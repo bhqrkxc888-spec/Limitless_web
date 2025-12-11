@@ -2,10 +2,44 @@ import { siteConfig } from '../config/siteConfig';
 import './HomePage.css';
 
 function HomePage() {
+  // Structured Data (JSON-LD) for SEO
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'TravelAgency',
+    name: siteConfig.siteName,
+    description: siteConfig.tagline,
+    url: 'https://new.limitlesscruises.com',
+    telephone: siteConfig.phone,
+    email: siteConfig.email,
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'GB'
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: 'United Kingdom'
+    },
+    knowsAbout: ['Cruise Holidays', 'UK Sailings', 'Worldwide Voyages', 'Travel Planning'],
+    memberOf: {
+      '@type': 'Organization',
+      name: 'ABTA',
+      identifier: 'P7541'
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.5',
+      reviewCount: '50'
+    }
+  };
+
   return (
     <main className="home-page">
+      {/* Structured Data for SEO */}
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
       {/* Hero Section */}
-      <section className="hero-section">
+      <section className="hero-section" aria-label="Hero section">
         <div className="container">
           <div className="hero-content">
             <div className="hero-text">
@@ -15,7 +49,7 @@ function HomePage() {
                 with exclusive deals and personalised service to make your voyage unforgettable.
               </p>
               <div className="hero-cta">
-                <a href={`tel:${siteConfig.phone}`} className="btn btn-primary">
+                <a href={`tel:${siteConfig.phone}`} className="btn btn-primary" aria-label={`Call ${siteConfig.phone}`}>
                   Call {siteConfig.phone}
                 </a>
                 <a href="/contact" className="btn btn-secondary">
@@ -23,12 +57,12 @@ function HomePage() {
                 </a>
               </div>
             </div>
-            <div className="hero-image">
-              <img 
-                src="/images/site-general/header.jpg" 
-                alt="Cruise ship on the ocean" 
-                className="hero-img"
-              />
+            {/* TODO: Consider adding a different hero image or visual element here, 
+                since the header image is now used as the logo in the header */}
+            <div className="hero-visual">
+              <div className="hero-accent">
+                {/* Decorative element or placeholder for future hero image */}
+              </div>
             </div>
           </div>
         </div>

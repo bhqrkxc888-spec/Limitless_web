@@ -7,8 +7,12 @@ function Header() {
       <div className="container">
         <div className="header-content">
           <div className="header-brand">
-            <a href="/" className="brand-link">
-              {siteConfig.siteName}
+            <a href="/" className="brand-link" aria-label="Limitless Cruises Home">
+              <img 
+                src="/images/site-general/header.jpg" 
+                alt="Limitless Cruises - Independent Cruise Specialist" 
+                className="brand-logo"
+              />
             </a>
           </div>
           <nav className="header-nav" aria-label="Main navigation">

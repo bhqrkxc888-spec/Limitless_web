@@ -1,0 +1,258 @@
+.privacy-policy-page {
+  min-height: calc(100vh - 200px);
+  background-color: var(--clr-bg);
+  padding-bottom: var(--space-2xl);
+}
+
+/* Header Section */
+.privacy-header {
+  background-color: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+  padding: var(--space-xl) 0;
+  margin-bottom: var(--space-2xl);
+}
+
+.privacy-header h1 {
+  margin: 0;
+  color: var(--clr-text-on-primary);
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Content Section */
+.privacy-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  background-color: var(--clr-surface);
+  padding: var(--space-2xl);
+  border-radius: var(--layout-radius-lg);
+  box-shadow: var(--layout-shadow-soft);
+}
+
+/* Intro Highlight Box */
+.privacy-intro {
+  background-color: #f0f7f6;
+  border: 1px solid var(--clr-border);
+  border-left: 4px solid var(--clr-secondary);
+  padding: var(--space-lg);
+  margin: 0 0 var(--space-xl) 0;
+  border-radius: var(--layout-radius-sm);
+}
+
+.privacy-intro p {
+  margin-bottom: var(--space-sm);
+}
+
+.privacy-intro p:last-child {
+  margin-bottom: 0;
+}
+
+.privacy-content > section {
+  margin-bottom: var(--space-xl);
+}
+
+.privacy-content > section:last-child {
+  margin-bottom: 0;
+}
+
+.privacy-content h2 {
+  color: var(--clr-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  margin: var(--space-xl) 0 var(--space-md) 0;
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--clr-border);
+}
+
+.privacy-content h2:first-of-type {
+  margin-top: 0;
+}
+
+.privacy-content h3 {
+  color: var(--clr-primary);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  margin: var(--space-lg) 0 var(--space-sm) 0;
+}
+
+.privacy-content p {
+  font-size: var(--font-size-base);
+  line-height: 1.8;
+  color: var(--clr-text-main);
+  margin-bottom: var(--space-md);
+}
+
+.privacy-content p:last-child {
+  margin-bottom: 0;
+}
+
+.privacy-content strong {
+  color: var(--clr-primary);
+  font-weight: 600;
+}
+
+/* Links */
+.privacy-content a {
+  color: #1e4fb3;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.privacy-content a:hover {
+  color: #0d3d8c;
+  text-decoration: none;
+}
+
+/* List Styling */
+.privacy-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-md) 0;
+}
+
+.privacy-list li {
+  position: relative;
+  padding-left: var(--space-xl);
+  margin-bottom: var(--space-sm);
+  line-height: 1.7;
+  color: var(--clr-text-main);
+}
+
+.privacy-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--clr-secondary);
+  font-weight: bold;
+  font-size: var(--font-size-xl);
+  line-height: 1.4;
+}
+
+.privacy-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Table Styling */
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: var(--space-lg) 0;
+  border-radius: var(--layout-radius-sm);
+  border: 1px solid var(--clr-border);
+}
+
+.privacy-table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 720px;
+  margin: 0;
+  background-color: var(--clr-surface);
+}
+
+.privacy-table th,
+.privacy-table td {
+  border: 1px solid var(--clr-border);
+  padding: var(--space-md);
+  vertical-align: top;
+  text-align: left;
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+}
+
+.privacy-table thead th {
+  background-color: #f6f7f8;
+  font-weight: 700;
+  color: var(--clr-primary);
+  position: sticky;
+  top: 0;
+}
+
+.privacy-table tbody tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.privacy-table tbody tr:hover {
+  background-color: rgba(34, 166, 164, 0.05);
+}
+
+/* Responsive Design */
+@media (max-width: 967px) {
+  .privacy-header h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .privacy-content {
+    padding: var(--space-xl);
+  }
+
+  .privacy-content h2 {
+    font-size: var(--font-size-xl);
+  }
+
+  .privacy-content h3 {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 767px) {
+  .privacy-policy-page {
+    padding-bottom: var(--space-xl);
+  }
+
+  .privacy-header {
+    padding: var(--space-lg) 0;
+    margin-bottom: var(--space-xl);
+  }
+
+  .privacy-header h1 {
+    font-size: var(--font-size-xl);
+  }
+
+  .privacy-content {
+    padding: var(--space-lg);
+    border-radius: var(--layout-radius-md);
+  }
+
+  .privacy-intro {
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .privacy-content h2 {
+    font-size: var(--font-size-lg);
+    margin: var(--space-lg) 0 var(--space-sm) 0;
+  }
+
+  .privacy-content h3 {
+    font-size: var(--font-size-base);
+  }
+
+  .privacy-content p {
+    font-size: var(--font-size-sm);
+    line-height: 1.7;
+  }
+
+  .privacy-list li {
+    padding-left: var(--space-lg);
+    font-size: var(--font-size-sm);
+  }
+
+  .table-wrapper {
+    margin: var(--space-md) 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .privacy-table {
+    min-width: 600px;
+  }
+
+  .privacy-table th,
+  .privacy-table td {
+    padding: var(--space-sm);
+    font-size: var(--font-size-xs);
+  }
+}
+

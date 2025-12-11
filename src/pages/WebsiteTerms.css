@@ -1,0 +1,152 @@
+.website-terms-page {
+  min-height: calc(100vh - 200px);
+  background-color: var(--clr-bg);
+  padding-bottom: var(--space-2xl);
+}
+
+/* Header Section */
+.terms-header {
+  background-color: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+  padding: var(--space-xl) 0;
+  margin-bottom: var(--space-2xl);
+}
+
+.terms-header h1 {
+  margin: 0;
+  color: var(--clr-text-on-primary);
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* Content Section */
+.terms-content {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: var(--clr-surface);
+  padding: var(--space-2xl);
+  border-radius: var(--layout-radius-lg);
+  box-shadow: var(--layout-shadow-soft);
+}
+
+.terms-content > p:first-of-type {
+  margin-top: 0;
+}
+
+.terms-content section {
+  margin-bottom: var(--space-xl);
+}
+
+.terms-content section:last-child {
+  margin-bottom: 0;
+}
+
+.terms-content h2 {
+  color: var(--clr-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  margin: var(--space-xl) 0 var(--space-md) 0;
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--clr-border);
+}
+
+.terms-content h2:first-of-type {
+  margin-top: 0;
+}
+
+.terms-content p {
+  font-size: var(--font-size-base);
+  line-height: 1.8;
+  color: var(--clr-text-main);
+  margin-bottom: var(--space-md);
+}
+
+.terms-content p:last-child {
+  margin-bottom: 0;
+}
+
+.terms-content strong {
+  color: var(--clr-primary);
+  font-weight: 600;
+}
+
+/* List Styling */
+.terms-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-md) 0;
+}
+
+.terms-list li {
+  position: relative;
+  padding-left: var(--space-xl);
+  margin-bottom: var(--space-sm);
+  line-height: 1.7;
+  color: var(--clr-text-main);
+}
+
+.terms-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--clr-secondary);
+  font-weight: bold;
+  font-size: var(--font-size-xl);
+  line-height: 1.4;
+}
+
+.terms-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 967px) {
+  .terms-header h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .terms-content {
+    padding: var(--space-xl);
+  }
+
+  .terms-content h2 {
+    font-size: var(--font-size-xl);
+  }
+}
+
+@media (max-width: 767px) {
+  .website-terms-page {
+    padding-bottom: var(--space-xl);
+  }
+
+  .terms-header {
+    padding: var(--space-lg) 0;
+    margin-bottom: var(--space-xl);
+  }
+
+  .terms-header h1 {
+    font-size: var(--font-size-xl);
+  }
+
+  .terms-content {
+    padding: var(--space-lg);
+    border-radius: var(--layout-radius-md);
+  }
+
+  .terms-content h2 {
+    font-size: var(--font-size-lg);
+    margin: var(--space-lg) 0 var(--space-sm) 0;
+  }
+
+  .terms-content p {
+    font-size: var(--font-size-sm);
+    line-height: 1.7;
+  }
+
+  .terms-list li {
+    padding-left: var(--space-lg);
+    font-size: var(--font-size-sm);
+  }
+}
+

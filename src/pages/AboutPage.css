@@ -1,0 +1,360 @@
+.about-page {
+  min-height: calc(100vh - 200px);
+  background-color: var(--clr-bg);
+}
+
+/* Common Header Style */
+.about-header {
+  background: var(--clr-primary);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.06);
+  padding: var(--space-lg) 0;
+  margin-bottom: var(--space-2xl);
+}
+
+.about-header h1,
+.about-header h2 {
+  margin: 0;
+  color: var(--clr-text-on-primary);
+  font-weight: 700;
+  font-size: var(--font-size-3xl);
+  line-height: 1.2;
+}
+
+/* Common Content Wrapper */
+.about-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* Block 1: Intro + What I Offer */
+.about-intro {
+  background: var(--clr-surface);
+  color: var(--clr-text-main);
+  padding-bottom: var(--space-2xl);
+}
+
+.about-lead {
+  margin: 0 0 var(--space-md) 0;
+  font-size: var(--font-size-lg);
+  line-height: 1.7;
+  color: var(--clr-text-main);
+}
+
+/* Credentials */
+.about-credentials {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  margin: var(--space-xl) 0 var(--space-2xl);
+}
+
+.about-badge {
+  flex: 1 1 200px;
+  max-width: 240px;
+  text-align: center;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  padding: var(--space-md) var(--space-lg);
+  box-shadow: var(--layout-shadow-soft);
+  font-weight: 600;
+  color: var(--clr-primary);
+  border-radius: var(--layout-radius-sm);
+}
+
+.about-subtitle {
+  margin: var(--space-lg) 0 var(--space-md) 0;
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--clr-primary);
+}
+
+/* Offer Cards */
+.about-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.about-card {
+  background: var(--clr-surface);
+  box-shadow: var(--layout-shadow-soft);
+  padding: var(--space-lg);
+  border-radius: var(--layout-radius-md);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.about-card h3 {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--clr-primary);
+}
+
+.about-card p {
+  margin: 0;
+  line-height: 1.7;
+  color: var(--clr-text-main);
+}
+
+/* Block 2: 5 Reasons */
+.about-reasons {
+  background: var(--clr-surface);
+  color: var(--clr-text-main);
+  padding-bottom: var(--space-2xl);
+  margin-top: var(--space-2xl);
+}
+
+.reasons-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-md);
+}
+
+.reasons-list li {
+  background: var(--clr-surface);
+  box-shadow: var(--layout-shadow-soft);
+  padding: var(--space-lg);
+  border-radius: var(--layout-radius-md);
+  border-left: 4px solid var(--clr-secondary);
+}
+
+.reasons-list h3 {
+  margin: 0 0 var(--space-sm);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--clr-primary);
+}
+
+.reasons-list p {
+  margin: 0;
+  line-height: 1.7;
+  color: var(--clr-text-main);
+}
+
+/* Block 3: About Me */
+.about-me {
+  background: var(--clr-surface);
+  color: var(--clr-text-main);
+  padding-bottom: var(--space-2xl);
+  margin-top: var(--space-2xl);
+}
+
+.about-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.about-gallery figure {
+  margin: 0;
+  background: var(--clr-surface);
+  box-shadow: var(--layout-shadow-soft);
+  overflow: hidden;
+  max-height: 340px;
+  border-radius: var(--layout-radius-md);
+}
+
+.about-gallery figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+  display: block;
+}
+
+.about-text p {
+  margin: 0 0 var(--space-md);
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+  color: var(--clr-text-main);
+}
+
+.about-text p:last-of-type {
+  margin-bottom: var(--space-xl);
+}
+
+.about-elite-wrap {
+  text-align: center;
+  margin-top: var(--space-xl);
+}
+
+.about-elite {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--clr-text-main);
+  background: var(--clr-surface);
+  box-shadow: var(--layout-shadow-soft);
+  padding: var(--space-lg);
+  transition: transform 0.25s ease;
+  border-radius: var(--layout-radius-md);
+}
+
+.about-elite:hover {
+  transform: translateY(-2px);
+  color: var(--clr-text-main);
+}
+
+.about-elite img {
+  width: 375px;
+  height: 70px;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.about-elite span {
+  font-weight: 700;
+  font-size: var(--font-size-base);
+  margin-top: var(--space-sm);
+  text-align: center;
+}
+
+/* Block 4: Cruise Lines */
+.about-cruise-lines {
+  background: var(--clr-surface);
+  color: var(--clr-text-main);
+  padding-bottom: var(--space-2xl);
+  margin-top: var(--space-2xl);
+  border: 1px solid var(--clr-border);
+  box-shadow: var(--layout-shadow-soft);
+}
+
+.about-intro-text {
+  margin: 0 0 var(--space-lg);
+  line-height: 1.65;
+  font-size: var(--font-size-base);
+  max-width: 900px;
+  color: var(--clr-text-main);
+}
+
+.cruise-lines-grid {
+  list-style: none;
+  margin: 0 0 var(--space-lg);
+  padding: 0;
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.cruise-lines-grid a {
+  display: block;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  padding: var(--space-md);
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--clr-primary);
+  box-shadow: var(--layout-shadow-soft);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  border-radius: var(--layout-radius-sm);
+}
+
+.cruise-lines-grid a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: var(--clr-secondary);
+  color: var(--clr-primary);
+}
+
+.about-note {
+  margin: var(--space-lg) 0 0;
+  color: var(--clr-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.about-note a {
+  color: var(--clr-secondary);
+  text-decoration: underline;
+}
+
+.about-note a:hover {
+  color: var(--clr-primary);
+}
+
+/* Responsive Design */
+@media (max-width: 980px) {
+  .about-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cruise-lines-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 820px) {
+  .about-gallery {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .about-header h1,
+  .about-header h2 {
+    font-size: var(--font-size-xl);
+  }
+
+  .about-content {
+    padding: 0 var(--space-md);
+  }
+
+  .about-lead {
+    font-size: var(--font-size-base);
+  }
+
+  .about-subtitle {
+    font-size: var(--font-size-xl);
+  }
+
+  .about-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .about-card h3 {
+    font-size: var(--font-size-lg);
+  }
+
+  .reasons-list h3 {
+    font-size: var(--font-size-lg);
+  }
+
+  .about-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .cruise-lines-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-elite img {
+    width: 100%;
+    max-width: 375px;
+  }
+}
+
+@media (max-width: 520px) {
+  .about-header {
+    padding: var(--space-md) 0;
+  }
+
+  .about-badge {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
