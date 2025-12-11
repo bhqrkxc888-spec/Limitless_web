@@ -173,29 +173,135 @@ export const cruiseLines = [
     name: 'MSC Cruises',
     shortName: 'MSC',
     tagline: 'Mediterranean style, global destinations',
-    description: 'MSC Cruises brings European elegance to cruising with beautiful ships, outstanding cuisine, and excellent value for families.',
+    description: 'MSC Cruises is one of the world\'s largest and fastest-growing lines, offering Italian design, modern ships and global itineraries. Guests can sail from the UK or choose fly-cruise packages worldwide. Expect an international atmosphere with family-friendly fun, varied entertainment, and the exclusive Yacht Club for those seeking privacy and relaxation.',
     category: 'mainstream',
     featured: true,
     image: '/images/cruise-lines/msc-cruises.jpg',
     logo: '/images/cruise-lines/logos/msc-cruises.png',
+    
+    // Why Choose section - benefit cards
     whyChoose: [
-      { title: 'Modern Fleet', description: 'Brand new ships with cutting-edge technology and elegant design.', icon: 'ship' },
-      { title: 'MSC Yacht Club', description: 'Ship-within-a-ship luxury experience with butler service.', icon: 'luxury' },
-      { title: 'Ocean Cay Marine Reserve', description: 'Private island paradise in the Bahamas with pristine beaches.', icon: 'island' },
-      { title: 'Great Family Value', description: 'Kids sail free on many sailings with supervised youth clubs.', icon: 'child' }
+      {
+        title: 'Accommodation on MSC Cruises',
+        description: 'Choose interior, ocean-view, balcony or suites. Guests booking MSC Yacht Club enjoy a private lounge, restaurant and priority benefits.',
+        icon: 'accommodation'
+      },
+      {
+        title: 'Food and Entertainment',
+        description: 'Full-board dining across restaurants and buffets, plus theatre shows, live music, pools, sports and kids\' clubs. Specialty venues are available fleetwide.',
+        icon: 'dining'
+      },
+      {
+        title: 'Global Itineraries',
+        description: 'Mediterranean, Caribbean, Northern Europe, Middle East, Asia and more—including convenient MSC UK sailings in season.',
+        icon: 'destination'
+      },
+      {
+        title: 'Fly Cruise Packages',
+        description: 'Flights, transfers and your cruise fare bundled together for simple, seamless travel to and from the ship.',
+        icon: 'travel'
+      },
+      {
+        title: 'Innovative Ships: MSC Virtuosa & MSC World Europa',
+        description: 'Striking design, smart technology and vibrant promenades on flagship ships including MSC Virtuosa and MSC World Europa.',
+        icon: 'ship'
+      },
+      {
+        title: 'Italian Style & Exclusive Discounts',
+        description: 'Friendly Mediterranean service across lounges, bars and spas—plus regular MSC exclusive discounts on selected sailings.',
+        icon: 'style'
+      },
+      {
+        title: 'Life onboard MSC Cruises',
+        description: 'Choose lively pool decks, sport courts, shows and nightlife, or quiet lounges and spa time. Dining spans Italian classics and international flavours. Families get extensive kids\' and teens\' facilities; couples and solo travellers enjoy stylish bars and wellness. Guests in MSC Yacht Club can retreat to a private sanctuary whenever they choose.',
+        icon: 'lifestyle'
+      }
     ],
+
+    // Destination images for grid
+    destinationImages: [
+      { name: 'Caribbean', image: 'https://limitlesscruises.com/wp-content/uploads/2025/09/600PF00006_stockphotoscom-7805337.jpg', alt: 'Caribbean beach and turquoise sea' },
+      { name: 'Mediterranean', image: 'https://limitlesscruises.com/wp-content/uploads/2025/10/IMG_2966.jpeg', alt: 'Mediterranean ruins and coastline' },
+      { name: 'Middle East', image: 'https://limitlesscruises.com/wp-content/uploads/2025/10/IMG_3198.jpeg', alt: 'Middle East mountains and sea' },
+      { name: 'Northern Europe', image: 'https://limitlesscruises.com/wp-content/uploads/2025/09/PF00006_Northern-Europe.jpg', alt: 'Northern Europe skyline and waterfront' },
+      { name: 'Asia & Japan', image: 'https://limitlesscruises.com/wp-content/uploads/2025/09/PF00001_Asia.jpg', alt: 'Cherry blossom path in Japan' },
+      { name: 'Grand Voyages', image: 'https://limitlesscruises.com/wp-content/uploads/2025/09/PF00005_stockphotoscom-6241866-2.jpg', alt: 'Sunset over the ocean on a Grand Voyage' }
+    ],
+
+    // Kids Club section
+    kidsClub: {
+      name: 'Doremi and LEGO® Fun',
+      intro: 'MSC Kids Clubs are complimentary programmes on every MSC ship for guests aged 0–17. Children are grouped by age and welcomed in safe, dedicated spaces run by trained, multilingual youth staff. Activities blend fun with learning and are designed to suit each age group, from creative play to team games and socials.',
+      detail: 'Age-appropriate playrooms, LEGO® play for younger guests, consoles and social lounges for older children, plus daily schedules that vary between sea days and port days. Parents register children once onboard and can check the daily programme in the app or on notice boards. Sign in and out procedures help make drop off and collection simple.',
+      quickFacts: [
+        'Complimentary programme for ages 0–17',
+        'Trained, multilingual youth staff',
+        'LEGO® play areas for younger children',
+        'Consoles and social lounges for teens',
+        'Registration completed onboard'
+      ],
+      highlights: [
+        { title: 'Baby and Mini', description: 'Chicco inspired Baby Club areas and Miniclubs with LEGO play, crafts, music and story time.' },
+        { title: 'Junior and Young', description: 'Team games, sports tournaments, talent shows, themed parties and quizzes.' },
+        { title: 'Teens', description: 'Lounges with consoles and film nights, dance parties and hosted meet ups.' },
+        { title: 'Family time', description: 'Doremiland activities, character moments and movie sessions for all ages.' }
+      ],
+      ageGroups: [
+        { club: 'Baby Club / Baby Time and Baby Care', age: '0–3 years (supervised care from 6 months)', morning: '9:00 am – 12:00 pm', afternoon: '2:00 pm – 5:00 pm', evening: '7:00 pm – 9:00 pm' },
+        { club: 'Mini Club', age: '3–6 years', morning: '9:00 am – 12:00 pm', afternoon: '2:00 pm – 5:00 pm', evening: '7:00 pm – 10:00 pm' },
+        { club: 'Junior Club', age: '7–11 years', morning: '9:00 am – 12:00 pm', afternoon: '2:00 pm – 5:00 pm', evening: '7:00 pm – 11:00 pm' },
+        { club: 'Young Club', age: '12–14 years', morning: '10:00 am – 1:00 pm', afternoon: '3:00 pm – 6:00 pm', evening: '7:00 pm – 11:00 pm' },
+        { club: 'Teen Club', age: '15–17 years', morning: '10:00 am – 1:00 pm', afternoon: '3:00 pm – 6:00 pm', evening: '7:00 pm – 11:00 pm' }
+      ],
+      costsInfo: 'The main Kids Club programme is included in your cruise fare. Registration is completed onboard at the club desk or during open house sessions. Activities and schedules can vary by ship, itinerary and whether the ship is in port or at sea. Some special activities, late night sessions or babysitting services may be chargeable.',
+      note: 'Spaces operate to capacity limits for safety. Arrive early for popular sessions. Share allergies, medical needs and authorised pick up adults during registration.'
+    },
+
+    // Accessibility info
+    accessibility: {
+      intro: 'Most cruise lines provide accessible staterooms, embarkation and disembarkation assistance, and onboard support for guests with disabilities or additional needs. Support can include mobility access, sensory assistance and medical equipment guidance. Staff can discuss reasonable adjustments to ensure guests enjoy the ship\'s facilities and activities safely and comfortably. At Limitless Cruises, we can help you review each cruise line\'s accessibility policies, complete any required forms and communicate your needs before sailing.',
+      tips: [
+        { title: 'Boarding support', description: 'Request wheelchair or assisted boarding ahead of time to ensure smooth embarkation and disembarkation.' },
+        { title: 'Cabin arrangements', description: 'Many ships have accessible staterooms with roll-in showers, grab bars and widened doorways. Book early, as these are limited.' },
+        { title: 'Dining & activities', description: 'Notify the team of dietary restrictions or sensory considerations so seating or service can be adapted for comfort.' },
+        { title: 'Medical & mobility devices', description: 'Bring any required medical aids, chargers and mobility equipment. Ships can usually store wheelchairs or scooters safely in cabins.' },
+        { title: 'Excursions', description: 'Ask about accessible tour options and check terrain details in advance. Some ports may use tender boats which are not always step-free.' },
+        { title: 'Preparation', description: 'Submit accessibility or special needs forms as early as possible (ideally 60 days before departure) so arrangements are confirmed in writing.' }
+      ]
+    },
+
+    // Loyalty program - MSC Voyagers Club
+    loyaltyProgram: {
+      name: 'MSC Voyagers Club',
+      intro: 'Discover the exclusive world of the MSC Voyagers Club, designed to reward loyal guests with ever-increasing privileges, savings and special experiences before, during and after your cruise. Compare each tier\'s benefits below — from booking perks to on-board discounts and priority services.',
+      pointsInfo: 'Points are earned based on cruise nights sailed. Benefits vary by tier and may be subject to ship and itinerary availability.',
+      tiers: [
+        { tier: 'Welcome', points: '0', benefits: 'Members\' E-Newsletter, Online Private Area, Luggage identification tag, Voyagers Selection discount up to +15%' },
+        { tier: 'Classic', points: '1–2,199', benefits: '5% cruise fare discount, +5% Voyagers Exclusives discount, Double experience points, 10% Logo Shop, 20% Photographs, 10% Digital accessories, 5% Internet, 50% F1 Simulator, 10% SPA services' },
+        { tier: 'Silver', points: '2,200–4,299', benefits: 'All Classic benefits, €/$50 Voyagers Exclusives shipboard credit, 10% Laundry package, 10% Minibar' },
+        { tier: 'Gold', points: '4,300–9,999', benefits: 'All Silver benefits, Complimentary 1-hour thermal area session, Courtesy bathrobe & slippers, One free F1 Simulator credit, 15% Logo Shop, 20% SPA services' },
+        { tier: 'Diamond', points: '10,000–24,999', benefits: 'All Gold benefits, Priority line at check-in, Priority drop-off of luggage, Priority for free cabin upgrade, Priority line assistance, Early access to theatre shows, MSC Voyagers Club Diamond Party, One free picture, Bottle of spumante with macarons, Specialty restaurant dinner, Free bottle of water' },
+        { tier: 'Blue Diamond', points: '25,000+', benefits: 'All Diamond benefits, Flexible arrival in port, Yacht Club drop-off luggage, Access to Yacht Club dedicated check-in, Exclusive Pillow Selection, One free shuttle bus ticket, Behind-the-scenes tour, Free Internet "Browse" Package, My Choice dining option, Private Meet & Greet with Captain' }
+      ],
+      note: 'Voyagers Exclusives benefits & discounts depend on advance-booking period and T&Cs. Some features vary by ship and may carry age/height limits. Members\' event not held on cruises under 4 days.'
+    },
+
+    // Simple lists for sidebar/quick reference
     highlights: [
       'Modern fleet with latest technology',
       'MSC Yacht Club luxury experience',
       'Ocean Cay marine reserve',
-      'Great value family cruises'
+      'Great value family cruises',
+      'Italian design and Mediterranean service',
+      'Fly-cruise packages available',
+      'Innovative ships including MSC Virtuosa and MSC World Europa'
     ],
-    ships: ['MSC World Europa', 'MSC Seascape', 'MSC Virtuosa', 'MSC Grandiosa'],
-    destinations: ['Mediterranean', 'Caribbean', 'Northern Europe', 'Middle East'],
-    suitableFor: ['Families', 'Couples', 'Budget-conscious'],
+    ships: ['MSC World Europa', 'MSC Seascape', 'MSC Virtuosa', 'MSC Grandiosa', 'MSC Seashore', 'MSC Seaview'],
+    destinations: ['Mediterranean', 'Caribbean', 'Northern Europe', 'Middle East', 'Asia & Japan', 'Grand Voyages'],
+    suitableFor: ['Families', 'Couples', 'Budget-conscious', 'Luxury Seekers'],
     meta: {
       title: 'MSC Cruises | Mediterranean & Caribbean Cruise Holidays',
-      description: 'Book MSC Cruises for Mediterranean elegance at great value. Family-friendly ships and exciting destinations with Limitless Cruises.'
+      description: 'Book MSC Cruises for Mediterranean elegance at great value. Family-friendly ships, MSC Yacht Club luxury, and exciting destinations with Limitless Cruises.'
     }
   },
   {

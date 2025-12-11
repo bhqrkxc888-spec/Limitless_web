@@ -192,55 +192,100 @@ function CruiseLinePage() {
               <div className="content-main">
                 <div className="info-card">
                   <p>{cruiseLine.kidsClub.intro}</p>
+                  {cruiseLine.kidsClub.detail && (
+                    <p><strong>What to expect:</strong> {cruiseLine.kidsClub.detail}</p>
+                  )}
                 </div>
 
-                {cruiseLine.kidsClub.ageGroups && (
-                  <Accordion
-                    variant="separated"
-                    items={[
-                      {
-                        id: 'age-groups',
-                        title: 'Age Groups & Schedule',
-                        content: (
-                          <>
-                            <DataTable
-                              columns={[
-                                { key: 'club', label: 'Club' },
-                                { key: 'age', label: 'Age' },
-                                { key: 'morning', label: 'Morning' },
-                                { key: 'afternoon', label: 'Afternoon' },
-                                { key: 'evening', label: 'Evening' }
-                              ]}
-                              rows={cruiseLine.kidsClub.ageGroups}
-                              variant="striped"
-                              compact
-                            />
-                            {cruiseLine.kidsClub.note && (
-                              <p className="note">{cruiseLine.kidsClub.note}</p>
-                            )}
-                          </>
-                        )
-                      }
-                    ]}
-                    defaultOpen="age-groups"
-                  />
+                {/* Highlights list if available */}
+                {cruiseLine.kidsClub.highlights && cruiseLine.kidsClub.highlights.length > 0 && (
+                  <div className="info-card">
+                    <ul className="tips-list">
+                      {cruiseLine.kidsClub.highlights.map((highlight, index) => (
+                        <li key={index}>
+                          <strong>{highlight.title}:</strong> {highlight.description}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 )}
+
+                {/* Accordions */}
+                <div className="accordion-wrapper">
+                  {cruiseLine.kidsClub.ageGroups && (
+                    <Accordion
+                      variant="separated"
+                      items={[
+                        {
+                          id: 'age-groups',
+                          title: 'Age Groups & Schedule',
+                          content: (
+                            <>
+                              <DataTable
+                                columns={[
+                                  { key: 'club', label: 'Club' },
+                                  { key: 'age', label: 'Age' },
+                                  { key: 'morning', label: 'Morning' },
+                                  { key: 'afternoon', label: 'Afternoon' },
+                                  { key: 'evening', label: 'Evening' }
+                                ]}
+                                rows={cruiseLine.kidsClub.ageGroups}
+                                variant="striped"
+                                compact
+                              />
+                              {cruiseLine.kidsClub.note && (
+                                <p className="note">{cruiseLine.kidsClub.note}</p>
+                              )}
+                            </>
+                          )
+                        }
+                      ]}
+                      defaultOpen="age-groups"
+                    />
+                  )}
+
+                  {cruiseLine.kidsClub.costsInfo && (
+                    <Accordion
+                      variant="separated"
+                      items={[
+                        {
+                          id: 'costs-prebooking',
+                          title: 'Costs and Pre Booking',
+                          content: (
+                            <div>
+                              <p>{cruiseLine.kidsClub.costsInfo}</p>
+                              {cruiseLine.kidsClub.note && (
+                                <ul className="tips-list" style={{ marginTop: '12px' }}>
+                                  <li>Spaces operate to capacity limits for safety. Arrive early for popular sessions.</li>
+                                  <li>Share allergies, medical needs and authorised pick up adults during registration.</li>
+                                  <li>Check the Daily Programme or app for the latest times and themed events.</li>
+                                </ul>
+                              )}
+                            </div>
+                          )
+                        }
+                      ]}
+                    />
+                  )}
+                </div>
               </div>
 
               <aside className="content-sidebar">
-                <div className="sidebar-card">
-                  <h3 className="sidebar-title">Quick Facts</h3>
-                  <ul className="facts-list">
-                    {cruiseLine.kidsClub.quickFacts.map((fact, index) => (
-                      <li key={index}>
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
-                        </svg>
-                        {fact}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {cruiseLine.kidsClub.quickFacts && cruiseLine.kidsClub.quickFacts.length > 0 && (
+                  <div className="sidebar-card">
+                    <h3 className="sidebar-title">Quick Facts</h3>
+                    <ul className="facts-list">
+                      {cruiseLine.kidsClub.quickFacts.map((fact, index) => (
+                        <li key={index}>
+                          <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                          </svg>
+                          {fact}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </aside>
             </div>
           </div>
