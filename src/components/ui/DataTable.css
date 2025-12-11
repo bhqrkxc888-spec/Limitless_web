@@ -1,0 +1,196 @@
+/* ========================================
+   DATA TABLE COMPONENT
+   Responsive, modern table styling
+   ======================================== */
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+
+.data-table thead th {
+  background-color: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--space-3) var(--space-4);
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.data-table thead th:first-child {
+  border-top-left-radius: var(--radius-lg);
+}
+
+.data-table thead th:last-child {
+  border-top-right-radius: var(--radius-lg);
+}
+
+/* ========================================
+   BODY
+   ======================================== */
+
+.data-table tbody td {
+  padding: var(--space-3) var(--space-4);
+  color: var(--clr-text-main);
+  border-bottom: 1px solid var(--clr-border);
+  transition: background-color var(--transition-fast);
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: var(--radius-lg);
+}
+
+.data-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: var(--radius-lg);
+}
+
+/* Hover effect */
+.data-table tbody tr:hover td {
+  background-color: var(--clr-bg-alt);
+}
+
+/* ========================================
+   VARIANTS
+   ======================================== */
+
+/* Striped */
+.data-table-striped tbody tr:nth-child(even) td {
+  background-color: var(--clr-bg-alt);
+}
+
+.data-table-striped tbody tr:nth-child(even):hover td {
+  background-color: var(--clr-bg-dark);
+}
+
+/* Bordered */
+.data-table-bordered {
+  border: 1px solid var(--clr-border);
+}
+
+.data-table-bordered tbody td {
+  border-right: 1px solid var(--clr-border);
+}
+
+.data-table-bordered tbody td:last-child {
+  border-right: none;
+}
+
+/* Default - minimal styling */
+.data-table-default thead th {
+  background-color: var(--clr-bg-dark);
+  color: var(--clr-text-main);
+}
+
+/* ========================================
+   COMPACT
+   ======================================== */
+
+.data-table-compact thead th,
+.data-table-compact tbody td {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-xs);
+}
+
+/* ========================================
+   RESPONSIVE CARDS VIEW
+   ======================================== */
+
+@media (max-width: 767px) {
+  .data-table {
+    font-size: var(--font-size-xs);
+  }
+
+  .data-table thead th,
+  .data-table tbody td {
+    padding: var(--space-2) var(--space-3);
+  }
+}
+
+/* Card layout for very small screens */
+@media (max-width: 479px) {
+  .data-table thead {
+    display: none;
+  }
+
+  .data-table tbody tr {
+    display: block;
+    background-color: var(--clr-surface);
+    border: 1px solid var(--clr-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-3);
+    padding: var(--space-3);
+  }
+
+  .data-table tbody tr:last-child {
+    margin-bottom: 0;
+  }
+
+  .data-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--clr-border-light);
+    text-align: right !important;
+  }
+
+  .data-table tbody td::before {
+    content: attr(data-label);
+    font-weight: var(--font-weight-semibold);
+    color: var(--clr-primary);
+    text-align: left;
+    flex-shrink: 0;
+  }
+
+  .data-table tbody td:last-child {
+    border-bottom: none;
+  }
+
+  .data-table tbody tr:hover td {
+    background-color: transparent;
+  }
+
+  .data-table-striped tbody tr:nth-child(even) td,
+  .data-table-striped tbody tr:nth-child(even):hover td {
+    background-color: transparent;
+  }
+}
+
+/* ========================================
+   SCREEN READER ONLY
+   ======================================== */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+

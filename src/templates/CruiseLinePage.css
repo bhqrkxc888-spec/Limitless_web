@@ -1,5 +1,6 @@
 /* ========================================
    CRUISE LINE PAGE TEMPLATE
+   Flexible, data-driven layout for all cruise lines
    ======================================== */
 
 .cruise-line-page {
@@ -7,7 +8,7 @@
 }
 
 /* ========================================
-   LAYOUT GRID
+   GRID LAYOUTS
    ======================================== */
 
 .cruise-line-grid {
@@ -21,74 +22,135 @@
   min-width: 0;
 }
 
+.cruise-line-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  position: sticky;
+  top: 120px;
+}
+
+/* Content Grid (for Kids Club etc) */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: var(--space-10);
+  align-items: start;
+}
+
+.content-main {
+  min-width: 0;
+}
+
+.content-sidebar {
+  position: sticky;
+  top: 120px;
+}
+
+/* Dual Section (side by side cards) */
+.dual-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-8);
+}
+
 /* ========================================
-   HIGHLIGHTS
+   HIGHLIGHTS SECTION
    ======================================== */
 
 .highlights-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-4);
+  gap: var(--space-6);
 }
 
 .highlight-card {
   display: flex;
-  align-items: flex-start;
-  gap: var(--space-3);
-  padding: var(--space-4);
-  background-color: var(--clr-bg-alt);
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background-color: var(--clr-surface);
+  border: 1px solid var(--clr-border);
   border-radius: var(--radius-lg);
+  transition: border-color var(--transition-fast),
+              box-shadow var(--transition-fast);
+}
+
+.highlight-card:hover {
+  border-color: var(--clr-secondary);
+  box-shadow: var(--shadow-md);
 }
 
 .highlight-icon {
   flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  color: var(--clr-secondary);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--clr-secondary);
+  border-radius: 50%;
 }
 
 .highlight-icon svg {
-  width: 100%;
-  height: 100%;
+  width: 18px;
+  height: 18px;
+  fill: white;
 }
 
 .highlight-text {
-  font-size: var(--font-size-base);
-  color: var(--clr-text-main);
-  line-height: var(--line-height-relaxed);
   margin: 0;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--clr-text-main);
 }
 
 /* ========================================
-   SHIPS SECTION
+   SHIPS & DESTINATIONS
    ======================================== */
 
+.ships-section,
+.destinations-section {
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--clr-border);
+}
+
 .section-subtitle {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--clr-text-main);
-  margin-bottom: var(--space-4);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--clr-primary);
+  margin: 0 0 var(--space-4);
 }
 
 .ships-list {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
+  gap: var(--space-3);
+}
+
+.ships-list-large {
+  gap: var(--space-4);
 }
 
 .ship-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   padding: var(--space-2) var(--space-4);
   background-color: var(--clr-primary);
   color: var(--clr-text-on-primary);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   border-radius: var(--radius-full);
+  transition: background-color var(--transition-fast);
 }
 
-/* ========================================
-   DESTINATIONS SECTION
-   ======================================== */
+.ship-badge:hover {
+  background-color: var(--clr-primary-dark);
+}
+
+.ships-list-large .ship-badge {
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--font-size-base);
+}
 
 .destinations-list {
   display: flex;
@@ -97,27 +159,72 @@
 }
 
 .destination-tag {
-  display: inline-block;
-  padding: var(--space-2) var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
   background-color: var(--clr-bg-alt);
   color: var(--clr-text-main);
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  border-radius: var(--radius-full);
   border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.destination-tag:hover {
+  background-color: var(--clr-secondary);
+  color: white;
+  border-color: var(--clr-secondary);
+}
+
+/* ========================================
+   INFO CARDS
+   ======================================== */
+
+.info-card {
+  background-color: var(--clr-bg-alt);
+  border: 1px solid var(--clr-border);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  margin-bottom: var(--space-6);
+}
+
+.info-card p {
+  margin: 0;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--clr-text-main);
+}
+
+/* ========================================
+   SECTION CARDS
+   ======================================== */
+
+.section-card {
+  background-color: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+}
+
+.section-card h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-primary);
+  margin: 0 0 var(--space-4);
+}
+
+.section-card > p {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--clr-text-main);
+  margin: 0 0 var(--space-6);
 }
 
 /* ========================================
    SIDEBAR
    ======================================== */
-
-.cruise-line-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-  position: sticky;
-  top: 120px;
-}
 
 .sidebar-card {
   background-color: var(--clr-surface);
@@ -130,15 +237,15 @@
 .sidebar-title {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
-  color: var(--clr-text-main);
-  margin-bottom: var(--space-3);
+  color: var(--clr-primary);
+  margin: 0 0 var(--space-3);
 }
 
 .sidebar-text {
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-sm);
   color: var(--clr-text-muted);
+  margin: 0 0 var(--space-5);
   line-height: var(--line-height-relaxed);
-  margin-bottom: var(--space-4);
 }
 
 .sidebar-cta {
@@ -147,7 +254,7 @@
   gap: var(--space-3);
 }
 
-/* Suitable For List */
+/* Suitable List */
 .suitable-list {
   list-style: none;
   margin: 0;
@@ -157,9 +264,9 @@
 .suitable-list li {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-3);
   padding: var(--space-2) 0;
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-sm);
   color: var(--clr-text-main);
 }
 
@@ -170,10 +277,9 @@
   flex-shrink: 0;
 }
 
-/* Trust Section */
+/* Trust Badges */
 .sidebar-trust {
   background-color: var(--clr-bg-alt);
-  border: none;
 }
 
 .trust-item {
@@ -182,14 +288,78 @@
   gap: var(--space-3);
   padding: var(--space-2) 0;
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
   color: var(--clr-text-main);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.trust-item:last-child {
+  border-bottom: none;
 }
 
 .trust-item svg {
   width: 20px;
   height: 20px;
   color: var(--clr-secondary);
+  flex-shrink: 0;
+}
+
+/* ========================================
+   FACTS LIST
+   ======================================== */
+
+.facts-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.facts-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  font-size: var(--font-size-base);
+  color: var(--clr-text-main);
+}
+
+.facts-list svg {
+  width: 18px;
+  height: 18px;
+  color: var(--clr-secondary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ========================================
+   TIPS LIST
+   ======================================== */
+
+.tips-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tips-list li {
+  padding: var(--space-2) 0;
+  line-height: var(--line-height-relaxed);
+  color: var(--clr-text-main);
+  border-bottom: 1px solid var(--clr-border-light);
+}
+
+.tips-list li:last-child {
+  border-bottom: none;
+}
+
+/* ========================================
+   NOTES
+   ======================================== */
+
+.note {
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-muted);
+  font-style: italic;
+  margin-top: var(--space-3);
 }
 
 /* ========================================
@@ -220,23 +390,31 @@
 }
 
 /* ========================================
+   UTILITY CLASSES
+   ======================================== */
+
+.mt-12 {
+  margin-top: var(--space-12);
+}
+
+/* ========================================
    RESPONSIVE
    ======================================== */
 
 @media (max-width: 1023px) {
-  .cruise-line-grid {
+  .cruise-line-grid,
+  .content-grid {
     grid-template-columns: 1fr;
     gap: var(--space-8);
   }
 
-  .cruise-line-sidebar {
+  .cruise-line-sidebar,
+  .content-sidebar {
     position: static;
-    flex-direction: row;
-    flex-wrap: wrap;
   }
 
-  .sidebar-card {
-    flex: 1 1 300px;
+  .dual-section {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -245,12 +423,14 @@
     grid-template-columns: 1fr;
   }
 
-  .cruise-line-sidebar {
-    flex-direction: column;
+  .highlight-card {
+    padding: var(--space-4);
   }
 
+  .info-card,
+  .section-card,
   .sidebar-card {
-    flex: 1 1 100%;
+    padding: var(--space-4);
   }
 
   .cta-buttons {
@@ -260,5 +440,21 @@
   .cta-buttons .btn {
     width: 100%;
   }
+
+  .ships-list-large .ship-badge {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--font-size-sm);
+  }
 }
 
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .highlight-card,
+  .destination-tag,
+  .ship-badge {
+    transition: none;
+  }
+}

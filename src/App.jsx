@@ -33,7 +33,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           
-          {/* Cruise Lines */}
+          {/* Cruise Lines - All use the unified template */}
           <Route path="/cruise-lines" element={<CruiseLinesPage />} />
           <Route path="/cruise-lines/:slug" element={<CruiseLinePage />} />
           

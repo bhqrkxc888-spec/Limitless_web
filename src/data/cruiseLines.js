@@ -1,6 +1,16 @@
 /**
  * Cruise Lines Data
  * All cruise line information for the site
+ * 
+ * Extended data structure supports optional sections:
+ * - whyChoose: Array of { title, description } benefit cards
+ * - destinationImages: Array of { name, image, alt } for featured destinations
+ * - kidsClub: { name, intro, quickFacts, ageGroups } for family ships
+ * - accessibility: { intro, tips } for accessibility info
+ * - loyaltyProgram: { name, intro, tiers } for loyalty schemes
+ * - fleet: Array of { name, type, description, features } for ship details
+ * - dining: Array of { name, description } for restaurant info
+ * - entertainment: Array of { name, description } for onboard activities
  */
 
 export const cruiseLines = [
@@ -10,11 +20,104 @@ export const cruiseLines = [
     name: 'P&O Cruises',
     shortName: 'P&O',
     tagline: 'Britain\'s favourite cruise line',
-    description: 'P&O Cruises offers warm British hospitality and a wide choice of destinations from convenient UK ports. With ships designed for adults only and family-friendly options, no-fly departures from Southampton, and pounds sterling onboard for easy budgeting, P&O Cruises provides a quintessentially British cruising experience for everyone.',
+    description: 'P&O Cruises offers warm British hospitality from convenient UK ports. Choose adults-only ships (Aurora, Arcadia) or family-friendly vessels (Iona, Arvia, Britannia). No-fly departures from Southampton, pounds sterling onboard, and no tipping required.',
     category: 'mainstream',
     featured: true,
     image: '/images/cruise-lines/po-cruises.jpg',
     logo: '/images/cruise-lines/logos/po-cruises.png',
+    
+    // Why Choose section - benefit cards
+    whyChoose: [
+      {
+        title: 'No-Fly from Southampton',
+        description: 'Start and finish in the UK with no airport stress. Pounds sterling onboard for easy budgeting, and tips are not required.',
+        icon: 'anchor'
+      },
+      {
+        title: 'Ships for Everyone',
+        description: 'Adults-only ships (Aurora, Arcadia) for peaceful cruising, or family-friendly vessels (Iona, Arvia, Britannia, Azura, Ventura) with kids clubs.',
+        icon: 'ship'
+      },
+      {
+        title: 'SkyDome & The 710 Club',
+        description: 'Iona and Arvia feature a glass-enclosed SkyDome and live music bar created with Gary Barlow.',
+        icon: 'music'
+      },
+      {
+        title: 'Food Heroes Dining',
+        description: 'Enjoy menus by Marco Pierre White, José Pizarro, and wine expert Olly Smith at The Glass House.',
+        icon: 'dining'
+      },
+      {
+        title: 'Kids Club: The Reef',
+        description: 'Ages 6 months to 17 years with age-specific programs, Night Nursery, and qualified Reef Rangers—all included.',
+        icon: 'child'
+      },
+      {
+        title: 'Arvia Exclusives',
+        description: 'Try Altitude Skywalk high ropes 54m above the ocean and Mission Control submarine experience.',
+        icon: 'adventure'
+      }
+    ],
+
+    // Destination images for grid
+    destinationImages: [
+      { name: 'Caribbean', image: 'https://limitlesscruises.com/wp-content/uploads/2025/09/PF00002_Caribbean.jpg', alt: 'Caribbean beach' },
+      { name: 'Mediterranean', image: 'https://limitlesscruises.com/wp-content/uploads/2025/10/IMG_2972.jpeg', alt: 'Mediterranean coast' },
+      { name: 'Norwegian Fjords', image: 'https://limitlesscruises.com/wp-content/uploads/2025/10/IMG_3153.jpeg', alt: 'Norwegian Fjords' },
+      { name: 'Northern Europe', image: 'https://limitlesscruises.com/wp-content/uploads/2025/09/600PF00003_stockphotoscom-6489159.jpg', alt: 'Northern Europe' },
+      { name: 'Canary Islands', image: 'https://limitlesscruises.com/wp-content/uploads/2025/10/IMG_3020.jpeg', alt: 'Canary Islands' },
+      { name: 'Scandinavia', image: 'https://limitlesscruises.com/wp-content/uploads/2025/09/IMG_2678.jpeg', alt: 'Scandinavia' }
+    ],
+
+    // Kids Club section
+    kidsClub: {
+      name: 'The Reef',
+      intro: 'The Reef provides age-specific groups with dedicated rooms and activities from soft play to DJ sessions. Led by qualified Reef Rangers, clubs include Night Nursery (6 months–4 years), Splashers (2–4), Surfers (5–8), Scubas (9–12), and H2O/The Scene (13–17). Pre-registration is recommended in My P&O Cruises. Optional guaranteed sessions cost around £4.95 (day) or £8.95 (evening). Teen spaces are drop-in.',
+      quickFacts: [
+        'Included in cruise fare',
+        'Qualified Reef Rangers',
+        'Night Nursery available',
+        'Pre-book guarantee slots'
+      ],
+      ageGroups: [
+        { club: 'Night Nursery', age: '6mo–4yr', morning: '—', afternoon: '—', evening: '6pm–midnight' },
+        { club: 'Splashers', age: '2–4yr', morning: '9am–12pm', afternoon: '2pm–5pm', evening: '6pm–10pm' },
+        { club: 'Surfers', age: '5–8yr', morning: '9am–12pm', afternoon: '2pm–5pm', evening: '6pm–10pm' },
+        { club: 'Scubas', age: '9–12yr', morning: '9am–12pm', afternoon: '2pm–5pm', evening: '6pm–10pm' },
+        { club: 'H2O/The Scene', age: '13–17yr', morning: '—', afternoon: 'Open access', evening: 'Open access' }
+      ],
+      note: 'Times vary by ship. Teen spaces are open access; younger groups have set sessions.'
+    },
+
+    // Accessibility info
+    accessibility: {
+      intro: 'P&O Cruises offers accessible cabins with widened doors, roll-in showers, and grab rails across the fleet. Limitless Cruises can liaise with the Accessibility Team to confirm cabin availability, arrange port assistance, and note any mobility or medical needs.',
+      tips: [
+        { title: 'Accessible cabins', description: 'Book early—limited availability, allocated first-come.' },
+        { title: 'Mobility equipment', description: 'Bring aids or hire via Mobility at Sea.' },
+        { title: 'Port assistance', description: 'Request 14 days before sailing.' },
+        { title: 'Hearing/visual', description: 'Induction loops, vibrating alerts, TTY phones available.' },
+        { title: 'Medical services', description: 'Doctors and nurses onboard all ships.' }
+      ]
+    },
+
+    // Loyalty program
+    loyaltyProgram: {
+      name: 'Peninsular Club',
+      intro: 'Earn points for every night sailed and unlock benefits across six tiers: Pacific (150+ points) through to Ligurian (2,501+ points, 201+ nights). Enjoy discounts, priority services, and exclusive events.',
+      pointsInfo: '10 points per night typically. Benefits vary by ship and itinerary.',
+      tiers: [
+        { tier: 'Pacific', points: '150–500', benefits: '5% discount, magazine' },
+        { tier: 'Atlantic', points: '501–1,000', benefits: '7.5% discount, Champagne welcome' },
+        { tier: 'Mediterranean', points: '1,001–2,000', benefits: '8.5% discount, cocktail party' },
+        { tier: 'Caribbean', points: '2,001–2,500', benefits: '10% discount, priority booking' },
+        { tier: 'Baltic', points: '2,501+', benefits: '10% discount, 50% laundry, priority check-in' },
+        { tier: 'Ligurian', points: '2,501+ (201+ nights)', benefits: 'All above + hospitality lounge, free pressing' }
+      ]
+    },
+
+    // Simple lists for sidebar/quick reference
     highlights: [
       'No-fly cruising from Southampton with pounds sterling onboard and no tipping required',
       'Adults-only ships (Aurora and Arcadia) plus family-friendly ships (Iona, Arvia, Britannia, Azura, Ventura)',
@@ -25,7 +128,7 @@ export const cruiseLines = [
       'British hospitality with fine dining, afternoon tea, live theatre shows and casual entertainment',
       'Arvia exclusive experiences: Altitude Skywalk high ropes and Mission Control submarine adventure'
     ],
-    ships: ['Iona', 'Arvia', 'Britannia', 'Ventura', 'Aurora', 'Arcadia'],
+    ships: ['Iona', 'Arvia', 'Britannia', 'Ventura', 'Azura', 'Aurora', 'Arcadia'],
     destinations: ['Mediterranean', 'Norwegian Fjords', 'Caribbean', 'Canary Islands', 'Northern Europe', 'Scandinavia'],
     suitableFor: ['Couples', 'Families', 'Solo Travellers'],
     meta: {
@@ -44,6 +147,12 @@ export const cruiseLines = [
     featured: true,
     image: '/images/cruise-lines/royal-caribbean.jpg',
     logo: '/images/cruise-lines/logos/royal-caribbean.png',
+    whyChoose: [
+      { title: 'World\'s Largest Ships', description: 'Icon of the Seas and Wonder of the Seas offer unmatched scale and amenities.', icon: 'ship' },
+      { title: 'Innovative Activities', description: 'FlowRider surf simulators, rock climbing, ice skating, and zip lines at sea.', icon: 'adventure' },
+      { title: 'Perfect Day at CocoCay', description: 'Private island with Thrill Waterpark and Coco Beach Club.', icon: 'island' },
+      { title: 'Award-Winning Entertainment', description: 'Broadway shows, ice skating performances, and AquaTheater diving shows.', icon: 'entertainment' }
+    ],
     highlights: [
       'World\'s largest cruise ships',
       'Innovative onboard activities',
@@ -69,6 +178,12 @@ export const cruiseLines = [
     featured: true,
     image: '/images/cruise-lines/msc-cruises.jpg',
     logo: '/images/cruise-lines/logos/msc-cruises.png',
+    whyChoose: [
+      { title: 'Modern Fleet', description: 'Brand new ships with cutting-edge technology and elegant design.', icon: 'ship' },
+      { title: 'MSC Yacht Club', description: 'Ship-within-a-ship luxury experience with butler service.', icon: 'luxury' },
+      { title: 'Ocean Cay Marine Reserve', description: 'Private island paradise in the Bahamas with pristine beaches.', icon: 'island' },
+      { title: 'Great Family Value', description: 'Kids sail free on many sailings with supervised youth clubs.', icon: 'child' }
+    ],
     highlights: [
       'Modern fleet with latest technology',
       'MSC Yacht Club luxury experience',
@@ -94,6 +209,12 @@ export const cruiseLines = [
     featured: true,
     image: '/images/cruise-lines/norwegian.jpg',
     logo: '/images/cruise-lines/logos/norwegian.png',
+    whyChoose: [
+      { title: 'Freestyle Cruising', description: 'No set dining times, dress codes, or fixed schedules—cruise your way.', icon: 'freedom' },
+      { title: 'The Haven', description: 'Exclusive ship-within-a-ship with private pool, restaurant, and butler service.', icon: 'luxury' },
+      { title: 'Great Stirrup Cay', description: 'Private island in the Bahamas with beach villas and water sports.', icon: 'island' },
+      { title: 'Award-Winning Entertainment', description: 'Broadway shows, comedy clubs, and world-class performers.', icon: 'entertainment' }
+    ],
     highlights: [
       'Freestyle Cruising - no set dining times',
       'The Haven exclusive ship-within-a-ship',
@@ -119,6 +240,12 @@ export const cruiseLines = [
     featured: true,
     image: '/images/cruise-lines/disney.jpg',
     logo: '/images/cruise-lines/logos/disney.png',
+    whyChoose: [
+      { title: 'Disney Character Experiences', description: 'Meet beloved characters throughout your voyage with magical moments.', icon: 'magic' },
+      { title: 'Broadway-Style Shows', description: 'Award-winning productions including Frozen and Tangled musicals.', icon: 'entertainment' },
+      { title: 'Castaway Cay', description: 'Disney\'s private island paradise with family and adults-only beaches.', icon: 'island' },
+      { title: 'Adults-Only Areas', description: 'Quiet pools, fine dining, and nightlife exclusively for grown-ups.', icon: 'adults' }
+    ],
     highlights: [
       'Disney character experiences',
       'Award-winning Broadway-style shows',
@@ -144,6 +271,12 @@ export const cruiseLines = [
     featured: true,
     image: '/images/cruise-lines/celebrity.jpg',
     logo: '/images/cruise-lines/logos/celebrity.png',
+    whyChoose: [
+      { title: 'Award-Winning Cuisine', description: 'Michelin-starred chefs and innovative dining concepts.', icon: 'dining' },
+      { title: 'The Retreat', description: 'Suite-class experience with private lounge, pool, and restaurant.', icon: 'luxury' },
+      { title: 'Destination Focus', description: 'Longer stays in port and immersive shore excursions.', icon: 'destination' },
+      { title: 'Modern Design', description: 'Stunning Edge Series ships with Magic Carpet and infinite verandas.', icon: 'design' }
+    ],
     highlights: [
       'Award-winning cuisine',
       'The Retreat - suite class experience',
@@ -244,6 +377,12 @@ export const cruiseLines = [
     featured: true,
     image: '/images/cruise-lines/virgin-voyages.jpg',
     logo: '/images/cruise-lines/logos/virgin-voyages.png',
+    whyChoose: [
+      { title: 'Adults-Only', description: 'Ships designed exclusively for grown-ups with sophisticated vibes.', icon: 'adults' },
+      { title: 'All Restaurants Included', description: '20+ eateries with no main dining room—all included in your fare.', icon: 'dining' },
+      { title: 'Rockstar Suites', description: 'Ultimate luxury with private karaoke rooms and champagne on tap.', icon: 'luxury' },
+      { title: 'No Buffets', description: 'Fresh, made-to-order food at every venue—no traditional cruise buffets.', icon: 'quality' }
+    ],
     highlights: [
       'Adults-only ships',
       'All restaurants included',
@@ -359,12 +498,43 @@ export const cruiseLines = [
     }
   },
   {
+    id: 'cunard',
+    slug: 'cunard-cruises',
+    name: 'Cunard',
+    shortName: 'Cunard',
+    tagline: 'The most famous ocean liners in the world',
+    description: 'Cunard offers timeless elegance aboard the world\'s most iconic ocean liners, including Queen Mary 2, Queen Victoria, and Queen Elizabeth.',
+    category: 'luxury',
+    featured: true,
+    image: '/images/cruise-lines/cunard.jpg',
+    logo: '/images/cruise-lines/logos/cunard.png',
+    whyChoose: [
+      { title: 'Legendary Ocean Liners', description: 'Sail on Queen Mary 2, the only true transatlantic ocean liner in service.', icon: 'ship' },
+      { title: 'White Star Service', description: 'Impeccable British service with formal evenings and afternoon tea.', icon: 'service' },
+      { title: 'Transatlantic Crossings', description: 'Experience the iconic 7-night voyage between Southampton and New York.', icon: 'voyage' },
+      { title: 'Grill Dining', description: 'Exclusive Grill Suites with dedicated restaurants and lounges.', icon: 'dining' }
+    ],
+    highlights: [
+      'Iconic Queen Mary 2 transatlantic crossings',
+      'White Star service and formal evenings',
+      'Grill Suite exclusive experiences',
+      'Royal Nights themed events'
+    ],
+    ships: ['Queen Mary 2', 'Queen Victoria', 'Queen Elizabeth', 'Queen Anne'],
+    destinations: ['Transatlantic', 'World Cruises', 'Mediterranean', 'Northern Europe'],
+    suitableFor: ['Couples', 'Mature Travellers', 'Luxury Seekers', 'History Enthusiasts'],
+    meta: {
+      title: 'Cunard Cruises | Luxury Ocean Liner Voyages',
+      description: 'Experience Cunard\'s legendary ocean liners. Queen Mary 2 transatlantic crossings and world cruises. Book with Limitless Cruises.'
+    }
+  },
+  {
     id: 'ae-expeditions',
     slug: 'ae-expeditions',
-    name: 'A&E Expeditions',
-    shortName: 'A&E',
+    name: 'Aurora Expeditions',
+    shortName: 'Aurora',
     tagline: 'Adventure expedition cruising',
-    description: 'A&E Expeditions offers adventure expedition cruises to remote destinations including Antarctica, Arctic, and beyond.',
+    description: 'Aurora Expeditions offers adventure expedition cruises to remote destinations including Antarctica, Arctic, and beyond.',
     category: 'expedition',
     featured: false,
     image: '/images/cruise-lines/ae-expeditions.jpg',
@@ -379,8 +549,8 @@ export const cruiseLines = [
     destinations: ['Antarctica', 'Arctic', 'Kimberley', 'Remote Islands'],
     suitableFor: ['Adventure Seekers', 'Wildlife Enthusiasts', 'Photographers'],
     meta: {
-      title: 'A&E Expeditions | Antarctic & Arctic Expedition Cruises',
-      description: 'Explore Antarctica and the Arctic with A&E Expeditions. Adventure expedition cruising. Book with Limitless Cruises.'
+      title: 'Aurora Expeditions | Antarctic & Arctic Expedition Cruises',
+      description: 'Explore Antarctica and the Arctic with Aurora Expeditions. Adventure expedition cruising. Book with Limitless Cruises.'
     }
   }
 ];
@@ -389,4 +559,3 @@ export const cruiseLines = [
 export const getCruiseLineBySlug = (slug) => cruiseLines.find(cl => cl.slug === slug);
 export const getFeaturedCruiseLines = () => cruiseLines.filter(cl => cl.featured);
 export const getCruiseLinesByCategory = (category) => cruiseLines.filter(cl => cl.category === category);
-

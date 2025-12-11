@@ -1,0 +1,195 @@
+/* ========================================
+   ACCORDION COMPONENT
+   Collapsible content sections
+   ======================================== */
+
+.accordion {
+  width: 100%;
+}
+
+/* ========================================
+   VARIANTS
+   ======================================== */
+
+/* Default - connected items */
+.accordion-default .accordion-item {
+  border: 1px solid var(--clr-border);
+  margin-top: -1px;
+}
+
+.accordion-default .accordion-item:first-child {
+  margin-top: 0;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.accordion-default .accordion-item:last-child {
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
+.accordion-default .accordion-item:only-child {
+  border-radius: var(--radius-lg);
+}
+
+/* Bordered - each item has full border */
+.accordion-bordered .accordion-item {
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-3);
+}
+
+.accordion-bordered .accordion-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Separated - cards with shadow */
+.accordion-separated .accordion-item {
+  background-color: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-4);
+}
+
+.accordion-separated .accordion-item:last-child {
+  margin-bottom: 0;
+}
+
+/* ========================================
+   TRIGGER BUTTON
+   ======================================== */
+
+.accordion-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-4) var(--space-5);
+  background-color: var(--clr-surface);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--clr-primary);
+  transition: background-color var(--transition-fast),
+              color var(--transition-fast);
+}
+
+.accordion-trigger:hover {
+  background-color: var(--clr-bg-alt);
+}
+
+.accordion-trigger:focus-visible {
+  outline: 2px solid var(--clr-secondary);
+  outline-offset: -2px;
+  z-index: 1;
+  position: relative;
+}
+
+.accordion-item.is-open .accordion-trigger {
+  color: var(--clr-secondary);
+}
+
+/* Rounded corners for triggers */
+.accordion-default .accordion-item:first-child .accordion-trigger {
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.accordion-bordered .accordion-item .accordion-trigger,
+.accordion-separated .accordion-item .accordion-trigger {
+  border-radius: var(--radius-lg);
+}
+
+.accordion-item.is-open .accordion-trigger {
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* ========================================
+   TITLE
+   ======================================== */
+
+.accordion-title {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ========================================
+   CHEVRON ICON
+   ======================================== */
+
+.accordion-chevron {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  flex-shrink: 0;
+  transition: transform var(--transition-normal);
+}
+
+.accordion-item.is-open .accordion-chevron {
+  transform: rotate(180deg);
+}
+
+/* ========================================
+   CONTENT
+   ======================================== */
+
+.accordion-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--transition-normal);
+}
+
+.accordion-item.is-open .accordion-content {
+  grid-template-rows: 1fr;
+}
+
+.accordion-body {
+  overflow: hidden;
+  background-color: var(--clr-surface);
+  padding: 0 var(--space-5);
+}
+
+.accordion-item.is-open .accordion-body {
+  padding: var(--space-5);
+  padding-top: 0;
+}
+
+.accordion-body p {
+  margin: 0 0 var(--space-3);
+  line-height: var(--line-height-relaxed);
+  color: var(--clr-text-main);
+}
+
+.accordion-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 767px) {
+  .accordion-trigger {
+    padding: var(--space-3) var(--space-4);
+    font-size: var(--font-size-sm);
+  }
+
+  .accordion-item.is-open .accordion-body {
+    padding: var(--space-4);
+    padding-top: 0;
+  }
+}
+
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion-chevron,
+  .accordion-content {
+    transition: none;
+  }
+}
+
