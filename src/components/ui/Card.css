@@ -1,0 +1,159 @@
+/* ========================================
+   CARD COMPONENT
+   ======================================== */
+
+.card {
+  background-color: var(--clr-surface);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+/* ========================================
+   VARIANTS
+   ======================================== */
+
+.card-default {
+  box-shadow: var(--shadow-card);
+}
+
+.card-elevated {
+  box-shadow: var(--shadow-lg);
+}
+
+.card-outlined {
+  box-shadow: none;
+  border: 1px solid var(--clr-border);
+}
+
+.card-interactive {
+  box-shadow: var(--shadow-card);
+}
+
+/* ========================================
+   CLICKABLE CARDS
+   ======================================== */
+
+.card-clickable {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.card-clickable:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  color: inherit;
+}
+
+.card-clickable:focus-visible {
+  outline: 2px solid var(--clr-secondary);
+  outline-offset: 2px;
+}
+
+.card-outlined.card-clickable:hover {
+  border-color: var(--clr-secondary);
+  box-shadow: var(--shadow-md);
+}
+
+/* ========================================
+   CARD IMAGE
+   ======================================== */
+
+.card-image {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--clr-bg-alt);
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.card-clickable:hover .card-image img {
+  transform: scale(1.05);
+}
+
+.card-image-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--clr-bg-dark);
+  color: var(--clr-text-light);
+}
+
+.card-image-placeholder svg {
+  width: 48px;
+  height: 48px;
+}
+
+/* ========================================
+   CARD CONTENT
+   ======================================== */
+
+.card-content {
+  padding: var(--space-6);
+}
+
+/* ========================================
+   CARD TITLE
+   ======================================== */
+
+.card-title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-text-main);
+  margin-bottom: var(--space-2);
+  line-height: var(--line-height-snug);
+}
+
+.card-clickable:hover .card-title {
+  color: var(--clr-secondary);
+}
+
+/* ========================================
+   CARD DESCRIPTION
+   ======================================== */
+
+.card-description {
+  font-size: var(--font-size-base);
+  color: var(--clr-text-muted);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: 0;
+}
+
+/* ========================================
+   CARD FOOTER
+   ======================================== */
+
+.card-footer {
+  padding: var(--space-4) var(--space-6);
+  border-top: 1px solid var(--clr-border-light);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* ========================================
+   CARD BADGE
+   ======================================== */
+
+.card-badge {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  padding: var(--space-1) var(--space-3);
+  background-color: var(--clr-accent);
+  color: var(--clr-text-on-accent);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+

@@ -1,0 +1,232 @@
+/* ========================================
+   HERO SECTION COMPONENT
+   Full-width hero with background image
+   ======================================== */
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: var(--clr-text-on-primary);
+}
+
+/* ========================================
+   SIZES
+   ======================================== */
+
+.hero-sm {
+  min-height: 300px;
+  padding: var(--space-12) 0;
+}
+
+.hero-md {
+  min-height: 400px;
+  padding: var(--space-16) 0;
+}
+
+.hero-lg {
+  min-height: 550px;
+  padding: var(--space-20) 0;
+}
+
+.hero-full {
+  min-height: calc(100vh - 140px);
+  padding: var(--space-20) 0;
+}
+
+/* ========================================
+   BACKGROUND
+   ======================================== */
+
+.hero-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-light) 100%);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(44, 52, 76, 0.85) 0%,
+    rgba(44, 52, 76, 0.6) 50%,
+    rgba(44, 52, 76, 0.4) 100%
+  );
+}
+
+/* ========================================
+   CONTENT
+   ======================================== */
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+}
+
+.hero-title {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-text-on-primary);
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-6);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-subtitle {
+  font-size: var(--font-size-xl);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-8);
+  max-width: 600px;
+}
+
+/* ========================================
+   CTA BUTTONS
+   ======================================== */
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+/* ========================================
+   ALIGNMENT
+   ======================================== */
+
+.hero-left .hero-content {
+  text-align: left;
+}
+
+.hero-center {
+  text-align: center;
+}
+
+.hero-center .hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-center .hero-subtitle {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-center .hero-cta {
+  justify-content: center;
+}
+
+/* ========================================
+   BADGES / TRUST SIGNALS
+   ======================================== */
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+  padding-top: var(--space-8);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hero-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.hero-badge svg {
+  width: 20px;
+  height: 20px;
+  color: var(--clr-accent);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 1023px) {
+  .hero-lg {
+    min-height: 450px;
+    padding: var(--space-16) 0;
+  }
+
+  .hero-full {
+    min-height: 500px;
+  }
+
+  .hero-title {
+    font-size: var(--font-size-4xl);
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-sm {
+    min-height: 250px;
+    padding: var(--space-8) 0;
+  }
+
+  .hero-md {
+    min-height: 300px;
+    padding: var(--space-12) 0;
+  }
+
+  .hero-lg {
+    min-height: 400px;
+    padding: var(--space-12) 0;
+  }
+
+  .hero-full {
+    min-height: 450px;
+  }
+
+  .hero-title {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .hero-subtitle {
+    font-size: var(--font-size-base);
+    margin-bottom: var(--space-6);
+  }
+
+  .hero-cta {
+    flex-direction: column;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-badges {
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-top: var(--space-6);
+    padding-top: var(--space-6);
+  }
+}
+

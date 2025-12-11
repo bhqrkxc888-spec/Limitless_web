@@ -1,0 +1,49 @@
+/* ========================================
+   IMAGE PLACEHOLDER COMPONENT
+   ======================================== */
+
+.image-placeholder {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(135deg, var(--clr-bg-alt) 0%, var(--clr-bg-dark) 100%);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.image-placeholder-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  color: var(--clr-text-light);
+}
+
+.image-placeholder-content svg {
+  width: 48px;
+  height: 48px;
+  opacity: 0.5;
+}
+
+.image-placeholder-text {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  opacity: 0.7;
+}
+
+/* ========================================
+   SIZE VARIANTS
+   ======================================== */
+
+.image-placeholder-sm .image-placeholder-content svg {
+  width: 32px;
+  height: 32px;
+}
+
+.image-placeholder-lg .image-placeholder-content svg {
+  width: 64px;
+  height: 64px;
+}
+

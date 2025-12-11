@@ -1,0 +1,38 @@
+/* ========================================
+   CRUISE LINES LISTING PAGE
+   ======================================== */
+
+.cruise-lines-page {
+  min-height: 100vh;
+}
+
+/* CTA Section */
+.cruise-lines-page .section-dark h2 {
+  color: var(--clr-text-on-primary);
+  margin-bottom: var(--space-4);
+}
+
+.cruise-lines-page .section-dark p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: var(--font-size-lg);
+  max-width: 600px;
+  margin: 0 auto var(--space-8);
+}
+
+.cruise-lines-page .cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 767px) {
+  .cruise-lines-page .cta-buttons {
+    flex-direction: column;
+  }
+
+  .cruise-lines-page .cta-buttons .btn {
+    width: 100%;
+  }
+}
+

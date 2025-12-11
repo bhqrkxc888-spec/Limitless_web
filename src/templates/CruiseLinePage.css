@@ -1,0 +1,264 @@
+/* ========================================
+   CRUISE LINE PAGE TEMPLATE
+   ======================================== */
+
+.cruise-line-page {
+  min-height: 100vh;
+}
+
+/* ========================================
+   LAYOUT GRID
+   ======================================== */
+
+.cruise-line-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+.cruise-line-main {
+  min-width: 0;
+}
+
+/* ========================================
+   HIGHLIGHTS
+   ======================================== */
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.highlight-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background-color: var(--clr-bg-alt);
+  border-radius: var(--radius-lg);
+}
+
+.highlight-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--clr-secondary);
+}
+
+.highlight-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.highlight-text {
+  font-size: var(--font-size-base);
+  color: var(--clr-text-main);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+/* ========================================
+   SHIPS SECTION
+   ======================================== */
+
+.section-subtitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-text-main);
+  margin-bottom: var(--space-4);
+}
+
+.ships-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.ship-badge {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-full);
+}
+
+/* ========================================
+   DESTINATIONS SECTION
+   ======================================== */
+
+.destinations-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.destination-tag {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--clr-bg-alt);
+  color: var(--clr-text-main);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--clr-border);
+}
+
+/* ========================================
+   SIDEBAR
+   ======================================== */
+
+.cruise-line-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  position: sticky;
+  top: 120px;
+}
+
+.sidebar-card {
+  background-color: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-card);
+}
+
+.sidebar-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-text-main);
+  margin-bottom: var(--space-3);
+}
+
+.sidebar-text {
+  font-size: var(--font-size-base);
+  color: var(--clr-text-muted);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-4);
+}
+
+.sidebar-cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Suitable For List */
+.suitable-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.suitable-list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
+  font-size: var(--font-size-base);
+  color: var(--clr-text-main);
+}
+
+.suitable-list svg {
+  width: 18px;
+  height: 18px;
+  color: var(--clr-secondary);
+  flex-shrink: 0;
+}
+
+/* Trust Section */
+.sidebar-trust {
+  background-color: var(--clr-bg-alt);
+  border: none;
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--clr-text-main);
+}
+
+.trust-item svg {
+  width: 20px;
+  height: 20px;
+  color: var(--clr-secondary);
+}
+
+/* ========================================
+   CTA SECTION
+   ======================================== */
+
+.cta-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cta-content h2 {
+  color: var(--clr-text-on-primary);
+  margin-bottom: var(--space-4);
+}
+
+.cta-content p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-8);
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 1023px) {
+  .cruise-line-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .cruise-line-sidebar {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .sidebar-card {
+    flex: 1 1 300px;
+  }
+}
+
+@media (max-width: 767px) {
+  .highlights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cruise-line-sidebar {
+    flex-direction: column;
+  }
+
+  .sidebar-card {
+    flex: 1 1 100%;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+  }
+
+  .cta-buttons .btn {
+    width: 100%;
+  }
+}
+

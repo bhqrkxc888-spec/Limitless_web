@@ -1,0 +1,217 @@
+/* ========================================
+   DESTINATION PAGE TEMPLATE
+   ======================================== */
+
+.destination-page {
+  min-height: 100vh;
+}
+
+/* ========================================
+   LAYOUT GRID
+   ======================================== */
+
+.destination-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+.destination-main {
+  min-width: 0;
+}
+
+/* ========================================
+   HIGHLIGHTS
+   ======================================== */
+
+.highlights-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background-color: var(--clr-bg-alt);
+  border-radius: var(--radius-lg);
+}
+
+.highlight-item .highlight-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--clr-secondary);
+}
+
+.highlight-item .highlight-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.highlight-item p {
+  font-size: var(--font-size-base);
+  color: var(--clr-text-main);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+/* ========================================
+   REGIONS
+   ======================================== */
+
+.regions-section h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-4);
+}
+
+.regions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.region-tag {
+  display: inline-block;
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--clr-secondary);
+  color: var(--clr-text-on-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-full);
+}
+
+/* ========================================
+   BEST TIME
+   ======================================== */
+
+.best-time-section h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-4);
+}
+
+.best-time-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  background-color: var(--clr-accent);
+  color: var(--clr-text-on-accent);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-full);
+}
+
+.best-time-badge svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ========================================
+   SIDEBAR
+   ======================================== */
+
+.destination-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  position: sticky;
+  top: 120px;
+}
+
+.destination-sidebar .sidebar-card {
+  background-color: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-card);
+}
+
+.destination-sidebar .sidebar-card h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-3);
+}
+
+.destination-sidebar .sidebar-card p {
+  font-size: var(--font-size-base);
+  color: var(--clr-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.destination-sidebar .sidebar-cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.cruise-lines-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cruise-lines-list li {
+  padding: var(--space-2) 0;
+  font-size: var(--font-size-base);
+  color: var(--clr-text-main);
+  border-bottom: 1px solid var(--clr-border-light);
+}
+
+.cruise-lines-list li:last-child {
+  border-bottom: none;
+}
+
+/* ========================================
+   CTA SECTION
+   ======================================== */
+
+.destination-page .section-dark h2 {
+  color: var(--clr-text-on-primary);
+  margin-bottom: var(--space-4);
+}
+
+.destination-page .section-dark p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: var(--font-size-lg);
+  max-width: 600px;
+  margin: 0 auto var(--space-8);
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 1023px) {
+  .destination-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .destination-sidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 767px) {
+  .cta-buttons {
+    flex-direction: column;
+  }
+
+  .cta-buttons .btn {
+    width: 100%;
+  }
+}
+

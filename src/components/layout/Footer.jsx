@@ -1,25 +1,132 @@
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config/siteConfig';
+import { navigation } from '../../data/navigation';
 import './Footer.css';
 
 function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="site-footer">
-      <div className="container">
-        {/* TODO: Add more footer sections (contact info, social links, etc.) */}
-        <div className="footer-links">
-          <Link to="/booking-terms" className="footer-link">Booking Terms & Conditions</Link>
-          <Link to="/website-terms" className="footer-link">Website Terms</Link>
-          <Link to="/privacy-policy" className="footer-link">Privacy Policy</Link>
-          <Link to="/cookie-policy" className="footer-link">Cookie Policy (UK)</Link>
+    <footer className="footer">
+      {/* Main Footer */}
+      <div className="footer-main">
+        <div className="container">
+          <div className="footer-grid">
+            {/* Brand Column */}
+            <div className="footer-brand">
+              <Link to="/" className="footer-logo">
+                <img 
+                  src="/images/site-general/header.jpg" 
+                  alt={siteConfig.siteName}
+                  className="footer-logo-img"
+                />
+              </Link>
+              <p className="footer-tagline">{siteConfig.tagline}</p>
+              
+              {/* Contact Info */}
+              <div className="footer-contact">
+                <a href={`tel:${siteConfig.phone}`} className="footer-contact-item">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                  </svg>
+                  <span>{siteConfig.phone}</span>
+                </a>
+                <a href={`mailto:${siteConfig.email}`} className="footer-contact-item">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                  </svg>
+                  <span>{siteConfig.email}</span>
+                </a>
+              </div>
+
+              {/* Social Links */}
+              <div className="footer-social">
+                <a href="https://www.facebook.com/profile.php?id=61570469572535" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
+                  </svg>
+                </a>
+                <a href="https://www.linkedin.com/company/limitless-cruises/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                  </svg>
+                </a>
+                <a href="https://www.youtube.com/@LimitlessCruises" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Cruise Lines */}
+            <div className="footer-column">
+              <h3 className="footer-column-title">Cruise Lines</h3>
+              <ul className="footer-links">
+                {navigation.footer.cruiseLines.map((link, index) => (
+                  <li key={index}>
+                    <Link to={link.path}>{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Destinations */}
+            <div className="footer-column">
+              <h3 className="footer-column-title">Destinations</h3>
+              <ul className="footer-links">
+                {navigation.footer.destinations.map((link, index) => (
+                  <li key={index}>
+                    <Link to={link.path}>{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
+              
+              <h3 className="footer-column-title mt-6">Cruise Types</h3>
+              <ul className="footer-links">
+                {navigation.footer.categories.map((link, index) => (
+                  <li key={index}>
+                    <Link to={link.path}>{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Company */}
+            <div className="footer-column">
+              <h3 className="footer-column-title">Company</h3>
+              <ul className="footer-links">
+                {navigation.footer.company.map((link, index) => (
+                  <li key={index}>
+                    <Link to={link.path}>{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
+
+              <h3 className="footer-column-title mt-6">Legal</h3>
+              <ul className="footer-links">
+                {navigation.footer.legal.map((link, index) => (
+                  <li key={index}>
+                    <Link to={link.path}>{link.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
-        
-        <div className="footer-legal">
-          {siteConfig.footerLegalText.map((paragraph, index) => (
-            <p key={index} className="legal-text">
-              {paragraph}
-            </p>
-          ))}
+      </div>
+
+      {/* Legal Footer */}
+      <div className="footer-legal">
+        <div className="container">
+          <div className="footer-legal-content">
+            {siteConfig.footerLegalText.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
+          </div>
+          <div className="footer-copyright">
+            <p>© {currentYear} {siteConfig.siteName}. All rights reserved.</p>
+          </div>
         </div>
       </div>
     </footer>
@@ -27,4 +134,3 @@ function Footer() {
 }
 
 export default Footer;
-
