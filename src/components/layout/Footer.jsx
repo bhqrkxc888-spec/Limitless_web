@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config/siteConfig';
 import './Footer.css';
 
@@ -7,10 +8,10 @@ function Footer() {
       <div className="container">
         {/* TODO: Add more footer sections (contact info, social links, etc.) */}
         <div className="footer-links">
-          <a href="/booking-terms" className="footer-link">Booking Terms & Conditions</a>
-          <a href="/website-terms" className="footer-link">Website Terms</a>
-          <a href="/privacy-policy" className="footer-link">Privacy Policy</a>
-          <a href="/cookie-policy" className="footer-link">Cookie Policy (UK)</a>
+          <Link to="/booking-terms" className="footer-link">Booking Terms & Conditions</Link>
+          <Link to="/website-terms" className="footer-link">Website Terms</Link>
+          <Link to="/privacy-policy" className="footer-link">Privacy Policy</Link>
+          <Link to="/cookie-policy" className="footer-link">Cookie Policy (UK)</Link>
         </div>
         
         <div className="footer-legal">
