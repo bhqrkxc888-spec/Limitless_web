@@ -24,7 +24,7 @@ function Header() {
                 <a href="/find-a-cruise" className="nav-link">Find a Cruise</a>
               </li>
               <li>
-                <a href="/information" className="nav-link">Information</a>
+                <a href="/about" className="nav-link">About</a>
               </li>
               <li>
                 <a href="/contact" className="nav-link">Contact</a>
