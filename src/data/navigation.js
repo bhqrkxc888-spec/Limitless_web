@@ -18,6 +18,8 @@ const getCruiseLinesByCategory = () => {
 };
 
 export const navigation = {
+  // PHASE 1: Simplified main navigation (coming soon period)
+  // Only showing essential pages during site upgrade
   main: [
     {
       id: 'home',
@@ -29,91 +31,7 @@ export const navigation = {
       id: 'find-cruise',
       label: 'Find a Cruise',
       path: '/find-a-cruise',
-      megaMenu: true,
-      columns: [
-        {
-          title: 'Search Tools',
-          links: [
-            { label: 'Cruise Finder', path: '/find-a-cruise', description: 'Search all cruise holidays' },
-            { label: 'School Holidays', path: '/school-holiday-cruises', description: 'Family-friendly dates' }
-          ]
-        },
-        {
-          title: 'Popular Destinations',
-          links: destinations.slice(0, 4).map(d => ({
-            label: d.name,
-            path: `/destinations/${d.slug}`,
-            description: d.tagline
-          }))
-        },
-        {
-          title: 'Cruise Types',
-          links: categories.map(c => ({
-            label: c.name,
-            path: `/cruises/${c.slug}`,
-            description: c.tagline
-          }))
-        }
-      ]
-    },
-    {
-      id: 'cruise-lines',
-      label: 'Cruise Lines',
-      path: '/cruise-lines',
-      megaMenu: true,
-      columns: [
-        {
-          title: 'Popular Lines',
-          links: cruiseLines.filter(cl => cl.featured).slice(0, 6).map(cl => ({
-            label: cl.name,
-            path: `/cruise-lines/${cl.slug}`,
-            description: cl.tagline
-          }))
-        },
-        {
-          title: 'Premium & Luxury',
-          links: cruiseLines
-            .filter(cl => ['premium', 'luxury', 'ultra-luxury', 'contemporary'].includes(cl.category))
-            .slice(0, 6)
-            .map(cl => ({
-              label: cl.name,
-              path: `/cruise-lines/${cl.slug}`,
-              description: cl.tagline
-            }))
-        },
-        {
-          title: 'UK Favourites',
-          links: [
-            { label: 'P&O Cruises', path: '/cruise-lines/p-and-o-cruises', description: 'Britain\'s favourite' },
-            { label: 'Fred. Olsen', path: '/cruise-lines/fred-olsen-cruises', description: 'Small ship cruising' },
-            { label: 'Marella Cruises', path: '/cruise-lines/marella-cruises', description: 'All-inclusive value' },
-            { label: 'View All Cruise Lines', path: '/cruise-lines', description: 'See our full list', highlight: true }
-          ]
-        }
-      ]
-    },
-    {
-      id: 'about',
-      label: 'About',
-      path: '/about',
-      megaMenu: true,
-      columns: [
-        {
-          title: 'About Us',
-          links: [
-            { label: 'Personal Cruise Consultant', path: '/about', description: 'Meet Katherine' },
-            { label: 'Why Choose Us', path: '/about#why-choose-us', description: 'Our service promise' },
-            { label: 'Holiday Elite', path: 'https://www.holidayelite.com', external: true, description: 'Our booking partner' }
-          ]
-        },
-        {
-          title: 'Resources',
-          links: [
-            { label: 'Cruising with SEND', path: '/cruising-with-send', description: 'Accessibility support' },
-            { label: 'Make a Payment', path: '/make-a-payment', description: 'Pay for your booking' }
-          ]
-        }
-      ]
+      megaMenu: false  // Simplified - no dropdown during coming soon period
     },
     {
       id: 'contact',
@@ -121,6 +39,11 @@ export const navigation = {
       path: '/contact',
       megaMenu: false
     }
+    
+    // TODO: Restore full navigation after launch:
+    // - Cruise Lines dropdown with mega menu
+    // - About dropdown
+    // - Destinations will be accessible via cruise lines pages
   ],
   
   footer: {
@@ -151,4 +74,3 @@ export const navigation = {
 };
 
 export default navigation;
-
