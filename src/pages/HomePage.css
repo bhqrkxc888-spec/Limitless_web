@@ -126,6 +126,8 @@
 .trust-text {
   display: flex;
   flex-direction: column;
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .trust-text strong {
@@ -141,9 +143,7 @@
 }
 
 .trust-divider {
-  width: 1px;
-  height: 32px;
-  background: rgba(255, 255, 255, 0.2);
+  display: none; /* Hide vertical dividers, using underlines instead */
 }
 
 /* ========================================
