@@ -34,6 +34,12 @@ export const navigation = {
       megaMenu: false  // Simplified - no dropdown during coming soon period
     },
     {
+      id: 'about',
+      label: 'About',
+      path: '/about',
+      megaMenu: false
+    },
+    {
       id: 'contact',
       label: 'Contact',
       path: '/contact',
@@ -42,7 +48,6 @@ export const navigation = {
     
     // TODO: Restore full navigation after launch:
     // - Cruise Lines dropdown with mega menu
-    // - About dropdown
     // - Destinations will be accessible via cruise lines pages
   ],
   
