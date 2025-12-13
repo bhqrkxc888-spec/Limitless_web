@@ -87,7 +87,7 @@
 }
 
 /* ========================================
-   TRUST BAR
+   TRUST BAR - Fixed text visibility
    ======================================== */
 
 .trust-bar {
@@ -107,27 +107,37 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  color: var(--clr-text-on-primary);
 }
 
 .trust-icon {
-  font-size: 1.5rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-accent);
 }
 
-.trust-item div {
+.trust-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.trust-text {
   display: flex;
   flex-direction: column;
 }
 
-.trust-item strong {
+.trust-text strong {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   letter-spacing: 0.02em;
+  color: #FFFFFF;
 }
 
-.trust-item span {
+.trust-text span {
   font-size: var(--font-size-xs);
-  opacity: 0.8;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* ========================================
@@ -185,9 +195,42 @@
   transform: translateY(-2px);
 }
 
+/* Contact Icons - SVG styling */
 .contact-icon {
-  font-size: 2rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
   margin-bottom: var(--space-4);
+  background: var(--clr-accent);
+  color: var(--clr-primary);
+}
+
+.contact-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.contact-icon--phone {
+  background: var(--clr-accent);
+  color: var(--clr-primary);
+}
+
+.contact-icon--whatsapp {
+  background: #25D366;
+  color: white;
+}
+
+.contact-icon--facebook {
+  background: #1877F2;
+  color: white;
+}
+
+.contact-icon--email {
+  background: var(--clr-primary);
+  color: white;
 }
 
 .contact-card-elegant h3 {
@@ -242,9 +285,22 @@
   box-shadow: var(--shadow-lg);
 }
 
+/* Offer Icons - SVG styling */
 .offer-icon {
-  font-size: 2.5rem;
-  margin-bottom: var(--space-6);
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-6);
+  background: linear-gradient(135deg, var(--clr-accent), var(--clr-accent-dark));
+  border-radius: var(--radius-full);
+  color: var(--clr-primary);
+}
+
+.offer-icon svg {
+  width: 28px;
+  height: 28px;
 }
 
 .offer-card h3 {
@@ -294,16 +350,46 @@
   margin-bottom: var(--space-8);
 }
 
+/* Contact Promise List */
 .contact-promise {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
 }
 
-.contact-promise p {
+.contact-promise li {
+  position: relative;
+  padding-left: var(--space-6);
   font-size: var(--font-size-base);
   color: var(--clr-primary);
-  margin: 0;
+  font-weight: var(--font-weight-medium);
+}
+
+.contact-promise li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: var(--clr-accent);
+  border-radius: var(--radius-full);
+}
+
+.contact-promise li::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 4px;
+  height: 8px;
+  border-right: 2px solid var(--clr-primary);
+  border-bottom: 2px solid var(--clr-primary);
 }
 
 .contact-form-container {
@@ -354,6 +440,14 @@
     gap: var(--space-10);
     text-align: center;
   }
+
+  .contact-promise {
+    align-items: center;
+  }
+
+  .contact-promise li {
+    text-align: left;
+  }
 }
 
 @media (max-width: 640px) {
@@ -376,7 +470,7 @@
     text-align: center;
   }
 
-  .trust-item div {
+  .trust-text {
     align-items: center;
   }
 
