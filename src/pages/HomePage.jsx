@@ -1,143 +1,191 @@
 import { siteConfig } from '../config/siteConfig';
-import { comingSoonConfig } from '../config/comingSoonConfig';
 import SEO from '../components/SEO';
-import ComingSoonCountdown from '../components/ComingSoonCountdown';
 import ContactForm from '../components/ContactForm';
-import { Button, SectionHeader } from '../components/ui';
+import { Button } from '../components/ui';
+import { aboutImages } from '../utils/imageHelpers';
 import './HomePage.css';
 
 function HomePage() {
-  // Structured Data (JSON-LD) for SEO
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'TravelAgency',
     name: siteConfig.siteName,
     description: siteConfig.tagline,
-    url: 'https://new.limitlesscruises.com',
+    url: 'https://limitlesscruises.com',
     telephone: siteConfig.phone,
-    email: siteConfig.email,
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'GB'
-    },
-    areaServed: {
-      '@type': 'Country',
-      name: 'United Kingdom'
-    },
-    memberOf: {
-      '@type': 'Organization',
-      name: 'ABTA',
-      identifier: 'P7541'
-    }
+    email: siteConfig.email
   };
 
   return (
-    <main className="home-page home-coming-soon">
-      {/* SEO */}
+    <main className="home-elegant">
       <SEO
-        title="New Website Coming Soon - Cruise Holidays & Expert Advice"
-        description="Limitless Cruises is upgrading our website. We remain fully open for cruise enquiries and bookings with preferential rates and expert advice."
-        canonical="https://new.limitlesscruises.com"
+        title="Your Personal Cruise Consultant | Limitless Cruises"
+        description="A refined new experience is coming. Limitless Cruises - your personal cruise consultant for expert advice, exclusive deals, and seamless holiday planning."
+        canonical="https://limitlesscruises.com"
         structuredData={structuredData}
       />
 
-      {/* Coming Soon Intro */}
-      <section className="section">
+      {/* Hero Section */}
+      <section className="hero-elegant">
         <div className="container">
-          <div className="coming-soon-intro">
-            <h1 className="coming-soon-title">{comingSoonConfig.title}</h1>
-            <p className="coming-soon-subtitle">{comingSoonConfig.subtitle}</p>
-            <p className="coming-soon-message">{comingSoonConfig.message}</p>
+          <div className="hero-content">
+            <div className="hero-text">
+              <p className="hero-eyebrow">A refined new experience is on the way</p>
+              <h1>Your Personal Cruise Consultant</h1>
+              <p className="hero-lead">
+                We're crafting something special. While our new website takes shape, 
+                we're still here to help you discover your perfect cruise holiday.
+              </p>
+              <div className="hero-cta-group">
+                <Button to="/find-a-cruise" variant="primary" size="lg">
+                  Find a Cruise
+                </Button>
+                <Button to="/contact" variant="secondary" size="lg">
+                  Get in Touch
+                </Button>
+              </div>
+            </div>
+            <div className="hero-image">
+              <img 
+                src={aboutImages.katherine2}
+                alt="Katherine, your personal cruise consultant" 
+                loading="eager"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Trust Badges */}
-            <div className="trust-badges">
-              <div className="trust-badge">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
-                </svg>
-                <span>ABTA Protected</span>
+      {/* Trust Bar */}
+      <section className="trust-bar">
+        <div className="container">
+          <div className="trust-items">
+            <div className="trust-item">
+              <span className="trust-icon">🛡️</span>
+              <div>
+                <strong>ABTA Protected</strong>
+                <span>P7541</span>
               </div>
-              <div className="trust-badge">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/>
-                </svg>
+            </div>
+            <div className="trust-item">
+              <span className="trust-icon">🎓</span>
+              <div>
+                <strong>CLIA Cruise Master</strong>
+                <span>Expert Certified</span>
+              </div>
+            </div>
+            <div className="trust-item">
+              <span className="trust-icon">🇬🇧</span>
+              <div>
+                <strong>UK Based</strong>
                 <span>Personal Service</span>
-              </div>
-              <div className="trust-badge">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-                <span>Best Price Guarantee</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Countdown */}
-      {comingSoonConfig.features.showCountdown && (
-        <section className="section section-alt">
-          <div className="container">
-            <ComingSoonCountdown targetDate={comingSoonConfig.launchDate} />
-          </div>
-        </section>
-      )}
-
-      {/* Quick Actions */}
-      <section className="section">
+      {/* We're Still Here */}
+      <section className="still-here">
         <div className="container">
-          <div className="quick-actions">
-            <div className="quick-action-card">
-              <div className="quick-action-icon">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                </svg>
-              </div>
-              <h2>Find Your Perfect Cruise</h2>
-              <p>Use our cruise finder to search sailings from all major cruise lines and get a personalised quote.</p>
-              <Button to="/find-a-cruise" variant="primary" size="lg">
-                Find a Cruise
-              </Button>
+          <div className="still-here-content">
+            <h2>We're Still Here for You</h2>
+            <p className="section-lead">
+              While we work on our new website, Katherine is ready to help with your cruise enquiries. 
+              Reach out through any of these channels.
+            </p>
+            
+            <div className="contact-grid">
+              <a href={`tel:${siteConfig.phone}`} className="contact-card-elegant">
+                <span className="contact-icon">📞</span>
+                <h3>Call Us</h3>
+                <p>{siteConfig.phone}</p>
+              </a>
+              
+              <a 
+                href="https://wa.me/447359796108" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="contact-card-elegant"
+              >
+                <span className="contact-icon">💬</span>
+                <h3>WhatsApp</h3>
+                <p>{siteConfig.whatsapp}</p>
+              </a>
+              
+              <a 
+                href={siteConfig.facebook}
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="contact-card-elegant"
+              >
+                <span className="contact-icon">👍</span>
+                <h3>Facebook</h3>
+                <p>Message Us</p>
+              </a>
+              
+              <a href="#contact-form" className="contact-card-elegant">
+                <span className="contact-icon">✉️</span>
+                <h3>Email</h3>
+                <p>Send Enquiry</p>
+              </a>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="quick-action-card">
-              <div className="quick-action-icon">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                </svg>
-              </div>
-              <h2>Get Expert Advice</h2>
-              <p>Speak with your personal cruise consultant for tailored recommendations and exclusive offers.</p>
-              <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">
-                Call {siteConfig.phone}
-              </Button>
+      {/* What We Offer */}
+      <section className="what-we-offer">
+        <div className="container">
+          <h2>What We Offer</h2>
+          <p className="section-lead">
+            Expert cruise planning tailored to you
+          </p>
+          
+          <div className="offer-cards">
+            <div className="offer-card">
+              <div className="offer-icon">🎯</div>
+              <h3>Personal Service</h3>
+              <p>One-to-one advice from Katherine, your dedicated cruise consultant who takes time to understand your preferences.</p>
+            </div>
+            
+            <div className="offer-card">
+              <div className="offer-icon">💎</div>
+              <h3>Best Value</h3>
+              <p>Price match guarantee, exclusive deals, and insider knowledge to get you the most from your cruise budget.</p>
+            </div>
+            
+            <div className="offer-card">
+              <div className="offer-icon">✨</div>
+              <h3>Stress-Free Planning</h3>
+              <p>From first enquiry to safe return - flights, hotels, transfers and every detail handled for you.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Contact Form Section */}
-      {comingSoonConfig.features.showContactForm && (
-        <section className="section section-alt" id="contact">
-          <div className="container">
-            <SectionHeader
-              title="Get in Touch"
-              subtitle="Send us your cruise enquiry and we'll respond within 24 hours with personalised recommendations and pricing."
-              align="center"
-            />
-
-            <ContactForm context="home-coming-soon" />
+      <section className="contact-section" id="contact-form">
+        <div className="container">
+          <div className="contact-form-wrapper">
+            <div className="contact-form-text">
+              <h2>Send Us Your Enquiry</h2>
+              <p>
+                Tell us about your dream cruise and we'll respond within 24 hours 
+                with personalised recommendations and pricing.
+              </p>
+              <div className="contact-promise">
+                <p>✓ No obligation quote</p>
+                <p>✓ Expert advice</p>
+                <p>✓ Response within 24 hours</p>
+              </div>
+            </div>
+            <div className="contact-form-container">
+              <ContactForm context="homepage-elegant" />
+            </div>
           </div>
-        </section>
-      )}
-
-      {/* TODO: Full home page content will be restored here after launch
-          - Featured cruise lines grid
-          - Why choose us section
-          - Featured destinations
-          - Cruise types/categories
-          - Latest offers (from CRM)
-      */}
+        </div>
+      </section>
     </main>
   );
 }

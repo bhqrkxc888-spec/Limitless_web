@@ -23,10 +23,19 @@ function ContactForm({ context = 'general' }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Check if Supabase is configured
+    if (!supabase) {
+      console.warn('Supabase not configured - form cannot be submitted');
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+      return;
+    }
+    
     setStatus('submitting');
 
     try {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('website_enquiries')
         .insert([{
           name: formData.name,

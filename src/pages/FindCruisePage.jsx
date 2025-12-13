@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import SEO from '../components/SEO';
 import ContactForm from '../components/ContactForm';
-import { SectionHeader } from '../components/ui';
+import { siteConfig } from '../config/siteConfig';
 import './FindCruisePage.css';
 
 function FindCruisePage() {
@@ -33,35 +33,33 @@ function FindCruisePage() {
   }, []);
 
   return (
-    <main className="find-cruise-page" role="region" aria-label="Find your perfect cruise">
+    <main className="find-cruise-elegant">
       <SEO
-        title="Find Your Perfect Cruise - Search & Enquire"
-        description="Search for your ideal cruise holiday with expert help from Limitless Cruises. We'll find and match the best options for you."
-        canonical="https://new.limitlesscruises.com/find-a-cruise"
+        title="Find Your Perfect Cruise | Limitless Cruises"
+        description="Search for your ideal cruise holiday with expert help from Limitless Cruises. We find and match the best options for you."
+        canonical="https://limitlesscruises.com/find-a-cruise"
       />
 
-      {/* Header */}
-      <div className="finder-header">
+      {/* Hero */}
+      <section className="finder-hero">
         <div className="container">
           <h1>Find Your Perfect Cruise</h1>
+          <p className="finder-hero-lead">
+            Search cruises below or tell us what you're looking for and we'll find the best options with exclusive pricing.
+          </p>
         </div>
-      </div>
+      </section>
 
-      <div className="container">
-        <div className="finder-content">
-          {/* Intro */}
-          <div className="finder-intro">
-            <p className="finder-lead">
-              <strong>Limitless Cruises is your independent cruise specialist.</strong> We work with all major cruise lines
-              to find the perfect sailing for you, whether you're looking for a family getaway, adults-only escape, or luxury voyage.
-            </p>
+      {/* Widget Section */}
+      <section className="finder-widget-section">
+        <div className="container">
+          <div className="finder-widget-intro">
             <p>
-              This is <strong>not a live booking engine</strong>. We personally match your preferences with the best available options
-              and respond with tailored recommendations and pricing you won't find online.
+              <strong>This is not a live booking engine.</strong> We personally match your preferences with the best available 
+              options and respond with tailored recommendations you won't find online.
             </p>
           </div>
 
-          {/* Widgety Cruise Finder Widget */}
           <div className="finder-widget-container">
             <iframe 
               className="widgety-cruise-tour-search" 
@@ -75,67 +73,83 @@ function FindCruisePage() {
               title="Cruise Search Widget"
             />
           </div>
+        </div>
+      </section>
 
-          {/* Contact Form */}
-          <section className="finder-enquiry-section">
-            <SectionHeader
-              title="Tell Us What You're Looking For"
-              subtitle="Share your ideal cruise details and we'll find the best matches with exclusive pricing."
-              align="center"
-            />
-
-            <ContactForm context="find-a-cruise" />
-          </section>
-
-          {/* Help Section */}
-          <section className="finder-help">
-            <h2>We Work With Leading Cruise Lines</h2>
-            <p className="finder-help-intro">
-              Including P&O Cruises, MSC Cruises, Royal Caribbean, Norwegian Cruise Line, Disney Cruise Line,
-              Celebrity Cruises, Princess Cruises, Viking, Seabourn, Azamara, Cunard, Fred. Olsen, Marella Cruises,
-              Ambassador Cruise Line, Explora Journeys, and more.
-            </p>
-
-            <div className="finder-help-grid">
-              <div className="help-card">
-                <h3>Popular Destinations</h3>
-                <ul>
-                  <li>Mediterranean & Greek Isles</li>
-                  <li>Caribbean & Canary Islands</li>
-                  <li>Norwegian Fjords & Baltic</li>
-                  <li>Alaska & Canada</li>
-                  <li>Asia & Far East</li>
-                  <li>Antarctica & Arctic</li>
-                </ul>
-              </div>
-
-              <div className="help-card">
-                <h3>Cruise Types</h3>
-                <ul>
-                  <li>Family cruises with kids clubs</li>
-                  <li>Adults-only sailings</li>
-                  <li>Luxury & expedition cruises</li>
-                  <li>UK sailings (no-fly)</li>
-                  <li>World cruises & grand voyages</li>
-                  <li>Themed sailings & events</li>
-                </ul>
-              </div>
-
-              <div className="help-card">
-                <h3>We Can Help With</h3>
-                <ul>
-                  <li>School holiday dates</li>
-                  <li>Accessible cabins & support</li>
-                  <li>Pre/post cruise hotels</li>
-                  <li>Flight arrangements</li>
-                  <li>Special occasions</li>
-                  <li>Group bookings</li>
-                </ul>
+      {/* Contact Section */}
+      <section className="finder-contact-section">
+        <div className="container">
+          <div className="finder-contact-layout">
+            <div className="finder-contact-info">
+              <h2>Can't Find What You're Looking For?</h2>
+              <p>
+                Tell us your ideal cruise and we'll search all major cruise lines 
+                to find the perfect match with exclusive pricing.
+              </p>
+              <div className="finder-quick-contact">
+                <a href={`tel:${siteConfig.phone}`} className="finder-contact-link">
+                  <span className="finder-contact-icon">📞</span>
+                  <span>{siteConfig.phone}</span>
+                </a>
+                <a href="https://wa.me/447359796108" target="_blank" rel="noopener noreferrer" className="finder-contact-link">
+                  <span className="finder-contact-icon">💬</span>
+                  <span>WhatsApp</span>
+                </a>
               </div>
             </div>
-          </section>
+            <div className="finder-form-wrapper">
+              <ContactForm context="find-a-cruise-elegant" />
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Cruise Lines */}
+      <section className="finder-cruiselines">
+        <div className="container">
+          <h2>We Work With Leading Cruise Lines</h2>
+          <p className="cruiselines-list">
+            P&O Cruises, MSC Cruises, Royal Caribbean, Norwegian Cruise Line, Disney Cruise Line,
+            Celebrity Cruises, Princess Cruises, Viking, Seabourn, Azamara, Cunard, Fred. Olsen, 
+            Marella Cruises, Ambassador Cruise Line, Explora Journeys, and more.
+          </p>
+
+          <div className="finder-info-grid">
+            <div className="finder-info-card">
+              <h3>Popular Destinations</h3>
+              <ul>
+                <li>Mediterranean & Greek Isles</li>
+                <li>Caribbean & Canary Islands</li>
+                <li>Norwegian Fjords & Baltic</li>
+                <li>Alaska & Canada</li>
+                <li>Asia & Far East</li>
+              </ul>
+            </div>
+
+            <div className="finder-info-card">
+              <h3>Cruise Types</h3>
+              <ul>
+                <li>Family cruises with kids clubs</li>
+                <li>Adults-only sailings</li>
+                <li>Luxury & expedition cruises</li>
+                <li>UK sailings (no-fly)</li>
+                <li>World cruises & grand voyages</li>
+              </ul>
+            </div>
+
+            <div className="finder-info-card">
+              <h3>We Can Help With</h3>
+              <ul>
+                <li>School holiday dates</li>
+                <li>Accessible cabins & support</li>
+                <li>Pre/post cruise hotels</li>
+                <li>Flight arrangements</li>
+                <li>Special occasions</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

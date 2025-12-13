@@ -1,36 +1,39 @@
 :root {
   /* ========================================
      LIMITLESS CRUISES - DESIGN TOKENS
-     Modern, Clean, Card-based Design System
+     Elegant, Premium, Sophisticated Design
      ======================================== */
 
-  /* Brand Colors */
-  --clr-primary: #2C344C;          /* Navy - header, footer, CTAs */
+  /* Brand Colors - Navy remains the hero */
+  --clr-primary: #2C344C;          /* Navy - header, footer (brand) */
   --clr-primary-dark: #1f2536;     /* Darker navy for hover states */
   --clr-primary-light: #3d4766;    /* Lighter navy for subtle accents */
-  --clr-secondary: #22A6A4;        /* Teal - links, accents */
-  --clr-secondary-dark: #1a8a88;   /* Darker teal for hover */
-  --clr-secondary-light: #2bc4c2;  /* Lighter teal */
-  --clr-accent: #D9B84D;           /* Gold - highlights, badges */
-  --clr-accent-dark: #c4a63e;      /* Darker gold */
+  
+  /* Gold Accent - Premium, Elegant */
+  --clr-secondary: #C9A962;        /* Gold - primary accent */
+  --clr-secondary-dark: #B8944F;   /* Darker gold for hover */
+  --clr-secondary-light: #D4BC7E;  /* Lighter gold */
+  --clr-accent: #C9A962;           /* Gold - highlights, buttons */
+  --clr-accent-dark: #B8944F;      /* Darker gold hover */
+  --clr-accent-light: #D4BC7E;     /* Lighter gold */
 
-  /* Background Colors */
-  --clr-bg: #FFFFFF;               /* Main background - white */
-  --clr-bg-alt: #F8FAFC;           /* Alternate sections - light gray */
-  --clr-bg-dark: #F1F5F9;          /* Darker alt for contrast */
-  --clr-surface: #FFFFFF;          /* Cards, modals */
+  /* Background Colors - Warm, Elegant */
+  --clr-bg: #FDFBF7;               /* Warm white - main background */
+  --clr-bg-alt: #F8F5F0;           /* Warm cream - alternate sections */
+  --clr-bg-dark: #F0EBE3;          /* Warmer for contrast */
+  --clr-surface: #FFFFFF;          /* Cards, modals - pure white */
 
-  /* Text Colors */
-  --clr-text-main: #1A1A2E;        /* Primary text - softer than black */
-  --clr-text-muted: #6B7280;       /* Secondary text */
-  --clr-text-light: #9CA3AF;       /* Tertiary text */
+  /* Text Colors - Refined */
+  --clr-text-main: #2C344C;        /* Navy for elegant text */
+  --clr-text-muted: #5C6478;       /* Softer navy-gray */
+  --clr-text-light: #8B9099;       /* Tertiary text */
   --clr-text-on-primary: #FFFFFF;  /* Text on dark backgrounds */
-  --clr-text-on-accent: #1A1A2E;   /* Text on gold */
+  --clr-text-on-accent: #2C344C;   /* Text on gold */
 
-  /* Border Colors */
-  --clr-border: #E5E7EB;           /* Default borders */
-  --clr-border-light: #F3F4F6;     /* Subtle borders */
-  --clr-border-dark: #D1D5DB;      /* Emphasized borders */
+  /* Border Colors - Subtle, Refined */
+  --clr-border: #E8E4DC;           /* Warm border */
+  --clr-border-light: #F2EFE9;     /* Subtle warm borders */
+  --clr-border-dark: #D8D4CC;      /* Emphasized borders */
 
   /* Status Colors */
   --clr-success: #10B981;
@@ -39,12 +42,12 @@
   --clr-info: #3B82F6;
 
   /* ========================================
-     TYPOGRAPHY
+     TYPOGRAPHY - Elegant & Refined
      ======================================== */
 
-  /* Font Family */
+  /* Font Family - Premium Serif + Clean Sans */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-family-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
 
   /* Font Sizes */
   --font-size-xs: 0.75rem;      /* 12px */

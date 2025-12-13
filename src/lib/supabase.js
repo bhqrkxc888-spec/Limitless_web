@@ -4,11 +4,17 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  console.warn('Supabase environment variables not configured. Some features will be unavailable.');
+// Check if Supabase is configured
+const isConfigured = supabaseUrl && supabaseAnonKey;
+
+if (!isConfigured) {
+  console.warn('Supabase environment variables not configured. Contact form will be unavailable.');
 }
 
-export const supabase = createClient(supabaseUrl || '', supabaseAnonKey || '');
+// Only create client if configured, otherwise create a mock that won't throw
+export const supabase = isConfigured 
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null;
 
 /**
  * Upload an image to Supabase Storage

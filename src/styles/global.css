@@ -6,8 +6,8 @@
 /* Import Design Tokens */
 @import './tokens.css';
 
-/* Import Inter Font */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* Import Fonts - Elegant Typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 /* ========================================
    CSS RESET & BASE
