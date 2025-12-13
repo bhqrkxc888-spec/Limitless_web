@@ -293,7 +293,7 @@
   background-color: var(--clr-bg-alt);
 }
 
-.trust-item {
+.sidebar-trust .trust-item {
   display: flex;
   align-items: center;
   gap: var(--space-3);
@@ -303,11 +303,11 @@
   border-bottom: 1px solid var(--clr-border);
 }
 
-.trust-item:last-child {
+.sidebar-trust .trust-item:last-child {
   border-bottom: none;
 }
 
-.trust-item svg {
+.sidebar-trust .trust-item svg {
   width: 20px;
   height: 20px;
   color: var(--clr-secondary);
