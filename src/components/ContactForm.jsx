@@ -27,7 +27,7 @@ function ContactForm({ context = 'general' }) {
 
     try {
       const { data, error } = await supabase
-        .from('web_enquiries')
+        .from('website_enquiries')
         .insert([{
           name: formData.name,
           email: formData.email,

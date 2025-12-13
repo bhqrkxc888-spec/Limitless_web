@@ -10,11 +10,11 @@ export const STORAGE_BUCKETS = {
   CATEGORIES: 'categories'
 };
 
-// Database table names
+// Database table names (website-specific to avoid conflicts with CRM)
 export const TABLES = {
-  CRUISE_LINES: 'cruise_lines',
-  IMAGES: 'images',
-  WEB_ENQUIRIES: 'web_enquiries',
+  CRUISE_LINES: 'website_cruise_lines',
+  IMAGES: 'website_images',
+  ENQUIRIES: 'website_enquiries',
   LATEST_DEALS: 'latest_deals'
 };
 
@@ -25,7 +25,7 @@ export const SCHEMA = 'crm';
 export const FULL_TABLES = {
   CRUISE_LINES: `${SCHEMA}.${TABLES.CRUISE_LINES}`,
   IMAGES: `${SCHEMA}.${TABLES.IMAGES}`,
-  WEB_ENQUIRIES: `${SCHEMA}.${TABLES.WEB_ENQUIRIES}`,
+  ENQUIRIES: `${SCHEMA}.${TABLES.ENQUIRIES}`,
   LATEST_DEALS: `${SCHEMA}.${TABLES.LATEST_DEALS}`
 };
 
