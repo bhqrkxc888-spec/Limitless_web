@@ -72,6 +72,21 @@ const CheckCircleIcon = () => (
   </svg>
 );
 
+// Additional trust bar icons
+const PriceTagIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+    <path d="M2 17l10 5 10-5"/>
+    <path d="M2 12l10 5 10-5"/>
+  </svg>
+);
+
+const HeartIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+  </svg>
+);
+
 function HomePage() {
   const structuredData = {
     '@context': 'https://schema.org',
@@ -136,6 +151,7 @@ function HomePage() {
                 <span>P7541</span>
               </div>
             </div>
+            <span className="trust-divider" />
             <div className="trust-item">
               <span className="trust-icon">
                 <AwardIcon />
@@ -145,6 +161,7 @@ function HomePage() {
                 <span>Expert Certified</span>
               </div>
             </div>
+            <span className="trust-divider" />
             <div className="trust-item">
               <span className="trust-icon">
                 <MapPinIcon />
@@ -152,6 +169,26 @@ function HomePage() {
               <div className="trust-text">
                 <strong>UK Based</strong>
                 <span>Personal Service</span>
+              </div>
+            </div>
+            <span className="trust-divider" />
+            <div className="trust-item">
+              <span className="trust-icon">
+                <PriceTagIcon />
+              </span>
+              <div className="trust-text">
+                <strong>Price Match</strong>
+                <span>Guaranteed</span>
+              </div>
+            </div>
+            <span className="trust-divider" />
+            <div className="trust-item">
+              <span className="trust-icon">
+                <HeartIcon />
+              </span>
+              <div className="trust-text">
+                <strong>Family Friendly</strong>
+                <span>SEND Aware</span>
               </div>
             </div>
           </div>
