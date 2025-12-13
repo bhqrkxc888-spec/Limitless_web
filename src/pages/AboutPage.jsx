@@ -1,4 +1,5 @@
 import CTASection from '../components/CTASection';
+import { aboutImages } from '../utils/imageHelpers';
 import './AboutPage.css';
 
 function AboutPage() {
@@ -34,19 +35,19 @@ function AboutPage() {
                 <p>I will learn what you love so I can shortlist the right ships, cabins and itineraries. You only choose from options that truly fit your travel style.</p>
               </li>
               <li className="about-card">
-                <h3>No Fly &amp; Fly Cruise Options</h3>
+                <h3>No Fly & Fly Cruise Options</h3>
                 <p>Prefer sailing from the UK. I plan sailings direct from ports like Southampton. Want the world. I match the right flights to your cruise dates so the trip feels seamless.</p>
               </li>
               <li className="about-card">
-                <h3>Multi Cruise &amp; Stay</h3>
+                <h3>Multi Cruise & Stay</h3>
                 <p>Back to back sailings or land and sea combinations let you see more in one holiday. I coordinate everything so it feels easy.</p>
               </li>
               <li className="about-card">
-                <h3>Hotels, Flights &amp; Transfers</h3>
+                <h3>Hotels, Flights & Transfers</h3>
                 <p>I handle every detail around your cruise, from pre and post hotel stays to private transfers and well timed flights for a smooth trip.</p>
               </li>
               <li className="about-card">
-                <h3>Value Adds &amp; Onboard Extras</h3>
+                <h3>Value Adds & Onboard Extras</h3>
                 <p>From drink packages to Wi Fi and onboard credit, I keep an eye on promotions and deals so you always get great value.</p>
               </li>
               <li className="about-card">
@@ -78,7 +79,7 @@ function AboutPage() {
                 <p>From our first chat to the moment you step onboard I handle each detail so planning feels simple while you enjoy the excitement.</p>
               </li>
               <li>
-                <h3>SEND Friendly &amp; Family Understanding</h3>
+                <h3>SEND Friendly & Family Understanding</h3>
                 <p>As a SEND mum I understand accessibility, flexibility and the right environment for each traveller. I recommend ships, cabins and excursions that keep things easy for families.</p>
               </li>
               <li>
@@ -86,7 +87,7 @@ function AboutPage() {
                 <p>You will never feel alone in the booking process. I am here before you travel, while you are away and when you return home.</p>
               </li>
               <li>
-                <h3>Great Value &amp; Price Match</h3>
+                <h3>Great Value & Price Match</h3>
                 <p>I search widely for deals and promotions and I can price match or beat direct prices in most cases.</p>
               </li>
             </ul>
@@ -108,7 +109,7 @@ function AboutPage() {
             <div className="about-gallery" aria-label="Photos of personal cruise consultant on travels">
               <figure>
                 <img 
-                  src="/images/placeholders/about-1.jpg" 
+                  src={aboutImages.katherine1}
                   alt="Personal cruise consultant Katherine at the Arvia deck chair" 
                   loading="lazy" 
                   decoding="async"
@@ -116,7 +117,7 @@ function AboutPage() {
               </figure>
               <figure>
                 <img 
-                  src="/images/placeholders/about-2.jpg" 
+                  src={aboutImages.katherine2}
                   alt="Walking a sunny seaside promenade" 
                   loading="lazy" 
                   decoding="async"
@@ -124,7 +125,7 @@ function AboutPage() {
               </figure>
               <figure>
                 <img 
-                  src="/images/placeholders/about-3.jpg" 
+                  src={aboutImages.katherine3}
                   alt="Family sightseeing in a European city" 
                   loading="lazy" 
                   decoding="async"
@@ -141,7 +142,7 @@ function AboutPage() {
               <div className="about-elite-wrap">
                 <a className="about-elite" href="https://www.holidayelite.com/our-travel-agents/katherine-horton" target="_blank" rel="noopener noreferrer">
                   <img 
-                    src="/images/placeholders/holiday-elite-badge.png"
+                    src={aboutImages.holidayEliteLogo}
                     alt="Holiday Elite badge for Katherine Horton" 
                     width="375" 
                     height="70" 
@@ -174,26 +175,26 @@ function AboutPage() {
             </p>
 
             <ul className="cruise-lines-grid" role="list">
-              <li><a href="/disney-cruise-line/" aria-label="Disney Cruise Line cruises with Limitless Cruises">Disney Cruise Line</a></li>
-              <li><a href="/fred-olsen-cruises/" aria-label="Fred Olsen cruises and itineraries">Fred. Olsen Cruise Lines</a></li>
-              <li><a href="/holland-america-line/" aria-label="Holland America Line cruises">Holland America Line</a></li>
-              <li><a href="/marella-cruises/" aria-label="Marella Cruises holidays">Marella Cruises</a></li>
-              <li><a href="/msc-cruises/" aria-label="MSC Cruises family and Med sailings">MSC Cruises</a></li>
-              <li><a href="/norwegian-cruise-line/" aria-label="Norwegian Cruise Line cruises">Norwegian Cruise Line</a></li>
-              <li><a href="/p-and-o-cruises/" aria-label="P and O Cruises ex-UK and fly-cruise">P&amp;O Cruises</a></li>
-              <li><a href="/princess-cruises/" aria-label="Princess Cruises MedallionClass cruises">Princess Cruises</a></li>
-              <li><a href="/royal-caribbean/" aria-label="Royal Caribbean cruises with activities and shows">Royal Caribbean</a></li>
-              <li><a href="/celebrity-cruises/" aria-label="Celebrity Cruises premium holidays">Celebrity Cruises</a></li>
-              <li><a href="/virgin-voyages-cruises/" aria-label="Virgin Voyages adult only cruises">Virgin Voyages</a></li>
-              <li><a href="/azamara-cruises/" aria-label="Azamara destination immersive cruises">Azamara</a></li>
-              <li><a href="/ae-expeditions/" aria-label="AE Expeditions polar and adventure cruises">AE Expeditions</a></li>
-              <li><a href="/viking-cruises/" aria-label="Viking Cruises ocean and river">Viking</a></li>
-              <li><a href="/seabourn-cruises/" aria-label="Seabourn ultra luxury small ship cruises">Seabourn</a></li>
+              <li><a href="/cruise-lines/disney-cruise-line" aria-label="Disney Cruise Line cruises with Limitless Cruises">Disney Cruise Line</a></li>
+              <li><a href="/cruise-lines/fred-olsen-cruises" aria-label="Fred Olsen cruises and itineraries">Fred. Olsen Cruise Lines</a></li>
+              <li><a href="/cruise-lines/holland-america-line" aria-label="Holland America Line cruises">Holland America Line</a></li>
+              <li><a href="/cruise-lines/marella-cruises" aria-label="Marella Cruises holidays">Marella Cruises</a></li>
+              <li><a href="/cruise-lines/msc-cruises" aria-label="MSC Cruises family and Med sailings">MSC Cruises</a></li>
+              <li><a href="/cruise-lines/norwegian-cruise-line" aria-label="Norwegian Cruise Line cruises">Norwegian Cruise Line</a></li>
+              <li><a href="/cruise-lines/p-and-o-cruises" aria-label="P and O Cruises ex-UK and fly-cruise">P&O Cruises</a></li>
+              <li><a href="/cruise-lines/princess-cruises" aria-label="Princess Cruises MedallionClass cruises">Princess Cruises</a></li>
+              <li><a href="/cruise-lines/royal-caribbean" aria-label="Royal Caribbean cruises with activities and shows">Royal Caribbean</a></li>
+              <li><a href="/cruise-lines/celebrity-cruises" aria-label="Celebrity Cruises premium holidays">Celebrity Cruises</a></li>
+              <li><a href="/cruise-lines/virgin-voyages-cruises" aria-label="Virgin Voyages adult only cruises">Virgin Voyages</a></li>
+              <li><a href="/cruise-lines/azamara-cruises" aria-label="Azamara destination immersive cruises">Azamara</a></li>
+              <li><a href="/cruise-lines/ae-expeditions" aria-label="AE Expeditions polar and adventure cruises">AE Expeditions</a></li>
+              <li><a href="/cruise-lines/viking-cruises" aria-label="Viking Cruises ocean and river">Viking</a></li>
+              <li><a href="/cruise-lines/seabourn-cruises" aria-label="Seabourn ultra luxury small ship cruises">Seabourn</a></li>
             </ul>
 
             <p className="about-note">
               You can also search every brand at once in our
-              <a href="/find-a-cruise/"> Cruise Finder</a>.
+              <a href="/find-a-cruise"> Cruise Finder</a>.
             </p>
           </div>
         </div>
@@ -206,4 +207,3 @@ function AboutPage() {
 }
 
 export default AboutPage;
-
