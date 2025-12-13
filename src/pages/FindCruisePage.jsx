@@ -1,9 +1,37 @@
+import { useEffect } from 'react';
 import SEO from '../components/SEO';
 import ContactForm from '../components/ContactForm';
 import { SectionHeader } from '../components/ui';
 import './FindCruisePage.css';
 
 function FindCruisePage() {
+  useEffect(() => {
+    // Load Widgety scripts
+    const scripts = [
+      'https://www.widgety.co.uk/assets/widgety_iframe-338e444fa45e2af836a1c162ed7b7fa3b57d6267f6e30c026f7d582a77e34dd7.js',
+      'https://www.widgety.co.uk/assets/deep_linking_iframe-4355a96984c672f2dbc8ef1db67edcde1065f89371539db26a3483f3a6551479.js',
+      'https://www.widgety.co.uk/assets/widgety_cruise_tour_search_navigation_script-e5c46a5521b82182ecdc1564d7f90c5cfb653f3ffed29c4220e85749607af1de.js'
+    ];
+
+    const loadedScripts = scripts.map(src => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.setAttribute('data-widgety', 'true');
+      script.async = true;
+      document.body.appendChild(script);
+      return script;
+    });
+
+    // Cleanup function
+    return () => {
+      loadedScripts.forEach(script => {
+        if (script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
+      });
+    };
+  }, []);
+
   return (
     <main className="find-cruise-page" role="region" aria-label="Find your perfect cruise">
       <SEO
@@ -25,7 +53,7 @@ function FindCruisePage() {
           <div className="finder-intro">
             <p className="finder-lead">
               <strong>Limitless Cruises is your independent cruise specialist.</strong> We work with all major cruise lines
-              to find the perfect sailing for you—whether you're looking for a family getaway, adults-only escape, or luxury voyage.
+              to find the perfect sailing for you, whether you're looking for a family getaway, adults-only escape, or luxury voyage.
             </p>
             <p>
               This is <strong>not a live booking engine</strong>. We personally match your preferences with the best available options
@@ -33,18 +61,19 @@ function FindCruisePage() {
             </p>
           </div>
 
-          {/* TODO: Future cruise finder widget/API integration will go here */}
-          <div className="finder-widget-placeholder">
-            <div className="placeholder-content">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
-              </svg>
-              <h3>Cruise Search Widget Coming Soon</h3>
-              <p>
-                Our new search interface is being developed. For now, use the form below to tell us what you're looking for
-                and we'll do the searching for you.
-              </p>
-            </div>
+          {/* Widgety Cruise Finder Widget */}
+          <div className="finder-widget-container">
+            <iframe 
+              className="widgety-cruise-tour-search" 
+              frameBorder="0" 
+              height="600" 
+              preview-nav="true" 
+              results-nav="true" 
+              src="//www.widgety.co.uk/widgets/ugPj5zR1QMRisywLk13B.widget" 
+              tabs="true" 
+              width="100%"
+              title="Cruise Search Widget"
+            />
           </div>
 
           {/* Contact Form */}

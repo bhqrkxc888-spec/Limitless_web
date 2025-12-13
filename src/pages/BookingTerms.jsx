@@ -67,7 +67,7 @@ function BookingTerms() {
               Most scheduled airlines do not allow changes, and therefore full cancellation charges will usually apply. Most "no frills" airlines have cancellation charges of 100% from time of booking.
             </p>
             <p>
-              <strong>Changes by the supplier</strong> — We will inform you as soon as reasonably possible if the supplier needs to make a significant change to your confirmed arrangements or to cancel them. We will also liaise between you and the supplier in relation to any alternative arrangements offered by the supplier but we will have no further liability to you.
+              <strong>Changes by the supplier</strong> - We will inform you as soon as reasonably possible if the supplier needs to make a significant change to your confirmed arrangements or to cancel them. We will also liaise between you and the supplier in relation to any alternative arrangements offered by the supplier but we will have no further liability to you.
             </p>
             <p>
               In the event that your travel arrangements are affected by Foreign and Commonwealth advice we may offer a Travel Credit Refund instead of a cash refund.

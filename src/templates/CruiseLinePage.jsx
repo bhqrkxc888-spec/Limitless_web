@@ -185,7 +185,7 @@ function CruiseLinePage() {
           <div className="container">
             <SectionHeader
               title={cruiseLine.kidsClub.name}
-              subtitle="Safe, supervised fun for the whole family—included in your cruise fare"
+              subtitle="Safe, supervised fun for the whole family, included in your cruise fare"
             />
 
             <div className="content-grid">

@@ -50,7 +50,7 @@ export const cruiseLines = [
       },
       {
         title: 'Kids Club: The Reef',
-        description: 'Ages 6 months to 17 years with age-specific programs, Night Nursery, and qualified Reef Rangers—all included.',
+        description: 'Ages 6 months to 17 years with age-specific programs, Night Nursery, and qualified Reef Rangers, all included.',
         icon: 'child'
       },
       {
@@ -94,7 +94,7 @@ export const cruiseLines = [
     accessibility: {
       intro: 'P&O Cruises offers accessible cabins with widened doors, roll-in showers, and grab rails across the fleet. Limitless Cruises can liaise with the Accessibility Team to confirm cabin availability, arrange port assistance, and note any mobility or medical needs.',
       tips: [
-        { title: 'Accessible cabins', description: 'Book early—limited availability, allocated first-come.' },
+        { title: 'Accessible cabins', description: 'Book early - limited availability, allocated first-come.' },
         { title: 'Mobility equipment', description: 'Bring aids or hire via Mobility at Sea.' },
         { title: 'Port assistance', description: 'Request 14 days before sailing.' },
         { title: 'Hearing/visual', description: 'Induction loops, vibrating alerts, TTY phones available.' },
@@ -193,7 +193,7 @@ export const cruiseLines = [
       },
       {
         title: 'Global Itineraries',
-        description: 'Mediterranean, Caribbean, Northern Europe, Middle East, Asia and more—including convenient MSC UK sailings in season.',
+        description: 'Mediterranean, Caribbean, Northern Europe, Middle East, Asia and more, including convenient MSC UK sailings in season.',
         icon: 'destination'
       },
       {
@@ -208,7 +208,7 @@ export const cruiseLines = [
       },
       {
         title: 'Italian Style & Exclusive Discounts',
-        description: 'Friendly Mediterranean service across lounges, bars and spas—plus regular MSC exclusive discounts on selected sailings.',
+        description: 'Friendly Mediterranean service across lounges, bars and spas, plus regular MSC exclusive discounts on selected sailings.',
         icon: 'style'
       },
       {
@@ -273,7 +273,7 @@ export const cruiseLines = [
     // Loyalty program - MSC Voyagers Club
     loyaltyProgram: {
       name: 'MSC Voyagers Club',
-      intro: 'Discover the exclusive world of the MSC Voyagers Club, designed to reward loyal guests with ever-increasing privileges, savings and special experiences before, during and after your cruise. Compare each tier\'s benefits below — from booking perks to on-board discounts and priority services.',
+      intro: 'Discover the exclusive world of the MSC Voyagers Club, designed to reward loyal guests with ever-increasing privileges, savings and special experiences before, during and after your cruise. Compare each tier\'s benefits below, from booking perks to on-board discounts and priority services.',
       pointsInfo: 'Points are earned based on cruise nights sailed. Benefits vary by tier and may be subject to ship and itinerary availability.',
       tiers: [
         { tier: 'Welcome', points: '0', benefits: 'Members\' E-Newsletter, Online Private Area, Luggage identification tag, Voyagers Selection discount up to +15%' },
@@ -316,7 +316,7 @@ export const cruiseLines = [
     image: '/images/cruise-lines/norwegian.jpg',
     logo: '/images/cruise-lines/logos/norwegian.png',
     whyChoose: [
-      { title: 'Freestyle Cruising', description: 'No set dining times, dress codes, or fixed schedules—cruise your way.', icon: 'freedom' },
+      { title: 'Freestyle Cruising', description: 'No set dining times, dress codes, or fixed schedules - cruise your way.', icon: 'freedom' },
       { title: 'The Haven', description: 'Exclusive ship-within-a-ship with private pool, restaurant, and butler service.', icon: 'luxury' },
       { title: 'Great Stirrup Cay', description: 'Private island in the Bahamas with beach villas and water sports.', icon: 'island' },
       { title: 'Award-Winning Entertainment', description: 'Broadway shows, comedy clubs, and world-class performers.', icon: 'entertainment' }
@@ -485,9 +485,9 @@ export const cruiseLines = [
     logo: '/images/cruise-lines/logos/virgin-voyages.png',
     whyChoose: [
       { title: 'Adults-Only', description: 'Ships designed exclusively for grown-ups with sophisticated vibes.', icon: 'adults' },
-      { title: 'All Restaurants Included', description: '20+ eateries with no main dining room—all included in your fare.', icon: 'dining' },
+      { title: 'All Restaurants Included', description: '20+ eateries with no main dining room, all included in your fare.', icon: 'dining' },
       { title: 'Rockstar Suites', description: 'Ultimate luxury with private karaoke rooms and champagne on tap.', icon: 'luxury' },
-      { title: 'No Buffets', description: 'Fresh, made-to-order food at every venue—no traditional cruise buffets.', icon: 'quality' }
+      { title: 'No Buffets', description: 'Fresh, made-to-order food at every venue, no traditional cruise buffets.', icon: 'quality' }
     ],
     highlights: [
       'Adults-only ships',

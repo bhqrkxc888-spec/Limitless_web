@@ -31,10 +31,10 @@ function PrivacyPolicy() {
             <p>If you do not think that we have processed your data in accordance with this notice, please tell us first. You can also complain to the Information Commissioner's Office (ICO) at <a href="https://ico.org.uk" target="_blank" rel="noopener noreferrer">ico.org.uk</a>.</p>
 
             <h3>Changes to this notice &amp; keeping your data up to date</h3>
-            <p>We may update this privacy notice from time to time. Please check back for the latest version. It's important that the personal information we hold is accurate and current—please keep us informed of changes.</p>
+            <p>We may update this privacy notice from time to time. Please check back for the latest version. It's important that the personal information we hold is accurate and current - please keep us informed of changes.</p>
 
             <h3>Links to other websites</h3>
-            <p>Our site may include links to third-party websites, plug-ins and applications. Clicking those may allow third parties to collect or share data about you. We don't control those sites—please read their privacy notices.</p>
+            <p>Our site may include links to third-party websites, plug-ins and applications. Clicking those may allow third parties to collect or share data about you. We don't control those sites - please read their privacy notices.</p>
           </section>
 
           <section>

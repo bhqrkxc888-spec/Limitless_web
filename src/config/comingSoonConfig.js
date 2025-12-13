@@ -14,7 +14,7 @@ export const comingSoonConfig = {
   
   // Enable/disable specific features during coming soon period
   features: {
-    showCountdown: true,
+    showCountdown: false, // Countdown removed per user request
     showCruiseFinder: true,
     showContactForm: true
   }
