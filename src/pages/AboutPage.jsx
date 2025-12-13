@@ -1,10 +1,17 @@
 import { aboutImages } from '../utils/imageHelpers';
 import { Button } from '../components/ui';
+import SEO from '../components/SEO';
 import './AboutPage.css';
 
 function AboutPage() {
   return (
     <main className="about-page-modern">
+      <SEO
+        title="About Us"
+        description="Meet Katherine, your personal cruise consultant at Limitless Cruises. CLIA Cruise Master, ABTA protected, UK-based personal service for your perfect cruise holiday."
+        canonical="https://limitlesscruises.com/about"
+      />
+
       {/* Hero Section */}
       <section className="about-hero">
         <div className="container">

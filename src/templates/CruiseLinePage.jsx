@@ -43,7 +43,7 @@ function CruiseLinePage() {
     '@type': 'Organization',
     name: cruiseLine.name,
     description: cruiseLine.description,
-    url: `https://new.limitlesscruises.com/cruise-lines/${cruiseLine.slug}`
+    url: `https://limitlesscruises.com/cruise-lines/${cruiseLine.slug}`
   };
 
   // Check what extended content is available
@@ -59,7 +59,7 @@ function CruiseLinePage() {
       <SEO
         title={cruiseLine.meta?.title || `${cruiseLine.name} Cruises`}
         description={cruiseLine.meta?.description || cruiseLine.description}
-        canonical={`https://new.limitlesscruises.com/cruise-lines/${cruiseLine.slug}`}
+        canonical={`https://limitlesscruises.com/cruise-lines/${cruiseLine.slug}`}
         structuredData={structuredData}
       />
 

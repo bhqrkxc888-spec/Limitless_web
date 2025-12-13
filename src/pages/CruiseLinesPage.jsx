@@ -24,7 +24,7 @@ function CruiseLinesPage() {
       item: {
         '@type': 'Organization',
         name: cl.name,
-        url: `https://new.limitlesscruises.com/cruise-lines/${cl.slug}`
+        url: `https://limitlesscruises.com/cruise-lines/${cl.slug}`
       }
     }))
   };
@@ -53,7 +53,7 @@ function CruiseLinesPage() {
       <SEO
         title="Cruise Lines | Browse All Cruise Line Partners"
         description="Explore all cruise lines we partner with. From mainstream to luxury, find the perfect cruise line for your holiday with expert advice from Limitless Cruises."
-        canonical="https://new.limitlesscruises.com/cruise-lines"
+        canonical="https://limitlesscruises.com/cruise-lines"
         structuredData={structuredData}
       />
 

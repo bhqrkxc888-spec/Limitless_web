@@ -1,13 +1,8 @@
 # robots.txt for Limitless Cruises
-# https://new.limitlesscruises.com/robots.txt
+# https://limitlesscruises.com/robots.txt
 
 User-agent: *
 Allow: /
 
-# Disallow admin or private areas (add as needed)
-# Disallow: /admin/
-# Disallow: /private/
-
 # Sitemap location
-Sitemap: https://new.limitlesscruises.com/sitemap.xml
-
+Sitemap: https://limitlesscruises.com/sitemap.xml

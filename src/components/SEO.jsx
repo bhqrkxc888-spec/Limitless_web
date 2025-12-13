@@ -21,9 +21,9 @@ function SEO({
   structuredData
 }) {
   const siteName = 'Limitless Cruises';
-  const siteUrl = 'https://new.limitlesscruises.com';
+  const siteUrl = 'https://limitlesscruises.com';
   const defaultDescription = 'Your personal cruise consultant. Book cruise holidays with preferential rates, exclusive offers and expert advice from Limitless Cruises.';
-  const defaultImage = `${siteUrl}/images/og-image.jpg`;
+  const defaultImage = 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/categories/about/About2.webp';
 
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
   const fullDescription = description || defaultDescription;
