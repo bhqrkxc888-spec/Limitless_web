@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { logger } from '../utils/logger';
 import { Button } from './ui';
@@ -10,20 +11,29 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
     email: '',
     phone: '',
     message: offerTitle ? `I'm interested in: ${offerTitle}` : '',
-    context: context
+    context: context,
+    consent: false
   });
   
   const [status, setStatus] = useState('idle'); // idle, submitting, success, error
 
   const handleChange = (e) => {
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: value
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Check consent
+    if (!formData.consent) {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+      return;
+    }
     
     // Check if Supabase is configured
     if (!supabase) {
@@ -65,7 +75,8 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
         email: '',
         phone: '',
         message: offerTitle ? `I'm interested in: ${offerTitle}` : '',
-        context: context
+        context: context,
+        consent: false
       });
 
       // Reset success message after 5 seconds
@@ -180,15 +191,37 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
           </svg>
-          <span>Something went wrong. Please try again or call us.</span>
+          <span>
+            {!formData.consent 
+              ? 'Please accept the data processing consent to submit your enquiry.'
+              : 'Something went wrong. Please try again or call us.'}
+          </span>
         </div>
       )}
+
+      <div className="form-consent">
+        <label className="form-checkbox-label">
+          <input
+            type="checkbox"
+            name="consent"
+            checked={formData.consent}
+            onChange={handleChange}
+            required
+            className="form-checkbox"
+            aria-required="true"
+          />
+          <span>
+            I consent to my data being stored and processed to respond to my enquiry. 
+            See our <Link to="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</Link> for details.
+          </span>
+        </label>
+      </div>
 
       <Button
         type="submit"
         variant="primary"
         size="lg"
-        disabled={status === 'submitting'}
+        disabled={status === 'submitting' || !formData.consent}
       >
         {status === 'submitting' ? 'Sending...' : 'Send Enquiry'}
       </Button>

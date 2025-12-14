@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config/siteConfig';
 import { navigation } from '../../data/navigation';
 import { isSiteLaunched } from '../../config/launchConfig';
+import { hasConsentDecision } from '../../utils/consentManager';
 import './Footer.css';
 
 function Footer() {
@@ -174,6 +175,20 @@ function Footer() {
                     <Link to={link.path}>{link.label}</Link>
                   </li>
                 ))}
+                {hasConsentDecision() && (
+                  <li>
+                    <button 
+                      onClick={() => {
+                        localStorage.removeItem('cookie-consent');
+                        localStorage.removeItem('cookie-consent-date');
+                        window.location.reload();
+                      }}
+                      className="footer-link-button"
+                    >
+                      Cookie Settings
+                    </button>
+                  </li>
+                )}
               </ul>
             </div>
           </div>

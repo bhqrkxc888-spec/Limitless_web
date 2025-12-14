@@ -185,6 +185,23 @@
   color: var(--clr-text-on-primary);
 }
 
+.footer-link-button {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: var(--font-size-base);
+  font-family: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  transition: color var(--transition-fast);
+  text-decoration: none;
+}
+
+.footer-link-button:hover {
+  color: var(--clr-text-on-primary);
+}
+
 .mt-6 {
   margin-top: var(--space-6);
 }

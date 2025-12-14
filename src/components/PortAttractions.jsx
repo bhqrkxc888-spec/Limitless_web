@@ -182,7 +182,20 @@ function PortAttractions({ lat, lon, destinationName, portName, regions, fullWid
         {/* Error State */}
         {error && (
           <div className="attractions-error" role="alert" aria-live="assertive">
-            <p>Unable to load attractions. Please try again later.</p>
+            {error === 'Cookie consent required to load attractions' ? (
+              <div className="attractions-consent-prompt">
+                <h3>Cookie Consent Required</h3>
+                <p>
+                  To view local attractions, please accept cookies in the banner below. 
+                  This allows us to use Google Maps to show you nearby points of interest.
+                </p>
+                <p className="attractions-consent-note">
+                  <small>Google Maps may set cookies on their domain.</small>
+                </p>
+              </div>
+            ) : (
+              <p>Unable to load attractions. Please try again later.</p>
+            )}
           </div>
         )}
 

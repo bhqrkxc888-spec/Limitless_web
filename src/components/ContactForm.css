@@ -96,6 +96,43 @@
   color: #991b1b;
 }
 
+.form-consent {
+  margin: var(--space-6) 0;
+  padding: var(--space-4);
+  background: var(--clr-bg-alt);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--clr-border);
+}
+
+.form-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-muted);
+  line-height: 1.6;
+  cursor: pointer;
+}
+
+.form-checkbox {
+  margin-top: 2px;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--clr-accent);
+}
+
+.form-checkbox-label a {
+  color: var(--clr-accent);
+  text-decoration: underline;
+  font-weight: var(--font-weight-medium);
+}
+
+.form-checkbox-label a:hover {
+  color: var(--clr-primary);
+}
+
 .form-note {
   margin-top: var(--space-4);
   font-size: var(--font-size-sm);

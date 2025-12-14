@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './ui';
+import { setConsentStatus, hasConsentDecision } from '../utils/consentManager';
 import './CookieConsent.css';
 
 function CookieConsent() {
@@ -8,8 +9,7 @@ function CookieConsent() {
 
   useEffect(() => {
     // Check if user has already made a choice
-    const consent = localStorage.getItem('cookie-consent');
-    if (!consent) {
+    if (!hasConsentDecision()) {
       // Show banner after a short delay for better UX
       const timer = setTimeout(() => {
         setIsVisible(true);
@@ -19,16 +19,15 @@ function CookieConsent() {
   }, []);
 
   const acceptCookies = () => {
-    localStorage.setItem('cookie-consent', 'accepted');
-    localStorage.setItem('cookie-consent-date', new Date().toISOString());
+    setConsentStatus('accepted');
     setIsVisible(false);
+    // Scripts will load automatically via consent-aware loaders
   };
 
   const rejectCookies = () => {
-    localStorage.setItem('cookie-consent', 'rejected');
-    localStorage.setItem('cookie-consent-date', new Date().toISOString());
+    setConsentStatus('rejected');
     setIsVisible(false);
-    // Optionally clear any existing cookies here if needed
+    // Scripts will remain blocked
   };
 
   if (!isVisible) return null;

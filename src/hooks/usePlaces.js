@@ -6,6 +6,8 @@
 import { useState, useEffect } from 'react';
 import { searchPlaces, calculateDistance } from '../services/placesAPI';
 import { apiConfig } from '../config/apiConfig';
+import { logger } from '../utils/logger';
+import { hasConsent } from '../utils/consentManager';
 
 export function usePlaces(lat, lon, query = '', type = 'tourist_attraction', maxResults = 10, radius = 5000) {
   const [places, setPlaces] = useState([]);
@@ -15,6 +17,14 @@ export function usePlaces(lat, lon, query = '', type = 'tourist_attraction', max
   useEffect(() => {
     if (!lat || !lon) {
       setLoading(false);
+      return;
+    }
+
+    // Check consent before making API calls
+    if (!hasConsent()) {
+      setPlaces([]);
+      setLoading(false);
+      setError('Cookie consent required to load attractions');
       return;
     }
 

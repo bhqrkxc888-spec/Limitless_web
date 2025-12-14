@@ -64,6 +64,48 @@
   box-shadow: var(--shadow-lg);
   border: 1px solid var(--clr-border);
   background-color: var(--clr-surface);
+  min-height: 600px;
+}
+
+.widget-consent-prompt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 600px;
+  background: var(--clr-bg-alt);
+  border: 2px dashed var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-12);
+}
+
+.widget-consent-content {
+  text-align: center;
+  max-width: 500px;
+}
+
+.widget-consent-content h3 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-xl);
+  color: var(--clr-primary);
+  margin-bottom: var(--space-4);
+}
+
+.widget-consent-content p {
+  font-size: var(--font-size-base);
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+  margin-bottom: var(--space-4);
+}
+
+.widget-consent-note {
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--clr-border);
+}
+
+.widget-consent-note small {
+  color: var(--clr-text-light);
+  font-size: var(--font-size-sm);
 }
 
 .widgety-cruise-tour-search {

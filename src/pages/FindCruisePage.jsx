@@ -1,36 +1,52 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import SEO from '../components/SEO';
 import ContactForm from '../components/ContactForm';
 import { siteConfig } from '../config/siteConfig';
+import { hasConsent, loadScriptsWithConsent } from '../utils/consentManager';
+import { Button } from '../components/ui';
 import './FindCruisePage.css';
 
 function FindCruisePage() {
+  const [scriptsLoaded, setScriptsLoaded] = useState(false);
+  const [showConsentPrompt, setShowConsentPrompt] = useState(false);
+
   useEffect(() => {
-    // Load Widgety scripts
+    // Widgety scripts - only load if consent is given
     const scripts = [
       'https://www.widgety.co.uk/assets/widgety_iframe-338e444fa45e2af836a1c162ed7b7fa3b57d6267f6e30c026f7d582a77e34dd7.js',
       'https://www.widgety.co.uk/assets/deep_linking_iframe-4355a96984c672f2dbc8ef1db67edcde1065f89371539db26a3483f3a6551479.js',
       'https://www.widgety.co.uk/assets/widgety_cruise_tour_search_navigation_script-e5c46a5521b82182ecdc1564d7f90c5cfb653f3ffed29c4220e85749607af1de.js'
     ];
 
-    const loadedScripts = scripts.map(src => {
-      const script = document.createElement('script');
-      script.src = src;
-      script.setAttribute('data-widgety', 'true');
-      script.async = true;
-      document.body.appendChild(script);
-      return script;
-    });
-
-    // Cleanup function
-    return () => {
-      loadedScripts.forEach(script => {
-        if (script.parentNode) {
-          script.parentNode.removeChild(script);
-        }
+    if (hasConsent()) {
+      // Load scripts if consent is given
+      loadScriptsWithConsent(scripts, {
+        attributes: { 'data-widgety': 'true' }
+      }).then(() => {
+        setScriptsLoaded(true);
       });
+    } else {
+      // Show prompt if no consent
+      setShowConsentPrompt(true);
+    }
+
+    // Listen for consent changes
+    const handleConsentChange = () => {
+      if (hasConsent() && !scriptsLoaded) {
+        loadScriptsWithConsent(scripts, {
+          attributes: { 'data-widgety': 'true' }
+        }).then(() => {
+          setScriptsLoaded(true);
+          setShowConsentPrompt(false);
+        });
+      }
     };
-  }, []);
+
+    window.addEventListener('cookie-consent-changed', handleConsentChange);
+    return () => {
+      window.removeEventListener('cookie-consent-changed', handleConsentChange);
+    };
+  }, [scriptsLoaded]);
 
   return (
     <main className="find-cruise-elegant">
@@ -61,17 +77,33 @@ function FindCruisePage() {
           </div>
 
           <div className="finder-widget-container">
-            <iframe 
-              className="widgety-cruise-tour-search" 
-              frameBorder="0" 
-              height="600" 
-              preview-nav="true" 
-              results-nav="true" 
-              src="//www.widgety.co.uk/widgets/ugPj5zR1QMRisywLk13B.widget" 
-              tabs="true" 
-              width="100%"
-              title="Cruise Search Widget"
-            />
+            {showConsentPrompt && !scriptsLoaded ? (
+              <div className="widget-consent-prompt">
+                <div className="widget-consent-content">
+                  <h3>Cookie Consent Required</h3>
+                  <p>
+                    The cruise search widget uses cookies to provide you with the best experience. 
+                    Please accept cookies in the banner below to load the search widget.
+                  </p>
+                  <p className="widget-consent-note">
+                    <small>This widget is provided by Widgety and may set cookies on their domain.</small>
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <iframe 
+                className="widgety-cruise-tour-search" 
+                frameBorder="0" 
+                height="600" 
+                preview-nav="true" 
+                results-nav="true" 
+                src={scriptsLoaded ? "//www.widgety.co.uk/widgets/ugPj5zR1QMRisywLk13B.widget" : undefined}
+                tabs="true" 
+                width="100%"
+                title="Cruise Search Widget"
+                style={{ display: scriptsLoaded ? 'block' : 'none' }}
+              />
+            )}
           </div>
         </div>
       </section>
