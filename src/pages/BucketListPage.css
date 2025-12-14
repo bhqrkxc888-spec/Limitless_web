@@ -99,3 +99,126 @@
   }
 }
 
+/* ========================================
+   CAROUSEL STYLES (Dream Experiences)
+   ======================================== */
+
+.bucket-list-carousel-wrapper {
+  position: relative;
+  margin-bottom: var(--space-12);
+}
+
+.bucket-list-featured-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+  transition: transform 0.3s ease;
+}
+
+.bucket-list-carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background: var(--clr-surface);
+  border: 2px solid var(--clr-primary);
+  border-radius: var(--radius-full);
+  color: var(--clr-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  z-index: 10;
+  box-shadow: var(--shadow-md);
+}
+
+.bucket-list-carousel-nav:hover {
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.bucket-list-carousel-prev {
+  left: -24px;
+}
+
+.bucket-list-carousel-next {
+  right: -24px;
+}
+
+.bucket-list-carousel-nav svg {
+  width: 24px;
+  height: 24px;
+}
+
+.bucket-list-featured-card {
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow);
+}
+
+.bucket-list-featured-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.bucket-list-featured-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--clr-border-light);
+}
+
+.bucket-list-featured-meta .duration {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--clr-text-main);
+}
+
+.bucket-list-featured-meta .price {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--clr-accent);
+}
+
+@media (max-width: 1024px) {
+  .bucket-list-featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bucket-list-carousel-prev {
+    left: -16px;
+  }
+
+  .bucket-list-carousel-next {
+    right: -16px;
+  }
+
+  .bucket-list-carousel-nav {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .bucket-list-featured-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bucket-list-carousel-prev {
+    left: 8px;
+  }
+
+  .bucket-list-carousel-next {
+    right: 8px;
+  }
+
+  .bucket-list-carousel-nav {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.9);
+  }
+}
+

@@ -141,15 +141,19 @@ function BucketListExperiencePage() {
                     subtitle="A glimpse into your journey"
                   />
                   <div className="itinerary-timeline">
-                    {experience.itinerary.map((item, index) => (
-                      <div key={index} className="itinerary-item">
-                        <div className="itinerary-day">{item.day}</div>
-                        <div className="itinerary-content">
-                          <h4>{item.location}</h4>
-                          {item.description && <p>{item.description}</p>}
+                    {experience.itinerary.map((item, index) => {
+                      // Format day number - extract first number if range (e.g., "2-3" -> "D2")
+                      const dayNumber = item.day.match(/^\d+/)?.[0] || (index + 1).toString();
+                      return (
+                        <div key={index} className="itinerary-item">
+                          <div className="itinerary-day">D{dayNumber}</div>
+                          <div className="itinerary-content">
+                            <h4>{item.location}</h4>
+                            {item.description && <p>{item.description}</p>}
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               )}

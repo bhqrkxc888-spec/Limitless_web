@@ -8,18 +8,34 @@ import './BucketListPage.css';
 
 function BucketListPage() {
   // Get dynamic rotating featured experiences (changes on each visit/refresh)
-  const [featured, setFeatured] = useState(getRotatingFeatured(4));
+  const [featured, setFeatured] = useState(getRotatingFeatured(3)); // Max 3 for carousel
   const allExperiences = getAllBucketList();
   const featuredStatic = getFeaturedBucketList();
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsToShow] = useState(3); // Always 3 on desktop
   
   // Rotate featured on component mount (creates dynamic feel)
   useEffect(() => {
     // Small delay to ensure different rotation
     const timer = setTimeout(() => {
-      setFeatured(getRotatingFeatured(4));
+      setFeatured(getRotatingFeatured(3));
     }, 100);
     return () => clearTimeout(timer);
   }, []);
+  
+  // Carousel navigation
+  const maxIndex = Math.max(0, featured.length - itemsToShow);
+  
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+  
+  const goToPrev = () => {
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  };
+  
+  // Get visible items for carousel
+  const visibleItems = featured.slice(currentIndex, currentIndex + itemsToShow);
 
   // Structured Data for SEO
   const structuredData = {
@@ -92,7 +108,7 @@ function BucketListPage() {
         secondaryCta={{ label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone}` }}
       />
 
-      {/* Featured Experiences - Dynamic */}
+      {/* Featured Experiences - Dynamic Carousel */}
       {featured.length > 0 && (
         <section className="section">
           <div className="container">
@@ -101,7 +117,57 @@ function BucketListPage() {
               title="Dream Experiences"
               subtitle="These extraordinary voyages represent the pinnacle of cruise travel. Each journey is carefully curated to deliver unforgettable moments."
             />
-            {renderExperienceCards(featured)}
+            <div className="bucket-list-carousel-wrapper">
+              {featured.length > itemsToShow && (
+                <button
+                  className="bucket-list-carousel-nav bucket-list-carousel-prev"
+                  onClick={goToPrev}
+                  aria-label="Previous experiences"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <path d="M15 18l-6-6 6-6"/>
+                  </svg>
+                </button>
+              )}
+              <div className="bucket-list-featured-grid">
+                {visibleItems.map((experience) => (
+                  <Card 
+                    key={experience.id} 
+                    to={`/bucket-list/${experience.slug}`} 
+                    variant="default"
+                    className="bucket-list-featured-card"
+                  >
+                    <Card.Image 
+                      src={experience.cardImage || experience.heroImage} 
+                      alt={experience.title}
+                      aspectRatio="16/10"
+                    />
+                    <Card.Content>
+                      <div className="bucket-list-badge">Bucket List</div>
+                      <Card.Title as="h3">{experience.title}</Card.Title>
+                      <Card.Description>{experience.tagline}</Card.Description>
+                      <div className="bucket-list-featured-meta">
+                        <span className="duration">{experience.duration}</span>
+                        {experience.startingFrom && (
+                          <span className="price">{experience.startingFrom}</span>
+                        )}
+                      </div>
+                    </Card.Content>
+                  </Card>
+                ))}
+              </div>
+              {featured.length > itemsToShow && (
+                <button
+                  className="bucket-list-carousel-nav bucket-list-carousel-next"
+                  onClick={goToNext}
+                  aria-label="Next experiences"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <path d="M9 18l6-6-6-6"/>
+                  </svg>
+                </button>
+              )}
+            </div>
           </div>
         </section>
       )}

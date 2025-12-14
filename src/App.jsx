@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 
 // Layout Components
 import Header from './components/layout/Header'
@@ -28,9 +29,21 @@ import DestinationPage from './templates/DestinationPage'
 import CategoryPage from './templates/CategoryPage'
 import BucketListExperiencePage from './templates/BucketListExperiencePage'
 
+// Scroll to top on route change
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [pathname]);
+
+  return null;
+}
+
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div className="app">
         {/* Skip to main content - Accessibility */}
         <a href="#main-content" className="skip-link">

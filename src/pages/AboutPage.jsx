@@ -172,34 +172,34 @@ function AboutPage() {
             <div className="testimonial-card">
               <div className="testimonial-content">
                 <p className="testimonial-quote">
-                  "Katherine made planning our family cruise so easy. Her recommendations were spot on and she was always available when we needed her."
+                  "Katherine's expertise made planning our world cruise absolutely seamless. She found us the perfect itinerary and handled every detail with care. We couldn't recommend her more highly."
                 </p>
               </div>
               <div className="testimonial-author">
-                <strong>Sarah & Family</strong>
-                <span>Sheffield</span>
+                <strong>Deborah</strong>
+                <span>Manchester</span>
               </div>
             </div>
             <div className="testimonial-card">
               <div className="testimonial-content">
                 <p className="testimonial-quote">
-                  "We couldn't have asked for better service. From booking to return, Katherine handled everything with professionalism and care."
+                  "After booking multiple cruises with Katherine, we wouldn't go anywhere else. Her personal service and attention to detail are exceptional. She truly goes above and beyond."
                 </p>
               </div>
               <div className="testimonial-author">
-                <strong>Michael & Pat</strong>
-                <span>Yorkshire</span>
+                <strong>David & Sandra</strong>
+                <span>Birmingham</span>
               </div>
             </div>
             <div className="testimonial-card">
               <div className="testimonial-content">
                 <p className="testimonial-quote">
-                  "As a first-time cruiser, I was nervous. Katherine took the time to explain everything and found the perfect cruise for us."
+                  "Katherine took the stress out of planning our first cruise. Her honest advice and genuine care for finding us the perfect holiday made all the difference. We're already planning our next trip with her!"
                 </p>
               </div>
               <div className="testimonial-author">
-                <strong>Emma</strong>
-                <span>Nottingham</span>
+                <strong>Sandra</strong>
+                <span>Leeds</span>
               </div>
             </div>
           </div>

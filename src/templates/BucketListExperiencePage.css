@@ -122,20 +122,22 @@
 
 .itinerary-day {
   position: absolute;
-  left: -32px;
+  left: -40px;
   top: 0;
-  width: 24px;
-  height: 24px;
+  width: 48px;
+  height: 48px;
   border-radius: var(--radius-full);
   background: var(--clr-accent);
   border: 3px solid var(--clr-bg);
   flex-shrink: 0;
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
-  color: var(--clr-text-on-accent);
+  color: var(--clr-primary);
   display: flex;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
+  z-index: 1;
 }
 
 .itinerary-content {
