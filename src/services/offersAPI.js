@@ -37,11 +37,24 @@ export async function getOffers({
       p_destination: destination
     });
 
-    if (error) throw error;
+    if (error) {
+      // If function not found, it's OK - offers feature might not be set up yet
+      // Silently return empty - this is expected if offers aren't configured yet
+      if (error.code === 'PGRST202' || 
+          error.message?.includes('not found') || 
+          error.message?.includes('Searched for') ||
+          error.message?.includes('Could not find')) {
+        return { data: { offers: [], total: 0, limit, offset }, error: null };
+      }
+      throw error;
+    }
 
     return { data, error: null };
   } catch (error) {
-    console.error('Error fetching offers:', error);
+    // Only log if it's not a "not found" error
+    if (error.code !== 'PGRST202' && !error.message?.includes('not found') && !error.message?.includes('Searched for')) {
+      console.warn('Error fetching offers:', error.message);
+    }
     return { data: null, error };
   }
 }
@@ -67,12 +80,23 @@ export async function getOfferBySlug(slug) {
       p_slug: slug
     });
 
-    if (error) throw error;
+    if (error) {
+      // If function not found, return null (not an error)
+      if (error.code === 'PGRST202' || 
+          error.message?.includes('not found') || 
+          error.message?.includes('Searched for') ||
+          error.message?.includes('Could not find')) {
+        return { data: null, error: null };
+      }
+      throw error;
+    }
 
     // RPC returns null if not found, which is fine
     return { data, error: null };
   } catch (error) {
-    console.error('Error fetching offer:', error);
+    if (error.code !== 'PGRST202' && !error.message?.includes('not found') && !error.message?.includes('Searched for')) {
+      console.warn('Error fetching offer:', error.message);
+    }
     return { data: null, error };
   }
 }
@@ -100,15 +124,20 @@ export async function incrementOfferView(offerId) {
     });
 
     if (error) {
-      console.warn('Error incrementing offer view:', error);
+      // Silently ignore if function doesn't exist - this is not critical
+      if (error.code !== 'PGRST202' && 
+          !error.message?.includes('not found') && 
+          !error.message?.includes('Searched for') &&
+          !error.message?.includes('Could not find')) {
+        console.warn('Error incrementing offer view:', error);
+      }
       // Don't throw - this is not critical
       return { data: null, error };
     }
 
     return { data: true, error: null };
   } catch (error) {
-    console.warn('Error incrementing offer view:', error);
-    // Don't throw - this is not critical
+    // Silently ignore - this is not critical
     return { data: null, error };
   }
 }

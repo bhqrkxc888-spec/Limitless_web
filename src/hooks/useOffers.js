@@ -41,7 +41,20 @@ export function useOffers({
         destination
       });
 
-      if (fetchError) throw fetchError;
+      if (fetchError) {
+        // If function not found, it's OK - offers might not be set up yet
+        // Silently handle this - don't treat as error
+        if (fetchError.code === 'PGRST202' || 
+            fetchError.message?.includes('not found') || 
+            fetchError.message?.includes('Searched for') ||
+            fetchError.message?.includes('Could not find')) {
+          setOffers([]);
+          setTotal(0);
+          setError(null); // Don't treat as error
+          return;
+        }
+        throw fetchError;
+      }
 
       if (data) {
         setOffers(data.offers || []);
@@ -51,7 +64,13 @@ export function useOffers({
         setTotal(0);
       }
     } catch (err) {
-      console.error('Error fetching offers:', err);
+      // Only log non-"function not found" errors
+      if (err.code !== 'PGRST202' && 
+          !err.message?.includes('not found') && 
+          !err.message?.includes('Searched for') &&
+          !err.message?.includes('Could not find')) {
+        console.error('Error fetching offers:', err);
+      }
       setError(err);
       setOffers([]);
       setTotal(0);
@@ -96,11 +115,28 @@ export function useOffer(slug) {
 
         const { data, error: fetchError } = await getOfferBySlug(slug);
 
-        if (fetchError) throw fetchError;
+        if (fetchError) {
+          // If function not found, silently handle
+          if (fetchError.code === 'PGRST202' || 
+              fetchError.message?.includes('not found') || 
+              fetchError.message?.includes('Searched for') ||
+              fetchError.message?.includes('Could not find')) {
+            setOffer(null);
+            setError(null);
+            return;
+          }
+          throw fetchError;
+        }
 
         setOffer(data || null);
       } catch (err) {
-        console.error('Error fetching offer:', err);
+        // Only log non-"function not found" errors
+        if (err.code !== 'PGRST202' && 
+            !err.message?.includes('not found') && 
+            !err.message?.includes('Searched for') &&
+            !err.message?.includes('Could not find')) {
+          console.error('Error fetching offer:', err);
+        }
         setError(err);
         setOffer(null);
       } finally {

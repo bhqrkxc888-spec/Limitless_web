@@ -342,22 +342,29 @@
   flex-direction: column;
   box-shadow: var(--shadow-sm);
   min-height: 100%;
+  overflow: hidden; /* Prevent content overflow */
 }
 
 .testimonial-content {
   flex: 1;
   margin-bottom: var(--space-6);
+  overflow: hidden; /* Contain content */
 }
 
 .testimonial-quote {
   font-size: var(--font-size-lg);
-  color: var(--clr-text-main);
+  color: var(--clr-text-main); /* Ensure dark, readable text */
+  font-weight: var(--font-weight-normal);
   line-height: 1.7;
   font-style: italic;
   position: relative;
   padding-left: var(--space-6);
   margin: 0;
-  flex: 1;
+  word-wrap: break-word; /* Break long words */
+  overflow-wrap: break-word; /* Modern property for word breaking */
+  hyphens: auto; /* Auto-hyphenate when needed */
+  overflow: hidden; /* Prevent text overflow */
+  text-overflow: ellipsis; /* Add ellipsis if text overflows (though we prevent this) */
 }
 
 .testimonial-quote::before {
@@ -369,6 +376,7 @@
   color: var(--clr-accent);
   opacity: 0.3;
   font-family: var(--font-family-display);
+  line-height: 1;
 }
 
 .testimonial-author {
@@ -377,6 +385,7 @@
   gap: var(--space-1);
   padding-top: var(--space-4);
   border-top: 1px solid var(--clr-border-light);
+  flex-shrink: 0; /* Prevent author section from shrinking */
 }
 
 .testimonial-author strong {
@@ -387,7 +396,7 @@
 
 .testimonial-author span {
   font-size: var(--font-size-sm);
-  color: var(--clr-text-light);
+  color: var(--clr-text-muted); /* Changed from light to muted for better readability */
 }
 
 /* ========================================

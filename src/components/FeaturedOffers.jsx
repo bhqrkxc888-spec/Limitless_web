@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import './FeaturedOffers.css';
 
 function FeaturedOffers() {
-  const { offers, loading } = useOffers({ 
+  const { offers, loading, error } = useOffers({ 
     limit: 4, 
     featured: true 
   });
@@ -41,8 +41,8 @@ function FeaturedOffers() {
 
   const visibleOffers = offers.slice(currentIndex, currentIndex + itemsToShow);
 
-  // Don't render if no offers
-  if (!loading && offers.length === 0) {
+  // Don't render if no offers or if there's an error (function not set up yet)
+  if (!loading && (offers.length === 0 || error)) {
     return null;
   }
 
