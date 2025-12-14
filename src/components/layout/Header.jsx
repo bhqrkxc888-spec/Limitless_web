@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { navigation } from '../../data/navigation';
 import { siteConfig } from '../../config/siteConfig';
@@ -8,17 +8,53 @@ import './Header.css';
 function Header() {
   const [activeMenu, setActiveMenu] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [authStatus, setAuthStatus] = useState(isSiteLaunched());
 
-  // Filter navigation based on launch status
+  // Listen for authentication changes (e.g., after admin login)
+  useEffect(() => {
+    // Check auth status on mount and when storage changes
+    const checkAuth = () => {
+      setAuthStatus(isSiteLaunched());
+    };
+
+    // Initial check
+    checkAuth();
+
+    // Listen for storage events (when sessionStorage changes in another tab/window)
+    const handleStorageChange = (e) => {
+      if (e.key === 'limitless_preview_authenticated') {
+        checkAuth();
+      }
+    };
+
+    // Listen for custom event (when auth changes in same window)
+    const handleAuthChange = () => {
+      checkAuth();
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('preview-auth-change', handleAuthChange);
+
+    // Also check periodically (for same-window changes since storage event doesn't fire in same window)
+    const interval = setInterval(checkAuth, 500);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('preview-auth-change', handleAuthChange);
+      clearInterval(interval);
+    };
+  }, []);
+
+  // Filter navigation based on launch status (reactive to authStatus)
   const visibleNavItems = useMemo(() => {
-    if (isSiteLaunched()) {
-      return navigation.main; // Show all items when launched
+    if (authStatus || isSiteLaunched()) {
+      return navigation.main; // Show all items when launched or authenticated
     }
     
-    // Hide protected routes when not launched
+    // Hide protected routes when not launched/authenticated
     const protectedPaths = ['/cruise-lines', '/destinations', '/bucket-list'];
     return navigation.main.filter(item => !protectedPaths.includes(item.path));
-  }, []);
+  }, [authStatus]);
 
   const handleMouseEnter = (menuId) => {
     setActiveMenu(menuId);

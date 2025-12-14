@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config/siteConfig';
 import { navigation } from '../../data/navigation';
@@ -7,14 +7,44 @@ import './Footer.css';
 
 function Footer() {
   const currentYear = new Date().getFullYear();
+  const [authStatus, setAuthStatus] = useState(isSiteLaunched());
 
-  // Filter footer navigation based on launch status
+  // Listen for authentication changes
+  useEffect(() => {
+    const checkAuth = () => {
+      setAuthStatus(isSiteLaunched());
+    };
+
+    checkAuth();
+
+    const handleStorageChange = (e) => {
+      if (e.key === 'limitless_preview_authenticated') {
+        checkAuth();
+      }
+    };
+
+    const handleAuthChange = () => {
+      checkAuth();
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('preview-auth-change', handleAuthChange);
+    const interval = setInterval(checkAuth, 500);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('preview-auth-change', handleAuthChange);
+      clearInterval(interval);
+    };
+  }, []);
+
+  // Filter footer navigation based on launch status (reactive to authStatus)
   const footerNav = useMemo(() => {
-    if (isSiteLaunched()) {
-      return navigation.footer; // Show all links when launched
+    if (authStatus || isSiteLaunched()) {
+      return navigation.footer; // Show all links when launched or authenticated
     }
 
-    // Hide protected routes when not launched
+    // Hide protected routes when not launched/authenticated
     return {
       ...navigation.footer,
       cruiseLines: [],
@@ -24,7 +54,7 @@ function Footer() {
         link => !['/bucket-list'].includes(link.path)
       )
     };
-  }, []);
+  }, [authStatus]);
 
   return (
     <footer className="footer">

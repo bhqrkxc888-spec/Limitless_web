@@ -29,6 +29,11 @@ function AdminPage() {
   const handleSuccess = () => {
     setAuthenticated(true);
     setShowGate(false);
+    // Trigger storage event to update navigation in Header/Footer
+    // (Note: storage event only fires in other tabs, so we'll use a small delay + reload)
+    // Actually, since we're reloading the page anyway, the navigation will update
+    // But let's trigger a custom event for same-window updates
+    window.dispatchEvent(new Event('preview-auth-change'));
   };
 
   return (

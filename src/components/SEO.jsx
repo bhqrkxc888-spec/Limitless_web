@@ -13,6 +13,7 @@ import { useEffect } from 'react';
  * @param {string} props.image - Open Graph image URL
  * @param {string} props.author - Page author (default: 'Limitless Cruises')
  * @param {string} props.robots - Robots meta (default: 'index, follow')
+ * @param {boolean} props.noindex - Set to true to add 'noindex' to robots meta
  * @param {Object} props.structuredData - JSON-LD structured data object
  */
 function SEO({
@@ -24,6 +25,7 @@ function SEO({
   image,
   author = 'Limitless Cruises',
   robots = 'index, follow',
+  noindex = false,
   structuredData
 }) {
   const siteName = 'Limitless Cruises';
@@ -64,8 +66,9 @@ function SEO({
     // Update meta author
     updateMetaTag('author', author);
 
-    // Update meta robots
-    updateMetaTag('robots', robots);
+    // Update meta robots (respect noindex override)
+    const robotsMeta = noindex ? 'noindex, nofollow' : robots;
+    updateMetaTag('robots', robotsMeta);
 
     // Update canonical link
     let canonicalLink = document.querySelector('link[rel="canonical"]');
@@ -78,37 +81,38 @@ function SEO({
       document.head.appendChild(canonicalLink);
     }
 
-    // Update Open Graph tags
-    const ogTags = {
-      'og:title': fullTitle,
-      'og:description': fullDescription,
-      'og:url': fullCanonical,
-      'og:type': type,
-      'og:image': fullImage,
-      'og:site_name': siteName,
-      'og:locale': 'en_GB'
-    };
+    // Update Open Graph tags (skip if noindex)
+    if (!noindex) {
+      const ogTags = {
+        'og:title': fullTitle,
+        'og:description': fullDescription,
+        'og:url': fullCanonical,
+        'og:type': type,
+        'og:image': fullImage,
+        'og:site_name': siteName,
+        'og:locale': 'en_GB'
+      };
 
-    Object.entries(ogTags).forEach(([property, content]) => {
-      updateMetaTag(property, content, 'property');
-    });
+      Object.entries(ogTags).forEach(([property, content]) => {
+        updateMetaTag(property, content, 'property');
+      });
 
-    // Update Twitter Card tags
-    const twitterTags = {
-      'twitter:card': 'summary_large_image',
-      'twitter:title': fullTitle,
-      'twitter:description': fullDescription,
-      'twitter:image': fullImage,
-      'twitter:site': '@limitlesscruises' // [Placeholder: Update with actual Twitter handle if exists]
-    };
+      // Update Twitter Card tags
+      const twitterTags = {
+        'twitter:card': 'summary_large_image',
+        'twitter:title': fullTitle,
+        'twitter:description': fullDescription,
+        'twitter:image': fullImage
+      };
 
-    Object.entries(twitterTags).forEach(([name, content]) => {
-      if (content) { // Only add if content exists
-        updateMetaTag(name, content, 'name');
-      }
-    });
+      Object.entries(twitterTags).forEach(([name, content]) => {
+        if (content) {
+          updateMetaTag(name, content, 'name');
+        }
+      });
+    }
 
-  }, [fullTitle, fullDescription, fullCanonical, type, fullImage, keywords, author, robots]);
+  }, [fullTitle, fullDescription, fullCanonical, type, fullImage, keywords, author, robots, noindex]);
 
   // Render structured data if provided
   if (structuredData) {
