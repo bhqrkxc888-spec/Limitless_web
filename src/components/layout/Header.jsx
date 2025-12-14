@@ -52,8 +52,25 @@ function Header() {
     }
     
     // Hide protected routes when not launched/authenticated
+    // Note: Dropdown items are handled separately - they're hidden if their parent dropdown is hidden
     const protectedPaths = ['/cruise-lines', '/destinations', '/bucket-list'];
-    return navigation.main.filter(item => !protectedPaths.includes(item.path));
+    return navigation.main.filter(item => {
+      // Hide items with protected paths
+      if (protectedPaths.includes(item.path)) {
+        return false;
+      }
+      // For dropdown menus, check if they contain protected links
+      if (item.megaMenu && item.columns) {
+        const hasProtectedLinks = item.columns.some(column =>
+          column.links.some(link => protectedPaths.includes(link.path))
+        );
+        // Hide dropdown if all its links are protected (or if it's the explore dropdown)
+        if (item.id === 'explore' && hasProtectedLinks) {
+          return false;
+        }
+      }
+      return true;
+    });
   }, [authStatus]);
 
   const handleMouseEnter = (menuId) => {

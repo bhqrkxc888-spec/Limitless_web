@@ -18,8 +18,7 @@ const getCruiseLinesByCategory = () => {
 };
 
 export const navigation = {
-  // Navigation for local development and testing
-  // Includes all main pages for full site structure
+  // Navigation structure with dropdown menus
   main: [
     {
       id: 'home',
@@ -28,28 +27,56 @@ export const navigation = {
       megaMenu: false
     },
     {
-      id: 'cruise-lines',
-      label: 'Cruise Lines',
-      path: '/cruise-lines',
-      megaMenu: false  // Can be enabled with dropdown later
+      id: 'explore',
+      label: 'Explore',
+      path: '/cruise-lines', // Default link (goes to first item)
+      megaMenu: true,
+      columns: [
+        {
+          title: 'Explore',
+          links: [
+            {
+              label: 'Cruise Lines',
+              path: '/cruise-lines',
+              description: 'Discover cruise lines we work with'
+            },
+            {
+              label: 'Destinations',
+              path: '/destinations',
+              description: 'Explore cruise destinations worldwide'
+            },
+            {
+              label: 'Bucket List',
+              path: '/bucket-list',
+              description: 'Once-in-a-lifetime experiences'
+            }
+          ]
+        }
+      ]
     },
     {
-      id: 'destinations',
-      label: 'Destinations',
-      path: '/destinations',
-      megaMenu: false  // Can be enabled with dropdown later
-    },
-    {
-      id: 'bucket-list',
-      label: 'Bucket List',
-      path: '/bucket-list',
-      megaMenu: false
-    },
-    {
-      id: 'find-cruise',
-      label: 'Find a Cruise',
-      path: '/find-a-cruise',
-      megaMenu: false
+      id: 'book',
+      label: 'Book',
+      path: '/offers', // Default link (goes to offers)
+      megaMenu: true,
+      columns: [
+        {
+          title: 'Book Your Cruise',
+          links: [
+            {
+              label: 'Latest Offers',
+              path: '/offers',
+              description: 'Special deals and exclusive offers',
+              highlight: true
+            },
+            {
+              label: 'Find a Cruise',
+              path: '/find-a-cruise',
+              description: 'Search and compare cruises'
+            }
+          ]
+        }
+      ]
     },
     {
       id: 'about',
@@ -93,6 +120,7 @@ export const navigation = {
     company: [
       { label: 'About Us', path: '/about' },
       { label: 'Contact', path: '/contact' },
+      { label: 'Latest Offers', path: '/offers' },
       { label: 'Find a Cruise', path: '/find-a-cruise' },
       { label: 'Bucket List Experiences', path: '/bucket-list' }
     ]
