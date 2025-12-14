@@ -18,27 +18,39 @@ function FindCruisePage() {
       'https://www.widgety.co.uk/assets/widgety_cruise_tour_search_navigation_script-e5c46a5521b82182ecdc1564d7f90c5cfb653f3ffed29c4220e85749607af1de.js'
     ];
 
-    if (hasConsent()) {
+    const loadWidgetyScripts = () => {
+      if (!hasConsent()) {
+        setShowConsentPrompt(true);
+        return;
+      }
+
       // Load scripts if consent is given
       loadScriptsWithConsent(scripts, {
         attributes: { 'data-widgety': 'true' }
-      }).then(() => {
-        setScriptsLoaded(true);
-      });
-    } else {
-      // Show prompt if no consent
-      setShowConsentPrompt(true);
-    }
+      })
+        .then((results) => {
+          // Check if at least one script loaded successfully
+          const success = results.some(result => result === true);
+          if (success) {
+            setScriptsLoaded(true);
+            setShowConsentPrompt(false);
+          }
+        })
+        .catch((error) => {
+          console.error('Error loading Widgety scripts:', error);
+          // Still try to show the widget - it might work even if scripts partially loaded
+          setScriptsLoaded(true);
+          setShowConsentPrompt(false);
+        });
+    };
+
+    // Initial load attempt
+    loadWidgetyScripts();
 
     // Listen for consent changes
     const handleConsentChange = () => {
       if (hasConsent() && !scriptsLoaded) {
-        loadScriptsWithConsent(scripts, {
-          attributes: { 'data-widgety': 'true' }
-        }).then(() => {
-          setScriptsLoaded(true);
-          setShowConsentPrompt(false);
-        });
+        loadWidgetyScripts();
       }
     };
 
@@ -88,21 +100,27 @@ function FindCruisePage() {
                   <p className="widget-consent-note">
                     <small>This widget is provided by Widgety and may set cookies on their domain.</small>
                   </p>
+                  <Button onClick={() => window.dispatchEvent(new Event('show-cookie-consent'))}>
+                    Review Cookie Settings
+                  </Button>
                 </div>
               </div>
-            ) : (
+            ) : scriptsLoaded ? (
               <iframe 
                 className="widgety-cruise-tour-search" 
                 frameBorder="0" 
                 height="600" 
                 preview-nav="true" 
                 results-nav="true" 
-                src={scriptsLoaded ? "//www.widgety.co.uk/widgets/ugPj5zR1QMRisywLk13B.widget" : undefined}
+                src="//www.widgety.co.uk/widgets/ugPj5zR1QMRisywLk13B.widget"
                 tabs="true" 
                 width="100%"
                 title="Cruise Search Widget"
-                style={{ display: scriptsLoaded ? 'block' : 'none' }}
               />
+            ) : (
+              <div className="widget-loading">
+                <p>Loading cruise search widget...</p>
+              </div>
             )}
           </div>
         </div>

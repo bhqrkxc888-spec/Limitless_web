@@ -91,46 +91,52 @@ async function storeConsentOnServer(status, timestamp, options = {}) {
   if (!supabase) return;
   
   try {
-    // Get user's IP address (via a simple service or from headers if available)
-    // Note: In production, IP should come from server-side, but for client-side
-    // we can use a service or leave null (server can capture it)
-    const ipAddress = null; // Will be captured by Supabase if using edge functions
-    
-    const consentData = {
-      consent_status: status,
-      consent_date: timestamp,
-      cookie_categories: options.cookieCategories || { 
-        essential: true, 
-        analytics: status === 'accepted',
-        marketing: status === 'accepted',
-        functional: status === 'accepted'
-      },
-      consent_method: options.consentMethod || 'banner',
-      user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : null
+    // Prepare cookie categories
+    const cookieCategories = options.cookieCategories || { 
+      essential: true, 
+      analytics: status === 'accepted',
+      marketing: status === 'accepted',
+      functional: status === 'accepted'
     };
     
-    // Use schema-qualified table name (crm.cookie_consents)
-    // If table doesn't exist yet, this will fail gracefully
-    const { error } = await supabase
-      .from('cookie_consents')
-      .insert([consentData]);
-    
-    // Note: If using schema-qualified name, you may need to use RPC or direct SQL
-    // For now, this assumes the table is in the public schema or accessible via anon key
+    // Use RPC function to insert into crm.cookie_consents table
+    // The RPC function automatically captures the IP address
+    const { data, error } = await supabase.rpc('store_cookie_consent', {
+      p_consent_status: status,
+      p_consent_date: timestamp,
+      p_cookie_categories: cookieCategories,
+      p_consent_method: options.consentMethod || 'banner',
+      p_user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : null
+    });
     
     if (error) {
-      // If table doesn't exist yet, that's OK - we'll add it later
+      // If function doesn't exist yet, that's OK - we'll add it later
       // localStorage is still working, so UX is not affected
-      if (error.code === '42P01' || error.message?.includes('does not exist')) {
-        // Table doesn't exist - this is expected if not set up yet
+      if (error.code === 'PGRST202' || error.message?.includes('not found') || error.message?.includes('function') || error.message?.includes('does not exist')) {
+        // Function doesn't exist - this is expected if not set up yet
+        if (import.meta.env.DEV) {
+          console.warn('Cookie consent RPC function not found. Run the RPC function SQL script to enable server-side storage.');
+        }
         return;
       }
-      throw error;
+      // Log other errors in development
+      if (import.meta.env.DEV) {
+        console.error('Error storing consent on server:', error);
+      }
+      // Don't throw - localStorage is primary, server is backup
+      return;
+    }
+    
+    // Success! Consent stored on server
+    if (import.meta.env.DEV && data) {
+      console.log('Cookie consent stored on server:', data);
     }
   } catch (error) {
     // Don't throw - this is background storage for compliance
     // localStorage is the primary storage for UX
-    throw error;
+    if (import.meta.env.DEV) {
+      console.error('Exception storing consent on server:', error);
+    }
   }
 }
 
@@ -181,7 +187,7 @@ export function loadScriptWithConsent(src, options = {}) {
  * Load multiple scripts only if consent is given
  * @param {Array<string>} sources - Array of script source URLs
  * @param {Object} options - Script options
- * @returns {Promise<Array<boolean>>} Array of load results
+ * @returns {Promise<Array<boolean>>} Array of load results (resolves even if some fail)
  */
 export async function loadScriptsWithConsent(sources, options = {}) {
   if (!hasConsent()) {
@@ -189,8 +195,14 @@ export async function loadScriptsWithConsent(sources, options = {}) {
     return sources.map(() => false);
   }
 
-  return Promise.all(
+  // Use Promise.allSettled to ensure we get results even if some scripts fail
+  const results = await Promise.allSettled(
     sources.map(src => loadScriptWithConsent(src, options))
+  );
+  
+  // Convert settled results to boolean array
+  return results.map(result => 
+    result.status === 'fulfilled' ? result.value : false
   );
 }
 
