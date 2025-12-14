@@ -8,6 +8,7 @@
  */
 
 import { apiConfig } from '../config/apiConfig';
+import { logger } from '../utils/logger';
 
 // Extended cache duration for development to prevent API hammering
 const IS_DEV = import.meta.env.DEV;
@@ -37,7 +38,7 @@ function getSearchCacheKey(lat, lon, query, type, radius) {
  */
 export async function searchPlaces(lat, lon, query = '', type = 'tourist_attraction', radius = 5000) {
   if (!apiConfig.places.enabled) {
-    console.warn('Places API not configured');
+    logger.warn('Places API not configured');
     return [];
   }
 
@@ -105,7 +106,7 @@ export async function searchPlaces(lat, lon, query = '', type = 'tourist_attract
 
     return placesWithDistance;
   } catch (error) {
-    console.error('Error fetching places:', error);
+    logger.error('Error fetching places:', error);
     // Return empty array on error (graceful degradation)
     return [];
   }
@@ -119,7 +120,7 @@ export async function searchPlaces(lat, lon, query = '', type = 'tourist_attract
  */
 export async function getPlaceDetails(placeId, fields = 'name,rating,formatted_address,formatted_phone_number,website,photos,opening_hours,geometry') {
   if (!apiConfig.places.enabled) {
-    console.warn('Places API not configured');
+    logger.warn('Places API not configured');
     return null;
   }
 
@@ -162,7 +163,7 @@ export async function getPlaceDetails(placeId, fields = 'name,rating,formatted_a
 
     return result;
   } catch (error) {
-    console.error('Error fetching place details:', error);
+    logger.error('Error fetching place details:', error);
     // Return null on error (graceful degradation)
     return null;
   }

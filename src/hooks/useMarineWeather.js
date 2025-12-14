@@ -34,7 +34,7 @@ export function useMarineWeather(lat, lon) {
 
         setConditions(current);
       } catch (err) {
-        console.error('Error fetching sea conditions:', err);
+        logger.error('Error fetching sea conditions:', err);
         setError(err.message);
       } finally {
         setLoading(false);

@@ -4,6 +4,7 @@
  */
 
 import { supabase } from '../lib/supabase';
+import { logger } from '../utils/logger';
 
 /**
  * Get list of published offers
@@ -24,7 +25,7 @@ export async function getOffers({
 } = {}) {
   // Check if Supabase is configured
   if (!supabase) {
-    console.warn('Supabase not configured - cannot fetch offers');
+    logger.warn('Supabase not configured - cannot fetch offers');
     return { data: null, error: new Error('Supabase not configured') };
   }
 
@@ -53,7 +54,7 @@ export async function getOffers({
   } catch (error) {
     // Only log if it's not a "not found" error
     if (error.code !== 'PGRST202' && !error.message?.includes('not found') && !error.message?.includes('Searched for')) {
-      console.warn('Error fetching offers:', error.message);
+      logger.warn('Error fetching offers:', error.message);
     }
     return { data: null, error };
   }
@@ -67,7 +68,7 @@ export async function getOffers({
 export async function getOfferBySlug(slug) {
   // Check if Supabase is configured
   if (!supabase) {
-    console.warn('Supabase not configured - cannot fetch offer');
+    logger.warn('Supabase not configured - cannot fetch offer');
     return { data: null, error: new Error('Supabase not configured') };
   }
 
@@ -95,7 +96,7 @@ export async function getOfferBySlug(slug) {
     return { data, error: null };
   } catch (error) {
     if (error.code !== 'PGRST202' && !error.message?.includes('not found') && !error.message?.includes('Searched for')) {
-      console.warn('Error fetching offer:', error.message);
+      logger.warn('Error fetching offer:', error.message);
     }
     return { data: null, error };
   }
@@ -109,7 +110,7 @@ export async function getOfferBySlug(slug) {
 export async function incrementOfferView(offerId) {
   // Check if Supabase is configured
   if (!supabase) {
-    console.warn('Supabase not configured - cannot track view');
+    logger.warn('Supabase not configured - cannot track view');
     return { data: null, error: new Error('Supabase not configured') };
   }
 
@@ -129,7 +130,7 @@ export async function incrementOfferView(offerId) {
           !error.message?.includes('not found') && 
           !error.message?.includes('Searched for') &&
           !error.message?.includes('Could not find')) {
-        console.warn('Error incrementing offer view:', error);
+        logger.warn('Error incrementing offer view:', error);
       }
       // Don't throw - this is not critical
       return { data: null, error };

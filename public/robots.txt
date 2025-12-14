@@ -4,5 +4,9 @@
 User-agent: *
 Allow: /
 
+# Block admin and preview pages from search engines
+Disallow: /admin
+Disallow: /api/
+
 # Sitemap location
 Sitemap: https://limitlesscruises.com/sitemap.xml

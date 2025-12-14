@@ -6,6 +6,7 @@
  */
 
 import { apiConfig } from '../config/apiConfig';
+import { logger } from '../utils/logger';
 
 // Extended cache duration for development to prevent API hammering
 const IS_DEV = import.meta.env.DEV;
@@ -54,7 +55,7 @@ export async function getCurrentWeather(lat, lon) {
 
     return data;
   } catch (error) {
-    console.error('Error fetching current weather:', error);
+    logger.error('Error fetching current weather:', error);
     throw error;
   }
 }
@@ -95,7 +96,7 @@ export async function getWeatherForecast(lat, lon) {
 
     return data;
   } catch (error) {
-    console.error('Error fetching weather forecast:', error);
+    logger.error('Error fetching weather forecast:', error);
     throw error;
   }
 }

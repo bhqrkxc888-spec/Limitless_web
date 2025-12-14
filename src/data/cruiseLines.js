@@ -61,13 +61,15 @@ export const cruiseLines = [
     ],
 
     // Destination images for grid
+    // TODO: Replace with Supabase URLs when images are uploaded
+    // Expected bucket: 'destinations' or 'cruise-lines'
     destinationImages: [
-      { name: 'Caribbean', image: 'https://limitlesscruises.com/wp-content/uploads/2025/09/PF00002_Caribbean.jpg', alt: 'Caribbean beach' },
-      { name: 'Mediterranean', image: 'https://limitlesscruises.com/wp-content/uploads/2025/10/IMG_2972.jpeg', alt: 'Mediterranean coast' },
-      { name: 'Norwegian Fjords', image: 'https://limitlesscruises.com/wp-content/uploads/2025/10/IMG_3153.jpeg', alt: 'Norwegian Fjords' },
-      { name: 'Northern Europe', image: 'https://limitlesscruises.com/wp-content/uploads/2025/09/600PF00003_stockphotoscom-6489159.jpg', alt: 'Northern Europe' },
-      { name: 'Canary Islands', image: 'https://limitlesscruises.com/wp-content/uploads/2025/10/IMG_3020.jpeg', alt: 'Canary Islands' },
-      { name: 'Scandinavia', image: 'https://limitlesscruises.com/wp-content/uploads/2025/09/IMG_2678.jpeg', alt: 'Scandinavia' }
+      { name: 'Caribbean', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Caribbean', alt: 'Caribbean beach' },
+      { name: 'Mediterranean', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Mediterranean', alt: 'Mediterranean coast' },
+      { name: 'Norwegian Fjords', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Norwegian+Fjords', alt: 'Norwegian Fjords' },
+      { name: 'Northern Europe', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Northern+Europe', alt: 'Northern Europe' },
+      { name: 'Canary Islands', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Canary+Islands', alt: 'Canary Islands' },
+      { name: 'Scandinavia', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Scandinavia', alt: 'Scandinavia' }
     ],
 
     // Kids Club section
@@ -219,13 +221,15 @@ export const cruiseLines = [
     ],
 
     // Destination images for grid
+    // TODO: Replace with Supabase URLs when images are uploaded
+    // Expected bucket: 'destinations' or 'cruise-lines'
     destinationImages: [
-      { name: 'Caribbean', image: 'https://limitlesscruises.com/wp-content/uploads/2025/09/600PF00006_stockphotoscom-7805337.jpg', alt: 'Caribbean beach and turquoise sea' },
-      { name: 'Mediterranean', image: 'https://limitlesscruises.com/wp-content/uploads/2025/10/IMG_2966.jpeg', alt: 'Mediterranean ruins and coastline' },
-      { name: 'Middle East', image: 'https://limitlesscruises.com/wp-content/uploads/2025/10/IMG_3198.jpeg', alt: 'Middle East mountains and sea' },
-      { name: 'Northern Europe', image: 'https://limitlesscruises.com/wp-content/uploads/2025/09/PF00006_Northern-Europe.jpg', alt: 'Northern Europe skyline and waterfront' },
-      { name: 'Asia & Japan', image: 'https://limitlesscruises.com/wp-content/uploads/2025/09/PF00001_Asia.jpg', alt: 'Cherry blossom path in Japan' },
-      { name: 'Grand Voyages', image: 'https://limitlesscruises.com/wp-content/uploads/2025/09/PF00005_stockphotoscom-6241866-2.jpg', alt: 'Sunset over the ocean on a Grand Voyage' }
+      { name: 'Caribbean', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Caribbean', alt: 'Caribbean beach and turquoise sea' },
+      { name: 'Mediterranean', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Mediterranean', alt: 'Mediterranean ruins and coastline' },
+      { name: 'Middle East', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Middle+East', alt: 'Middle East mountains and sea' },
+      { name: 'Northern Europe', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Northern+Europe', alt: 'Northern Europe skyline and waterfront' },
+      { name: 'Asia & Japan', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Asia+%26+Japan', alt: 'Cherry blossom path in Japan' },
+      { name: 'Grand Voyages', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Grand+Voyages', alt: 'Sunset over the ocean on a Grand Voyage' }
     ],
 
     // Kids Club section

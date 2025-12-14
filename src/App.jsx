@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 // Layout Components
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
+import CookieConsent from './components/CookieConsent'
 
 // Route Protection
 import ProtectedRoute from './components/ProtectedRoute'
@@ -19,11 +20,13 @@ import DestinationsPage from './pages/DestinationsPage'
 import BucketListPage from './pages/BucketListPage'
 import OffersPage from './pages/OffersPage'
 import OfferPage from './pages/OfferPage'
+import NotFoundPage from './pages/NotFoundPage'
 
 // Legal Pages
 import WebsiteTerms from './pages/WebsiteTerms'
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import BookingTerms from './pages/BookingTerms'
+import CookiePolicy from './pages/CookiePolicy'
 
 // Template Pages (Dynamic Routes)
 import CruiseLinePage from './templates/CruiseLinePage'
@@ -59,8 +62,24 @@ function App() {
           <Route path="/find-a-cruise" element={<FindCruisePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/offers" element={<OffersPage />} />
-          <Route path="/offers/:slug" element={<OfferPage />} />
+          
+          {/* Offers - Protected */}
+          <Route 
+            path="/offers" 
+            element={
+              <ProtectedRoute>
+                <OffersPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/offers/:slug" 
+            element={
+              <ProtectedRoute>
+                <OfferPage />
+              </ProtectedRoute>
+            } 
+          />
           
           {/* Admin/Preview Access */}
           <Route path="/admin" element={<AdminPage />} />
@@ -129,16 +148,21 @@ function App() {
             } 
           />
           
-          {/* Legal Pages - Always Public */}
-          <Route path="/website-terms" element={<WebsiteTerms />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/booking-terms" element={<BookingTerms />} />
-        </Routes>
-        </main>
-        <Footer />
-      </div>
-    </BrowserRouter>
-  )
+                {/* Legal Pages - Always Public */}
+                <Route path="/website-terms" element={<WebsiteTerms />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/booking-terms" element={<BookingTerms />} />
+                <Route path="/cookie-policy" element={<CookiePolicy />} />
+
+                {/* 404 - Catch all unmatched routes */}
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </main>
+            <Footer />
+            <CookieConsent />
+          </div>
+        </BrowserRouter>
+      )
 }
 
 export default App

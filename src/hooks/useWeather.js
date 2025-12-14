@@ -38,7 +38,7 @@ export function useWeather(lat, lon) {
         setCurrent(currentData);
         setForecast(groupForecastByDay(forecastData.list));
       } catch (err) {
-        console.error('Error fetching weather:', err);
+        logger.error('Error fetching weather:', err);
         setError(err.message);
       } finally {
         setLoading(false);

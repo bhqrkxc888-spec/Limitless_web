@@ -95,7 +95,7 @@ function HomePage() {
     '@type': 'TravelAgency',
     name: siteConfig.siteName,
     description: siteConfig.tagline,
-    url: 'https://limitlesscruises.com',
+    url: siteConfig.siteUrl,
     telephone: siteConfig.phone,
     email: siteConfig.email
   };
@@ -108,7 +108,7 @@ function HomePage() {
       <SEO
         title="Your Personal Cruise Consultant | Limitless Cruises"
         description="A refined new experience is coming. Limitless Cruises - your personal cruise consultant for expert advice, exclusive deals, and seamless holiday planning."
-        canonical="https://limitlesscruises.com"
+        canonical={siteConfig.siteUrl}
         structuredData={structuredData}
       />
 

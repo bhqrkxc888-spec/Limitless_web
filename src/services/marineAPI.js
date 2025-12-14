@@ -7,6 +7,7 @@
  */
 
 import { apiConfig } from '../config/apiConfig';
+import { logger } from '../utils/logger';
 
 // Extended cache duration for development to prevent API hammering
 const IS_DEV = import.meta.env.DEV;
@@ -61,7 +62,7 @@ export async function getSeaConditions(lat, lon) {
 
     return data;
   } catch (error) {
-    console.error('Error fetching sea conditions:', error);
+    logger.error('Error fetching sea conditions:', error);
     throw error;
   }
 }

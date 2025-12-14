@@ -62,7 +62,7 @@ export function usePlaces(lat, lon, query = '', type = 'tourist_attraction', max
 
         setPlaces(placesWithDistance);
       } catch (err) {
-        console.error('Error fetching places:', err);
+        logger.error('Error fetching places:', err);
         setError(err.message);
       } finally {
         setLoading(false);

@@ -1,0 +1,98 @@
+.cookie-policy-page {
+  background: var(--clr-bg);
+  min-height: 100vh;
+}
+
+.cookie-policy-header {
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+  padding: var(--space-16) 0;
+  margin-bottom: var(--space-12);
+}
+
+.cookie-policy-header h1 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--space-4);
+}
+
+.cookie-policy-intro {
+  font-size: var(--font-size-lg);
+  opacity: 0.95;
+  max-width: 800px;
+}
+
+.cookie-policy-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: var(--space-20);
+}
+
+.cookie-policy-content section {
+  margin-bottom: var(--space-12);
+}
+
+.cookie-policy-content h2 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  color: var(--clr-primary);
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 2px solid var(--clr-border);
+}
+
+.cookie-policy-content h3 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-xl);
+  color: var(--clr-primary);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+}
+
+.cookie-policy-content p {
+  font-size: var(--font-size-base);
+  line-height: 1.8;
+  color: var(--clr-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.cookie-policy-content ul {
+  margin-left: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+.cookie-policy-content li {
+  font-size: var(--font-size-base);
+  line-height: 1.8;
+  color: var(--clr-text-muted);
+  margin-bottom: var(--space-2);
+}
+
+.cookie-policy-content a {
+  color: var(--clr-accent);
+  text-decoration: underline;
+  font-weight: var(--font-weight-medium);
+}
+
+.cookie-policy-content a:hover {
+  color: var(--clr-primary);
+}
+
+@media (max-width: 767px) {
+  .cookie-policy-header {
+    padding: var(--space-12) 0;
+  }
+
+  .cookie-policy-header h1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .cookie-policy-content {
+    padding-bottom: var(--space-12);
+  }
+
+  .cookie-policy-content section {
+    margin-bottom: var(--space-8);
+  }
+}
+

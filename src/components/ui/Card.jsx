@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { logger } from '../../utils/logger';
 import './Card.css';
 
 /**
@@ -56,7 +57,7 @@ function Card({
 function CardImage({ src, alt = '', aspectRatio = '16/9', className = '' }) {
   // Ensure alt text is provided for accessibility
   if (src && !alt) {
-    console.warn('Card.Image: alt text is recommended for accessibility');
+    logger.warn('Card.Image: alt text is recommended for accessibility');
   }
   
   return (

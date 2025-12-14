@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabase';
+import { logger } from '../utils/logger';
 import { Button } from './ui';
 import './ContactForm.css';
 
@@ -26,7 +27,7 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
     
     // Check if Supabase is configured
     if (!supabase) {
-      console.warn('Supabase not configured - form cannot be submitted');
+      logger.warn('Supabase not configured - form cannot be submitted');
       setStatus('error');
       setTimeout(() => setStatus('idle'), 5000);
       return;
@@ -71,7 +72,7 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
       setTimeout(() => setStatus('idle'), 5000);
 
     } catch (error) {
-      console.error('Form submission error:', error);
+      logger.error('Form submission error:', error);
       setStatus('error');
       
       // Reset error message after 5 seconds

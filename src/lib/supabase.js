@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { logger } from '../utils/logger';
 
 // Initialize Supabase client
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
@@ -8,7 +9,7 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const isConfigured = supabaseUrl && supabaseAnonKey;
 
 if (!isConfigured) {
-  console.warn('Supabase environment variables not configured. Contact form will be unavailable.');
+  logger.warn('Supabase environment variables not configured. Contact form will be unavailable.');
 }
 
 // Only create client if configured, otherwise create a mock that won't throw
@@ -36,7 +37,7 @@ export async function uploadImage(file, bucket, path) {
 
     return { data, error: null };
   } catch (error) {
-    console.error('Error uploading image:', error);
+    logger.error('Error uploading image:', error);
     return { data: null, error };
   }
 }
@@ -71,7 +72,7 @@ export async function deleteImage(bucket, path) {
 
     return { data, error: null };
   } catch (error) {
-    console.error('Error deleting image:', error);
+    logger.error('Error deleting image:', error);
     return { data: null, error };
   }
 }
@@ -96,7 +97,7 @@ export async function listFiles(bucket, folder = '') {
 
     return { data, error: null };
   } catch (error) {
-    console.error('Error listing files:', error);
+    logger.error('Error listing files:', error);
     return { data: null, error };
   }
 }

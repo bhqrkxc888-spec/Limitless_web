@@ -5,6 +5,7 @@
 
 import { useState, useEffect } from 'react';
 import { getOffers, getOfferBySlug } from '../services/offersAPI';
+import { logger } from '../utils/logger';
 
 /**
  * Hook for fetching list of offers
@@ -69,7 +70,7 @@ export function useOffers({
           !err.message?.includes('not found') && 
           !err.message?.includes('Searched for') &&
           !err.message?.includes('Could not find')) {
-        console.error('Error fetching offers:', err);
+        logger.error('Error fetching offers:', err);
       }
       setError(err);
       setOffers([]);
@@ -135,7 +136,7 @@ export function useOffer(slug) {
             !err.message?.includes('not found') && 
             !err.message?.includes('Searched for') &&
             !err.message?.includes('Could not find')) {
-          console.error('Error fetching offer:', err);
+          logger.error('Error fetching offer:', err);
         }
         setError(err);
         setOffer(null);
