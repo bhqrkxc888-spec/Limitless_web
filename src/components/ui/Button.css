@@ -34,16 +34,19 @@
 .btn-sm {
   padding: var(--space-2) var(--space-4);
   font-size: var(--font-size-sm);
+  min-height: 36px; /* Minimum touch target */
 }
 
 .btn-md {
   padding: var(--space-3) var(--space-6);
   font-size: var(--font-size-base);
+  min-height: 44px; /* WCAG minimum touch target */
 }
 
 .btn-lg {
   padding: var(--space-4) var(--space-8);
   font-size: var(--font-size-lg);
+  min-height: 48px; /* Larger touch target for primary actions */
 }
 
 /* ========================================

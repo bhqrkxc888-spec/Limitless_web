@@ -153,13 +153,15 @@ function PortAttractions({ lat, lon, destinationName, portName, regions, fullWid
       {/* Port Selection Buttons */}
       {availablePorts.length > 1 && (
         <div className="port-selection">
-          <div className="port-selection-label">Select Port:</div>
-          <div className="port-buttons">
+          <label className="port-selection-label" id="port-selection-label">Select Port:</label>
+          <div className="port-buttons" role="group" aria-labelledby="port-selection-label">
             {availablePorts.map(port => (
               <button
                 key={port.name}
                 className={`port-button ${activePortName === port.name ? 'is-active' : ''}`}
                 onClick={() => handlePortClick(port)}
+                aria-pressed={activePortName === port.name}
+                aria-label={`Select ${port.name} port`}
               >
                 {port.name}
               </button>
@@ -169,52 +171,74 @@ function PortAttractions({ lat, lon, destinationName, portName, regions, fullWid
       )}
 
       <div className="port-attractions-content">
+        {/* Loading State */}
+        {loading && (
+          <div className="attractions-loading" role="status" aria-live="polite">
+            <span className="sr-only">Loading attractions</span>
+            <p>Loading attractions for {activePortName || destinationName}...</p>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && (
+          <div className="attractions-error" role="alert" aria-live="assertive">
+            <p>Unable to load attractions. Please try again later.</p>
+          </div>
+        )}
+
         {/* Navigation Arrows */}
-        {totalPages > 1 && (
-          <div className="attractions-navigation">
-            <button 
+        {!loading && !error && totalPages > 1 && (
+          <nav className="attractions-navigation" aria-label="Attractions pagination">
+            <button
               className="attractions-nav-arrow attractions-nav-prev"
               onClick={handlePrevPage}
               disabled={currentPage === 0}
-              aria-label="Previous page"
+              aria-label={`Previous page, currently page ${currentPage + 1} of ${totalPages}`}
+              aria-disabled={currentPage === 0}
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <polyline points="15 18 9 12 15 6"/>
               </svg>
+              <span className="sr-only">Previous</span>
             </button>
-            
-            <span className="attractions-page-indicator">
-              {currentPage + 1} / {totalPages}
+
+            <span className="attractions-page-indicator" aria-live="polite" aria-atomic="true">
+              Page {currentPage + 1} of {totalPages}
             </span>
-            
-            <button 
+
+            <button
               className="attractions-nav-arrow attractions-nav-next"
               onClick={handleNextPage}
               disabled={currentPage >= totalPages - 1}
-              aria-label="Next page"
+              aria-label={`Next page, currently page ${currentPage + 1} of ${totalPages}`}
+              aria-disabled={currentPage >= totalPages - 1}
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <polyline points="9 18 15 12 9 6"/>
               </svg>
+              <span className="sr-only">Next</span>
             </button>
-          </div>
+          </nav>
         )}
         
-        <div className={`attractions-grid ${fullWidth ? 'attractions-grid-fullwidth' : ''}`}>
+        {!loading && !error && (
+          <div className={`attractions-grid ${fullWidth ? 'attractions-grid-fullwidth' : ''}`} role="list">
           {currentPlaces.map((place) => {
             const photoUrl = place.photos && place.photos[0] 
               ? getPlacePhotoUrl(place.photos[0].photo_reference, 400)
               : null;
 
-            return (
-              <Card 
-                key={place.place_id} 
-                href={`https://www.google.com/maps/place/?q=place_id:${place.place_id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="outlined"
-                className="attraction-card"
-              >
+              return (
+                <Card 
+                  key={place.place_id}
+                  role="listitem"
+                  href={`https://www.google.com/maps/place/?q=place_id:${place.place_id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="outlined"
+                  className="attraction-card"
+                  aria-label={`${place.name}, ${getPlaceCategory(place.types)}${place.rating ? `, rated ${place.rating} out of 5` : ''}`}
+                >
                 {photoUrl && (
                   <Card.Image 
                     src={photoUrl} 
@@ -248,7 +272,7 @@ function PortAttractions({ lat, lon, destinationName, portName, regions, fullWid
             );
           })}
         </div>
-
+        )}
       </div>
     </div>
   );

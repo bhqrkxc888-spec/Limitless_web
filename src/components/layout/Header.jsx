@@ -103,7 +103,8 @@ function Header() {
               className="header-mobile-toggle"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
-              aria-label="Toggle navigation menu"
+              aria-controls="main-navigation"
+              aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             >
               <span className="hamburger">
                 <span></span>
@@ -114,6 +115,7 @@ function Header() {
 
             {/* Navigation */}
             <nav 
+              id="main-navigation"
               className={`header-nav ${mobileMenuOpen ? 'is-open' : ''}`}
               aria-label="Main navigation"
             >

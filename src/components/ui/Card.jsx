@@ -53,14 +53,19 @@ function Card({
 /**
  * Card Image Component
  */
-function CardImage({ src, alt, aspectRatio = '16/9', className = '' }) {
+function CardImage({ src, alt = '', aspectRatio = '16/9', className = '' }) {
+  // Ensure alt text is provided for accessibility
+  if (src && !alt) {
+    console.warn('Card.Image: alt text is recommended for accessibility');
+  }
+  
   return (
     <div 
       className={`card-image ${className}`}
       style={{ aspectRatio }}
     >
       {src ? (
-        <img src={src} alt={alt} loading="lazy" />
+        <img src={src} alt={alt || 'Card image'} loading="lazy" />
       ) : (
         <div className="card-image-placeholder">
           <svg viewBox="0 0 24 24" fill="currentColor">

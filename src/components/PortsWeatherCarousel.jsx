@@ -136,38 +136,43 @@ function PortsWeatherCarousel({ ports, title, onPortChange, selectedPort = null 
         <button 
           className="carousel-nav carousel-nav-prev"
           onClick={goToPrev}
-          aria-label="Previous port"
+          aria-label={`Previous port, currently viewing ${currentPort.name}`}
         >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <path d="M15 18l-6-6 6-6"/>
           </svg>
+          <span className="sr-only">Previous port</span>
         </button>
 
-        <div className="carousel-content">
+        <div className="carousel-content" role="tabpanel" id={`port-weather-${currentPort.id}`} aria-live="polite">
           <PortWeatherCard port={currentPort} />
         </div>
 
         <button 
           className="carousel-nav carousel-nav-next"
           onClick={goToNext}
-          aria-label="Next port"
+          aria-label={`Next port, currently viewing ${currentPort.name}`}
         >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             <path d="M9 18l6-6-6-6"/>
           </svg>
+          <span className="sr-only">Next port</span>
         </button>
       </div>
 
       {/* Port Indicators */}
-      <div className="carousel-indicators">
+      <div className="carousel-indicators" role="tablist" aria-label="Port selection">
         {visiblePorts.map((port, index) => (
           <button
             key={port.id}
             className={`carousel-indicator ${index === currentIndex ? 'is-active' : ''}`}
             onClick={() => goToPort(index)}
-            aria-label={`View ${port.name}`}
+            role="tab"
+            aria-selected={index === currentIndex}
+            aria-controls={`port-weather-${port.id}`}
+            aria-label={`View weather for ${port.name}, ${port.country}`}
           >
-            <span className="indicator-dot"></span>
+            <span className="indicator-dot" aria-hidden="true"></span>
             <span className="indicator-label">{port.name}</span>
           </button>
         ))}
@@ -191,7 +196,10 @@ function PortWeatherCard({ port }) {
       </div>
 
       {weatherLoading ? (
-        <div className="port-loading">Loading weather...</div>
+        <div className="port-loading" role="status" aria-live="polite">
+          <span className="sr-only">Loading weather data for {port.name}</span>
+          Loading weather...
+        </div>
       ) : current ? (
         <>
           {/* Current Weather - Matching WeatherWidget Layout */}

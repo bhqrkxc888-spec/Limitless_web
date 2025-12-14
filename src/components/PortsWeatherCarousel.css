@@ -83,8 +83,10 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
+  width: 44px; /* WCAG minimum touch target */
+  height: 44px; /* WCAG minimum touch target */
+  min-width: 44px;
+  min-height: 44px;
   border-radius: var(--radius-full);
   background: var(--clr-surface);
   border: 2px solid var(--clr-border);
@@ -428,8 +430,10 @@
   }
 
   .carousel-nav {
-    width: 36px;
-    height: 36px;
+    width: 44px; /* Maintain minimum touch target on mobile */
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
   }
 
   .carousel-nav-prev {

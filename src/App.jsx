@@ -32,7 +32,12 @@ function App() {
   return (
     <BrowserRouter>
       <div className="app">
+        {/* Skip to main content - Accessibility */}
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         <Header />
+        <main id="main-content">
         <Routes>
           {/* Main Pages - Always Public */}
           <Route path="/" element={<HomePage />} />
@@ -112,6 +117,7 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/booking-terms" element={<BookingTerms />} />
         </Routes>
+        </main>
         <Footer />
       </div>
     </BrowserRouter>

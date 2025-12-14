@@ -85,6 +85,8 @@ function ContactForm({ context = 'general' }) {
             onChange={handleChange}
             required
             disabled={status === 'submitting'}
+            aria-required="true"
+            aria-invalid={status === 'error' && !formData.name}
           />
         </div>
 
@@ -101,6 +103,9 @@ function ContactForm({ context = 'general' }) {
             onChange={handleChange}
             required
             disabled={status === 'submitting'}
+            aria-required="true"
+            aria-invalid={status === 'error' && !formData.email}
+            autoComplete="email"
           />
         </div>
 
@@ -116,6 +121,7 @@ function ContactForm({ context = 'general' }) {
             value={formData.phone}
             onChange={handleChange}
             disabled={status === 'submitting'}
+            autoComplete="tel"
           />
         </div>
       </div>
@@ -134,12 +140,19 @@ function ContactForm({ context = 'general' }) {
           required
           disabled={status === 'submitting'}
           placeholder="Tell us about your ideal cruise..."
+          aria-required="true"
+          aria-invalid={status === 'error' && !formData.message}
         />
       </div>
 
       {status === 'success' && (
-        <div className="form-message form-message-success">
-          <svg viewBox="0 0 24 24" fill="currentColor">
+        <div 
+          className="form-message form-message-success" 
+          role="alert"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
           </svg>
           <span>Thank you! We'll be in touch soon.</span>
@@ -147,8 +160,13 @@ function ContactForm({ context = 'general' }) {
       )}
 
       {status === 'error' && (
-        <div className="form-message form-message-error">
-          <svg viewBox="0 0 24 24" fill="currentColor">
+        <div 
+          className="form-message form-message-error" 
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
           </svg>
           <span>Something went wrong. Please try again or call us.</span>

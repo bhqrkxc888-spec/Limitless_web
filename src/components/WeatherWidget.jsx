@@ -33,7 +33,10 @@ function WeatherWidget({ lat, lon, destinationName }) {
           <h3>Weather</h3>
         </div>
         <div className="weather-widget-content">
-          <div className="weather-loading">Loading weather data...</div>
+          <div className="weather-loading" role="status" aria-live="polite">
+            <span className="sr-only">Loading weather data for {destinationName}</span>
+            Loading weather data...
+          </div>
         </div>
       </div>
     );
@@ -47,7 +50,9 @@ function WeatherWidget({ lat, lon, destinationName }) {
           <h3>Weather</h3>
         </div>
         <div className="weather-widget-content">
-          <p className="weather-error">Weather data temporarily unavailable</p>
+          <p className="weather-error" role="alert" aria-live="assertive">
+            Weather data temporarily unavailable for {destinationName}
+          </p>
         </div>
       </div>
     );

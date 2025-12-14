@@ -291,6 +291,9 @@
   .header-mobile-toggle {
     display: block;
     z-index: 1001;
+    min-width: 44px; /* WCAG minimum touch target */
+    min-height: 44px;
+    padding: var(--space-2);
   }
 
   .header-nav {
