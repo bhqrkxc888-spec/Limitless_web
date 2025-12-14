@@ -317,6 +317,149 @@
 }
 
 /* ========================================
+   TESTIMONIALS
+   ======================================== */
+
+.about-testimonials {
+  padding: var(--space-20) 0;
+  background: var(--clr-bg-alt);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-8);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.testimonial-card {
+  background: var(--clr-surface);
+  padding: var(--space-8);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--clr-border);
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+}
+
+.testimonial-content {
+  flex: 1;
+  margin-bottom: var(--space-6);
+}
+
+.testimonial-quote {
+  font-size: var(--font-size-lg);
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+  font-style: italic;
+  position: relative;
+  padding-left: var(--space-6);
+}
+
+.testimonial-quote::before {
+  content: '"';
+  position: absolute;
+  left: 0;
+  top: -10px;
+  font-size: 4rem;
+  color: var(--clr-accent);
+  opacity: 0.3;
+  font-family: var(--font-family-display);
+}
+
+.testimonial-author {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--clr-border-light);
+}
+
+.testimonial-author strong {
+  font-weight: var(--font-weight-semibold);
+  color: var(--clr-primary);
+  font-size: var(--font-size-base);
+}
+
+.testimonial-author span {
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-light);
+}
+
+/* ========================================
+   MY PROMISE
+   ======================================== */
+
+.about-promise {
+  padding: var(--space-20) 0;
+  background: var(--clr-surface);
+}
+
+.promise-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.promise-content h2 {
+  font-family: var(--font-family-display);
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 600;
+  color: var(--clr-primary);
+  margin-bottom: var(--space-6);
+}
+
+.promise-intro {
+  font-size: var(--font-size-lg);
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+  margin-bottom: var(--space-12);
+}
+
+.promise-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-8);
+  text-align: left;
+}
+
+.promise-item {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+
+.promise-icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--clr-accent);
+  color: var(--clr-primary);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.promise-item h3 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--clr-primary);
+  margin-bottom: var(--space-2);
+}
+
+.promise-item p {
+  font-size: var(--font-size-base);
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ========================================
    CTA SECTION
    ======================================== */
 
@@ -407,6 +550,8 @@
   .about-services,
   .about-why,
   .about-katherine,
+  .about-testimonials,
+  .about-promise,
   .about-cta {
     padding: var(--space-12) 0;
   }
@@ -423,6 +568,14 @@
   .credential-badge {
     font-size: var(--font-size-xs);
     padding: var(--space-1) var(--space-3);
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .promise-list {
+    grid-template-columns: 1fr;
   }
 
   .cta-buttons {

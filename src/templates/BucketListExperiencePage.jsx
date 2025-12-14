@@ -279,19 +279,35 @@ function BucketListExperiencePage() {
 
       {/* CTA Section */}
       <section className="section section-dark">
-        <div className="container text-center">
-          <h2>Ready to Experience {experience.title}?</h2>
-          <p>
-            Speak with your personal cruise consultant today for expert advice, exclusive deals, 
-            and personalized planning for your bucket list adventure.
-          </p>
-          <div className="cta-buttons">
-            <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">
-              Call {siteConfig.phone}
-            </Button>
-            <Button to="/contact" variant="outline" size="lg" className="btn-outline-white">
-              Enquire Online
-            </Button>
+        <div className="container">
+          <div className="bucket-list-cta-content">
+            <h2>Ready to Experience {experience.title}?</h2>
+            <p>
+              Get in touch today for a personalised quote and expert advice on this bucket list adventure. 
+              I'll help you find the perfect itinerary, dates, and exclusive deals.
+            </p>
+            <div className="cta-options">
+              <div className="cta-option">
+                <h3>Get a Quote</h3>
+                <p>Request a personalised quote tailored to your preferences and dates</p>
+                <Button to="/contact" variant="primary" size="lg" fullWidth>
+                  Request Quote
+                </Button>
+              </div>
+              <div className="cta-divider"></div>
+              <div className="cta-option">
+                <h3>Speak with Katherine</h3>
+                <p>Call or WhatsApp for immediate advice and booking assistance</p>
+                <div className="cta-contact-buttons">
+                  <Button href={`tel:${siteConfig.phone}`} variant="outline" size="lg" className="btn-outline-white">
+                    Call {siteConfig.phone}
+                  </Button>
+                  <Button href={siteConfig.whatsappUrl || 'https://wa.me/447359796108'} variant="outline" size="lg" className="btn-outline-white" target="_blank" rel="noopener noreferrer">
+                    WhatsApp
+                  </Button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

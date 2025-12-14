@@ -164,6 +164,90 @@ function AboutPage() {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section className="about-testimonials">
+        <div className="container">
+          <h2 className="section-title">What My Clients Say</h2>
+          <div className="testimonials-grid">
+            <div className="testimonial-card">
+              <div className="testimonial-content">
+                <p className="testimonial-quote">
+                  "Katherine made planning our family cruise so easy. Her recommendations were spot on and she was always available when we needed her."
+                </p>
+              </div>
+              <div className="testimonial-author">
+                <strong>Sarah & Family</strong>
+                <span>Sheffield</span>
+              </div>
+            </div>
+            <div className="testimonial-card">
+              <div className="testimonial-content">
+                <p className="testimonial-quote">
+                  "We couldn't have asked for better service. From booking to return, Katherine handled everything with professionalism and care."
+                </p>
+              </div>
+              <div className="testimonial-author">
+                <strong>Michael & Pat</strong>
+                <span>Yorkshire</span>
+              </div>
+            </div>
+            <div className="testimonial-card">
+              <div className="testimonial-content">
+                <p className="testimonial-quote">
+                  "As a first-time cruiser, I was nervous. Katherine took the time to explain everything and found the perfect cruise for us."
+                </p>
+              </div>
+              <div className="testimonial-author">
+                <strong>Emma</strong>
+                <span>Nottingham</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* My Promise Section */}
+      <section className="about-promise">
+        <div className="container">
+          <div className="promise-content">
+            <h2>My Promise to You</h2>
+            <p className="promise-intro">
+              When you book with Limitless Cruises, you're not just another booking. You're someone I care about, and I'm committed to making sure your cruise holiday is everything you hoped it would be.
+            </p>
+            <div className="promise-list">
+              <div className="promise-item">
+                <div className="promise-icon">✓</div>
+                <div>
+                  <h3>Honest Advice</h3>
+                  <p>I'll always tell you what I really think, even if it means recommending a different cruise or cruise line.</p>
+                </div>
+              </div>
+              <div className="promise-item">
+                <div className="promise-icon">✓</div>
+                <div>
+                  <h3>Best Value</h3>
+                  <p>I search for the best deals and promotions to ensure you get excellent value for your money.</p>
+                </div>
+              </div>
+              <div className="promise-item">
+                <div className="promise-icon">✓</div>
+                <div>
+                  <h3>Personal Service</h3>
+                  <p>From first enquiry to returning home, I'm here to help with any questions or concerns.</p>
+                </div>
+              </div>
+              <div className="promise-item">
+                <div className="promise-icon">✓</div>
+                <div>
+                  <h3>Peace of Mind</h3>
+                  <p>Every booking is ABTA protected, so you can book with complete confidence.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="about-cta">
         <div className="container">

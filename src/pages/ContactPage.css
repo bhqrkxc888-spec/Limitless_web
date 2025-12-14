@@ -20,7 +20,14 @@
   display: grid;
   grid-template-columns: 1fr auto;
   gap: var(--space-16);
-  align-items: center;
+  align-items: start;
+}
+
+.contact-hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 160px; /* Match image height */
 }
 
 .contact-hero-text h1 {

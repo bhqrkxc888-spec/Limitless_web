@@ -152,7 +152,7 @@ export const bucketListExperiences = [
     title: 'Japan & Asia Cruises',
     tagline: 'Where ancient traditions meet modern wonders',
     description: 'Discover the captivating blend of ancient traditions and cutting-edge innovation across Japan and Asia. From cherry blossoms to towering skyscrapers, serene temples to bustling markets.',
-    heroImage: '/images/bucket-list/japan-asia-hero.jpg',
+    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Japan/japan-hero.jpeg',
     cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Japan/Japan-card-cherryblossom.jpeg',
     duration: '14-21+ nights',
     season: 'Year-round (cherry blossom season: March-May)',
@@ -212,7 +212,11 @@ export const bucketListExperiences = [
       description: 'Discover Japan and Asia on a cultural cruise. Experience cherry blossoms, ancient temples, and modern cities. Expert booking from Limitless Cruises.',
       keywords: ['japan cruise', 'asia cruise', 'cherry blossom cruise', 'far east cruise', 'asian cruise holidays']
     },
-    images: [],
+    images: [
+      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Japan/DowntownTokyo.jpeg',
+      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Japan/Japan-mtfuji.jpeg',
+      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Japan/southkorea.jpeg'
+    ],
     featured: true,
     priority: 3
   },
@@ -424,8 +428,230 @@ export const bucketListExperiences = [
       keywords: ['northern lights cruise', 'aurora cruise', 'arctic cruise', 'norway cruise', 'northern lights holiday']
     },
     images: [],
-    featured: false,
+    featured: true,
     priority: 6
+  },
+  {
+    id: 'south-america',
+    slug: 'south-america-cruises',
+    title: 'South America',
+    tagline: 'Vibrant cultures and stunning landscapes',
+    description: 'Discover the dramatic beauty and rich culture of South America. From the Amazon rainforest to the wilds of Patagonia, from vibrant cities to ancient Incan ruins, experience the continent\'s incredible diversity.',
+    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/hero-iguazu-falls%20.jpeg',
+    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/Patagonian-glaciers.jpeg',
+    duration: '10-21+ nights',
+    season: 'Year-round (best: October-April)',
+    startingFrom: 'From £2,000 per person',
+    bestFor: ['Culture enthusiasts', 'Nature lovers', 'Adventure seekers', 'History buffs'],
+    highlights: [
+      'Amazon River cruises through the rainforest',
+      'Visit iconic cities like Rio de Janeiro, Buenos Aires, and Lima',
+      'Explore ancient Machu Picchu and Incan ruins',
+      'Witness the natural wonder of Iguazu Falls',
+      'Patagonia\'s breathtaking glaciers and fjords',
+      'Experience vibrant Latin American culture'
+    ],
+    includes: [
+      'All meals on board',
+      'Selected shore excursions',
+      'Cultural performances',
+      'Port transfers'
+    ],
+    cruiseLines: ['Holland America Line', 'Celebrity Cruises', 'Princess Cruises', 'Azamara'],
+    itinerary: [
+      { day: '1', location: 'Buenos Aires, Argentina', description: 'Embarkation and city exploration' },
+      { day: '2-3', location: 'Montevideo, Uruguay', description: 'Colonial charm and coastal beauty' },
+      { day: '4-5', location: 'At Sea', description: 'Relax and enjoy ship amenities' },
+      { day: '6-7', location: 'Falkland Islands', description: 'Wildlife and remote landscapes' },
+      { day: '8-10', location: 'Cape Horn & Patagonia', description: 'Dramatic fjords and glaciers' },
+      { day: '11-12', location: 'Punta Arenas, Chile', description: 'Gateway to Patagonia' },
+      { day: '13-14', location: 'Strait of Magellan', description: 'Scenic cruising' },
+      { day: '15+', location: 'Additional ports', description: 'Ushuaia, Valparaíso, and more' }
+    ],
+    destinations: [
+      { name: 'Argentina', description: 'Buenos Aires, Ushuaia, Patagonia' },
+      { name: 'Chile', description: 'Valparaíso, Chilean Fjords, Cape Horn' },
+      { name: 'Brazil', description: 'Rio de Janeiro, Amazon River' },
+      { name: 'Peru', description: 'Lima, Machu Picchu (overland)' }
+    ],
+    testimonials: [
+      { quote: 'South America exceeded all expectations. The diversity of landscapes and cultures was incredible.', author: 'David M.', location: 'Manchester' },
+      { quote: 'The Amazon cruise was a highlight, and visiting Machu Picchu was a dream come true.', author: 'Lisa K.', location: 'Birmingham' }
+    ],
+    faq: [
+      {
+        question: 'When is the best time to cruise South America?',
+        answer: 'October to April is generally the best time, with warmer weather in the south and drier conditions. Peak season is December to February for summer weather.'
+      },
+      {
+        question: 'Can I visit Machu Picchu on a South America cruise?',
+        answer: 'Yes, many cruises offer overland excursions to Machu Picchu from ports like Lima or Callao. These are typically 2-3 day add-on experiences.'
+      },
+      {
+        question: 'What is the weather like?',
+        answer: 'Weather varies greatly by region and season. Northern areas (Amazon, Brazil) are tropical year-round, while the south (Patagonia) has distinct seasons with cold winters.'
+      }
+    ],
+    meta: {
+      title: 'South America Cruises | Amazon & Patagonia Voyages | Limitless Cruises',
+      description: 'Discover South America by cruise. Explore the Amazon, Patagonia, vibrant cities and ancient ruins. Expert booking advice from Limitless Cruises.',
+      keywords: ['south america cruise', 'amazon cruise', 'patagonia cruise', 'machu picchu cruise', 'south american voyage']
+    },
+    images: [
+      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/Machu-Picchu.jpeg',
+      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-christ.jpeg',
+      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg',
+      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/city-in-Peru.jpeg'
+    ],
+    featured: true,
+    priority: 7
+  },
+  {
+    id: 'middle-east',
+    slug: 'middle-east-cruises',
+    title: 'Middle East & Arabian Peninsula',
+    tagline: 'Ancient wonders meet modern luxury',
+    description: 'Experience the fascinating blend of ancient history and contemporary luxury in the Middle East. From the architectural wonders of Dubai to the historical sites of Egypt, discover a region rich in culture and heritage.',
+    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/hero-dubai.jpeg',
+    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/Abu-Dhabi.jpeg',
+    duration: '7-14 nights',
+    season: 'October - April (avoiding extreme summer heat)',
+    startingFrom: 'From £1,500 per person',
+    bestFor: ['History enthusiasts', 'Luxury travellers', 'Culture explorers', 'Architecture admirers'],
+    highlights: [
+      'Explore iconic cities like Dubai, Abu Dhabi, and Muscat',
+      'Visit ancient Egyptian sites (Giza, Luxor, Valley of the Kings)',
+      'Experience the architectural marvels of modern Middle East',
+      'Discover traditional souks and spice markets',
+      'Luxurious onboard experiences',
+      'Beautiful desert landscapes and oases'
+    ],
+    includes: [
+      'All meals on board',
+      'Selected shore excursions',
+      'Cultural activities',
+      'Port transfers'
+    ],
+    cruiseLines: ['Celebrity Cruises', 'Royal Caribbean', 'MSC Cruises', 'Costa Cruises'],
+    itinerary: [
+      { day: '1', location: 'Dubai, UAE', description: 'Embarkation and city exploration' },
+      { day: '2', location: 'Abu Dhabi, UAE', description: 'Sheikh Zayed Mosque, cultural sites' },
+      { day: '3', location: 'At Sea', description: 'Relax and enjoy ship amenities' },
+      { day: '4', location: 'Muscat, Oman', description: 'Sultan Qaboos Grand Mosque, souks' },
+      { day: '5', location: 'Doha, Qatar', description: 'Modern architecture and museums' },
+      { day: '6-7', location: 'At Sea', description: 'Luxury onboard experiences' },
+      { day: '8+', location: 'Optional extensions', description: 'Egypt, Jordan, or longer itineraries' }
+    ],
+    destinations: [
+      { name: 'United Arab Emirates', description: 'Dubai, Abu Dhabi' },
+      { name: 'Oman', description: 'Muscat, traditional culture' },
+      { name: 'Qatar', description: 'Doha, modern architecture' },
+      { name: 'Egypt', description: 'Giza, Luxor (on select itineraries)' }
+    ],
+    testimonials: [
+      { quote: 'The Middle East cruise was fascinating. The contrast between ancient history and modern luxury was incredible.', author: 'James R.', location: 'London' },
+      { quote: 'Dubai and Abu Dhabi were highlights, and the onboard luxury was exceptional.', author: 'Sarah W.', location: 'Edinburgh' }
+    ],
+    faq: [
+      {
+        question: 'When is the best time to cruise the Middle East?',
+        answer: 'October to April is ideal, avoiding the extreme summer heat. The weather is pleasant for exploring during these months.'
+      },
+      {
+        question: 'What should I wear in the Middle East?',
+        answer: 'Dress modestly, especially when visiting religious sites. Cover shoulders and knees. Light, breathable fabrics are recommended.'
+      },
+      {
+        question: 'Are Middle East cruises family-friendly?',
+        answer: 'Yes, many cruise lines offer excellent family facilities and activities. The modern cities offer plenty of family attractions.'
+      }
+    ],
+    meta: {
+      title: 'Middle East Cruises | Dubai & Arabian Peninsula | Limitless Cruises',
+      description: 'Experience the Middle East by cruise. Explore Dubai, Abu Dhabi, ancient sites and modern luxury. Expert booking advice from Limitless Cruises.',
+      keywords: ['middle east cruise', 'dubai cruise', 'abu dhabi cruise', 'arabian peninsula cruise', 'egypt cruise']
+    },
+    images: [
+      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/Abu-Dhabi.jpeg',
+      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg',
+      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/Petra.jpeg'
+    ],
+    featured: true,
+    priority: 8
+  },
+  {
+    id: 'pacific-new-zealand',
+    slug: 'pacific-new-zealand-cruises',
+    title: 'Pacific Islands & New Zealand',
+    tagline: 'Paradise found in the South Pacific',
+    description: 'Discover the stunning beauty of the South Pacific and New Zealand. From pristine tropical islands with turquoise waters to New Zealand\'s dramatic landscapes, experience paradise in all its forms.',
+    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/NewZealand-hero.jpeg',
+    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/Auckland.jpeg',
+    duration: '10-18+ nights',
+    season: 'Year-round (best: October-April for New Zealand)',
+    startingFrom: 'From £2,200 per person',
+    bestFor: ['Nature lovers', 'Beach enthusiasts', 'Adventure seekers', 'Photography enthusiasts'],
+    highlights: [
+      'Pristine beaches and turquoise waters of the Pacific Islands',
+      'New Zealand\'s stunning fjords, mountains, and coastlines',
+      'Explore vibrant Maori culture',
+      'Snorkelling and water sports in crystal-clear lagoons',
+      'Adventure activities in New Zealand (bungee, hiking)',
+      'Relaxed island lifestyle and friendly locals'
+    ],
+    includes: [
+      'All meals on board',
+      'Selected shore excursions',
+      'Cultural experiences',
+      'Port transfers'
+    ],
+    cruiseLines: ['Princess Cruises', 'P&O Cruises', 'Celebrity Cruises', 'Holland America Line'],
+    itinerary: [
+      { day: '1', location: 'Sydney, Australia', description: 'Embarkation (or Auckland, New Zealand)' },
+      { day: '2-3', location: 'At Sea', description: 'Crossing the Tasman Sea' },
+      { day: '4', location: 'Auckland, New Zealand', description: 'City of Sails exploration' },
+      { day: '5', location: 'Bay of Islands, NZ', description: 'Beautiful coastline and marine life' },
+      { day: '6-7', location: 'At Sea', description: 'Scenic cruising' },
+      { day: '8', location: 'Fiji', description: 'Tropical paradise islands' },
+      { day: '9-10', location: 'Vanuatu', description: 'Volcanic islands and culture' },
+      { day: '11-12', location: 'New Caledonia', description: 'French Pacific charm' },
+      { day: '13+', location: 'Additional Pacific islands', description: 'Tonga, Samoa, or more New Zealand ports' }
+    ],
+    destinations: [
+      { name: 'New Zealand', description: 'Auckland, Bay of Islands, Milford Sound, Wellington' },
+      { name: 'Fiji', description: 'Tropical islands, pristine beaches' },
+      { name: 'Vanuatu', description: 'Volcanic landscapes, local culture' },
+      { name: 'New Caledonia', description: 'French Pacific, beautiful lagoons' }
+    ],
+    testimonials: [
+      { quote: 'New Zealand\'s fjords were absolutely breathtaking. The Pacific islands were pure paradise.', author: 'Helen T.', location: 'Bristol' },
+      { quote: 'The perfect combination of adventure in New Zealand and relaxation in the islands.', author: 'Mark D.', location: 'Leeds' }
+    ],
+    faq: [
+      {
+        question: 'When is the best time for Pacific & New Zealand cruises?',
+        answer: 'October to April is ideal for New Zealand (warmer weather), while the Pacific Islands can be visited year-round, though the dry season (May-October) is often preferred.'
+      },
+      {
+        question: 'Do I need a visa for New Zealand?',
+        answer: 'UK citizens typically need a New Zealand Electronic Travel Authority (NZeTA) before travel, which can be obtained online.'
+      },
+      {
+        question: 'What activities are available?',
+        answer: 'Activities range from relaxing beach days and snorkelling in the Pacific Islands to adventure activities like hiking, bungee jumping, and scenic cruises in New Zealand\'s fjords.'
+      }
+    ],
+    meta: {
+      title: 'Pacific & New Zealand Cruises | South Pacific Voyages | Limitless Cruises',
+      description: 'Discover the Pacific Islands and New Zealand by cruise. Pristine beaches, stunning fjords, and island paradise. Expert booking advice from Limitless Cruises.',
+      keywords: ['pacific cruise', 'new zealand cruise', 'fiji cruise', 'south pacific cruise', 'new zealand fjords']
+    },
+    images: [
+      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/Sydney.jpeg',
+      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/sydneybridge.jpeg'
+    ],
+    featured: true,
+    priority: 9
   }
 ];
 

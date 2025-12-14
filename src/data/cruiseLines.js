@@ -559,7 +559,7 @@ export const cruiseLines = [
     name: 'Princess Cruises',
     shortName: 'Princess',
     tagline: 'Come back new',
-    description: 'Princess Cruises offers award-winning MedallionClass technology for a personalized cruise experience with innovative service.',
+    description: 'Princess Cruises offers award-winning MedallionClass technology for a personalised cruise experience with innovative service.',
     category: 'premium',
     featured: false,
     image: '/images/cruise-lines/princess.jpg',
