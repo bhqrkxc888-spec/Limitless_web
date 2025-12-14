@@ -18,8 +18,8 @@ const getCruiseLinesByCategory = () => {
 };
 
 export const navigation = {
-  // PHASE 1: Simplified main navigation (coming soon period)
-  // Only showing essential pages during site upgrade
+  // Navigation for local development and testing
+  // Includes all main pages for full site structure
   main: [
     {
       id: 'home',
@@ -28,10 +28,28 @@ export const navigation = {
       megaMenu: false
     },
     {
+      id: 'cruise-lines',
+      label: 'Cruise Lines',
+      path: '/cruise-lines',
+      megaMenu: false  // Can be enabled with dropdown later
+    },
+    {
+      id: 'destinations',
+      label: 'Destinations',
+      path: '/destinations',
+      megaMenu: false  // Can be enabled with dropdown later
+    },
+    {
+      id: 'bucket-list',
+      label: 'Bucket List',
+      path: '/bucket-list',
+      megaMenu: false
+    },
+    {
       id: 'find-cruise',
       label: 'Find a Cruise',
       path: '/find-a-cruise',
-      megaMenu: false  // Simplified - no dropdown during coming soon period
+      megaMenu: false
     },
     {
       id: 'about',
@@ -45,21 +63,23 @@ export const navigation = {
       path: '/contact',
       megaMenu: false
     }
-    
-    // TODO: Restore full navigation after launch:
-    // - Cruise Lines dropdown with mega menu
-    // - Destinations will be accessible via cruise lines pages
   ],
   
   footer: {
-    cruiseLines: cruiseLines.slice(0, 8).map(cl => ({
-      label: cl.name,
-      path: `/cruise-lines/${cl.slug}`
-    })),
-    destinations: destinations.map(d => ({
-      label: d.name,
-      path: `/destinations/${d.slug}`
-    })),
+    cruiseLines: [
+      { label: 'All Cruise Lines', path: '/cruise-lines' },
+      ...cruiseLines.slice(0, 8).map(cl => ({
+        label: cl.name,
+        path: `/cruise-lines/${cl.slug}`
+      }))
+    ],
+    destinations: [
+      { label: 'All Destinations', path: '/destinations' },
+      ...destinations.map(d => ({
+        label: d.name,
+        path: `/destinations/${d.slug}`
+      }))
+    ],
     categories: categories.map(c => ({
       label: c.name,
       path: `/cruises/${c.slug}`
@@ -73,7 +93,8 @@ export const navigation = {
     company: [
       { label: 'About Us', path: '/about' },
       { label: 'Contact', path: '/contact' },
-      { label: 'Find a Cruise', path: '/find-a-cruise' }
+      { label: 'Find a Cruise', path: '/find-a-cruise' },
+      { label: 'Bucket List Experiences', path: '/bucket-list' }
     ]
   }
 };

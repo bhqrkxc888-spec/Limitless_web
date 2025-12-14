@@ -20,7 +20,7 @@ function AboutPage() {
               <h1>Your Personal Cruise Consultant</h1>
               <p className="about-hero-lead">
                 Making your cruise holiday simple, personal and perfectly tailored to you.
-              </p>
+            </p>
               <div className="about-credentials-inline">
                 <span className="credential-badge">CLIA Cruise Master</span>
                 <span className="credential-badge">ABTA P7541</span>
@@ -40,7 +40,7 @@ function AboutPage() {
 
       {/* What I Offer - Modern Grid */}
       <section className="about-services">
-        <div className="container">
+          <div className="container">
           <h2 className="section-title">What I Offer</h2>
           <div className="services-grid">
             <div className="service-card">
@@ -94,14 +94,14 @@ function AboutPage() {
                 <div className="why-item">
                   <div className="why-number">1</div>
                   <div>
-                    <h3>Tailored Advice</h3>
+                <h3>Tailored Advice</h3>
                     <p>Every itinerary is designed around you. Your cruise feels completely personal.</p>
                   </div>
                 </div>
                 <div className="why-item">
                   <div className="why-number">2</div>
                   <div>
-                    <h3>Stress Free Planning</h3>
+                <h3>Stress Free Planning</h3>
                     <p>I handle each detail so planning feels simple while you enjoy the excitement.</p>
                   </div>
                 </div>
@@ -141,7 +141,7 @@ function AboutPage() {
               <p>Hi, I'm Katherine, the face behind Limitless Cruises. I live in the UK with my two children and I love travel, especially cruising.</p>
               <p>I've been lucky to visit Australia, Singapore, Florida, New York and many beautiful parts of Europe. Planning holidays has always been my passion.</p>
               <p>I bring that energy to every booking I support and focus on trips that feel relaxed, well organised and full of moments to remember.</p>
-              
+
               <div className="katherine-elite">
                 <a 
                   href="https://www.holidayelite.com/our-travel-agents/katherine-horton" 
@@ -153,7 +153,7 @@ function AboutPage() {
                     src={aboutImages.holidayEliteLogo}
                     alt="Holiday Elite Member" 
                     width="200" 
-                    loading="lazy"
+                    loading="lazy" 
                   />
                   <span>View Holiday Elite Profile →</span>
                 </a>

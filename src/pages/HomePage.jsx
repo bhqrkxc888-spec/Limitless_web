@@ -1,6 +1,7 @@
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import ContactForm from '../components/ContactForm';
+import BucketListFeatured from '../components/BucketListFeatured';
 import { Button } from '../components/ui';
 import { aboutImages } from '../utils/imageHelpers';
 import './HomePage.css';
@@ -287,6 +288,9 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Bucket List Featured - Dynamic Rotating Content */}
+      <BucketListFeatured />
 
       {/* Contact Form Section */}
       <section className="contact-section" id="contact-form">

@@ -1,10 +1,30 @@
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config/siteConfig';
 import { navigation } from '../../data/navigation';
+import { isSiteLaunched } from '../../config/launchConfig';
 import './Footer.css';
 
 function Footer() {
   const currentYear = new Date().getFullYear();
+
+  // Filter footer navigation based on launch status
+  const footerNav = useMemo(() => {
+    if (isSiteLaunched()) {
+      return navigation.footer; // Show all links when launched
+    }
+
+    // Hide protected routes when not launched
+    return {
+      ...navigation.footer,
+      cruiseLines: [],
+      destinations: [],
+      categories: [],
+      company: navigation.footer.company.filter(
+        link => !['/bucket-list'].includes(link.path)
+      )
+    };
+  }, []);
 
   return (
     <footer className="footer">
@@ -60,43 +80,51 @@ function Footer() {
             </div>
 
             {/* Cruise Lines */}
-            <div className="footer-column">
-              <h3 className="footer-column-title">Cruise Lines</h3>
-              <ul className="footer-links">
-                {navigation.footer.cruiseLines.map((link, index) => (
-                  <li key={index}>
-                    <Link to={link.path}>{link.label}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {footerNav.cruiseLines.length > 0 && (
+              <div className="footer-column">
+                <h3 className="footer-column-title">Cruise Lines</h3>
+                <ul className="footer-links">
+                  {footerNav.cruiseLines.map((link, index) => (
+                    <li key={index}>
+                      <Link to={link.path}>{link.label}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* Destinations */}
-            <div className="footer-column">
-              <h3 className="footer-column-title">Destinations</h3>
-              <ul className="footer-links">
-                {navigation.footer.destinations.map((link, index) => (
-                  <li key={index}>
-                    <Link to={link.path}>{link.label}</Link>
-                  </li>
-                ))}
-              </ul>
-              
-              <h3 className="footer-column-title mt-6">Cruise Types</h3>
-              <ul className="footer-links">
-                {navigation.footer.categories.map((link, index) => (
-                  <li key={index}>
-                    <Link to={link.path}>{link.label}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {footerNav.destinations.length > 0 && (
+              <div className="footer-column">
+                <h3 className="footer-column-title">Destinations</h3>
+                <ul className="footer-links">
+                  {footerNav.destinations.map((link, index) => (
+                    <li key={index}>
+                      <Link to={link.path}>{link.label}</Link>
+                    </li>
+                  ))}
+                </ul>
+                
+                {footerNav.categories.length > 0 && (
+                  <>
+                    <h3 className="footer-column-title mt-6">Cruise Types</h3>
+                    <ul className="footer-links">
+                      {footerNav.categories.map((link, index) => (
+                        <li key={index}>
+                          <Link to={link.path}>{link.label}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+              </div>
+            )}
 
             {/* Company */}
             <div className="footer-column">
               <h3 className="footer-column-title">Company</h3>
               <ul className="footer-links">
-                {navigation.footer.company.map((link, index) => (
+                {footerNav.company.map((link, index) => (
                   <li key={index}>
                     <Link to={link.path}>{link.label}</Link>
                   </li>
@@ -105,7 +133,7 @@ function Footer() {
 
               <h3 className="footer-column-title mt-6">Legal</h3>
               <ul className="footer-links">
-                {navigation.footer.legal.map((link, index) => (
+                {footerNav.legal.map((link, index) => (
                   <li key={index}>
                     <Link to={link.path}>{link.label}</Link>
                   </li>

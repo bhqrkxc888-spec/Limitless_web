@@ -1,12 +1,24 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { navigation } from '../../data/navigation';
 import { siteConfig } from '../../config/siteConfig';
+import { isSiteLaunched } from '../../config/launchConfig';
 import './Header.css';
 
 function Header() {
   const [activeMenu, setActiveMenu] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Filter navigation based on launch status
+  const visibleNavItems = useMemo(() => {
+    if (isSiteLaunched()) {
+      return navigation.main; // Show all items when launched
+    }
+    
+    // Hide protected routes when not launched
+    const protectedPaths = ['/cruise-lines', '/destinations', '/bucket-list'];
+    return navigation.main.filter(item => !protectedPaths.includes(item.path));
+  }, []);
 
   const handleMouseEnter = (menuId) => {
     setActiveMenu(menuId);
@@ -70,7 +82,7 @@ function Header() {
               aria-label="Main navigation"
             >
               <ul className="nav-list">
-                {navigation.main.map((item) => (
+                {visibleNavItems.map((item) => (
                   <li 
                     key={item.id}
                     className={`nav-item ${item.megaMenu ? 'has-mega-menu' : ''}`}

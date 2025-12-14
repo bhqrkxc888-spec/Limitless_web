@@ -21,6 +21,10 @@
   min-width: 0;
 }
 
+.destination-main {
+  min-width: 0;
+}
+
 /* ========================================
    HIGHLIGHTS
    ======================================== */
@@ -191,6 +195,16 @@
 }
 
 /* ========================================
+   FULL WIDTH ATTRACTIONS
+   ======================================== */
+
+.attractions-fullwidth {
+  width: 100%;
+  margin-top: var(--space-8);
+  clear: both;
+}
+
+/* ========================================
    RESPONSIVE
    ======================================== */
 
@@ -202,6 +216,11 @@
 
   .destination-sidebar {
     position: static;
+  }
+  
+  .attractions-fullwidth {
+    grid-column: 1;
+    margin-top: var(--space-6);
   }
 }
 

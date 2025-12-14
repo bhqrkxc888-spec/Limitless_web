@@ -1,14 +1,27 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDestinationBySlug } from '../data/destinations';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
+import SeaConditions from '../components/SeaConditions';
+import PortAttractions from '../components/PortAttractions';
+import PortsWeatherCarousel from '../components/PortsWeatherCarousel';
 import { Button, SectionHeader } from '../components/ui';
 import './DestinationPage.css';
 
 function DestinationPage() {
   const { slug } = useParams();
   const destination = getDestinationBySlug(slug);
+  // Initialize selectedPort with first port or destination coordinates to prevent layout shift
+  const initialPort = destination?.coordinates?.ports?.[0] || (destination?.coordinates ? {
+    name: destination.name,
+    coordinates: {
+      lat: destination.coordinates.lat,
+      lon: destination.coordinates.lon
+    }
+  } : null);
+  const [selectedPort, setSelectedPort] = useState(initialPort);
 
   // Handle destination not found
   if (!destination) {
@@ -69,8 +82,8 @@ function DestinationPage() {
                 {destination.highlights.map((highlight, index) => (
                   <div key={index} className="highlight-item">
                     <div className="highlight-icon">
-                      <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12"/>
                       </svg>
                     </div>
                     <p>{highlight}</p>
@@ -95,8 +108,9 @@ function DestinationPage() {
                 <div className="best-time-section mt-12">
                   <h3>Best Time to Cruise</h3>
                   <div className="best-time-badge">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10"/>
+                      <polyline points="12 6 12 12 16 14"/>
                     </svg>
                     <span>{destination.bestTime}</span>
                   </div>
@@ -106,6 +120,16 @@ function DestinationPage() {
 
             {/* Sidebar */}
             <aside className="destination-sidebar">
+              {/* Ports Weather Carousel - Default to Mediterranean ports */}
+              <PortsWeatherCarousel 
+                ports={destination.coordinates?.ports && destination.coordinates.ports.length > 1 
+                  ? destination.coordinates.ports 
+                  : undefined}
+                title={`${destination.name} Port Conditions`}
+                onPortChange={setSelectedPort}
+                selectedPort={selectedPort}
+              />
+
               <div className="sidebar-card">
                 <h3>Book Your {destination.name} Cruise</h3>
                 <p>
@@ -121,7 +145,7 @@ function DestinationPage() {
                 </div>
               </div>
 
-              {/* Popular Cruise Lines */}
+              {/* Popular Cruise Lines - Moved Down */}
               {destination.cruiseLines && destination.cruiseLines.length > 0 && (
                 <div className="sidebar-card">
                   <h3>Popular Cruise Lines</h3>
@@ -134,24 +158,23 @@ function DestinationPage() {
               )}
             </aside>
           </div>
-        </div>
-      </section>
 
-      {/* CTA Section */}
-      <section className="section section-dark">
-        <div className="container text-center">
-          <h2>Ready to Explore the {destination.name}?</h2>
-          <p>
-            Speak with your personal cruise consultant today for expert advice and the best prices.
-          </p>
-          <div className="cta-buttons">
-            <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">
-              Call {siteConfig.phone}
-            </Button>
-            <Button to="/find-a-cruise" variant="outline" size="lg" className="btn-outline-white">
-              Search Cruises
-            </Button>
-          </div>
+          {/* Port Attractions Widget - Full Width Below Grid */}
+          {destination.coordinates && (
+            <div className="attractions-fullwidth">
+              <PortAttractions 
+                lat={selectedPort?.coordinates?.lat || destination.coordinates.lat} 
+                lon={selectedPort?.coordinates?.lon || destination.coordinates.lon}
+                destinationName={destination.name}
+                portName={selectedPort?.name}
+                regions={destination.regions}
+                fullWidth
+                availablePorts={destination.coordinates?.ports || []}
+                selectedPortName={selectedPort?.name}
+                onPortChange={setSelectedPort}
+              />
+            </div>
+          )}
         </div>
       </section>
     </main>

@@ -4,12 +4,18 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 
+// Route Protection
+import ProtectedRoute from './components/ProtectedRoute'
+
 // Public Pages
 import HomePage from './pages/HomePage'
 import FindCruisePage from './pages/FindCruisePage'
 import AboutPage from './pages/AboutPage'
 import ContactPage from './pages/ContactPage'
+import AdminPage from './pages/AdminPage'
 import CruiseLinesPage from './pages/CruiseLinesPage'
+import DestinationsPage from './pages/DestinationsPage'
+import BucketListPage from './pages/BucketListPage'
 
 // Legal Pages
 import WebsiteTerms from './pages/WebsiteTerms'
@@ -20,6 +26,7 @@ import BookingTerms from './pages/BookingTerms'
 import CruiseLinePage from './templates/CruiseLinePage'
 import DestinationPage from './templates/DestinationPage'
 import CategoryPage from './templates/CategoryPage'
+import BucketListExperiencePage from './templates/BucketListExperiencePage'
 
 function App() {
   return (
@@ -27,23 +34,80 @@ function App() {
       <div className="app">
         <Header />
         <Routes>
-          {/* Main Pages */}
+          {/* Main Pages - Always Public */}
           <Route path="/" element={<HomePage />} />
           <Route path="/find-a-cruise" element={<FindCruisePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           
-          {/* Cruise Lines - All use the unified template */}
-          <Route path="/cruise-lines" element={<CruiseLinesPage />} />
-          <Route path="/cruise-lines/:slug" element={<CruiseLinePage />} />
+          {/* Admin/Preview Access */}
+          <Route path="/admin" element={<AdminPage />} />
           
-          {/* Destinations */}
-          <Route path="/destinations/:slug" element={<DestinationPage />} />
+          {/* Cruise Lines - Protected */}
+          <Route 
+            path="/cruise-lines" 
+            element={
+              <ProtectedRoute>
+                <CruiseLinesPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/cruise-lines/:slug" 
+            element={
+              <ProtectedRoute>
+                <CruiseLinePage />
+              </ProtectedRoute>
+            } 
+          />
           
-          {/* Cruise Categories */}
-          <Route path="/cruises/:slug" element={<CategoryPage />} />
+          {/* Destinations - Protected */}
+          <Route 
+            path="/destinations" 
+            element={
+              <ProtectedRoute>
+                <DestinationsPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/destinations/:slug" 
+            element={
+              <ProtectedRoute>
+                <DestinationPage />
+              </ProtectedRoute>
+            } 
+          />
           
-          {/* Legal Pages */}
+          {/* Bucket List Experiences - Protected */}
+          <Route 
+            path="/bucket-list" 
+            element={
+              <ProtectedRoute>
+                <BucketListPage />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/bucket-list/:slug" 
+            element={
+              <ProtectedRoute>
+                <BucketListExperiencePage />
+              </ProtectedRoute>
+            } 
+          />
+          
+          {/* Cruise Categories - Protected */}
+          <Route 
+            path="/cruises/:slug" 
+            element={
+              <ProtectedRoute>
+                <CategoryPage />
+              </ProtectedRoute>
+            } 
+          />
+          
+          {/* Legal Pages - Always Public */}
           <Route path="/website-terms" element={<WebsiteTerms />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/booking-terms" element={<BookingTerms />} />

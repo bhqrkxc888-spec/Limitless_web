@@ -97,7 +97,14 @@
    ======================================== */
 
 .card-content {
-  padding: var(--space-6);
+  padding: var(--space-6) var(--space-6) var(--space-6);
+}
+
+/* Enhanced spacing for better readability */
+@media (min-width: 1024px) {
+  .card-content {
+    padding: var(--space-8);
+  }
 }
 
 /* ========================================

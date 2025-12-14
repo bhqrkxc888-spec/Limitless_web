@@ -1,0 +1,303 @@
+import { useParams } from 'react-router-dom';
+import { getBucketListBySlug, getRotatingFeatured } from '../data/bucketList';
+import { siteConfig } from '../config/siteConfig';
+import SEO from '../components/SEO';
+import HeroSection from '../components/HeroSection';
+import { Button, SectionHeader, Accordion, Card } from '../components/ui';
+import { useState, useEffect } from 'react';
+import './BucketListExperiencePage.css';
+
+function BucketListExperiencePage() {
+  const { slug } = useParams();
+  const experience = getBucketListBySlug(slug);
+  const [relatedExperiences] = useState(getRotatingFeatured(3));
+
+  // Handle experience not found
+  if (!experience) {
+    return (
+      <main className="bucket-list-experience-page">
+        <SEO title="Experience Not Found" />
+        <div className="container section">
+          <h1>Experience Not Found</h1>
+          <p>Sorry, we couldn't find the bucket list experience you're looking for.</p>
+          <Button to="/bucket-list">View All Experiences</Button>
+        </div>
+      </main>
+    );
+  }
+
+  // Structured Data for SEO
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: experience.title,
+    description: experience.description,
+    url: `https://limitlesscruises.com/bucket-list/${experience.slug}`,
+    category: 'Travel Package',
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'GBP',
+      availability: 'https://schema.org/InStock',
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        price: experience.startingFrom
+      }
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.8',
+      reviewCount: experience.testimonials?.length || 0
+    }
+  };
+
+  return (
+    <main className="bucket-list-experience-page">
+      {/* SEO */}
+      <SEO
+        title={experience.meta?.title || `${experience.title} | Bucket List Experience`}
+        description={experience.meta?.description || experience.description}
+        canonical={`https://limitlesscruises.com/bucket-list/${experience.slug}`}
+        keywords={experience.meta?.keywords?.join(', ') || ''}
+        structuredData={structuredData}
+      />
+
+      {/* Hero Section */}
+      <HeroSection
+        title={experience.title}
+        subtitle={experience.tagline}
+        image={experience.heroImage}
+        imageAlt={experience.title}
+        size="lg"
+        align="left"
+        primaryCta={{ label: 'Enquire Now', to: '/contact' }}
+        secondaryCta={{ label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone}` }}
+      />
+
+      {/* Key Info Bar */}
+      <section className="key-info-bar">
+        <div className="container">
+          <div className="key-info-grid">
+            <div className="key-info-item">
+              <span className="key-info-label">Duration</span>
+              <span className="key-info-value">{experience.duration}</span>
+            </div>
+            <div className="key-info-item">
+              <span className="key-info-label">Season</span>
+              <span className="key-info-value">{experience.season}</span>
+            </div>
+            {experience.startingFrom && (
+              <div className="key-info-item">
+                <span className="key-info-label">Starting From</span>
+                <span className="key-info-value">{experience.startingFrom}</span>
+              </div>
+            )}
+            {experience.bestFor && experience.bestFor.length > 0 && (
+              <div className="key-info-item">
+                <span className="key-info-label">Best For</span>
+                <span className="key-info-value">{experience.bestFor.join(', ')}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <section className="section">
+        <div className="container">
+          <div className="experience-grid">
+            <div className="experience-main">
+              {/* Description */}
+              <div className="experience-description">
+                <p className="lead">{experience.description}</p>
+              </div>
+
+              {/* Highlights */}
+              {experience.highlights && experience.highlights.length > 0 && (
+                <div className="highlights-section">
+                  <SectionHeader
+                    title="Experience Highlights"
+                    subtitle="What makes this journey extraordinary"
+                  />
+                  <div className="highlights-grid">
+                    {experience.highlights.map((highlight, index) => (
+                      <div key={index} className="highlight-card">
+                        <div className="highlight-icon">
+                          <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                          </svg>
+                        </div>
+                        <p>{highlight}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Itinerary */}
+              {experience.itinerary && experience.itinerary.length > 0 && (
+                <div className="itinerary-section">
+                  <SectionHeader
+                    title="Itinerary Overview"
+                    subtitle="A glimpse into your journey"
+                  />
+                  <div className="itinerary-timeline">
+                    {experience.itinerary.map((item, index) => (
+                      <div key={index} className="itinerary-item">
+                        <div className="itinerary-day">{item.day}</div>
+                        <div className="itinerary-content">
+                          <h4>{item.location}</h4>
+                          {item.description && <p>{item.description}</p>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* What's Included */}
+              {experience.includes && experience.includes.length > 0 && (
+                <div className="includes-section">
+                  <SectionHeader
+                    title="What's Included"
+                    subtitle="Everything that's part of your journey"
+                  />
+                  <ul className="includes-list">
+                    {experience.includes.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Testimonials */}
+              {experience.testimonials && experience.testimonials.length > 0 && (
+                <div className="testimonials-section">
+                  <SectionHeader
+                    title="Guest Experiences"
+                    subtitle="What our guests say"
+                  />
+                  <div className="testimonials-grid">
+                    {experience.testimonials.map((testimonial, index) => (
+                      <div key={index} className="testimonial-card">
+                        <div className="testimonial-quote">
+                          <svg viewBox="0 0 24 24" fill="currentColor" opacity="0.2">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                          </svg>
+                        </div>
+                        <p className="testimonial-text">"{testimonial.quote}"</p>
+                        <div className="testimonial-author">
+                          <strong>{testimonial.author}</strong>
+                          {testimonial.location && <span>, {testimonial.location}</span>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* FAQ */}
+              {experience.faq && experience.faq.length > 0 && (
+                <div className="faq-section">
+                  <SectionHeader
+                    title="Frequently Asked Questions"
+                    subtitle="Everything you need to know"
+                  />
+                  <Accordion>
+                    {experience.faq.map((faq, index) => (
+                      <Accordion.Item key={index} title={faq.question}>
+                        <p>{faq.answer}</p>
+                      </Accordion.Item>
+                    ))}
+                  </Accordion>
+                </div>
+              )}
+            </div>
+
+            {/* Sidebar */}
+            <aside className="experience-sidebar">
+              <div className="sidebar-card booking-card">
+                <h3>Book This Experience</h3>
+                <p>
+                  Ready to embark on this extraordinary journey? Our expert consultants are here to help.
+                </p>
+                <div className="sidebar-cta">
+                  <Button href={`tel:${siteConfig.phone}`} variant="primary" fullWidth>
+                    Call {siteConfig.phone}
+                  </Button>
+                  <Button to="/contact" variant="outline" fullWidth>
+                    Enquire Online
+                  </Button>
+                </div>
+                {experience.startingFrom && (
+                  <p className="price-note">
+                    {experience.startingFrom}<br />
+                    <small>Prices subject to availability</small>
+                  </p>
+                )}
+              </div>
+
+              {/* Cruise Lines */}
+              {experience.cruiseLines && experience.cruiseLines.length > 0 && (
+                <div className="sidebar-card">
+                  <h3>Available Cruise Lines</h3>
+                  <ul className="cruise-lines-list">
+                    {experience.cruiseLines.map((line, index) => (
+                      <li key={index}>{line}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Related Experiences */}
+              {relatedExperiences.length > 0 && (
+                <div className="sidebar-card">
+                  <h3>You May Also Like</h3>
+                  <div className="related-experiences">
+                    {relatedExperiences
+                      .filter(exp => exp.id !== experience.id)
+                      .slice(0, 3)
+                      .map((exp) => (
+                        <Card key={exp.id} to={`/bucket-list/${exp.slug}`} variant="outlined" className="related-card">
+                          <Card.Image 
+                            src={exp.cardImage || exp.heroImage} 
+                            alt={exp.title}
+                            aspectRatio="16/9"
+                          />
+                          <Card.Content>
+                            <Card.Title as="h4" className="small-title">{exp.title}</Card.Title>
+                            <Card.Description className="small-text">{exp.tagline}</Card.Description>
+                          </Card.Content>
+                        </Card>
+                      ))}
+                  </div>
+                </div>
+              )}
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="section section-dark">
+        <div className="container text-center">
+          <h2>Ready to Experience {experience.title}?</h2>
+          <p>
+            Speak with your personal cruise consultant today for expert advice, exclusive deals, 
+            and personalized planning for your bucket list adventure.
+          </p>
+          <div className="cta-buttons">
+            <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">
+              Call {siteConfig.phone}
+            </Button>
+            <Button to="/contact" variant="outline" size="lg" className="btn-outline-white">
+              Enquire Online
+            </Button>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+export default BucketListExperiencePage;
+

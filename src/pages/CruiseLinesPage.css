@@ -6,6 +6,23 @@
   min-height: 100vh;
 }
 
+/* Enhanced grid spacing for premium feel */
+.cruise-lines-page .grid-3 {
+  gap: var(--space-8);
+}
+
+@media (max-width: 1023px) {
+  .cruise-lines-page .grid-3 {
+    gap: var(--space-6);
+  }
+}
+
+@media (max-width: 767px) {
+  .cruise-lines-page .grid-3 {
+    gap: var(--space-4);
+  }
+}
+
 /* CTA Section */
 .cruise-lines-page .section-dark h2 {
   color: var(--clr-text-on-primary);

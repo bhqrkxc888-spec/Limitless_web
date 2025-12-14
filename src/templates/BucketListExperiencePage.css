@@ -1,0 +1,338 @@
+/* ========================================
+   BUCKET LIST EXPERIENCE PAGE
+   ======================================== */
+
+.bucket-list-experience-page {
+  min-height: 100vh;
+}
+
+/* Key Info Bar */
+.key-info-bar {
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+  padding: var(--space-6) 0;
+  border-bottom: 3px solid var(--clr-accent);
+}
+
+.key-info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-6);
+}
+
+.key-info-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.key-info-label {
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.9;
+}
+
+.key-info-value {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--clr-text-on-primary);
+}
+
+/* Experience Grid */
+.experience-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+.experience-main {
+  min-width: 0;
+}
+
+.experience-description {
+  margin-bottom: var(--space-12);
+}
+
+.experience-description .lead {
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-relaxed);
+  color: var(--clr-text-main);
+}
+
+/* Highlights Grid */
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-4);
+}
+
+.highlight-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background-color: var(--clr-bg-alt);
+  border-radius: var(--radius-lg);
+  border-left: 3px solid var(--clr-accent);
+}
+
+.highlight-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--clr-accent);
+}
+
+.highlight-card p {
+  margin: 0;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+}
+
+/* Itinerary Timeline */
+.itinerary-section {
+  margin-top: var(--space-12);
+}
+
+.itinerary-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  position: relative;
+  padding-left: var(--space-8);
+}
+
+.itinerary-timeline::before {
+  content: '';
+  position: absolute;
+  left: 12px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--clr-border);
+}
+
+.itinerary-item {
+  display: flex;
+  gap: var(--space-6);
+  position: relative;
+}
+
+.itinerary-day {
+  position: absolute;
+  left: -32px;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: var(--clr-accent);
+  border: 3px solid var(--clr-bg);
+  flex-shrink: 0;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-text-on-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.itinerary-content {
+  flex: 1;
+}
+
+.itinerary-content h4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-2);
+  color: var(--clr-primary);
+}
+
+.itinerary-content p {
+  margin: 0;
+  color: var(--clr-text-muted);
+}
+
+/* Includes List */
+.includes-section {
+  margin-top: var(--space-12);
+}
+
+.includes-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-3);
+}
+
+.includes-list li {
+  padding-left: var(--space-6);
+  position: relative;
+  margin: 0;
+}
+
+.includes-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--clr-accent);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Testimonials */
+.testimonials-section {
+  margin-top: var(--space-12);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-6);
+}
+
+.testimonial-card {
+  padding: var(--space-6);
+  background-color: var(--clr-bg-alt);
+  border-radius: var(--radius-lg);
+  position: relative;
+}
+
+.testimonial-quote {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  width: 48px;
+  height: 48px;
+  opacity: 0.1;
+}
+
+.testimonial-text {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  font-style: italic;
+  margin-bottom: var(--space-4);
+  color: var(--clr-text-main);
+}
+
+.testimonial-author {
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-muted);
+}
+
+.testimonial-author strong {
+  color: var(--clr-text-main);
+}
+
+/* FAQ Section */
+.faq-section {
+  margin-top: var(--space-12);
+}
+
+/* Sidebar */
+.experience-sidebar {
+  position: sticky;
+  top: var(--space-8);
+}
+
+.sidebar-card {
+  background-color: var(--clr-surface);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+  box-shadow: var(--shadow-card);
+}
+
+.booking-card {
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
+  color: var(--clr-text-on-primary);
+}
+
+.booking-card h3,
+.booking-card p {
+  color: var(--clr-text-on-primary);
+}
+
+.price-note {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.price-note small {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  opacity: 0.9;
+}
+
+.cruise-lines-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cruise-lines-list li {
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--clr-border-light);
+  margin: 0;
+}
+
+.cruise-lines-list li:last-child {
+  border-bottom: none;
+}
+
+.related-experiences {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.related-card .small-title {
+  font-size: var(--font-size-base);
+  margin-bottom: var(--space-1);
+}
+
+.related-card .small-text {
+  font-size: var(--font-size-sm);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .experience-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .experience-sidebar {
+    position: static;
+  }
+
+  .key-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .key-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .highlights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .includes-list {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .itinerary-timeline {
+    padding-left: var(--space-6);
+  }
+}
+

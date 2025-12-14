@@ -1,0 +1,64 @@
+/* Destinations Page Styles */
+
+.destinations-page {
+  min-height: 100vh;
+}
+
+.destination-meta {
+  margin-top: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-muted);
+}
+
+.best-time {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.best-time::before {
+  content: '📅';
+  font-size: var(--font-size-base);
+}
+
+/* Responsive Grid - Enhanced spacing */
+.grid-2-md {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .grid-2-md {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+.grid-3-lg {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .grid-3-lg {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-3-lg {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+@media (max-width: 767px) {
+  .grid-2-md,
+  .grid-3-lg {
+    gap: var(--space-4);
+  }
+}
+
