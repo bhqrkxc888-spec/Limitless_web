@@ -26,6 +26,13 @@ export const aboutImages = {
 };
 
 /**
+ * Get Homepage hero image
+ */
+export const homeHeroImages = [
+  getStorageUrl('categories', 'Home/hero-2.jpeg') // Riviera Maya Caribbean beach
+];
+
+/**
  * Future: Easy to switch to custom domain
  * Just change SUPABASE_URL to your CDN/custom domain
  * Example: 'https://images.limitlesscruises.com'

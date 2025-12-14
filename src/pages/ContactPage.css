@@ -71,7 +71,7 @@
 .contact-cards-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-6);
+  gap: var(--space-4);
 }
 
 .contact-method-card {

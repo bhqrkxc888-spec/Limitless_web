@@ -2,7 +2,8 @@ export const siteConfig = {
   siteName: 'Limitless Cruises',
   tagline: 'Independent Cruise Specialist for UK Sailings & Worldwide Voyages',
   phone: '0114 321 3208',
-  whatsapp: '+44 7359 796108',
+  whatsapp: '07359 796108',
+  whatsappUrl: 'https://wa.me/447359796108', // Keep +44 for URL
   email: 'travel@limitlesscruises.com',
   facebook: 'https://www.facebook.com/profile.php?id=61570469572535',
   footerLegalText: [

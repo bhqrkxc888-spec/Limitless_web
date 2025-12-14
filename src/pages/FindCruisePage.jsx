@@ -91,7 +91,7 @@ function FindCruisePage() {
                   <span className="finder-contact-icon">📞</span>
                   <span>{siteConfig.phone}</span>
                 </a>
-                <a href="https://wa.me/447359796108" target="_blank" rel="noopener noreferrer" className="finder-contact-link">
+                <a href={siteConfig.whatsappUrl || 'https://wa.me/447359796108'} target="_blank" rel="noopener noreferrer" className="finder-contact-link">
                   <span className="finder-contact-icon">💬</span>
                   <span>WhatsApp</span>
                 </a>

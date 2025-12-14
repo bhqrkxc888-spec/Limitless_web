@@ -44,32 +44,26 @@ function AboutPage() {
           <h2 className="section-title">What I Offer</h2>
           <div className="services-grid">
             <div className="service-card">
-              <div className="service-icon">👤</div>
               <h3>Personal Support</h3>
               <p>I learn what you love so I can shortlist the right ships, cabins and itineraries that truly fit your travel style.</p>
             </div>
             <div className="service-card">
-              <div className="service-icon">✈️</div>
               <h3>No Fly & Fly Options</h3>
               <p>Prefer sailing from the UK or want worldwide destinations. I match flights to cruise dates for seamless travel.</p>
             </div>
             <div className="service-card">
-              <div className="service-icon">🚢</div>
               <h3>Multi Cruise & Stay</h3>
               <p>Back to back sailings or land and sea combinations. I coordinate everything so it feels easy.</p>
             </div>
             <div className="service-card">
-              <div className="service-icon">🏨</div>
               <h3>Complete Planning</h3>
               <p>Hotels, flights, transfers and timing - I handle every detail for a smooth, stress-free trip.</p>
             </div>
             <div className="service-card">
-              <div className="service-icon">💎</div>
               <h3>Best Value</h3>
               <p>Drink packages, Wi-Fi, onboard credit. I find promotions and deals so you always get great value.</p>
             </div>
             <div className="service-card">
-              <div className="service-icon">🛡️</div>
               <h3>ABTA Protected</h3>
               <p>Every booking is ABTA bonded with friendly help before, during and after your cruise.</p>
             </div>
@@ -151,7 +145,7 @@ function AboutPage() {
                 >
                   <img 
                     src={aboutImages.holidayEliteLogo}
-                    alt="Holiday Elite Member" 
+                    alt="Holiday Elite Travel Agent - Katherine's professional membership" 
                     width="200" 
                     loading="lazy" 
                   />

@@ -3,7 +3,7 @@ import SEO from '../components/SEO';
 import ContactForm from '../components/ContactForm';
 import BucketListFeatured from '../components/BucketListFeatured';
 import { Button } from '../components/ui';
-import { aboutImages } from '../utils/imageHelpers';
+import { homeHeroImages } from '../utils/imageHelpers';
 import './HomePage.css';
 
 // SVG Icons as components for clean, professional look
@@ -99,6 +99,9 @@ function HomePage() {
     email: siteConfig.email
   };
 
+  // Single hero image (first image from array, with fallback)
+  const heroImage = homeHeroImages[0] || 'https://via.placeholder.com/800x1000/2C344C/C9A962?text=LIMITLESS+CRUISES';
+
   return (
     <main className="home-elegant">
       <SEO
@@ -108,32 +111,39 @@ function HomePage() {
         structuredData={structuredData}
       />
 
-      {/* Hero Section */}
+      {/* Hero Section - Image Background with Overlay Text */}
       <section className="hero-elegant">
+        <div className="hero-background-image">
+          <img 
+            src={heroImage}
+            alt="Beautiful Caribbean beach with turquoise waters and a cruise ship on the horizon - Limitless Cruises destination"
+            loading="eager"
+            onError={(e) => {
+              e.target.src = 'https://via.placeholder.com/800x1000/2C344C/C9A962?text=LIMITLESS+CRUISES';
+            }}
+          />
+          <div className="hero-image-overlay"></div>
+        </div>
         <div className="container">
-          <div className="hero-content">
-            <div className="hero-text">
-              <p className="hero-eyebrow">A refined new experience is on the way</p>
-              <h1>Your Personal Cruise Consultant</h1>
-              <p className="hero-lead">
-                We're crafting something special. While our new website takes shape, 
-                we're still here to help you discover your perfect cruise holiday.
-              </p>
-              <div className="hero-cta-group">
-                <Button to="/find-a-cruise" variant="primary" size="lg">
-                  Find a Cruise
-                </Button>
-                <Button to="/contact" variant="secondary" size="lg">
-                  Get in Touch
-                </Button>
+          <div className="hero-content-overlay">
+            {/* Text Box - Overlays the image */}
+            <div className="hero-text-box">
+              <div className="hero-text">
+                <p className="hero-eyebrow">A refined new experience is on the way</p>
+                <h1>Your Personal Cruise Consultant</h1>
+                <p className="hero-lead">
+                  We're crafting something special. While our new website takes shape, 
+                  we're still here to help you discover your perfect cruise holiday.
+                </p>
+                <div className="hero-cta-group">
+                  <Button to="/find-a-cruise" variant="primary" size="lg">
+                    Find a Cruise
+                  </Button>
+                  <Button to="/contact" variant="secondary" size="lg">
+                    Get in Touch
+                  </Button>
+                </div>
               </div>
-            </div>
-            <div className="hero-image">
-              <img 
-                src={aboutImages.katherine2}
-                alt="Katherine, your personal cruise consultant" 
-                loading="eager"
-              />
             </div>
           </div>
         </div>
@@ -215,18 +225,18 @@ function HomePage() {
                 <p>{siteConfig.phone}</p>
               </a>
               
-              <a 
-                href="https://wa.me/447359796108" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="contact-card-elegant"
-              >
-                <span className="contact-icon contact-icon--whatsapp">
-                  <WhatsAppIcon />
-                </span>
-                <h3>WhatsApp</h3>
-                <p>{siteConfig.whatsapp}</p>
-              </a>
+                    <a 
+                      href={siteConfig.whatsappUrl || 'https://wa.me/447359796108'} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="contact-card-elegant"
+                    >
+                      <span className="contact-icon contact-icon--whatsapp">
+                        <WhatsAppIcon />
+                      </span>
+                      <h3>Mobile / WhatsApp</h3>
+                      <p>{siteConfig.whatsapp}</p>
+                    </a>
               
               <a 
                 href={siteConfig.facebook}

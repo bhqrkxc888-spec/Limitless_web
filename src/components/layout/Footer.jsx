@@ -65,11 +65,17 @@ function Footer() {
             {/* Brand Column */}
             <div className="footer-brand">
               <Link to="/" className="footer-logo">
-                <img 
-                  src="/images/site-general/header.jpg" 
-                  alt={siteConfig.siteName}
-                  className="footer-logo-img"
-                />
+                <div className="logo-container">
+                  <img 
+                    src="https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/categories/Home/Hero-logo.png" 
+                    alt="Limitless Cruises logo - gold cruise ship icon" 
+                    className="logo-icon"
+                  />
+                  <div className="logo-text">
+                    <span className="logo-name">Limitless Cruises</span>
+                    <span className="logo-tagline">Personal Cruise Consultant</span>
+                  </div>
+                </div>
               </Link>
               <p className="footer-tagline">{siteConfig.tagline}</p>
               

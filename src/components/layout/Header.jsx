@@ -78,9 +78,15 @@ function Header() {
             <span className="header-top-text">
               ABTA Protected | Personal Cruise Consultant
             </span>
-            <a href={`tel:${siteConfig.phone}`} className="header-phone">
-              Call {siteConfig.phone}
-            </a>
+            <div className="header-phone-group">
+              <a href={`tel:${siteConfig.phone}`} className="header-phone">
+                {siteConfig.phone}
+              </a>
+              <span className="header-phone-separator">|</span>
+              <a href={siteConfig.whatsappUrl || 'https://wa.me/447359796108'} target="_blank" rel="noopener noreferrer" className="header-phone header-phone--whatsapp">
+                {siteConfig.whatsapp}
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -91,11 +97,17 @@ function Header() {
           <div className="header-content">
             {/* Logo */}
             <Link to="/" className="header-logo" onClick={closeMobileMenu}>
-              <img 
-                src="/images/site-general/header.jpg" 
-                alt={siteConfig.siteName}
-                className="header-logo-img"
-              />
+              <div className="logo-container">
+                <img 
+                  src="https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/categories/Home/Hero-logo.png" 
+                  alt="Limitless Cruises logo - gold cruise ship icon" 
+                  className="logo-icon"
+                />
+                <div className="logo-text">
+                  <span className="logo-name">Limitless Cruises</span>
+                  <span className="logo-tagline">Personal Cruise Consultant</span>
+                </div>
+              </div>
             </Link>
 
             {/* Mobile Menu Toggle */}
@@ -189,7 +201,7 @@ function Header() {
               {/* Mobile CTA */}
               <div className="nav-cta-mobile">
                 <a href={`tel:${siteConfig.phone}`} className="btn btn-primary btn-full">
-                  Call {siteConfig.phone}
+                  {siteConfig.phone}
                 </a>
               </div>
             </nav>
