@@ -17,6 +17,8 @@ import AdminPage from './pages/AdminPage'
 import CruiseLinesPage from './pages/CruiseLinesPage'
 import DestinationsPage from './pages/DestinationsPage'
 import BucketListPage from './pages/BucketListPage'
+import OffersPage from './pages/OffersPage'
+import OfferPage from './pages/OfferPage'
 
 // Legal Pages
 import WebsiteTerms from './pages/WebsiteTerms'
@@ -57,6 +59,8 @@ function App() {
           <Route path="/find-a-cruise" element={<FindCruisePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/offers" element={<OffersPage />} />
+          <Route path="/offers/:slug" element={<OfferPage />} />
           
           {/* Admin/Preview Access */}
           <Route path="/admin" element={<AdminPage />} />

@@ -1,7 +1,8 @@
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import ContactForm from '../components/ContactForm';
-import BucketListFeatured from '../components/BucketListFeatured';
+import BucketListFeatured from '../components/BucketListFeatured'
+import FeaturedOffers from '../components/FeaturedOffers';
 import { Button } from '../components/ui';
 import { homeHeroImages } from '../utils/imageHelpers';
 import './HomePage.css';
@@ -298,6 +299,9 @@ function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Featured Offers - Latest Deals */}
+      <FeaturedOffers />
 
       {/* Bucket List Featured - Dynamic Rotating Content */}
       <BucketListFeatured />

@@ -1,0 +1,59 @@
+/* ========================================
+   OFFERS PAGE
+   ======================================== */
+
+.offers-page {
+  min-height: 100vh;
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--space-8);
+  margin-top: var(--space-12);
+}
+
+@media (min-width: 640px) {
+  .offers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+@media (min-width: 1024px) {
+  .offers-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+.offers-loading,
+.offers-error,
+.offers-empty {
+  text-align: center;
+  padding: var(--space-16) var(--space-4);
+  color: var(--clr-text-muted);
+}
+
+.offers-error,
+.offers-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.offers-error p,
+.offers-empty p {
+  font-size: var(--font-size-lg);
+  margin-bottom: 0;
+}
+
+.cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  justify-content: center;
+  margin-top: var(--space-8);
+}
+

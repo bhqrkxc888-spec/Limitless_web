@@ -3,12 +3,12 @@ import { supabase } from '../lib/supabase';
 import { Button } from './ui';
 import './ContactForm.css';
 
-function ContactForm({ context = 'general' }) {
+function ContactForm({ context = 'general', offerId = null, offerTitle = null }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    message: '',
+    message: offerTitle ? `I'm interested in: ${offerTitle}` : '',
     context: context
   });
   
@@ -35,16 +35,26 @@ function ContactForm({ context = 'general' }) {
     setStatus('submitting');
 
     try {
+      const enquiryData = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        message: formData.message,
+        source: formData.context,
+        status: 'new'
+      };
+
+      // Add offer linking if provided
+      if (offerId) {
+        enquiryData.offer_id = offerId;
+      }
+      if (offerTitle) {
+        enquiryData.offer_title = offerTitle;
+      }
+
       const { error } = await supabase
         .from('website_enquiries')
-        .insert([{
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.message,
-          source: formData.context,
-          status: 'new'
-        }]);
+        .insert([enquiryData]);
 
       if (error) throw error;
       
@@ -53,7 +63,7 @@ function ContactForm({ context = 'general' }) {
         name: '',
         email: '',
         phone: '',
-        message: '',
+        message: offerTitle ? `I'm interested in: ${offerTitle}` : '',
         context: context
       });
 
