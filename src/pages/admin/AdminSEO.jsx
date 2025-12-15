@@ -4,7 +4,7 @@
  * View SEO scores and issues for all pages
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Search,
@@ -15,11 +15,34 @@ import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
-  Clock
+  Clock,
+  RefreshCw,
+  Loader2
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
+
+// Pages to scan for SEO
+const PAGES_TO_SCAN = [
+  { path: '/', name: 'Home' },
+  { path: '/find-a-cruise', name: 'Find a Cruise' },
+  { path: '/about', name: 'About' },
+  { path: '/contact', name: 'Contact' },
+  { path: '/website-terms', name: 'Website Terms' },
+  { path: '/privacy-policy', name: 'Privacy Policy' },
+  { path: '/booking-terms', name: 'Booking Terms' },
+  { path: '/cookie-policy', name: 'Cookie Policy' },
+  // Protected pages (will only work if preview authenticated)
+  { path: '/cruise-lines', name: 'Cruise Lines' },
+  { path: '/destinations', name: 'Destinations' },
+  { path: '/bucket-list', name: 'Bucket List' },
+  { path: '/cruise-types', name: 'Cruise Types' },
+  { path: '/offers', name: 'Offers' },
+  { path: '/faq', name: 'FAQ' },
+  { path: '/testimonials', name: 'Testimonials' },
+  { path: '/travel-news', name: 'Travel News' },
+];
 
 function AdminSEO() {
   const navigate = useNavigate();
@@ -31,6 +54,11 @@ function AdminSEO() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [expandedRow, setExpandedRow] = useState(null);
   const [pageMetrics, setPageMetrics] = useState({});
+  
+  // Scan state
+  const [isScanning, setIsScanning] = useState(false);
+  const [scanProgress, setScanProgress] = useState({ current: 0, total: 0, currentPage: '' });
+  const iframeRef = useRef(null);
   
   // Filters
   const [scoreFilter, setScoreFilter] = useState('all');
@@ -126,6 +154,69 @@ function AdminSEO() {
     }
   };
 
+  // Scan site for SEO
+  const scanSite = useCallback(async () => {
+    setIsScanning(true);
+    setScanProgress({ current: 0, total: PAGES_TO_SCAN.length, currentPage: '' });
+
+    // Get the base URL
+    const baseUrl = window.location.origin;
+
+    for (let i = 0; i < PAGES_TO_SCAN.length; i++) {
+      const page = PAGES_TO_SCAN[i];
+      setScanProgress({ 
+        current: i + 1, 
+        total: PAGES_TO_SCAN.length, 
+        currentPage: page.name 
+      });
+
+      try {
+        // Create a hidden iframe to load the page
+        const iframe = document.createElement('iframe');
+        iframe.style.cssText = 'position:absolute;width:1px;height:1px;left:-9999px;';
+        document.body.appendChild(iframe);
+
+        // Load the page and wait for it
+        await new Promise((resolve, reject) => {
+          const timeout = setTimeout(() => {
+            iframe.remove();
+            resolve(); // Don't reject, just move on
+          }, 10000); // 10 second timeout per page
+
+          iframe.onload = () => {
+            // Wait a bit for SEO analysis to run
+            setTimeout(() => {
+              clearTimeout(timeout);
+              iframe.remove();
+              resolve();
+            }, 2000); // Wait 2 seconds for analysis
+          };
+
+          iframe.onerror = () => {
+            clearTimeout(timeout);
+            iframe.remove();
+            resolve(); // Don't reject, just move on
+          };
+
+          iframe.src = `${baseUrl}${page.path}`;
+        });
+
+        // Small delay between pages to not overwhelm
+        await new Promise(resolve => setTimeout(resolve, 500));
+      } catch (err) {
+        console.error(`Error scanning ${page.path}:`, err);
+      }
+    }
+
+    // Refresh the data
+    setIsScanning(false);
+    setScanProgress({ current: 0, total: 0, currentPage: '' });
+    
+    // Wait a moment for the last page's data to be saved
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    await fetchSEOData();
+  }, [fetchSEOData]);
+
   // Pagination
   const totalPages = Math.ceil(pages.length / pageSize);
   const paginatedPages = pages.slice((page - 1) * pageSize, page * pageSize);
@@ -187,11 +278,47 @@ function AdminSEO() {
     >
       <div className="admin-seo">
         <header className="admin-page-header">
-          <h1 className="admin-page-title">SEO Health</h1>
-          <p className="admin-page-subtitle">
-            Monitor SEO scores and issues across your pages
-          </p>
+          <div className="admin-page-header-row">
+            <div>
+              <h1 className="admin-page-title">SEO Health</h1>
+              <p className="admin-page-subtitle">
+                Monitor SEO scores and issues across your pages
+              </p>
+            </div>
+            <button 
+              className="admin-btn admin-btn-primary"
+              onClick={scanSite}
+              disabled={isScanning}
+            >
+              {isScanning ? (
+                <>
+                  <Loader2 size={16} className="spinning" />
+                  Scanning...
+                </>
+              ) : (
+                <>
+                  <RefreshCw size={16} />
+                  Scan Site for SEO
+                </>
+              )}
+            </button>
+          </div>
         </header>
+
+        {/* Scan Progress */}
+        {isScanning && (
+          <div className="admin-scan-progress">
+            <div className="admin-scan-progress-bar">
+              <div 
+                className="admin-scan-progress-fill"
+                style={{ width: `${(scanProgress.current / scanProgress.total) * 100}%` }}
+              />
+            </div>
+            <p className="admin-scan-progress-text">
+              Scanning: <strong>{scanProgress.currentPage}</strong> ({scanProgress.current}/{scanProgress.total})
+            </p>
+          </div>
+        )}
 
         {/* Summary Stats */}
         <div className="admin-stats-grid">
@@ -259,8 +386,19 @@ function AdminSEO() {
             <p className="admin-empty-text">
               {scoreFilter !== 'all' || issuesFilter !== 'all'
                 ? 'Try adjusting your filters'
-                : 'SEO data will appear here as pages are analyzed.'}
+                : 'Click "Scan Site for SEO" above to analyze all your pages.'}
             </p>
+            {scoreFilter === 'all' && issuesFilter === 'all' && (
+              <button 
+                className="admin-btn admin-btn-primary"
+                onClick={scanSite}
+                disabled={isScanning}
+                style={{ marginTop: '1rem' }}
+              >
+                <RefreshCw size={16} />
+                Scan Site for SEO
+              </button>
+            )}
           </div>
         ) : (
           <div className="admin-card">
@@ -427,6 +565,60 @@ function AdminSEO() {
       <style>{`
         .admin-seo {
           max-width: 1400px;
+        }
+
+        .admin-page-header-row {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          gap: 1rem;
+          flex-wrap: wrap;
+        }
+
+        .admin-page-header-row .admin-btn {
+          flex-shrink: 0;
+        }
+
+        .spinning {
+          animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        .admin-scan-progress {
+          background: var(--admin-bg-secondary);
+          border: 1px solid var(--admin-border);
+          border-radius: 12px;
+          padding: 1.25rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .admin-scan-progress-bar {
+          height: 8px;
+          background: var(--admin-bg-tertiary);
+          border-radius: 4px;
+          overflow: hidden;
+          margin-bottom: 0.75rem;
+        }
+
+        .admin-scan-progress-fill {
+          height: 100%;
+          background: var(--admin-primary);
+          border-radius: 4px;
+          transition: width 0.3s ease;
+        }
+
+        .admin-scan-progress-text {
+          font-size: 0.875rem;
+          color: var(--admin-text-muted);
+          margin: 0;
+        }
+
+        .admin-scan-progress-text strong {
+          color: var(--admin-text);
         }
 
         .admin-page-link {
