@@ -175,19 +175,20 @@ export async function logError(error, options = {}) {
     }
     
     const pageUrl = typeof window !== 'undefined' ? window.location.href : null
-    const _pagePath = getPagePath(pageUrl) // Used for debugging, kept for potential future use
+    const pagePath = typeof window !== 'undefined' ? window.location.pathname : null
     const userAgent = typeof navigator !== 'undefined' ? navigator.userAgent : null
     const sessionId = getSessionId()
-    
-    // Get IP address (if available from headers, otherwise null)
-    // Note: IP is typically captured server-side, but we'll try to get it if possible
-    const _ipAddress = null // Client-side IP detection is not reliable, kept for potential future use
     
     const errorType = getErrorType(error, options)
     const severity = getSeverity(error, options)
     
+    // Build context with page_path included
+    const context = {
+      ...(options.context || {}),
+      page_path: pagePath
+    }
+    
     // Call Supabase RPC function
-    // Note: Parameter names must match the SQL function definition exactly
     const { error: rpcError } = await supabase.rpc('log_website_error', {
       p_error_type: errorType,
       p_error_message: errorMessage,
@@ -198,7 +199,7 @@ export async function logError(error, options = {}) {
       p_user_agent: userAgent,
       p_session_id: sessionId,
       p_severity: severity,
-      p_context: options.context || null
+      p_context: context
     })
     
     if (rpcError) {
