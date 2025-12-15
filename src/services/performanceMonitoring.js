@@ -7,6 +7,33 @@
 
 import { supabase } from '../lib/supabase'
 
+// Capability flag - track if RPC function exists and works
+const CAPABILITY_KEY = 'performance_monitoring_available'
+
+/**
+ * Check if performance monitoring is available (cached in sessionStorage)
+ * @returns {boolean|null} - true if available, false if unavailable, null if unknown
+ */
+function getCapability() {
+  if (typeof window === 'undefined' || typeof sessionStorage === 'undefined') {
+    return null
+  }
+  const value = sessionStorage.getItem(CAPABILITY_KEY)
+  if (value === null) return null
+  return value === 'true'
+}
+
+/**
+ * Set capability availability
+ * @param {boolean} available - Whether the capability is available
+ */
+function setCapability(available) {
+  if (typeof window === 'undefined' || typeof sessionStorage === 'undefined') {
+    return
+  }
+  sessionStorage.setItem(CAPABILITY_KEY, String(available))
+}
+
 /**
  * Detects device type from user agent
  * @returns {string} Device type
@@ -105,6 +132,12 @@ export async function logPerformanceMetric(metricName, metricValue, metricType =
     return;
   }
 
+  // Check if we know the function doesn't exist/work - skip to prevent 400 errors
+  const capability = getCapability()
+  if (capability === false) {
+    return;
+  }
+
   try {
     const pageUrl = typeof window !== 'undefined' ? window.location.href : null
     const pagePath = getPagePath(pageUrl)
@@ -151,11 +184,22 @@ export async function logPerformanceMetric(metricName, metricValue, metricType =
     })
     
     if (rpcError) {
-      // If function doesn't exist (404), silently fail - database setup may not be complete
-      if (rpcError.code === 'PGRST202' || rpcError.message?.includes('not found') || rpcError.message?.includes('function') || rpcError.message?.includes('does not exist') || rpcError.code === '42883') {
-        // Function doesn't exist - this is expected if database setup hasn't been run
+      // Check for function not found or schema mismatch errors
+      const isNotFoundError = 
+        rpcError.code === 'PGRST202' || 
+        rpcError.code === '42883' ||
+        rpcError.code === '42703' || // undefined column
+        rpcError.message?.includes('not found') || 
+        rpcError.message?.includes('function') || 
+        rpcError.message?.includes('does not exist') ||
+        rpcError.message?.includes('column') ||
+        rpcError.message?.includes('relation')
+      
+      if (isNotFoundError) {
+        // Function doesn't exist or schema mismatch - mark as unavailable
+        setCapability(false)
         if (import.meta.env.DEV) {
-          console.warn('[Performance Monitoring] RPC function not found. Run the database setup SQL script to enable performance tracking.')
+          console.warn('[Performance Monitoring] RPC function not available. Database setup may be incomplete.')
         }
         return
       }
@@ -163,6 +207,9 @@ export async function logPerformanceMetric(metricName, metricValue, metricType =
       if (import.meta.env.DEV) {
         console.error('[Performance Monitoring] Failed to log metric:', rpcError)
       }
+    } else {
+      // Success - mark as available
+      setCapability(true)
     }
   } catch (err) {
     // Silently fail - we don't want performance logging to cause errors
@@ -340,6 +387,12 @@ export async function trackApiCall(url, options = {}) {
 export function initPerformanceMonitoring() {
   if (typeof window === 'undefined') return;
   if (import.meta.env.DEV) return; // Don't track in development
+  
+  // Check if we know the function doesn't work - skip initialization entirely
+  const capability = getCapability()
+  if (capability === false) {
+    return;
+  }
   
   // Initialize Core Web Vitals
   initCoreWebVitals()

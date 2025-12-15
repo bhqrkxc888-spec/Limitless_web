@@ -631,23 +631,26 @@ async function logSEOMetric(metricType, metricName, metricValue, metricUnit, met
     })
     
     if (rpcError) {
-      // Check for function not found errors (404, PGRST202, or various "not found" messages)
+      // Check for function not found or schema mismatch errors
       const isNotFoundError = 
         rpcError.status === 404 || 
         rpcError.statusCode === 404 ||
         rpcError.code === 'PGRST202' || 
         rpcError.code === '42883' ||
+        rpcError.code === '42703' || // undefined column
         rpcError.message?.includes('not found') || 
         rpcError.message?.includes('function') || 
         rpcError.message?.includes('does not exist') ||
+        rpcError.message?.includes('column') ||
+        rpcError.message?.includes('relation') ||
         rpcError.message?.includes('Searched for') ||
         rpcError.message?.includes('Could not find')
       
       if (isNotFoundError) {
-        // Function doesn't exist - mark as unavailable and silently fail
+        // Function doesn't exist or schema mismatch - mark as unavailable
         setCapability(CAPABILITY_KEY_METRIC_LOG, false)
         if (import.meta.env.DEV) {
-          console.warn('[SEO Monitoring] RPC function not found. Run the database setup SQL script to enable SEO tracking.')
+          console.warn('[SEO Monitoring] RPC function not available. Database setup may be incomplete.')
         }
         return
       }
@@ -711,23 +714,26 @@ async function updatePageSummary(summary) {
     })
     
     if (rpcError) {
-      // Check for function not found errors (404, PGRST202, or various "not found" messages)
+      // Check for function not found or schema mismatch errors
       const isNotFoundError = 
         rpcError.status === 404 || 
         rpcError.statusCode === 404 ||
         rpcError.code === 'PGRST202' || 
         rpcError.code === '42883' ||
+        rpcError.code === '42703' || // undefined column
         rpcError.message?.includes('not found') || 
         rpcError.message?.includes('function') || 
         rpcError.message?.includes('does not exist') ||
+        rpcError.message?.includes('column') ||
+        rpcError.message?.includes('relation') ||
         rpcError.message?.includes('Searched for') ||
         rpcError.message?.includes('Could not find')
       
       if (isNotFoundError) {
-        // Function doesn't exist - mark as unavailable and silently fail
+        // Function doesn't exist or schema mismatch - mark as unavailable
         setCapability(CAPABILITY_KEY_PAGE_UPDATE, false)
         if (import.meta.env.DEV) {
-          console.warn('[SEO Monitoring] RPC function not found. Run the database setup SQL script to enable SEO tracking.')
+          console.warn('[SEO Monitoring] RPC function not available. Database setup may be incomplete.')
         }
         return
       }
@@ -922,14 +928,17 @@ async function checkSEOMonitoringAvailable() {
       error?.statusCode === 404 ||
       error?.code === 'PGRST202' || 
       error?.code === '42883' ||
+      error?.code === '42703' || // undefined column
       error?.message?.includes('not found') || 
       error?.message?.includes('function') || 
       error?.message?.includes('does not exist') ||
+      error?.message?.includes('column') ||
+      error?.message?.includes('relation') ||
       error?.message?.includes('Searched for') ||
       error?.message?.includes('Could not find')
     
     if (isNotFoundError) {
-      // Function doesn't exist - mark both as unavailable
+      // Function doesn't exist or schema mismatch - mark both as unavailable
       setCapability(CAPABILITY_KEY_PAGE_UPDATE, false)
       setCapability(CAPABILITY_KEY_METRIC_LOG, false)
       return false
