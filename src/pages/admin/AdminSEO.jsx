@@ -159,6 +159,14 @@ function AdminSEO() {
     setIsScanning(true);
     setScanProgress({ current: 0, total: PAGES_TO_SCAN.length, currentPage: '' });
 
+    // Clear any cached "unavailable" flags so we try fresh
+    try {
+      sessionStorage.removeItem('seo_monitoring_page_update_available');
+      sessionStorage.removeItem('seo_monitoring_metric_log_available');
+    } catch (e) {
+      console.warn('Could not clear sessionStorage:', e);
+    }
+
     // Get the base URL
     const baseUrl = window.location.origin;
 
@@ -198,7 +206,9 @@ function AdminSEO() {
             resolve(); // Don't reject, just move on
           };
 
-          iframe.src = `${baseUrl}${page.path}`;
+          // Add _seo_scan param to trigger SEO analysis even in dev mode
+          const separator = page.path.includes('?') ? '&' : '?';
+          iframe.src = `${baseUrl}${page.path}${separator}_seo_scan=1`;
         });
 
         // Small delay between pages to not overwhelm

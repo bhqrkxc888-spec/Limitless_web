@@ -29,7 +29,8 @@ const TRACKING_PARAMS = [
   'source',      // Generic source
   '_ga',         // Google Analytics
   'mc_cid',      // Mailchimp Campaign ID
-  'mc_eid'       // Mailchimp Email ID
+  'mc_eid',      // Mailchimp Email ID
+  '_seo_scan'    // Admin SEO scan trigger
 ]
 
 /**
@@ -972,6 +973,35 @@ async function checkSEOMonitoringAvailable() {
   }
 }
 
+/**
+ * Force analyze current page SEO (for admin scanning)
+ * This bypasses the DEV mode check and runs analysis immediately
+ * @returns {Promise<void>}
+ */
+export async function forceAnalyzePageSEO() {
+  // Check if Supabase is available
+  if (!supabase) {
+    console.warn('[SEO Monitoring] Supabase not configured')
+    return
+  }
+
+  // Clear any cached "unavailable" flags so we try fresh
+  if (typeof sessionStorage !== 'undefined') {
+    sessionStorage.removeItem(CAPABILITY_KEY_PAGE_UPDATE)
+    sessionStorage.removeItem(CAPABILITY_KEY_METRIC_LOG)
+  }
+
+  // Check if functions are available
+  const isAvailable = await checkSEOMonitoringAvailable()
+  if (!isAvailable) {
+    console.warn('[SEO Monitoring] Database functions not available')
+    return
+  }
+
+  // Run the analysis
+  await analyzePageSEO()
+}
+
 export function initSEOMonitoring() {
   // Check if monitoring is enabled
   if (!isMonitoringEnabled()) {
@@ -979,7 +1009,19 @@ export function initSEOMonitoring() {
   }
 
   if (typeof window === 'undefined') return
-  if (import.meta.env.DEV) return // Don't track in development
+  
+  // Check if this is an admin scan (triggered by ?_seo_scan=1 param)
+  const urlParams = new URLSearchParams(window.location.search)
+  const isAdminScan = urlParams.get('_seo_scan') === '1'
+  
+  // In dev mode, only run if this is an admin scan
+  if (import.meta.env.DEV && !isAdminScan) return // Don't track in development (unless admin scan)
+  
+  // If this is an admin scan, clear any cached "unavailable" flags
+  if (isAdminScan && typeof sessionStorage !== 'undefined') {
+    sessionStorage.removeItem(CAPABILITY_KEY_PAGE_UPDATE)
+    sessionStorage.removeItem(CAPABILITY_KEY_METRIC_LOG)
+  }
 
   // Check if SEO monitoring is available (functions exist in database)
   // This prevents 404 errors if the database setup hasn't been run
