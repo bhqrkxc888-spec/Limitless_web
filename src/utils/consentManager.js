@@ -10,6 +10,11 @@
  * - Consent records must be stored server-side for legal proof
  * - Keep records for 1-2 years minimum
  * - Store IP address, timestamp, consent status
+ * - Consent expires after 12 months (user must re-consent)
+ * 
+ * Consent Expiration:
+ * - Client-side (localStorage): Expires after 12 months, banner reappears
+ * - Server-side (database): Records kept for 2 years for audit purposes
  */
 
 import { supabase } from '../lib/supabase';
@@ -17,12 +22,45 @@ import { supabase } from '../lib/supabase';
 const CONSENT_KEY = 'cookie-consent';
 const CONSENT_DATE_KEY = 'cookie-consent-date';
 
+// Consent expires after 12 months (GDPR best practice: 12-13 months)
+// This ensures users are re-asked for consent periodically
+const CONSENT_EXPIRY_MONTHS = 12;
+
+/**
+ * Check if consent has expired
+ * @returns {boolean} True if consent exists but has expired
+ */
+function isConsentExpired() {
+  if (typeof window === 'undefined') return false;
+  
+  const consentDate = localStorage.getItem(CONSENT_DATE_KEY);
+  if (!consentDate) return false;
+  
+  const consentTimestamp = new Date(consentDate);
+  const expiryDate = new Date(consentTimestamp);
+  expiryDate.setMonth(expiryDate.getMonth() + CONSENT_EXPIRY_MONTHS);
+  
+  return new Date() > expiryDate;
+}
+
 /**
  * Get current consent status
- * @returns {string|null} 'accepted', 'rejected', or null (no decision yet)
+ * Returns null if consent has expired or was never given
+ * @returns {string|null} 'accepted', 'rejected', or null (no decision yet or expired)
  */
 export function getConsentStatus() {
   if (typeof window === 'undefined') return null;
+  
+  // If consent has expired, clear it and return null
+  if (isConsentExpired()) {
+    localStorage.removeItem(CONSENT_KEY);
+    localStorage.removeItem(CONSENT_DATE_KEY);
+    window.dispatchEvent(new CustomEvent('cookie-consent-changed', { 
+      detail: { status: null } 
+    }));
+    return null;
+  }
+  
   return localStorage.getItem(CONSENT_KEY);
 }
 

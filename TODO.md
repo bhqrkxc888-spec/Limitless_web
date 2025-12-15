@@ -3,11 +3,15 @@
 **Last Updated:** December 15, 2024  
 **Status:** Production Ready - Minor Enhancements Remaining
 
+**Labels:** 
+- **DANE** = Tasks for Dane (user actions, content, images)
+- **AI** = Tasks for AI (code changes, technical implementation)
+
 ---
 
 ## 🔴 High Priority
 
-### 1. Missing Hero Images (5 remaining)
+### 1. Missing Hero Images (5 remaining) - **DANE**
 **Status:** ⚠️ Site functional with placeholders  
 **Priority:** High (visual completeness)
 
@@ -39,13 +43,13 @@ The following bucket list experiences need hero images (1920x1080px):
   - Hero image: ❌ Needed
   - Supabase path: `/destinations/Fjords/`
 
-**Action:** Upload 1920x1080px images to Supabase, update `src/data/bucketList.js`
+**Action:** Upload 1920x1080px images to Supabase, update `src/data/bucketList.js` - **AI**
 
 ---
 
 ## 🟡 Medium Priority
 
-### 2. Replace Placeholder Images in cruiseLines.js
+### 2. Replace Placeholder Images in cruiseLines.js - **DANE**
 **Status:** ⚠️ Placeholders in place  
 **Priority:** Medium
 
@@ -53,32 +57,40 @@ The following bucket list experiences need hero images (1920x1080px):
 - [ ] **Celebrity Cruises** - 6 destination images (placeholders)
 
 **Location:** `src/data/cruiseLines.js` (lines 64-71, 224-229)  
-**Action:** Replace placeholders with Supabase URLs when images available
+**Action:** Replace placeholders with Supabase URLs when images available - **AI**
 
 ---
 
-### 3. Logo Image Dimensions
+### 3. Logo Image Dimensions - **AI**
 **Status:** ⚠️ No dimensions set  
 **Priority:** Medium
 
-- [ ] Determine actual logo size
-- [ ] Add width/height attributes to logo images
+- [ ] Determine actual logo size - **DANE**
+- [ ] Add width/height attributes to logo images - **AI**
 - [ ] Files: `src/components/layout/Header.jsx`, `src/components/layout/Footer.jsx`
 
 ---
 
-### 4. Set Up Monitoring
-**Status:** ⚠️ Not configured  
+### 4. Set Up External Monitoring Services - **DANE**
+**Status:** ✅ Error tracking already implemented (Supabase-based)  
 **Priority:** Medium  
 **Effort:** ~1 hour
 
-- [ ] Error tracking (e.g., Sentry)
+**Note:** Error tracking and performance monitoring are already set up and working:
+- ✅ Error tracking service (`src/services/errorTracking.js`)
+- ✅ Performance monitoring (`src/services/performanceMonitoring.js`)
+- ✅ Database tables and RPC functions (see `docs/MONITORING_DATABASE_SETUP.sql`)
+- ✅ Global error handlers in `main.jsx`
+- ✅ Integrated into logger utility
+
+**Optional external services (if desired):**
+- [ ] External error tracking (e.g., Sentry) - Optional, Supabase tracking already works
 - [ ] Uptime monitoring (e.g., UptimeRobot, Pingdom)
-- [ ] Performance monitoring (Vercel Analytics)
+- [ ] Performance monitoring dashboard (Vercel Analytics or similar)
 
 ---
 
-### 5. Verify Backups
+### 5. Verify Backups - **DANE**
 **Status:** ⚠️ Not verified  
 **Priority:** Medium  
 **Effort:** ~30 minutes
@@ -92,7 +104,7 @@ The following bucket list experiences need hero images (1920x1080px):
 
 ## 🟢 Low Priority / Nice-to-Have
 
-### 6. Image Audit - Remaining Items
+### 6. Image Audit - Remaining Items - **AI**
 **Status:** ⚠️ Ongoing  
 **Priority:** Low
 
@@ -103,7 +115,7 @@ The following bucket list experiences need hero images (1920x1080px):
 
 ---
 
-### 7. Add Contextual Internal Links
+### 7. Add Contextual Internal Links - **AI**
 **Status:** ⚠️ Not implemented  
 **Priority:** Low  
 **Effort:** ~1 hour
@@ -114,19 +126,20 @@ The following bucket list experiences need hero images (1920x1080px):
 
 ---
 
-### 8. Add FAQ Section
+### 8. Add FAQ Section - **DANE + AI**
 **Status:** ⚠️ Not implemented  
 **Priority:** Low  
 **Effort:** ~2 hours
 
-- [ ] Create FAQ page or section
-- [ ] Common cruise booking questions
-- [ ] Include structured data (FAQPage schema)
-- [ ] Add to navigation
+- [ ] Create FAQ content - **DANE**
+- [ ] Create FAQ page component - **AI**
+- [ ] Common cruise booking questions - **DANE**
+- [ ] Include structured data (FAQPage schema) - **AI**
+- [ ] Add to navigation - **AI**
 
 ---
 
-### 9. Add Product Schema for Offers
+### 9. Add Product Schema for Offers - **AI**
 **Status:** ⚠️ Not implemented  
 **Priority:** Low  
 **Effort:** ~1 hour  
@@ -137,7 +150,7 @@ The following bucket list experiences need hero images (1920x1080px):
 
 ---
 
-### 10. Verify Color Contrast
+### 10. Verify Color Contrast - **AI**
 **Status:** ⚠️ Not verified  
 **Priority:** Low  
 **Effort:** ~30 minutes
@@ -149,7 +162,7 @@ The following bucket list experiences need hero images (1920x1080px):
 
 ---
 
-### 11. Add Link Checking
+### 11. Add Link Checking - **DANE**
 **Status:** ⚠️ Not implemented  
 **Priority:** Low  
 **Effort:** ~30 minutes
@@ -161,7 +174,7 @@ The following bucket list experiences need hero images (1920x1080px):
 
 ---
 
-### 12. Sea Conditions Feature
+### 12. Sea Conditions Feature - **AI**
 **Status:** ⚠️ Currently "coming soon"  
 **Priority:** Low
 
@@ -171,7 +184,7 @@ The following bucket list experiences need hero images (1920x1080px):
 
 ---
 
-### 13. Optional: Consent Checks for Weather APIs
+### 13. Optional: Consent Checks for Weather APIs - **AI**
 **Status:** ⚠️ Optional enhancement  
 **Priority:** Very Low  
 **Note:** Weather APIs don't set cookies, so consent not required. This is for consistency only.
@@ -194,6 +207,8 @@ The following bucket list experiences need hero images (1920x1080px):
 - ✅ 404 page
 - ✅ Production-safe logging
 - ✅ Resource hints and performance optimizations
+- ✅ **Error tracking system (Supabase-based)**
+- ✅ **Performance monitoring (Core Web Vitals)**
 
 ### Images
 - ✅ All card images complete (800x500px)
@@ -232,10 +247,10 @@ The following bucket list experiences need hero images (1920x1080px):
    - Priority: Alaska/Rocky Mountaineer (user request)
    - Then: World Cruises, Antarctica, Galápagos, Northern Lights
 
-2. **Set up monitoring** (operational visibility)
-   - Error tracking
-   - Uptime monitoring
-   - Performance analytics
+2. **Set up external monitoring services** (optional - error tracking already working)
+   - ✅ Error tracking (already implemented via Supabase)
+   - ✅ Performance monitoring (already implemented)
+   - Optional: External services (Sentry, UptimeRobot, etc.)
 
 3. **Verify backups** (data protection)
    - Supabase database
