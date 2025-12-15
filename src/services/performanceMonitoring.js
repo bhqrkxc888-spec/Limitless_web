@@ -111,27 +111,55 @@ export async function logPerformanceMetric(metricName, metricValue, metricType =
     const deviceType = getDeviceType()
     const { browserName, browserVersion } = getBrowserInfo()
     const connectionType = getConnectionType()
+    const userAgent = typeof navigator !== 'undefined' ? navigator.userAgent : null
+    
+    // Generate session ID for tracking
+    const STORAGE_KEY = 'error_tracking_session_id'
+    let sessionId = null
+    if (typeof window !== 'undefined') {
+      sessionId = sessionStorage.getItem(STORAGE_KEY)
+      if (!sessionId) {
+        sessionId = `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`
+        sessionStorage.setItem(STORAGE_KEY, sessionId)
+      }
+    }
+    
+    // Build additional_data object for API-specific info
+    const additionalData = options.context || {}
+    if (options.apiUrl) additionalData.apiUrl = options.apiUrl
+    if (options.apiMethod) additionalData.apiMethod = options.apiMethod
+    if (options.apiStatusCode) additionalData.apiStatusCode = options.apiStatusCode
     
     // Call Supabase RPC function
     // Note: Parameter order matches SQL function: required params first, then optional
     const { error: rpcError } = await supabase.rpc('log_website_performance', {
+      p_metric_type: metricType || 'core_web_vital',
       p_metric_name: metricName,
       p_metric_value: metricValue,
-      p_metric_type: metricType,
+      p_metric_unit: options.unit || 'ms',
       p_page_url: pageUrl,
       p_page_path: pagePath,
+      p_user_agent: userAgent,
+      p_session_id: sessionId,
       p_device_type: deviceType,
+      p_connection_type: connectionType,
       p_browser_name: browserName,
       p_browser_version: browserVersion,
-      p_connection_type: connectionType,
-      p_api_url: options.apiUrl || null,
-      p_api_method: options.apiMethod || null,
-      p_api_status_code: options.apiStatusCode || null,
-      p_context: options.context || null
+      p_viewport_width: typeof window !== 'undefined' ? window.innerWidth : null,
+      p_viewport_height: typeof window !== 'undefined' ? window.innerHeight : null,
+      p_additional_data: Object.keys(additionalData).length > 0 ? additionalData : null
     })
     
     if (rpcError) {
-      // Silently fail - we don't want performance logging to cause errors
+      // If function doesn't exist (404), silently fail - database setup may not be complete
+      if (rpcError.code === 'PGRST202' || rpcError.message?.includes('not found') || rpcError.message?.includes('function') || rpcError.message?.includes('does not exist') || rpcError.code === '42883') {
+        // Function doesn't exist - this is expected if database setup hasn't been run
+        if (import.meta.env.DEV) {
+          console.warn('[Performance Monitoring] RPC function not found. Run the database setup SQL script to enable performance tracking.')
+        }
+        return
+      }
+      // Log other errors (only in development)
       if (import.meta.env.DEV) {
         console.error('[Performance Monitoring] Failed to log metric:', rpcError)
       }

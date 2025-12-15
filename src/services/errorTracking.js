@@ -143,23 +143,30 @@ export async function logError(error, options = {}) {
     const severity = getSeverity(error, options)
     
     // Call Supabase RPC function
+    // Note: Parameter names must match the SQL function definition exactly
     const { error: rpcError } = await supabase.rpc('log_website_error', {
+      p_error_type: errorType,
       p_error_message: errorMessage,
       p_error_stack: errorStack,
-      p_error_type: errorType,
-      p_severity: severity,
-      p_page_url: pageUrl,
-      p_page_path: pagePath,
-      p_line_number: lineNumber,
-      p_column_number: columnNumber,
+      p_error_url: pageUrl,
+      p_error_line: lineNumber,
+      p_error_column: columnNumber,
       p_user_agent: userAgent,
-      p_ip_address: ipAddress,
       p_session_id: sessionId,
+      p_severity: severity,
       p_context: options.context || null
     })
     
     if (rpcError) {
-      // Log to console for debugging (only in development)
+      // If function doesn't exist (404), silently fail - database setup may not be complete
+      if (rpcError.code === 'PGRST202' || rpcError.message?.includes('not found') || rpcError.message?.includes('function') || rpcError.message?.includes('does not exist') || rpcError.code === '42883') {
+        // Function doesn't exist - this is expected if database setup hasn't been run
+        if (import.meta.env.DEV) {
+          console.warn('[Error Tracking] RPC function not found. Run the database setup SQL script to enable error tracking.')
+        }
+        return
+      }
+      // Log other errors to console for debugging (only in development)
       if (import.meta.env.DEV) {
         console.error('[Error Tracking] Failed to log error to Supabase:', rpcError)
         console.error('[Error Tracking] Error details:', {
