@@ -7,6 +7,33 @@
 
 import { supabase } from '../lib/supabase'
 
+// Capability flag - track if RPC function exists and works
+const CAPABILITY_KEY = 'error_tracking_available'
+
+/**
+ * Check if error tracking is available (cached in sessionStorage)
+ * @returns {boolean|null} - true if available, false if unavailable, null if unknown
+ */
+function getCapability() {
+  if (typeof window === 'undefined' || typeof sessionStorage === 'undefined') {
+    return null
+  }
+  const value = sessionStorage.getItem(CAPABILITY_KEY)
+  if (value === null) return null
+  return value === 'true'
+}
+
+/**
+ * Set capability availability
+ * @param {boolean} available - Whether the capability is available
+ */
+function setCapability(available) {
+  if (typeof window === 'undefined' || typeof sessionStorage === 'undefined') {
+    return
+  }
+  sessionStorage.setItem(CAPABILITY_KEY, String(available))
+}
+
 /**
  * Generates an anonymous session ID for tracking errors across page loads
  * @returns {string} Session ID
@@ -110,6 +137,12 @@ export async function logError(error, options = {}) {
     return;
   }
 
+  // Check if we know the function doesn't exist/work - skip to prevent 400 errors
+  const capability = getCapability()
+  if (capability === false) {
+    return;
+  }
+
   try {
     const errorMessage = error?.message || String(error)
     const errorStack = error?.stack || null
@@ -158,11 +191,22 @@ export async function logError(error, options = {}) {
     })
     
     if (rpcError) {
-      // If function doesn't exist (404), silently fail - database setup may not be complete
-      if (rpcError.code === 'PGRST202' || rpcError.message?.includes('not found') || rpcError.message?.includes('function') || rpcError.message?.includes('does not exist') || rpcError.code === '42883') {
-        // Function doesn't exist - this is expected if database setup hasn't been run
+      // Check for function not found or schema mismatch errors
+      const isNotFoundError = 
+        rpcError.code === 'PGRST202' || 
+        rpcError.code === '42883' ||
+        rpcError.code === '42703' || // undefined column
+        rpcError.message?.includes('not found') || 
+        rpcError.message?.includes('function') || 
+        rpcError.message?.includes('does not exist') ||
+        rpcError.message?.includes('column') ||
+        rpcError.message?.includes('relation')
+      
+      if (isNotFoundError) {
+        // Function doesn't exist or schema mismatch - mark as unavailable
+        setCapability(false)
         if (import.meta.env.DEV) {
-          console.warn('[Error Tracking] RPC function not found. Run the database setup SQL script to enable error tracking.')
+          console.warn('[Error Tracking] RPC function not available. Database setup may be incomplete.')
         }
         return
       }
@@ -177,7 +221,8 @@ export async function logError(error, options = {}) {
         })
       }
     } else {
-      // Success - log in development mode
+      // Success - mark as available
+      setCapability(true)
       if (import.meta.env.DEV) {
         console.log('[Error Tracking] Error logged successfully to Supabase')
       }

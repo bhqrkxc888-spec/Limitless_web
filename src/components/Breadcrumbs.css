@@ -1,8 +1,10 @@
 /* ========================================
    BREADCRUMBS
+   Hidden site-wide per design decision
    ======================================== */
 
 .breadcrumbs {
+  display: none;
   padding: var(--space-4) 0;
   background-color: var(--clr-bg);
   border-bottom: 1px solid var(--clr-border);

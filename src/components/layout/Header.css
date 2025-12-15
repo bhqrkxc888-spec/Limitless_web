@@ -214,6 +214,7 @@
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 9999;
   min-width: 300px;
   max-width: 900px;
   background-color: var(--clr-surface);

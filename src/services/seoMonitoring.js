@@ -7,6 +7,58 @@
 
 import { supabase } from '../lib/supabase'
 
+/**
+ * Tracking parameters to strip from URLs
+ * These are added by ad platforms and campaign tracking tools
+ */
+const TRACKING_PARAMS = [
+  'fbclid',      // Facebook Click ID
+  'gclid',       // Google Ads Click ID
+  'utm_source',  // UTM Campaign
+  'utm_medium',
+  'utm_campaign',
+  'utm_term',
+  'utm_content',
+  'ref',         // Generic referral
+  'source',      // Generic source
+  '_ga',         // Google Analytics
+  'mc_cid',      // Mailchimp Campaign ID
+  'mc_eid'       // Mailchimp Email ID
+]
+
+/**
+ * Clean URL by removing tracking parameters
+ * @param {string} url - Full URL to clean
+ * @returns {string} - Clean URL without tracking params
+ */
+function cleanUrl(url) {
+  try {
+    const urlObj = new URL(url, typeof window !== 'undefined' ? window.location.origin : 'http://localhost')
+    TRACKING_PARAMS.forEach(param => urlObj.searchParams.delete(param))
+    // Remove trailing ? if no params left
+    return urlObj.href.replace(/\?$/, '')
+  } catch {
+    return url
+  }
+}
+
+/**
+ * Clean page path by removing tracking parameters from query string
+ * @param {string} path - Path with potential query string
+ * @returns {string} - Clean path without tracking params
+ */
+function cleanPath(path) {
+  try {
+    const urlObj = new URL(path, 'http://localhost')
+    TRACKING_PARAMS.forEach(param => urlObj.searchParams.delete(param))
+    const search = urlObj.search || ''
+    return urlObj.pathname + search.replace(/\?$/, '')
+  } catch {
+    // Fallback: strip everything after ? if parsing fails
+    return path.split('?')[0] || '/'
+  }
+}
+
 // Capability flags - track if RPC functions exist to avoid unnecessary 404s
 const CAPABILITY_KEY_PAGE_UPDATE = 'seo_monitoring_page_update_available'
 const CAPABILITY_KEY_METRIC_LOG = 'seo_monitoring_metric_log_available'
@@ -66,16 +118,18 @@ if (typeof window !== 'undefined') {
 }
 
 /**
- * Extracts page path from URL
+ * Extracts page path from URL, stripping tracking parameters
  * @param {string} url - Full URL
- * @returns {string} Page path
+ * @returns {string} Clean page path without tracking params
  */
 function getPagePath(url) {
   try {
     const urlObj = new URL(url)
-    return urlObj.pathname + urlObj.search
+    const rawPath = urlObj.pathname + urlObj.search
+    return cleanPath(rawPath)
   } catch {
-    return url || (typeof window !== 'undefined' ? window.location.pathname + window.location.search : null)
+    const fallbackPath = url || (typeof window !== 'undefined' ? window.location.pathname + window.location.search : null)
+    return cleanPath(fallbackPath || '/')
   }
 }
 
@@ -561,8 +615,9 @@ async function logSEOMetric(metricType, metricName, metricValue, metricUnit, met
   }
 
   try {
-    const pageUrl = typeof window !== 'undefined' ? window.location.href : null
-    const pagePath = getPagePath(pageUrl)
+    const rawUrl = typeof window !== 'undefined' ? window.location.href : null
+    const pageUrl = rawUrl ? cleanUrl(rawUrl) : null
+    const pagePath = getPagePath(rawUrl)
     
     const { error: rpcError } = await supabase.rpc('log_website_seo_metric', {
       p_page_url: pageUrl,
@@ -635,8 +690,9 @@ async function updatePageSummary(summary) {
   }
 
   try {
-    const pageUrl = typeof window !== 'undefined' ? window.location.href : null
-    const pagePath = getPagePath(pageUrl)
+    const rawUrl = typeof window !== 'undefined' ? window.location.href : null
+    const pageUrl = rawUrl ? cleanUrl(rawUrl) : null
+    const pagePath = getPagePath(rawUrl)
     
     const { error: rpcError } = await supabase.rpc('update_website_seo_page', {
       p_page_url: pageUrl,
