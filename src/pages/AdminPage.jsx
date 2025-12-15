@@ -39,7 +39,7 @@ function AdminPage() {
   return (
     <main className="admin-page">
       <SEO
-        title="Admin Access | Limitless Cruises"
+        title="Admin Access"
         description="Preview access for protected pages"
         noindex={true}
       />

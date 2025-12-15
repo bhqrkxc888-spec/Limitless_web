@@ -1,0 +1,70 @@
+/* ========================================
+   TRAVEL NEWS CATEGORY PAGE
+   ======================================== */
+
+.travel-news-category-page {
+  min-height: 100vh;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .news-grid {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .news-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.news-loading,
+.news-error,
+.news-empty {
+  text-align: center;
+  padding: var(--space-8);
+  color: var(--clr-text-muted);
+}
+
+.news-error {
+  color: var(--clr-error);
+}
+
+.news-empty-actions {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  margin-top: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--clr-border-light);
+}
+
+.pagination-info {
+  font-weight: var(--font-weight-medium);
+  color: var(--clr-text-main);
+}
+
+.cta-buttons {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  margin-top: var(--space-6);
+  flex-wrap: wrap;
+}
+

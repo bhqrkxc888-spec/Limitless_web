@@ -1,7 +1,9 @@
 /**
  * Production-safe logging utility
- * Only logs in development, silent in production
+ * Logs to console in development, sends to Supabase in production
  */
+
+import { logError } from '../services/errorTracking';
 
 const isDevelopment = import.meta.env.DEV;
 const isProduction = import.meta.env.PROD;
@@ -16,19 +18,37 @@ export const logger = {
   warn: (...args) => {
     if (isDevelopment) {
       console.warn(...args);
+    } else {
+      // In production, log warnings to Supabase
+      const message = args.map(arg => 
+        typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+      ).join(' ');
+      logError(message, { 
+        errorType: 'javascript', 
+        severity: 'warning' 
+      }).catch(() => {
+        // Silently fail if error tracking fails
+      });
     }
-    // In production, only log critical warnings
-    // (can be extended to send to error tracking service)
   },
   
   error: (...args) => {
-    // Always log errors, but in production could send to error tracking
     if (isDevelopment) {
       console.error(...args);
     } else {
-      // In production, could send to error tracking service (e.g., Sentry)
-      // For now, silently fail to avoid console noise
-      // console.error(...args); // Uncomment if you want errors in production
+      // In production, send errors to Supabase
+      const error = args[0] instanceof Error 
+        ? args[0] 
+        : new Error(args.map(arg => 
+            typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+          ).join(' '));
+      
+      logError(error, { 
+        errorType: 'javascript', 
+        severity: 'error' 
+      }).catch(() => {
+        // Silently fail if error tracking fails
+      });
     }
   },
   

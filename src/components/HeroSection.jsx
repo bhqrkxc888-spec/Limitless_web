@@ -39,7 +39,14 @@ function HeroSection({
       {/* Background Image */}
       <div className="hero-background">
         {image ? (
-          <img src={image} alt={imageAlt} className="hero-image" loading="eager" />
+          <img 
+            src={image} 
+            alt={imageAlt} 
+            className="hero-image" 
+            width="1920"
+            height="1080"
+            loading="eager" 
+          />
         ) : (
           <div className="hero-placeholder" />
         )}

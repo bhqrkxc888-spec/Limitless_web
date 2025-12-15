@@ -148,7 +148,7 @@ function PrivacyPolicy() {
 
           <section>
             <h2>Sharing Your Personal Information</h2>
-            <p>We may share your data with:</p>
+            <p>We store your personal data in secure customer management and database systems to process bookings, manage enquiries, and provide customer service. We may share your data with:</p>
             <ul className="privacy-list">
               <li>Management service partners (e.g., The Midcounties Co-operative Group) providing administrative services/reporting.</li>
               <li>Travel companies, airlines, hotels, insurers and others involved in performing your contract.</li>

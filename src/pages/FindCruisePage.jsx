@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react';
 import SEO from '../components/SEO';
 import ContactForm from '../components/ContactForm';
+import Breadcrumbs from '../components/Breadcrumbs';
 import { siteConfig } from '../config/siteConfig';
 import { hasConsent, loadScriptsWithConsent } from '../utils/consentManager';
 import { Button } from '../components/ui';
 import './FindCruisePage.css';
 
 function FindCruisePage() {
+  const breadcrumbs = [
+    { label: 'Home', path: '/' },
+    { label: 'Find a Cruise', path: '/find-a-cruise' }
+  ];
   const [scriptsLoaded, setScriptsLoaded] = useState(false);
   const [showConsentPrompt, setShowConsentPrompt] = useState(false);
 
@@ -63,17 +68,20 @@ function FindCruisePage() {
   return (
     <main className="find-cruise-elegant">
       <SEO
-        title="Find Your Perfect Cruise | Limitless Cruises"
+        title="Find Your Perfect Cruise"
         description="Search for your ideal cruise holiday with expert help from Limitless Cruises. We find and match the best options for you."
         canonical="https://limitlesscruises.com/find-a-cruise"
       />
+      <div className="container">
+        <Breadcrumbs items={breadcrumbs} />
+      </div>
 
       {/* Hero */}
       <section className="finder-hero">
         <div className="container">
           <h1>Find Your Perfect Cruise</h1>
           <p className="finder-hero-lead">
-            Search cruises below or tell us what you're looking for and we'll find the best options with exclusive pricing.
+            Search cruises below or tell us what you're looking for and we'll find the best options with exclusive pricing. <a href="/about" className="inline-link">Learn more about our approach</a>.
           </p>
         </div>
       </section>

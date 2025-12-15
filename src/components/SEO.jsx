@@ -115,12 +115,19 @@ function SEO({
 
   }, [fullTitle, fullDescription, fullCanonical, type, fullImage, keywords, author, robots, noindex]);
 
-  // Render structured data if provided
+  // Render structured data if provided (supports single object or array)
   if (structuredData) {
+    // Handle both single object and array of objects
+    const dataToRender = Array.isArray(structuredData) ? structuredData : [structuredData];
+    
     return (
-      <script type="application/ld+json">
-        {JSON.stringify(structuredData)}
-      </script>
+      <>
+        {dataToRender.map((data, index) => (
+          <script key={index} type="application/ld+json">
+            {JSON.stringify(data)}
+          </script>
+        ))}
+      </>
     );
   }
 

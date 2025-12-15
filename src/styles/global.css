@@ -113,6 +113,27 @@ a:focus-visible {
   border-radius: var(--radius-sm);
 }
 
+/* Inline links - for contextual internal links in content */
+a.inline-link {
+  color: var(--clr-primary);
+  text-decoration: underline;
+  text-decoration-color: var(--clr-accent);
+  text-underline-offset: 2px;
+  font-weight: var(--font-weight-medium);
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+}
+
+a.inline-link:hover {
+  color: var(--clr-accent);
+  text-decoration-color: var(--clr-accent);
+}
+
+a.inline-link:focus-visible {
+  outline: 2px solid var(--clr-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
 /* ========================================
    LISTS
    ======================================== */

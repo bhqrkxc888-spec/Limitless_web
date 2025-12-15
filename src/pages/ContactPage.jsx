@@ -1,17 +1,26 @@
 import { siteConfig } from '../config/siteConfig';
 import ContactForm from '../components/ContactForm';
 import SEO from '../components/SEO';
+import Breadcrumbs from '../components/Breadcrumbs';
 import { aboutImages } from '../utils/imageHelpers';
 import './ContactPage.css';
 
 function ContactPage() {
+  const breadcrumbs = [
+    { label: 'Home', path: '/' },
+    { label: 'Contact', path: '/contact' }
+  ];
+
   return (
     <main className="contact-elegant">
       <SEO
-        title="Contact Us | Limitless Cruises"
+        title="Contact Us"
         description="Get in touch with Katherine at Limitless Cruises. Call, WhatsApp, email or send an enquiry for personalised cruise quotes and expert advice."
         canonical="https://limitlesscruises.com/contact"
       />
+      <div className="container">
+        <Breadcrumbs items={breadcrumbs} />
+      </div>
 
       {/* Hero */}
       <section className="contact-hero">
@@ -28,6 +37,8 @@ function ContactPage() {
               <img 
                 src={aboutImages.katherine1} 
                 alt="Katherine, your cruise consultant" 
+                width="1920"
+                height="1080"
                 loading="eager"
               />
             </div>

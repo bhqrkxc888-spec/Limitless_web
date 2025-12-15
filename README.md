@@ -1,16 +1,94 @@
-# React + Vite
+# Limitless Cruises Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern React/Vite website for Limitless Cruises - UK cruise travel agency.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Quick Start
 
-## React Compiler
+```bash
+# Install dependencies
+npm install
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# Start development server
+npm run dev
 
-## Expanding the ESLint configuration
+# Build for production
+npm run build
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Preview production build
+npm run preview
+```
+
+---
+
+## 📋 Project Status
+
+**Status:** ✅ Production Ready (~90% Complete)
+
+- **For tasks:** See [`TODO.md`](./TODO.md)
+- **For status:** See [`docs/PROJECT_STATUS.md`](./docs/PROJECT_STATUS.md)
+- **For setup:** See [`docs/LOCAL_DEV_SETUP.md`](./docs/LOCAL_DEV_SETUP.md)
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** React 18 + Vite
+- **Styling:** CSS Modules
+- **Backend:** Supabase (Database + Storage)
+- **Deployment:** Vercel
+- **APIs:** Google Places, OpenWeatherMap, StormGlass
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── components/     # Reusable components
+├── pages/         # Page components
+├── templates/     # Page templates
+├── data/          # Static data
+├── services/      # API services
+├── hooks/         # Custom hooks
+├── utils/         # Utility functions
+├── config/        # Configuration
+└── styles/        # Global styles
+```
+
+---
+
+## 📚 Documentation
+
+All documentation is in the `docs/` folder:
+- Setup guides
+- API integration guides
+- CRM specifications
+- Content templates
+
+---
+
+## 🔐 Environment Variables
+
+Required environment variables (see `.env.example`):
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_ANON_KEY`
+- `VITE_GOOGLE_PLACES_API_KEY`
+- `VITE_OPENWEATHER_API_KEY`
+- `VITE_STORMGLASS_API_KEY`
+
+---
+
+## ✅ Quality Checklist
+
+- ✅ SEO optimized
+- ✅ Security headers configured
+- ✅ Accessibility (WCAG AA)
+- ✅ Responsive design
+- ✅ Cookie consent (GDPR compliant)
+- ✅ Production-safe logging
+
+---
+
+**For detailed information, see the `docs/` folder.**

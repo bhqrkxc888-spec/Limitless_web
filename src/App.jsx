@@ -20,6 +20,10 @@ import DestinationsPage from './pages/DestinationsPage'
 import BucketListPage from './pages/BucketListPage'
 import OffersPage from './pages/OffersPage'
 import OfferPage from './pages/OfferPage'
+import TravelNewsPage from './pages/TravelNewsPage'
+import TravelNewsArticlePage from './pages/TravelNewsArticlePage'
+import TravelNewsCategoryPage from './pages/TravelNewsCategoryPage'
+import TravelNewsTagPage from './pages/TravelNewsTagPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 // Legal Pages
@@ -147,6 +151,12 @@ function App() {
               </ProtectedRoute>
             } 
           />
+          
+          {/* Travel News - Public */}
+          <Route path="/travel-news" element={<TravelNewsPage />} />
+          <Route path="/travel-news/category/:category" element={<TravelNewsCategoryPage />} />
+          <Route path="/travel-news/tag/:tag" element={<TravelNewsTagPage />} />
+          <Route path="/travel-news/:slug" element={<TravelNewsArticlePage />} />
           
                 {/* Legal Pages - Always Public */}
                 <Route path="/website-terms" element={<WebsiteTerms />} />

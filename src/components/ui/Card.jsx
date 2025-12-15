@@ -66,7 +66,13 @@ function CardImage({ src, alt = '', aspectRatio = '16/9', className = '' }) {
       style={{ aspectRatio }}
     >
       {src ? (
-        <img src={src} alt={alt || 'Card image'} loading="lazy" />
+        <img 
+          src={src} 
+          alt={alt || 'Card image'} 
+          width="800"
+          height="500"
+          loading="lazy" 
+        />
       ) : (
         <div className="card-image-placeholder">
           <svg viewBox="0 0 24 24" fill="currentColor">

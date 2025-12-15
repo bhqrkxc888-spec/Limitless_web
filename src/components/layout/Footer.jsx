@@ -52,7 +52,7 @@ function Footer() {
       destinations: [],
       categories: [],
       company: navigation.footer.company.filter(
-        link => !['/bucket-list'].includes(link.path)
+        link => !['/bucket-list', '/offers'].includes(link.path)
       )
     };
   }, [authStatus]);

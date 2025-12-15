@@ -90,15 +90,55 @@ const HeartIcon = () => (
 );
 
 function HomePage() {
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'TravelAgency',
-    name: siteConfig.siteName,
-    description: siteConfig.tagline,
-    url: siteConfig.siteUrl,
-    telephone: siteConfig.phone,
-    email: siteConfig.email
-  };
+  // Enhanced structured data with Organization and Website schemas
+  const structuredData = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'TravelAgency',
+      name: siteConfig.siteName,
+      description: siteConfig.tagline,
+      url: siteConfig.siteUrl,
+      telephone: siteConfig.phone,
+      email: siteConfig.email
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Organization',
+      name: siteConfig.siteName,
+      url: siteConfig.siteUrl,
+      logo: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/categories/Home/Hero-logo.png',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        telephone: siteConfig.phone,
+        contactType: 'Customer Service',
+        email: siteConfig.email,
+        areaServed: 'GB',
+        availableLanguage: 'English'
+      },
+      sameAs: [
+        siteConfig.facebook
+      ],
+      memberOf: {
+        '@type': 'Organization',
+        name: 'ABTA',
+        identifier: 'P7541'
+      }
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: siteConfig.siteName,
+      url: siteConfig.siteUrl,
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: {
+          '@type': 'EntryPoint',
+          urlTemplate: `${siteConfig.siteUrl}/find-a-cruise?q={search_term_string}`
+        },
+        'query-input': 'required name=search_term_string'
+      }
+    }
+  ];
 
   // Single hero image (first image from array, with fallback)
   const heroImage = homeHeroImages[0] || 'https://via.placeholder.com/800x1000/2C344C/C9A962?text=LIMITLESS+CRUISES';
@@ -106,7 +146,7 @@ function HomePage() {
   return (
     <main className="home-elegant">
       <SEO
-        title="Your Personal Cruise Consultant | Limitless Cruises"
+        title="Your Personal Cruise Consultant"
         description="A refined new experience is coming. Limitless Cruises - your personal cruise consultant for expert advice, exclusive deals, and seamless holiday planning."
         canonical={siteConfig.siteUrl}
         structuredData={structuredData}
@@ -118,6 +158,8 @@ function HomePage() {
           <img 
             src={heroImage}
             alt="Beautiful Caribbean beach with turquoise waters and a cruise ship on the horizon - Limitless Cruises destination"
+            width="1920"
+            height="1080"
             loading="eager"
             onError={(e) => {
               e.target.src = 'https://via.placeholder.com/800x1000/2C344C/C9A962?text=LIMITLESS+CRUISES';
@@ -134,7 +176,7 @@ function HomePage() {
                 <h1>Your Personal Cruise Consultant</h1>
                 <p className="hero-lead">
                   We're crafting something special. While our new website takes shape, 
-                  we're still here to help you discover your perfect cruise holiday.
+                  we're still here to help you <a href="/find-a-cruise" className="inline-link">discover your perfect cruise holiday</a>.
                 </p>
                 <div className="hero-cta-group">
                   <Button to="/find-a-cruise" variant="primary" size="lg">
@@ -269,7 +311,7 @@ function HomePage() {
         <div className="container">
           <h2>What We Offer</h2>
           <p className="section-lead">
-            Expert cruise planning tailored to you
+            Expert cruise planning tailored to you. <a href="/about" className="inline-link">Learn more about our services</a>.
           </p>
           
           <div className="offer-cards">

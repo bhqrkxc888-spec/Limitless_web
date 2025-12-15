@@ -1,9 +1,15 @@
 import { aboutImages } from '../utils/imageHelpers';
 import { Button } from '../components/ui';
 import SEO from '../components/SEO';
+import Breadcrumbs from '../components/Breadcrumbs';
 import './AboutPage.css';
 
 function AboutPage() {
+  const breadcrumbs = [
+    { label: 'Home', path: '/' },
+    { label: 'About', path: '/about' }
+  ];
+
   return (
     <main className="about-page-modern">
       <SEO
@@ -11,6 +17,9 @@ function AboutPage() {
         description="Meet Katherine, your personal cruise consultant at Limitless Cruises. CLIA Cruise Master, ABTA protected, UK-based personal service for your perfect cruise holiday."
         canonical="https://limitlesscruises.com/about"
       />
+      <div className="container">
+        <Breadcrumbs items={breadcrumbs} />
+      </div>
 
       {/* Hero Section */}
       <section className="about-hero">
@@ -31,6 +40,8 @@ function AboutPage() {
               <img 
                 src={aboutImages.katherine2}
                 alt="Katherine, your personal cruise consultant" 
+                width="1920"
+                height="1080"
                 loading="eager"
               />
             </div>
@@ -45,7 +56,7 @@ function AboutPage() {
           <div className="services-grid">
             <div className="service-card">
               <h3>Personal Support</h3>
-              <p>I learn what you love so I can shortlist the right ships, cabins and itineraries that truly fit your travel style.</p>
+              <p>I learn what you love so I can shortlist the right ships, cabins and itineraries that truly fit your travel style. <a href="/find-a-cruise" className="inline-link">Start your search</a>.</p>
             </div>
             <div className="service-card">
               <h3>No Fly & Fly Options</h3>
