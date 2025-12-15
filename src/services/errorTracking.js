@@ -1,90 +1,102 @@
 /**
  * Error Tracking Service
- * Sends errors to Supabase for CRM visibility
+ * 
+ * Logs errors to Supabase for monitoring and debugging.
+ * All errors are sent to crm.website_errors table via RPC function.
  */
 
-import { supabase } from '../lib/supabase';
+import { supabase } from '../lib/supabase'
 
 /**
- * Get current page URL
- */
-function getCurrentUrl() {
-  if (typeof window === 'undefined') return null;
-  return window.location.href;
-}
-
-/**
- * Get current page path
- */
-function getCurrentPath() {
-  if (typeof window === 'undefined') return null;
-  return window.location.pathname;
-}
-
-/**
- * Generate or get session ID
+ * Generates an anonymous session ID for tracking errors across page loads
+ * @returns {string} Session ID
  */
 function getSessionId() {
   if (typeof window === 'undefined') return null;
   
-  let sessionId = sessionStorage.getItem('limitless_session_id');
-  if (!sessionId) {
-    sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-    sessionStorage.setItem('limitless_session_id', sessionId);
-  }
-  return sessionId;
-}
-
-/**
- * Parse user agent to extract browser info
- */
-function parseUserAgent() {
-  if (typeof navigator === 'undefined') return {};
+  const STORAGE_KEY = 'error_tracking_session_id'
+  let sessionId = sessionStorage.getItem(STORAGE_KEY)
   
-  const ua = navigator.userAgent;
-  const browserInfo = {
-    userAgent: ua,
-    browserName: 'unknown',
-    browserVersion: 'unknown',
-    deviceType: 'desktop',
-    viewportWidth: window.innerWidth,
-    viewportHeight: window.innerHeight
-  };
-
-  // Detect browser
-  if (ua.includes('Chrome') && !ua.includes('Edg')) {
-    browserInfo.browserName = 'Chrome';
-    const match = ua.match(/Chrome\/(\d+)/);
-    if (match) browserInfo.browserVersion = match[1];
-  } else if (ua.includes('Firefox')) {
-    browserInfo.browserName = 'Firefox';
-    const match = ua.match(/Firefox\/(\d+)/);
-    if (match) browserInfo.browserVersion = match[1];
-  } else if (ua.includes('Safari') && !ua.includes('Chrome')) {
-    browserInfo.browserName = 'Safari';
-    const match = ua.match(/Version\/(\d+)/);
-    if (match) browserInfo.browserVersion = match[1];
-  } else if (ua.includes('Edg')) {
-    browserInfo.browserName = 'Edge';
-    const match = ua.match(/Edg\/(\d+)/);
-    if (match) browserInfo.browserVersion = match[1];
+  if (!sessionId) {
+    sessionId = `session_${Date.now()}_${Math.random().toString(36).substring(2, 11)}`
+    sessionStorage.setItem(STORAGE_KEY, sessionId)
   }
-
-  // Detect device type
-  if (/Mobile|Android|iPhone|iPad/.test(ua)) {
-    browserInfo.deviceType = /iPad/.test(ua) ? 'tablet' : 'mobile';
-  }
-
-  return browserInfo;
+  
+  return sessionId
 }
 
 /**
- * Log an error to Supabase
- * @param {Error|string} error - Error object or error message
- * @param {Object} options - Additional options
- * @param {string} options.errorType - Type of error ('javascript', 'api', 'network', 'form', 'other')
- * @param {string} options.severity - Severity level ('error', 'warning', 'critical')
- * @param {Object} options.context - Additional context data
+ * Extracts page path from URL
+ * @param {string} url - Full URL
+ * @returns {string} Page path
+ */
+function getPagePath(url) {
+  try {
+    const urlObj = new URL(url)
+    return urlObj.pathname + urlObj.search
+  } catch {
+    return url || (typeof window !== 'undefined' ? window.location.pathname + window.location.search : null)
+  }
+}
+
+/**
+ * Determines error type from error object
+ * @param {Error} error - Error object
+ * @param {object} options - Additional options
+ * @returns {string} Error type
+ */
+function getErrorType(error, options = {}) {
+  if (options.errorType) return options.errorType
+  
+  if (error?.name === 'NetworkError' || error?.message?.includes('fetch')) {
+    return 'network'
+  }
+  
+  if (error?.name === 'TypeError' || error?.name === 'ReferenceError') {
+    return 'javascript'
+  }
+  
+  if (options.context?.endpoint || options.context?.api) {
+    return 'api'
+  }
+  
+  if (options.context?.form) {
+    return 'form'
+  }
+  
+  return 'javascript'
+}
+
+/**
+ * Determines severity level from error
+ * @param {Error} error - Error object
+ * @param {object} options - Additional options
+ * @returns {string} Severity level
+ */
+function getSeverity(error, options = {}) {
+  if (options.severity) return options.severity
+  
+  const message = error?.message || String(error)
+  
+  if (message.includes('critical') || message.includes('fatal')) {
+    return 'critical'
+  }
+  
+  if (message.includes('warning') || message.includes('deprecated')) {
+    return 'warning'
+  }
+  
+  return 'error'
+}
+
+/**
+ * Logs an error to Supabase
+ * @param {Error|string} error - Error object or message
+ * @param {object} options - Additional options
+ * @param {string} options.errorType - Type of error ('javascript', 'api', 'network', 'form')
+ * @param {string} options.severity - Severity level ('info', 'warning', 'error', 'critical')
+ * @param {object} options.context - Additional context data
+ * @returns {Promise<void>}
  */
 export async function logError(error, options = {}) {
   // Don't log in development (too noisy)
@@ -99,110 +111,129 @@ export async function logError(error, options = {}) {
   }
 
   try {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    const errorStack = error instanceof Error ? error.stack : null;
-    const browserInfo = parseUserAgent();
-
+    const errorMessage = error?.message || String(error)
+    const errorStack = error?.stack || null
+    
     // Extract error location from stack trace
-    let errorLine = null;
-    let errorColumn = null;
+    let lineNumber = null
+    let columnNumber = null
+    
     if (errorStack) {
-      const stackLines = errorStack.split('\n');
-      const firstLine = stackLines.find(line => line.includes(':'));
+      const stackLines = errorStack.split('\n')
+      const firstLine = stackLines.find(line => line.includes(':'))
       if (firstLine) {
-        const match = firstLine.match(/:(\d+):(\d+)/);
+        const match = firstLine.match(/:(\d+):(\d+)/)
         if (match) {
-          errorLine = parseInt(match[1], 10);
-          errorColumn = parseInt(match[2], 10);
+          lineNumber = parseInt(match[1], 10)
+          columnNumber = parseInt(match[2], 10)
         }
       }
     }
-
-    const errorData = {
-      p_error_type: options.errorType || 'javascript',
-      p_error_message: errorMessage.substring(0, 1000), // Limit message length
-      p_error_stack: errorStack ? errorStack.substring(0, 5000) : null, // Limit stack length
-      p_error_url: getCurrentUrl(),
-      p_error_line: errorLine,
-      p_error_column: errorColumn,
-      p_user_agent: browserInfo.userAgent,
-      p_session_id: getSessionId(),
-      p_severity: options.severity || 'error',
+    
+    const pageUrl = typeof window !== 'undefined' ? window.location.href : null
+    const pagePath = getPagePath(pageUrl)
+    const userAgent = typeof navigator !== 'undefined' ? navigator.userAgent : null
+    const sessionId = getSessionId()
+    
+    // Get IP address (if available from headers, otherwise null)
+    // Note: IP is typically captured server-side, but we'll try to get it if possible
+    const ipAddress = null // Client-side IP detection is not reliable
+    
+    const errorType = getErrorType(error, options)
+    const severity = getSeverity(error, options)
+    
+    // Call Supabase RPC function
+    const { error: rpcError } = await supabase.rpc('log_website_error', {
+      p_error_message: errorMessage,
+      p_error_stack: errorStack,
+      p_error_type: errorType,
+      p_severity: severity,
+      p_page_url: pageUrl,
+      p_page_path: pagePath,
+      p_line_number: lineNumber,
+      p_column_number: columnNumber,
+      p_user_agent: userAgent,
+      p_ip_address: ipAddress,
+      p_session_id: sessionId,
       p_context: options.context || null
-    };
-
-    // Call RPC function to log error
-    const { data, error: rpcError } = await supabase.rpc('log_website_error', errorData);
-
+    })
+    
     if (rpcError) {
-      // Silently fail - don't break the app if error logging fails
+      // Log to console for debugging (only in development)
       if (import.meta.env.DEV) {
-        console.warn('Failed to log error to Supabase:', rpcError);
+        console.error('[Error Tracking] Failed to log error to Supabase:', rpcError)
+        console.error('[Error Tracking] Error details:', {
+          message: errorMessage,
+          code: rpcError.code,
+          details: rpcError.details,
+          hint: rpcError.hint
+        })
+      }
+    } else {
+      // Success - log in development mode
+      if (import.meta.env.DEV) {
+        console.log('[Error Tracking] Error logged successfully to Supabase')
       }
     }
-
-    return data;
   } catch (err) {
-    // Silently fail - don't break the app if error logging fails
+    // Log to console for debugging (only in development)
     if (import.meta.env.DEV) {
-      console.warn('Exception while logging error:', err);
+      console.error('[Error Tracking] Exception while logging error:', err)
     }
   }
 }
 
 /**
- * Log a performance metric to Supabase
- * @param {string} metricName - Name of the metric (e.g., 'LCP', 'FID', 'CLS')
- * @param {number} metricValue - Value of the metric
- * @param {Object} options - Additional options
+ * Logs a network error
+ * @param {Error} error - Network error
+ * @param {object} context - Additional context (endpoint, method, etc.)
+ * @returns {Promise<void>}
  */
-export async function logPerformanceMetric(metricName, metricValue, options = {}) {
-  // Don't log in development (too noisy)
-  if (import.meta.env.DEV) {
-    return;
-  }
-
-  // Don't log if Supabase not configured
-  if (!supabase) {
-    return;
-  }
-
-  try {
-    const browserInfo = parseUserAgent();
-
-    const metricData = {
-      p_metric_type: options.metricType || 'core_web_vital',
-      p_metric_name: metricName,
-      p_metric_value: metricValue,
-      p_metric_unit: options.unit || 'ms',
-      p_page_url: getCurrentUrl(),
-      p_page_path: getCurrentPath(),
-      p_user_agent: browserInfo.userAgent,
-      p_session_id: getSessionId(),
-      p_device_type: browserInfo.deviceType,
-      p_browser_name: browserInfo.browserName,
-      p_browser_version: browserInfo.browserVersion,
-      p_viewport_width: browserInfo.viewportWidth,
-      p_viewport_height: browserInfo.viewportHeight,
-      p_additional_data: options.additionalData || null
-    };
-
-    // Call RPC function to log performance metric
-    const { data, error: rpcError } = await supabase.rpc('log_website_performance', metricData);
-
-    if (rpcError) {
-      // Silently fail - don't break the app if performance logging fails
-      if (import.meta.env.DEV) {
-        console.warn('Failed to log performance metric to Supabase:', rpcError);
-      }
-    }
-
-    return data;
-  } catch (err) {
-    // Silently fail - don't break the app if performance logging fails
-    if (import.meta.env.DEV) {
-      console.warn('Exception while logging performance metric:', err);
-    }
-  }
+export async function logNetworkError(error, context = {}) {
+  return logError(error, {
+    errorType: 'network',
+    severity: 'error',
+    context
+  })
 }
 
+/**
+ * Logs an API error
+ * @param {Error} error - API error
+ * @param {object} context - Additional context (endpoint, status code, etc.)
+ * @returns {Promise<void>}
+ */
+export async function logApiError(error, context = {}) {
+  return logError(error, {
+    errorType: 'api',
+    severity: 'error',
+    context
+  })
+}
+
+/**
+ * Logs a form submission error
+ * @param {Error} error - Form error
+ * @param {object} context - Additional context (form name, fields, etc.)
+ * @returns {Promise<void>}
+ */
+export async function logFormError(error, context = {}) {
+  return logError(error, {
+    errorType: 'form',
+    severity: 'error',
+    context: { ...context, form: true }
+  })
+}
+
+/**
+ * Logs a critical error
+ * @param {Error} error - Critical error
+ * @param {object} context - Additional context
+ * @returns {Promise<void>}
+ */
+export async function logCriticalError(error, context = {}) {
+  return logError(error, {
+    severity: 'critical',
+    context
+  })
+}

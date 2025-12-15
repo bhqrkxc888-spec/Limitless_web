@@ -65,8 +65,8 @@ The following bucket list experiences need hero images (1920x1080px):
 **Status:** ⚠️ No dimensions set  
 **Priority:** Medium
 
-- [ ] Determine actual logo size - **DANE**
-- [ ] Add width/height attributes to logo images - **AI**
+- [ ] Determine actual logo size
+- [ ] Add width/height attributes to logo images
 - [ ] Files: `src/components/layout/Header.jsx`, `src/components/layout/Footer.jsx`
 
 ---
