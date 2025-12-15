@@ -49,10 +49,17 @@ function initMonitoring() {
       const response = await originalFetch.apply(this, args)
       
       // Log API errors (4xx, 5xx status codes)
-      if (!response.ok && response.status >= 400) {
+      // Skip logging 404s from Supabase RPC endpoints - these are expected when RPC functions don't exist
+      // and are handled silently by the service layer
+      const url = String(args[0] || '')
+      const method = args[1]?.method || 'GET'
+      const isSupabaseRpc = url.includes('/rest/v1/rpc/') && method === 'POST'
+      const shouldSkipLogging = isSupabaseRpc && response.status === 404
+      
+      if (!response.ok && response.status >= 400 && !shouldSkipLogging) {
         logApiError(new Error(`API Error: ${response.status} ${response.statusText}`), {
           endpoint: args[0],
-          method: args[1]?.method || 'GET',
+          method: method,
           statusCode: response.status,
           statusText: response.statusText
         }).catch(() => {

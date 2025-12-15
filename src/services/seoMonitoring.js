@@ -7,6 +7,36 @@
 
 import { supabase } from '../lib/supabase'
 
+// Capability flags - track if RPC functions exist to avoid unnecessary 404s
+const CAPABILITY_KEY_PAGE_UPDATE = 'seo_monitoring_page_update_available'
+const CAPABILITY_KEY_METRIC_LOG = 'seo_monitoring_metric_log_available'
+
+/**
+ * Check if a capability is available (cached in sessionStorage)
+ * @param {string} key - Capability key
+ * @returns {boolean|null} - true if available, false if unavailable, null if unknown
+ */
+function getCapability(key) {
+  if (typeof window === 'undefined' || typeof sessionStorage === 'undefined') {
+    return null
+  }
+  const value = sessionStorage.getItem(key)
+  if (value === null) return null
+  return value === 'true'
+}
+
+/**
+ * Set capability availability
+ * @param {string} key - Capability key
+ * @param {boolean} available - Whether the capability is available
+ */
+function setCapability(key, available) {
+  if (typeof window === 'undefined' || typeof sessionStorage === 'undefined') {
+    return
+  }
+  sessionStorage.setItem(key, String(available))
+}
+
 /**
  * Extracts page path from URL
  * @param {string} url - Full URL
@@ -505,6 +535,13 @@ async function logSEOMetric(metricType, metricName, metricValue, metricUnit, met
     return
   }
 
+  // Check if we know the function doesn't exist - skip call to prevent 404
+  const capability = getCapability(CAPABILITY_KEY_METRIC_LOG)
+  if (capability === false) {
+    // We know the function doesn't exist, don't call it
+    return
+  }
+
   try {
     const pageUrl = typeof window !== 'undefined' ? window.location.href : null
     const pagePath = getPagePath(pageUrl)
@@ -521,16 +558,33 @@ async function logSEOMetric(metricType, metricName, metricValue, metricUnit, met
     })
     
     if (rpcError) {
-      // If function doesn't exist, silently fail
-      if (rpcError.code === 'PGRST202' || rpcError.message?.includes('not found') || rpcError.message?.includes('function') || rpcError.message?.includes('does not exist') || rpcError.code === '42883') {
+      // Check for function not found errors (404, PGRST202, or various "not found" messages)
+      const isNotFoundError = 
+        rpcError.status === 404 || 
+        rpcError.statusCode === 404 ||
+        rpcError.code === 'PGRST202' || 
+        rpcError.code === '42883' ||
+        rpcError.message?.includes('not found') || 
+        rpcError.message?.includes('function') || 
+        rpcError.message?.includes('does not exist') ||
+        rpcError.message?.includes('Searched for') ||
+        rpcError.message?.includes('Could not find')
+      
+      if (isNotFoundError) {
+        // Function doesn't exist - mark as unavailable and silently fail
+        setCapability(CAPABILITY_KEY_METRIC_LOG, false)
         if (import.meta.env.DEV) {
           console.warn('[SEO Monitoring] RPC function not found. Run the database setup SQL script to enable SEO tracking.')
         }
         return
       }
+      // Log other errors (only in development)
       if (import.meta.env.DEV) {
         console.error('[SEO Monitoring] Failed to log metric:', rpcError)
       }
+    } else {
+      // Success - mark as available
+      setCapability(CAPABILITY_KEY_METRIC_LOG, true)
     }
   } catch (err) {
     // Silently fail - we don't want SEO logging to cause errors
@@ -555,6 +609,13 @@ async function updatePageSummary(summary) {
     return
   }
 
+  // Check if we know the function doesn't exist - skip call to prevent 404
+  const capability = getCapability(CAPABILITY_KEY_PAGE_UPDATE)
+  if (capability === false) {
+    // We know the function doesn't exist, don't call it
+    return
+  }
+
   try {
     const pageUrl = typeof window !== 'undefined' ? window.location.href : null
     const pagePath = getPagePath(pageUrl)
@@ -576,15 +637,33 @@ async function updatePageSummary(summary) {
     })
     
     if (rpcError) {
-      if (rpcError.code === 'PGRST202' || rpcError.message?.includes('not found') || rpcError.message?.includes('function') || rpcError.message?.includes('does not exist') || rpcError.code === '42883') {
+      // Check for function not found errors (404, PGRST202, or various "not found" messages)
+      const isNotFoundError = 
+        rpcError.status === 404 || 
+        rpcError.statusCode === 404 ||
+        rpcError.code === 'PGRST202' || 
+        rpcError.code === '42883' ||
+        rpcError.message?.includes('not found') || 
+        rpcError.message?.includes('function') || 
+        rpcError.message?.includes('does not exist') ||
+        rpcError.message?.includes('Searched for') ||
+        rpcError.message?.includes('Could not find')
+      
+      if (isNotFoundError) {
+        // Function doesn't exist - mark as unavailable and silently fail
+        setCapability(CAPABILITY_KEY_PAGE_UPDATE, false)
         if (import.meta.env.DEV) {
           console.warn('[SEO Monitoring] RPC function not found. Run the database setup SQL script to enable SEO tracking.')
         }
         return
       }
+      // Log other errors (only in development)
       if (import.meta.env.DEV) {
         console.error('[SEO Monitoring] Failed to update page summary:', rpcError)
       }
+    } else {
+      // Success - mark as available
+      setCapability(CAPABILITY_KEY_PAGE_UPDATE, true)
     }
   } catch (err) {
     if (import.meta.env.DEV) {
