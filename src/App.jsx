@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
+import { analyzePageSEO } from './services/seoMonitoring'
 
 // Layout Components
 import Header from './components/layout/Header'
@@ -38,12 +39,23 @@ import DestinationPage from './templates/DestinationPage'
 import CategoryPage from './templates/CategoryPage'
 import BucketListExperiencePage from './templates/BucketListExperiencePage'
 
-// Scroll to top on route change
+// Scroll to top on route change and trigger SEO analysis
 function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Trigger SEO analysis on route change (after a delay to let page render)
+    if (!import.meta.env.DEV) {
+      const timeoutId = setTimeout(() => {
+        analyzePageSEO().catch(() => {
+          // Silently fail if SEO analysis fails
+        })
+      }, 1500)
+      
+      return () => clearTimeout(timeoutId)
+    }
   }, [pathname]);
 
   return null;

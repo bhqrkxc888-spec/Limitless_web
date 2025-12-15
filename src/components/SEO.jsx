@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { siteConfig } from '../config/siteConfig';
+import { analyzePageSEO } from '../services/seoMonitoring';
 
 /**
  * SEO Component
@@ -113,6 +114,17 @@ function SEO({
       });
     }
 
+    // Trigger SEO analysis after meta tags are updated
+    // Wait a bit to ensure all tags are in place
+    const timeoutId = setTimeout(() => {
+      if (!import.meta.env.DEV) {
+        analyzePageSEO().catch(() => {
+          // Silently fail if SEO analysis fails
+        })
+      }
+    }, 500)
+
+    return () => clearTimeout(timeoutId)
   }, [fullTitle, fullDescription, fullCanonical, type, fullImage, keywords, author, robots, noindex]);
 
   // Render structured data if provided (supports single object or array)

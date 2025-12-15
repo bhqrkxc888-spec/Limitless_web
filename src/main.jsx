@@ -4,11 +4,15 @@ import './styles/global.css'
 import App from './App.jsx'
 import { logError, logNetworkError, logApiError } from './services/errorTracking'
 import { initPerformanceMonitoring } from './services/performanceMonitoring'
+import { initSEOMonitoring } from './services/seoMonitoring'
 
 // Initialize global error handlers and performance monitoring
 function initMonitoring() {
   // Initialize performance monitoring (Core Web Vitals, page load times)
   initPerformanceMonitoring()
+  
+  // Initialize SEO monitoring (meta tags, content, structured data)
+  initSEOMonitoring()
   
   // Global error handler for unhandled JavaScript errors
   window.addEventListener('error', (event) => {

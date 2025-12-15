@@ -161,6 +161,7 @@ function HomePage() {
             width="1920"
             height="1080"
             loading="eager"
+            fetchPriority="high"
             onError={(e) => {
               e.target.src = 'https://via.placeholder.com/800x1000/2C344C/C9A962?text=LIMITLESS+CRUISES';
             }}
