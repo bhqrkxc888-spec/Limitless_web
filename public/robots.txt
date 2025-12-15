@@ -1,12 +1,83 @@
 # robots.txt for Limitless Cruises
 # https://limitlesscruises.com/robots.txt
+# Last updated: December 2024
+
+# ===========================================
+# STANDARD SEARCH ENGINE CRAWLERS
+# ===========================================
 
 User-agent: *
 Allow: /
-
-# Block admin and preview pages from search engines
 Disallow: /admin
 Disallow: /api/
 
-# Sitemap location
+# ===========================================
+# AI / LLM CRAWLERS - ALLOWED FOR DISCOVERY
+# ===========================================
+# We welcome AI crawlers to index our content
+# for improved discoverability in AI-assisted search
+
+# OpenAI
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Google AI / Bard
+User-agent: Google-Extended
+Allow: /
+
+# Anthropic / Claude
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Microsoft / Bing AI
+User-agent: Bingbot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+# ByteDance / TikTok
+User-agent: Bytespider
+Allow: /
+
+# Common Crawl (used for AI training datasets)
+User-agent: CCBot
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+# Apple
+User-agent: Applebot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+# ===========================================
+# CRAWL OPTIMIZATION
+# ===========================================
+
+# Request reasonable crawl delays
+Crawl-delay: 1
+
+# ===========================================
+# SITEMAP & ADDITIONAL RESOURCES
+# ===========================================
+
 Sitemap: https://limitlesscruises.com/sitemap.xml
+
+# For AI/LLM context, see:
+# https://limitlesscruises.com/llms.txt

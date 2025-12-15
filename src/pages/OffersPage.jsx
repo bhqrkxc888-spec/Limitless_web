@@ -88,11 +88,22 @@ function OffersPage() {
           )}
 
           {!loading && !error && offers.length > 0 && (
-            <div className="offers-grid">
-              {offers.map((offer) => (
-                <OfferCard key={offer.id} offer={offer} />
-              ))}
-            </div>
+            <>
+              {/* Show notice if displaying demo offers */}
+              {offers[0]?.is_demo && (
+                <div className="offers-demo-notice">
+                  <p>
+                    <strong>Sample offers shown.</strong> These are example offers to demonstrate our service. 
+                    Contact us for current availability and pricing.
+                  </p>
+                </div>
+              )}
+              <div className="offers-grid">
+                {offers.map((offer) => (
+                  <OfferCard key={offer.id} offer={offer} />
+                ))}
+              </div>
+            </>
           )}
         </div>
       </section>

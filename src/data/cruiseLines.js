@@ -407,23 +407,92 @@ export const cruiseLines = [
     name: 'Fred. Olsen Cruise Lines',
     shortName: 'Fred. Olsen',
     tagline: 'Smaller ships for a more personal experience',
-    description: 'Fred. Olsen offers intimate cruising on smaller ships with friendly British service and access to smaller ports that larger ships cannot reach.',
+    description: 'Fred. Olsen offers intimate cruising on smaller ships with friendly British service and access to smaller ports that larger ships cannot reach. Family-owned for five generations, they specialise in no-fly cruises from multiple UK regional ports including Southampton, Liverpool, Newcastle, Dover, and Edinburgh.',
     category: 'traditional',
-    featured: false,
+    featured: true, // Important for UK market
     image: '/images/cruise-lines/fred-olsen.jpg',
     logo: '/images/cruise-lines/logos/fred-olsen.png',
-    highlights: [
-      'Small ship cruising',
-      'Access to unique ports',
-      'British-style service',
-      'Regional UK departures'
+    
+    whyChoose: [
+      {
+        title: 'Smaller Ships, Bigger Experiences',
+        description: 'Ships carry just 800-1,400 guests, creating an intimate atmosphere where crew know your name and preferences.',
+        icon: 'ship'
+      },
+      {
+        title: 'Regional UK Departures',
+        description: 'Sail from Southampton, Liverpool, Newcastle, Dover, Rosyth (Edinburgh), and other UK ports - no need to travel far to start your holiday.',
+        icon: 'uk'
+      },
+      {
+        title: 'Unique Port Access',
+        description: 'Smaller ships can dock in places larger vessels cannot reach - scenic harbours, remote islands, and charming smaller towns.',
+        icon: 'destination'
+      },
+      {
+        title: 'No Single Supplements',
+        description: 'Excellent for solo travellers with dedicated solo cabins and often no single supplement on selected sailings.',
+        icon: 'solo'
+      },
+      {
+        title: 'British Heritage',
+        description: 'Family-owned for five generations with genuine British hospitality, pounds sterling onboard, and no tipping required.',
+        icon: 'heritage'
+      },
+      {
+        title: 'Scenic Cruising',
+        description: 'Routes designed for maximum scenery - fjord cruises with early morning arrivals, and daytime sailings past dramatic coastlines.',
+        icon: 'scenic'
+      }
     ],
-    ships: ['Bolette', 'Borealis', 'Balmoral', 'Braemar'],
-    destinations: ['Norwegian Fjords', 'Baltic', 'Mediterranean', 'British Isles'],
-    suitableFor: ['Couples', 'Solo Travellers', 'Mature Travellers'],
+
+    destinationImages: [
+      { name: 'Norwegian Fjords', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800', alt: 'Norwegian fjord landscape' },
+      { name: 'British Isles', image: 'https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=800', alt: 'Scottish highlands coastline' },
+      { name: 'Baltic Capitals', image: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=800', alt: 'Colourful Baltic waterfront' },
+      { name: 'Canary Islands', image: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800', alt: 'Canary Islands volcanic landscape' },
+      { name: 'Arctic & Iceland', image: 'https://images.unsplash.com/photo-1520769945061-0a448c463865?w=800', alt: 'Iceland glacier scenery' },
+      { name: 'Mediterranean', image: 'https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=800', alt: 'Mediterranean coastal town' }
+    ],
+
+    accessibility: {
+      intro: 'Fred. Olsen\'s smaller ships offer a more accessible experience with less walking required. Wheelchair-accessible cabins are available, and the intimate size means crew can provide more personalised assistance.',
+      tips: [
+        { title: 'Accessible cabins', description: 'Limited accessible cabins available - book early to secure.' },
+        { title: 'Smaller ship benefits', description: 'Less walking between venues compared to mega-ships.' },
+        { title: 'Port access', description: 'Some smaller ports may use tender boats - discuss accessibility needs when booking.' },
+        { title: 'Mobility aids', description: 'Wheelchairs and scooters can be accommodated in cabins and public areas.' },
+        { title: 'Dietary needs', description: 'Galley team accommodates special diets with advance notice.' }
+      ]
+    },
+
+    loyaltyProgram: {
+      name: 'Oceans Club',
+      intro: 'The Oceans Club rewards repeat guests with increasing benefits based on nights sailed. Members enjoy exclusive offers, priority booking, and special recognition onboard.',
+      pointsInfo: 'Benefits based on cumulative cruise nights sailed.',
+      tiers: [
+        { tier: 'Oceans', points: '1-29 nights', benefits: 'Welcome aboard discount, newsletter' },
+        { tier: 'Oceans Plus', points: '30-99 nights', benefits: '5% discount, cocktail party' },
+        { tier: 'Oceans Platinum', points: '100+ nights', benefits: '10% discount, priority booking, enhanced benefits' }
+      ]
+    },
+
+    highlights: [
+      'Small ship cruising (800-1,400 guests) for intimate atmosphere',
+      'Multiple UK regional departures - Southampton, Liverpool, Newcastle, Dover, Rosyth',
+      'Access to unique smaller ports and scenic harbours',
+      'No single supplement on many sailings - excellent for solo travellers',
+      'British family-owned for five generations',
+      'Pounds sterling onboard with no tipping required',
+      'Expert on Norwegian Fjords and scenic cruising routes',
+      'Friendly crew who remember you by name'
+    ],
+    ships: ['Bolette', 'Borealis'],
+    destinations: ['Norwegian Fjords', 'Baltic Capitals', 'Mediterranean', 'British Isles', 'Canary Islands', 'Iceland & Arctic', 'Caribbean'],
+    suitableFor: ['Solo Travellers', 'Couples', 'Mature Travellers', 'First-Time Cruisers', 'Those Avoiding Flights'],
     meta: {
-      title: 'Fred. Olsen Cruises | Small Ship UK Cruising',
-      description: 'Discover Fred. Olsen Cruise Lines for intimate small ship cruising from UK ports. Book with Limitless Cruises.'
+      title: 'Fred. Olsen Cruises | Small Ship UK Cruising from Regional Ports',
+      description: 'Discover Fred. Olsen Cruise Lines for intimate small ship cruising from UK regional ports. Perfect for solo travellers. Book with Limitless Cruises.'
     }
   },
   {
@@ -432,23 +501,117 @@ export const cruiseLines = [
     name: 'Holland America Line',
     shortName: 'Holland America',
     tagline: 'A signature of excellence',
-    description: 'Holland America Line combines classic elegance with modern amenities, offering enriching destination experiences and refined dining.',
+    description: 'Holland America Line combines classic elegance with modern amenities, offering enriching destination experiences and refined dining. With over 150 years of heritage, their mid-sized ships provide the perfect balance between intimacy and variety, particularly excelling in Alaska and world cruise itineraries.',
     category: 'premium',
-    featured: false,
+    featured: true, // Upgraded to featured as per user priority
     image: '/images/cruise-lines/holland-america.jpg',
     logo: '/images/cruise-lines/logos/holland-america.png',
-    highlights: [
-      'Music Walk entertainment venues',
-      'Explorations Central destination experiences',
-      'Award-winning Pinnacle Grill',
-      'Elegant mid-sized ships'
+    
+    // Why Choose section - benefit cards
+    whyChoose: [
+      {
+        title: 'Music Walk Entertainment',
+        description: 'A unique promenade of music venues including B.B. King\'s Blues Club, Lincoln Center Stage, and Billboard Onboard with live performances nightly.',
+        icon: 'music'
+      },
+      {
+        title: 'Alaska Pioneers',
+        description: 'Over 75 years of Alaska expertise. More ports, more overnights, and exclusive experiences in places like Glacier Bay and the Inside Passage.',
+        icon: 'destination'
+      },
+      {
+        title: 'Pinnacle Grill Dining',
+        description: 'Award-winning steakhouse serving USDA Prime beef, plus specialty venues like Rudi\'s Sel de Mer and Tamarind for Asian fusion.',
+        icon: 'dining'
+      },
+      {
+        title: 'EXC Experiences',
+        description: 'Explorations Central offers destination workshops, port guides, and immersive shore excursions designed by destination experts.',
+        icon: 'experience'
+      },
+      {
+        title: 'Elegant Mid-Sized Ships',
+        description: 'Ships carry 1,400-2,600 guests, large enough for variety but intimate enough for personalised service and elegant spaces.',
+        icon: 'ship'
+      },
+      {
+        title: 'Grand Voyage Expert',
+        description: 'Renowned for extended voyages and world cruises lasting 60-120+ nights with exceptional Grand Voyage perks and pricing.',
+        icon: 'voyage'
+      }
     ],
-    ships: ['Rotterdam', 'Nieuw Statendam', 'Koningsdam', 'Eurodam'],
-    destinations: ['Alaska', 'Caribbean', 'Northern Europe', 'World Cruises'],
-    suitableFor: ['Mature Travellers', 'Couples', 'Music Lovers'],
+
+    // Destination images for grid
+    // TODO: Replace with real Supabase URLs when images are uploaded
+    destinationImages: [
+      { name: 'Alaska', image: 'https://images.unsplash.com/photo-1531176175280-33e76ce12523?w=800', alt: 'Alaska glacier and mountains' },
+      { name: 'Caribbean', image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800', alt: 'Caribbean turquoise waters' },
+      { name: 'Northern Europe', image: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=800', alt: 'Northern Europe colourful waterfront' },
+      { name: 'Mediterranean', image: 'https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=800', alt: 'Mediterranean coastal village' },
+      { name: 'World Cruises', image: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800', alt: 'Ocean sunset on world cruise' },
+      { name: 'Australia & New Zealand', image: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800', alt: 'Sydney Opera House' }
+    ],
+
+    // Kids Club section (Club HAL)
+    kidsClub: {
+      name: 'Club HAL',
+      intro: 'Club HAL offers age-appropriate activities for children aged 3-17. While Holland America is known for its sophisticated atmosphere, families are welcome with dedicated youth spaces and programming during school holidays.',
+      quickFacts: [
+        'Available on all ships',
+        'Ages 3-17 in age groups',
+        'Activities during sea days and evenings',
+        'More extensive during school holidays'
+      ],
+      ageGroups: [
+        { club: 'Club HAL', age: '3–7 years', morning: 'Varies', afternoon: '2pm–5pm', evening: '7pm–10pm' },
+        { club: 'Club HAL', age: '8–12 years', morning: 'Varies', afternoon: '2pm–5pm', evening: '7pm–10pm' },
+        { club: 'The Loft/Oasis', age: '13–17 years', morning: 'Varies', afternoon: 'Open access', evening: 'Open access' }
+      ],
+      note: 'Programming is most robust during school holiday periods and summer Alaska sailings. Check specific sailings for Club HAL availability.'
+    },
+
+    // Accessibility info
+    accessibility: {
+      intro: 'Holland America Line provides accessible staterooms with roll-in showers, grab bars, and lowered fixtures. Ships have accessible public areas, and the line works with guests to accommodate mobility, visual, and hearing needs.',
+      tips: [
+        { title: 'Accessible cabins', description: 'Wheelchair-accessible staterooms available in various categories. Book early as availability is limited.' },
+        { title: 'Shore excursions', description: 'Accessible tours available in many ports. Shore excursion team can advise on accessibility.' },
+        { title: 'Mobility equipment', description: 'Ships can accommodate wheelchairs and scooters. Contact the Access Office before sailing.' },
+        { title: 'Hearing assistance', description: 'Assistive listening devices, visual alerts, and TTY phones available upon request.' },
+        { title: 'Special diets', description: 'Dietary accommodations handled with advance notice.' }
+      ]
+    },
+
+    // Loyalty program - Mariner Society
+    loyaltyProgram: {
+      name: 'Mariner Society',
+      intro: 'The Mariner Society rewards loyal guests with cruise credits, discounts, and exclusive benefits. Points accumulate based on cruise nights sailed, with five membership tiers offering increasing perks.',
+      pointsInfo: '1 point per cruise day. Benefits vary by tier and ship.',
+      tiers: [
+        { tier: 'Star Mariner', points: '1-74 days', benefits: 'Welcome back gift, member-only offers' },
+        { tier: '2-Star Mariner', points: '75-149 days', benefits: 'Priority boarding, specialty dining discount' },
+        { tier: '3-Star Mariner', points: '150-299 days', benefits: 'Enhanced cabin amenities, cocktail party invite' },
+        { tier: '4-Star Mariner', points: '300-499 days', benefits: 'Suite upgrades (when available), laundry credit' },
+        { tier: '5-Star Mariner', points: '500+ days', benefits: 'Pinnacle Suite perks, wine package, increased discounts' }
+      ]
+    },
+
+    highlights: [
+      'Music Walk entertainment with B.B. King\'s Blues Club and Lincoln Center Stage',
+      'Explorations Central (EXC) destination experiences and shore excursions',
+      'Award-winning Pinnacle Grill steakhouse and specialty dining',
+      'Alaska specialists with over 75 years of experience',
+      'Elegant mid-sized ships (1,400-2,600 guests)',
+      'Exceptional world cruises and grand voyages',
+      'O, The Oprah Magazine spa partnership',
+      'America\'s Test Kitchen culinary programming'
+    ],
+    ships: ['Rotterdam', 'Nieuw Statendam', 'Koningsdam', 'Nieuw Amsterdam', 'Eurodam', 'Oosterdam', 'Westerdam', 'Zuiderdam', 'Volendam'],
+    destinations: ['Alaska', 'Caribbean', 'Northern Europe', 'Mediterranean', 'World Cruises', 'Australia & New Zealand', 'Canada & New England', 'Panama Canal'],
+    suitableFor: ['Mature Travellers', 'Couples', 'Music Lovers', 'Alaska Enthusiasts', 'World Cruise Seekers'],
     meta: {
-      title: 'Holland America Line | Classic Premium Cruising',
-      description: 'Experience elegant cruising with Holland America Line. Enriching destinations and refined service. Book with Limitless Cruises.'
+      title: 'Holland America Line | Premium Alaska & World Cruises',
+      description: 'Experience elegant cruising with Holland America Line. Alaska specialists, Music Walk entertainment, refined dining. Book with Limitless Cruises.'
     }
   },
   {
@@ -457,23 +620,98 @@ export const cruiseLines = [
     name: 'Marella Cruises',
     shortName: 'Marella',
     tagline: 'All-inclusive cruise holidays',
-    description: 'Marella Cruises, part of TUI, offers great value all-inclusive cruising with flights included from UK airports.',
+    description: 'Marella Cruises, part of TUI UK, offers exceptional value all-inclusive cruising with flights, drinks, and gratuities included. With both family-friendly and adults-only ships, Marella makes cruising simple with a truly hassle-free experience.',
     category: 'mainstream',
-    featured: false,
+    featured: true, // Popular UK cruise line
     image: '/images/cruise-lines/marella.jpg',
     logo: '/images/cruise-lines/logos/marella.png',
-    highlights: [
-      'All-inclusive drinks packages',
-      'Flights included',
-      'Adults-only and family ships',
-      'Great value'
+    
+    whyChoose: [
+      {
+        title: 'Truly All-Inclusive',
+        description: 'Flights from UK airports, unlimited drinks (including alcoholic), gratuities, and entertainment all included in your fare.',
+        icon: 'value'
+      },
+      {
+        title: 'TUI Quality Guarantee',
+        description: 'Backed by TUI UK, Europe\'s largest travel company, with ATOL and ABTA protection included.',
+        icon: 'trust'
+      },
+      {
+        title: 'Adults-Only Option',
+        description: 'Choose adults-only ships for a more relaxed atmosphere, or family ships with great kids\' facilities.',
+        icon: 'choice'
+      },
+      {
+        title: 'Simple Pricing',
+        description: 'No surprise extras - the price you see includes virtually everything for a stress-free holiday.',
+        icon: 'simple'
+      },
+      {
+        title: 'Regional Flights',
+        description: 'Depart from multiple UK airports so you may not need to travel to London.',
+        icon: 'flights'
+      },
+      {
+        title: 'Great Entertainment',
+        description: 'West End-style shows, live music, and themed nights all included in your cruise.',
+        icon: 'entertainment'
+      }
     ],
-    ships: ['Marella Voyager', 'Marella Discovery', 'Marella Discovery 2', 'Marella Explorer'],
-    destinations: ['Mediterranean', 'Caribbean', 'Canary Islands', 'Arabian Gulf'],
-    suitableFor: ['Families', 'Couples', 'Budget-conscious'],
+
+    destinationImages: [
+      { name: 'Mediterranean', image: 'https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=800', alt: 'Mediterranean coastal village' },
+      { name: 'Caribbean', image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800', alt: 'Caribbean palm tree beach' },
+      { name: 'Canary Islands', image: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800', alt: 'Canary Islands volcanic landscape' },
+      { name: 'Arabian Gulf', image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800', alt: 'Dubai skyline' },
+      { name: 'Adriatic', image: 'https://images.unsplash.com/photo-1555881400-69c8e8f3d2b5?w=800', alt: 'Croatian coastline' }
+    ],
+
+    kidsClub: {
+      name: 'Kids\' Club (Family Ships)',
+      intro: 'Marella Discovery and Marella Discovery 2 offer excellent kids\' facilities with supervised activities for children aged 3-17. Note: Marella Voyager and Marella Explorer are adults-only ships (18+).',
+      quickFacts: [
+        'Available on Discovery and Discovery 2',
+        'Ages 3-17 in age-appropriate groups',
+        'Supervised activities included',
+        'Kids eat free at selected venues'
+      ],
+      ageGroups: [
+        { club: 'Mini Marlins', age: '3–5 years', morning: 'Selected hours', afternoon: 'Selected hours', evening: 'Until 9pm' },
+        { club: 'Marlins', age: '6–8 years', morning: 'Selected hours', afternoon: 'Selected hours', evening: 'Until 9pm' },
+        { club: 'Makos', age: '9–12 years', morning: 'Selected hours', afternoon: 'Selected hours', evening: 'Until 9pm' },
+        { club: 'Sharks', age: '13–17 years', morning: 'Open access', afternoon: 'Open access', evening: 'Until 11pm' }
+      ],
+      note: 'Marella Voyager and Marella Explorer are adults-only (18+) - ideal for couples and groups seeking a quieter experience.'
+    },
+
+    accessibility: {
+      intro: 'Marella Cruises offer accessible cabins on all ships with roll-in showers and other adaptations. TUI\'s access team can assist with arranging accessible transfers and shore excursions.',
+      tips: [
+        { title: 'Accessible cabins', description: 'Wheelchair-accessible staterooms available across ship categories.' },
+        { title: 'Inclusive flights', description: 'TUI arranges accessible airport assistance as part of your package.' },
+        { title: 'Shore excursions', description: 'Accessible tours available in many destinations.' },
+        { title: 'Mobility equipment', description: 'Ships can accommodate wheelchairs and mobility aids.' },
+        { title: 'Dietary needs', description: 'All-inclusive dining accommodates special diets.' }
+      ]
+    },
+
+    highlights: [
+      'All-inclusive: drinks, flights, and gratuities included',
+      'Part of TUI UK with ATOL protection',
+      'Adults-only ships (Voyager, Explorer) or family-friendly options',
+      'Flights from multiple UK regional airports',
+      'No tipping or hidden costs',
+      'West End-style entertainment included',
+      'Relaxed dress code - smart casual is fine',
+      'Popular with first-time cruisers for simplicity'
+    ],
+    ships: ['Marella Voyager (Adults Only)', 'Marella Explorer (Adults Only)', 'Marella Discovery (Family)', 'Marella Discovery 2 (Family)'],
+    destinations: ['Mediterranean', 'Caribbean', 'Canary Islands', 'Arabian Gulf', 'Adriatic'],
+    suitableFor: ['Families', 'Couples', 'Adults-Only Seekers', 'First-Time Cruisers', 'Budget-Conscious'],
     meta: {
       title: 'Marella Cruises | All-Inclusive TUI Cruise Holidays',
-      description: 'Book Marella Cruises for all-inclusive cruise holidays with flights. Great value from Limitless Cruises.'
+      description: 'Book Marella Cruises - truly all-inclusive with flights, drinks & tips included. Adults-only and family ships. Book with Limitless Cruises.'
     }
   },
   {
@@ -513,23 +751,90 @@ export const cruiseLines = [
     name: 'Viking',
     shortName: 'Viking',
     tagline: 'The thinking person\'s cruise',
-    description: 'Viking offers destination-focused ocean and river cruises for curious travellers who want to explore the world thoughtfully.',
+    description: 'Viking offers destination-focused ocean and river cruises for curious travellers who want to explore the world thoughtfully. With elegant Scandinavian design, adults-only ships, and enriching cultural experiences, Viking has redefined what cruising can be.',
     category: 'luxury',
-    featured: false,
+    featured: true,
     image: '/images/cruise-lines/viking.jpg',
     logo: '/images/cruise-lines/logos/viking.png',
-    highlights: [
-      'Destination-focused itineraries',
-      'All-inclusive shore excursions',
-      'Adults-only (18+)',
-      'Elegant Scandinavian design'
+    
+    whyChoose: [
+      {
+        title: 'Destination Immersion',
+        description: 'Itineraries designed around destinations, not ships. More time in port, overnight stays, and culturally enriching experiences.',
+        icon: 'destination'
+      },
+      {
+        title: 'All-Inclusive Value',
+        description: 'Shore excursion in every port, Wi-Fi, speciality dining, and beer/wine with meals all included in your fare.',
+        icon: 'value'
+      },
+      {
+        title: 'Adults-Only Experience',
+        description: 'Peaceful, sophisticated atmosphere with no children under 18, casinos, or umbrella drinks.',
+        icon: 'adults'
+      },
+      {
+        title: 'Scandinavian Design',
+        description: 'Award-winning ship design with clean lines, natural materials, and serene Nordic spa experiences.',
+        icon: 'design'
+      },
+      {
+        title: 'Cultural Enrichment',
+        description: 'Resident historians, destination lectures, cooking classes, and performing arts programmes.',
+        icon: 'culture'
+      },
+      {
+        title: 'Ocean, River & Expedition',
+        description: 'One cruise line offering ocean voyages, European river cruises, and polar expeditions.',
+        icon: 'variety'
+      }
     ],
-    ships: ['Viking Neptune', 'Viking Mars', 'Viking Saturn', 'Viking Orion'],
-    destinations: ['Northern Europe', 'Mediterranean', 'World Cruises', 'Expeditions'],
-    suitableFor: ['Mature Travellers', 'Couples', 'Culture Seekers'],
+
+    destinationImages: [
+      { name: 'Northern Europe', image: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=800', alt: 'Baltic capital waterfront' },
+      { name: 'Mediterranean', image: 'https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=800', alt: 'Mediterranean coastal village' },
+      { name: 'British Isles', image: 'https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=800', alt: 'Scottish coastline' },
+      { name: 'World Cruises', image: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800', alt: 'Ocean voyage sunset' },
+      { name: 'Expeditions', image: 'https://images.unsplash.com/photo-1520769945061-0a448c463865?w=800', alt: 'Arctic expedition landscape' }
+    ],
+
+    accessibility: {
+      intro: 'Viking ships are designed with accessibility in mind, featuring accessible staterooms, lifts throughout, and accessible shore excursions in many ports.',
+      tips: [
+        { title: 'Accessible staterooms', description: 'Wheelchair-accessible cabins with roll-in showers available.' },
+        { title: 'Ship design', description: 'All public areas accessible. Ships feature lifts between all decks.' },
+        { title: 'Shore excursions', description: 'Many tours offer accessible options. Team can advise on specific ports.' },
+        { title: 'Dietary needs', description: 'All restaurants accommodate dietary requirements with advance notice.' }
+      ]
+    },
+
+    loyaltyProgram: {
+      name: 'Viking Explorer Society',
+      intro: 'Past guests automatically join the Viking Explorer Society, receiving exclusive offers, priority booking, and special amenities on future cruises.',
+      pointsInfo: 'Benefits based on number of cruises completed.',
+      tiers: [
+        { tier: 'Explorer', points: '1+ cruise', benefits: 'Special offers, priority access, onboard credit' },
+        { tier: 'Silver Explorer', points: '5+ cruises', benefits: 'Enhanced benefits, complimentary laundry, dinner with officers' },
+        { tier: 'Gold Explorer', points: '10+ cruises', benefits: 'Suite upgrades (when available), premium shore excursions' }
+      ]
+    },
+
+    highlights: [
+      'Destination-focused itineraries with more time in port',
+      'Shore excursion included in every port',
+      'Adults-only ships (18+) for peaceful cruising',
+      'Award-winning Scandinavian ship design',
+      'Wi-Fi, specialty dining, and drinks with meals included',
+      'Cultural enrichment with resident historians',
+      'LivNordic spa on every ship',
+      'Ocean, river, and expedition options'
+    ],
+    ships: ['Viking Neptune', 'Viking Mars', 'Viking Saturn', 'Viking Venus', 'Viking Orion', 'Viking Star', 'Viking Sea', 'Viking Sky'],
+    destinations: ['Northern Europe', 'Mediterranean', 'British Isles', 'World Cruises', 'Alaska', 'Caribbean', 'Polar Expeditions'],
+    suitableFor: ['Mature Travellers', 'Couples', 'Culture Seekers', 'First-Time Cruisers', 'Those Seeking Calm'],
     meta: {
-      title: 'Viking Cruises | Destination-Focused Ocean & River Cruising',
-      description: 'Explore with Viking - elegant, destination-focused cruising. Ocean and river voyages. Book with Limitless Cruises.'
+      title: 'Viking Cruises | Destination-Focused Ocean, River & Expedition Cruising',
+      description: 'Explore with Viking - elegant, destination-focused cruising. Adults-only, all-inclusive value. Book with Limitless Cruises.'
     }
   },
   {
@@ -538,23 +843,92 @@ export const cruiseLines = [
     name: 'Seabourn',
     shortName: 'Seabourn',
     tagline: 'Intimate luxury at sea',
-    description: 'Seabourn delivers ultra-luxury cruising on intimate ships with exceptional service, all-inclusive luxury, and unique destinations.',
+    description: 'Seabourn delivers ultra-luxury cruising on intimate ships with exceptional service, all-inclusive luxury, and unique destinations. With all ocean-front suites, open bars, and a crew-to-guest ratio that ensures personalised attention, Seabourn represents the pinnacle of cruise luxury.',
     category: 'ultra-luxury',
     featured: false,
     image: '/images/cruise-lines/seabourn.jpg',
     logo: '/images/cruise-lines/logos/seabourn.png',
-    highlights: [
-      'All-suite accommodations',
-      'Open bars and fine dining included',
-      'Intimate ships (up to 600 guests)',
-      'Marina with water sports'
+    
+    whyChoose: [
+      {
+        title: 'All-Suite Ships',
+        description: 'Every accommodation is an ocean-view suite with luxury amenities and personal service.',
+        icon: 'suite'
+      },
+      {
+        title: 'Ultra All-Inclusive',
+        description: 'Open bars with premium spirits, fine wines, champagne, gratuities, and speciality dining all included.',
+        icon: 'value'
+      },
+      {
+        title: 'Intimate Experience',
+        description: 'Just 450-600 guests on ocean ships means exceptional personal service and no crowds.',
+        icon: 'intimate'
+      },
+      {
+        title: 'The Marina',
+        description: 'Fold-out watersports marina offering kayaking, paddleboarding, and water toys directly from the ship.',
+        icon: 'watersports'
+      },
+      {
+        title: 'Ventures by Seabourn',
+        description: 'Small-group expedition-style excursions with expert guides, kayaking, and Zodiac exploration.',
+        icon: 'adventure'
+      },
+      {
+        title: 'The Grill by Thomas Keller',
+        description: 'Partnership with legendary chef Thomas Keller for exceptional dining experiences.',
+        icon: 'dining'
+      }
     ],
-    ships: ['Seabourn Ovation', 'Seabourn Encore', 'Seabourn Quest', 'Seabourn Pursuit'],
-    destinations: ['Mediterranean', 'Northern Europe', 'Caribbean', 'Expeditions'],
-    suitableFor: ['Luxury Seekers', 'Couples', 'Mature Travellers'],
+
+    destinationImages: [
+      { name: 'Mediterranean', image: 'https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=800', alt: 'Mediterranean luxury coastline' },
+      { name: 'Northern Europe', image: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=800', alt: 'Baltic luxury destination' },
+      { name: 'Caribbean', image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800', alt: 'Caribbean paradise' },
+      { name: 'Expeditions', image: 'https://images.unsplash.com/photo-1520769945061-0a448c463865?w=800', alt: 'Antarctic expedition' },
+      { name: 'Arabia', image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800', alt: 'Arabian luxury destination' }
+    ],
+
+    accessibility: {
+      intro: 'Seabourn offers accessible suites with wider doorways, roll-in showers, and personalised assistance. The intimate ship size means attentive service for all guests.',
+      tips: [
+        { title: 'Accessible suites', description: 'Modified suites available with wheelchair-friendly bathrooms.' },
+        { title: 'Personal service', description: 'High crew-to-guest ratio ensures attentive individual assistance.' },
+        { title: 'Shore excursions', description: 'Accessible tours arranged where possible. Ventures excursions may have limitations.' },
+        { title: 'Marina activities', description: 'Some watersports may not be suitable for all mobility levels.' }
+      ]
+    },
+
+    loyaltyProgram: {
+      name: 'Seabourn Club',
+      intro: 'The Seabourn Club rewards past guests with increasing benefits based on sailing days completed, from discounts to exclusive experiences.',
+      pointsInfo: 'Points based on cruise days sailed.',
+      tiers: [
+        { tier: 'Club Member', points: '1-19 days', benefits: 'Welcome savings, member pricing, onboard recognition' },
+        { tier: 'Silver', points: '20-69 days', benefits: '5% savings, spa discount, cocktail party' },
+        { tier: 'Gold', points: '70-139 days', benefits: '10% savings, shore excursion credit, complimentary laundry' },
+        { tier: 'Platinum', points: '140-249 days', benefits: '15% savings, suite upgrade priority, dining preferences' },
+        { tier: 'Diamond', points: '250+ days', benefits: 'Up to 20% savings, exclusive experiences, VIP treatment' }
+      ]
+    },
+
+    highlights: [
+      'All ocean-front suites with luxury amenities',
+      'Ultra all-inclusive: premium drinks, fine dining, gratuities',
+      'Intimate ships with just 450-600 guests',
+      'Marina with complimentary water sports',
+      'Ventures by Seabourn expedition excursions',
+      'The Grill by Thomas Keller restaurant',
+      'Curated wine and spirits collections',
+      'Seabourn Conversations with guest speakers'
+    ],
+    ships: ['Seabourn Ovation', 'Seabourn Encore', 'Seabourn Quest', 'Seabourn Pursuit', 'Seabourn Venture'],
+    destinations: ['Mediterranean', 'Northern Europe', 'Caribbean', 'Antarctica', 'Arctic', 'Asia', 'Arabia'],
+    suitableFor: ['Luxury Seekers', 'Couples', 'Mature Travellers', 'Foodies', 'Adventure Lovers'],
     meta: {
-      title: 'Seabourn Cruises | Ultra-Luxury Small Ship Cruising',
-      description: 'Experience Seabourn\'s ultra-luxury all-inclusive cruising. Intimate ships, exceptional service. Book with Limitless Cruises.'
+      title: 'Seabourn Cruises | Ultra-Luxury All-Inclusive Cruising',
+      description: 'Experience Seabourn\'s ultra-luxury cruising. All-suite ships, open bars, The Grill by Thomas Keller. Book with Limitless Cruises.'
     }
   },
   {
@@ -563,23 +937,108 @@ export const cruiseLines = [
     name: 'Princess Cruises',
     shortName: 'Princess',
     tagline: 'Come back new',
-    description: 'Princess Cruises offers award-winning MedallionClass technology for a personalised cruise experience with innovative service.',
+    description: 'Princess Cruises offers award-winning MedallionClass technology for a personalised cruise experience with innovative service. Known for their Alaska expertise, romantic destinations, and the famous Movies Under the Stars poolside cinema.',
     category: 'premium',
-    featured: false,
+    featured: true,
     image: '/images/cruise-lines/princess.jpg',
     logo: '/images/cruise-lines/logos/princess.png',
-    highlights: [
-      'MedallionClass technology',
-      'Movies Under the Stars',
-      'Discovery at Sea programmes',
-      'Private balcony dining'
+    
+    whyChoose: [
+      {
+        title: 'MedallionClass Experience',
+        description: 'Wearable OceanMedallion technology enables keyless cabin entry, food delivery anywhere on ship, and personalised service.',
+        icon: 'technology'
+      },
+      {
+        title: 'Movies Under the Stars',
+        description: 'Iconic poolside cinema showing blockbusters under the night sky with complimentary popcorn and blankets.',
+        icon: 'entertainment'
+      },
+      {
+        title: 'Alaska Pioneers',
+        description: 'Over 50 years of Alaska cruising with more departures and exclusive experiences like Glacier Bay.',
+        icon: 'destination'
+      },
+      {
+        title: 'Discovery at Sea',
+        description: 'Partnership with Discovery Channel for immersive enrichment programming and shore excursions.',
+        icon: 'discovery'
+      },
+      {
+        title: 'Balcony Dining',
+        description: 'Ultimate Balcony Dining experience with multi-course meals served on your private balcony.',
+        icon: 'dining'
+      },
+      {
+        title: 'The Sanctuary',
+        description: 'Adults-only retreat with comfortable loungers, spa treatments, and dedicated steward service.',
+        icon: 'relaxation'
+      }
     ],
-    ships: ['Sun Princess', 'Discovery Princess', 'Enchanted Princess', 'Sky Princess'],
-    destinations: ['Alaska', 'Caribbean', 'Mediterranean', 'Australia'],
-    suitableFor: ['Couples', 'Families', 'Tech-savvy Travellers'],
+
+    destinationImages: [
+      { name: 'Alaska', image: 'https://images.unsplash.com/photo-1531176175280-33e76ce12523?w=800', alt: 'Alaska glacier scenery' },
+      { name: 'Caribbean', image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800', alt: 'Caribbean beach paradise' },
+      { name: 'Mediterranean', image: 'https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=800', alt: 'Mediterranean coastal town' },
+      { name: 'Australia', image: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800', alt: 'Sydney Opera House' },
+      { name: 'Hawaii', image: 'https://images.unsplash.com/photo-1507876466758-bc54f384809c?w=800', alt: 'Hawaiian volcanic coastline' }
+    ],
+
+    kidsClub: {
+      name: 'Camp Discovery',
+      intro: 'Camp Discovery offers supervised activities for children aged 3-17, with age-appropriate programming and a partnership with Discovery Channel for educational experiences.',
+      quickFacts: [
+        'Ages 3-17 welcome',
+        'Discovery Channel partnership',
+        'Treehouse and Lodge areas',
+        'Teen-only spaces'
+      ],
+      ageGroups: [
+        { club: 'The Treehouse', age: '3–7 years', morning: '9am–12pm', afternoon: '2pm–5pm', evening: '7pm–10pm' },
+        { club: 'The Lodge', age: '8–12 years', morning: '9am–12pm', afternoon: '2pm–5pm', evening: '7pm–10pm' },
+        { club: 'The Beach House', age: '13–17 years', morning: 'Open access', afternoon: 'Open access', evening: 'Until 1am' }
+      ],
+      note: 'Programming enhanced during school holidays and summer sailings.'
+    },
+
+    accessibility: {
+      intro: 'Princess Cruises is committed to accessible cruising with modified staterooms, accessible dining, and shore excursion options. The MedallionClass technology also assists guests with mobility needs.',
+      tips: [
+        { title: 'Accessible staterooms', description: 'Wheelchair-accessible cabins with wider doors and roll-in showers.' },
+        { title: 'MedallionClass benefits', description: 'Technology enables easier navigation and service requests.' },
+        { title: 'Shore excursions', description: 'Accessible tours available in many destinations.' },
+        { title: 'Dining', description: 'All restaurants accessible with dietary accommodations available.' }
+      ]
+    },
+
+    loyaltyProgram: {
+      name: 'Captain\'s Circle',
+      intro: 'The Captain\'s Circle loyalty programme rewards repeat cruisers with exclusive benefits, discounts, and recognition based on cruise credits earned.',
+      pointsInfo: '1 cruise credit per day at sea. Benefits increase with each tier.',
+      tiers: [
+        { tier: 'Gold', points: '1-5 cruises', benefits: 'Member pricing, newsletter, 10% savings on select cruises' },
+        { tier: 'Ruby', points: '6-15 cruises', benefits: 'Priority check-in, specialty dining discount, complimentary laundry' },
+        { tier: 'Platinum', points: '16-30 cruises', benefits: 'Complimentary internet, wine with dinner, spa discount' },
+        { tier: 'Elite', points: '31+ cruises', benefits: 'Club Class dining upgrade, suite perks, premier shore excursions' }
+      ]
+    },
+
+    highlights: [
+      'MedallionClass wearable technology for seamless service',
+      'Movies Under the Stars poolside cinema',
+      'Over 50 years of Alaska cruising expertise',
+      'Discovery at Sea enrichment programmes',
+      'The Sanctuary adults-only retreat',
+      'Ultimate Balcony Dining experience',
+      'Award-winning itineraries to 380+ destinations',
+      'Princess Plus all-inclusive package option'
+    ],
+    ships: ['Sun Princess', 'Discovery Princess', 'Enchanted Princess', 'Sky Princess', 'Majestic Princess', 'Regal Princess', 'Royal Princess'],
+    destinations: ['Alaska', 'Caribbean', 'Mediterranean', 'Australia & New Zealand', 'Hawaii', 'Panama Canal', 'World Cruises'],
+    suitableFor: ['Couples', 'Families', 'Tech-Savvy Travellers', 'Alaska Seekers', 'Movie Lovers'],
     meta: {
       title: 'Princess Cruises | MedallionClass Cruise Holidays',
-      description: 'Discover Princess Cruises with innovative MedallionClass service. Award-winning cruising. Book with Limitless Cruises.'
+      description: 'Discover Princess Cruises with innovative MedallionClass service. Alaska experts, Movies Under the Stars. Book with Limitless Cruises.'
     }
   },
   {
@@ -588,23 +1047,89 @@ export const cruiseLines = [
     name: 'Azamara',
     shortName: 'Azamara',
     tagline: 'Destination immersion at sea',
-    description: 'Azamara specializes in destination-intensive cruising with longer stays, more overnights, and night touring in unique ports.',
+    description: 'Azamara specializes in destination-intensive cruising with longer stays, more overnights, and night touring in unique ports. Their boutique ships carry just 600-700 guests to smaller harbours that larger ships cannot access.',
     category: 'luxury',
     featured: false,
     image: '/images/cruise-lines/azamara.jpg',
     logo: '/images/cruise-lines/logos/azamara.png',
+    
+    whyChoose: [
+      {
+        title: 'Longer Port Stays',
+        description: 'More time in port than any other cruise line, with many late evening departures and overnight stays.',
+        icon: 'time'
+      },
+      {
+        title: 'AzAmazing Evenings',
+        description: 'Complimentary exclusive events - think private concerts in ancient amphitheatres or museum after-hours access.',
+        icon: 'experience'
+      },
+      {
+        title: 'Boutique Ships',
+        description: 'Just 600-700 guests means access to smaller ports, intimate atmosphere, and personalised service.',
+        icon: 'ship'
+      },
+      {
+        title: 'Night Touring',
+        description: 'Experience destinations after dark when most cruise passengers have returned to their ships.',
+        icon: 'night'
+      },
+      {
+        title: 'Inclusive Amenities',
+        description: 'Gratuities, select spirits, wines, and beers included. Plus shuttle buses in port.',
+        icon: 'value'
+      },
+      {
+        title: 'Country-Intensive Voyages',
+        description: 'Itineraries that deeply explore a single region rather than hopping between countries.',
+        icon: 'destination'
+      }
+    ],
+
+    destinationImages: [
+      { name: 'Mediterranean', image: 'https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=800', alt: 'Mediterranean harbour village' },
+      { name: 'British Isles', image: 'https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=800', alt: 'Scottish coastline' },
+      { name: 'Asia', image: 'https://images.unsplash.com/photo-1528164344705-47542687000d?w=800', alt: 'Asian temple at sunset' },
+      { name: 'South America', image: 'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=800', alt: 'South American coastline' }
+    ],
+
+    accessibility: {
+      intro: 'Azamara\'s boutique ships offer accessible staterooms and attentive service. The smaller size means less walking between venues.',
+      tips: [
+        { title: 'Accessible staterooms', description: 'Modified cabins available with roll-in showers and grab bars.' },
+        { title: 'Boutique advantage', description: 'Smaller ships mean shorter distances between venues.' },
+        { title: 'Tender ports', description: 'Some smaller ports require tender boats - discuss accessibility needs when booking.' },
+        { title: 'Shore excursions', description: 'Accessible options available in many destinations.' }
+      ]
+    },
+
+    loyaltyProgram: {
+      name: 'Circle Members',
+      intro: 'Past Azamara guests receive exclusive savings, priority booking, and special onboard amenities on future voyages.',
+      pointsInfo: 'Benefits increase with each cruise completed.',
+      tiers: [
+        { tier: 'Circle Member', points: '1+ cruise', benefits: 'Savings offers, priority booking, onboard recognition' },
+        { tier: 'Silver Circle', points: '3+ cruises', benefits: 'Enhanced savings, wine with dinner' },
+        { tier: 'Gold Circle', points: '6+ cruises', benefits: 'Specialty dining, internet package, spa discount' }
+      ]
+    },
+
     highlights: [
-      'Longer stays in port',
-      'More overnight calls',
-      'AzAmazing Evenings events',
-      'Boutique ships (600-700 guests)'
+      'Longer stays in port with late evening departures',
+      'Complimentary AzAmazing Evenings exclusive events',
+      'Boutique ships carrying just 600-700 guests',
+      'Night touring experiences after other ships leave',
+      'Gratuities and select drinks included',
+      'Shuttle buses in port included',
+      'Access to smaller, less-visited harbours',
+      'Country-intensive destination exploration'
     ],
     ships: ['Azamara Journey', 'Azamara Quest', 'Azamara Pursuit', 'Azamara Onward'],
-    destinations: ['Mediterranean', 'British Isles', 'Asia', 'South America'],
-    suitableFor: ['Culture Seekers', 'Couples', 'Mature Travellers'],
+    destinations: ['Mediterranean', 'British Isles', 'Asia', 'South America', 'Caribbean', 'Northern Europe'],
+    suitableFor: ['Culture Seekers', 'Couples', 'Mature Travellers', 'Destination Lovers', 'Small Ship Fans'],
     meta: {
       title: 'Azamara Cruises | Destination-Intensive Boutique Cruising',
-      description: 'Experience Azamara\'s destination-immersive cruising. Longer port stays, unique experiences. Book with Limitless Cruises.'
+      description: 'Experience Azamara\'s destination-immersive cruising. Longer port stays, boutique ships, AzAmazing Evenings. Book with Limitless Cruises.'
     }
   },
   {
@@ -644,23 +1169,78 @@ export const cruiseLines = [
     name: 'Aurora Expeditions',
     shortName: 'Aurora',
     tagline: 'Adventure expedition cruising',
-    description: 'Aurora Expeditions offers adventure expedition cruises to remote destinations including Antarctica, Arctic, and beyond.',
+    description: 'Aurora Expeditions offers adventure expedition cruises to the world\'s most remote destinations. With small ships, expert expedition teams, and a focus on active exploration, Aurora delivers authentic polar and adventure experiences.',
     category: 'expedition',
     featured: false,
     image: '/images/cruise-lines/ae-expeditions.jpg',
     logo: '/images/cruise-lines/logos/ae-expeditions.png',
+    
+    whyChoose: [
+      {
+        title: 'Polar Specialists',
+        description: 'Over 30 years of expedition cruising experience to Antarctica and the Arctic.',
+        icon: 'polar'
+      },
+      {
+        title: 'Small Expedition Ships',
+        description: 'Purpose-built expedition vessels carrying just 126-170 guests for maximum wildlife encounters.',
+        icon: 'ship'
+      },
+      {
+        title: 'Expert Expedition Team',
+        description: 'Marine biologists, glaciologists, historians, and photographers guide every voyage.',
+        icon: 'experts'
+      },
+      {
+        title: 'Active Adventures',
+        description: 'Optional activities include sea kayaking, scuba diving, snorkelling, and polar plunges.',
+        icon: 'adventure'
+      },
+      {
+        title: 'Zodiac Exploration',
+        description: 'Multiple Zodiac excursions daily for wildlife spotting, landings, and ice cruising.',
+        icon: 'zodiac'
+      },
+      {
+        title: 'Sustainability Focus',
+        description: 'Committed to responsible travel with carbon offsetting and conservation partnerships.',
+        icon: 'sustainability'
+      }
+    ],
+
+    destinationImages: [
+      { name: 'Antarctica', image: 'https://images.unsplash.com/photo-1520769945061-0a448c463865?w=800', alt: 'Antarctic ice and penguins' },
+      { name: 'Arctic', image: 'https://images.unsplash.com/photo-1517783999520-f068d7431571?w=800', alt: 'Arctic polar bear landscape' },
+      { name: 'Kimberley', image: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800', alt: 'Australian Kimberley coastline' },
+      { name: 'Patagonia', image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800', alt: 'Patagonian mountains' }
+    ],
+
+    accessibility: {
+      intro: 'Expedition cruising involves physical elements including Zodiac transfers and landings on beaches. Some voyages may have limitations for guests with mobility challenges. Please discuss your needs before booking.',
+      tips: [
+        { title: 'Ship access', description: 'Ships have lifts between decks and some accessible cabins.' },
+        { title: 'Zodiac transfers', description: 'Require stepping into small boats from a platform - may be challenging for some.' },
+        { title: 'Shore landings', description: 'Often involve wet landings on beaches or rocky shores.' },
+        { title: 'Activities', description: 'Many optional activities require moderate fitness levels.' }
+      ]
+    },
+
     highlights: [
-      'Expedition to remote regions',
-      'Expert expedition team',
-      'Zodiac excursions',
-      'Small expedition vessels'
+      'Over 30 years of polar expedition experience',
+      'Small expedition ships (126-170 guests)',
+      'Expert expedition team with scientists and naturalists',
+      'Multiple daily Zodiac excursions',
+      'Optional sea kayaking, diving, and snorkelling',
+      'Polar plunge experience in Antarctica',
+      'Committed to sustainable and responsible travel',
+      'Lectures and workshops throughout voyage'
     ],
     ships: ['Greg Mortimer', 'Sylvia Earle', 'Douglas Mawson'],
-    destinations: ['Antarctica', 'Arctic', 'Kimberley', 'Remote Islands'],
-    suitableFor: ['Adventure Seekers', 'Wildlife Enthusiasts', 'Photographers'],
+    destinations: ['Antarctica', 'Arctic', 'Kimberley (Australia)', 'Patagonia', 'New Zealand Sub-Antarctic Islands', 'Costa Rica'],
+    suitableFor: ['Adventure Seekers', 'Wildlife Enthusiasts', 'Photographers', 'Active Travellers', 'Bucket List Seekers'],
     meta: {
       title: 'Aurora Expeditions | Antarctic & Arctic Expedition Cruises',
-      description: 'Explore Antarctica and the Arctic with Aurora Expeditions. Adventure expedition cruising. Book with Limitless Cruises.'
+      description: 'Explore Antarctica, the Arctic, and beyond with Aurora Expeditions. Expert-led adventure cruising. Book with Limitless Cruises.'
     }
   }
 ];

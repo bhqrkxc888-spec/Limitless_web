@@ -24,6 +24,10 @@ function PreviewGate({ onSuccess, showGate }) {
     if (password === previewPassword) {
       // Store in sessionStorage (clears on browser close - more secure than localStorage)
       sessionStorage.setItem('limitless_preview_authenticated', 'true');
+      
+      // Dispatch custom event to notify Header/Footer of auth change (same-window)
+      window.dispatchEvent(new CustomEvent('preview-auth-change'));
+      
       onSuccess();
     } else {
       setError('Incorrect password. Please try again.');

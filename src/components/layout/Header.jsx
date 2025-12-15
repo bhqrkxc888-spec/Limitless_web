@@ -10,7 +10,7 @@ function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [authStatus, setAuthStatus] = useState(isSiteLaunched());
 
-  // Listen for authentication changes (e.g., after admin login)
+  // Listen for authentication changes (e.g., after preview login)
   useEffect(() => {
     // Check auth status on mount and when storage changes
     const checkAuth = () => {
@@ -35,13 +35,9 @@ function Header() {
     window.addEventListener('storage', handleStorageChange);
     window.addEventListener('preview-auth-change', handleAuthChange);
 
-    // Also check periodically (for same-window changes since storage event doesn't fire in same window)
-    const interval = setInterval(checkAuth, 500);
-
     return () => {
       window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener('preview-auth-change', handleAuthChange);
-      clearInterval(interval);
     };
   }, []);
 

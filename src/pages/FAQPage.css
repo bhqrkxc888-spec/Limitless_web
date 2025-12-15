@@ -1,0 +1,287 @@
+/* ========================================
+   FAQ PAGE STYLES
+   ======================================== */
+
+.faq-page {
+  background-color: var(--clr-bg);
+}
+
+/* ========================================
+   HERO
+   ======================================== */
+
+.faq-hero {
+  padding: var(--space-12) 0 var(--space-8);
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
+  color: var(--clr-text-on-primary);
+  text-align: center;
+}
+
+.faq-hero h1 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-4xl);
+  color: var(--clr-text-on-primary);
+  margin-bottom: var(--space-4);
+}
+
+.faq-hero-subtitle {
+  font-size: var(--font-size-lg);
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto var(--space-8);
+}
+
+.faq-hero-subtitle a {
+  color: var(--clr-accent);
+  text-decoration: underline;
+}
+
+/* Search */
+.faq-search {
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.faq-search-input {
+  width: 100%;
+  padding: var(--space-4) var(--space-5);
+  padding-right: var(--space-12);
+  font-size: var(--font-size-base);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--clr-text-on-primary);
+  transition: all var(--transition-fast);
+}
+
+.faq-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.faq-search-input:focus {
+  outline: none;
+  border-color: var(--clr-accent);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.faq-search-clear {
+  position: absolute;
+  right: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 24px;
+  cursor: pointer;
+  padding: var(--space-1);
+  line-height: 1;
+}
+
+.faq-search-clear:hover {
+  color: var(--clr-text-on-primary);
+}
+
+/* ========================================
+   LAYOUT
+   ======================================== */
+
+.faq-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+/* ========================================
+   CATEGORY SIDEBAR
+   ======================================== */
+
+.faq-categories {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  background: var(--clr-bg);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.faq-category-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: none;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast);
+  color: var(--clr-text-main);
+}
+
+.faq-category-btn:hover {
+  background: var(--clr-bg-alt);
+}
+
+.faq-category-btn.is-active {
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+}
+
+.faq-category-btn.is-active .category-count {
+  background: var(--clr-accent);
+  color: var(--clr-primary);
+}
+
+.category-icon {
+  font-size: 1.25rem;
+}
+
+.category-name {
+  flex: 1;
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.category-count {
+  font-size: var(--font-size-xs);
+  background: var(--clr-bg-alt);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  color: var(--clr-text-muted);
+}
+
+/* ========================================
+   QUESTIONS
+   ======================================== */
+
+.faq-questions h2 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  color: var(--clr-primary);
+  margin-bottom: var(--space-6);
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.faq-category-badge {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  color: var(--clr-accent);
+  background: var(--clr-bg-alt);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Accordion styling for FAQ */
+.faq-list .accordion {
+  background: var(--clr-bg);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+}
+
+.faq-list .accordion-header {
+  padding: var(--space-4) var(--space-5);
+}
+
+.faq-list .accordion-content {
+  padding: 0 var(--space-5) var(--space-4);
+}
+
+.faq-list .accordion-content a {
+  color: var(--clr-secondary);
+  text-decoration: underline;
+}
+
+/* ========================================
+   SEARCH RESULTS
+   ======================================== */
+
+.search-results-title {
+  font-size: var(--font-size-xl);
+  color: var(--clr-text-muted);
+  margin-bottom: var(--space-6);
+}
+
+.no-results {
+  text-align: center;
+  color: var(--clr-text-muted);
+  padding: var(--space-8);
+}
+
+.no-results a {
+  color: var(--clr-secondary);
+}
+
+/* ========================================
+   CTA
+   ======================================== */
+
+.section-dark .cta-buttons {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-6);
+}
+
+.btn-outline-white {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: var(--clr-text-on-primary);
+}
+
+.btn-outline-white:hover {
+  border-color: var(--clr-accent);
+  background: var(--clr-accent);
+  color: var(--clr-primary);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 900px) {
+  .faq-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-categories {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .faq-category-btn {
+    flex: 1 1 auto;
+    min-width: 140px;
+    justify-content: center;
+  }
+
+  .category-name {
+    flex: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .faq-hero h1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .faq-category-btn {
+    min-width: 100%;
+  }
+}
+

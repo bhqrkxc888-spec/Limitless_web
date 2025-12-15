@@ -90,55 +90,22 @@ const HeartIcon = () => (
 );
 
 function HomePage() {
-  // Enhanced structured data with Organization and Website schemas
-  const structuredData = [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'TravelAgency',
-      name: siteConfig.siteName,
-      description: siteConfig.tagline,
-      url: siteConfig.siteUrl,
-      telephone: siteConfig.phone,
-      email: siteConfig.email
-    },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'Organization',
-      name: siteConfig.siteName,
-      url: siteConfig.siteUrl,
-      logo: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/categories/Home/Hero-logo.png',
-      contactPoint: {
-        '@type': 'ContactPoint',
-        telephone: siteConfig.phone,
-        contactType: 'Customer Service',
-        email: siteConfig.email,
-        areaServed: 'GB',
-        availableLanguage: 'English'
+  // WebSite schema with SearchAction for sitelinks search box
+  // Note: TravelAgency/Organization schema is in index.html (site-wide)
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteConfig.siteName,
+    url: siteConfig.siteUrl,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${siteConfig.siteUrl}/find-a-cruise?q={search_term_string}`
       },
-      sameAs: [
-        siteConfig.facebook
-      ],
-      memberOf: {
-        '@type': 'Organization',
-        name: 'ABTA',
-        identifier: 'P7541'
-      }
-    },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      name: siteConfig.siteName,
-      url: siteConfig.siteUrl,
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: {
-          '@type': 'EntryPoint',
-          urlTemplate: `${siteConfig.siteUrl}/find-a-cruise?q={search_term_string}`
-        },
-        'query-input': 'required name=search_term_string'
-      }
+      'query-input': 'required name=search_term_string'
     }
-  ];
+  };
 
   // Single hero image (first image from array, with fallback)
   const heroImage = homeHeroImages[0] || 'https://via.placeholder.com/800x1000/2C344C/C9A962?text=LIMITLESS+CRUISES';
@@ -232,8 +199,8 @@ function HomePage() {
                 <PriceTagIcon />
               </span>
               <div className="trust-text">
-                <strong>Price Match</strong>
-                <span>Guaranteed</span>
+                <strong>Price Match*</strong>
+                <span><a href="/booking-terms" className="terms-link">T&Cs apply</a></span>
               </div>
             </div>
             <span className="trust-divider" />

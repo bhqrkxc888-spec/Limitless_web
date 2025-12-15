@@ -652,6 +652,552 @@ export const bucketListExperiences = [
     ],
     featured: true,
     priority: 9
+  },
+  // NEW BUCKET LIST EXPERIENCES BELOW
+  {
+    id: 'transatlantic-crossings',
+    slug: 'transatlantic-crossings',
+    title: 'Transatlantic Crossings',
+    tagline: 'The classic ocean voyage experience',
+    description: 'Experience the romance of crossing the Atlantic in the tradition of the great ocean liners. Days of relaxation at sea, world-class entertainment, and the anticipation of arrival in a new world.',
+    heroImage: '/images/bucket-list/transatlantic-hero.jpg',
+    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Transatlantic/queen-mary-2.jpeg',
+    duration: '7-14 nights',
+    season: 'Year-round (peak: April-May, September-October)',
+    startingFrom: 'From £899 per person',
+    bestFor: ['Ocean liner enthusiasts', 'Those who prefer not to fly', 'Classic cruise lovers', 'First-time cruisers'],
+    highlights: [
+      'Classic ocean liner experience on Cunard\'s Queen Mary 2',
+      'Six or seven relaxing sea days',
+      'World-class entertainment and enrichment programs',
+      'Elegant afternoon tea and formal nights',
+      'Outstanding dining experiences',
+      'Arrive refreshed without jet lag'
+    ],
+    includes: [
+      'All meals and room service',
+      'Entertainment and enrichment lectures',
+      'Onboard activities',
+      'Formal evening events',
+      'Access to ship amenities'
+    ],
+    cruiseLines: ['Cunard', 'Celebrity Cruises', 'Holland America', 'Norwegian Cruise Line'],
+    itinerary: [
+      { day: '1', location: 'Southampton, UK', description: 'Embarkation and departure' },
+      { day: '2-6', location: 'At Sea', description: 'Relaxing days crossing the Atlantic' },
+      { day: '7', location: 'New York, USA', description: 'Arrival under the Statue of Liberty' }
+    ],
+    destinations: [
+      { name: 'Southampton to New York', description: 'The classic transatlantic route' },
+      { name: 'Eastbound crossings', description: 'New York to Southampton' },
+      { name: 'Repositioning voyages', description: 'Seasonal crossings with added ports' }
+    ],
+    testimonials: [
+      { quote: 'Arriving in New York by sea, passing the Statue of Liberty, was absolutely magical. The crossing was so relaxing.', author: 'William & Mary', location: 'Kent' },
+      { quote: 'Queen Mary 2 is simply the most elegant way to cross the Atlantic. We\'ll never fly again!', author: 'Elizabeth T.', location: 'Surrey' }
+    ],
+    faq: [
+      {
+        question: 'How long does a transatlantic crossing take?',
+        answer: 'A typical Southampton to New York crossing takes 7 nights. Some voyages include stops in ports like Halifax or Boston.'
+      },
+      {
+        question: 'Is it rough crossing the Atlantic?',
+        answer: 'The Atlantic can be unpredictable, but modern ships like Queen Mary 2 are designed for ocean crossings with excellent stabilizers.'
+      },
+      {
+        question: 'What is there to do on sea days?',
+        answer: 'Enrichment lectures, West End style shows, fine dining, spa treatments, afternoon tea, and simply enjoying the ocean views.'
+      }
+    ],
+    meta: {
+      title: 'Transatlantic Cruises | Ocean Crossings on Queen Mary 2',
+      description: 'Experience the classic transatlantic crossing. Sail from Southampton to New York on Cunard\'s Queen Mary 2. Expert booking from Limitless Cruises.',
+      keywords: ['transatlantic cruise', 'ocean crossing', 'queen mary 2', 'cunard crossing', 'southampton new york']
+    },
+    images: [],
+    featured: true,
+    priority: 10
+  },
+  {
+    id: 'amazon-river',
+    slug: 'amazon-river-expeditions',
+    title: 'Amazon River Expeditions',
+    tagline: 'Into the heart of the rainforest',
+    description: 'Navigate the world\'s mightiest river through the Amazon rainforest. Encounter incredible wildlife, meet indigenous communities, and explore the most biodiverse place on Earth.',
+    heroImage: '/images/bucket-list/amazon-hero.jpg',
+    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Amazon/amazon-river.jpeg',
+    duration: '7-14 nights',
+    season: 'Year-round (high water: December-May, low water: June-November)',
+    startingFrom: 'From £3,000 per person',
+    bestFor: ['Nature enthusiasts', 'Wildlife photographers', 'Adventure seekers', 'Eco-tourists'],
+    highlights: [
+      'Navigate the mighty Amazon River',
+      'Spot pink river dolphins, monkeys, and exotic birds',
+      'Visit indigenous communities',
+      'Night excursions to see nocturnal wildlife',
+      'Expert naturalist guides',
+      'Small ship expedition experience'
+    ],
+    includes: [
+      'All meals and drinks',
+      'Expert naturalist guides',
+      'Excursions by motorized skiff',
+      'Kayaking and fishing',
+      'Village visits',
+      'Lectures on Amazon ecology'
+    ],
+    cruiseLines: ['Aqua Expeditions', 'Delfin Cruises', 'Avalon Waterways', 'Viking'],
+    itinerary: [
+      { day: '1', location: 'Iquitos, Peru', description: 'Gateway to the Amazon' },
+      { day: '2-6', location: 'Amazon tributaries', description: 'Daily excursions and wildlife viewing' },
+      { day: '7', location: 'Return to Iquitos', description: 'Journey complete' }
+    ],
+    destinations: [
+      { name: 'Peruvian Amazon', description: 'Iquitos and Pacaya-Samiria Reserve' },
+      { name: 'Brazilian Amazon', description: 'Manaus and Rio Negro' },
+      { name: 'Ecuadorian Amazon', description: 'Napo River expeditions' }
+    ],
+    testimonials: [
+      { quote: 'Seeing pink dolphins and meeting local villagers was a truly humbling experience. The Amazon is beyond words.', author: 'Peter & Susan', location: 'Oxford' },
+      { quote: 'Our naturalist guide spotted wildlife we would have never seen on our own. An incredible expedition.', author: 'Catherine L.', location: 'Cambridge' }
+    ],
+    faq: [
+      {
+        question: 'When is the best time to visit the Amazon?',
+        answer: 'High water season (Dec-May) allows deeper exploration of flooded forests. Low water season (Jun-Nov) offers better wildlife spotting on exposed beaches.'
+      },
+      {
+        question: 'What vaccinations do I need?',
+        answer: 'Yellow fever vaccination is recommended. Consult your GP or travel clinic well before departure for full advice.'
+      },
+      {
+        question: 'How hot and humid is it?',
+        answer: 'The Amazon is hot and humid year-round (25-35°C). Lightweight, breathable clothing is essential. Ships are air-conditioned.'
+      }
+    ],
+    meta: {
+      title: 'Amazon River Cruises | Rainforest Expeditions | Limitless Cruises',
+      description: 'Explore the Amazon rainforest by river cruise. Encounter incredible wildlife and pristine nature. Expert booking from Limitless Cruises.',
+      keywords: ['amazon cruise', 'amazon river expedition', 'rainforest cruise', 'peru amazon', 'wildlife cruise']
+    },
+    images: [],
+    featured: true,
+    priority: 11
+  },
+  {
+    id: 'iceland-circumnavigation',
+    slug: 'iceland-circumnavigation',
+    title: 'Iceland Circumnavigation',
+    tagline: 'Land of fire and ice',
+    description: 'Sail around Iceland to discover its otherworldly landscapes of geysers, glaciers, volcanoes, and waterfalls. Witness the midnight sun or Northern Lights depending on the season.',
+    heroImage: '/images/bucket-list/iceland-hero.jpg',
+    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Iceland/iceland-waterfall.jpeg',
+    duration: '10-14 nights',
+    season: 'May - September (summer), September - March (Northern Lights)',
+    startingFrom: 'From £2,500 per person',
+    bestFor: ['Nature lovers', 'Photography enthusiasts', 'Adventure seekers', 'Geology enthusiasts'],
+    highlights: [
+      'Witness dramatic volcanic landscapes',
+      'See powerful waterfalls and geysers',
+      'Whale watching in Husavik',
+      'Midnight sun in summer',
+      'Northern Lights potential (winter voyages)',
+      'Explore remote Westfjords'
+    ],
+    includes: [
+      'All meals on board',
+      'Selected shore excursions',
+      'Expert guides',
+      'Zodiac landings (expedition ships)',
+      'Lectures on geology and nature'
+    ],
+    cruiseLines: ['Hurtigruten', 'Viking', 'Ponant', 'Silversea', 'Fred. Olsen'],
+    itinerary: [
+      { day: '1', location: 'Reykjavik', description: 'Embarkation in Iceland\'s capital' },
+      { day: '2', location: 'Westfjords', description: 'Remote fjords and seabird cliffs' },
+      { day: '3', location: 'Akureyri', description: 'Gateway to the north' },
+      { day: '4', location: 'Husavik', description: 'Whale watching capital' },
+      { day: '5-6', location: 'East Fjords', description: 'Dramatic landscapes' },
+      { day: '7', location: 'Heimaey', description: 'Westman Islands' },
+      { day: '8', location: 'Return to Reykjavik', description: 'Circumnavigation complete' }
+    ],
+    destinations: [
+      { name: 'Reykjavik', description: 'Vibrant capital city' },
+      { name: 'Westfjords', description: 'Remote, dramatic coastline' },
+      { name: 'North Iceland', description: 'Akureyri, Husavik, Godafoss' }
+    ],
+    testimonials: [
+      { quote: 'Iceland by sea is the best way to truly appreciate its incredible coastline. Every port was a new adventure.', author: 'Jonathan K.', location: 'Edinburgh' },
+      { quote: 'Seeing the Northern Lights from the ship\'s deck while anchored in a fjord was unforgettable.', author: 'Rachel & Tom', location: 'Manchester' }
+    ],
+    faq: [
+      {
+        question: 'When can I see the Northern Lights?',
+        answer: 'Northern Lights are visible from September to March. Summer voyages instead feature the midnight sun.'
+      },
+      {
+        question: 'What is the weather like?',
+        answer: 'Icelandic weather is unpredictable. Summer temperatures average 10-15°C. Layered, waterproof clothing is essential.'
+      },
+      {
+        question: 'Can I combine with a land stay?',
+        answer: 'Yes, many cruises offer pre or post Golden Circle tours, glacier walks, or Blue Lagoon visits.'
+      }
+    ],
+    meta: {
+      title: 'Iceland Cruises | Circumnavigation & Northern Lights | Limitless Cruises',
+      description: 'Sail around Iceland. Witness volcanoes, glaciers, Northern Lights and midnight sun. Expert booking from Limitless Cruises.',
+      keywords: ['iceland cruise', 'iceland circumnavigation', 'northern lights cruise', 'iceland expedition', 'reykjavik cruise']
+    },
+    images: [],
+    featured: true,
+    priority: 12
+  },
+  {
+    id: 'european-rivers',
+    slug: 'european-river-cruises',
+    title: 'European River Cruises',
+    tagline: 'Glide through the heart of Europe',
+    description: 'Cruise the legendary rivers of Europe, from the romantic Rhine and Danube to the Seine and Douro. Pass fairytale castles, vineyard-covered hillsides, and charming medieval towns.',
+    heroImage: '/images/bucket-list/river-cruise-hero.jpg',
+    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Rivers/rhine-castle.jpeg',
+    duration: '7-14 nights',
+    season: 'March - December (peak: April-October)',
+    startingFrom: 'From £1,800 per person',
+    bestFor: ['First-time cruisers', 'Culture enthusiasts', 'Wine lovers', 'Those preferring calm waters'],
+    highlights: [
+      'Intimate small ship experience',
+      'Daily port visits - no sea days',
+      'Dock in the heart of cities',
+      'All-inclusive dining and drinks',
+      'Scenic cruising through valleys',
+      'Included excursions'
+    ],
+    includes: [
+      'All meals with wine and beer at dinner',
+      'Guided shore excursions',
+      'Onboard entertainment',
+      'WiFi',
+      'Bicycles for independent exploration'
+    ],
+    cruiseLines: ['Viking', 'AmaWaterways', 'Uniworld', 'Avalon Waterways', 'Scenic'],
+    itinerary: [
+      { day: '1', location: 'Amsterdam', description: 'Embarkation (Rhine cruise example)' },
+      { day: '2', location: 'Cologne', description: 'Historic cathedral city' },
+      { day: '3', location: 'Koblenz', description: 'Rhine Gorge scenery' },
+      { day: '4', location: 'Heidelberg', description: 'Romantic castle town' },
+      { day: '5', location: 'Strasbourg', description: 'Alsace and French culture' },
+      { day: '6', location: 'Breisach', description: 'Black Forest gateway' },
+      { day: '7', location: 'Basel', description: 'Swiss disembarkation' }
+    ],
+    destinations: [
+      { name: 'Rhine', description: 'Amsterdam to Basel, fairytale castles' },
+      { name: 'Danube', description: 'Budapest, Vienna, Passau' },
+      { name: 'Seine', description: 'Paris to Normandy' },
+      { name: 'Douro', description: 'Portugal\'s wine country' }
+    ],
+    testimonials: [
+      { quote: 'River cruising is the perfect pace. A new town every day, incredible scenery, and no unpacking!', author: 'Margaret H.', location: 'Bristol' },
+      { quote: 'The Christmas markets cruise on the Rhine was magical. So festive and beautifully organised.', author: 'David & Anne', location: 'Liverpool' }
+    ],
+    faq: [
+      {
+        question: 'What\'s the difference between river and ocean cruising?',
+        answer: 'River ships are smaller (100-200 guests), dock in city centres, and sail calm rivers. There are no sea days - you visit a new destination daily.'
+      },
+      {
+        question: 'Do river cruises get rough?',
+        answer: 'Rivers are very calm compared to oceans. Motion sickness is rarely an issue on river cruises.'
+      },
+      {
+        question: 'What rivers can I cruise?',
+        answer: 'Popular options include the Rhine, Danube, Seine, Rhône, Douro, and Mekong. Each offers unique scenery and experiences.'
+      }
+    ],
+    meta: {
+      title: 'European River Cruises | Rhine, Danube, Seine | Limitless Cruises',
+      description: 'Explore Europe by river cruise. Sail the Rhine, Danube, Seine and more. Expert booking from Limitless Cruises.',
+      keywords: ['river cruise', 'european river cruise', 'rhine cruise', 'danube cruise', 'viking river cruise']
+    },
+    images: [],
+    featured: true,
+    priority: 13
+  },
+  {
+    id: 'great-barrier-reef',
+    slug: 'great-barrier-reef-cruises',
+    title: 'Great Barrier Reef & Australia',
+    tagline: 'Discover the world\'s largest coral reef',
+    description: 'Experience Australia\'s natural wonder - the Great Barrier Reef. Snorkel or dive among vibrant coral and tropical fish, then explore Australia\'s stunning coastline and iconic cities.',
+    heroImage: '/images/bucket-list/great-barrier-reef-hero.jpg',
+    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Australia/great-barrier-reef.jpeg',
+    duration: '10-18 nights',
+    season: 'Year-round (best: April-November for reef conditions)',
+    startingFrom: 'From £3,500 per person',
+    bestFor: ['Marine life enthusiasts', 'Snorkelers and divers', 'Nature photographers', 'Adventure seekers'],
+    highlights: [
+      'Snorkel or dive the Great Barrier Reef',
+      'See vibrant coral and tropical fish',
+      'Visit the Whitsunday Islands',
+      'Explore Cairns and Port Douglas',
+      'Sydney Harbour and Opera House',
+      'Optional rainforest excursions'
+    ],
+    includes: [
+      'All meals on board',
+      'Selected reef excursions',
+      'Snorkeling equipment',
+      'Marine biologist presentations',
+      'Port transfers'
+    ],
+    cruiseLines: ['Princess Cruises', 'P&O Cruises Australia', 'Celebrity Cruises', 'Coral Expeditions'],
+    itinerary: [
+      { day: '1', location: 'Sydney', description: 'Embarkation' },
+      { day: '2-3', location: 'At Sea', description: 'Sailing north along the coast' },
+      { day: '4', location: 'Brisbane', description: 'Queensland\'s capital' },
+      { day: '5-6', location: 'Whitsundays', description: 'Island paradise' },
+      { day: '7-8', location: 'Cairns', description: 'Great Barrier Reef gateway' },
+      { day: '9', location: 'Great Barrier Reef', description: 'Snorkeling and reef exploration' },
+      { day: '10-12', location: 'Return journey', description: 'Coastal ports and sea days' }
+    ],
+    destinations: [
+      { name: 'Great Barrier Reef', description: 'World\'s largest coral reef system' },
+      { name: 'Whitsunday Islands', description: 'Tropical island paradise' },
+      { name: 'Sydney', description: 'Iconic harbour and Opera House' }
+    ],
+    testimonials: [
+      { quote: 'Swimming over the reef and seeing all those fish and coral was beyond incredible. A must-do experience!', author: 'Sarah M.', location: 'London' },
+      { quote: 'The combination of cities, islands and reef made this the perfect Australian holiday.', author: 'James & Helen', location: 'Newcastle' }
+    ],
+    faq: [
+      {
+        question: 'Can non-swimmers visit the reef?',
+        answer: 'Yes! Glass-bottom boats and semi-submersibles offer reef viewing without getting in the water. Introductory snorkeling with flotation is also available.'
+      },
+      {
+        question: 'When is the best time to visit the reef?',
+        answer: 'April to November offers the best conditions with calm seas and good visibility. The stinger season (November-May) requires protective suits.'
+      },
+      {
+        question: 'Is the Great Barrier Reef dying?',
+        answer: 'While facing challenges, the reef remains spectacular. Many areas show resilience and recovery. Visiting supports conservation efforts.'
+      }
+    ],
+    meta: {
+      title: 'Great Barrier Reef Cruises | Australia Ocean Voyages | Limitless Cruises',
+      description: 'Explore the Great Barrier Reef by cruise. Snorkel, dive and discover Australia\'s natural wonder. Expert booking from Limitless Cruises.',
+      keywords: ['great barrier reef cruise', 'australia cruise', 'reef cruise', 'cairns cruise', 'whitsundays cruise']
+    },
+    images: [],
+    featured: true,
+    priority: 14
+  },
+  {
+    id: 'polynesian-islands',
+    slug: 'polynesian-islands-cruises',
+    title: 'Polynesian Islands',
+    tagline: 'Paradise found in the South Pacific',
+    description: 'Discover the legendary islands of French Polynesia - Tahiti, Bora Bora, Moorea and beyond. Overwater bungalows, crystal lagoons, and the warmest hospitality in the world await.',
+    heroImage: '/images/bucket-list/polynesia-hero.jpg',
+    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Polynesia/bora-bora.jpeg',
+    duration: '7-14 nights',
+    season: 'Year-round (dry season: May-October)',
+    startingFrom: 'From £4,000 per person',
+    bestFor: ['Honeymooners', 'Luxury travellers', 'Beach lovers', 'Photographers'],
+    highlights: [
+      'Iconic Bora Bora overwater views',
+      'Crystal-clear turquoise lagoons',
+      'Traditional Polynesian culture',
+      'Snorkeling with rays and sharks',
+      'Small ship intimate experience',
+      'Stunning volcanic peaks and beaches'
+    ],
+    includes: [
+      'All meals and drinks',
+      'Water sports equipment',
+      'Cultural experiences',
+      'Snorkeling excursions',
+      'Traditional dance performances'
+    ],
+    cruiseLines: ['Paul Gauguin Cruises', 'Windstar', 'Ponant', 'Oceania', 'Regent Seven Seas'],
+    itinerary: [
+      { day: '1', location: 'Papeete, Tahiti', description: 'Embarkation in French Polynesia' },
+      { day: '2', location: 'Moorea', description: 'Tahiti\'s sister island' },
+      { day: '3', location: 'Huahine', description: 'The garden isle' },
+      { day: '4', location: 'Taha\'a', description: 'Vanilla island' },
+      { day: '5-6', location: 'Bora Bora', description: 'The pearl of the Pacific' },
+      { day: '7', location: 'Return to Papeete', description: 'Cruise complete' }
+    ],
+    destinations: [
+      { name: 'French Polynesia', description: 'Tahiti, Bora Bora, Moorea' },
+      { name: 'Society Islands', description: 'Huahine, Raiatea, Taha\'a' },
+      { name: 'Tuamotu Atolls', description: 'Remote diving paradise' }
+    ],
+    testimonials: [
+      { quote: 'Bora Bora from the deck of our ship was the most beautiful thing I\'ve ever seen. Pure paradise.', author: 'Emma & Jack', location: 'Brighton (honeymoon)' },
+      { quote: 'The Paul Gauguin is the perfect way to experience these islands. Small, intimate, and beautifully done.', author: 'Christine P.', location: 'Bath' }
+    ],
+    faq: [
+      {
+        question: 'When is the best time to visit French Polynesia?',
+        answer: 'May to October is the dry season with lower humidity. November to April is warmer but wetter. It\'s beautiful year-round.'
+      },
+      {
+        question: 'Is it very expensive?',
+        answer: 'French Polynesia is a luxury destination. Cruising offers good value compared to island hopping independently with flights and hotels.'
+      },
+      {
+        question: 'How long is the flight from the UK?',
+        answer: 'Flights typically route via Los Angeles or Paris, taking 20-24 hours total. The journey is part of the adventure!'
+      }
+    ],
+    meta: {
+      title: 'French Polynesia Cruises | Tahiti & Bora Bora | Limitless Cruises',
+      description: 'Cruise the Polynesian islands. Discover Tahiti, Bora Bora and paradise lagoons. Expert booking from Limitless Cruises.',
+      keywords: ['polynesia cruise', 'tahiti cruise', 'bora bora cruise', 'french polynesia', 'paul gauguin cruise']
+    },
+    images: [],
+    featured: false,
+    priority: 15
+  },
+  {
+    id: 'midnight-sun',
+    slug: 'midnight-sun-voyages',
+    title: 'Midnight Sun Voyages',
+    tagline: 'Where the sun never sets',
+    description: 'Experience the magic of the Arctic summer when the sun never dips below the horizon. Cruise Norway\'s coast, Svalbard, or Iceland under 24 hours of ethereal daylight.',
+    heroImage: '/images/bucket-list/midnight-sun-hero.jpg',
+    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Arctic/midnight-sun.jpeg',
+    duration: '7-14 nights',
+    season: 'May - July (peak midnight sun: June 21)',
+    startingFrom: 'From £2,000 per person',
+    bestFor: ['Nature enthusiasts', 'Photographers', 'Adventure seekers', 'Those who love unique experiences'],
+    highlights: [
+      '24 hours of continuous daylight',
+      'Surreal golden-hour lighting',
+      'Extended wildlife viewing opportunities',
+      'Norwegian coastal beauty',
+      'Arctic exploration',
+      'North Cape - Europe\'s northernmost point'
+    ],
+    includes: [
+      'All meals on board',
+      'Midnight sun viewing events',
+      'Wildlife excursions',
+      'Expert naturalist guides',
+      'Port visits and excursions'
+    ],
+    cruiseLines: ['Hurtigruten', 'Viking', 'Ponant', 'Fred. Olsen', 'Silversea'],
+    itinerary: [
+      { day: '1', location: 'Bergen, Norway', description: 'Embarkation' },
+      { day: '2-3', location: 'Norwegian coast', description: 'Coastal sailing' },
+      { day: '4', location: 'Lofoten Islands', description: 'Arctic beauty' },
+      { day: '5', location: 'Tromsø', description: 'Gateway to the Arctic' },
+      { day: '6', location: 'North Cape', description: 'Midnight sun at 71°N' },
+      { day: '7', location: 'Hammerfest', description: 'World\'s northernmost town' },
+      { day: '8+', location: 'Return or Svalbard', description: 'Extended Arctic exploration' }
+    ],
+    destinations: [
+      { name: 'Norwegian Coast', description: 'Bergen to North Cape' },
+      { name: 'Svalbard', description: 'High Arctic wilderness' },
+      { name: 'Iceland', description: 'Land of the midnight sun' }
+    ],
+    testimonials: [
+      { quote: 'Standing at North Cape at midnight with the sun still shining was surreal. An unforgettable moment.', author: 'Robert P.', location: 'Glasgow' },
+      { quote: 'The lighting for photography is incredible - golden hour literally all night long!', author: 'Janet L.', location: 'Birmingham' }
+    ],
+    faq: [
+      {
+        question: 'When can I see the midnight sun?',
+        answer: 'The midnight sun occurs from mid-May to late July, depending on latitude. June 21 (summer solstice) offers the longest daylight.'
+      },
+      {
+        question: 'Where is the best place to see it?',
+        answer: 'Norway\'s North Cape (71°N) is iconic. Svalbard and northern Iceland also offer excellent midnight sun viewing.'
+      },
+      {
+        question: 'Will I be able to sleep?',
+        answer: 'Ships provide blackout curtains. Many guests find the continuous light energizing and enjoy late-night activities.'
+      }
+    ],
+    meta: {
+      title: 'Midnight Sun Cruises | Arctic Summer Voyages | Limitless Cruises',
+      description: 'Experience the midnight sun on an Arctic cruise. 24-hour daylight in Norway, Svalbard or Iceland. Expert booking from Limitless Cruises.',
+      keywords: ['midnight sun cruise', 'arctic summer cruise', 'norway midnight sun', 'svalbard cruise', 'north cape cruise']
+    },
+    images: [],
+    featured: false,
+    priority: 16
+  },
+  {
+    id: 'grand-voyages',
+    slug: 'grand-voyages',
+    title: 'Grand Voyages',
+    tagline: 'Extended journeys of discovery',
+    description: 'Embark on an extended voyage of 30 to 60 nights, exploring multiple continents and oceans. These immersive journeys offer the depth of experience only possible with extended time at sea.',
+    heroImage: '/images/bucket-list/grand-voyage-hero.jpg',
+    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Grand/grand-voyage.jpeg',
+    duration: '30-60+ nights',
+    season: 'Year-round (repositioning seasons optimal)',
+    startingFrom: 'From £5,000 per person',
+    bestFor: ['Extended travellers', 'Retirees', 'Those seeking immersive experiences', 'Value seekers'],
+    highlights: [
+      'Visit multiple continents in one voyage',
+      'Deep cultural immersion',
+      'Outstanding value per night',
+      'Strong onboard community',
+      'No packing and unpacking',
+      'Grand voyage exclusive events and perks'
+    ],
+    includes: [
+      'All meals and drinks (select lines)',
+      'Gratuities included',
+      'Onboard enrichment programs',
+      'Laundry service (select lines)',
+      'Special grand voyage events',
+      'Extended shore time in key ports'
+    ],
+    cruiseLines: ['Cunard', 'Holland America', 'Princess Cruises', 'P&O Cruises', 'Fred. Olsen'],
+    itinerary: [
+      { day: '1', location: 'Southampton', description: 'Begin grand voyage' },
+      { day: '2-10', location: 'Atlantic crossing', description: 'Sea days and Caribbean ports' },
+      { day: '11-20', location: 'South America', description: 'Buenos Aires, Rio, Montevideo' },
+      { day: '21-35', location: 'Africa', description: 'Cape Town, Madagascar, Seychelles' },
+      { day: '36-50', location: 'Asia', description: 'Dubai, India, Southeast Asia' },
+      { day: '51-60', location: 'Return home', description: 'Mediterranean and homeward' }
+    ],
+    destinations: [
+      { name: 'Multiple continents', description: 'South America, Africa, Asia, Europe' },
+      { name: 'Iconic cities', description: 'Cape Town, Singapore, Rio de Janeiro' },
+      { name: 'Remote ports', description: 'Unique stops not on shorter itineraries' }
+    ],
+    testimonials: [
+      { quote: 'Our 50-night grand voyage was life-changing. The friendships we made and places we visited will stay with us forever.', author: 'George & Patricia', location: 'Hampshire' },
+      { quote: 'The value is incredible when you consider accommodation, food, and transport to so many destinations.', author: 'Michael T.', location: 'Devon' }
+    ],
+    faq: [
+      {
+        question: 'How do I pack for 30-60 nights?',
+        answer: 'Most grand voyages include laundry service. Pack mix-and-match pieces and layers. You\'ll need formal wear for special evenings.'
+      },
+      {
+        question: 'What about medication and health?',
+        answer: 'Ships have onboard medical facilities. Ensure adequate medication supplies and travel insurance for extended trips.'
+      },
+      {
+        question: 'Can I book part of a grand voyage?',
+        answer: 'Yes, most cruise lines offer segments of grand voyages if you can\'t commit to the full journey.'
+      }
+    ],
+    meta: {
+      title: 'Grand Voyages | Extended Cruise Journeys | Limitless Cruises',
+      description: 'Embark on an extended grand voyage of 30-60+ nights. Explore multiple continents and oceans. Expert booking from Limitless Cruises.',
+      keywords: ['grand voyage', 'extended cruise', 'long cruise', 'multi-continent cruise', '60 night cruise']
+    },
+    images: [],
+    featured: true,
+    priority: 17
   }
 ];
 

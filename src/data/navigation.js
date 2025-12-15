@@ -5,7 +5,7 @@
 
 import { cruiseLines } from './cruiseLines';
 import { destinations } from './destinations';
-import { categories } from './categories';
+import { cruiseTypes } from './cruiseTypes';
 
 export const navigation = {
   // Navigation structure with dropdown menus
@@ -34,6 +34,11 @@ export const navigation = {
               label: 'Destinations',
               path: '/destinations',
               description: 'Explore cruise destinations worldwide'
+            },
+            {
+              label: 'Cruise Types',
+              path: '/cruise-types',
+              description: 'Find your perfect cruise style'
             },
             {
               label: 'Bucket List',
@@ -92,15 +97,19 @@ export const navigation = {
     ],
     destinations: [
       { label: 'All Destinations', path: '/destinations' },
-      ...destinations.map(d => ({
+      // Featured destinations first
+      ...destinations.filter(d => d.featured).slice(0, 6).map(d => ({
         label: d.name,
         path: `/destinations/${d.slug}`
       }))
     ],
-    categories: categories.map(c => ({
-      label: c.name,
-      path: `/cruises/${c.slug}`
-    })),
+    cruiseTypes: [
+      { label: 'All Cruise Types', path: '/cruise-types' },
+      ...cruiseTypes.filter(t => t.featured).slice(0, 5).map(t => ({
+        label: t.name,
+        path: `/cruise-types#${t.id}`
+      }))
+    ],
     legal: [
       { label: 'Booking Terms', path: '/booking-terms' },
       { label: 'Website Terms', path: '/website-terms' },
@@ -110,9 +119,11 @@ export const navigation = {
     company: [
       { label: 'About Us', path: '/about' },
       { label: 'Contact', path: '/contact' },
+      { label: 'FAQ', path: '/faq' },
+      { label: 'Testimonials', path: '/testimonials' },
       { label: 'Latest Offers', path: '/offers' },
       { label: 'Find a Cruise', path: '/find-a-cruise' },
-      { label: 'Bucket List Experiences', path: '/bucket-list' }
+      { label: 'Travel News', path: '/travel-news' }
     ]
   }
 };

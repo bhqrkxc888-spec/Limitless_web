@@ -10,32 +10,33 @@ function Footer() {
   const currentYear = new Date().getFullYear();
   const [authStatus, setAuthStatus] = useState(isSiteLaunched());
 
-  // Listen for authentication changes
+  // Listen for authentication changes (e.g., after preview login)
   useEffect(() => {
     const checkAuth = () => {
       setAuthStatus(isSiteLaunched());
     };
 
+    // Initial check
     checkAuth();
 
+    // Listen for storage events (when sessionStorage changes in another tab/window)
     const handleStorageChange = (e) => {
       if (e.key === 'limitless_preview_authenticated') {
         checkAuth();
       }
     };
 
+    // Listen for custom event (when auth changes in same window)
     const handleAuthChange = () => {
       checkAuth();
     };
 
     window.addEventListener('storage', handleStorageChange);
     window.addEventListener('preview-auth-change', handleAuthChange);
-    const interval = setInterval(checkAuth, 500);
 
     return () => {
       window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener('preview-auth-change', handleAuthChange);
-      clearInterval(interval);
     };
   }, []);
 
@@ -50,9 +51,9 @@ function Footer() {
       ...navigation.footer,
       cruiseLines: [],
       destinations: [],
-      categories: [],
+      cruiseTypes: [],
       company: navigation.footer.company.filter(
-        link => !['/bucket-list', '/offers'].includes(link.path)
+        link => !['/bucket-list', '/offers', '/cruise-types'].includes(link.path)
       )
     };
   }, [authStatus]);
@@ -142,11 +143,11 @@ function Footer() {
                   ))}
                 </ul>
                 
-                {footerNav.categories.length > 0 && (
+                {footerNav.cruiseTypes && footerNav.cruiseTypes.length > 0 && (
                   <>
                     <h3 className="footer-column-title mt-6">Cruise Types</h3>
                     <ul className="footer-links">
-                      {footerNav.categories.map((link, index) => (
+                      {footerNav.cruiseTypes.map((link, index) => (
                         <li key={index}>
                           <Link to={link.path}>{link.label}</Link>
                         </li>

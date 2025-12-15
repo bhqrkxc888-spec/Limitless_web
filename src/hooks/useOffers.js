@@ -1,10 +1,12 @@
 /**
  * useOffers Hook
  * React hook for fetching offers data
+ * Falls back to placeholder data when Supabase offers aren't available
  */
 
 import { useState, useEffect, useCallback } from 'react';
 import { getOffers, getOfferBySlug } from '../services/offersAPI';
+import { placeholderOffers, getPlaceholderOfferBySlug } from '../data/placeholderOffers';
 import { logger } from '../utils/logger';
 
 /**
@@ -57,12 +59,29 @@ export function useOffers({
         throw fetchError;
       }
 
-      if (data) {
-        setOffers(data.offers || []);
-        setTotal(data.total || 0);
+      if (data && data.offers && data.offers.length > 0) {
+        // Use real Supabase data
+        setOffers(data.offers);
+        setTotal(data.total || data.offers.length);
       } else {
-        setOffers([]);
-        setTotal(0);
+        // Fall back to placeholder offers when Supabase is empty
+        // Apply filters if provided
+        let filtered = [...placeholderOffers];
+        if (featured !== null) {
+          filtered = filtered.filter(o => o.featured === featured);
+        }
+        if (destination) {
+          filtered = filtered.filter(o => 
+            o.destination?.toLowerCase().includes(destination.toLowerCase())
+          );
+        }
+        if (offerType) {
+          filtered = filtered.filter(o => o.offer_type === offerType);
+        }
+        // Apply pagination
+        const paginated = filtered.slice(offset, offset + limit);
+        setOffers(paginated);
+        setTotal(filtered.length);
       }
     } catch (err) {
       // Only log non-"function not found" errors
@@ -129,7 +148,13 @@ export function useOffer(slug) {
           throw fetchError;
         }
 
-        setOffer(data || null);
+        // Use real data if found, otherwise check placeholder
+        if (data) {
+          setOffer(data);
+        } else {
+          // Fall back to placeholder offer
+          setOffer(getPlaceholderOfferBySlug(slug));
+        }
       } catch (err) {
         // Only log non-"function not found" errors
         if (err.code !== 'PGRST202' && 

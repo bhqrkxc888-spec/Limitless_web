@@ -6,6 +6,7 @@ import { analyzePageSEO } from './services/seoMonitoring'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import CookieConsent from './components/CookieConsent'
+import FloatingWhatsApp from './components/FloatingWhatsApp'
 
 // Route Protection
 import ProtectedRoute from './components/ProtectedRoute'
@@ -50,6 +51,7 @@ const ContactPage = lazy(() => import('./pages/ContactPage'))
 const AdminPage = lazy(() => import('./pages/AdminPage'))
 const CruiseLinesPage = lazy(() => import('./pages/CruiseLinesPage'))
 const DestinationsPage = lazy(() => import('./pages/DestinationsPage'))
+const CruiseTypesPage = lazy(() => import('./pages/CruiseTypesPage'))
 const BucketListPage = lazy(() => import('./pages/BucketListPage'))
 const OffersPage = lazy(() => import('./pages/OffersPage'))
 const OfferPage = lazy(() => import('./pages/OfferPage'))
@@ -58,6 +60,8 @@ const TravelNewsArticlePage = lazy(() => import('./pages/TravelNewsArticlePage')
 const TravelNewsCategoryPage = lazy(() => import('./pages/TravelNewsCategoryPage'))
 const TravelNewsTagPage = lazy(() => import('./pages/TravelNewsTagPage'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
+const FAQPage = lazy(() => import('./pages/FAQPage'))
+const TestimonialsPage = lazy(() => import('./pages/TestimonialsPage'))
 
 // Legal Pages
 const WebsiteTerms = lazy(() => import('./pages/WebsiteTerms'))
@@ -187,7 +191,17 @@ function App() {
                 } 
               />
               
-              {/* Cruise Categories - Protected */}
+              {/* Cruise Types Hub - Protected */}
+              <Route 
+                path="/cruise-types" 
+                element={
+                  <ProtectedRoute>
+                    <CruiseTypesPage />
+                  </ProtectedRoute>
+                } 
+              />
+              
+              {/* Legacy Cruise Categories Route - Redirect to Cruise Types */}
               <Route 
                 path="/cruises/:slug" 
                 element={
@@ -197,11 +211,57 @@ function App() {
                 } 
               />
               
-              {/* Travel News - Public */}
-              <Route path="/travel-news" element={<TravelNewsPage />} />
-              <Route path="/travel-news/category/:category" element={<TravelNewsCategoryPage />} />
-              <Route path="/travel-news/tag/:tag" element={<TravelNewsTagPage />} />
-              <Route path="/travel-news/:slug" element={<TravelNewsArticlePage />} />
+              {/* FAQ & Testimonials - Protected during development */}
+              <Route 
+                path="/faq" 
+                element={
+                  <ProtectedRoute>
+                    <FAQPage />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/testimonials" 
+                element={
+                  <ProtectedRoute>
+                    <TestimonialsPage />
+                  </ProtectedRoute>
+                } 
+              />
+              
+              {/* Travel News - Protected during development */}
+              <Route 
+                path="/travel-news" 
+                element={
+                  <ProtectedRoute>
+                    <TravelNewsPage />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/travel-news/category/:category" 
+                element={
+                  <ProtectedRoute>
+                    <TravelNewsCategoryPage />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/travel-news/tag/:tag" 
+                element={
+                  <ProtectedRoute>
+                    <TravelNewsTagPage />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/travel-news/:slug" 
+                element={
+                  <ProtectedRoute>
+                    <TravelNewsArticlePage />
+                  </ProtectedRoute>
+                } 
+              />
               
               {/* Legal Pages - Always Public */}
               <Route path="/website-terms" element={<WebsiteTerms />} />
@@ -216,6 +276,7 @@ function App() {
         </main>
         <Footer />
         <CookieConsent />
+        <FloatingWhatsApp />
       </div>
     </BrowserRouter>
   )

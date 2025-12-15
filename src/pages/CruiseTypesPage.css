@@ -1,0 +1,393 @@
+/* ========================================
+   CRUISE TYPES PAGE STYLES
+   Hub page for different cruise types
+   ======================================== */
+
+.cruise-types-page {
+  background-color: var(--clr-bg);
+}
+
+/* ========================================
+   QUICK NAVIGATION
+   ======================================== */
+
+.cruise-types-nav {
+  padding: var(--space-6) 0;
+  background: var(--clr-bg-alt);
+  border-bottom: 1px solid var(--clr-border);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+}
+
+.types-quick-nav {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  padding: var(--space-2) 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.types-quick-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.quick-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--clr-text-main);
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+  min-width: 100px;
+}
+
+.quick-nav-item:hover {
+  border-color: var(--clr-accent);
+  background: var(--clr-accent);
+  color: var(--clr-primary);
+  transform: translateY(-2px);
+}
+
+.quick-nav-item svg {
+  width: 24px;
+  height: 24px;
+  color: var(--clr-accent);
+  transition: color var(--transition-fast);
+}
+
+.quick-nav-item:hover svg {
+  color: var(--clr-primary);
+}
+
+.quick-nav-item span {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ========================================
+   CRUISE TYPES GRID
+   ======================================== */
+
+.cruise-types-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.cruise-type-anchor {
+  scroll-margin-top: 120px;
+}
+
+/* ========================================
+   CRUISE TYPE CARD
+   ======================================== */
+
+.cruise-type-card {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: var(--space-6);
+  padding: var(--space-8);
+  background: var(--clr-bg);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+.cruise-type-card:hover {
+  border-color: var(--clr-accent);
+  box-shadow: var(--shadow-lg);
+}
+
+.cruise-type-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
+  border-radius: var(--radius-lg);
+  flex-shrink: 0;
+}
+
+.cruise-type-icon svg {
+  width: 40px;
+  height: 40px;
+  color: var(--clr-accent);
+}
+
+.cruise-type-content h3 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  color: var(--clr-primary);
+  margin-bottom: var(--space-1);
+}
+
+.cruise-type-tagline {
+  font-size: var(--font-size-lg);
+  color: var(--clr-accent);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-3);
+}
+
+.cruise-type-description {
+  color: var(--clr-text-muted);
+  margin-bottom: var(--space-4);
+  line-height: var(--line-height-relaxed);
+}
+
+.cruise-type-highlights {
+  margin-bottom: var(--space-4);
+}
+
+.cruise-type-highlights ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.cruise-type-highlights li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background: var(--clr-bg-alt);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-main);
+  margin-bottom: 0;
+}
+
+.cruise-type-highlights li::before {
+  content: '✓';
+  color: var(--clr-accent);
+  font-weight: var(--font-weight-bold);
+}
+
+.cruise-type-lines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  font-size: var(--font-size-sm);
+}
+
+.lines-label {
+  color: var(--clr-text-muted);
+}
+
+.lines-list {
+  color: var(--clr-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ========================================
+   COMPARISON TABLE
+   ======================================== */
+
+.comparison-table-wrapper {
+  overflow-x: auto;
+  margin: 0 calc(-1 * var(--space-4));
+  padding: 0 var(--space-4);
+}
+
+.comparison-table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  background: var(--clr-bg);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.comparison-table thead {
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+}
+
+.comparison-table th {
+  padding: var(--space-4) var(--space-5);
+  text-align: left;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.comparison-table th:first-child {
+  border-top-left-radius: var(--radius-lg);
+}
+
+.comparison-table th:last-child {
+  border-top-right-radius: var(--radius-lg);
+}
+
+.comparison-table td {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--clr-border);
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-main);
+}
+
+.comparison-table tbody tr:hover {
+  background: var(--clr-bg-alt);
+}
+
+.comparison-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.comparison-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: var(--radius-lg);
+}
+
+.comparison-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: var(--radius-lg);
+}
+
+/* ========================================
+   NOT SURE CTA
+   ======================================== */
+
+.not-sure-cta {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--space-8);
+  background: var(--clr-bg);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.not-sure-cta h2 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-3xl);
+  color: var(--clr-primary);
+  margin-bottom: var(--space-4);
+}
+
+.not-sure-cta p {
+  color: var(--clr-text-muted);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-6);
+}
+
+.not-sure-cta .cta-buttons {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ========================================
+   CTA SECTION
+   ======================================== */
+
+.section-dark .cta-buttons {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-6);
+}
+
+.btn-outline-white {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: var(--clr-text-on-primary);
+}
+
+.btn-outline-white:hover {
+  border-color: var(--clr-accent);
+  background: var(--clr-accent);
+  color: var(--clr-primary);
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+  .cruise-type-card {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    padding: var(--space-6);
+  }
+
+  .cruise-type-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .cruise-type-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .cruise-type-content h3 {
+    font-size: var(--font-size-xl);
+  }
+
+  .cruise-type-tagline {
+    font-size: var(--font-size-base);
+  }
+
+  .cruise-type-highlights ul {
+    flex-direction: column;
+  }
+
+  .quick-nav-item {
+    min-width: 85px;
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .quick-nav-item svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .quick-nav-item span {
+    font-size: var(--font-size-xs);
+  }
+
+  .not-sure-cta {
+    padding: var(--space-6);
+  }
+
+  .not-sure-cta h2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: var(--space-3);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cruise-type-card {
+    grid-template-columns: 100px 1fr;
+    padding: var(--space-10);
+  }
+
+  .cruise-type-icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .cruise-type-icon svg {
+    width: 50px;
+    height: 50px;
+  }
+}
+

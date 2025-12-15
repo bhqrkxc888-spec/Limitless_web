@@ -57,3 +57,23 @@
   margin-top: var(--space-8);
 }
 
+/* Demo notice for placeholder offers */
+.offers-demo-notice {
+  background: linear-gradient(135deg, var(--clr-bg-alt) 0%, var(--clr-bg) 100%);
+  border: 1px dashed var(--clr-accent);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-6);
+  margin-bottom: var(--space-8);
+  text-align: center;
+}
+
+.offers-demo-notice p {
+  margin: 0;
+  color: var(--clr-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.offers-demo-notice strong {
+  color: var(--clr-accent);
+}
+

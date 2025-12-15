@@ -6,8 +6,8 @@
 /* Import Design Tokens */
 @import './tokens.css';
 
-/* Import Fonts - Elegant Typography with font-display: swap for better performance */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+/* Note: Google Fonts (Inter + Playfair Display) are loaded via index.html
+   for optimal performance with preload + stylesheet link */
 
 /* ========================================
    CSS RESET & BASE
