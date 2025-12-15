@@ -49,6 +49,10 @@ function AdminErrors() {
         .select('*', { count: 'exact' })
         .order('created_at', { ascending: false });
       
+      // Exclude CRM errors - only show errors from the main website
+      // CRM has its own error tracking, we don't want those mixed in
+      query = query.not('page_url', 'like', '%crm.limitlesscruises.com%');
+      
       // Apply filters
       if (typeFilter !== 'all') {
         query = query.eq('error_type', typeFilter);
