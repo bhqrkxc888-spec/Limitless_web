@@ -191,7 +191,7 @@ export function initCoreWebVitals() {
         }
       })
       lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] })
-    } catch (err) {
+    } catch {
       // LCP not supported
     }
     
@@ -207,7 +207,7 @@ export function initCoreWebVitals() {
         })
       })
       fidObserver.observe({ entryTypes: ['first-input'] })
-    } catch (err) {
+    } catch {
       // FID not supported
     }
     
@@ -235,7 +235,7 @@ export function initCoreWebVitals() {
           logPerformanceMetric('CLS', clsValue, 'core_web_vital')
         }
       })
-    } catch (err) {
+    } catch {
       // CLS not supported
     }
   }

@@ -479,47 +479,37 @@ function analyzeRobots() {
  */
 function calculateOverallScore(metrics) {
   let score = 100
-  let maxDeductions = 0
   
   // Title: -20 if fail, -10 if warning
   if (metrics.title.status === 'fail') score -= 20
   else if (metrics.title.status === 'warning') score -= 10
-  maxDeductions += 20
   
   // Description: -20 if fail, -10 if warning
   if (metrics.description.status === 'fail') score -= 20
   else if (metrics.description.status === 'warning') score -= 10
-  maxDeductions += 20
   
   // Structured data: -15 if fail, -5 if warning
   if (metrics.structuredData.status === 'fail') score -= 15
   else if (metrics.structuredData.status === 'warning') score -= 5
-  maxDeductions += 15
   
   // H1: -10 if warning
   if (metrics.h1.status === 'warning') score -= 10
-  maxDeductions += 10
   
   // Content: -10 if warning
   if (metrics.content.status === 'warning') score -= 10
-  maxDeductions += 10
   
   // Images: -10 if fail, -5 if warning
   if (metrics.images.status === 'fail') score -= 10
   else if (metrics.images.status === 'warning') score -= 5
-  maxDeductions += 10
   
   // Links: -5 if warning
   if (metrics.links.status === 'warning') score -= 5
-  maxDeductions += 5
   
   // Canonical: -5 if warning
   if (metrics.canonical.status === 'warning') score -= 5
-  maxDeductions += 5
   
   // Open Graph: -5 if warning
   if (metrics.openGraph.status === 'warning') score -= 5
-  maxDeductions += 5
   
   // Ensure score is between 0 and 100
   return Math.max(0, Math.min(100, score))
@@ -893,7 +883,7 @@ async function checkSEOMonitoringAvailable() {
     setCapability(CAPABILITY_KEY_PAGE_UPDATE, true)
     setCapability(CAPABILITY_KEY_METRIC_LOG, true)
     return true
-  } catch (err) {
+  } catch {
     // On error, assume unavailable
     setCapability(CAPABILITY_KEY_PAGE_UPDATE, false)
     setCapability(CAPABILITY_KEY_METRIC_LOG, false)

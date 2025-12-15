@@ -1,8 +1,16 @@
+import SEO from '../components/SEO';
 import './BookingTerms.css';
 
 function BookingTerms() {
   return (
     <main className="booking-terms-page">
+      <SEO
+        title="Booking Terms & Conditions"
+        description="Read the booking terms and conditions for Limitless Cruises. ABTA protected holidays with Holiday Elite. Understand payments, cancellations, and your rights."
+        canonical="https://limitlesscruises.com/booking-terms"
+        noindex={false}
+      />
+
       <div className="booking-terms-header">
         <div className="container">
           <h1>Booking Terms &amp; Conditions</h1>

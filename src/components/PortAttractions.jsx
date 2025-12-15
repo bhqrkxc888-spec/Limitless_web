@@ -3,7 +3,7 @@
  * Sophisticated display of port attractions and things to do
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { usePlaces } from '../hooks/usePlaces';
 import { getPlacePhotoUrl, formatDistance, getPlaceCategory } from '../services/placesAPI';
 import { apiConfig, apiMessages } from '../config/apiConfig';
@@ -11,13 +11,22 @@ import { siteConfig } from '../config/siteConfig';
 import { Card } from './ui';
 import './PortAttractions.css';
 
-function PortAttractions({ lat, lon, destinationName, portName, regions, fullWidth = false, availablePorts = [], selectedPortName = null, onPortChange = null }) {
+function PortAttractions({ lat, lon, destinationName, portName, fullWidth = false, availablePorts = [], selectedPortName = null, onPortChange = null }) {
   const [currentPage, setCurrentPage] = useState(0);
   const cardsPerPage = 4; // Show 4 cards at a time
+  const prevActivePortRef = useRef(null);
   
   // Determine which port to use for search (selected port or default)
   const activePortName = selectedPortName || portName;
   const activePort = availablePorts.find(p => p.name === activePortName) || { name: activePortName, coordinates: { lat, lon } };
+  
+  // Reset to first page when port changes
+  useEffect(() => {
+    if (prevActivePortRef.current !== null && prevActivePortRef.current !== activePortName) {
+      setCurrentPage(0);
+    }
+    prevActivePortRef.current = activePortName;
+  }, [activePortName]);
   
   // Build search query - port-specific search for attractions
   const isSmallPort = activePortName && ['Gibraltar', 'Ibiza'].includes(activePortName);
@@ -39,11 +48,6 @@ function PortAttractions({ lat, lon, destinationName, portName, regions, fullWid
   // Pagination
   const totalPages = Math.ceil(places.length / cardsPerPage);
   const currentPlaces = places.slice(currentPage * cardsPerPage, (currentPage + 1) * cardsPerPage);
-  
-  // Reset to first page when port changes
-  useEffect(() => {
-    setCurrentPage(0);
-  }, [activePortName]);
   
   const handlePrevPage = () => {
     setCurrentPage(prev => Math.max(0, prev - 1));

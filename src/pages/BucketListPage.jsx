@@ -1,4 +1,4 @@
-import { getAllBucketList, getFeaturedBucketList, getRotatingFeatured } from '../data/bucketList';
+import { getAllBucketList, getRotatingFeatured } from '../data/bucketList';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
@@ -10,7 +10,6 @@ function BucketListPage() {
   // Get dynamic rotating featured experiences (changes on each visit/refresh)
   const [featured, setFeatured] = useState(getRotatingFeatured(3)); // Max 3 for carousel
   const allExperiences = getAllBucketList();
-  const featuredStatic = getFeaturedBucketList();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsToShow] = useState(3); // Always 3 on desktop
   

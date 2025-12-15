@@ -4,7 +4,7 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, SectionHeader, Accordion, Card } from '../components/ui';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './BucketListExperiencePage.css';
 
 function BucketListExperiencePage() {

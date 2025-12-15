@@ -131,13 +131,13 @@ export async function logError(error, options = {}) {
     }
     
     const pageUrl = typeof window !== 'undefined' ? window.location.href : null
-    const pagePath = getPagePath(pageUrl)
+    const _pagePath = getPagePath(pageUrl) // Used for debugging, kept for potential future use
     const userAgent = typeof navigator !== 'undefined' ? navigator.userAgent : null
     const sessionId = getSessionId()
     
     // Get IP address (if available from headers, otherwise null)
     // Note: IP is typically captured server-side, but we'll try to get it if possible
-    const ipAddress = null // Client-side IP detection is not reliable
+    const _ipAddress = null // Client-side IP detection is not reliable, kept for potential future use
     
     const errorType = getErrorType(error, options)
     const severity = getSeverity(error, options)

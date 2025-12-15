@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { isSiteLaunched, isPublicRoute, isPreviewAuthenticated } from '../config/launchConfig';
+import { useLocation } from 'react-router-dom';
+import { isPublicRoute, isPreviewAuthenticated } from '../config/launchConfig';
 import { Button } from './ui';
 import './ProtectedRoute.css';
 
@@ -11,13 +10,6 @@ import './ProtectedRoute.css';
 function ProtectedRoute({ children }) {
   const location = useLocation();
   const pathname = location.pathname;
-  const navigate = useNavigate();
-  const [checking, setChecking] = useState(true);
-
-  useEffect(() => {
-    // Check authentication status
-    setChecking(false);
-  }, []);
 
   // If site is fully launched (env var), allow access - no password needed
   if (import.meta.env.VITE_SITE_LAUNCHED === 'true') {
@@ -32,11 +24,6 @@ function ProtectedRoute({ children }) {
   // If already authenticated via admin page, allow access
   if (isPreviewAuthenticated()) {
     return children;
-  }
-
-  // If checking, show nothing briefly (prevents flash)
-  if (checking) {
-    return null;
   }
 
   // Not authenticated - show coming soon with admin link

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { Button } from '../components/ui';
-import { siteConfig } from '../config/siteConfig';
 import './NotFoundPage.css';
 
 function NotFoundPage() {

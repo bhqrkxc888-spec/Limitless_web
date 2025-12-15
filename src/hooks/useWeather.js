@@ -6,6 +6,7 @@
 import { useState, useEffect } from 'react';
 import { getCurrentWeather, getWeatherForecast, groupForecastByDay } from '../services/weatherAPI';
 import { apiConfig } from '../config/apiConfig';
+import { logger } from '../utils/logger';
 
 export function useWeather(lat, lon) {
   const [current, setCurrent] = useState(null);

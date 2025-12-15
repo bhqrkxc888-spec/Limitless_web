@@ -1,8 +1,16 @@
+import SEO from '../components/SEO';
 import './PrivacyPolicy.css';
 
 function PrivacyPolicy() {
   return (
     <main className="privacy-policy-page">
+      <SEO
+        title="Privacy Policy"
+        description="Learn how Limitless Cruises collects, uses, and protects your personal data. Read our full privacy policy for GDPR compliance information."
+        canonical="https://limitlesscruises.com/privacy-policy"
+        noindex={false}
+      />
+
       <div className="privacy-header">
         <div className="container">
           <h1>Privacy Policy</h1>

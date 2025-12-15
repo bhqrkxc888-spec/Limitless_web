@@ -6,7 +6,6 @@
 import { logError } from '../services/errorTracking';
 
 const isDevelopment = import.meta.env.DEV;
-const isProduction = import.meta.env.PROD;
 
 export const logger = {
   log: (...args) => {

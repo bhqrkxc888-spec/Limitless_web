@@ -4,7 +4,7 @@
  */
 
 import { useWeather } from '../hooks/useWeather';
-import { getWeatherIconUrl, formatTemperature, groupForecastByDay } from '../services/weatherAPI';
+import { getWeatherIconUrl, formatTemperature } from '../services/weatherAPI';
 import { apiConfig, apiMessages } from '../config/apiConfig';
 import './WeatherWidget.css';
 

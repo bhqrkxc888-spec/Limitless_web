@@ -1,8 +1,16 @@
+import SEO from '../components/SEO';
 import './WebsiteTerms.css';
 
 function WebsiteTerms() {
   return (
     <main className="website-terms-page">
+      <SEO
+        title="Website Terms & Conditions"
+        description="Read the terms and conditions for using the Limitless Cruises website. Understanding your obligations and our disclaimers."
+        canonical="https://limitlesscruises.com/website-terms"
+        noindex={false}
+      />
+
       <div className="terms-header">
         <div className="container">
           <h1>Website Conditions</h1>

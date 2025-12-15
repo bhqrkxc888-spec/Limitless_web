@@ -98,7 +98,8 @@ function CardContent({ className = '', children }) {
 /**
  * Card Title Component
  */
-function CardTitle({ as: Tag = 'h3', className = '', children }) {
+function CardTitle({ as = 'h3', className = '', children }) {
+  const Tag = as;
   return (
     <Tag className={`card-title ${className}`}>
       {children}

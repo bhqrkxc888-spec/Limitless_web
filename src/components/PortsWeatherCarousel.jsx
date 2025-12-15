@@ -4,7 +4,7 @@
  * Auto-scrolls through ports with aggressive caching to minimize API calls
  */
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useWeather } from '../hooks/useWeather';
 import { getWeatherIconUrl, formatTemperature } from '../services/weatherAPI';
 import { majorPorts } from '../data/majorPorts';
@@ -21,12 +21,12 @@ import './PortsWeatherCarousel.css';
  */
 function PortsWeatherCarousel({ ports, title, onPortChange, selectedPort = null }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [visiblePorts, setVisiblePorts] = useState([]);
   const intervalRef = useRef(null);
   const userInteractionRef = useRef(false); // Track if user has manually interacted
+  const prevPortsRef = useRef(ports);
 
-  // Get time-rotated ports (changes every 2 hours to reduce API calls)
-  useEffect(() => {
+  // Compute visible ports using useMemo (derived state)
+  const visiblePorts = useMemo(() => {
     // Always default to majorPorts (Mediterranean) if no ports provided
     const portsToUse = ports || majorPorts;
     
@@ -47,8 +47,15 @@ function PortsWeatherCarousel({ ports, title, onPortChange, selectedPort = null 
 
     // Show 4 ports at a time, rotated every 2 hours
     const rotated = getTimeRotatedContent(formattedPorts, 2); // 2 hour rotation
-    setVisiblePorts(rotated.slice(0, Math.min(4, rotated.length)));
-    setCurrentIndex(0);
+    return rotated.slice(0, Math.min(4, rotated.length));
+  }, [ports]);
+
+  // Reset currentIndex when ports change
+  useEffect(() => {
+    if (prevPortsRef.current !== ports) {
+      prevPortsRef.current = ports;
+      setCurrentIndex(0);
+    }
   }, [ports]);
 
   // Sync with externally selected port (from attractions filter)
@@ -63,7 +70,7 @@ function PortsWeatherCarousel({ ports, title, onPortChange, selectedPort = null 
         setCurrentIndex(portIndex);
       }
     }
-  }, [selectedPort, visiblePorts]);
+  }, [selectedPort, visiblePorts, currentIndex]);
 
   // Auto-scroll through visible ports (only if user hasn't interacted and no external selection)
   useEffect(() => {

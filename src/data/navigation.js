@@ -7,16 +7,6 @@ import { cruiseLines } from './cruiseLines';
 import { destinations } from './destinations';
 import { categories } from './categories';
 
-// Get cruise lines grouped by category for mega menu
-const getCruiseLinesByCategory = () => {
-  const mainstream = cruiseLines.filter(cl => cl.category === 'mainstream');
-  const premium = cruiseLines.filter(cl => cl.category === 'premium' || cl.category === 'contemporary');
-  const luxury = cruiseLines.filter(cl => cl.category === 'luxury' || cl.category === 'ultra-luxury' || cl.category === 'expedition');
-  const traditional = cruiseLines.filter(cl => cl.category === 'traditional');
-  
-  return { mainstream, premium, luxury, traditional };
-};
-
 export const navigation = {
   // Navigation structure with dropdown menus
   main: [

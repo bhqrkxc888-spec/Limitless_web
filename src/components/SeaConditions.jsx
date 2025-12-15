@@ -5,7 +5,7 @@
 
 import './SeaConditions.css';
 
-function SeaConditions({ lat, lon }) {
+function SeaConditions() {
   // Coming Soon - Always show coming soon message
   return (
     <div className="sea-conditions-widget">

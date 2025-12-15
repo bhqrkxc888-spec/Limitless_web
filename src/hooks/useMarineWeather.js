@@ -6,6 +6,7 @@
 import { useState, useEffect } from 'react';
 import { getSeaConditions, getCurrentSeaConditions } from '../services/marineAPI';
 import { apiConfig } from '../config/apiConfig';
+import { logger } from '../utils/logger';
 
 export function useMarineWeather(lat, lon) {
   const [conditions, setConditions] = useState(null);

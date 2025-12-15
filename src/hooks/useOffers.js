@@ -3,7 +3,7 @@
  * React hook for fetching offers data
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { getOffers, getOfferBySlug } from '../services/offersAPI';
 import { logger } from '../utils/logger';
 
@@ -29,7 +29,7 @@ export function useOffers({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchOffers = async () => {
+  const fetchOffers = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -78,11 +78,11 @@ export function useOffers({
     } finally {
       setLoading(false);
     }
-  };
+  }, [limit, offset, featured, offerType, destination]);
 
   useEffect(() => {
     fetchOffers();
-  }, [limit, offset, featured, offerType, destination]);
+  }, [fetchOffers]);
 
   return {
     offers,

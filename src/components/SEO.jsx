@@ -125,7 +125,7 @@ function SEO({
     }, 500)
 
     return () => clearTimeout(timeoutId)
-  }, [fullTitle, fullDescription, fullCanonical, type, fullImage, keywords, author, robots, noindex]);
+  }, [fullTitle, fullDescription, fullCanonical, type, fullImage, keywords, author, robots, noindex, siteName]);
 
   // Render structured data if provided (supports single object or array)
   if (structuredData) {

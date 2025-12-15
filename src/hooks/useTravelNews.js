@@ -3,7 +3,7 @@
  * React hook for fetching travel news data
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { getTravelNews, getTravelNewsBySlug } from '../services/travelNewsAPI';
 import { logger } from '../utils/logger';
 
@@ -29,7 +29,7 @@ export function useTravelNews({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchNews = async () => {
+  const fetchNews = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -78,11 +78,11 @@ export function useTravelNews({
     } finally {
       setLoading(false);
     }
-  };
+  }, [limit, offset, featured, category, tag]);
 
   useEffect(() => {
     fetchNews();
-  }, [limit, offset, featured, category, tag]);
+  }, [fetchNews]);
 
   return {
     news,

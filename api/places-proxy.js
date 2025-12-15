@@ -33,7 +33,7 @@ export default async function handler(req, res) {
     let response;
 
     switch (action) {
-      case 'search':
+      case 'search': {
         // Nearby Search API
         const { lat, lon, query = '', type = 'tourist_attraction', radius = 5000 } = params;
         
@@ -80,8 +80,9 @@ export default async function handler(req, res) {
           results: searchData.results || [],
           next_page_token: searchData.next_page_token || null
         });
+      }
 
-      case 'details':
+      case 'details': {
         // Place Details API
         const { placeId, fields = 'name,rating,formatted_address,formatted_phone_number,website,photos,opening_hours,geometry' } = params;
         
@@ -112,8 +113,9 @@ export default async function handler(req, res) {
           status: 'OK',
           result: detailsData.result
         });
+      }
 
-      case 'photo':
+      case 'photo': {
         // Place Photo API - Proxy the image to avoid CORS and keep API key secure
         const { photo_reference, maxwidth = 400 } = params;
         
@@ -138,13 +140,14 @@ export default async function handler(req, res) {
           res.setHeader('Content-Type', contentType);
           res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 24 hours
           return res.status(200).send(Buffer.from(imageBuffer));
-        } catch (error) {
-          console.error('Error fetching photo:', error);
+        } catch (photoError) {
+          console.error('Error fetching photo:', photoError);
           return res.status(500).json({
             error: 'Failed to fetch photo',
-            message: error.message
+            message: photoError.message
           });
         }
+      }
 
       default:
         return res.status(400).json({ error: 'Invalid action. Use "search", "details", or "photo"' });

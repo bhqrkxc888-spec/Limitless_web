@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { siteConfig } from '../config/siteConfig';
+import { useState } from 'react';
 import { Button } from './ui';
 import './PreviewGate.css';
 

@@ -6,12 +6,18 @@ import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, SectionHeader } from '../components/ui';
 import ContactForm from '../components/ContactForm';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import './OfferPage.css';
 
 function OfferPage() {
   const { slug } = useParams();
   const { offer, loading, error } = useOffer(slug);
+
+  // Compute default price valid until date (90 days from now) - must be before early returns
+  // Using useMemo with empty deps ensures it's computed once per component instance
+  const defaultPriceValidUntil = useMemo(() => {
+    return new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
+  }, []);
 
   // Track view when offer is loaded
   useEffect(() => {
@@ -93,7 +99,7 @@ function OfferPage() {
       price: offer.price_from,
       priceCurrency: offer.currency || 'GBP',
       availability: 'https://schema.org/InStock',
-      priceValidUntil: offer.expires_at || new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      priceValidUntil: offer.expires_at || defaultPriceValidUntil,
       url: `https://limitlesscruises.com/offers/${offer.slug}`
     },
     ...(offer.hero_image_url && {
