@@ -67,6 +67,23 @@
   width: 100%;
 }
 
+.admin-back-link {
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--clr-border);
+}
+
+.admin-back-link a {
+  color: var(--clr-text-muted);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  transition: color var(--transition-fast);
+}
+
+.admin-back-link a:hover {
+  color: var(--clr-primary);
+}
+
 /* Responsive */
 @media (min-width: 768px) {
   .admin-success-actions {

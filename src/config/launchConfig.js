@@ -8,11 +8,32 @@ const envSiteLaunched = import.meta.env.VITE_SITE_LAUNCHED === 'true';
 
 // Check if user is authenticated for preview mode
 // Uses sessionStorage (more secure, clears on browser close)
+// Also checks for admin dashboard session
 export const isPreviewAuthenticated = () => {
   if (typeof window === 'undefined') {
     return false; // Server-side, no preview mode
   }
-  return sessionStorage.getItem('limitless_preview_authenticated') === 'true';
+  
+  // Check sessionStorage (legacy preview auth)
+  if (sessionStorage.getItem('limitless_preview_authenticated') === 'true') {
+    return true;
+  }
+  
+  // Check for admin dashboard session (cookie-based)
+  // If logged into admin, automatically have preview access
+  if (document.cookie.includes('admin_session_active=true')) {
+    return true;
+  }
+  
+  return false;
+};
+
+// Check if user has admin session (logged into monitoring dashboard)
+export const hasAdminSession = () => {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+  return document.cookie.includes('admin_session_active=true');
 };
 
 // Site is launched if either env var is true OR user is preview authenticated

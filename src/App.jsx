@@ -63,6 +63,13 @@ const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
 const FAQPage = lazy(() => import('./pages/FAQPage'))
 const TestimonialsPage = lazy(() => import('./pages/TestimonialsPage'))
 
+// Admin Monitoring Dashboard
+const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'))
+const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
+const AdminErrors = lazy(() => import('./pages/admin/AdminErrors'))
+const AdminPerformance = lazy(() => import('./pages/admin/AdminPerformance'))
+const AdminSEO = lazy(() => import('./pages/admin/AdminSEO'))
+
 // Legal Pages
 const WebsiteTerms = lazy(() => import('./pages/WebsiteTerms'))
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
@@ -83,7 +90,8 @@ function ScrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     
     // Trigger SEO analysis on route change (after a delay to let page render)
-    if (!import.meta.env.DEV) {
+    // Skip for admin routes
+    if (!import.meta.env.DEV && !pathname.startsWith('/admin')) {
       const timeoutId = setTimeout(() => {
         analyzePageSEO().catch(() => {
           // Silently fail if SEO analysis fails
@@ -97,187 +105,214 @@ function ScrollToTop() {
   return null;
 }
 
+// Layout wrapper that conditionally shows header/footer
+function AppLayout() {
+  const { pathname } = useLocation();
+  const isAdminRoute = pathname.startsWith('/admin');
+  
+  // Admin routes have their own layout
+  if (isAdminRoute) {
+    return (
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          {/* Preview Access for hidden/coming-soon pages */}
+          <Route path="/preview" element={<AdminPage />} />
+          
+          {/* Admin Monitoring Dashboard */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/errors" element={<AdminErrors />} />
+          <Route path="/admin/performance" element={<AdminPerformance />} />
+          <Route path="/admin/seo" element={<AdminSEO />} />
+        </Routes>
+      </Suspense>
+    );
+  }
+  
+  // Regular site layout with header/footer
+  return (
+    <div className="app">
+      {/* Skip to main content - Accessibility */}
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+      <Header />
+      <main id="main-content">
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            {/* Main Pages - Always Public */}
+            <Route path="/" element={<HomePage />} />
+            <Route path="/find-a-cruise" element={<FindCruisePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            
+            {/* Offers - Protected */}
+            <Route 
+              path="/offers" 
+              element={
+                <ProtectedRoute>
+                  <OffersPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/offers/:slug" 
+              element={
+                <ProtectedRoute>
+                  <OfferPage />
+                </ProtectedRoute>
+              } 
+            />
+            
+            {/* Cruise Lines - Protected */}
+            <Route 
+              path="/cruise-lines" 
+              element={
+                <ProtectedRoute>
+                  <CruiseLinesPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/cruise-lines/:slug" 
+              element={
+                <ProtectedRoute>
+                  <CruiseLinePage />
+                </ProtectedRoute>
+              } 
+            />
+            
+            {/* Destinations - Protected */}
+            <Route 
+              path="/destinations" 
+              element={
+                <ProtectedRoute>
+                  <DestinationsPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/destinations/:slug" 
+              element={
+                <ProtectedRoute>
+                  <DestinationPage />
+                </ProtectedRoute>
+              } 
+            />
+            
+            {/* Bucket List Experiences - Protected */}
+            <Route 
+              path="/bucket-list" 
+              element={
+                <ProtectedRoute>
+                  <BucketListPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/bucket-list/:slug" 
+              element={
+                <ProtectedRoute>
+                  <BucketListExperiencePage />
+                </ProtectedRoute>
+              } 
+            />
+            
+            {/* Cruise Types Hub - Protected */}
+            <Route 
+              path="/cruise-types" 
+              element={
+                <ProtectedRoute>
+                  <CruiseTypesPage />
+                </ProtectedRoute>
+              } 
+            />
+            
+            {/* Legacy Cruise Categories Route - Redirect to Cruise Types */}
+            <Route 
+              path="/cruises/:slug" 
+              element={
+                <ProtectedRoute>
+                  <CategoryPage />
+                </ProtectedRoute>
+              } 
+            />
+            
+            {/* FAQ & Testimonials - Protected during development */}
+            <Route 
+              path="/faq" 
+              element={
+                <ProtectedRoute>
+                  <FAQPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/testimonials" 
+              element={
+                <ProtectedRoute>
+                  <TestimonialsPage />
+                </ProtectedRoute>
+              } 
+            />
+            
+            {/* Travel News - Protected during development */}
+            <Route 
+              path="/travel-news" 
+              element={
+                <ProtectedRoute>
+                  <TravelNewsPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/travel-news/category/:category" 
+              element={
+                <ProtectedRoute>
+                  <TravelNewsCategoryPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/travel-news/tag/:tag" 
+              element={
+                <ProtectedRoute>
+                  <TravelNewsTagPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/travel-news/:slug" 
+              element={
+                <ProtectedRoute>
+                  <TravelNewsArticlePage />
+                </ProtectedRoute>
+              } 
+            />
+            
+            {/* Legal Pages - Always Public */}
+            <Route path="/website-terms" element={<WebsiteTerms />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/booking-terms" element={<BookingTerms />} />
+            <Route path="/cookie-policy" element={<CookiePolicy />} />
+
+            {/* 404 - Catch all unmatched routes */}
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </Suspense>
+      </main>
+      <Footer />
+      <CookieConsent />
+      <FloatingWhatsApp />
+    </div>
+  );
+}
+
 function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <div className="app">
-        {/* Skip to main content - Accessibility */}
-        <a href="#main-content" className="skip-link">
-          Skip to main content
-        </a>
-        <Header />
-        <main id="main-content">
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              {/* Main Pages - Always Public */}
-              <Route path="/" element={<HomePage />} />
-              <Route path="/find-a-cruise" element={<FindCruisePage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              
-              {/* Offers - Protected */}
-              <Route 
-                path="/offers" 
-                element={
-                  <ProtectedRoute>
-                    <OffersPage />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/offers/:slug" 
-                element={
-                  <ProtectedRoute>
-                    <OfferPage />
-                  </ProtectedRoute>
-                } 
-              />
-              
-              {/* Admin/Preview Access */}
-              <Route path="/admin" element={<AdminPage />} />
-              
-              {/* Cruise Lines - Protected */}
-              <Route 
-                path="/cruise-lines" 
-                element={
-                  <ProtectedRoute>
-                    <CruiseLinesPage />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/cruise-lines/:slug" 
-                element={
-                  <ProtectedRoute>
-                    <CruiseLinePage />
-                  </ProtectedRoute>
-                } 
-              />
-              
-              {/* Destinations - Protected */}
-              <Route 
-                path="/destinations" 
-                element={
-                  <ProtectedRoute>
-                    <DestinationsPage />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/destinations/:slug" 
-                element={
-                  <ProtectedRoute>
-                    <DestinationPage />
-                  </ProtectedRoute>
-                } 
-              />
-              
-              {/* Bucket List Experiences - Protected */}
-              <Route 
-                path="/bucket-list" 
-                element={
-                  <ProtectedRoute>
-                    <BucketListPage />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/bucket-list/:slug" 
-                element={
-                  <ProtectedRoute>
-                    <BucketListExperiencePage />
-                  </ProtectedRoute>
-                } 
-              />
-              
-              {/* Cruise Types Hub - Protected */}
-              <Route 
-                path="/cruise-types" 
-                element={
-                  <ProtectedRoute>
-                    <CruiseTypesPage />
-                  </ProtectedRoute>
-                } 
-              />
-              
-              {/* Legacy Cruise Categories Route - Redirect to Cruise Types */}
-              <Route 
-                path="/cruises/:slug" 
-                element={
-                  <ProtectedRoute>
-                    <CategoryPage />
-                  </ProtectedRoute>
-                } 
-              />
-              
-              {/* FAQ & Testimonials - Protected during development */}
-              <Route 
-                path="/faq" 
-                element={
-                  <ProtectedRoute>
-                    <FAQPage />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/testimonials" 
-                element={
-                  <ProtectedRoute>
-                    <TestimonialsPage />
-                  </ProtectedRoute>
-                } 
-              />
-              
-              {/* Travel News - Protected during development */}
-              <Route 
-                path="/travel-news" 
-                element={
-                  <ProtectedRoute>
-                    <TravelNewsPage />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/travel-news/category/:category" 
-                element={
-                  <ProtectedRoute>
-                    <TravelNewsCategoryPage />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/travel-news/tag/:tag" 
-                element={
-                  <ProtectedRoute>
-                    <TravelNewsTagPage />
-                  </ProtectedRoute>
-                } 
-              />
-              <Route 
-                path="/travel-news/:slug" 
-                element={
-                  <ProtectedRoute>
-                    <TravelNewsArticlePage />
-                  </ProtectedRoute>
-                } 
-              />
-              
-              {/* Legal Pages - Always Public */}
-              <Route path="/website-terms" element={<WebsiteTerms />} />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/booking-terms" element={<BookingTerms />} />
-              <Route path="/cookie-policy" element={<CookiePolicy />} />
-
-              {/* 404 - Catch all unmatched routes */}
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </Suspense>
-        </main>
-        <Footer />
-        <CookieConsent />
-        <FloatingWhatsApp />
-      </div>
+      <AppLayout />
     </BrowserRouter>
   )
 }
