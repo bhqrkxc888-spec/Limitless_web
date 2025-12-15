@@ -182,12 +182,6 @@ export async function logError(error, options = {}) {
     const errorType = getErrorType(error, options)
     const severity = getSeverity(error, options)
     
-    // Build context with page_path included
-    const context = {
-      ...(options.context || {}),
-      page_path: pagePath
-    }
-    
     // Call Supabase RPC function
     const { error: rpcError } = await supabase.rpc('log_website_error', {
       p_error_type: errorType,
@@ -196,10 +190,11 @@ export async function logError(error, options = {}) {
       p_error_url: pageUrl,
       p_error_line: lineNumber,
       p_error_column: columnNumber,
+      p_page_path: pagePath,
       p_user_agent: userAgent,
       p_session_id: sessionId,
       p_severity: severity,
-      p_context: context
+      p_context: options.context || null
     })
     
     if (rpcError) {
