@@ -11,6 +11,28 @@ import { supabase } from '../lib/supabase'
 const CAPABILITY_KEY_PAGE_UPDATE = 'seo_monitoring_page_update_available'
 const CAPABILITY_KEY_METRIC_LOG = 'seo_monitoring_metric_log_available'
 
+// Initialize capabilities on module load - assume unavailable until proven otherwise
+// This prevents errors on first load if functions don't exist
+let capabilitiesInitialized = false
+
+/**
+ * Initialize capabilities - check if we've already determined they don't exist
+ */
+function initializeCapabilities() {
+  if (capabilitiesInitialized || typeof window === 'undefined' || typeof sessionStorage === 'undefined') {
+    return
+  }
+  
+  // Check if we've previously determined functions don't exist
+  const pageUpdateAvailable = sessionStorage.getItem(CAPABILITY_KEY_PAGE_UPDATE)
+  const metricLogAvailable = sessionStorage.getItem(CAPABILITY_KEY_METRIC_LOG)
+  
+  // If we know they don't exist, mark as initialized
+  if (pageUpdateAvailable === 'false' && metricLogAvailable === 'false') {
+    capabilitiesInitialized = true
+  }
+}
+
 /**
  * Check if a capability is available (cached in sessionStorage)
  * @param {string} key - Capability key
@@ -35,6 +57,12 @@ function setCapability(key, available) {
     return
   }
   sessionStorage.setItem(key, String(available))
+  capabilitiesInitialized = true
+}
+
+// Initialize on module load
+if (typeof window !== 'undefined') {
+  initializeCapabilities()
 }
 
 /**
@@ -681,6 +709,18 @@ export async function analyzePageSEO() {
     return
   }
 
+  // Initialize capabilities check
+  initializeCapabilities()
+
+  // Check if we know the RPC functions don't exist - skip entire analysis to prevent 404s
+  const pageUpdateAvailable = getCapability(CAPABILITY_KEY_PAGE_UPDATE)
+  const metricLogAvailable = getCapability(CAPABILITY_KEY_METRIC_LOG)
+  
+  // If we know both functions don't exist, skip everything to prevent 404s
+  if (pageUpdateAvailable === false && metricLogAvailable === false) {
+    return
+  }
+
   // Wait a bit for page to fully render
   await new Promise(resolve => setTimeout(resolve, 1000))
 
@@ -788,34 +828,120 @@ export async function analyzePageSEO() {
  * Initializes SEO monitoring
  * Analyzes page on load and route changes
  */
+/**
+ * Check if SEO monitoring RPC functions are available
+ * Makes a lightweight test call to determine if functions exist
+ * @returns {Promise<boolean>} - true if functions are available
+ */
+async function checkSEOMonitoringAvailable() {
+  if (!supabase) {
+    return false
+  }
+
+  // Check cached capability first
+  const pageUpdateAvailable = getCapability(CAPABILITY_KEY_PAGE_UPDATE)
+  const metricLogAvailable = getCapability(CAPABILITY_KEY_METRIC_LOG)
+  
+  // If we know they don't exist, return false immediately
+  if (pageUpdateAvailable === false && metricLogAvailable === false) {
+    return false
+  }
+  
+  // If we know they exist, return true
+  if (pageUpdateAvailable === true && metricLogAvailable === true) {
+    return true
+  }
+
+  // We don't know yet - make a test call to check
+  // Use a minimal call to update_website_seo_page to test availability
+  try {
+    const { error } = await supabase.rpc('update_website_seo_page', {
+      p_page_url: 'test',
+      p_page_path: '/test',
+      p_page_title: null,
+      p_page_type: null,
+      p_overall_score: null,
+      p_title_status: null,
+      p_description_status: null,
+      p_structured_data_status: null,
+      p_content_status: null,
+      p_links_status: null,
+      p_technical_status: null,
+      p_issues_count: null,
+      p_warnings_count: null
+    })
+    
+    const isNotFoundError = 
+      error?.status === 404 || 
+      error?.statusCode === 404 ||
+      error?.code === 'PGRST202' || 
+      error?.code === '42883' ||
+      error?.message?.includes('not found') || 
+      error?.message?.includes('function') || 
+      error?.message?.includes('does not exist') ||
+      error?.message?.includes('Searched for') ||
+      error?.message?.includes('Could not find')
+    
+    if (isNotFoundError) {
+      // Function doesn't exist - mark both as unavailable
+      setCapability(CAPABILITY_KEY_PAGE_UPDATE, false)
+      setCapability(CAPABILITY_KEY_METRIC_LOG, false)
+      return false
+    }
+    
+    // Function exists (or other error - assume available)
+    setCapability(CAPABILITY_KEY_PAGE_UPDATE, true)
+    setCapability(CAPABILITY_KEY_METRIC_LOG, true)
+    return true
+  } catch (err) {
+    // On error, assume unavailable
+    setCapability(CAPABILITY_KEY_PAGE_UPDATE, false)
+    setCapability(CAPABILITY_KEY_METRIC_LOG, false)
+    return false
+  }
+}
+
 export function initSEOMonitoring() {
   if (typeof window === 'undefined') return
   if (import.meta.env.DEV) return // Don't track in development
 
-  // Analyze on initial load
-  analyzePageSEO()
+  // Check if SEO monitoring is available (functions exist in database)
+  // This prevents 404 errors if the database setup hasn't been run
+  checkSEOMonitoringAvailable().then((isAvailable) => {
+    if (!isAvailable) {
+      // Functions don't exist - don't initialize monitoring
+      // This prevents all 404 errors
+      return
+    }
 
-  // Analyze on route changes (for SPA)
-  let lastPath = window.location.pathname
-  const checkRouteChange = () => {
-    const currentPath = window.location.pathname
-    if (currentPath !== lastPath) {
-      lastPath = currentPath
-      // Wait a bit for new page to render
+    // Functions exist - proceed with monitoring
+    // Analyze on initial load
+    analyzePageSEO()
+
+    // Analyze on route changes (for SPA)
+    let lastPath = window.location.pathname
+    const checkRouteChange = () => {
+      const currentPath = window.location.pathname
+      if (currentPath !== lastPath) {
+        lastPath = currentPath
+        // Wait a bit for new page to render
+        setTimeout(() => {
+          analyzePageSEO()
+        }, 1000)
+      }
+    }
+
+    // Check for route changes periodically
+    setInterval(checkRouteChange, 1000)
+
+    // Also listen to popstate (back/forward navigation)
+    window.addEventListener('popstate', () => {
       setTimeout(() => {
         analyzePageSEO()
       }, 1000)
-    }
-  }
-
-  // Check for route changes periodically
-  setInterval(checkRouteChange, 1000)
-
-  // Also listen to popstate (back/forward navigation)
-  window.addEventListener('popstate', () => {
-    setTimeout(() => {
-      analyzePageSEO()
-    }, 1000)
+    })
+  }).catch(() => {
+    // Silently fail if check fails
   })
 }
 
