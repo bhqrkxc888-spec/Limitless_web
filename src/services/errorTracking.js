@@ -263,6 +263,19 @@ export async function logNetworkError(error, context = {}) {
  * @returns {Promise<void>}
  */
 export async function logApiError(error, context = {}) {
+  // Don't log expected auth errors (failed login attempts are not bugs)
+  const endpoint = context?.endpoint || '';
+  const statusCode = context?.statusCode;
+  
+  if (endpoint.includes('/api/admin/login') && statusCode === 401) {
+    // This is just a failed login attempt, not an error
+    return;
+  }
+  if (endpoint.includes('/api/admin/session') && statusCode === 401) {
+    // Session expired or not authenticated - expected
+    return;
+  }
+  
   return logError(error, {
     errorType: 'api',
     severity: 'error',
