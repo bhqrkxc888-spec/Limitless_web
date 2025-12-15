@@ -6,6 +6,12 @@
  */
 
 import { supabase } from '../lib/supabase'
+import { siteConfig } from '../config/siteConfig'
+
+// Check if error tracking is enabled in config
+function isEnabled() {
+  return siteConfig.monitoring?.enabled && siteConfig.monitoring?.errorTracking
+}
 
 // Capability flag - track if RPC function exists and works
 const CAPABILITY_KEY = 'error_tracking_available'
@@ -126,6 +132,11 @@ function getSeverity(error, options = {}) {
  * @returns {Promise<void>}
  */
 export async function logError(error, options = {}) {
+  // Check if monitoring is enabled
+  if (!isEnabled()) {
+    return;
+  }
+
   // Don't log in development (too noisy)
   if (import.meta.env.DEV) {
     console.error('Error (not logged to Supabase in dev):', error);

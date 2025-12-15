@@ -6,6 +6,12 @@
  */
 
 import { supabase } from '../lib/supabase'
+import { siteConfig } from '../config/siteConfig'
+
+// Check if performance tracking is enabled in config
+function isEnabled() {
+  return siteConfig.monitoring?.enabled && siteConfig.monitoring?.performanceTracking
+}
 
 // Capability flag - track if RPC function exists and works
 const CAPABILITY_KEY = 'performance_monitoring_available'
@@ -122,6 +128,11 @@ function getPagePath(url) {
  * @returns {Promise<void>}
  */
 export async function logPerformanceMetric(metricName, metricValue, metricType = null, options = {}) {
+  // Check if monitoring is enabled
+  if (!isEnabled()) {
+    return;
+  }
+
   // Don't log in development (too noisy)
   if (import.meta.env.DEV) {
     return;
@@ -385,6 +396,11 @@ export async function trackApiCall(url, options = {}) {
  * Initializes all performance monitoring
  */
 export function initPerformanceMonitoring() {
+  // Check if monitoring is enabled
+  if (!isEnabled()) {
+    return;
+  }
+
   if (typeof window === 'undefined') return;
   if (import.meta.env.DEV) return; // Don't track in development
   

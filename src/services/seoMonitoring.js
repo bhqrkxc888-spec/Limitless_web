@@ -6,6 +6,12 @@
  */
 
 import { supabase } from '../lib/supabase'
+import { siteConfig } from '../config/siteConfig'
+
+// Check if SEO tracking is enabled in config
+function isMonitoringEnabled() {
+  return siteConfig.monitoring?.enabled && siteConfig.monitoring?.seoTracking
+}
 
 /**
  * Tracking parameters to strip from URLs
@@ -597,6 +603,11 @@ function countIssues(metrics) {
  * @returns {Promise<void>}
  */
 async function logSEOMetric(metricType, metricName, metricValue, metricUnit, metricStatus, metricDetails) {
+  // Check if monitoring is enabled
+  if (!isMonitoringEnabled()) {
+    return
+  }
+
   // Don't log in development (too noisy)
   if (import.meta.env.DEV) {
     return
@@ -676,6 +687,11 @@ async function logSEOMetric(metricType, metricName, metricValue, metricUnit, met
  * @returns {Promise<void>}
  */
 async function updatePageSummary(summary) {
+  // Check if monitoring is enabled
+  if (!isMonitoringEnabled()) {
+    return
+  }
+
   // Don't log in development
   if (import.meta.env.DEV) {
     return
@@ -957,6 +973,11 @@ async function checkSEOMonitoringAvailable() {
 }
 
 export function initSEOMonitoring() {
+  // Check if monitoring is enabled
+  if (!isMonitoringEnabled()) {
+    return
+  }
+
   if (typeof window === 'undefined') return
   if (import.meta.env.DEV) return // Don't track in development
 

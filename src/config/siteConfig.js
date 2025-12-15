@@ -7,6 +7,15 @@ export const siteConfig = {
   whatsappUrl: 'https://wa.me/447359796108', // Keep +44 for URL
   email: 'travel@limitlesscruises.com',
   facebook: 'https://www.facebook.com/profile.php?id=61570469572535',
+  
+  // Monitoring settings
+  monitoring: {
+    enabled: true,
+    errorTracking: true,
+    performanceTracking: true,
+    seoTracking: true
+  },
+  
   footerLegalText: [
     'Limitless Cruises Ltd when selling travel arrangements is a trading name of The Midcounties Co-operative Ltd. Limitless Cruises Ltd is a Member of Midcounties Co-operative Travel Consortium (ABTA P7541).',
     'Book with Confidence. We are a Member of ABTA which means you have the benefit of ABTA\'s assistance and Code of Conduct. Some of the flights and flight-inclusive holidays on this website are financially protected by the ATOL scheme, but ATOL protection does not apply to all holiday and travel services offered. We will confirm which protection applies before you make your booking. If you do not receive an ATOL Certificate then the booking will not be ATOL protected. If you do receive an ATOL Certificate but all parts of your trip are not listed on it, those parts will not be ATOL protected. See our booking conditions for details or visit www.caa.co.uk.',
