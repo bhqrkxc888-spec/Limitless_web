@@ -4,7 +4,7 @@
  */
 
 import { put, list, del } from '@vercel/blob';
-import logger from '../utils/logger';
+import { logger } from '../utils/logger';
 
 /**
  * Upload an image to Vercel Blob
