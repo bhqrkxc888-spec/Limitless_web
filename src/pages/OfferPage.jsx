@@ -31,23 +31,37 @@ function OfferPage() {
     }
   }, [offer?.id]);
 
-  // Collect all images for gallery
+  // Collect all images for gallery - with deduplication
   const galleryImages = useMemo(() => {
     if (!offer) return [];
     const images = [];
+    const seenUrls = new Set();
     
+    // Helper to add image only if not already seen
+    const addImage = (url, alt) => {
+      if (url && !seenUrls.has(url)) {
+        seenUrls.add(url);
+        images.push({ url, alt });
+      }
+    };
+    
+    // Priority: hero_image_url first (main display image)
     if (offer.hero_image_url) {
-      images.push({ url: offer.hero_image_url, alt: `${offer.title} - Main Image` });
+      addImage(offer.hero_image_url, `${offer.title} - Main Image`);
     }
-    if (offer.card_image_url && offer.card_image_url !== offer.hero_image_url) {
-      images.push({ url: offer.card_image_url, alt: `${offer.title} - Card Image` });
+    
+    // Then card_image_url (only if different from hero)
+    if (offer.card_image_url) {
+      addImage(offer.card_image_url, `${offer.title}`);
     }
+    
+    // Then gallery images (only add if not already shown)
     if (offer.gallery_images && Array.isArray(offer.gallery_images)) {
       offer.gallery_images.forEach((img, idx) => {
-        if (typeof img === 'string') {
-          images.push({ url: img, alt: `${offer.title} - Gallery ${idx + 1}` });
-        } else if (img?.url) {
-          images.push({ url: img.url, alt: img.alt || `${offer.title} - Gallery ${idx + 1}` });
+        const imgUrl = typeof img === 'string' ? img : img?.url;
+        const imgAlt = typeof img === 'string' ? `${offer.title} - Gallery ${idx + 1}` : (img?.alt || `${offer.title} - Gallery ${idx + 1}`);
+        if (imgUrl) {
+          addImage(imgUrl, imgAlt);
         }
       });
     }
@@ -377,12 +391,6 @@ function OfferPage() {
                 )}
                 {offer.departure_date && (
                   <div className="offer-quick-detail">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                      <line x1="16" y1="2" x2="16" y2="6"/>
-                      <line x1="8" y1="2" x2="8" y2="6"/>
-                      <line x1="3" y1="10" x2="21" y2="10"/>
-                    </svg>
                     <div>
                       <span className="offer-quick-detail__label">Departure</span>
                       <span className="offer-quick-detail__value">{formatShortDate(offer.departure_date)}</span>

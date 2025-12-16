@@ -232,12 +232,6 @@ function BucketListExperiencePage() {
                     Enquire Online
                   </Button>
                 </div>
-                {experience.startingFrom && (
-                  <p className="price-note">
-                    {experience.startingFrom}<br />
-                    <small>Prices subject to availability</small>
-                  </p>
-                )}
               </div>
 
               {/* Cruise Lines */}

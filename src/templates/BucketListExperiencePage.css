@@ -99,7 +99,7 @@
 .itinerary-timeline {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: var(--space-10);
   position: relative;
   padding-left: var(--space-8);
 }
@@ -251,9 +251,21 @@
   color: var(--clr-text-on-primary);
 }
 
-.booking-card h3,
+.booking-card h3 {
+  color: var(--clr-text-on-primary);
+  margin-bottom: var(--space-4);
+}
+
 .booking-card p {
   color: var(--clr-text-on-primary);
+  margin-bottom: var(--space-6);
+  line-height: var(--line-height-relaxed);
+}
+
+.sidebar-cta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
 }
 
 .price-note {

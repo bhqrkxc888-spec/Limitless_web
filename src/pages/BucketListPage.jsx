@@ -69,9 +69,6 @@ function BucketListPage() {
             <Card.Description>{experience.tagline}</Card.Description>
             <div className="bucket-list-meta">
               <span className="bucket-list-duration">{experience.duration}</span>
-              {experience.startingFrom && (
-                <span className="bucket-list-price">{experience.startingFrom}</span>
-              )}
             </div>
             {experience.highlights && experience.highlights.length > 0 && (
               <ul className="bucket-list-highlights">
@@ -147,9 +144,6 @@ function BucketListPage() {
                       <Card.Description>{experience.tagline}</Card.Description>
                       <div className="bucket-list-featured-meta">
                         <span className="duration">{experience.duration}</span>
-                        {experience.startingFrom && (
-                          <span className="price">{experience.startingFrom}</span>
-                        )}
                       </div>
                     </Card.Content>
                   </Card>
