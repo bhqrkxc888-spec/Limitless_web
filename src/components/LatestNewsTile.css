@@ -86,6 +86,99 @@
 }
 
 /* ========================================
+   CAROUSEL WRAPPER
+   ======================================== */
+
+.latest-news-tile__carousel-wrapper {
+  position: relative;
+}
+
+/* ========================================
+   NAVIGATION ARROWS
+   ======================================== */
+
+.latest-news-tile__nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--clr-surface);
+  border: 2px solid var(--clr-border-light);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-md);
+}
+
+.latest-news-tile__nav-arrow:hover:not(:disabled) {
+  background: var(--clr-accent);
+  border-color: var(--clr-accent);
+  box-shadow: var(--shadow-lg);
+}
+
+.latest-news-tile__nav-arrow:hover:not(:disabled) svg {
+  color: var(--clr-text-on-accent);
+}
+
+.latest-news-tile__nav-arrow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.latest-news-tile__nav-arrow svg {
+  width: 24px;
+  height: 24px;
+  color: var(--clr-text-main);
+  transition: color var(--transition-fast);
+}
+
+.latest-news-tile__nav-arrow--prev {
+  left: -24px;
+}
+
+.latest-news-tile__nav-arrow--next {
+  right: -24px;
+}
+
+/* ========================================
+   CAROUSEL INDICATORS
+   ======================================== */
+
+.latest-news-tile__indicators {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.latest-news-tile__indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--clr-border);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.latest-news-tile__indicator:hover {
+  background: var(--clr-accent-light);
+  transform: scale(1.2);
+}
+
+.latest-news-tile__indicator--active {
+  background: var(--clr-accent);
+  width: 24px;
+  border-radius: var(--radius-full);
+}
+
+/* ========================================
    FEATURED ARTICLE - Horizontal Layout
    ======================================== */
 
@@ -105,6 +198,11 @@
 .latest-news-tile__featured:hover {
   box-shadow: var(--shadow-lg);
   border-color: var(--clr-accent);
+}
+
+.latest-news-tile__featured--transitioning {
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 .latest-news-tile__featured-image {
@@ -228,93 +326,6 @@
   transform: translateX(4px);
 }
 
-/* ========================================
-   OTHER ARTICLES LIST
-   ======================================== */
-
-.latest-news-tile__list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-4);
-  margin-top: var(--space-6);
-}
-
-.latest-news-tile__item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-  padding: var(--space-4) var(--space-5);
-  background: var(--clr-surface);
-  border: 1px solid var(--clr-border-light);
-  border-radius: var(--radius-md);
-  text-decoration: none;
-  transition: all var(--transition-fast);
-}
-
-.latest-news-tile__item:hover {
-  border-color: var(--clr-accent);
-  box-shadow: var(--shadow-sm);
-}
-
-.latest-news-tile__item-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.latest-news-tile__item-meta {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  margin-bottom: var(--space-1);
-}
-
-.latest-news-tile__item-category {
-  font-size: 0.65rem;
-  font-weight: var(--font-weight-semibold);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--clr-primary);
-}
-
-.latest-news-tile__item-date {
-  font-size: var(--font-size-xs);
-  color: var(--clr-text-muted);
-}
-
-.latest-news-tile__item-title {
-  font-family: var(--font-family-display);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  color: var(--clr-text-main);
-  margin: 0;
-  line-height: var(--line-height-snug);
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.latest-news-tile__item-arrow {
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--clr-text-muted);
-  transition: all var(--transition-fast);
-}
-
-.latest-news-tile__item-arrow svg {
-  width: 16px;
-  height: 16px;
-}
-
-.latest-news-tile__item:hover .latest-news-tile__item-arrow {
-  color: var(--clr-accent);
-  transform: translateX(2px);
-}
 
 /* ========================================
    CTA
@@ -331,6 +342,14 @@
    ======================================== */
 
 @media (max-width: 1024px) {
+  .latest-news-tile__nav-arrow--prev {
+    left: -16px;
+  }
+
+  .latest-news-tile__nav-arrow--next {
+    right: -16px;
+  }
+
   .latest-news-tile__featured {
     grid-template-columns: 300px 1fr;
   }
@@ -348,10 +367,6 @@
   .latest-news-tile__featured-title {
     font-size: var(--font-size-xl);
   }
-  
-  .latest-news-tile__list {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 768px) {
@@ -363,6 +378,24 @@
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-3);
+  }
+
+  .latest-news-tile__nav-arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .latest-news-tile__nav-arrow svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .latest-news-tile__nav-arrow--prev {
+    left: -12px;
+  }
+
+  .latest-news-tile__nav-arrow--next {
+    right: -12px;
   }
   
   .latest-news-tile__featured {
@@ -381,12 +414,37 @@
   .latest-news-tile__featured-title {
     font-size: var(--font-size-lg);
   }
-  
-  .latest-news-tile__list {
-    grid-template-columns: 1fr;
+}
+
+@media (max-width: 480px) {
+  .latest-news-tile__nav-arrow {
+    width: 36px;
+    height: 36px;
   }
-  
-  .latest-news-tile__item {
-    padding: var(--space-3) var(--space-4);
+
+  .latest-news-tile__nav-arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .latest-news-tile__nav-arrow--prev {
+    left: 4px;
+  }
+
+  .latest-news-tile__nav-arrow--next {
+    right: 4px;
+  }
+
+  .latest-news-tile__indicators {
+    margin-top: var(--space-3);
+  }
+
+  .latest-news-tile__indicator {
+    width: 8px;
+    height: 8px;
+  }
+
+  .latest-news-tile__indicator--active {
+    width: 20px;
   }
 }
