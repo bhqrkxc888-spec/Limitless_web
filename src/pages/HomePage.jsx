@@ -133,7 +133,6 @@ function HomePage() {
             sizes="100vw"
             srcsetWidths={[640, 1024, 1920]}
             quality={85}
-            format="webp"
           />
           <div className="hero-image-overlay"></div>
         </div>

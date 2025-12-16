@@ -33,7 +33,7 @@ function OptimizedImage({
   sizes = '100vw',
   srcsetWidths = [640, 1024, 1920],
   quality = 85,
-  format = 'webp',
+  // format parameter removed - not supported by Supabase
   objectFit = 'cover',
   style = {},
   ...props
@@ -69,12 +69,12 @@ function OptimizedImage({
   
   // Generate optimized URLs for Supabase images
   const optimizedSrc = isSupabase 
-    ? getOptimizedImageUrl(src, { width: maxWidth, quality, format })
+    ? getOptimizedImageUrl(src, { width: maxWidth, quality })
     : src;
   
   // Generate srcset only for Supabase images
   const srcSet = isSupabase && srcsetWidths.length > 0
-    ? generateSrcSet(src, srcsetWidths, { quality, format })
+    ? generateSrcSet(src, srcsetWidths, { quality })
     : undefined;
 
   return (

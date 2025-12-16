@@ -45,7 +45,6 @@ const convertToTransformUrl = (url) => {
  * @param {number} options.width - Target width in pixels
  * @param {number} options.height - Target height in pixels (optional - omit to maintain aspect ratio)
  * @param {number} options.quality - Quality 1-100 (default: 85)
- * @param {string} options.format - 'webp', 'avif', 'jpeg', 'png' (default: 'webp')
  * @returns {string} Optimized image URL
  */
 export const getOptimizedImageUrl = (url, options = {}) => {
@@ -57,8 +56,8 @@ export const getOptimizedImageUrl = (url, options = {}) => {
   const {
     width,
     height,
-    quality = 85,
-    format = 'webp'
+    quality = 85
+    // format parameter removed - Supabase doesn't support it
   } = options;
   
   const transformUrl = convertToTransformUrl(url);
@@ -68,7 +67,7 @@ export const getOptimizedImageUrl = (url, options = {}) => {
   if (width) params.set('width', String(width));
   if (height) params.set('height', String(height));
   if (quality) params.set('quality', String(quality));
-  if (format) params.set('format', format);
+  // Don't add format parameter - not supported by Supabase Image Transforms
   
   return params.toString() ? `${transformUrl}?${params}` : transformUrl;
 };
@@ -85,11 +84,11 @@ export const getOptimizedImageUrl = (url, options = {}) => {
 export const generateSrcSet = (url, widths = [640, 1024, 1920], options = {}) => {
   if (!url || !isSupabaseUrl(url)) return '';
   
-  const { quality = 85, format = 'webp' } = options;
+  const { quality = 85 } = options;
   
   return widths
     .map(width => {
-      const optimizedUrl = getOptimizedImageUrl(url, { width, quality, format });
+      const optimizedUrl = getOptimizedImageUrl(url, { width, quality });
       return `${optimizedUrl} ${width}w`;
     })
     .join(', ');

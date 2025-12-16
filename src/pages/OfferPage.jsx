@@ -295,7 +295,6 @@ function OfferPage() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 800px"
                       srcsetWidths={[640, 1024, 1200, 1920]}
                       quality={85}
-                      format="webp"
                     />
                     {savingsDisplay && (
                       <div className="offer-gallery__savings">
@@ -324,7 +323,6 @@ function OfferPage() {
                             sizes="150px"
                             srcsetWidths={[150, 300]}
                             quality={75}
-                            format="webp"
                           />
                         </button>
                       ))}

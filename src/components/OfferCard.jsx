@@ -106,7 +106,6 @@ function OfferCard({ offer, variant = 'default' }) {
               sizes="(max-width: 768px) 100vw, 50vw"
               srcsetWidths={[640, 1024, 1200]}
               quality={85}
-              format="webp"
             />
           ) : (
             <div className="offer-card-hero__placeholder">
@@ -222,7 +221,6 @@ function OfferCard({ offer, variant = 'default' }) {
               sizes="(max-width: 768px) 100vw, 400px"
               srcsetWidths={[400, 600, 800]}
               quality={85}
-              format="webp"
             />
           ) : (
             <div className="offer-card-horizontal__placeholder">

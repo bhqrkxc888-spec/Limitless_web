@@ -82,7 +82,6 @@ function CardImage({ src, alt = '', aspectRatio = '16/9', className = '', priori
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
           srcsetWidths={[400, 600, 800]}
           quality={85}
-          format="webp"
         />
       ) : (
         <div className="card-image-placeholder">
