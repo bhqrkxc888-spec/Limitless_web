@@ -48,9 +48,6 @@ function NewsCard({ article, variant = 'default' }) {
               </svg>
             </div>
           )}
-          {article.featured && (
-            <span className="news-card-hero__badge">Featured</span>
-          )}
         </div>
         <div className="news-card-hero__content">
           <div className="news-card-hero__meta-top">
@@ -113,9 +110,6 @@ function NewsCard({ article, variant = 'default' }) {
                 {formatCategory(article.category)}
               </span>
             )}
-            {article.featured && (
-              <span className="news-card-horizontal__featured">Featured</span>
-            )}
           </div>
           <h3 className="news-card-horizontal__title">{article.title}</h3>
           {article.excerpt && (
@@ -163,13 +157,6 @@ function NewsCard({ article, variant = 'default' }) {
         {article.category && (
           <span className="news-category-badge">
             {formatCategory(article.category)}
-          </span>
-        )}
-
-        {/* Featured Badge */}
-        {article.featured && variant !== 'featured' && (
-          <span className="news-featured-badge">
-            Featured
           </span>
         )}
 

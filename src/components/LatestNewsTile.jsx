@@ -83,9 +83,6 @@ function LatestNewsTile() {
                   loading="lazy"
                 />
               )}
-              {featuredArticle.featured && (
-                <span className="latest-news-tile__badge">Featured</span>
-              )}
             </div>
             
             {/* Content Right */}

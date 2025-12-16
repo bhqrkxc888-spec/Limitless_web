@@ -23,13 +23,7 @@ function TravelNewsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10; // 1 hero + 9 grid items
 
-  // Fetch featured article separately for the hero
-  const { news: featuredNews, loading: featuredLoading } = useTravelNews({
-    limit: 1,
-    featured: true
-  });
-
-  // Fetch main news list
+  // Fetch main news list (sorted by published_at DESC from API)
   const { news, total, loading, error } = useTravelNews({
     limit: itemsPerPage,
     offset: (currentPage - 1) * itemsPerPage,
@@ -38,13 +32,11 @@ function TravelNewsPage() {
 
   const totalPages = Math.ceil(total / itemsPerPage);
   
-  // Get the featured article (first featured, or first article)
-  const heroArticle = featuredNews[0] || news[0];
+  // Use first article as hero (most recent by date)
+  const heroArticle = news[0];
   
-  // Filter out hero article from main grid if it's the same
-  const gridArticles = heroArticle 
-    ? news.filter(article => article.id !== heroArticle.id)
-    : news;
+  // Rest of articles for the grid
+  const gridArticles = news.slice(1);
 
   // Structured Data for SEO
   const structuredData = {
@@ -67,7 +59,7 @@ function TravelNewsPage() {
     }))
   };
 
-  const isLoading = loading || featuredLoading;
+  const isLoading = loading;
 
   return (
     <main className="travel-news-page">
@@ -184,12 +176,12 @@ function TravelNewsPage() {
         </section>
       )}
 
-      {/* Featured Hero Article */}
+      {/* Hero Article - Most Recent */}
       {!isLoading && !error && heroArticle && currentPage === 1 && !selectedCategory && (
         <section className="news-hero-section">
           <div className="container">
             <div className="news-hero-label">
-              <span>Featured Story</span>
+              <span>Latest Story</span>
             </div>
             <NewsCard article={heroArticle} variant="hero" />
           </div>
