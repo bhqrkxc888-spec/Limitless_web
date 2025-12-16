@@ -31,7 +31,7 @@ function FindCruisePage() {
 
       // Load scripts if consent is given
       loadScriptsWithConsent(scripts, {
-        attributes: { 'data-widgety': 'true' }
+        attributes: { 'data-widgety': 'true', 'defer': 'true' }
       })
         .then((results) => {
           // Check if at least one script loaded successfully
@@ -49,8 +49,12 @@ function FindCruisePage() {
         });
     };
 
-    // Initial load attempt
-    loadWidgetyScripts();
+    // Defer Widgety scripts until page is interactive (prevents blocking render)
+    if (typeof requestIdleCallback !== 'undefined') {
+      requestIdleCallback(() => loadWidgetyScripts(), { timeout: 2000 });
+    } else {
+      setTimeout(loadWidgetyScripts, 1000);
+    }
 
     // Listen for consent changes
     const handleConsentChange = () => {

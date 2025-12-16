@@ -77,7 +77,7 @@ function BucketListFeatured() {
           )}
 
           <div className="bucket-list-featured-grid">
-            {visibleItems.map((experience) => (
+            {visibleItems.map((experience, index) => (
               <Card 
                 key={experience.id} 
                 to={`/bucket-list/${experience.slug}`} 
@@ -88,6 +88,7 @@ function BucketListFeatured() {
                   src={experience.cardImage || experience.heroImage} 
                   alt={experience.title}
                   aspectRatio="16/10"
+                  priority={index === 0}
                 />
                 <Card.Content>
                   <div className="bucket-list-badge">Bucket List</div>

@@ -4,6 +4,32 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  build: {
+    // Optimize chunk splitting for better caching
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Separate vendor chunks
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'supabase-vendor': ['@supabase/supabase-js'],
+          // Separate large data files
+          'cruise-data': ['./src/data/cruiseLines.js'],
+          'destination-data': ['./src/data/destinations.js'],
+        }
+      }
+    },
+    // Increase chunk size warning limit (we have large data files)
+    chunkSizeWarningLimit: 1000,
+    // Enable CSS code splitting
+    cssCodeSplit: true,
+    // Minify CSS
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true, // Remove console.logs in production
+      }
+    }
+  },
   server: {
     proxy: {
       '/api': {

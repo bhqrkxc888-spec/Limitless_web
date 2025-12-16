@@ -123,7 +123,7 @@ function HomePage() {
 
       {/* Hero Section - Image Background with Overlay Text */}
       <section className="hero-elegant">
-        <div className="hero-background-image">
+        <div className="hero-background-image" style={{ aspectRatio: '16/9' }}>
           <OptimizedImage
             src={heroImage}
             alt="Beautiful Caribbean beach with turquoise waters and a cruise ship on the horizon - Limitless Cruises destination"
@@ -132,7 +132,8 @@ function HomePage() {
             priority={true}
             sizes="100vw"
             srcsetWidths={[640, 1024, 1920]}
-            quality={85}
+            quality={90}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
           <div className="hero-image-overlay"></div>
         </div>

@@ -8,11 +8,20 @@ import { initSEOMonitoring } from './services/seoMonitoring'
 
 // Initialize global error handlers and performance monitoring
 function initMonitoring() {
-  // Initialize performance monitoring (Core Web Vitals, page load times)
-  initPerformanceMonitoring()
-  
-  // Initialize SEO monitoring (meta tags, content, structured data)
-  initSEOMonitoring()
+  // Defer performance monitoring until after page is interactive
+  // This prevents blocking initial render
+  if (typeof requestIdleCallback !== 'undefined') {
+    requestIdleCallback(() => {
+      initPerformanceMonitoring()
+      initSEOMonitoring()
+    })
+  } else {
+    // Fallback: defer by 2 seconds for older browsers
+    setTimeout(() => {
+      initPerformanceMonitoring()
+      initSEOMonitoring()
+    }, 2000)
+  }
   
   // Global error handler for unhandled JavaScript errors
   window.addEventListener('error', (event) => {

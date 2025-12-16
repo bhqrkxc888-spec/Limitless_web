@@ -77,8 +77,13 @@ function FeaturedOffers() {
               )}
 
               <div className="featured-offers-grid">
-                {visibleOffers.map((offer) => (
-                  <OfferCard key={offer.id} offer={offer} variant="featured" />
+                {visibleOffers.map((offer, index) => (
+                  <OfferCard 
+                    key={offer.id} 
+                    offer={offer} 
+                    variant="featured"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
                 ))}
               </div>
 

@@ -1,11 +1,10 @@
 /**
  * Navigation Data
  * Menu structure for the mega menu
+ * 
+ * PERFORMANCE NOTE: Footer data uses lightweight static arrays instead of 
+ * importing full data files (cruiseLines.js is 1248 lines)
  */
-
-import { cruiseLines } from './cruiseLines';
-import { destinations } from './destinations';
-import { cruiseTypes } from './cruiseTypes';
 
 export const navigation = {
   // Navigation structure with dropdown menus
@@ -95,25 +94,31 @@ export const navigation = {
   footer: {
     cruiseLines: [
       { label: 'All Cruise Lines', path: '/cruise-lines' },
-      ...cruiseLines.slice(0, 8).map(cl => ({
-        label: cl.name,
-        path: `/cruise-lines/${cl.slug}`
-      }))
+      { label: 'P&O Cruises', path: '/cruise-lines/p-and-o-cruises' },
+      { label: 'MSC Cruises', path: '/cruise-lines/msc-cruises' },
+      { label: 'Royal Caribbean', path: '/cruise-lines/royal-caribbean' },
+      { label: 'Celebrity Cruises', path: '/cruise-lines/celebrity-cruises' },
+      { label: 'Princess Cruises', path: '/cruise-lines/princess-cruises' },
+      { label: 'Cunard', path: '/cruise-lines/cunard' },
+      { label: 'Viking Ocean', path: '/cruise-lines/viking-ocean-cruises' },
+      { label: 'Norwegian Cruise Line', path: '/cruise-lines/norwegian-cruise-line' }
     ],
     destinations: [
       { label: 'All Destinations', path: '/destinations' },
-      // Featured destinations first
-      ...destinations.filter(d => d.featured).slice(0, 6).map(d => ({
-        label: d.name,
-        path: `/destinations/${d.slug}`
-      }))
+      { label: 'Mediterranean', path: '/destinations/mediterranean' },
+      { label: 'Caribbean', path: '/destinations/caribbean' },
+      { label: 'Norwegian Fjords', path: '/destinations/fjords' },
+      { label: 'Canary Islands', path: '/destinations/canary-islands' },
+      { label: 'Alaska', path: '/destinations/alaska' },
+      { label: 'Transatlantic', path: '/destinations/transatlantic' }
     ],
     cruiseTypes: [
       { label: 'All Cruise Types', path: '/cruise-types' },
-      ...cruiseTypes.filter(t => t.featured).slice(0, 5).map(t => ({
-        label: t.name,
-        path: `/cruise-types#${t.id}`
-      }))
+      { label: 'Family Cruises', path: '/cruise-types#family' },
+      { label: 'Adults Only', path: '/cruise-types#adults-only' },
+      { label: 'Luxury Cruises', path: '/cruise-types#luxury' },
+      { label: 'UK Sailings', path: '/cruise-types#uk-sailings' },
+      { label: 'River Cruises', path: '/cruise-types#river' }
     ],
     legal: [
       { label: 'Booking Terms', path: '/booking-terms' },
