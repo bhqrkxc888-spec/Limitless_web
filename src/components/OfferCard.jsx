@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Card } from './ui';
 import OptimizedImage from './OptimizedImage';
+import { getCardImageUrl } from '../utils/imageNaming';
+import { getDestinationHeroUrl } from '../config/destinations';
 import './OfferCard.css';
 
 /**
@@ -12,6 +14,35 @@ import './OfferCard.css';
  */
 function OfferCard({ offer, variant = 'default' }) {
   if (!offer) return null;
+
+  // Smart image selection: use explicit URLs or auto-generate from naming convention
+  const getCardImage = () => {
+    if (offer.card_image_url) return offer.card_image_url;
+    if (offer.image_url) return getCardImageUrl(offer.image_url);
+    return null;
+  };
+
+  // Hero images are now destination-based
+  const getHeroImage = () => {
+    // Priority 1: Explicit hero URL (legacy support)
+    if (offer.hero_image_url) return offer.hero_image_url;
+    
+    // Priority 2: Destination hero (NEW SYSTEM)
+    if (offer.destination || offer.destination_slug) {
+      const destSlug = offer.destination_slug || offer.destination;
+      const heroPath = getDestinationHeroUrl(destSlug);
+      if (heroPath) {
+        // Construct full Vercel Blob URL
+        return `https://blob.vercel-storage.com/${heroPath}`;
+      }
+    }
+    
+    // Priority 3: Fallback to card image
+    return getCardImage();
+  };
+
+  const cardImageUrl = getCardImage();
+  const heroImageUrl = getHeroImage();
 
   const formatPrice = (price, currency = 'GBP') => {
     const formattedPrice = new Intl.NumberFormat('en-GB', {
@@ -96,9 +127,9 @@ function OfferCard({ offer, variant = 'default' }) {
     return (
       <Link to={`/offers/${offer.slug}`} className="offer-card-hero">
         <div className="offer-card-hero__image">
-          {(offer.hero_image_url || offer.card_image_url) ? (
+          {(heroImageUrl || cardImageUrl) ? (
             <OptimizedImage
-              src={offer.hero_image_url || offer.card_image_url}
+              src={heroImageUrl || cardImageUrl}
               alt={offer.title}
               width={1200}
               height={675}
@@ -106,7 +137,7 @@ function OfferCard({ offer, variant = 'default' }) {
               sizes="(max-width: 768px) 100vw, 50vw"
               srcsetWidths={[640, 1024, 1200]}
               quality={85}
-              objectFit="contain"
+              objectFit="cover"
             />
           ) : (
             <div className="offer-card-hero__placeholder">
@@ -212,9 +243,9 @@ function OfferCard({ offer, variant = 'default' }) {
     return (
       <Link to={`/offers/${offer.slug}`} className="offer-card-horizontal">
         <div className="offer-card-horizontal__image">
-          {(offer.card_image_url || offer.hero_image_url) ? (
+          {(cardImageUrl || heroImageUrl) ? (
             <OptimizedImage
-              src={offer.card_image_url || offer.hero_image_url}
+              src={cardImageUrl || heroImageUrl}
               alt={offer.title}
               width={600}
               height={400}
@@ -222,7 +253,7 @@ function OfferCard({ offer, variant = 'default' }) {
               sizes="(max-width: 768px) 100vw, 400px"
               srcsetWidths={[400, 600, 800]}
               quality={85}
-              objectFit="contain"
+              objectFit="cover"
             />
           ) : (
             <div className="offer-card-horizontal__placeholder">
@@ -329,12 +360,12 @@ function OfferCard({ offer, variant = 'default' }) {
       variant="default"
       className={`offer-card offer-card--${variant}`}
     >
-      {(offer.card_image_url || offer.hero_image_url) && (
+      {(cardImageUrl || heroImageUrl) && (
         <Card.Image
-          src={offer.card_image_url || offer.hero_image_url}
+          src={cardImageUrl || heroImageUrl}
           alt={offer.title}
           aspectRatio="16/9"
-          objectFit="contain"
+          objectFit="cover"
         />
       )}
       

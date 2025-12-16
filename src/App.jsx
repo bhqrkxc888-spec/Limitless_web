@@ -72,6 +72,7 @@ const AdminPerformance = lazy(() => import('./pages/admin/AdminPerformance'))
 const AdminSEO = lazy(() => import('./pages/admin/AdminSEO'))
 const AdminProjectStatus = lazy(() => import('./pages/admin/AdminProjectStatus'))
 const AdminImageUpload = lazy(() => import('./pages/admin/AdminImageUpload'))
+const AdminDestinationHeroes = lazy(() => import('./pages/admin/AdminDestinationHeroes'))
 
 // Legal Pages
 const WebsiteTerms = lazy(() => import('./pages/WebsiteTerms'))
@@ -127,6 +128,7 @@ function AppLayout() {
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/project-status" element={<AdminProjectStatus />} />
           <Route path="/admin/image-upload" element={<AdminImageUpload />} />
+          <Route path="/admin/destination-heroes" element={<AdminDestinationHeroes />} />
           <Route path="/admin/errors" element={<AdminErrors />} />
           <Route path="/admin/performance" element={<AdminPerformance />} />
           <Route path="/admin/seo" element={<AdminSEO />} />

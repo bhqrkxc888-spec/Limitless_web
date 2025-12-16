@@ -18,6 +18,72 @@
   color: var(--color-text-secondary, #666);
 }
 
+.guidelines-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.guidelines-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.guidelines-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.guideline-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.guideline-card h3 {
+  font-size: 1rem;
+  margin: 0 0 0.5rem 0;
+  color: white;
+}
+
+.guideline-card p {
+  margin: 0.25rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.guideline-note {
+  font-size: 0.85rem !important;
+  font-weight: 400 !important;
+  opacity: 0.9;
+  margin-top: 0.5rem !important;
+}
+
+.guidelines-footer {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  opacity: 0.95;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.guidelines-footer a {
+  color: white;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.guidelines-footer a:hover {
+  opacity: 0.8;
+}
+
 .upload-section,
 .images-section {
   background: white;
@@ -68,6 +134,68 @@
   margin-top: 0.5rem;
   font-size: 0.9rem;
   color: var(--color-text-secondary, #666);
+}
+
+.image-dimension-info {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.image-dimension-info ul {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.5rem;
+}
+
+.image-dimension-info li {
+  margin: 0.25rem 0;
+}
+
+.dimension-warning {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 6px;
+  color: #856404;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.dimension-warning div {
+  margin: 0.25rem 0;
+}
+
+.dimension-success {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #d4edda;
+  border: 1px solid #28a745;
+  border-radius: 6px;
+  color: #155724;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.dimension-success div {
+  margin: 0.25rem 0;
+}
+
+.dimension-info {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #d1ecf1;
+  border: 1px solid #17a2b8;
+  border-radius: 6px;
+  color: #0c5460;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.dimension-info div {
+  margin: 0.25rem 0;
 }
 
 .help-text {
@@ -229,5 +357,37 @@
   text-align: center;
   padding: 3rem;
   color: var(--color-text-secondary, #666);
+}
+
+.image-type-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--color-gray-300, #ddd);
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: white;
+  transition: border-color 0.2s ease;
+}
+
+.image-type-select:focus {
+  outline: none;
+  border-color: var(--color-primary, #1a365d);
+}
+
+.path-preview {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-left: 3px solid var(--color-primary, #1a365d);
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
+.path-preview code {
+  font-family: 'Courier New', monospace;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  color: var(--color-primary, #1a365d);
+  font-weight: 600;
 }
 
