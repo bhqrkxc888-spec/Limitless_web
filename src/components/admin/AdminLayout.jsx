@@ -15,7 +15,8 @@ import {
   Menu,
   X,
   FileText,
-  ExternalLink
+  ExternalLink,
+  ClipboardList
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import './AdminLayout.css';
@@ -37,6 +38,7 @@ function AdminLayout({ children, onLogout, lastUpdated, onRefresh, isRefreshing 
 
   const navItems = [
     { path: '/admin', icon: LayoutDashboard, label: 'Overview', exact: true },
+    { path: '/admin/project-status', icon: ClipboardList, label: 'Project Status' },
     { path: '/admin/errors', icon: AlertTriangle, label: 'Errors' },
     { path: '/admin/performance', icon: Activity, label: 'Performance' },
     { path: '/admin/seo', icon: Search, label: 'SEO' }

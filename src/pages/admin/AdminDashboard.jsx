@@ -31,10 +31,15 @@ const sitePages = [
   { path: '/find-a-cruise', name: 'Find a Cruise', status: 'public', description: 'Cruise search widget' },
   { path: '/about', name: 'About', status: 'public', description: 'About us page' },
   { path: '/contact', name: 'Contact', status: 'public', description: 'Contact form' },
+  { path: '/travel-news', name: 'Travel News', status: 'public', description: 'News and articles (in nav)' },
+  { path: '/travel-news/:slug', name: 'News Article', status: 'public', description: 'Individual news articles' },
+  { path: '/offers', name: 'Offers', status: 'public', description: 'Current cruise offers' },
+  { path: '/offers/:slug', name: 'Offer Detail', status: 'public', description: 'Individual offer pages' },
   { path: '/website-terms', name: 'Website Terms', status: 'public', description: 'Legal terms' },
   { path: '/privacy-policy', name: 'Privacy Policy', status: 'public', description: 'Privacy information' },
   { path: '/booking-terms', name: 'Booking Terms', status: 'public', description: 'Booking conditions' },
   { path: '/cookie-policy', name: 'Cookie Policy', status: 'public', description: 'Cookie usage' },
+  { path: '/price-match-guarantee', name: 'Price Match', status: 'public', description: 'Price match T&Cs' },
   
   // Hidden pages (require preview access)
   { path: '/cruise-lines', name: 'Cruise Lines', status: 'hidden', description: 'All cruise lines hub' },
@@ -44,12 +49,8 @@ const sitePages = [
   { path: '/bucket-list', name: 'Bucket List', status: 'hidden', description: 'Bucket list experiences hub' },
   { path: '/bucket-list/:slug', name: 'Bucket List Detail', status: 'hidden', description: 'Individual experience pages' },
   { path: '/cruise-types', name: 'Cruise Types', status: 'hidden', description: 'Types of cruises hub' },
-  { path: '/offers', name: 'Offers', status: 'hidden', description: 'Current cruise offers' },
-  { path: '/offers/:slug', name: 'Offer Detail', status: 'hidden', description: 'Individual offer pages' },
   { path: '/faq', name: 'FAQ', status: 'hidden', description: 'Frequently asked questions' },
   { path: '/testimonials', name: 'Testimonials', status: 'hidden', description: 'Customer reviews' },
-  { path: '/travel-news', name: 'Travel News', status: 'hidden', description: 'News and articles' },
-  { path: '/travel-news/:slug', name: 'News Article', status: 'hidden', description: 'Individual news articles' },
 ];
 
 function AdminDashboard() {
