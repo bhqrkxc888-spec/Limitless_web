@@ -1,15 +1,17 @@
 import { getOptimizedImageUrl, generateSrcSet, isSupabaseUrl } from '../utils/imageHelpers';
+import { isVercelBlobUrl } from '../lib/vercelBlob';
 
 /**
  * OptimizedImage Component
- * Automatically optimizes Supabase Storage images using Image Transforms.
- * Falls back gracefully for non-Supabase URLs (Unsplash, external images).
+ * Automatically optimizes images from Vercel Blob or Supabase Storage.
+ * Falls back gracefully for external URLs.
  * 
  * Features:
- * - WebP conversion for Supabase images
+ * - Automatic WebP conversion for Vercel Blob images (via Vercel CDN)
+ * - Manual transforms for legacy Supabase images
  * - Responsive srcset generation
  * - Proper loading/priority attributes for LCP optimization
- * - Maintains aspect ratio (width-only transforms)
+ * - Maintains aspect ratio
  * 
  * @param {string} src - Original image URL
  * @param {string} alt - Alt text (required for accessibility)
@@ -20,7 +22,6 @@ import { getOptimizedImageUrl, generateSrcSet, isSupabaseUrl } from '../utils/im
  * @param {string} sizes - Sizes attribute for responsive images (default: '100vw')
  * @param {number[]} srcsetWidths - Widths to generate for srcset (default: [640, 1024, 1920])
  * @param {number} quality - Image quality 1-100 (default: 85)
- * @param {string} format - Image format: 'webp', 'avif', 'jpeg', 'png' (default: 'webp')
  * @param {string} objectFit - CSS object-fit value (default: 'cover')
  */
 function OptimizedImage({
@@ -62,17 +63,21 @@ function OptimizedImage({
     );
   }
 
+  const isVercelBlob = isVercelBlobUrl(src);
   const isSupabase = isSupabaseUrl(src);
   
   // Determine the max width for the primary src (use largest srcset width or provided width)
   const maxWidth = width || Math.max(...srcsetWidths);
   
-  // Generate optimized URLs for Supabase images
-  const optimizedSrc = isSupabase 
+  // Generate optimized URLs
+  // Vercel Blob: use as-is (Vercel CDN handles optimization automatically)
+  // Supabase: use manual transforms
+  // External: use as-is
+  const optimizedSrc = (isVercelBlob || isSupabase)
     ? getOptimizedImageUrl(src, { width: maxWidth, quality })
     : src;
   
-  // Generate srcset only for Supabase images
+  // Generate srcset (only for Supabase - Vercel handles this automatically)
   const srcSet = isSupabase && srcsetWidths.length > 0
     ? generateSrcSet(src, srcsetWidths, { quality })
     : undefined;

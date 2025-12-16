@@ -1,12 +1,29 @@
 /**
  * Image URL Helpers
  * Centralized image URL generation and optimization for LCP performance
+ * Now using Vercel Blob Storage for website images
  */
 
+import { isVercelBlobUrl } from '../lib/vercelBlob';
+
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://xrbusklskmeaamwynfmm.supabase.co';
+const VERCEL_BLOB_URL = 'https://public.blob.vercel-storage.com';
 
 /**
- * Get full URL for a Supabase Storage image
+ * Get full URL for a Vercel Blob Storage image
+ * @param {string} path - File path (e.g., 'categories/home/hero.jpg')
+ * @returns {string} Full image URL
+ * Note: Actual URLs are generated on upload, this is a placeholder
+ */
+export const getBlobUrl = (path) => {
+  // Vercel Blob URLs are generated on upload
+  // This is a helper for migration - actual URLs come from upload response
+  return `${VERCEL_BLOB_URL}/${path}`;
+};
+
+/**
+ * Legacy: Get full URL for a Supabase Storage image
+ * Kept for backward compatibility during migration
  * @param {string} bucket - Storage bucket name (e.g., 'categories')
  * @param {string} path - File path within bucket (e.g., 'about/About1.webp')
  * @returns {string} Full image URL
@@ -37,8 +54,8 @@ const convertToTransformUrl = (url) => {
 };
 
 /**
- * Get optimized image URL with Supabase Image Transforms
- * Only transforms Supabase Storage URLs; external URLs pass through unchanged.
+ * Get optimized image URL
+ * Works with both Vercel Blob and Supabase Storage URLs
  * 
  * @param {string} url - Original image URL
  * @param {object} options - Transform options
@@ -50,70 +67,103 @@ const convertToTransformUrl = (url) => {
 export const getOptimizedImageUrl = (url, options = {}) => {
   if (!url) return url;
   
-  // If not Supabase URL, return as-is (external images like Unsplash)
-  if (!isSupabaseUrl(url)) return url;
+  // Vercel Blob URLs are automatically optimized by Vercel's CDN
+  // No manual transforms needed - return as-is
+  if (isVercelBlobUrl(url)) {
+    return url;
+  }
   
-  const {
-    width,
-    height,
-    quality = 85
-    // format parameter removed - Supabase doesn't support it
-  } = options;
+  // Legacy: Supabase Image Transforms (for backward compatibility)
+  if (isSupabaseUrl(url)) {
+    const {
+      width,
+      height,
+      quality = 85
+    } = options;
+    
+    const transformUrl = convertToTransformUrl(url);
+    const params = new URLSearchParams();
+    
+    if (width) params.set('width', String(width));
+    if (height) params.set('height', String(height));
+    if (quality) params.set('quality', String(quality));
+    
+    return params.toString() ? `${transformUrl}?${params}` : transformUrl;
+  }
   
-  const transformUrl = convertToTransformUrl(url);
-  const params = new URLSearchParams();
-  
-  // Only add width - let height auto-calculate to preserve aspect ratio
-  if (width) params.set('width', String(width));
-  if (height) params.set('height', String(height));
-  if (quality) params.set('quality', String(quality));
-  // Don't add format parameter - not supported by Supabase Image Transforms
-  
-  return params.toString() ? `${transformUrl}?${params}` : transformUrl;
+  // External URLs pass through unchanged
+  return url;
 };
 
 /**
  * Generate responsive srcset for an image
- * Only generates srcset for Supabase URLs; returns empty string for external URLs.
+ * Works with both Vercel Blob and Supabase URLs
  * 
  * @param {string} url - Original image URL
  * @param {number[]} widths - Array of widths to generate (default: [640, 1024, 1920])
- * @param {object} options - Transform options (quality, format, etc.)
- * @returns {string} srcset string or empty string if not Supabase URL
+ * @param {object} options - Transform options (quality, etc.)
+ * @returns {string} srcset string or empty string if not optimizable
  */
 export const generateSrcSet = (url, widths = [640, 1024, 1920], options = {}) => {
-  if (!url || !isSupabaseUrl(url)) return '';
+  if (!url) return '';
   
-  const { quality = 85 } = options;
+  // Vercel Blob: return empty (Vercel Image component handles srcset automatically)
+  if (isVercelBlobUrl(url)) {
+    return '';
+  }
   
-  return widths
-    .map(width => {
-      const optimizedUrl = getOptimizedImageUrl(url, { width, quality });
-      return `${optimizedUrl} ${width}w`;
-    })
-    .join(', ');
+  // Supabase: generate srcset manually
+  if (isSupabaseUrl(url)) {
+    const { quality = 85 } = options;
+    
+    return widths
+      .map(width => {
+        const optimizedUrl = getOptimizedImageUrl(url, { width, quality });
+        return `${optimizedUrl} ${width}w`;
+      })
+      .join(', ');
+  }
+  
+  // External URLs: no srcset
+  return '';
 };
 
 /**
  * Get About page images
  */
 export const aboutImages = {
-  katherine1: getStorageUrl('categories', 'about/About1.webp'),
-  katherine2: getStorageUrl('categories', 'about/About2.webp'),
-  katherine3: getStorageUrl('categories', 'about/About3.webp'),
-  holidayEliteLogo: getStorageUrl('categories', 'about/HolidayEliteLogo.png')
+  katherine1: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/about/About1.webp',
+  katherine2: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/about/About2.webp',
+  katherine3: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/about/About3.webp',
+  holidayEliteLogo: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/about/HolidayEliteLogo.png'
 };
 
 /**
  * Get Homepage hero image
  */
 export const homeHeroImages = [
-  getStorageUrl('categories', 'Home/hero-2.jpeg') // Riviera Maya Caribbean beach
+  'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/home/hero.jpeg'
 ];
 
 /**
- * Future: Easy to switch to custom domain
- * Just change SUPABASE_URL to your CDN/custom domain
- * Example: 'https://images.limitlesscruises.com'
+ * Image paths for Vercel Blob uploads
+ * Use these paths when uploading images
  */
+export const IMAGE_PATHS = {
+  ABOUT: {
+    KATHERINE_1: 'categories/about/katherine-1.webp',
+    KATHERINE_2: 'categories/about/katherine-2.webp',
+    KATHERINE_3: 'categories/about/katherine-3.webp',
+    HOLIDAY_ELITE_LOGO: 'categories/about/holiday-elite-logo.png'
+  },
+  HOME: {
+    HERO: 'categories/home/hero.jpeg'
+  },
+  DESTINATIONS: {
+    // Add destination image paths as needed
+  },
+  CRUISE_LINES: {
+    // Add cruise line image paths as needed
+  }
+};
 
