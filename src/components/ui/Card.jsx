@@ -56,7 +56,7 @@ function Card({
  * Card Image Component
  * Uses OptimizedImage for automatic Supabase transforms
  */
-function CardImage({ src, alt = '', aspectRatio = '16/9', className = '', priority = false }) {
+function CardImage({ src, alt = '', aspectRatio = '16/9', className = '', priority = false, objectFit = 'contain' }) {
   // Ensure alt text is provided for accessibility
   if (src && !alt) {
     logger.warn('Card.Image: alt text is recommended for accessibility');
@@ -82,6 +82,7 @@ function CardImage({ src, alt = '', aspectRatio = '16/9', className = '', priori
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
           srcsetWidths={[400, 600, 800]}
           quality={85}
+          objectFit={objectFit}
         />
       ) : (
         <div className="card-image-placeholder">
