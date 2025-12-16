@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { uploadImageToBlob, listBlobImages } from '../../lib/vercelBlob';
-import logger from '../../utils/logger';
+import { logger } from '../../utils/logger';
 import './AdminImageUpload.css';
 
 /**
