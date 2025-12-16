@@ -152,7 +152,7 @@ function TravelNewsCategoryPage() {
         <div className="container text-center">
           <h2>Want More Travel News?</h2>
           <p>
-            Explore all our travel news articles or get in touch with our experts for personalised advice.
+            Explore all our travel news articles or get in touch for personalised advice.
           </p>
           <div className="cta-buttons">
             <Button to="/travel-news" variant="primary" size="lg">

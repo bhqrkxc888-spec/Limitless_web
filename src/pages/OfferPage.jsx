@@ -1,20 +1,20 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useOffer } from '../hooks/useOffers';
 import { incrementOfferView } from '../services/offersAPI';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
-import HeroSection from '../components/HeroSection';
+import Breadcrumbs from '../components/Breadcrumbs';
 import { Button, SectionHeader } from '../components/ui';
 import ContactForm from '../components/ContactForm';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './OfferPage.css';
 
 function OfferPage() {
   const { slug } = useParams();
   const { offer, loading, error } = useOffer(slug);
+  const [selectedImage, setSelectedImage] = useState(0);
 
   // Compute default price valid until date (90 days from now) - must be before early returns
-  // Using useMemo with empty deps ensures it's computed once per component instance
   const defaultPriceValidUntil = useMemo(() => {
     return new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
   }, []);
@@ -25,6 +25,30 @@ function OfferPage() {
       incrementOfferView(offer.id);
     }
   }, [offer?.id]);
+
+  // Collect all images for gallery
+  const galleryImages = useMemo(() => {
+    if (!offer) return [];
+    const images = [];
+    
+    if (offer.hero_image_url) {
+      images.push({ url: offer.hero_image_url, alt: `${offer.title} - Main Image` });
+    }
+    if (offer.card_image_url && offer.card_image_url !== offer.hero_image_url) {
+      images.push({ url: offer.card_image_url, alt: `${offer.title} - Card Image` });
+    }
+    if (offer.gallery_images && Array.isArray(offer.gallery_images)) {
+      offer.gallery_images.forEach((img, idx) => {
+        if (typeof img === 'string') {
+          images.push({ url: img, alt: `${offer.title} - Gallery ${idx + 1}` });
+        } else if (img?.url) {
+          images.push({ url: img.url, alt: img.alt || `${offer.title} - Gallery ${idx + 1}` });
+        }
+      });
+    }
+    
+    return images;
+  }, [offer]);
 
   // Helper functions
   const formatPrice = (price, currency = 'GBP') => {
@@ -41,8 +65,19 @@ function OfferPage() {
     if (!dateString) return '';
     const date = new Date(dateString);
     return date.toLocaleDateString('en-GB', {
+      weekday: 'long',
       day: 'numeric',
       month: 'long',
+      year: 'numeric'
+    });
+  };
+
+  const formatShortDate = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'short',
       year: 'numeric'
     });
   };
@@ -53,13 +88,27 @@ function OfferPage() {
     return `${nights} nights`;
   };
 
+  const getOfferTypeLabel = (type) => {
+    if (!type) return '';
+    switch(type) {
+      case 'fly_cruise': return 'Fly-Cruise Package';
+      case 'cruise_only': return 'Cruise Only';
+      case 'bucket_list': return 'Bucket List Experience';
+      case 'special_offer': return 'Special Offer';
+      default: return type.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+    }
+  };
+
   // Loading state
   if (loading) {
     return (
       <main className="offer-page">
         <SEO title="Loading Offer..." />
         <div className="container section">
-          <p>Loading offer details...</p>
+          <div className="offer-loading">
+            <div className="offer-loading__spinner"></div>
+            <p>Loading offer details...</p>
+          </div>
         </div>
       </main>
     );
@@ -71,16 +120,31 @@ function OfferPage() {
       <main className="offer-page">
         <SEO title="Offer Not Found" />
         <div className="container section">
-          <h1>Offer Not Found</h1>
-          <p>Sorry, we couldn't find the offer you're looking for. It may have expired or been removed.</p>
-          <div className="offer-actions">
-            <Button to="/offers">View All Offers</Button>
-            <Button to="/contact" variant="outline">Contact Us</Button>
+          <div className="offer-not-found">
+            <div className="offer-not-found__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="m9 9 6 6"/>
+                <path d="m15 9-6 6"/>
+              </svg>
+            </div>
+            <h1>Offer Not Found</h1>
+            <p>Sorry, this offer may have expired or been removed. Browse our latest deals or contact us for current offers.</p>
+            <div className="offer-not-found__actions">
+              <Button to="/offers" variant="primary">View All Offers</Button>
+              <Button to="/contact" variant="outline">Contact Us</Button>
+            </div>
           </div>
         </div>
       </main>
     );
   }
+
+  // Breadcrumb items
+  const breadcrumbItems = [
+    { label: 'Offers', to: '/offers' },
+    { label: offer.title }
+  ];
 
   // Structured Data for SEO
   const structuredData = {
@@ -102,95 +166,226 @@ function OfferPage() {
       priceValidUntil: offer.expires_at || defaultPriceValidUntil,
       url: `https://limitlesscruises.com/offers/${offer.slug}`
     },
-    ...(offer.hero_image_url && {
-      image: offer.hero_image_url
+    ...(galleryImages.length > 0 && {
+      image: galleryImages.map(img => img.url)
     })
   };
 
   const savingsDisplay = offer.savings_percentage
-    ? `Save ${offer.savings_percentage}%`
+    ? `${offer.savings_percentage}%`
     : offer.savings_amount
-    ? `Save ${formatPrice(offer.savings_amount, offer.currency)}`
+    ? formatPrice(offer.savings_amount, offer.currency)
     : null;
 
   return (
     <main className="offer-page">
       {/* SEO */}
       <SEO
-        title={offer.meta_title || offer.title}
+        title={offer.meta_title || `${offer.title} | Cruise Offer`}
         description={offer.meta_description || offer.short_description || offer.full_description}
         canonical={`https://limitlesscruises.com/offers/${offer.slug}`}
         keywords={offer.meta_keywords?.join(', ') || ''}
-        image={offer.hero_image_url || offer.card_image_url}
+        image={galleryImages[0]?.url}
         structuredData={structuredData}
       />
 
-      {/* Hero Section */}
-      <HeroSection
-        title={offer.title}
-        subtitle={offer.short_description}
-        image={offer.hero_image_url}
-        imageAlt={offer.title}
-        size="lg"
-        align="left"
-        primaryCta={{ label: 'Enquire About This Offer', to: '#enquiry-form' }}
-        secondaryCta={{ label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone}` }}
-      />
-
-      {/* Key Info Bar */}
-      <section className="key-info-bar">
+      {/* Breadcrumbs */}
+      <div className="offer-breadcrumbs">
         <div className="container">
-          <div className="key-info-grid">
-            {offer.price_from && (
-              <div className="key-info-item key-info-item--price">
-                <span className="key-info-label">Price From</span>
-                <span className="key-info-value">
-                  {formatPrice(offer.price_from, offer.currency)}
-                  {savingsDisplay && (
-                    <span className="key-info-savings">{savingsDisplay}</span>
+          <Breadcrumbs items={breadcrumbItems} />
+        </div>
+      </div>
+
+      {/* Offer Header with Gallery */}
+      <section className="offer-header">
+        <div className="container">
+          <div className="offer-header__layout">
+            {/* Gallery Section */}
+            <div className="offer-gallery">
+              {galleryImages.length > 0 ? (
+                <>
+                  <div className="offer-gallery__main">
+                    <img 
+                      src={galleryImages[selectedImage]?.url} 
+                      alt={galleryImages[selectedImage]?.alt}
+                      loading="eager"
+                    />
+                    {savingsDisplay && (
+                      <div className="offer-gallery__savings">
+                        Save {savingsDisplay}
+                      </div>
+                    )}
+                    {offer.featured && (
+                      <div className="offer-gallery__featured">Featured</div>
+                    )}
+                  </div>
+                  {galleryImages.length > 1 && (
+                    <div className="offer-gallery__thumbs">
+                      {galleryImages.map((img, idx) => (
+                        <button
+                          key={idx}
+                          className={`offer-gallery__thumb ${selectedImage === idx ? 'offer-gallery__thumb--active' : ''}`}
+                          onClick={() => setSelectedImage(idx)}
+                          aria-label={`View image ${idx + 1}`}
+                        >
+                          <img src={img.url} alt={img.alt} loading="lazy" />
+                        </button>
+                      ))}
+                    </div>
                   )}
+                </>
+              ) : (
+                <div className="offer-gallery__placeholder">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                  </svg>
+                </div>
+              )}
+            </div>
+
+            {/* Offer Info */}
+            <div className="offer-header__info">
+              {offer.offer_type && (
+                <span className="offer-type-tag">
+                  {getOfferTypeLabel(offer.offer_type)}
                 </span>
-                {offer.price_basis === 'per_person' && (
-                  <span className="key-info-note">per person</span>
+              )}
+              
+              <h1 className="offer-header__title">{offer.title}</h1>
+              
+              {offer.short_description && (
+                <p className="offer-header__description">{offer.short_description}</p>
+              )}
+
+              {/* Quick Details */}
+              <div className="offer-quick-details">
+                {offer.cruise_line_name && (
+                  <div className="offer-quick-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M3 18l18-6-18-6v12z"/>
+                    </svg>
+                    <div>
+                      <span className="offer-quick-detail__label">Cruise Line</span>
+                      <span className="offer-quick-detail__value">{offer.cruise_line_name}</span>
+                    </div>
+                  </div>
+                )}
+                {offer.ship_name && (
+                  <div className="offer-quick-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M18 18v-7a4 4 0 0 0-4-4H4"/>
+                      <path d="M6 18H2v-3"/>
+                      <path d="M22 18h-4v-7"/>
+                      <path d="M18 5v2"/>
+                      <path d="M22 18a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2"/>
+                    </svg>
+                    <div>
+                      <span className="offer-quick-detail__label">Ship</span>
+                      <span className="offer-quick-detail__value">{offer.ship_name}</span>
+                    </div>
+                  </div>
+                )}
+                {offer.destination && (
+                  <div className="offer-quick-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                      <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <div>
+                      <span className="offer-quick-detail__label">Destination</span>
+                      <span className="offer-quick-detail__value">{offer.destination}</span>
+                    </div>
+                  </div>
+                )}
+                {offer.duration_nights && (
+                  <div className="offer-quick-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    <div>
+                      <span className="offer-quick-detail__label">Duration</span>
+                      <span className="offer-quick-detail__value">{formatDuration(offer.duration_nights)}</span>
+                    </div>
+                  </div>
+                )}
+                {offer.departure_date && (
+                  <div className="offer-quick-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                      <line x1="16" y1="2" x2="16" y2="6"/>
+                      <line x1="8" y1="2" x2="8" y2="6"/>
+                      <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    <div>
+                      <span className="offer-quick-detail__label">Departure</span>
+                      <span className="offer-quick-detail__value">{formatShortDate(offer.departure_date)}</span>
+                    </div>
+                  </div>
+                )}
+                {offer.departure_port && (
+                  <div className="offer-quick-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                      <path d="M2 12h20"/>
+                    </svg>
+                    <div>
+                      <span className="offer-quick-detail__label">Departs From</span>
+                      <span className="offer-quick-detail__value">{offer.departure_port}</span>
+                    </div>
+                  </div>
                 )}
               </div>
-            )}
-            {offer.duration_nights && (
-              <div className="key-info-item">
-                <span className="key-info-label">Duration</span>
-                <span className="key-info-value">{formatDuration(offer.duration_nights)}</span>
+
+              {/* Pricing Card */}
+              <div className="offer-pricing-card">
+                <div className="offer-pricing-card__main">
+                  {offer.original_price && (
+                    <div className="offer-pricing-card__was">
+                      <span className="label">Was</span>
+                      <span className="price">{formatPrice(offer.original_price, offer.currency)}</span>
+                    </div>
+                  )}
+                  <div className="offer-pricing-card__now">
+                    <span className="label">From</span>
+                    <span className="price">{formatPrice(offer.price_from, offer.currency)}</span>
+                    {offer.price_basis === 'per_person' && (
+                      <span className="basis">per person</span>
+                    )}
+                  </div>
+                  {savingsDisplay && (
+                    <div className="offer-pricing-card__savings">
+                      <span>You Save {savingsDisplay}</span>
+                    </div>
+                  )}
+                </div>
+                {offer.price_notes && (
+                  <p className="offer-pricing-card__notes">{offer.price_notes}</p>
+                )}
+                <div className="offer-pricing-card__actions">
+                  <Button href="#enquiry-form" variant="primary" size="lg" fullWidth>
+                    Enquire About This Offer
+                  </Button>
+                  <Button href={`tel:${siteConfig.phone}`} variant="outline" size="lg" fullWidth>
+                    Call {siteConfig.phone}
+                  </Button>
+                </div>
               </div>
-            )}
-            {offer.departure_date && (
-              <div className="key-info-item">
-                <span className="key-info-label">Departure</span>
-                <span className="key-info-value">{formatDate(offer.departure_date)}</span>
-              </div>
-            )}
-            {offer.departure_port && (
-              <div className="key-info-item">
-                <span className="key-info-label">Departure Port</span>
-                <span className="key-info-value">{offer.departure_port}</span>
-              </div>
-            )}
-            {offer.cruise_line_name && (
-              <div className="key-info-item">
-                <span className="key-info-label">Cruise Line</span>
-                <span className="key-info-value">{offer.cruise_line_name}</span>
-              </div>
-            )}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Main Content */}
-      <section className="section">
+      <section className="section offer-content-section">
         <div className="container">
-          <div className="offer-grid">
-            <div className="offer-main">
+          <div className="offer-content-grid">
+            <div className="offer-main-content">
               {/* Full Description */}
               {offer.full_description && (
-                <div className="offer-description">
+                <div className="offer-section">
+                  <h2 className="offer-section__title">About This Offer</h2>
                   <div 
                     className="offer-description-content"
                     dangerouslySetInnerHTML={{ __html: offer.full_description }}
@@ -200,69 +395,197 @@ function OfferPage() {
 
               {/* Highlights */}
               {offer.highlights && offer.highlights.length > 0 && (
-                <div className="highlights-section">
-                  <SectionHeader
-                    title="Offer Highlights"
-                    subtitle="What makes this offer special"
-                  />
-                  <ul className="highlights-list">
+                <div className="offer-section">
+                  <h2 className="offer-section__title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+                    </svg>
+                    Offer Highlights
+                  </h2>
+                  <ul className="offer-highlights-list">
                     {offer.highlights.map((highlight, index) => (
-                      <li key={index}>{highlight}</li>
+                      <li key={index}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                          <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        {highlight}
+                      </li>
                     ))}
                   </ul>
                 </div>
               )}
 
               {/* Itinerary */}
-              {offer.itinerary_detailed && Array.isArray(offer.itinerary_detailed) && offer.itinerary_detailed.length > 0 && (
-                <div className="itinerary-section">
-                  <SectionHeader
-                    title="Itinerary"
-                    subtitle="Day-by-day overview"
-                  />
-                  <div className="itinerary-list">
-                    {offer.itinerary_detailed.map((item, index) => (
-                      <div key={index} className="itinerary-item">
-                        <div className="itinerary-day">
-                          Day {item.day || index + 1}
-                        </div>
-                        <div className="itinerary-content">
-                          <h4>{item.location || item.port || 'At Sea'}</h4>
-                          {item.description && <p>{item.description}</p>}
-                        </div>
+              {offer.itinerary_summary && (
+                <div className="offer-section">
+                  <h2 className="offer-section__title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                      <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    Itinerary
+                  </h2>
+                  <p className="offer-itinerary-summary">{offer.itinerary_summary}</p>
+                  
+                  {offer.ports_of_call && offer.ports_of_call.length > 0 && (
+                    <div className="offer-ports">
+                      <h3>Ports of Call</h3>
+                      <div className="offer-ports-list">
+                        {offer.ports_of_call.map((port, idx) => (
+                          <span key={idx} className="offer-port-tag">{port}</span>
+                        ))}
                       </div>
-                    ))}
+                    </div>
+                  )}
+
+                  {offer.itinerary_detailed && Array.isArray(offer.itinerary_detailed) && offer.itinerary_detailed.length > 0 && (
+                    <div className="offer-itinerary-detailed">
+                      <h3>Day-by-Day Itinerary</h3>
+                      <div className="offer-itinerary-timeline">
+                        {offer.itinerary_detailed.map((item, index) => (
+                          <div key={index} className="offer-itinerary-item">
+                            <div className="offer-itinerary-day">
+                              <span className="day-number">Day {item.day || index + 1}</span>
+                            </div>
+                            <div className="offer-itinerary-content">
+                              <h4>{item.location || item.port || 'At Sea'}</h4>
+                              {item.description && <p>{item.description}</p>}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* What's Included / Excluded */}
+              <div className="offer-inclusions-grid">
+                {offer.includes && offer.includes.length > 0 && (
+                  <div className="offer-section offer-section--includes">
+                    <h2 className="offer-section__title">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                      </svg>
+                      What's Included
+                    </h2>
+                    <ul className="offer-includes-list">
+                      {offer.includes.map((item, index) => (
+                        <li key={index}>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                          </svg>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {offer.excludes && offer.excludes.length > 0 && (
+                  <div className="offer-section offer-section--excludes">
+                    <h2 className="offer-section__title">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="15" y1="9" x2="9" y2="15"/>
+                        <line x1="9" y1="9" x2="15" y2="15"/>
+                      </svg>
+                      Not Included
+                    </h2>
+                    <ul className="offer-excludes-list">
+                      {offer.excludes.map((item, index) => (
+                        <li key={index}>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                          </svg>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              {/* Suitable For / Best For */}
+              {(offer.suitable_for?.length > 0 || offer.best_for) && (
+                <div className="offer-section">
+                  <h2 className="offer-section__title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                      <circle cx="9" cy="7" r="4"/>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    Perfect For
+                  </h2>
+                  <div className="offer-perfect-for">
+                    {offer.suitable_for && offer.suitable_for.length > 0 && (
+                      <div className="offer-suitable-for">
+                        {offer.suitable_for.map((item, idx) => (
+                          <span key={idx} className="offer-suitable-tag">{item}</span>
+                        ))}
+                      </div>
+                    )}
+                    {offer.best_for && (
+                      <p className="offer-best-for">
+                        <strong>Best for:</strong> {offer.best_for}
+                      </p>
+                    )}
                   </div>
                 </div>
               )}
 
-              {/* What's Included */}
-              {offer.includes && offer.includes.length > 0 && (
-                <div className="includes-section">
-                  <SectionHeader
-                    title="What's Included"
-                    subtitle="Everything that's part of this offer"
-                  />
-                  <ul className="includes-list">
-                    {offer.includes.map((item, index) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
+              {/* Flight Details (for fly-cruise) */}
+              {offer.includes_flight && (
+                <div className="offer-section">
+                  <h2 className="offer-section__title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+                    </svg>
+                    Flight Details
+                  </h2>
+                  <div className="offer-flight-details">
+                    {offer.departure_airport && (
+                      <div className="offer-flight-detail">
+                        <span className="label">Departure Airport:</span>
+                        <span className="value">{offer.departure_airport}</span>
+                      </div>
+                    )}
+                    {offer.flight_class && (
+                      <div className="offer-flight-detail">
+                        <span className="label">Class:</span>
+                        <span className="value">{offer.flight_class}</span>
+                      </div>
+                    )}
+                    {offer.transfer_included !== undefined && (
+                      <div className="offer-flight-detail">
+                        <span className="label">Transfers:</span>
+                        <span className="value">{offer.transfer_included ? 'Included' : 'Not included'}</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
 
-              {/* What's Not Included */}
-              {offer.excludes && offer.excludes.length > 0 && (
-                <div className="excludes-section">
-                  <SectionHeader
-                    title="What's Not Included"
-                    subtitle="Items not covered by this offer"
-                  />
-                  <ul className="excludes-list">
-                    {offer.excludes.map((item, index) => (
-                      <li key={index}>{item}</li>
+              {/* Regions */}
+              {offer.regions && offer.regions.length > 0 && (
+                <div className="offer-section">
+                  <h2 className="offer-section__title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M2 12h20"/>
+                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                    Regions Visited
+                  </h2>
+                  <div className="offer-regions">
+                    {offer.regions.map((region, idx) => (
+                      <span key={idx} className="offer-region-tag">{region}</span>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               )}
             </div>
@@ -270,10 +593,10 @@ function OfferPage() {
             {/* Sidebar */}
             <aside className="offer-sidebar">
               {/* Enquiry Form */}
-              <div className="sidebar-card" id="enquiry-form">
+              <div className="offer-sidebar-card" id="enquiry-form">
                 <h3>Enquire About This Offer</h3>
                 <p>
-                  Interested in this offer? Fill out the form below and we'll get back to you with more details and availability.
+                  Interested in this cruise? Fill out the form and we'll get back to you with availability and booking details.
                 </p>
                 <ContactForm 
                   context="offer-detail"
@@ -283,53 +606,47 @@ function OfferPage() {
               </div>
 
               {/* Quick Info */}
-              <div className="sidebar-card">
-                <h3>Quick Information</h3>
-                <dl className="offer-quick-info">
+              <div className="offer-sidebar-card">
+                <h3>Offer Summary</h3>
+                <dl className="offer-summary-list">
                   {offer.offer_type && (
                     <>
-                      <dt>Offer Type</dt>
-                      <dd>
-                        {offer.offer_type === 'fly_cruise' ? 'Fly-Cruise' : 
-                         offer.offer_type === 'cruise_only' ? 'Cruise Only' :
-                         offer.offer_type.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                      </dd>
+                      <dt>Type</dt>
+                      <dd>{getOfferTypeLabel(offer.offer_type)}</dd>
                     </>
                   )}
-                  {offer.destination && (
+                  {offer.category && (
                     <>
-                      <dt>Destination</dt>
-                      <dd>{offer.destination}</dd>
-                    </>
-                  )}
-                  {offer.ship_name && (
-                    <>
-                      <dt>Ship</dt>
-                      <dd>{offer.ship_name}</dd>
+                      <dt>Category</dt>
+                      <dd>{offer.category.charAt(0).toUpperCase() + offer.category.slice(1)}</dd>
                     </>
                   )}
                   {offer.cabin_type && (
                     <>
-                      <dt>Cabin Type</dt>
-                      <dd>
-                        {offer.cabin_type.charAt(0).toUpperCase() + offer.cabin_type.slice(1)}
-                      </dd>
+                      <dt>Cabin</dt>
+                      <dd>{offer.cabin_type.charAt(0).toUpperCase() + offer.cabin_type.slice(1)}</dd>
                     </>
                   )}
-                  {offer.includes_flight && (
+                  {offer.departure_date && offer.return_date && (
                     <>
-                      <dt>Flight Included</dt>
-                      <dd>Yes</dd>
+                      <dt>Travel Dates</dt>
+                      <dd>{formatShortDate(offer.departure_date)} - {formatShortDate(offer.return_date)}</dd>
+                    </>
+                  )}
+                  {offer.published_at && (
+                    <>
+                      <dt>Listed</dt>
+                      <dd>{formatShortDate(offer.published_at)}</dd>
                     </>
                   )}
                 </dl>
               </div>
 
               {/* Contact CTA */}
-              <div className="sidebar-card sidebar-card--cta">
+              <div className="offer-sidebar-card offer-sidebar-card--cta">
                 <h3>Prefer to Speak Directly?</h3>
-                <p>Call or WhatsApp us for immediate assistance.</p>
-                <div className="sidebar-cta-buttons">
+                <p>Call or WhatsApp us for immediate assistance and expert advice.</p>
+                <div className="offer-sidebar-buttons">
                   <Button href={`tel:${siteConfig.phone}`} variant="primary" fullWidth>
                     Call {siteConfig.phone}
                   </Button>
@@ -348,9 +665,20 @@ function OfferPage() {
           </div>
         </div>
       </section>
+
+      {/* Back to Offers */}
+      <section className="offer-back-section">
+        <div className="container">
+          <Link to="/offers" className="offer-back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to All Offers
+          </Link>
+        </div>
+      </section>
     </main>
   );
 }
 
 export default OfferPage;
-

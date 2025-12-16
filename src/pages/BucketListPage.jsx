@@ -188,7 +188,7 @@ function BucketListPage() {
         <div className="container text-center">
           <h2>Ready to Start Your Journey?</h2>
           <p>
-            Our expert cruise consultants are here to help you plan your bucket list adventure. 
+            Your expert cruise consultant is here to help you plan your bucket list adventure. 
             Get personalised advice and exclusive deals on these extraordinary voyages.
           </p>
           <div className="cta-buttons">

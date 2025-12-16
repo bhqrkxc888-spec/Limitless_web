@@ -204,6 +204,15 @@ function Footer() {
               <p key={index}>{paragraph}</p>
             ))}
           </div>
+          
+          {/* Price Match Asterisk Note */}
+          <div className="footer-price-match-note">
+            <p>
+              * <strong>Price Match Guarantee:</strong> Subject to <Link to="/price-match-guarantee">terms and conditions</Link>. 
+              We'll match any genuine like-for-like quote from an ABTA member.
+            </p>
+          </div>
+          
           <div className="footer-copyright">
             <p>© {currentYear} {siteConfig.siteName}. All rights reserved.</p>
             <Link to="/admin/login" className="footer-admin-link">Staff Login</Link>

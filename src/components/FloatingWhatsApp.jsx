@@ -42,7 +42,7 @@ function FloatingWhatsApp() {
         onClick={() => setIsExpanded(false)}
       >
         <div className="tooltip-content">
-          <span className="tooltip-title">Chat with Katherine</span>
+          <span className="tooltip-title">Chat with Us</span>
           <span className="tooltip-text">Quick cruise advice on WhatsApp</span>
         </div>
         <button 

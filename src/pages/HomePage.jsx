@@ -148,7 +148,7 @@ function HomePage() {
                   we craft bespoke cruise holidays tailored to your preferences.
                 </p>
                 <p className="hero-note">
-                  We're enhancing our digital experience. Explore our services or speak directly with our consultants.
+                  We're enhancing our digital experience. Explore our services or speak directly with your personal consultant.
                 </p>
                 <div className="hero-cta-group">
                   <Button to="/find-a-cruise" variant="primary" size="lg">
@@ -203,8 +203,8 @@ function HomePage() {
                 <PriceTagIcon />
               </span>
               <div className="trust-text">
-                <strong>Price Match*</strong>
-                <span><a href="/booking-terms" className="terms-link">T&Cs apply</a></span>
+                <strong><a href="/price-match-guarantee" className="trust-link">Price Match*</a></strong>
+                <span>We'll match like-for-like</span>
               </div>
             </div>
             <span className="trust-divider" />
@@ -227,7 +227,7 @@ function HomePage() {
           <div className="still-here-content">
             <h2>Speak With Us</h2>
             <p className="section-lead">
-              Our dedicated consultant Katherine is here to provide expert guidance 
+              Your dedicated consultant is here to provide expert guidance 
               and personalised recommendations for your next voyage.
             </p>
             
@@ -292,7 +292,7 @@ function HomePage() {
                 <UserIcon />
               </div>
               <h3>Personal Service</h3>
-              <p>One-to-one advice from Katherine, your dedicated cruise consultant who takes time to understand your preferences.</p>
+              <p>One-to-one advice from your dedicated cruise consultant who takes time to understand your preferences.</p>
             </div>
             
             <div className="offer-card">

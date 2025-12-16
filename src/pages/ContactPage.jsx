@@ -15,7 +15,7 @@ function ContactPage() {
     <main className="contact-elegant">
       <SEO
         title="Contact Us"
-        description="Get in touch with Katherine at Limitless Cruises. Call, WhatsApp, email or send an enquiry for personalised cruise quotes and expert advice."
+        description="Get in touch with Limitless Cruises. Call, WhatsApp, email or send an enquiry for personalised cruise quotes and expert advice."
         canonical="https://limitlesscruises.com/contact"
       />
       <div className="container">
@@ -36,7 +36,7 @@ function ContactPage() {
             <div className="contact-hero-image">
               <img 
                 src={aboutImages.katherine1} 
-                alt="Katherine, your cruise consultant" 
+                alt="Your cruise consultant" 
                 width="1920"
                 height="1080"
                 loading="eager"

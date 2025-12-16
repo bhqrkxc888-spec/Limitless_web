@@ -124,7 +124,7 @@ function CruiseLinesPage() {
         <div className="container text-center">
           <h2>Not Sure Which Cruise Line?</h2>
           <p>
-            Speak with your personal cruise consultant. We'll help you find the perfect cruise line for your style and budget.
+            Speak with your dedicated cruise consultant. We'll help you find the perfect cruise line for your style and budget.
           </p>
           <div className="cta-buttons">
             <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">

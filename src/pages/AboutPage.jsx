@@ -14,7 +14,7 @@ function AboutPage() {
     <main className="about-page-modern">
       <SEO
         title="About Us"
-        description="Meet Katherine, your personal cruise consultant at Limitless Cruises. CLIA Cruise Master, ABTA protected, UK-based personal service for your perfect cruise holiday."
+        description="Your personal cruise consultant at Limitless Cruises. CLIA Cruise Master, ABTA protected, UK-based personal service for your perfect cruise holiday."
         canonical="https://limitlesscruises.com/about"
       />
       <div className="container">
@@ -39,7 +39,7 @@ function AboutPage() {
             <div className="about-hero-image">
               <img 
                 src={aboutImages.katherine2}
-                alt="Katherine, your personal cruise consultant" 
+                alt="Your personal cruise consultant" 
                 width="1920"
                 height="1080"
                 loading="eager"
@@ -89,7 +89,7 @@ function AboutPage() {
             <div className="why-image">
               <img 
                 src={aboutImages.katherine1}
-                alt="Katherine on cruise deck" 
+                alt="Your cruise consultant on deck" 
                 loading="lazy"
               />
             </div>
@@ -142,7 +142,7 @@ function AboutPage() {
         <div className="container">
           <div className="katherine-layout">
             <div className="katherine-content">
-              <h2>Meet Katherine</h2>
+              <h2>Meet Your Consultant</h2>
               <p>Hi, I'm Katherine, the face behind Limitless Cruises. I live in the UK with my two children and I love travel, especially cruising.</p>
               <p>I've been lucky to visit Australia, Singapore, Florida, New York and many beautiful parts of Europe. Planning holidays has always been my passion.</p>
               <p>I bring that energy to every booking I support and focus on trips that feel relaxed, well organised and full of moments to remember.</p>
@@ -156,7 +156,7 @@ function AboutPage() {
                 >
                   <img 
                     src={aboutImages.holidayEliteLogo}
-                    alt="Holiday Elite Travel Agent - Katherine's professional membership" 
+                    alt="Holiday Elite Travel Agent - Professional membership" 
                     width="200" 
                     loading="lazy" 
                   />
@@ -167,7 +167,7 @@ function AboutPage() {
             <div className="katherine-image">
               <img 
                 src={aboutImages.katherine3}
-                alt="Katherine with family" 
+                alt="Family travel moments" 
                 loading="lazy"
               />
             </div>
@@ -183,7 +183,7 @@ function AboutPage() {
             <div className="testimonial-card">
               <div className="testimonial-content">
                 <p className="testimonial-quote">
-                  "Katherine's expertise made planning our world cruise absolutely seamless. She found us the perfect itinerary and handled every detail with care. We couldn't recommend her more highly."
+                  "The expertise made planning our world cruise absolutely seamless. We were found the perfect itinerary with every detail handled with care. Couldn't recommend more highly."
                 </p>
               </div>
               <div className="testimonial-author">
@@ -194,7 +194,7 @@ function AboutPage() {
             <div className="testimonial-card">
               <div className="testimonial-content">
                 <p className="testimonial-quote">
-                  "After booking multiple cruises with Katherine, we wouldn't go anywhere else. Her personal service and attention to detail are exceptional. She truly goes above and beyond."
+                  "After booking multiple cruises, we wouldn't go anywhere else. The personal service and attention to detail are exceptional. Truly goes above and beyond."
                 </p>
               </div>
               <div className="testimonial-author">
@@ -205,7 +205,7 @@ function AboutPage() {
             <div className="testimonial-card">
               <div className="testimonial-content">
                 <p className="testimonial-quote">
-                  "Katherine took the stress out of planning our first cruise. Her honest advice and genuine care for finding us the perfect holiday made all the difference. We're already planning our next trip with her!"
+                  "The stress was taken out of planning our first cruise. Honest advice and genuine care for finding us the perfect holiday made all the difference. Already planning our next trip!"
                 </p>
               </div>
               <div className="testimonial-author">
@@ -270,7 +270,7 @@ function AboutPage() {
                 Find a Cruise
               </Button>
               <Button to="/contact" variant="secondary" size="lg">
-                Contact Katherine
+                Get in Touch
               </Button>
             </div>
           </div>

@@ -416,7 +416,7 @@ function CruiseLinePage() {
           <div className="cta-content text-center">
             <h2>Ready to Book Your {cruiseLine.shortName} Cruise?</h2>
             <p>
-              Speak with your personal cruise consultant today. We'll help you find the perfect {cruiseLine.name} cruise at the best price.
+              Speak with your dedicated cruise consultant today. We'll help you find the perfect {cruiseLine.name} cruise at the best price.
             </p>
             <div className="cta-buttons">
               <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">
@@ -443,7 +443,7 @@ function SidebarContent({ cruiseLine }) {
       <div className="sidebar-card">
         <h3 className="sidebar-title">Book Your {cruiseLine.shortName} Cruise</h3>
         <p className="sidebar-text">
-          Get expert advice and the best prices on {cruiseLine.name} cruises from your personal cruise consultant.
+          Get expert advice and the best prices on {cruiseLine.name} cruises from your dedicated cruise consultant.
         </p>
         <div className="sidebar-cta">
           <Button href={`tel:${siteConfig.phone}`} variant="primary" fullWidth>

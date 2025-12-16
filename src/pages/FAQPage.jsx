@@ -14,7 +14,7 @@ const faqData = {
     questions: [
       {
         question: 'How do I book a cruise with Limitless Cruises?',
-        answer: 'Simply give Katherine a call, send a WhatsApp message, or complete our contact form. We\'ll discuss your preferences, find the perfect cruise, and handle all the booking details for you. There are no booking fees - our service is completely free.'
+        answer: 'Simply give us a call, send a WhatsApp message, or complete our contact form. We\'ll discuss your preferences, find the perfect cruise, and handle all the booking details for you. There are no booking fees - our service is completely free.'
       },
       {
         question: 'Is my booking financially protected?',
@@ -232,7 +232,7 @@ function FAQPage() {
           <h1>Frequently Asked Questions</h1>
           <p className="faq-hero-subtitle">
             Everything you need to know about cruise holidays. Can't find your answer? 
-            <Link to="/contact"> Just ask Katherine</Link>.
+            <Link to="/contact"> Just ask us</Link>.
           </p>
           
           {/* Search */}
@@ -323,7 +323,7 @@ function FAQPage() {
         <div className="container text-center">
           <h2>Still Have Questions?</h2>
           <p>
-            Katherine is here to help with any cruise questions - no question is too simple or too detailed.
+            We're here to help with any cruise questions - no question is too simple or too detailed.
           </p>
           <div className="cta-buttons">
             <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">

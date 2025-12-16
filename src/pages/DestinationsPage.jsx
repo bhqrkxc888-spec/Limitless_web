@@ -101,7 +101,7 @@ function DestinationsPage() {
         <div className="container text-center">
           <h2>Ready to Explore These Destinations?</h2>
           <p>
-            Speak with your personal cruise consultant to plan your perfect destination-focused cruise holiday.
+            Speak with your dedicated cruise consultant to plan your perfect destination-focused cruise holiday.
           </p>
           <div className="cta-buttons">
             <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">

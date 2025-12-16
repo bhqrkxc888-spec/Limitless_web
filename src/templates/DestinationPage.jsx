@@ -133,7 +133,7 @@ function DestinationPage() {
               <div className="sidebar-card">
                 <h3>Book Your {destination.name} Cruise</h3>
                 <p>
-                  Get expert advice on {destination.name} cruises from your personal cruise consultant.
+                  Get expert advice on {destination.name} cruises from your dedicated cruise consultant.
                 </p>
                 <div className="sidebar-cta">
                   <Button href={`tel:${siteConfig.phone}`} variant="primary" fullWidth>

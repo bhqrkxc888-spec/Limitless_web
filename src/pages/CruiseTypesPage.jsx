@@ -277,7 +277,7 @@ function CruiseTypesPage() {
         <div className="container text-center">
           <h2>Ready to Find Your Perfect Cruise?</h2>
           <p>
-            Speak with Katherine, your personal cruise consultant, to discover which cruise type will give you the holiday of your dreams.
+            Speak with your dedicated cruise consultant to discover which cruise type will give you the holiday of your dreams.
           </p>
           <div className="cta-buttons">
             <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">

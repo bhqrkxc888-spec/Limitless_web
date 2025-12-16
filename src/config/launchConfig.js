@@ -55,10 +55,14 @@ export const publicRoutes = [
   '/',
   '/find-a-cruise',
   '/contact',
-  '/about', // Optional: include About if you want it public
+  '/about',
+  '/travel-news',
+  '/offers',
   '/website-terms',
   '/privacy-policy',
-  '/booking-terms'
+  '/booking-terms',
+  '/cookie-policy',
+  '/price-match-guarantee'
 ];
 
 /**

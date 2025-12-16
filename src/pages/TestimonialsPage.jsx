@@ -12,7 +12,7 @@ import './TestimonialsPage.css';
 const testimonials = [
   {
     id: 1,
-    quote: "Katherine made our first cruise so easy. She listened to exactly what we wanted and found the perfect Mediterranean itinerary. We can't wait to book our next one!",
+    quote: "Our first cruise was made so easy. They listened to exactly what we wanted and found the perfect Mediterranean itinerary. We can't wait to book our next one!",
     author: "Sarah & Michael",
     location: "Sheffield",
     cruise: "Mediterranean on P&O Arvia",
@@ -21,7 +21,7 @@ const testimonials = [
   },
   {
     id: 2,
-    quote: "As a solo traveller, I was nervous about cruising alone. Katherine recommended Norwegian's studio cabins and helped me feel completely at ease. The whole experience was wonderful.",
+    quote: "As a solo traveller, I was nervous about cruising alone. Norwegian's studio cabins were recommended and I was helped to feel completely at ease. The whole experience was wonderful.",
     author: "Janet T.",
     location: "Leeds",
     cruise: "Norwegian Fjords Solo",
@@ -30,7 +30,7 @@ const testimonials = [
   },
   {
     id: 3,
-    quote: "Booking our family Disney cruise through Limitless was the best decision. Katherine handled everything - flights, transfers, the lot. The kids are still talking about it!",
+    quote: "Booking our family Disney cruise through Limitless was the best decision. Everything was handled - flights, transfers, the lot. The kids are still talking about it!",
     author: "The Williams Family",
     location: "Manchester",
     cruise: "Disney Caribbean",
@@ -39,7 +39,7 @@ const testimonials = [
   },
   {
     id: 4,
-    quote: "We've booked three cruises now with Katherine. Her knowledge of the different cruise lines is incredible, and she always finds us deals we wouldn't have found ourselves.",
+    quote: "We've booked three cruises now with Limitless. The knowledge of the different cruise lines is incredible, and we're always found deals we wouldn't have found ourselves.",
     author: "David & Anne",
     location: "Doncaster",
     cruise: "Multiple cruises",
@@ -48,7 +48,7 @@ const testimonials = [
   },
   {
     id: 5,
-    quote: "Katherine's advice on accessible cabins and assistance was invaluable. She made sure everything was arranged before we sailed. Truly a personal service.",
+    quote: "The advice on accessible cabins and assistance was invaluable. Everything was arranged before we sailed. Truly a personal service.",
     author: "Robert P.",
     location: "Barnsley",
     cruise: "P&O British Isles",
@@ -57,7 +57,7 @@ const testimonials = [
   },
   {
     id: 6,
-    quote: "After comparing prices online, we found Katherine matched the best deal and added onboard credit. Plus the personal service means if anything goes wrong, we have someone to call.",
+    quote: "After comparing prices online, we found Limitless matched the best deal and added onboard credit. Plus the personal service means if anything goes wrong, we have someone to call.",
     author: "Christine & Paul",
     location: "Rotherham",
     cruise: "MSC Mediterranean",
@@ -200,17 +200,17 @@ function TestimonialsPage() {
             <div className="trust-item">
               <div className="trust-icon">🎓</div>
               <h3>CLIA Cruise Master</h3>
-              <p>Katherine holds the highest cruise industry qualification.</p>
+              <p>Qualified with the highest cruise industry certification.</p>
             </div>
             <div className="trust-item">
               <div className="trust-icon">💬</div>
               <h3>Personal Service</h3>
-              <p>Speak directly with Katherine - not a call centre.</p>
+              <p>Speak directly with your consultant - not a call centre.</p>
             </div>
             <div className="trust-item">
               <div className="trust-icon">💰</div>
               <h3>Price Match*</h3>
-              <p>We'll match genuine like-for-like quotes. <a href="/booking-terms">*T&Cs apply</a></p>
+              <p>We'll match genuine like-for-like quotes. <a href="/price-match-guarantee">See terms</a></p>
             </div>
           </div>
         </div>
@@ -237,7 +237,7 @@ function TestimonialsPage() {
         <div className="container text-center">
           <h2>Ready to Create Your Own Story?</h2>
           <p>
-            Join our happy customers and let Katherine plan your perfect cruise holiday.
+            Join our happy customers and let us plan your perfect cruise holiday.
           </p>
           <div className="cta-buttons">
             <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">

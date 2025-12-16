@@ -230,6 +230,35 @@
   margin-bottom: 0;
 }
 
+.footer-price-match-note {
+  margin: var(--space-6) 0;
+  padding: var(--space-4);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--clr-accent);
+}
+
+.footer-price-match-note p {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+}
+
+.footer-price-match-note strong {
+  color: var(--clr-accent);
+}
+
+.footer-price-match-note a {
+  color: var(--clr-accent);
+  text-decoration: underline;
+  transition: color var(--transition-fast);
+}
+
+.footer-price-match-note a:hover {
+  color: #fff;
+}
+
 .footer-copyright {
   padding-top: var(--space-6);
   border-top: 1px solid rgba(255, 255, 255, 0.1);

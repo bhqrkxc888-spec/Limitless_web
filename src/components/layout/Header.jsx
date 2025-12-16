@@ -47,7 +47,7 @@ function Header() {
       return navigation.main; // Show all items when launched or authenticated
     }
     
-    // When not authenticated, show only: Home, Find a Cruise, About, Contact
+    // When not authenticated, show: Home, Find a Cruise, About, Travel News, Contact
     const publicMenuItems = [
       {
         id: 'home',
@@ -65,6 +65,12 @@ function Header() {
         id: 'about',
         label: 'About',
         path: '/about',
+        megaMenu: false
+      },
+      {
+        id: 'travel-news',
+        label: 'Travel News',
+        path: '/travel-news',
         megaMenu: false
       },
       {

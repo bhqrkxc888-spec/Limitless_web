@@ -294,7 +294,7 @@ function TravelNewsPage() {
         <div className="container text-center">
           <h2>Have Questions About Travel News?</h2>
           <p>
-            Our expert travel consultants can help you understand how the latest news affects your travel plans.
+            Your expert travel consultant can help you understand how the latest news affects your travel plans.
             Get personalised advice and stay informed.
           </p>
           <div className="cta-buttons">

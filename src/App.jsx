@@ -7,6 +7,7 @@ import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import CookieConsent from './components/CookieConsent'
 import FloatingWhatsApp from './components/FloatingWhatsApp'
+import DevModeIndicator from './components/DevModeIndicator'
 
 // Route Protection
 import ProtectedRoute from './components/ProtectedRoute'
@@ -75,6 +76,7 @@ const WebsiteTerms = lazy(() => import('./pages/WebsiteTerms'))
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
 const BookingTerms = lazy(() => import('./pages/BookingTerms'))
 const CookiePolicy = lazy(() => import('./pages/CookiePolicy'))
+const PriceMatchGuarantee = lazy(() => import('./pages/PriceMatchGuarantee'))
 
 // Template Pages (Dynamic Routes)
 const CruiseLinePage = lazy(() => import('./templates/CruiseLinePage'))
@@ -253,6 +255,7 @@ function AppLayout() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/booking-terms" element={<BookingTerms />} />
             <Route path="/cookie-policy" element={<CookiePolicy />} />
+            <Route path="/price-match-guarantee" element={<PriceMatchGuarantee />} />
 
             {/* 404 - Catch all unmatched routes */}
             <Route path="*" element={<NotFoundPage />} />
@@ -262,6 +265,7 @@ function AppLayout() {
       <Footer />
       <CookieConsent />
       <FloatingWhatsApp />
+      <DevModeIndicator />
     </div>
   );
 }

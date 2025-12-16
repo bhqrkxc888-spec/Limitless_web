@@ -222,7 +222,7 @@ function BucketListExperiencePage() {
               <div className="sidebar-card booking-card">
                 <h3>Book This Experience</h3>
                 <p>
-                  Ready to embark on this extraordinary journey? Our expert consultants are here to help.
+                  Ready to embark on this extraordinary journey? Your expert consultant is here to help.
                 </p>
                 <div className="sidebar-cta">
                   <Button href={`tel:${siteConfig.phone}`} variant="primary" fullWidth>
@@ -300,7 +300,7 @@ function BucketListExperiencePage() {
               </div>
               <div className="cta-divider"></div>
               <div className="cta-option">
-                <h3>Speak with Katherine</h3>
+                <h3>Speak with Your Consultant</h3>
                 <p>Call or WhatsApp for immediate advice and booking assistance</p>
                 <div className="cta-contact-buttons">
                   <Button href={`tel:${siteConfig.phone}`} variant="outline" size="lg" className="btn-outline-white">

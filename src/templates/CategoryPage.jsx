@@ -97,7 +97,7 @@ function CategoryPage() {
               <div className="sidebar-card">
                 <h3>Find Your Perfect {category.name.replace(' Cruises', '')} Cruise</h3>
                 <p>
-                  Get expert advice on {category.name.toLowerCase()} from your personal cruise consultant.
+                  Get expert advice on {category.name.toLowerCase()} from your dedicated cruise consultant.
                 </p>
                 <div className="sidebar-cta">
                   <Button href={`tel:${siteConfig.phone}`} variant="primary" fullWidth>
@@ -140,7 +140,7 @@ function CategoryPage() {
         <div className="container text-center">
           <h2>Ready to Book Your {category.name.replace(' Cruises', '')} Cruise?</h2>
           <p>
-            Speak with your personal cruise consultant today for expert advice and the best prices.
+            Speak with your dedicated cruise consultant today for expert advice and the best prices.
           </p>
           <div className="cta-buttons">
             <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">

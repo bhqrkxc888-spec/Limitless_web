@@ -10,6 +10,31 @@ import { placeholderOffers, getPlaceholderOfferBySlug } from '../data/placeholde
 import { logger } from '../utils/logger';
 
 /**
+ * Apply filters to placeholder offers
+ */
+function filterPlaceholderOffers(offers, { featured, destination, offerType, offset, limit }) {
+  let filtered = [...offers];
+  
+  if (featured !== null && featured !== undefined) {
+    filtered = filtered.filter(o => o.featured === featured);
+  }
+  if (destination) {
+    filtered = filtered.filter(o => 
+      o.destination?.toLowerCase().includes(destination.toLowerCase())
+    );
+  }
+  if (offerType) {
+    filtered = filtered.filter(o => o.offer_type === offerType);
+  }
+  
+  // Apply pagination
+  const total = filtered.length;
+  const paginated = filtered.slice(offset, offset + limit);
+  
+  return { offers: paginated, total };
+}
+
+/**
  * Hook for fetching list of offers
  * @param {Object} options - Query options
  * @param {number} options.limit - Maximum number of offers
@@ -44,56 +69,49 @@ export function useOffers({
         destination
       });
 
-      if (fetchError) {
-        // If function not found, it's OK - offers might not be set up yet
-        // Silently handle this - don't treat as error
-        if (fetchError.code === 'PGRST202' || 
-            fetchError.message?.includes('not found') || 
-            fetchError.message?.includes('Searched for') ||
-            fetchError.message?.includes('Could not find')) {
-          setOffers([]);
-          setTotal(0);
-          setError(null); // Don't treat as error
-          return;
-        }
-        throw fetchError;
-      }
-
-      if (data && data.offers && data.offers.length > 0) {
+      // Check if we got valid data from Supabase
+      if (!fetchError && data && data.offers && data.offers.length > 0) {
         // Use real Supabase data
         setOffers(data.offers);
         setTotal(data.total || data.offers.length);
       } else {
-        // Fall back to placeholder offers when Supabase is empty
-        // Apply filters if provided
-        let filtered = [...placeholderOffers];
-        if (featured !== null) {
-          filtered = filtered.filter(o => o.featured === featured);
+        // Fall back to placeholder offers:
+        // - When Supabase returns empty data
+        // - When there's an error (function not found, not configured, etc.)
+        const filtered = filterPlaceholderOffers(placeholderOffers, {
+          featured,
+          destination,
+          offerType,
+          offset,
+          limit
+        });
+        setOffers(filtered.offers);
+        setTotal(filtered.total);
+        
+        // Don't set error for expected cases (empty DB, function not found)
+        // Only log unexpected errors for debugging
+        if (fetchError && 
+            fetchError.code !== 'PGRST202' && 
+            !fetchError.message?.includes('not found') && 
+            !fetchError.message?.includes('Searched for') &&
+            !fetchError.message?.includes('Could not find') &&
+            !fetchError.message?.includes('not configured')) {
+          logger.warn('Offers API error, using placeholder data:', fetchError.message);
         }
-        if (destination) {
-          filtered = filtered.filter(o => 
-            o.destination?.toLowerCase().includes(destination.toLowerCase())
-          );
-        }
-        if (offerType) {
-          filtered = filtered.filter(o => o.offer_type === offerType);
-        }
-        // Apply pagination
-        const paginated = filtered.slice(offset, offset + limit);
-        setOffers(paginated);
-        setTotal(filtered.length);
       }
     } catch (err) {
-      // Only log non-"function not found" errors
-      if (err.code !== 'PGRST202' && 
-          !err.message?.includes('not found') && 
-          !err.message?.includes('Searched for') &&
-          !err.message?.includes('Could not find')) {
-        logger.error('Error fetching offers:', err);
-      }
-      setError(err);
-      setOffers([]);
-      setTotal(0);
+      // Unexpected error - still fall back to placeholders
+      logger.error('Unexpected error fetching offers:', err);
+      
+      const filtered = filterPlaceholderOffers(placeholderOffers, {
+        featured,
+        destination,
+        offerType,
+        offset,
+        limit
+      });
+      setOffers(filtered.offers);
+      setTotal(filtered.total);
     } finally {
       setLoading(false);
     }
@@ -135,36 +153,29 @@ export function useOffer(slug) {
 
         const { data, error: fetchError } = await getOfferBySlug(slug);
 
-        if (fetchError) {
-          // If function not found, silently handle
-          if (fetchError.code === 'PGRST202' || 
-              fetchError.message?.includes('not found') || 
-              fetchError.message?.includes('Searched for') ||
-              fetchError.message?.includes('Could not find')) {
-            setOffer(null);
-            setError(null);
-            return;
-          }
-          throw fetchError;
-        }
-
-        // Use real data if found, otherwise check placeholder
-        if (data) {
+        // Check if we got valid data from Supabase
+        if (!fetchError && data) {
           setOffer(data);
         } else {
           // Fall back to placeholder offer
-          setOffer(getPlaceholderOfferBySlug(slug));
+          const placeholderOffer = getPlaceholderOfferBySlug(slug);
+          setOffer(placeholderOffer);
+          
+          // Only log unexpected errors
+          if (fetchError && 
+              fetchError.code !== 'PGRST202' && 
+              !fetchError.message?.includes('not found') && 
+              !fetchError.message?.includes('Searched for') &&
+              !fetchError.message?.includes('Could not find') &&
+              !fetchError.message?.includes('not configured')) {
+            logger.warn('Offer API error, using placeholder data:', fetchError.message);
+          }
         }
       } catch (err) {
-        // Only log non-"function not found" errors
-        if (err.code !== 'PGRST202' && 
-            !err.message?.includes('not found') && 
-            !err.message?.includes('Searched for') &&
-            !err.message?.includes('Could not find')) {
-          logger.error('Error fetching offer:', err);
-        }
-        setError(err);
-        setOffer(null);
+        // Unexpected error - still try placeholder
+        logger.error('Unexpected error fetching offer:', err);
+        const placeholderOffer = getPlaceholderOfferBySlug(slug);
+        setOffer(placeholderOffer);
       } finally {
         setLoading(false);
       }
@@ -175,4 +186,3 @@ export function useOffer(slug) {
 
   return { offer, loading, error };
 }
-

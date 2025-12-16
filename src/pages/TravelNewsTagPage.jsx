@@ -142,7 +142,7 @@ function TravelNewsTagPage() {
         <div className="container text-center">
           <h2>Explore More Travel News</h2>
           <p>
-            Discover more articles or get in touch with our experts for personalised travel advice.
+            Discover more articles or get in touch for personalised travel advice.
           </p>
           <div className="cta-buttons">
             <Button to="/travel-news" variant="primary" size="lg">

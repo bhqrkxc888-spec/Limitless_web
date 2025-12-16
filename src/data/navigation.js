@@ -119,7 +119,8 @@ export const navigation = {
       { label: 'Booking Terms', path: '/booking-terms' },
       { label: 'Website Terms', path: '/website-terms' },
       { label: 'Privacy Policy', path: '/privacy-policy' },
-      { label: 'Cookie Policy', path: '/cookie-policy' }
+      { label: 'Cookie Policy', path: '/cookie-policy' },
+      { label: 'Price Match Guarantee', path: '/price-match-guarantee' }
     ],
     company: [
       { label: 'About Us', path: '/about' },

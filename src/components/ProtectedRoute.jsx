@@ -51,7 +51,7 @@ function ComingSoonMessage() {
             We're working hard to bring you an exceptional experience.
           </p>
           <p className="coming-soon-submessage">
-            In the meantime, you can explore our cruise finder, get in touch with our team, 
+            In the meantime, you can explore our cruise finder, get in touch with us, 
             or learn more about us.
           </p>
           <div className="coming-soon-cta">
