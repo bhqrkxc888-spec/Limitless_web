@@ -113,12 +113,8 @@ function AdminErrors() {
       
       if (error) throw error;
       
-      // Update local state
-      setErrors(prev => prev.map(e => 
-        e.id === errorId 
-          ? { ...e, resolved: true, resolved_at: new Date().toISOString() }
-          : e
-      ));
+      // Refresh data from database to ensure counts and filters are correct
+      await fetchErrors();
     } catch (err) {
       console.error('Error marking as resolved:', err);
     }
