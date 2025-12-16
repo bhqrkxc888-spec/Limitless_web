@@ -68,6 +68,11 @@ export const navigation = {
               label: 'Find a Cruise',
               path: '/find-a-cruise',
               description: 'Search and compare cruises'
+            },
+            {
+              label: 'Travel News',
+              path: '/travel-news',
+              description: 'Latest cruise and travel updates'
             }
           ]
         }

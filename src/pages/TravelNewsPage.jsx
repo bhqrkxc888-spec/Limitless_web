@@ -1,28 +1,35 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useTravelNews } from '../hooks/useTravelNews';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
-import HeroSection from '../components/HeroSection';
 import { Button, SectionHeader } from '../components/ui';
 import NewsCard from '../components/NewsCard';
 import './TravelNewsPage.css';
 
 const CATEGORIES = [
-  { value: null, label: 'All Categories' },
-  { value: 'destination', label: 'Destinations' },
-  { value: 'cruise_line', label: 'Cruise Lines' },
-  { value: 'travel_tips', label: 'Travel Tips' },
-  { value: 'industry_news', label: 'Industry News' },
-  { value: 'special_offers', label: 'Special Offers' },
+  { value: null, label: 'All' },
   { value: 'events', label: 'Events' },
+  { value: 'cruise_line', label: 'Cruise Lines' },
+  { value: 'destination', label: 'Destinations' },
+  { value: 'special_offers', label: 'Offers' },
+  { value: 'industry_news', label: 'Industry' },
+  { value: 'travel_tips', label: 'Tips' },
   { value: 'general', label: 'General' }
 ];
 
 function TravelNewsPage() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12;
+  const itemsPerPage = 10; // 1 hero + 9 grid items
 
+  // Fetch featured article separately for the hero
+  const { news: featuredNews, loading: featuredLoading } = useTravelNews({
+    limit: 1,
+    featured: true
+  });
+
+  // Fetch main news list
   const { news, total, loading, error } = useTravelNews({
     limit: itemsPerPage,
     offset: (currentPage - 1) * itemsPerPage,
@@ -30,6 +37,14 @@ function TravelNewsPage() {
   });
 
   const totalPages = Math.ceil(total / itemsPerPage);
+  
+  // Get the featured article (first featured, or first article)
+  const heroArticle = featuredNews[0] || news[0];
+  
+  // Filter out hero article from main grid if it's the same
+  const gridArticles = heroArticle 
+    ? news.filter(article => article.id !== heroArticle.id)
+    : news;
 
   // Structured Data for SEO
   const structuredData = {
@@ -52,6 +67,8 @@ function TravelNewsPage() {
     }))
   };
 
+  const isLoading = loading || featuredLoading;
+
   return (
     <main className="travel-news-page">
       {/* SEO */}
@@ -63,112 +80,217 @@ function TravelNewsPage() {
         structuredData={structuredData}
       />
 
-      {/* Hero Section */}
-      <HeroSection
-        title="Travel News"
-        subtitle="Stay informed with the latest travel news, cruise updates, destination guides, and expert travel tips. Your source for everything cruise and travel related."
-        size="lg"
-        align="center"
-        primaryCta={{ label: 'Contact Us', to: '/contact' }}
-        secondaryCta={{ label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone}` }}
-      />
-
-      {/* Category Filter */}
-      <section className="section section-light">
+      {/* Page Header */}
+      <section className="news-page-header">
         <div className="container">
-          <div className="category-filter">
-            <label htmlFor="category-filter" className="category-filter-label">
-              Filter by Category:
-            </label>
-            <select
-              id="category-filter"
-              className="category-filter-select"
-              value={selectedCategory || ''}
-              onChange={(e) => {
-                setSelectedCategory(e.target.value || null);
-                setCurrentPage(1);
-              }}
-            >
-              {CATEGORIES.map((cat) => (
-                <option key={cat.value || 'all'} value={cat.value || ''}>
-                  {cat.label}
-                </option>
-              ))}
-            </select>
+          <div className="news-page-header__content">
+            <span className="news-page-header__eyebrow">Stay Informed</span>
+            <h1 className="news-page-header__title">Travel News</h1>
+            <p className="news-page-header__subtitle">
+              The latest cruise updates, destination guides, and expert travel tips. 
+              Your source for everything cruise and travel related.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* News Grid */}
-      <section className="section">
+      {/* Category Filter Pills */}
+      <section className="news-filter-section">
         <div className="container">
-          <SectionHeader
-            eyebrow="Latest Articles"
-            title={selectedCategory ? `${CATEGORIES.find(c => c.value === selectedCategory)?.label} News` : "All Travel News"}
-            subtitle={`${total} article${total !== 1 ? 's' : ''} available`}
-          />
+          <div className="news-filter-pills">
+            {CATEGORIES.map((cat) => (
+              <button
+                key={cat.value || 'all'}
+                className={`news-filter-pill ${selectedCategory === cat.value ? 'news-filter-pill--active' : ''}`}
+                onClick={() => {
+                  setSelectedCategory(cat.value);
+                  setCurrentPage(1);
+                }}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          {loading && (
+      {/* Loading State */}
+      {isLoading && (
+        <section className="section">
+          <div className="container">
             <div className="news-loading">
-              <p>Loading articles...</p>
+              <div className="news-loading__spinner"></div>
+              <p>Loading the latest news...</p>
             </div>
-          )}
+          </div>
+        </section>
+      )}
 
-          {error && (
+      {/* Error State */}
+      {error && !isLoading && (
+        <section className="section">
+          <div className="container">
             <div className="news-error">
+              <div className="news-error__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+              </div>
+              <h3>Unable to Load News</h3>
               <p>Sorry, we couldn't load the articles at this time. Please try again later or contact us directly.</p>
               <Button to="/contact" variant="primary">
                 Contact Us
               </Button>
             </div>
-          )}
+          </div>
+        </section>
+      )}
 
-          {!loading && !error && news.length === 0 && (
+      {/* Empty State */}
+      {!isLoading && !error && news.length === 0 && (
+        <section className="section">
+          <div className="container">
             <div className="news-empty">
-              <p>No articles are currently available. Check back soon for the latest travel news.</p>
-              <Button to="/contact" variant="primary">
-                Get in Touch
-              </Button>
-            </div>
-          )}
-
-          {!loading && !error && news.length > 0 && (
-            <>
-              <div className="news-grid">
-                {news.map((article) => (
-                  <NewsCard key={article.id} article={article} />
-                ))}
+              <div className="news-empty__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                  <polyline points="10 9 9 9 8 9"/>
+                </svg>
               </div>
+              <h3>No Articles Available</h3>
+              <p>
+                {selectedCategory 
+                  ? `No articles found in this category. Try selecting a different category or check back soon.`
+                  : `No articles are currently available. Check back soon for the latest travel news.`
+                }
+              </p>
+              <div className="news-empty__actions">
+                {selectedCategory && (
+                  <Button onClick={() => setSelectedCategory(null)} variant="outline">
+                    View All News
+                  </Button>
+                )}
+                <Button to="/contact" variant="primary">
+                  Get in Touch
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
-              {/* Pagination */}
-              {totalPages > 1 && (
-                <div className="pagination">
-                  <Button
-                    variant="outline"
-                    onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                    disabled={currentPage === 1}
-                  >
-                    Previous
-                  </Button>
-                  <span className="pagination-info">
-                    Page {currentPage} of {totalPages}
-                  </span>
-                  <Button
-                    variant="outline"
-                    onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
-                    disabled={currentPage === totalPages}
-                  >
-                    Next
-                  </Button>
+      {/* Featured Hero Article */}
+      {!isLoading && !error && heroArticle && currentPage === 1 && !selectedCategory && (
+        <section className="news-hero-section">
+          <div className="container">
+            <div className="news-hero-label">
+              <span>Featured Story</span>
+            </div>
+            <NewsCard article={heroArticle} variant="hero" />
+          </div>
+        </section>
+      )}
+
+      {/* News Grid */}
+      {!isLoading && !error && news.length > 0 && (
+        <section className="section news-grid-section">
+          <div className="container">
+            <SectionHeader
+              eyebrow={selectedCategory ? CATEGORIES.find(c => c.value === selectedCategory)?.label : "Latest Articles"}
+              title={selectedCategory ? `${CATEGORIES.find(c => c.value === selectedCategory)?.label} News` : "All Travel News"}
+              subtitle={`${total} article${total !== 1 ? 's' : ''} available`}
+            />
+
+            <div className="news-articles-list">
+              {(selectedCategory || currentPage > 1 ? news : gridArticles).map((article) => (
+                <NewsCard key={article.id} article={article} variant="horizontal" />
+              ))}
+            </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="news-pagination">
+                <Button
+                  variant="outline"
+                  onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                  disabled={currentPage === 1}
+                  className="news-pagination__btn"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M15 18l-6-6 6-6"/>
+                  </svg>
+                  Previous
+                </Button>
+                
+                <div className="news-pagination__pages">
+                  {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                    let pageNum;
+                    if (totalPages <= 5) {
+                      pageNum = i + 1;
+                    } else if (currentPage <= 3) {
+                      pageNum = i + 1;
+                    } else if (currentPage >= totalPages - 2) {
+                      pageNum = totalPages - 4 + i;
+                    } else {
+                      pageNum = currentPage - 2 + i;
+                    }
+                    return (
+                      <button
+                        key={pageNum}
+                        className={`news-pagination__page ${currentPage === pageNum ? 'news-pagination__page--active' : ''}`}
+                        onClick={() => setCurrentPage(pageNum)}
+                      >
+                        {pageNum}
+                      </button>
+                    );
+                  })}
                 </div>
-              )}
-            </>
-          )}
+                
+                <Button
+                  variant="outline"
+                  onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                  disabled={currentPage === totalPages}
+                  className="news-pagination__btn"
+                >
+                  Next
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M9 18l6-6-6-6"/>
+                  </svg>
+                </Button>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* Category Links Section */}
+      <section className="news-categories-section">
+        <div className="container">
+          <h2 className="news-categories__title">Browse by Category</h2>
+          <div className="news-categories-grid">
+            {CATEGORIES.filter(c => c.value !== null).map((cat) => (
+              <Link 
+                key={cat.value} 
+                to={`/travel-news/category/${cat.value}`}
+                className="news-category-card"
+              >
+                <span className="news-category-card__label">{cat.label}</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="news-category-card__arrow">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="section section-dark">
+      <section className="section section-dark news-cta-section">
         <div className="container text-center">
           <h2>Have Questions About Travel News?</h2>
           <p>

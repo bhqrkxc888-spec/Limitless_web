@@ -55,7 +55,7 @@ function BucketListPage() {
   };
 
   const renderExperienceCards = (experiences) => (
-    <div className="grid grid-2-md grid-3-lg">
+    <div className="grid grid-3">
       {experiences.map((experience) => (
         <Card key={experience.id} to={`/bucket-list/${experience.slug}`} variant="default" className="bucket-list-card">
           <Card.Image 

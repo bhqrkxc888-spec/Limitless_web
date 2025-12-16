@@ -3,6 +3,7 @@ import SEO from '../components/SEO';
 import ContactForm from '../components/ContactForm';
 import BucketListFeatured from '../components/BucketListFeatured'
 import FeaturedOffers from '../components/FeaturedOffers';
+import LatestNewsTile from '../components/LatestNewsTile';
 import { Button } from '../components/ui';
 import { homeHeroImages } from '../utils/imageHelpers';
 import './HomePage.css';
@@ -114,7 +115,7 @@ function HomePage() {
     <main className="home-elegant">
       <SEO
         title="Your Personal Cruise Consultant"
-        description="A refined new experience is coming. Limitless Cruises - your personal cruise consultant for expert advice, exclusive deals, and seamless holiday planning."
+        description="Limitless Cruises - your personal cruise consultant for expert advice, exclusive deals, and seamless holiday planning. ABTA protected, CLIA certified cruise specialists."
         canonical={siteConfig.siteUrl}
         structuredData={structuredData}
       />
@@ -140,18 +141,21 @@ function HomePage() {
             {/* Text Box - Overlays the image */}
             <div className="hero-text-box">
               <div className="hero-text">
-                <p className="hero-eyebrow">A refined new experience is on the way</p>
-                <h1>Your Personal Cruise Consultant</h1>
+                <p className="hero-eyebrow">Personal Cruise Specialists</p>
+                <h1>Your Journey Begins Here</h1>
                 <p className="hero-lead">
-                  We're crafting something special. While our new website takes shape, 
-                  we're still here to help you <a href="/find-a-cruise" className="inline-link">discover your perfect cruise holiday</a>.
+                  Experience the difference of truly personal service. From ocean voyages to river cruises, 
+                  we craft bespoke cruise holidays tailored to your preferences.
+                </p>
+                <p className="hero-note">
+                  We're enhancing our digital experience. Explore our services or speak directly with our consultants.
                 </p>
                 <div className="hero-cta-group">
                   <Button to="/find-a-cruise" variant="primary" size="lg">
                     Find a Cruise
                   </Button>
-                  <Button to="/contact" variant="secondary" size="lg">
-                    Get in Touch
+                  <Button to="/offers" variant="secondary" size="lg">
+                    View Offers
                   </Button>
                 </div>
               </div>
@@ -217,14 +221,14 @@ function HomePage() {
         </div>
       </section>
 
-      {/* We're Still Here */}
+      {/* Contact Options */}
       <section className="still-here">
         <div className="container">
           <div className="still-here-content">
-            <h2>We're Still Here for You</h2>
+            <h2>Speak With Us</h2>
             <p className="section-lead">
-              While we work on our new website, Katherine is ready to help with your cruise enquiries. 
-              Reach out through any of these channels.
+              Our dedicated consultant Katherine is here to provide expert guidance 
+              and personalised recommendations for your next voyage.
             </p>
             
             <div className="contact-grid">
@@ -232,22 +236,22 @@ function HomePage() {
                 <span className="contact-icon contact-icon--phone">
                   <PhoneIcon />
                 </span>
-                <h3>Call Us</h3>
+                <h3>Telephone</h3>
                 <p>{siteConfig.phone}</p>
               </a>
               
-                    <a 
-                      href={siteConfig.whatsappUrl || 'https://wa.me/447359796108'} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="contact-card-elegant"
-                    >
-                      <span className="contact-icon contact-icon--whatsapp">
-                        <WhatsAppIcon />
-                      </span>
-                      <h3>Mobile / WhatsApp</h3>
-                      <p>{siteConfig.whatsapp}</p>
-                    </a>
+              <a 
+                href={siteConfig.whatsappUrl || 'https://wa.me/447359796108'} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="contact-card-elegant"
+              >
+                <span className="contact-icon contact-icon--whatsapp">
+                  <WhatsAppIcon />
+                </span>
+                <h3>WhatsApp</h3>
+                <p>{siteConfig.whatsapp}</p>
+              </a>
               
               <a 
                 href={siteConfig.facebook}
@@ -259,15 +263,15 @@ function HomePage() {
                   <FacebookIcon />
                 </span>
                 <h3>Facebook</h3>
-                <p>Message Us</p>
+                <p>Send Message</p>
               </a>
               
               <a href="#contact-form" className="contact-card-elegant">
                 <span className="contact-icon contact-icon--email">
                   <MailIcon />
                 </span>
-                <h3>Email</h3>
-                <p>Send Enquiry</p>
+                <h3>Enquire</h3>
+                <p>Send Request</p>
               </a>
             </div>
           </div>
@@ -312,6 +316,9 @@ function HomePage() {
 
       {/* Featured Offers - Latest Deals */}
       <FeaturedOffers />
+
+      {/* Latest Travel News */}
+      <LatestNewsTile />
 
       {/* Bucket List Featured - Dynamic Rotating Content */}
       <BucketListFeatured />

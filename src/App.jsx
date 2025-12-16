@@ -146,23 +146,9 @@ function AppLayout() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
             
-            {/* Offers - Protected */}
-            <Route 
-              path="/offers" 
-              element={
-                <ProtectedRoute>
-                  <OffersPage />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/offers/:slug" 
-              element={
-                <ProtectedRoute>
-                  <OfferPage />
-                </ProtectedRoute>
-              } 
-            />
+            {/* Offers - Public */}
+            <Route path="/offers" element={<OffersPage />} />
+            <Route path="/offers/:slug" element={<OfferPage />} />
             
             {/* Cruise Lines - Protected */}
             <Route 
@@ -256,39 +242,11 @@ function AppLayout() {
               } 
             />
             
-            {/* Travel News - Protected during development */}
-            <Route 
-              path="/travel-news" 
-              element={
-                <ProtectedRoute>
-                  <TravelNewsPage />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/travel-news/category/:category" 
-              element={
-                <ProtectedRoute>
-                  <TravelNewsCategoryPage />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/travel-news/tag/:tag" 
-              element={
-                <ProtectedRoute>
-                  <TravelNewsTagPage />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/travel-news/:slug" 
-              element={
-                <ProtectedRoute>
-                  <TravelNewsArticlePage />
-                </ProtectedRoute>
-              } 
-            />
+            {/* Travel News - Public */}
+            <Route path="/travel-news" element={<TravelNewsPage />} />
+            <Route path="/travel-news/category/:category" element={<TravelNewsCategoryPage />} />
+            <Route path="/travel-news/tag/:tag" element={<TravelNewsTagPage />} />
+            <Route path="/travel-news/:slug" element={<TravelNewsArticlePage />} />
             
             {/* Legal Pages - Always Public */}
             <Route path="/website-terms" element={<WebsiteTerms />} />

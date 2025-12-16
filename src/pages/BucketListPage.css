@@ -80,21 +80,18 @@
 }
 
 /* Enhanced grid spacing */
-.bucket-list-page .grid-2-md,
-.bucket-list-page .grid-3-lg {
+.bucket-list-page .grid-3 {
   gap: var(--space-8);
 }
 
 @media (max-width: 1023px) {
-  .bucket-list-page .grid-2-md,
-  .bucket-list-page .grid-3-lg {
+  .bucket-list-page .grid-3 {
     gap: var(--space-6);
   }
 }
 
 @media (max-width: 767px) {
-  .bucket-list-page .grid-2-md,
-  .bucket-list-page .grid-3-lg {
+  .bucket-list-page .grid-3 {
     gap: var(--space-4);
   }
 }

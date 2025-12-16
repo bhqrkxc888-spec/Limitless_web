@@ -120,7 +120,17 @@
   font-size: var(--font-size-lg);
   line-height: 1.7;
   color: var(--clr-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.hero-note {
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--clr-text-light);
+  font-style: italic;
   margin-bottom: var(--space-8);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--clr-border-light);
 }
 
 .hero-cta-group {

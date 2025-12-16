@@ -142,6 +142,14 @@ export async function logError(error, options = {}) {
     console.error('Error (not logged to Supabase in dev):', error);
     return;
   }
+  
+  // Skip known non-actionable errors
+  const errorMessage = error?.message || String(error);
+  
+  // MIME type errors happen when browser has stale cache after deploy - not a real bug
+  if (errorMessage.includes('MIME type') || errorMessage.includes('not a valid JavaScript')) {
+    return;
+  }
 
   // Don't log if Supabase not configured
   if (!supabase) {
