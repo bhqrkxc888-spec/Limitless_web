@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { siteConfig } from '../config/siteConfig';
+import PriceMatchForm from '../components/PriceMatchForm';
 import './PriceMatchGuarantee.css';
 
 function PriceMatchGuarantee() {
@@ -10,10 +11,10 @@ function PriceMatchGuarantee() {
     mainEntity: [
       {
         '@type': 'Question',
-        name: 'What is the Limitless Cruises Price Match Guarantee?',
+        name: 'What is the Limitless Cruises Price Match Policy?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'If you find an identical cruise holiday at a lower price from another ABTA member, we will match that price. The quote must be genuine, in writing, and for the exact same cruise, cabin, and departure date.'
+          text: 'If you find an identical cruise holiday at a lower price from another ABTA member, we will endeavor to match or beat that price. The quote must be genuine, in writing, and for the exact same cruise, cabin, and departure date. Please note that price matching cannot be guaranteed.'
         }
       },
       {
@@ -21,7 +22,7 @@ function PriceMatchGuarantee() {
         name: 'How do I claim a price match?',
         acceptedAnswer: {
           '@type': 'Answer',
-          text: 'Contact us within 48 hours of receiving your competitor quote with written evidence of the lower price. We will verify the quote and match it if all conditions are met.'
+          text: 'Contact us within 48 hours of receiving your competitor quote with written evidence of the lower price. We will verify the quote and endeavor to match or beat it if all conditions are met, though this cannot be guaranteed.'
         }
       }
     ]
@@ -30,16 +31,16 @@ function PriceMatchGuarantee() {
   return (
     <main className="price-match-page">
       <SEO
-        title="Price Match Guarantee"
-        description="Limitless Cruises Price Match Guarantee - we'll match any genuine like-for-like cruise quote from an ABTA member. Read our terms and conditions."
+        title="Price Match Policy"
+        description="Limitless Cruises Price Match Policy - we'll endeavor to match or beat any genuine like-for-like cruise quote from an ABTA member. Read our terms and conditions."
         canonical="https://limitlesscruises.com/price-match-guarantee"
         structuredData={structuredData}
       />
 
       <div className="price-match-header">
         <div className="container">
-          <h1>Price Match Guarantee</h1>
-          <p className="price-match-strapline">Your assurance of the best value cruise holidays</p>
+          <h1>Price Match Policy</h1>
+          <p className="price-match-strapline">We endeavor to offer you the best value cruise holidays</p>
         </div>
       </div>
 
@@ -57,7 +58,7 @@ function PriceMatchGuarantee() {
               <p>
                 At <strong>Limitless Cruises</strong>, we're committed to offering you competitive prices 
                 combined with exceptional personal service. If you find a lower price elsewhere for an 
-                identical cruise holiday, we'll match it – guaranteed.
+                identical cruise holiday, we'll endeavor to do our best to match or beat it, though this cannot be guaranteed.
               </p>
             </div>
           </div>
@@ -78,7 +79,7 @@ function PriceMatchGuarantee() {
               <div className="summary-step">
                 <span className="step-number">3</span>
                 <h3>Contact Us</h3>
-                <p>Send us the quote within 48 hours. We'll verify and match the price if conditions are met.</p>
+                <p>Send us the quote within 48 hours. We'll verify and endeavor to match or beat the price if conditions are met, though this cannot be guaranteed.</p>
               </div>
             </div>
           </section>
@@ -86,12 +87,12 @@ function PriceMatchGuarantee() {
           <section>
             <h2>Terms &amp; Conditions</h2>
             <p>
-              The following terms apply to our Price Match Guarantee. Please read them carefully 
+              The following terms apply to our Price Match Policy. Please read them carefully 
               before submitting a price match request.
             </p>
 
             <h3>1. Qualifying Criteria</h3>
-            <p>To qualify for our Price Match Guarantee, the following conditions must be met:</p>
+            <p>To qualify for our Price Match Policy, the following conditions must be met:</p>
             <ul>
               <li>The competitor must be an <strong>ABTA-bonded travel agent</strong> based in the UK</li>
               <li>The quote must be for the <strong>exact same cruise</strong> – same ship, same sailing date, same itinerary</li>
@@ -112,7 +113,7 @@ function PriceMatchGuarantee() {
             </ul>
 
             <h3>3. Exclusions</h3>
-            <p>The Price Match Guarantee does not apply to:</p>
+            <p>The Price Match Policy does not apply to:</p>
             <ul>
               <li><strong>Auction sites</strong> or bidding platforms (e.g., eBay)</li>
               <li><strong>Membership-only discounts</strong> or loyalty scheme prices</li>
@@ -126,15 +127,16 @@ function PriceMatchGuarantee() {
             </ul>
 
             <h3>4. How to Claim</h3>
-            <p>To submit a price match request:</p>
-            <ol>
-              <li>Email us at <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a> with the subject line "Price Match Request"</li>
-              <li>Include your booking reference (if you've already booked with us) or enquiry details</li>
-              <li>Attach the competitor's written quote showing all relevant details</li>
-              <li>Provide the competitor's ABTA number and contact details</li>
-            </ol>
+            <p>Submit your price match request using the form below. You'll need to:</p>
+            <ul>
+              <li>Provide your contact details and booking reference (if applicable)</li>
+              <li>Enter the competitor's details (name, ABTA number, contact information)</li>
+              <li>Upload a copy of the competitor's written quote</li>
+              <li>Include all relevant quote details in the form</li>
+            </ul>
             <p>
-              We aim to respond to all price match requests within <strong>24 working hours</strong>. 
+              Alternatively, you can email us at <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a> with the subject line "Price Match Request".
+              We aim to respond to all requests within <strong>24 working hours</strong>. 
               We may contact the competitor directly to verify the quote.
             </p>
 
@@ -144,17 +146,34 @@ function PriceMatchGuarantee() {
               requests that do not meet the criteria set out above. Our decision is final.
             </p>
             <p>
-              If approved, we will match the competitor's price on your booking. The price match 
+              If approved, we will endeavor to match or beat the competitor's price on your booking, though this cannot be guaranteed. The price match 
               applies to the <strong>base cruise fare only</strong> – not to optional extras, 
               insurance, or add-ons.
             </p>
 
-            <h3>6. Timing</h3>
+            <h3>6. Alternative Arrangements</h3>
+            <p>
+              In some cases, we may be able to find the same trip but with different operators 
+              for flights and hotels. If this is possible, we will discuss these alternative 
+              arrangements with you before proceeding. Our goal is to provide you with the best 
+              value while maintaining the quality and experience you expect.
+            </p>
+
+            <h3>7. Timing</h3>
             <ul>
               <li>Price match requests must be submitted <strong>before final payment</strong> is made</li>
               <li>For new bookings, the request must be made <strong>within 7 days of booking</strong></li>
               <li>For existing bookings approaching balance due, requests must be made <strong>at least 72 hours before payment is due</strong></li>
             </ul>
+          </section>
+
+          <section className="price-match-form-section" id="submit-request">
+            <h2>Submit Your Price Match Request</h2>
+            <p className="form-section-intro">
+              Complete the form below to submit your price match request. Please have your competitor's 
+              quote ready to upload.
+            </p>
+            <PriceMatchForm />
           </section>
 
           <section className="price-match-cta">

@@ -57,6 +57,31 @@ export function getPublicUrl(bucket, path) {
 }
 
 /**
+ * Upload a document to Supabase Storage (for price match quotes, etc.)
+ * @param {File} file - The file to upload
+ * @param {string} bucket - The storage bucket name
+ * @param {string} path - The file path within the bucket
+ * @returns {Promise<{data, error}>}
+ */
+export async function uploadDocument(file, bucket, path) {
+  try {
+    const { data, error } = await supabase.storage
+      .from(bucket)
+      .upload(path, file, {
+        cacheControl: '3600',
+        upsert: false
+      });
+
+    if (error) throw error;
+
+    return { data, error: null };
+  } catch (error) {
+    logger.error('Error uploading document:', error);
+    return { data: null, error };
+  }
+}
+
+/**
  * Delete an image from Supabase Storage
  * @param {string} bucket - The storage bucket name
  * @param {string} path - The file path within the bucket

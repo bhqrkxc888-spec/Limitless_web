@@ -7,7 +7,8 @@
 export const STORAGE_BUCKETS = {
   CRUISE_LINES: 'cruise-lines',
   DESTINATIONS: 'destinations',
-  CATEGORIES: 'categories'
+  CATEGORIES: 'categories',
+  PRICE_MATCH_DOCS: 'price-match-documents'
 };
 
 // Database table names (website-specific to avoid conflicts with CRM)
@@ -50,5 +51,18 @@ export const UPLOAD_CONSTRAINTS = {
   MAX_FILE_SIZE: 5 * 1024 * 1024, // 5MB
   ALLOWED_TYPES: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'],
   ALLOWED_EXTENSIONS: ['.jpg', '.jpeg', '.png', '.webp']
+};
+
+// Price match document upload constraints (supports PDFs)
+export const PRICE_MATCH_UPLOAD_CONSTRAINTS = {
+  MAX_FILE_SIZE: 10 * 1024 * 1024, // 10MB (larger for PDFs)
+  ALLOWED_TYPES: [
+    'image/jpeg', 
+    'image/jpg', 
+    'image/png', 
+    'image/webp',
+    'application/pdf'
+  ],
+  ALLOWED_EXTENSIONS: ['.jpg', '.jpeg', '.png', '.webp', '.pdf']
 };
 
