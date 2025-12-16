@@ -367,6 +367,59 @@
   gap: var(--space-3);
 }
 
+/* V2: Deposit Info */
+.offer-pricing-card__deposit {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(22, 163, 74, 0.1));
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-main);
+}
+
+.offer-pricing-card__deposit svg {
+  width: 18px;
+  height: 18px;
+  color: var(--clr-success);
+  flex-shrink: 0;
+}
+
+/* Departure Airport Info */
+.offer-pricing-card__departure {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  background: var(--clr-bg-alt);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
+}
+
+.offer-pricing-card__departure .label {
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-main);
+}
+
+.offer-pricing-card__departure .link {
+  font-size: var(--font-size-sm);
+  color: var(--clr-accent);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+}
+
+.offer-pricing-card__departure .link:hover {
+  text-decoration: underline;
+}
+
+/* V2: OBC in pricing card */
+.offer-pricing-card .obc-badge--card {
+  margin-bottom: var(--space-4);
+}
+
 /* ========================================
    MAIN CONTENT SECTION
    ======================================== */
@@ -801,6 +854,77 @@
 
 .offer-back-link:hover svg {
   transform: translateX(-4px);
+}
+
+/* ========================================
+   V2: PACKAGE SUMMARY
+   ======================================== */
+
+.offer-package-summary {
+  background: linear-gradient(135deg, rgba(var(--clr-primary-rgb, 26, 42, 74), 0.03), rgba(var(--clr-accent-rgb, 212, 175, 55), 0.03));
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6) !important;
+  margin-bottom: var(--space-8);
+}
+
+.offer-package-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.offer-package-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border-light);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-base);
+  color: var(--clr-text-main);
+}
+
+.offer-package-item svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.offer-package-item strong {
+  font-weight: var(--font-weight-semibold);
+}
+
+.offer-package-item--hotel svg {
+  color: #3b82f6;
+}
+
+.offer-package-item--cruise svg {
+  color: var(--clr-accent);
+}
+
+.offer-package-item--flight svg {
+  color: #6366f1;
+}
+
+.offer-package-item--obc svg {
+  color: #8b5cf6;
+}
+
+/* ========================================
+   V2: ACCOMMODATION SECTION
+   ======================================== */
+
+.offer-accommodation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-6);
+}
+
+.offer-accommodation-section .offer-section__title {
+  margin-bottom: var(--space-6);
 }
 
 /* ========================================

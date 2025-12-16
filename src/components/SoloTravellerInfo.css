@@ -1,0 +1,112 @@
+/* ========================================
+   SOLO TRAVELLER INFO
+   Display solo supplement information
+   ======================================== */
+
+/* Default Variant (Card-style) */
+.solo-info--default {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-bg-alt);
+  border: 1px solid var(--clr-border-light);
+  border-radius: var(--radius-lg);
+}
+
+.solo-info--default .solo-info__icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.solo-info--default .solo-info__icon svg {
+  width: 18px;
+  height: 18px;
+  color: var(--clr-accent);
+}
+
+.solo-info--default .solo-info__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.solo-info--default .solo-info__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--clr-text-main);
+}
+
+.solo-info--default .solo-info__value {
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-muted);
+}
+
+/* Compact Variant */
+.solo-info--compact {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background: var(--clr-bg-alt);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  color: var(--clr-text-main);
+}
+
+.solo-info--compact svg {
+  width: 14px;
+  height: 14px;
+  color: var(--clr-accent);
+}
+
+/* Inline Variant */
+.solo-info--inline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-main);
+}
+
+.solo-info--inline svg {
+  width: 18px;
+  height: 18px;
+  color: var(--clr-accent);
+  flex-shrink: 0;
+}
+
+.solo-info--inline .solo-info__supplement {
+  color: var(--clr-text-muted);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .solo-info--default {
+    padding: var(--space-3);
+    gap: var(--space-2);
+  }
+  
+  .solo-info--default .solo-info__icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .solo-info--default .solo-info__icon svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .solo-info--default .solo-info__label,
+  .solo-info--default .solo-info__value {
+    font-size: var(--font-size-xs);
+  }
+}
+

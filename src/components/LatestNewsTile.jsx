@@ -91,8 +91,8 @@ function LatestNewsTile() {
         {/* Section Header */}
         <div className="latest-news-tile__section-header">
           <div>
-            <h2 className="latest-news-tile__section-title">Travel News</h2>
-            <p className="latest-news-tile__section-subtitle">Latest updates from the cruise industry</p>
+            <h2 className="latest-news-tile__section-title">Latest News & Exclusive Offers</h2>
+            <p className="latest-news-tile__section-subtitle">Stay updated with the latest cruise news and special offers tailored just for you</p>
           </div>
           <Link to="/travel-news" className="latest-news-tile__view-all">
             View All
@@ -204,8 +204,11 @@ function LatestNewsTile() {
 
         {/* CTA */}
         <div className="latest-news-tile__cta">
-          <Button to="/travel-news" variant="outline" size="sm">
-            Browse All News
+          <Button to="/contact" variant="primary" size="md">
+            Speak to a Cruise Specialist
+          </Button>
+          <Button to="/travel-news" variant="outline" size="md">
+            Browse All News & Offers
           </Button>
         </div>
       </div>

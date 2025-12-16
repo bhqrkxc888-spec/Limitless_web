@@ -140,16 +140,58 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--clr-text-main);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
 }
 
-.bucket-list-featured-meta .price {
+.bucket-list-featured-meta .duration::before {
+  content: '📅';
   font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
-  color: var(--clr-accent);
 }
 
+/* Inline CTA within card */
+.bucket-list-featured-cta-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.bucket-list-featured-card:hover .bucket-list-featured-cta-inline {
+  background: var(--clr-accent);
+  color: var(--clr-text-on-accent);
+  transform: translateX(4px);
+}
+
+.bucket-list-featured-cta-inline svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transition-fast);
+}
+
+.bucket-list-featured-card:hover .bucket-list-featured-cta-inline svg {
+  transform: translateX(4px);
+}
+
+.bucket-list-cta-text {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Bottom CTA section */
 .bucket-list-featured-cta {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
 }
 
 @media (max-width: 1024px) {
@@ -192,6 +234,16 @@
     width: 36px;
     height: 36px;
     background: rgba(255, 255, 255, 0.9);
+  }
+
+  .bucket-list-featured-cta {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .bucket-list-featured-cta .btn {
+    width: 100%;
+    justify-content: center;
   }
 }
 

@@ -1,0 +1,137 @@
+/* ========================================
+   ONBOARD CREDIT BADGE
+   Highlight OBC as a selling point
+   ======================================== */
+
+/* Default Variant */
+.obc-badge--default {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.1));
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: var(--radius-lg);
+}
+
+.obc-badge--default .obc-badge__icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.obc-badge--default .obc-badge__icon svg {
+  width: 20px;
+  height: 20px;
+  color: white;
+}
+
+.obc-badge--default .obc-badge__text {
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-main);
+}
+
+.obc-badge--default .obc-badge__text strong {
+  color: #7c3aed;
+  font-weight: var(--font-weight-bold);
+}
+
+/* Compact Variant (for cards) */
+.obc-badge--compact {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  color: white;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.obc-badge--compact svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Card Variant (for sidebar/featured) */
+.obc-badge--card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(168, 85, 247, 0.08));
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  border-radius: var(--radius-lg);
+}
+
+.obc-badge--card .obc-badge__icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  border-radius: var(--radius-lg);
+  flex-shrink: 0;
+}
+
+.obc-badge--card .obc-badge__icon svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+.obc-badge--card .obc-badge__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.obc-badge--card .obc-badge__label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--clr-text-muted);
+}
+
+.obc-badge--card .obc-badge__amount {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: #7c3aed;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .obc-badge--default {
+    padding: var(--space-2) var(--space-3);
+    gap: var(--space-2);
+  }
+  
+  .obc-badge--default .obc-badge__icon {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .obc-badge--default .obc-badge__icon svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .obc-badge--card .obc-badge__icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .obc-badge--card .obc-badge__amount {
+    font-size: var(--font-size-base);
+  }
+}
+

@@ -6,6 +6,11 @@ import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { Button, SectionHeader } from '../components/ui';
 import ContactForm from '../components/ContactForm';
+// V2 Components
+import AccommodationCard from '../components/AccommodationCard';
+import AirportPricingList from '../components/AirportPricingTable';
+import OnboardCreditBadge from '../components/OnboardCreditBadge';
+import SoloTravellerInfo from '../components/SoloTravellerInfo';
 import { useEffect, useMemo, useState } from 'react';
 import './OfferPage.css';
 
@@ -99,6 +104,34 @@ function OfferPage() {
     }
   };
 
+  // V2: Calculate lowest price from airport_prices
+  const getDisplayPrice = (offerData) => {
+    if (!offerData) return null;
+    if (offerData.airport_prices?.length > 0) {
+      return Math.min(...offerData.airport_prices.map(ap => ap.price));
+    }
+    return offerData.price_from;
+  };
+
+  // V2: Calculate total package nights
+  const getTotalPackageNights = (offerData) => {
+    if (!offerData) return 0;
+    return (offerData.pre_stay_nights || 0) + 
+           (offerData.duration_nights || 0) + 
+           (offerData.post_stay_nights || 0);
+  };
+
+  // V2: Check for accommodation
+  const hasAccommodation = (offerData) => {
+    return offerData?.pre_stay_hotel_name || offerData?.post_stay_hotel_name;
+  };
+
+  // V2: Capitalize helper
+  const capitalize = (str) => {
+    if (!str) return '';
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+
   // Loading state
   if (loading) {
     return (
@@ -146,7 +179,7 @@ function OfferPage() {
     { label: offer.title }
   ];
 
-  // Structured Data for SEO
+  // Structured Data for SEO (V2 Enhanced)
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Product',
@@ -160,7 +193,7 @@ function OfferPage() {
     },
     offers: {
       '@type': 'Offer',
-      price: offer.price_from,
+      price: getDisplayPrice(offer),
       priceCurrency: offer.currency || 'GBP',
       availability: 'https://schema.org/InStock',
       priceValidUntil: offer.expires_at || defaultPriceValidUntil,
@@ -168,6 +201,39 @@ function OfferPage() {
     },
     ...(galleryImages.length > 0 && {
       image: galleryImages.map(img => img.url)
+    }),
+    // V2: Include accommodation in structured data
+    ...(hasAccommodation(offer) && {
+      includesObject: [
+        ...(offer.pre_stay_hotel_name ? [{
+          '@type': 'LodgingReservation',
+          reservationFor: {
+            '@type': 'LodgingBusiness',
+            name: offer.pre_stay_hotel_name,
+            address: offer.pre_stay_location,
+            ...(offer.pre_stay_hotel_stars && {
+              starRating: {
+                '@type': 'Rating',
+                ratingValue: offer.pre_stay_hotel_stars
+              }
+            })
+          }
+        }] : []),
+        ...(offer.post_stay_hotel_name ? [{
+          '@type': 'LodgingReservation',
+          reservationFor: {
+            '@type': 'LodgingBusiness',
+            name: offer.post_stay_hotel_name,
+            address: offer.post_stay_location,
+            ...(offer.post_stay_hotel_stars && {
+              starRating: {
+                '@type': 'Rating',
+                ratingValue: offer.post_stay_hotel_stars
+              }
+            })
+          }
+        }] : [])
+      ]
     })
   };
 
@@ -349,7 +415,7 @@ function OfferPage() {
                   )}
                   <div className="offer-pricing-card__now">
                     <span className="label">From</span>
-                    <span className="price">{formatPrice(offer.price_from, offer.currency)}</span>
+                    <span className="price">{formatPrice(getDisplayPrice(offer), offer.currency)}</span>
                     {offer.price_basis === 'per_person' && (
                       <span className="basis">per person</span>
                     )}
@@ -360,9 +426,46 @@ function OfferPage() {
                     </div>
                   )}
                 </div>
+                
+                {/* V2: Deposit Info */}
+                {offer.deposit_amount && (
+                  <div className="offer-pricing-card__deposit">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                    <span>Secure with just {formatPrice(offer.deposit_amount, offer.currency)} deposit</span>
+                  </div>
+                )}
+                
                 {offer.price_notes && (
                   <p className="offer-pricing-card__notes">{offer.price_notes}</p>
                 )}
+                
+                {/* V2: OBC Badge */}
+                {offer.onboard_credit_amount && offer.onboard_credit_amount > 0 && (
+                  <OnboardCreditBadge 
+                    amount={offer.onboard_credit_amount} 
+                    currency={offer.onboard_credit_currency || 'USD'} 
+                    variant="card"
+                  />
+                )}
+                
+                {/* Departure airport info */}
+                {offer.includes_flight && (
+                  <div className="offer-pricing-card__departure">
+                    {offer.airport_prices?.length > 1 ? (
+                      <>
+                        <span className="label">Flying from {offer.airport_prices.length} UK airports</span>
+                        <a href="#airport-pricing" className="link">See all prices →</a>
+                      </>
+                    ) : (
+                      offer.departure_airport && (
+                        <span className="label">Flying from {offer.departure_airport}</span>
+                      )
+                    )}
+                  </div>
+                )}
+                
                 <div className="offer-pricing-card__actions">
                   <Button href="#enquiry-form" variant="primary" size="lg" fullWidth>
                     Enquire About This Offer
@@ -382,6 +485,125 @@ function OfferPage() {
         <div className="container">
           <div className="offer-content-grid">
             <div className="offer-main-content">
+              {/* V2: Package Summary - Show if has accommodation */}
+              {hasAccommodation(offer) && (
+                <div className="offer-section offer-package-summary">
+                  <h2 className="offer-section__title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="3" y="3" width="18" height="18" rx="2"/>
+                      <path d="M3 9h18"/>
+                      <path d="M9 21V9"/>
+                    </svg>
+                    {getTotalPackageNights(offer)}-Night Package Includes
+                  </h2>
+                  <div className="offer-package-items">
+                    {offer.pre_stay_hotel_name && (
+                      <div className="offer-package-item offer-package-item--hotel">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
+                          <path d="M1 21h22"/>
+                        </svg>
+                        <span>
+                          <strong>{offer.pre_stay_nights} nights</strong> at {offer.pre_stay_hotel_name}
+                          {offer.pre_stay_hotel_stars && ` (${offer.pre_stay_hotel_stars}★)`}
+                          {offer.pre_stay_location && ` in ${offer.pre_stay_location}`}
+                        </span>
+                      </div>
+                    )}
+                    <div className="offer-package-item offer-package-item--cruise">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M3 18l18-6-18-6v12z"/>
+                      </svg>
+                      <span>
+                        <strong>{offer.duration_nights}-night cruise</strong> on {offer.ship_name}
+                        {offer.cabin_type && ` in ${capitalize(offer.cabin_type)} Stateroom`}
+                      </span>
+                    </div>
+                    {offer.post_stay_hotel_name && (
+                      <div className="offer-package-item offer-package-item--hotel">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
+                          <path d="M1 21h22"/>
+                        </svg>
+                        <span>
+                          <strong>{offer.post_stay_nights} nights</strong> at {offer.post_stay_hotel_name}
+                          {offer.post_stay_hotel_stars && ` (${offer.post_stay_hotel_stars}★)`}
+                          {offer.post_stay_location && ` in ${offer.post_stay_location}`}
+                        </span>
+                      </div>
+                    )}
+                    {offer.includes_flight && (
+                      <div className="offer-package-item offer-package-item--flight">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+                        </svg>
+                        <span>
+                          <strong>Return flights</strong>
+                          {offer.flight_direct && ' (direct)'} included
+                        </span>
+                      </div>
+                    )}
+                    {offer.transfer_included && (
+                      <div className="offer-package-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <rect x="1" y="3" width="15" height="13" rx="2"/>
+                          <path d="M16 8h4l3 3v5h-3"/>
+                          <circle cx="5.5" cy="18.5" r="2.5"/>
+                          <circle cx="18.5" cy="18.5" r="2.5"/>
+                        </svg>
+                        <span><strong>Transfers</strong> included</span>
+                      </div>
+                    )}
+                    {offer.onboard_credit_amount > 0 && (
+                      <div className="offer-package-item offer-package-item--obc">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <rect x="3" y="8" width="18" height="4" rx="1"/>
+                          <path d="M12 8v13"/>
+                        </svg>
+                        <span>
+                          <strong>Up to {offer.onboard_credit_currency === 'USD' ? '$' : '£'}{offer.onboard_credit_amount}</strong> onboard credit
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* V2: Accommodation Cards */}
+              {hasAccommodation(offer) && (
+                <div className="offer-section offer-accommodation-section">
+                  <h2 className="offer-section__title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
+                      <path d="M1 21h22"/>
+                    </svg>
+                    Your Accommodation
+                  </h2>
+                  <div className="offer-accommodation-grid">
+                    {offer.pre_stay_hotel_name && (
+                      <AccommodationCard
+                        type="pre"
+                        hotelName={offer.pre_stay_hotel_name}
+                        stars={offer.pre_stay_hotel_stars}
+                        nights={offer.pre_stay_nights}
+                        location={offer.pre_stay_location}
+                        includes={offer.pre_stay_includes}
+                      />
+                    )}
+                    {offer.post_stay_hotel_name && (
+                      <AccommodationCard
+                        type="post"
+                        hotelName={offer.post_stay_hotel_name}
+                        stars={offer.post_stay_hotel_stars}
+                        nights={offer.post_stay_nights}
+                        location={offer.post_stay_location}
+                        includes={offer.post_stay_includes}
+                      />
+                    )}
+                  </div>
+                </div>
+              )}
+
               {/* Full Description */}
               {offer.full_description && (
                 <div className="offer-section">
@@ -548,7 +770,7 @@ function OfferPage() {
                     Flight Details
                   </h2>
                   <div className="offer-flight-details">
-                    {offer.departure_airport && (
+                    {offer.departure_airport && !offer.airport_prices?.length && (
                       <div className="offer-flight-detail">
                         <span className="label">Departure Airport:</span>
                         <span className="value">{offer.departure_airport}</span>
@@ -557,7 +779,13 @@ function OfferPage() {
                     {offer.flight_class && (
                       <div className="offer-flight-detail">
                         <span className="label">Class:</span>
-                        <span className="value">{offer.flight_class}</span>
+                        <span className="value">{capitalize(offer.flight_class)}</span>
+                      </div>
+                    )}
+                    {offer.flight_direct !== undefined && !offer.airport_prices?.length && (
+                      <div className="offer-flight-detail">
+                        <span className="label">Flight Type:</span>
+                        <span className="value">{offer.flight_direct ? 'Direct flight' : 'Connecting flight'}</span>
                       </div>
                     )}
                     {offer.transfer_included !== undefined && (
@@ -567,6 +795,28 @@ function OfferPage() {
                       </div>
                     )}
                   </div>
+                </div>
+              )}
+
+              {/* V2: Airport Pricing List (only shows if multiple airports) */}
+              {offer.airport_prices?.length > 1 && (
+                <div className="offer-section" id="airport-pricing">
+                  <AirportPricingList 
+                    airportPrices={offer.airport_prices}
+                    currency={offer.currency}
+                    priceBasis={offer.price_basis}
+                  />
+                </div>
+              )}
+
+              {/* V2: Solo Traveller Info */}
+              {offer.solo_supplement && offer.solo_supplement > 0 && (
+                <div className="offer-section">
+                  <SoloTravellerInfo 
+                    soloSupplement={offer.solo_supplement}
+                    currency={offer.currency}
+                    variant="default"
+                  />
                 </div>
               )}
 

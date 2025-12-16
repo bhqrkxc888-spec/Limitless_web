@@ -56,10 +56,10 @@ function BucketListFeatured() {
       <div className="container">
         <div className="section-header">
           <p className="section-eyebrow">Extraordinary Experiences</p>
-          <h2>Dream Experiences</h2>
+          <h2>Bucket List Destinations</h2>
           <p className="section-subtitle">
-            These bucket list cruises represent the pinnacle of travel. 
-            From world cruises to polar expeditions, each journey creates memories that last forever.
+            Discover once-in-a-lifetime cruise experiences to the world's most remarkable destinations. 
+            Let us help you plan your dream voyage with expert guidance and exclusive access.
           </p>
         </div>
 
@@ -95,9 +95,12 @@ function BucketListFeatured() {
                   <Card.Description>{experience.tagline}</Card.Description>
                   <div className="bucket-list-featured-meta">
                     <span className="duration">{experience.duration}</span>
-                    {experience.startingFrom && (
-                      <span className="price">{experience.startingFrom}</span>
-                    )}
+                  </div>
+                  <div className="bucket-list-featured-cta-inline">
+                    <span className="bucket-list-cta-text">Enquire Now</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
                   </div>
                 </Card.Content>
               </Card>
@@ -118,6 +121,9 @@ function BucketListFeatured() {
         </div>
 
         <div className="bucket-list-featured-cta">
+          <Button to="/contact" variant="primary" size="lg">
+            Discuss Your Dream Cruise
+          </Button>
           <Button to="/bucket-list" variant="outline" size="lg">
             View All Bucket List Experiences
           </Button>

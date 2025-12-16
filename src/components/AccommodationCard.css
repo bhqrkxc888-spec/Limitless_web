@@ -1,0 +1,160 @@
+/* ========================================
+   ACCOMMODATION CARD
+   Display for pre/post cruise hotel stays
+   ======================================== */
+
+.accommodation-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  position: relative;
+  overflow: hidden;
+}
+
+.accommodation-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent));
+}
+
+.accommodation-card--pre::before {
+  background: linear-gradient(90deg, #3b82f6, #6366f1);
+}
+
+.accommodation-card--post::before {
+  background: linear-gradient(90deg, #8b5cf6, #a855f7);
+}
+
+/* Header */
+.accommodation-card__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.accommodation-card__icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--clr-bg-alt);
+  border-radius: var(--radius-md);
+}
+
+.accommodation-card__icon svg {
+  width: 18px;
+  height: 18px;
+  color: var(--clr-accent);
+}
+
+.accommodation-card__type {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--clr-text-muted);
+}
+
+/* Hotel Name */
+.accommodation-card__hotel-name {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-text-main);
+  margin: 0 0 var(--space-3);
+  line-height: var(--line-height-tight);
+}
+
+/* Details Row */
+.accommodation-card__details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.accommodation-card__stars {
+  display: flex;
+  gap: 2px;
+}
+
+.accommodation-card__stars svg {
+  width: 14px;
+  height: 14px;
+  color: #f59e0b;
+}
+
+.accommodation-card__nights {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  background: var(--clr-bg-alt);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--clr-text-main);
+}
+
+.accommodation-card__location {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-muted);
+}
+
+.accommodation-card__location svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Includes List */
+.accommodation-card__includes {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--clr-border-light);
+}
+
+.accommodation-card__includes li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-main);
+}
+
+.accommodation-card__includes li svg {
+  width: 16px;
+  height: 16px;
+  color: var(--clr-success);
+  flex-shrink: 0;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .accommodation-card {
+    padding: var(--space-4);
+  }
+  
+  .accommodation-card__hotel-name {
+    font-size: var(--font-size-base);
+  }
+  
+  .accommodation-card__details {
+    gap: var(--space-2);
+  }
+}
+

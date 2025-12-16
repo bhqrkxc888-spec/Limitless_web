@@ -59,7 +59,12 @@ export const placeholderOffers = [
     best_for: 'Nature lovers and scenic cruise seekers',
     regions: ['Norwegian Fjords', 'Northern Europe'],
     published_at: new Date().toISOString(),
-    is_demo: true
+    is_demo: true,
+    // V2: Enhanced pricing fields
+    solo_supplement: 450,
+    deposit_amount: 150,
+    onboard_credit_amount: 100,
+    onboard_credit_currency: 'GBP'
   },
   {
     id: 'demo-2',
@@ -94,7 +99,8 @@ export const placeholderOffers = [
     category: 'mainstream',
     featured: true,
     includes_flight: true,
-    flight_class: 'Economy',
+    flight_class: 'economy',
+    flight_direct: true,
     transfer_included: true,
     hero_image_url: 'https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=1920',
     card_image_url: 'https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=800',
@@ -102,7 +108,7 @@ export const placeholderOffers = [
       'https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800',
       'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=800'
     ],
-    includes: ['Return flights', 'All meals onboard', 'Entertainment', '24hr room service', 'Airport transfers'],
+    includes: ['Return flights', 'All meals onboard', 'Entertainment', '24hr room service', 'Airport transfers', '$200 onboard credit'],
     excludes: ['Travel insurance', 'Shore excursions', 'Specialty dining', 'Drinks packages'],
     highlights: [
       'Flights and transfers included',
@@ -116,7 +122,20 @@ export const placeholderOffers = [
     best_for: 'Mediterranean first-timers wanting to see the highlights',
     regions: ['Western Mediterranean', 'French Riviera', 'Italian Coast'],
     published_at: new Date().toISOString(),
-    is_demo: true
+    is_demo: true,
+    // V2: Multi-airport pricing
+    airport_prices: [
+      { code: 'LGW', name: 'London Gatwick', price: 899, direct: true },
+      { code: 'LHR', name: 'London Heathrow', price: 949, direct: true },
+      { code: 'MAN', name: 'Manchester', price: 929, direct: false },
+      { code: 'BHX', name: 'Birmingham', price: 959, direct: false },
+      { code: 'EDI', name: 'Edinburgh', price: 979, direct: false }
+    ],
+    // V2: Enhanced pricing
+    solo_supplement: 600,
+    deposit_amount: 200,
+    onboard_credit_amount: 200,
+    onboard_credit_currency: 'USD'
   },
   {
     id: 'demo-3',
@@ -155,7 +174,7 @@ export const placeholderOffers = [
       'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=800',
       'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=800'
     ],
-    includes: ['All meals onboard', 'Evening entertainment', 'Christmas & New Year celebrations', 'Port visits'],
+    includes: ['All meals onboard', 'Evening entertainment', 'Christmas & New Year celebrations', 'Port visits', '$300 onboard credit'],
     excludes: ['Flights', 'Travel insurance', 'Shore excursions', 'Drinks packages'],
     highlights: [
       'Escape British winter for Caribbean sun',
@@ -169,15 +188,20 @@ export const placeholderOffers = [
     best_for: 'Those wanting a festive Caribbean escape without flying',
     regions: ['Eastern Caribbean', 'Southern Caribbean'],
     published_at: new Date().toISOString(),
-    is_demo: true
+    is_demo: true,
+    // V2: Enhanced pricing
+    solo_supplement: 1200,
+    deposit_amount: 300,
+    onboard_credit_amount: 300,
+    onboard_credit_currency: 'USD'
   },
   {
     id: 'demo-4',
     slug: 'alaska-wilderness-2025',
-    title: 'Alaska Wilderness Adventure',
-    short_description: 'Witness glaciers, wildlife, and stunning natural beauty on this 7-night Alaskan cruise.',
-    full_description: `<p>Holland America Line's Alaska expertise shines in this 7-night voyage through America's Last Frontier. Watch glaciers calve into the sea, spot whales and bears, and explore charming frontier towns.</p>`,
-    price_from: 1899,
+    title: 'Alaska Wilderness Adventure with Seattle Stay',
+    short_description: 'Witness glaciers, wildlife, and stunning natural beauty on this 10-night package including 2 nights in Seattle.',
+    full_description: `<p>Holland America Line's Alaska expertise shines in this incredible 10-night package. Start with 2 nights in vibrant Seattle, then embark on a 7-night voyage through America's Last Frontier. Watch glaciers calve into the sea, spot whales and bears, and explore charming frontier towns. After your cruise, enjoy a final night in Vancouver before flying home.</p>`,
+    price_from: 2599,
     original_price: null,
     savings_percentage: null,
     savings_amount: null,
@@ -191,32 +215,57 @@ export const placeholderOffers = [
     duration_nights: 7,
     duration_days: 8,
     departure_date: '2025-07-12',
-    return_date: '2025-07-19',
+    return_date: '2025-07-22',
     offer_type: 'fly_cruise',
     cabin_type: 'balcony',
     category: 'premium',
     featured: false,
     includes_flight: true,
-    flight_class: 'Economy',
+    flight_class: 'economy',
+    flight_direct: false,
     transfer_included: true,
     hero_image_url: 'https://images.unsplash.com/photo-1531176175280-33e76ce12523?w=1920',
     card_image_url: 'https://images.unsplash.com/photo-1531176175280-33e76ce12523?w=800',
     gallery_images: [],
-    includes: ['Flights', 'All meals onboard', 'Glacier cruising', 'Onboard naturalist talks', 'Airport transfers'],
+    includes: ['Flights', 'All meals onboard', 'Glacier cruising', 'Onboard naturalist talks', 'Airport transfers', '2 nights Seattle hotel', '1 night Vancouver hotel', '$150 onboard credit'],
     excludes: ['Travel insurance', 'Shore excursions', 'Drinks packages'],
     highlights: [
       'Glacier Bay National Park scenic cruising',
       'Wildlife spotting opportunities',
       'Expert onboard naturalists',
-      'Premium Holland America service'
+      'Premium Holland America service',
+      '2 nights exploring Seattle',
+      '1 night in beautiful Vancouver'
     ],
-    itinerary_summary: 'Seattle → Ketchikan → Juneau → Glacier Bay → Victoria → Seattle',
-    ports_of_call: ['Ketchikan', 'Juneau', 'Glacier Bay (scenic cruising)', 'Victoria'],
+    itinerary_summary: 'Seattle (2 nights) → Cruise → Ketchikan → Juneau → Glacier Bay → Vancouver (1 night)',
+    ports_of_call: ['Ketchikan', 'Juneau', 'Glacier Bay (scenic cruising)', 'Victoria', 'Vancouver'],
     suitable_for: ['Nature Lovers', 'Couples', 'Photography Enthusiasts'],
     best_for: 'Those seeking Alaska\'s natural wonders with premium service',
-    regions: ['Alaska', 'Inside Passage'],
+    regions: ['Alaska', 'Inside Passage', 'Pacific Northwest'],
     published_at: new Date().toISOString(),
-    is_demo: true
+    is_demo: true,
+    // V2: Pre/Post Stay Accommodation
+    pre_stay_hotel_name: 'Fairmont Olympic Hotel',
+    pre_stay_hotel_stars: 5,
+    pre_stay_nights: 2,
+    pre_stay_location: 'Seattle',
+    pre_stay_includes: ['breakfast', 'wifi'],
+    post_stay_hotel_name: 'Pan Pacific Vancouver',
+    post_stay_hotel_stars: 5,
+    post_stay_nights: 1,
+    post_stay_location: 'Vancouver',
+    post_stay_includes: ['breakfast', 'transfers'],
+    // V2: Multi-airport pricing
+    airport_prices: [
+      { code: 'LHR', name: 'London Heathrow', price: 2599, direct: false },
+      { code: 'MAN', name: 'Manchester', price: 2699, direct: false },
+      { code: 'GLA', name: 'Glasgow', price: 2749, direct: false }
+    ],
+    // V2: Enhanced pricing
+    solo_supplement: 1500,
+    deposit_amount: 350,
+    onboard_credit_amount: 150,
+    onboard_credit_currency: 'USD'
   },
   {
     id: 'demo-5',

@@ -22,6 +22,37 @@ function OfferCard({ offer, variant = 'default' }) {
     return formattedPrice;
   };
 
+  // V2: Calculate lowest price from airport_prices if available
+  const getDisplayPrice = () => {
+    if (offer.airport_prices?.length > 0) {
+      const lowestAirportPrice = Math.min(...offer.airport_prices.map(ap => ap.price));
+      return lowestAirportPrice;
+    }
+    return offer.price_from;
+  };
+
+  // V2: Calculate total package nights including pre/post stays
+  const getTotalPackageNights = () => {
+    return (offer.pre_stay_nights || 0) + 
+           (offer.duration_nights || 0) + 
+           (offer.post_stay_nights || 0);
+  };
+
+  // V2: Check if offer has accommodation
+  const hasAccommodation = offer.pre_stay_hotel_name || offer.post_stay_hotel_name;
+
+  // V2: Check if offer has onboard credit
+  const hasOBC = offer.onboard_credit_amount && offer.onboard_credit_amount > 0;
+
+  // V2: Format OBC currency
+  const formatOBC = () => {
+    if (!hasOBC) return null;
+    const symbol = { USD: '$', GBP: '£', EUR: '€' }[offer.onboard_credit_currency || 'USD'] || '$';
+    return `${symbol}${offer.onboard_credit_amount.toLocaleString()}`;
+  };
+
+  const displayPrice = getDisplayPrice();
+
   const formatDate = (dateString) => {
     if (!dateString) return '';
     const date = new Date(dateString);
@@ -55,6 +86,10 @@ function OfferCard({ offer, variant = 'default' }) {
     ? `Save ${formatPrice(offer.savings_amount, offer.currency)}`
     : null;
 
+  // V2: Calculate total package nights for display
+  const totalPackageNights = getTotalPackageNights();
+  const showPackageNights = hasAccommodation && totalPackageNights > offer.duration_nights;
+
   // Hero variant - Full-width horizontal layout for featured offer
   if (variant === 'hero') {
     return (
@@ -78,6 +113,16 @@ function OfferCard({ offer, variant = 'default' }) {
           )}
           {savingsDisplay && (
             <span className="offer-card-hero__savings">{savingsDisplay}</span>
+          )}
+          {/* V2: Pre-stay badge */}
+          {hasAccommodation && (
+            <span className="offer-card-hero__hotel-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
+                <path d="M1 21h22"/>
+              </svg>
+              Hotel Stay Included
+            </span>
           )}
         </div>
         <div className="offer-card-hero__content">
@@ -127,6 +172,14 @@ function OfferCard({ offer, variant = 'default' }) {
               </span>
             )}
           </div>
+          {/* V2: OBC badge */}
+          {hasOBC && (
+            <div className="offer-card-hero__extras">
+              <span className="offer-card-hero__obc">
+                {formatOBC()} onboard credit
+              </span>
+            </div>
+          )}
           <div className="offer-card-hero__footer">
             <div className="offer-card-hero__pricing">
               {offer.original_price && (
@@ -135,7 +188,7 @@ function OfferCard({ offer, variant = 'default' }) {
                 </span>
               )}
               <span className="offer-card-hero__price">
-                From {formatPrice(offer.price_from, offer.currency)}
+                From {formatPrice(displayPrice, offer.currency)}
               </span>
               {offer.price_basis === 'per_person' && (
                 <span className="offer-card-hero__basis">per person</span>
@@ -176,6 +229,15 @@ function OfferCard({ offer, variant = 'default' }) {
           )}
           {offer.featured && (
             <span className="offer-card-horizontal__featured-badge">Featured</span>
+          )}
+          {/* V2: Hotel stay badge */}
+          {hasAccommodation && (
+            <span className="offer-card-horizontal__hotel-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
+              </svg>
+              Hotel
+            </span>
           )}
         </div>
         <div className="offer-card-horizontal__content">
@@ -221,6 +283,12 @@ function OfferCard({ offer, variant = 'default' }) {
               </span>
             )}
           </div>
+          {/* V2: OBC badge */}
+          {hasOBC && (
+            <div className="offer-card-horizontal__extras">
+              <span className="offer-card-horizontal__obc">{formatOBC()} OBC</span>
+            </div>
+          )}
           <div className="offer-card-horizontal__footer">
             <div className="offer-card-horizontal__pricing">
               {offer.original_price && (
@@ -229,7 +297,7 @@ function OfferCard({ offer, variant = 'default' }) {
                 </span>
               )}
               <span className="offer-card-horizontal__price">
-                From {formatPrice(offer.price_from, offer.currency)}
+                From {formatPrice(displayPrice, offer.currency)}
               </span>
               {offer.price_basis === 'per_person' && (
                 <span className="offer-card-horizontal__basis">pp</span>
@@ -263,21 +331,47 @@ function OfferCard({ offer, variant = 'default' }) {
       )}
       
       <Card.Content>
-        {/* Offer Type Badge */}
-        {offer.offer_type && (
-          <span className="offer-type-badge">
-            {getOfferTypeLabel(offer.offer_type)}
-          </span>
-        )}
+        {/* Badges Row */}
+        <div className="offer-card-badges">
+          {/* Offer Type Badge */}
+          {offer.offer_type && (
+            <span className="offer-type-badge">
+              {getOfferTypeLabel(offer.offer_type)}
+            </span>
+          )}
 
-        {/* Savings Badge */}
-        {savingsDisplay && (
-          <span className="offer-savings-badge">
-            {savingsDisplay}
-          </span>
-        )}
+          {/* Savings Badge */}
+          {savingsDisplay && (
+            <span className="offer-savings-badge">
+              {savingsDisplay}
+            </span>
+          )}
+          
+          {/* V2: OBC Badge */}
+          {hasOBC && (
+            <span className="offer-obc-badge">
+              {formatOBC()} OBC
+            </span>
+          )}
+        </div>
 
         <Card.Title as="h3">{offer.title}</Card.Title>
+        
+        {/* V2: Hotel stay indicator */}
+        {hasAccommodation && variant !== 'compact' && (
+          <div className="offer-hotel-indicator">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
+              <path d="M1 21h22"/>
+            </svg>
+            <span>
+              {offer.pre_stay_nights && `${offer.pre_stay_nights}n pre-cruise`}
+              {offer.pre_stay_nights && offer.post_stay_nights && ' + '}
+              {offer.post_stay_nights && `${offer.post_stay_nights}n post-cruise`}
+              {' '}hotel stay
+            </span>
+          </div>
+        )}
         
         {offer.short_description && (
           <Card.Description>{offer.short_description}</Card.Description>
@@ -285,11 +379,11 @@ function OfferCard({ offer, variant = 'default' }) {
 
         {/* Meta Information */}
         <div className="offer-meta">
-          {offer.price_from && (
+          {(offer.price_from || displayPrice) && (
             <div className="offer-price">
               <span className="offer-price-label">From</span>
               <span className="offer-price-value">
-                {formatPrice(offer.price_from, offer.currency)}
+                {formatPrice(displayPrice, offer.currency)}
               </span>
               {offer.price_basis === 'per_person' && (
                 <span className="offer-price-basis">per person</span>

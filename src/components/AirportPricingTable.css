@@ -1,0 +1,93 @@
+/* ========================================
+   AIRPORT PRICING LIST
+   Simple list of prices by airport
+   ======================================== */
+
+.airport-pricing-list {
+  background: var(--clr-bg-alt);
+  border: 1px solid var(--clr-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+.airport-pricing-list__title {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--clr-text-main);
+  margin: 0 0 var(--space-4);
+}
+
+.airport-pricing-list__items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.airport-pricing-list__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border-light);
+  border-radius: var(--radius-md);
+}
+
+.airport-pricing-list__item--lowest {
+  border-color: var(--clr-accent);
+  background: rgba(var(--clr-accent-rgb, 212, 175, 55), 0.05);
+}
+
+.airport-pricing-list__airport {
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-main);
+  font-weight: var(--font-weight-medium);
+}
+
+.airport-pricing-list__price {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-accent);
+}
+
+.airport-pricing-list__badge {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--clr-success);
+  background: rgba(34, 197, 94, 0.1);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-sm);
+}
+
+.airport-pricing-list__note {
+  margin: var(--space-3) 0 0;
+  font-size: var(--font-size-xs);
+  color: var(--clr-text-muted);
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .airport-pricing-list {
+    padding: var(--space-4);
+  }
+  
+  .airport-pricing-list__item {
+    padding: var(--space-2) var(--space-3);
+  }
+  
+  .airport-pricing-list__airport {
+    font-size: var(--font-size-xs);
+  }
+  
+  .airport-pricing-list__price {
+    font-size: var(--font-size-sm);
+  }
+}
