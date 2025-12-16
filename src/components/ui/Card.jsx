@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { logger } from '../../utils/logger';
+import OptimizedImage from '../OptimizedImage';
 import './Card.css';
 
 /**
@@ -53,12 +54,18 @@ function Card({
 
 /**
  * Card Image Component
+ * Uses OptimizedImage for automatic Supabase transforms
  */
-function CardImage({ src, alt = '', aspectRatio = '16/9', className = '' }) {
+function CardImage({ src, alt = '', aspectRatio = '16/9', className = '', priority = false }) {
   // Ensure alt text is provided for accessibility
   if (src && !alt) {
     logger.warn('Card.Image: alt text is recommended for accessibility');
   }
+  
+  // Calculate dimensions from aspect ratio for image optimization
+  const [widthRatio, heightRatio] = aspectRatio.split('/').map(Number);
+  const baseWidth = 800;
+  const calculatedHeight = Math.round((baseWidth * heightRatio) / widthRatio);
   
   return (
     <div 
@@ -66,12 +73,16 @@ function CardImage({ src, alt = '', aspectRatio = '16/9', className = '' }) {
       style={{ aspectRatio }}
     >
       {src ? (
-        <img 
-          src={src} 
-          alt={alt || 'Card image'} 
-          width="800"
-          height="500"
-          loading="lazy" 
+        <OptimizedImage
+          src={src}
+          alt={alt || 'Card image'}
+          width={baseWidth}
+          height={calculatedHeight}
+          priority={priority}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+          srcsetWidths={[400, 600, 800]}
+          quality={85}
+          format="webp"
         />
       ) : (
         <div className="card-image-placeholder">

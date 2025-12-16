@@ -411,6 +411,30 @@
   border-left: 4px solid #10b981;
 }
 
+.requirement-card.priority-complete {
+  border-left: 4px solid #10b981;
+  background: #f0fdf4;
+}
+
+.requirement-card.requirement-complete {
+  opacity: 0.85;
+}
+
+.status-indicator {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+
+.status-indicator--complete {
+  background: #10b981;
+  color: white;
+}
+
 .priority-badge {
   display: inline-block;
   padding: 0.2rem 0.5rem;

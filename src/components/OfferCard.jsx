@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Card } from './ui';
+import OptimizedImage from './OptimizedImage';
 import './OfferCard.css';
 
 /**
@@ -96,10 +97,16 @@ function OfferCard({ offer, variant = 'default' }) {
       <Link to={`/offers/${offer.slug}`} className="offer-card-hero">
         <div className="offer-card-hero__image">
           {(offer.hero_image_url || offer.card_image_url) ? (
-            <img 
+            <OptimizedImage
               src={offer.hero_image_url || offer.card_image_url}
               alt={offer.title}
-              loading="lazy"
+              width={1200}
+              height={675}
+              priority={false}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              srcsetWidths={[640, 1024, 1200]}
+              quality={85}
+              format="webp"
             />
           ) : (
             <div className="offer-card-hero__placeholder">
@@ -206,10 +213,16 @@ function OfferCard({ offer, variant = 'default' }) {
       <Link to={`/offers/${offer.slug}`} className="offer-card-horizontal">
         <div className="offer-card-horizontal__image">
           {(offer.card_image_url || offer.hero_image_url) ? (
-            <img 
+            <OptimizedImage
               src={offer.card_image_url || offer.hero_image_url}
               alt={offer.title}
-              loading="lazy"
+              width={600}
+              height={400}
+              priority={false}
+              sizes="(max-width: 768px) 100vw, 400px"
+              srcsetWidths={[400, 600, 800]}
+              quality={85}
+              format="webp"
             />
           ) : (
             <div className="offer-card-horizontal__placeholder">

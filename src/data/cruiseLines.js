@@ -23,8 +23,8 @@ export const cruiseLines = [
     description: 'P&O Cruises offers warm British hospitality from convenient UK ports. Choose adults-only ships (Aurora, Arcadia) or family-friendly vessels (Iona, Arvia, Britannia). No-fly departures from Southampton, pounds sterling onboard, and no tipping required.',
     category: 'mainstream',
     featured: true,
-    image: '/images/cruise-lines/po-cruises.jpg',
-    logo: '/images/cruise-lines/logos/po-cruises.png',
+    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Transatlantic/queen-mary-2.jpeg',
+    logo: null, // Logo to be uploaded to CRM
     
     // Why Choose section - benefit cards
     whyChoose: [
@@ -61,15 +61,13 @@ export const cruiseLines = [
     ],
 
     // Destination images for grid
-    // TODO: Replace with Supabase URLs when images are uploaded
-    // Expected bucket: 'destinations' or 'cruise-lines'
     destinationImages: [
-      { name: 'Caribbean', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Caribbean', alt: 'Caribbean beach' },
-      { name: 'Mediterranean', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Mediterranean', alt: 'Mediterranean coast' },
-      { name: 'Norwegian Fjords', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Norwegian+Fjords', alt: 'Norwegian Fjords' },
-      { name: 'Northern Europe', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Northern+Europe', alt: 'Northern Europe' },
-      { name: 'Canary Islands', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Canary+Islands', alt: 'Canary Islands' },
-      { name: 'Scandinavia', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Scandinavia', alt: 'Scandinavia' }
+      { name: 'Caribbean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg', alt: 'Tropical Caribbean beach with turquoise waters' },
+      { name: 'Mediterranean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg', alt: 'Mediterranean coastal harbour' },
+      { name: 'Norwegian Fjords', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Fjords/northern-lights.jpeg', alt: 'Norwegian Fjords with Northern Lights' },
+      { name: 'Northern Europe', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/sydneybridge.jpeg', alt: 'Northern European waterfront' },
+      { name: 'Canary Islands', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/Patagonian-glaciers.jpeg', alt: 'Canary Islands volcanic landscape' },
+      { name: 'Scandinavia', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Arctic/midnight-sun.jpeg', alt: 'Scandinavian landscape under midnight sun' }
     ],
 
     // Kids Club section
@@ -147,8 +145,8 @@ export const cruiseLines = [
     description: 'Royal Caribbean is known for groundbreaking ships featuring incredible amenities like FlowRider surf simulators, rock climbing walls, and the iconic Central Park at sea.',
     category: 'mainstream',
     featured: true,
-    image: '/images/cruise-lines/royal-caribbean.jpg',
-    logo: '/images/cruise-lines/logos/royal-caribbean.png',
+    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg',
+    logo: null, // Logo to be uploaded to CRM
     whyChoose: [
       { title: 'World\'s Largest Ships', description: 'Icon of the Seas and Wonder of the Seas offer unmatched scale and amenities.', icon: 'ship' },
       { title: 'Innovative Activities', description: 'FlowRider surf simulators, rock climbing, ice skating, and zip lines at sea.', icon: 'adventure' },
@@ -178,8 +176,8 @@ export const cruiseLines = [
     description: 'MSC Cruises is one of the world\'s largest and fastest-growing lines, offering Italian design, modern ships and global itineraries. Guests can sail from the UK or choose fly-cruise packages worldwide. Expect an international atmosphere with family-friendly fun, varied entertainment, and the exclusive Yacht Club for those seeking privacy and relaxation.',
     category: 'mainstream',
     featured: true,
-    image: '/images/cruise-lines/msc-cruises.jpg',
-    logo: '/images/cruise-lines/logos/msc-cruises.png',
+    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg',
+    logo: null, // Logo to be uploaded to CRM
     
     // Why Choose section - benefit cards
     whyChoose: [
@@ -221,15 +219,13 @@ export const cruiseLines = [
     ],
 
     // Destination images for grid
-    // TODO: Replace with Supabase URLs when images are uploaded
-    // Expected bucket: 'destinations' or 'cruise-lines'
     destinationImages: [
-      { name: 'Caribbean', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Caribbean', alt: 'Caribbean beach and turquoise sea' },
-      { name: 'Mediterranean', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Mediterranean', alt: 'Mediterranean ruins and coastline' },
-      { name: 'Middle East', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Middle+East', alt: 'Middle East mountains and sea' },
-      { name: 'Northern Europe', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Northern+Europe', alt: 'Northern Europe skyline and waterfront' },
-      { name: 'Asia & Japan', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Asia+%26+Japan', alt: 'Cherry blossom path in Japan' },
-      { name: 'Grand Voyages', image: 'https://via.placeholder.com/800x500/2C344C/C9A962?text=Grand+Voyages', alt: 'Sunset over the ocean on a Grand Voyage' }
+      { name: 'Caribbean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg', alt: 'Caribbean beach and turquoise sea' },
+      { name: 'Mediterranean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/Petra.jpeg', alt: 'Mediterranean ruins and coastline' },
+      { name: 'Middle East', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/hero-dubai.jpeg', alt: 'Middle East Dubai skyline' },
+      { name: 'Northern Europe', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/Auckland.jpeg', alt: 'Northern Europe skyline and waterfront' },
+      { name: 'Asia & Japan', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Japan/Japan-card-cherryblossom.jpeg', alt: 'Cherry blossom path in Japan' },
+      { name: 'Grand Voyages', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Grand/grand-voyage.jpeg', alt: 'Sunset over the ocean on a Grand Voyage' }
     ],
 
     // Kids Club section
@@ -317,8 +313,8 @@ export const cruiseLines = [
     description: 'Norwegian Cruise Line pioneered Freestyle Cruising, offering flexibility with no fixed dining times and a relaxed, resort-style atmosphere.',
     category: 'mainstream',
     featured: true,
-    image: '/images/cruise-lines/norwegian.jpg',
-    logo: '/images/cruise-lines/logos/norwegian.png',
+    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Fjords/northern-lights.jpeg',
+    logo: null, // Logo to be uploaded to CRM
     whyChoose: [
       { title: 'Freestyle Cruising', description: 'No set dining times, dress codes, or fixed schedules - cruise your way.', icon: 'freedom' },
       { title: 'The Haven', description: 'Exclusive ship-within-a-ship with private pool, restaurant, and butler service.', icon: 'luxury' },
@@ -348,8 +344,8 @@ export const cruiseLines = [
     description: 'Disney Cruise Line delivers magical family holidays with world-class entertainment, character experiences, and exceptional service.',
     category: 'premium',
     featured: true,
-    image: '/images/cruise-lines/disney.jpg',
-    logo: '/images/cruise-lines/logos/disney.png',
+    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg',
+    logo: null, // Logo to be uploaded to CRM
     whyChoose: [
       { title: 'Disney Character Experiences', description: 'Meet beloved characters throughout your voyage with magical moments.', icon: 'magic' },
       { title: 'Broadway-Style Shows', description: 'Award-winning productions including Frozen and Tangled musicals.', icon: 'entertainment' },
@@ -379,8 +375,8 @@ export const cruiseLines = [
     description: 'Celebrity Cruises offers modern luxury with stylish ships, Michelin-inspired cuisine, and a focus on destination immersion.',
     category: 'premium',
     featured: true,
-    image: '/images/cruise-lines/celebrity.jpg',
-    logo: '/images/cruise-lines/logos/celebrity.png',
+    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Japan/Japan-card-cherryblossom.jpeg',
+    logo: null, // Logo to be uploaded to CRM
     whyChoose: [
       { title: 'Award-Winning Cuisine', description: 'Michelin-starred chefs and innovative dining concepts.', icon: 'dining' },
       { title: 'The Retreat', description: 'Suite-class experience with private lounge, pool, and restaurant.', icon: 'luxury' },
@@ -410,8 +406,8 @@ export const cruiseLines = [
     description: 'Fred. Olsen offers intimate cruising on smaller ships with friendly British service and access to smaller ports that larger ships cannot reach. Family-owned for five generations, they specialise in no-fly cruises from multiple UK regional ports including Southampton, Liverpool, Newcastle, Dover, and Edinburgh.',
     category: 'traditional',
     featured: true, // Important for UK market
-    image: '/images/cruise-lines/fred-olsen.jpg',
-    logo: '/images/cruise-lines/logos/fred-olsen.png',
+    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Fjords/northern-lights.jpeg',
+    logo: null, // Logo to be uploaded to CRM
     
     whyChoose: [
       {
@@ -447,12 +443,12 @@ export const cruiseLines = [
     ],
 
     destinationImages: [
-      { name: 'Norwegian Fjords', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800', alt: 'Norwegian fjord landscape' },
-      { name: 'British Isles', image: 'https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=800', alt: 'Scottish highlands coastline' },
-      { name: 'Baltic Capitals', image: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=800', alt: 'Colourful Baltic waterfront' },
-      { name: 'Canary Islands', image: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800', alt: 'Canary Islands volcanic landscape' },
-      { name: 'Arctic & Iceland', image: 'https://images.unsplash.com/photo-1520769945061-0a448c463865?w=800', alt: 'Iceland glacier scenery' },
-      { name: 'Mediterranean', image: 'https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=800', alt: 'Mediterranean coastal town' }
+      { name: 'Norwegian Fjords', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Fjords/northern-lights.jpeg', alt: 'Norwegian fjord landscape' },
+      { name: 'British Isles', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Rivers/rhine-castle.jpeg', alt: 'British Isles coastline' },
+      { name: 'Baltic Capitals', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/Auckland.jpeg', alt: 'Colourful Baltic waterfront' },
+      { name: 'Canary Islands', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Iceland/iceland-waterfall.jpeg', alt: 'Canary Islands volcanic landscape' },
+      { name: 'Arctic & Iceland', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Arctic/midnight-sun.jpeg', alt: 'Iceland glacier scenery' },
+      { name: 'Mediterranean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg', alt: 'Mediterranean coastal town' }
     ],
 
     accessibility: {
@@ -504,8 +500,8 @@ export const cruiseLines = [
     description: 'Holland America Line combines classic elegance with modern amenities, offering enriching destination experiences and refined dining. With over 150 years of heritage, their mid-sized ships provide the perfect balance between intimacy and variety, particularly excelling in Alaska and world cruise itineraries.',
     category: 'premium',
     featured: true, // Upgraded to featured as per user priority
-    image: '/images/cruise-lines/holland-america.jpg',
-    logo: '/images/cruise-lines/logos/holland-america.png',
+    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Canada/banf.jpeg',
+    logo: null, // Logo to be uploaded to CRM
     
     // Why Choose section - benefit cards
     whyChoose: [
@@ -544,12 +540,12 @@ export const cruiseLines = [
     // Destination images for grid
     // TODO: Replace with real Supabase URLs when images are uploaded
     destinationImages: [
-      { name: 'Alaska', image: 'https://images.unsplash.com/photo-1531176175280-33e76ce12523?w=800', alt: 'Alaska glacier and mountains' },
-      { name: 'Caribbean', image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800', alt: 'Caribbean turquoise waters' },
-      { name: 'Northern Europe', image: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=800', alt: 'Northern Europe colourful waterfront' },
-      { name: 'Mediterranean', image: 'https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=800', alt: 'Mediterranean coastal village' },
-      { name: 'World Cruises', image: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800', alt: 'Ocean sunset on world cruise' },
-      { name: 'Australia & New Zealand', image: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800', alt: 'Sydney Opera House' }
+      { name: 'Alaska', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Canada/banf.jpeg', alt: 'Alaska glacier and mountains' },
+      { name: 'Caribbean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg', alt: 'Caribbean turquoise waters' },
+      { name: 'Northern Europe', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/Auckland.jpeg', alt: 'Northern Europe colourful waterfront' },
+      { name: 'Mediterranean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg', alt: 'Mediterranean coastal village' },
+      { name: 'World Cruises', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/World%20Cruise/worldcruise.jpeg', alt: 'Ocean sunset on world cruise' },
+      { name: 'Australia & New Zealand', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/Sydney.jpeg', alt: 'Sydney Opera House' }
     ],
 
     // Kids Club section (Club HAL)
@@ -623,8 +619,8 @@ export const cruiseLines = [
     description: 'Marella Cruises, part of TUI UK, offers exceptional value all-inclusive cruising with flights, drinks, and gratuities included. With both family-friendly and adults-only ships, Marella makes cruising simple with a truly hassle-free experience.',
     category: 'mainstream',
     featured: true, // Popular UK cruise line
-    image: '/images/cruise-lines/marella.jpg',
-    logo: '/images/cruise-lines/logos/marella.png',
+    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/hero-dubai.jpeg',
+    logo: null, // Logo to be uploaded to CRM
     
     whyChoose: [
       {
@@ -660,11 +656,11 @@ export const cruiseLines = [
     ],
 
     destinationImages: [
-      { name: 'Mediterranean', image: 'https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=800', alt: 'Mediterranean coastal village' },
-      { name: 'Caribbean', image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800', alt: 'Caribbean palm tree beach' },
-      { name: 'Canary Islands', image: 'https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=800', alt: 'Canary Islands volcanic landscape' },
-      { name: 'Arabian Gulf', image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800', alt: 'Dubai skyline' },
-      { name: 'Adriatic', image: 'https://images.unsplash.com/photo-1555881400-69c8e8f3d2b5?w=800', alt: 'Croatian coastline' }
+      { name: 'Mediterranean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg', alt: 'Mediterranean coastal village' },
+      { name: 'Caribbean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg', alt: 'Caribbean palm tree beach' },
+      { name: 'Canary Islands', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Iceland/iceland-waterfall.jpeg', alt: 'Canary Islands volcanic landscape' },
+      { name: 'Arabian Gulf', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/hero-dubai.jpeg', alt: 'Dubai skyline' },
+      { name: 'Adriatic', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/Petra.jpeg', alt: 'Croatian coastline' }
     ],
 
     kidsClub: {
@@ -723,8 +719,8 @@ export const cruiseLines = [
     description: 'Virgin Voyages offers an adults-only, design-forward cruise experience that challenges traditional cruising conventions.',
     category: 'contemporary',
     featured: true,
-    image: '/images/cruise-lines/virgin-voyages.jpg',
-    logo: '/images/cruise-lines/logos/virgin-voyages.png',
+    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg',
+    logo: null, // Logo to be uploaded to CRM
     whyChoose: [
       { title: 'Adults-Only', description: 'Ships designed exclusively for grown-ups with sophisticated vibes.', icon: 'adults' },
       { title: 'All Restaurants Included', description: '20+ eateries with no main dining room, all included in your fare.', icon: 'dining' },
@@ -754,8 +750,8 @@ export const cruiseLines = [
     description: 'Viking offers destination-focused ocean and river cruises for curious travellers who want to explore the world thoughtfully. With elegant Scandinavian design, adults-only ships, and enriching cultural experiences, Viking has redefined what cruising can be.',
     category: 'luxury',
     featured: true,
-    image: '/images/cruise-lines/viking.jpg',
-    logo: '/images/cruise-lines/logos/viking.png',
+    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Rivers/rhine-castle.jpeg',
+    logo: null, // Logo to be uploaded to CRM
     
     whyChoose: [
       {
@@ -791,11 +787,11 @@ export const cruiseLines = [
     ],
 
     destinationImages: [
-      { name: 'Northern Europe', image: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=800', alt: 'Baltic capital waterfront' },
-      { name: 'Mediterranean', image: 'https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=800', alt: 'Mediterranean coastal village' },
-      { name: 'British Isles', image: 'https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=800', alt: 'Scottish coastline' },
-      { name: 'World Cruises', image: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800', alt: 'Ocean voyage sunset' },
-      { name: 'Expeditions', image: 'https://images.unsplash.com/photo-1520769945061-0a448c463865?w=800', alt: 'Arctic expedition landscape' }
+      { name: 'Northern Europe', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/Auckland.jpeg', alt: 'Baltic capital waterfront' },
+      { name: 'Mediterranean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg', alt: 'Mediterranean coastal village' },
+      { name: 'British Isles', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Rivers/rhine-castle.jpeg', alt: 'Scottish coastline' },
+      { name: 'World Cruises', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/World%20Cruise/worldcruise.jpeg', alt: 'Ocean voyage sunset' },
+      { name: 'Expeditions', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Arctic/midnight-sun.jpeg', alt: 'Arctic expedition landscape' }
     ],
 
     accessibility: {
@@ -846,8 +842,8 @@ export const cruiseLines = [
     description: 'Seabourn delivers ultra-luxury cruising on intimate ships with exceptional service, all-inclusive luxury, and unique destinations. With all ocean-front suites, open bars, and a crew-to-guest ratio that ensures personalised attention, Seabourn represents the pinnacle of cruise luxury.',
     category: 'ultra-luxury',
     featured: false,
-    image: '/images/cruise-lines/seabourn.jpg',
-    logo: '/images/cruise-lines/logos/seabourn.png',
+    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Polynesia/bora-bora.jpeg',
+    logo: null, // Logo to be uploaded to CRM
     
     whyChoose: [
       {
@@ -883,11 +879,11 @@ export const cruiseLines = [
     ],
 
     destinationImages: [
-      { name: 'Mediterranean', image: 'https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=800', alt: 'Mediterranean luxury coastline' },
-      { name: 'Northern Europe', image: 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=800', alt: 'Baltic luxury destination' },
-      { name: 'Caribbean', image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800', alt: 'Caribbean paradise' },
-      { name: 'Expeditions', image: 'https://images.unsplash.com/photo-1520769945061-0a448c463865?w=800', alt: 'Antarctic expedition' },
-      { name: 'Arabia', image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800', alt: 'Arabian luxury destination' }
+      { name: 'Mediterranean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg', alt: 'Mediterranean luxury coastline' },
+      { name: 'Northern Europe', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/Auckland.jpeg', alt: 'Baltic luxury destination' },
+      { name: 'Caribbean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg', alt: 'Caribbean paradise' },
+      { name: 'Expeditions', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Antartica/antartica-card.jpeg', alt: 'Antarctic expedition' },
+      { name: 'Arabia', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/hero-dubai.jpeg', alt: 'Arabian luxury destination' }
     ],
 
     accessibility: {
@@ -940,8 +936,8 @@ export const cruiseLines = [
     description: 'Princess Cruises offers award-winning MedallionClass technology for a personalised cruise experience with innovative service. Known for their Alaska expertise, romantic destinations, and the famous Movies Under the Stars poolside cinema.',
     category: 'premium',
     featured: true,
-    image: '/images/cruise-lines/princess.jpg',
-    logo: '/images/cruise-lines/logos/princess.png',
+    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Canada/banf.jpeg',
+    logo: null, // Logo to be uploaded to CRM
     
     whyChoose: [
       {
@@ -977,11 +973,11 @@ export const cruiseLines = [
     ],
 
     destinationImages: [
-      { name: 'Alaska', image: 'https://images.unsplash.com/photo-1531176175280-33e76ce12523?w=800', alt: 'Alaska glacier scenery' },
-      { name: 'Caribbean', image: 'https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800', alt: 'Caribbean beach paradise' },
-      { name: 'Mediterranean', image: 'https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=800', alt: 'Mediterranean coastal town' },
-      { name: 'Australia', image: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800', alt: 'Sydney Opera House' },
-      { name: 'Hawaii', image: 'https://images.unsplash.com/photo-1507876466758-bc54f384809c?w=800', alt: 'Hawaiian volcanic coastline' }
+      { name: 'Alaska', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Canada/banf.jpeg', alt: 'Alaska glacier scenery' },
+      { name: 'Caribbean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg', alt: 'Caribbean beach paradise' },
+      { name: 'Mediterranean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg', alt: 'Mediterranean coastal town' },
+      { name: 'Australia', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/Sydney.jpeg', alt: 'Sydney Opera House' },
+      { name: 'Hawaii', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Polynesia/bora-bora.jpeg', alt: 'Hawaiian volcanic coastline' }
     ],
 
     kidsClub: {
@@ -1050,8 +1046,8 @@ export const cruiseLines = [
     description: 'Azamara specializes in destination-intensive cruising with longer stays, more overnights, and night touring in unique ports. Their boutique ships carry just 600-700 guests to smaller harbours that larger ships cannot access.',
     category: 'luxury',
     featured: false,
-    image: '/images/cruise-lines/azamara.jpg',
-    logo: '/images/cruise-lines/logos/azamara.png',
+    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/Petra.jpeg',
+    logo: null, // Logo to be uploaded to CRM
     
     whyChoose: [
       {
@@ -1087,10 +1083,10 @@ export const cruiseLines = [
     ],
 
     destinationImages: [
-      { name: 'Mediterranean', image: 'https://images.unsplash.com/photo-1534445867742-43195f401b6c?w=800', alt: 'Mediterranean harbour village' },
-      { name: 'British Isles', image: 'https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=800', alt: 'Scottish coastline' },
-      { name: 'Asia', image: 'https://images.unsplash.com/photo-1528164344705-47542687000d?w=800', alt: 'Asian temple at sunset' },
-      { name: 'South America', image: 'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=800', alt: 'South American coastline' }
+      { name: 'Mediterranean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg', alt: 'Mediterranean harbour village' },
+      { name: 'British Isles', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Rivers/rhine-castle.jpeg', alt: 'Scottish coastline' },
+      { name: 'Asia', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Japan/Japan-card-cherryblossom.jpeg', alt: 'Asian temple at sunset' },
+      { name: 'South America', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/Patagonian-glaciers.jpeg', alt: 'South American coastline' }
     ],
 
     accessibility: {
@@ -1141,8 +1137,8 @@ export const cruiseLines = [
     description: 'Cunard offers timeless elegance aboard the world\'s most iconic ocean liners, including Queen Mary 2, Queen Victoria, and Queen Elizabeth.',
     category: 'luxury',
     featured: true,
-    image: '/images/cruise-lines/cunard.jpg',
-    logo: '/images/cruise-lines/logos/cunard.png',
+    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Transatlantic/queen-mary-2.jpeg',
+    logo: null, // Logo to be uploaded to CRM
     whyChoose: [
       { title: 'Legendary Ocean Liners', description: 'Sail on Queen Mary 2, the only true transatlantic ocean liner in service.', icon: 'ship' },
       { title: 'White Star Service', description: 'Impeccable British service with formal evenings and afternoon tea.', icon: 'service' },
@@ -1172,8 +1168,8 @@ export const cruiseLines = [
     description: 'Aurora Expeditions offers adventure expedition cruises to the world\'s most remote destinations. With small ships, expert expedition teams, and a focus on active exploration, Aurora delivers authentic polar and adventure experiences.',
     category: 'expedition',
     featured: false,
-    image: '/images/cruise-lines/ae-expeditions.jpg',
-    logo: '/images/cruise-lines/logos/ae-expeditions.png',
+    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Antartica/antartica-card.jpeg',
+    logo: null, // Logo to be uploaded to CRM
     
     whyChoose: [
       {
@@ -1209,10 +1205,10 @@ export const cruiseLines = [
     ],
 
     destinationImages: [
-      { name: 'Antarctica', image: 'https://images.unsplash.com/photo-1520769945061-0a448c463865?w=800', alt: 'Antarctic ice and penguins' },
-      { name: 'Arctic', image: 'https://images.unsplash.com/photo-1517783999520-f068d7431571?w=800', alt: 'Arctic polar bear landscape' },
-      { name: 'Kimberley', image: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800', alt: 'Australian Kimberley coastline' },
-      { name: 'Patagonia', image: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800', alt: 'Patagonian mountains' }
+      { name: 'Antarctica', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Antartica/antartica-card.jpeg', alt: 'Antarctic ice and penguins' },
+      { name: 'Arctic', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Arctic/midnight-sun.jpeg', alt: 'Arctic polar landscape' },
+      { name: 'Kimberley', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Australia/great-barrier-reef.jpeg', alt: 'Australian Kimberley coastline' },
+      { name: 'Patagonia', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/Patagonian-glaciers.jpeg', alt: 'Patagonian mountains' }
     ],
 
     accessibility: {

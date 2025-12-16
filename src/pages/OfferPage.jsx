@@ -11,6 +11,7 @@ import AccommodationCard from '../components/AccommodationCard';
 import AirportPricingList from '../components/AirportPricingTable';
 import OnboardCreditBadge from '../components/OnboardCreditBadge';
 import SoloTravellerInfo from '../components/SoloTravellerInfo';
+import OptimizedImage from '../components/OptimizedImage';
 import { useEffect, useMemo, useState } from 'react';
 import './OfferPage.css';
 
@@ -285,10 +286,16 @@ function OfferPage() {
               {galleryImages.length > 0 ? (
                 <>
                   <div className="offer-gallery__main">
-                    <img 
-                      src={galleryImages[selectedImage]?.url} 
+                    <OptimizedImage
+                      src={galleryImages[selectedImage]?.url}
                       alt={galleryImages[selectedImage]?.alt}
-                      loading="eager"
+                      width={1200}
+                      height={675}
+                      priority={true}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 800px"
+                      srcsetWidths={[640, 1024, 1200, 1920]}
+                      quality={85}
+                      format="webp"
                     />
                     {savingsDisplay && (
                       <div className="offer-gallery__savings">
@@ -308,7 +315,17 @@ function OfferPage() {
                           onClick={() => setSelectedImage(idx)}
                           aria-label={`View image ${idx + 1}`}
                         >
-                          <img src={img.url} alt={img.alt} loading="lazy" />
+                          <OptimizedImage
+                            src={img.url}
+                            alt={img.alt}
+                            width={150}
+                            height={100}
+                            priority={false}
+                            sizes="150px"
+                            srcsetWidths={[150, 300]}
+                            quality={75}
+                            format="webp"
+                          />
                         </button>
                       ))}
                     </div>

@@ -226,7 +226,8 @@ const projectSections = [
         approved: false,
         notes: 'Grid of all cruise lines with filtering',
         requirements: [
-          { type: 'images', desc: 'High-res logos for each cruise line (400x200 min)' },
+          { type: 'images', desc: 'Upload cruise line logos to Supabase (400x200, transparent PNG) - currently null' },
+          { type: 'images', desc: 'Replace placeholder destination images with actual cruise line hero images (1920x800)' },
           { type: 'content', desc: 'Review/update cruise line descriptions' }
         ]
       },
@@ -238,7 +239,7 @@ const projectSections = [
         approved: false,
         notes: '22 cruise lines with hero, overview, ships, USPs, offers',
         requirements: [
-          { type: 'images', desc: 'Hero images for each cruise line (1920x800)' },
+          { type: 'images', desc: 'Upload proper cruise line hero images (1920x800) - currently using destination placeholders' },
           { type: 'images', desc: 'Ship images for fleet sections' },
           { type: 'content', desc: 'Verify ship names and descriptions are current' }
         ]
@@ -260,7 +261,7 @@ const projectSections = [
         approved: false,
         notes: 'Interactive map and grid of all destinations',
         requirements: [
-          { type: 'images', desc: 'Destination thumbnail images (800x600)' }
+          { type: 'images', desc: 'Replace placeholder images with proper destination thumbnails (800x600) - currently using bucket list placeholders' }
         ]
       },
       {
@@ -271,7 +272,7 @@ const projectSections = [
         approved: false,
         notes: 'Individual destination pages with regions, ports, best time to visit',
         requirements: [
-          { type: 'images', desc: 'Hero images for each destination (1920x800)' },
+          { type: 'images', desc: 'Upload proper destination hero images (1920x800) - currently using bucket list placeholders' },
           { type: 'images', desc: 'Port/highlight images' },
           { type: 'content', desc: 'Review destination descriptions for accuracy' }
         ]
@@ -293,7 +294,7 @@ const projectSections = [
         approved: false,
         notes: 'Showcase of unique cruise experiences',
         requirements: [
-          { type: 'images', desc: 'Experience thumbnail images (800x600)' }
+          { type: 'images', desc: '✅ Hero images updated to Supabase URLs - all bucket list experiences now use real images' }
         ]
       },
       {
@@ -304,7 +305,7 @@ const projectSections = [
         approved: false,
         notes: 'Individual experience pages with itinerary suggestions',
         requirements: [
-          { type: 'images', desc: 'Hero images for each experience (1920x800)' },
+          { type: 'images', desc: '✅ Hero images updated to Supabase URLs' },
           { type: 'content', desc: 'Add more bucket list experiences' }
         ]
       }
@@ -325,7 +326,7 @@ const projectSections = [
         approved: false,
         notes: 'Overview of all cruise categories',
         requirements: [
-          { type: 'images', desc: 'Category images (800x600)' },
+          { type: 'images', desc: '✅ Category images updated to Supabase URLs' },
           { type: 'content', desc: 'Review category descriptions' }
         ]
       }
@@ -431,12 +432,16 @@ const projectSections = [
 // Summary of what's needed
 const contentRequirements = {
   images: [
-    { priority: 'high', desc: 'Cruise line hero images (1920x800) - 22 needed', section: 'Cruise Lines' },
-    { priority: 'high', desc: 'Destination hero images (1920x800) - 15+ needed', section: 'Destinations' },
-    { priority: 'medium', desc: 'Cruise line logos (400x200, transparent PNG) - some missing', section: 'Cruise Lines' },
-    { priority: 'medium', desc: 'Ship images for fleet sections', section: 'Cruise Lines' },
-    { priority: 'medium', desc: 'Bucket list experience images', section: 'Bucket List' },
-    { priority: 'low', desc: 'Customer photos for testimonials', section: 'Testimonials' }
+    { priority: 'high', desc: 'Cruise line logos (400x200, transparent PNG) - 16 needed (currently null)', section: 'Cruise Lines', status: 'pending' },
+    { priority: 'high', desc: 'Cruise line hero images (1920x800) - 22 needed (using destination placeholders)', section: 'Cruise Lines', status: 'pending' },
+    { priority: 'high', desc: 'Destination hero images (1920x800) - 15+ needed (using bucket list placeholders)', section: 'Destinations', status: 'pending' },
+    { priority: 'medium', desc: 'Ship images for fleet sections', section: 'Cruise Lines', status: 'pending' },
+    { priority: 'low', desc: 'Customer photos for testimonials', section: 'Testimonials', status: 'pending' },
+    { priority: 'complete', desc: '✅ All external/placeholder images removed (Unsplash, via.placeholder)', section: 'All Pages', status: 'complete' },
+    { priority: 'complete', desc: '✅ All images now use Supabase storage with image transforms (WebP, responsive)', section: 'All Pages', status: 'complete' },
+    { priority: 'complete', desc: '✅ Bucket list hero images updated to Supabase URLs', section: 'Bucket List', status: 'complete' },
+    { priority: 'complete', desc: '✅ Cruise types images updated to Supabase URLs', section: 'Cruise Types', status: 'complete' },
+    { priority: 'complete', desc: '✅ Placeholder offers updated with Supabase images', section: 'Offers', status: 'complete' }
   ],
   content: [
     { priority: 'high', desc: 'Publish initial offers via CRM', section: 'Offers' },
@@ -747,10 +752,13 @@ function AdminProjectStatus() {
               </h2>
               <div className="requirements-cards">
                 {contentRequirements.images.map((req, idx) => (
-                  <div key={idx} className={`requirement-card priority-${req.priority}`}>
+                  <div key={idx} className={`requirement-card priority-${req.priority} ${req.status === 'complete' ? 'requirement-complete' : ''}`}>
                     <span className="priority-badge">{req.priority}</span>
                     <p>{req.desc}</p>
                     <span className="section-tag">{req.section}</span>
+                    {req.status === 'complete' && (
+                      <span className="status-indicator status-indicator--complete">✓ Complete</span>
+                    )}
                   </div>
                 ))}
               </div>

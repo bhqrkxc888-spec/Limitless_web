@@ -5,6 +5,7 @@ import BucketListFeatured from '../components/BucketListFeatured'
 import FeaturedOffers from '../components/FeaturedOffers';
 import LatestNewsTile from '../components/LatestNewsTile';
 import { Button } from '../components/ui';
+import OptimizedImage from '../components/OptimizedImage';
 import { homeHeroImages } from '../utils/imageHelpers';
 import './HomePage.css';
 
@@ -108,8 +109,8 @@ function HomePage() {
     }
   };
 
-  // Single hero image (first image from array, with fallback)
-  const heroImage = homeHeroImages[0] || 'https://via.placeholder.com/800x1000/2C344C/C9A962?text=LIMITLESS+CRUISES';
+  // Single hero image (first image from array)
+  const heroImage = homeHeroImages[0];
 
   return (
     <main className="home-elegant">
@@ -123,16 +124,16 @@ function HomePage() {
       {/* Hero Section - Image Background with Overlay Text */}
       <section className="hero-elegant">
         <div className="hero-background-image">
-          <img 
+          <OptimizedImage
             src={heroImage}
             alt="Beautiful Caribbean beach with turquoise waters and a cruise ship on the horizon - Limitless Cruises destination"
-            width="1920"
-            height="1080"
-            loading="eager"
-            fetchPriority="high"
-            onError={(e) => {
-              e.target.src = 'https://via.placeholder.com/800x1000/2C344C/C9A962?text=LIMITLESS+CRUISES';
-            }}
+            width={1920}
+            height={1080}
+            priority={true}
+            sizes="100vw"
+            srcsetWidths={[640, 1024, 1920]}
+            quality={85}
+            format="webp"
           />
           <div className="hero-image-overlay"></div>
         </div>
