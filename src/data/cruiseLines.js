@@ -64,7 +64,7 @@ export const cruiseLines = [
     destinationImages: [
       { name: 'Caribbean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg', alt: 'Tropical Caribbean beach with turquoise waters' },
       { name: 'Mediterranean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg', alt: 'Mediterranean coastal harbour' },
-      { name: 'Norwegian Fjords', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Fjords/northern-lights.jpeg', alt: 'Norwegian Fjords with Northern Lights' },
+      { name: 'Norwegian Fjords', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights.jpeg', alt: 'Norwegian Fjords with Northern Lights' },
       { name: 'Northern Europe', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/sydneybridge.jpeg', alt: 'Northern European waterfront' },
       { name: 'Canary Islands', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/Patagonian-glaciers.jpeg', alt: 'Canary Islands volcanic landscape' },
       { name: 'Scandinavia', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Arctic/midnight-sun.jpeg', alt: 'Scandinavian landscape under midnight sun' }
@@ -313,7 +313,7 @@ export const cruiseLines = [
     description: 'Norwegian Cruise Line pioneered Freestyle Cruising, offering flexibility with no fixed dining times and a relaxed, resort-style atmosphere.',
     category: 'mainstream',
     featured: true,
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Fjords/northern-lights.jpeg',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights.jpeg',
     logo: null, // Logo to be uploaded to CRM
     whyChoose: [
       { title: 'Freestyle Cruising', description: 'No set dining times, dress codes, or fixed schedules - cruise your way.', icon: 'freedom' },
@@ -406,7 +406,7 @@ export const cruiseLines = [
     description: 'Fred. Olsen offers intimate cruising on smaller ships with friendly British service and access to smaller ports that larger ships cannot reach. Family-owned for five generations, they specialise in no-fly cruises from multiple UK regional ports including Southampton, Liverpool, Newcastle, Dover, and Edinburgh.',
     category: 'traditional',
     featured: true, // Important for UK market
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Fjords/northern-lights.jpeg',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights.jpeg',
     logo: null, // Logo to be uploaded to CRM
     
     whyChoose: [
@@ -443,7 +443,7 @@ export const cruiseLines = [
     ],
 
     destinationImages: [
-      { name: 'Norwegian Fjords', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Fjords/northern-lights.jpeg', alt: 'Norwegian fjord landscape' },
+      { name: 'Norwegian Fjords', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights.jpeg', alt: 'Norwegian fjord landscape' },
       { name: 'British Isles', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Rivers/rhine-castle.jpeg', alt: 'British Isles coastline' },
       { name: 'Baltic Capitals', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/Auckland.jpeg', alt: 'Colourful Baltic waterfront' },
       { name: 'Canary Islands', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Iceland/iceland-waterfall.jpeg', alt: 'Canary Islands volcanic landscape' },
@@ -544,7 +544,7 @@ export const cruiseLines = [
       { name: 'Caribbean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg', alt: 'Caribbean turquoise waters' },
       { name: 'Northern Europe', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/Auckland.jpeg', alt: 'Northern Europe colourful waterfront' },
       { name: 'Mediterranean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg', alt: 'Mediterranean coastal village' },
-      { name: 'World Cruises', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/World%20Cruise/worldcruise.jpeg', alt: 'Ocean sunset on world cruise' },
+      { name: 'World Cruises', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/worldcruise.jpeg', alt: 'Ocean sunset on world cruise' },
       { name: 'Australia & New Zealand', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/Sydney.jpeg', alt: 'Sydney Opera House' }
     ],
 
@@ -790,7 +790,7 @@ export const cruiseLines = [
       { name: 'Northern Europe', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/Auckland.jpeg', alt: 'Baltic capital waterfront' },
       { name: 'Mediterranean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg', alt: 'Mediterranean coastal village' },
       { name: 'British Isles', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Rivers/rhine-castle.jpeg', alt: 'Scottish coastline' },
-      { name: 'World Cruises', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/World%20Cruise/worldcruise.jpeg', alt: 'Ocean voyage sunset' },
+      { name: 'World Cruises', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/worldcruise.jpeg', alt: 'Ocean voyage sunset' },
       { name: 'Expeditions', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Arctic/midnight-sun.jpeg', alt: 'Arctic expedition landscape' }
     ],
 
@@ -882,7 +882,7 @@ export const cruiseLines = [
       { name: 'Mediterranean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg', alt: 'Mediterranean luxury coastline' },
       { name: 'Northern Europe', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/Auckland.jpeg', alt: 'Baltic luxury destination' },
       { name: 'Caribbean', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg', alt: 'Caribbean paradise' },
-      { name: 'Expeditions', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Antartica/antartica-card.jpeg', alt: 'Antarctic expedition' },
+      { name: 'Expeditions', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antartica-card.jpeg', alt: 'Antarctic expedition' },
       { name: 'Arabia', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/hero-dubai.jpeg', alt: 'Arabian luxury destination' }
     ],
 
@@ -1168,7 +1168,7 @@ export const cruiseLines = [
     description: 'Aurora Expeditions offers adventure expedition cruises to the world\'s most remote destinations. With small ships, expert expedition teams, and a focus on active exploration, Aurora delivers authentic polar and adventure experiences.',
     category: 'expedition',
     featured: false,
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Antartica/antartica-card.jpeg',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antartica-card.jpeg',
     logo: null, // Logo to be uploaded to CRM
     
     whyChoose: [
@@ -1205,7 +1205,7 @@ export const cruiseLines = [
     ],
 
     destinationImages: [
-      { name: 'Antarctica', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Antartica/antartica-card.jpeg', alt: 'Antarctic ice and penguins' },
+      { name: 'Antarctica', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antartica-card.jpeg', alt: 'Antarctic ice and penguins' },
       { name: 'Arctic', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Arctic/midnight-sun.jpeg', alt: 'Arctic polar landscape' },
       { name: 'Kimberley', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Australia/great-barrier-reef.jpeg', alt: 'Australian Kimberley coastline' },
       { name: 'Patagonia', image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/Patagonian-glaciers.jpeg', alt: 'Patagonian mountains' }

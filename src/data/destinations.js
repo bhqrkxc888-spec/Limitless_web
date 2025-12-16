@@ -10,7 +10,7 @@ export const destinations = [
     name: 'Mediterranean',
     tagline: 'Sun-soaked history and culture',
     description: 'Explore ancient civilizations, stunning coastlines, and world-class cuisine on a Mediterranean cruise. From Barcelona to Athens, discover iconic destinations.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/muscat.jpeg',
     featured: true,
     // Coordinates for API integration (Barcelona as primary port)
     coordinates: {
@@ -49,7 +49,7 @@ export const destinations = [
     name: 'Caribbean',
     tagline: 'Paradise islands await',
     description: 'Crystal-clear waters, white sand beaches, and tropical adventures await in the Caribbean. From Jamaica to the Bahamas, find your perfect island escape.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/Rio-beech.jpeg',
     featured: true,
     // Coordinates for API integration (Nassau, Bahamas as primary port)
     coordinates: {
@@ -83,7 +83,7 @@ export const destinations = [
     name: 'Norwegian Fjords',
     tagline: 'Majestic natural beauty',
     description: 'Sail through dramatic fjords, past cascading waterfalls, and beneath towering mountains on a Norwegian Fjords cruise. Nature at its most spectacular.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Fjords/northern-lights.jpeg',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights.jpeg',
     featured: true,
     // Coordinates for API integration (Bergen as primary port)
     coordinates: {
@@ -186,7 +186,7 @@ export const destinations = [
     name: 'Baltic & Northern Europe',
     tagline: 'Historic capitals and cultural treasures',
     description: 'Discover the enchanting cities of the Baltic Sea, from the grandeur of St Petersburg to the charm of Copenhagen and Stockholm. Rich history, stunning architecture, and Nordic culture await.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/Auckland.jpeg',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/pacific/Auckland.jpeg',
     featured: true,
     coordinates: {
       lat: 59.9311,
@@ -393,7 +393,7 @@ export const destinations = [
     name: 'Adriatic',
     tagline: 'Croatia, Venice and Montenegro',
     description: 'Cruise the stunning Adriatic coastline, from the floating city of Venice to Croatia\'s medieval walled cities and Montenegro\'s dramatic fjords. A treasure trove of history and natural beauty.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/Abu-Dhabi.jpeg',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/Abu-Dhabi.jpeg',
     featured: false,
     coordinates: {
       lat: 42.6507,
@@ -530,7 +530,7 @@ export const destinations = [
     name: 'Southeast Asia',
     tagline: 'Temples, beaches and exotic culture',
     description: 'Explore the exotic wonders of Southeast Asia, from Thailand\'s temples to Vietnam\'s halong Bay and Singapore\'s modernity. A sensory journey through rich cultures and stunning landscapes.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Japan/Japan-card-cherryblossom.jpeg',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/japan/Japan-mtfuji.jpeg',
     featured: false,
     coordinates: {
       lat: 1.3521,

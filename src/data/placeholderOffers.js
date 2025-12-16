@@ -39,10 +39,10 @@ export const placeholderOffers = [
     cabin_type: 'inside',
     category: 'mainstream',
     featured: true,
-    hero_image_url: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Fjords/northern-lights.jpeg',
-    card_image_url: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Fjords/northern-lights.jpeg',
+    hero_image_url: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights.jpeg',
+    card_image_url: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights.jpeg',
     gallery_images: [
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Fjords/northern-lights.jpeg',
+      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights.jpeg',
       'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Arctic/midnight-sun.jpeg'
     ],
     includes: ['All meals onboard', 'Evening entertainment', 'Port calls at 5 destinations', 'Service charges'],

@@ -424,6 +424,15 @@ const projectSections = [
         approved: true,
         notes: 'This page - project overview and requirements',
         requirements: []
+      },
+      {
+        name: 'Image Upload (Vercel Blob)',
+        path: '/admin/image-upload',
+        status: 'COMPLETE',
+        tested: true,
+        approved: true,
+        notes: 'Upload website images to Vercel Blob Storage',
+        requirements: []
       }
     ]
   }
@@ -438,7 +447,11 @@ const contentRequirements = {
     { priority: 'medium', desc: 'Ship images for fleet sections', section: 'Cruise Lines', status: 'pending' },
     { priority: 'low', desc: 'Customer photos for testimonials', section: 'Testimonials', status: 'pending' },
     { priority: 'complete', desc: '✅ All external/placeholder images removed (Unsplash, via.placeholder)', section: 'All Pages', status: 'complete' },
-    { priority: 'complete', desc: '✅ All images now use Supabase storage with image transforms (WebP, responsive)', section: 'All Pages', status: 'complete' },
+    { priority: 'complete', desc: '✅ Vercel Blob Storage configured for website images', section: 'Infrastructure', status: 'complete' },
+    { priority: 'complete', desc: '✅ Website images migrated to Vercel Blob (favicon, home hero, about page)', section: 'Core Pages', status: 'complete' },
+    { priority: 'complete', desc: '✅ Destination images migrated to Vercel Blob (Japan, Middle East, Pacific, South America, Antarctica, Fjords, World Cruise, Galápagos)', section: 'Destinations', status: 'complete' },
+    { priority: 'complete', desc: '✅ Image optimization system updated for Vercel Blob (automatic WebP, CDN, responsive)', section: 'Performance', status: 'complete' },
+    { priority: 'complete', desc: '✅ Admin Image Upload tool created for Vercel Blob', section: 'Admin Tools', status: 'complete' },
     { priority: 'complete', desc: '✅ Bucket list hero images updated to Supabase URLs', section: 'Bucket List', status: 'complete' },
     { priority: 'complete', desc: '✅ Cruise types images updated to Supabase URLs', section: 'Cruise Types', status: 'complete' },
     { priority: 'complete', desc: '✅ Placeholder offers updated with Supabase images', section: 'Offers', status: 'complete' }
@@ -446,16 +459,20 @@ const contentRequirements = {
   content: [
     { priority: 'high', desc: 'Publish initial offers via CRM', section: 'Offers' },
     { priority: 'high', desc: 'Publish initial news articles via CRM', section: 'Travel News' },
+    { priority: 'high', desc: 'Upload remaining destination images to Vercel Blob (Canada, Iceland, Amazon, Rivers, Great Barrier Reef, French Polynesia, Arctic, Transatlantic, Grand Voyages)', section: 'Destinations' },
     { priority: 'medium', desc: 'Review cruise line descriptions for accuracy', section: 'Cruise Lines' },
     { priority: 'medium', desc: 'Verify ship names are current', section: 'Cruise Lines' },
     { priority: 'medium', desc: 'Add real customer testimonials', section: 'Testimonials' },
     { priority: 'low', desc: 'Expand FAQ based on common questions', section: 'FAQ' }
   ],
   technical: [
+    { priority: 'high', desc: 'Update CRM to upload website images to Vercel Blob (see docs/VERCEL_BLOB_CRM_INTEGRATION.md)', section: 'CRM Integration' },
     { priority: 'high', desc: 'Connect CRM offers API (Supabase RPC configured)', section: 'Offers' },
     { priority: 'high', desc: 'Connect CRM news API (Supabase RPC configured)', section: 'Travel News' },
     { priority: 'medium', desc: 'Set VITE_SITE_LAUNCHED=true when ready to go live', section: 'All Hidden Pages' },
-    { priority: 'low', desc: 'Configure Google Analytics tracking', section: 'All Pages' }
+    { priority: 'low', desc: 'Configure Google Analytics tracking', section: 'All Pages' },
+    { priority: 'complete', desc: '✅ Vercel Blob Storage connected to project', section: 'Infrastructure', status: 'complete' },
+    { priority: 'complete', desc: '✅ Image optimization system refactored for Vercel Blob', section: 'Performance', status: 'complete' }
   ]
 };
 
