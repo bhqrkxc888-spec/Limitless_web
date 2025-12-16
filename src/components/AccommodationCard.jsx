@@ -22,7 +22,9 @@ function AccommodationCard({
       spa: 'Spa access',
       gym: 'Gym access',
       pool: 'Pool access',
-      parking: 'Free parking'
+      parking: 'Free parking',
+      city_tour: 'City tour included',
+      airport_lounge: 'Airport lounge access'
     };
     return labels[item.toLowerCase()] || item;
   };

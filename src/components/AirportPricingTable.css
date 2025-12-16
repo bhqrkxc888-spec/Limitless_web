@@ -43,9 +43,26 @@
 }
 
 .airport-pricing-list__airport {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   font-size: var(--font-size-sm);
   color: var(--clr-text-main);
   font-weight: var(--font-weight-medium);
+}
+
+.airport-pricing-list__flight-type {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--clr-text-muted);
+  background: var(--clr-bg-alt);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-sm);
+}
+
+.airport-pricing-list__flight-type--direct {
+  color: var(--clr-success);
+  background: rgba(34, 197, 94, 0.1);
 }
 
 .airport-pricing-list__price {
@@ -81,10 +98,17 @@
   
   .airport-pricing-list__item {
     padding: var(--space-2) var(--space-3);
+    flex-wrap: wrap;
+    gap: var(--space-2);
   }
   
   .airport-pricing-list__airport {
     font-size: var(--font-size-xs);
+    flex-wrap: wrap;
+  }
+  
+  .airport-pricing-list__flight-type {
+    font-size: 10px;
   }
   
   .airport-pricing-list__price {

@@ -32,6 +32,11 @@ function AirportPricingList({ airportPrices, currency = 'GBP', priceBasis = 'per
           >
             <span className="airport-pricing-list__airport">
               {ap.name}
+              {ap.direct !== undefined && (
+                <span className={`airport-pricing-list__flight-type ${ap.direct ? 'airport-pricing-list__flight-type--direct' : ''}`}>
+                  {ap.direct ? 'Direct' : 'Connecting'}
+                </span>
+              )}
             </span>
             <span className="airport-pricing-list__price">
               {symbol}{formatPrice(ap.price)}{basisLabel}
