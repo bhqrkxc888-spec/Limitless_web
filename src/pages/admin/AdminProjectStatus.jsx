@@ -5,7 +5,7 @@
  * Staff-only view for tracking website development progress
  */
 
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   CheckCircle2, 
@@ -32,10 +32,15 @@ import {
   Newspaper,
   Percent,
   Shield,
-  Users
+  Users,
+  Check,
+  Edit2,
+  Save,
+  X
 } from 'lucide-react';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
+import { supabase } from '../../lib/supabase';
 import './AdminProjectStatus.css';
 
 // Status definitions
@@ -441,38 +446,419 @@ const projectSections = [
 // Summary of what's needed
 const contentRequirements = {
   images: [
-    { priority: 'high', desc: 'Cruise line logos (400x200, transparent PNG) - 16 needed (currently null)', section: 'Cruise Lines', status: 'pending' },
-    { priority: 'high', desc: 'Cruise line hero images (1920x800) - 22 needed (using destination placeholders)', section: 'Cruise Lines', status: 'pending' },
-    { priority: 'high', desc: 'Destination hero images (1920x800) - 15+ needed (using bucket list placeholders)', section: 'Destinations', status: 'pending' },
-    { priority: 'medium', desc: 'Ship images for fleet sections', section: 'Cruise Lines', status: 'pending' },
-    { priority: 'low', desc: 'Customer photos for testimonials', section: 'Testimonials', status: 'pending' },
-    { priority: 'complete', desc: '✅ All external/placeholder images removed (Unsplash, via.placeholder)', section: 'All Pages', status: 'complete' },
-    { priority: 'complete', desc: '✅ Vercel Blob Storage configured for website images', section: 'Infrastructure', status: 'complete' },
-    { priority: 'complete', desc: '✅ Website images migrated to Vercel Blob (favicon, home hero, about page)', section: 'Core Pages', status: 'complete' },
-    { priority: 'complete', desc: '✅ Destination images migrated to Vercel Blob (Japan, Middle East, Pacific, South America, Antarctica, Fjords, World Cruise, Galápagos)', section: 'Destinations', status: 'complete' },
-    { priority: 'complete', desc: '✅ Image optimization system updated for Vercel Blob (automatic WebP, CDN, responsive)', section: 'Performance', status: 'complete' },
-    { priority: 'complete', desc: '✅ Admin Image Upload tool created for Vercel Blob', section: 'Admin Tools', status: 'complete' },
-    { priority: 'complete', desc: '✅ Bucket list hero images updated to Supabase URLs', section: 'Bucket List', status: 'complete' },
-    { priority: 'complete', desc: '✅ Cruise types images updated to Supabase URLs', section: 'Cruise Types', status: 'complete' },
-    { priority: 'complete', desc: '✅ Placeholder offers updated with Supabase images', section: 'Offers', status: 'complete' }
+    { 
+      id: 'cruise-line-logos',
+      priority: 'high', 
+      desc: 'Cruise line logos (400x200, transparent PNG) - 16 needed (currently null)', 
+      section: 'Cruise Lines', 
+      status: 'pending',
+      details: {
+        count: 16,
+        completed: 0,
+        format: 'PNG (transparent)',
+        dimensions: '400 × 200px',
+        location: 'Supabase Storage: cruise-lines/logos/',
+        notes: 'Currently null in database. Need to upload via admin image upload tool.',
+        examples: ['Cunard', 'P&O Cruises', 'Princess Cruises', 'Royal Caribbean', 'Celebrity', 'Holland America']
+      }
+    },
+    { 
+      id: 'cruise-line-heroes',
+      priority: 'high', 
+      desc: 'Cruise line hero images (1920x800) - 22 needed (using destination placeholders)', 
+      section: 'Cruise Lines', 
+      status: 'pending',
+      details: {
+        count: 22,
+        completed: 0,
+        format: 'JPEG, WebP',
+        dimensions: '1920 × 800px',
+        location: 'Vercel Blob or Supabase Storage',
+        notes: 'Currently using destination placeholders. Each cruise line needs unique hero image.',
+        examples: ['Cunard', 'P&O Cruises', 'Princess Cruises', 'Royal Caribbean']
+      }
+    },
+    { 
+      id: 'destination-heroes',
+      priority: 'high', 
+      desc: 'Destination hero images (1920x800) - 15+ needed (using bucket list placeholders)', 
+      section: 'Destinations', 
+      status: 'pending',
+      details: {
+        count: 15,
+        completed: 0,
+        format: 'JPEG, WebP',
+        dimensions: '1920 × 800px',
+        location: 'Vercel Blob Storage',
+        notes: 'Currently using bucket list placeholders. Need destination-specific hero images.',
+        examples: ['Canada', 'Iceland', 'Amazon', 'Great Barrier Reef', 'French Polynesia']
+      }
+    },
+    { 
+      id: 'ship-images',
+      priority: 'medium', 
+      desc: 'Ship images for fleet sections', 
+      section: 'Cruise Lines', 
+      status: 'pending',
+      details: {
+        count: 0,
+        completed: 0,
+        format: 'JPEG, WebP',
+        dimensions: '800 × 600px',
+        location: 'Supabase Storage or Vercel Blob',
+        notes: 'Ship images for individual cruise line fleet sections. Count varies by cruise line.',
+        examples: []
+      }
+    },
+    { 
+      id: 'customer-photos',
+      priority: 'low', 
+      desc: 'Customer photos for testimonials', 
+      section: 'Testimonials', 
+      status: 'pending',
+      details: {
+        count: 0,
+        completed: 0,
+        format: 'JPEG, WebP',
+        dimensions: '400 × 400px',
+        location: 'Supabase Storage',
+        notes: 'Optional customer photos for testimonials (with permission).',
+        examples: []
+      }
+    },
+    { 
+      id: 'external-placeholders-removed',
+      priority: 'complete', 
+      desc: '✅ All external/placeholder images removed (Unsplash, via.placeholder)', 
+      section: 'All Pages', 
+      status: 'complete',
+      details: {
+        count: 1,
+        completed: 1,
+        format: 'N/A',
+        dimensions: 'N/A',
+        location: 'N/A',
+        notes: 'All external placeholder images have been removed from the codebase.',
+        examples: []
+      }
+    },
+    { 
+      id: 'vercel-blob-configured',
+      priority: 'complete', 
+      desc: '✅ Vercel Blob Storage configured for website images', 
+      section: 'Infrastructure', 
+      status: 'complete',
+      details: {
+        count: 1,
+        completed: 1,
+        format: 'N/A',
+        dimensions: 'N/A',
+        location: 'Vercel Blob',
+        notes: 'Vercel Blob Storage is configured and ready for use.',
+        examples: []
+      }
+    },
+    { 
+      id: 'website-images-migrated',
+      priority: 'complete', 
+      desc: '✅ Website images migrated to Vercel Blob (favicon, home hero, about page)', 
+      section: 'Core Pages', 
+      status: 'complete',
+      details: {
+        count: 3,
+        completed: 3,
+        format: 'JPEG, WebP',
+        dimensions: 'Various',
+        location: 'Vercel Blob',
+        notes: 'Core website images have been migrated to Vercel Blob.',
+        examples: ['Favicon', 'Home Hero', 'About Page']
+      }
+    },
+    { 
+      id: 'destination-images-migrated',
+      priority: 'complete', 
+      desc: '✅ Destination images migrated to Vercel Blob (Japan, Middle East, Pacific, South America, Antarctica, Fjords, World Cruise, Galápagos)', 
+      section: 'Destinations', 
+      status: 'complete',
+      details: {
+        count: 8,
+        completed: 8,
+        format: 'JPEG, WebP',
+        dimensions: '1920 × 800px',
+        location: 'Vercel Blob',
+        notes: 'Multiple destination images have been migrated to Vercel Blob.',
+        examples: ['Japan', 'Middle East', 'Pacific', 'South America', 'Antarctica', 'Fjords', 'World Cruise', 'Galápagos']
+      }
+    },
+    { 
+      id: 'image-optimization-updated',
+      priority: 'complete', 
+      desc: '✅ Image optimization system updated for Vercel Blob (automatic WebP, CDN, responsive)', 
+      section: 'Performance', 
+      status: 'complete',
+      details: {
+        count: 1,
+        completed: 1,
+        format: 'N/A',
+        dimensions: 'N/A',
+        location: 'N/A',
+        notes: 'Image optimization system has been updated to work with Vercel Blob.',
+        examples: []
+      }
+    },
+    { 
+      id: 'admin-upload-tool',
+      priority: 'complete', 
+      desc: '✅ Admin Image Upload tool created for Vercel Blob', 
+      section: 'Admin Tools', 
+      status: 'complete',
+      details: {
+        count: 1,
+        completed: 1,
+        format: 'N/A',
+        dimensions: 'N/A',
+        location: '/admin/image-upload',
+        notes: 'Admin tool for uploading images to Vercel Blob is available.',
+        examples: []
+      }
+    },
+    { 
+      id: 'bucket-list-images',
+      priority: 'complete', 
+      desc: '✅ Bucket list hero images updated to Supabase URLs', 
+      section: 'Bucket List', 
+      status: 'complete',
+      details: {
+        count: 1,
+        completed: 1,
+        format: 'JPEG, WebP',
+        dimensions: '1920 × 800px',
+        location: 'Supabase Storage',
+        notes: 'All bucket list experience hero images are now using Supabase URLs.',
+        examples: []
+      }
+    },
+    { 
+      id: 'cruise-types-images',
+      priority: 'complete', 
+      desc: '✅ Cruise types images updated to Supabase URLs', 
+      section: 'Cruise Types', 
+      status: 'complete',
+      details: {
+        count: 1,
+        completed: 1,
+        format: 'JPEG, WebP',
+        dimensions: 'Various',
+        location: 'Supabase Storage',
+        notes: 'Cruise type category images are now using Supabase URLs.',
+        examples: []
+      }
+    },
+    { 
+      id: 'placeholder-offers-updated',
+      priority: 'complete', 
+      desc: '✅ Placeholder offers updated with Supabase images', 
+      section: 'Offers', 
+      status: 'complete',
+      details: {
+        count: 1,
+        completed: 1,
+        format: 'JPEG, WebP',
+        dimensions: '800 × 500px',
+        location: 'Supabase Storage',
+        notes: 'Placeholder offers now use Supabase images instead of external placeholders.',
+        examples: []
+      }
+    }
   ],
   content: [
-    { priority: 'high', desc: 'Publish initial offers via CRM', section: 'Offers' },
-    { priority: 'high', desc: 'Publish initial news articles via CRM', section: 'Travel News' },
-    { priority: 'high', desc: 'Upload remaining destination images to Vercel Blob (Canada, Iceland, Amazon, Rivers, Great Barrier Reef, French Polynesia, Arctic, Transatlantic, Grand Voyages)', section: 'Destinations' },
-    { priority: 'medium', desc: 'Review cruise line descriptions for accuracy', section: 'Cruise Lines' },
-    { priority: 'medium', desc: 'Verify ship names are current', section: 'Cruise Lines' },
-    { priority: 'medium', desc: 'Add real customer testimonials', section: 'Testimonials' },
-    { priority: 'low', desc: 'Expand FAQ based on common questions', section: 'FAQ' }
+    { 
+      id: 'publish-offers',
+      priority: 'high', 
+      desc: 'Publish initial offers via CRM', 
+      section: 'Offers',
+      status: 'pending',
+      details: {
+        count: 0,
+        completed: 0,
+        notes: 'Publish initial cruise offers through the CRM system to populate the offers page.',
+        examples: []
+      }
+    },
+    { 
+      id: 'publish-news',
+      priority: 'high', 
+      desc: 'Publish initial news articles via CRM', 
+      section: 'Travel News',
+      status: 'pending',
+      details: {
+        count: 0,
+        completed: 0,
+        notes: 'Publish initial travel news articles through the CRM system.',
+        examples: []
+      }
+    },
+    { 
+      id: 'remaining-destinations',
+      priority: 'high', 
+      desc: 'Upload remaining destination images to Vercel Blob (Canada, Iceland, Amazon, Rivers, Great Barrier Reef, French Polynesia, Arctic, Transatlantic, Grand Voyages)', 
+      section: 'Destinations',
+      status: 'pending',
+      details: {
+        count: 9,
+        completed: 0,
+        format: 'JPEG, WebP',
+        dimensions: '1920 × 800px',
+        location: 'Vercel Blob',
+        notes: 'Upload hero images for remaining destinations that haven\'t been migrated yet.',
+        examples: ['Canada', 'Iceland', 'Amazon', 'Rivers', 'Great Barrier Reef', 'French Polynesia', 'Arctic', 'Transatlantic', 'Grand Voyages']
+      }
+    },
+    { 
+      id: 'review-cruise-descriptions',
+      priority: 'medium', 
+      desc: 'Review cruise line descriptions for accuracy', 
+      section: 'Cruise Lines',
+      status: 'pending',
+      details: {
+        count: 22,
+        completed: 0,
+        notes: 'Review and update cruise line descriptions to ensure accuracy and current information.',
+        examples: []
+      }
+    },
+    { 
+      id: 'verify-ship-names',
+      priority: 'medium', 
+      desc: 'Verify ship names are current', 
+      section: 'Cruise Lines',
+      status: 'pending',
+      details: {
+        count: 0,
+        completed: 0,
+        notes: 'Verify that all ship names in the fleet sections are current and accurate.',
+        examples: []
+      }
+    },
+    { 
+      id: 'add-testimonials',
+      priority: 'medium', 
+      desc: 'Add real customer testimonials', 
+      section: 'Testimonials',
+      status: 'pending',
+      details: {
+        count: 0,
+        completed: 0,
+        notes: 'Add real customer testimonials and reviews to the testimonials page.',
+        examples: []
+      }
+    },
+    { 
+      id: 'expand-faq',
+      priority: 'low', 
+      desc: 'Expand FAQ based on common questions', 
+      section: 'FAQ',
+      status: 'pending',
+      details: {
+        count: 0,
+        completed: 0,
+        notes: 'Add more FAQ items based on common customer questions.',
+        examples: []
+      }
+    }
   ],
   technical: [
-    { priority: 'high', desc: 'Update CRM to upload website images to Vercel Blob (see docs/VERCEL_BLOB_CRM_INTEGRATION.md)', section: 'CRM Integration' },
-    { priority: 'high', desc: 'Connect CRM offers API (Supabase RPC configured)', section: 'Offers' },
-    { priority: 'high', desc: 'Connect CRM news API (Supabase RPC configured)', section: 'Travel News' },
-    { priority: 'medium', desc: 'Set VITE_SITE_LAUNCHED=true when ready to go live', section: 'All Hidden Pages' },
-    { priority: 'low', desc: 'Configure Google Analytics tracking', section: 'All Pages' },
-    { priority: 'complete', desc: '✅ Vercel Blob Storage connected to project', section: 'Infrastructure', status: 'complete' },
-    { priority: 'complete', desc: '✅ Image optimization system refactored for Vercel Blob', section: 'Performance', status: 'complete' }
+    { 
+      id: 'crm-vercel-blob-integration',
+      priority: 'high', 
+      desc: 'Update CRM to upload website images to Vercel Blob (see docs/VERCEL_BLOB_CRM_INTEGRATION.md)', 
+      section: 'CRM Integration',
+      status: 'pending',
+      details: {
+        count: 1,
+        completed: 0,
+        notes: 'Update the CRM system to support uploading website images directly to Vercel Blob Storage. See documentation for details.',
+        examples: []
+      }
+    },
+    { 
+      id: 'connect-offers-api',
+      priority: 'high', 
+      desc: 'Connect CRM offers API (Supabase RPC configured)', 
+      section: 'Offers',
+      status: 'pending',
+      details: {
+        count: 1,
+        completed: 0,
+        notes: 'Connect the website to the CRM offers API. Supabase RPC function is already configured.',
+        examples: []
+      }
+    },
+    { 
+      id: 'connect-news-api',
+      priority: 'high', 
+      desc: 'Connect CRM news API (Supabase RPC configured)', 
+      section: 'Travel News',
+      status: 'pending',
+      details: {
+        count: 1,
+        completed: 0,
+        notes: 'Connect the website to the CRM news API. Supabase RPC function is already configured.',
+        examples: []
+      }
+    },
+    { 
+      id: 'set-site-launched',
+      priority: 'medium', 
+      desc: 'Set VITE_SITE_LAUNCHED=true when ready to go live', 
+      section: 'All Hidden Pages',
+      status: 'pending',
+      details: {
+        count: 1,
+        completed: 0,
+        notes: 'Set the environment variable VITE_SITE_LAUNCHED=true to make all hidden pages publicly visible.',
+        examples: []
+      }
+    },
+    { 
+      id: 'google-analytics',
+      priority: 'low', 
+      desc: 'Configure Google Analytics tracking', 
+      section: 'All Pages',
+      status: 'pending',
+      details: {
+        count: 1,
+        completed: 0,
+        notes: 'Configure Google Analytics tracking code for all pages.',
+        examples: []
+      }
+    },
+    { 
+      id: 'vercel-blob-connected',
+      priority: 'complete', 
+      desc: '✅ Vercel Blob Storage connected to project', 
+      section: 'Infrastructure', 
+      status: 'complete',
+      details: {
+        count: 1,
+        completed: 1,
+        notes: 'Vercel Blob Storage has been successfully connected to the project.',
+        examples: []
+      }
+    },
+    { 
+      id: 'image-optimization-refactored',
+      priority: 'complete', 
+      desc: '✅ Image optimization system refactored for Vercel Blob', 
+      section: 'Performance', 
+      status: 'complete',
+      details: {
+        count: 1,
+        completed: 1,
+        notes: 'Image optimization system has been refactored to work with Vercel Blob.',
+        examples: []
+      }
+    }
   ]
 };
 
@@ -548,6 +934,171 @@ function RequirementsList({ requirements }) {
         );
       })}
     </ul>
+  );
+}
+
+function RequirementCard({ requirement, category, onToggleComplete, onUpdateDetails }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [localDetails, setLocalDetails] = useState(requirement.details || {});
+  const [notes, setNotes] = useState(requirement.notes || '');
+
+  const handleToggleComplete = async (e) => {
+    e.stopPropagation();
+    const newStatus = requirement.status === 'complete' ? 'pending' : 'complete';
+    await onToggleComplete(requirement.id, category, newStatus);
+  };
+
+  const handleSaveDetails = async () => {
+    await onUpdateDetails(requirement.id, category, {
+      ...localDetails,
+      notes
+    });
+    setIsEditing(false);
+  };
+
+  const progress = requirement.details?.count 
+    ? Math.round((requirement.details.completed / requirement.details.count) * 100)
+    : requirement.status === 'complete' ? 100 : 0;
+
+  return (
+    <div className={`requirement-card priority-${requirement.priority} ${requirement.status === 'complete' ? 'requirement-complete' : ''}`}>
+      <div className="requirement-card-header" onClick={() => setIsExpanded(!isExpanded)}>
+        <div className="requirement-card-left">
+          <button
+            className="requirement-checkbox"
+            onClick={handleToggleComplete}
+            aria-label={requirement.status === 'complete' ? 'Mark as incomplete' : 'Mark as complete'}
+          >
+            {requirement.status === 'complete' ? (
+              <Check size={18} className="check-icon" />
+            ) : (
+              <div className="checkbox-empty" />
+            )}
+          </button>
+          <div className="requirement-info">
+            <span className="priority-badge">{requirement.priority}</span>
+            <p>{requirement.desc}</p>
+            <span className="section-tag">{requirement.section}</span>
+          </div>
+        </div>
+        <div className="requirement-card-right">
+          {requirement.details?.count && (
+            <div className="progress-indicator">
+              <span className="progress-text">
+                {requirement.details.completed}/{requirement.details.count}
+              </span>
+              <div className="progress-bar">
+                <div 
+                  className="progress-fill" 
+                  style={{ width: `${progress}%` }}
+                />
+              </div>
+            </div>
+          )}
+          {isExpanded ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
+        </div>
+      </div>
+
+      {isExpanded && (
+        <div className="requirement-details">
+          {isEditing ? (
+            <div className="requirement-edit-form">
+              {requirement.details?.count !== undefined && (
+                <div className="form-group">
+                  <label>Completed Count</label>
+                  <input
+                    type="number"
+                    value={localDetails.completed || 0}
+                    onChange={(e) => setLocalDetails({...localDetails, completed: parseInt(e.target.value) || 0})}
+                    min={0}
+                    max={localDetails.count || 1}
+                  />
+                </div>
+              )}
+              <div className="form-group">
+                <label>Notes</label>
+                <textarea
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  rows={3}
+                  placeholder="Add notes about this task..."
+                />
+              </div>
+              <div className="form-actions">
+                <button onClick={handleSaveDetails} className="btn-save">
+                  <Save size={14} />
+                  Save
+                </button>
+                <button onClick={() => setIsEditing(false)} className="btn-cancel">
+                  <X size={14} />
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            <>
+              {requirement.details && (
+                <div className="details-grid">
+                  {requirement.details.format && (
+                    <div className="detail-item">
+                      <strong>Format:</strong> {requirement.details.format}
+                    </div>
+                  )}
+                  {requirement.details.dimensions && (
+                    <div className="detail-item">
+                      <strong>Dimensions:</strong> {requirement.details.dimensions}
+                    </div>
+                  )}
+                  {requirement.details.location && (
+                    <div className="detail-item">
+                      <strong>Location:</strong> {requirement.details.location}
+                    </div>
+                  )}
+                  {requirement.details.count !== undefined && (
+                    <div className="detail-item">
+                      <strong>Progress:</strong> {requirement.details.completed} of {requirement.details.count} completed
+                    </div>
+                  )}
+                  {requirement.details.examples && requirement.details.examples.length > 0 && (
+                    <div className="detail-item detail-item-full">
+                      <strong>Examples:</strong>
+                      <div className="examples-list">
+                        {requirement.details.examples.map((ex, i) => (
+                          <span key={i} className="example-tag">{ex}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {requirement.details.notes && (
+                    <div className="detail-item detail-item-full">
+                      <strong>Notes:</strong>
+                      <p>{requirement.details.notes}</p>
+                    </div>
+                  )}
+                  {notes && (
+                    <div className="detail-item detail-item-full">
+                      <strong>Your Notes:</strong>
+                      <p>{notes}</p>
+                    </div>
+                  )}
+                </div>
+              )}
+              <button 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsEditing(true);
+                }} 
+                className="btn-edit-details"
+              >
+                <Edit2 size={14} />
+                Edit Details
+              </button>
+            </>
+          )}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -635,8 +1186,199 @@ function AdminProjectStatus() {
   const { isAuthenticated, isLoading: authLoading, logout } = useAdminAuth();
   const [expandedSections, setExpandedSections] = useState(['core-pages', 'offers']);
   const [activeTab, setActiveTab] = useState('overview');
+  const [requirements, setRequirements] = useState(contentRequirements);
+  const [isLoadingTasks, setIsLoadingTasks] = useState(true);
   
   const stats = calculateStats();
+  
+  // Load saved task status from Supabase or localStorage
+  useEffect(() => {
+    loadTaskStatus();
+  }, []);
+
+  const loadTaskStatus = useCallback(async () => {
+    try {
+      if (supabase) {
+        // Try to load from Supabase
+        const { data, error } = await supabase
+          .from('admin_task_status')
+          .select('*');
+        
+        // If table doesn't exist, fall back to localStorage
+        if (error && error.code === '42P01') {
+          const saved = localStorage.getItem('admin_task_status');
+          if (saved) {
+            try {
+              const parsed = JSON.parse(saved);
+              const updated = { ...contentRequirements };
+              Object.keys(updated).forEach(category => {
+                updated[category] = updated[category].map(req => {
+                  const savedKey = `${category}_${req.id}`;
+                  const saved = parsed[savedKey];
+                  if (saved) {
+                    return { 
+                      ...req, 
+                      status: saved.status || req.status,
+                      details: { ...req.details, ...(saved.details || {}) },
+                      notes: saved.notes || req.notes || ''
+                    };
+                  }
+                  return req;
+                });
+              });
+              setRequirements(updated);
+            } catch (e) {
+              console.error('Error parsing saved task status:', e);
+            }
+          }
+        } else if (!error && data && data.length > 0) {
+          // Merge saved status with requirements
+          const updated = { ...contentRequirements };
+          Object.keys(updated).forEach(category => {
+            updated[category] = updated[category].map(req => {
+              const saved = data.find(s => s.task_id === req.id && s.category === category);
+              if (saved) {
+                return { 
+                  ...req, 
+                  status: saved.status || req.status, 
+                  details: { ...req.details, ...(saved.details || {}) },
+                  notes: saved.notes || req.notes || ''
+                };
+              }
+              return req;
+            });
+          });
+          setRequirements(updated);
+        }
+      } else {
+        // Fallback to localStorage
+        const saved = localStorage.getItem('admin_task_status');
+        if (saved) {
+          try {
+            const parsed = JSON.parse(saved);
+            const updated = { ...contentRequirements };
+            Object.keys(updated).forEach(category => {
+              updated[category] = updated[category].map(req => {
+                const savedKey = `${category}_${req.id}`;
+                const saved = parsed[savedKey];
+                if (saved) {
+                  return { 
+                    ...req, 
+                    status: saved.status || req.status,
+                    details: { ...req.details, ...(saved.details || {}) },
+                    notes: saved.notes || req.notes || ''
+                  };
+                }
+                return req;
+              });
+            });
+            setRequirements(updated);
+          } catch (e) {
+            console.error('Error parsing saved task status:', e);
+          }
+        }
+      }
+    } catch (err) {
+      console.error('Error loading task status:', err);
+      // On any error, try localStorage as fallback
+      const saved = localStorage.getItem('admin_task_status');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          const updated = { ...contentRequirements };
+          Object.keys(updated).forEach(category => {
+            updated[category] = updated[category].map(req => {
+              const savedKey = `${category}_${req.id}`;
+              const saved = parsed[savedKey];
+              if (saved) {
+                return { 
+                  ...req, 
+                  status: saved.status || req.status,
+                  details: { ...req.details, ...(saved.details || {}) },
+                  notes: saved.notes || req.notes || ''
+                };
+              }
+              return req;
+            });
+          });
+          setRequirements(updated);
+        } catch (e) {
+          console.error('Error parsing saved task status:', e);
+        }
+      }
+    } finally {
+      setIsLoadingTasks(false);
+    }
+  }, []);
+
+  const handleToggleComplete = useCallback(async (taskId, category, newStatus) => {
+    const updated = { ...requirements };
+    updated[category] = updated[category].map(req => 
+      req.id === taskId ? { ...req, status: newStatus } : req
+    );
+    setRequirements(updated);
+
+    // Save to Supabase or localStorage
+    try {
+      if (supabase) {
+        const { error } = await supabase
+          .from('admin_task_status')
+          .upsert({
+            task_id: taskId,
+            category: category,
+            status: newStatus,
+            updated_at: new Date().toISOString()
+          });
+        // If table doesn't exist, fall back to localStorage
+        if (error && error.code === '42P01') {
+          const saved = JSON.parse(localStorage.getItem('admin_task_status') || '{}');
+          saved[`${category}_${taskId}`] = { ...saved[`${category}_${taskId}`], status: newStatus };
+          localStorage.setItem('admin_task_status', JSON.stringify(saved));
+        }
+      } else {
+        const saved = JSON.parse(localStorage.getItem('admin_task_status') || '{}');
+        saved[`${category}_${taskId}`] = { ...saved[`${category}_${taskId}`], status: newStatus };
+        localStorage.setItem('admin_task_status', JSON.stringify(saved));
+      }
+    } catch (err) {
+      console.error('Error saving task status:', err);
+    }
+  }, [requirements]);
+
+  const handleUpdateDetails = useCallback(async (taskId, category, details) => {
+    const updated = { ...requirements };
+    updated[category] = updated[category].map(req => 
+      req.id === taskId ? { ...req, details: { ...req.details, ...details }, notes: details.notes || req.notes || '' } : req
+    );
+    setRequirements(updated);
+
+    // Save to Supabase or localStorage
+    try {
+      if (supabase) {
+        const { error } = await supabase
+          .from('admin_task_status')
+          .upsert({
+            task_id: taskId,
+            category: category,
+            details: details,
+            notes: details.notes || '',
+            updated_at: new Date().toISOString()
+          });
+        // If table doesn't exist, fall back to localStorage
+        if (error && error.code === '42P01') {
+          const saved = JSON.parse(localStorage.getItem('admin_task_status') || '{}');
+          saved[`${category}_${taskId}`] = { ...saved[`${category}_${taskId}`], details, notes: details.notes || '' };
+          localStorage.setItem('admin_task_status', JSON.stringify(saved));
+        }
+      } else {
+        const saved = JSON.parse(localStorage.getItem('admin_task_status') || '{}');
+        saved[`${category}_${taskId}`] = { ...saved[`${category}_${taskId}`], details, notes: details.notes || '' };
+        localStorage.setItem('admin_task_status', JSON.stringify(saved));
+      }
+    } catch (err) {
+      console.error('Error saving task details:', err);
+    }
+  }, [requirements]);
   
   const toggleSection = (sectionId) => {
     setExpandedSections(prev => 
@@ -761,59 +1503,80 @@ function AdminProjectStatus() {
 
         {activeTab === 'requirements' && (
           <div className="requirements-overview">
-            {/* Images Needed */}
-            <div className="requirements-section">
-              <h2>
-                <Image size={20} />
-                Images Needed
-              </h2>
-              <div className="requirements-cards">
-                {contentRequirements.images.map((req, idx) => (
-                  <div key={idx} className={`requirement-card priority-${req.priority} ${req.status === 'complete' ? 'requirement-complete' : ''}`}>
-                    <span className="priority-badge">{req.priority}</span>
-                    <p>{req.desc}</p>
-                    <span className="section-tag">{req.section}</span>
-                    {req.status === 'complete' && (
-                      <span className="status-indicator status-indicator--complete">✓ Complete</span>
-                    )}
-                  </div>
-                ))}
+            {isLoadingTasks ? (
+              <div className="admin-loading">
+                <div className="admin-loading-spinner" />
+                <p>Loading tasks...</p>
               </div>
-            </div>
+            ) : (
+              <>
+                {/* Images Needed */}
+                <div className="requirements-section">
+                  <h2>
+                    <Image size={20} />
+                    Images Needed
+                    <span className="section-count">
+                      ({requirements.images.filter(r => r.status !== 'complete').length} pending)
+                    </span>
+                  </h2>
+                  <div className="requirements-cards">
+                    {requirements.images.map((req) => (
+                      <RequirementCard
+                        key={req.id}
+                        requirement={req}
+                        category="images"
+                        onToggleComplete={handleToggleComplete}
+                        onUpdateDetails={handleUpdateDetails}
+                      />
+                    ))}
+                  </div>
+                </div>
 
-            {/* Content Needed */}
-            <div className="requirements-section">
-              <h2>
-                <FileText size={20} />
-                Content Needed
-              </h2>
-              <div className="requirements-cards">
-                {contentRequirements.content.map((req, idx) => (
-                  <div key={idx} className={`requirement-card priority-${req.priority}`}>
-                    <span className="priority-badge">{req.priority}</span>
-                    <p>{req.desc}</p>
-                    <span className="section-tag">{req.section}</span>
+                {/* Content Needed */}
+                <div className="requirements-section">
+                  <h2>
+                    <FileText size={20} />
+                    Content Needed
+                    <span className="section-count">
+                      ({requirements.content.filter(r => r.status !== 'complete').length} pending)
+                    </span>
+                  </h2>
+                  <div className="requirements-cards">
+                    {requirements.content.map((req) => (
+                      <RequirementCard
+                        key={req.id}
+                        requirement={req}
+                        category="content"
+                        onToggleComplete={handleToggleComplete}
+                        onUpdateDetails={handleUpdateDetails}
+                      />
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
+                </div>
 
-            {/* Technical Tasks */}
-            <div className="requirements-section">
-              <h2>
-                <Settings size={20} />
-                Technical Tasks
-              </h2>
-              <div className="requirements-cards">
-                {contentRequirements.technical.map((req, idx) => (
-                  <div key={idx} className={`requirement-card priority-${req.priority}`}>
-                    <span className="priority-badge">{req.priority}</span>
-                    <p>{req.desc}</p>
-                    <span className="section-tag">{req.section}</span>
+                {/* Technical Tasks */}
+                <div className="requirements-section">
+                  <h2>
+                    <Settings size={20} />
+                    Technical Tasks
+                    <span className="section-count">
+                      ({requirements.technical.filter(r => r.status !== 'complete').length} pending)
+                    </span>
+                  </h2>
+                  <div className="requirements-cards">
+                    {requirements.technical.map((req) => (
+                      <RequirementCard
+                        key={req.id}
+                        requirement={req}
+                        category="technical"
+                        onToggleComplete={handleToggleComplete}
+                        onUpdateDetails={handleUpdateDetails}
+                      />
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
+                </div>
+              </>
+            )}
 
             {/* Quick Reference */}
             <div className="requirements-section">

@@ -331,7 +331,7 @@ function OfferCard({ offer, variant = 'default' }) {
         <Card.Image
           src={offer.card_image_url || offer.hero_image_url}
           alt={offer.title}
-          aspectRatio="16/10"
+          aspectRatio="16/9"
         />
       )}
       

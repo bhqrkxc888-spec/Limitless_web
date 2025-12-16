@@ -395,8 +395,14 @@
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 10px;
-  padding: 1rem;
   position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+  overflow: hidden;
+}
+
+.requirement-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .requirement-card.priority-high {
@@ -418,6 +424,243 @@
 
 .requirement-card.requirement-complete {
   opacity: 0.85;
+}
+
+.requirement-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.requirement-card-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.requirement-checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: all 0.2s;
+  padding: 0;
+}
+
+.requirement-checkbox:hover {
+  border-color: #4f46e5;
+  background: #f3f4f6;
+}
+
+.requirement-checkbox .check-icon {
+  color: #10b981;
+}
+
+.requirement-card.requirement-complete .requirement-checkbox {
+  background: #10b981;
+  border-color: #10b981;
+}
+
+.requirement-card.requirement-complete .requirement-checkbox .check-icon {
+  color: white;
+}
+
+.checkbox-empty {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+.requirement-info {
+  flex: 1;
+}
+
+.requirement-card-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progress-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 120px;
+}
+
+.progress-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6b7280;
+  min-width: 50px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  min-width: 60px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #059669);
+  transition: width 0.3s;
+}
+
+/* Requirement Details */
+.requirement-details {
+  border-top: 1px solid #e5e7eb;
+  padding: 1rem;
+  background: #f9fafb;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.detail-item {
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.detail-item strong {
+  color: #111827;
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-item-full {
+  grid-column: 1 / -1;
+}
+
+.detail-item p {
+  margin: 0.5rem 0 0 0;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.examples-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.example-tag {
+  padding: 0.25rem 0.5rem;
+  background: #e0e7ff;
+  color: #4338ca;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+/* Edit Form */
+.requirement-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-family: inherit;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-save,
+.btn-cancel,
+.btn-edit-details {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-save {
+  background: #10b981;
+  color: white;
+}
+
+.btn-save:hover {
+  background: #059669;
+}
+
+.btn-cancel {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.btn-cancel:hover {
+  background: #d1d5db;
+}
+
+.btn-edit-details {
+  background: #4f46e5;
+  color: white;
+  margin-top: 0.5rem;
+}
+
+.btn-edit-details:hover {
+  background: #4338ca;
+}
+
+.section-count {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #6b7280;
+  margin-left: 0.5rem;
 }
 
 .status-indicator {
@@ -628,6 +871,25 @@
   
   .tabs {
     overflow-x: auto;
+  }
+  
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .progress-indicator {
+    min-width: 100px;
+  }
+  
+  .requirement-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .requirement-card-right {
+    width: 100%;
+    justify-content: space-between;
   }
 }
 
