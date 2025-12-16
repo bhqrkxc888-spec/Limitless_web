@@ -40,7 +40,6 @@ import {
 } from 'lucide-react';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
-import { supabase } from '../../lib/supabase';
 import './AdminProjectStatus.css';
 
 // Status definitions
@@ -1196,91 +1195,9 @@ function AdminProjectStatus() {
     loadTaskStatus();
   }, []);
 
-  const loadTaskStatus = useCallback(async () => {
+  const loadTaskStatus = useCallback(() => {
     try {
-      if (supabase) {
-        // Try to load from Supabase
-        const { data, error } = await supabase
-          .from('admin_task_status')
-          .select('*');
-        
-        // If table doesn't exist, fall back to localStorage
-        if (error && error.code === '42P01') {
-          const saved = localStorage.getItem('admin_task_status');
-          if (saved) {
-            try {
-              const parsed = JSON.parse(saved);
-              const updated = { ...contentRequirements };
-              Object.keys(updated).forEach(category => {
-                updated[category] = updated[category].map(req => {
-                  const savedKey = `${category}_${req.id}`;
-                  const saved = parsed[savedKey];
-                  if (saved) {
-                    return { 
-                      ...req, 
-                      status: saved.status || req.status,
-                      details: { ...req.details, ...(saved.details || {}) },
-                      notes: saved.notes || req.notes || ''
-                    };
-                  }
-                  return req;
-                });
-              });
-              setRequirements(updated);
-            } catch (e) {
-              console.error('Error parsing saved task status:', e);
-            }
-          }
-        } else if (!error && data && data.length > 0) {
-          // Merge saved status with requirements
-          const updated = { ...contentRequirements };
-          Object.keys(updated).forEach(category => {
-            updated[category] = updated[category].map(req => {
-              const saved = data.find(s => s.task_id === req.id && s.category === category);
-              if (saved) {
-                return { 
-                  ...req, 
-                  status: saved.status || req.status, 
-                  details: { ...req.details, ...(saved.details || {}) },
-                  notes: saved.notes || req.notes || ''
-                };
-              }
-              return req;
-            });
-          });
-          setRequirements(updated);
-        }
-      } else {
-        // Fallback to localStorage
-        const saved = localStorage.getItem('admin_task_status');
-        if (saved) {
-          try {
-            const parsed = JSON.parse(saved);
-            const updated = { ...contentRequirements };
-            Object.keys(updated).forEach(category => {
-              updated[category] = updated[category].map(req => {
-                const savedKey = `${category}_${req.id}`;
-                const saved = parsed[savedKey];
-                if (saved) {
-                  return { 
-                    ...req, 
-                    status: saved.status || req.status,
-                    details: { ...req.details, ...(saved.details || {}) },
-                    notes: saved.notes || req.notes || ''
-                  };
-                }
-                return req;
-              });
-            });
-            setRequirements(updated);
-          } catch (e) {
-            console.error('Error parsing saved task status:', e);
-          }
-        }
-      }
-    } catch (err) {
-      console.error('Error loading task status:', err);
-      // On any error, try localStorage as fallback
+      // Use localStorage only (no Supabase needed for admin-only feature)
       const saved = localStorage.getItem('admin_task_status');
       if (saved) {
         try {
@@ -1289,13 +1206,13 @@ function AdminProjectStatus() {
           Object.keys(updated).forEach(category => {
             updated[category] = updated[category].map(req => {
               const savedKey = `${category}_${req.id}`;
-              const saved = parsed[savedKey];
-              if (saved) {
+              const savedData = parsed[savedKey];
+              if (savedData) {
                 return { 
                   ...req, 
-                  status: saved.status || req.status,
-                  details: { ...req.details, ...(saved.details || {}) },
-                  notes: saved.notes || req.notes || ''
+                  status: savedData.status || req.status,
+                  details: { ...req.details, ...(savedData.details || {}) },
+                  notes: savedData.notes || req.notes || ''
                 };
               }
               return req;
@@ -1306,75 +1223,44 @@ function AdminProjectStatus() {
           console.error('Error parsing saved task status:', e);
         }
       }
+    } catch (err) {
+      console.error('Error loading task status:', err);
     } finally {
       setIsLoadingTasks(false);
     }
   }, []);
 
-  const handleToggleComplete = useCallback(async (taskId, category, newStatus) => {
+  const handleToggleComplete = useCallback((taskId, category, newStatus) => {
     const updated = { ...requirements };
     updated[category] = updated[category].map(req => 
       req.id === taskId ? { ...req, status: newStatus } : req
     );
     setRequirements(updated);
 
-    // Save to Supabase or localStorage
+    // Save to localStorage only (no Supabase needed)
     try {
-      if (supabase) {
-        const { error } = await supabase
-          .from('admin_task_status')
-          .upsert({
-            task_id: taskId,
-            category: category,
-            status: newStatus,
-            updated_at: new Date().toISOString()
-          });
-        // If table doesn't exist, fall back to localStorage
-        if (error && error.code === '42P01') {
-          const saved = JSON.parse(localStorage.getItem('admin_task_status') || '{}');
-          saved[`${category}_${taskId}`] = { ...saved[`${category}_${taskId}`], status: newStatus };
-          localStorage.setItem('admin_task_status', JSON.stringify(saved));
-        }
-      } else {
-        const saved = JSON.parse(localStorage.getItem('admin_task_status') || '{}');
-        saved[`${category}_${taskId}`] = { ...saved[`${category}_${taskId}`], status: newStatus };
-        localStorage.setItem('admin_task_status', JSON.stringify(saved));
-      }
+      const saved = JSON.parse(localStorage.getItem('admin_task_status') || '{}');
+      const key = `${category}_${taskId}`;
+      saved[key] = { ...saved[key], status: newStatus };
+      localStorage.setItem('admin_task_status', JSON.stringify(saved));
     } catch (err) {
       console.error('Error saving task status:', err);
     }
   }, [requirements]);
 
-  const handleUpdateDetails = useCallback(async (taskId, category, details) => {
+  const handleUpdateDetails = useCallback((taskId, category, details) => {
     const updated = { ...requirements };
     updated[category] = updated[category].map(req => 
       req.id === taskId ? { ...req, details: { ...req.details, ...details }, notes: details.notes || req.notes || '' } : req
     );
     setRequirements(updated);
 
-    // Save to Supabase or localStorage
+    // Save to localStorage only (no Supabase needed)
     try {
-      if (supabase) {
-        const { error } = await supabase
-          .from('admin_task_status')
-          .upsert({
-            task_id: taskId,
-            category: category,
-            details: details,
-            notes: details.notes || '',
-            updated_at: new Date().toISOString()
-          });
-        // If table doesn't exist, fall back to localStorage
-        if (error && error.code === '42P01') {
-          const saved = JSON.parse(localStorage.getItem('admin_task_status') || '{}');
-          saved[`${category}_${taskId}`] = { ...saved[`${category}_${taskId}`], details, notes: details.notes || '' };
-          localStorage.setItem('admin_task_status', JSON.stringify(saved));
-        }
-      } else {
-        const saved = JSON.parse(localStorage.getItem('admin_task_status') || '{}');
-        saved[`${category}_${taskId}`] = { ...saved[`${category}_${taskId}`], details, notes: details.notes || '' };
-        localStorage.setItem('admin_task_status', JSON.stringify(saved));
-      }
+      const saved = JSON.parse(localStorage.getItem('admin_task_status') || '{}');
+      const key = `${category}_${taskId}`;
+      saved[key] = { ...saved[key], details, notes: details.notes || '' };
+      localStorage.setItem('admin_task_status', JSON.stringify(saved));
     } catch (err) {
       console.error('Error saving task details:', err);
     }
