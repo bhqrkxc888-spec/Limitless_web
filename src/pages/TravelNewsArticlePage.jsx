@@ -3,7 +3,6 @@ import { useTravelNewsArticle } from '../hooks/useTravelNews';
 import { incrementTravelNewsView } from '../services/travelNewsAPI';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
-import HeroSection from '../components/HeroSection';
 import { Button, SectionHeader } from '../components/ui';
 import { useEffect } from 'react';
 import './TravelNewsArticlePage.css';
@@ -44,7 +43,10 @@ function TravelNewsArticlePage() {
       <main className="travel-news-article-page">
         <SEO title="Loading Article..." />
         <div className="container section">
-          <p>Loading article...</p>
+          <div className="article-loading">
+            <div className="article-loading-spinner"></div>
+            <p>Loading article...</p>
+          </div>
         </div>
       </main>
     );
@@ -56,11 +58,13 @@ function TravelNewsArticlePage() {
       <main className="travel-news-article-page">
         <SEO title="Article Not Found" />
         <div className="container section">
-          <h1>Article Not Found</h1>
-          <p>Sorry, we couldn't find the article you're looking for. It may have expired or been removed.</p>
-          <div className="article-actions">
-            <Button to="/travel-news">View All Articles</Button>
-            <Button to="/contact" variant="outline">Contact Us</Button>
+          <div className="article-not-found">
+            <h1>Article Not Found</h1>
+            <p>Sorry, we couldn't find the article you're looking for. It may have expired or been removed.</p>
+            <div className="article-actions">
+              <Button to="/travel-news">View All Articles</Button>
+              <Button to="/contact" variant="outline">Contact Us</Button>
+            </div>
           </div>
         </div>
       </main>
@@ -106,62 +110,68 @@ function TravelNewsArticlePage() {
         structuredData={structuredData}
       />
 
-      {/* Hero Section */}
-      <HeroSection
-        title={article.title}
-        subtitle={article.excerpt}
-        image={article.featured_image_url}
-        imageAlt={article.title}
-        size="lg"
-        align="left"
-        primaryCta={{ label: 'Contact Us', to: '/contact' }}
-        secondaryCta={{ label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone}` }}
-      />
-
-      {/* Article Meta Bar */}
-      <section className="article-meta-bar">
+      {/* Clean Article Header */}
+      <section className="article-header">
         <div className="container">
-          <div className="article-meta-grid">
+          {/* Breadcrumb */}
+          <nav className="article-breadcrumb">
+            <Link to="/">Home</Link>
+            <span className="breadcrumb-separator">/</span>
+            <Link to="/travel-news">Travel News</Link>
             {article.category && (
-              <Link to={`/travel-news/category/${article.category}`} className="article-meta-item article-meta-item--category">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                  <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-                <span>{formatCategory(article.category)}</span>
+              <>
+                <span className="breadcrumb-separator">/</span>
+                <Link to={`/travel-news/category/${article.category}`}>
+                  {formatCategory(article.category)}
+                </Link>
+              </>
+            )}
+          </nav>
+
+          {/* Article Meta */}
+          <div className="article-header-meta">
+            {article.category && (
+              <Link 
+                to={`/travel-news/category/${article.category}`} 
+                className="article-header-category"
+              >
+                {formatCategory(article.category)}
               </Link>
             )}
             {article.published_at && (
-              <div className="article-meta-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polyline points="12 6 12 12 16 14"/>
-                </svg>
-                <span>{formatDate(article.published_at)}</span>
-              </div>
+              <time className="article-header-date">
+                {formatDate(article.published_at)}
+              </time>
             )}
             {article.view_count !== undefined && (
-              <div className="article-meta-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                  <circle cx="12" cy="12" r="3"/>
-                </svg>
-                <span>{article.view_count} views</span>
-              </div>
-            )}
-            {article.share_count !== undefined && article.share_count > 0 && (
-              <div className="article-meta-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="18" cy="5" r="3"/>
-                  <circle cx="6" cy="12" r="3"/>
-                  <circle cx="18" cy="19" r="3"/>
-                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-                </svg>
-                <span>{article.share_count} shares</span>
-              </div>
+              <span className="article-header-views">
+                {article.view_count} views
+              </span>
             )}
           </div>
+
+          {/* Title */}
+          <h1 className="article-header-title">{article.title}</h1>
+
+          {/* Excerpt */}
+          {article.excerpt && (
+            <p className="article-header-excerpt">{article.excerpt}</p>
+          )}
+
+          {/* Tags */}
+          {article.tags && article.tags.length > 0 && (
+            <div className="article-header-tags">
+              {article.tags.map((tag, index) => (
+                <Link 
+                  key={index} 
+                  to={`/travel-news/tag/${encodeURIComponent(tag)}`} 
+                  className="article-header-tag"
+                >
+                  {tag}
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -170,7 +180,7 @@ function TravelNewsArticlePage() {
         <div className="container">
           <div className="article-grid">
             <div className="article-main">
-              {/* Article Content */}
+              {/* Article Content - No featured image, clean text-focused layout */}
               {article.content && (
                 <div className="article-content">
                   <div 
@@ -180,27 +190,10 @@ function TravelNewsArticlePage() {
                 </div>
               )}
 
-              {/* Tags */}
-              {article.tags && article.tags.length > 0 && (
-                <div className="article-tags-section">
-                  <h3>Tags</h3>
-                  <div className="article-tags">
-                    {article.tags.map((tag, index) => (
-                      <Link key={index} to={`/travel-news/tag/${encodeURIComponent(tag)}`} className="article-tag">
-                        {tag}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-
               {/* Gallery Images */}
               {article.gallery_images && article.gallery_images.length > 0 && (
                 <div className="article-gallery">
-                  <SectionHeader
-                    title="Gallery"
-                    subtitle="More images from this article"
-                  />
+                  <h3>Gallery</h3>
                   <div className="gallery-grid">
                     {article.gallery_images.map((imageUrl, index) => (
                       <div key={index} className="gallery-item">
@@ -214,23 +207,20 @@ function TravelNewsArticlePage() {
                   </div>
                 </div>
               )}
+
+              {/* Share / Back Actions */}
+              <div className="article-footer-actions">
+                <Button to="/travel-news" variant="outline">
+                  Back to News
+                </Button>
+                <Button to="/contact" variant="primary">
+                  Contact Us
+                </Button>
+              </div>
             </div>
 
             {/* Sidebar */}
             <aside className="article-sidebar">
-              {/* Category Navigation */}
-              {article.category && (
-                <div className="sidebar-card">
-                  <h3>Category</h3>
-                  <Link to={`/travel-news/category/${article.category}`} className="category-link">
-                    {formatCategory(article.category)}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                  </Link>
-                </div>
-              )}
-
               {/* Contact CTA */}
               <div className="sidebar-card sidebar-card--cta">
                 <h3>Have Questions?</h3>
@@ -248,6 +238,37 @@ function TravelNewsArticlePage() {
                   </Button>
                 </div>
               </div>
+
+              {/* Category Navigation */}
+              {article.category && (
+                <div className="sidebar-card">
+                  <h3>Category</h3>
+                  <Link to={`/travel-news/category/${article.category}`} className="category-link">
+                    {formatCategory(article.category)}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </Link>
+                </div>
+              )}
+
+              {/* Related Tags */}
+              {article.tags && article.tags.length > 0 && (
+                <div className="sidebar-card">
+                  <h3>Related Topics</h3>
+                  <div className="sidebar-tags">
+                    {article.tags.map((tag, index) => (
+                      <Link 
+                        key={index} 
+                        to={`/travel-news/tag/${encodeURIComponent(tag)}`} 
+                        className="sidebar-tag"
+                      >
+                        {tag}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </aside>
           </div>
         </div>
@@ -272,4 +293,3 @@ function TravelNewsArticlePage() {
 }
 
 export default TravelNewsArticlePage;
-

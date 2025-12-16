@@ -5,8 +5,8 @@ import './LatestNewsTile.css';
 
 /**
  * LatestNewsTile Component
- * Displays a compact tile of latest news articles for the homepage
- * Shows 3-4 latest articles in a sidebar-style layout
+ * Displays a horizontal layout news section for the homepage
+ * Featured article with image left (400px), content right
  */
 function LatestNewsTile() {
   const { news, loading, error } = useTravelNews({
@@ -44,96 +44,120 @@ function LatestNewsTile() {
       .join(' ');
   };
 
+  const featuredArticle = news[0];
+  const otherArticles = news.slice(1, 4);
+
   return (
     <section className="latest-news-tile">
       <div className="container">
-        <div className="latest-news-tile__wrapper">
-          {/* Header */}
-          <div className="latest-news-tile__header">
-            <div className="latest-news-tile__header-left">
-              <span className="latest-news-tile__icon">
+        {/* Section Header */}
+        <div className="latest-news-tile__section-header">
+          <div>
+            <h2 className="latest-news-tile__section-title">Travel News</h2>
+            <p className="latest-news-tile__section-subtitle">Latest updates from the cruise industry</p>
+          </div>
+          <Link to="/travel-news" className="latest-news-tile__view-all">
+            View All
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </Link>
+        </div>
+
+        {/* Loading State */}
+        {loading && (
+          <div className="latest-news-tile__loading">
+            <div className="latest-news-tile__loading-spinner"></div>
+          </div>
+        )}
+
+        {/* Featured Article - Horizontal Layout */}
+        {!loading && featuredArticle && (
+          <Link to={`/travel-news/${featuredArticle.slug}`} className="latest-news-tile__featured">
+            {/* Image Left */}
+            <div className="latest-news-tile__featured-image">
+              {(featuredArticle.featured_image_url || featuredArticle.thumbnail_image_url) && (
+                <img 
+                  src={featuredArticle.featured_image_url || featuredArticle.thumbnail_image_url}
+                  alt={featuredArticle.title}
+                  loading="lazy"
+                />
+              )}
+              {featuredArticle.featured && (
+                <span className="latest-news-tile__badge">Featured</span>
+              )}
+            </div>
+            
+            {/* Content Right */}
+            <div className="latest-news-tile__featured-content">
+              <div className="latest-news-tile__featured-meta">
+                {featuredArticle.category && (
+                  <span className="latest-news-tile__category">
+                    {formatCategory(featuredArticle.category)}
+                  </span>
+                )}
+                <span className="latest-news-tile__date">
+                  {formatDate(featuredArticle.published_at)}
+                </span>
+              </div>
+              <h3 className="latest-news-tile__featured-title">{featuredArticle.title}</h3>
+              {featuredArticle.excerpt && (
+                <p className="latest-news-tile__featured-excerpt">{featuredArticle.excerpt}</p>
+              )}
+              {featuredArticle.tags && featuredArticle.tags.length > 0 && (
+                <div className="latest-news-tile__tags">
+                  {featuredArticle.tags.slice(0, 4).map((tag, index) => (
+                    <span key={index} className="latest-news-tile__tag">{tag}</span>
+                  ))}
+                </div>
+              )}
+              <span className="latest-news-tile__read-more">
+                Read Full Article
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                  <polyline points="14 2 14 8 20 8"/>
-                  <line x1="16" y1="13" x2="8" y2="13"/>
-                  <line x1="16" y1="17" x2="8" y2="17"/>
-                  <polyline points="10 9 9 9 8 9"/>
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
               </span>
-              <div>
-                <h2 className="latest-news-tile__title">Travel News</h2>
-                <p className="latest-news-tile__subtitle">Latest updates & insights</p>
-              </div>
             </div>
-            <Link to="/travel-news" className="latest-news-tile__view-all">
-              View All
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </Link>
-          </div>
+          </Link>
+        )}
 
-          {/* Loading State */}
-          {loading && (
-            <div className="latest-news-tile__loading">
-              <div className="latest-news-tile__loading-spinner"></div>
-            </div>
-          )}
-
-          {/* News List */}
-          {!loading && news.length > 0 && (
-            <div className="latest-news-tile__list">
-              {news.map((article, index) => (
-                <Link 
-                  key={article.id} 
-                  to={`/travel-news/${article.slug}`}
-                  className={`latest-news-tile__item ${index === 0 ? 'latest-news-tile__item--featured' : ''}`}
-                >
-                  {/* Featured item has image */}
-                  {index === 0 && (article.featured_image_url || article.thumbnail_image_url) && (
-                    <div className="latest-news-tile__item-image">
-                      <img 
-                        src={article.featured_image_url || article.thumbnail_image_url}
-                        alt={article.title}
-                        loading="lazy"
-                      />
-                      {article.featured && (
-                        <span className="latest-news-tile__badge">Featured</span>
-                      )}
-                    </div>
-                  )}
-                  <div className="latest-news-tile__item-content">
-                    <div className="latest-news-tile__item-meta">
-                      {article.category && (
-                        <span className="latest-news-tile__item-category">
-                          {formatCategory(article.category)}
-                        </span>
-                      )}
-                      <span className="latest-news-tile__item-date">
-                        {formatDate(article.published_at)}
+        {/* Other Articles - Compact List */}
+        {!loading && otherArticles.length > 0 && (
+          <div className="latest-news-tile__list">
+            {otherArticles.map((article) => (
+              <Link 
+                key={article.id} 
+                to={`/travel-news/${article.slug}`}
+                className="latest-news-tile__item"
+              >
+                <div className="latest-news-tile__item-content">
+                  <div className="latest-news-tile__item-meta">
+                    {article.category && (
+                      <span className="latest-news-tile__item-category">
+                        {formatCategory(article.category)}
                       </span>
-                    </div>
-                    <h3 className="latest-news-tile__item-title">{article.title}</h3>
-                    {index === 0 && article.excerpt && (
-                      <p className="latest-news-tile__item-excerpt">{article.excerpt}</p>
                     )}
+                    <span className="latest-news-tile__item-date">
+                      {formatDate(article.published_at)}
+                    </span>
                   </div>
-                  <span className="latest-news-tile__item-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M9 18l6-6-6-6"/>
-                    </svg>
-                  </span>
-                </Link>
-              ))}
-            </div>
-          )}
-
-          {/* CTA */}
-          <div className="latest-news-tile__cta">
-            <Button to="/travel-news" variant="outline" size="sm" fullWidth>
-              Read All News
-            </Button>
+                  <h4 className="latest-news-tile__item-title">{article.title}</h4>
+                </div>
+                <span className="latest-news-tile__item-arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M9 18l6-6-6-6"/>
+                  </svg>
+                </span>
+              </Link>
+            ))}
           </div>
+        )}
+
+        {/* CTA */}
+        <div className="latest-news-tile__cta">
+          <Button to="/travel-news" variant="outline" size="sm">
+            Browse All News
+          </Button>
         </div>
       </div>
     </section>
@@ -141,4 +165,3 @@ function LatestNewsTile() {
 }
 
 export default LatestNewsTile;
-
