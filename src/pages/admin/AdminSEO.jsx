@@ -514,7 +514,7 @@ function AdminSEO() {
                               {pageMetrics[pageData.page_path] && pageMetrics[pageData.page_path].length > 0 && (
                                 <div className="admin-seo-metrics">
                                   <h4>Recent Metrics</h4>
-                                  <div className="admin-seo-metrics-list">
+                                  <div className="admin-seo-metrics-grid">
                                     {pageMetrics[pageData.page_path]
                                       .filter((m, i, arr) => 
                                         arr.findIndex(x => x.metric_name === m.metric_name) === i
@@ -536,6 +536,88 @@ function AdminSEO() {
                                   </div>
                                 </div>
                               )}
+
+                              {/* Recommendations */}
+                              {(() => {
+                                const recommendations = [];
+                                if (pageData.title_status === 'warning' || pageData.title_status === 'fail') {
+                                  recommendations.push({
+                                    type: pageData.title_status === 'fail' ? 'error' : 'warning',
+                                    text: 'Title tag needs optimization - ensure it\'s 50-60 characters and includes target keywords'
+                                  });
+                                }
+                                if (pageData.description_status === 'warning' || pageData.description_status === 'fail') {
+                                  recommendations.push({
+                                    type: pageData.description_status === 'fail' ? 'error' : 'warning',
+                                    text: 'Meta description needs improvement - aim for 150-160 characters with a compelling call to action'
+                                  });
+                                }
+                                if (pageData.content_status === 'warning' || pageData.content_status === 'fail') {
+                                  recommendations.push({
+                                    type: pageData.content_status === 'fail' ? 'error' : 'warning',
+                                    text: 'Content quality could be improved - add more unique, valuable content with proper heading structure'
+                                  });
+                                }
+                                if (pageData.links_status === 'warning' || pageData.links_status === 'fail') {
+                                  recommendations.push({
+                                    type: pageData.links_status === 'fail' ? 'error' : 'warning',
+                                    text: 'Link structure needs attention - ensure internal links are descriptive and external links are relevant'
+                                  });
+                                }
+                                if (pageData.structured_data_status === 'warning' || pageData.structured_data_status === 'fail') {
+                                  recommendations.push({
+                                    type: pageData.structured_data_status === 'fail' ? 'error' : 'warning',
+                                    text: 'Add or fix structured data (JSON-LD) for better search engine understanding'
+                                  });
+                                }
+                                if (pageData.technical_status === 'warning' || pageData.technical_status === 'fail') {
+                                  recommendations.push({
+                                    type: pageData.technical_status === 'fail' ? 'error' : 'warning',
+                                    text: 'Technical SEO issues detected - check canonical URLs, mobile-friendliness, and page speed'
+                                  });
+                                }
+                                
+                                // Add metric-based recommendations
+                                const metricsForPage = pageMetrics[pageData.page_path] || [];
+                                metricsForPage.forEach(metric => {
+                                  if (metric.metric_status === 'warning' && metric.metric_name === 'description_length') {
+                                    recommendations.push({
+                                      type: 'warning',
+                                      text: `Meta description is ${metric.metric_value > 160 ? 'too long' : 'too short'} (${metric.metric_value} chars) - aim for 150-160 characters`
+                                    });
+                                  }
+                                  if (metric.metric_status === 'warning' && metric.metric_name === 'char_count') {
+                                    recommendations.push({
+                                      type: 'info',
+                                      text: `Page has ${metric.metric_value} characters - consider adding more content for better SEO`
+                                    });
+                                  }
+                                });
+                                
+                                if (recommendations.length === 0 && pageData.overall_score >= 80) {
+                                  recommendations.push({
+                                    type: 'success',
+                                    text: 'Great job! This page is well-optimized for SEO. Continue monitoring for any changes.'
+                                  });
+                                }
+                                
+                                return recommendations.length > 0 ? (
+                                  <div className="admin-seo-recommendations">
+                                    <h4>Recommendations</h4>
+                                    <div className="admin-recommendations-list">
+                                      {recommendations.slice(0, 5).map((rec, idx) => (
+                                        <div key={idx} className={`admin-recommendation admin-recommendation-${rec.type}`}>
+                                          {rec.type === 'error' && <AlertCircle size={14} />}
+                                          {rec.type === 'warning' && <AlertTriangle size={14} />}
+                                          {rec.type === 'success' && <CheckCircle size={14} />}
+                                          {rec.type === 'info' && <AlertCircle size={14} />}
+                                          <span>{rec.text}</span>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  </div>
+                                ) : null;
+                              })()}
                             </div>
                           </td>
                         </tr>
@@ -705,32 +787,57 @@ function AdminSEO() {
           margin: 0 0 0.75rem 0;
         }
 
-        .admin-seo-metrics-list {
+        .admin-seo-metrics-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          grid-template-columns: repeat(5, 1fr);
           gap: 0.5rem;
+        }
+
+        @media (max-width: 1200px) {
+          .admin-seo-metrics-grid {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
+
+        @media (max-width: 900px) {
+          .admin-seo-metrics-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+
+        @media (max-width: 640px) {
+          .admin-seo-metrics-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
         }
 
         .admin-seo-metric-item {
           display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          padding: 0.5rem 0.75rem;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.375rem;
+          padding: 0.625rem 0.75rem;
           background: var(--admin-bg);
           border-radius: 6px;
           font-size: 0.8125rem;
+          min-width: 0;
         }
 
         .admin-seo-metric-name {
           color: var(--admin-text);
-          flex: 1;
+          font-weight: 500;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 100%;
+          font-size: 0.75rem;
         }
 
         .admin-seo-metric-status {
           padding: 0.125rem 0.375rem;
           border-radius: 4px;
-          font-size: 0.6875rem;
-          font-weight: 500;
+          font-size: 0.625rem;
+          font-weight: 600;
           text-transform: uppercase;
         }
 
@@ -756,7 +863,67 @@ function AdminSEO() {
 
         .admin-seo-metric-value {
           color: var(--admin-text-dim);
+          font-size: 0.6875rem;
+        }
+
+        /* Recommendations Section */
+        .admin-seo-recommendations {
+          margin-top: 1.5rem;
+          padding-top: 1.5rem;
+          border-top: 1px solid var(--admin-border);
+        }
+
+        .admin-seo-recommendations h4 {
           font-size: 0.75rem;
+          color: var(--admin-text-muted);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          margin: 0 0 0.75rem 0;
+        }
+
+        .admin-recommendations-list {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .admin-recommendation {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.5rem;
+          padding: 0.75rem 1rem;
+          border-radius: 8px;
+          font-size: 0.8125rem;
+          line-height: 1.4;
+        }
+
+        .admin-recommendation svg {
+          flex-shrink: 0;
+          margin-top: 0.125rem;
+        }
+
+        .admin-recommendation-error {
+          background: rgba(248, 113, 113, 0.1);
+          border: 1px solid rgba(248, 113, 113, 0.2);
+          color: #f87171;
+        }
+
+        .admin-recommendation-warning {
+          background: rgba(251, 191, 36, 0.1);
+          border: 1px solid rgba(251, 191, 36, 0.2);
+          color: #fbbf24;
+        }
+
+        .admin-recommendation-success {
+          background: rgba(52, 211, 153, 0.1);
+          border: 1px solid rgba(52, 211, 153, 0.2);
+          color: #34d399;
+        }
+
+        .admin-recommendation-info {
+          background: rgba(79, 140, 255, 0.1);
+          border: 1px solid rgba(79, 140, 255, 0.2);
+          color: #4f8cff;
         }
       `}</style>
     </AdminLayout>

@@ -99,8 +99,14 @@ function AdminErrors() {
     }
   }, [authLoading, isAuthenticated, navigate]);
 
+  const [resolving, setResolving] = useState(null);
+  const [resolveError, setResolveError] = useState(null);
+
   const markAsResolved = async (errorId) => {
     if (!supabase) return;
+    
+    setResolving(errorId);
+    setResolveError(null);
     
     try {
       const { error } = await supabase
@@ -111,12 +117,39 @@ function AdminErrors() {
         })
         .eq('id', errorId);
       
-      if (error) throw error;
+      if (error) {
+        // Check for common issues
+        if (error.code === '42703') {
+          // Column doesn't exist - database needs migration
+          setResolveError('Database needs migration. Please run the WEBSITE_ERRORS_RESOLVE_FIX.sql script.');
+          console.error('Missing column - run database migration:', error);
+        } else if (error.code === '42501') {
+          // RLS policy blocking update
+          setResolveError('Permission denied. Please run the WEBSITE_ERRORS_RESOLVE_FIX.sql script to add UPDATE policy.');
+          console.error('RLS policy blocking update:', error);
+        } else {
+          setResolveError(`Failed to resolve: ${error.message}`);
+          console.error('Error marking as resolved:', error);
+        }
+        return;
+      }
       
-      // Refresh data from database to ensure counts and filters are correct
+      // Optimistically update local state immediately for better UX
+      setErrors(prevErrors => 
+        prevErrors.map(err => 
+          err.id === errorId 
+            ? { ...err, resolved: true, resolved_at: new Date().toISOString() }
+            : err
+        )
+      );
+      
+      // Then refresh from database to ensure counts are correct
       await fetchErrors();
     } catch (err) {
+      setResolveError(`Error: ${err.message}`);
       console.error('Error marking as resolved:', err);
+    } finally {
+      setResolving(null);
     }
   };
 
@@ -163,6 +196,26 @@ function AdminErrors() {
             Monitor and resolve JavaScript errors
           </p>
         </header>
+
+        {/* Error Message */}
+        {resolveError && (
+          <div className="admin-alert admin-alert-error" style={{ marginBottom: '1rem' }}>
+            <p style={{ margin: 0 }}>{resolveError}</p>
+            <button 
+              onClick={() => setResolveError(null)}
+              style={{ 
+                background: 'none', 
+                border: 'none', 
+                color: 'inherit', 
+                cursor: 'pointer',
+                padding: '0.25rem',
+                marginLeft: '0.5rem'
+              }}
+            >
+              ✕
+            </button>
+          </div>
+        )}
 
         {/* Filters */}
         <div className="admin-filters">
@@ -280,9 +333,9 @@ function AdminErrors() {
                           {error.error_message?.length > 60 ? '...' : ''}
                         </td>
                         <td>
-                          <span className="admin-table-page" title={error.page_path}>
-                            {error.page_path?.substring(0, 30)}
-                            {error.page_path?.length > 30 ? '...' : ''}
+                          <span className="admin-table-page" title={error.page_path || error.page_url}>
+                            {(error.page_path || error.page_url)?.substring(0, 30)}
+                            {(error.page_path || error.page_url)?.length > 30 ? '...' : ''}
                           </span>
                         </td>
                         <td>
@@ -295,8 +348,9 @@ function AdminErrors() {
                             <button 
                               className="admin-btn admin-btn-sm admin-btn-secondary"
                               onClick={() => markAsResolved(error.id)}
+                              disabled={resolving === error.id}
                             >
-                              Resolve
+                              {resolving === error.id ? 'Resolving...' : 'Resolve'}
                             </button>
                           )}
                         </td>
@@ -310,16 +364,16 @@ function AdminErrors() {
                                   <strong>Full Message:</strong>
                                   <p>{error.error_message}</p>
                                 </div>
-                                {error.page_path && (
+                                {(error.page_path || error.page_url) && (
                                   <div className="admin-error-detail">
                                     <strong>Page:</strong>
                                     <a 
-                                      href={error.error_url || error.page_path} 
+                                      href={error.page_url || error.page_path} 
                                       target="_blank" 
                                       rel="noopener noreferrer"
                                       className="admin-error-link"
                                     >
-                                      {error.page_path}
+                                      {error.page_path || error.page_url}
                                       <ExternalLink size={12} />
                                     </a>
                                   </div>
@@ -382,6 +436,21 @@ function AdminErrors() {
       <style>{`
         .admin-errors {
           max-width: 1200px;
+        }
+
+        .admin-alert {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0.75rem 1rem;
+          border-radius: 0.5rem;
+          font-size: 0.875rem;
+        }
+
+        .admin-alert-error {
+          background: rgba(239, 68, 68, 0.15);
+          border: 1px solid rgba(239, 68, 68, 0.3);
+          color: #f87171;
         }
 
         .admin-table-message,

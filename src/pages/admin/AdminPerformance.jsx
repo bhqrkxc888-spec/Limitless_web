@@ -11,7 +11,9 @@ import {
   Smartphone,
   Monitor,
   Tablet,
-  Clock
+  Clock,
+  Copy,
+  Check
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import useAdminAuth from '../../hooks/useAdminAuth';
@@ -40,6 +42,7 @@ function AdminPerformance() {
   // Filters
   const [deviceFilter, setDeviceFilter] = useState('all');
   const [timeRange, setTimeRange] = useState('24h');
+  const [copiedIssue, setCopiedIssue] = useState(null);
 
   const getTimeRange = (range) => {
     const now = new Date();
@@ -219,6 +222,136 @@ function AdminPerformance() {
 
   const totalSamples = deviceBreakdown.desktop + deviceBreakdown.mobile + deviceBreakdown.tablet;
 
+  // Generate AI-friendly issue report for a metric
+  const generateIssueReport = (name, data) => {
+    const status = getMetricStatus(name, data.avg);
+    if (status === 'good') return null;
+
+    const recommendations = {
+      LCP: {
+        issue: 'Largest Contentful Paint (LCP) is too slow',
+        causes: [
+          'Large images or videos taking too long to load',
+          'Slow server response time (TTFB)',
+          'Render-blocking JavaScript or CSS',
+          'Client-side rendering delays'
+        ],
+        fixes: [
+          'Optimize and compress images (use WebP format, proper sizing)',
+          'Implement lazy loading for below-the-fold images',
+          'Use a CDN for static assets',
+          'Preload critical resources with <link rel="preload">',
+          'Minimize render-blocking resources',
+          'Consider server-side rendering for critical content'
+        ]
+      },
+      FID: {
+        issue: 'First Input Delay (FID) is too high',
+        causes: [
+          'Long JavaScript execution blocking the main thread',
+          'Large JavaScript bundles',
+          'Third-party scripts blocking interactivity',
+          'Complex event handlers'
+        ],
+        fixes: [
+          'Break up long JavaScript tasks into smaller chunks',
+          'Use code splitting to reduce initial bundle size',
+          'Defer non-critical JavaScript',
+          'Remove or defer third-party scripts',
+          'Use web workers for heavy computations'
+        ]
+      },
+      CLS: {
+        issue: 'Cumulative Layout Shift (CLS) is too high - page elements are moving unexpectedly',
+        causes: [
+          'Images without explicit width/height dimensions',
+          'Ads, embeds, or iframes without reserved space',
+          'Dynamically injected content',
+          'Web fonts causing FOIT/FOUT',
+          'Animations that trigger layout changes'
+        ],
+        fixes: [
+          'Always include width and height attributes on images and videos',
+          'Reserve space for ad slots and embeds',
+          'Avoid inserting content above existing content',
+          'Use font-display: swap and preload fonts',
+          'Use transform animations instead of layout-triggering properties'
+        ]
+      },
+      TTFB: {
+        issue: 'Time to First Byte (TTFB) is too slow - server is responding slowly',
+        causes: [
+          'Slow server processing',
+          'Slow database queries',
+          'No server-side caching',
+          'Distant server location from users'
+        ],
+        fixes: [
+          'Use a CDN to serve content from edge locations',
+          'Implement server-side caching (Redis, Memcached)',
+          'Optimize database queries and add indexes',
+          'Consider upgrading server resources',
+          'Use HTTP/2 or HTTP/3'
+        ]
+      },
+      FCP: {
+        issue: 'First Contentful Paint (FCP) is too slow - initial content takes too long to appear',
+        causes: [
+          'Render-blocking resources (CSS, JavaScript)',
+          'Large CSS files',
+          'Slow server response',
+          'Too many HTTP requests'
+        ],
+        fixes: [
+          'Inline critical CSS and defer non-critical CSS',
+          'Minimize and compress CSS',
+          'Remove unused CSS',
+          'Defer non-critical JavaScript',
+          'Reduce the number of HTTP requests'
+        ]
+      }
+    };
+
+    const rec = recommendations[name];
+    const timeRangeLabel = timeRange === '24h' ? 'last 24 hours' : timeRange === '7d' ? 'last 7 days' : 'last 30 days';
+
+    return `## Performance Issue: ${rec.issue}
+
+**Current Metrics (${timeRangeLabel}):**
+- Average: ${formatMetricValue(name, data.avg)}
+- P50 (median): ${formatMetricValue(name, data.p50)}
+- P95 (worst 5%): ${formatMetricValue(name, data.p95)}
+- Sample size: ${data.count} measurements
+
+**Target:** ${metricThresholds[name].good} (Good) | Current status: ${status === 'needs-improvement' ? 'Needs Improvement' : 'Poor'}
+
+**Common Causes:**
+${rec.causes.map(c => `- ${c}`).join('\n')}
+
+**Recommended Fixes:**
+${rec.fixes.map(f => `- ${f}`).join('\n')}
+
+**Device Breakdown:**
+- Desktop: ${deviceBreakdown.desktop} samples
+- Mobile: ${deviceBreakdown.mobile} samples
+- Tablet: ${deviceBreakdown.tablet} samples
+
+Please analyze my React/Vite website and help me implement these fixes to improve ${name}.`;
+  };
+
+  const copyIssueToClipboard = async (name, data) => {
+    const report = generateIssueReport(name, data);
+    if (!report) return;
+
+    try {
+      await navigator.clipboard.writeText(report);
+      setCopiedIssue(name);
+      setTimeout(() => setCopiedIssue(null), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
+
   return (
     <AdminLayout 
       onLogout={logout} 
@@ -307,6 +440,7 @@ function AdminPerformance() {
             <div className="admin-metrics-grid">
               {Object.entries(metrics).map(([name, data]) => {
                 const status = getMetricStatus(name, data.avg);
+                const hasIssue = status !== 'good' && data.count > 0;
                 return (
                   <div key={name} className="admin-metric-card">
                     <div className="admin-metric-header">
@@ -342,9 +476,30 @@ function AdminPerformance() {
                       </div>
                     </div>
 
-                    <div className="admin-metric-thresholds">
-                      <span className="admin-threshold good">Good: {metricThresholds[name].good}</span>
-                      <span className="admin-threshold poor">Poor: {metricThresholds[name].poor}</span>
+                    <div className="admin-metric-footer">
+                      <div className="admin-metric-thresholds">
+                        <span className="admin-threshold good">Good: {metricThresholds[name].good}</span>
+                        <span className="admin-threshold poor">Poor: {metricThresholds[name].poor}</span>
+                      </div>
+                      {hasIssue && (
+                        <button 
+                          className="admin-copy-issue-btn"
+                          onClick={() => copyIssueToClipboard(name, data)}
+                          title="Copy issue details for AI assistance"
+                        >
+                          {copiedIssue === name ? (
+                            <>
+                              <Check size={14} />
+                              Copied!
+                            </>
+                          ) : (
+                            <>
+                              <Copy size={14} />
+                              Copy Issue for AI
+                            </>
+                          )}
+                        </button>
+                      )}
                     </div>
                   </div>
                 );
@@ -501,9 +656,17 @@ function AdminPerformance() {
           color: var(--admin-error);
         }
 
+        .admin-metric-footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 0.75rem;
+          flex-wrap: wrap;
+        }
+
         .admin-metric-thresholds {
           display: flex;
-          gap: 1rem;
+          gap: 0.75rem;
           font-size: 0.75rem;
         }
 
@@ -522,9 +685,43 @@ function AdminPerformance() {
           color: var(--admin-error);
         }
 
+        .admin-copy-issue-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.375rem;
+          padding: 0.375rem 0.75rem;
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: var(--admin-primary);
+          background: rgba(79, 140, 255, 0.1);
+          border: 1px solid rgba(79, 140, 255, 0.2);
+          border-radius: 6px;
+          cursor: pointer;
+          transition: all 0.15s ease;
+        }
+
+        .admin-copy-issue-btn:hover {
+          background: rgba(79, 140, 255, 0.2);
+          border-color: rgba(79, 140, 255, 0.3);
+        }
+
+        .admin-copy-issue-btn:active {
+          transform: scale(0.98);
+        }
+
         @media (max-width: 640px) {
           .admin-metric-values {
             grid-template-columns: repeat(2, 1fr);
+          }
+
+          .admin-metric-footer {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+
+          .admin-copy-issue-btn {
+            width: 100%;
+            justify-content: center;
           }
         }
       `}</style>
