@@ -275,15 +275,39 @@
   margin: 0;
 }
 
-.footer-admin-link {
-  font-size: var(--font-size-xs);
-  color: rgba(255, 255, 255, 0.4);
+/* ========================================
+   FLOATING STAFF LOGIN BUTTON
+   Fixed position at bottom left
+   ======================================== */
+
+.floating-staff-login {
+  position: fixed;
+  bottom: var(--space-6);
+  left: var(--space-6);
+  z-index: var(--z-fixed);
+  padding: var(--space-3) var(--space-4);
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
-  transition: color var(--transition-fast);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
 }
 
-.footer-admin-link:hover {
-  color: rgba(255, 255, 255, 0.7);
+.floating-staff-login:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.floating-staff-login:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
 }
 
 /* ========================================
