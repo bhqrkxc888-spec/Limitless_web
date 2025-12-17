@@ -43,7 +43,7 @@ export const placeholderOffers = [
     card_image_url: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights.jpeg',
     gallery_images: [
       'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights.jpeg',
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Arctic/midnight-sun.jpeg'
+      'null'
     ],
     includes: ['All meals onboard', 'Evening entertainment', 'Port calls at 5 destinations', 'Service charges'],
     excludes: ['Travel insurance', 'Shore excursions', 'Drinks packages'],
@@ -102,11 +102,11 @@ export const placeholderOffers = [
     flight_class: 'economy',
     flight_direct: true,
     transfer_included: true,
-    hero_image_url: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg',
-    card_image_url: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg',
+    hero_image_url: 'null',
+    card_image_url: 'null',
     gallery_images: [
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/Petra.jpeg',
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/hero-dubai.jpeg'
+      'null',
+      'null'
     ],
     includes: ['Return flights', 'All meals onboard', 'Entertainment', '24hr room service', 'Airport transfers', '$200 onboard credit'],
     excludes: ['Travel insurance', 'Shore excursions', 'Specialty dining', 'Drinks packages'],
@@ -168,11 +168,11 @@ export const placeholderOffers = [
     cabin_type: 'ocean_view',
     category: 'mainstream',
     featured: true,
-    hero_image_url: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg',
-    card_image_url: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg',
+    hero_image_url: 'null',
+    card_image_url: 'null',
     gallery_images: [
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-christ.jpeg',
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Polynesia/bora-bora.jpeg'
+      'null',
+      'null'
     ],
     includes: ['All meals onboard', 'Evening entertainment', 'Christmas & New Year celebrations', 'Port visits', '$300 onboard credit'],
     excludes: ['Flights', 'Travel insurance', 'Shore excursions', 'Drinks packages'],
@@ -224,8 +224,8 @@ export const placeholderOffers = [
     flight_class: 'economy',
     flight_direct: false,
     transfer_included: true,
-    hero_image_url: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Canada/banf.jpeg',
-    card_image_url: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Canada/banf.jpeg',
+    hero_image_url: 'null',
+    card_image_url: 'null',
     gallery_images: [],
     includes: ['Flights', 'All meals onboard', 'Glacier cruising', 'Onboard naturalist talks', 'Airport transfers', '2 nights Seattle hotel', '1 night Vancouver hotel', '$150 onboard credit'],
     excludes: ['Travel insurance', 'Shore excursions', 'Drinks packages'],
@@ -291,8 +291,8 @@ export const placeholderOffers = [
     cabin_type: 'inside',
     category: 'mainstream',
     featured: false,
-    hero_image_url: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Iceland/iceland-waterfall.jpeg',
-    card_image_url: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Iceland/iceland-waterfall.jpeg',
+    hero_image_url: 'null',
+    card_image_url: 'null',
     gallery_images: [],
     includes: ['All meals onboard', 'Entertainment', 'Gratuities', 'Tea & coffee throughout'],
     excludes: ['Travel insurance', 'Shore excursions', 'Drinks packages'],
@@ -338,8 +338,8 @@ export const placeholderOffers = [
     includes_flight: true,
     flight_class: 'Economy',
     transfer_included: true,
-    hero_image_url: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Grand/grand-voyage.jpeg',
-    card_image_url: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Grand/grand-voyage.jpeg',
+    hero_image_url: 'null',
+    card_image_url: 'null',
     gallery_images: [],
     includes: ['Flights', 'All-inclusive drinks', 'Gratuities', 'All meals onboard', 'Entertainment'],
     excludes: ['Travel insurance', 'Shore excursions', 'Spa treatments'],

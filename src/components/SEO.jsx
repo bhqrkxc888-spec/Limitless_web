@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { siteConfig } from '../config/siteConfig';
 import { analyzePageSEO } from '../services/seoMonitoring';
+import { SITE_ASSETS } from '../config/assetUrls';
 
 /**
  * SEO Component
@@ -33,7 +34,7 @@ function SEO({
   const siteName = siteConfig.siteName;
   const siteUrl = siteConfig.siteUrl;
   const defaultDescription = 'Your dedicated cruise consultant. Book cruise holidays with preferential rates, exclusive offers and expert advice from Limitless Cruises.';
-  const defaultImage = 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/categories/about/About2.webp';
+  const defaultImage = SITE_ASSETS.ogImage || null;
 
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
   const fullDescription = description || defaultDescription;
