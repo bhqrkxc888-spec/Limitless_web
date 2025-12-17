@@ -783,7 +783,6 @@ export const bucketListExperiences = [
       keywords: ['amazon cruise', 'amazon river expedition', 'rainforest cruise', 'peru amazon', 'wildlife cruise']
     },
     images: [],
-    featured: true,
     priority: 11
   },
   {
@@ -1060,7 +1059,6 @@ export const bucketListExperiences = [
       keywords: ['polynesia cruise', 'tahiti cruise', 'bora bora cruise', 'french polynesia', 'paul gauguin cruise']
     },
     images: [],
-    featured: false,
     priority: 15
   },
   {

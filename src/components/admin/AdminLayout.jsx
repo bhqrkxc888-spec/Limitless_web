@@ -18,9 +18,7 @@ import {
   ExternalLink,
   ClipboardList,
   Image,
-  MapPin,
-  Scale,
-  Building2
+  MapPin
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import './AdminLayout.css';
