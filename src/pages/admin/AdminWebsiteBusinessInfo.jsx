@@ -46,7 +46,8 @@ function AdminWebsiteBusinessInfo() {
       setError(null);
 
       const { data, error: fetchError } = await supabase
-        .from('web.site_settings')
+        .schema('web')
+        .from('site_settings')
         .select('*')
         .eq('site_key', 'main')
         .single();
@@ -140,7 +141,8 @@ function AdminWebsiteBusinessInfo() {
       if (settings) {
         // Update existing settings
         const { error: updateError } = await supabase
-          .from('web.site_settings')
+          .schema('web')
+          .from('site_settings')
           .update({
             contact_json,
             socials_json,
@@ -153,7 +155,8 @@ function AdminWebsiteBusinessInfo() {
       } else {
         // Insert new settings
         const { error: insertError } = await supabase
-          .from('web.site_settings')
+          .schema('web')
+          .from('site_settings')
           .insert({
             site_key: 'main',
             contact_json,

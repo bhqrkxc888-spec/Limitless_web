@@ -28,7 +28,8 @@ function AdminWebsiteLegal() {
       setError(null);
 
       const { data, error: fetchError } = await supabase
-        .from('web.site_documents')
+        .schema('web')
+        .from('site_documents')
         .select('*')
         .order('slug', { ascending: true });
 
@@ -75,7 +76,8 @@ function AdminWebsiteLegal() {
       setError(null);
 
       const { error: updateError } = await supabase
-        .from('web.site_documents')
+        .schema('web')
+        .from('site_documents')
         .update({
           title: editingDoc.editedTitle,
           content: editingDoc.editedContent,

@@ -33,7 +33,8 @@ function LegalPageTemplate({ slug, fallbackTitle, fallbackDescription, fallbackC
         }
 
         const { data, error: fetchError } = await supabase
-          .from('web.site_documents')
+          .schema('web')
+          .from('site_documents')
           .select('*')
           .eq('slug', slug)
           .eq('status', 'published')
