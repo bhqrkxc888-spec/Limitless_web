@@ -250,63 +250,169 @@ function AdminWebsiteAssets() {
         </div>
 
         <style>{`
+          .admin-website-assets .admin-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+          }
+          .admin-website-assets .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+          }
+          .admin-website-assets .admin-table th {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #94a3b8;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          }
+          .admin-website-assets .admin-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            vertical-align: middle;
+          }
+          .admin-website-assets .admin-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+          }
           .asset-thumbnail {
-            width: 60px;
-            height: 40px;
+            width: 80px;
+            height: 48px;
             object-fit: cover;
-            border-radius: 4px;
+            border-radius: 6px;
             border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
           }
           .asset-placeholder {
-            width: 60px;
-            height: 40px;
+            width: 80px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255,255,255,0.05);
-            border-radius: 4px;
-            color: #4a5568;
+            background: linear-gradient(135deg, rgba(30,41,59,0.8) 0%, rgba(15,23,42,0.8) 100%);
+            border-radius: 6px;
+            border: 1px dashed rgba(255,255,255,0.15);
+            color: #475569;
           }
           .asset-name {
             display: flex;
             flex-direction: column;
-            gap: 0.25rem;
+            gap: 0.35rem;
+          }
+          .asset-name strong {
+            color: #e2e8f0;
+            font-weight: 500;
           }
           .asset-path {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #64748b;
-            font-family: monospace;
+            font-family: 'SF Mono', Monaco, monospace;
+            background: rgba(0,0,0,0.2);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            display: inline-block;
           }
           .status-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.25rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 500;
+            gap: 0.35rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
           }
           .status-uploaded {
-            background: rgba(34, 197, 94, 0.2);
-            color: #22c55e;
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
           }
           .status-missing {
-            background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
           }
           .asset-actions {
             display: flex;
             gap: 0.5rem;
           }
           .admin-btn-sm {
-            padding: 0.25rem 0.5rem;
-            font-size: 0.75rem;
+            padding: 0.4rem 0.75rem;
+            font-size: 0.7rem;
             display: inline-flex;
             align-items: center;
-            gap: 0.25rem;
+            gap: 0.35rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 6px;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+          }
+          .admin-btn-sm:hover {
+            background: rgba(255,255,255,0.1);
+            color: #e2e8f0;
+            border-color: rgba(255,255,255,0.2);
           }
           .cruise-line-group td {
-            border-top: 2px solid rgba(255,255,255,0.1) !important;
+            background: rgba(30, 41, 59, 0.5) !important;
+            border-top: 2px solid rgba(99, 102, 241, 0.3) !important;
+            padding: 0.75rem 1rem !important;
+          }
+          .cruise-line-group td strong {
+            color: #a5b4fc;
+            font-size: 0.85rem;
+          }
+          .admin-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.5rem;
+            border-radius: 10px;
+            width: fit-content;
+          }
+          .admin-tab {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            border: none;
+            background: transparent;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+          }
+          .admin-tab:hover {
+            background: rgba(255,255,255,0.05);
+            color: #e2e8f0;
+          }
+          .admin-tab.active {
+            background: rgba(99, 102, 241, 0.2);
+            color: #a5b4fc;
+          }
+          .admin-info-box {
+            border-radius: 10px;
+            padding: 1.25rem;
+          }
+          .admin-info-box h3 {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+          }
+          .admin-info-box ol {
+            line-height: 1.8;
+          }
+          .admin-info-box code {
+            font-size: 0.75rem;
           }
         `}</style>
       </div>
