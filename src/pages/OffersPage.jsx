@@ -120,7 +120,7 @@ function OffersPage() {
         name: offer.title,
         description: offer.short_description || offer.full_description,
         url: `https://limitlesscruises.com/offers/${offer.slug}`,
-        image: offer.hero_image_url || offer.card_image_url,
+        image: offer.card_image_url,
         offers: {
           '@type': 'Offer',
           price: offer.price_from,

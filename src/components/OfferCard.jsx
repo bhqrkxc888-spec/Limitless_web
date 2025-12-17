@@ -14,10 +14,23 @@ import './OfferCard.css';
 function OfferCard({ offer, variant = 'default' }) {
   if (!offer) return null;
 
+  // Helper to validate URL is a proper image URL
+  const isValidImageUrl = (url) => {
+    if (!url || typeof url !== 'string') return false;
+    const trimmed = url.trim();
+    if (!trimmed) return false;
+    return trimmed.startsWith('http://') || 
+           trimmed.startsWith('https://') || 
+           trimmed.startsWith('/');
+  };
+
   // Smart image selection: use explicit URLs or auto-generate from naming convention
   const getCardImage = () => {
-    if (offer.card_image_url) return offer.card_image_url;
-    if (offer.image_url) return getCardImageUrl(offer.image_url);
+    if (isValidImageUrl(offer.card_image_url)) return offer.card_image_url;
+    if (offer.image_url) {
+      const generatedUrl = getCardImageUrl(offer.image_url);
+      if (isValidImageUrl(generatedUrl)) return generatedUrl;
+    }
     return null;
   };
 

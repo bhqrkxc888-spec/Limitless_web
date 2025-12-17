@@ -19,6 +19,7 @@ function OfferPage() {
   const { slug } = useParams();
   const { offer, loading, error } = useOffer(slug);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [failedImages, setFailedImages] = useState(new Set());
 
   // Compute default price valid until date (90 days from now) - must be before early returns
   const defaultPriceValidUntil = useMemo(() => {
@@ -39,9 +40,20 @@ function OfferPage() {
     const images = [];
     const seenUrls = new Set();
     
-    // Helper to add image only if not already seen
+    // Helper to validate URL is a proper image URL
+    const isValidImageUrl = (url) => {
+      if (!url || typeof url !== 'string') return false;
+      const trimmed = url.trim();
+      if (!trimmed) return false;
+      // Must be a full URL (http/https) or a valid relative path
+      return trimmed.startsWith('http://') || 
+             trimmed.startsWith('https://') || 
+             trimmed.startsWith('/');
+    };
+    
+    // Helper to add image only if not already seen and valid
     const addImage = (url, alt) => {
-      if (url && !seenUrls.has(url)) {
+      if (isValidImageUrl(url) && !seenUrls.has(url)) {
         seenUrls.add(url);
         images.push({ url, alt });
       }
@@ -57,9 +69,7 @@ function OfferPage() {
       offer.gallery_images.forEach((img, idx) => {
         const imgUrl = typeof img === 'string' ? img : img?.url;
         const imgAlt = typeof img === 'string' ? `${offer.title} - Gallery ${idx + 1}` : (img?.alt || `${offer.title} - Gallery ${idx + 1}`);
-        if (imgUrl) {
-          addImage(imgUrl, imgAlt);
-        }
+        addImage(imgUrl, imgAlt);
       });
     }
     
@@ -266,59 +276,86 @@ function OfferPage() {
           <div className="offer-header__layout">
             {/* Gallery Section */}
             <div className="offer-gallery">
-              {galleryImages.length > 0 ? (
-                <>
-                  <div className="offer-gallery__main">
-                    <OptimizedImage
-                      src={galleryImages[selectedImage]?.url}
-                      alt={galleryImages[selectedImage]?.alt}
-                      width={1200}
-                      height={675}
-                      priority={true}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 800px"
-                      srcsetWidths={[640, 1024, 1200, 1920]}
-                      quality={85}
-                    />
-                    {savingsDisplay && (
-                      <div className="offer-gallery__savings">
-                        Save {savingsDisplay}
+              {(() => {
+                // Filter out images that failed to load
+                const validImages = galleryImages.filter(img => !failedImages.has(img.url));
+                // Ensure selected index is valid
+                const safeSelectedImage = Math.min(selectedImage, Math.max(0, validImages.length - 1));
+                
+                // Handler for image load errors
+                const handleImageError = (url) => {
+                  setFailedImages(prev => new Set([...prev, url]));
+                  // If current selected image failed, move to next valid one
+                  if (galleryImages[selectedImage]?.url === url) {
+                    const nextValidIndex = galleryImages.findIndex((img, idx) => 
+                      idx !== selectedImage && !failedImages.has(img.url)
+                    );
+                    if (nextValidIndex >= 0) {
+                      setSelectedImage(nextValidIndex);
+                    }
+                  }
+                };
+                
+                if (validImages.length > 0) {
+                  return (
+                    <>
+                      <div className="offer-gallery__main">
+                        <OptimizedImage
+                          src={validImages[safeSelectedImage]?.url}
+                          alt={validImages[safeSelectedImage]?.alt}
+                          width={1200}
+                          height={675}
+                          priority={true}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 800px"
+                          srcsetWidths={[640, 1024, 1200, 1920]}
+                          quality={85}
+                          onError={() => handleImageError(validImages[safeSelectedImage]?.url)}
+                        />
+                        {savingsDisplay && (
+                          <div className="offer-gallery__savings">
+                            Save {savingsDisplay}
+                          </div>
+                        )}
+                        {offer.featured && (
+                          <div className="offer-gallery__featured">Featured</div>
+                        )}
                       </div>
-                    )}
-                    {offer.featured && (
-                      <div className="offer-gallery__featured">Featured</div>
-                    )}
+                      {validImages.length > 1 && (
+                        <div className="offer-gallery__thumbs">
+                          {validImages.map((img, idx) => (
+                            <button
+                              key={idx}
+                              className={`offer-gallery__thumb ${safeSelectedImage === idx ? 'offer-gallery__thumb--active' : ''}`}
+                              onClick={() => setSelectedImage(idx)}
+                              aria-label={`View image ${idx + 1}`}
+                            >
+                              <OptimizedImage
+                                src={img.url}
+                                alt={img.alt}
+                                width={150}
+                                height={100}
+                                priority={false}
+                                sizes="150px"
+                                srcsetWidths={[150, 300]}
+                                quality={75}
+                                onError={() => handleImageError(img.url)}
+                              />
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  );
+                }
+                
+                return (
+                  <div className="offer-gallery__placeholder">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                    </svg>
                   </div>
-                  {galleryImages.length > 1 && (
-                    <div className="offer-gallery__thumbs">
-                      {galleryImages.map((img, idx) => (
-                        <button
-                          key={idx}
-                          className={`offer-gallery__thumb ${selectedImage === idx ? 'offer-gallery__thumb--active' : ''}`}
-                          onClick={() => setSelectedImage(idx)}
-                          aria-label={`View image ${idx + 1}`}
-                        >
-                          <OptimizedImage
-                            src={img.url}
-                            alt={img.alt}
-                            width={150}
-                            height={100}
-                            priority={false}
-                            sizes="150px"
-                            srcsetWidths={[150, 300]}
-                            quality={75}
-                          />
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </>
-              ) : (
-                <div className="offer-gallery__placeholder">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-                  </svg>
-                </div>
-              )}
+                );
+              })()}
             </div>
 
             {/* Offer Info */}
