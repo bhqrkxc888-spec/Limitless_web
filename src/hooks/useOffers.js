@@ -6,33 +6,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { getOffers, getOfferBySlug } from '../services/offersAPI';
-import { placeholderOffers, getPlaceholderOfferBySlug } from '../data/placeholderOffers';
 import { logger } from '../utils/logger';
-
-/**
- * Apply filters to placeholder offers
- */
-function filterPlaceholderOffers(offers, { featured, destination, offerType, offset, limit }) {
-  let filtered = [...offers];
-  
-  if (featured !== null && featured !== undefined) {
-    filtered = filtered.filter(o => o.featured === featured);
-  }
-  if (destination) {
-    filtered = filtered.filter(o => 
-      o.destination?.toLowerCase().includes(destination.toLowerCase())
-    );
-  }
-  if (offerType) {
-    filtered = filtered.filter(o => o.offer_type === offerType);
-  }
-  
-  // Apply pagination
-  const total = filtered.length;
-  const paginated = filtered.slice(offset, offset + limit);
-  
-  return { offers: paginated, total };
-}
 
 /**
  * Hook for fetching list of offers
@@ -75,18 +49,10 @@ export function useOffers({
         setOffers(data.offers);
         setTotal(data.total || data.offers.length);
       } else {
-        // Fall back to placeholder offers:
-        // - When Supabase returns empty data
-        // - When there's an error (function not found, not configured, etc.)
-        const filtered = filterPlaceholderOffers(placeholderOffers, {
-          featured,
-          destination,
-          offerType,
-          offset,
-          limit
-        });
-        setOffers(filtered.offers);
-        setTotal(filtered.total);
+        // No offers available - return empty array
+        // Offers will be uploaded from CRM soon
+        setOffers([]);
+        setTotal(0);
         
         // Don't set error for expected cases (empty DB, function not found)
         // Only log unexpected errors for debugging
@@ -96,22 +62,14 @@ export function useOffers({
             !fetchError.message?.includes('Searched for') &&
             !fetchError.message?.includes('Could not find') &&
             !fetchError.message?.includes('not configured')) {
-          logger.warn('Offers API error, using placeholder data:', fetchError.message);
+          logger.warn('Offers API error:', fetchError.message);
         }
       }
     } catch (err) {
-      // Unexpected error - still fall back to placeholders
+      // Unexpected error - return empty
       logger.error('Unexpected error fetching offers:', err);
-      
-      const filtered = filterPlaceholderOffers(placeholderOffers, {
-        featured,
-        destination,
-        offerType,
-        offset,
-        limit
-      });
-      setOffers(filtered.offers);
-      setTotal(filtered.total);
+      setOffers([]);
+      setTotal(0);
     } finally {
       setLoading(false);
     }
@@ -157,9 +115,8 @@ export function useOffer(slug) {
         if (!fetchError && data) {
           setOffer(data);
         } else {
-          // Fall back to placeholder offer
-          const placeholderOffer = getPlaceholderOfferBySlug(slug);
-          setOffer(placeholderOffer);
+          // No offer found
+          setOffer(null);
           
           // Only log unexpected errors
           if (fetchError && 
@@ -168,14 +125,13 @@ export function useOffer(slug) {
               !fetchError.message?.includes('Searched for') &&
               !fetchError.message?.includes('Could not find') &&
               !fetchError.message?.includes('not configured')) {
-            logger.warn('Offer API error, using placeholder data:', fetchError.message);
+            logger.warn('Offer API error:', fetchError.message);
           }
         }
       } catch (err) {
-        // Unexpected error - still try placeholder
+        // Unexpected error
         logger.error('Unexpected error fetching offer:', err);
-        const placeholderOffer = getPlaceholderOfferBySlug(slug);
-        setOffer(placeholderOffer);
+        setOffer(null);
       } finally {
         setLoading(false);
       }

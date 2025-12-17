@@ -330,15 +330,6 @@ function OffersPage() {
               subtitle={`${filteredOffers.length} offer${filteredOffers.length !== 1 ? 's' : ''} available. Prices subject to availability.`}
             />
 
-            {/* Demo notice for placeholder offers */}
-            {offers[0]?.is_demo && (
-              <div className="offers-demo-notice">
-                <p>
-                  <strong>Sample offers shown.</strong> These are example offers to demonstrate our service. 
-                  Contact us for current availability and pricing.
-                </p>
-              </div>
-            )}
 
             <div className="offers-list">
               {(hasActiveFilters || currentPage > 1 ? paginatedOffers : gridOffers).map((offer) => (

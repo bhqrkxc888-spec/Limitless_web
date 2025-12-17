@@ -171,13 +171,11 @@ function OfferPage() {
           <div className="offer-not-found">
             <div className="offer-not-found__icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="m9 9 6 6"/>
-                <path d="m15 9-6 6"/>
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
               </svg>
             </div>
-            <h1>Offer Not Found</h1>
-            <p>Sorry, this offer may have expired or been removed. Browse our latest deals or contact us for current offers.</p>
+            <h1>Offer Not Available</h1>
+            <p>This offer may have expired or been removed. Our offers are being updated regularly - check back soon or contact us for current availability.</p>
             <div className="offer-not-found__actions">
               <Button to="/offers" variant="primary">View All Offers</Button>
               <Button to="/contact" variant="outline">Contact Us</Button>
