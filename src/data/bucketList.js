@@ -585,8 +585,8 @@ export const bucketListExperiences = [
     title: 'Pacific Islands & New Zealand',
     tagline: 'Paradise found in the South Pacific',
     description: 'Discover the stunning beauty of the South Pacific and New Zealand. From pristine tropical islands with turquoise waters to New Zealand\'s dramatic landscapes, experience paradise in all its forms.',
-    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/NewZealand-hero.jpeg',
-    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/Auckland.jpeg',
+    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Pacific/NewZealand-hero.webp',
+    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Pacific/Auckland.webp',
     duration: '10-18+ nights',
     season: 'Year-round (best: October-April for New Zealand)',
     startingFrom: 'From £2,200 per person',
@@ -647,8 +647,8 @@ export const bucketListExperiences = [
       keywords: ['pacific cruise', 'new zealand cruise', 'fiji cruise', 'south pacific cruise', 'new zealand fjords']
     },
     images: [
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/Sydney.jpeg',
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Pacific/sydneybridge.jpeg'
+      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Pacific/Sydney.webp',
+      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Pacific/sydneybridge.webp'
     ],
     featured: true,
     priority: 9
