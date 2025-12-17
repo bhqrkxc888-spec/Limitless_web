@@ -144,6 +144,22 @@
   flex-shrink: 0;
 }
 
+.admin-nav-divider {
+  height: 1px;
+  background: var(--admin-border);
+  margin: 0.75rem 0;
+}
+
+.admin-nav-section {
+  padding: 0.5rem 1rem 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--admin-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.5rem;
+}
+
 /* Sidebar Footer */
 .admin-sidebar-footer {
   padding: 1rem;

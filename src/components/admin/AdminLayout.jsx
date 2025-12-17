@@ -16,7 +16,11 @@ import {
   X,
   FileText,
   ExternalLink,
-  ClipboardList
+  ClipboardList,
+  Image,
+  MapPin,
+  Scale,
+  Building2
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import './AdminLayout.css';
@@ -41,7 +45,13 @@ function AdminLayout({ children, onLogout, lastUpdated, onRefresh, isRefreshing 
     { path: '/admin/project-status', icon: ClipboardList, label: 'Project Status' },
     { path: '/admin/errors', icon: AlertTriangle, label: 'Errors' },
     { path: '/admin/performance', icon: Activity, label: 'Performance' },
-    { path: '/admin/seo', icon: Search, label: 'SEO' }
+    { path: '/admin/seo', icon: Search, label: 'SEO' },
+    { type: 'divider' },
+    { type: 'section', label: 'Website' },
+    { path: '/admin/website/assets', icon: Image, label: 'Assets' },
+    { path: '/admin/website/destinations', icon: MapPin, label: 'Destinations' },
+    { path: '/admin/website/legal', icon: Scale, label: 'Legal' },
+    { path: '/admin/website/business-info', icon: Building2, label: 'Business Info' }
   ];
 
   const formatLastUpdated = () => {
@@ -83,7 +93,18 @@ function AdminLayout({ children, onLogout, lastUpdated, onRefresh, isRefreshing 
         </div>
 
         <nav className="admin-nav">
-          {navItems.map(({ path, icon: Icon, label, exact }) => {
+          {navItems.map((item, index) => {
+            if (item.type === 'divider') {
+              return <div key={`divider-${index}`} className="admin-nav-divider" />;
+            }
+            if (item.type === 'section') {
+              return (
+                <div key={`section-${index}`} className="admin-nav-section">
+                  {item.label}
+                </div>
+              );
+            }
+            const { path, icon: Icon, label, exact } = item;
             const IconComponent = Icon;
             return (
               <NavLink

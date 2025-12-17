@@ -73,6 +73,10 @@ const AdminSEO = lazy(() => import('./pages/admin/AdminSEO'))
 const AdminProjectStatus = lazy(() => import('./pages/admin/AdminProjectStatus'))
 const AdminImageUpload = lazy(() => import('./pages/admin/AdminImageUpload'))
 const AdminDestinationHeroes = lazy(() => import('./pages/admin/AdminDestinationHeroes'))
+const AdminWebsiteAssets = lazy(() => import('./pages/admin/AdminWebsiteAssets'))
+const AdminWebsiteDestinations = lazy(() => import('./pages/admin/AdminWebsiteDestinations'))
+const AdminWebsiteLegal = lazy(() => import('./pages/admin/AdminWebsiteLegal'))
+const AdminWebsiteBusinessInfo = lazy(() => import('./pages/admin/AdminWebsiteBusinessInfo'))
 
 // Legal Pages
 const WebsiteTerms = lazy(() => import('./pages/WebsiteTerms'))
@@ -132,6 +136,11 @@ function AppLayout() {
           <Route path="/admin/errors" element={<AdminErrors />} />
           <Route path="/admin/performance" element={<AdminPerformance />} />
           <Route path="/admin/seo" element={<AdminSEO />} />
+          {/* Admin Website Section */}
+          <Route path="/admin/website/assets" element={<AdminWebsiteAssets />} />
+          <Route path="/admin/website/destinations" element={<AdminWebsiteDestinations />} />
+          <Route path="/admin/website/legal" element={<AdminWebsiteLegal />} />
+          <Route path="/admin/website/business-info" element={<AdminWebsiteBusinessInfo />} />
         </Routes>
       </Suspense>
     );
