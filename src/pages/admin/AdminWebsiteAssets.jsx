@@ -120,7 +120,7 @@ function AdminWebsiteAssets() {
     
     try {
       const { data, error: fetchError } = await supabase
-        .from('destination_catalog')
+        .from('web.destination_catalog')
         .select('*')
         .eq('enabled', true)
         .order('sort_order', { ascending: true });
@@ -139,7 +139,7 @@ function AdminWebsiteAssets() {
     try {
       setLoading(true);
       const { data, error: fetchError } = await supabase
-        .from('site_assets')
+        .from('web.site_assets')
         .select('*')
         .order('updated_at', { ascending: false });
 
@@ -299,7 +299,7 @@ function AdminWebsiteAssets() {
         };
 
         const { error: upsertError } = await supabase
-          .from('site_assets')
+          .from('web.site_assets')
           .upsert(assetData, {
             onConflict: 'asset_type,entity_key'
           });
@@ -335,7 +335,7 @@ function AdminWebsiteAssets() {
 
       if (supabase) {
         const { error: deleteError } = await supabase
-          .from('site_assets')
+          .from('web.site_assets')
           .delete()
           .eq('asset_type', assetType)
           .eq('entity_key', entityKey || null);
@@ -364,7 +364,7 @@ function AdminWebsiteAssets() {
 
     try {
       const { error: insertError } = await supabase
-        .from('destination_catalog')
+        .from('web.destination_catalog')
         .insert({
           slug: newDestination.slug,
           name: newDestination.name,

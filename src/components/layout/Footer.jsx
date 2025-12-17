@@ -23,7 +23,7 @@ function Footer() {
 
       try {
         const { data, error } = await supabase
-          .from('site_settings')
+          .from('web.site_settings')
           .select('*')
           .eq('site_key', 'main')
           .single();

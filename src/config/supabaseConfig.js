@@ -16,18 +16,29 @@ export const TABLES = {
   CRUISE_LINES: 'website_cruise_lines',
   IMAGES: 'website_images',
   ENQUIRIES: 'website_enquiries',
-  LATEST_DEALS: 'latest_deals'
+  LATEST_DEALS: 'latest_deals',
+  SITE_SETTINGS: 'site_settings',
+  SITE_DOCUMENTS: 'site_documents',
+  SITE_ASSETS: 'site_assets',
+  DESTINATION_CATALOG: 'destination_catalog'
 };
 
-// Schema name
-export const SCHEMA = 'crm';
+// Schema names
+export const SCHEMA = {
+  CRM: 'crm',
+  WEB: 'web'
+};
 
 // Full table paths
 export const FULL_TABLES = {
-  CRUISE_LINES: `${SCHEMA}.${TABLES.CRUISE_LINES}`,
-  IMAGES: `${SCHEMA}.${TABLES.IMAGES}`,
-  ENQUIRIES: `${SCHEMA}.${TABLES.ENQUIRIES}`,
-  LATEST_DEALS: `${SCHEMA}.${TABLES.LATEST_DEALS}`
+  CRUISE_LINES: `${SCHEMA.CRM}.${TABLES.CRUISE_LINES}`,
+  IMAGES: `${SCHEMA.CRM}.${TABLES.IMAGES}`,
+  ENQUIRIES: `${SCHEMA.CRM}.${TABLES.ENQUIRIES}`,
+  LATEST_DEALS: `${SCHEMA.CRM}.${TABLES.LATEST_DEALS}`,
+  SITE_SETTINGS: `${SCHEMA.WEB}.${TABLES.SITE_SETTINGS}`,
+  SITE_DOCUMENTS: `${SCHEMA.WEB}.${TABLES.SITE_DOCUMENTS}`,
+  SITE_ASSETS: `${SCHEMA.WEB}.${TABLES.SITE_ASSETS}`,
+  DESTINATION_CATALOG: `${SCHEMA.WEB}.${TABLES.DESTINATION_CATALOG}`
 };
 
 // Entity types for image associations

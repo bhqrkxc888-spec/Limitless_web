@@ -37,7 +37,7 @@ function AdminWebsiteDestinations() {
     try {
       setLoading(true);
       const { data, error: fetchError } = await supabase
-        .from('destination_catalog')
+        .from('web.destination_catalog')
         .select('*')
         .order('sort_order', { ascending: true });
 
@@ -69,7 +69,7 @@ function AdminWebsiteDestinations() {
       setError(null);
 
       const { error: insertError } = await supabase
-        .from('destination_catalog')
+        .from('web.destination_catalog')
         .insert({
           slug: formData.slug,
           name: formData.name,
@@ -100,7 +100,7 @@ function AdminWebsiteDestinations() {
       setError(null);
 
       const { error: updateError } = await supabase
-        .from('destination_catalog')
+        .from('web.destination_catalog')
         .update(updates)
         .eq('slug', slug);
 
@@ -131,14 +131,14 @@ function AdminWebsiteDestinations() {
       // Delete associated assets first
       if (supabase) {
         await supabase
-          .from('site_assets')
+          .from('web.site_assets')
           .delete()
           .eq('entity_key', slug);
       }
 
       // Delete destination
       const { error: deleteError } = await supabase
-        .from('destination_catalog')
+        .from('web.destination_catalog')
         .delete()
         .eq('slug', slug);
 

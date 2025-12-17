@@ -33,7 +33,7 @@ export async function getAssetUrl(assetType, entityKey, fallbackUrl) {
 
   try {
     const { data, error } = await supabase
-      .from('site_assets')
+      .from('web.site_assets')
       .select('url')
       .eq('asset_type', assetType)
       .eq('entity_key', entityKey || null)
