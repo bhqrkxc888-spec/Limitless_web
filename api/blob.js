@@ -98,11 +98,8 @@ export default async function handler(req, res) {
       const sizingRule = SIZING_RULES[assetType] || { maxWidth: 2560 };
       
       let sharpInstance = sharp(buffer)
-        .rotate() // Auto-rotate based on EXIF
-        .withMetadata({ 
-          exif: {}, // Strip EXIF but keep essential metadata
-          icc: true, // Keep color profile
-        });
+        .rotate(); // Auto-rotate based on EXIF
+      // Note: We intentionally strip metadata for privacy/security
 
       // Apply sizing based on asset type
       if (assetType === 'favicon') {
