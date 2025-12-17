@@ -20,7 +20,7 @@ export const SITE_ASSETS = {
   homeHero: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/home-hero.webp',
   
   // Social share image for Facebook/Twitter/LinkedIn (1200x630)
-  ogImage: null,
+  ogImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/OG.webp',
   
   // Site logo (transparent PNG or SVG)
   logo: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Hero-logo.webp',
