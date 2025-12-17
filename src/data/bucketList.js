@@ -226,7 +226,7 @@ export const bucketListExperiences = [
     title: 'Rocky Mountaineer & Alaska',
     tagline: 'Iconic rail journey meets stunning cruise',
     description: 'Combine two bucket-list experiences: the legendary Rocky Mountaineer train journey through Canada\'s stunning mountain landscapes, followed by an Alaska cruise through the Inside Passage.',
-    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Canada/banf.webp',
+    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Canada/banf.jpeg',
     cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Canada/banf.webp',
     duration: '10-14 nights',
     season: 'May - September',
