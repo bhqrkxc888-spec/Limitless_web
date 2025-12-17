@@ -23,10 +23,10 @@ export const SITE_ASSETS = {
   ogImage: null,
   
   // Site logo (transparent PNG or SVG)
-  logo: null,
+  logo: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Hero-logo.webp',
   
-  // Favicon (512x512 PNG)
-  favicon: null,
+  // Favicon (512x512 PNG) - using logo as favicon
+  favicon: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Hero-logo.webp',
 };
 
 // ============================================================================
