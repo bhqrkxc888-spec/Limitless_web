@@ -225,6 +225,22 @@ function AdminWebsiteDestinations() {
           </div>
         )}
 
+        {/* Instructions */}
+        <div className="admin-info-box" style={{ marginBottom: '1.5rem' }}>
+          <h3>🗺️ Destination Catalog</h3>
+          <p>Manage the list of cruise destinations shown on your website. Each destination can have its own page with hero images.</p>
+          <ul>
+            <li><strong>Slug:</strong> URL-friendly identifier (e.g., "caribbean-cruises"). Cannot be changed after creation.</li>
+            <li><strong>Name:</strong> Display name shown on the website (e.g., "Caribbean").</li>
+            <li><strong>Region:</strong> Geographic grouping (e.g., "Americas", "Europe", "Asia").</li>
+            <li><strong>Sort Order:</strong> Controls the display order. Lower numbers appear first.</li>
+            <li><strong>Enabled/Disabled:</strong> Disabled destinations are hidden from the public website.</li>
+          </ul>
+          <p style={{ marginTop: '0.75rem', fontSize: '0.8125rem', color: 'var(--admin-text-muted)' }}>
+            💡 After adding a destination here, go to <strong>Assets → Destinations</strong> to upload its hero image.
+          </p>
+        </div>
+
         {/* Stats */}
         <div className="admin-stats-grid" style={{ marginBottom: '1.5rem' }}>
           <div className="admin-stat-card">
@@ -614,6 +630,44 @@ function AdminWebsiteDestinations() {
           outline: none;
           border-color: var(--admin-primary);
           box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .admin-info-box {
+          background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0.03) 100%);
+          border: 1px solid rgba(99, 102, 241, 0.2);
+          border-radius: 8px;
+          padding: 1.25rem 1.5rem;
+        }
+
+        .admin-info-box h3 {
+          margin: 0 0 0.75rem 0;
+          font-size: 1rem;
+          font-weight: 600;
+          color: var(--admin-text-primary);
+        }
+
+        .admin-info-box p {
+          margin: 0 0 0.75rem 0;
+          font-size: 0.875rem;
+          color: var(--admin-text-secondary);
+          line-height: 1.5;
+        }
+
+        .admin-info-box ul {
+          margin: 0;
+          padding-left: 1.25rem;
+          font-size: 0.8125rem;
+          color: var(--admin-text-secondary);
+          line-height: 1.7;
+        }
+
+        .admin-info-box li {
+          margin-bottom: 0.375rem;
+        }
+
+        .admin-info-box strong {
+          color: var(--admin-text-primary);
+          font-weight: 600;
         }
       `}</style>
     </AdminLayout>

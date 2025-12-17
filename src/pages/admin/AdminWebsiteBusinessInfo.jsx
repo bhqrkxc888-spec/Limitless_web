@@ -247,6 +247,20 @@ function AdminWebsiteBusinessInfo() {
           </div>
         )}
 
+        {/* Instructions */}
+        <div className="admin-info-box" style={{ marginBottom: '1.5rem' }}>
+          <h3>🏢 Business Information</h3>
+          <p>This information appears across your public website, including the header, footer, and contact page.</p>
+          <ul>
+            <li><strong>Contact Details:</strong> Phone number, email, and address shown in the footer and contact page.</li>
+            <li><strong>Opening Hours:</strong> Business hours displayed on the contact page.</li>
+            <li><strong>Social Media:</strong> Links to your social media profiles shown in the footer.</li>
+          </ul>
+          <p style={{ marginTop: '0.75rem', fontSize: '0.8125rem', color: 'var(--admin-text-muted)' }}>
+            💡 Changes are saved to the database and appear on your website after clicking "Save Changes".
+          </p>
+        </div>
+
         {loading && !settings ? (
           <div className="admin-card">
             <div style={{ textAlign: 'center', padding: '3rem' }}>
@@ -589,6 +603,44 @@ function AdminWebsiteBusinessInfo() {
           background: rgba(34, 197, 94, 0.1);
           border: 1px solid rgba(34, 197, 94, 0.3);
           color: #86efac;
+        }
+
+        .admin-info-box {
+          background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0.03) 100%);
+          border: 1px solid rgba(99, 102, 241, 0.2);
+          border-radius: 8px;
+          padding: 1.25rem 1.5rem;
+        }
+
+        .admin-info-box h3 {
+          margin: 0 0 0.75rem 0;
+          font-size: 1rem;
+          font-weight: 600;
+          color: var(--admin-text-primary);
+        }
+
+        .admin-info-box p {
+          margin: 0 0 0.75rem 0;
+          font-size: 0.875rem;
+          color: var(--admin-text-secondary);
+          line-height: 1.5;
+        }
+
+        .admin-info-box ul {
+          margin: 0;
+          padding-left: 1.25rem;
+          font-size: 0.8125rem;
+          color: var(--admin-text-secondary);
+          line-height: 1.7;
+        }
+
+        .admin-info-box li {
+          margin-bottom: 0.375rem;
+        }
+
+        .admin-info-box strong {
+          color: var(--admin-text-primary);
+          font-weight: 600;
         }
       `}</style>
     </AdminLayout>

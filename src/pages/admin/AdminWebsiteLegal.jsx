@@ -159,6 +159,22 @@ function AdminWebsiteLegal() {
           </div>
         )}
 
+        {/* Instructions */}
+        <div className="admin-info-box" style={{ marginBottom: '1.5rem' }}>
+          <h3>📜 Legal Documents Manager</h3>
+          <p>Manage legal pages that appear on your public website. These are important for compliance and customer trust.</p>
+          <ul>
+            <li><strong>Website Terms:</strong> Terms of use for your website visitors.</li>
+            <li><strong>Privacy Policy:</strong> How you collect, use, and protect customer data (GDPR/UK DPA compliant).</li>
+            <li><strong>Booking Terms:</strong> Terms and conditions for cruise bookings.</li>
+            <li><strong>Cookie Policy:</strong> Information about cookies and tracking on your site.</li>
+            <li><strong>Price Match Guarantee:</strong> Your price match promise terms and conditions.</li>
+          </ul>
+          <p style={{ marginTop: '0.75rem', fontSize: '0.8125rem', color: 'var(--admin-text-muted)' }}>
+            ⚠️ Changes take effect immediately on the public website. Always review content before saving.
+          </p>
+        </div>
+
         {/* Summary Stats */}
         <div className="admin-stats-grid" style={{ marginBottom: '1.5rem' }}>
           <div className="admin-stat-card">
@@ -493,6 +509,44 @@ function AdminWebsiteLegal() {
           background: rgba(34, 197, 94, 0.1);
           color: #86efac;
           border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .admin-info-box {
+          background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0.03) 100%);
+          border: 1px solid rgba(99, 102, 241, 0.2);
+          border-radius: 8px;
+          padding: 1.25rem 1.5rem;
+        }
+
+        .admin-info-box h3 {
+          margin: 0 0 0.75rem 0;
+          font-size: 1rem;
+          font-weight: 600;
+          color: var(--admin-text-primary);
+        }
+
+        .admin-info-box p {
+          margin: 0 0 0.75rem 0;
+          font-size: 0.875rem;
+          color: var(--admin-text-secondary);
+          line-height: 1.5;
+        }
+
+        .admin-info-box ul {
+          margin: 0;
+          padding-left: 1.25rem;
+          font-size: 0.8125rem;
+          color: var(--admin-text-secondary);
+          line-height: 1.7;
+        }
+
+        .admin-info-box li {
+          margin-bottom: 0.375rem;
+        }
+
+        .admin-info-box strong {
+          color: var(--admin-text-primary);
+          font-weight: 600;
         }
       `}</style>
     </AdminLayout>

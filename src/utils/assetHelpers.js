@@ -1,6 +1,18 @@
 /**
  * Asset Helpers
  * Helper functions to get asset URLs with Supabase fallback
+ * 
+ * ASSET TYPES:
+ * - home_hero: Homepage hero image (16:9)
+ * - og_image: Social share image (1200x630)
+ * - site_logo: Header/footer logo (transparent PNG/SVG)
+ * - favicon: Browser tab icon (square)
+ * - destination_hero: Destination page hero (16:9)
+ * - cruise_line_logo: Cruise line logo (transparent)
+ * - cruise_line_card: Cruise line card image (16:9)
+ * - cruise_line_hero: Cruise line page hero (16:9)
+ * - ship_card: Ship card image (16:9)
+ * - ship_hero: Ship page hero (16:9)
  */
 
 import { supabase } from '../lib/supabase';
@@ -9,6 +21,26 @@ import { logger } from './logger';
 // Cache for asset lookups
 const assetCache = new Map();
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+// Default fallback images
+const DEFAULT_FALLBACKS = {
+  home_hero: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/home/hero.jpeg',
+  favicon: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/home/favicon.png',
+  og_image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/about/About2.webp'
+};
+
+/**
+ * Get optimized asset URL with Vercel Image Optimization
+ * @param {string} url - Original asset URL
+ * @returns {string} Optimized URL
+ */
+export function getOptimizedAssetUrl(url) {
+  if (!url) return url;
+  
+  // Vercel Blob URLs are automatically optimized
+  // Just return them as-is for now
+  return url;
+}
 
 /**
  * Get asset URL from Supabase site_assets, with fallback
@@ -26,9 +58,12 @@ export async function getAssetUrl(assetType, entityKey, fallbackUrl) {
     return cached.url;
   }
 
+  // Determine fallback (use provided or default)
+  const actualFallback = fallbackUrl || DEFAULT_FALLBACKS[assetType] || null;
+
   // If no Supabase, return fallback immediately
   if (!supabase) {
-    return fallbackUrl;
+    return actualFallback;
   }
 
   try {
@@ -43,8 +78,8 @@ export async function getAssetUrl(assetType, entityKey, fallbackUrl) {
     if (error) {
       // No asset found, use fallback
       if (error.code === 'PGRST116') {
-        logger.info(`No asset found for ${assetType}/${entityKey}, using fallback`);
-        return fallbackUrl;
+        // Don't log for expected missing assets
+        return actualFallback;
       }
       throw error;
     }
@@ -54,7 +89,7 @@ export async function getAssetUrl(assetType, entityKey, fallbackUrl) {
     return data.url;
   } catch (err) {
     logger.error(`Error fetching asset ${assetType}/${entityKey}:`, err);
-    return fallbackUrl;
+    return actualFallback;
   }
 }
 
@@ -134,6 +169,24 @@ export async function getSiteLogo(fallbackUrl) {
  */
 export async function getFavicon(fallbackUrl) {
   return getAssetUrl('favicon', null, fallbackUrl);
+}
+
+/**
+ * Get home page hero image
+ * @param {string} fallbackUrl - Fallback URL
+ * @returns {Promise<string>}
+ */
+export async function getHomeHero(fallbackUrl) {
+  return getAssetUrl('home_hero', null, fallbackUrl);
+}
+
+/**
+ * Get social share / OG image
+ * @param {string} fallbackUrl - Fallback URL
+ * @returns {Promise<string>}
+ */
+export async function getOgImage(fallbackUrl) {
+  return getAssetUrl('og_image', null, fallbackUrl);
 }
 
 /**

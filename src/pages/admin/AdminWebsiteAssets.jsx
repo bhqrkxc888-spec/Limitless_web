@@ -15,14 +15,20 @@ import { cruiseLines } from '../../data/cruiseLines';
 
 // Validation rules
 const VALIDATION_RULES = {
+  // Site-wide assets
+  home_hero: { ratio: '16:9', maxSize: 4 * 1024 * 1024, formats: ['image/jpeg', 'image/png', 'image/webp'] },
+  og_image: { ratio: null, maxSize: 2 * 1024 * 1024, formats: ['image/jpeg', 'image/png'], recommendedSize: '1200x630' },
+  site_logo: { ratio: null, maxSize: 1 * 1024 * 1024, formats: ['image/svg+xml', 'image/png'], requireAlpha: false },
+  favicon: { ratio: '1:1', maxSize: 1 * 1024 * 1024, formats: ['image/png', 'image/x-icon'] },
+  // Destination assets
   destination_hero: { ratio: '16:9', maxSize: 4 * 1024 * 1024, formats: ['image/jpeg', 'image/png', 'image/webp'] },
+  // Cruise line assets
   cruise_line_hero: { ratio: '16:9', maxSize: 4 * 1024 * 1024, formats: ['image/jpeg', 'image/png', 'image/webp'] },
   cruise_line_card: { ratio: '16:9', maxSize: 4 * 1024 * 1024, formats: ['image/jpeg', 'image/png', 'image/webp'] },
-  ship_hero: { ratio: '16:9', maxSize: 4 * 1024 * 1024, formats: ['image/jpeg', 'image/png', 'image/webp'] },
-  ship_card: { ratio: '16:9', maxSize: 4 * 1024 * 1024, formats: ['image/jpeg', 'image/png', 'image/webp'] },
   cruise_line_logo: { ratio: null, maxSize: 1 * 1024 * 1024, formats: ['image/svg+xml', 'image/png'], requireAlpha: true },
-  site_logo: { ratio: null, maxSize: 1 * 1024 * 1024, formats: ['image/svg+xml', 'image/png'], requireAlpha: false },
-  favicon: { ratio: '1:1', maxSize: 1 * 1024 * 1024, formats: ['image/png', 'image/x-icon'] }
+  // Ship assets
+  ship_hero: { ratio: '16:9', maxSize: 4 * 1024 * 1024, formats: ['image/jpeg', 'image/png', 'image/webp'] },
+  ship_card: { ratio: '16:9', maxSize: 4 * 1024 * 1024, formats: ['image/jpeg', 'image/png', 'image/webp'] }
 };
 
 // Helper to check aspect ratio
@@ -267,7 +273,11 @@ function AdminWebsiteAssets() {
       const ext = file.name.split('.').pop();
       let blobPath = '';
       
-      if (assetType.startsWith('site_')) {
+      if (assetType === 'home_hero') {
+        blobPath = `site/home-hero.${ext}`;
+      } else if (assetType === 'og_image') {
+        blobPath = `site/og-image.${ext}`;
+      } else if (assetType.startsWith('site_') || assetType === 'favicon') {
         blobPath = `site/${assetType.replace('site_', '')}.${ext}`;
       } else if (assetType === 'destination_hero') {
         blobPath = `destinations/${entityKey}-HERO.${ext}`;
@@ -396,8 +406,10 @@ function AdminWebsiteAssets() {
     switch (activeTab) {
       case 'site':
         return [
-          { id: 'site-logo', label: 'Site Logo', assetType: 'site_logo', entityKey: null },
-          { id: 'favicon', label: 'Favicon', assetType: 'favicon', entityKey: null }
+          { id: 'home-hero', label: 'Home Page Hero', assetType: 'home_hero', entityKey: null, description: 'Main hero image on the homepage (16:9, 1920x1080+)' },
+          { id: 'og-image', label: 'Social Share Image (OG)', assetType: 'og_image', entityKey: null, description: 'Image shown when sharing on social media (1200x630px)' },
+          { id: 'site-logo', label: 'Site Logo', assetType: 'site_logo', entityKey: null, description: 'Header/footer logo (transparent PNG or SVG)' },
+          { id: 'favicon', label: 'Favicon', assetType: 'favicon', entityKey: null, description: 'Browser tab icon (square, 512x512px)' }
         ];
       
       case 'destinations':
@@ -526,6 +538,66 @@ function AdminWebsiteAssets() {
           })}
         </div>
 
+        {/* Tab Instructions */}
+        <div className="admin-info-box" style={{ marginBottom: '1.5rem' }}>
+          {activeTab === 'site' && (
+            <>
+              <h3>🌐 Site-Wide Assets</h3>
+              <p>These images appear across the entire website. Upload these first for a complete launch.</p>
+              <ul>
+                <li><strong>Home Page Hero:</strong> Large banner on the homepage. Must be <strong>16:9 ratio</strong>, 1920x1080px recommended. JPG or WebP for best compression.</li>
+                <li><strong>Social Share Image (OG):</strong> Shown when someone shares your site on Facebook, LinkedIn, Twitter etc. <strong>1200×630px</strong> is the standard size. Include your logo and tagline.</li>
+                <li><strong>Site Logo:</strong> Main logo in header/footer. Use transparent PNG or SVG. Recommended: 200x60px minimum.</li>
+                <li><strong>Favicon:</strong> Small icon shown in browser tabs. Must be square (1:1). Recommended: 512x512px PNG.</li>
+              </ul>
+              <p style={{ marginTop: '0.75rem', fontSize: '0.8125rem', color: 'var(--admin-text-muted)' }}>
+                ⭐ <strong>Priority:</strong> Home Hero and Social Share Image are critical for launch. They are the first things visitors see.
+              </p>
+            </>
+          )}
+          {activeTab === 'destinations' && (
+            <>
+              <h3>🗺️ Destination Images</h3>
+              <p>Hero images for each cruise destination. These appear at the top of destination pages.</p>
+              <ul>
+                <li><strong>Hero Image:</strong> Large banner image showing the destination. Must be <strong>16:9 aspect ratio</strong>.</li>
+                <li><strong>Recommended size:</strong> 1920x1080px or larger for best quality on all screens.</li>
+                <li><strong>Max file size:</strong> 4MB (JPG, PNG, or WebP)</li>
+              </ul>
+              <p style={{ marginTop: '0.75rem', fontSize: '0.8125rem', color: 'var(--admin-text-muted)' }}>
+                💡 Tip: Use high-quality landscape photos that capture the essence of each destination.
+              </p>
+            </>
+          )}
+          {activeTab === 'cruise-lines' && (
+            <>
+              <h3>🚢 Cruise Line Assets</h3>
+              <p>Images and logos for each cruise line brand. These appear on cruise line pages and cards.</p>
+              <ul>
+                <li><strong>Logo:</strong> Official cruise line logo. Use transparent PNG or SVG. Max 1MB.</li>
+                <li><strong>Card Image:</strong> Thumbnail image for cards/listings. <strong>16:9 ratio</strong>, 800x450px recommended.</li>
+                <li><strong>Hero Image:</strong> Large banner for cruise line page header. <strong>16:9 ratio</strong>, 1920x1080px recommended.</li>
+              </ul>
+              <p style={{ marginTop: '0.75rem', fontSize: '0.8125rem', color: 'var(--admin-text-muted)' }}>
+                ⚠️ Logos: PNG files MUST have a transparent background. SVG is preferred.
+              </p>
+            </>
+          )}
+          {activeTab === 'ships' && (
+            <>
+              <h3>⚓ Ship Images</h3>
+              <p>Images for individual ships. These appear on ship detail pages and in ship listings.</p>
+              <ul>
+                <li><strong>Card Image:</strong> Ship thumbnail for cards/listings. <strong>16:9 ratio</strong>, 800x450px recommended.</li>
+                <li><strong>Hero Image:</strong> Large banner for ship page header. <strong>16:9 ratio</strong>, 1920x1080px recommended.</li>
+              </ul>
+              <p style={{ marginTop: '0.75rem', fontSize: '0.8125rem', color: 'var(--admin-text-muted)' }}>
+                💡 Tip: Use exterior shots showing the full ship, or dramatic sailing images.
+              </p>
+            </>
+          )}
+        </div>
+
         {/* Assets Table */}
         <div className="admin-card">
           <div className="admin-table-wrapper">
@@ -564,9 +636,14 @@ function AdminWebsiteAssets() {
                       <td>
                         <div>
                           <strong>{row.label}</strong>
-                          {asset && (
+                          {row.description && (
                             <div style={{ fontSize: '0.75rem', color: 'var(--admin-text-muted)', marginTop: '0.25rem' }}>
-                              {asset.width && asset.height && `${asset.width}×${asset.height}`}
+                              {row.description}
+                            </div>
+                          )}
+                          {asset && (
+                            <div style={{ fontSize: '0.75rem', color: 'var(--admin-success)', marginTop: '0.25rem' }}>
+                              ✓ {asset.width && asset.height && `${asset.width}×${asset.height}`}
                               {asset.bytes && ` • ${(asset.bytes / 1024).toFixed(0)}KB`}
                             </div>
                           )}
@@ -902,6 +979,48 @@ function AdminWebsiteAssets() {
         .admin-btn-danger:disabled {
           opacity: 0.5;
           cursor: not-allowed;
+        }
+
+        .admin-info-box {
+          background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(99, 102, 241, 0.03) 100%);
+          border: 1px solid rgba(99, 102, 241, 0.2);
+          border-radius: 8px;
+          padding: 1.25rem 1.5rem;
+        }
+
+        .admin-info-box h3 {
+          margin: 0 0 0.75rem 0;
+          font-size: 1rem;
+          font-weight: 600;
+          color: var(--admin-text-primary);
+        }
+
+        .admin-info-box p {
+          margin: 0 0 0.75rem 0;
+          font-size: 0.875rem;
+          color: var(--admin-text-secondary);
+          line-height: 1.5;
+        }
+
+        .admin-info-box ul {
+          margin: 0;
+          padding-left: 1.25rem;
+          font-size: 0.8125rem;
+          color: var(--admin-text-secondary);
+          line-height: 1.7;
+        }
+
+        .admin-info-box li {
+          margin-bottom: 0.375rem;
+        }
+
+        .admin-info-box li:last-child {
+          margin-bottom: 0;
+        }
+
+        .admin-info-box strong {
+          color: var(--admin-text-primary);
+          font-weight: 600;
         }
       `}</style>
     </AdminLayout>
