@@ -437,8 +437,8 @@ export const bucketListExperiences = [
     title: 'South America',
     tagline: 'Vibrant cultures and stunning landscapes',
     description: 'Discover the dramatic beauty and rich culture of South America. From the Amazon rainforest to the wilds of Patagonia, from vibrant cities to ancient Incan ruins, experience the continent\'s incredible diversity.',
-    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/hero-iguazu-falls%20.jpeg',
-    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/Patagonian-glaciers.jpeg',
+    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/hero-iguazu-falls.webp',
+    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/Patagonian-glaciers.webp',
     duration: '10-21+ nights',
     season: 'Year-round (best: October-April)',
     startingFrom: 'From £2,000 per person',
@@ -498,10 +498,10 @@ export const bucketListExperiences = [
       keywords: ['south america cruise', 'amazon cruise', 'patagonia cruise', 'machu picchu cruise', 'south american voyage']
     },
     images: [
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/Machu-Picchu.jpeg',
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-christ.jpeg',
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg',
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/city-in-Peru.jpeg'
+      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/Machu-Picchu.webp',
+      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/rio-christ.webp',
+      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/Rio-beech.webp',
+      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/city-in-Peru.webp'
     ],
     featured: true,
     priority: 7
