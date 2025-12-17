@@ -723,6 +723,7 @@ export const bucketListExperiences = [
     id: 'amazon-river',
     slug: 'amazon-river-expeditions',
     title: 'Amazon River Expeditions',
+    featured: false, // Hidden - to do later
     tagline: 'Into the heart of the rainforest',
     description: 'Navigate the world\'s mightiest river through the Amazon rainforest. Encounter incredible wildlife, meet indigenous communities, and explore the most biodiverse place on Earth.',
     heroImage: null, // Amazon hero - Upload to Vercel
@@ -861,7 +862,7 @@ export const bucketListExperiences = [
     tagline: 'Glide through the heart of Europe',
     description: 'Cruise the legendary rivers of Europe, from the romantic Rhine and Danube to the Seine and Douro. Pass fairytale castles, vineyard-covered hillsides, and charming medieval towns.',
     heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe-river/europe-river-hero.webp',
-    cardImage: null, // European Rivers card - Upload to Vercel
+    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe-river/Danube-river-card.webp',
     duration: '7-14 nights',
     season: 'March - December (peak: April-October)',
     startingFrom: 'From £1,800 per person',
@@ -921,7 +922,7 @@ export const bucketListExperiences = [
       keywords: ['river cruise', 'european river cruise', 'rhine cruise', 'danube cruise', 'viking river cruise']
     },
     images: [],
-    featured: true,
+    featured: false, // Hidden - to do later
     priority: 13
   },
   {
@@ -930,8 +931,8 @@ export const bucketListExperiences = [
     title: 'Great Barrier Reef & Australia',
     tagline: 'Discover the world\'s largest coral reef',
     description: 'Experience Australia\'s natural wonder - the Great Barrier Reef. Snorkel or dive among vibrant coral and tropical fish, then explore Australia\'s stunning coastline and iconic cities.',
-    heroImage: null, // Great Barrier Reef hero - Upload to Vercel
-    cardImage: null, // Great Barrier Reef card - Upload to Vercel
+    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Greatbarrierreef/greatbarrierreef-hero.webp',
+    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Greatbarrierreef/greatbarrier-card.webp',
     duration: '10-18 nights',
     season: 'Year-round (best: April-November for reef conditions)',
     startingFrom: 'From £3,500 per person',
@@ -1001,6 +1002,7 @@ export const bucketListExperiences = [
     description: 'Discover the legendary islands of French Polynesia - Tahiti, Bora Bora, Moorea and beyond. Overwater bungalows, crystal lagoons, and the warmest hospitality in the world await.',
     heroImage: null, // Bora Bora hero - Upload to Vercel
     cardImage: null, // Bora Bora card - Upload to Vercel
+    featured: false, // Hidden - to do later
     duration: '7-14 nights',
     season: 'Year-round (dry season: May-October)',
     startingFrom: 'From £4,000 per person',
@@ -1067,8 +1069,8 @@ export const bucketListExperiences = [
     title: 'Midnight Sun Voyages',
     tagline: 'Where the sun never sets',
     description: 'Experience the magic of the Arctic summer when the sun never dips below the horizon. Cruise Norway\'s coast, Svalbard, or Iceland under 24 hours of ethereal daylight.',
-    heroImage: null, // Midnight Sun hero - Upload to Vercel
-    cardImage: null, // Midnight Sun card - Upload to Vercel
+    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Midnight-sun/midnightsun-hero.webp',
+    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Midnight-sun/midnight-sun-card.webp',
     duration: '7-14 nights',
     season: 'May - July (peak midnight sun: June 21)',
     startingFrom: 'From £2,000 per person',

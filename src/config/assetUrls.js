@@ -37,7 +37,7 @@ export const SITE_ASSETS = {
 
 export const DESTINATION_HEROES = {
   'caribbean': null,
-  'mediterranean': null,
+  'mediterranean': 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe/Europe-hero.webp',
   'northern-europe': null,
   'alaska': null,
   'asia': null,
