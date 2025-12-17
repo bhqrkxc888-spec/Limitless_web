@@ -218,31 +218,28 @@ function AdminWebsiteAssets() {
 
               {activeTab === 'cruise-lines' && (
                 <>
-                  {cruiseLines.map(line => (
-                    <tr key={line.id} className="cruise-line-group">
-                      <td colSpan="4" style={{ background: 'rgba(255,255,255,0.03)', padding: '0.75rem 1rem' }}>
-                        <strong style={{ color: '#e2e8f0' }}>{line.name}</strong>
+                  {cruiseLines.flatMap(line => [
+                    <tr key={`${line.id}-header`} className="cruise-line-group">
+                      <td colSpan="4">
+                        <strong>{line.name}</strong>
                       </td>
-                    </tr>
-                  )).concat(
-                    cruiseLines.flatMap(line => [
-                      renderAssetRow(
-                        `${line.name} - Logo`,
-                        CRUISE_LINE_LOGOS[line.id],
-                        `cruise-lines/${line.id}-LOGO.webp`
-                      ),
-                      renderAssetRow(
-                        `${line.name} - Hero`,
-                        CRUISE_LINE_HEROES[line.id],
-                        `cruise-lines/${line.id}-HERO.webp`
-                      ),
-                      renderAssetRow(
-                        `${line.name} - Card`,
-                        CRUISE_LINE_CARDS[line.id],
-                        `cruise-lines/${line.id}-CARD.webp`
-                      ),
-                    ])
-                  )}
+                    </tr>,
+                    renderAssetRow(
+                      `${line.name} - Logo`,
+                      CRUISE_LINE_LOGOS[line.id],
+                      `cruise-lines/${line.id}-LOGO.webp`
+                    ),
+                    renderAssetRow(
+                      `${line.name} - Hero`,
+                      CRUISE_LINE_HEROES[line.id],
+                      `cruise-lines/${line.id}-HERO.webp`
+                    ),
+                    renderAssetRow(
+                      `${line.name} - Card`,
+                      CRUISE_LINE_CARDS[line.id],
+                      `cruise-lines/${line.id}-CARD.webp`
+                    ),
+                  ])}
                 </>
               )}
             </tbody>
