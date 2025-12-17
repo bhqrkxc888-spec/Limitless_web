@@ -63,7 +63,7 @@ export const cruiseLines = [
     // Destination images for grid
     destinationImages: [
       { name: 'Caribbean', image: 'null', alt: 'Tropical Caribbean beach with turquoise waters' },
-      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastal harbour' },
+      { name: 'Mediterranean', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe/med-card.webp', alt: 'Mediterranean coastal harbour' },
       { name: 'Norwegian Fjords', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights.jpeg', alt: 'Norwegian Fjords with Northern Lights' },
       { name: 'Northern Europe', image: 'null', alt: 'Northern European waterfront' },
       { name: 'Canary Islands', image: 'null', alt: 'Canary Islands volcanic landscape' },
