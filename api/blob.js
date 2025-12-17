@@ -4,12 +4,20 @@
  */
 
 import { put } from '@vercel/blob';
-import sharp from 'sharp';
+
+// Dynamically import sharp (required for Vercel serverless)
+let sharp;
+try {
+  sharp = (await import('sharp')).default;
+} catch (error) {
+  console.error('Sharp not available:', error);
+}
 
 export const config = {
   api: {
     bodyParser: false,
   },
+  maxDuration: 60, // Allow up to 60 seconds for processing
 };
 
 // Sizing rules based on asset type
@@ -27,6 +35,16 @@ const SIZING_RULES = {
 };
 
 export default async function handler(req, res) {
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-asset-type');
+
+  // Handle OPTIONS preflight
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -37,6 +55,15 @@ export default async function handler(req, res) {
 
     if (!filename) {
       return res.status(400).json({ error: 'Filename is required' });
+    }
+
+    // Check for Vercel Blob token
+    if (!process.env.BLOB_READ_WRITE_TOKEN) {
+      console.error('BLOB_READ_WRITE_TOKEN not configured');
+      return res.status(500).json({ 
+        error: 'Storage not configured',
+        message: 'BLOB_READ_WRITE_TOKEN environment variable is missing'
+      });
     }
 
     // Read raw body
@@ -61,6 +88,13 @@ export default async function handler(req, res) {
       finalFilename = filename;
     } else {
       // Raster images: process with Sharp
+      if (!sharp) {
+        return res.status(500).json({
+          error: 'Image processing not available',
+          message: 'Sharp module failed to load'
+        });
+      }
+
       const sizingRule = SIZING_RULES[assetType] || { maxWidth: 2560 };
       
       let sharpInstance = sharp(buffer)
@@ -115,9 +149,11 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('Error processing/uploading image:', error);
+    console.error('Error stack:', error.stack);
     return res.status(500).json({ 
       error: 'Upload failed',
       message: error.message,
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined,
     });
   }
 }
