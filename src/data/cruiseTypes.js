@@ -11,7 +11,7 @@ export const cruiseTypes = [
     tagline: 'Adventures for all ages',
     shortDescription: 'Create unforgettable family memories with cruises designed for all ages.',
     description: 'Create unforgettable family memories with cruises designed for all ages. Kids clubs, family activities, waterparks, and entertainment the whole family will love. From toddler-friendly facilities to teen hangouts, cruise lines have perfected the art of keeping everyone happy.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/South%20America/rio-beech.jpeg',
+    image: 'null',
     icon: 'family',
     highlights: [
       'Award-winning kids clubs and teen programmes',
@@ -43,7 +43,7 @@ export const cruiseTypes = [
     tagline: 'Sophisticated escapes',
     shortDescription: 'Peaceful relaxation on ships designed exclusively for grown-ups.',
     description: 'Enjoy peaceful relaxation on adults-only ships or adult-exclusive areas. Perfect for couples, groups of friends, or solo travellers seeking a serene, sophisticated atmosphere without the bustle of family cruising.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Polynesia/bora-bora.jpeg',
+    image: 'null',
     icon: 'adults',
     highlights: [
       'No children on board - guaranteed tranquillity',
@@ -75,7 +75,7 @@ export const cruiseTypes = [
     tagline: 'No-fly cruising from home',
     shortDescription: 'Skip the airport hassle with cruises departing from UK ports.',
     description: 'Skip the airport hassle with cruises departing from Southampton, Liverpool, Tilbury, and other UK ports. Your holiday starts the moment you board - no flights, generous baggage allowances, and easy access from home.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Transatlantic/queen-mary-2.jpeg',
+    image: 'null',
     icon: 'uk',
     highlights: [
       'No flights required - drive to the port',
@@ -107,7 +107,7 @@ export const cruiseTypes = [
     tagline: 'The finest way to travel',
     shortDescription: 'All-inclusive elegance with exceptional service and intimate ships.',
     description: 'Experience cruising at its finest with all-inclusive luxury lines. Butler service, gourmet dining, premium drinks, and gratuities included. Smaller ships mean exceptional service ratios and access to exclusive ports.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/hero-dubai.jpeg',
+    image: 'null',
     icon: 'luxury',
     highlights: [
       'All-inclusive fares (drinks, dining, gratuities)',
@@ -139,7 +139,7 @@ export const cruiseTypes = [
     tagline: 'Glide through the heart of cities',
     shortDescription: 'Intimate ships sailing Europe\'s legendary waterways.',
     description: 'Cruise the legendary rivers of Europe on intimate ships that dock in the heart of cities. No sea days, daily new destinations, and all-inclusive packages make river cruising the stress-free way to explore.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Rivers/rhine-castle.jpeg',
+    image: 'null',
     icon: 'river',
     highlights: [
       'Dock in city centres',
@@ -203,7 +203,7 @@ export const cruiseTypes = [
     tagline: 'Freedom to cruise your way',
     shortDescription: 'Cruises designed for independent travellers with no single supplements.',
     description: 'Cruising solo has never been easier. Many cruise lines now offer dedicated solo cabins with little or no single supplement, plus social events and dining designed to help solo travellers connect.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Grand/grand-voyage.jpeg',
+    image: 'null',
     icon: 'solo',
     highlights: [
       'Studio cabins designed for solo travellers',

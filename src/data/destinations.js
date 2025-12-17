@@ -117,7 +117,7 @@ export const destinations = [
     name: 'Atlantic Islands',
     tagline: 'Canaries, Azores & Madeira',
     description: 'Discover the volcanic landscapes, year-round sunshine, and unique cultures of the Atlantic Islands including the Canaries, Azores, and Madeira.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Iceland/iceland-waterfall.jpeg',
+    image: 'null',
     featured: false,
     // Coordinates for API integration (Tenerife as primary port)
     coordinates: {
@@ -152,7 +152,7 @@ export const destinations = [
     name: 'Alaska',
     tagline: 'America\'s last frontier',
     description: 'Experience the raw wilderness of Alaska with its towering glaciers, abundant wildlife, and pristine natural beauty. From the Inside Passage to Glacier Bay, discover one of the world\'s most spectacular cruise destinations.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Canada/banf.jpeg',
+    image: 'null',
     featured: true,
     coordinates: {
       lat: 58.3019,
@@ -221,7 +221,7 @@ export const destinations = [
     name: 'British Isles',
     tagline: 'Discover the beauty of home',
     description: 'Explore the stunning coastlines, historic castles, and charming villages of the British Isles. From the Scottish Highlands to the Irish coast, discover the beauty and heritage on your doorstep.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Rivers/rhine-castle.jpeg',
+    image: 'null',
     featured: false,
     coordinates: {
       lat: 57.4596,
@@ -257,7 +257,7 @@ export const destinations = [
     name: 'Transatlantic',
     tagline: 'Classic ocean voyages',
     description: 'Experience the romance of crossing the Atlantic Ocean in the tradition of the great ocean liners. Relaxing sea days, exceptional service, and the anticipation of arrival in a new world.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Transatlantic/queen-mary-2.jpeg',
+    image: 'null',
     featured: false,
     coordinates: {
       lat: 40.6892,
@@ -290,7 +290,7 @@ export const destinations = [
     name: 'Hawaii',
     tagline: 'Aloha spirit and volcanic wonder',
     description: 'Discover the magic of the Hawaiian Islands with their stunning volcanic landscapes, pristine beaches, and rich Polynesian culture. Island-hop between Maui, Oahu, Kauai, and the Big Island.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Polynesia/bora-bora.jpeg',
+    image: 'null',
     featured: false,
     coordinates: {
       lat: 21.3069,
@@ -324,7 +324,7 @@ export const destinations = [
     name: 'Australia',
     tagline: 'Discover Down Under',
     description: 'From the iconic Sydney Harbour to the Great Barrier Reef, experience Australia\'s diverse landscapes, unique wildlife, and vibrant cities on a cruise holiday.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Australia/great-barrier-reef.jpeg',
+    image: 'null',
     featured: false,
     coordinates: {
       lat: -33.8688,
@@ -358,7 +358,7 @@ export const destinations = [
     name: 'Greek Isles',
     tagline: 'Ancient history meets island paradise',
     description: 'Island-hop through the stunning Greek Isles, from the whitewashed beauty of Santorini to the beaches of Mykonos. Discover ancient ruins, azure waters, and legendary Greek hospitality.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/Petra.jpeg',
+    image: 'null',
     featured: true,
     coordinates: {
       lat: 36.3932,
@@ -428,7 +428,7 @@ export const destinations = [
     name: 'Scandinavia',
     tagline: 'Nordic capitals and culture',
     description: 'Explore the stylish capitals and stunning landscapes of Scandinavia. From Copenhagen\'s hygge to Stockholm\'s archipelago and Oslo\'s fjords, discover the best of Nordic culture.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Arctic/midnight-sun.jpeg',
+    image: 'null',
     featured: false,
     coordinates: {
       lat: 59.9139,
@@ -462,7 +462,7 @@ export const destinations = [
     name: 'Canada & New England',
     tagline: 'Fall foliage and maritime charm',
     description: 'Experience the spectacular autumn colours, historic ports, and maritime heritage of Canada and New England. From Boston to Quebec City, discover charming towns and stunning natural beauty.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Canada/banf.jpeg',
+    image: 'null',
     featured: false,
     coordinates: {
       lat: 46.8139,
@@ -497,7 +497,7 @@ export const destinations = [
     name: 'Panama Canal',
     tagline: 'Engineering marvel of the world',
     description: 'Transit one of the world\'s greatest engineering achievements on a Panama Canal cruise. Experience the wonder of crossing between two oceans while exploring Central American ports.',
-    image: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Amazon/amazon-river.jpeg',
+    image: 'null',
     featured: false,
     coordinates: {
       lat: 9.0801,

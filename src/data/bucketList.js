@@ -214,7 +214,7 @@ export const bucketListExperiences = [
     },
     images: [
       'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Japan/DowntownTokyo%20.webp',
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Japan/Japan-mtfuji.jpeg',
+      null, // Japan-mtfuji - Upload to Vercel
       'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Japan/southkorea.webp'
     ],
     featured: true,
@@ -226,7 +226,7 @@ export const bucketListExperiences = [
     title: 'Rocky Mountaineer & Alaska',
     tagline: 'Iconic rail journey meets stunning cruise',
     description: 'Combine two bucket-list experiences: the legendary Rocky Mountaineer train journey through Canada\'s stunning mountain landscapes, followed by an Alaska cruise through the Inside Passage.',
-    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Canada/banf.jpeg',
+    heroImage: null, // Rocky Mountaineer hero - Upload to Vercel
     cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Canada/banf.webp',
     duration: '10-14 nights',
     season: 'May - September',
@@ -660,8 +660,8 @@ export const bucketListExperiences = [
     title: 'Transatlantic Crossings',
     tagline: 'The classic ocean voyage experience',
     description: 'Experience the romance of crossing the Atlantic in the tradition of the great ocean liners. Days of relaxation at sea, world-class entertainment, and the anticipation of arrival in a new world.',
-    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Transatlantic/queen-mary-2.jpeg',
-    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Transatlantic/queen-mary-2.jpeg',
+    heroImage: null, // Transatlantic hero - Upload to Vercel
+    cardImage: null, // Transatlantic card - Upload to Vercel
     duration: '7-14 nights',
     season: 'Year-round (peak: April-May, September-October)',
     startingFrom: 'From £899 per person',
@@ -725,8 +725,8 @@ export const bucketListExperiences = [
     title: 'Amazon River Expeditions',
     tagline: 'Into the heart of the rainforest',
     description: 'Navigate the world\'s mightiest river through the Amazon rainforest. Encounter incredible wildlife, meet indigenous communities, and explore the most biodiverse place on Earth.',
-    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Amazon/amazon-river.jpeg',
-    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Amazon/amazon-river.jpeg',
+    heroImage: null, // Amazon hero - Upload to Vercel
+    cardImage: null, // Amazon card - Upload to Vercel
     duration: '7-14 nights',
     season: 'Year-round (high water: December-May, low water: June-November)',
     startingFrom: 'From £3,000 per person',
@@ -791,8 +791,8 @@ export const bucketListExperiences = [
     title: 'Iceland Circumnavigation',
     tagline: 'Land of fire and ice',
     description: 'Sail around Iceland to discover its otherworldly landscapes of geysers, glaciers, volcanoes, and waterfalls. Witness the midnight sun or Northern Lights depending on the season.',
-    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Iceland/iceland-waterfall.jpeg',
-    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Iceland/iceland-waterfall.jpeg',
+    heroImage: null, // Iceland hero - Upload to Vercel
+    cardImage: null, // Iceland card - Upload to Vercel
     duration: '10-14 nights',
     season: 'May - September (summer), September - March (Northern Lights)',
     startingFrom: 'From £2,500 per person',
@@ -860,8 +860,8 @@ export const bucketListExperiences = [
     title: 'European River Cruises',
     tagline: 'Glide through the heart of Europe',
     description: 'Cruise the legendary rivers of Europe, from the romantic Rhine and Danube to the Seine and Douro. Pass fairytale castles, vineyard-covered hillsides, and charming medieval towns.',
-    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Rivers/rhine-castle.jpeg',
-    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Rivers/rhine-castle.jpeg',
+    heroImage: null, // European Rivers hero - Upload to Vercel
+    cardImage: null, // European Rivers card - Upload to Vercel
     duration: '7-14 nights',
     season: 'March - December (peak: April-October)',
     startingFrom: 'From £1,800 per person',
@@ -930,8 +930,8 @@ export const bucketListExperiences = [
     title: 'Great Barrier Reef & Australia',
     tagline: 'Discover the world\'s largest coral reef',
     description: 'Experience Australia\'s natural wonder - the Great Barrier Reef. Snorkel or dive among vibrant coral and tropical fish, then explore Australia\'s stunning coastline and iconic cities.',
-    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Australia/great-barrier-reef.jpeg',
-    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Australia/great-barrier-reef.jpeg',
+    heroImage: null, // Great Barrier Reef hero - Upload to Vercel
+    cardImage: null, // Great Barrier Reef card - Upload to Vercel
     duration: '10-18 nights',
     season: 'Year-round (best: April-November for reef conditions)',
     startingFrom: 'From £3,500 per person',
@@ -999,8 +999,8 @@ export const bucketListExperiences = [
     title: 'Polynesian Islands',
     tagline: 'Paradise found in the South Pacific',
     description: 'Discover the legendary islands of French Polynesia - Tahiti, Bora Bora, Moorea and beyond. Overwater bungalows, crystal lagoons, and the warmest hospitality in the world await.',
-    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Polynesia/bora-bora.jpeg',
-    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Polynesia/bora-bora.jpeg',
+    heroImage: null, // Bora Bora hero - Upload to Vercel
+    cardImage: null, // Bora Bora card - Upload to Vercel
     duration: '7-14 nights',
     season: 'Year-round (dry season: May-October)',
     startingFrom: 'From £4,000 per person',
@@ -1067,8 +1067,8 @@ export const bucketListExperiences = [
     title: 'Midnight Sun Voyages',
     tagline: 'Where the sun never sets',
     description: 'Experience the magic of the Arctic summer when the sun never dips below the horizon. Cruise Norway\'s coast, Svalbard, or Iceland under 24 hours of ethereal daylight.',
-    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Arctic/midnight-sun.jpeg',
-    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Arctic/midnight-sun.jpeg',
+    heroImage: null, // Midnight Sun hero - Upload to Vercel
+    cardImage: null, // Midnight Sun card - Upload to Vercel
     duration: '7-14 nights',
     season: 'May - July (peak midnight sun: June 21)',
     startingFrom: 'From £2,000 per person',
@@ -1136,8 +1136,8 @@ export const bucketListExperiences = [
     title: 'Grand Voyages',
     tagline: 'Extended journeys of discovery',
     description: 'Embark on an extended voyage of 30 to 60 nights, exploring multiple continents and oceans. These immersive journeys offer the depth of experience only possible with extended time at sea.',
-    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Grand/grand-voyage.jpeg',
-    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Grand/grand-voyage.jpeg',
+    heroImage: null, // Grand Voyages hero - Upload to Vercel
+    cardImage: null, // Grand Voyages card - Upload to Vercel
     duration: '30-60+ nights',
     season: 'Year-round (repositioning seasons optimal)',
     startingFrom: 'From £5,000 per person',
