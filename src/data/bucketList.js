@@ -860,7 +860,7 @@ export const bucketListExperiences = [
     title: 'European River Cruises',
     tagline: 'Glide through the heart of Europe',
     description: 'Cruise the legendary rivers of Europe, from the romantic Rhine and Danube to the Seine and Douro. Pass fairytale castles, vineyard-covered hillsides, and charming medieval towns.',
-    heroImage: null, // European Rivers hero - Upload to Vercel
+    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe-river/europe-river-hero.webp',
     cardImage: null, // European Rivers card - Upload to Vercel
     duration: '7-14 nights',
     season: 'March - December (peak: April-October)',
