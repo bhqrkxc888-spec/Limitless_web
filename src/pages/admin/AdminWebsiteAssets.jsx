@@ -148,14 +148,18 @@ function AdminWebsiteAssets() {
       const { data, error: fetchError } = await supabase
         .schema('web')
         .from('site_assets')
-        .select('*')
-        .order('updated_at', { ascending: false });
+        .select('asset_type, entity_key, url, updated_at');
 
-      if (fetchError) throw fetchError;
-      setAssets(data || []);
+      if (fetchError) {
+        logger.error('Error fetching assets:', fetchError);
+        // Don't throw - just log and continue
+        setAssets([]);
+      } else {
+        setAssets(data || []);
+      }
     } catch (error) {
-      logger.error('Error fetching assets:', error);
-      setError('Failed to load assets');
+      logger.error('Error in fetchAssets:', error);
+      setAssets([]);
     } finally {
       setLoading(false);
     }
@@ -299,30 +303,30 @@ function AdminWebsiteAssets() {
         throw new Error('Failed to upload to storage');
       }
 
-      // Store metadata in Supabase
+      // Store minimal metadata in Supabase
       if (supabase) {
-        const assetData = {
-          asset_type: assetType,
-          entity_key: entityKey || null,
-          url,
-          width: validation.metadata?.width || null,
-          height: validation.metadata?.height || null,
-          bytes: validation.metadata?.bytes || null,
-          mime: validation.metadata?.mime || null,
-          has_alpha: validation.metadata?.hasAlpha || null,
-          updated_at: new Date().toISOString()
-        };
+        try {
+          const assetData = {
+            asset_type: assetType,
+            entity_key: entityKey || null,
+            url,
+            updated_at: new Date().toISOString()
+          };
 
-        const { error: upsertError } = await supabase
-          .schema('web')
-          .from('site_assets')
-          .upsert(assetData, {
-            onConflict: 'asset_type,entity_key'
-          });
+          const { error: upsertError } = await supabase
+            .schema('web')
+            .from('site_assets')
+            .upsert(assetData, {
+              onConflict: 'asset_type,entity_key'
+            });
 
-        if (upsertError) {
-          logger.error('Error storing asset metadata:', upsertError);
-          throw new Error('Failed to save asset metadata');
+          if (upsertError) {
+            logger.error('Error storing asset metadata:', upsertError);
+            // Don't fail the upload - Blob succeeded
+            setError(`Upload succeeded but failed to track: ${upsertError.message}`);
+          }
+        } catch (metaError) {
+          logger.error('Error saving metadata:', metaError);
         }
       }
 
@@ -357,13 +361,15 @@ function AdminWebsiteAssets() {
           .eq('asset_type', assetType)
           .eq('entity_key', entityKey || null);
 
-        if (deleteError) throw deleteError;
+        if (deleteError) {
+          logger.error('Error removing asset:', deleteError);
+          throw new Error(`Failed to remove asset: ${deleteError.message}`);
+        }
       }
 
       // Refresh assets
       await fetchAssets();
-      setSuccessMessage('Asset removed successfully');
-      setTimeout(() => setSuccessMessage(null), 3000);
+      setSuccessMessage('Asset removed successfully (Blob URL still accessible)');
     } catch (err) {
       logger.error('Error removing asset:', err);
       setError(err.message || 'Failed to remove asset');
