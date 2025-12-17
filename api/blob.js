@@ -135,6 +135,7 @@ export default async function handler(req, res) {
     const blob = await put(finalFilename, processedBuffer, {
       access: 'public',
       addRandomSuffix: false,
+      allowOverwrite: true, // Allow replacing existing files
       contentType,
     });
 
