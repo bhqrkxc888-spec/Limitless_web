@@ -11,7 +11,7 @@ export const bucketListExperiences = [
     tagline: 'The ultimate voyage around the globe',
     description: 'Embark on the journey of a lifetime with a world cruise. Visit multiple continents, experience diverse cultures, and create unforgettable memories on a voyage that spans 30 to 180+ nights.',
     heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/worldcruise.jpeg',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/worldcruise.jpeg',
+    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/worldcruise-card.webp',
     duration: '30-180+ nights',
     season: 'Year-round departures',
     startingFrom: 'From £8,000 per person',
@@ -83,7 +83,7 @@ export const bucketListExperiences = [
     tagline: 'Journey to the last great wilderness',
     description: 'Experience the pristine beauty of Antarctica, where penguins rule the ice, whales breach in icy waters, and towering icebergs create a landscape unlike anywhere else on Earth.',
     heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antartica-card.jpeg',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antartica-card.jpeg',
+    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antartica-card.webp',
     duration: '10-20 nights',
     season: 'November - March (Antarctic summer)',
     startingFrom: 'From £4,500 per person',
@@ -152,8 +152,8 @@ export const bucketListExperiences = [
     title: 'Japan & Asia Cruises',
     tagline: 'Where ancient traditions meet modern wonders',
     description: 'Discover the captivating blend of ancient traditions and cutting-edge innovation across Japan and Asia. From cherry blossoms to towering skyscrapers, serene temples to bustling markets.',
-    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Japan/japan-hero.jpeg',
-    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Japan/Japan-card-cherryblossom.jpeg',
+    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Japan/japan-hero.webp',
+    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Japan/Japan-card.webp',
     duration: '14-21+ nights',
     season: 'Year-round (cherry blossom season: March-May)',
     startingFrom: 'From £3,500 per person',
@@ -213,9 +213,9 @@ export const bucketListExperiences = [
       keywords: ['japan cruise', 'asia cruise', 'cherry blossom cruise', 'far east cruise', 'asian cruise holidays']
     },
     images: [
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Japan/DowntownTokyo.jpeg',
+      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Japan/DowntownTokyo%20.webp',
       'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Japan/Japan-mtfuji.jpeg',
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Japan/southkorea.jpeg'
+      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Japan/southkorea.webp'
     ],
     featured: true,
     priority: 3
@@ -370,7 +370,7 @@ export const bucketListExperiences = [
     tagline: 'Dance under the Aurora Borealis',
     description: 'Witness the magical Northern Lights in the Arctic regions of Norway, Iceland, and beyond. Combine Aurora viewing with husky sledding, snow activities, and Arctic landscapes.',
     heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights.jpeg',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights.jpeg',
+    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights-card.webp',
     duration: '7-14 nights',
     season: 'September - March (best: November - February)',
     startingFrom: 'From £2,500 per person',
@@ -512,8 +512,8 @@ export const bucketListExperiences = [
     title: 'Middle East & Arabian Peninsula',
     tagline: 'Ancient wonders meet modern luxury',
     description: 'Experience the fascinating blend of ancient history and contemporary luxury in the Middle East. From the architectural wonders of Dubai to the historical sites of Egypt, discover a region rich in culture and heritage.',
-    heroImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/hero-dubai.jpeg',
-    cardImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/Abu-Dhabi.jpeg',
+    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/hero-dubai.webp',
+    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/Abu-Dhabi.webp',
     duration: '7-14 nights',
     season: 'October - April (avoiding extreme summer heat)',
     startingFrom: 'From £1,500 per person',
@@ -572,9 +572,9 @@ export const bucketListExperiences = [
       keywords: ['middle east cruise', 'dubai cruise', 'abu dhabi cruise', 'arabian peninsula cruise', 'egypt cruise']
     },
     images: [
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/Abu-Dhabi.jpeg',
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/muscat.jpeg',
-      'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/destinations/Middle%20East/Petra.jpeg'
+      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/Abu-Dhabi.webp',
+      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/muscat.webp',
+      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/Petra.webp'
     ],
     featured: true,
     priority: 8
