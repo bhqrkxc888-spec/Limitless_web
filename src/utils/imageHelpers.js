@@ -140,10 +140,10 @@ export const aboutImages = {
 
 /**
  * Get Homepage hero image
- * Now uses centralized config
+ * Now uses centralized config with proper fallback
  */
-import { SITE_ASSETS } from '../config/assetUrls';
-export const homeHeroImages = [SITE_ASSETS.homeHero];
+import { SITE_ASSETS, PLACEHOLDER_IMAGE } from '../config/assetUrls';
+export const homeHeroImages = [SITE_ASSETS.homeHero || PLACEHOLDER_IMAGE];
 
 /**
  * Image paths for Vercel Blob uploads
