@@ -229,11 +229,14 @@ function AdminWebsiteAssets() {
   };
 
   // Upload file to Vercel Blob
-  const uploadToBlob = async (file, path) => {
+  const uploadToBlob = async (file, path, assetType) => {
     try {
-      // Use Vercel Blob client-side upload
+      // Use Vercel Blob client-side upload with Sharp processing
       const response = await fetch(`/api/blob?filename=${encodeURIComponent(path)}`, {
         method: 'POST',
+        headers: {
+          'x-asset-type': assetType, // Pass asset type for server-side sizing
+        },
         body: file,
       });
 
@@ -289,8 +292,8 @@ function AdminWebsiteAssets() {
         blobPath = `ships/${entityKey}-${suffix}.${ext}`;
       }
 
-      // Upload to Vercel Blob
-      const { url, error: uploadError } = await uploadToBlob(file, blobPath);
+      // Upload to Vercel Blob (with Sharp processing)
+      const { url, error: uploadError } = await uploadToBlob(file, blobPath, assetType);
       
       if (uploadError) {
         throw new Error('Failed to upload to storage');
