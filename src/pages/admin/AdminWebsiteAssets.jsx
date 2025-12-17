@@ -1,96 +1,97 @@
 /**
  * Admin Website Assets Page
  * 
- * Read-only asset status dashboard showing which assets exist
+ * Full asset manager with upload, validation, and persistence
  */
 
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Image, MapPin, Ship, Globe, RefreshCw } from 'lucide-react';
-import { destinations } from '../../config/destinations';
-import { cruiseLines } from '../../data/cruiseLines';
-import OptimizedImage from '../../components/OptimizedImage';
+import { Image, MapPin, Ship, Globe, RefreshCw, Upload, AlertCircle, Check, X, Plus } from 'lucide-react';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
+import { supabase } from '../../lib/supabase';
+import { logger } from '../../utils/logger';
+import { cruiseLines } from '../../data/cruiseLines';
 
-const VERCEL_BLOB_BASE = 'https://public.blob.vercel-storage.com';
-
-// Helper functions to build expected Blob paths
-const getDestinationHeroPath = (slug) => `destinations/${slug}-HERO.jpg`;
-const getCruiseLineLogoPath = (id) => `cruise-lines/${id}-LOGO.png`;
-const getCruiseLineCardPath = (id) => `cruise-lines/${id}-CARD.jpg`;
-const getCruiseLineHeroPath = (id) => `cruise-lines/${id}-HERO.jpg`;
-const getShipCardPath = (shipName, cruiseLineId) => {
-  const shipKey = shipName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  return `ships/${cruiseLineId}-${shipKey}-CARD.jpg`;
-};
-const getShipHeroPath = (shipName, cruiseLineId) => {
-  const shipKey = shipName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  return `ships/${cruiseLineId}-${shipKey}-HERO.jpg`;
-};
-
-// Helper to get full Blob URL
-const getBlobUrlFromPath = (path) => `${VERCEL_BLOB_BASE}/${path}`;
-
-// Check if asset exists via image load (works for all asset types)
-const checkAssetExists = async (url) => {
-  return new Promise((resolve) => {
-    const img = new window.Image();
-    let resolved = false;
-    
-    const cleanup = () => {
-      if (!resolved) {
-        resolved = true;
-        img.onload = null;
-        img.onerror = null;
-      }
-    };
-    
-    img.onload = () => {
-      cleanup();
-      resolve(true);
-    };
-    
-    img.onerror = () => {
-      cleanup();
-      resolve(false);
-    };
-    
-    img.src = url;
-    
-    // Timeout after 5 seconds
-    setTimeout(() => {
-      if (!resolved) {
-        cleanup();
-        resolve(false);
-      }
-    }, 5000);
-  });
+// Validation rules
+const VALIDATION_RULES = {
+  destination_hero: { ratio: '16:9', maxSize: 4 * 1024 * 1024, formats: ['image/jpeg', 'image/png', 'image/webp'] },
+  cruise_line_hero: { ratio: '16:9', maxSize: 4 * 1024 * 1024, formats: ['image/jpeg', 'image/png', 'image/webp'] },
+  cruise_line_card: { ratio: '16:9', maxSize: 4 * 1024 * 1024, formats: ['image/jpeg', 'image/png', 'image/webp'] },
+  ship_hero: { ratio: '16:9', maxSize: 4 * 1024 * 1024, formats: ['image/jpeg', 'image/png', 'image/webp'] },
+  ship_card: { ratio: '16:9', maxSize: 4 * 1024 * 1024, formats: ['image/jpeg', 'image/png', 'image/webp'] },
+  cruise_line_logo: { ratio: null, maxSize: 1 * 1024 * 1024, formats: ['image/svg+xml', 'image/png'], requireAlpha: true },
+  site_logo: { ratio: null, maxSize: 1 * 1024 * 1024, formats: ['image/svg+xml', 'image/png'], requireAlpha: false },
+  favicon: { ratio: '1:1', maxSize: 1 * 1024 * 1024, formats: ['image/png', 'image/x-icon'] }
 };
 
-// Batch check assets with throttling
-const checkAssetsBatch = async (assets, batchSize = 5, delay = 200) => {
-  const results = {};
+// Helper to check aspect ratio
+const checkAspectRatio = (width, height, expectedRatio) => {
+  if (!expectedRatio) return { valid: true };
   
-  for (let i = 0; i < assets.length; i += batchSize) {
-    const batch = assets.slice(i, i + batchSize);
-    const batchPromises = batch.map(async (asset) => {
-      const exists = await checkAssetExists(asset.url);
-      return { key: asset.key, exists };
-    });
-    
-    const batchResults = await Promise.all(batchPromises);
-    batchResults.forEach(({ key, exists }) => {
-      results[key] = exists;
-    });
-    
-    // Delay between batches
-    if (i + batchSize < assets.length) {
-      await new Promise(resolve => setTimeout(resolve, delay));
-    }
+  const [w, h] = expectedRatio.split(':').map(Number);
+  const expected = w / h;
+  const actual = width / height;
+  const tolerance = 0.02; // 2% tolerance
+  
+  const valid = Math.abs(actual - expected) < tolerance;
+  return {
+    valid,
+    expected: expectedRatio,
+    actual: `${width}:${height}`,
+    message: valid ? null : `Image must be ${expectedRatio} aspect ratio`
+  };
+};
+
+// Helper to check if image has alpha channel
+const checkHasAlpha = (imageData) => {
+  const data = imageData.data;
+  for (let i = 3; i < data.length; i += 4) {
+    if (data[i] < 255) return true;
   }
-  
-  return results;
+  return false;
+};
+
+// Helper to get image metadata
+const getImageMetadata = (file) => {
+  return new Promise((resolve, reject) => {
+    const img = new window.Image();
+    const reader = new FileReader();
+    
+    reader.onload = (e) => {
+      img.onload = () => {
+        // Create canvas to check alpha
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        
+        let hasAlpha = false;
+        try {
+          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+          hasAlpha = checkHasAlpha(imageData);
+        } catch {
+          // CORS or other error - assume no alpha
+          hasAlpha = false;
+        }
+        
+        resolve({
+          width: img.width,
+          height: img.height,
+          hasAlpha,
+          mime: file.type,
+          bytes: file.size
+        });
+      };
+      
+      img.onerror = () => reject(new Error('Failed to load image'));
+      img.src = e.target.result;
+    };
+    
+    reader.onerror = () => reject(new Error('Failed to read file'));
+    reader.readAsDataURL(file);
+  });
 };
 
 function AdminWebsiteAssets() {
@@ -98,9 +99,14 @@ function AdminWebsiteAssets() {
   const { isAuthenticated, isLoading: authLoading, logout } = useAdminAuth();
   
   const [activeTab, setActiveTab] = useState('destinations');
-  const [assetStatus, setAssetStatus] = useState({});
-  const [isChecking, setIsChecking] = useState(false);
-  const [lastChecked, setLastChecked] = useState(null);
+  const [assets, setAssets] = useState([]);
+  const [destinations, setDestinations] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState({});
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [showAddDestination, setShowAddDestination] = useState(false);
+  const [newDestination, setNewDestination] = useState({ slug: '', name: '', region: '' });
 
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {
@@ -108,90 +114,326 @@ function AdminWebsiteAssets() {
     }
   }, [authLoading, isAuthenticated, navigate]);
 
-  // Generate assets list based on active tab
-  const getAssetsForTab = useCallback(() => {
+  // Fetch destinations from catalog
+  const fetchDestinations = useCallback(async () => {
+    if (!supabase) return;
+    
+    try {
+      const { data, error: fetchError } = await supabase
+        .from('destination_catalog')
+        .select('*')
+        .eq('enabled', true)
+        .order('sort_order', { ascending: true });
+
+      if (fetchError) throw fetchError;
+      setDestinations(data || []);
+    } catch (error) {
+      logger.error('Error fetching destinations:', error);
+    }
+  }, []);
+
+  // Fetch assets from Supabase
+  const fetchAssets = useCallback(async () => {
+    if (!supabase) return;
+    
+    try {
+      setLoading(true);
+      const { data, error: fetchError } = await supabase
+        .from('site_assets')
+        .select('*')
+        .order('updated_at', { ascending: false });
+
+      if (fetchError) throw fetchError;
+      setAssets(data || []);
+    } catch (error) {
+      logger.error('Error fetching assets:', error);
+      setError('Failed to load assets');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isAuthenticated && supabase) {
+      fetchDestinations();
+      fetchAssets();
+    }
+  }, [isAuthenticated, fetchDestinations, fetchAssets]);
+
+  // Get asset for a specific entity
+  const getAsset = (assetType, entityKey) => {
+    return assets.find(a => a.asset_type === assetType && a.entity_key === entityKey);
+  };
+
+  // Validate file
+  const validateFile = async (file, assetType) => {
+    const rules = VALIDATION_RULES[assetType];
+    if (!rules) return { valid: true };
+
+    const errors = [];
+    const warnings = [];
+
+    // Check file size
+    if (file.size > rules.maxSize) {
+      const maxSizeMB = (rules.maxSize / 1024 / 1024).toFixed(1);
+      const fileSizeMB = (file.size / 1024 / 1024).toFixed(1);
+      errors.push(`File size (${fileSizeMB}MB) exceeds maximum of ${maxSizeMB}MB. Please compress or resize the image.`);
+    }
+
+    // Check format
+    if (!rules.formats.includes(file.type)) {
+      const allowedFormats = rules.formats.map(f => f.split('/')[1].toUpperCase()).join(', ');
+      errors.push(`Invalid file format. Only ${allowedFormats} files are allowed for ${assetType.replace(/_/g, ' ')}.`);
+    }
+
+    // For SVG, we can't get dimensions easily
+    if (file.type === 'image/svg+xml') {
+      return { valid: errors.length === 0, errors, warnings };
+    }
+
+    // Get image metadata
+    try {
+      const metadata = await getImageMetadata(file);
+
+      // Check aspect ratio
+      if (rules.ratio) {
+        const ratioCheck = checkAspectRatio(metadata.width, metadata.height, rules.ratio);
+        if (!ratioCheck.valid) {
+          errors.push(`❌ ${ratioCheck.message}. Current: ${metadata.width}x${metadata.height} (${(metadata.width / metadata.height).toFixed(2)}:1). Please crop or resize to ${rules.ratio}.`);
+        }
+      }
+
+      // Check alpha channel for logos
+      if (rules.requireAlpha && file.type === 'image/png' && !metadata.hasAlpha) {
+        errors.push(`❌ PNG logos must have a transparent background (alpha channel). Current file has no transparency. Please use a PNG with transparency or upload an SVG instead.`);
+      }
+
+      // Check dimensions
+      if (metadata.width < 800 || metadata.height < 450) {
+        warnings.push(`⚠️ Low resolution: ${metadata.width}x${metadata.height}. Recommended minimum: 1920x1080 for best quality. Upload will proceed but image may appear blurry on high-resolution displays.`);
+      }
+
+      return { valid: errors.length === 0, errors, warnings, metadata };
+    } catch {
+      errors.push('Failed to read image metadata');
+      return { valid: false, errors, warnings };
+    }
+  };
+
+  // Upload file to Vercel Blob
+  const uploadToBlob = async (file, path) => {
+    try {
+      // Use Vercel Blob client-side upload
+      const response = await fetch(`/api/blob?filename=${encodeURIComponent(path)}`, {
+        method: 'POST',
+        body: file,
+      });
+
+      if (!response.ok) {
+        throw new Error('Upload failed');
+      }
+
+      const { url } = await response.json();
+      return { url, error: null };
+    } catch (err) {
+      logger.error('Error uploading to blob:', err);
+      return { url: null, error: err };
+    }
+  };
+
+  // Handle file upload
+  const handleUpload = async (file, assetType, entityKey) => {
+    const uploadKey = `${assetType}-${entityKey || 'site'}`;
+    setUploading(prev => ({ ...prev, [uploadKey]: true }));
+    setError(null);
+    setSuccessMessage(null);
+
+    try {
+      // Validate file
+      const validation = await validateFile(file, assetType);
+      
+      if (!validation.valid) {
+        setError(validation.errors.join('. '));
+        return;
+      }
+
+      if (validation.warnings && validation.warnings.length > 0) {
+        logger.warn('Upload warnings:', validation.warnings);
+      }
+
+      // Build blob path
+      const ext = file.name.split('.').pop();
+      let blobPath = '';
+      
+      if (assetType.startsWith('site_')) {
+        blobPath = `site/${assetType.replace('site_', '')}.${ext}`;
+      } else if (assetType === 'destination_hero') {
+        blobPath = `destinations/${entityKey}-HERO.${ext}`;
+      } else if (assetType.startsWith('cruise_line_')) {
+        const suffix = assetType.replace('cruise_line_', '').toUpperCase();
+        blobPath = `cruise-lines/${entityKey}-${suffix}.${ext}`;
+      } else if (assetType.startsWith('ship_')) {
+        const suffix = assetType.replace('ship_', '').toUpperCase();
+        blobPath = `ships/${entityKey}-${suffix}.${ext}`;
+      }
+
+      // Upload to Vercel Blob
+      const { url, error: uploadError } = await uploadToBlob(file, blobPath);
+      
+      if (uploadError) {
+        throw new Error('Failed to upload to storage');
+      }
+
+      // Store metadata in Supabase
+      if (supabase) {
+        const assetData = {
+          asset_type: assetType,
+          entity_key: entityKey || null,
+          url,
+          width: validation.metadata?.width || null,
+          height: validation.metadata?.height || null,
+          bytes: validation.metadata?.bytes || null,
+          mime: validation.metadata?.mime || null,
+          has_alpha: validation.metadata?.hasAlpha || null,
+          updated_at: new Date().toISOString()
+        };
+
+        const { error: upsertError } = await supabase
+          .from('site_assets')
+          .upsert(assetData, {
+            onConflict: 'asset_type,entity_key'
+          });
+
+        if (upsertError) {
+          logger.error('Error storing asset metadata:', upsertError);
+          throw new Error('Failed to save asset metadata');
+        }
+      }
+
+      // Refresh assets
+      await fetchAssets();
+      setSuccessMessage(`Successfully uploaded ${assetType}`);
+      setTimeout(() => setSuccessMessage(null), 3000);
+
+    } catch (err) {
+      logger.error('Error uploading asset:', err);
+      setError(err.message || 'Failed to upload asset');
+    } finally {
+      setUploading(prev => ({ ...prev, [uploadKey]: false }));
+    }
+  };
+
+  // Handle remove asset
+  const handleRemove = async (assetType, entityKey) => {
+    if (!confirm('Are you sure you want to remove this asset? This action cannot be undone.')) {
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError(null);
+
+      if (supabase) {
+        const { error: deleteError } = await supabase
+          .from('site_assets')
+          .delete()
+          .eq('asset_type', assetType)
+          .eq('entity_key', entityKey || null);
+
+        if (deleteError) throw deleteError;
+      }
+
+      // Refresh assets
+      await fetchAssets();
+      setSuccessMessage('Asset removed successfully');
+      setTimeout(() => setSuccessMessage(null), 3000);
+    } catch (err) {
+      logger.error('Error removing asset:', err);
+      setError(err.message || 'Failed to remove asset');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Add new destination
+  const handleAddDestination = async () => {
+    if (!newDestination.slug || !newDestination.name) {
+      setError('Slug and name are required');
+      return;
+    }
+
+    try {
+      const { error: insertError } = await supabase
+        .from('destination_catalog')
+        .insert({
+          slug: newDestination.slug,
+          name: newDestination.name,
+          region: newDestination.region || null,
+          enabled: true,
+          sort_order: destinations.length * 10 + 10
+        });
+
+      if (insertError) throw insertError;
+
+      await fetchDestinations();
+      setShowAddDestination(false);
+      setNewDestination({ slug: '', name: '', region: '' });
+      setSuccessMessage('Destination added successfully');
+      setTimeout(() => setSuccessMessage(null), 3000);
+    } catch (err) {
+      logger.error('Error adding destination:', err);
+      setError('Failed to add destination');
+    }
+  };
+
+  // Get rows for current tab
+  const getRowsForTab = () => {
     switch (activeTab) {
       case 'site':
         return [
-          { key: 'site-logo', entityName: 'Site Logo', assetType: 'Logo', path: 'site/site-logo.svg', url: getBlobUrlFromPath('site/site-logo.svg') },
-          { key: 'site-logo-png', entityName: 'Site Logo', assetType: 'Logo', path: 'site/site-logo.png', url: getBlobUrlFromPath('site/site-logo.png') },
-          { key: 'site-favicon', entityName: 'Favicon', assetType: 'Favicon', path: 'site/favicon.png', url: getBlobUrlFromPath('site/favicon.png') }
+          { id: 'site-logo', label: 'Site Logo', assetType: 'site_logo', entityKey: null },
+          { id: 'favicon', label: 'Favicon', assetType: 'favicon', entityKey: null }
         ];
       
       case 'destinations':
         return destinations.map(dest => ({
-          key: `dest-${dest.slug}-hero`,
-          entityName: dest.name,
-          entityKey: dest.slug,
-          assetType: 'Hero',
-          path: getDestinationHeroPath(dest.slug),
-          url: getBlobUrlFromPath(getDestinationHeroPath(dest.slug))
+          id: `dest-${dest.slug}`,
+          label: dest.name,
+          assetType: 'destination_hero',
+          entityKey: dest.slug
         }));
       
       case 'cruise-lines': {
-        const cruiseLineAssets = [];
+        const rows = [];
         cruiseLines.forEach(cl => {
-          cruiseLineAssets.push(
-            { key: `cl-${cl.id}-logo`, entityName: cl.name, entityKey: cl.id, assetType: 'Logo', path: getCruiseLineLogoPath(cl.id), url: getBlobUrlFromPath(getCruiseLineLogoPath(cl.id)) },
-            { key: `cl-${cl.id}-card`, entityName: cl.name, entityKey: cl.id, assetType: 'Card', path: getCruiseLineCardPath(cl.id), url: getBlobUrlFromPath(getCruiseLineCardPath(cl.id)) },
-            { key: `cl-${cl.id}-hero`, entityName: cl.name, entityKey: cl.id, assetType: 'Hero', path: getCruiseLineHeroPath(cl.id), url: getBlobUrlFromPath(getCruiseLineHeroPath(cl.id)) }
+          rows.push(
+            { id: `cl-${cl.id}-logo`, label: `${cl.name} - Logo`, assetType: 'cruise_line_logo', entityKey: cl.id },
+            { id: `cl-${cl.id}-card`, label: `${cl.name} - Card`, assetType: 'cruise_line_card', entityKey: cl.id },
+            { id: `cl-${cl.id}-hero`, label: `${cl.name} - Hero`, assetType: 'cruise_line_hero', entityKey: cl.id }
           );
         });
-        return cruiseLineAssets;
+        return rows;
       }
       
       case 'ships': {
-        const shipAssets = [];
+        const rows = [];
         cruiseLines.forEach(cl => {
           if (cl.ships && Array.isArray(cl.ships)) {
             cl.ships.forEach(shipName => {
-              shipAssets.push(
-                { key: `ship-${cl.id}-${shipName}-card`, entityName: shipName, entityKey: `${cl.id}-${shipName}`, assetType: 'Card', path: getShipCardPath(shipName, cl.id), url: getBlobUrlFromPath(getShipCardPath(shipName, cl.id)), cruiseLine: cl.name },
-                { key: `ship-${cl.id}-${shipName}-hero`, entityName: shipName, entityKey: `${cl.id}-${shipName}`, assetType: 'Hero', path: getShipHeroPath(shipName, cl.id), url: getBlobUrlFromPath(getShipHeroPath(shipName, cl.id)), cruiseLine: cl.name }
+              const shipKey = `${cl.id}-${shipName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+              rows.push(
+                { id: `ship-${shipKey}-card`, label: `${shipName} (${cl.shortName}) - Card`, assetType: 'ship_card', entityKey: shipKey },
+                { id: `ship-${shipKey}-hero`, label: `${shipName} (${cl.shortName}) - Hero`, assetType: 'ship_hero', entityKey: shipKey }
               );
             });
           }
         });
-        return shipAssets;
+        return rows;
       }
       
       default:
         return [];
     }
-  }, [activeTab]);
-
-  // Check assets when tab changes or on manual refresh
-  const checkAssets = useCallback(async () => {
-    const assets = getAssetsForTab();
-    if (assets.length === 0) return;
-    
-    setIsChecking(true);
-    try {
-      const results = await checkAssetsBatch(assets);
-      setAssetStatus(prev => ({ ...prev, ...results }));
-      setLastChecked(Date.now());
-    } catch (error) {
-      console.error('Error checking assets:', error);
-    } finally {
-      setIsChecking(false);
-    }
-  }, [getAssetsForTab]);
-
-  // Check assets when tab changes (only if not already checked)
-  useEffect(() => {
-    const assets = getAssetsForTab();
-    const needsCheck = assets.some(asset => assetStatus[asset.key] === undefined);
-    if (needsCheck && !isChecking) {
-      checkAssets();
-    }
-  }, [activeTab, getAssetsForTab, assetStatus, isChecking, checkAssets]);
-
-  // Calculate stats
-  const getStats = () => {
-    const assets = getAssetsForTab();
-    const found = assets.filter(asset => assetStatus[asset.key] === true).length;
-    const total = assets.length;
-    return { found, total };
   };
 
   if (authLoading || (!isAuthenticated && !authLoading)) {
@@ -211,8 +453,7 @@ function AdminWebsiteAssets() {
     );
   }
 
-  const assets = getAssetsForTab();
-  const stats = getStats();
+  const rows = getRowsForTab();
   const tabs = [
     { id: 'site', label: 'Site', icon: Globe },
     { id: 'destinations', label: 'Destinations', icon: MapPin },
@@ -223,47 +464,45 @@ function AdminWebsiteAssets() {
   return (
     <AdminLayout 
       onLogout={logout} 
-      lastUpdated={lastChecked}
-      onRefresh={checkAssets}
-      isRefreshing={isChecking}
+      lastUpdated={null}
+      onRefresh={fetchAssets}
+      isRefreshing={loading}
     >
       <div className="admin-website-assets">
         <header className="admin-page-header">
-          <div className="admin-page-header-row">
-            <div>
-              <h1 className="admin-page-title">Website Assets</h1>
-              <p className="admin-page-subtitle">
-                Monitor asset status across the website
-              </p>
-            </div>
+          <div>
+            <h1 className="admin-page-title">Website Assets</h1>
+            <p className="admin-page-subtitle">
+              Upload and manage website images
+            </p>
+          </div>
+          {activeTab === 'destinations' && (
             <button
               className="admin-btn admin-btn-primary"
-              onClick={checkAssets}
-              disabled={isChecking}
+              onClick={() => setShowAddDestination(true)}
             >
-              <RefreshCw size={16} className={isChecking ? 'spinning' : ''} />
-              {isChecking ? 'Checking...' : 'Refresh Status'}
+              <Plus size={16} />
+              Add Destination
             </button>
-          </div>
+          )}
         </header>
 
-        {/* Stats Summary */}
-        <div className="admin-stats-grid" style={{ marginBottom: '1.5rem' }}>
-          <div className="admin-stat-card">
-            <div className="admin-stat-label">Found</div>
-            <div className={`admin-stat-value ${stats.found === stats.total ? 'success' : stats.found > 0 ? 'warning' : 'error'}`}>
-              {stats.found}
-            </div>
-            <div className="admin-stat-subtitle">of {stats.total} assets</div>
+        {error && (
+          <div className="admin-alert admin-alert-error" style={{ marginBottom: '1.5rem' }}>
+            <AlertCircle size={20} />
+            <span>{error}</span>
+            <button onClick={() => setError(null)} className="admin-alert-close">
+              <X size={16} />
+            </button>
           </div>
-          <div className="admin-stat-card">
-            <div className="admin-stat-label">Missing</div>
-            <div className={`admin-stat-value ${stats.found === stats.total ? 'success' : 'error'}`}>
-              {stats.total - stats.found}
-            </div>
-            <div className="admin-stat-subtitle">assets</div>
+        )}
+
+        {successMessage && (
+          <div className="admin-alert admin-alert-success" style={{ marginBottom: '1.5rem' }}>
+            <Check size={20} />
+            <span>{successMessage}</span>
           </div>
-        </div>
+        )}
 
         {/* Tabs */}
         <div className="admin-tabs">
@@ -284,112 +523,171 @@ function AdminWebsiteAssets() {
 
         {/* Assets Table */}
         <div className="admin-card">
-          {assets.length === 0 ? (
-            <div className="admin-empty">
-              <p style={{ fontSize: '0.875rem', color: 'var(--admin-text-muted)', margin: 0 }}>
-                No assets found for this section
-              </p>
-            </div>
-          ) : (
-            <div className="admin-table-wrapper">
-              <table className="admin-table">
-                <thead>
-                  <tr>
-                    <th style={{ width: '80px' }}>Preview</th>
-                    <th>Entity Name</th>
-                    <th>Asset Type</th>
-                    <th>Expected Path</th>
-                    <th style={{ width: '100px' }}>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {assets.map((asset) => {
-                    const exists = assetStatus[asset.key] === true;
-                    const checking = assetStatus[asset.key] === undefined && isChecking;
-                    
-                    return (
-                      <tr key={asset.key}>
-                        <td>
-                          {exists ? (
-                            <div className="admin-asset-thumbnail">
-                              <OptimizedImage
-                                src={asset.url}
-                                alt={asset.entityName}
-                                width={60}
-                                height={40}
-                                className="admin-thumbnail-img"
-                                style={{ objectFit: 'cover', borderRadius: '4px' }}
-                              />
-                            </div>
-                          ) : (
-                            <div className="admin-asset-placeholder">
-                              <Image size={24} style={{ opacity: 0.3 }} />
-                            </div>
-                          )}
-                        </td>
-                        <td>
-                          <div>
-                            <strong>{asset.entityName}</strong>
-                            {asset.cruiseLine && (
-                              <div style={{ fontSize: '0.75rem', color: 'var(--admin-text-muted)', marginTop: '0.25rem' }}>
-                                {asset.cruiseLine}
-                              </div>
-                            )}
+          <div className="admin-table-wrapper">
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '100px' }}>Preview</th>
+                  <th>Name</th>
+                  <th style={{ width: '120px' }}>Status</th>
+                  <th style={{ width: '180px' }}>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.map((row) => {
+                  const asset = getAsset(row.assetType, row.entityKey);
+                  const uploadKey = `${row.assetType}-${row.entityKey || 'site'}`;
+                  const isUploading = uploading[uploadKey];
+                  
+                  return (
+                    <tr key={row.id}>
+                      <td>
+                        {asset?.url ? (
+                          <div className="admin-asset-thumbnail">
+                            <img
+                              src={asset.url}
+                              alt={row.label}
+                              className="admin-thumbnail-img"
+                            />
                           </div>
-                        </td>
-                        <td>
-                          <span className="admin-badge admin-badge-info">
-                            {asset.assetType}
-                          </span>
-                        </td>
-                        <td>
-                          <code style={{ 
-                            fontSize: '0.75rem', 
-                            color: 'var(--admin-text-dim)',
-                            background: 'var(--admin-bg-tertiary)',
-                            padding: '0.25rem 0.5rem',
-                            borderRadius: '4px',
-                            wordBreak: 'break-all'
-                          }}>
-                            {asset.path}
-                          </code>
-                        </td>
-                        <td>
-                          {checking ? (
-                            <span className="admin-badge admin-badge-info">
-                              Checking...
-                            </span>
-                          ) : exists ? (
-                            <span className="admin-badge admin-badge-success">
-                              Found
-                            </span>
-                          ) : (
-                            <span className="admin-badge admin-badge-error">
-                              Missing
-                            </span>
+                        ) : (
+                          <div className="admin-asset-placeholder">
+                            <Image size={24} />
+                          </div>
+                        )}
+                      </td>
+                      <td>
+                        <div>
+                          <strong>{row.label}</strong>
+                          {asset && (
+                            <div style={{ fontSize: '0.75rem', color: 'var(--admin-text-muted)', marginTop: '0.25rem' }}>
+                              {asset.width && asset.height && `${asset.width}×${asset.height}`}
+                              {asset.bytes && ` • ${(asset.bytes / 1024).toFixed(0)}KB`}
+                            </div>
                           )}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-            </div>
-          )}
+                        </div>
+                      </td>
+                      <td>
+                        {asset ? (
+                          <span className="admin-badge admin-badge-success">
+                            <Check size={14} />
+                            Uploaded
+                          </span>
+                        ) : (
+                          <span className="admin-badge admin-badge-warning">
+                            Missing
+                          </span>
+                        )}
+                      </td>
+                      <td>
+                        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                          <label className="admin-btn admin-btn-sm admin-btn-primary" style={{ cursor: 'pointer' }}>
+                            <input
+                              type="file"
+                              accept={VALIDATION_RULES[row.assetType]?.formats.join(',') || 'image/*'}
+                              onChange={(e) => {
+                                const file = e.target.files?.[0];
+                                if (file) {
+                                  handleUpload(file, row.assetType, row.entityKey);
+                                }
+                                e.target.value = ''; // Reset
+                              }}
+                              style={{ display: 'none' }}
+                              disabled={isUploading}
+                            />
+                            <Upload size={14} />
+                            {isUploading ? 'Uploading...' : (asset ? 'Replace' : 'Upload')}
+                          </label>
+                          {asset && (
+                            <>
+                              <a
+                                href={asset.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="admin-btn admin-btn-sm admin-btn-secondary"
+                              >
+                                Preview
+                              </a>
+                              <button
+                                onClick={() => handleRemove(row.assetType, row.entityKey)}
+                                className="admin-btn admin-btn-sm admin-btn-danger"
+                                disabled={loading}
+                              >
+                                Remove
+                              </button>
+                            </>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
+
+        {/* Add Destination Modal */}
+        {showAddDestination && (
+          <div className="admin-modal-overlay" onClick={() => setShowAddDestination(false)}>
+            <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
+              <div className="admin-modal-header">
+                <h2>Add New Destination</h2>
+                <button onClick={() => setShowAddDestination(false)} className="admin-modal-close">
+                  <X size={20} />
+                </button>
+              </div>
+              <div className="admin-modal-body">
+                <div className="admin-form-group">
+                  <label htmlFor="dest-slug">Slug (URL-friendly)</label>
+                  <input
+                    id="dest-slug"
+                    type="text"
+                    value={newDestination.slug}
+                    onChange={(e) => setNewDestination(prev => ({ ...prev, slug: e.target.value }))}
+                    className="admin-input"
+                    placeholder="mediterranean-cruises"
+                  />
+                </div>
+                <div className="admin-form-group">
+                  <label htmlFor="dest-name">Name</label>
+                  <input
+                    id="dest-name"
+                    type="text"
+                    value={newDestination.name}
+                    onChange={(e) => setNewDestination(prev => ({ ...prev, name: e.target.value }))}
+                    className="admin-input"
+                    placeholder="Mediterranean"
+                  />
+                </div>
+                <div className="admin-form-group">
+                  <label htmlFor="dest-region">Region (optional)</label>
+                  <input
+                    id="dest-region"
+                    type="text"
+                    value={newDestination.region}
+                    onChange={(e) => setNewDestination(prev => ({ ...prev, region: e.target.value }))}
+                    className="admin-input"
+                    placeholder="Europe"
+                  />
+                </div>
+              </div>
+              <div className="admin-modal-footer">
+                <button onClick={() => setShowAddDestination(false)} className="admin-btn admin-btn-secondary">
+                  Cancel
+                </button>
+                <button onClick={handleAddDestination} className="admin-btn admin-btn-primary">
+                  Add Destination
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       <style>{`
         .admin-website-assets {
           max-width: 1400px;
-        }
-
-        .admin-page-header-row {
-          display: flex;
-          align-items: flex-start;
-          justify-content: space-between;
-          gap: 1rem;
-          flex-wrap: wrap;
         }
 
         .admin-tabs {
@@ -411,7 +709,7 @@ function AdminWebsiteAssets() {
           font-size: 0.875rem;
           font-weight: 500;
           cursor: pointer;
-          transition: all var(--admin-transition);
+          transition: all 0.2s;
         }
 
         .admin-tab:hover {
@@ -425,24 +723,22 @@ function AdminWebsiteAssets() {
         }
 
         .admin-asset-thumbnail {
-          width: 60px;
-          height: 40px;
+          width: 80px;
+          height: 60px;
           border-radius: 4px;
           overflow: hidden;
           background: var(--admin-bg-tertiary);
-          display: flex;
-          align-items: center;
-          justify-content: center;
         }
 
         .admin-thumbnail-img {
           width: 100%;
           height: 100%;
+          object-fit: cover;
         }
 
         .admin-asset-placeholder {
-          width: 60px;
-          height: 40px;
+          width: 80px;
+          height: 60px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -451,17 +747,156 @@ function AdminWebsiteAssets() {
           color: var(--admin-text-dim);
         }
 
-        .spinning {
-          animation: spin 1s linear infinite;
+        .admin-alert {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          padding: 1rem;
+          border-radius: 6px;
+          font-size: 0.875rem;
+          position: relative;
         }
 
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
+        .admin-alert-error {
+          background: rgba(239, 68, 68, 0.1);
+          border: 1px solid rgba(239, 68, 68, 0.3);
+          color: #fca5a5;
         }
 
-        code {
-          font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+        .admin-alert-success {
+          background: rgba(34, 197, 94, 0.1);
+          border: 1px solid rgba(34, 197, 94, 0.3);
+          color: #86efac;
+        }
+
+        .admin-alert-close {
+          position: absolute;
+          right: 0.75rem;
+          top: 50%;
+          transform: translateY(-50%);
+          background: none;
+          border: none;
+          color: currentColor;
+          cursor: pointer;
+          padding: 0.25rem;
+          opacity: 0.7;
+        }
+
+        .admin-alert-close:hover {
+          opacity: 1;
+        }
+
+        .admin-modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.75);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 9999;
+          padding: 1rem;
+        }
+
+        .admin-modal {
+          background: var(--admin-bg-secondary);
+          border-radius: 8px;
+          max-width: 500px;
+          width: 100%;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .admin-modal-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 1.5rem;
+          border-bottom: 1px solid var(--admin-border);
+        }
+
+        .admin-modal-header h2 {
+          margin: 0;
+          font-size: 1.25rem;
+          color: var(--admin-text-primary);
+        }
+
+        .admin-modal-close {
+          background: none;
+          border: none;
+          color: var(--admin-text-muted);
+          cursor: pointer;
+          padding: 0.25rem;
+          display: flex;
+          border-radius: 4px;
+          transition: all 0.2s;
+        }
+
+        .admin-modal-close:hover {
+          background: var(--admin-bg-tertiary);
+          color: var(--admin-text-primary);
+        }
+
+        .admin-modal-body {
+          padding: 1.5rem;
+        }
+
+        .admin-modal-footer {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 0.75rem;
+          padding: 1.5rem;
+          border-top: 1px solid var(--admin-border);
+        }
+
+        .admin-form-group {
+          margin-bottom: 1.5rem;
+        }
+
+        .admin-form-group:last-child {
+          margin-bottom: 0;
+        }
+
+        .admin-form-group label {
+          display: block;
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: var(--admin-text-primary);
+          margin-bottom: 0.5rem;
+        }
+
+        .admin-input {
+          width: 100%;
+          background: var(--admin-bg-tertiary);
+          border: 1px solid var(--admin-border);
+          border-radius: 6px;
+          padding: 0.75rem;
+          color: var(--admin-text-primary);
+          font-size: 0.875rem;
+          transition: all 0.2s;
+        }
+
+        .admin-input:focus {
+          outline: none;
+          border-color: var(--admin-primary);
+          box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .admin-btn-danger {
+          background: rgba(239, 68, 68, 0.1);
+          color: #f87171;
+          border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .admin-btn-danger:hover {
+          background: rgba(239, 68, 68, 0.2);
+        }
+
+        .admin-btn-danger:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
         }
       `}</style>
     </AdminLayout>
