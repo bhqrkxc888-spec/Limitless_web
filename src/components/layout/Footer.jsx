@@ -303,12 +303,8 @@ function Footer() {
           
           <div className="footer-copyright">
             <p>© {currentYear} {siteConfig.siteName}. All rights reserved.</p>
+            <Link to="/admin/login" className="footer-admin-link">Staff Login</Link>
           </div>
-          
-          {/* Floating Staff Login Button - Bottom Left */}
-          <Link to="/admin/login" className="floating-staff-login" aria-label="Staff Login">
-            Staff Login
-          </Link>
         </div>
       </div>
     </footer>
