@@ -4,11 +4,13 @@ import { siteConfig } from '../../config/siteConfig';
 import { navigation } from '../../data/navigation';
 import { isSiteLaunched } from '../../config/launchConfig';
 import { hasConsentDecision } from '../../utils/consentManager';
+import CookieSettings from '../CookieSettings';
 import './Footer.css';
 
 function Footer() {
   const currentYear = new Date().getFullYear();
   const [authStatus, setAuthStatus] = useState(isSiteLaunched());
+  const [showCookieSettings, setShowCookieSettings] = useState(false);
 
   // Listen for authentication changes (e.g., after preview login)
   useEffect(() => {
@@ -209,20 +211,14 @@ function Footer() {
                     <Link to={link.path}>{link.label}</Link>
                   </li>
                 ))}
-                {hasConsentDecision() && (
-                  <li>
-                    <button 
-                      onClick={() => {
-                        localStorage.removeItem('cookie-consent');
-                        localStorage.removeItem('cookie-consent-date');
-                        window.location.reload();
-                      }}
-                      className="footer-link-button"
-                    >
-                      Cookie Settings
-                    </button>
-                  </li>
-                )}
+                <li>
+                  <button 
+                    onClick={() => setShowCookieSettings(true)}
+                    className="footer-link-button"
+                  >
+                    Cookie Settings
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
@@ -252,6 +248,11 @@ function Footer() {
           </div>
         </div>
       </div>
+      
+      <CookieSettings 
+        isOpen={showCookieSettings} 
+        onClose={() => setShowCookieSettings(false)} 
+      />
     </footer>
   );
 }

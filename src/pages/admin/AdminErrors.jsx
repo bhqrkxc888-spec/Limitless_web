@@ -101,6 +101,9 @@ function AdminErrors() {
 
   const [resolving, setResolving] = useState(null);
   const [resolveError, setResolveError] = useState(null);
+  const [bulkAction, setBulkAction] = useState(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteAction, setDeleteAction] = useState(null);
 
   const markAsResolved = async (errorId) => {
     if (!supabase) return;
@@ -150,6 +153,109 @@ function AdminErrors() {
       console.error('Error marking as resolved:', err);
     } finally {
       setResolving(null);
+    }
+  };
+
+  const bulkResolveAll = async () => {
+    if (!supabase) return;
+    
+    setBulkAction('resolving');
+    setResolveError(null);
+    
+    try {
+      const { error } = await supabase
+        .from('website_errors')
+        .update({ 
+          resolved: true, 
+          resolved_at: new Date().toISOString() 
+        })
+        .eq('resolved', false)
+        .not('page_url', 'like', '%crm.limitlesscruises.com%');
+      
+      if (error) {
+        if (error.code === '42501') {
+          setResolveError('Permission denied. Please check RLS policies for UPDATE on website_errors table.');
+        } else {
+          setResolveError(`Failed to resolve errors: ${error.message}`);
+        }
+        setBulkAction(null);
+        return;
+      }
+      
+      await fetchErrors();
+      setBulkAction(null);
+    } catch (err) {
+      setResolveError(`Error: ${err.message}`);
+      setBulkAction(null);
+    }
+  };
+
+  const deleteResolvedErrors = async () => {
+    if (!supabase) return;
+    
+    setBulkAction('deleting');
+    setResolveError(null);
+    setShowDeleteConfirm(false);
+    
+    try {
+      const { error } = await supabase
+        .from('website_errors')
+        .delete()
+        .eq('resolved', true)
+        .not('page_url', 'like', '%crm.limitlesscruises.com%');
+      
+      if (error) {
+        if (error.code === '42501') {
+          setResolveError('Permission denied. Please check RLS policies for DELETE on website_errors table.');
+        } else {
+          setResolveError(`Failed to delete errors: ${error.message}`);
+        }
+        setBulkAction(null);
+        return;
+      }
+      
+      await fetchErrors();
+      setBulkAction(null);
+      setDeleteAction(null);
+    } catch (err) {
+      setResolveError(`Error: ${err.message}`);
+      setBulkAction(null);
+    }
+  };
+
+  const deleteOldErrors = async (daysOld = 30) => {
+    if (!supabase) return;
+    
+    setBulkAction('deleting');
+    setResolveError(null);
+    setShowDeleteConfirm(false);
+    
+    try {
+      const cutoffDate = new Date();
+      cutoffDate.setDate(cutoffDate.getDate() - daysOld);
+      
+      const { error } = await supabase
+        .from('website_errors')
+        .delete()
+        .lt('created_at', cutoffDate.toISOString())
+        .not('page_url', 'like', '%crm.limitlesscruises.com%');
+      
+      if (error) {
+        if (error.code === '42501') {
+          setResolveError('Permission denied. Please check RLS policies for DELETE on website_errors table.');
+        } else {
+          setResolveError(`Failed to delete errors: ${error.message}`);
+        }
+        setBulkAction(null);
+        return;
+      }
+      
+      await fetchErrors();
+      setBulkAction(null);
+      setDeleteAction(null);
+    } catch (err) {
+      setResolveError(`Error: ${err.message}`);
+      setBulkAction(null);
     }
   };
 
@@ -214,6 +320,105 @@ function AdminErrors() {
             >
               ✕
             </button>
+          </div>
+        )}
+
+        {/* Bulk Actions */}
+        <div className="admin-bulk-actions" style={{ 
+          display: 'flex', 
+          gap: '0.75rem', 
+          marginBottom: '1rem',
+          flexWrap: 'wrap',
+          alignItems: 'center'
+        }}>
+          <button
+            className="admin-btn admin-btn-sm admin-btn-secondary"
+            onClick={bulkResolveAll}
+            disabled={bulkAction === 'resolving' || isLoading}
+            style={{ whiteSpace: 'nowrap' }}
+          >
+            {bulkAction === 'resolving' ? 'Resolving...' : 'Resolve All Unresolved'}
+          </button>
+          <button
+            className="admin-btn admin-btn-sm admin-btn-secondary"
+            onClick={() => {
+              setDeleteAction('resolved');
+              setShowDeleteConfirm(true);
+            }}
+            disabled={bulkAction === 'deleting' || isLoading}
+            style={{ whiteSpace: 'nowrap' }}
+          >
+            Delete All Resolved
+          </button>
+          <button
+            className="admin-btn admin-btn-sm admin-btn-secondary"
+            onClick={() => {
+              setDeleteAction('old30');
+              setShowDeleteConfirm(true);
+            }}
+            disabled={bulkAction === 'deleting' || isLoading}
+            style={{ whiteSpace: 'nowrap' }}
+          >
+            Delete Errors Older Than 30 Days
+          </button>
+        </div>
+
+        {/* Delete Confirmation Modal */}
+        {showDeleteConfirm && (
+          <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(0, 0, 0, 0.6)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 2000
+          }}>
+            <div style={{
+              background: 'var(--admin-bg-secondary)',
+              padding: '1.5rem',
+              borderRadius: '0.5rem',
+              maxWidth: '400px',
+              width: '90%'
+            }}>
+              <h3 style={{ marginTop: 0, marginBottom: '1rem' }}>
+                {deleteAction === 'resolved' 
+                  ? 'Delete All Resolved Errors?' 
+                  : 'Delete Old Errors?'}
+              </h3>
+              <p style={{ marginBottom: '1.5rem', color: 'var(--admin-text-muted)' }}>
+                {deleteAction === 'resolved'
+                  ? 'This will permanently delete all resolved errors. This action cannot be undone.'
+                  : 'This will permanently delete all errors older than 30 days. This action cannot be undone.'}
+              </p>
+              <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+                <button
+                  className="admin-btn admin-btn-sm admin-btn-secondary"
+                  onClick={() => {
+                    setShowDeleteConfirm(false);
+                    setDeleteAction(null);
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="admin-btn admin-btn-sm admin-btn-danger"
+                  onClick={() => {
+                    if (deleteAction === 'resolved') {
+                      deleteResolvedErrors();
+                    } else if (deleteAction === 'old30') {
+                      deleteOldErrors(30);
+                    }
+                  }}
+                  disabled={bulkAction === 'deleting'}
+                >
+                  {bulkAction === 'deleting' ? 'Deleting...' : 'Delete'}
+                </button>
+              </div>
+            </div>
           </div>
         )}
 

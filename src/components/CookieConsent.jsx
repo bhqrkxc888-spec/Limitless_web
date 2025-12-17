@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from './ui';
 import { setConsentStatus, hasConsentDecision } from '../utils/consentManager';
+import CookieSettings from './CookieSettings';
 import './CookieConsent.css';
 
 function CookieConsent() {
   const [isVisible, setIsVisible] = useState(false);
+  const [showCookieSettings, setShowCookieSettings] = useState(false);
 
   useEffect(() => {
     // Check if user has already made a choice
@@ -47,6 +49,14 @@ function CookieConsent() {
           <Button 
             variant="outline" 
             size="sm"
+            onClick={() => setShowCookieSettings(true)}
+            className="cookie-consent-settings"
+          >
+            Cookie Settings
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm"
             onClick={rejectCookies}
             className="cookie-consent-reject"
           >
@@ -62,6 +72,11 @@ function CookieConsent() {
           </Button>
         </div>
       </div>
+      
+      <CookieSettings 
+        isOpen={showCookieSettings} 
+        onClose={() => setShowCookieSettings(false)} 
+      />
     </div>
   );
 }
