@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { Card } from './ui';
 import OptimizedImage from './OptimizedImage';
 import { getCardImageUrl } from '../utils/imageNaming';
-import { getDestinationHeroUrl } from '../config/destinations';
 import './OfferCard.css';
 
 /**
@@ -22,27 +21,9 @@ function OfferCard({ offer, variant = 'default' }) {
     return null;
   };
 
-  // Hero images are now destination-based
-  const getHeroImage = () => {
-    // Priority 1: Explicit hero URL (legacy support)
-    if (offer.hero_image_url) return offer.hero_image_url;
-    
-    // Priority 2: Destination hero (NEW SYSTEM)
-    if (offer.destination || offer.destination_slug) {
-      const destSlug = offer.destination_slug || offer.destination;
-      const heroPath = getDestinationHeroUrl(destSlug);
-      if (heroPath) {
-        // Construct full Vercel Blob URL
-        return `https://blob.vercel-storage.com/${heroPath}`;
-      }
-    }
-    
-    // Priority 3: Fallback to card image
-    return getCardImage();
-  };
-
+  // For hero variant cards, just use the card image (hero images removed from offers)
   const cardImageUrl = getCardImage();
-  const heroImageUrl = getHeroImage();
+  const heroImageUrl = cardImageUrl; // Hero variant now uses card image
 
   const formatPrice = (price, currency = 'GBP') => {
     const formattedPrice = new Intl.NumberFormat('en-GB', {

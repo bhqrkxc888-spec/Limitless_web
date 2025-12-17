@@ -12,7 +12,6 @@ import AirportPricingList from '../components/AirportPricingTable';
 import OnboardCreditBadge from '../components/OnboardCreditBadge';
 import SoloTravellerInfo from '../components/SoloTravellerInfo';
 import OptimizedImage from '../components/OptimizedImage';
-import { getDestinationHeroUrl } from '../config/destinations';
 import { useEffect, useMemo, useState } from 'react';
 import './OfferPage.css';
 
@@ -34,6 +33,7 @@ function OfferPage() {
   }, [offer?.id]);
 
   // Collect all images for gallery - with deduplication
+  // NOTE: Hero images removed from offers - cleaner design without destination hero banners
   const galleryImages = useMemo(() => {
     if (!offer) return [];
     const images = [];
@@ -47,22 +47,7 @@ function OfferPage() {
       }
     };
     
-    // Priority 1: Explicit hero URL (legacy support)
-    if (offer.hero_image_url) {
-      addImage(offer.hero_image_url, `${offer.title} - Main Image`);
-    }
-    // Priority 2: Destination hero (NEW SYSTEM - website constructs from destination)
-    else if (offer.destination || offer.destination_slug) {
-      const destSlug = offer.destination_slug || offer.destination;
-      const heroPath = getDestinationHeroUrl(destSlug);
-      if (heroPath) {
-        // Construct full Vercel Blob URL
-        const fullHeroUrl = `https://blob.vercel-storage.com/${heroPath}`;
-        addImage(fullHeroUrl, `${offer.title} - Destination Hero`);
-      }
-    }
-    
-    // Priority 3: Card image (always add if available)
+    // Priority 1: Card image (primary image for offers)
     if (offer.card_image_url) {
       addImage(offer.card_image_url, `${offer.title}`);
     }
