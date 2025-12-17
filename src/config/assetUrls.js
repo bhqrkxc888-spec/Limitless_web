@@ -36,15 +36,15 @@ export const SITE_ASSETS = {
 // ============================================================================
 
 export const DESTINATION_HEROES = {
-  'caribbean': null,
+  'caribbean': 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean/caribbean-hero.webp',
   'mediterranean': 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe/Europe-hero.webp',
   'northern-europe': null,
   'alaska': null,
   'asia': null,
   'australia-new-zealand': null,
-  'south-america': null,
+  'south-america': 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/hero-iguazu-falls%20.webp',
   'africa': null,
-  'middle-east': null,
+  'middle-east': 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/hero-dubai.webp',
   'hawaii': null,
   'transatlantic': null,
   'world-cruises': null,
