@@ -58,19 +58,6 @@ function getSessionId() {
   return sessionId
 }
 
-/**
- * Extracts page path from URL
- * @param {string} url - Full URL
- * @returns {string} Page path
- */
-function getPagePath(url) {
-  try {
-    const urlObj = new URL(url)
-    return urlObj.pathname + urlObj.search
-  } catch {
-    return url || (typeof window !== 'undefined' ? window.location.pathname + window.location.search : null)
-  }
-}
 
 /**
  * Determines error type from error object

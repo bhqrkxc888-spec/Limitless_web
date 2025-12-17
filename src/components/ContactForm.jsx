@@ -47,7 +47,7 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
 
     try {
       const enquiryData = {
-        name: formData.name,
+        full_name: formData.name,
         email: formData.email,
         phone: formData.phone,
         message: formData.message,

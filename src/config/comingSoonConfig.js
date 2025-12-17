@@ -10,7 +10,7 @@ export const comingSoonConfig = {
   // Coming soon page content
   title: 'A new Limitless Cruises website is coming soon',
   subtitle: 'We\'re upgrading our website to serve you better',
-  message: 'Limitless Cruises remains fully open for cruise enquiries and bookings. We're here to help you find your perfect cruise holiday with the best deals from leading cruise lines worldwide.',
+  message: 'Limitless Cruises remains fully open for cruise enquiries and bookings. We\'re here to help you find your perfect cruise holiday with the best deals from leading cruise lines worldwide.',
   
   // Enable/disable specific features during coming soon period
   features: {

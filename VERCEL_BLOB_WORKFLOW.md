@@ -116,7 +116,7 @@ Then I respond:
 1. **`src/data/imageReferences.js`** - Centralized image URL storage
 2. **`IMAGE_UPLOAD_REQUIREMENTS.md`** - Complete list of all images needed
 3. **`VERCEL_BLOB_WORKFLOW.md`** - This file (quick reference)
-4. **`PERFORMANCE_FIXES_ACTION_PLAN.md`** - Updated with migration info
+4. **`README_PERFORMANCE_AND_IMAGES.md`** - Complete performance and image migration guide
 
 ---
 

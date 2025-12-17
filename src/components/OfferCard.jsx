@@ -63,13 +63,6 @@ function OfferCard({ offer, variant = 'default' }) {
     return offer.price_from;
   };
 
-  // V2: Calculate total package nights including pre/post stays
-  const getTotalPackageNights = () => {
-    return (offer.pre_stay_nights || 0) + 
-           (offer.duration_nights || 0) + 
-           (offer.post_stay_nights || 0);
-  };
-
   // V2: Check if offer has accommodation
   const hasAccommodation = offer.pre_stay_hotel_name || offer.post_stay_hotel_name;
 
@@ -117,10 +110,6 @@ function OfferCard({ offer, variant = 'default' }) {
     : offer.savings_amount
     ? `Save ${formatPrice(offer.savings_amount, offer.currency)}`
     : null;
-
-  // V2: Calculate total package nights for display
-  const totalPackageNights = getTotalPackageNights();
-  const showPackageNights = hasAccommodation && totalPackageNights > offer.duration_nights;
 
   // Hero variant - Full-width horizontal layout for featured offer
   if (variant === 'hero') {

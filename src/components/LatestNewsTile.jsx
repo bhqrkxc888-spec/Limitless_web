@@ -19,18 +19,6 @@ function LatestNewsTile() {
     featured: null // Get all recent news, not just featured
   });
 
-  // Don't render if no news or error (API not set up yet)
-  if (!loading && (news.length === 0 || error)) {
-    return null;
-  }
-
-  const handlePrevious = () => {
-    if (isTransitioning || news.length === 0) return;
-    setIsTransitioning(true);
-    setCurrentIndex((prev) => (prev === 0 ? news.length - 1 : prev - 1));
-    setTimeout(() => setIsTransitioning(false), 500);
-  };
-
   const handleNext = () => {
     if (isTransitioning || news.length === 0) return;
     setIsTransitioning(true);
@@ -49,6 +37,18 @@ function LatestNewsTile() {
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex, news.length]);
+
+  // Don't render if no news or error (API not set up yet)
+  if (!loading && (news.length === 0 || error)) {
+    return null;
+  }
+
+  const handlePrevious = () => {
+    if (isTransitioning || news.length === 0) return;
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => (prev === 0 ? news.length - 1 : prev - 1));
+    setTimeout(() => setIsTransitioning(false), 500);
+  };
 
   const goToSlide = (index) => {
     if (isTransitioning || index === currentIndex) return;

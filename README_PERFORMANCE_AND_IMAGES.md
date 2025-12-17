@@ -112,7 +112,7 @@ See `VERCEL_BLOB_WORKFLOW.md` for details.
 
 | File | Purpose |
 |------|---------|
-| **PERFORMANCE_FIXES_ACTION_PLAN.md** | Complete performance guide, testing checklist |
+| **README_PERFORMANCE_AND_IMAGES.md** | Complete performance guide, testing checklist (this file) |
 | **IMAGE_UPLOAD_REQUIREMENTS.md** | All images needed, organized by priority |
 | **VERCEL_BLOB_WORKFLOW.md** | Quick reference for upload process |
 | **This file** | Summary of everything done |

@@ -118,7 +118,7 @@ ${formData.quoteDetails}
 Attachment: ${STORAGE_BUCKETS.PRICE_MATCH_DOCS}/${filePath}`;
 
       const enquiryData = {
-        name: formData.name,
+        full_name: formData.name,
         email: formData.email,
         phone: formData.phone,
         message: message,

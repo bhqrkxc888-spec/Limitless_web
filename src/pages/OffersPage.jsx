@@ -39,7 +39,7 @@ function OffersPage() {
   });
 
   // Fetch main offers list
-  const { offers, total, loading, error } = useOffers({
+  const { offers, loading, error } = useOffers({
     limit: 50, // Fetch more and filter client-side for search
     offerType: selectedType,
     destination: selectedDestination

@@ -182,7 +182,7 @@ function FAQPage() {
     if (!searchTerm) return null;
     
     const results = [];
-    Object.entries(faqData).forEach(([key, category]) => {
+    Object.entries(faqData).forEach(([, category]) => {
       category.questions.forEach(q => {
         if (
           q.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -289,11 +289,11 @@ function FAQPage() {
             <div className="faq-layout">
               {/* Category Sidebar */}
               <nav className="faq-categories" aria-label="FAQ categories">
-                {Object.entries(faqData).map(([key, category]) => (
+                {Object.entries(faqData).map(([categoryKey, category]) => (
                   <button
-                    key={key}
-                    className={`faq-category-btn ${activeCategory === key ? 'is-active' : ''}`}
-                    onClick={() => setActiveCategory(key)}
+                    key={categoryKey}
+                    className={`faq-category-btn ${activeCategory === categoryKey ? 'is-active' : ''}`}
+                    onClick={() => setActiveCategory(categoryKey)}
                   >
                     <span className="category-icon">{category.icon}</span>
                     <span className="category-name">{category.title}</span>

@@ -4,7 +4,7 @@
  * View SEO scores and issues for all pages
  */
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   Search,
@@ -58,7 +58,6 @@ function AdminSEO() {
   // Scan state
   const [isScanning, setIsScanning] = useState(false);
   const [scanProgress, setScanProgress] = useState({ current: 0, total: 0, currentPage: '' });
-  const iframeRef = useRef(null);
   
   // Filters
   const [scoreFilter, setScoreFilter] = useState('all');
@@ -185,7 +184,7 @@ function AdminSEO() {
         document.body.appendChild(iframe);
 
         // Load the page and wait for it
-        await new Promise((resolve, reject) => {
+        await new Promise((resolve) => {
           const timeout = setTimeout(() => {
             iframe.remove();
             resolve(); // Don't reject, just move on

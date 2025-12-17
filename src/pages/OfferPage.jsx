@@ -92,17 +92,6 @@ function OfferPage() {
     }).format(price);
   };
 
-  const formatDate = (dateString) => {
-    if (!dateString) return '';
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-GB', {
-      weekday: 'long',
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric'
-    });
-  };
-
   const formatShortDate = (dateString) => {
     if (!dateString) return '';
     const date = new Date(dateString);

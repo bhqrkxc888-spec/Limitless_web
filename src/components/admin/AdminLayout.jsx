@@ -83,19 +83,22 @@ function AdminLayout({ children, onLogout, lastUpdated, onRefresh, isRefreshing 
         </div>
 
         <nav className="admin-nav">
-          {navItems.map(({ path, icon: Icon, label, exact }) => (
-            <NavLink
-              key={path}
-              to={path}
-              end={exact}
-              className={({ isActive }) => 
-                `admin-nav-item ${isActive ? 'active' : ''}`
-              }
-            >
-              <Icon size={20} />
-              <span>{label}</span>
-            </NavLink>
-          ))}
+          {navItems.map(({ path, icon: Icon, label, exact }) => {
+            const IconComponent = Icon;
+            return (
+              <NavLink
+                key={path}
+                to={path}
+                end={exact}
+                className={({ isActive }) => 
+                  `admin-nav-item ${isActive ? 'active' : ''}`
+                }
+              >
+                <IconComponent size={20} />
+                <span>{label}</span>
+              </NavLink>
+            );
+          })}
         </nav>
 
         <div className="admin-sidebar-footer">

@@ -12,10 +12,6 @@ function AdminDestinationHeroes() {
   const [checkingImages, setCheckingImages] = useState(true);
   const [imageUrls, setImageUrls] = useState({});
 
-  useEffect(() => {
-    checkUploadedImages();
-  }, []);
-
   // Check which hero images are already uploaded
   const checkUploadedImages = async () => {
     setCheckingImages(true);
@@ -32,7 +28,7 @@ function AdminDestinationHeroes() {
           uploaded.add(dest.slug);
           urls[dest.slug] = heroUrl;
         }
-      } catch (err) {
+      } catch {
         // Image doesn't exist yet
       }
     }
@@ -41,6 +37,10 @@ function AdminDestinationHeroes() {
     setImageUrls(urls);
     setCheckingImages(false);
   };
+
+  useEffect(() => {
+    checkUploadedImages();
+  }, []);
 
   const destinationsByRegion = getDestinationsByRegion();
   const totalDestinations = destinations.length;
