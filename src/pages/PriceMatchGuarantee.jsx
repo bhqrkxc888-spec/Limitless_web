@@ -67,7 +67,6 @@ const fallbackContent = `
 function PriceMatchGuarantee() {
   return (
     <LegalPageTemplate
-      slug="price-match-guarantee"
       fallbackTitle="Price Match Guarantee"
       fallbackDescription="Found a better price for your cruise? Limitless Cruises offers a price match guarantee. Learn about our promise and how to claim."
       fallbackContent={fallbackContent}

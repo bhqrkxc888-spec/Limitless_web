@@ -60,7 +60,6 @@ const fallbackContent = `
 function PrivacyPolicy() {
   return (
     <LegalPageTemplate
-      slug="privacy-policy"
       fallbackTitle="Privacy Policy"
       fallbackDescription="Learn how Limitless Cruises collects, uses, and protects your personal data. Your privacy matters to us."
       fallbackContent={fallbackContent}

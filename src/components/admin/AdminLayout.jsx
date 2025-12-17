@@ -49,9 +49,7 @@ function AdminLayout({ children, onLogout, lastUpdated, onRefresh, isRefreshing 
     { type: 'divider' },
     { type: 'section', label: 'Website' },
     { path: '/admin/website/assets', icon: Image, label: 'Assets' },
-    { path: '/admin/website/destinations', icon: MapPin, label: 'Destinations' },
-    { path: '/admin/website/legal', icon: Scale, label: 'Legal' },
-    { path: '/admin/website/business-info', icon: Building2, label: 'Business Info' }
+    { path: '/admin/website/destinations', icon: MapPin, label: 'Destinations' }
   ];
 
   const formatLastUpdated = () => {

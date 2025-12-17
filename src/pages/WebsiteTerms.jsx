@@ -40,7 +40,6 @@ const fallbackContent = `
 function WebsiteTerms() {
   return (
     <LegalPageTemplate
-      slug="website-terms"
       fallbackTitle="Website Terms & Conditions"
       fallbackDescription="Read the terms and conditions for using the Limitless Cruises website. Understanding your obligations and our disclaimers."
       fallbackContent={fallbackContent}

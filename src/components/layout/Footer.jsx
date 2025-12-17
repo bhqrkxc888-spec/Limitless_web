@@ -4,46 +4,11 @@ import { siteConfig } from '../../config/siteConfig';
 import { navigation } from '../../data/navigation';
 import { isSiteLaunched } from '../../config/launchConfig';
 import { hasConsentDecision } from '../../utils/consentManager';
-import { supabase } from '../../lib/supabase';
-import { logger } from '../../utils/logger';
 import './Footer.css';
 
 function Footer() {
   const currentYear = new Date().getFullYear();
   const [authStatus, setAuthStatus] = useState(isSiteLaunched());
-  const [siteSettings, setSiteSettings] = useState(null);
-
-  // Fetch site settings from Supabase
-  useEffect(() => {
-    const fetchSettings = async () => {
-      if (!supabase) {
-        logger.info('Supabase not configured, using fallback siteConfig');
-        return;
-      }
-
-      try {
-        const { data, error } = await supabase
-          .schema('web')
-          .from('site_settings')
-          .select('*')
-          .eq('site_key', 'main')
-          .single();
-
-        if (error) {
-          if (error.code !== 'PGRST116') { // Not a "no rows" error
-            throw error;
-          }
-          logger.info('No site settings found, using fallback');
-        } else {
-          setSiteSettings(data);
-        }
-      } catch (err) {
-        logger.error('Error fetching site settings:', err);
-      }
-    };
-
-    fetchSettings();
-  }, []);
 
   // Listen for authentication changes (e.g., after preview login)
   useEffect(() => {
@@ -93,15 +58,19 @@ function Footer() {
     };
   }, [authStatus]);
 
-  // Get contact info - use Supabase data if available, otherwise fallback to siteConfig
-  const contact = siteSettings?.contact_json || {
+  // Get contact info from siteConfig
+  const contact = {
     phone: siteConfig.phone,
     email: siteConfig.email,
     address: siteConfig.address
   };
 
-  // Get social links - use Supabase data if available
-  const socials = siteSettings?.socials_json || {};
+  // Get social links from siteConfig
+  const socials = {
+    facebook: siteConfig.facebook,
+    linkedin: siteConfig.linkedin,
+    youtube: siteConfig.youtube
+  };
 
   return (
     <footer className="footer">
@@ -126,7 +95,7 @@ function Footer() {
               </Link>
               <p className="footer-tagline">{siteConfig.tagline}</p>
               
-              {/* Contact Info - from Supabase or fallback */}
+              {/* Contact Info */}
               <div className="footer-contact">
                 {contact.phone && (
                   <a href={`tel:${contact.phone}`} className="footer-contact-item">
@@ -146,10 +115,10 @@ function Footer() {
                 )}
               </div>
 
-              {/* Social Links - from Supabase or fallback */}
+              {/* Social Links */}
               <div className="footer-social">
                 <a 
-                  href={socials.facebook || 'https://www.facebook.com/profile.php?id=61570469572535'} 
+                  href={socials.facebook} 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   aria-label="Facebook"
@@ -159,7 +128,7 @@ function Footer() {
                   </svg>
                 </a>
                 <a 
-                  href={socials.linkedin || 'https://www.linkedin.com/company/limitless-cruises/'} 
+                  href={socials.linkedin} 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   aria-label="LinkedIn"
@@ -178,30 +147,6 @@ function Footer() {
                     <path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/>
                   </svg>
                 </a>
-                {socials.instagram && (
-                  <a 
-                    href={socials.instagram} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    aria-label="Instagram"
-                  >
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
-                    </svg>
-                  </a>
-                )}
-                {socials.twitter && (
-                  <a 
-                    href={socials.twitter} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    aria-label="Twitter/X"
-                  >
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                    </svg>
-                  </a>
-                )}
               </div>
             </div>
 

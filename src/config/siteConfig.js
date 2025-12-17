@@ -6,7 +6,10 @@ export const siteConfig = {
   whatsapp: '07359 796108',
   whatsappUrl: 'https://wa.me/447359796108', // Keep +44 for URL
   email: 'travel@limitlesscruises.com',
+  address: '51 Fairfields Way, Aston, Sheffield, S26 2HB',
   facebook: 'https://www.facebook.com/profile.php?id=61570469572535',
+  linkedin: 'https://www.linkedin.com/company/limitless-cruises/',
+  youtube: 'https://www.youtube.com/@LimitlessCruises',
   
   // Monitoring settings
   monitoring: {

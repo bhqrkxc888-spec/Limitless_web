@@ -46,7 +46,6 @@ const fallbackContent = `
 function CookiePolicy() {
   return (
     <LegalPageTemplate
-      slug="cookie-policy"
       fallbackTitle="Cookie Policy"
       fallbackDescription="Learn about how Limitless Cruises uses cookies and similar technologies on our website. Manage your cookie preferences."
       fallbackContent={fallbackContent}

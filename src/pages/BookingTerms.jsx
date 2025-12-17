@@ -162,7 +162,6 @@ const fallbackContent = `
 function BookingTerms() {
   return (
     <LegalPageTemplate
-      slug="booking-terms"
       fallbackTitle="Booking Terms & Conditions"
       fallbackDescription="Read the booking terms and conditions for cruises with Limitless Cruises. Understand payment terms, cancellation policies, and your rights."
       fallbackContent={fallbackContent}
