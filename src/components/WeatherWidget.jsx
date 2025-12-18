@@ -16,10 +16,12 @@ function WeatherWidget({ lat, lon, destinationName }) {
     return (
       <div className="weather-widget">
         <div className="weather-widget-header">
-          <h3>Weather</h3>
+          <h3>Weather in {destinationName}</h3>
         </div>
         <div className="weather-widget-content">
-          <p className="weather-message">{apiMessages.weatherNotConfigured}</p>
+          <p className="weather-message">
+            For current weather conditions and forecasts, please contact us for detailed destination information.
+          </p>
         </div>
       </div>
     );

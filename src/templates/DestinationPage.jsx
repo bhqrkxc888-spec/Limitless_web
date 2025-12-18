@@ -5,7 +5,6 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import SeaConditions from '../components/SeaConditions';
-import PortAttractions from '../components/PortAttractions';
 import PortsWeatherCarousel from '../components/PortsWeatherCarousel';
 import { Button, SectionHeader } from '../components/ui';
 import './DestinationPage.css';
@@ -158,23 +157,6 @@ function DestinationPage() {
               )}
             </aside>
           </div>
-
-          {/* Port Attractions Widget - Full Width Below Grid */}
-          {destination.coordinates && (
-            <div className="attractions-fullwidth">
-              <PortAttractions 
-                lat={selectedPort?.coordinates?.lat || destination.coordinates.lat} 
-                lon={selectedPort?.coordinates?.lon || destination.coordinates.lon}
-                destinationName={destination.name}
-                portName={selectedPort?.name}
-                regions={destination.regions}
-                fullWidth
-                availablePorts={destination.coordinates?.ports || []}
-                selectedPortName={selectedPort?.name}
-                onPortChange={setSelectedPort}
-              />
-            </div>
-          )}
         </div>
       </section>
     </main>
