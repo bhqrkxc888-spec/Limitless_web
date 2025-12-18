@@ -1,9 +1,12 @@
 import { useParams } from 'react-router-dom';
 import { getCruiseLineBySlug } from '../data/cruiseLines';
+import { getTravelNewsByCruiseLine } from '../services/travelNewsAPI';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader, Accordion, DataTable } from '../components/ui';
+import NewsCard from '../components/NewsCard';
+import { useEffect, useState } from 'react';
 import './CruiseLinePage.css';
 
 /**
@@ -22,6 +25,24 @@ import './CruiseLinePage.css';
 function CruiseLinePage() {
   const { slug } = useParams();
   const cruiseLine = getCruiseLineBySlug(slug);
+  const [cruiseLineNews, setCruiseLineNews] = useState([]);
+  const [loadingNews, setLoadingNews] = useState(true);
+
+  // Fetch cruise line news
+  useEffect(() => {
+    if (!cruiseLine?.slug) return;
+    
+    async function fetchNews() {
+      setLoadingNews(true);
+      const { data } = await getTravelNewsByCruiseLine(cruiseLine.slug, 3);
+      if (data?.news) {
+        setCruiseLineNews(data.news);
+      }
+      setLoadingNews(false);
+    }
+    
+    fetchNews();
+  }, [cruiseLine?.slug]);
 
   // Handle cruise line not found
   if (!cruiseLine) {
@@ -405,6 +426,30 @@ function CruiseLinePage() {
               <aside className="cruise-line-sidebar">
                 <SidebarContent cruiseLine={cruiseLine} />
               </aside>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Latest News Section */}
+      {!loadingNews && cruiseLineNews.length > 0 && (
+        <section className="section">
+          <div className="container">
+            <SectionHeader
+              eyebrow="Latest Updates"
+              title={`${cruiseLine.name} News`}
+              subtitle={`Stay up to date with the latest news and announcements from ${cruiseLine.name}`}
+              align="center"
+            />
+            <div className="grid grid-3">
+              {cruiseLineNews.map((article) => (
+                <NewsCard key={article.id} article={article} variant="default" />
+              ))}
+            </div>
+            <div style={{ textAlign: 'center', marginTop: '32px' }}>
+              <Button to="/travel-news" variant="outline">
+                View All Travel News
+              </Button>
             </div>
           </div>
         </section>

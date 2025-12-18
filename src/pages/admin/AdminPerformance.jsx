@@ -35,6 +35,12 @@ function AdminPerformance() {
     mobile: 0,
     tablet: 0
   });
+  const [insights, setInsights] = useState({
+    lcpCulprits: [],
+    clsOffenders: [],
+    slowImages: [],
+    worstPages: []
+  });
   const [isLoading, setIsLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -98,6 +104,12 @@ function AdminPerformance() {
       
       const devices = { desktop: 0, mobile: 0, tablet: 0 };
       
+      // Track insights from additional_data
+      const lcpImages = new Map(); // imageName -> { count, avgTime }
+      const clsElements = new Map(); // element -> { count, totalShift }
+      const slowImagesList = [];
+      const pageMetrics = new Map(); // page -> { lcpSum, lcpCount }
+      
       (data || []).forEach(record => {
         const name = record.metric_name;
         if (metricGroups[name]) {
@@ -107,6 +119,50 @@ function AdminPerformance() {
         // Count devices
         if (record.device_type && devices[record.device_type] !== undefined) {
           devices[record.device_type]++;
+        }
+        
+        // Extract insights from additional_data
+        const context = record.additional_data;
+        if (context) {
+          // LCP image culprits
+          if (name === 'LCP' && context.imageName) {
+            const key = context.imageName;
+            const existing = lcpImages.get(key) || { count: 0, totalTime: 0 };
+            lcpImages.set(key, {
+              count: existing.count + 1,
+              totalTime: existing.totalTime + record.metric_value,
+              element: context.element || 'IMG'
+            });
+          }
+          
+          // CLS offenders
+          if (name === 'CLS' && context.worstShift) {
+            const shift = context.worstShift;
+            const key = `${shift.element}${shift.id ? '#' + shift.id : ''}${shift.class ? '.' + shift.class : ''}`;
+            const existing = clsElements.get(key) || { count: 0, totalShift: 0 };
+            clsElements.set(key, {
+              count: existing.count + 1,
+              totalShift: existing.totalShift + (shift.value || 0)
+            });
+          }
+          
+          // Slow images
+          if (name === 'SlowImages' && context.slowestImage) {
+            slowImagesList.push({
+              name: context.slowestImage,
+              duration: context.slowestDuration,
+              page: record.page_path
+            });
+          }
+        }
+        
+        // Track page performance
+        if (name === 'LCP' && record.page_path) {
+          const existing = pageMetrics.get(record.page_path) || { lcpSum: 0, lcpCount: 0 };
+          pageMetrics.set(record.page_path, {
+            lcpSum: existing.lcpSum + record.metric_value,
+            lcpCount: existing.lcpCount + 1
+          });
         }
       });
       
@@ -124,8 +180,42 @@ function AdminPerformance() {
         };
       });
       
+      // Build insights
+      const newInsights = {
+        lcpCulprits: Array.from(lcpImages.entries())
+          .map(([name, data]) => ({
+            name,
+            count: data.count,
+            avgTime: Math.round(data.totalTime / data.count),
+            element: data.element
+          }))
+          .sort((a, b) => b.avgTime - a.avgTime)
+          .slice(0, 5),
+        clsOffenders: Array.from(clsElements.entries())
+          .map(([selector, data]) => ({
+            selector,
+            count: data.count,
+            avgShift: (data.totalShift / data.count).toFixed(3)
+          }))
+          .sort((a, b) => parseFloat(b.avgShift) - parseFloat(a.avgShift))
+          .slice(0, 5),
+        slowImages: slowImagesList
+          .sort((a, b) => b.duration - a.duration)
+          .slice(0, 5),
+        worstPages: Array.from(pageMetrics.entries())
+          .map(([page, data]) => ({
+            page,
+            avgLcp: Math.round(data.lcpSum / data.lcpCount),
+            count: data.lcpCount
+          }))
+          .filter(p => p.avgLcp > 2500) // Only show pages with poor LCP
+          .sort((a, b) => b.avgLcp - a.avgLcp)
+          .slice(0, 5)
+      };
+      
       setMetrics(newMetrics);
       setDeviceBreakdown(devices);
+      setInsights(newInsights);
       setLastUpdated(Date.now());
     } catch (err) {
       console.error('Error fetching performance data:', err);
@@ -506,6 +596,100 @@ Please analyze my React/Vite website and help me implement these fixes to improv
               })}
             </div>
 
+            {/* Performance Insights */}
+            {(insights.lcpCulprits.length > 0 || insights.clsOffenders.length > 0 || insights.slowImages.length > 0 || insights.worstPages.length > 0) && (
+              <div className="admin-insights">
+                <h2 className="admin-insights-title">🔍 Performance Insights</h2>
+                <p className="admin-insights-subtitle">Issues detected from your site data - fix these to improve scores</p>
+                
+                <div className="admin-insights-grid">
+                  {/* LCP Culprits */}
+                  {insights.lcpCulprits.length > 0 && (
+                    <div className="admin-insight-card">
+                      <h3 className="admin-insight-heading">🖼️ LCP Image Culprits</h3>
+                      <p className="admin-insight-hint">These images are slowing your largest contentful paint</p>
+                      <ul className="admin-insight-list">
+                        {insights.lcpCulprits.map((img, i) => (
+                          <li key={i} className="admin-insight-item">
+                            <span className="admin-insight-name">{img.name}</span>
+                            <span className={`admin-insight-value ${img.avgTime > 2500 ? 'poor' : img.avgTime > 1500 ? 'warn' : ''}`}>
+                              {img.avgTime}ms
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="admin-insight-fix">
+                        <strong>Fix:</strong> Compress images, use WebP, add width/height attributes
+                      </p>
+                    </div>
+                  )}
+                  
+                  {/* CLS Offenders */}
+                  {insights.clsOffenders.length > 0 && (
+                    <div className="admin-insight-card">
+                      <h3 className="admin-insight-heading">📐 Layout Shift Offenders</h3>
+                      <p className="admin-insight-hint">These elements are causing layout shifts</p>
+                      <ul className="admin-insight-list">
+                        {insights.clsOffenders.map((el, i) => (
+                          <li key={i} className="admin-insight-item">
+                            <code className="admin-insight-selector">{el.selector}</code>
+                            <span className={`admin-insight-value ${parseFloat(el.avgShift) > 0.1 ? 'poor' : 'warn'}`}>
+                              {el.avgShift}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="admin-insight-fix">
+                        <strong>Fix:</strong> Add width/height to images, reserve space for dynamic content
+                      </p>
+                    </div>
+                  )}
+                  
+                  {/* Slow Images */}
+                  {insights.slowImages.length > 0 && (
+                    <div className="admin-insight-card">
+                      <h3 className="admin-insight-heading">🐢 Slow Loading Images</h3>
+                      <p className="admin-insight-hint">Images taking over 500ms to load</p>
+                      <ul className="admin-insight-list">
+                        {insights.slowImages.map((img, i) => (
+                          <li key={i} className="admin-insight-item">
+                            <span className="admin-insight-name">{img.name}</span>
+                            <span className={`admin-insight-value ${img.duration > 1000 ? 'poor' : 'warn'}`}>
+                              {img.duration}ms
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="admin-insight-fix">
+                        <strong>Fix:</strong> Optimize file size, use CDN, lazy load below-fold images
+                      </p>
+                    </div>
+                  )}
+                  
+                  {/* Worst Pages */}
+                  {insights.worstPages.length > 0 && (
+                    <div className="admin-insight-card">
+                      <h3 className="admin-insight-heading">📄 Slowest Pages</h3>
+                      <p className="admin-insight-hint">Pages with poor LCP (above 2.5s)</p>
+                      <ul className="admin-insight-list">
+                        {insights.worstPages.map((page, i) => (
+                          <li key={i} className="admin-insight-item">
+                            <span className="admin-insight-name">{page.page}</span>
+                            <span className="admin-insight-value poor">
+                              {(page.avgLcp / 1000).toFixed(2)}s
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="admin-insight-fix">
+                        <strong>Fix:</strong> Check hero images, reduce JS, optimize critical path
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
             {totalSamples === 0 && (
               <div className="admin-empty" style={{ marginTop: '2rem' }}>
                 <Clock size={48} className="admin-empty-icon" />
@@ -722,6 +906,122 @@ Please analyze my React/Vite website and help me implement these fixes to improv
           .admin-copy-issue-btn {
             width: 100%;
             justify-content: center;
+          }
+        }
+
+        /* Insights Section */
+        .admin-insights {
+          margin-top: 2.5rem;
+          padding-top: 2rem;
+          border-top: 1px solid var(--admin-border);
+        }
+
+        .admin-insights-title {
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: var(--admin-text);
+          margin: 0 0 0.25rem 0;
+        }
+
+        .admin-insights-subtitle {
+          font-size: 0.875rem;
+          color: var(--admin-text-muted);
+          margin: 0 0 1.5rem 0;
+        }
+
+        .admin-insights-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 1rem;
+        }
+
+        .admin-insight-card {
+          background: var(--admin-bg-secondary);
+          border: 1px solid var(--admin-border);
+          border-radius: 10px;
+          padding: 1.25rem;
+        }
+
+        .admin-insight-heading {
+          font-size: 0.9375rem;
+          font-weight: 600;
+          color: var(--admin-text);
+          margin: 0 0 0.25rem 0;
+        }
+
+        .admin-insight-hint {
+          font-size: 0.75rem;
+          color: var(--admin-text-dim);
+          margin: 0 0 0.75rem 0;
+        }
+
+        .admin-insight-list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .admin-insight-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0.5rem 0;
+          border-bottom: 1px solid var(--admin-border);
+          font-size: 0.8125rem;
+        }
+
+        .admin-insight-item:last-child {
+          border-bottom: none;
+        }
+
+        .admin-insight-name {
+          color: var(--admin-text);
+          max-width: 180px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .admin-insight-selector {
+          font-family: monospace;
+          font-size: 0.75rem;
+          background: var(--admin-bg-tertiary);
+          padding: 0.125rem 0.375rem;
+          border-radius: 4px;
+          color: var(--admin-text-muted);
+          max-width: 160px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .admin-insight-value {
+          font-weight: 600;
+          color: var(--admin-text);
+        }
+
+        .admin-insight-value.warn {
+          color: var(--admin-warning);
+        }
+
+        .admin-insight-value.poor {
+          color: var(--admin-error);
+        }
+
+        .admin-insight-fix {
+          font-size: 0.75rem;
+          color: var(--admin-text-muted);
+          margin: 0.75rem 0 0 0;
+          padding-top: 0.75rem;
+          border-top: 1px dashed var(--admin-border);
+        }
+
+        .admin-insight-fix strong {
+          color: var(--admin-success);
+        }
+
+        @media (max-width: 640px) {
+          .admin-insights-grid {
+            grid-template-columns: 1fr;
           }
         }
       `}</style>

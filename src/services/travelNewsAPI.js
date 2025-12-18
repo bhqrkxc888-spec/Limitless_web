@@ -103,6 +103,50 @@ export async function getTravelNewsBySlug(slug) {
 }
 
 /**
+ * Get travel news articles for a specific cruise line
+ * @param {string} cruiseLineSlug - Cruise line slug (e.g., 'p-and-o-cruises')
+ * @param {number} limit - Maximum number of articles to return (default: 10)
+ * @returns {Promise<{data: {news: Array, total: number, cruise_line_slug: string} | null, error: Error | null}>}
+ */
+export async function getTravelNewsByCruiseLine(cruiseLineSlug, limit = 10) {
+  // Check if Supabase is configured
+  if (!supabase) {
+    logger.warn('Supabase not configured - cannot fetch cruise line news');
+    return { data: null, error: new Error('Supabase not configured') };
+  }
+
+  if (!cruiseLineSlug) {
+    return { data: null, error: new Error('Cruise line slug is required') };
+  }
+
+  try {
+    const { data, error } = await supabase.rpc('get_travel_news_by_cruise_line_public', {
+      p_cruise_line_slug: cruiseLineSlug,
+      p_limit: limit
+    });
+
+    if (error) {
+      // If function not found, return empty - feature might not be set up yet
+      if (error.code === 'PGRST202' || 
+          error.message?.includes('not found') || 
+          error.message?.includes('Searched for') ||
+          error.message?.includes('Could not find')) {
+        return { data: { news: [], total: 0, cruise_line_slug: cruiseLineSlug }, error: null };
+      }
+      throw error;
+    }
+
+    return { data, error: null };
+  } catch (error) {
+    // Only log if it's not a "not found" error
+    if (error.code !== 'PGRST202' && !error.message?.includes('not found') && !error.message?.includes('Searched for')) {
+      logger.warn('Error fetching cruise line news:', error.message);
+    }
+    return { data: null, error };
+  }
+}
+
+/**
  * Increment travel news view count
  * @param {string} newsId - Article UUID
  * @returns {Promise<{data: any | null, error: Error | null}>}
