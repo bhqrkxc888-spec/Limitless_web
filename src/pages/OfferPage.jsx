@@ -693,6 +693,18 @@ function OfferPage() {
                   </h2>
                   <p className="offer-itinerary-summary">{offer.itinerary_summary}</p>
                   
+                  {/* Itinerary Map */}
+                  {offer.show_itinerary_map !== false && offer.itinerary_map_url && (
+                    <div className="offer-itinerary-map">
+                      <OptimizedImage
+                        src={offer.itinerary_map_url}
+                        alt={`${offer.title} cruise route map`}
+                        className="offer-itinerary-map__image"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  
                   {offer.ports_of_call && offer.ports_of_call.length > 0 && (
                     <div className="offer-ports">
                       <h3>Ports of Call</h3>
