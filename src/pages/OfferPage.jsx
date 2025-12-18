@@ -694,7 +694,9 @@ function OfferPage() {
                     </svg>
                     Itinerary
                   </h2>
-                  <p className="offer-itinerary-summary">{offer.itinerary_summary}</p>
+                  {offer.itinerary_summary && (
+                    <p className="offer-itinerary-summary">{offer.itinerary_summary}</p>
+                  )}
                   
                   {/* Itinerary Map */}
                   {offer.show_itinerary_map !== false && offer.itinerary_map_url && (
