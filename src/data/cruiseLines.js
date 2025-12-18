@@ -26,6 +26,12 @@ export const cruiseLines = [
     image: 'null',
     logo: null, // Logo to be uploaded to CRM
     
+    // SEO Meta
+    meta: {
+      title: 'P&O Cruises | UK\'s Favourite Cruise Line | Expert UK Bookings',
+      description: 'Book P&O Cruises with your personal consultant. Britannia, Iona, Arvia and more. Family-friendly British cruising, expertly booked.'
+    },
+    
     // Why Choose section - benefit cards
     whyChoose: [
       {
@@ -88,6 +94,12 @@ export const cruiseLines = [
         { club: 'H2O/The Scene', age: '13–17yr', morning: '—', afternoon: 'Open access', evening: 'Open access' }
       ],
       note: 'Times vary by ship. Teen spaces are open access; younger groups have set sessions.'
+    },
+    
+    // SEO Meta
+    meta: {
+      title: 'MSC Cruises | Mediterranean Elegance | UK Personal Consultant',
+      description: 'MSC Cruises expertly booked through your UK consultant. Bellissima, Meraviglia, World Europa. Mediterranean style, exceptional value.'
     },
 
     // Accessibility info
@@ -163,8 +175,8 @@ export const cruiseLines = [
     destinations: ['Caribbean', 'Mediterranean', 'Alaska', 'Asia'],
     suitableFor: ['Families', 'Adventure Seekers', 'Multi-generational'],
     meta: {
-      title: 'Royal Caribbean Cruises | Book with Limitless Cruises',
-      description: 'Discover Royal Caribbean cruise holidays with innovative ships and exciting destinations. Expert advice from Limitless Cruises.'
+      title: 'Royal Caribbean | Adventure Cruises | UK Expert Bookings',
+      description: 'Royal Caribbean adventure cruises with expert UK guidance. Oasis, Quantum, Icon class ships. Innovative features, endless entertainment.'
     }
   },
   {
@@ -331,8 +343,8 @@ export const cruiseLines = [
     destinations: ['Caribbean', 'Alaska', 'Mediterranean', 'Northern Europe'],
     suitableFor: ['Couples', 'Solo Travellers', 'Families'],
     meta: {
-      title: 'Norwegian Cruise Line | Freestyle Cruising Holidays',
-      description: 'Experience Freestyle Cruising with Norwegian Cruise Line. Flexible dining, exciting destinations. Book with Limitless Cruises.'
+      title: 'Norwegian Cruise Line | Freestyle Cruising | UK Expert Bookings',
+      description: 'Norwegian Freestyle Cruising with expert UK guidance. The Haven luxury, Great Stirrup Cay. Flexible dining, no set schedules.'
     }
   },
   {
@@ -362,8 +374,8 @@ export const cruiseLines = [
     destinations: ['Caribbean', 'Bahamas', 'Mediterranean', 'Alaska'],
     suitableFor: ['Families', 'Disney Fans', 'Multi-generational'],
     meta: {
-      title: 'Disney Cruise Line | Magical Family Cruise Holidays',
-      description: 'Create magical memories with Disney Cruise Line. Character experiences, entertainment & more. Book with Limitless Cruises.'
+      title: 'Disney Cruise Line | Magical Family Cruises | UK Expert Bookings',
+      description: 'Disney magic at sea with expert UK consultant service. Character experiences, Castaway Cay, Broadway shows. Perfect family holidays.'
     }
   },
   {
@@ -393,8 +405,8 @@ export const cruiseLines = [
     destinations: ['Caribbean', 'Mediterranean', 'Alaska', 'Galapagos'],
     suitableFor: ['Couples', 'Foodies', 'Luxury Seekers'],
     meta: {
-      title: 'Celebrity Cruises | Modern Luxury Cruise Holidays',
-      description: 'Experience modern luxury with Celebrity Cruises. Award-winning dining and stunning destinations. Book with Limitless Cruises.'
+      title: 'Celebrity Cruises | Modern Luxury | UK Expert Bookings',
+      description: 'Celebrity modern luxury with expert UK consultant service. Award-winning dining, Edge-class ships, stunning destinations.'
     }
   },
   {
@@ -1033,8 +1045,8 @@ export const cruiseLines = [
     destinations: ['Alaska', 'Caribbean', 'Mediterranean', 'Australia & New Zealand', 'Hawaii', 'Panama Canal', 'World Cruises'],
     suitableFor: ['Couples', 'Families', 'Tech-Savvy Travellers', 'Alaska Seekers', 'Movie Lovers'],
     meta: {
-      title: 'Princess Cruises | MedallionClass Cruise Holidays',
-      description: 'Discover Princess Cruises with innovative MedallionClass service. Alaska experts, Movies Under the Stars. Book with Limitless Cruises.'
+      title: 'Princess Cruises | MedallionClass Cruises | UK Expert Bookings',
+      description: 'Princess Cruises with expert UK consultant service. MedallionClass technology, Alaska specialists, Movies Under the Stars.'
     }
   },
   {
@@ -1155,8 +1167,8 @@ export const cruiseLines = [
     destinations: ['Transatlantic', 'World Cruises', 'Mediterranean', 'Northern Europe'],
     suitableFor: ['Couples', 'Mature Travellers', 'Luxury Seekers', 'History Enthusiasts'],
     meta: {
-      title: 'Cunard Cruises | Luxury Ocean Liner Voyages',
-      description: 'Experience Cunard\'s legendary ocean liners. Queen Mary 2 transatlantic crossings and world cruises. Book with Limitless Cruises.'
+      title: 'Cunard | Luxury Ocean Liners | UK Expert Bookings',
+      description: 'Cunard\'s legendary ocean liners with expert UK consultant service. Queen Mary 2 transatlantic crossings, world cruises, British elegance.'
     }
   },
   {

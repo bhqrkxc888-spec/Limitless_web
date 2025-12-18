@@ -100,8 +100,8 @@ function TestimonialsPage() {
   return (
     <main className="testimonials-page">
       <SEO
-        title="Customer Reviews & Testimonials | What Our Clients Say"
-        description="Read what our customers say about booking their cruise holidays with Limitless Cruises. Real reviews from real travellers."
+        title="Client Experiences | Real Reviews from Cruise Travellers"
+        description="Read genuine experiences from clients who've booked their cruise holidays through Limitless Cruises. See why travellers trust our personal consultant service."
         canonical="https://limitlesscruises.com/testimonials"
       />
 
@@ -112,9 +112,9 @@ function TestimonialsPage() {
       {/* Hero */}
       <section className="testimonials-hero">
         <div className="container">
-          <h1>What Our Customers Say</h1>
+          <h1>Client Experiences</h1>
           <p className="testimonials-hero-subtitle">
-            Don't just take our word for it - hear from real travellers who booked their dream cruises with Limitless Cruises.
+            Hear from real travellers who've experienced the difference of personal consultant service for their dream cruise holidays.
           </p>
           
           {/* Stats */}

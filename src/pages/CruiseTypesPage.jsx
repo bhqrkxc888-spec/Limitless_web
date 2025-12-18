@@ -117,8 +117,8 @@ function CruiseTypesPage() {
     <main className="cruise-types-page">
       {/* SEO */}
       <SEO
-        title="Cruise Types | Family, Luxury, River, Expedition & More"
-        description="Discover the perfect cruise type for you. From family-friendly ships to adults-only escapes, luxury voyages to expedition adventures. Expert advice from Limitless Cruises."
+        title="Cruise Types | Family, Luxury, River, Expedition & More | Expert Guidance"
+        description="Find your perfect cruise style with expert guidance. Family adventures, luxury escapes, river voyages, expedition cruises. Bespoke service from your UK consultant."
         canonical="https://limitlesscruises.com/cruise-types"
         structuredData={structuredData}
       />

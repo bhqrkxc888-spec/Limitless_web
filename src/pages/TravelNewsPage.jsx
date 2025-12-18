@@ -59,10 +59,10 @@ function TravelNewsPage() {
     <main className="travel-news-page">
       {/* SEO */}
       <SEO
-        title="Travel News | Latest Cruise & Travel Updates"
-        description="Stay up to date with the latest travel news, cruise line updates, destination guides, and travel tips from Limitless Cruises. Expert insights and industry news."
+        title="Travel News | Latest Cruise Updates | UK Consultant Insights"
+        description="Stay up to date with the latest travel news, cruise line updates, destination guides. Expert insights from your personal UK cruise consultant."
         canonical="https://limitlesscruises.com/travel-news"
-        keywords="travel news, cruise news, destination news, travel tips, cruise updates, travel industry news"
+        keywords="travel news, cruise news, destination guides, travel tips, UK cruise consultant, cruise industry updates"
         structuredData={structuredData}
       />
 

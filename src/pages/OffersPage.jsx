@@ -135,10 +135,10 @@ function OffersPage() {
     <main className="offers-page">
       {/* SEO */}
       <SEO
-        title="Cruise Offers & Deals | Exclusive Cruise Packages"
-        description="Discover exclusive cruise deals and special offers. From Mediterranean escapes to Caribbean adventures, find your perfect cruise at unbeatable prices with expert booking advice."
+        title="Exclusive Cruise Offers | Hand-Selected Deals | UK Consultant"
+        description="Hand-selected cruise offers and exclusive deals. Expertly curated by your personal consultant. ABTA protected bookings."
         canonical="https://limitlesscruises.com/offers"
-        keywords="cruise offers, cruise deals, cheap cruises, cruise specials, cruise discounts, fly cruise deals, Caribbean cruises, Mediterranean cruises"
+        keywords="cruise offers, cruise deals, exclusive cruise packages, cruise specials, UK cruise consultant, ABTA protected cruises"
         structuredData={structuredData}
       />
 
@@ -149,8 +149,8 @@ function OffersPage() {
             <span className="offers-page-header__eyebrow">Exclusive Deals</span>
             <h1 className="offers-page-header__title">Cruise Offers</h1>
             <p className="offers-page-header__subtitle">
-              Hand-picked cruise deals and exclusive packages. Expert advice, unbeatable prices, 
-              and personal service on every booking.
+              Hand-selected cruise deals and exclusive packages. Expert guidance, exceptional value, 
+              and personal consultant service on every booking.
             </p>
           </div>
         </div>

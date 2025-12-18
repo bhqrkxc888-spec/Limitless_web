@@ -87,17 +87,17 @@ function BucketListPage() {
     <main className="bucket-list-page">
       {/* SEO */}
       <SEO
-        title="Bucket List Cruise Experiences | Once in a Lifetime Voyages"
-        description="Discover extraordinary bucket list cruise experiences. World cruises, Antarctica expeditions, Japan & Asia, Rocky Mountaineer & Alaska, and more. Expert booking from Limitless Cruises."
+        title="Extraordinary Cruise Experiences | Bucket List Voyages | Expert Planning"
+        description="Extraordinary bucket list cruise experiences. World cruises, Antarctica expeditions, Japan & Asia. Expertly planned by your personal consultant."
         canonical="https://limitlesscruises.com/bucket-list"
-        keywords="bucket list cruises, world cruise, antarctica cruise, once in a lifetime cruises, extraordinary cruise holidays"
+        keywords="bucket list cruises, world cruise, antarctica cruise, extraordinary cruise experiences, luxury cruise holidays"
         structuredData={structuredData}
       />
 
       {/* Hero Section */}
       <HeroSection
-        title="Once in a Lifetime Experiences"
-        subtitle="Extraordinary voyages that make a major impact. From world cruises to polar expeditions, these bucket list journeys create memories that last forever."
+        title="Extraordinary Cruise Experiences"
+        subtitle="Extraordinary voyages that make a lasting impact. From world cruises to polar expeditions, these bucket list journeys create memories that last forever."
         size="lg"
         align="center"
         primaryCta={{ label: 'Enquire Now', to: '/contact' }}

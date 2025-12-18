@@ -51,8 +51,8 @@ function CruiseLinesPage() {
     <main className="cruise-lines-page">
       {/* SEO */}
       <SEO
-        title="Cruise Lines | Browse All Cruise Line Partners"
-        description="Explore all cruise lines we partner with. From mainstream to luxury, find the perfect cruise line for your holiday with expert advice from Limitless Cruises."
+        title="Cruise Lines | P&O, MSC, Royal Caribbean & More | UK Expert Bookings"
+        description="Book with confidence through your personal UK cruise consultant. Expert knowledge of all major cruise lines. ABTA protected, exclusive deals."
         canonical="https://limitlesscruises.com/cruise-lines"
         structuredData={structuredData}
       />

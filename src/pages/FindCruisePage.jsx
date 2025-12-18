@@ -72,8 +72,8 @@ function FindCruisePage() {
   return (
     <main className="find-cruise-elegant">
       <SEO
-        title="Find Your Perfect Cruise"
-        description="Search for your ideal cruise holiday with expert help from Limitless Cruises. We find and match the best options for you."
+        title="Find Your Perfect Cruise | Bespoke Selection Service | Limitless Cruises"
+        description="Discover your ideal cruise holiday with expert guidance. River cruises, ocean voyages, expedition adventures - all personally curated for you."
         canonical="https://limitlesscruises.com/find-a-cruise"
       />
       <div className="container">

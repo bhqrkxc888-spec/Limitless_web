@@ -54,8 +54,8 @@ function DestinationsPage() {
     <main className="destinations-page">
       {/* SEO */}
       <SEO
-        title="Cruise Destinations | Mediterranean, Caribbean, Norwegian Fjords & More"
-        description="Discover extraordinary cruise destinations worldwide. From Mediterranean ports to Caribbean islands, Norwegian fjords to exotic Asia. Expert destination advice from Limitless Cruises."
+        title="Cruise Destinations | Mediterranean, Caribbean, Fjords & More | Expert UK Guidance"
+        description="Expertly curated cruise destinations with personal UK consultant service. From Mediterranean elegance to Caribbean warmth, Norwegian fjords to exotic Asia."
         canonical="https://limitlesscruises.com/destinations"
         structuredData={structuredData}
       />
@@ -63,7 +63,7 @@ function DestinationsPage() {
       {/* Hero Section */}
       <HeroSection
         title="Discover Extraordinary Destinations"
-        subtitle="From sun-soaked Mediterranean ports to dramatic Norwegian fjords, discover the world's most captivating cruise destinations."
+        subtitle="From sun-soaked Mediterranean ports to dramatic Norwegian fjords, discover the world's most captivating cruise destinations with expert consultant guidance."
         size="md"
         align="center"
       />

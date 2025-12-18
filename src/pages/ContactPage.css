@@ -20,14 +20,13 @@
   display: grid;
   grid-template-columns: 1fr auto;
   gap: var(--space-16);
-  align-items: start;
+  align-items: center;
 }
 
 .contact-hero-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 160px; /* Match image height */
 }
 
 .contact-hero-text h1 {
@@ -182,7 +181,7 @@
 
 .hours-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-4);
 }
 
@@ -345,6 +344,12 @@
     text-align: left;
   }
 
+  .hours-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
   .hours-grid {
     grid-template-columns: 1fr;
   }

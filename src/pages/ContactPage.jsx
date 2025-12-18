@@ -14,8 +14,8 @@ function ContactPage() {
   return (
     <main className="contact-elegant">
       <SEO
-        title="Contact Us"
-        description="Get in touch with Limitless Cruises. Call, WhatsApp, email or send an enquiry for personalised cruise quotes and expert advice."
+        title="Contact Your Personal Cruise Consultant | UK Based | Limitless Cruises"
+        description="Speak with your personal cruise consultant. Call, WhatsApp, email or enquire online. ABTA protected, UK based, expert guidance for your perfect cruise."
         canonical="https://limitlesscruises.com/contact"
       />
       <div className="container">

@@ -4,12 +4,21 @@ import { incrementTravelNewsView } from '../services/travelNewsAPI';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import { Button, SectionHeader } from '../components/ui';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './TravelNewsArticlePage.css';
 
 function TravelNewsArticlePage() {
   const { slug } = useParams();
   const { article, loading, error } = useTravelNewsArticle(slug);
+  
+  // Contact form state
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  const [formStatus, setFormStatus] = useState({ submitting: false, submitted: false, error: null });
 
   // Track view when article is loaded
   useEffect(() => {
@@ -17,6 +26,31 @@ function TravelNewsArticlePage() {
       incrementTravelNewsView(article.id);
     }
   }, [article?.id]);
+
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    setFormStatus({ submitting: true, submitted: false, error: null });
+    
+    try {
+      // Submit to contact endpoint
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...contactForm,
+          source: `News Article: ${article?.title || slug}`,
+          articleUrl: window.location.href
+        })
+      });
+      
+      if (!response.ok) throw new Error('Failed to send');
+      
+      setFormStatus({ submitting: false, submitted: true, error: null });
+      setContactForm({ name: '', email: '', phone: '', message: '' });
+    } catch (err) {
+      setFormStatus({ submitting: false, submitted: false, error: 'Failed to send. Please try again.' });
+    }
+  };
 
   // Helper functions
   const formatDate = (dateString) => {
@@ -239,21 +273,99 @@ function TravelNewsArticlePage() {
 
             {/* Sidebar */}
             <aside className="article-sidebar">
-              {/* Contact CTA */}
-              <div className="sidebar-card sidebar-card--cta">
-                <h3>Have Questions?</h3>
-                <p>Get in touch with our travel experts for personalised advice.</p>
-                <div className="sidebar-cta-buttons">
-                  <Button href={`tel:${siteConfig.phone}`} variant="primary" fullWidth>
-                    Call {siteConfig.phone}
-                  </Button>
-                  <Button 
-                    to="/contact" 
-                    variant="outline" 
-                    fullWidth
+              {/* Mini Contact Form */}
+              <div className="sidebar-card sidebar-card--contact">
+                <h3>Get in Touch</h3>
+                <p style={{ fontSize: '0.875rem', color: 'var(--clr-text-secondary)', marginBottom: '16px' }}>
+                  Interested in this? Let us help plan your cruise.
+                </p>
+                
+                {formStatus.submitted ? (
+                  <div style={{ padding: '24px', textAlign: 'center', background: 'var(--clr-success-bg)', borderRadius: '8px' }}>
+                    <div style={{ fontSize: '2rem', marginBottom: '8px' }}>✓</div>
+                    <p style={{ margin: 0, fontWeight: '500', color: 'var(--clr-success)' }}>Thanks! We'll be in touch soon.</p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleContactSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    <input
+                      type="text"
+                      placeholder="Your Name *"
+                      value={contactForm.name}
+                      onChange={(e) => setContactForm(f => ({ ...f, name: e.target.value }))}
+                      required
+                      style={{
+                        padding: '10px 12px',
+                        border: '1px solid var(--clr-border)',
+                        borderRadius: '6px',
+                        fontSize: '0.875rem',
+                        width: '100%'
+                      }}
+                    />
+                    <input
+                      type="email"
+                      placeholder="Email Address *"
+                      value={contactForm.email}
+                      onChange={(e) => setContactForm(f => ({ ...f, email: e.target.value }))}
+                      required
+                      style={{
+                        padding: '10px 12px',
+                        border: '1px solid var(--clr-border)',
+                        borderRadius: '6px',
+                        fontSize: '0.875rem',
+                        width: '100%'
+                      }}
+                    />
+                    <input
+                      type="tel"
+                      placeholder="Phone Number"
+                      value={contactForm.phone}
+                      onChange={(e) => setContactForm(f => ({ ...f, phone: e.target.value }))}
+                      style={{
+                        padding: '10px 12px',
+                        border: '1px solid var(--clr-border)',
+                        borderRadius: '6px',
+                        fontSize: '0.875rem',
+                        width: '100%'
+                      }}
+                    />
+                    <textarea
+                      placeholder="Your Message"
+                      value={contactForm.message}
+                      onChange={(e) => setContactForm(f => ({ ...f, message: e.target.value }))}
+                      rows={3}
+                      style={{
+                        padding: '10px 12px',
+                        border: '1px solid var(--clr-border)',
+                        borderRadius: '6px',
+                        fontSize: '0.875rem',
+                        width: '100%',
+                        resize: 'vertical'
+                      }}
+                    />
+                    
+                    {formStatus.error && (
+                      <p style={{ margin: 0, color: 'var(--clr-error)', fontSize: '0.75rem' }}>{formStatus.error}</p>
+                    )}
+                    
+                    <Button 
+                      type="submit" 
+                      variant="primary" 
+                      fullWidth
+                      disabled={formStatus.submitting}
+                    >
+                      {formStatus.submitting ? 'Sending...' : 'Send Enquiry'}
+                    </Button>
+                  </form>
+                )}
+                
+                <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid var(--clr-border)', textAlign: 'center' }}>
+                  <p style={{ margin: '0 0 8px', fontSize: '0.75rem', color: 'var(--clr-text-secondary)' }}>Or call us directly:</p>
+                  <a 
+                    href={`tel:${siteConfig.phone}`} 
+                    style={{ fontWeight: '600', color: 'var(--clr-primary)', textDecoration: 'none' }}
                   >
-                    Contact Us
-                  </Button>
+                    {siteConfig.phone}
+                  </a>
                 </div>
               </div>
 

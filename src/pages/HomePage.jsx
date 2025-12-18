@@ -115,8 +115,8 @@ function HomePage() {
   return (
     <main className="home-elegant">
       <SEO
-        title="Your Personal Cruise Consultant"
-        description="Limitless Cruises - your personal cruise consultant for expert advice, exclusive deals, and seamless holiday planning. ABTA protected, CLIA certified cruise specialists."
+        title="Expert UK Cruise Consultant | Personal Service | Limitless Cruises"
+        description="ABTA protected personal cruise consultant. Bespoke cruise holidays, exclusive deals, expert guidance. Based in the UK, serving clients nationwide."
         canonical={siteConfig.siteUrl}
         structuredData={structuredData}
       />
@@ -142,8 +142,8 @@ function HomePage() {
             {/* Text Box - Overlays the image */}
             <div className="hero-text-box">
               <div className="hero-text">
-                <p className="hero-eyebrow">Personal Cruise Specialists</p>
-                <h1>Your Journey Begins Here</h1>
+                <p className="hero-eyebrow">Personal Cruise Consultant</p>
+                <h1>Your Bespoke Cruise Journey</h1>
                 <p className="hero-lead">
                   Experience the difference of truly personal service. From ocean voyages to river cruises, 
                   we craft bespoke cruise holidays tailored to your preferences.
