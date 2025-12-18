@@ -211,6 +211,8 @@
   height: 400px;
   overflow: hidden;
   flex-shrink: 0;
+  /* Fixed dimensions reserve space - prevents CLS even without img dimensions */
+  background: var(--clr-bg-alt);
 }
 
 .latest-news-tile__featured-image img {

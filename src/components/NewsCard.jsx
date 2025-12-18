@@ -39,6 +39,8 @@ function NewsCard({ article, variant = 'default' }) {
             <img 
               src={article.featured_image_url || article.thumbnail_image_url}
               alt={article.title}
+              width={article.featured_image_width || article.thumbnail_image_width}
+              height={article.featured_image_height || article.thumbnail_image_height}
               loading="lazy"
             />
           ) : (
@@ -93,6 +95,8 @@ function NewsCard({ article, variant = 'default' }) {
             <img 
               src={article.featured_image_url || article.thumbnail_image_url}
               alt={article.title}
+              width={article.featured_image_width || article.thumbnail_image_width}
+              height={article.featured_image_height || article.thumbnail_image_height}
               loading="lazy"
             />
           ) : (

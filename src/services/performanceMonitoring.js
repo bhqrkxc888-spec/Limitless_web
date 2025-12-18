@@ -232,20 +232,39 @@ export async function logPerformanceMetric(metricName, metricValue, metricType =
 
 /**
  * Initializes Core Web Vitals monitoring
- * Tracks LCP, FID, and CLS automatically
+ * Tracks LCP, FID, CLS, INP, and Long Tasks with attribution
  */
 export function initCoreWebVitals() {
   // Only run if Web Vitals library is available
   if (typeof window === 'undefined') return
   
-  // LCP (Largest Contentful Paint)
   if ('PerformanceObserver' in window) {
+    // LCP (Largest Contentful Paint) - with element attribution
     try {
       const lcpObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries()
         const lastEntry = entries[entries.length - 1]
         if (lastEntry) {
-          logPerformanceMetric('LCP', lastEntry.renderTime || lastEntry.loadTime, 'core_web_vital')
+          // Build context with LCP element details
+          const context = {}
+          if (lastEntry.element) {
+            context.element = lastEntry.element.tagName || 'unknown'
+            if (lastEntry.element.id) context.elementId = lastEntry.element.id
+            if (lastEntry.element.className) {
+              context.elementClass = String(lastEntry.element.className).split(' ')[0] || null
+            }
+          }
+          if (lastEntry.url) {
+            // Extract just the filename from image URL
+            context.imageUrl = lastEntry.url
+            const urlParts = lastEntry.url.split('/')
+            context.imageName = urlParts[urlParts.length - 1]?.split('?')[0] || null
+          }
+          if (lastEntry.size) context.size = lastEntry.size
+          
+          logPerformanceMetric('LCP', lastEntry.renderTime || lastEntry.loadTime, 'core_web_vital', {
+            context: Object.keys(context).length > 0 ? context : null
+          })
         }
       })
       lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] })
@@ -253,14 +272,18 @@ export function initCoreWebVitals() {
       // LCP not supported
     }
     
-    // FID (First Input Delay) - now called INP (Interaction to Next Paint) in newer versions
+    // FID (First Input Delay) - legacy metric, still useful
     try {
       const fidObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries()
         entries.forEach((entry) => {
           if (entry.processingStart && entry.startTime) {
             const fid = entry.processingStart - entry.startTime
-            logPerformanceMetric('FID', fid, 'core_web_vital')
+            logPerformanceMetric('FID', fid, 'core_web_vital', {
+              context: {
+                eventType: entry.name || 'unknown'
+              }
+            })
           }
         })
       })
@@ -269,32 +292,101 @@ export function initCoreWebVitals() {
       // FID not supported
     }
     
-    // CLS (Cumulative Layout Shift)
+    // INP (Interaction to Next Paint) - New Core Web Vital replacing FID
+    try {
+      let maxINP = 0
+      let maxINPContext = null
+      const inpObserver = new PerformanceObserver((list) => {
+        const entries = list.getEntries()
+        entries.forEach((entry) => {
+          // Only track interactions with meaningful duration
+          if (entry.duration > maxINP) {
+            maxINP = entry.duration
+            maxINPContext = {
+              interactionType: entry.name || 'unknown',
+              target: entry.target?.tagName || 'unknown',
+              targetId: entry.target?.id || null
+            }
+          }
+        })
+      })
+      inpObserver.observe({ entryTypes: ['event'], durationThreshold: 40 })
+      
+      // Log worst INP on page unload
+      window.addEventListener('beforeunload', () => {
+        if (maxINP > 0) {
+          logPerformanceMetric('INP', maxINP, 'core_web_vital', {
+            context: maxINPContext
+          })
+        }
+      })
+    } catch {
+      // INP not supported
+    }
+    
+    // CLS (Cumulative Layout Shift) - with source attribution
     try {
       let clsValue = 0
+      let worstShift = null
+      let shiftCount = 0
+      
       const clsObserver = new PerformanceObserver((list) => {
         const entries = list.getEntries()
         entries.forEach((entry) => {
           if (!entry.hadRecentInput) {
             clsValue += entry.value
+            shiftCount++
+            
+            // Track worst shift source for debugging
+            if (entry.sources?.[0] && (!worstShift || entry.value > worstShift.value)) {
+              const source = entry.sources[0]
+              worstShift = {
+                value: entry.value,
+                element: source.node?.tagName || 'unknown',
+                id: source.node?.id || null,
+                class: source.node?.className ? String(source.node.className).split(' ')[0] : null
+              }
+            }
           }
         })
-        
-        // Log CLS when page is unloaded or after a delay
-        if (clsValue > 0) {
-          logPerformanceMetric('CLS', clsValue, 'core_web_vital')
-        }
       })
       clsObserver.observe({ entryTypes: ['layout-shift'] })
       
-      // Log final CLS on page unload
+      // Log final CLS with attribution on page unload
       window.addEventListener('beforeunload', () => {
         if (clsValue > 0) {
-          logPerformanceMetric('CLS', clsValue, 'core_web_vital')
+          const context = {
+            totalShifts: shiftCount
+          }
+          if (worstShift) {
+            context.worstShift = worstShift
+          }
+          logPerformanceMetric('CLS', clsValue, 'core_web_vital', { context })
         }
       })
     } catch {
       // CLS not supported
+    }
+    
+    // Long Tasks - Track JavaScript blocking the main thread (>50ms)
+    try {
+      const longTaskObserver = new PerformanceObserver((list) => {
+        const entries = list.getEntries()
+        entries.forEach((entry) => {
+          // Only log significant long tasks (>100ms to reduce noise)
+          if (entry.duration > 100) {
+            logPerformanceMetric('LongTask', entry.duration, 'javascript', {
+              context: {
+                startTime: Math.round(entry.startTime),
+                attribution: entry.attribution?.[0]?.name || 'unknown'
+              }
+            })
+          }
+        })
+      })
+      longTaskObserver.observe({ entryTypes: ['longtask'] })
+    } catch {
+      // Long tasks not supported
     }
   }
 }
@@ -308,8 +400,70 @@ export function trackPageLoad() {
   // Wait for page to fully load
   if (document.readyState === 'complete') {
     measurePageLoad()
+    measureResourceTiming()
   } else {
-    window.addEventListener('load', measurePageLoad)
+    window.addEventListener('load', () => {
+      measurePageLoad()
+      measureResourceTiming()
+    })
+  }
+}
+
+/**
+ * Measures and logs slow resource loading (images, scripts, etc.)
+ * Helps identify which assets are impacting performance
+ */
+function measureResourceTiming() {
+  try {
+    // Small delay to ensure all resources are recorded
+    setTimeout(() => {
+      const resources = performance.getEntriesByType('resource')
+      
+      // Find slow images (>500ms) - these often impact LCP
+      const slowImages = resources
+        .filter(r => r.initiatorType === 'img' && r.duration > 500)
+        .map(r => ({
+          name: r.name.split('/').pop()?.split('?')[0] || r.name,
+          duration: Math.round(r.duration),
+          size: r.transferSize || 0
+        }))
+        .sort((a, b) => b.duration - a.duration)
+        .slice(0, 5) // Top 5 slowest
+      
+      if (slowImages.length > 0) {
+        logPerformanceMetric('SlowImages', slowImages.length, 'resources', {
+          context: {
+            images: slowImages,
+            slowestImage: slowImages[0]?.name,
+            slowestDuration: slowImages[0]?.duration
+          }
+        })
+      }
+      
+      // Track overall resource summary
+      const resourceSummary = {
+        total: resources.length,
+        images: resources.filter(r => r.initiatorType === 'img').length,
+        scripts: resources.filter(r => r.initiatorType === 'script').length,
+        css: resources.filter(r => r.initiatorType === 'css' || r.initiatorType === 'link').length,
+        fonts: resources.filter(r => r.initiatorType === 'css' && r.name.includes('font')).length
+      }
+      
+      // Calculate total transfer size
+      const totalSize = resources.reduce((sum, r) => sum + (r.transferSize || 0), 0)
+      
+      // Only log if there are many resources or large total size (>1MB)
+      if (resources.length > 50 || totalSize > 1024 * 1024) {
+        logPerformanceMetric('ResourceLoad', resources.length, 'resources', {
+          context: {
+            ...resourceSummary,
+            totalSizeKB: Math.round(totalSize / 1024)
+          }
+        })
+      }
+    }, 100)
+  } catch {
+    // Silently fail
   }
 }
 

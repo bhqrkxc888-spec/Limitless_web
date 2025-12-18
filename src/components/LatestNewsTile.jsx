@@ -148,6 +148,8 @@ function LatestNewsTile() {
                   <img 
                     src={currentArticle.featured_image_url || currentArticle.thumbnail_image_url}
                     alt={currentArticle.title}
+                    width={currentArticle.featured_image_width || currentArticle.thumbnail_image_width}
+                    height={currentArticle.featured_image_height || currentArticle.thumbnail_image_height}
                     loading="lazy"
                   />
                 )}
