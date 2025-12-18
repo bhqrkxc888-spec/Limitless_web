@@ -682,7 +682,10 @@ function OfferPage() {
               )}
 
               {/* Itinerary */}
-              {offer.itinerary_summary && (
+              {(offer.itinerary_summary || 
+                (offer.show_itinerary_map !== false && offer.itinerary_map_url) ||
+                (offer.ports_of_call && offer.ports_of_call.length > 0) ||
+                (offer.itinerary_detailed && offer.itinerary_detailed.length > 0)) && (
                 <div className="offer-section">
                   <h2 className="offer-section__title">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
