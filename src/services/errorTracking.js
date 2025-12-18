@@ -137,6 +137,17 @@ export async function logError(error, options = {}) {
   if (errorMessage.includes('MIME type') || errorMessage.includes('not a valid JavaScript')) {
     return;
   }
+  
+  // Skip bot probes - these are not real errors, just bots looking for WordPress/vulnerabilities
+  const pagePath = typeof window !== 'undefined' ? window.location.pathname : '';
+  const botProbePatterns = [
+    '/wp-', '/.well-known/', '/apple-app', '/xmlrpc', '/admin.php',
+    '/wp-json', '/wp-admin', '/wp-content', '/wp-includes',
+    '/phpmyadmin', '/administrator', '/.env', '/config.php'
+  ];
+  if (botProbePatterns.some(pattern => pagePath.includes(pattern))) {
+    return;
+  }
 
   // Don't log if Supabase not configured
   if (!supabase) {

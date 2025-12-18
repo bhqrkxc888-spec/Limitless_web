@@ -59,6 +59,8 @@ const OfferPage = lazy(() => import('./pages/OfferPage'))
 const TravelNewsPage = lazy(() => import('./pages/TravelNewsPage'))
 const TravelNewsArticlePage = lazy(() => import('./pages/TravelNewsArticlePage'))
 const TravelNewsCategoryPage = lazy(() => import('./pages/TravelNewsCategoryPage'))
+const CruiseGuidesPage = lazy(() => import('./pages/CruiseGuidesPage'))
+const CruiseGuideDetailPage = lazy(() => import('./pages/CruiseGuideDetailPage'))
 const TravelNewsTagPage = lazy(() => import('./pages/TravelNewsTagPage'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
 const FAQPage = lazy(() => import('./pages/FAQPage'))
@@ -260,6 +262,10 @@ function AppLayout() {
             <Route path="/travel-news/category/:category" element={<TravelNewsCategoryPage />} />
             <Route path="/travel-news/tag/:tag" element={<TravelNewsTagPage />} />
             <Route path="/travel-news/:slug" element={<TravelNewsArticlePage />} />
+            
+            {/* Cruise Guides - Public */}
+            <Route path="/cruise-guides" element={<CruiseGuidesPage />} />
+            <Route path="/cruise-guides/:slug" element={<CruiseGuideDetailPage />} />
             
             {/* Legal Pages - Always Public */}
             <Route path="/website-terms" element={<WebsiteTerms />} />

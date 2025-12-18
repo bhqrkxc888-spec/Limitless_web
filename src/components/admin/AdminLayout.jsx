@@ -23,6 +23,32 @@ import {
 import { useState, useEffect } from 'react';
 import './AdminLayout.css';
 
+// Add noindex meta tag for all admin pages
+const AdminSEO = () => {
+  useEffect(() => {
+    // Set noindex, nofollow for admin pages
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (!robotsMeta) {
+      robotsMeta = document.createElement('meta');
+      robotsMeta.setAttribute('name', 'robots');
+      document.head.appendChild(robotsMeta);
+    }
+    robotsMeta.setAttribute('content', 'noindex, nofollow');
+    
+    // Update title
+    document.title = 'Admin | Limitless Cruises';
+    
+    return () => {
+      // Reset when leaving admin area
+      if (robotsMeta) {
+        robotsMeta.setAttribute('content', 'index, follow');
+      }
+    };
+  }, []);
+  
+  return null;
+};
+
 function AdminLayout({ children, onLogout, lastUpdated, onRefresh, isRefreshing }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -61,6 +87,7 @@ function AdminLayout({ children, onLogout, lastUpdated, onRefresh, isRefreshing 
 
   return (
     <div className="admin-layout">
+      <AdminSEO />
       {/* Mobile Header */}
       <header className="admin-mobile-header">
         <button 

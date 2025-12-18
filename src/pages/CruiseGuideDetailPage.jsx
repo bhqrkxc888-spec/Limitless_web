@@ -1,0 +1,143 @@
+import { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { getCruiseGuideBySlug } from '../services/cruiseGuidesAPI';
+import SEO from '../components/SEO';
+import { Button } from '../components/ui';
+import ContactForm from '../components/ContactForm';
+import './CruiseGuideDetailPage.css';
+
+function CruiseGuideDetailPage() {
+  const { slug } = useParams();
+  const [guide, setGuide] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadGuide() {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await getCruiseGuideBySlug(slug);
+        
+        if (!cancelled) {
+          if (data) {
+            setGuide(data);
+          } else {
+            setError('Guide not found');
+          }
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError('Failed to load guide');
+          console.error('Error loading guide:', err);
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadGuide();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <main className="guide-detail-page">
+        <div className="container">
+          <div className="guide-loading">Loading...</div>
+        </div>
+      </main>
+    );
+  }
+
+  if (error || !guide) {
+    return (
+      <main className="guide-detail-page">
+        <div className="container">
+          <div className="guide-error">
+            <h1>Guide Not Found</h1>
+            <p>Sorry, we couldn't find the guide you're looking for.</p>
+            <Button to="/cruise-guides" variant="primary">
+              ← Back to Guides
+            </Button>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  const imageUrl = guide.featured_image_url;
+  const imageWidth = guide.featured_image_width || 1200;
+  const imageHeight = guide.featured_image_height || 630;
+
+  return (
+    <main className="guide-detail-page">
+      <SEO
+        title={guide.meta_title || guide.title}
+        description={guide.meta_description || guide.excerpt}
+        keywords={guide.meta_keywords?.join(', ')}
+        canonical={`https://limitlesscruises.com/cruise-guides/${guide.slug}`}
+        image={imageUrl}
+        type="article"
+      />
+
+      <div className="guide-detail-header">
+        <div className="container">
+          <Link to="/cruise-guides" className="guide-detail-back">
+            ← Back to Guides
+          </Link>
+          {guide.guide_type && (
+            <span className="guide-detail-type">
+              {guide.guide_type.replace('_', ' ')}
+            </span>
+          )}
+          <h1 className="guide-detail-title">{guide.title}</h1>
+          {guide.excerpt && (
+            <p className="guide-detail-excerpt">{guide.excerpt}</p>
+          )}
+        </div>
+      </div>
+
+      {imageUrl && (
+        <div className="guide-detail-image">
+          <div className="container">
+            <img
+              src={imageUrl}
+              alt={guide.title}
+              width={imageWidth}
+              height={imageHeight}
+            />
+          </div>
+        </div>
+      )}
+
+      <div className="guide-detail-content-section">
+        <div className="container">
+          <div className="guide-detail-layout">
+            <article className="guide-detail-content">
+              <div dangerouslySetInnerHTML={{ __html: guide.content }} />
+            </article>
+
+            <aside className="guide-detail-sidebar">
+              <div className="guide-detail-contact-card">
+                <h3>Ready to Book?</h3>
+                <p>Get in touch with your personal cruise consultant for expert guidance and exclusive deals.</p>
+                <ContactForm source={`cruise-guide:${guide.slug}`} compact />
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+export default CruiseGuideDetailPage;
+

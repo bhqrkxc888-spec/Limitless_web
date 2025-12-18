@@ -10,7 +10,22 @@ import { Lock, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import './AdminLogin.css';
 
+// Set noindex for admin login page
+const useNoIndex = () => {
+  useEffect(() => {
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (!robotsMeta) {
+      robotsMeta = document.createElement('meta');
+      robotsMeta.setAttribute('name', 'robots');
+      document.head.appendChild(robotsMeta);
+    }
+    robotsMeta.setAttribute('content', 'noindex, nofollow');
+    document.title = 'Staff Login | Limitless Cruises';
+  }, []);
+};
+
 function AdminLogin() {
+  useNoIndex();
   const navigate = useNavigate();
   const { login, isAuthenticated, isLoading: authLoading } = useAdminAuth();
   

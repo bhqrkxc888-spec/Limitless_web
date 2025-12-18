@@ -65,7 +65,11 @@ function initMonitoring() {
       const isSupabaseRpc = url.includes('/rest/v1/rpc/') && method === 'POST'
       const shouldSkipLogging = isSupabaseRpc && response.status === 404
       
-      if (!response.ok && response.status >= 400 && !shouldSkipLogging) {
+      // Skip bot probe URLs - these are not real errors
+      const botProbePatterns = ['/wp-', '/.well-known/', '/apple-app', '/xmlrpc', '/phpmyadmin']
+      const isBotProbe = botProbePatterns.some(pattern => url.includes(pattern))
+      
+      if (!response.ok && response.status >= 400 && !shouldSkipLogging && !isBotProbe) {
         logApiError(new Error(`API Error: ${response.status} ${response.statusText}`), {
           endpoint: args[0],
           method: method,
@@ -79,12 +83,19 @@ function initMonitoring() {
       return response
     } catch (error) {
       // Log network errors (connection failures, timeouts, etc.)
-      logNetworkError(error, {
-        endpoint: args[0],
-        method: args[1]?.method || 'GET'
-      }).catch(() => {
-        // Silently fail if error tracking fails
-      })
+      // Skip bot probes
+      const url = String(args[0] || '')
+      const botProbePatterns = ['/wp-', '/.well-known/', '/apple-app', '/xmlrpc', '/phpmyadmin']
+      const isBotProbe = botProbePatterns.some(pattern => url.includes(pattern))
+      
+      if (!isBotProbe) {
+        logNetworkError(error, {
+          endpoint: args[0],
+          method: args[1]?.method || 'GET'
+        }).catch(() => {
+          // Silently fail if error tracking fails
+        })
+      }
       throw error
     }
   }
