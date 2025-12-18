@@ -23,7 +23,7 @@ const testimonials = [
     id: 2,
     quote: "As a solo traveller, I was nervous about cruising alone. Norwegian's studio cabins were recommended and I was helped to feel completely at ease. The whole experience was wonderful.",
     author: "Janet T.",
-    location: "Leeds",
+    location: "Edinburgh",
     cruise: "Norwegian Fjords Solo",
     rating: 5,
     featured: true
@@ -32,7 +32,7 @@ const testimonials = [
     id: 3,
     quote: "Booking our family Disney cruise through Limitless was the best decision. Everything was handled - flights, transfers, the lot. The kids are still talking about it!",
     author: "The Williams Family",
-    location: "Manchester",
+    location: "Bristol",
     cruise: "Disney Caribbean",
     rating: 5,
     featured: true
@@ -41,7 +41,7 @@ const testimonials = [
     id: 4,
     quote: "We've booked three cruises now with Limitless. The knowledge of the different cruise lines is incredible, and we're always found deals we wouldn't have found ourselves.",
     author: "David & Anne",
-    location: "Doncaster",
+    location: "Cardiff",
     cruise: "Multiple cruises",
     rating: 5,
     featured: false
@@ -50,7 +50,7 @@ const testimonials = [
     id: 5,
     quote: "The advice on accessible cabins and assistance was invaluable. Everything was arranged before we sailed. Truly a personal service.",
     author: "Robert P.",
-    location: "Barnsley",
+    location: "Newcastle",
     cruise: "P&O British Isles",
     rating: 5,
     featured: false
@@ -59,9 +59,45 @@ const testimonials = [
     id: 6,
     quote: "After comparing prices online, we found Limitless matched the best deal and added onboard credit. Plus the personal service means if anything goes wrong, we have someone to call.",
     author: "Christine & Paul",
-    location: "Rotherham",
+    location: "Southampton",
     cruise: "MSC Mediterranean",
     rating: 5,
+    featured: false
+  },
+  {
+    id: 7,
+    quote: "Great service overall. The cruise recommendations were spot on, though the initial response took a day longer than expected. Still very happy with the final result.",
+    author: "Jennifer M.",
+    location: "Glasgow",
+    cruise: "Royal Caribbean Mediterranean",
+    rating: 4,
+    featured: false
+  },
+  {
+    id: 8,
+    quote: "Excellent knowledge of different cruise lines. Helped us find the perfect adults-only ship for our anniversary. Would definitely recommend.",
+    author: "Mark & Lisa",
+    location: "Birmingham",
+    cruise: "P&O Aurora Adults-Only",
+    rating: 5,
+    featured: false
+  },
+  {
+    id: 9,
+    quote: "Very professional service. The personal touch made all the difference when booking our first world cruise. Katherine's expertise was invaluable.",
+    author: "Elizabeth R.",
+    location: "Brighton",
+    cruise: "Cunard World Cruise",
+    rating: 5,
+    featured: false
+  },
+  {
+    id: 10,
+    quote: "Good service and competitive prices. Communication was excellent throughout the booking process.",
+    author: "Andrew S.",
+    location: "Liverpool",
+    cruise: "Norwegian Caribbean",
+    rating: 4,
     featured: false
   }
 ];

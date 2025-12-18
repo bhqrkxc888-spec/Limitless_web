@@ -124,14 +124,22 @@ function AdminLayout({ children, onLogout, lastUpdated, onRefresh, isRefreshing 
             <span className="value">{formatLastUpdated()}</span>
           </div>
           <a 
+            href="/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="admin-site-link"
+          >
+            <ExternalLink size={16} />
+            <span>Back to Site</span>
+          </a>
+          <a 
             href="/preview" 
             target="_blank" 
             rel="noopener noreferrer"
             className="admin-preview-link"
           >
             <FileText size={16} />
-            <span>Access Hidden Pages</span>
-            <ExternalLink size={12} />
+            <span>Hidden Pages</span>
           </a>
           <button 
             className="admin-refresh-btn"

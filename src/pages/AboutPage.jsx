@@ -187,8 +187,8 @@ function AboutPage() {
                 </p>
               </div>
               <div className="testimonial-author">
-                <strong>Deborah</strong>
-                <span>Manchester</span>
+                <strong>Elizabeth R.</strong>
+                <span>Brighton</span>
               </div>
             </div>
             <div className="testimonial-card">
@@ -198,8 +198,8 @@ function AboutPage() {
                 </p>
               </div>
               <div className="testimonial-author">
-                <strong>David & Sandra</strong>
-                <span>Birmingham</span>
+                <strong>David & Anne</strong>
+                <span>Cardiff</span>
               </div>
             </div>
             <div className="testimonial-card">
@@ -209,8 +209,8 @@ function AboutPage() {
                 </p>
               </div>
               <div className="testimonial-author">
-                <strong>Sandra</strong>
-                <span>Leeds</span>
+                <strong>Sarah & Michael</strong>
+                <span>Sheffield</span>
               </div>
             </div>
           </div>

@@ -216,6 +216,7 @@
   border-color: var(--admin-error);
 }
 
+.admin-site-link,
 .admin-preview-link {
   display: flex;
   align-items: center;
@@ -223,7 +224,7 @@
   gap: 0.5rem;
   width: 100%;
   padding: 0.625rem 1rem;
-  border: 1px dashed var(--admin-border);
+  border: 1px solid var(--admin-border);
   border-radius: 6px;
   font-size: 0.8125rem;
   font-weight: 500;
@@ -234,15 +235,25 @@
   margin-bottom: 0.5rem;
 }
 
+.admin-site-link {
+  background: rgba(201, 169, 98, 0.1);
+  border-color: rgba(201, 169, 98, 0.3);
+  color: #c9a962;
+}
+
+.admin-site-link:hover {
+  background: rgba(201, 169, 98, 0.2);
+  border-color: #c9a962;
+}
+
+.admin-preview-link {
+  border-style: dashed;
+}
+
 .admin-preview-link:hover {
   color: var(--admin-primary);
   border-color: var(--admin-primary);
   background: rgba(79, 140, 255, 0.05);
-}
-
-.admin-preview-link svg:last-child {
-  opacity: 0.5;
-  margin-left: auto;
 }
 
 /* Spinning animation */
