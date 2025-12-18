@@ -3,7 +3,6 @@ import { useParams, Link } from 'react-router-dom';
 import { getCruiseGuideBySlug } from '../services/cruiseGuidesAPI';
 import SEO from '../components/SEO';
 import { Button } from '../components/ui';
-import ContactForm from '../components/ContactForm';
 import './CruiseGuideDetailPage.css';
 
 function CruiseGuideDetailPage() {
@@ -86,9 +85,13 @@ function CruiseGuideDetailPage() {
 
       <div className="guide-detail-header">
         <div className="container">
-          <Link to="/cruise-guides" className="guide-detail-back">
-            ← Back to Guides
-          </Link>
+          <div className="guide-detail-breadcrumb">
+            <Link to="/">Home</Link>
+            <span className="breadcrumb-separator">›</span>
+            <Link to="/cruise-guides">Cruise Guides</Link>
+            <span className="breadcrumb-separator">›</span>
+            <span>{guide.title}</span>
+          </div>
           {guide.guide_type && (
             <span className="guide-detail-type">
               {guide.guide_type.replace('_', ' ')}
@@ -103,19 +106,20 @@ function CruiseGuideDetailPage() {
 
       <div className="guide-detail-content-section">
         <div className="container">
-          <div className="guide-detail-layout">
-            <article className="guide-detail-content">
-              <div dangerouslySetInnerHTML={{ __html: guide.content }} />
-            </article>
-
-            <aside className="guide-detail-sidebar">
-              <div className="guide-detail-contact-card">
-                <h3>Ready to Book?</h3>
-                <p>Get in touch with your personal cruise consultant for expert guidance and exclusive deals.</p>
-                <ContactForm source={`cruise-guide:${guide.slug}`} compact />
+          <article className="guide-detail-article">
+            <div className="guide-detail-content" dangerouslySetInnerHTML={{ __html: guide.content }} />
+            
+            <div className="guide-detail-footer">
+              <div className="guide-detail-cta">
+                <h3>Ready to Plan Your Perfect Cruise?</h3>
+                <p>Get in touch with your personal UK cruise consultant for expert guidance and exclusive deals.</p>
+                <div className="guide-detail-cta-actions">
+                  <Button to="/contact" variant="primary">Get in Touch</Button>
+                  <Button to="/cruise-guides" variant="secondary">View More Guides</Button>
+                </div>
               </div>
-            </aside>
-          </div>
+            </div>
+          </article>
         </div>
       </div>
     </main>
