@@ -643,14 +643,19 @@ async function logSEOMetric(metricType, metricName, metricValue, metricUnit, met
     })
     
     if (rpcError) {
-      // Check for function not found or schema mismatch errors
-      const isNotFoundError = 
+      // Check for function not found, unauthorized, or schema mismatch errors
+      const isUnavailableError = 
         rpcError.status === 404 || 
+        rpcError.status === 401 ||  // Unauthorized - RPC not accessible
+        rpcError.status === 403 ||  // Forbidden
         rpcError.statusCode === 404 ||
+        rpcError.statusCode === 401 ||
+        rpcError.statusCode === 403 ||
         rpcError.code === 'PGRST202' || 
         rpcError.code === '42883' ||
         rpcError.code === '42703' || // undefined column
         rpcError.message?.includes('not found') || 
+        rpcError.message?.includes('Unauthorized') ||
         rpcError.message?.includes('function') || 
         rpcError.message?.includes('does not exist') ||
         rpcError.message?.includes('column') ||
@@ -658,8 +663,8 @@ async function logSEOMetric(metricType, metricName, metricValue, metricUnit, met
         rpcError.message?.includes('Searched for') ||
         rpcError.message?.includes('Could not find')
       
-      if (isNotFoundError) {
-        // Function doesn't exist or schema mismatch - mark as unavailable
+      if (isUnavailableError) {
+        // Function doesn't exist, unauthorized, or schema mismatch - mark as unavailable
         setCapability(CAPABILITY_KEY_METRIC_LOG, false)
         if (import.meta.env.DEV) {
           console.warn('[SEO Monitoring] RPC function not available. Database setup may be incomplete.')
@@ -731,14 +736,19 @@ async function updatePageSummary(summary) {
     })
     
     if (rpcError) {
-      // Check for function not found or schema mismatch errors
-      const isNotFoundError = 
+      // Check for function not found, unauthorized, or schema mismatch errors
+      const isUnavailableError = 
         rpcError.status === 404 || 
+        rpcError.status === 401 ||  // Unauthorized - RPC not accessible
+        rpcError.status === 403 ||  // Forbidden
         rpcError.statusCode === 404 ||
+        rpcError.statusCode === 401 ||
+        rpcError.statusCode === 403 ||
         rpcError.code === 'PGRST202' || 
         rpcError.code === '42883' ||
         rpcError.code === '42703' || // undefined column
         rpcError.message?.includes('not found') || 
+        rpcError.message?.includes('Unauthorized') ||
         rpcError.message?.includes('function') || 
         rpcError.message?.includes('does not exist') ||
         rpcError.message?.includes('column') ||
@@ -746,8 +756,8 @@ async function updatePageSummary(summary) {
         rpcError.message?.includes('Searched for') ||
         rpcError.message?.includes('Could not find')
       
-      if (isNotFoundError) {
-        // Function doesn't exist or schema mismatch - mark as unavailable
+      if (isUnavailableError) {
+        // Function doesn't exist, unauthorized, or schema mismatch - mark as unavailable
         setCapability(CAPABILITY_KEY_PAGE_UPDATE, false)
         if (import.meta.env.DEV) {
           console.warn('[SEO Monitoring] RPC function not available. Database setup may be incomplete.')
@@ -940,13 +950,18 @@ async function checkSEOMonitoringAvailable() {
       p_warnings_count: null
     })
     
-    const isNotFoundError = 
+    const isUnavailableError = 
       error?.status === 404 || 
+      error?.status === 401 ||  // Unauthorized - RPC not accessible
+      error?.status === 403 ||  // Forbidden
       error?.statusCode === 404 ||
+      error?.statusCode === 401 ||
+      error?.statusCode === 403 ||
       error?.code === 'PGRST202' || 
       error?.code === '42883' ||
       error?.code === '42703' || // undefined column
       error?.message?.includes('not found') || 
+      error?.message?.includes('Unauthorized') ||
       error?.message?.includes('function') || 
       error?.message?.includes('does not exist') ||
       error?.message?.includes('column') ||
@@ -954,8 +969,8 @@ async function checkSEOMonitoringAvailable() {
       error?.message?.includes('Searched for') ||
       error?.message?.includes('Could not find')
     
-    if (isNotFoundError) {
-      // Function doesn't exist or schema mismatch - mark both as unavailable
+    if (isUnavailableError) {
+      // Function doesn't exist, unauthorized, or schema mismatch - mark both as unavailable
       setCapability(CAPABILITY_KEY_PAGE_UPDATE, false)
       setCapability(CAPABILITY_KEY_METRIC_LOG, false)
       return false
