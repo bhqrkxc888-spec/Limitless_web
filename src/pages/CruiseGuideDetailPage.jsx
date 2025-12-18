@@ -73,10 +73,6 @@ function CruiseGuideDetailPage() {
     );
   }
 
-  const imageUrl = guide.featured_image_url;
-  const imageWidth = guide.featured_image_width || 1200;
-  const imageHeight = guide.featured_image_height || 630;
-
   return (
     <main className="guide-detail-page">
       <SEO
@@ -84,7 +80,7 @@ function CruiseGuideDetailPage() {
         description={guide.meta_description || guide.excerpt}
         keywords={guide.meta_keywords?.join(', ')}
         canonical={`https://limitlesscruises.com/cruise-guides/${guide.slug}`}
-        image={imageUrl}
+        image={guide.featured_image_url}
         type="article"
       />
 
@@ -104,19 +100,6 @@ function CruiseGuideDetailPage() {
           )}
         </div>
       </div>
-
-      {imageUrl && (
-        <div className="guide-detail-image">
-          <div className="container">
-            <img
-              src={imageUrl}
-              alt={guide.title}
-              width={imageWidth}
-              height={imageHeight}
-            />
-          </div>
-        </div>
-      )}
 
       <div className="guide-detail-content-section">
         <div className="container">

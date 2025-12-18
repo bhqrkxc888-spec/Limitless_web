@@ -46,17 +46,6 @@
   max-width: 800px;
 }
 
-.guide-detail-image {
-  padding: 32px 0;
-}
-
-.guide-detail-image img {
-  width: 100%;
-  height: auto;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
-}
-
 .guide-detail-content-section {
   padding: 48px 0 80px;
 }
@@ -153,10 +142,6 @@
 @media (max-width: 768px) {
   .guide-detail-header {
     padding: 32px 0 24px;
-  }
-
-  .guide-detail-image {
-    padding: 24px 0;
   }
 
   .guide-detail-content-section {

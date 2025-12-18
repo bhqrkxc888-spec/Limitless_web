@@ -9,7 +9,7 @@ CREATE SCHEMA IF NOT EXISTS web;
 -- web.site_settings table
 -- ============================================================================
 -- Stores site-wide configuration including contact info, socials, and hours
-CREATE TABLE web.site_settings (
+CREATE TABLE IF NOT EXISTS web.site_settings (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   site_key text UNIQUE NOT NULL,
   site_logo_url text,
@@ -22,7 +22,7 @@ CREATE TABLE web.site_settings (
 );
 
 -- Index for fast lookup by site_key
-CREATE INDEX idx_site_settings_site_key ON web.site_settings(site_key);
+CREATE INDEX IF NOT EXISTS idx_site_settings_site_key ON web.site_settings(site_key);
 
 -- Trigger to auto-update updated_at
 CREATE OR REPLACE FUNCTION web.update_updated_at_column()
@@ -31,8 +31,9 @@ BEGIN
   NEW.updated_at = now();
   RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = web, public;
 
+DROP TRIGGER IF EXISTS update_site_settings_updated_at ON web.site_settings;
 CREATE TRIGGER update_site_settings_updated_at
   BEFORE UPDATE ON web.site_settings
   FOR EACH ROW
@@ -42,7 +43,7 @@ CREATE TRIGGER update_site_settings_updated_at
 -- web.site_documents table
 -- ============================================================================
 -- Stores legal documents and other site content
-CREATE TABLE web.site_documents (
+CREATE TABLE IF NOT EXISTS web.site_documents (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   slug text UNIQUE NOT NULL,
   title text NOT NULL,
@@ -54,10 +55,11 @@ CREATE TABLE web.site_documents (
 );
 
 -- Indexes
-CREATE INDEX idx_site_documents_slug ON web.site_documents(slug);
-CREATE INDEX idx_site_documents_status ON web.site_documents(status);
+CREATE INDEX IF NOT EXISTS idx_site_documents_slug ON web.site_documents(slug);
+CREATE INDEX IF NOT EXISTS idx_site_documents_status ON web.site_documents(status);
 
 -- Trigger to auto-update updated_at
+DROP TRIGGER IF EXISTS update_site_documents_updated_at ON web.site_documents;
 CREATE TRIGGER update_site_documents_updated_at
   BEFORE UPDATE ON web.site_documents
   FOR EACH ROW
@@ -74,8 +76,9 @@ BEGIN
   END IF;
   RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = web, public;
 
+DROP TRIGGER IF EXISTS set_site_documents_published_at ON web.site_documents;
 CREATE TRIGGER set_site_documents_published_at
   BEFORE UPDATE ON web.site_documents
   FOR EACH ROW
@@ -90,18 +93,21 @@ ALTER TABLE web.site_settings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE web.site_documents ENABLE ROW LEVEL SECURITY;
 
 -- Public read access to site_settings
+DROP POLICY IF EXISTS "Public can view site settings" ON web.site_settings;
 CREATE POLICY "Public can view site settings"
   ON web.site_settings
   FOR SELECT
   USING (true);
 
 -- Public can only view published documents
+DROP POLICY IF EXISTS "Public can view published documents" ON web.site_documents;
 CREATE POLICY "Public can view published documents"
   ON web.site_documents
   FOR SELECT
   USING (status = 'published');
 
 -- Authenticated users (admin) have full access to site_settings
+DROP POLICY IF EXISTS "Authenticated users can manage site settings" ON web.site_settings;
 CREATE POLICY "Authenticated users can manage site settings"
   ON web.site_settings
   FOR ALL
@@ -109,6 +115,7 @@ CREATE POLICY "Authenticated users can manage site settings"
   WITH CHECK (auth.role() = 'authenticated');
 
 -- Authenticated users (admin) have full access to site_documents
+DROP POLICY IF EXISTS "Authenticated users can manage site documents" ON web.site_documents;
 CREATE POLICY "Authenticated users can manage site documents"
   ON web.site_documents
   FOR ALL
