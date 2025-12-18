@@ -31,12 +31,6 @@ function TravelNewsPage() {
   });
 
   const totalPages = Math.ceil(total / itemsPerPage);
-  
-  // Use first article as hero (most recent by date)
-  const heroArticle = news[0];
-  
-  // Rest of articles for the grid
-  const gridArticles = news.slice(1);
 
   // Structured Data for SEO
   const structuredData = {
@@ -176,18 +170,6 @@ function TravelNewsPage() {
         </section>
       )}
 
-      {/* Hero Article - Most Recent */}
-      {!isLoading && !error && heroArticle && currentPage === 1 && !selectedCategory && (
-        <section className="news-hero-section">
-          <div className="container">
-            <div className="news-hero-label">
-              <span>Latest Story</span>
-            </div>
-            <NewsCard article={heroArticle} variant="hero" />
-          </div>
-        </section>
-      )}
-
       {/* News Grid */}
       {!isLoading && !error && news.length > 0 && (
         <section className="section news-grid-section">
@@ -199,7 +181,7 @@ function TravelNewsPage() {
             />
 
             <div className="news-articles-list">
-              {(selectedCategory || currentPage > 1 ? news : gridArticles).map((article) => (
+              {news.map((article) => (
                 <NewsCard key={article.id} article={article} variant="horizontal" />
               ))}
             </div>

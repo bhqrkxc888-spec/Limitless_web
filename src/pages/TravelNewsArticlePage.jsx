@@ -180,7 +180,25 @@ function TravelNewsArticlePage() {
         <div className="container">
           <div className="article-grid">
             <div className="article-main">
-              {/* Article Content - No featured image, clean text-focused layout */}
+              {/* Featured Image */}
+              {article.featured_image_url && (
+                <div className="article-featured-image" style={{ marginBottom: '32px' }}>
+                  <img 
+                    src={article.featured_image_url}
+                    alt={article.title}
+                    width={article.featured_image_width}
+                    height={article.featured_image_height}
+                    style={{ 
+                      width: '100%', 
+                      height: 'auto',
+                      borderRadius: '8px',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
+                    }}
+                  />
+                </div>
+              )}
+
+              {/* Article Content */}
               {article.content && (
                 <div className="article-content">
                   <div 
