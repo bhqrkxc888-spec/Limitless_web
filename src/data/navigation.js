@@ -105,12 +105,12 @@ export const navigation = {
     ],
     destinations: [
       { label: 'All Destinations', path: '/destinations' },
-      { label: 'Mediterranean', path: '/destinations/mediterranean' },
-      { label: 'Caribbean', path: '/destinations/caribbean' },
-      { label: 'Norwegian Fjords', path: '/destinations/fjords' },
-      { label: 'Canary Islands', path: '/destinations/canary-islands' },
-      { label: 'Alaska', path: '/destinations/alaska' },
-      { label: 'Transatlantic', path: '/destinations/transatlantic' }
+      { label: 'Mediterranean', path: '/destinations/mediterranean-cruises' },
+      { label: 'Caribbean', path: '/destinations/caribbean-cruises' },
+      { label: 'Norwegian Fjords', path: '/destinations/norwegian-fjords-cruises' },
+      { label: 'Canary Islands', path: '/destinations/canary-islands-cruises' },
+      { label: 'Alaska', path: '/destinations/alaska-cruises' },
+      { label: 'Transatlantic', path: '/destinations/transatlantic-cruises' }
     ],
     cruiseTypes: [
       { label: 'All Cruise Types', path: '/cruise-types' },

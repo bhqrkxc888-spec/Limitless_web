@@ -10,7 +10,6 @@ import './FAQPage.css';
 const faqData = {
   booking: {
     title: 'Booking & Payments',
-    icon: '💳',
     questions: [
       {
         question: 'How do I book a cruise with Limitless Cruises?',
@@ -30,7 +29,7 @@ const faqData = {
       },
       {
         question: 'When is the final balance due?',
-        answer: 'For most cruises, the final balance is due 10-12 weeks before departure. Longer voyages and world cruises may require earlier payment. We\'ll send you reminders so you never miss a deadline.'
+        answer: 'Final balance can be up to 16 weeks prior to departure. The final payment date will be confirmed on any quotation. We\'ll send you reminders so you never miss a deadline.'
       },
       {
         question: 'Do you offer a price match guarantee?',
@@ -40,7 +39,6 @@ const faqData = {
   },
   firstTime: {
     title: 'First-Time Cruisers',
-    icon: '🚢',
     questions: [
       {
         question: 'I\'ve never cruised before. Where should I start?',
@@ -60,13 +58,12 @@ const faqData = {
       },
       {
         question: 'Can I use my mobile phone on a cruise?',
-        answer: 'Yes, but be careful with costs. Ships have their own cellular networks which can be expensive. Most people use the ship\'s WiFi packages or wait until ports to use local networks. Let us know if connectivity is important - some cruise lines offer better WiFi than others.'
+        answer: 'Yes, but be careful with costs. Ships use the maritime network which is extremely expensive. It is best to look into WiFi on board if absolutely required - we can advise on the best options. When in port, your phone will be covered by roaming.'
       }
     ]
   },
   onboard: {
     title: 'Life Onboard',
-    icon: '🍽️',
     questions: [
       {
         question: 'What are the dining options?',
@@ -92,7 +89,6 @@ const faqData = {
   },
   family: {
     title: 'Family Cruising',
-    icon: '👨‍👩‍👧‍👦',
     questions: [
       {
         question: 'Are cruises good for families with children?',
@@ -114,7 +110,6 @@ const faqData = {
   },
   cabins: {
     title: 'Cabins & Accommodation',
-    icon: '🛏️',
     questions: [
       {
         question: 'What\'s the difference between cabin types?',
@@ -132,7 +127,6 @@ const faqData = {
   },
   ports: {
     title: 'Ports & Excursions',
-    icon: '🏝️',
     questions: [
       {
         question: 'Do I have to book ship excursions?',
@@ -150,7 +144,6 @@ const faqData = {
   },
   ukSailings: {
     title: 'UK No-Fly Cruises',
-    icon: '🇬🇧',
     questions: [
       {
         question: 'Which UK ports can I sail from?',
@@ -295,7 +288,6 @@ function FAQPage() {
                     className={`faq-category-btn ${activeCategory === categoryKey ? 'is-active' : ''}`}
                     onClick={() => setActiveCategory(categoryKey)}
                   >
-                    <span className="category-icon">{category.icon}</span>
                     <span className="category-name">{category.title}</span>
                     <span className="category-count">{category.questions.length}</span>
                   </button>
@@ -304,7 +296,7 @@ function FAQPage() {
 
               {/* Questions */}
               <div className="faq-questions">
-                <h2>{faqData[activeCategory].icon} {faqData[activeCategory].title}</h2>
+                <h2>{faqData[activeCategory].title}</h2>
                 <div className="faq-list">
                   {faqData[activeCategory].questions.map((q, index) => (
                     <Accordion key={index} title={q.question}>

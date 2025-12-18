@@ -187,17 +187,25 @@
 
 /* Accordion styling for FAQ */
 .faq-list .accordion {
-  background: var(--clr-bg);
+  background: var(--clr-surface);
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.faq-list .accordion:hover {
+  border-color: var(--clr-accent);
+  box-shadow: var(--shadow-sm);
 }
 
 .faq-list .accordion-header {
-  padding: var(--space-4) var(--space-5);
+  padding: var(--space-5) var(--space-6);
 }
 
 .faq-list .accordion-content {
-  padding: 0 var(--space-5) var(--space-4);
+  padding: 0 var(--space-6) var(--space-5);
+  line-height: 1.7;
+  color: var(--clr-text-main);
 }
 
 .faq-list .accordion-content a {

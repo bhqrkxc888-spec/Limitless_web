@@ -12,7 +12,7 @@
 
 .contact-hero {
   background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
-  padding: var(--space-16) 0;
+  padding: var(--space-20) 0 var(--space-16) 0;
   color: var(--clr-text-on-primary);
 }
 
@@ -68,7 +68,7 @@
 .contact-methods {
   padding: var(--space-16) 0;
   background: var(--clr-surface);
-  margin-top: -60px;
+  margin-top: -40px;
   position: relative;
   z-index: 10;
   border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
@@ -161,7 +161,7 @@
 }
 
 .contact-hours-card {
-  max-width: 600px;
+  max-width: 1200px;
   margin: 0 auto;
   text-align: center;
 }

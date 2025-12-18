@@ -32,13 +32,7 @@ function OffersPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
-  // Fetch featured offer for hero
-  const { offers: featuredOffers, loading: featuredLoading } = useOffers({
-    limit: 1,
-    featured: true
-  });
-
-  // Fetch main offers list
+  // Fetch all offers (sorted by latest first)
   const { offers, loading, error } = useOffers({
     limit: 50, // Fetch more and filter client-side for search
     offerType: selectedType,
@@ -67,16 +61,8 @@ function OffersPage() {
   }, [filteredOffers, currentPage, itemsPerPage]);
 
   const totalPages = Math.ceil(filteredOffers.length / itemsPerPage);
-  
-  // Get hero offer (first featured, or first offer)
-  const heroOffer = featuredOffers[0];
-  
-  // Filter out hero offer from grid if it's the same
-  const gridOffers = heroOffer 
-    ? paginatedOffers.filter(offer => offer.id !== heroOffer.id)
-    : paginatedOffers;
 
-  const isLoading = loading || featuredLoading;
+  const isLoading = loading;
 
   // Handle filter changes
   const handleTypeChange = (type) => {
@@ -149,8 +135,8 @@ function OffersPage() {
             <span className="offers-page-header__eyebrow">Exclusive Deals</span>
             <h1 className="offers-page-header__title">Cruise Offers</h1>
             <p className="offers-page-header__subtitle">
-              Hand-selected cruise deals and exclusive packages. Expert guidance, exceptional value, 
-              and personal consultant service on every booking.
+              Hand-selected cruise deals and exclusive packages, updated regularly. 
+              Expert guidance, exceptional value, and personal consultant service on every booking.
             </p>
           </div>
         </div>
@@ -308,31 +294,18 @@ function OffersPage() {
         </section>
       )}
 
-      {/* Featured Hero Offer */}
-      {!isLoading && !error && heroOffer && currentPage === 1 && !hasActiveFilters && (
-        <section className="offers-hero-section">
-          <div className="container">
-            <div className="offers-hero-label">
-              <span>Featured Offer</span>
-            </div>
-            <OfferCard offer={heroOffer} variant="hero" />
-          </div>
-        </section>
-      )}
-
       {/* Offers Grid */}
       {!isLoading && !error && filteredOffers.length > 0 && (
         <section className="section offers-grid-section">
           <div className="container">
             <SectionHeader
-              eyebrow={hasActiveFilters ? "Filtered Results" : "All Available Offers"}
-              title={selectedType ? OFFER_TYPES.find(t => t.value === selectedType)?.label : "Browse All Offers"}
-              subtitle={`${filteredOffers.length} offer${filteredOffers.length !== 1 ? 's' : ''} available. Prices subject to availability.`}
+              eyebrow={hasActiveFilters ? "Filtered Results" : "Latest Offers"}
+              title={selectedType ? OFFER_TYPES.find(t => t.value === selectedType)?.label : "All Cruise Offers"}
+              subtitle={`${filteredOffers.length} offer${filteredOffers.length !== 1 ? 's' : ''} available. Showing latest first. Prices subject to availability.`}
             />
 
-
             <div className="offers-list">
-              {(hasActiveFilters || currentPage > 1 ? paginatedOffers : gridOffers).map((offer) => (
+              {paginatedOffers.map((offer) => (
                 <OfferCard key={offer.id} offer={offer} variant="horizontal" />
               ))}
             </div>
