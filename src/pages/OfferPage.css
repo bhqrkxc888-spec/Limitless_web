@@ -787,6 +787,64 @@
 }
 
 /* ========================================
+   DESCRIPTION SECTION - Prominent
+   ======================================== */
+
+.offer-section--description {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-10);
+  box-shadow: var(--shadow-card);
+}
+
+.offer-section__title--large {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-6);
+  color: var(--clr-primary);
+}
+
+.offer-description-content {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--clr-text-main);
+}
+
+.offer-description-content p {
+  margin-bottom: var(--space-4);
+}
+
+.offer-description-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Limit description length visually */
+.offer-description-content {
+  max-height: 600px;
+  overflow-y: auto;
+  padding-right: var(--space-2);
+}
+
+.offer-description-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.offer-description-content::-webkit-scrollbar-track {
+  background: var(--clr-bg-alt);
+  border-radius: 3px;
+}
+
+.offer-description-content::-webkit-scrollbar-thumb {
+  background: var(--clr-border);
+  border-radius: 3px;
+}
+
+.offer-description-content::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-primary);
+}
+
+/* ========================================
    ENQUIRY SECTION - Bottom of Page
    ======================================== */
 
@@ -796,16 +854,15 @@
   padding: var(--space-12) 0;
 }
 
-.offer-enquiry-grid {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: var(--space-8);
-  max-width: 1400px;
+.offer-enquiry-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  max-width: 800px;
   margin: 0 auto;
 }
 
-.offer-enquiry-form-card,
-.offer-enquiry-cta-card {
+.offer-enquiry-form-card {
   background: var(--clr-surface);
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-xl);
@@ -828,35 +885,44 @@
   line-height: var(--line-height-relaxed);
 }
 
-.offer-enquiry-cta-card h3 {
-  font-family: var(--font-family-display);
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--clr-text-main);
-  margin: 0 0 var(--space-4);
-}
-
-/* CTA Card */
+/* CTA Card - Stacked Below Form */
 .offer-enquiry-cta-card {
   background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-dark));
   color: var(--clr-text-on-primary);
   border: none;
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
 }
 
-.offer-enquiry-cta-card h3,
+.offer-enquiry-cta-card h3 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-text-on-primary);
+  margin: 0 0 var(--space-3);
+}
+
 .offer-enquiry-cta-card p {
   color: var(--clr-text-on-primary);
-}
-
-.offer-enquiry-cta-card p {
-  opacity: 0.9;
+  opacity: 0.95;
   margin-bottom: var(--space-5);
+  font-size: var(--font-size-base);
 }
 
 .offer-enquiry-buttons {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.offer-enquiry-buttons .button {
+  min-width: 200px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ========================================
@@ -992,10 +1058,7 @@
     position: static;
   }
   
-  /* Enquiry grid stacks on tablet */
-  .offer-enquiry-grid {
-    grid-template-columns: 1fr;
-  }
+  /* Enquiry already stacked, no change needed */
 }
 
 @media (max-width: 768px) {
@@ -1023,9 +1086,20 @@
     grid-template-columns: 1fr;
   }
   
-  .offer-enquiry-form-card,
-  .offer-enquiry-cta-card {
+  .offer-enquiry-form-card {
     padding: var(--space-6);
+  }
+  
+  .offer-enquiry-cta-card {
+    padding: var(--space-5);
+  }
+  
+  .offer-enquiry-buttons {
+    flex-direction: column;
+  }
+  
+  .offer-enquiry-buttons .button {
+    width: 100%;
   }
 }
 
