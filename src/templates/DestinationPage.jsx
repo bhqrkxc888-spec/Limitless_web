@@ -7,6 +7,7 @@ import HeroSection from '../components/HeroSection';
 import SeaConditions from '../components/SeaConditions';
 import PortsWeatherCarousel from '../components/PortsWeatherCarousel';
 import { Button, SectionHeader } from '../components/ui';
+import { getHeroImage, getOgImage } from '../utils/imageHelpers';
 import './DestinationPage.css';
 
 function DestinationPage() {
@@ -52,6 +53,7 @@ function DestinationPage() {
         title={destination.meta?.title || `${destination.name} Cruises`}
         description={destination.meta?.description || destination.description}
         canonical={`https://limitlesscruises.com/destinations/${destination.slug}`}
+        image={getOgImage(destination.image)}
         structuredData={structuredData}
       />
 
@@ -59,7 +61,7 @@ function DestinationPage() {
       <HeroSection
         title={`${destination.name} Cruises`}
         subtitle={destination.description}
-        image={destination.image}
+        image={getHeroImage(destination.image)}
         imageAlt={`${destination.name} cruise destination`}
         size="md"
         align="left"

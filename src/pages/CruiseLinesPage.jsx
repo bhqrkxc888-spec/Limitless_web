@@ -3,6 +3,7 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader } from '../components/ui';
+import { getLogoImage, getCardImage } from '../utils/imageHelpers';
 import './CruiseLinesPage.css';
 
 function CruiseLinesPage() {
@@ -34,7 +35,7 @@ function CruiseLinesPage() {
       {lines.map((cruiseLine) => (
         <Card key={cruiseLine.id} to={`/cruise-lines/${cruiseLine.slug}`} variant="default">
           <Card.Image 
-            src={cruiseLine.image} 
+            src={getCardImage(cruiseLine.image)} 
             alt={cruiseLine.name}
             aspectRatio="16/10"
           />

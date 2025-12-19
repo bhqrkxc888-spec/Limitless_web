@@ -5,6 +5,7 @@ import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, SectionHeader, Accordion, Card } from '../components/ui';
 import { useState } from 'react';
+import { getHeroImage, getCardImage, getOgImage } from '../utils/imageHelpers';
 import './BucketListExperiencePage.css';
 
 function BucketListExperiencePage() {
@@ -58,6 +59,7 @@ function BucketListExperiencePage() {
         description={experience.meta?.description || experience.description}
         canonical={`https://limitlesscruises.com/bucket-list/${experience.slug}`}
         keywords={experience.meta?.keywords?.join(', ') || ''}
+        image={getOgImage(experience.heroImage)}
         structuredData={structuredData}
       />
 
@@ -65,7 +67,7 @@ function BucketListExperiencePage() {
       <HeroSection
         title={experience.title}
         subtitle={experience.tagline}
-        image={experience.heroImage}
+        image={getHeroImage(experience.heroImage)}
         imageAlt={experience.title}
         size="lg"
         align="left"
@@ -257,7 +259,7 @@ function BucketListExperiencePage() {
                       .map((exp) => (
                         <Card key={exp.id} to={`/bucket-list/${exp.slug}`} variant="outlined" className="related-card">
                           <Card.Image 
-                            src={exp.cardImage || exp.heroImage} 
+                            src={getCardImage(exp.cardImage || exp.heroImage)} 
                             alt={exp.title}
                             aspectRatio="16/9"
                           />

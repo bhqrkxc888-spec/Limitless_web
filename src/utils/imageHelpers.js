@@ -167,3 +167,74 @@ export const IMAGE_PATHS = {
   }
 };
 
+/**
+ * Placeholder image paths (in /public)
+ */
+export const PLACEHOLDERS = {
+  hero: '/images/placeholders/hero.svg',
+  logo: '/images/placeholders/logo.svg',
+  ogImage: '/images/placeholders/og-image.svg',
+};
+
+/**
+ * Validate and normalize an image URL with fallback to placeholder
+ * @param {string} url - Image URL to validate
+ * @param {string} fallback - Fallback placeholder type ('hero', 'logo', 'ogImage')
+ * @returns {string} Valid image URL or placeholder
+ */
+export function normalizeImageUrl(url, fallback = 'hero') {
+  // If no URL provided, return placeholder
+  if (!url) {
+    return PLACEHOLDERS[fallback] || PLACEHOLDERS.hero;
+  }
+  
+  // If URL is already a valid absolute URL, return it
+  if (url.startsWith('http://') || url.startsWith('https://')) {
+    return url;
+  }
+  
+  // If URL starts with /, it's a valid public path
+  if (url.startsWith('/')) {
+    return url;
+  }
+  
+  // Otherwise, it's invalid - return placeholder
+  return PLACEHOLDERS[fallback] || PLACEHOLDERS.hero;
+}
+
+/**
+ * Get hero image with fallback
+ * @param {string} url - Hero image URL
+ * @returns {string} Valid hero image URL
+ */
+export function getHeroImage(url) {
+  return normalizeImageUrl(url, 'hero');
+}
+
+/**
+ * Get logo image with fallback
+ * @param {string} url - Logo image URL
+ * @returns {string} Valid logo image URL
+ */
+export function getLogoImage(url) {
+  return normalizeImageUrl(url, 'logo');
+}
+
+/**
+ * Get OG/social image with fallback
+ * @param {string} url - OG image URL
+ * @returns {string} Valid OG image URL
+ */
+export function getOgImage(url) {
+  return normalizeImageUrl(url, 'ogImage');
+}
+
+/**
+ * Get card/thumbnail image with fallback
+ * @param {string} url - Card image URL
+ * @returns {string} Valid card image URL
+ */
+export function getCardImage(url) {
+  return normalizeImageUrl(url, 'hero');
+}
+

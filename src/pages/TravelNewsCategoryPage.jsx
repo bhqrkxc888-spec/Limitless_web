@@ -55,12 +55,12 @@ function TravelNewsCategoryPage() {
 
   return (
     <main className="travel-news-category-page">
-      {/* SEO */}
+      {/* SEO - noindex for category archives (thin content) */}
       <SEO
         title={`${categoryLabel} News | Travel News`}
         description={`Stay informed with the latest ${categoryLabel.toLowerCase()} news, updates, and insights from Limitless Cruises.`}
         canonical={`https://limitlesscruises.com/travel-news/category/${category}`}
-        keywords={`${categoryLabel.toLowerCase()}, travel news, cruise news, ${category}`}
+        noindex={true}
         structuredData={structuredData}
       />
 

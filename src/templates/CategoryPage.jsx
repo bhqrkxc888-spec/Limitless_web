@@ -4,6 +4,7 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, SectionHeader } from '../components/ui';
+import { getHeroImage, getOgImage } from '../utils/imageHelpers';
 import './CategoryPage.css';
 
 function CategoryPage() {
@@ -41,6 +42,7 @@ function CategoryPage() {
         title={category.meta?.title || category.name}
         description={category.meta?.description || category.description}
         canonical={`https://limitlesscruises.com/cruises/${category.slug}`}
+        image={getOgImage(category.image)}
         structuredData={structuredData}
       />
 
@@ -48,7 +50,7 @@ function CategoryPage() {
       <HeroSection
         title={category.name}
         subtitle={category.description}
-        image={category.image}
+        image={getHeroImage(category.image)}
         imageAlt={category.name}
         size="md"
         align="left"

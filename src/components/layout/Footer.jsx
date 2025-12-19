@@ -244,7 +244,6 @@ function Footer() {
           
           <div className="footer-copyright">
             <p>© {currentYear} {siteConfig.siteName}. All rights reserved.</p>
-            <Link to="/admin/login" className="footer-admin-link">Staff Login</Link>
           </div>
         </div>
       </div>

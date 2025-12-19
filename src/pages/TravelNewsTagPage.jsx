@@ -45,12 +45,12 @@ function TravelNewsTagPage() {
 
   return (
     <main className="travel-news-tag-page">
-      {/* SEO */}
+      {/* SEO - noindex for tag archives (thin content) */}
       <SEO
         title={`${decodedTag} | Travel News`}
         description={`Travel news articles tagged with "${decodedTag}". Browse related articles and stay informed with the latest travel updates.`}
         canonical={`https://limitlesscruises.com/travel-news/tag/${tag}`}
-        keywords={`${decodedTag}, travel news, cruise news, tagged articles`}
+        noindex={true}
         structuredData={structuredData}
       />
 

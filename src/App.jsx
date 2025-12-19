@@ -11,6 +11,7 @@ import DevModeIndicator from './components/DevModeIndicator'
 
 // Route Protection
 import ProtectedRoute from './components/ProtectedRoute'
+import PublishGate from './components/PublishGate'
 
 // Loading fallback component
 function PageLoader() {
@@ -165,67 +166,67 @@ function AppLayout() {
             <Route path="/offers" element={<OffersPage />} />
             <Route path="/offers/:slug" element={<OfferPage />} />
             
-            {/* Cruise Lines - Protected */}
+            {/* Cruise Lines - Publish Gated */}
             <Route 
               path="/cruise-lines" 
               element={
-                <ProtectedRoute>
+                <PublishGate section="Cruise Lines" title="Cruise Lines" backLink="/" backLabel="Return Home">
                   <CruiseLinesPage />
-                </ProtectedRoute>
+                </PublishGate>
               } 
             />
             <Route 
               path="/cruise-lines/:slug" 
               element={
-                <ProtectedRoute>
+                <PublishGate section="Cruise Lines" title="Cruise Line Details" backLink="/cruise-lines" backLabel="View All Cruise Lines">
                   <CruiseLinePage />
-                </ProtectedRoute>
+                </PublishGate>
               } 
             />
             
-            {/* Destinations - Protected */}
+            {/* Destinations - Publish Gated */}
             <Route 
               path="/destinations" 
               element={
-                <ProtectedRoute>
+                <PublishGate section="Destinations" title="Destinations" backLink="/" backLabel="Return Home">
                   <DestinationsPage />
-                </ProtectedRoute>
+                </PublishGate>
               } 
             />
             <Route 
               path="/destinations/:slug" 
               element={
-                <ProtectedRoute>
+                <PublishGate section="Destinations" title="Destination Details" backLink="/destinations" backLabel="View All Destinations">
                   <DestinationPage />
-                </ProtectedRoute>
+                </PublishGate>
               } 
             />
             
-            {/* Bucket List Experiences - Protected */}
+            {/* Bucket List Experiences - Publish Gated */}
             <Route 
               path="/bucket-list" 
               element={
-                <ProtectedRoute>
+                <PublishGate section="Bucket List Experiences" title="Bucket List" backLink="/" backLabel="Return Home">
                   <BucketListPage />
-                </ProtectedRoute>
+                </PublishGate>
               } 
             />
             <Route 
               path="/bucket-list/:slug" 
               element={
-                <ProtectedRoute>
+                <PublishGate section="Bucket List Experience" title="Experience Details" backLink="/bucket-list" backLabel="View All Experiences">
                   <BucketListExperiencePage />
-                </ProtectedRoute>
+                </PublishGate>
               } 
             />
             
-            {/* Cruise Types Hub - Protected */}
+            {/* Cruise Types Hub - Publish Gated */}
             <Route 
               path="/cruise-types" 
               element={
-                <ProtectedRoute>
+                <PublishGate section="Cruise Types" title="Cruise Types" backLink="/" backLabel="Return Home">
                   <CruiseTypesPage />
-                </ProtectedRoute>
+                </PublishGate>
               } 
             />
             
@@ -233,27 +234,27 @@ function AppLayout() {
             <Route 
               path="/cruises/:slug" 
               element={
-                <ProtectedRoute>
+                <PublishGate section="Cruise Types" title="Cruise Type Details" backLink="/cruise-types" backLabel="View All Cruise Types">
                   <CategoryPage />
-                </ProtectedRoute>
+                </PublishGate>
               } 
             />
             
-            {/* FAQ & Testimonials - Protected during development */}
+            {/* FAQ & Testimonials - Publish Gated */}
             <Route 
               path="/faq" 
               element={
-                <ProtectedRoute>
+                <PublishGate section="FAQ" title="Frequently Asked Questions" backLink="/" backLabel="Return Home">
                   <FAQPage />
-                </ProtectedRoute>
+                </PublishGate>
               } 
             />
             <Route 
               path="/testimonials" 
               element={
-                <ProtectedRoute>
+                <PublishGate section="Testimonials" title="Customer Testimonials" backLink="/" backLabel="Return Home">
                   <TestimonialsPage />
-                </ProtectedRoute>
+                </PublishGate>
               } 
             />
             
@@ -263,9 +264,23 @@ function AppLayout() {
             <Route path="/travel-news/tag/:tag" element={<TravelNewsTagPage />} />
             <Route path="/travel-news/:slug" element={<TravelNewsArticlePage />} />
             
-            {/* Cruise Guides - Public */}
-            <Route path="/cruise-guides" element={<CruiseGuidesPage />} />
-            <Route path="/cruise-guides/:slug" element={<CruiseGuideDetailPage />} />
+            {/* Cruise Guides - Publish Gated */}
+            <Route 
+              path="/cruise-guides" 
+              element={
+                <PublishGate section="Cruise Guides" title="Cruise Guides" backLink="/" backLabel="Return Home">
+                  <CruiseGuidesPage />
+                </PublishGate>
+              } 
+            />
+            <Route 
+              path="/cruise-guides/:slug" 
+              element={
+                <PublishGate section="Cruise Guide" title="Cruise Guide Details" backLink="/cruise-guides" backLabel="View All Guides">
+                  <CruiseGuideDetailPage />
+                </PublishGate>
+              } 
+            />
             
             {/* Legal Pages - Always Public */}
             <Route path="/website-terms" element={<WebsiteTerms />} />

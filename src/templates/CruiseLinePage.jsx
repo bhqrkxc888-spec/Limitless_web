@@ -7,6 +7,7 @@ import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader, Accordion, DataTable } from '../components/ui';
 import NewsCard from '../components/NewsCard';
 import { useEffect, useState } from 'react';
+import { getHeroImage, getLogoImage, getOgImage } from '../utils/imageHelpers';
 import './CruiseLinePage.css';
 
 /**
@@ -81,6 +82,7 @@ function CruiseLinePage() {
         title={cruiseLine.meta?.title || `${cruiseLine.name} Cruises`}
         description={cruiseLine.meta?.description || cruiseLine.description}
         canonical={`https://limitlesscruises.com/cruise-lines/${cruiseLine.slug}`}
+        image={getOgImage(cruiseLine.image)}
         structuredData={structuredData}
       />
 
@@ -88,7 +90,7 @@ function CruiseLinePage() {
       <HeroSection
         title={cruiseLine.name}
         subtitle={cruiseLine.description}
-        image={cruiseLine.image}
+        image={getHeroImage(cruiseLine.image)}
         imageAlt={`${cruiseLine.name} cruise ship`}
         size="md"
         align="left"

@@ -1,79 +1,112 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import { siteConfig } from '../config/siteConfig';
-import { analyzePageSEO } from '../services/seoMonitoring';
+import { getSEOPolicy } from '../utils/seoPolicy';
 import { SITE_ASSETS } from '../config/assetUrls';
 
 /**
- * SEO Component
- * Updates document title and meta tags dynamically
+ * SEO Component - SSG/Prerender Compatible
+ * 
+ * Updates document head with SEO meta tags. Works with:
+ * - Client-side rendering (useEffect updates)
+ * - Prerendering/SSG (Puppeteer captures after useEffect runs)
+ * 
+ * For prerendering to work correctly, the prerender script waits for
+ * the page to fully render before capturing HTML.
  * 
  * @param {Object} props
- * @param {string} props.title - Page title
+ * @param {string} props.title - Page title (without site name suffix)
  * @param {string} props.description - Meta description
- * @param {string} props.canonical - Canonical URL
- * @param {string} props.keywords - Meta keywords (comma-separated)
+ * @param {string} props.canonical - Override canonical URL
  * @param {string} props.type - Open Graph type (default: 'website')
  * @param {string} props.image - Open Graph image URL
  * @param {string} props.author - Page author (default: 'Limitless Cruises')
- * @param {string} props.robots - Robots meta (default: 'index, follow')
- * @param {boolean} props.noindex - Set to true to add 'noindex' to robots meta
- * @param {Object} props.structuredData - JSON-LD structured data object
+ * @param {string} props.robots - Override robots meta
+ * @param {boolean} props.noindex - Force noindex
+ * @param {Object|Array} props.structuredData - JSON-LD structured data
+ * @param {string} props.publishedTime - Article published date (ISO 8601)
+ * @param {string} props.modifiedTime - Article modified date (ISO 8601)
  */
 function SEO({
   title,
   description,
   canonical,
-  keywords,
   type = 'website',
   image,
   author = 'Limitless Cruises',
-  robots = 'index, follow',
+  robots,
   noindex = false,
-  structuredData
+  structuredData,
+  publishedTime,
+  modifiedTime,
 }) {
-  const siteName = siteConfig.siteName;
-  const siteUrl = siteConfig.siteUrl;
+  const location = useLocation();
+  
+  // Site configuration
+  const siteName = siteConfig.siteName || 'Limitless Cruises';
+  const siteUrl = siteConfig.siteUrl || 'https://limitlesscruises.com';
   const defaultDescription = 'Your dedicated cruise consultant. Book cruise holidays with preferential rates, exclusive offers and expert advice from Limitless Cruises.';
-  const defaultImage = SITE_ASSETS.ogImage || null;
+  const defaultImage = SITE_ASSETS.ogImage || `${siteUrl}/og-image.jpg`;
 
-  const fullTitle = title ? `${title} | ${siteName}` : siteName;
+  // Get SEO policy for current path
+  const policy = useMemo(() => {
+    return getSEOPolicy(location.pathname, {
+      searchParams: new URLSearchParams(location.search),
+      noindex,
+    });
+  }, [location.pathname, location.search, noindex]);
+
+  // Computed values
+  // Don't add site name suffix if title already includes it
+  const fullTitle = title
+    ? (title.includes(siteName) ? title : `${title} | ${siteName}`)
+    : siteName;
   const fullDescription = description || defaultDescription;
-  const fullCanonical = canonical || siteUrl;
+  const fullCanonical = canonical || policy.canonical;
   const fullImage = image || defaultImage;
+  const robotsMeta = robots || policy.robots;
 
   useEffect(() => {
     // Update document title
     document.title = fullTitle;
 
     // Helper function to update or create meta tag
-    const updateMetaTag = (name, content, attribute = 'name') => {
-      let meta = document.querySelector(`meta[${attribute}="${name}"]`);
+    const updateMetaTag = (selector, content, createFn) => {
+      if (!content) return null;
+      
+      let meta = document.querySelector(selector);
       if (meta) {
         meta.setAttribute('content', content);
       } else {
-        meta = document.createElement('meta');
-        meta.setAttribute(attribute, name);
-        meta.setAttribute('content', content);
+        meta = createFn();
         document.head.appendChild(meta);
       }
+      return meta;
     };
 
-    // Update meta description
-    updateMetaTag('description', fullDescription);
+    // Helper to create meta tag with name attribute
+    const createNameMeta = (name) => {
+      const meta = document.createElement('meta');
+      meta.setAttribute('name', name);
+      return meta;
+    };
 
-    // Update meta keywords (if provided)
-    if (keywords) {
-      updateMetaTag('keywords', keywords);
-    }
+    // Helper to create meta tag with property attribute
+    const createPropertyMeta = (property) => {
+      const meta = document.createElement('meta');
+      meta.setAttribute('property', property);
+      return meta;
+    };
 
-    // Update meta author
-    updateMetaTag('author', author);
+    // Track created elements for cleanup
+    const createdElements = [];
 
-    // Update meta robots (respect noindex override)
-    const robotsMeta = noindex ? 'noindex, nofollow' : robots;
-    updateMetaTag('robots', robotsMeta);
+    // === Basic Meta Tags ===
+    updateMetaTag('meta[name="description"]', fullDescription, () => createNameMeta('description'));
+    updateMetaTag('meta[name="author"]', author, () => createNameMeta('author'));
+    updateMetaTag('meta[name="robots"]', robotsMeta, () => createNameMeta('robots'));
 
-    // Update canonical link
+    // === Canonical Link ===
     let canonicalLink = document.querySelector('link[rel="canonical"]');
     if (canonicalLink) {
       canonicalLink.setAttribute('href', fullCanonical);
@@ -82,63 +115,111 @@ function SEO({
       canonicalLink.setAttribute('rel', 'canonical');
       canonicalLink.setAttribute('href', fullCanonical);
       document.head.appendChild(canonicalLink);
+      createdElements.push(canonicalLink);
     }
 
-    // Update Open Graph tags (skip if noindex)
-    if (!noindex) {
-      const ogTags = {
-        'og:title': fullTitle,
-        'og:description': fullDescription,
-        'og:url': fullCanonical,
-        'og:type': type,
-        'og:image': fullImage,
-        'og:site_name': siteName,
-        'og:locale': 'en_GB'
-      };
+    // === Open Graph Tags ===
+    const ogTags = {
+      'og:title': fullTitle,
+      'og:description': fullDescription,
+      'og:url': fullCanonical,
+      'og:type': type,
+      'og:image': fullImage,
+      'og:site_name': siteName,
+      'og:locale': 'en_GB',
+    };
 
-      Object.entries(ogTags).forEach(([property, content]) => {
-        updateMetaTag(property, content, 'property');
-      });
-
-      // Update Twitter Card tags
-      const twitterTags = {
-        'twitter:card': 'summary_large_image',
-        'twitter:title': fullTitle,
-        'twitter:description': fullDescription,
-        'twitter:image': fullImage
-      };
-
-      Object.entries(twitterTags).forEach(([name, content]) => {
-        if (content) {
-          updateMetaTag(name, content, 'name');
-        }
-      });
+    // Add article-specific OG tags
+    if (type === 'article') {
+      if (publishedTime) ogTags['article:published_time'] = publishedTime;
+      if (modifiedTime) ogTags['article:modified_time'] = modifiedTime;
+      ogTags['article:author'] = author;
     }
 
-    // Trigger SEO analysis after meta tags are updated
-    // Wait a bit to ensure all tags are in place
-    const timeoutId = setTimeout(() => {
-      if (!import.meta.env.DEV) {
-        analyzePageSEO().catch(() => {
-          // Silently fail if SEO analysis fails
-        })
+    Object.entries(ogTags).forEach(([property, content]) => {
+      if (content) {
+        updateMetaTag(
+          `meta[property="${property}"]`,
+          content,
+          () => createPropertyMeta(property)
+        );
       }
-    }, 500)
+    });
 
-    return () => clearTimeout(timeoutId)
-  }, [fullTitle, fullDescription, fullCanonical, type, fullImage, keywords, author, robots, noindex, siteName]);
+    // === Twitter Card Tags ===
+    const twitterTags = {
+      'twitter:card': 'summary_large_image',
+      'twitter:title': fullTitle,
+      'twitter:description': fullDescription,
+      'twitter:image': fullImage,
+      'twitter:site': '@LimitlessCruise', // Add if you have Twitter handle
+    };
 
-  // Render structured data if provided (supports single object or array)
+    Object.entries(twitterTags).forEach(([name, content]) => {
+      if (content) {
+        updateMetaTag(
+          `meta[name="${name}"]`,
+          content,
+          () => createNameMeta(name)
+        );
+      }
+    });
+
+    // === JSON-LD Structured Data ===
+    // Remove any existing dynamic JSON-LD (keep the static one from index.html)
+    const existingDynamicJsonLd = document.querySelectorAll('script[type="application/ld+json"][data-dynamic="true"]');
+    existingDynamicJsonLd.forEach(el => el.remove());
+
+    if (structuredData) {
+      const dataArray = Array.isArray(structuredData) ? structuredData : [structuredData];
+      
+      dataArray.forEach((data, index) => {
+        const script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.setAttribute('data-dynamic', 'true');
+        script.textContent = JSON.stringify(data);
+        document.head.appendChild(script);
+        createdElements.push(script);
+      });
+    }
+
+    // Mark page as SEO-ready for prerender script
+    document.documentElement.setAttribute('data-seo-ready', 'true');
+
+    // Cleanup function (optional - mainly for SPA navigation)
+    return () => {
+      // We don't remove meta tags on cleanup since they should persist
+      // and be updated by the next page's SEO component
+      document.documentElement.removeAttribute('data-seo-ready');
+    };
+  }, [
+    fullTitle,
+    fullDescription,
+    fullCanonical,
+    type,
+    fullImage,
+    author,
+    robotsMeta,
+    siteName,
+    structuredData,
+    publishedTime,
+    modifiedTime,
+  ]);
+
+  // For prerendering, we also render the structured data as actual script tags
+  // This ensures they're captured even if useEffect hasn't run
   if (structuredData) {
-    // Handle both single object and array of objects
-    const dataToRender = Array.isArray(structuredData) ? structuredData : [structuredData];
+    const dataArray = Array.isArray(structuredData) ? structuredData : [structuredData];
     
     return (
       <>
-        {dataToRender.map((data, index) => (
-          <script key={index} type="application/ld+json">
-            {JSON.stringify(data)}
-          </script>
+        {dataArray.map((data, index) => (
+          <script
+            key={`json-ld-${index}`}
+            type="application/ld+json"
+            data-dynamic="true"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+          />
         ))}
       </>
     );
@@ -149,3 +230,106 @@ function SEO({
 
 export default SEO;
 
+/**
+ * Generate base structured data for the organization
+ * This is used in index.html but can also be called programmatically
+ */
+export function getOrganizationSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'TravelAgency',
+    name: 'Limitless Cruises',
+    description: 'Your personal cruise consultant. Book cruise holidays with preferential rates, exclusive offers and expert advice.',
+    url: 'https://limitlesscruises.com',
+    telephone: '+44 114 321 3208',
+    email: 'travel@limitlesscruises.com',
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'GB',
+    },
+    areaServed: {
+      '@type': 'Country',
+      name: 'United Kingdom',
+    },
+    sameAs: [
+      'https://www.facebook.com/profile.php?id=61570469572535',
+      'https://www.linkedin.com/company/limitless-cruises/',
+      'https://www.youtube.com/@LimitlessCruises',
+    ],
+    memberOf: {
+      '@type': 'Organization',
+      name: 'ABTA',
+      identifier: 'P7541',
+    },
+  };
+}
+
+/**
+ * Generate WebSite schema with search action
+ */
+export function getWebSiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Limitless Cruises',
+    url: 'https://limitlesscruises.com',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://limitlesscruises.com/find-a-cruise?q={search_term_string}',
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  };
+}
+
+/**
+ * Generate BreadcrumbList schema
+ * @param {Array<{name: string, url: string}>} items - Breadcrumb items
+ */
+export function getBreadcrumbSchema(items) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+}
+
+/**
+ * Generate Article schema for blog posts
+ * @param {Object} article - Article data
+ */
+export function getArticleSchema(article) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: article.title,
+    description: article.excerpt || article.description,
+    url: article.url,
+    datePublished: article.publishedAt,
+    dateModified: article.modifiedAt || article.publishedAt,
+    image: article.image,
+    author: {
+      '@type': 'Organization',
+      name: 'Limitless Cruises',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Limitless Cruises',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://limitlesscruises.com/logo.png',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': article.url,
+    },
+  };
+}
