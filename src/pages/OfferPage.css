@@ -430,7 +430,7 @@
 
 .offer-content-grid {
   display: grid;
-  grid-template-columns: 3fr 1fr; /* Changed from 2fr 1fr - narrower sidebar */
+  grid-template-columns: 66fr 33fr; /* 66/33 split for better balance */
   gap: var(--space-12);
   align-items: start;
   max-width: 1600px; /* Slightly wider container */
