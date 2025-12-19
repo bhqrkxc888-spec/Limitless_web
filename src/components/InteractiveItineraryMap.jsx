@@ -23,25 +23,33 @@ function InteractiveItineraryMap({ itinerary, title }) {
 
   // Filter and enrich itinerary data
   const ports = useMemo(() => {
-    if (!Array.isArray(itinerary)) return [];
+    if (!Array.isArray(itinerary)) {
+      console.warn('InteractiveItineraryMap: itinerary is not an array', itinerary);
+      return [];
+    }
     
-    return itinerary
-      .filter(item => {
-        // Include ports with coordinates, exclude sea days
-        return item.lat && 
-               item.lon && 
-               !item.is_sea_day && 
-               item.type !== 'sea';
-      })
-      .map((item, index) => ({
-        ...item,
-        index,
-        day: item.day || index + 1,
-        name: item.port || item.location || `Port ${index + 1}`,
-        lat: parseFloat(item.lat),
-        lon: parseFloat(item.lon),
-        type: item.type || 'port'
-      }));
+    const filtered = itinerary.filter(item => {
+      // Include ports with coordinates, exclude sea days
+      const hasCoords = item.lat && item.lon;
+      const notSeaDay = !item.is_sea_day && item.type !== 'sea';
+      return hasCoords && notSeaDay;
+    });
+    
+    console.log(`InteractiveItineraryMap: Found ${filtered.length} ports with coordinates out of ${itinerary.length} total items`);
+    
+    if (filtered.length === 0 && itinerary.length > 0) {
+      console.error('InteractiveItineraryMap: No ports have coordinates!', itinerary);
+    }
+    
+    return filtered.map((item, index) => ({
+      ...item,
+      index,
+      day: item.day || index + 1,
+      name: item.port || item.location || `Port ${index + 1}`,
+      lat: parseFloat(item.lat),
+      lon: parseFloat(item.lon),
+      type: item.type || 'port'
+    }));
   }, [itinerary]);
 
   // Get marker color based on position
@@ -226,7 +234,12 @@ function InteractiveItineraryMap({ itinerary, title }) {
   if (ports.length === 0) {
     return (
       <div className="interactive-map-error">
-        <p>No port coordinates available for this itinerary</p>
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+          <circle cx="12" cy="10" r="3"/>
+        </svg>
+        <p><strong>Map coordinates not available</strong></p>
+        <p className="error-hint">The interactive map will appear once coordinates are generated in the CRM.</p>
       </div>
     );
   }
