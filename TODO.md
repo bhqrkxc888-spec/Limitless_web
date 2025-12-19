@@ -9,56 +9,50 @@
 
 ### 1. Image Requirements - Bucket List Hero Images
 
-**Status:** In Progress  
+**Status:** ✅ **COMPLETE**  
 **Priority:** High  
 **Format:** 1920x1080px (16:9 aspect ratio)  
-**Location:** Upload to Vercel Blob Storage
+**Location:** Uploaded to Vercel Blob Storage
 
-#### Missing Hero Images (5 needed):
+#### ✅ All Hero Images Complete:
 
-**1. Rocky Mountaineer & Alaska**
-- **Current:** Using card image as placeholder
-- **Needed:** Hero image (1920x1080px)
-- **Suggested content:** Rocky Mountaineer train in Canadian Rockies, OR Alaska Inside Passage with glaciers, OR combination showing both experiences
-- **Supabase path:** `/destinations/Canada/` or `/destinations/Alaska/`
-- **File location:** `src/data/bucketList.js` line 229
+1. ✅ **Rocky Mountaineer & Alaska** - `alaska-hero.jpg`
+2. ✅ **World Cruises** - `worldcruise-hero.webp`
+3. ✅ **Antarctica Expeditions** - `antarctica-hero.webp`
+4. ✅ **Galápagos Islands** - `galapagos-hero.webp`
+5. ✅ **Northern Lights & Arctic** - `northernlights-hero.webp`
 
-**2. World Cruises**
-- **Current:** Has image (`worldcruise.jpeg`) but may need higher quality
-- **Needed:** High-quality hero image (1920x1080px)
-- **Suggested content:** Cruise ship at iconic port (Singapore, Sydney, Cape Town), OR world map with ship route overlay
-- **Supabase path:** `/destinations/Worldcruise/`
-- **File location:** `src/data/bucketList.js` line 13
-
-**3. Antarctica Expeditions**
-- **Current:** Using card image (`antartica-card.jpeg`) as hero
-- **Needed:** Proper hero image (1920x1080px)
-- **Suggested content:** Dramatic icebergs, penguins on ice, OR expedition ship in Antarctic waters, OR Zodiac landing
-- **Supabase path:** `/destinations/antarctica/`
-- **File location:** `src/data/bucketList.js` line 85
-
-**4. Galápagos Islands**
-- **Current:** Has image (`Galapagos.jpeg`) but may need better quality
-- **Needed:** High-quality hero image (1920x1080px)
-- **Suggested content:** Giant tortoises, marine iguanas, OR blue-footed boobies, OR Galápagos landscape with unique wildlife
-- **Supabase path:** `/destinations/galapagos/`
-- **File location:** `src/data/bucketList.js` line 304
-
-**5. Northern Lights & Arctic**
-- **Current:** Has image (`northern-lights.jpeg`) - verify quality
-- **Needed:** Verify/upgrade hero image (1920x1080px)
-- **Suggested content:** Aurora Borealis over Arctic landscape, OR Northern Lights over Norwegian fjords
-- **Supabase path:** `/destinations/Fjords/`
-- **File location:** `src/data/bucketList.js` line 372
+**All hero images updated in code and ready to push!**
 
 ---
 
 ### 2. Image Requirements - Cruise Line Destination Images
 
-**Status:** In Progress  
+**Status:** Ready for Images  
 **Priority:** High  
 **Format:** 800x600px (4:3 aspect ratio)  
 **Location:** Upload to Vercel Blob Storage
+
+**Strategy:** Provide multiple images per destination, and I'll distribute them intelligently across cruise lines (avoiding too much repetition).
+
+**Unique Destinations Needed (17 total):**
+1. Caribbean
+2. Northern Europe
+3. Canary Islands
+4. Scandinavia
+5. Middle East
+6. Asia & Japan
+7. British Isles
+8. Baltic Capitals
+9. Arctic & Iceland
+10. Australia & New Zealand
+11. Adriatic
+12. Arabia
+13. Hawaii
+14. Grand Voyages
+15. Expeditions
+16. Kimberley
+17. Patagonia
 
 #### P&O Cruises - Missing Destination Images (4 needed):
 - **Caribbean** - Tropical beach with turquoise waters
@@ -226,6 +220,14 @@
 - ✅ Fixed Supabase 400 error for offers endpoint
 - ✅ Removed unused JavaScript
 - ✅ Updated build configuration for better chunking
+
+### Bucket List Hero Images (December 19, 2025)
+- ✅ Antarctica Expeditions - `antarctica-hero.webp`
+- ✅ Northern Lights & Arctic - `northernlights-hero.webp`
+- ✅ World Cruises - `worldcruise-hero.webp`
+- ✅ Rocky Mountaineer & Alaska - `alaska-hero.jpg`
+- ✅ Galápagos Islands - `galapagos-hero.webp`
+- ✅ All hero image URLs updated in `src/data/bucketList.js`
 
 ---
 
