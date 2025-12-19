@@ -9,7 +9,7 @@
  * - Mobile-friendly
  */
 
-import { useEffect, useRef, useMemo } from 'react';
+import { useEffect, useRef, useMemo, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { apiConfig } from '../config/apiConfig';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -18,7 +18,8 @@ import './InteractiveItineraryMap.css';
 function InteractiveItineraryMap({ itinerary, title }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const markers = useRef([]);
+  const [selectedPort, setSelectedPort] = useState(null);
+  const popup = useRef(null);
 
   // Filter and enrich itinerary data
   const ports = useMemo(() => {
@@ -54,19 +55,31 @@ function InteractiveItineraryMap({ itinerary, title }) {
     return '#3b82f6'; // Blue - Middle ports
   };
 
-  // Create custom marker element
-  const createMarkerElement = (port, index) => {
-    const el = document.createElement('div');
-    el.className = 'port-marker';
-    el.style.backgroundColor = getMarkerColor(port, index);
-    
-    const number = document.createElement('span');
-    number.className = 'port-marker-number';
-    number.textContent = port.day;
-    el.appendChild(number);
-    
-    return el;
-  };
+  // Create GeoJSON for ports
+  const portsGeoJSON = useMemo(() => {
+    if (ports.length === 0) return null;
+
+    return {
+      type: 'FeatureCollection',
+      features: ports.map((port, index) => ({
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [port.lon, port.lat]
+        },
+        properties: {
+          id: `port-${port.day}`,
+          day: port.day,
+          name: port.name,
+          type: port.type,
+          color: getMarkerColor(port, index),
+          description: port.description || '',
+          country: port.country || '',
+          index
+        }
+      }))
+    };
+  }, [ports]);
 
   // Initialize map
   useEffect(() => {
@@ -104,72 +117,108 @@ function InteractiveItineraryMap({ itinerary, title }) {
     // Add navigation controls
     map.current.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
 
-    // Wait for map to load before adding markers and route
+    // Wait for map to load before adding layers
     map.current.on('load', () => {
-      // Add route line
-      if (ports.length >= 2) {
-        map.current.addSource('route', {
-          type: 'geojson',
-          data: {
-            type: 'Feature',
-            geometry: {
-              type: 'LineString',
-              coordinates: ports.map(p => [p.lon, p.lat])
-            }
-          }
-        });
+      // Add ports data source
+      map.current.addSource('ports', {
+        type: 'geojson',
+        data: portsGeoJSON
+      });
 
-        map.current.addLayer({
-          id: 'route-line',
-          type: 'line',
-          source: 'route',
-          paint: {
-            'line-color': '#3b82f6',
-            'line-width': 3,
-            'line-opacity': 0.6,
-            'line-dasharray': [2, 2]
-          }
-        });
-      }
+      // Add circles for port markers
+      map.current.addLayer({
+        id: 'port-circles',
+        type: 'circle',
+        source: 'ports',
+        paint: {
+          'circle-radius': 20,
+          'circle-color': ['get', 'color'],
+          'circle-stroke-width': 3,
+          'circle-stroke-color': '#ffffff',
+          'circle-opacity': 1
+        }
+      });
 
-      // Add markers
-      ports.forEach((port, index) => {
-        const el = createMarkerElement(port, index);
+      // Add text labels for day numbers
+      map.current.addLayer({
+        id: 'port-labels',
+        type: 'symbol',
+        source: 'ports',
+        layout: {
+          'text-field': ['get', 'day'],
+          'text-font': ['DIN Pro Bold', 'Arial Unicode MS Bold'],
+          'text-size': 14,
+          'text-allow-overlap': true,
+          'text-ignore-placement': true
+        },
+        paint: {
+          'text-color': '#ffffff'
+        }
+      });
+
+      // Create popup instance
+      popup.current = new mapboxgl.Popup({
+        closeButton: true,
+        closeOnClick: false,
+        className: 'port-popup',
+        maxWidth: '280px'
+      });
+
+      // Add hover cursor
+      map.current.on('mouseenter', 'port-circles', () => {
+        map.current.getCanvas().style.cursor = 'pointer';
+      });
+
+      map.current.on('mouseleave', 'port-circles', () => {
+        map.current.getCanvas().style.cursor = '';
+      });
+
+      // Click handler for ports
+      map.current.on('click', 'port-circles', (e) => {
+        const feature = e.features[0];
+        const props = feature.properties;
+        const coords = feature.geometry.coordinates.slice();
         
-        // Create popup
-        const popup = new mapboxgl.Popup({ 
-          offset: 35,
-          closeButton: true,
-          closeOnClick: false,
-          className: 'port-popup'
-        }).setHTML(`
+        // Build popup content
+        let popupHTML = `
           <div class="port-popup-content">
-            <div class="port-popup-day">Day ${port.day}</div>
-            <div class="port-popup-name">${port.name}</div>
-            ${port.description ? `<div class="port-popup-description">${port.description}</div>` : ''}
-          </div>
-        `);
-
-        // Create marker
-        const marker = new mapboxgl.Marker({ element: el })
-          .setLngLat([port.lon, port.lat])
-          .setPopup(popup)
+            <div class="port-popup-header">
+              <div class="port-popup-day">Day ${props.day}</div>
+              ${props.type === 'embark' || props.type === 'embarkation' ? '<div class="port-popup-badge embark">Embarkation</div>' : ''}
+              ${props.type === 'disembark' || props.type === 'disembarkation' ? '<div class="port-popup-badge disembark">Disembarkation</div>' : ''}
+            </div>
+            <div class="port-popup-name">${props.name}</div>
+        `;
+        
+        if (props.description) {
+          popupHTML += `<div class="port-popup-description">${props.description}</div>`;
+        }
+        
+        if (props.country) {
+          popupHTML += `<div class="port-popup-location">📍 ${props.country}</div>`;
+        }
+        
+        popupHTML += `<div class="port-popup-coords">${coords[1].toFixed(4)}°, ${coords[0].toFixed(4)}°</div>`;
+        popupHTML += `</div>`;
+        
+        popup.current
+          .setLngLat(coords)
+          .setHTML(popupHTML)
           .addTo(map.current);
-
-        markers.current.push(marker);
       });
     });
 
     // Cleanup
     return () => {
-      markers.current.forEach(marker => marker.remove());
-      markers.current = [];
+      if (popup.current) {
+        popup.current.remove();
+      }
       if (map.current) {
         map.current.remove();
         map.current = null;
       }
     };
-  }, [ports, apiConfig.mapbox.enabled, apiConfig.mapbox.accessToken, apiConfig.mapbox.style]);
+  }, [ports, portsGeoJSON, apiConfig.mapbox.enabled, apiConfig.mapbox.accessToken, apiConfig.mapbox.style]);
 
   if (!apiConfig.mapbox.enabled || !apiConfig.mapbox.accessToken) {
     return (
