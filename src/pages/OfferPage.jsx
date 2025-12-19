@@ -189,62 +189,35 @@ function OfferPage() {
   ];
 
   // Structured Data for SEO (V2 Enhanced)
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: offer.title,
-    description: offer.full_description || offer.short_description,
-    url: `https://limitlesscruises.com/offers/${offer.slug}`,
-    category: 'Travel Package',
-    brand: {
-      '@type': 'Organization',
-      name: offer.cruise_line_name || 'Cruise Line'
-    },
-    offers: {
-      '@type': 'Offer',
-      price: getDisplayPrice(offer),
-      priceCurrency: offer.currency || 'GBP',
-      availability: 'https://schema.org/InStock',
-      priceValidUntil: offer.expires_at || defaultPriceValidUntil,
-      url: `https://limitlesscruises.com/offers/${offer.slug}`
-    },
-    ...(galleryImages.length > 0 && {
-      image: galleryImages.map(img => img.url)
-    }),
-    // V2: Include accommodation in structured data
-    ...(hasAccommodation(offer) && {
-      includesObject: [
-        ...(offer.pre_stay_hotel_name ? [{
-          '@type': 'LodgingReservation',
-          reservationFor: {
-            '@type': 'LodgingBusiness',
-            name: offer.pre_stay_hotel_name,
-            address: offer.pre_stay_location,
-            ...(offer.pre_stay_hotel_stars && {
-              starRating: {
-                '@type': 'Rating',
-                ratingValue: offer.pre_stay_hotel_stars
-              }
-            })
-          }
-        }] : []),
-        ...(offer.post_stay_hotel_name ? [{
-          '@type': 'LodgingReservation',
-          reservationFor: {
-            '@type': 'LodgingBusiness',
-            name: offer.post_stay_hotel_name,
-            address: offer.post_stay_location,
-            ...(offer.post_stay_hotel_stars && {
-              starRating: {
-                '@type': 'Rating',
-                ratingValue: offer.post_stay_hotel_stars
-              }
-            })
-          }
-        }] : [])
-      ]
-    })
-  };
+  const structuredData = useMemo(() => {
+    const data = {
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: offer.title,
+      description: offer.short_description || '',
+      url: `https://limitlesscruises.com/offers/${offer.slug}`,
+      category: 'Travel Package',
+      brand: {
+        '@type': 'Organization',
+        name: offer.cruise_line_name || 'Cruise Line'
+      },
+      offers: {
+        '@type': 'Offer',
+        price: getDisplayPrice(offer),
+        priceCurrency: offer.currency || 'GBP',
+        availability: 'https://schema.org/InStock',
+        priceValidUntil: offer.expires_at || defaultPriceValidUntil,
+        url: `https://limitlesscruises.com/offers/${offer.slug}`
+      }
+    };
+
+    // Add images if available
+    if (galleryImages.length > 0) {
+      data.image = galleryImages.map(img => img.url);
+    }
+
+    return data;
+  }, [offer, galleryImages, defaultPriceValidUntil]);
 
   const savingsDisplay = offer.savings_percentage
     ? `${offer.savings_percentage}%`
