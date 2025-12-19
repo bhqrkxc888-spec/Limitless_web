@@ -10,7 +10,7 @@ export const destinations = [
     name: 'Mediterranean',
     tagline: 'Sun-soaked history and culture',
     description: 'Explore ancient civilizations, stunning coastlines, and world-class cuisine on a Mediterranean cruise. From Barcelona to Athens, discover iconic destinations.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/muscat.webp',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe/Med-coast.webp',
     featured: true,
     // Coordinates for API integration (Barcelona as primary port)
     coordinates: {
@@ -186,7 +186,7 @@ export const destinations = [
     name: 'Baltic & Northern Europe',
     tagline: 'Historic capitals and cultural treasures',
     description: 'Discover the enchanting cities of the Baltic Sea, from the grandeur of St Petersburg to the charm of Copenhagen and Stockholm. Rich history, stunning architecture, and Nordic culture await.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/pacific/copenhagen-2.webp',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Baltics/Copenhagen.webp',
     featured: true,
     coordinates: {
       lat: 59.9311,
@@ -393,7 +393,7 @@ export const destinations = [
     name: 'Adriatic',
     tagline: 'Croatia, Venice and Montenegro',
     description: 'Cruise the stunning Adriatic coastline, from the floating city of Venice to Croatia\'s medieval walled cities and Montenegro\'s dramatic fjords. A treasure trove of history and natural beauty.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/Adriatic.webp',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Adriatic/Adriatic.webp',
     featured: false,
     coordinates: {
       lat: 42.6507,
@@ -530,7 +530,7 @@ export const destinations = [
     name: 'Southeast Asia',
     tagline: 'Temples, beaches and exotic culture',
     description: 'Explore the exotic wonders of Southeast Asia, from Thailand\'s temples to Vietnam\'s halong Bay and Singapore\'s modernity. A sensory journey through rich cultures and stunning landscapes.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/Japan/japan-hero.webp',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/singapore/singapore.webp',
     featured: false,
     coordinates: {
       lat: 1.3521,

@@ -11,7 +11,7 @@ export const cruiseTypes = [
     tagline: 'Adventures for all ages',
     shortDescription: 'Create unforgettable family memories with cruises designed for all ages.',
     description: 'Create unforgettable family memories with cruises designed for all ages. Kids clubs, family activities, waterparks, and entertainment the whole family will love. From toddler-friendly facilities to teen hangouts, cruise lines have perfected the art of keeping everyone happy.',
-    image: 'null',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Cruise%20Type/family.webp',
     icon: 'family',
     highlights: [
       'Award-winning kids clubs and teen programmes',
@@ -43,7 +43,7 @@ export const cruiseTypes = [
     tagline: 'Sophisticated escapes',
     shortDescription: 'Peaceful relaxation on ships designed exclusively for grown-ups.',
     description: 'Enjoy peaceful relaxation on adults-only ships or adult-exclusive areas. Perfect for couples, groups of friends, or solo travellers seeking a serene, sophisticated atmosphere without the bustle of family cruising.',
-    image: 'null',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Cruise%20Type/Adult-Only.webp',
     icon: 'adults',
     highlights: [
       'No children on board - guaranteed tranquillity',
@@ -75,7 +75,7 @@ export const cruiseTypes = [
     tagline: 'No-fly cruising from home',
     shortDescription: 'Skip the airport hassle with cruises departing from UK ports.',
     description: 'Skip the airport hassle with cruises departing from Southampton, Liverpool, Tilbury, and other UK ports. Your holiday starts the moment you board - no flights, generous baggage allowances, and easy access from home.',
-    image: 'null',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Cruise%20Type/no-fly.webp',
     icon: 'uk',
     highlights: [
       'No flights required - drive to the port',
@@ -107,7 +107,7 @@ export const cruiseTypes = [
     tagline: 'The finest way to travel',
     shortDescription: 'All-inclusive elegance with exceptional service and intimate ships.',
     description: 'Experience cruising at its finest with all-inclusive luxury lines. Butler service, gourmet dining, premium drinks, and gratuities included. Smaller ships mean exceptional service ratios and access to exclusive ports.',
-    image: 'null',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Cruise%20Type/luxury.webp',
     icon: 'luxury',
     highlights: [
       'All-inclusive fares (drinks, dining, gratuities)',
@@ -139,7 +139,7 @@ export const cruiseTypes = [
     tagline: 'Glide through the heart of cities',
     shortDescription: 'Intimate ships sailing Europe\'s legendary waterways.',
     description: 'Cruise the legendary rivers of Europe on intimate ships that dock in the heart of cities. No sea days, daily new destinations, and all-inclusive packages make river cruising the stress-free way to explore.',
-    image: 'null',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe-river/danube-river.webp',
     icon: 'river',
     highlights: [
       'Dock in city centres',
@@ -171,7 +171,7 @@ export const cruiseTypes = [
     tagline: 'Explore the world\'s wild places',
     shortDescription: 'Adventure to remote destinations on specialist expedition ships.',
     description: 'Venture beyond the ordinary to the world\'s most remote and pristine destinations. Antarctica, the Arctic, Galápagos, and more - expedition cruises combine adventure with expert-led exploration.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antarctica-hero.webp',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Cruise%20Type/expedition.webp',
     icon: 'expedition',
     highlights: [
       'Zodiac landings on remote shores',
