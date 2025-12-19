@@ -5,6 +5,7 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
+import { logger } from '../utils/logger';
 
 // Check if we have an active session cookie (client-side flag)
 function hasSessionCookie() {
@@ -43,7 +44,7 @@ export function useAdminAuth() {
         return false;
       }
     } catch (err) {
-      console.error('Session validation error:', err);
+      logger.error('Session validation error:', err);
       setIsAuthenticated(false);
       setError('Failed to validate session');
       return false;
@@ -78,7 +79,7 @@ export function useAdminAuth() {
         return { success: false, error: data.error };
       }
     } catch (err) {
-      console.error('Login error:', err);
+      logger.error('Login error:', err);
       const errorMsg = 'Network error. Please try again.';
       setError(errorMsg);
       return { success: false, error: errorMsg };
@@ -95,7 +96,7 @@ export function useAdminAuth() {
         credentials: 'include'
       });
     } catch (err) {
-      console.error('Logout error:', err);
+      logger.error('Logout error:', err);
     } finally {
       setIsAuthenticated(false);
       setError(null);
