@@ -528,11 +528,10 @@ function OfferPage() {
         </div>
       </section>
 
-      {/* Main Content */}
+      {/* Main Content - Full Width */}
       <section className="section offer-content-section">
         <div className="container">
-          <div className="offer-content-grid">
-            <div className="offer-main-content">
+          <div className="offer-single-column">
               {/* V2: Package Summary - Show if has accommodation */}
               {hasAccommodation(offer) && (
                 <div className="offer-section offer-package-summary">
@@ -686,7 +685,7 @@ function OfferPage() {
                 </div>
               )}
 
-              {/* Itinerary */}
+              {/* Itinerary - Map & Timeline Side by Side */}
               {(offer.itinerary_summary || 
                 (offer.show_itinerary_map !== false && offer.itinerary_map_url) ||
                 (offer.ports_of_call && offer.ports_of_call.length > 0) ||
@@ -703,19 +702,8 @@ function OfferPage() {
                     <p className="offer-itinerary-summary">{offer.itinerary_summary}</p>
                   )}
                   
-                  {/* Interactive Itinerary Map */}
-                  {offer.show_itinerary_map !== false && offer.itinerary_detailed && offer.itinerary_detailed.length > 0 && (
-                    <div className="offer-itinerary-map">
-                      <InteractiveItineraryMap 
-                        itinerary={offer.itinerary_detailed}
-                        title={offer.title}
-                      />
-                    </div>
-                  )}
-                  
                   {offer.ports_of_call && offer.ports_of_call.length > 0 && (
                     <div className="offer-ports">
-                      <h3>Ports of Call</h3>
                       <div className="offer-ports-list">
                         {offer.ports_of_call.map((port, idx) => (
                           <span key={idx} className="offer-port-tag">{safeRender(port)}</span>
@@ -724,21 +712,35 @@ function OfferPage() {
                     </div>
                   )}
 
+                  {/* Map & Day-by-Day Side by Side */}
                   {offer.itinerary_detailed && Array.isArray(offer.itinerary_detailed) && offer.itinerary_detailed.length > 0 && (
-                    <div className="offer-itinerary-detailed">
-                      <h3>Day-by-Day Itinerary</h3>
-                      <div className="offer-itinerary-timeline">
-                        {offer.itinerary_detailed.map((item, index) => (
-                          <div key={index} className="offer-itinerary-item">
-                            <div className="offer-itinerary-day">
-                              <span className="day-number">Day {item.day || index + 1}</span>
+                    <div className="offer-itinerary-grid">
+                      {/* Interactive Map */}
+                      {offer.show_itinerary_map !== false && (
+                        <div className="offer-itinerary-map-column">
+                          <InteractiveItineraryMap 
+                            itinerary={offer.itinerary_detailed}
+                            title={offer.title}
+                          />
+                        </div>
+                      )}
+                      
+                      {/* Day-by-Day Timeline */}
+                      <div className="offer-itinerary-timeline-column">
+                        <h3>Day-by-Day</h3>
+                        <div className="offer-itinerary-timeline">
+                          {offer.itinerary_detailed.map((item, index) => (
+                            <div key={index} className="offer-itinerary-item">
+                              <div className="offer-itinerary-day">
+                                <span className="day-number">Day {item.day || index + 1}</span>
+                              </div>
+                              <div className="offer-itinerary-content">
+                                <h4>{safeRender(item.location || item.port || 'At Sea')}</h4>
+                                {item.description && <p>{safeRender(item.description)}</p>}
+                              </div>
                             </div>
-                            <div className="offer-itinerary-content">
-                              <h4>{safeRender(item.location || item.port || 'At Sea')}</h4>
-                              {item.description && <p>{safeRender(item.description)}</p>}
-                            </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </div>
                     </div>
                   )}
@@ -901,26 +903,30 @@ function OfferPage() {
                   </div>
                 </div>
               )}
+          </div>
+        </div>
+      </section>
+
+      {/* Enquiry Section - Full Width at Bottom */}
+      <section className="section offer-enquiry-section" id="enquiry-form">
+        <div className="container">
+          <div className="offer-enquiry-grid">
+            {/* Enquiry Form */}
+            <div className="offer-enquiry-form-card">
+              <h2>Enquire About This Offer</h2>
+              <p>
+                Interested in this cruise? Fill out the form and we'll get back to you with availability and booking details.
+              </p>
+              <ContactForm 
+                context="offer-detail"
+                offerId={offer.id}
+                offerTitle={offer.title}
+              />
             </div>
 
-            {/* Sidebar */}
-            <aside className="offer-sidebar">
-              {/* Enquiry Form */}
-              <div className="offer-sidebar-card" id="enquiry-form">
-                <h3>Enquire About This Offer</h3>
-                <p>
-                  Interested in this cruise? Fill out the form and we'll get back to you with availability and booking details.
-                </p>
-                <ContactForm 
-                  context="offer-detail"
-                  offerId={offer.id}
-                  offerTitle={offer.title}
-                />
-              </div>
-
-              {/* Quick Info */}
-              <div className="offer-sidebar-card">
-                <h3>Offer Summary</h3>
+            {/* Quick Info Summary */}
+            <div className="offer-enquiry-summary-card">
+              <h3>Offer Summary</h3>
                 <dl className="offer-summary-list">
                   {offer.offer_type && (
                     <>
@@ -953,28 +959,27 @@ function OfferPage() {
                     </>
                   )}
                 </dl>
-              </div>
+            </div>
 
-              {/* Contact CTA */}
-              <div className="offer-sidebar-card offer-sidebar-card--cta">
-                <h3>Prefer to Speak Directly?</h3>
-                <p>Call or WhatsApp us for immediate assistance and expert advice.</p>
-                <div className="offer-sidebar-buttons">
-                  <Button href={`tel:${siteConfig.phone}`} variant="primary" fullWidth>
-                    Call {siteConfig.phone}
-                  </Button>
-                  <Button 
-                    href={siteConfig.whatsappUrl} 
-                    variant="outline" 
-                    fullWidth
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    WhatsApp {siteConfig.whatsapp}
-                  </Button>
-                </div>
+            {/* Contact CTA */}
+            <div className="offer-enquiry-cta-card">
+              <h3>Prefer to Speak Directly?</h3>
+              <p>Call or WhatsApp us for immediate assistance and expert advice.</p>
+              <div className="offer-enquiry-buttons">
+                <Button href={`tel:${siteConfig.phone}`} variant="primary" fullWidth>
+                  Call {siteConfig.phone}
+                </Button>
+                <Button 
+                  href={siteConfig.whatsappUrl} 
+                  variant="outline" 
+                  fullWidth
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  WhatsApp {siteConfig.whatsapp}
+                </Button>
               </div>
-            </aside>
+            </div>
           </div>
         </div>
       </section>

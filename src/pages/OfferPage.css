@@ -428,19 +428,35 @@
   background: var(--clr-bg);
 }
 
-.offer-content-grid {
-  display: grid;
-  grid-template-columns: 66fr 33fr; /* 66/33 split for better balance */
-  gap: var(--space-12);
-  align-items: start;
-  max-width: 1600px; /* Slightly wider container */
+/* Single Column Layout - Full Width */
+.offer-single-column {
+  max-width: 1400px;
   margin: 0 auto;
-}
-
-.offer-main-content {
   display: flex;
   flex-direction: column;
   gap: var(--space-10);
+}
+
+/* Itinerary Grid - Map & Timeline Side by Side */
+.offer-itinerary-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-8);
+  margin-top: var(--space-6);
+}
+
+.offer-itinerary-map-column {
+  position: sticky;
+  top: var(--space-8);
+  align-self: start;
+}
+
+.offer-itinerary-timeline-column h3 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-text-main);
+  margin: 0 0 var(--space-4);
 }
 
 /* Section Styles */
@@ -771,38 +787,61 @@
 }
 
 /* ========================================
-   SIDEBAR
+   ENQUIRY SECTION - Bottom of Page
    ======================================== */
 
-.offer-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-  position: sticky;
-  top: var(--space-8);
+.offer-enquiry-section {
+  background: var(--clr-bg-alt);
+  border-top: 1px solid var(--clr-border-light);
+  padding: var(--space-12) 0;
 }
 
-.offer-sidebar-card {
+.offer-enquiry-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--space-6);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.offer-enquiry-form-card,
+.offer-enquiry-summary-card,
+.offer-enquiry-cta-card {
   background: var(--clr-surface);
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-xl);
-  padding: var(--space-6);
+  padding: var(--space-8);
   box-shadow: var(--shadow-card);
 }
 
-.offer-sidebar-card h3 {
+.offer-enquiry-form-card h2 {
   font-family: var(--font-family-display);
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
   color: var(--clr-text-main);
   margin: 0 0 var(--space-3);
 }
 
-.offer-sidebar-card p {
-  font-size: var(--font-size-sm);
+.offer-enquiry-form-card p {
+  font-size: var(--font-size-base);
   color: var(--clr-text-muted);
-  margin: 0 0 var(--space-5);
+  margin: 0 0 var(--space-6);
   line-height: var(--line-height-relaxed);
+}
+
+.offer-enquiry-summary-card h3,
+.offer-enquiry-cta-card h3 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-text-main);
+  margin: 0 0 var(--space-4);
+}
+
+.offer-enquiry-summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
 }
 
 /* Summary List */
@@ -828,22 +867,23 @@
 }
 
 /* CTA Card */
-.offer-sidebar-card--cta {
+.offer-enquiry-cta-card {
   background: linear-gradient(135deg, var(--clr-primary), var(--clr-primary-dark));
   color: var(--clr-text-on-primary);
   border: none;
 }
 
-.offer-sidebar-card--cta h3,
-.offer-sidebar-card--cta p {
+.offer-enquiry-cta-card h3,
+.offer-enquiry-cta-card p {
   color: var(--clr-text-on-primary);
 }
 
-.offer-sidebar-card--cta p {
+.offer-enquiry-cta-card p {
   opacity: 0.9;
+  margin-bottom: var(--space-5);
 }
 
-.offer-sidebar-buttons {
+.offer-enquiry-buttons {
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
@@ -962,10 +1002,6 @@
   .offer-header__layout {
     gap: var(--space-8);
   }
-  
-  .offer-content-grid {
-    gap: var(--space-8);
-  }
 }
 
 @media (max-width: 1024px) {
@@ -977,19 +1013,18 @@
     position: static;
   }
   
-  .offer-content-grid {
+  /* Itinerary grid stacks on tablet */
+  .offer-itinerary-grid {
     grid-template-columns: 1fr;
   }
   
-  .offer-sidebar {
+  .offer-itinerary-map-column {
     position: static;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-6);
   }
   
-  .offer-sidebar-card:first-child {
-    grid-column: 1 / -1;
+  /* Enquiry grid stacks on tablet */
+  .offer-enquiry-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1014,12 +1049,14 @@
     grid-template-columns: 1fr;
   }
   
-  .offer-sidebar {
+  .offer-highlights-list {
     grid-template-columns: 1fr;
   }
   
-  .offer-highlights-list {
-    grid-template-columns: 1fr;
+  .offer-enquiry-form-card,
+  .offer-enquiry-summary-card,
+  .offer-enquiry-cta-card {
+    padding: var(--space-6);
   }
 }
 
