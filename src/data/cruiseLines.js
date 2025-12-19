@@ -68,12 +68,12 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'Caribbean', image: 'null', alt: 'Tropical Caribbean beach with turquoise waters' },
+      { name: 'Caribbean', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean/nassau-bahamas.webp', alt: 'Tropical Caribbean beach with turquoise waters' },
       { name: 'Mediterranean', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe/med-card.webp', alt: 'Mediterranean coastal harbour' },
       { name: 'Norwegian Fjords', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights.jpeg', alt: 'Norwegian Fjords with Northern Lights' },
-      { name: 'Northern Europe', image: 'null', alt: 'Northern European waterfront' },
-      { name: 'Canary Islands', image: 'null', alt: 'Canary Islands volcanic landscape' },
-      { name: 'Scandinavia', image: 'null', alt: 'Scandinavian landscape under midnight sun' }
+      { name: 'Northern Europe', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Baltics/Copenhagen.webp', alt: 'Northern European waterfront' },
+      { name: 'Canary Islands', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/canary-islands/tenerife-beach.webp', alt: 'Canary Islands volcanic landscape' },
+      { name: 'Scandinavia', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Scandanavia/scandanavia.webp', alt: 'Scandinavian landscape under midnight sun' }
     ],
 
     // Kids Club section
@@ -232,12 +232,12 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean beach and turquoise sea' },
+      { name: 'Caribbean', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean/caribbean-2.webp', alt: 'Caribbean beach and turquoise sea' },
       { name: 'Mediterranean', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe/med-card.webp', alt: 'Mediterranean ruins and coastline' },
-      { name: 'Middle East', image: 'null', alt: 'Middle East Dubai skyline' },
-      { name: 'Northern Europe', image: 'null', alt: 'Northern Europe skyline and waterfront' },
-      { name: 'Asia & Japan', image: 'null', alt: 'Cherry blossom path in Japan' },
-      { name: 'Grand Voyages', image: 'null', alt: 'Sunset over the ocean on a Grand Voyage' }
+      { name: 'Middle East', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/Abu-Dhabi.webp', alt: 'Middle East Dubai skyline' },
+      { name: 'Northern Europe', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Baltics/copenhagen-2.webp', alt: 'Northern Europe skyline and waterfront' },
+      { name: 'Asia & Japan', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Japan/Japan-card.webp', alt: 'Cherry blossom path in Japan' },
+      { name: 'Grand Voyages', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/grandvoyage.webp', alt: 'Sunset over the ocean on a Grand Voyage' }
     ],
 
     // Kids Club section
@@ -456,10 +456,10 @@ export const cruiseLines = [
 
     destinationImages: [
       { name: 'Norwegian Fjords', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights.jpeg', alt: 'Norwegian fjord landscape' },
-      { name: 'British Isles', image: 'null', alt: 'British Isles coastline' },
-      { name: 'Baltic Capitals', image: 'null', alt: 'Colourful Baltic waterfront' },
-      { name: 'Canary Islands', image: 'null', alt: 'Canary Islands volcanic landscape' },
-      { name: 'Arctic & Iceland', image: 'null', alt: 'Iceland glacier scenery' },
+      { name: 'British Isles', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/British-islands/britishislands-1.webp', alt: 'British Isles coastline' },
+      { name: 'Baltic Capitals', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Baltics/Copenhagen.webp', alt: 'Colourful Baltic waterfront' },
+      { name: 'Canary Islands', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/canary-islands/tenerife-tiede.webp', alt: 'Canary Islands volcanic landscape' },
+      { name: 'Arctic & Iceland', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Iceland/iceland.webp', alt: 'Iceland glacier scenery' },
       { name: 'Mediterranean', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe/med-card.webp', alt: 'Mediterranean coastal town' }
     ],
 
@@ -553,11 +553,11 @@ export const cruiseLines = [
     // TODO: Replace with real Supabase URLs when images are uploaded
     destinationImages: [
       { name: 'Alaska', image: 'null', alt: 'Alaska glacier and mountains' },
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean turquoise waters' },
-      { name: 'Northern Europe', image: 'null', alt: 'Northern Europe colourful waterfront' },
+      { name: 'Caribbean', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean/us-virgin-islands.webp', alt: 'Caribbean turquoise waters' },
+      { name: 'Northern Europe', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Baltics/tallin-oldtown.webp', alt: 'Northern Europe colourful waterfront' },
       { name: 'Mediterranean', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe/med-card.webp', alt: 'Mediterranean coastal village' },
       { name: 'World Cruises', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/worldcruise.jpeg', alt: 'Ocean sunset on world cruise' },
-      { name: 'Australia & New Zealand', image: 'null', alt: 'Sydney Opera House' }
+      { name: 'Australia & New Zealand', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Australia/Australia.webp', alt: 'Sydney Opera House' }
     ],
 
     // Kids Club section (Club HAL)
@@ -669,10 +669,10 @@ export const cruiseLines = [
 
     destinationImages: [
       { name: 'Mediterranean', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe/med-card.webp', alt: 'Mediterranean coastal village' },
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean palm tree beach' },
-      { name: 'Canary Islands', image: 'null', alt: 'Canary Islands volcanic landscape' },
-      { name: 'Arabian Gulf', image: 'null', alt: 'Dubai skyline' },
-      { name: 'Adriatic', image: 'null', alt: 'Croatian coastline' }
+      { name: 'Caribbean', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean/caribbean-3.webp', alt: 'Caribbean palm tree beach' },
+      { name: 'Canary Islands', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/canary-islands/canary-1.webp', alt: 'Canary Islands volcanic landscape' },
+      { name: 'Arabian Gulf', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/muscat.webp', alt: 'Dubai skyline' },
+      { name: 'Adriatic', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Adriatic/Adriatic.webp', alt: 'Croatian coastline' }
     ],
 
     kidsClub: {
@@ -799,11 +799,11 @@ export const cruiseLines = [
     ],
 
     destinationImages: [
-      { name: 'Northern Europe', image: 'null', alt: 'Baltic capital waterfront' },
+      { name: 'Northern Europe', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Baltics/tallin-skyline.webp', alt: 'Baltic capital waterfront' },
       { name: 'Mediterranean', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe/med-card.webp', alt: 'Mediterranean coastal village' },
-      { name: 'British Isles', image: 'null', alt: 'Scottish coastline' },
+      { name: 'British Isles', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/British-islands/Scotland-1.webp', alt: 'Scottish coastline' },
       { name: 'World Cruises', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/worldcruise.jpeg', alt: 'Ocean voyage sunset' },
-      { name: 'Expeditions', image: 'null', alt: 'Arctic expedition landscape' }
+      { name: 'Expeditions', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antartica-card.jpeg', alt: 'Arctic expedition landscape' }
     ],
 
     accessibility: {
@@ -892,10 +892,10 @@ export const cruiseLines = [
 
     destinationImages: [
       { name: 'Mediterranean', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe/med-card.webp', alt: 'Mediterranean luxury coastline' },
-      { name: 'Northern Europe', image: 'null', alt: 'Baltic luxury destination' },
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean paradise' },
+      { name: 'Northern Europe', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Baltics/Stockholm.webp', alt: 'Baltic luxury destination' },
+      { name: 'Caribbean', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean/caribbean-1.webp', alt: 'Caribbean paradise' },
       { name: 'Expeditions', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antartica-card.jpeg', alt: 'Antarctic expedition' },
-      { name: 'Arabia', image: 'null', alt: 'Arabian luxury destination' }
+      { name: 'Arabia', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/Petra.webp', alt: 'Arabian luxury destination' }
     ],
 
     accessibility: {
@@ -986,10 +986,10 @@ export const cruiseLines = [
 
     destinationImages: [
       { name: 'Alaska', image: 'null', alt: 'Alaska glacier scenery' },
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean beach paradise' },
+      { name: 'Caribbean', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean/caribbean-4.webp', alt: 'Caribbean beach paradise' },
       { name: 'Mediterranean', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe/med-card.webp', alt: 'Mediterranean coastal town' },
-      { name: 'Australia', image: 'null', alt: 'Sydney Opera House' },
-      { name: 'Hawaii', image: 'null', alt: 'Hawaiian volcanic coastline' }
+      { name: 'Australia', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Australia/Australia.webp', alt: 'Sydney Opera House' },
+      { name: 'Hawaii', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/hawaii/hawaii.webp', alt: 'Hawaiian volcanic coastline' }
     ],
 
     kidsClub: {
@@ -1096,7 +1096,7 @@ export const cruiseLines = [
 
     destinationImages: [
       { name: 'Mediterranean', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe/med-card.webp', alt: 'Mediterranean harbour village' },
-      { name: 'British Isles', image: 'null', alt: 'Scottish coastline' },
+      { name: 'British Isles', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/British-islands/ireland.webp', alt: 'Scottish coastline' },
       { name: 'Asia', image: 'null', alt: 'Asian temple at sunset' },
       { name: 'South America', image: 'null', alt: 'South American coastline' }
     ],
@@ -1219,8 +1219,8 @@ export const cruiseLines = [
     destinationImages: [
       { name: 'Antarctica', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antartica-card.jpeg', alt: 'Antarctic ice and penguins' },
       { name: 'Arctic', image: 'null', alt: 'Arctic polar landscape' },
-      { name: 'Kimberley', image: 'null', alt: 'Australian Kimberley coastline' },
-      { name: 'Patagonia', image: 'null', alt: 'Patagonian mountains' }
+      { name: 'Kimberley', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Australia/westernaustralia.webp', alt: 'Australian Kimberley coastline' },
+      { name: 'Patagonia', image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/patagonia.webp', alt: 'Patagonian mountains' }
     ],
 
     accessibility: {
