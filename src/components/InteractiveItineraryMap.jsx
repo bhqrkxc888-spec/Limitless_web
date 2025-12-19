@@ -19,6 +19,7 @@ function InteractiveItineraryMap({ itinerary, title }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [selectedPort, setSelectedPort] = useState(null);
+  const [currentStyle, setCurrentStyle] = useState('outdoors');
   const popup = useRef(null);
 
   // Filter and enrich itinerary data - combine round-trip ports
@@ -137,7 +138,13 @@ function InteractiveItineraryMap({ itinerary, title }) {
 
   // Initialize map
   useEffect(() => {
-    if (!apiConfig.mapbox.enabled || !apiConfig.mapbox.accessToken || ports.length === 0) {
+    if (!apiConfig.mapbox.enabled || !apiConfig.mapbox.accessToken) {
+      console.warn('Mapbox not enabled or no access token');
+      return;
+    }
+    
+    if (ports.length === 0) {
+      console.warn('No ports to display on map');
       return;
     }
 
@@ -158,21 +165,38 @@ function InteractiveItineraryMap({ itinerary, title }) {
       [maxLon, maxLat]  // Northeast
     ];
 
-    // Initialize map
+    // Initialize map with 3D terrain support
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: apiConfig.mapbox.style,
       bounds: bounds,
       fitBoundsOptions: {
         padding: { top: 80, bottom: 80, left: 80, right: 80 }
-      }
+      },
+      pitch: 0, // Start flat, user can tilt
+      bearing: 0
     });
 
-    // Add navigation controls
-    map.current.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
+    // Add navigation controls (with compass for pitch/tilt)
+    map.current.addControl(new mapboxgl.NavigationControl({ 
+      showCompass: true,
+      visualizePitch: true 
+    }), 'top-right');
+
+    // Add fullscreen control
+    map.current.addControl(new mapboxgl.FullscreenControl(), 'top-right');
 
     // Wait for map to load before adding layers
     map.current.on('load', () => {
+      // Enable 3D terrain
+      map.current.addSource('mapbox-dem', {
+        type: 'raster-dem',
+        url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+        tileSize: 512,
+        maxzoom: 14
+      });
+      map.current.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
+
       // Add ports data source
       map.current.addSource('ports', {
         type: 'geojson',
@@ -232,6 +256,14 @@ function InteractiveItineraryMap({ itinerary, title }) {
         const feature = e.features[0];
         const props = feature.properties;
         const coords = feature.geometry.coordinates.slice();
+        
+        // Smooth fly to port with zoom
+        map.current.flyTo({
+          center: coords,
+          zoom: 10,
+          duration: 1500,
+          essential: true
+        });
         
         // Parse days and visits if this is a round-trip port
         const days = props.days ? JSON.parse(props.days) : [props.day];
@@ -295,6 +327,87 @@ function InteractiveItineraryMap({ itinerary, title }) {
     };
   }, [ports, portsGeoJSON, apiConfig.mapbox.enabled, apiConfig.mapbox.accessToken, apiConfig.mapbox.style]);
 
+  // Handle style changes
+  const handleStyleChange = (newStyle) => {
+    if (!map.current) return;
+    
+    const styleUrls = {
+      outdoors: 'mapbox://styles/mapbox/outdoors-v12',
+      satellite: 'mapbox://styles/mapbox/satellite-streets-v12',
+      streets: 'mapbox://styles/mapbox/streets-v12',
+      light: 'mapbox://styles/mapbox/light-v11',
+      dark: 'mapbox://styles/mapbox/dark-v11'
+    };
+    
+    setCurrentStyle(newStyle);
+    
+    // Save current state
+    const currentCenter = map.current.getCenter();
+    const currentZoom = map.current.getZoom();
+    const currentPitch = map.current.getPitch();
+    const currentBearing = map.current.getBearing();
+    
+    // Change style
+    map.current.setStyle(styleUrls[newStyle]);
+    
+    // Wait for style to load, then restore terrain and layers
+    map.current.once('style.load', () => {
+      // Re-enable 3D terrain
+      map.current.addSource('mapbox-dem', {
+        type: 'raster-dem',
+        url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+        tileSize: 512,
+        maxzoom: 14
+      });
+      map.current.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
+      
+      // Re-add ports data source
+      map.current.addSource('ports', {
+        type: 'geojson',
+        data: portsGeoJSON
+      });
+      
+      // Re-add port layers
+      map.current.addLayer({
+        id: 'port-circles',
+        type: 'circle',
+        source: 'ports',
+        paint: {
+          'circle-radius': 16,
+          'circle-color': ['get', 'color'],
+          'circle-stroke-width': 2.5,
+          'circle-stroke-color': '#ffffff',
+          'circle-opacity': 1
+        }
+      });
+      
+      map.current.addLayer({
+        id: 'port-labels',
+        type: 'symbol',
+        source: 'ports',
+        layout: {
+          'text-field': ['get', 'day'],
+          'text-font': ['DIN Pro Bold', 'Arial Unicode MS Bold'],
+          'text-size': 12,
+          'text-allow-overlap': true,
+          'text-ignore-placement': true
+        },
+        paint: {
+          'text-color': '#ffffff'
+        }
+      });
+      
+      // Restore view
+      map.current.flyTo({
+        center: currentCenter,
+        zoom: currentZoom,
+        pitch: currentPitch,
+        bearing: currentBearing,
+        duration: 0
+      });
+    });
+  };
+
   if (!apiConfig.mapbox.enabled || !apiConfig.mapbox.accessToken) {
     return (
       <div className="interactive-map-error">
@@ -320,6 +433,45 @@ function InteractiveItineraryMap({ itinerary, title }) {
     <div className="interactive-itinerary-map-container">
       <div className="interactive-itinerary-map-wrapper">
         <div ref={mapContainer} className="interactive-itinerary-map" />
+        
+        {/* Style Switcher */}
+        <div className="map-style-switcher">
+          <button 
+            className={`map-style-btn ${currentStyle === 'outdoors' ? 'active' : ''}`}
+            onClick={() => handleStyleChange('outdoors')}
+            title="Outdoors (Terrain)"
+          >
+            🗺️
+          </button>
+          <button 
+            className={`map-style-btn ${currentStyle === 'satellite' ? 'active' : ''}`}
+            onClick={() => handleStyleChange('satellite')}
+            title="Satellite View"
+          >
+            🛰️
+          </button>
+          <button 
+            className={`map-style-btn ${currentStyle === 'streets' ? 'active' : ''}`}
+            onClick={() => handleStyleChange('streets')}
+            title="Street Map"
+          >
+            📍
+          </button>
+          <button 
+            className={`map-style-btn ${currentStyle === 'light' ? 'active' : ''}`}
+            onClick={() => handleStyleChange('light')}
+            title="Light Mode"
+          >
+            ☀️
+          </button>
+          <button 
+            className={`map-style-btn ${currentStyle === 'dark' ? 'active' : ''}`}
+            onClick={() => handleStyleChange('dark')}
+            title="Dark Mode"
+          >
+            🌙
+          </button>
+        </div>
       </div>
       
       {/* Disclaimer - small text below map */}
