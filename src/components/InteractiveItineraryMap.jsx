@@ -75,9 +75,14 @@ function InteractiveItineraryMap({ itinerary, title }) {
       
       if (latDiff < 0.01 && lonDiff < 0.01) {
         // Round trip detected - combine first and last into one marker
+        // IMPORTANT: Don't create circular references by storing full objects
         first.type = 'round-trip';
         first.days = [first.day, last.day];
-        first.visits = [first, last];
+        // Only store the essential visit info, not full objects (avoids circular ref)
+        first.visits = [
+          { day: first.day, type: first.type === 'round-trip' ? 'embark' : (first.type || 'embark'), port: first.name },
+          { day: last.day, type: last.type || 'disembark', port: last.name }
+        ];
         first.isRoundTrip = true;
         
         // Remove the last port (duplicate)

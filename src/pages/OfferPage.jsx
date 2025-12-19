@@ -184,8 +184,8 @@ function OfferPage() {
 
   // Breadcrumb items
   const breadcrumbItems = [
-    { label: 'Offers', to: '/offers' },
-    { label: offer.title }
+    { label: 'Offers', path: '/offers' },
+    { label: offer.title || 'Offer' }
   ];
 
   // Structured Data for SEO (V2 Enhanced)
