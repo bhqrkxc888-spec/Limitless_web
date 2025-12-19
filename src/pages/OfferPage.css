@@ -430,9 +430,11 @@
 
 .offer-content-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 3fr 1fr; /* Changed from 2fr 1fr - narrower sidebar */
   gap: var(--space-12);
   align-items: start;
+  max-width: 1600px; /* Slightly wider container */
+  margin: 0 auto;
 }
 
 .offer-main-content {

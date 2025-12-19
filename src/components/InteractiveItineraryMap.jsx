@@ -111,11 +111,11 @@ function InteractiveItineraryMap({ itinerary, title }) {
     const port = ports[index];
     setCurrentPortIndex(index);
     
-    // Fly to the port
+    // Fly to the port - slower, smoother animation
     map.current.flyTo({
       center: [port.lon, port.lat],
       zoom: 10,
-      duration: 1500,
+      duration: 2500, // Increased from 1500ms to 2500ms for smoother transition
       essential: true
     });
     
@@ -189,7 +189,7 @@ function InteractiveItineraryMap({ itinerary, title }) {
     
     map.current.fitBounds(bounds, {
       padding: { top: 80, bottom: 80, left: 80, right: 80 },
-      duration: 1500
+      duration: 2000 // Increased from 1500ms for smoother transition
     });
   };
 
@@ -268,9 +268,6 @@ function InteractiveItineraryMap({ itinerary, title }) {
       showCompass: true,
       visualizePitch: true 
     }), 'top-right');
-
-    // Add fullscreen control
-    map.current.addControl(new mapboxgl.FullscreenControl(), 'top-right');
 
     // Wait for map to load before adding layers
     map.current.on('load', () => {
@@ -457,7 +454,7 @@ function InteractiveItineraryMap({ itinerary, title }) {
         expandedMap.current.flyTo({
           center: coords,
           zoom: 11,
-          duration: 1500
+          duration: 2500 // Smoother animation
         });
         
         const days = props.days ? JSON.parse(props.days) : [props.day];
