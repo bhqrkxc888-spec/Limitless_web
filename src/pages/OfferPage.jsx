@@ -12,6 +12,7 @@ import AirportPricingList from '../components/AirportPricingTable';
 import OnboardCreditBadge from '../components/OnboardCreditBadge';
 import SoloTravellerInfo from '../components/SoloTravellerInfo';
 import OptimizedImage from '../components/OptimizedImage';
+import InteractiveItineraryMap from '../components/InteractiveItineraryMap';
 import { useEffect, useMemo, useState } from 'react';
 import './OfferPage.css';
 
@@ -704,14 +705,12 @@ function OfferPage() {
                     <p className="offer-itinerary-summary">{offer.itinerary_summary}</p>
                   )}
                   
-                  {/* Itinerary Map */}
-                  {offer.show_itinerary_map !== false && offer.itinerary_map_url && (
+                  {/* Interactive Itinerary Map */}
+                  {offer.show_itinerary_map !== false && offer.itinerary_detailed && offer.itinerary_detailed.length > 0 && (
                     <div className="offer-itinerary-map">
-                      <OptimizedImage
-                        src={offer.itinerary_map_url}
-                        alt={`${offer.title} cruise route map`}
-                        className="offer-itinerary-map__image"
-                        loading="lazy"
+                      <InteractiveItineraryMap 
+                        itinerary={offer.itinerary_detailed}
+                        title={offer.title}
                       />
                     </div>
                   )}

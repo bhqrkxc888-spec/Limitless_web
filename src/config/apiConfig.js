@@ -20,6 +20,13 @@ export const apiConfig = {
     apiKey: import.meta.env.VITE_STORMGLASS_API_KEY || '',
     baseUrl: 'https://api.stormglass.io/v2',
     enabled: !!import.meta.env.VITE_STORMGLASS_API_KEY
+  },
+
+  // Mapbox API - Interactive maps
+  mapbox: {
+    accessToken: import.meta.env.VITE_MAPBOX_TOKEN || 'pk.eyJ1IjoiZGFuZWxhd3RvbiIsImEiOiJjbWpiNHM2b3EwNm10M2dyNjJ3eTA0ZHJyIn0.ltnRWBhmfiriKIsmGozQtw',
+    style: 'mapbox://styles/mapbox/outdoors-v12',
+    enabled: true
   }
 };
 
