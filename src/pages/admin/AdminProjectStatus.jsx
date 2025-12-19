@@ -428,15 +428,6 @@ const projectSections = [
         approved: true,
         notes: 'This page - project overview and requirements',
         requirements: []
-      },
-      {
-        name: 'Image Upload (Vercel Blob)',
-        path: '/admin/image-upload',
-        status: 'COMPLETE',
-        tested: true,
-        approved: true,
-        notes: 'Upload website images to Vercel Blob Storage',
-        requirements: []
       }
     ]
   }
@@ -602,22 +593,6 @@ const contentRequirements = {
         dimensions: 'N/A',
         location: 'N/A',
         notes: 'Image optimization system has been updated to work with Vercel Blob.',
-        examples: []
-      }
-    },
-    { 
-      id: 'admin-upload-tool',
-      priority: 'complete', 
-      desc: '✅ Admin Image Upload tool created for Vercel Blob', 
-      section: 'Admin Tools', 
-      status: 'complete',
-      details: {
-        count: 1,
-        completed: 1,
-        format: 'N/A',
-        dimensions: 'N/A',
-        location: '/admin/image-upload',
-        notes: 'Admin tool for uploading images to Vercel Blob is available.',
         examples: []
       }
     },

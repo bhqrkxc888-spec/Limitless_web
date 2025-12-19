@@ -74,10 +74,10 @@ const AdminErrors = lazy(() => import('./pages/admin/AdminErrors'))
 const AdminPerformance = lazy(() => import('./pages/admin/AdminPerformance'))
 const AdminSEO = lazy(() => import('./pages/admin/AdminSEO'))
 const AdminProjectStatus = lazy(() => import('./pages/admin/AdminProjectStatus'))
-const AdminImageUpload = lazy(() => import('./pages/admin/AdminImageUpload'))
 const AdminDestinationHeroes = lazy(() => import('./pages/admin/AdminDestinationHeroes'))
 const AdminWebsiteAssets = lazy(() => import('./pages/admin/AdminWebsiteAssets'))
 const AdminWebsiteDestinations = lazy(() => import('./pages/admin/AdminWebsiteDestinations'))
+const AdminOffersDebug = lazy(() => import('./pages/admin/AdminOffersDebug'))
 
 // Legal Pages
 const WebsiteTerms = lazy(() => import('./pages/WebsiteTerms'))
@@ -132,7 +132,6 @@ function AppLayout() {
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/project-status" element={<AdminProjectStatus />} />
-          <Route path="/admin/image-upload" element={<AdminImageUpload />} />
           <Route path="/admin/destination-heroes" element={<AdminDestinationHeroes />} />
           <Route path="/admin/errors" element={<AdminErrors />} />
           <Route path="/admin/performance" element={<AdminPerformance />} />
@@ -140,6 +139,7 @@ function AppLayout() {
           {/* Admin Website Section */}
           <Route path="/admin/website/assets" element={<AdminWebsiteAssets />} />
           <Route path="/admin/website/destinations" element={<AdminWebsiteDestinations />} />
+          <Route path="/admin/offers/debug" element={<AdminOffersDebug />} />
         </Routes>
       </Suspense>
     );

@@ -24,6 +24,7 @@ function PortsWeatherCarousel({ ports, title, onPortChange, selectedPort = null 
   const intervalRef = useRef(null);
   const userInteractionRef = useRef(false); // Track if user has manually interacted
   const prevPortsRef = useRef(ports);
+  const internalChangeRef = useRef(false); // Track if WE initiated the change (prevents loop)
 
   // Compute visible ports using useMemo (derived state)
   const visiblePorts = useMemo(() => {
@@ -59,7 +60,14 @@ function PortsWeatherCarousel({ ports, title, onPortChange, selectedPort = null 
   }, [ports]);
 
   // Sync with externally selected port (from attractions filter)
+  // Skip if WE just made the change (prevents infinite loop)
   useEffect(() => {
+    // Skip if we initiated this change ourselves
+    if (internalChangeRef.current) {
+      internalChangeRef.current = false;
+      return;
+    }
+    
     if (selectedPort && visiblePorts.length > 0) {
       const portIndex = visiblePorts.findIndex(p => p.name === selectedPort.name || p.id === selectedPort.id);
       if (portIndex !== -1 && portIndex !== currentIndex) {
@@ -90,6 +98,7 @@ function PortsWeatherCarousel({ ports, title, onPortChange, selectedPort = null 
   // Manual navigation - stop auto-rotation when user interacts
   const goToNext = () => {
     userInteractionRef.current = true;
+    internalChangeRef.current = true; // Mark that we're making an internal change
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
@@ -98,6 +107,7 @@ function PortsWeatherCarousel({ ports, title, onPortChange, selectedPort = null 
 
   const goToPrev = () => {
     userInteractionRef.current = true;
+    internalChangeRef.current = true; // Mark that we're making an internal change
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }
@@ -106,6 +116,7 @@ function PortsWeatherCarousel({ ports, title, onPortChange, selectedPort = null 
 
   const goToPort = (index) => {
     userInteractionRef.current = true;
+    internalChangeRef.current = true; // Mark that we're making an internal change
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
     }

@@ -87,15 +87,10 @@ function AdminDestinationHeroes() {
         <ol>
           <li>Generate or source high-quality images for each destination (1920×1080)</li>
           <li>Name them exactly as shown below (e.g., <code>caribbean-HERO.jpg</code>)</li>
-          <li>Upload to Vercel Blob at path: <code>destinations/{'{'}filename{'}'}</code></li>
-          <li>Use the <a href="/admin/image-upload">Image Upload Tool</a> or upload directly to Vercel</li>
+          <li>Upload directly to Vercel Blob at path: <code>destinations/{'{'}filename{'}'}</code></li>
           <li>Click "Refresh Status" to update the checklist</li>
         </ol>
         <div className="instruction-links">
-          <a href="/admin/image-upload" className="btn-link">
-            <Upload size={16} />
-            Go to Image Upload Tool
-          </a>
           <button onClick={checkUploadedImages} className="btn-refresh" disabled={checkingImages}>
             {checkingImages ? 'Checking...' : 'Refresh Status'}
           </button>
