@@ -7,6 +7,7 @@
 
 import { Link } from 'react-router-dom';
 import './Breadcrumbs.css';
+import { safeStringify } from '../utils/safeStringify';
 
 function Breadcrumbs({ items = [] }) {
   // Don't render if no items or only one item (homepage)
@@ -55,7 +56,7 @@ function Breadcrumbs({ items = [] }) {
         </ol>
       </nav>
       <script type="application/ld+json">
-        {JSON.stringify(structuredData)}
+        {safeStringify(structuredData)}
       </script>
     </>
   );

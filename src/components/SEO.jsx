@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { siteConfig } from '../config/siteConfig';
+import { safeStringify } from '../utils/safeStringify';
 import { getSEOPolicy } from '../utils/seoPolicy';
 import { SITE_ASSETS } from '../config/assetUrls';
 
@@ -177,7 +178,7 @@ function SEO({
         const script = document.createElement('script');
         script.type = 'application/ld+json';
         script.setAttribute('data-dynamic', 'true');
-        script.textContent = JSON.stringify(data);
+        script.textContent = safeStringify(data);
         document.head.appendChild(script);
         createdElements.push(script);
       });
@@ -218,7 +219,7 @@ function SEO({
             key={`json-ld-${index}`}
             type="application/ld+json"
             data-dynamic="true"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+            dangerouslySetInnerHTML={{ __html: safeStringify(data) }}
           />
         ))}
       </>

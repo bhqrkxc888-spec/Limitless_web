@@ -4,6 +4,7 @@
  */
 
 import { logError } from '../services/errorTracking';
+import { safeStringify } from './safeStringify';
 
 const isDevelopment = import.meta.env.DEV;
 
@@ -20,7 +21,7 @@ export const logger = {
     } else {
       // In production, log warnings to Supabase
       const message = args.map(arg => 
-        typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+        typeof arg === 'object' ? safeStringify(arg) : String(arg)
       ).join(' ');
       logError(message, { 
         errorType: 'javascript', 
@@ -39,7 +40,7 @@ export const logger = {
       const error = args[0] instanceof Error 
         ? args[0] 
         : new Error(args.map(arg => 
-            typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+            typeof arg === 'object' ? safeStringify(arg) : String(arg)
           ).join(' '));
       
       logError(error, { 

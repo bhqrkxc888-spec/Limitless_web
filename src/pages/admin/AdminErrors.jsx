@@ -17,6 +17,7 @@ import {
 import { supabase } from '../../lib/supabase';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
+import { safeStringify } from '../../utils/safeStringify';
 
 function AdminErrors() {
   const navigate = useNavigate();
@@ -596,10 +597,10 @@ function AdminErrors() {
                                   </div>
                                 )}
                                 {error.context && Object.keys(error.context).length > 0 && (
-                                  <div className="admin-error-detail">
-                                    <strong>Context:</strong>
-                                    <pre className="admin-stack-trace">{JSON.stringify(error.context, null, 2)}</pre>
-                                  </div>
+                                <div className="admin-error-detail">
+                                  <strong>Context:</strong>
+                                  <pre className="admin-stack-trace">{safeStringify(error.context, 2)}</pre>
+                                </div>
                                 )}
                               </div>
                             </div>

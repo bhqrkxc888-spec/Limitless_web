@@ -190,10 +190,12 @@ function OfferPage() {
 
   // Structured Data for SEO (V2 Enhanced)
   const structuredData = useMemo(() => {
+    if (!offer) return null;
+    
     const data = {
       '@context': 'https://schema.org',
       '@type': 'Product',
-      name: offer.title,
+      name: offer.title || '',
       description: offer.short_description || '',
       url: `https://limitlesscruises.com/offers/${offer.slug}`,
       category: 'Travel Package',
@@ -203,7 +205,7 @@ function OfferPage() {
       },
       offers: {
         '@type': 'Offer',
-        price: getDisplayPrice(offer),
+        price: getDisplayPrice(offer) || 0,
         priceCurrency: offer.currency || 'GBP',
         availability: 'https://schema.org/InStock',
         priceValidUntil: offer.expires_at || defaultPriceValidUntil,
@@ -213,11 +215,22 @@ function OfferPage() {
 
     // Add images if available
     if (galleryImages.length > 0) {
-      data.image = galleryImages.map(img => img.url);
+      data.image = galleryImages.map(img => img.url).filter(Boolean);
     }
 
     return data;
-  }, [offer, galleryImages, defaultPriceValidUntil]);
+  }, [
+    offer?.title,
+    offer?.short_description,
+    offer?.slug,
+    offer?.cruise_line_name,
+    offer?.currency,
+    offer?.expires_at,
+    offer?.price_from,
+    offer?.airport_prices,
+    galleryImages,
+    defaultPriceValidUntil
+  ]);
 
   const savingsDisplay = offer.savings_percentage
     ? `${offer.savings_percentage}%`
