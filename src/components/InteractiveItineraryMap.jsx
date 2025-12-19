@@ -107,10 +107,10 @@ function InteractiveItineraryMap({ itinerary, title }) {
     const port = ports[index];
     setCurrentPortIndex(index);
     
-    // Fly to the port - slower, smoother animation
+    // Fly to the port - slower, smoother animation with less zoom
     map.current.flyTo({
       center: [port.lon, port.lat],
-      zoom: 10,
+      zoom: 7, // Reduced from 10 to 7 for less aggressive zoom
       duration: 2500, // Increased from 1500ms to 2500ms for smoother transition
       essential: true
     });
@@ -154,30 +154,59 @@ function InteractiveItineraryMap({ itinerary, title }) {
 
   // Navigation handlers
   const goToPrevPort = (e) => {
-    e?.preventDefault();
-    e?.stopPropagation();
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    
+    // Prevent page scroll by storing and restoring scroll position
+    const scrollY = window.scrollY;
+    const scrollX = window.scrollX;
+    
     if (currentPortIndex === null) {
       navigateToPort(ports.length - 1); // Start from end
     } else if (currentPortIndex > 0) {
       navigateToPort(currentPortIndex - 1);
     }
+    
+    // Restore scroll position immediately
+    window.scrollTo(scrollX, scrollY);
+    return false;
   };
 
   const goToNextPort = (e) => {
-    e?.preventDefault();
-    e?.stopPropagation();
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    
+    // Prevent page scroll by storing and restoring scroll position
+    const scrollY = window.scrollY;
+    const scrollX = window.scrollX;
+    
     if (currentPortIndex === null) {
       navigateToPort(0); // Start from beginning
     } else if (currentPortIndex < ports.length - 1) {
       navigateToPort(currentPortIndex + 1);
     }
+    
+    // Restore scroll position immediately
+    window.scrollTo(scrollX, scrollY);
+    return false;
   };
 
   // Reset view to show all ports
   const resetView = (e) => {
-    e?.preventDefault();
-    e?.stopPropagation();
-    if (!map.current || ports.length === 0) return;
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    
+    // Prevent page scroll by storing and restoring scroll position
+    const scrollY = window.scrollY;
+    const scrollX = window.scrollX;
+    
+    if (!map.current || ports.length === 0) return false;
     
     setCurrentPortIndex(null);
     if (popup.current) popup.current.remove();
@@ -193,6 +222,10 @@ function InteractiveItineraryMap({ itinerary, title }) {
       padding: { top: 80, bottom: 80, left: 80, right: 80 },
       duration: 2000 // Increased from 1500ms for smoother transition
     });
+    
+    // Restore scroll position immediately
+    window.scrollTo(scrollX, scrollY);
+    return false;
   };
 
   // Create GeoJSON for ports
@@ -530,16 +563,15 @@ function InteractiveItineraryMap({ itinerary, title }) {
               Next →
             </button>
             
-            {currentPortIndex !== null && (
-              <button 
-                type="button"
-                className="map-nav-btn map-nav-reset"
-                onClick={resetView}
-                title="Show All Ports"
-              >
-                ⟲
-              </button>
-            )}
+            <button 
+              type="button"
+              className="map-nav-btn map-nav-reset"
+              onClick={resetView}
+              disabled={currentPortIndex === null}
+              title="Reset to Full View"
+            >
+              ⟲ Reset
+            </button>
           </div>
         </div>
       </div>

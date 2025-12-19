@@ -18,7 +18,8 @@
 .interactive-itinerary-map-wrapper {
   position: relative;
   width: 100%;
-  height: 600px;
+  height: 700px;
+  scroll-margin-top: 100px; /* Prevent scroll jumping */
 }
 
 .interactive-itinerary-map {
@@ -33,10 +34,23 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Prevent map canvas from causing scroll on focus */
+.interactive-itinerary-map canvas {
+  outline: none;
+}
+
+.interactive-itinerary-map .mapboxgl-canvas-container {
+  outline: none;
+}
+
+.interactive-itinerary-map .mapboxgl-canvas {
+  outline: none;
+}
+
 /* Responsive height */
 @media (max-width: 768px) {
   .interactive-itinerary-map {
-    height: 450px;
+    height: 550px;
   }
 }
 
