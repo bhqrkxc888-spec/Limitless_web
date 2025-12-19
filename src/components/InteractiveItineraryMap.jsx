@@ -21,7 +21,7 @@ function InteractiveItineraryMap({ itinerary, title }) {
   const [selectedPort, setSelectedPort] = useState(null);
   const popup = useRef(null);
 
-  // Filter and enrich itinerary data - offset duplicate coordinates
+  // Filter and enrich itinerary data - combine round-trip ports
   const ports = useMemo(() => {
     if (!Array.isArray(itinerary)) {
       console.warn('InteractiveItineraryMap: itinerary is not an array', itinerary);
@@ -41,37 +41,62 @@ function InteractiveItineraryMap({ itinerary, title }) {
       console.error('InteractiveItineraryMap: No ports have coordinates!', itinerary);
     }
     
-    // Track coordinate usage to apply small offset for duplicates (round-trip cruises)
-    const coordCounts = new Map();
+    // Group by coordinates to detect round-trip ports
+    const portGroups = new Map();
     
-    return filtered.map((item, index) => {
+    filtered.forEach((item, index) => {
       const lat = parseFloat(item.lat);
       const lon = parseFloat(item.lon);
       const coordKey = `${lat.toFixed(4)},${lon.toFixed(4)}`;
       
-      // Check if we've seen this coordinate before
-      const count = coordCounts.get(coordKey) || 0;
-      coordCounts.set(coordKey, count + 1);
-      
-      // Apply tiny offset for duplicates (0.002° ≈ 220m, visible on map but close)
-      const offsetLat = lat + (count * 0.002);
-      const offsetLon = lon + (count * 0.002);
-      
-      return {
+      const enriched = {
         ...item,
         index,
         day: item.day || index + 1,
         name: item.port || item.location || `Port ${index + 1}`,
-        lat: offsetLat,
-        lon: offsetLon,
-        type: item.type || 'port',
-        isOffset: count > 0 // Flag to know if this was offset
+        lat,
+        lon,
+        type: item.type || 'port'
       };
+      
+      if (portGroups.has(coordKey)) {
+        // Same location - combine into array
+        portGroups.get(coordKey).push(enriched);
+      } else {
+        portGroups.set(coordKey, [enriched]);
+      }
     });
+    
+    // Convert groups to display ports
+    const result = [];
+    portGroups.forEach(group => {
+      if (group.length === 1) {
+        // Single visit - show as normal
+        result.push(group[0]);
+      } else {
+        // Multiple visits (round-trip) - combine into one marker
+        const types = group.map(p => p.type);
+        const days = group.map(p => p.day);
+        const isRoundTrip = types.includes('embark') && types.includes('disembark');
+        
+        result.push({
+          ...group[0], // Use first instance as base
+          type: isRoundTrip ? 'round-trip' : group[0].type,
+          days: days.sort((a, b) => a - b), // All days sorted
+          visits: group, // All visit details
+          isRoundTrip
+        });
+      }
+    });
+    
+    return result;
   }, [itinerary]);
 
-  // Get marker color based on position
+  // Get marker color based on type
   const getMarkerColor = (port, index) => {
+    if (port.type === 'round-trip') {
+      return '#9333ea'; // Purple - Round-trip (start & finish)
+    }
     if (index === 0 || port.type === 'embark' || port.type === 'embarkation') {
       return '#22c55e'; // Green - Start
     }
@@ -94,14 +119,17 @@ function InteractiveItineraryMap({ itinerary, title }) {
           coordinates: [port.lon, port.lat]
         },
         properties: {
-          id: `port-${port.day}`,
-          day: port.day,
+          id: `port-${port.days ? port.days[0] : port.day}`,
+          day: port.days ? port.days[0] : port.day, // Use first day for display
           name: port.name,
           type: port.type,
           color: getMarkerColor(port, index),
           description: port.description || '',
           country: port.country || '',
-          index
+          index,
+          // For round-trip ports, include all days and visits
+          days: port.days ? JSON.stringify(port.days) : null,
+          visits: port.visits ? JSON.stringify(port.visits) : null
         }
       }))
     };
@@ -151,21 +179,21 @@ function InteractiveItineraryMap({ itinerary, title }) {
         data: portsGeoJSON
       });
 
-      // Add circles for port markers
+      // Add circles for port markers (smaller size)
       map.current.addLayer({
         id: 'port-circles',
         type: 'circle',
         source: 'ports',
         paint: {
-          'circle-radius': 20,
+          'circle-radius': 16,
           'circle-color': ['get', 'color'],
-          'circle-stroke-width': 3,
+          'circle-stroke-width': 2.5,
           'circle-stroke-color': '#ffffff',
           'circle-opacity': 1
         }
       });
 
-      // Add text labels for day numbers
+      // Add text labels for day numbers (smaller text)
       map.current.addLayer({
         id: 'port-labels',
         type: 'symbol',
@@ -173,7 +201,7 @@ function InteractiveItineraryMap({ itinerary, title }) {
         layout: {
           'text-field': ['get', 'day'],
           'text-font': ['DIN Pro Bold', 'Arial Unicode MS Bold'],
-          'text-size': 14,
+          'text-size': 12,
           'text-allow-overlap': true,
           'text-ignore-placement': true
         },
@@ -205,22 +233,45 @@ function InteractiveItineraryMap({ itinerary, title }) {
         const props = feature.properties;
         const coords = feature.geometry.coordinates.slice();
         
-        // Build clean popup content
-        let popupHTML = `
-          <div class="port-popup-content">
-            <div class="port-popup-day">Day ${props.day}</div>
-            <div class="port-popup-name">${props.name}</div>
-        `;
+        // Parse days and visits if this is a round-trip port
+        const days = props.days ? JSON.parse(props.days) : [props.day];
+        const visits = props.visits ? JSON.parse(props.visits) : null;
         
-        // Show type badge
-        if (props.type === 'embark' || props.type === 'embarkation') {
-          popupHTML += '<div class="port-popup-badge embark">Embarkation Port</div>';
-        } else if (props.type === 'disembark' || props.type === 'disembarkation') {
-          popupHTML += '<div class="port-popup-badge disembark">Disembarkation Port</div>';
+        // Build popup content
+        let popupHTML = `<div class="port-popup-content">`;
+        
+        // Day badge
+        if (days.length > 1) {
+          popupHTML += `<div class="port-popup-day">Days ${days.join(', ')}</div>`;
+        } else {
+          popupHTML += `<div class="port-popup-day">Day ${days[0]}</div>`;
         }
         
-        if (props.description) {
-          popupHTML += `<div class="port-popup-description">${props.description}</div>`;
+        // Port name
+        popupHTML += `<div class="port-popup-name">${props.name}</div>`;
+        
+        // Round-trip details
+        if (props.type === 'round-trip' && visits) {
+          popupHTML += '<div class="port-popup-badge round-trip">Round-Trip Port</div>';
+          popupHTML += '<div class="port-popup-description">';
+          visits.forEach(visit => {
+            const typeLabel = visit.type === 'embark' ? 'Embarkation' : 
+                             visit.type === 'disembark' ? 'Disembarkation' : 
+                             visit.port?.includes('overnight') ? 'Overnight stay' : 'Port of call';
+            popupHTML += `<div>• Day ${visit.day}: ${typeLabel}</div>`;
+          });
+          popupHTML += '</div>';
+        } else {
+          // Single visit - show type badge
+          if (props.type === 'embark' || props.type === 'embarkation') {
+            popupHTML += '<div class="port-popup-badge embark">Embarkation Port</div>';
+          } else if (props.type === 'disembark' || props.type === 'disembarkation') {
+            popupHTML += '<div class="port-popup-badge disembark">Disembarkation Port</div>';
+          }
+          
+          if (props.description) {
+            popupHTML += `<div class="port-popup-description">${props.description}</div>`;
+          }
         }
         
         popupHTML += `</div>`;

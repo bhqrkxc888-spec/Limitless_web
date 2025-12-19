@@ -109,6 +109,11 @@
   color: #991b1b;
 }
 
+.port-popup-badge.round-trip {
+  background: #f3e8ff;
+  color: #6b21a8;
+}
+
 .port-popup-name {
   font-size: 18px;
   font-weight: 700;
