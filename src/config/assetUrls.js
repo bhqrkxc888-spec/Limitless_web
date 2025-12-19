@@ -17,7 +17,7 @@ export const BLOB_BASE = 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.co
 
 export const SITE_ASSETS = {
   // Homepage hero image (16:9, 1920x1080+)
-  homeHero: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/home-hero.webp',
+  homeHero: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/HERO-home.webp',
   
   // Social share image for Facebook/Twitter/LinkedIn (1200x630)
   ogImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/OG.webp',

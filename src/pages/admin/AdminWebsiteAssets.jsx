@@ -197,7 +197,7 @@ function AdminWebsiteAssets() {
             <tbody>
               {activeTab === 'site' && (
                 <>
-                  {renderAssetRow('Home Page Hero', SITE_ASSETS.homeHero, 'site/home-hero.webp')}
+                  {renderAssetRow('Home Page Hero', SITE_ASSETS.homeHero, 'site/HERO-home.webp')}
                   {renderAssetRow('Social Share (OG)', SITE_ASSETS.ogImage, 'site/og-image.webp')}
                   {renderAssetRow('Site Logo', SITE_ASSETS.logo, 'site/logo.webp')}
                   {renderAssetRow('Favicon', SITE_ASSETS.favicon, 'site/favicon.png')}
