@@ -924,43 +924,6 @@ function OfferPage() {
               />
             </div>
 
-            {/* Quick Info Summary */}
-            <div className="offer-enquiry-summary-card">
-              <h3>Offer Summary</h3>
-                <dl className="offer-summary-list">
-                  {offer.offer_type && (
-                    <>
-                      <dt>Type</dt>
-                      <dd>{getOfferTypeLabel(offer.offer_type)}</dd>
-                    </>
-                  )}
-                  {offer.category && (
-                    <>
-                      <dt>Category</dt>
-                      <dd>{offer.category.charAt(0).toUpperCase() + offer.category.slice(1)}</dd>
-                    </>
-                  )}
-                  {offer.cabin_type && (
-                    <>
-                      <dt>Cabin</dt>
-                      <dd>{offer.cabin_type.charAt(0).toUpperCase() + offer.cabin_type.slice(1)}</dd>
-                    </>
-                  )}
-                  {offer.departure_date && offer.return_date && (
-                    <>
-                      <dt>Travel Dates</dt>
-                      <dd>{formatShortDate(offer.departure_date)} - {formatShortDate(offer.return_date)}</dd>
-                    </>
-                  )}
-                  {offer.published_at && (
-                    <>
-                      <dt>Listed</dt>
-                      <dd>{formatShortDate(offer.published_at)}</dd>
-                    </>
-                  )}
-                </dl>
-            </div>
-
             {/* Contact CTA */}
             <div className="offer-enquiry-cta-card">
               <h3>Prefer to Speak Directly?</h3>

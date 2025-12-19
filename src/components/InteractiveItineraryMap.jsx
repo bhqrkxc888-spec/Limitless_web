@@ -20,14 +20,10 @@ import './InteractiveItineraryMap.css';
 
 function InteractiveItineraryMap({ itinerary, title }) {
   const mapContainer = useRef(null);
-  const expandedMapContainer = useRef(null);
   const map = useRef(null);
-  const expandedMap = useRef(null);
   const [currentPortIndex, setCurrentPortIndex] = useState(null); // Track current port for navigation
   const [currentStyle, setCurrentStyle] = useState('outdoors');
-  const [isExpanded, setIsExpanded] = useState(false); // Track expanded/modal mode
   const popup = useRef(null);
-  const expandedPopup = useRef(null);
 
   // Filter and enrich itinerary data - handle round-trips properly
   const ports = useMemo(() => {
@@ -157,7 +153,9 @@ function InteractiveItineraryMap({ itinerary, title }) {
   };
 
   // Navigation handlers
-  const goToPrevPort = () => {
+  const goToPrevPort = (e) => {
+    e?.preventDefault();
+    e?.stopPropagation();
     if (currentPortIndex === null) {
       navigateToPort(ports.length - 1); // Start from end
     } else if (currentPortIndex > 0) {
@@ -165,7 +163,9 @@ function InteractiveItineraryMap({ itinerary, title }) {
     }
   };
 
-  const goToNextPort = () => {
+  const goToNextPort = (e) => {
+    e?.preventDefault();
+    e?.stopPropagation();
     if (currentPortIndex === null) {
       navigateToPort(0); // Start from beginning
     } else if (currentPortIndex < ports.length - 1) {
@@ -174,7 +174,9 @@ function InteractiveItineraryMap({ itinerary, title }) {
   };
 
   // Reset view to show all ports
-  const resetView = () => {
+  const resetView = (e) => {
+    e?.preventDefault();
+    e?.stopPropagation();
     if (!map.current || ports.length === 0) return;
     
     setCurrentPortIndex(null);
@@ -357,140 +359,6 @@ function InteractiveItineraryMap({ itinerary, title }) {
     };
   }, [ports, portsGeoJSON, apiConfig.mapbox.enabled, apiConfig.mapbox.accessToken, apiConfig.mapbox.style]);
 
-  // Initialize expanded map when modal opens
-  useEffect(() => {
-    if (!isExpanded || !expandedMapContainer.current || expandedMap.current) return;
-    if (!apiConfig.mapbox.enabled || !apiConfig.mapbox.accessToken) return;
-    if (ports.length === 0) return;
-
-    mapboxgl.accessToken = apiConfig.mapbox.accessToken;
-
-    // Calculate bounds
-    const lats = ports.map(p => p.lat);
-    const lons = ports.map(p => p.lon);
-    const bounds = [
-      [Math.min(...lons), Math.min(...lats)],
-      [Math.max(...lons), Math.max(...lats)]
-    ];
-
-    // Initialize expanded map
-    expandedMap.current = new mapboxgl.Map({
-      container: expandedMapContainer.current,
-      style: `mapbox://styles/mapbox/${currentStyle}-v${currentStyle === 'outdoors' ? '12' : currentStyle === 'streets' ? '12' : '11'}`,
-      bounds: bounds,
-      fitBoundsOptions: {
-        padding: { top: 100, bottom: 100, left: 100, right: 100 }
-      }
-    });
-
-    expandedMap.current.addControl(new mapboxgl.NavigationControl({ 
-      showCompass: true,
-      visualizePitch: true 
-    }), 'top-right');
-
-    expandedMap.current.on('load', () => {
-      // Add terrain
-      expandedMap.current.addSource('mapbox-dem', {
-        type: 'raster-dem',
-        url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
-        tileSize: 512,
-        maxzoom: 14
-      });
-      expandedMap.current.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
-
-      // Add ports
-      expandedMap.current.addSource('ports', {
-        type: 'geojson',
-        data: portsGeoJSON
-      });
-
-      expandedMap.current.addLayer({
-        id: 'port-circles',
-        type: 'circle',
-        source: 'ports',
-        paint: {
-          'circle-radius': 20,
-          'circle-color': ['get', 'color'],
-          'circle-stroke-width': 3,
-          'circle-stroke-color': '#ffffff'
-        }
-      });
-
-      expandedMap.current.addLayer({
-        id: 'port-labels',
-        type: 'symbol',
-        source: 'ports',
-        layout: {
-          'text-field': ['get', 'day'],
-          'text-font': ['DIN Pro Bold', 'Arial Unicode MS Bold'],
-          'text-size': 14
-        },
-        paint: {
-          'text-color': '#ffffff'
-        }
-      });
-
-      // Add popup
-      expandedPopup.current = new mapboxgl.Popup({
-        closeButton: true,
-        closeOnClick: false,
-        className: 'port-popup',
-        maxWidth: '300px'
-      });
-
-      expandedMap.current.on('mouseenter', 'port-circles', () => {
-        expandedMap.current.getCanvas().style.cursor = 'pointer';
-      });
-
-      expandedMap.current.on('mouseleave', 'port-circles', () => {
-        expandedMap.current.getCanvas().style.cursor = '';
-      });
-
-      expandedMap.current.on('click', 'port-circles', (e) => {
-        const feature = e.features[0];
-        const props = feature.properties;
-        const coords = feature.geometry.coordinates.slice();
-        
-        expandedMap.current.flyTo({
-          center: coords,
-          zoom: 11,
-          duration: 2500 // Smoother animation
-        });
-        
-        const days = props.days ? JSON.parse(props.days) : [props.day];
-        const visits = props.visits ? JSON.parse(props.visits) : null;
-        
-        let popupHTML = `<div class="port-popup-content">`;
-        if (days.length > 1) {
-          popupHTML += `<div class="port-popup-day">Days ${days.join(', ')}</div>`;
-        } else {
-          popupHTML += `<div class="port-popup-day">Day ${days[0]}</div>`;
-        }
-        popupHTML += `<div class="port-popup-name">${props.name}</div>`;
-        if (props.description) {
-          popupHTML += `<div class="port-popup-description">${props.description}</div>`;
-        }
-        popupHTML += `</div>`;
-        
-        expandedPopup.current
-          .setLngLat(coords)
-          .setHTML(popupHTML)
-          .addTo(expandedMap.current);
-      });
-    });
-
-    // Cleanup when modal closes
-    return () => {
-      if (expandedPopup.current) {
-        expandedPopup.current.remove();
-      }
-      if (expandedMap.current) {
-        expandedMap.current.remove();
-        expandedMap.current = null;
-      }
-    };
-  }, [isExpanded, ports, portsGeoJSON, currentStyle, apiConfig.mapbox.enabled, apiConfig.mapbox.accessToken]);
-
   // Handle style changes
   const handleStyleChange = (newStyle) => {
     if (!map.current) return;
@@ -594,22 +462,13 @@ function InteractiveItineraryMap({ itinerary, title }) {
   }
 
   return (
-    <>
     <div className="interactive-itinerary-map-container">
       <div className="interactive-itinerary-map-wrapper">
         <div ref={mapContainer} className="interactive-itinerary-map">
-          {/* Expand Map Button - Top Right */}
-          <button 
-            className="map-expand-btn"
-            onClick={() => setIsExpanded(true)}
-            title="Expand Map"
-          >
-            ⛶
-          </button>
-
           {/* Style Switcher - Inside map container for fullscreen access */}
           <div className="map-style-switcher">
             <button 
+              type="button"
               className={`map-style-btn ${currentStyle === 'outdoors' ? 'active' : ''}`}
               onClick={() => handleStyleChange('outdoors')}
               title="Outdoors (Terrain)"
@@ -617,6 +476,7 @@ function InteractiveItineraryMap({ itinerary, title }) {
               🗺️
             </button>
             <button 
+              type="button"
               className={`map-style-btn ${currentStyle === 'satellite' ? 'active' : ''}`}
               onClick={() => handleStyleChange('satellite')}
               title="Satellite View"
@@ -624,6 +484,7 @@ function InteractiveItineraryMap({ itinerary, title }) {
               🛰️
             </button>
             <button 
+              type="button"
               className={`map-style-btn ${currentStyle === 'streets' ? 'active' : ''}`}
               onClick={() => handleStyleChange('streets')}
               title="Street Map"
@@ -635,6 +496,7 @@ function InteractiveItineraryMap({ itinerary, title }) {
           {/* Port Navigation - Bottom of map */}
           <div className="map-port-navigation">
             <button 
+              type="button"
               className="map-nav-btn"
               onClick={goToPrevPort}
               disabled={currentPortIndex === 0}
@@ -659,6 +521,7 @@ function InteractiveItineraryMap({ itinerary, title }) {
             </div>
             
             <button 
+              type="button"
               className="map-nav-btn"
               onClick={goToNextPort}
               disabled={currentPortIndex === ports.length - 1}
@@ -669,6 +532,7 @@ function InteractiveItineraryMap({ itinerary, title }) {
             
             {currentPortIndex !== null && (
               <button 
+                type="button"
                 className="map-nav-btn map-nav-reset"
                 onClick={resetView}
                 title="Show All Ports"
@@ -685,32 +549,6 @@ function InteractiveItineraryMap({ itinerary, title }) {
         This map shows cruise ports only. Flights and hotels are not included in the route visualization.
       </p>
     </div>
-
-    {/* Expanded Map Modal */}
-    {isExpanded && (
-      <div className="map-modal-overlay" onClick={() => setIsExpanded(false)}>
-        <div className="map-modal-container" onClick={(e) => e.stopPropagation()}>
-          <button 
-            className="map-modal-close"
-            onClick={() => setIsExpanded(false)}
-            title="Close Expanded View"
-          >
-            ✕
-          </button>
-          <div className="map-modal-content">
-            <h3 className="map-modal-title">{title || 'Itinerary Map'}</h3>
-            <div className="map-modal-map-wrapper">
-              <div 
-                ref={expandedMapContainer} 
-                className="map-modal-map"
-                style={{ width: '100%', height: '100%' }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    )}
-    </>
   );
 }
 
