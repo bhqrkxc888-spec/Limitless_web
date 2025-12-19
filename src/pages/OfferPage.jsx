@@ -691,8 +691,9 @@ function OfferPage() {
                     <p className="offer-itinerary-summary">{offer.itinerary_summary}</p>
                   )}
                   
-                  {/* Interactive Itinerary Map */}
-                  {offer.show_itinerary_map !== false && offer.itinerary_detailed && offer.itinerary_detailed.length > 0 && (
+                  {/* Interactive Itinerary Map - TEMPORARILY DISABLED FOR DEBUGGING */}
+                  {/* TODO: Re-enable once root cause found */}
+                  {false && offer.show_itinerary_map !== false && offer.itinerary_detailed && offer.itinerary_detailed.length > 0 && (
                     <div className="offer-itinerary-map">
                       <InteractiveItineraryMap 
                         itinerary={offer.itinerary_detailed}
