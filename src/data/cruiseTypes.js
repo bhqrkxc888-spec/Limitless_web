@@ -171,7 +171,7 @@ export const cruiseTypes = [
     tagline: 'Explore the world\'s wild places',
     shortDescription: 'Adventure to remote destinations on specialist expedition ships.',
     description: 'Venture beyond the ordinary to the world\'s most remote and pristine destinations. Antarctica, the Arctic, Galápagos, and more - expedition cruises combine adventure with expert-led exploration.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antartica-card.jpeg',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antarctica-hero.webp',
     icon: 'expedition',
     highlights: [
       'Zodiac landings on remote shores',

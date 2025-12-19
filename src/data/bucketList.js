@@ -302,7 +302,7 @@ export const bucketListExperiences = [
     tagline: 'Darwin\'s living laboratory',
     description: 'Explore the Galápagos Islands, where unique wildlife found nowhere else on Earth inspired Charles Darwin. Snorkel with sea lions, observe giant tortoises, and discover endemic species.',
     heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/galapagos/galapagos-hero.webp',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/galapagos/Galapagos.jpeg',
+    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/galapagos/galapagos-hero.webp',
     duration: '7-10 nights',
     season: 'Year-round (dry season: June-December)',
     startingFrom: 'From £3,500 per person',

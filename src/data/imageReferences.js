@@ -19,7 +19,7 @@ export const imageReferences = {
   site: {
     // ✅ Uploaded - manage via Admin → Website → Assets → Site
     favicon: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/home/favicon.png',
-    heroHome: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/home/hero.jpeg',
+    heroHome: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/home/hero.webp',
     // 📷 Upload via Admin: Social share image (1200x630px)
     ogImage: null,
   },
@@ -48,20 +48,20 @@ export const imageReferences = {
   // ====================
   bucketList: {
     worldCruise: {
-      hero: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/worldcruise.jpeg',
-      card: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/worldcruise.jpeg',
+      hero: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/worldcruise.webp',
+      card: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/worldcruise.webp',
     },
     antarctica: {
-      hero: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antartica-card.jpeg',
-      card: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antartica-card.jpeg',
+      hero: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antarctica-hero.webp',
+      card: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antarctica-hero.webp',
     },
     galapagos: {
-      hero: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/galapagos/Galapagos.jpeg',
-      card: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/galapagos/Galapagos.jpeg',
+      hero: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/galapagos/galapagos-hero.webp',
+      card: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/galapagos/galapagos-hero.webp',
     },
     northernLights: {
-      hero: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights.jpeg',
-      card: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northern-lights.jpeg',
+      hero: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northernlights-hero.webp',
+      card: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northernlights-hero.webp',
     },
   },
 

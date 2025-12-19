@@ -188,9 +188,20 @@ function PortsWeatherCarousel({ ports, title, onPortChange, selectedPort = null 
   );
 }
 
-// Individual Port Weather Card Component
+// Individual Port Weather Card Component  
 function PortWeatherCard({ port }) {
-  const { current, forecast, loading: weatherLoading, error } = useWeather(port.coordinates.lat, port.coordinates.lon);
+  const { current, forecast, loading: weatherLoading, error } = useWeather(port.coordinates?.lat, port.coordinates?.lon);
+
+  // Defensive check for port data
+  if (!port || !port.coordinates || !port.name) {
+    return (
+      <div className="port-weather-card">
+        <div className="port-weather-error" role="alert">
+          <p>Port data unavailable</p>
+        </div>
+      </div>
+    );
+  }
 
   // Check if current weather data is valid
   const hasValidWeather = current && 
@@ -206,7 +217,7 @@ function PortWeatherCard({ port }) {
       <div className="port-card-header">
         <div>
           <h4 className="port-name">{port.name}</h4>
-          <p className="port-country">{port.country}</p>
+          <p className="port-country">{port.country || 'Unknown'}</p>
         </div>
       </div>
 
@@ -222,75 +233,107 @@ function PortWeatherCard({ port }) {
       ) : (
         <>
           {/* Current Weather - Matching WeatherWidget Layout */}
-          <div className="port-weather-current">
-            <div className="port-weather-main">
-              <div className="port-weather-icon-temp">
-                <img 
-                  src={getWeatherIconUrl(current.weather[0].icon)} 
-                  alt={current.weather[0].description || 'Weather icon'}
-                  className="port-weather-icon-large"
-                />
-                <div className="port-weather-temp-group">
-                  <span className="port-weather-temp">{formatTemperature(current.main.temp)}</span>
-                  <span className="port-weather-feels-like">Feels like {formatTemperature(current.main.feels_like)}</span>
-                </div>
-              </div>
-              <div className="port-weather-condition">
-                <p className="port-weather-description">{current.weather[0].description || 'N/A'}</p>
-              </div>
-            </div>
+          {(() => {
+            try {
+              const weather = current?.weather?.[0];
+              const main = current?.main;
+              const wind = current?.wind;
+              
+              if (!weather || !main) {
+                return (
+                  <div className="port-weather-error">
+                    <p>Weather data temporarily unavailable</p>
+                  </div>
+                );
+              }
 
-            <div className="port-weather-details">
-              <div className="port-weather-detail-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
-                  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
-                  <path d="M12 3v6m0 6v6"/>
-                </svg>
-                <div>
-                  <span className="port-weather-detail-label">Humidity</span>
-                  <span className="port-weather-detail-value">{current.main.humidity || 0}%</span>
-                </div>
-              </div>
-              <div className="port-weather-detail-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                </svg>
-                <div>
-                  <span className="port-weather-detail-label">Wind</span>
-                  <span className="port-weather-detail-value">{Math.round((current.wind?.speed || 0) * 3.6)} km/h</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* 5-Day Forecast - Matching WeatherWidget Layout */}
-          {forecast && Array.isArray(forecast) && forecast.length > 0 && (
-            <div className="port-weather-forecast">
-              <h4 className="port-weather-forecast-title">5-Day Forecast</h4>
-              <div className="port-weather-forecast-grid">
-                {forecast.map((day, index) => (
-                  day && day.icon && (
-                    <div key={index} className="port-weather-forecast-day">
-                      <div className="port-forecast-date">
-                        {index === 0 ? 'Today' : (day.date ? new Date(day.date).toLocaleDateString('en-GB', { weekday: 'short' }) : 'N/A')}
+              return (
+                <>
+                  <div className="port-weather-current">
+                    <div className="port-weather-main">
+                      <div className="port-weather-icon-temp">
+                        <img 
+                          src={getWeatherIconUrl(weather.icon || '01d')} 
+                          alt={weather.description || 'Weather icon'}
+                          className="port-weather-icon-large"
+                          onError={(e) => { e.target.style.display = 'none'; }}
+                        />
+                        <div className="port-weather-temp-group">
+                          <span className="port-weather-temp">{formatTemperature(main.temp || 0)}</span>
+                          <span className="port-weather-feels-like">Feels like {formatTemperature(main.feels_like || 0)}</span>
+                        </div>
                       </div>
-                      <img 
-                        src={getWeatherIconUrl(day.icon)} 
-                        alt={day.condition || 'Forecast'}
-                        className="port-forecast-icon"
-                      />
-                      <div className="port-forecast-temps">
-                        <span className="port-forecast-high">{formatTemperature(day.high)}</span>
-                        <span className="port-forecast-low">{formatTemperature(day.low)}</span>
+                      <div className="port-weather-condition">
+                        <p className="port-weather-description">{weather.description || 'N/A'}</p>
                       </div>
-                      <div className="port-forecast-condition">{day.condition || 'N/A'}</div>
                     </div>
-                  )
-                ))}
-              </div>
-            </div>
-          )}
+
+                    <div className="port-weather-details">
+                      <div className="port-weather-detail-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+                          <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+                          <path d="M12 3v6m0 6v6"/>
+                        </svg>
+                        <div>
+                          <span className="port-weather-detail-label">Humidity</span>
+                          <span className="port-weather-detail-value">{main.humidity || 0}%</span>
+                        </div>
+                      </div>
+                      <div className="port-weather-detail-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                        <div>
+                          <span className="port-weather-detail-label">Wind</span>
+                          <span className="port-weather-detail-value">{Math.round((wind?.speed || 0) * 3.6)} km/h</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 5-Day Forecast - Matching WeatherWidget Layout */}
+                  {forecast && Array.isArray(forecast) && forecast.length > 0 && (
+                    <div className="port-weather-forecast">
+                      <h4 className="port-weather-forecast-title">5-Day Forecast</h4>
+                      <div className="port-weather-forecast-grid">
+                        {forecast.filter(day => day && day.icon).map((day, index) => {
+                          try {
+                            return (
+                              <div key={index} className="port-weather-forecast-day">
+                                <div className="port-forecast-date">
+                                  {index === 0 ? 'Today' : (day.date ? new Date(day.date).toLocaleDateString('en-GB', { weekday: 'short' }) : 'N/A')}
+                                </div>
+                                <img 
+                                  src={getWeatherIconUrl(day.icon)} 
+                                  alt={day.condition || 'Forecast'}
+                                  className="port-forecast-icon"
+                                  onError={(e) => { e.target.style.display = 'none'; }}
+                                />
+                                <div className="port-forecast-temps">
+                                  <span className="port-forecast-high">{formatTemperature(day.high || 0)}</span>
+                                  <span className="port-forecast-low">{formatTemperature(day.low || 0)}</span>
+                                </div>
+                                <div className="port-forecast-condition">{day.condition || 'N/A'}</div>
+                              </div>
+                            );
+                          } catch (err) {
+                            return null;
+                          }
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </>
+              );
+            } catch (err) {
+              return (
+                <div className="port-weather-error">
+                  <p>Weather data temporarily unavailable</p>
+                </div>
+              );
+            }
+          })()}
         </>
       )}
     </div>
