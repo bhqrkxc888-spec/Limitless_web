@@ -152,7 +152,7 @@ function InteractiveItineraryMap({ itinerary, title }) {
     }
   };
 
-  // Navigation handlers
+  // Navigation handlers - Circular navigation
   const goToPrevPort = (e) => {
     if (e) {
       e.preventDefault();
@@ -167,6 +167,9 @@ function InteractiveItineraryMap({ itinerary, title }) {
       navigateToPort(ports.length - 1); // Start from end
     } else if (currentPortIndex > 0) {
       navigateToPort(currentPortIndex - 1);
+    } else {
+      // Loop back to the end when at the beginning
+      navigateToPort(ports.length - 1);
     }
     
     // Restore scroll position immediately
@@ -188,6 +191,9 @@ function InteractiveItineraryMap({ itinerary, title }) {
       navigateToPort(0); // Start from beginning
     } else if (currentPortIndex < ports.length - 1) {
       navigateToPort(currentPortIndex + 1);
+    } else {
+      // Loop back to the beginning when at the end
+      navigateToPort(0);
     }
     
     // Restore scroll position immediately
@@ -532,8 +538,7 @@ function InteractiveItineraryMap({ itinerary, title }) {
               type="button"
               className="map-nav-btn"
               onClick={goToPrevPort}
-              disabled={currentPortIndex === 0}
-              title="Previous Port"
+              title="Previous Port (loops to end)"
             >
               ← Prev
             </button>
@@ -557,8 +562,7 @@ function InteractiveItineraryMap({ itinerary, title }) {
               type="button"
               className="map-nav-btn"
               onClick={goToNextPort}
-              disabled={currentPortIndex === ports.length - 1}
-              title="Next Port"
+              title="Next Port (loops to start)"
             >
               Next →
             </button>
