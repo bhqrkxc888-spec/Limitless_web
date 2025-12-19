@@ -143,6 +143,18 @@ function OfferPage() {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
+  // Safe render helper - prevents React error #310 if data is object instead of string
+  const safeRender = (value) => {
+    if (value === null || value === undefined) return '';
+    if (typeof value === 'string') return value;
+    if (typeof value === 'number') return String(value);
+    if (typeof value === 'object') {
+      // If it's an object, try to get a displayable value
+      return value.name || value.label || value.title || value.value || JSON.stringify(value);
+    }
+    return String(value);
+  };
+
   // Loading state
   if (loading) {
     return (
@@ -667,7 +679,7 @@ function OfferPage() {
                           <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                           <polyline points="22 4 12 14.01 9 11.01"/>
                         </svg>
-                        {highlight}
+                        {safeRender(highlight)}
                       </li>
                     ))}
                   </ul>
@@ -707,7 +719,7 @@ function OfferPage() {
                       <h3>Ports of Call</h3>
                       <div className="offer-ports-list">
                         {offer.ports_of_call.map((port, idx) => (
-                          <span key={idx} className="offer-port-tag">{port}</span>
+                          <span key={idx} className="offer-port-tag">{safeRender(port)}</span>
                         ))}
                       </div>
                     </div>
@@ -723,8 +735,8 @@ function OfferPage() {
                               <span className="day-number">Day {item.day || index + 1}</span>
                             </div>
                             <div className="offer-itinerary-content">
-                              <h4>{item.location || item.port || 'At Sea'}</h4>
-                              {item.description && <p>{item.description}</p>}
+                              <h4>{safeRender(item.location || item.port || 'At Sea')}</h4>
+                              {item.description && <p>{safeRender(item.description)}</p>}
                             </div>
                           </div>
                         ))}
@@ -751,7 +763,7 @@ function OfferPage() {
                           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <polyline points="20 6 9 17 4 12"/>
                           </svg>
-                          {item}
+                          {safeRender(item)}
                         </li>
                       ))}
                     </ul>
@@ -775,7 +787,7 @@ function OfferPage() {
                             <line x1="18" y1="6" x2="6" y2="18"/>
                             <line x1="6" y1="6" x2="18" y2="18"/>
                           </svg>
-                          {item}
+                          {safeRender(item)}
                         </li>
                       ))}
                     </ul>
@@ -799,13 +811,13 @@ function OfferPage() {
                     {offer.suitable_for && offer.suitable_for.length > 0 && (
                       <div className="offer-suitable-for">
                         {offer.suitable_for.map((item, idx) => (
-                          <span key={idx} className="offer-suitable-tag">{item}</span>
+                          <span key={idx} className="offer-suitable-tag">{safeRender(item)}</span>
                         ))}
                       </div>
                     )}
                     {offer.best_for && (
                       <p className="offer-best-for">
-                        <strong>Best for:</strong> {offer.best_for}
+                        <strong>Best for:</strong> {safeRender(offer.best_for)}
                       </p>
                     )}
                   </div>
@@ -885,7 +897,7 @@ function OfferPage() {
                   </h2>
                   <div className="offer-regions">
                     {offer.regions.map((region, idx) => (
-                      <span key={idx} className="offer-region-tag">{region}</span>
+                      <span key={idx} className="offer-region-tag">{safeRender(region)}</span>
                     ))}
                   </div>
                 </div>
