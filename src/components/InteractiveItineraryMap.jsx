@@ -216,24 +216,25 @@ function InteractiveItineraryMap({ itinerary, title }) {
         const types = props.types ? JSON.parse(props.types) : [props.type];
         
         // Build clean popup content
-        let popupHTML = `<div class="port-popup-content"><div class="port-popup-header">`;
+        let popupHTML = `<div class="port-popup-content">`;
         
-        // Show all days if duplicate
+        // Day badge
         if (days.length > 1) {
           popupHTML += `<div class="port-popup-day">Days ${days.join(' & ')}</div>`;
         } else {
           popupHTML += `<div class="port-popup-day">Day ${days[0]}</div>`;
         }
         
-        // Show all relevant badges
+        // Port name
+        popupHTML += `<div class="port-popup-name">${props.name}</div>`;
+        
+        // Type badges (after name, so they don't overlap)
         if (types.includes('embark') || types.includes('embarkation')) {
-          popupHTML += '<div class="port-popup-badge embark">Embarkation</div>';
+          popupHTML += '<div class="port-popup-badge embark">Embarkation Port</div>';
         }
         if (types.includes('disembark') || types.includes('disembarkation')) {
-          popupHTML += '<div class="port-popup-badge disembark">Disembarkation</div>';
+          popupHTML += '<div class="port-popup-badge disembark">Disembarkation Port</div>';
         }
-        
-        popupHTML += `</div><div class="port-popup-name">${props.name}</div>`;
         
         if (props.description) {
           popupHTML += `<div class="port-popup-description">${props.description}</div>`;
