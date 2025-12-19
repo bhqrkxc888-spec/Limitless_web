@@ -514,12 +514,12 @@ function OfferPage() {
                   </div>
                 )}
                 
-                <div className="offer-pricing-card__actions">
-                  <Button href="#enquiry-form" variant="primary" size="lg" fullWidth>
-                    Enquire About This Offer
+                <div className="offer-pricing-card__actions" style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+                  <Button href="#enquiry-form" variant="outline" size="md" fullWidth>
+                    Enquire Now
                   </Button>
-                  <Button href={`tel:${siteConfig.phone}`} variant="outline" size="lg" fullWidth>
-                    Call {siteConfig.phone}
+                  <Button href={`tel:${siteConfig.phone}`} variant="ghost" size="sm" fullWidth style={{ marginTop: '0.5rem', opacity: 0.8 }}>
+                    Or call {siteConfig.phone}
                   </Button>
                 </div>
               </div>
