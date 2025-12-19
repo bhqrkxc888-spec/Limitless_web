@@ -67,12 +67,11 @@ export const publicRoutes = [
 
 /**
  * Protected routes - only accessible when site is launched
+ * Note: Cruise Types and Destinations are now public (published)
  */
 export const protectedRoutes = [
   '/cruise-lines',
   '/cruise-lines/:slug',
-  '/destinations',
-  '/destinations/:slug',
   '/bucket-list',
   '/bucket-list/:slug',
   '/cruises/:slug'

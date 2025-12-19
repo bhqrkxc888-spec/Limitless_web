@@ -47,7 +47,7 @@ function Header() {
       return navigation.main; // Show all items when launched or authenticated
     }
     
-    // When not authenticated, show: Home, Find a Cruise, About, Travel News, Contact
+    // When not authenticated, show: Home, Find a Cruise, Destinations, Cruise Types, Resources, About, Contact
     const publicMenuItems = [
       {
         id: 'home',
@@ -62,15 +62,49 @@ function Header() {
         megaMenu: false
       },
       {
-        id: 'about',
-        label: 'About',
-        path: '/about',
+        id: 'destinations',
+        label: 'Destinations',
+        path: '/destinations',
         megaMenu: false
       },
       {
-        id: 'travel-news',
-        label: 'Travel News',
-        path: '/travel-news',
+        id: 'cruise-types',
+        label: 'Cruise Types',
+        path: '/cruise-types',
+        megaMenu: false
+      },
+      {
+        id: 'resources',
+        label: 'Resources',
+        path: '/faq',
+        megaMenu: true,
+        columns: [
+          {
+            title: 'Resources',
+            links: [
+              {
+                label: 'FAQ',
+                path: '/faq',
+                description: 'Frequently asked questions'
+              },
+              {
+                label: 'Travel News',
+                path: '/travel-news',
+                description: 'Latest cruise and travel updates'
+              },
+              {
+                label: 'Cruise Guides',
+                path: '/cruise-guides',
+                description: 'Expert guides and travel tips'
+              }
+            ]
+          }
+        ]
+      },
+      {
+        id: 'about',
+        label: 'About',
+        path: '/about',
         megaMenu: false
       },
       {

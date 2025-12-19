@@ -67,6 +67,24 @@ export const navigation = {
               label: 'Find a Cruise',
               path: '/find-a-cruise',
               description: 'Search and compare cruises'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      id: 'resources',
+      label: 'Resources',
+      path: '/faq', // Default link (goes to FAQ)
+      megaMenu: true,
+      columns: [
+        {
+          title: 'Resources',
+          links: [
+            {
+              label: 'FAQ',
+              path: '/faq',
+              description: 'Frequently asked questions'
             },
             {
               label: 'Travel News',

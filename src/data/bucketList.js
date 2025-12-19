@@ -360,7 +360,7 @@ export const bucketListExperiences = [
       keywords: ['galapagos cruise', 'galapagos expedition', 'darwin cruise', 'ecuador cruise', 'wildlife cruise']
     },
     images: [],
-    featured: false,
+    featured: true,
     priority: 5
   },
   {
@@ -791,8 +791,8 @@ export const bucketListExperiences = [
     title: 'Iceland Circumnavigation',
     tagline: 'Land of fire and ice',
     description: 'Sail around Iceland to discover its otherworldly landscapes of geysers, glaciers, volcanoes, and waterfalls. Witness the midnight sun or Northern Lights depending on the season.',
-    heroImage: null, // Iceland hero - Upload to Vercel
-    cardImage: null, // Iceland card - Upload to Vercel
+    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Iceland/iceland.webp',
+    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Iceland/iceland.webp',
     duration: '10-14 nights',
     season: 'May - September (summer), September - March (Northern Lights)',
     startingFrom: 'From £2,500 per person',
@@ -1136,8 +1136,8 @@ export const bucketListExperiences = [
     title: 'Grand Voyages',
     tagline: 'Extended journeys of discovery',
     description: 'Embark on an extended voyage of 30 to 60 nights, exploring multiple continents and oceans. These immersive journeys offer the depth of experience only possible with extended time at sea.',
-    heroImage: null, // Grand Voyages hero - Upload to Vercel
-    cardImage: null, // Grand Voyages card - Upload to Vercel
+    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/grandvoyage.webp',
+    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/grandvoyage.webp',
     duration: '30-60+ nights',
     season: 'Year-round (repositioning seasons optimal)',
     startingFrom: 'From £5,000 per person',
