@@ -26,7 +26,7 @@ export const PUBLISH_STATUS = {
   // Content hubs
   offers: 'published',
   travelNews: 'published',
-  cruiseGuides: 'draft',        // Not ready yet
+  cruiseGuides: 'published',     // Now published
   
   // Cruise content
   destinations: 'published',     // 16 destination pages
@@ -36,7 +36,7 @@ export const PUBLISH_STATUS = {
   
   // Support pages
   faq: 'published',
-  testimonials: 'draft',         // Needs real testimonials
+  testimonials: 'draft',         // Coming soon - under development
   
   // Legal pages (always published)
   legal: 'published',

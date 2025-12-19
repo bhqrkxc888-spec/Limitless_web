@@ -58,6 +58,16 @@ export const publicRoutes = [
   '/about',
   '/travel-news',
   '/offers',
+  '/faq',
+  '/destinations',
+  '/destinations/:slug',
+  '/cruise-types',
+  '/cruise-types/:slug',
+  '/cruises/:slug',
+  '/cruise-lines',
+  '/cruise-lines/:slug',
+  '/bucket-list',
+  '/bucket-list/:slug',
   '/website-terms',
   '/privacy-policy',
   '/booking-terms',
@@ -67,14 +77,10 @@ export const publicRoutes = [
 
 /**
  * Protected routes - only accessible when site is launched
- * Note: Cruise Types and Destinations are now public (published)
+ * All main content is now public (published)
  */
 export const protectedRoutes = [
-  '/cruise-lines',
-  '/cruise-lines/:slug',
-  '/bucket-list',
-  '/bucket-list/:slug',
-  '/cruises/:slug'
+  // All routes are now public - this array is kept for future use
 ];
 
 /**

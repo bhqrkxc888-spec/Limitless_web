@@ -42,24 +42,10 @@ function Footer() {
     };
   }, []);
 
-  // Filter footer navigation based on launch status (reactive to authStatus)
-  // Use stable reference to prevent re-renders
+  // Site is fully launched - always show all footer links
   const footerNav = useMemo(() => {
-    if (authStatus || isSiteLaunched()) {
-      return navigation.footer; // Show all links when launched or authenticated
-    }
-
-    // Hide protected routes when not launched/authenticated
-    return {
-      ...navigation.footer,
-      cruiseLines: [],
-      destinations: [],
-      cruiseTypes: [],
-      company: navigation.footer.company.filter(
-        link => !['/bucket-list', '/offers', '/cruise-types'].includes(link.path)
-      )
-    };
-  }, [authStatus]);
+    return navigation.footer; // Show all links (site is fully launched)
+  }, []);
 
   // Prevent flash during initial auth check
   const [isInitialLoad, setIsInitialLoad] = useState(true);

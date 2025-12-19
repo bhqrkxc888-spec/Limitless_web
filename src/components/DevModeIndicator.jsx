@@ -8,10 +8,8 @@ import { isPreviewAuthenticated } from '../config/launchConfig';
 import './DevModeIndicator.css';
 
 // Protected routes that are hidden from public
-// Note: Destinations and Cruise Types are now public (published)
+// Note: All main content is now public (published)
 const protectedRoutes = [
-  '/cruise-lines',
-  '/bucket-list',
   '/testimonials'
 ];
 

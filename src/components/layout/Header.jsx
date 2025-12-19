@@ -41,82 +41,10 @@ function Header() {
     };
   }, []);
 
-  // Filter navigation based on launch status (reactive to authStatus)
+  // Site is fully launched - always show full navigation
   const visibleNavItems = useMemo(() => {
-    if (authStatus || isSiteLaunched()) {
-      return navigation.main; // Show all items when launched or authenticated
-    }
-    
-    // When not authenticated, show: Home, Find a Cruise, Destinations, Cruise Types, Resources, About, Contact
-    const publicMenuItems = [
-      {
-        id: 'home',
-        label: 'Home',
-        path: '/',
-        megaMenu: false
-      },
-      {
-        id: 'find-cruise',
-        label: 'Find a Cruise',
-        path: '/find-a-cruise',
-        megaMenu: false
-      },
-      {
-        id: 'destinations',
-        label: 'Destinations',
-        path: '/destinations',
-        megaMenu: false
-      },
-      {
-        id: 'cruise-types',
-        label: 'Cruise Types',
-        path: '/cruise-types',
-        megaMenu: false
-      },
-      {
-        id: 'resources',
-        label: 'Resources',
-        path: '/faq',
-        megaMenu: true,
-        columns: [
-          {
-            title: 'Resources',
-            links: [
-              {
-                label: 'FAQ',
-                path: '/faq',
-                description: 'Frequently asked questions'
-              },
-              {
-                label: 'Travel News',
-                path: '/travel-news',
-                description: 'Latest cruise and travel updates'
-              },
-              {
-                label: 'Cruise Guides',
-                path: '/cruise-guides',
-                description: 'Expert guides and travel tips'
-              }
-            ]
-          }
-        ]
-      },
-      {
-        id: 'about',
-        label: 'About',
-        path: '/about',
-        megaMenu: false
-      },
-      {
-        id: 'contact',
-        label: 'Contact',
-        path: '/contact',
-        megaMenu: false
-      }
-    ];
-    
-    return publicMenuItems;
-  }, [authStatus]);
+    return navigation.main; // Show all items (site is fully launched)
+  }, []);
 
   const handleMouseEnter = (menuId) => {
     setActiveMenu(menuId);

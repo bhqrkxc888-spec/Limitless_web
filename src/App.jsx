@@ -166,89 +166,28 @@ function AppLayout() {
             <Route path="/offers" element={<OffersPage />} />
             <Route path="/offers/:slug" element={<OfferPage />} />
             
-            {/* Cruise Lines - Publish Gated */}
-            <Route 
-              path="/cruise-lines" 
-              element={
-                <PublishGate section="Cruise Lines" title="Cruise Lines" backLink="/" backLabel="Return Home">
-                  <CruiseLinesPage />
-                </PublishGate>
-              } 
-            />
-            <Route 
-              path="/cruise-lines/:slug" 
-              element={
-                <PublishGate section="Cruise Lines" title="Cruise Line Details" backLink="/cruise-lines" backLabel="View All Cruise Lines">
-                  <CruiseLinePage />
-                </PublishGate>
-              } 
-            />
+            {/* Cruise Lines - Published */}
+            <Route path="/cruise-lines" element={<CruiseLinesPage />} />
+            <Route path="/cruise-lines/:slug" element={<CruiseLinePage />} />
             
-            {/* Destinations - Publish Gated */}
-            <Route 
-              path="/destinations" 
-              element={
-                <PublishGate section="Destinations" title="Destinations" backLink="/" backLabel="Return Home">
-                  <DestinationsPage />
-                </PublishGate>
-              } 
-            />
-            <Route 
-              path="/destinations/:slug" 
-              element={
-                <PublishGate section="Destinations" title="Destination Details" backLink="/destinations" backLabel="View All Destinations">
-                  <DestinationPage />
-                </PublishGate>
-              } 
-            />
+            {/* Destinations - Published */}
+            <Route path="/destinations" element={<DestinationsPage />} />
+            <Route path="/destinations/:slug" element={<DestinationPage />} />
             
-            {/* Bucket List Experiences - Publish Gated */}
-            <Route 
-              path="/bucket-list" 
-              element={
-                <PublishGate section="Bucket List Experiences" title="Bucket List" backLink="/" backLabel="Return Home">
-                  <BucketListPage />
-                </PublishGate>
-              } 
-            />
-            <Route 
-              path="/bucket-list/:slug" 
-              element={
-                <PublishGate section="Bucket List Experience" title="Experience Details" backLink="/bucket-list" backLabel="View All Experiences">
-                  <BucketListExperiencePage />
-                </PublishGate>
-              } 
-            />
+            {/* Bucket List Experiences - Published */}
+            <Route path="/bucket-list" element={<BucketListPage />} />
+            <Route path="/bucket-list/:slug" element={<BucketListExperiencePage />} />
             
-            {/* Cruise Types Hub - Publish Gated */}
-            <Route 
-              path="/cruise-types" 
-              element={
-                <PublishGate section="Cruise Types" title="Cruise Types" backLink="/" backLabel="Return Home">
-                  <CruiseTypesPage />
-                </PublishGate>
-              } 
-            />
+            {/* Cruise Types Hub - Published */}
+            <Route path="/cruise-types" element={<CruiseTypesPage />} />
             
             {/* Legacy Cruise Categories Route - Redirect to Cruise Types */}
-            <Route 
-              path="/cruises/:slug" 
-              element={
-                <PublishGate section="Cruise Types" title="Cruise Type Details" backLink="/cruise-types" backLabel="View All Cruise Types">
-                  <CategoryPage />
-                </PublishGate>
-              } 
-            />
+            <Route path="/cruises/:slug" element={<CategoryPage />} />
             
-            {/* FAQ & Testimonials - Publish Gated */}
-            <Route 
-              path="/faq" 
-              element={
-                <PublishGate section="FAQ" title="Frequently Asked Questions" backLink="/" backLabel="Return Home">
-                  <FAQPage />
-                </PublishGate>
-              } 
-            />
+            {/* FAQ - Published */}
+            <Route path="/faq" element={<FAQPage />} />
+            
+            {/* Testimonials - Coming Soon (Draft) */}
             <Route 
               path="/testimonials" 
               element={
@@ -264,23 +203,9 @@ function AppLayout() {
             <Route path="/travel-news/tag/:tag" element={<TravelNewsTagPage />} />
             <Route path="/travel-news/:slug" element={<TravelNewsArticlePage />} />
             
-            {/* Cruise Guides - Publish Gated */}
-            <Route 
-              path="/cruise-guides" 
-              element={
-                <PublishGate section="Cruise Guides" title="Cruise Guides" backLink="/" backLabel="Return Home">
-                  <CruiseGuidesPage />
-                </PublishGate>
-              } 
-            />
-            <Route 
-              path="/cruise-guides/:slug" 
-              element={
-                <PublishGate section="Cruise Guide" title="Cruise Guide Details" backLink="/cruise-guides" backLabel="View All Guides">
-                  <CruiseGuideDetailPage />
-                </PublishGate>
-              } 
-            />
+            {/* Cruise Guides - Published */}
+            <Route path="/cruise-guides" element={<CruiseGuidesPage />} />
+            <Route path="/cruise-guides/:slug" element={<CruiseGuideDetailPage />} />
             
             {/* Legal Pages - Always Public */}
             <Route path="/website-terms" element={<WebsiteTerms />} />
