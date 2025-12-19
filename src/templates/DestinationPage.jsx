@@ -1,27 +1,19 @@
-import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDestinationBySlug } from '../data/destinations';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
-import SeaConditions from '../components/SeaConditions';
-import PortsWeatherCarousel from '../components/PortsWeatherCarousel';
 import { Button, SectionHeader } from '../components/ui';
 import { getHeroImage, getOgImage } from '../utils/imageHelpers';
 import './DestinationPage.css';
 
+// Weather carousel temporarily disabled - will reintroduce with improved port data
+// import SeaConditions from '../components/SeaConditions';
+// import PortsWeatherCarousel from '../components/PortsWeatherCarousel';
+
 function DestinationPage() {
   const { slug } = useParams();
   const destination = getDestinationBySlug(slug);
-  // Initialize selectedPort with first port or destination coordinates to prevent layout shift
-  const initialPort = destination?.coordinates?.ports?.[0] || (destination?.coordinates ? {
-    name: destination.name,
-    coordinates: {
-      lat: destination.coordinates.lat,
-      lon: destination.coordinates.lon
-    }
-  } : null);
-  const [selectedPort, setSelectedPort] = useState(initialPort);
 
   // Handle destination not found
   if (!destination) {
@@ -121,16 +113,8 @@ function DestinationPage() {
 
             {/* Sidebar */}
             <aside className="destination-sidebar">
-              {/* Ports Weather Carousel - Default to Mediterranean ports */}
-              <PortsWeatherCarousel 
-                ports={destination.coordinates?.ports && destination.coordinates.ports.length > 1 
-                  ? destination.coordinates.ports 
-                  : undefined}
-                title={`${destination.name} Port Conditions`}
-                onPortChange={setSelectedPort}
-                selectedPort={selectedPort}
-              />
-
+              {/* Weather carousel temporarily disabled - will reintroduce with improved data */}
+              
               <div className="sidebar-card">
                 <h3>Book Your {destination.name} Cruise</h3>
                 <p>
