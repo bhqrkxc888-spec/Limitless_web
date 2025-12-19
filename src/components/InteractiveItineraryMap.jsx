@@ -179,7 +179,7 @@ function InteractiveItineraryMap({ itinerary, title }) {
         const props = feature.properties;
         const coords = feature.geometry.coordinates.slice();
         
-        // Build popup content
+        // Build clean popup content
         let popupHTML = `
           <div class="port-popup-content">
             <div class="port-popup-header">
@@ -194,11 +194,6 @@ function InteractiveItineraryMap({ itinerary, title }) {
           popupHTML += `<div class="port-popup-description">${props.description}</div>`;
         }
         
-        if (props.country) {
-          popupHTML += `<div class="port-popup-location">📍 ${props.country}</div>`;
-        }
-        
-        popupHTML += `<div class="port-popup-coords">${coords[1].toFixed(4)}°, ${coords[0].toFixed(4)}°</div>`;
         popupHTML += `</div>`;
         
         popup.current
@@ -237,28 +232,40 @@ function InteractiveItineraryMap({ itinerary, title }) {
   }
 
   return (
-    <div className="interactive-itinerary-map-wrapper">
-      <div ref={mapContainer} className="interactive-itinerary-map" />
+    <div className="interactive-itinerary-map-container">
+      {/* Disclaimer */}
+      <div className="itinerary-map-disclaimer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4"/>
+          <path d="M12 8h.01"/>
+        </svg>
+        <p>This map shows cruise ports only. Flights and hotels are not included in the route visualization.</p>
+      </div>
       
-      {/* Legend */}
-      <div className="map-legend">
-        <div className="map-legend-item">
-          <div className="map-legend-marker" style={{ backgroundColor: '#22c55e' }}>
-            <span>1</span>
+      <div className="interactive-itinerary-map-wrapper">
+        <div ref={mapContainer} className="interactive-itinerary-map" />
+        
+        {/* Legend */}
+        <div className="map-legend">
+          <div className="map-legend-item">
+            <div className="map-legend-marker" style={{ backgroundColor: '#22c55e' }}>
+              <span>1</span>
+            </div>
+            <span>Embarkation</span>
           </div>
-          <span>Embarkation</span>
-        </div>
-        <div className="map-legend-item">
-          <div className="map-legend-marker" style={{ backgroundColor: '#3b82f6' }}>
-            <span>2</span>
+          <div className="map-legend-item">
+            <div className="map-legend-marker" style={{ backgroundColor: '#3b82f6' }}>
+              <span>2</span>
+            </div>
+            <span>Ports of Call</span>
           </div>
-          <span>Ports of Call</span>
-        </div>
-        <div className="map-legend-item">
-          <div className="map-legend-marker" style={{ backgroundColor: '#ef4444' }}>
-            <span>{ports.length}</span>
+          <div className="map-legend-item">
+            <div className="map-legend-marker" style={{ backgroundColor: '#ef4444' }}>
+              <span>{ports.length}</span>
+            </div>
+            <span>Disembarkation</span>
           </div>
-          <span>Disembarkation</span>
         </div>
       </div>
     </div>
