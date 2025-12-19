@@ -15,6 +15,16 @@ export default defineConfig({
           // Separate large data files
           'cruise-data': ['./src/data/cruiseLines.js'],
           'destination-data': ['./src/data/destinations.js'],
+          // Lazy-load weather APIs (only loaded with consent)
+          'weather-apis': [
+            './src/services/weatherAPI.js',
+            './src/services/marineAPI.js'
+          ],
+          // Separate form components (not needed on every page)
+          'forms': [
+            './src/components/ContactForm.jsx',
+            './src/components/PriceMatchForm.jsx'
+          ]
         }
       }
     },

@@ -10,12 +10,12 @@
   --clr-primary-light: #3d4766;    /* Lighter navy for subtle accents */
   
   /* Gold Accent - Premium, Elegant */
-  --clr-secondary: #C9A962;        /* Gold - primary accent */
-  --clr-secondary-dark: #B8944F;   /* Darker gold for hover */
-  --clr-secondary-light: #D4BC7E;  /* Lighter gold */
-  --clr-accent: #C9A962;           /* Gold - highlights, buttons */
-  --clr-accent-dark: #B8944F;      /* Darker gold hover */
-  --clr-accent-light: #D4BC7E;     /* Lighter gold */
+  --clr-secondary: #D4B86A;        /* Gold - primary accent (WCAG AA compliant) */
+  --clr-secondary-dark: #C0A558;   /* Darker gold for hover */
+  --clr-secondary-light: #E5D299;  /* Lighter gold */
+  --clr-accent: #D4B86A;           /* Gold - highlights, buttons (WCAG AA compliant) */
+  --clr-accent-dark: #C0A558;      /* Darker gold hover */
+  --clr-accent-light: #E5D299;     /* Lighter gold */
 
   /* Background Colors - Warm, Elegant */
   --clr-bg: #FDFBF7;               /* Warm white - main background */

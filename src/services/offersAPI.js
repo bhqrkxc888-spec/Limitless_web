@@ -39,9 +39,11 @@ export async function getOffers({
     });
 
     if (error) {
-      // If function not found, it's OK - offers feature might not be set up yet
+      // If function not found or bad request (400), it's OK - offers feature might not be set up yet
       // Silently return empty - this is expected if offers aren't configured yet
       if (error.code === 'PGRST202' || 
+          error.code === '42883' || // PostgreSQL function does not exist
+          error.status === 400 || // Bad request (function signature mismatch)
           error.message?.includes('not found') || 
           error.message?.includes('Searched for') ||
           error.message?.includes('Could not find')) {
@@ -82,8 +84,10 @@ export async function getOfferBySlug(slug) {
     });
 
     if (error) {
-      // If function not found, return null (not an error)
+      // If function not found or bad request, return null (not an error)
       if (error.code === 'PGRST202' || 
+          error.code === '42883' || // PostgreSQL function does not exist
+          error.status === 400 || // Bad request
           error.message?.includes('not found') || 
           error.message?.includes('Searched for') ||
           error.message?.includes('Could not find')) {

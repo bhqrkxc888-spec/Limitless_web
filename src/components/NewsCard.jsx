@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Card } from './ui';
+import OptimizedImage from './OptimizedImage';
 import './NewsCard.css';
 
 /**
@@ -36,11 +37,12 @@ function NewsCard({ article, variant = 'default' }) {
       <Link to={`/travel-news/${article.slug}`} className="news-card-hero">
         <div className="news-card-hero__image">
           {(article.featured_image_url || article.thumbnail_image_url) ? (
-            <img 
+            <OptimizedImage 
               src={article.featured_image_url || article.thumbnail_image_url}
               alt={article.title}
-              width={article.featured_image_width || article.thumbnail_image_width}
-              height={article.featured_image_height || article.thumbnail_image_height}
+              width={article.featured_image_width || article.thumbnail_image_width || 800}
+              height={article.featured_image_height || article.thumbnail_image_height || 450}
+              priority={false}
               loading="lazy"
             />
           ) : (

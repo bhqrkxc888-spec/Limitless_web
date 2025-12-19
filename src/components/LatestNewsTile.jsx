@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTravelNews } from '../hooks/useTravelNews';
 import { Button } from './ui';
+import OptimizedImage from './OptimizedImage';
 import './LatestNewsTile.css';
 
 /**
@@ -145,11 +146,12 @@ function LatestNewsTile() {
               {/* Image Left */}
               <div className="latest-news-tile__featured-image">
                 {(currentArticle.featured_image_url || currentArticle.thumbnail_image_url) && (
-                  <img 
+                  <OptimizedImage 
                     src={currentArticle.featured_image_url || currentArticle.thumbnail_image_url}
                     alt={currentArticle.title}
-                    width={currentArticle.featured_image_width || currentArticle.thumbnail_image_width}
-                    height={currentArticle.featured_image_height || currentArticle.thumbnail_image_height}
+                    width={currentArticle.featured_image_width || currentArticle.thumbnail_image_width || 400}
+                    height={currentArticle.featured_image_height || currentArticle.thumbnail_image_height || 400}
+                    priority={false}
                     loading="lazy"
                   />
                 )}

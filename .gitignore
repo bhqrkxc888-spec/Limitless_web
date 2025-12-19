@@ -32,5 +32,23 @@ dist-ssr
 old-website-backup/
 
 # Documentation (keep local only, not uploaded to git)
+.markdown/
 docs/
 .vercel
+
+# Markdown documentation files (keep local, except key files)
+*.md
+!README.md
+!TODO.md
+
+# Reports and generated files
+reports/
+*.json
+!package.json
+!package-lock.json
+!vercel.json
+!eslint.config.js
+
+# Test scripts (except build scripts)
+*.sh
+!scripts/*.sh

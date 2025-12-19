@@ -11,6 +11,7 @@
     "prerender": "node scripts/prerender.js",
     "sitemap": "node scripts/generate-sitemap.js",
     "validate:seo": "node scripts/validate-seo.js",
+    "optimize:images": "node scripts/optimize-images.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },

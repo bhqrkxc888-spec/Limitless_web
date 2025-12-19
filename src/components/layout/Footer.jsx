@@ -43,6 +43,7 @@ function Footer() {
   }, []);
 
   // Filter footer navigation based on launch status (reactive to authStatus)
+  // Use stable reference to prevent re-renders
   const footerNav = useMemo(() => {
     if (authStatus || isSiteLaunched()) {
       return navigation.footer; // Show all links when launched or authenticated
@@ -59,6 +60,12 @@ function Footer() {
       )
     };
   }, [authStatus]);
+
+  // Prevent flash during initial auth check
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
+  useEffect(() => {
+    setIsInitialLoad(false);
+  }, []);
 
   // Get contact info from siteConfig
   const contact = {
@@ -79,7 +86,7 @@ function Footer() {
       {/* Main Footer */}
       <div className="footer-main">
         <div className="container">
-          <div className="footer-grid">
+          <div className="footer-grid" style={{ opacity: isInitialLoad ? 0.95 : 1, transition: 'opacity 150ms ease' }}>
             {/* Brand Column */}
             <div className="footer-brand">
               <Link to="/" className="footer-logo">

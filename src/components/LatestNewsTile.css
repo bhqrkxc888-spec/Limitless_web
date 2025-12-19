@@ -157,22 +157,37 @@
 }
 
 .latest-news-tile__indicator {
+  /* Touch target size: 48x48px minimum for accessibility */
+  min-width: 48px;
+  min-height: 48px;
+  padding: 12px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Visual indicator (smaller than touch target) */
+.latest-news-tile__indicator::before {
+  content: '';
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background: var(--clr-border);
-  border: none;
-  cursor: pointer;
   transition: all var(--transition-fast);
-  padding: 0;
 }
 
-.latest-news-tile__indicator:hover {
+.latest-news-tile__indicator:hover::before {
   background: var(--clr-accent-light);
   transform: scale(1.2);
 }
 
-.latest-news-tile__indicator--active {
+.latest-news-tile__indicator--active::before {
   background: var(--clr-accent);
   width: 24px;
   border-radius: var(--radius-full);
@@ -193,6 +208,8 @@
   text-decoration: none;
   transition: all var(--transition-base);
   box-shadow: var(--shadow-card);
+  /* Optimize transitions - hint browser to prepare for opacity changes */
+  will-change: opacity;
 }
 
 .latest-news-tile__featured:hover {
@@ -220,6 +237,8 @@
   height: 100%;
   object-fit: cover;
   transition: transform var(--transition-slow);
+  /* Optimize image transform animations */
+  will-change: transform;
 }
 
 .latest-news-tile__featured:hover .latest-news-tile__featured-image img {
@@ -454,12 +473,12 @@
     margin-top: var(--space-3);
   }
 
-  .latest-news-tile__indicator {
+  .latest-news-tile__indicator::before {
     width: 8px;
     height: 8px;
   }
 
-  .latest-news-tile__indicator--active {
+  .latest-news-tile__indicator--active::before {
     width: 20px;
   }
 }
