@@ -15,6 +15,11 @@ function AccommodationCard({
   if (!hotelName) return null;
 
   const getIncludeLabel = (item) => {
+    // SAFE: Convert to string first (handles if AI returns objects instead of strings)
+    const itemStr = typeof item === 'string' 
+      ? item 
+      : (item?.text || item?.name || item?.label || String(item));
+    
     const labels = {
       breakfast: 'Breakfast included',
       transfers: 'Transfers included',
@@ -26,7 +31,7 @@ function AccommodationCard({
       city_tour: 'City tour included',
       airport_lounge: 'Airport lounge access'
     };
-    return labels[item.toLowerCase()] || item;
+    return labels[itemStr.toLowerCase()] || itemStr;
   };
 
   return (
@@ -79,7 +84,7 @@ function AccommodationCard({
 
       {includes?.length > 0 && (
         <ul className="accommodation-card__includes">
-          {includes.map((item, idx) => (
+          {includes.filter(item => item != null).map((item, idx) => (
             <li key={idx}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <polyline points="20 6 9 17 4 12"/>
