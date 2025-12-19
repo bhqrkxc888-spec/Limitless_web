@@ -127,7 +127,7 @@ function CruiseTypesPage() {
       {/* Hero Section */}
       <HeroSection
         title="Find Your Perfect Cruise Style"
-        subtitle="Whether you're seeking family fun, adults-only tranquility, luxury indulgence, or expedition adventure – there's a cruise type tailored just for you."
+        subtitle="Whether you're seeking family fun, adults-only tranquility, luxury indulgence, or expedition adventure - there's a cruise type tailored just for you."
         size="md"
         align="center"
       />

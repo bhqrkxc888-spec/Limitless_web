@@ -79,7 +79,7 @@ export const cruiseLines = [
     // Kids Club section
     kidsClub: {
       name: 'The Reef',
-      intro: 'The Reef provides age-specific groups with dedicated rooms and activities from soft play to DJ sessions. Led by qualified Reef Rangers, clubs include Night Nursery (6 months–4 years), Splashers (2–4), Surfers (5–8), Scubas (9–12), and H2O/The Scene (13–17). Pre-registration is recommended in My P&O Cruises. Optional guaranteed sessions cost around £4.95 (day) or £8.95 (evening). Teen spaces are drop-in.',
+      intro: 'The Reef provides age-specific groups with dedicated rooms and activities from soft play to DJ sessions. Led by qualified Reef Rangers, clubs include Night Nursery (6 months-4 years), Splashers (2-4), Surfers (5-8), Scubas (9-12), and H2O/The Scene (13-17). Pre-registration is recommended in My P&O Cruises. Optional guaranteed sessions cost around £4.95 (day) or £8.95 (evening). Teen spaces are drop-in.',
       quickFacts: [
         'Included in cruise fare',
         'Qualified Reef Rangers',
@@ -87,11 +87,11 @@ export const cruiseLines = [
         'Pre-book guarantee slots'
       ],
       ageGroups: [
-        { club: 'Night Nursery', age: '6mo–4yr', morning: '—', afternoon: '—', evening: '6pm–midnight' },
-        { club: 'Splashers', age: '2–4yr', morning: '9am–12pm', afternoon: '2pm–5pm', evening: '6pm–10pm' },
-        { club: 'Surfers', age: '5–8yr', morning: '9am–12pm', afternoon: '2pm–5pm', evening: '6pm–10pm' },
-        { club: 'Scubas', age: '9–12yr', morning: '9am–12pm', afternoon: '2pm–5pm', evening: '6pm–10pm' },
-        { club: 'H2O/The Scene', age: '13–17yr', morning: '—', afternoon: 'Open access', evening: 'Open access' }
+        { club: 'Night Nursery', age: '6mo-4yr', morning: '-', afternoon: '-', evening: '6pm-midnight' },
+        { club: 'Splashers', age: '2-4yr', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '6pm-10pm' },
+        { club: 'Surfers', age: '5-8yr', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '6pm-10pm' },
+        { club: 'Scubas', age: '9-12yr', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '6pm-10pm' },
+        { club: 'H2O/The Scene', age: '13-17yr', morning: '-', afternoon: 'Open access', evening: 'Open access' }
       ],
       note: 'Times vary by ship. Teen spaces are open access; younger groups have set sessions.'
     },
@@ -120,10 +120,10 @@ export const cruiseLines = [
       intro: 'Earn points for every night sailed and unlock benefits across six tiers: Pacific (150+ points) through to Ligurian (2,501+ points, 201+ nights). Enjoy discounts, priority services, and exclusive events.',
       pointsInfo: '10 points per night typically. Benefits vary by ship and itinerary.',
       tiers: [
-        { tier: 'Pacific', points: '150–500', benefits: '5% discount, magazine' },
-        { tier: 'Atlantic', points: '501–1,000', benefits: '7.5% discount, Champagne welcome' },
-        { tier: 'Mediterranean', points: '1,001–2,000', benefits: '8.5% discount, cocktail party' },
-        { tier: 'Caribbean', points: '2,001–2,500', benefits: '10% discount, priority booking' },
+        { tier: 'Pacific', points: '150-500', benefits: '5% discount, magazine' },
+        { tier: 'Atlantic', points: '501-1,000', benefits: '7.5% discount, Champagne welcome' },
+        { tier: 'Mediterranean', points: '1,001-2,000', benefits: '8.5% discount, cocktail party' },
+        { tier: 'Caribbean', points: '2,001-2,500', benefits: '10% discount, priority booking' },
         { tier: 'Baltic', points: '2,501+', benefits: '10% discount, 50% laundry, priority check-in' },
         { tier: 'Ligurian', points: '2,501+ (201+ nights)', benefits: 'All above + hospitality lounge, free pressing' }
       ]
@@ -243,10 +243,10 @@ export const cruiseLines = [
     // Kids Club section
     kidsClub: {
       name: 'Doremi and LEGO® Fun',
-      intro: 'MSC Kids Clubs are complimentary programmes on every MSC ship for guests aged 0–17. Children are grouped by age and welcomed in safe, dedicated spaces run by trained, multilingual youth staff. Activities blend fun with learning and are designed to suit each age group, from creative play to team games and socials.',
+      intro: 'MSC Kids Clubs are complimentary programmes on every MSC ship for guests aged 0-17. Children are grouped by age and welcomed in safe, dedicated spaces run by trained, multilingual youth staff. Activities blend fun with learning and are designed to suit each age group, from creative play to team games and socials.',
       detail: 'Age-appropriate playrooms, LEGO® play for younger guests, consoles and social lounges for older children, plus daily schedules that vary between sea days and port days. Parents register children once onboard and can check the daily programme in the app or on notice boards. Sign in and out procedures help make drop off and collection simple.',
       quickFacts: [
-        'Complimentary programme for ages 0–17',
+        'Complimentary programme for ages 0-17',
         'Trained, multilingual youth staff',
         'LEGO® play areas for younger children',
         'Consoles and social lounges for teens',
@@ -259,11 +259,11 @@ export const cruiseLines = [
         { title: 'Family time', description: 'Doremiland activities, character moments and movie sessions for all ages.' }
       ],
       ageGroups: [
-        { club: 'Baby Club / Baby Time and Baby Care', age: '0–3 years (supervised care from 6 months)', morning: '9:00 am – 12:00 pm', afternoon: '2:00 pm – 5:00 pm', evening: '7:00 pm – 9:00 pm' },
-        { club: 'Mini Club', age: '3–6 years', morning: '9:00 am – 12:00 pm', afternoon: '2:00 pm – 5:00 pm', evening: '7:00 pm – 10:00 pm' },
-        { club: 'Junior Club', age: '7–11 years', morning: '9:00 am – 12:00 pm', afternoon: '2:00 pm – 5:00 pm', evening: '7:00 pm – 11:00 pm' },
-        { club: 'Young Club', age: '12–14 years', morning: '10:00 am – 1:00 pm', afternoon: '3:00 pm – 6:00 pm', evening: '7:00 pm – 11:00 pm' },
-        { club: 'Teen Club', age: '15–17 years', morning: '10:00 am – 1:00 pm', afternoon: '3:00 pm – 6:00 pm', evening: '7:00 pm – 11:00 pm' }
+        { club: 'Baby Club / Baby Time and Baby Care', age: '0-3 years (supervised care from 6 months)', morning: '9:00 am - 12:00 pm', afternoon: '2:00 pm - 5:00 pm', evening: '7:00 pm - 9:00 pm' },
+        { club: 'Mini Club', age: '3-6 years', morning: '9:00 am - 12:00 pm', afternoon: '2:00 pm - 5:00 pm', evening: '7:00 pm - 10:00 pm' },
+        { club: 'Junior Club', age: '7-11 years', morning: '9:00 am - 12:00 pm', afternoon: '2:00 pm - 5:00 pm', evening: '7:00 pm - 11:00 pm' },
+        { club: 'Young Club', age: '12-14 years', morning: '10:00 am - 1:00 pm', afternoon: '3:00 pm - 6:00 pm', evening: '7:00 pm - 11:00 pm' },
+        { club: 'Teen Club', age: '15-17 years', morning: '10:00 am - 1:00 pm', afternoon: '3:00 pm - 6:00 pm', evening: '7:00 pm - 11:00 pm' }
       ],
       costsInfo: 'The main Kids Club programme is included in your cruise fare. Registration is completed onboard at the club desk or during open house sessions. Activities and schedules can vary by ship, itinerary and whether the ship is in port or at sea. Some special activities, late night sessions or babysitting services may be chargeable.',
       note: 'Spaces operate to capacity limits for safety. Arrive early for popular sessions. Share allergies, medical needs and authorised pick up adults during registration.'
@@ -289,10 +289,10 @@ export const cruiseLines = [
       pointsInfo: 'Points are earned based on cruise nights sailed. Benefits vary by tier and may be subject to ship and itinerary availability.',
       tiers: [
         { tier: 'Welcome', points: '0', benefits: 'Members\' E-Newsletter, Online Private Area, Luggage identification tag, Voyagers Selection discount up to +15%' },
-        { tier: 'Classic', points: '1–2,199', benefits: '5% cruise fare discount, +5% Voyagers Exclusives discount, Double experience points, 10% Logo Shop, 20% Photographs, 10% Digital accessories, 5% Internet, 50% F1 Simulator, 10% SPA services' },
-        { tier: 'Silver', points: '2,200–4,299', benefits: 'All Classic benefits, €/$50 Voyagers Exclusives shipboard credit, 10% Laundry package, 10% Minibar' },
-        { tier: 'Gold', points: '4,300–9,999', benefits: 'All Silver benefits, Complimentary 1-hour thermal area session, Courtesy bathrobe & slippers, One free F1 Simulator credit, 15% Logo Shop, 20% SPA services' },
-        { tier: 'Diamond', points: '10,000–24,999', benefits: 'All Gold benefits, Priority line at check-in, Priority drop-off of luggage, Priority for free cabin upgrade, Priority line assistance, Early access to theatre shows, MSC Voyagers Club Diamond Party, One free picture, Bottle of spumante with macarons, Specialty restaurant dinner, Free bottle of water' },
+        { tier: 'Classic', points: '1-2,199', benefits: '5% cruise fare discount, +5% Voyagers Exclusives discount, Double experience points, 10% Logo Shop, 20% Photographs, 10% Digital accessories, 5% Internet, 50% F1 Simulator, 10% SPA services' },
+        { tier: 'Silver', points: '2,200-4,299', benefits: 'All Classic benefits, €/$50 Voyagers Exclusives shipboard credit, 10% Laundry package, 10% Minibar' },
+        { tier: 'Gold', points: '4,300-9,999', benefits: 'All Silver benefits, Complimentary 1-hour thermal area session, Courtesy bathrobe & slippers, One free F1 Simulator credit, 15% Logo Shop, 20% SPA services' },
+        { tier: 'Diamond', points: '10,000-24,999', benefits: 'All Gold benefits, Priority line at check-in, Priority drop-off of luggage, Priority for free cabin upgrade, Priority line assistance, Early access to theatre shows, MSC Voyagers Club Diamond Party, One free picture, Bottle of spumante with macarons, Specialty restaurant dinner, Free bottle of water' },
         { tier: 'Blue Diamond', points: '25,000+', benefits: 'All Diamond benefits, Flexible arrival in port, Yacht Club drop-off luggage, Access to Yacht Club dedicated check-in, Exclusive Pillow Selection, One free shuttle bus ticket, Behind-the-scenes tour, Free Internet "Browse" Package, My Choice dining option, Private Meet & Greet with Captain' }
       ],
       note: 'Voyagers Exclusives benefits & discounts depend on advance-booking period and T&Cs. Some features vary by ship and may carry age/height limits. Members\' event not held on cruises under 4 days.'
@@ -571,9 +571,9 @@ export const cruiseLines = [
         'More extensive during school holidays'
       ],
       ageGroups: [
-        { club: 'Club HAL', age: '3–7 years', morning: 'Varies', afternoon: '2pm–5pm', evening: '7pm–10pm' },
-        { club: 'Club HAL', age: '8–12 years', morning: 'Varies', afternoon: '2pm–5pm', evening: '7pm–10pm' },
-        { club: 'The Loft/Oasis', age: '13–17 years', morning: 'Varies', afternoon: 'Open access', evening: 'Open access' }
+        { club: 'Club HAL', age: '3-7 years', morning: 'Varies', afternoon: '2pm-5pm', evening: '7pm-10pm' },
+        { club: 'Club HAL', age: '8-12 years', morning: 'Varies', afternoon: '2pm-5pm', evening: '7pm-10pm' },
+        { club: 'The Loft/Oasis', age: '13-17 years', morning: 'Varies', afternoon: 'Open access', evening: 'Open access' }
       ],
       note: 'Programming is most robust during school holiday periods and summer Alaska sailings. Check specific sailings for Club HAL availability.'
     },
@@ -685,10 +685,10 @@ export const cruiseLines = [
         'Kids eat free at selected venues'
       ],
       ageGroups: [
-        { club: 'Mini Marlins', age: '3–5 years', morning: 'Selected hours', afternoon: 'Selected hours', evening: 'Until 9pm' },
-        { club: 'Marlins', age: '6–8 years', morning: 'Selected hours', afternoon: 'Selected hours', evening: 'Until 9pm' },
-        { club: 'Makos', age: '9–12 years', morning: 'Selected hours', afternoon: 'Selected hours', evening: 'Until 9pm' },
-        { club: 'Sharks', age: '13–17 years', morning: 'Open access', afternoon: 'Open access', evening: 'Until 11pm' }
+        { club: 'Mini Marlins', age: '3-5 years', morning: 'Selected hours', afternoon: 'Selected hours', evening: 'Until 9pm' },
+        { club: 'Marlins', age: '6-8 years', morning: 'Selected hours', afternoon: 'Selected hours', evening: 'Until 9pm' },
+        { club: 'Makos', age: '9-12 years', morning: 'Selected hours', afternoon: 'Selected hours', evening: 'Until 9pm' },
+        { club: 'Sharks', age: '13-17 years', morning: 'Open access', afternoon: 'Open access', evening: 'Until 11pm' }
       ],
       note: 'Marella Voyager and Marella Explorer are adults-only (18+) - ideal for couples and groups seeking a quieter experience.'
     },
@@ -1002,9 +1002,9 @@ export const cruiseLines = [
         'Teen-only spaces'
       ],
       ageGroups: [
-        { club: 'The Treehouse', age: '3–7 years', morning: '9am–12pm', afternoon: '2pm–5pm', evening: '7pm–10pm' },
-        { club: 'The Lodge', age: '8–12 years', morning: '9am–12pm', afternoon: '2pm–5pm', evening: '7pm–10pm' },
-        { club: 'The Beach House', age: '13–17 years', morning: 'Open access', afternoon: 'Open access', evening: 'Until 1am' }
+        { club: 'The Treehouse', age: '3-7 years', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-10pm' },
+        { club: 'The Lodge', age: '8-12 years', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-10pm' },
+        { club: 'The Beach House', age: '13-17 years', morning: 'Open access', afternoon: 'Open access', evening: 'Until 1am' }
       ],
       note: 'Programming enhanced during school holidays and summer sailings.'
     },

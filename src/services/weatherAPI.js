@@ -125,32 +125,59 @@ export function formatTemperature(temp) {
  * @returns {Array} Forecast grouped by day
  */
 export function groupForecastByDay(list) {
+  if (!list || !Array.isArray(list) || list.length === 0) {
+    return [];
+  }
+
   const days = {};
   
   list.forEach(item => {
-    const date = new Date(item.dt * 1000);
-    const dayKey = date.toDateString();
-    
-    if (!days[dayKey]) {
-      days[dayKey] = {
-        date: date,
-        temps: [],
-        conditions: [],
-        icons: []
-      };
+    // Validate item structure
+    if (!item || !item.dt || !item.main || !item.weather || !Array.isArray(item.weather) || item.weather.length === 0) {
+      return; // Skip invalid items
     }
-    
-    days[dayKey].temps.push(item.main.temp);
-    days[dayKey].conditions.push(item.weather[0].main);
-    days[dayKey].icons.push(item.weather[0].icon);
+
+    try {
+      const date = new Date(item.dt * 1000);
+      if (isNaN(date.getTime())) {
+        return; // Skip invalid dates
+      }
+      
+      const dayKey = date.toDateString();
+      
+      if (!days[dayKey]) {
+        days[dayKey] = {
+          date: date,
+          temps: [],
+          conditions: [],
+          icons: []
+        };
+      }
+      
+      if (typeof item.main.temp === 'number') {
+        days[dayKey].temps.push(item.main.temp);
+      }
+      if (item.weather[0].main) {
+        days[dayKey].conditions.push(item.weather[0].main);
+      }
+      if (item.weather[0].icon) {
+        days[dayKey].icons.push(item.weather[0].icon);
+      }
+    } catch (err) {
+      logger.warn('Error processing forecast item:', err);
+      // Continue processing other items
+    }
   });
 
-  return Object.values(days).map(day => ({
-    date: day.date,
-    high: Math.round(Math.max(...day.temps)),
-    low: Math.round(Math.min(...day.temps)),
-    condition: day.conditions[Math.floor(day.conditions.length / 2)], // Middle of day
-    icon: day.icons[Math.floor(day.icons.length / 2)]
-  })).slice(0, 5); // Limit to 5 days
+  return Object.values(days)
+    .filter(day => day.temps.length > 0 && day.icons.length > 0) // Only return valid days
+    .map(day => ({
+      date: day.date,
+      high: Math.round(Math.max(...day.temps)),
+      low: Math.round(Math.min(...day.temps)),
+      condition: day.conditions[Math.floor(day.conditions.length / 2)] || 'N/A', // Middle of day
+      icon: day.icons[Math.floor(day.icons.length / 2)] || '01d' // Default icon if missing
+    }))
+    .slice(0, 5); // Limit to 5 days
 }
 

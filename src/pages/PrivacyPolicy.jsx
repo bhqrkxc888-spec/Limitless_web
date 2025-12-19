@@ -57,7 +57,7 @@ const fallbackContent = `
 <p>We rely on one or more of the following legal bases:</p>
 <ul>
   <li><strong>Contract:</strong> where processing is necessary to take steps at your request before entering into a contract, or to perform a contract.</li>
-  <li><strong>Legitimate interests:</strong> to respond to enquiries, run and protect our business, improve our services, and prevent fraud—balanced against your rights.</li>
+  <li><strong>Legitimate interests:</strong> to respond to enquiries, run and protect our business, improve our services, and prevent fraud-balanced against your rights.</li>
   <li><strong>Consent:</strong> where required (for example, certain marketing communications or non-essential cookies).</li>
   <li><strong>Legal obligation:</strong> where we must comply with law (e.g., accounting, regulatory or consumer law requirements).</li>
 </ul>

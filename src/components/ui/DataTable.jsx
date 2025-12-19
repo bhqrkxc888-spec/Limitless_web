@@ -51,7 +51,7 @@ function DataTable({
                   {typeof row[col.key] === 'object' && row[col.key] !== null ? (
                     row[col.key]
                   ) : (
-                    row[col.key] ?? '—'
+                    row[col.key] ?? '-'
                   )}
                 </td>
               ))}

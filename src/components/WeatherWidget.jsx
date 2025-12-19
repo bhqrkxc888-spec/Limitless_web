@@ -44,8 +44,15 @@ function WeatherWidget({ lat, lon, destinationName }) {
     );
   }
 
-  // Error state
-  if (error || !current) {
+  // Error state or invalid data
+  const hasValidWeather = current && 
+    current.weather && 
+    Array.isArray(current.weather) && 
+    current.weather.length > 0 && 
+    current.main && 
+    current.wind;
+
+  if (error || !hasValidWeather) {
     return (
       <div className="weather-widget">
         <div className="weather-widget-header">
@@ -53,7 +60,7 @@ function WeatherWidget({ lat, lon, destinationName }) {
         </div>
         <div className="weather-widget-content">
           <p className="weather-error" role="alert" aria-live="assertive">
-            Weather data temporarily unavailable for {destinationName}
+            Weather data temporarily unavailable for {destinationName || 'this location'}
           </p>
         </div>
       </div>
@@ -62,7 +69,7 @@ function WeatherWidget({ lat, lon, destinationName }) {
 
   const weather = current.weather[0];
   const main = current.main;
-  const wind = current.wind;
+  const wind = current.wind || {};
 
   return (
     <div className="weather-widget">
@@ -114,7 +121,7 @@ function WeatherWidget({ lat, lon, destinationName }) {
             </svg>
             <div>
               <span className="weather-detail-label">Wind</span>
-              <span className="weather-detail-value">{Math.round(wind.speed * 3.6)} km/h</span>
+              <span className="weather-detail-value">{Math.round((wind.speed || 0) * 3.6)} km/h</span>
             </div>
           </div>
         </div>

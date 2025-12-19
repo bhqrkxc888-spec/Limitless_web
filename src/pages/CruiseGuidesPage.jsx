@@ -106,8 +106,9 @@ function CruiseGuidesPage() {
         <section className="section">
           <div className="container">
             <div className="guides-empty">
-              <h3>No Guides Found</h3>
-              <p>We're currently working on new guides. Check back soon!</p>
+              <h3>Coming Soon</h3>
+              <p>We're currently creating comprehensive cruise guides for you. Our expert guides covering destinations, ship reviews, and travel tips will be available soon.</p>
+              <p>In the meantime, feel free to <a href="/contact">contact us</a> for personalised cruise advice.</p>
             </div>
           </div>
         </section>

@@ -310,7 +310,7 @@ function AdminWebsiteDestinations() {
                           onBlur={(e) => handleUpdate(dest.slug, { region: e.target.value || null })}
                         />
                       ) : (
-                        <span style={{ color: 'var(--admin-text-muted)' }}>{dest.region || '—'}</span>
+                        <span style={{ color: 'var(--admin-text-muted)' }}>{dest.region || '-'}</span>
                       )}
                     </td>
                     <td>

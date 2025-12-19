@@ -231,7 +231,7 @@ function AdminSEO() {
   const paginatedPages = pages.slice((page - 1) * pageSize, page * pageSize);
 
   const formatDate = (timestamp) => {
-    if (!timestamp) return '—';
+    if (!timestamp) return '-';
     const date = new Date(timestamp);
     return date.toLocaleDateString('en-US', { 
       month: 'short', 
@@ -251,7 +251,7 @@ function AdminSEO() {
     if (status === 'pass') return <CheckCircle size={14} className="admin-status-icon success" />;
     if (status === 'warning') return <AlertTriangle size={14} className="admin-status-icon warning" />;
     if (status === 'fail') return <AlertCircle size={14} className="admin-status-icon error" />;
-    return <span className="admin-status-icon neutral">—</span>;
+    return <span className="admin-status-icon neutral">-</span>;
   };
 
   if (authLoading || (!isAuthenticated && !authLoading)) {
@@ -334,7 +334,7 @@ function AdminSEO() {
           <div className="admin-stat-card">
             <div className="admin-stat-label">Average Score</div>
             <div className={`admin-stat-value ${getScoreClass(avgScore)}`}>
-              {avgScore || '—'}
+              {avgScore || '-'}
             </div>
           </div>
           <div className="admin-stat-card">
@@ -456,7 +456,7 @@ function AdminSEO() {
                         </td>
                         <td>
                           <span className={`admin-score admin-score-${getScoreClass(pageData.overall_score)}`}>
-                            {pageData.overall_score || '—'}
+                            {pageData.overall_score || '-'}
                           </span>
                         </td>
                         <td>{getStatusIcon(pageData.title_status)}</td>
@@ -502,11 +502,11 @@ function AdminSEO() {
                                 </div>
                                 <div className="admin-seo-detail">
                                   <h4>Structured Data</h4>
-                                  <p>{getStatusIcon(pageData.structured_data_status)} {pageData.structured_data_status || '—'}</p>
+                                  <p>{getStatusIcon(pageData.structured_data_status)} {pageData.structured_data_status || '-'}</p>
                                 </div>
                                 <div className="admin-seo-detail">
                                   <h4>Technical</h4>
-                                  <p>{getStatusIcon(pageData.technical_status)} {pageData.technical_status || '—'}</p>
+                                  <p>{getStatusIcon(pageData.technical_status)} {pageData.technical_status || '-'}</p>
                                 </div>
                               </div>
                               

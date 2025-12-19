@@ -545,19 +545,19 @@ Please analyze my React/Vite website and help me implement these fixes to improv
                       <div className="admin-metric-value-group">
                         <span className="admin-metric-value-label">Average</span>
                         <span className={`admin-metric-value admin-metric-value-${status}`}>
-                          {data.count > 0 ? formatMetricValue(name, data.avg) : '—'}
+                          {data.count > 0 ? formatMetricValue(name, data.avg) : '-'}
                         </span>
                       </div>
                       <div className="admin-metric-value-group">
                         <span className="admin-metric-value-label">P50</span>
                         <span className="admin-metric-value">
-                          {data.count > 0 ? formatMetricValue(name, data.p50) : '—'}
+                          {data.count > 0 ? formatMetricValue(name, data.p50) : '-'}
                         </span>
                       </div>
                       <div className="admin-metric-value-group">
                         <span className="admin-metric-value-label">P95</span>
                         <span className="admin-metric-value">
-                          {data.count > 0 ? formatMetricValue(name, data.p95) : '—'}
+                          {data.count > 0 ? formatMetricValue(name, data.p95) : '-'}
                         </span>
                       </div>
                       <div className="admin-metric-value-group">

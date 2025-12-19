@@ -106,7 +106,7 @@ const fallbackContent = `
 
 <p>In that case we have, as required by the Package Travel and Linked Travel Arrangements Regulations 2018, protection in place to refund your payments to us for services not performed because of our insolvency. Please note that this does not provide a refund in the event of the insolvency of the relevant service provider.</p>
 
-<p>We have taken out insolvency protection with ABTA – The Travel Association. You can contact ABTA at 30 Park Street, London, SE1 9EQ; claims@abta.co.uk; 0203 758 8779) if services are denied because of our insolvency.</p>
+<p>We have taken out insolvency protection with ABTA - The Travel Association. You can contact ABTA at 30 Park Street, London, SE1 9EQ; claims@abta.co.uk; 0203 758 8779) if services are denied because of our insolvency.</p>
 
 <p><strong>Note:</strong> This insolvency protection does not cover contracts with parties other than with us, which can be performed despite our insolvency.</p>
 

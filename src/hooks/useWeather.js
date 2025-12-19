@@ -36,11 +36,25 @@ export function useWeather(lat, lon) {
           getWeatherForecast(lat, lon)
         ]);
 
-        setCurrent(currentData);
-        setForecast(groupForecastByDay(forecastData.list));
+        // Validate current data structure
+        if (!currentData || !currentData.weather || !Array.isArray(currentData.weather) || currentData.weather.length === 0) {
+          throw new Error('Invalid weather data received');
+        }
+
+        // Validate forecast data structure
+        if (!forecastData || !forecastData.list || !Array.isArray(forecastData.list)) {
+          logger.warn('Invalid forecast data structure, using empty forecast');
+          setCurrent(currentData);
+          setForecast([]);
+        } else {
+          setCurrent(currentData);
+          setForecast(groupForecastByDay(forecastData.list));
+        }
       } catch (err) {
         logger.error('Error fetching weather:', err);
-        setError(err.message);
+        setError(err.message || 'Weather data unavailable');
+        setCurrent(null);
+        setForecast(null);
       } finally {
         setLoading(false);
       }

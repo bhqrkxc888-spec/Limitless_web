@@ -242,7 +242,7 @@ function AdminDashboard() {
               <div className="admin-stat-card">
                 <div className="admin-stat-label">Avg LCP</div>
                 <div className={`admin-stat-value ${getLCPStatus(stats.avgLCP)}`}>
-                  {stats.avgLCP > 0 ? `${(stats.avgLCP / 1000).toFixed(2)}s` : '—'}
+                  {stats.avgLCP > 0 ? `${(stats.avgLCP / 1000).toFixed(2)}s` : '-'}
                 </div>
                 <div className="admin-stat-subtitle">
                   {stats.avgLCP <= 2500 ? 'Good' : stats.avgLCP <= 4000 ? 'Needs improvement' : 'Poor'}
@@ -252,7 +252,7 @@ function AdminDashboard() {
               <div className="admin-stat-card">
                 <div className="admin-stat-label">Avg CLS</div>
                 <div className={`admin-stat-value ${getCLSStatus(stats.avgCLS)}`}>
-                  {parseFloat(stats.avgCLS) > 0 ? stats.avgCLS : '—'}
+                  {parseFloat(stats.avgCLS) > 0 ? stats.avgCLS : '-'}
                 </div>
                 <div className="admin-stat-subtitle">
                   {parseFloat(stats.avgCLS) <= 0.1 ? 'Good' : parseFloat(stats.avgCLS) <= 0.25 ? 'Needs improvement' : 'Poor'}
@@ -262,7 +262,7 @@ function AdminDashboard() {
               <div className="admin-stat-card">
                 <div className="admin-stat-label">Avg SEO Score</div>
                 <div className={`admin-stat-value ${getSEOScoreStatus(stats.avgSEOScore)}`}>
-                  {stats.avgSEOScore > 0 ? stats.avgSEOScore : '—'}
+                  {stats.avgSEOScore > 0 ? stats.avgSEOScore : '-'}
                 </div>
                 <div className="admin-stat-subtitle">
                   {stats.pagesWithIssues} pages with issues
