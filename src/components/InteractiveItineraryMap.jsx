@@ -2,10 +2,13 @@
  * Interactive Itinerary Map Component
  * 
  * Displays cruise itinerary on an interactive Mapbox GL map with:
- * - Color-coded numbered markers (green=start, blue=ports, red=end)
- * - Clickable port markers with popups
- * - Route line between ports
- * - Zoom/pan controls
+ * - Color-coded numbered markers (purple=start/finish, blue=ports)
+ * - Clickable port markers with detailed popups
+ * - Multiple map styles (Outdoors, Satellite, Streets, Light, Dark)
+ * - 3D terrain visualization
+ * - Smooth animations and zoom controls
+ * - Fullscreen mode
+ * - Automatic round-trip detection (removes duplicate last day)
  * - Mobile-friendly
  */
 
@@ -22,18 +25,26 @@ function InteractiveItineraryMap({ itinerary, title }) {
   const [currentStyle, setCurrentStyle] = useState('outdoors');
   const popup = useRef(null);
 
-  // Filter and enrich itinerary data - combine round-trip ports
+  // Filter and enrich itinerary data - handle round-trips properly
   const ports = useMemo(() => {
     if (!Array.isArray(itinerary)) {
       console.warn('InteractiveItineraryMap: itinerary is not an array', itinerary);
       return [];
     }
     
+    // Filter out sea days and items without coordinates
     const filtered = itinerary.filter(item => {
-      // Include ports with coordinates, exclude sea days
       const hasCoords = item.lat && item.lon;
-      const notSeaDay = !item.is_sea_day && item.type !== 'sea';
-      return hasCoords && notSeaDay;
+      const portName = (item.port || item.location || '').toLowerCase();
+      
+      // Exclude sea days by checking multiple indicators
+      const isSeaDay = item.is_sea_day || 
+                       item.type === 'sea' || 
+                       portName.includes('at sea') ||
+                       portName.includes('cruising') ||
+                       portName === '';
+      
+      return hasCoords && !isSeaDay;
     });
     
     console.log(`InteractiveItineraryMap: Found ${filtered.length} ports with coordinates out of ${itinerary.length} total items`);
@@ -42,69 +53,63 @@ function InteractiveItineraryMap({ itinerary, title }) {
       console.error('InteractiveItineraryMap: No ports have coordinates!', itinerary);
     }
     
-    // Group by coordinates to detect round-trip ports
-    const portGroups = new Map();
+    // Enrich port data
+    const enrichedPorts = filtered.map((item, index) => ({
+      ...item,
+      index,
+      day: item.day || index + 1,
+      name: item.port || item.location || `Port ${index + 1}`,
+      lat: parseFloat(item.lat),
+      lon: parseFloat(item.lon),
+      type: item.type || 'port'
+    }));
     
-    filtered.forEach((item, index) => {
-      const lat = parseFloat(item.lat);
-      const lon = parseFloat(item.lon);
-      const coordKey = `${lat.toFixed(4)},${lon.toFixed(4)}`;
+    // Check for round-trip: first and last port at same location
+    if (enrichedPorts.length >= 2) {
+      const first = enrichedPorts[0];
+      const last = enrichedPorts[enrichedPorts.length - 1];
       
-      const enriched = {
-        ...item,
-        index,
-        day: item.day || index + 1,
-        name: item.port || item.location || `Port ${index + 1}`,
-        lat,
-        lon,
-        type: item.type || 'port'
-      };
+      // If first and last are at same location (within 0.01 degrees ~1km), it's a round trip
+      const latDiff = Math.abs(first.lat - last.lat);
+      const lonDiff = Math.abs(first.lon - last.lon);
       
-      if (portGroups.has(coordKey)) {
-        // Same location - combine into array
-        portGroups.get(coordKey).push(enriched);
-      } else {
-        portGroups.set(coordKey, [enriched]);
-      }
-    });
-    
-    // Convert groups to display ports
-    const result = [];
-    portGroups.forEach(group => {
-      if (group.length === 1) {
-        // Single visit - show as normal
-        result.push(group[0]);
-      } else {
-        // Multiple visits (round-trip) - combine into one marker
-        const types = group.map(p => p.type);
-        const days = group.map(p => p.day);
-        const isRoundTrip = types.includes('embark') && types.includes('disembark');
+      if (latDiff < 0.01 && lonDiff < 0.01) {
+        // Round trip detected - combine first and last into one marker
+        first.type = 'round-trip';
+        first.days = [first.day, last.day];
+        first.visits = [first, last];
+        first.isRoundTrip = true;
         
-        result.push({
-          ...group[0], // Use first instance as base
-          type: isRoundTrip ? 'round-trip' : group[0].type,
-          days: days.sort((a, b) => a - b), // All days sorted
-          visits: group, // All visit details
-          isRoundTrip
-        });
+        // Remove the last port (duplicate)
+        enrichedPorts.pop();
+        
+        console.log(`Round-trip detected: ${first.name} (Days ${first.days.join(' & ')})`);
       }
-    });
+    }
     
-    return result;
+    return enrichedPorts;
   }, [itinerary]);
 
-  // Get marker color based on type
-  const getMarkerColor = (port, index) => {
-    if (port.type === 'round-trip') {
-      return '#9333ea'; // Purple - Round-trip (start & finish)
+  // Get marker color - SIMPLIFIED: Purple for start/finish, Blue for everything else
+  const getMarkerColor = (port, index, totalPorts) => {
+    // Purple for round-trip ports (combined embark/disembark)
+    if (port.type === 'round-trip' || port.isRoundTrip) {
+      return '#9333ea'; // Purple
     }
-    if (index === 0 || port.type === 'embark' || port.type === 'embarkation') {
-      return '#22c55e'; // Green - Start
+    
+    // Purple for first or last port
+    if (index === 0 || index === totalPorts - 1) {
+      return '#9333ea'; // Purple - Start or Finish
     }
-    if (index === ports.length - 1 || port.type === 'disembark' || port.type === 'disembarkation') {
-      return '#ef4444'; // Red - End
+    
+    // Purple for explicit embark/disembark types
+    if (port.type === 'embark' || port.type === 'embarkation' || 
+        port.type === 'disembark' || port.type === 'disembarkation') {
+      return '#9333ea'; // Purple
     }
-    return '#3b82f6'; // Blue - Middle ports
+    
+    // Blue for all other ports
+    return '#3b82f6'; // Blue
   };
 
   // Create GeoJSON for ports
@@ -124,7 +129,7 @@ function InteractiveItineraryMap({ itinerary, title }) {
           day: port.days ? port.days[0] : port.day, // Use first day for display
           name: port.name,
           type: port.type,
-          color: getMarkerColor(port, index),
+          color: getMarkerColor(port, index, ports.length), // Pass total count
           description: port.description || '',
           country: port.country || '',
           index,
@@ -432,45 +437,31 @@ function InteractiveItineraryMap({ itinerary, title }) {
   return (
     <div className="interactive-itinerary-map-container">
       <div className="interactive-itinerary-map-wrapper">
-        <div ref={mapContainer} className="interactive-itinerary-map" />
-        
-        {/* Style Switcher */}
-        <div className="map-style-switcher">
-          <button 
-            className={`map-style-btn ${currentStyle === 'outdoors' ? 'active' : ''}`}
-            onClick={() => handleStyleChange('outdoors')}
-            title="Outdoors (Terrain)"
-          >
-            🗺️
-          </button>
-          <button 
-            className={`map-style-btn ${currentStyle === 'satellite' ? 'active' : ''}`}
-            onClick={() => handleStyleChange('satellite')}
-            title="Satellite View"
-          >
-            🛰️
-          </button>
-          <button 
-            className={`map-style-btn ${currentStyle === 'streets' ? 'active' : ''}`}
-            onClick={() => handleStyleChange('streets')}
-            title="Street Map"
-          >
-            📍
-          </button>
-          <button 
-            className={`map-style-btn ${currentStyle === 'light' ? 'active' : ''}`}
-            onClick={() => handleStyleChange('light')}
-            title="Light Mode"
-          >
-            ☀️
-          </button>
-          <button 
-            className={`map-style-btn ${currentStyle === 'dark' ? 'active' : ''}`}
-            onClick={() => handleStyleChange('dark')}
-            title="Dark Mode"
-          >
-            🌙
-          </button>
+        <div ref={mapContainer} className="interactive-itinerary-map">
+          {/* Style Switcher - Inside map container for fullscreen access */}
+          <div className="map-style-switcher">
+            <button 
+              className={`map-style-btn ${currentStyle === 'outdoors' ? 'active' : ''}`}
+              onClick={() => handleStyleChange('outdoors')}
+              title="Outdoors (Terrain)"
+            >
+              🗺️
+            </button>
+            <button 
+              className={`map-style-btn ${currentStyle === 'satellite' ? 'active' : ''}`}
+              onClick={() => handleStyleChange('satellite')}
+              title="Satellite View"
+            >
+              🛰️
+            </button>
+            <button 
+              className={`map-style-btn ${currentStyle === 'streets' ? 'active' : ''}`}
+              onClick={() => handleStyleChange('streets')}
+              title="Street Map"
+            >
+              📍
+            </button>
+          </div>
         </div>
       </div>
       
