@@ -6,29 +6,13 @@
   width: 100%;
 }
 
-/* Disclaimer */
+/* Disclaimer - small text below map */
 .itinerary-map-disclaimer {
-  background: linear-gradient(to right, #f8fafc, #f1f5f9);
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 14px 18px;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.itinerary-map-disclaimer svg {
-  flex-shrink: 0;
-  color: #64748b;
-  margin-top: 2px;
-}
-
-.itinerary-map-disclaimer p {
-  margin: 0;
-  font-size: 14px;
-  color: #475569;
-  line-height: 1.6;
+  margin: 12px 0 0 0;
+  font-size: 12px;
+  color: #94a3b8;
+  text-align: center;
+  font-style: italic;
 }
 
 .interactive-itinerary-map-wrapper {
@@ -91,6 +75,7 @@
   align-items: center;
   gap: 8px;
   margin-bottom: 8px;
+  flex-wrap: wrap; /* Allow badges to wrap to next line if needed */
 }
 
 .port-popup-day {

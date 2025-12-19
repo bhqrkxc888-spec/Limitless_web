@@ -21,7 +21,7 @@ function InteractiveItineraryMap({ itinerary, title }) {
   const [selectedPort, setSelectedPort] = useState(null);
   const popup = useRef(null);
 
-  // Filter and enrich itinerary data
+  // Filter and enrich itinerary data - handle duplicate ports
   const ports = useMemo(() => {
     if (!Array.isArray(itinerary)) {
       console.warn('InteractiveItineraryMap: itinerary is not an array', itinerary);
@@ -41,15 +41,36 @@ function InteractiveItineraryMap({ itinerary, title }) {
       console.error('InteractiveItineraryMap: No ports have coordinates!', itinerary);
     }
     
-    return filtered.map((item, index) => ({
-      ...item,
-      index,
-      day: item.day || index + 1,
-      name: item.port || item.location || `Port ${index + 1}`,
-      lat: parseFloat(item.lat),
-      lon: parseFloat(item.lon),
-      type: item.type || 'port'
-    }));
+    // Group ports by coordinates to handle duplicates (e.g., embark & disembark at same port)
+    const portMap = new Map();
+    
+    filtered.forEach((item, index) => {
+      const key = `${parseFloat(item.lat).toFixed(4)},${parseFloat(item.lon).toFixed(4)}`;
+      const enriched = {
+        ...item,
+        index,
+        day: item.day || index + 1,
+        name: item.port || item.location || `Port ${index + 1}`,
+        lat: parseFloat(item.lat),
+        lon: parseFloat(item.lon),
+        type: item.type || 'port'
+      };
+      
+      if (portMap.has(key)) {
+        // Duplicate location - combine days
+        const existing = portMap.get(key);
+        portMap.set(key, {
+          ...existing,
+          days: [...(existing.days || [existing.day]), enriched.day],
+          types: [...(existing.types || [existing.type]), enriched.type],
+          isDuplicate: true
+        });
+      } else {
+        portMap.set(key, enriched);
+      }
+    });
+    
+    return Array.from(portMap.values());
   }, [itinerary]);
 
   // Get marker color based on position
@@ -83,7 +104,10 @@ function InteractiveItineraryMap({ itinerary, title }) {
           color: getMarkerColor(port, index),
           description: port.description || '',
           country: port.country || '',
-          index
+          index,
+          // Include days and types arrays for duplicate ports (stringify for Mapbox)
+          days: port.days ? JSON.stringify(port.days) : null,
+          types: port.types ? JSON.stringify(port.types) : null
         }
       }))
     };
@@ -187,16 +211,29 @@ function InteractiveItineraryMap({ itinerary, title }) {
         const props = feature.properties;
         const coords = feature.geometry.coordinates.slice();
         
+        // Parse days and types if this is a duplicate port
+        const days = props.days ? JSON.parse(props.days) : [props.day];
+        const types = props.types ? JSON.parse(props.types) : [props.type];
+        
         // Build clean popup content
-        let popupHTML = `
-          <div class="port-popup-content">
-            <div class="port-popup-header">
-              <div class="port-popup-day">Day ${props.day}</div>
-              ${props.type === 'embark' || props.type === 'embarkation' ? '<div class="port-popup-badge embark">Embarkation</div>' : ''}
-              ${props.type === 'disembark' || props.type === 'disembarkation' ? '<div class="port-popup-badge disembark">Disembarkation</div>' : ''}
-            </div>
-            <div class="port-popup-name">${props.name}</div>
-        `;
+        let popupHTML = `<div class="port-popup-content"><div class="port-popup-header">`;
+        
+        // Show all days if duplicate
+        if (days.length > 1) {
+          popupHTML += `<div class="port-popup-day">Days ${days.join(' & ')}</div>`;
+        } else {
+          popupHTML += `<div class="port-popup-day">Day ${days[0]}</div>`;
+        }
+        
+        // Show all relevant badges
+        if (types.includes('embark') || types.includes('embarkation')) {
+          popupHTML += '<div class="port-popup-badge embark">Embarkation</div>';
+        }
+        if (types.includes('disembark') || types.includes('disembarkation')) {
+          popupHTML += '<div class="port-popup-badge disembark">Disembarkation</div>';
+        }
+        
+        popupHTML += `</div><div class="port-popup-name">${props.name}</div>`;
         
         if (props.description) {
           popupHTML += `<div class="port-popup-description">${props.description}</div>`;
@@ -246,16 +283,6 @@ function InteractiveItineraryMap({ itinerary, title }) {
 
   return (
     <div className="interactive-itinerary-map-container">
-      {/* Disclaimer */}
-      <div className="itinerary-map-disclaimer">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M12 16v-4"/>
-          <path d="M12 8h.01"/>
-        </svg>
-        <p>This map shows cruise ports only. Flights and hotels are not included in the route visualization.</p>
-      </div>
-      
       <div className="interactive-itinerary-map-wrapper">
         <div ref={mapContainer} className="interactive-itinerary-map" />
         
@@ -281,6 +308,11 @@ function InteractiveItineraryMap({ itinerary, title }) {
           </div>
         </div>
       </div>
+      
+      {/* Disclaimer - small text below map */}
+      <p className="itinerary-map-disclaimer">
+        This map shows cruise ports only. Flights and hotels are not included in the route visualization.
+      </p>
     </div>
   );
 }
