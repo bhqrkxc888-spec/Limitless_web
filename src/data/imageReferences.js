@@ -18,7 +18,7 @@ export const imageReferences = {
   // ====================
   site: {
     // ✅ Uploaded - manage via Admin → Website → Assets → Site
-    favicon: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/home/favicon.png',
+    favicon: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/favicon.webp',
     heroHome: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/home/hero.webp',
     // 📷 Upload via Admin: Social share image (1200x630px)
     ogImage: null,

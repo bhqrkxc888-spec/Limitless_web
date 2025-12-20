@@ -71,7 +71,7 @@ function Footer() {
               <Link to="/" className="footer-logo">
                 <div className="logo-container">
                   <img 
-                    src="https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/home/favicon.png" 
+                    src="https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/favicon.webp" 
                     alt="Limitless Cruises logo - gold cruise ship icon" 
                     className="logo-icon"
                     width="56"

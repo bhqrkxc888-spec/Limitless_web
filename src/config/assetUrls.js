@@ -25,8 +25,8 @@ export const SITE_ASSETS = {
   // Site logo (transparent PNG or SVG)
   logo: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Hero-logo.webp',
   
-  // Favicon (512x512 PNG) - using logo as favicon
-  favicon: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Hero-logo.webp',
+  // Favicon (WebP format, optimized)
+  favicon: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/favicon.webp',
 };
 
 // ============================================================================

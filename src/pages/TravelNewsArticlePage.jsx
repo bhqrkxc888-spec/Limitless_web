@@ -165,7 +165,7 @@ function TravelNewsArticlePage() {
       name: 'Limitless Cruises',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/home/favicon.png',
+        url: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/favicon.webp',
         width: 512,
         height: 512
       }
