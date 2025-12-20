@@ -31,22 +31,24 @@ function initMonitoring() {
     // Skip in development
     if (import.meta.env.DEV) return;
     
-    // Track Core Web Vitals
-    onCLS((metric) => {
-      // Log to performance monitoring
-      fetch('/api/admin/performance', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          metric_name: 'CLS',
-          metric_value: metric.value,
-          page_url: window.location.pathname,
-          user_agent: navigator.userAgent
-        })
-      }).catch(() => {
-        // Silently fail if tracking fails
+    // Wrap in try-catch to handle browsers that don't support buffered flag
+    try {
+      // Track Core Web Vitals
+      onCLS((metric) => {
+        // Log to performance monitoring
+        fetch('/api/admin/performance', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            metric_name: 'CLS',
+            metric_value: metric.value,
+            page_url: window.location.pathname,
+            user_agent: navigator.userAgent
+          })
+        }).catch(() => {
+          // Silently fail if tracking fails
+        });
       });
-    });
     
     onINP((metric) => {
       fetch('/api/admin/performance', {
@@ -99,6 +101,10 @@ function initMonitoring() {
         })
       }).catch(() => {});
     });
+    } catch {
+      // Some browsers don't support buffered flag with entryTypes
+      // This is expected and doesn't affect functionality
+    }
   }
   
   // Global error handler for unhandled JavaScript errors

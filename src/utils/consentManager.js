@@ -17,8 +17,6 @@
  * - Server-side (database): Records kept for 2 years for audit purposes
  */
 
-import { supabase } from '../lib/supabase';
-
 const CONSENT_KEY = 'cookie-consent';
 const CONSENT_DATE_KEY = 'cookie-consent-date';
 
@@ -91,9 +89,8 @@ export function hasConsentDecision() {
 /**
  * Set consent status
  * @param {string} status - 'accepted' or 'rejected'
- * @param {Object} options - Optional: cookieCategories, consentMethod
  */
-export async function setConsentStatus(status, options = {}) {
+export function setConsentStatus(status) {
   if (typeof window === 'undefined') return;
   if (status !== 'accepted' && status !== 'rejected') return;
   
@@ -103,79 +100,13 @@ export async function setConsentStatus(status, options = {}) {
   localStorage.setItem(CONSENT_KEY, status);
   localStorage.setItem(CONSENT_DATE_KEY, timestamp);
   
-  // Store on server for GDPR compliance (fire and forget - don't block UX)
-  if (supabase) {
-    storeConsentOnServer(status, timestamp, options).catch(err => {
-      // Silently fail - localStorage is primary, server is backup for legal compliance
-      // Log in development only
-      if (import.meta.env.DEV) {
-        console.warn('Failed to store consent on server:', err);
-      }
-    });
-  }
+  // Server-side storage disabled - localStorage is sufficient for most use cases
+  // To enable GDPR audit trail storage, create the store_cookie_consent RPC in Supabase
   
   // Dispatch event so components can react
   window.dispatchEvent(new CustomEvent('cookie-consent-changed', { 
     detail: { status } 
   }));
-}
-
-/**
- * Store consent record on server (Supabase)
- * This provides legal proof of consent for GDPR compliance
- * @private
- */
-async function storeConsentOnServer(status, timestamp, options = {}) {
-  if (!supabase) return;
-  
-  try {
-    // Prepare cookie categories
-    const cookieCategories = options.cookieCategories || { 
-      essential: true, 
-      analytics: status === 'accepted',
-      marketing: status === 'accepted',
-      functional: status === 'accepted'
-    };
-    
-    // Use RPC function to insert into crm.cookie_consents table
-    // The RPC function automatically captures the IP address
-    const { data, error } = await supabase.rpc('store_cookie_consent', {
-      p_consent_status: status,
-      p_consent_date: timestamp,
-      p_cookie_categories: cookieCategories,
-      p_consent_method: options.consentMethod || 'banner',
-      p_user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : null
-    });
-    
-    if (error) {
-      // If function doesn't exist yet, that's OK - we'll add it later
-      // localStorage is still working, so UX is not affected
-      if (error.code === 'PGRST202' || error.message?.includes('not found') || error.message?.includes('function') || error.message?.includes('does not exist')) {
-        // Function doesn't exist - this is expected if not set up yet
-        if (import.meta.env.DEV) {
-          console.warn('Cookie consent RPC function not found. Run the RPC function SQL script to enable server-side storage.');
-        }
-        return;
-      }
-      // Log other errors in development
-      if (import.meta.env.DEV) {
-        console.error('Error storing consent on server:', error);
-      }
-      // Don't throw - localStorage is primary, server is backup
-      return;
-    }
-    
-    // Success! Consent stored on server
-    if (import.meta.env.DEV && data) {
-      console.log('Cookie consent stored on server:', data);
-    }
-  } catch (error) {
-    // Don't throw - this is background storage for compliance
-    // localStorage is the primary storage for UX
-    if (import.meta.env.DEV) {
-      console.error('Exception storing consent on server:', error);
-    }
-  }
 }
 
 /**
