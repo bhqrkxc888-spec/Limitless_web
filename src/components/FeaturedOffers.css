@@ -49,11 +49,17 @@
   color: var(--clr-primary);
 }
 
-.featured-offers-nav:hover {
+.featured-offers-nav:hover:not(:disabled) {
   background: var(--clr-primary);
   color: var(--clr-text-on-primary);
   border-color: var(--clr-primary);
   transform: translateY(-50%) scale(1.05);
+}
+
+.featured-offers-nav:disabled {
+  opacity: 0;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .featured-offers-nav svg {

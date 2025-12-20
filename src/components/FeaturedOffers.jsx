@@ -5,9 +5,10 @@ import { useState, useEffect } from 'react';
 import './FeaturedOffers.css';
 
 function FeaturedOffers() {
+  // Fetch latest 10 offers (not filtered by featured flag)
+  // Sorted by date on server side
   const { offers, loading, error } = useOffers({ 
-    limit: 4, 
-    featured: true 
+    limit: 10
   });
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsToShow, setItemsToShow] = useState(3);
@@ -51,8 +52,8 @@ function FeaturedOffers() {
       <div className="container">
         <SectionHeader
           eyebrow="Latest Offers"
-          title="Special Cruise Deals"
-          subtitle="Exclusive offers and special deals. Book now to secure these limited-time prices."
+          title="Recently Added Cruise Deals"
+          subtitle="Discover our newest offers and special deals. More offers added regularly."
         />
 
         {loading && (
@@ -64,11 +65,12 @@ function FeaturedOffers() {
         {!loading && offers.length > 0 && (
           <>
             <div className="featured-offers-carousel-wrapper">
-              {offers.length > itemsToShow && (
+              {offers.length > itemsToShow && currentIndex > 0 && (
                 <button
                   className="featured-offers-nav featured-offers-prev"
                   onClick={goToPrev}
                   aria-label="Previous offers"
+                  disabled={currentIndex === 0}
                 >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M15 18l-6-6 6-6"/>
@@ -77,21 +79,22 @@ function FeaturedOffers() {
               )}
 
               <div className="featured-offers-grid">
-                {visibleOffers.map((offer, index) => (
+                {visibleOffers.map((offer) => (
                   <OfferCard 
                     key={offer.id} 
                     offer={offer} 
                     variant="featured"
-                    loading={index === 0 ? "eager" : "lazy"}
+                    loading="lazy"
                   />
                 ))}
               </div>
 
-              {offers.length > itemsToShow && (
+              {offers.length > itemsToShow && currentIndex < maxIndex && (
                 <button
                   className="featured-offers-nav featured-offers-next"
                   onClick={goToNext}
                   aria-label="Next offers"
+                  disabled={currentIndex >= maxIndex}
                 >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                     <path d="M9 18l6-6-6-6"/>
