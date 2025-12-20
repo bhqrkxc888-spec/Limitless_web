@@ -12,7 +12,7 @@ function LegalPageTemplate({ fallbackTitle, fallbackDescription, fallbackContent
   const location = useLocation();
   
   // Get canonical URL
-  const canonicalUrl = `https://limitlesscruises.com${location.pathname}`;
+  const canonicalUrl = `https://www.limitlesscruises.com${location.pathname}`;
 
   return (
     <main className="legal-page">

@@ -31,7 +31,7 @@ function CategoryPage() {
     '@type': 'Product',
     name: category.name,
     description: category.description,
-    url: `https://limitlesscruises.com/cruises/${category.slug}`,
+    url: `https://www.limitlesscruises.com/cruises/${category.slug}`,
     category: 'Cruise Holidays'
   };
 
@@ -41,7 +41,7 @@ function CategoryPage() {
       <SEO
         title={category.meta?.title || category.name}
         description={category.meta?.description || category.description}
-        canonical={`https://limitlesscruises.com/cruises/${category.slug}`}
+        canonical={`https://www.limitlesscruises.com/cruises/${category.slug}`}
         image={getOgImage(category.image)}
         structuredData={structuredData}
       />

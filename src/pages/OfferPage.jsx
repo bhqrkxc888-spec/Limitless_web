@@ -175,7 +175,7 @@ function OfferPage() {
       '@type': 'Product',
       name: offer.title || '',
       description: offer.short_description || '',
-      url: `https://limitlesscruises.com/offers/${offer.slug}`,
+      url: `https://www.limitlesscruises.com/offers/${offer.slug}`,
       category: 'Travel Package',
       brand: {
         '@type': 'Organization',
@@ -187,7 +187,7 @@ function OfferPage() {
         priceCurrency: offer.currency || 'GBP',
         availability: 'https://schema.org/InStock',
         priceValidUntil: offer.expires_at || defaultPriceValidUntil,
-        url: `https://limitlesscruises.com/offers/${offer.slug}`
+        url: `https://www.limitlesscruises.com/offers/${offer.slug}`
       }
     };
 
@@ -256,7 +256,7 @@ function OfferPage() {
       <SEO
         title={offer.meta_title || `${offer.title} | Cruise Offer`}
         description={offer.meta_description || offer.short_description || offer.full_description}
-        canonical={`https://limitlesscruises.com/offers/${offer.slug}`}
+        canonical={`https://www.limitlesscruises.com/offers/${offer.slug}`}
         keywords={offer.meta_keywords?.join(', ') || ''}
         image={galleryImages[0]?.url}
         structuredData={structuredData}

@@ -45,7 +45,7 @@ function SEO({
   
   // Site configuration
   const siteName = siteConfig.siteName || 'Limitless Cruises';
-  const siteUrl = siteConfig.siteUrl || 'https://limitlesscruises.com';
+  const siteUrl = siteConfig.siteUrl || 'https://www.limitlesscruises.com';
   const defaultDescription = 'Your dedicated cruise consultant. Book cruise holidays with preferential rates, exclusive offers and expert advice from Limitless Cruises.';
   const defaultImage = SITE_ASSETS.ogImage || `${siteUrl}/og-image.jpg`;
 
@@ -240,7 +240,7 @@ export function getOrganizationSchema() {
     '@type': 'TravelAgency',
     name: 'Limitless Cruises',
     description: 'Your personal cruise consultant. Book cruise holidays with preferential rates, exclusive offers and expert advice.',
-    url: 'https://limitlesscruises.com',
+    url: 'https://www.limitlesscruises.com',
     telephone: '+44 114 321 3208',
     email: 'travel@limitlesscruises.com',
     address: {
@@ -270,12 +270,12 @@ export function getWebSiteSchema() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     name: 'Limitless Cruises',
-    url: 'https://limitlesscruises.com',
+    url: 'https://www.limitlesscruises.com',
     potentialAction: {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: 'https://limitlesscruises.com/find-a-cruise?q={search_term_string}',
+        urlTemplate: 'https://www.limitlesscruises.com/find-a-cruise?q={search_term_string}',
       },
       'query-input': 'required name=search_term_string',
     },

@@ -34,7 +34,7 @@ function CruiseGuidesPage() {
     '@type': 'CollectionPage',
     name: 'Cruise Guides',
     description: 'Comprehensive cruise guides, destination tips, ship reviews, and expert advice from Limitless Cruises.',
-    url: 'https://limitlesscruises.com/cruise-guides',
+    url: 'https://www.limitlesscruises.com/cruise-guides',
   };
 
   return (
@@ -42,7 +42,7 @@ function CruiseGuidesPage() {
       <SEO
         title="Cruise Guides | Expert Tips & Destination Guides | UK Consultant"
         description="Comprehensive cruise guides from your personal UK cruise consultant. Destination guides, ship reviews, how-to tips, and expert comparisons to help plan your perfect cruise."
-        canonical="https://limitlesscruises.com/cruise-guides"
+        canonical="https://www.limitlesscruises.com/cruise-guides"
         keywords="cruise guides, destination guides, ship reviews, cruise tips, how to cruise, cruise planning, UK cruise consultant"
         structuredData={structuredData}
       />

@@ -23,7 +23,7 @@ function Breadcrumbs({ items = [] }) {
       '@type': 'ListItem',
       position: index + 1,
       name: item.label,
-      item: item.path ? `https://limitlesscruises.com${item.path}` : undefined
+      item: item.path ? `https://www.limitlesscruises.com${item.path}` : undefined
     }))
   };
 

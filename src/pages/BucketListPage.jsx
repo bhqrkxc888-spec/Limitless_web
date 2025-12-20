@@ -50,7 +50,7 @@ function BucketListPage() {
         '@type': 'Product',
         name: exp.title,
         description: exp.description,
-        url: `https://limitlesscruises.com/bucket-list/${exp.slug}`
+        url: `https://www.limitlesscruises.com/bucket-list/${exp.slug}`
       }
     }))
   };
@@ -90,7 +90,7 @@ function BucketListPage() {
       <SEO
         title="Extraordinary Cruise Experiences | Bucket List Voyages | Expert Planning"
         description="Extraordinary bucket list cruise experiences. World cruises, Antarctica expeditions, Japan & Asia. Expertly planned by your personal consultant."
-        canonical="https://limitlesscruises.com/bucket-list"
+        canonical="https://www.limitlesscruises.com/bucket-list"
         keywords="bucket list cruises, world cruise, antarctica cruise, extraordinary cruise experiences, luxury cruise holidays"
         structuredData={structuredData}
       />

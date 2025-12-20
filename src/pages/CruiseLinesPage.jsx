@@ -25,7 +25,7 @@ function CruiseLinesPage() {
       item: {
         '@type': 'Organization',
         name: cl.name,
-        url: `https://limitlesscruises.com/cruise-lines/${cl.slug}`
+        url: `https://www.limitlesscruises.com/cruise-lines/${cl.slug}`
       }
     }))
   };
@@ -54,7 +54,7 @@ function CruiseLinesPage() {
       <SEO
         title="Cruise Lines | P&O, MSC, Royal Caribbean & More | UK Expert Bookings"
         description="Book with confidence through your personal UK cruise consultant. Expert knowledge of all major cruise lines. ABTA protected, exclusive deals."
-        canonical="https://limitlesscruises.com/cruise-lines"
+        canonical="https://www.limitlesscruises.com/cruise-lines"
         structuredData={structuredData}
       />
 

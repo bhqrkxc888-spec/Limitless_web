@@ -66,6 +66,7 @@ function CruiseGuideDetailPage() {
   if (error || !guide) {
     return (
       <main className="guide-detail-page">
+        <SEO title="Guide Not Found" noindex={true} />
         <div className="container">
           <div className="guide-error">
             <h1>Guide Not Found</h1>
@@ -85,7 +86,7 @@ function CruiseGuideDetailPage() {
         title={guide.meta_title || guide.title}
         description={guide.meta_description || guide.excerpt}
         keywords={guide.meta_keywords?.join(', ')}
-        canonical={`https://limitlesscruises.com/cruise-guides/${guide.slug}`}
+        canonical={`https://www.limitlesscruises.com/cruise-guides/${guide.slug}`}
         image={guide.featured_image_url}
         type="article"
       />

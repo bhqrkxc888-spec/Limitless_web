@@ -138,7 +138,7 @@ function TestimonialsPage() {
       <SEO
         title="Client Experiences | Real Reviews from Cruise Travellers"
         description="Read genuine experiences from clients who've booked their cruise holidays through Limitless Cruises. See why travellers trust our personal consultant service."
-        canonical="https://limitlesscruises.com/testimonials"
+        canonical="https://www.limitlesscruises.com/testimonials"
       />
 
       <div className="container">

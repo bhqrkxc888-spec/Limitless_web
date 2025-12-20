@@ -74,7 +74,7 @@ function FindCruisePage() {
       <SEO
         title="Find Your Perfect Cruise | Bespoke Selection Service | Limitless Cruises"
         description="Discover your ideal cruise holiday with expert guidance. River cruises, ocean voyages, expedition adventures - all personally curated for you."
-        canonical="https://limitlesscruises.com/find-a-cruise"
+        canonical="https://www.limitlesscruises.com/find-a-cruise"
       />
       <div className="container">
         <Breadcrumbs items={breadcrumbs} />

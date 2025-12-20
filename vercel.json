@@ -1,5 +1,18 @@
 {
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path((?!www\\.).*)",
+      "destination": "https://www.limitlesscruises.com/:path*",
+      "permanent": true,
+      "has": [
+        {
+          "type": "host",
+          "value": "limitlesscruises.com"
+        }
+      ]
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

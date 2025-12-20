@@ -35,7 +35,7 @@ function DestinationPage() {
     '@type': 'TouristDestination',
     name: destination.name,
     description: destination.description,
-    url: `https://limitlesscruises.com/destinations/${destination.slug}`
+    url: `https://www.limitlesscruises.com/destinations/${destination.slug}`
   };
 
   return (
@@ -44,7 +44,7 @@ function DestinationPage() {
       <SEO
         title={destination.meta?.title || `${destination.name} Cruises`}
         description={destination.meta?.description || destination.description}
-        canonical={`https://limitlesscruises.com/destinations/${destination.slug}`}
+        canonical={`https://www.limitlesscruises.com/destinations/${destination.slug}`}
         image={getOgImage(destination.image)}
         structuredData={structuredData}
       />

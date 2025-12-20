@@ -38,7 +38,7 @@ function TravelNewsCategoryPage() {
     '@type': 'CollectionPage',
     name: `${categoryLabel} Travel News`,
     description: `Latest ${categoryLabel.toLowerCase()} news and updates from Limitless Cruises.`,
-    url: `https://limitlesscruises.com/travel-news/category/${category}`,
+    url: `https://www.limitlesscruises.com/travel-news/category/${category}`,
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: news.map((article, index) => ({
@@ -47,7 +47,7 @@ function TravelNewsCategoryPage() {
         item: {
           '@type': 'BlogPosting',
           headline: article.title,
-          url: `https://limitlesscruises.com/travel-news/${article.slug}`
+          url: `https://www.limitlesscruises.com/travel-news/${article.slug}`
         }
       }))
     }
@@ -59,7 +59,7 @@ function TravelNewsCategoryPage() {
       <SEO
         title={`${categoryLabel} News | Travel News`}
         description={`Stay informed with the latest ${categoryLabel.toLowerCase()} news, updates, and insights from Limitless Cruises.`}
-        canonical={`https://limitlesscruises.com/travel-news/category/${category}`}
+        canonical={`https://www.limitlesscruises.com/travel-news/category/${category}`}
         noindex={true}
         structuredData={structuredData}
       />

@@ -33,7 +33,7 @@ function BucketListExperiencePage() {
     '@type': 'Product',
     name: experience.title,
     description: experience.description,
-    url: `https://limitlesscruises.com/bucket-list/${experience.slug}`,
+    url: `https://www.limitlesscruises.com/bucket-list/${experience.slug}`,
     category: 'Travel Package',
     offers: {
       '@type': 'Offer',
@@ -57,7 +57,7 @@ function BucketListExperiencePage() {
       <SEO
         title={experience.meta?.title || `${experience.title} | Bucket List Experience`}
         description={experience.meta?.description || experience.description}
-        canonical={`https://limitlesscruises.com/bucket-list/${experience.slug}`}
+        canonical={`https://www.limitlesscruises.com/bucket-list/${experience.slug}`}
         keywords={experience.meta?.keywords?.join(', ') || ''}
         image={getOgImage(experience.heroImage)}
         structuredData={structuredData}

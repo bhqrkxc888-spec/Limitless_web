@@ -134,7 +134,7 @@ function TravelNewsArticlePage() {
     '@type': 'BlogPosting',
     headline: article.title,
     description: article.excerpt || article.meta_description,
-    url: `https://limitlesscruises.com/travel-news/${article.slug}`,
+    url: `https://www.limitlesscruises.com/travel-news/${article.slug}`,
     datePublished: article.published_at,
     image: article.featured_image_url || article.thumbnail_image_url,
     author: {
@@ -153,7 +153,7 @@ function TravelNewsArticlePage() {
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://limitlesscruises.com/travel-news/${article.slug}`
+      '@id': `https://www.limitlesscruises.com/travel-news/${article.slug}`
     }
   };
 
@@ -163,7 +163,7 @@ function TravelNewsArticlePage() {
       <SEO
         title={article.meta_title || article.title}
         description={article.meta_description || article.excerpt}
-        canonical={`https://limitlesscruises.com/travel-news/${article.slug}`}
+        canonical={`https://www.limitlesscruises.com/travel-news/${article.slug}`}
         keywords={article.meta_keywords?.join(', ') || ''}
         image={article.featured_image_url || article.thumbnail_image_url}
         structuredData={structuredData}

@@ -116,7 +116,7 @@ function OffersPage() {
     '@type': 'ItemList',
     name: 'Cruise Offers & Deals',
     description: 'Browse our latest cruise offers and special deals. Find your perfect cruise holiday with exclusive pricing and expert booking advice.',
-    url: 'https://limitlesscruises.com/offers',
+    url: 'https://www.limitlesscruises.com/offers',
     numberOfItems: filteredOffers.length,
     itemListElement: filteredOffers.slice(0, 10).map((offer, index) => ({
       '@type': 'ListItem',
@@ -125,7 +125,7 @@ function OffersPage() {
         '@type': 'Product',
         name: offer.title,
         description: offer.short_description || offer.full_description,
-        url: `https://limitlesscruises.com/offers/${offer.slug}`,
+        url: `https://www.limitlesscruises.com/offers/${offer.slug}`,
         image: offer.card_image_url,
         offers: {
           '@type': 'Offer',
@@ -143,7 +143,7 @@ function OffersPage() {
       <SEO
         title="Exclusive Cruise Offers | Hand-Selected Deals | UK Consultant"
         description="Hand-selected cruise offers and exclusive deals. Expertly curated by your personal consultant. ABTA protected bookings."
-        canonical={currentPage > 1 ? "https://limitlesscruises.com/offers" : undefined}
+        canonical={currentPage > 1 ? `https://www.limitlesscruises.com/offers?page=${currentPage}` : undefined}
         keywords="cruise offers, cruise deals, exclusive cruise packages, cruise specials, UK cruise consultant, ABTA protected cruises"
         structuredData={structuredData}
       />

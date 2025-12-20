@@ -23,7 +23,7 @@ function DestinationsPage() {
       item: {
         '@type': 'TouristDestination',
         name: dest.name,
-        url: `https://limitlesscruises.com/destinations/${dest.slug}`
+        url: `https://www.limitlesscruises.com/destinations/${dest.slug}`
       }
     }))
   };
@@ -57,7 +57,7 @@ function DestinationsPage() {
       <SEO
         title="Cruise Destinations | Mediterranean, Caribbean, Fjords & More | Expert UK Guidance"
         description="Expertly curated cruise destinations with personal UK consultant service. From Mediterranean elegance to Caribbean warmth, Norwegian fjords to exotic Asia."
-        canonical="https://limitlesscruises.com/destinations"
+        canonical="https://www.limitlesscruises.com/destinations"
         structuredData={structuredData}
       />
 

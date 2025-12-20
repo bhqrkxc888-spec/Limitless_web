@@ -211,7 +211,7 @@ function FAQPage() {
       <SEO
         title="Frequently Asked Questions | UK Cruise Consultant | Limitless Cruises"
         description="Find answers to common cruise questions. Booking, first-time cruising, what's included, cabins, family cruising, UK departures. Expert guidance from your personal consultant."
-        canonical="https://limitlesscruises.com/faq"
+        canonical="https://www.limitlesscruises.com/faq"
         structuredData={structuredData}
       />
 

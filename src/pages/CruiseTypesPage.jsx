@@ -81,7 +81,7 @@ function CruiseTypesPage() {
         '@type': 'Product',
         name: type.name,
         description: type.shortDescription,
-        url: `https://limitlesscruises.com/cruise-types/${type.slug}`
+        url: `https://www.limitlesscruises.com/cruise-types/${type.slug}`
       }
     }))
   };
@@ -119,7 +119,7 @@ function CruiseTypesPage() {
       <SEO
         title="Cruise Types | Family, Luxury, River, Expedition & More | Expert Guidance"
         description="Find your perfect cruise style with expert guidance. Family adventures, luxury escapes, river voyages, expedition cruises. Bespoke service from your UK consultant."
-        canonical="https://limitlesscruises.com/cruise-types"
+        canonical="https://www.limitlesscruises.com/cruise-types"
         structuredData={structuredData}
       />
 

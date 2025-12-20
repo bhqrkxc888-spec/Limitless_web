@@ -38,12 +38,12 @@ function TravelNewsPage() {
     '@type': 'Blog',
     name: 'Travel News',
     description: 'Latest travel news, cruise updates, destination guides, and travel tips from Limitless Cruises.',
-    url: 'https://limitlesscruises.com/travel-news',
+    url: 'https://www.limitlesscruises.com/travel-news',
     blogPost: news.map((article) => ({
       '@type': 'BlogPosting',
       headline: article.title,
       description: article.excerpt,
-      url: `https://limitlesscruises.com/travel-news/${article.slug}`,
+      url: `https://www.limitlesscruises.com/travel-news/${article.slug}`,
       datePublished: article.published_at,
       image: article.featured_image_url || article.thumbnail_image_url,
       author: {
@@ -61,7 +61,7 @@ function TravelNewsPage() {
       <SEO
         title="Travel News | Latest Cruise Updates | UK Consultant Insights"
         description="Stay up to date with the latest travel news, cruise line updates, destination guides. Expert insights from your personal UK cruise consultant."
-        canonical="https://limitlesscruises.com/travel-news"
+        canonical="https://www.limitlesscruises.com/travel-news"
         keywords="travel news, cruise news, destination guides, travel tips, UK cruise consultant, cruise industry updates"
         structuredData={structuredData}
       />

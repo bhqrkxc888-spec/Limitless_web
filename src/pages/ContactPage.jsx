@@ -16,7 +16,7 @@ function ContactPage() {
       <SEO
         title="Contact Your Personal Cruise Consultant | UK Based | Limitless Cruises"
         description="Speak with your personal cruise consultant. Call, WhatsApp, email or enquire online. ABTA protected, UK based, expert guidance for your perfect cruise."
-        canonical="https://limitlesscruises.com/contact"
+        canonical="https://www.limitlesscruises.com/contact"
       />
       <div className="container">
         <Breadcrumbs items={breadcrumbs} />

@@ -28,7 +28,7 @@ function TravelNewsTagPage() {
     '@type': 'CollectionPage',
     name: `${decodedTag} Travel News`,
     description: `Travel news articles tagged with "${decodedTag}" from Limitless Cruises.`,
-    url: `https://limitlesscruises.com/travel-news/tag/${tag}`,
+    url: `https://www.limitlesscruises.com/travel-news/tag/${tag}`,
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: news.map((article, index) => ({
@@ -37,7 +37,7 @@ function TravelNewsTagPage() {
         item: {
           '@type': 'BlogPosting',
           headline: article.title,
-          url: `https://limitlesscruises.com/travel-news/${article.slug}`
+          url: `https://www.limitlesscruises.com/travel-news/${article.slug}`
         }
       }))
     }
@@ -49,7 +49,7 @@ function TravelNewsTagPage() {
       <SEO
         title={`${decodedTag} | Travel News`}
         description={`Travel news articles tagged with "${decodedTag}". Browse related articles and stay informed with the latest travel updates.`}
-        canonical={`https://limitlesscruises.com/travel-news/tag/${tag}`}
+        canonical={`https://www.limitlesscruises.com/travel-news/tag/${tag}`}
         noindex={true}
         structuredData={structuredData}
       />

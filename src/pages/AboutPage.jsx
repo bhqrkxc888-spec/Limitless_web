@@ -15,7 +15,7 @@ function AboutPage() {
       <SEO
         title="About Katherine | CLIA Cruise Master | Your UK Personal Cruise Consultant"
         description="Meet Katherine, your personal UK cruise consultant. CLIA Cruise Master, ABTA protected, specialising in bespoke cruise holidays tailored to you."
-        canonical="https://limitlesscruises.com/about"
+        canonical="https://www.limitlesscruises.com/about"
       />
       <div className="container">
         <Breadcrumbs items={breadcrumbs} />
