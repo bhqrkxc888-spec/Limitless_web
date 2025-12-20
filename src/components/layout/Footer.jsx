@@ -46,12 +46,6 @@ function Footer() {
     return navigation.footer; // Show all links (site is fully launched)
   }, []);
 
-  // Prevent flash during initial auth check
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
-  useEffect(() => {
-    setIsInitialLoad(false);
-  }, []);
-
   // Get contact info from siteConfig
   const contact = {
     phone: siteConfig.phone,
@@ -71,7 +65,7 @@ function Footer() {
       {/* Main Footer */}
       <div className="footer-main">
         <div className="container">
-          <div className="footer-grid" style={{ opacity: isInitialLoad ? 0.95 : 1, transition: 'opacity 150ms ease' }}>
+          <div className="footer-grid">
             {/* Brand Column */}
             <div className="footer-brand">
               <Link to="/" className="footer-logo">
