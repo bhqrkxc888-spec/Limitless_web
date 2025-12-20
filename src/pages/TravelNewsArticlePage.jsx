@@ -19,6 +19,7 @@ function TravelNewsArticlePage() {
     message: ''
   });
   const [formStatus, setFormStatus] = useState({ submitting: false, submitted: false, error: null });
+  const [lastSubmitTime, setLastSubmitTime] = useState(0);
 
   // Track view when article is loaded
   useEffect(() => {
@@ -29,7 +30,16 @@ function TravelNewsArticlePage() {
 
   const handleContactSubmit = async (e) => {
     e.preventDefault();
+    
+    // Rate limiting: prevent submissions within 3 seconds
+    const now = Date.now();
+    if (now - lastSubmitTime < 3000) {
+      setFormStatus({ submitting: false, submitted: false, error: 'Please wait a moment before submitting again.' });
+      return;
+    }
+    
     setFormStatus({ submitting: true, submitted: false, error: null });
+    setLastSubmitTime(now);
     
     try {
       // Submit to contact endpoint
@@ -123,7 +133,9 @@ function TravelNewsArticlePage() {
       name: 'Limitless Cruises',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://limitlesscruises.com/logo.png'
+        url: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/home/favicon.png',
+        width: 512,
+        height: 512
       }
     },
     mainEntityOfPage: {

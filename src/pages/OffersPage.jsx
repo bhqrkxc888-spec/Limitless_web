@@ -123,7 +123,7 @@ function OffersPage() {
       <SEO
         title="Exclusive Cruise Offers | Hand-Selected Deals | UK Consultant"
         description="Hand-selected cruise offers and exclusive deals. Expertly curated by your personal consultant. ABTA protected bookings."
-        canonical="https://limitlesscruises.com/offers"
+        canonical={currentPage > 1 ? "https://limitlesscruises.com/offers" : undefined}
         keywords="cruise offers, cruise deals, exclusive cruise packages, cruise specials, UK cruise consultant, ABTA protected cruises"
         structuredData={structuredData}
       />

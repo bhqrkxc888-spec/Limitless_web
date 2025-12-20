@@ -1,9 +1,28 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import SEO from '../components/SEO';
 import { Button } from '../components/ui';
+import { logError } from '../services/errorTracking';
 import './NotFoundPage.css';
 
 function NotFoundPage() {
+  const location = useLocation();
+  
+  // Track 404 errors for monitoring
+  useEffect(() => {
+    logError(new Error('404 Page Not Found'), {
+      errorType: 'navigation',
+      severity: 'warning',
+      context: {
+        path: location.pathname,
+        search: location.search,
+        referrer: document.referrer
+      }
+    }).catch(() => {
+      // Silently fail if tracking fails
+    });
+  }, [location.pathname, location.search]);
+  
   return (
     <main className="not-found-page">
       <SEO

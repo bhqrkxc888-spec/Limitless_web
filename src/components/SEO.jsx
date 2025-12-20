@@ -325,7 +325,9 @@ export function getArticleSchema(article) {
       name: 'Limitless Cruises',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://limitlesscruises.com/logo.png',
+        url: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/home/favicon.png',
+        width: 512,
+        height: 512,
       },
     },
     mainEntityOfPage: {

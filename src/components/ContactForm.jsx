@@ -16,6 +16,7 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
   });
   
   const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+  const [lastSubmitTime, setLastSubmitTime] = useState(0);
 
   const handleChange = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
@@ -27,6 +28,16 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Rate limiting: prevent submissions within 3 seconds of last submission
+    const now = Date.now();
+    const timeSinceLastSubmit = now - lastSubmitTime;
+    if (timeSinceLastSubmit < 3000) {
+      logger.warn('Form submission rate limited');
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+      return;
+    }
     
     // Check consent
     if (!formData.consent) {
@@ -44,6 +55,7 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
     }
     
     setStatus('submitting');
+    setLastSubmitTime(now);
 
     try {
       const enquiryData = {

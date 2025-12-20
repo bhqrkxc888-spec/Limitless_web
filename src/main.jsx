@@ -5,6 +5,7 @@ import App from './App.jsx'
 import { logError, logNetworkError, logApiError } from './services/errorTracking'
 import { initPerformanceMonitoring } from './services/performanceMonitoring'
 import { initSEOMonitoring } from './services/seoMonitoring'
+import { onCLS, onFID, onLCP, onFCP, onTTFB } from 'web-vitals'
 
 // Initialize global error handlers and performance monitoring
 function initMonitoring() {
@@ -14,13 +15,90 @@ function initMonitoring() {
     requestIdleCallback(() => {
       initPerformanceMonitoring()
       initSEOMonitoring()
+      initWebVitals()
     })
   } else {
     // Fallback: defer by 2 seconds for older browsers
     setTimeout(() => {
       initPerformanceMonitoring()
       initSEOMonitoring()
+      initWebVitals()
     }, 2000)
+  }
+  
+  // Initialize Core Web Vitals tracking
+  function initWebVitals() {
+    // Skip in development
+    if (import.meta.env.DEV) return;
+    
+    // Track Core Web Vitals
+    onCLS((metric) => {
+      // Log to performance monitoring
+      fetch('/api/admin/performance', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          metric_name: 'CLS',
+          metric_value: metric.value,
+          page_url: window.location.pathname,
+          user_agent: navigator.userAgent
+        })
+      }).catch(() => {
+        // Silently fail if tracking fails
+      });
+    });
+    
+    onFID((metric) => {
+      fetch('/api/admin/performance', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          metric_name: 'FID',
+          metric_value: metric.value,
+          page_url: window.location.pathname,
+          user_agent: navigator.userAgent
+        })
+      }).catch(() => {});
+    });
+    
+    onLCP((metric) => {
+      fetch('/api/admin/performance', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          metric_name: 'LCP',
+          metric_value: metric.value,
+          page_url: window.location.pathname,
+          user_agent: navigator.userAgent
+        })
+      }).catch(() => {});
+    });
+    
+    onFCP((metric) => {
+      fetch('/api/admin/performance', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          metric_name: 'FCP',
+          metric_value: metric.value,
+          page_url: window.location.pathname,
+          user_agent: navigator.userAgent
+        })
+      }).catch(() => {});
+    });
+    
+    onTTFB((metric) => {
+      fetch('/api/admin/performance', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          metric_name: 'TTFB',
+          metric_value: metric.value,
+          page_url: window.location.pathname,
+          user_agent: navigator.userAgent
+        })
+      }).catch(() => {});
+    });
   }
   
   // Global error handler for unhandled JavaScript errors

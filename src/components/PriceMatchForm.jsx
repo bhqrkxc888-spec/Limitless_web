@@ -22,6 +22,7 @@ function PriceMatchForm() {
   const [file, setFile] = useState(null);
   const [fileError, setFileError] = useState('');
   const [status, setStatus] = useState('idle'); // idle, submitting, success, error
+  const [lastSubmitTime, setLastSubmitTime] = useState(0);
   const fileInputRef = useRef(null);
 
   const handleChange = (e) => {
@@ -62,6 +63,15 @@ function PriceMatchForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    // Rate limiting: prevent submissions within 3 seconds
+    const now = Date.now();
+    if (now - lastSubmitTime < 3000) {
+      logger.warn('Form submission rate limited');
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+      return;
+    }
+    
     // Check consent
     if (!formData.consent) {
       setStatus('error');
@@ -84,6 +94,7 @@ function PriceMatchForm() {
     }
     
     setStatus('submitting');
+    setLastSubmitTime(now);
     setFileError('');
 
     try {
