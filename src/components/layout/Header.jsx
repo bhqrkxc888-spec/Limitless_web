@@ -8,7 +8,7 @@ import './Header.css';
 function Header() {
   const [activeMenu, setActiveMenu] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [authStatus, setAuthStatus] = useState(isSiteLaunched());
+  const [, setAuthStatus] = useState(isSiteLaunched());
 
   // Listen for authentication changes (e.g., after preview login)
   useEffect(() => {

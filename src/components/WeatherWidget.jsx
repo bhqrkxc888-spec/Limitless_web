@@ -5,7 +5,7 @@
 
 import { useWeather } from '../hooks/useWeather';
 import { getWeatherIconUrl, formatTemperature } from '../services/weatherAPI';
-import { apiConfig, apiMessages } from '../config/apiConfig';
+import { apiConfig } from '../config/apiConfig';
 import './WeatherWidget.css';
 
 function WeatherWidget({ lat, lon, destinationName }) {

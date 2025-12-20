@@ -17,8 +17,12 @@ function Accordion({
   defaultOpen = false,
   variant = 'default' 
 }) {
+  // State must be declared at the top level before any conditionals
   const [isOpen, setIsOpen] = useState(defaultOpen);
-
+  const [openItems, setOpenItems] = useState(
+    defaultOpen && items?.[0]?.id ? [items[0].id] : []
+  );
+  
   // Single item mode (title + children)
   if (title && !items) {
     return (
@@ -54,9 +58,6 @@ function Accordion({
   }
 
   // Multi-item mode (items array)
-  const [openItems, setOpenItems] = useState(
-    defaultOpen && items?.[0]?.id ? [items[0].id] : []
-  );
 
   const toggleItem = (id) => {
     if (allowMultiple) {

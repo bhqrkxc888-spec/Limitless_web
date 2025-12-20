@@ -8,7 +8,7 @@
  */
 
 import { siteConfig } from '../config/siteConfig';
-import { getPublishStatus, shouldIndex as publishShouldIndex } from '../config/publishStatus';
+import { shouldIndex as publishShouldIndex } from '../config/publishStatus';
 
 // ============================================================================
 // TRACKING PARAMETERS TO STRIP
@@ -78,7 +78,8 @@ export function normalizeUrl(url) {
     const urlObj = new URL(url, baseUrl);
     
     // Strip tracking and filter params
-    [...TRACKING_PARAMS, ...FILTER_PARAMS].forEach(param => {
+    const allParams = [...TRACKING_PARAMS, ...FILTER_PARAMS];
+    allParams.forEach(param => {
       urlObj.searchParams.delete(param);
     });
     
@@ -188,7 +189,8 @@ export function shouldIncludeInSitemap(path) {
   
   // Must not be a blocked path
   for (const blocked of BLOCKED_PATHS) {
-    if (path.startsWith(blocked.replace(/\/$/, ''))) {
+    const normalizedBlocked = blocked.endsWith('/') ? blocked.slice(0, -1) : blocked;
+    if (path.startsWith(normalizedBlocked)) {
       return false;
     }
   }
@@ -231,14 +233,14 @@ export function getPageType(path) {
   }
   
   // Article pages
-  if (/^\/travel-news\/[^\/]+$/.test(normalizedPath) && 
+  if (/^\/travel-news\/[^/]+$/.test(normalizedPath) && 
       !normalizedPath.includes('/category/') && 
       !normalizedPath.includes('/tag/')) {
     return PAGE_TYPES.ARTICLE;
   }
   
   // Detail pages
-  if (/^\/(destinations|cruise-lines|cruise-types|bucket-list|cruise-guides|offers)\/[^\/]+$/.test(normalizedPath)) {
+  if (/^\/(destinations|cruise-lines|cruise-types|bucket-list|cruise-guides|offers)\/[^/]+$/.test(normalizedPath)) {
     return PAGE_TYPES.DETAIL;
   }
   

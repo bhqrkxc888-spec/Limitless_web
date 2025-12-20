@@ -174,7 +174,7 @@ function SEO({
     if (structuredData) {
       const dataArray = Array.isArray(structuredData) ? structuredData : [structuredData];
       
-      dataArray.forEach((data, index) => {
+      dataArray.forEach((data) => {
         const script = document.createElement('script');
         script.type = 'application/ld+json';
         script.setAttribute('data-dynamic', 'true');
@@ -231,10 +231,9 @@ function SEO({
 
 export default SEO;
 
-/**
- * Generate base structured data for the organization
- * This is used in index.html but can also be called programmatically
- */
+// Export helper functions for structured data generation
+// These are used by other components and the sitemap generator
+// eslint-disable-next-line react-refresh/only-export-components
 export function getOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
@@ -265,9 +264,7 @@ export function getOrganizationSchema() {
   };
 }
 
-/**
- * Generate WebSite schema with search action
- */
+// eslint-disable-next-line react-refresh/only-export-components
 export function getWebSiteSchema() {
   return {
     '@context': 'https://schema.org',
@@ -285,10 +282,7 @@ export function getWebSiteSchema() {
   };
 }
 
-/**
- * Generate BreadcrumbList schema
- * @param {Array<{name: string, url: string}>} items - Breadcrumb items
- */
+// eslint-disable-next-line react-refresh/only-export-components
 export function getBreadcrumbSchema(items) {
   return {
     '@context': 'https://schema.org',
@@ -302,10 +296,7 @@ export function getBreadcrumbSchema(items) {
   };
 }
 
-/**
- * Generate Article schema for blog posts
- * @param {Object} article - Article data
- */
+// eslint-disable-next-line react-refresh/only-export-components
 export function getArticleSchema(article) {
   return {
     '@context': 'https://schema.org',

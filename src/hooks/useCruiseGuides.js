@@ -43,14 +43,7 @@ export function useCruiseGuides(options = {}) {
     return () => {
       cancelled = true;
     };
-  }, [
-    options.limit,
-    options.offset,
-    options.featured,
-    options.guideType,
-    options.cruiseLineSlug,
-    options.destinationSlug,
-  ]);
+  }, [options]);
 
   return { guides, total, loading, error };
 }

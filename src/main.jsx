@@ -5,7 +5,7 @@ import App from './App.jsx'
 import { logError, logNetworkError, logApiError } from './services/errorTracking'
 import { initPerformanceMonitoring } from './services/performanceMonitoring'
 import { initSEOMonitoring } from './services/seoMonitoring'
-import { onCLS, onFID, onLCP, onFCP, onTTFB } from 'web-vitals'
+import { onCLS, onINP, onLCP, onFCP, onTTFB } from 'web-vitals'
 
 // Initialize global error handlers and performance monitoring
 function initMonitoring() {
@@ -48,12 +48,12 @@ function initMonitoring() {
       });
     });
     
-    onFID((metric) => {
+    onINP((metric) => {
       fetch('/api/admin/performance', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          metric_name: 'FID',
+          metric_name: 'INP',
           metric_value: metric.value,
           page_url: window.location.pathname,
           user_agent: navigator.userAgent

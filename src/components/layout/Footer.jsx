@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config/siteConfig';
 import { navigation } from '../../data/navigation';
 import { isSiteLaunched } from '../../config/launchConfig';
-import { hasConsentDecision } from '../../utils/consentManager';
 import CookieSettings from '../CookieSettings';
 import './Footer.css';
 
 function Footer() {
   const currentYear = new Date().getFullYear();
-  const [authStatus, setAuthStatus] = useState(isSiteLaunched());
+  const [, setAuthStatus] = useState(isSiteLaunched());
   const [showCookieSettings, setShowCookieSettings] = useState(false);
 
   // Listen for authentication changes (e.g., after preview login)

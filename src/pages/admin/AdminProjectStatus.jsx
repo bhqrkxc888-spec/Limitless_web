@@ -1168,6 +1168,7 @@ function AdminProjectStatus() {
   // Load saved task status from Supabase or localStorage
   useEffect(() => {
     loadTaskStatus();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const loadTaskStatus = useCallback(() => {

@@ -328,7 +328,7 @@ function PortWeatherCard({ port }) {
                                 <div className="port-forecast-condition">{day.condition || 'N/A'}</div>
                               </div>
                             );
-                          } catch (err) {
+                          } catch {
                             return null;
                           }
                         })}
@@ -337,7 +337,7 @@ function PortWeatherCard({ port }) {
                   )}
                 </>
               );
-            } catch (err) {
+            } catch {
               return (
                 <div className="port-weather-error">
                   <p>Weather data temporarily unavailable</p>

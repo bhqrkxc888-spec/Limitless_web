@@ -26,11 +26,6 @@ export const cruiseLines = [
     image: 'null',
     logo: null, // Logo to be uploaded to CRM
     
-    // SEO Meta
-    meta: {
-      title: 'P&O Cruises | UK\'s Favourite Cruise Line | Expert UK Bookings',
-      description: 'Book P&O Cruises with your personal consultant. Britannia, Iona, Arvia and more. Family-friendly British cruising, expertly booked.'
-    },
     
     // Why Choose section - benefit cards
     whyChoose: [
@@ -94,12 +89,6 @@ export const cruiseLines = [
         { club: 'H2O/The Scene', age: '13-17yr', morning: '-', afternoon: 'Open access', evening: 'Open access' }
       ],
       note: 'Times vary by ship. Teen spaces are open access; younger groups have set sessions.'
-    },
-    
-    // SEO Meta
-    meta: {
-      title: 'MSC Cruises | Mediterranean Elegance | UK Personal Consultant',
-      description: 'MSC Cruises expertly booked through your UK consultant. Bellissima, Meraviglia, World Europa. Mediterranean style, exceptional value.'
     },
 
     // Accessibility info

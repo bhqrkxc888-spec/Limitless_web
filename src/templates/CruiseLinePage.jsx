@@ -7,7 +7,7 @@ import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader, Accordion, DataTable } from '../components/ui';
 import NewsCard from '../components/NewsCard';
 import { useEffect, useState } from 'react';
-import { getHeroImage, getLogoImage, getOgImage } from '../utils/imageHelpers';
+import { getHeroImage, getOgImage } from '../utils/imageHelpers';
 import './CruiseLinePage.css';
 
 /**

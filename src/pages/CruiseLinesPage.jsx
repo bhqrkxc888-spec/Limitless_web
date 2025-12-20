@@ -3,7 +3,7 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader } from '../components/ui';
-import { getLogoImage, getCardImage } from '../utils/imageHelpers';
+import { getCardImage } from '../utils/imageHelpers';
 import './CruiseLinesPage.css';
 
 function CruiseLinesPage() {

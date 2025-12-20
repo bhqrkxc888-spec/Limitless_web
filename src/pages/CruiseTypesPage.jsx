@@ -2,8 +2,7 @@ import { cruiseTypes, getFeaturedCruiseTypes } from '../data/cruiseTypes';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
-import { Button, Card, SectionHeader } from '../components/ui';
-import { getCardImage } from '../utils/imageHelpers';
+import { Button, SectionHeader } from '../components/ui';
 import './CruiseTypesPage.css';
 
 // Icon components for each cruise type

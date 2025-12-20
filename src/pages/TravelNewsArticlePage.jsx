@@ -57,7 +57,7 @@ function TravelNewsArticlePage() {
       
       setFormStatus({ submitting: false, submitted: true, error: null });
       setContactForm({ name: '', email: '', phone: '', message: '' });
-    } catch (err) {
+    } catch {
       setFormStatus({ submitting: false, submitted: false, error: 'Failed to send. Please try again.' });
     }
   };

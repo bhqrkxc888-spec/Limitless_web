@@ -18,7 +18,7 @@ import { apiConfig } from '../config/apiConfig';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './InteractiveItineraryMap.css';
 
-function InteractiveItineraryMap({ itinerary, title }) {
+function InteractiveItineraryMap({ itinerary }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [currentPortIndex, setCurrentPortIndex] = useState(null); // Track current port for navigation
@@ -396,6 +396,7 @@ function InteractiveItineraryMap({ itinerary, title }) {
         map.current = null;
       }
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ports, portsGeoJSON, apiConfig.mapbox.enabled, apiConfig.mapbox.accessToken, apiConfig.mapbox.style]);
 
   // Handle style changes

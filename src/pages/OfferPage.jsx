@@ -159,6 +159,11 @@ function OfferPage() {
   const structuredData = useMemo(() => {
     if (!offer) return null;
     
+    // Helper to get display price
+    const displayPrice = offer.airport_prices?.length > 0 
+      ? Math.min(...offer.airport_prices.map(ap => ap.price))
+      : offer.price_from;
+    
     const data = {
       '@context': 'https://schema.org',
       '@type': 'Product',
@@ -172,7 +177,7 @@ function OfferPage() {
       },
       offers: {
         '@type': 'Offer',
-        price: getDisplayPrice(offer) || 0,
+        price: displayPrice || 0,
         priceCurrency: offer.currency || 'GBP',
         availability: 'https://schema.org/InStock',
         priceValidUntil: offer.expires_at || defaultPriceValidUntil,
@@ -186,18 +191,7 @@ function OfferPage() {
     }
 
     return data;
-  }, [
-    offer?.title,
-    offer?.short_description,
-    offer?.slug,
-    offer?.cruise_line_name,
-    offer?.currency,
-    offer?.expires_at,
-    offer?.price_from,
-    offer?.airport_prices,
-    galleryImages,
-    defaultPriceValidUntil
-  ]);
+  }, [offer, galleryImages, defaultPriceValidUntil]);
 
   // Loading state
   if (loading) {
