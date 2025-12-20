@@ -5,6 +5,8 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
+    // Enable sourcemaps for production debugging (hidden sourcemaps for security)
+    sourcemap: 'hidden',
     // Optimize chunk splitting for better caching
     rollupOptions: {
       output: {

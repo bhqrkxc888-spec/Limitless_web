@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "build:ssg": "cross-env VITE_SITE_LAUNCHED=true npm run sitemap && cross-env VITE_SITE_LAUNCHED=true vite build && cross-env VITE_SITE_LAUNCHED=true npm run prerender",
+    "build": "npm run lint && vite build",
+    "build:ssg": "npm run lint && cross-env VITE_SITE_LAUNCHED=true npm run sitemap && cross-env VITE_SITE_LAUNCHED=true vite build && cross-env VITE_SITE_LAUNCHED=true npm run prerender",
     "build:sitemap": "node scripts/generate-sitemap.js && vite build",
     "prerender": "node scripts/prerender.js",
     "sitemap": "node scripts/generate-sitemap.js",

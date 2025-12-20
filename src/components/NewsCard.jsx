@@ -94,12 +94,16 @@ function NewsCard({ article, variant = 'default' }) {
       <Link to={`/travel-news/${article.slug}`} className="news-card-horizontal">
         <div className="news-card-horizontal__image">
           {(article.featured_image_url || article.thumbnail_image_url) ? (
-            <img 
+            <OptimizedImage
               src={article.featured_image_url || article.thumbnail_image_url}
               alt={article.title}
-              width={article.featured_image_width || article.thumbnail_image_width}
-              height={article.featured_image_height || article.thumbnail_image_height}
-              loading="lazy"
+              width={article.featured_image_width || article.thumbnail_image_width || 600}
+              height={article.featured_image_height || article.thumbnail_image_height || 400}
+              priority={false}
+              sizes="(max-width: 768px) 100vw, 400px"
+              srcsetWidths={[400, 600, 800]}
+              quality={85}
+              objectFit="cover"
             />
           ) : (
             <div className="news-card-horizontal__placeholder">

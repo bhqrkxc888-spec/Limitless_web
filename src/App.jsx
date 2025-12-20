@@ -8,6 +8,7 @@ import Footer from './components/layout/Footer'
 import CookieConsent from './components/CookieConsent'
 import FloatingWhatsApp from './components/FloatingWhatsApp'
 import DevModeIndicator from './components/DevModeIndicator'
+import ErrorBoundary from './components/ErrorBoundary'
 
 // Route Protection
 import ProtectedRoute from './components/ProtectedRoute'
@@ -229,10 +230,12 @@ function AppLayout() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <AppLayout />
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <ScrollToTop />
+        <AppLayout />
+      </BrowserRouter>
+    </ErrorBoundary>
   )
 }
 

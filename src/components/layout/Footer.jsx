@@ -81,6 +81,11 @@ function Footer() {
                     src="https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/home/favicon.png" 
                     alt="Limitless Cruises logo - gold cruise ship icon" 
                     className="logo-icon"
+                    width="56"
+                    height="56"
+                    loading="lazy"
+                    decoding="async"
+                    fetchpriority="low"
                   />
                   <div className="logo-text">
                     <span className="logo-name">Limitless Cruises</span>

@@ -1,0 +1,180 @@
+/* ========================================
+   ERROR BOUNDARY
+   Fallback UI for caught React errors
+   ======================================== */
+
+.error-boundary {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.error-boundary__container {
+  max-width: 600px;
+  text-align: center;
+  background: white;
+  padding: var(--space-12);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+}
+
+.error-boundary__icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--space-6);
+  color: var(--clr-error, #dc2626);
+}
+
+.error-boundary__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.error-boundary__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-primary);
+  margin-bottom: var(--space-4);
+}
+
+.error-boundary__message {
+  font-size: var(--font-size-lg);
+  color: var(--clr-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-8);
+}
+
+.error-boundary__actions {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-8);
+}
+
+.error-boundary__button {
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.error-boundary__button--primary {
+  background-color: var(--clr-primary);
+  color: white;
+}
+
+.error-boundary__button--primary:hover {
+  background-color: var(--clr-primary-hover, #1e2638);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.error-boundary__button--secondary {
+  background-color: white;
+  color: var(--clr-primary);
+  border: 2px solid var(--clr-primary);
+}
+
+.error-boundary__button--secondary:hover {
+  background-color: var(--clr-primary);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.error-boundary__contact {
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-tertiary);
+  margin-top: var(--space-6);
+}
+
+.error-boundary__link {
+  color: var(--clr-primary);
+  text-decoration: underline;
+  transition: color var(--transition-fast);
+}
+
+.error-boundary__link:hover {
+  color: var(--clr-secondary);
+}
+
+.error-boundary__details {
+  margin-top: var(--space-8);
+  text-align: left;
+  background: #f8f9fa;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid #e9ecef;
+}
+
+.error-boundary__details summary {
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  color: var(--clr-primary);
+  user-select: none;
+}
+
+.error-boundary__details summary:hover {
+  color: var(--clr-secondary);
+}
+
+.error-boundary__stack {
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  font-size: var(--font-size-xs);
+  line-height: 1.5;
+  color: #495057;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.error-boundary__stack strong {
+  display: block;
+  color: var(--clr-error, #dc2626);
+  margin-bottom: var(--space-2);
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .error-boundary {
+    padding: var(--space-4);
+  }
+
+  .error-boundary__container {
+    padding: var(--space-8);
+  }
+
+  .error-boundary__icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .error-boundary__title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .error-boundary__message {
+    font-size: var(--font-size-base);
+  }
+
+  .error-boundary__actions {
+    flex-direction: column;
+  }
+
+  .error-boundary__button {
+    width: 100%;
+  }
+}
+
