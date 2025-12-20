@@ -272,6 +272,20 @@ function OfferPage() {
       {/* Offer Header with Gallery */}
       <section className="offer-header">
         <div className="container">
+          {/* Full-width title and category */}
+          <div className="offer-header__top">
+            {offer.offer_type && (
+              <span className="offer-type-tag">
+                {getOfferTypeLabel(offer.offer_type)}
+              </span>
+            )}
+            <h1 className="offer-header__title">{offer.title}</h1>
+            {offer.short_description && (
+              <p className="offer-header__description">{offer.short_description}</p>
+            )}
+          </div>
+
+          {/* Magazine-style layout: Image + Details side by side */}
           <div className="offer-header__layout">
             {/* Gallery Section */}
             <div className="offer-gallery">
@@ -357,20 +371,8 @@ function OfferPage() {
               })()}
             </div>
 
-            {/* Offer Info */}
+            {/* Offer Info - Details and Pricing */}
             <div className="offer-header__info">
-              {offer.offer_type && (
-                <span className="offer-type-tag">
-                  {getOfferTypeLabel(offer.offer_type)}
-                </span>
-              )}
-              
-              <h1 className="offer-header__title">{offer.title}</h1>
-              
-              {offer.short_description && (
-                <p className="offer-header__description">{offer.short_description}</p>
-              )}
-
               {/* Quick Details */}
               <div className="offer-quick-details">
                 {offer.cruise_line_name && (
