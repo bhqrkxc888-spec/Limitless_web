@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useTravelNewsArticle } from '../hooks/useTravelNews';
 import { incrementTravelNewsView } from '../services/travelNewsAPI';
+import { supabase } from '../lib/supabase';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import { Button, SectionHeader } from '../components/ui';
@@ -53,23 +54,41 @@ function TravelNewsArticlePage() {
     setFormStatus({ submitting: true, submitted: false, error: null });
     
     try {
-      // Submit to contact endpoint
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...contactForm,
-          source: `News Article: ${article?.title || slug}`,
-          articleUrl: window.location.href
-        })
-      });
+      // Prepare enquiry data
+      const enquiryData = {
+        name: contactForm.name,
+        email: contactForm.email,
+        phone: contactForm.phone || null,
+        message: contactForm.message,
+        source: `News Article: ${article?.title || slug}`,
+        context: {
+          articleUrl: window.location.href,
+          articleSlug: slug,
+          articleTitle: article?.title
+        }
+      };
+
+      // Submit to Supabase with 10s timeout
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Request timeout')), 10000)
+      );
+
+      const { error } = await Promise.race([
+        supabase.from('website_enquiries').insert([enquiryData]),
+        timeoutPromise
+      ]);
       
-      if (!response.ok) throw new Error('Failed to send');
+      if (error) throw error;
       
       setFormStatus({ submitting: false, submitted: true, error: null });
       setContactForm({ name: '', email: '', phone: '', message: '' });
-    } catch {
-      setFormStatus({ submitting: false, submitted: false, error: 'Failed to send. Please try again.' });
+    } catch (err) {
+      console.error('Contact form error:', err);
+      setFormStatus({ 
+        submitting: false, 
+        submitted: false, 
+        error: 'Failed to send. Please try again or contact us directly.' 
+      });
     } finally {
       isSubmitting.current = false;
     }
