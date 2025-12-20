@@ -21,8 +21,6 @@
   display: grid;
   grid-template-columns: 1.5fr repeat(3, 1fr);
   gap: var(--space-12);
-  /* Reserve minimum height to prevent layout shift during auth check */
-  min-height: 400px;
 }
 
 /* ========================================

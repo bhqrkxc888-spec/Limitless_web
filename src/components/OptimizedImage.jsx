@@ -91,7 +91,7 @@ function OptimizedImage({
       width={width}
       height={height}
       loading={priority ? 'eager' : 'lazy'}
-      fetchPriority={priority ? 'high' : 'low'}
+      fetchPriority={priority ? 'high' : 'auto'}
       decoding={priority ? 'sync' : 'async'}
       className={className}
       style={{

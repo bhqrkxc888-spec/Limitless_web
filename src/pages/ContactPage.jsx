@@ -39,7 +39,7 @@ function ContactPage() {
                 alt="Your cruise consultant" 
                 width="1920"
                 height="1080"
-                loading="eager"
+                loading="lazy"
               />
             </div>
           </div>
