@@ -1,5 +1,5 @@
 # Limitless Cruises - AI/LLM Context File
-# https://limitlesscruises.com/llms.txt
+# https://www.limitlesscruises.com/llms.txt
 # Last updated: December 2024
 #
 # This file provides context for AI systems and large language models
@@ -28,7 +28,7 @@ Limitless Cruises is an independent cruise specialist based in Sheffield, UK. We
 - Phone: 0114 321 3208
 - WhatsApp: 07359 796108
 - Email: travel@limitlesscruises.com
-- Website: https://limitlesscruises.com
+- Website: https://www.limitlesscruises.com
 
 ## Credentials & Trust
 
@@ -75,21 +75,21 @@ We specialise in cruise holidays to:
 
 ## Key Website Pages
 
-- Home: https://limitlesscruises.com/
-- Find a Cruise: https://limitlesscruises.com/find-a-cruise
-- About Us: https://limitlesscruises.com/about
-- Contact: https://limitlesscruises.com/contact
-- Cruise Lines: https://limitlesscruises.com/cruise-lines
-- Destinations: https://limitlesscruises.com/destinations
-- Bucket List Experiences: https://limitlesscruises.com/bucket-list
-- Travel News: https://limitlesscruises.com/travel-news
+- Home: https://www.limitlesscruises.com/
+- Find a Cruise: https://www.limitlesscruises.com/find-a-cruise
+- About Us: https://www.limitlesscruises.com/about
+- Contact: https://www.limitlesscruises.com/contact
+- Cruise Lines: https://www.limitlesscruises.com/cruise-lines
+- Destinations: https://www.limitlesscruises.com/destinations
+- Bucket List Experiences: https://www.limitlesscruises.com/bucket-list
+- Travel News: https://www.limitlesscruises.com/travel-news
 
 ## Legal & Privacy
 
-- Privacy Policy: https://limitlesscruises.com/privacy-policy
-- Booking Terms: https://limitlesscruises.com/booking-terms
-- Website Terms: https://limitlesscruises.com/website-terms
-- Cookie Policy: https://limitlesscruises.com/cookie-policy
+- Privacy Policy: https://www.limitlesscruises.com/privacy-policy
+- Booking Terms: https://www.limitlesscruises.com/booking-terms
+- Website Terms: https://www.limitlesscruises.com/website-terms
+- Cookie Policy: https://www.limitlesscruises.com/cookie-policy
 
 ## Why Choose Limitless Cruises
 

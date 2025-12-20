@@ -74,7 +74,7 @@ export const BLOCKED_PATHS = [
  */
 export function normalizeUrl(url) {
   try {
-    const baseUrl = siteConfig.siteUrl || 'https://limitlesscruises.com';
+    const baseUrl = siteConfig.siteUrl || 'https://www.limitlesscruises.com';
     const urlObj = new URL(url, baseUrl);
     
     // Strip tracking and filter params
@@ -96,7 +96,7 @@ export function normalizeUrl(url) {
     return `${baseUrl}${pathname}${queryString}`;
   } catch {
     // If URL parsing fails, return as-is with base URL prepended
-    const baseUrl = siteConfig.siteUrl || 'https://limitlesscruises.com';
+    const baseUrl = siteConfig.siteUrl || 'https://www.limitlesscruises.com';
     return url.startsWith('http') ? url : `${baseUrl}${url}`;
   }
 }
@@ -108,7 +108,7 @@ export function normalizeUrl(url) {
  */
 export function getCanonicalUrl(path) {
   if (!path) {
-    return siteConfig.siteUrl || 'https://limitlesscruises.com';
+    return siteConfig.siteUrl || 'https://www.limitlesscruises.com';
   }
   
   // Handle full URLs

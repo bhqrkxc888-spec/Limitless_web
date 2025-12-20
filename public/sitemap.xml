@@ -4,434 +4,440 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
-    <loc>https://limitlesscruises.com/</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/about</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/about</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/contact</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/contact</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/find-a-cruise</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/find-a-cruise</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/offers</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/offers</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/travel-news</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/travel-news</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/destinations</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-guides</loc>
+    <lastmod>2025-12-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.limitlesscruises.com/destinations</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-lines</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-lines</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-types</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-types</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/faq</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/faq</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/privacy-policy</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/privacy-policy</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cookie-policy</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cookie-policy</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/booking-terms</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/booking-terms</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/website-terms</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/website-terms</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/price-match-guarantee</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/price-match-guarantee</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-lines/p-and-o-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-lines/p-and-o-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-lines/royal-caribbean</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-lines/royal-caribbean</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-lines/msc-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-lines/msc-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-lines/norwegian-cruise-line</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-lines/norwegian-cruise-line</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-lines/disney-cruise-line</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-lines/disney-cruise-line</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-lines/celebrity-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-lines/celebrity-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-lines/fred-olsen-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-lines/fred-olsen-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-lines/holland-america-line</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-lines/holland-america-line</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-lines/marella-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-lines/marella-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-lines/virgin-voyages-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-lines/virgin-voyages-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-lines/viking-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-lines/viking-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-lines/seabourn-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-lines/seabourn-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-lines/princess-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-lines/princess-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-lines/azamara-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-lines/azamara-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-lines/cunard-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-lines/cunard-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruise-lines/ae-expeditions</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruise-lines/ae-expeditions</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/destinations/mediterranean-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/destinations/mediterranean-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/destinations/caribbean-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/destinations/caribbean-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/destinations/norwegian-fjords-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/destinations/norwegian-fjords-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/destinations/atlantic-islands-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/destinations/atlantic-islands-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/destinations/alaska-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/destinations/alaska-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/destinations/baltic-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/destinations/baltic-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/destinations/british-isles-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/destinations/british-isles-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/destinations/transatlantic-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/destinations/transatlantic-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/destinations/hawaii-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/destinations/hawaii-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/destinations/australia-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/destinations/australia-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/destinations/greek-isles-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/destinations/greek-isles-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/destinations/adriatic-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/destinations/adriatic-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/destinations/scandinavia-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/destinations/scandinavia-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/destinations/canada-new-england-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/destinations/canada-new-england-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/destinations/panama-canal-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/destinations/panama-canal-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/destinations/southeast-asia-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/destinations/southeast-asia-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list/world-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list/world-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list/antarctica-expeditions</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list/antarctica-expeditions</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list/japan-asia-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list/japan-asia-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list/rocky-mountaineer-alaska</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list/rocky-mountaineer-alaska</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list/galapagos-expeditions</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list/galapagos-expeditions</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list/northern-lights-arctic</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list/northern-lights-arctic</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list/south-america-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list/south-america-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list/middle-east-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list/middle-east-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list/pacific-new-zealand-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list/pacific-new-zealand-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list/transatlantic-crossings</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list/transatlantic-crossings</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list/amazon-river-expeditions</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list/amazon-river-expeditions</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list/iceland-circumnavigation</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list/iceland-circumnavigation</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list/european-river-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list/european-river-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list/great-barrier-reef-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list/great-barrier-reef-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list/polynesian-islands-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list/polynesian-islands-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list/midnight-sun-voyages</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list/midnight-sun-voyages</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/bucket-list/grand-voyages</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/bucket-list/grand-voyages</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruises/family-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruises/family-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruises/adult-only-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruises/adult-only-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruises/uk-no-fly-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruises/uk-no-fly-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruises/luxury-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruises/luxury-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruises/river-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruises/river-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruises/expedition-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruises/expedition-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://limitlesscruises.com/cruises/solo-cruises</loc>
-    <lastmod>2025-12-19</lastmod>
+    <loc>https://www.limitlesscruises.com/cruises/solo-cruises</loc>
+    <lastmod>2025-12-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

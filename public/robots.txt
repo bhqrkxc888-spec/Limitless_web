@@ -1,5 +1,5 @@
 # robots.txt for Limitless Cruises
-# https://limitlesscruises.com/robots.txt
+# https://www.limitlesscruises.com/robots.txt
 # Last updated: December 2024
 
 # ===========================================
@@ -78,7 +78,7 @@ Crawl-delay: 1
 # SITEMAP & ADDITIONAL RESOURCES
 # ===========================================
 
-Sitemap: https://limitlesscruises.com/sitemap.xml
+Sitemap: https://www.limitlesscruises.com/sitemap.xml
 
 # For AI/LLM context, see:
-# https://limitlesscruises.com/llms.txt
+# https://www.limitlesscruises.com/llms.txt

@@ -40,7 +40,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Configuration
-const SITE_URL = 'https://limitlesscruises.com';
+const SITE_URL = 'https://www.limitlesscruises.com';
 const today = new Date().toISOString().split('T')[0];
 
 // ============================================================================

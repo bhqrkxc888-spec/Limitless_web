@@ -1,6 +1,6 @@
 export const siteConfig = {
   siteName: 'Limitless Cruises',
-  siteUrl: 'https://limitlesscruises.com', // Canonical site URL for SEO
+  siteUrl: 'https://www.limitlesscruises.com', // Canonical site URL for SEO
   tagline: 'Independent Cruise Specialist for UK Sailings & Worldwide Voyages',
   phone: '0114 321 3208',
   whatsapp: '07359 796108',

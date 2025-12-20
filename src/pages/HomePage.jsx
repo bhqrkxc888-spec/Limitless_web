@@ -1,6 +1,6 @@
+import { lazy, Suspense } from 'react';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
-import ContactForm from '../components/ContactForm';
 import BucketListFeatured from '../components/BucketListFeatured'
 import FeaturedOffers from '../components/FeaturedOffers';
 import LatestNewsTile from '../components/LatestNewsTile';
@@ -8,6 +8,9 @@ import { Button } from '../components/ui';
 import OptimizedImage from '../components/OptimizedImage';
 import { homeHeroImages } from '../utils/imageHelpers';
 import './HomePage.css';
+
+// Lazy load ContactForm (below the fold)
+const ContactForm = lazy(() => import('../components/ContactForm'));
 
 // SVG Icons as components for clean, professional look
 const ShieldIcon = () => (
@@ -341,7 +344,9 @@ function HomePage() {
               </ul>
             </div>
             <div className="contact-form-container">
-              <ContactForm context="homepage-elegant" />
+              <Suspense fallback={<div style={{ padding: '2rem', textAlign: 'center' }}>Loading form...</div>}>
+                <ContactForm context="homepage-elegant" />
+              </Suspense>
             </div>
           </div>
         </div>
