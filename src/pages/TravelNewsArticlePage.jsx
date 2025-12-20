@@ -4,12 +4,16 @@ import { incrementTravelNewsView } from '../services/travelNewsAPI';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import { Button, SectionHeader } from '../components/ui';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import './TravelNewsArticlePage.css';
 
 function TravelNewsArticlePage() {
   const { slug } = useParams();
-  const { article, loading, error } = useTravelNewsArticle(slug);
+  
+  // Validate slug format
+  const isValidSlug = slug && /^[a-z0-9-]+$/i.test(slug);
+  
+  const { article, loading, error } = useTravelNewsArticle(isValidSlug ? slug : null);
   
   // Contact form state
   const [contactForm, setContactForm] = useState({
@@ -19,7 +23,8 @@ function TravelNewsArticlePage() {
     message: ''
   });
   const [formStatus, setFormStatus] = useState({ submitting: false, submitted: false, error: null });
-  const [lastSubmitTime, setLastSubmitTime] = useState(0);
+  const lastSubmitTime = useRef(0);
+  const isSubmitting = useRef(false);
 
   // Track view when article is loaded
   useEffect(() => {
@@ -31,15 +36,21 @@ function TravelNewsArticlePage() {
   const handleContactSubmit = async (e) => {
     e.preventDefault();
     
+    // Immediate double-submit protection
+    if (isSubmitting.current) {
+      return;
+    }
+    
     // Rate limiting: prevent submissions within 3 seconds
     const now = Date.now();
-    if (now - lastSubmitTime < 3000) {
+    if (now - lastSubmitTime.current < 3000) {
       setFormStatus({ submitting: false, submitted: false, error: 'Please wait a moment before submitting again.' });
       return;
     }
     
+    isSubmitting.current = true;
+    lastSubmitTime.current = now;
     setFormStatus({ submitting: true, submitted: false, error: null });
-    setLastSubmitTime(now);
     
     try {
       // Submit to contact endpoint
@@ -59,6 +70,8 @@ function TravelNewsArticlePage() {
       setContactForm({ name: '', email: '', phone: '', message: '' });
     } catch {
       setFormStatus({ submitting: false, submitted: false, error: 'Failed to send. Please try again.' });
+    } finally {
+      isSubmitting.current = false;
     }
   };
 
@@ -97,14 +110,14 @@ function TravelNewsArticlePage() {
   }
 
   // Error state
-  if (error || !article) {
+  if (!isValidSlug || error || !article) {
     return (
       <main className="travel-news-article-page">
         <SEO title="Article Not Found" />
         <div className="container section">
           <div className="article-not-found">
             <h1>Article Not Found</h1>
-            <p>Sorry, we couldn't find the article you're looking for. It may have expired or been removed.</p>
+            <p>{!isValidSlug ? 'Invalid article URL.' : 'Sorry, we couldn\'t find the article you\'re looking for. It may have expired or been removed.'}</p>
             <div className="article-actions">
               <Button to="/travel-news">View All Articles</Button>
               <Button to="/contact" variant="outline">Contact Us</Button>

@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useOffers } from '../hooks/useOffers';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
@@ -26,11 +27,34 @@ const DESTINATIONS = [
 ];
 
 function OffersPage() {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [selectedType, setSelectedType] = useState(null);
   const [selectedDestination, setSelectedDestination] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  
+  // Get page from URL, default to 1
+  const currentPage = parseInt(searchParams.get('page') || '1', 10);
+  
+  // Update URL when page changes
+  const setCurrentPage = (pageOrUpdater) => {
+    const newPage = typeof pageOrUpdater === 'function' ? pageOrUpdater(currentPage) : pageOrUpdater;
+    if (newPage === 1) {
+      searchParams.delete('page');
+    } else {
+      searchParams.set('page', newPage.toString());
+    }
+    setSearchParams(searchParams);
+  };
+  
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    if (currentPage !== 1) {
+      searchParams.delete('page');
+      setSearchParams(searchParams, { replace: true });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedType, selectedDestination, searchQuery]);
 
   // Fetch all offers (sorted by latest first)
   const { offers, loading, error } = useOffers({
@@ -67,25 +91,21 @@ function OffersPage() {
   // Handle filter changes
   const handleTypeChange = (type) => {
     setSelectedType(type);
-    setCurrentPage(1);
     setSearchQuery('');
   };
 
   const handleDestinationChange = (destination) => {
     setSelectedDestination(destination);
-    setCurrentPage(1);
   };
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
-    setCurrentPage(1);
   };
 
   const clearFilters = () => {
     setSelectedType(null);
     setSelectedDestination(null);
     setSearchQuery('');
-    setCurrentPage(1);
   };
 
   const hasActiveFilters = selectedType || selectedDestination || searchQuery;

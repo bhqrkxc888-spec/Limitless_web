@@ -12,6 +12,12 @@ export function useCruiseGuides(options = {}) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Extract options to avoid object reference issues
+  const limit = options.limit;
+  const offset = options.offset;
+  const featured = options.featured;
+  const guideType = options.guideType;
+
   useEffect(() => {
     let cancelled = false;
 
@@ -19,7 +25,7 @@ export function useCruiseGuides(options = {}) {
       try {
         setLoading(true);
         setError(null);
-        const result = await getCruiseGuides(options);
+        const result = await getCruiseGuides({ limit, offset, featured, guideType });
         
         if (!cancelled) {
           setGuides(result.guides || []);
@@ -43,7 +49,7 @@ export function useCruiseGuides(options = {}) {
     return () => {
       cancelled = true;
     };
-  }, [options]);
+  }, [limit, offset, featured, guideType]);
 
   return { guides, total, loading, error };
 }

@@ -155,8 +155,9 @@ function AppLayout() {
       </a>
       <Header />
       <main id="main-content">
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
+        <ErrorBoundary>
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
             {/* Main Pages - Always Public */}
             <Route path="/" element={<HomePage />} />
             <Route path="/find-a-cruise" element={<FindCruisePage />} />
@@ -219,6 +220,7 @@ function AppLayout() {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
+        </ErrorBoundary>
       </main>
       <Footer />
       <CookieConsent />

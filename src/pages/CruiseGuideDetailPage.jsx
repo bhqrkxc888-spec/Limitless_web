@@ -12,6 +12,13 @@ function CruiseGuideDetailPage() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    // Validate slug format
+    if (!slug || !/^[a-z0-9-]+$/i.test(slug)) {
+      setError('Invalid guide URL');
+      setLoading(false);
+      return;
+    }
+
     let cancelled = false;
 
     async function loadGuide() {

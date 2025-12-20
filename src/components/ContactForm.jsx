@@ -75,9 +75,15 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
         enquiryData.offer_title = offerTitle;
       }
 
-      const { error } = await supabase
-        .from('website_enquiries')
-        .insert([enquiryData]);
+      // Add timeout to prevent hanging
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Request timeout')), 10000)
+      );
+
+      const { error } = await Promise.race([
+        supabase.from('website_enquiries').insert([enquiryData]),
+        timeoutPromise
+      ]);
 
       if (error) throw error;
       

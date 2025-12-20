@@ -12,13 +12,19 @@ import AirportPricingList from '../components/AirportPricingTable';
 import OnboardCreditBadge from '../components/OnboardCreditBadge';
 import SoloTravellerInfo from '../components/SoloTravellerInfo';
 import OptimizedImage from '../components/OptimizedImage';
-import InteractiveItineraryMap from '../components/InteractiveItineraryMap';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, lazy, Suspense } from 'react';
 import './OfferPage.css';
+
+// Lazy-load heavy Mapbox component
+const InteractiveItineraryMap = lazy(() => import('../components/InteractiveItineraryMap'));
 
 function OfferPage() {
   const { slug } = useParams();
-  const { offer, loading, error } = useOffer(slug);
+  
+  // Validate slug format
+  const isValidSlug = slug && /^[a-z0-9-]+$/i.test(slug);
+  
+  const { offer, loading, error } = useOffer(isValidSlug ? slug : null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [failedImages, setFailedImages] = useState(new Set());
 
@@ -209,7 +215,7 @@ function OfferPage() {
   }
 
   // Error state
-  if (error || !offer) {
+  if (!isValidSlug || error || !offer) {
     return (
       <main className="offer-page">
         <SEO title="Offer Not Found" />
@@ -221,7 +227,7 @@ function OfferPage() {
               </svg>
             </div>
             <h1>Offer Not Available</h1>
-            <p>This offer may have expired or been removed. Our offers are being updated regularly - check back soon or contact us for current availability.</p>
+            <p>{!isValidSlug ? 'Invalid offer URL.' : 'This offer may have expired or been removed.'} Our offers are being updated regularly - check back soon or contact us for current availability.</p>
             <div className="offer-not-found__actions">
               <Button to="/offers" variant="primary">View All Offers</Button>
               <Button to="/contact" variant="outline">Contact Us</Button>
@@ -286,8 +292,6 @@ function OfferPage() {
               {(() => {
                 // Filter out images that failed to load
                 const validImages = galleryImages.filter(img => !failedImages.has(img.url));
-                // Ensure selected index is valid
-                const safeSelectedImage = Math.min(selectedImage, Math.max(0, validImages.length - 1));
                 
                 // Handler for image load errors
                 const handleImageError = (url) => {
@@ -303,7 +307,12 @@ function OfferPage() {
                   }
                 };
                 
-                if (validImages.length > 0) {
+                // Ensure selected index is valid after filtering
+                const safeSelectedImage = validImages.length > 0 
+                  ? Math.min(selectedImage, validImages.length - 1) 
+                  : 0;
+                
+                if (validImages.length > 0 && validImages[safeSelectedImage]) {
                   return (
                     <>
                       <div className="offer-gallery__main">
@@ -711,13 +720,26 @@ function OfferPage() {
                   {/* Map & Day-by-Day Side by Side */}
                   {offer.itinerary_detailed && Array.isArray(offer.itinerary_detailed) && offer.itinerary_detailed.length > 0 && (
                     <div className="offer-itinerary-grid">
-                      {/* Interactive Map */}
+                      {/* Interactive Map - Lazy loaded */}
                       {offer.show_itinerary_map !== false && (
                         <div className="offer-itinerary-map-column">
-                          <InteractiveItineraryMap 
-                            itinerary={offer.itinerary_detailed}
-                            title={offer.title}
-                          />
+                          <Suspense fallback={
+                            <div style={{ 
+                              minHeight: '400px', 
+                              display: 'flex', 
+                              alignItems: 'center', 
+                              justifyContent: 'center',
+                              background: '#f5f5f5',
+                              borderRadius: '8px'
+                            }}>
+                              <p>Loading interactive map...</p>
+                            </div>
+                          }>
+                            <InteractiveItineraryMap 
+                              itinerary={offer.itinerary_detailed}
+                              title={offer.title}
+                            />
+                          </Suspense>
                         </div>
                       )}
                       

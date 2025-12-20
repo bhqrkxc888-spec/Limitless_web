@@ -386,14 +386,26 @@ function InteractiveItineraryMap({ itinerary }) {
       });
     });
 
-    // Cleanup
+    // Cleanup - defensive checks to avoid errors on unmounted instances
     return () => {
-      if (popup.current) {
-        popup.current.remove();
+      try {
+        if (popup.current) {
+          popup.current.remove();
+          popup.current = null;
+        }
+      } catch {
+        // Ignore popup removal errors
       }
-      if (map.current) {
-        map.current.remove();
-        map.current = null;
+      
+      try {
+        if (map.current) {
+          // Remove all event listeners first
+          map.current.off();
+          map.current.remove();
+          map.current = null;
+        }
+      } catch {
+        // Ignore map removal errors on unmount
       }
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
