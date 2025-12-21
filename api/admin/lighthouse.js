@@ -80,7 +80,7 @@ function extractLighthouseData(psiData) {
 
   // Opportunities (optimization suggestions)
   const opportunities = Object.entries(audits)
-    .filter(([key, audit]) => 
+    .filter(([, audit]) => 
       audit.details?.type === 'opportunity' && 
       audit.numericValue && 
       audit.numericValue > 0
@@ -98,7 +98,7 @@ function extractLighthouseData(psiData) {
 
   // Diagnostics
   const diagnostics = Object.entries(audits)
-    .filter(([key, audit]) => 
+    .filter(([, audit]) => 
       audit.details?.type === 'diagnostic' &&
       audit.score !== null &&
       audit.score < 1
