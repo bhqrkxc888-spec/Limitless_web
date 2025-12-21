@@ -69,7 +69,6 @@ function AdminLayout({ children, onLogout, lastUpdated, onRefresh, isRefreshing 
     { path: '/admin', icon: LayoutDashboard, label: 'Overview', exact: true },
     { path: '/admin/project-status', icon: ClipboardList, label: 'Project Status' },
     { path: '/admin/errors', icon: AlertTriangle, label: 'Errors' },
-    { path: '/admin/performance', icon: Activity, label: 'Performance' },
     { path: '/admin/lighthouse', icon: Gauge, label: 'Lighthouse' },
     { path: '/admin/seo', icon: Search, label: 'SEO' },
     { type: 'divider' },

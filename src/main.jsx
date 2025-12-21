@@ -3,108 +3,22 @@ import { createRoot } from 'react-dom/client'
 import './styles/global.css'
 import App from './App.jsx'
 import { logError, logNetworkError, logApiError } from './services/errorTracking'
-import { initPerformanceMonitoring } from './services/performanceMonitoring'
 import { initSEOMonitoring } from './services/seoMonitoring'
-import { onCLS, onINP, onLCP, onFCP, onTTFB } from 'web-vitals'
 
-// Initialize global error handlers and performance monitoring
+// Initialize global error handlers and monitoring
+// Note: Performance monitoring disabled - using Lighthouse instead
 function initMonitoring() {
-  // Defer performance monitoring until after page is interactive
+  // Defer SEO monitoring until after page is interactive
   // This prevents blocking initial render
   if (typeof requestIdleCallback !== 'undefined') {
     requestIdleCallback(() => {
-      initPerformanceMonitoring()
       initSEOMonitoring()
-      initWebVitals()
     })
   } else {
     // Fallback: defer by 2 seconds for older browsers
     setTimeout(() => {
-      initPerformanceMonitoring()
       initSEOMonitoring()
-      initWebVitals()
     }, 2000)
-  }
-  
-  // Initialize Core Web Vitals tracking
-  function initWebVitals() {
-    // Skip in development
-    if (import.meta.env.DEV) return;
-    
-    // Wrap in try-catch to handle browsers that don't support buffered flag
-    try {
-      // Track Core Web Vitals
-      onCLS((metric) => {
-        // Log to performance monitoring
-        fetch('/api/admin/performance', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            metric_name: 'CLS',
-            metric_value: metric.value,
-            page_url: window.location.pathname,
-            user_agent: navigator.userAgent
-          })
-        }).catch(() => {
-          // Silently fail if tracking fails
-        });
-      });
-    
-    onINP((metric) => {
-      fetch('/api/admin/performance', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          metric_name: 'INP',
-          metric_value: metric.value,
-          page_url: window.location.pathname,
-          user_agent: navigator.userAgent
-        })
-      }).catch(() => {});
-    });
-    
-    onLCP((metric) => {
-      fetch('/api/admin/performance', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          metric_name: 'LCP',
-          metric_value: metric.value,
-          page_url: window.location.pathname,
-          user_agent: navigator.userAgent
-        })
-      }).catch(() => {});
-    });
-    
-    onFCP((metric) => {
-      fetch('/api/admin/performance', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          metric_name: 'FCP',
-          metric_value: metric.value,
-          page_url: window.location.pathname,
-          user_agent: navigator.userAgent
-        })
-      }).catch(() => {});
-    });
-    
-    onTTFB((metric) => {
-      fetch('/api/admin/performance', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          metric_name: 'TTFB',
-          metric_value: metric.value,
-          page_url: window.location.pathname,
-          user_agent: navigator.userAgent
-        })
-      }).catch(() => {});
-    });
-    } catch {
-      // Some browsers don't support buffered flag with entryTypes
-      // This is expected and doesn't affect functionality
-    }
   }
   
   // Global error handler for unhandled JavaScript errors

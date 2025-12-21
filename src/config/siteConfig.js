@@ -14,10 +14,11 @@ export const siteConfig = {
   // Monitoring settings
   // Note: errorTracking disabled until log_website_error RPC function is created in Supabase
   // This prevents 404 errors in Lighthouse audits
+  // performanceTracking disabled - using Lighthouse instead for performance metrics
   monitoring: {
     enabled: true,
     errorTracking: false,
-    performanceTracking: true,
+    performanceTracking: false, // Disabled - using Lighthouse instead
     seoTracking: true
   },
   

@@ -17,7 +17,8 @@ import {
   Eye,
   EyeOff,
   ExternalLink,
-  FileText
+  FileText,
+  Gauge
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import useAdminAuth from '../../hooks/useAdminAuth';
@@ -91,32 +92,23 @@ function AdminDashboard() {
         .select('id')
         .eq('resolved', false);
       
-      // Fetch performance data
-      const { data: lcpData } = await supabase
-        .from('website_performance')
-        .select('metric_value')
-        .eq('metric_name', 'LCP')
-        .gte('created_at', since24h);
-      
-      const { data: clsData } = await supabase
-        .from('website_performance')
-        .select('metric_value')
-        .eq('metric_name', 'CLS')
-        .gte('created_at', since24h);
+      // Fetch performance data from Lighthouse (latest desktop audit)
+      const { data: lighthouseData } = await supabase
+        .from('website_lighthouse')
+        .select('lcp, cls, performance_score')
+        .eq('strategy', 'desktop')
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .single();
       
       // Fetch SEO data
       const { data: seoPages } = await supabase
         .from('website_seo_pages')
         .select('*');
       
-      // Calculate stats
-      const avgLCP = lcpData?.length 
-        ? lcpData.reduce((sum, d) => sum + d.metric_value, 0) / lcpData.length 
-        : 0;
-      
-      const avgCLS = clsData?.length 
-        ? clsData.reduce((sum, d) => sum + d.metric_value, 0) / clsData.length 
-        : 0;
+      // Calculate stats from Lighthouse
+      const avgLCP = lighthouseData?.lcp ? lighthouseData.lcp : 0;
+      const avgCLS = lighthouseData?.cls ? lighthouseData.cls : 0;
       
       const avgSEOScore = seoPages?.length 
         ? seoPages.reduce((sum, p) => sum + (p.overall_score || 0), 0) / seoPages.length 
@@ -240,22 +232,26 @@ function AdminDashboard() {
               </div>
 
               <div className="admin-stat-card">
-                <div className="admin-stat-label">Avg LCP</div>
+                <div className="admin-stat-label">LCP</div>
                 <div className={`admin-stat-value ${getLCPStatus(stats.avgLCP)}`}>
                   {stats.avgLCP > 0 ? `${(stats.avgLCP / 1000).toFixed(2)}s` : '-'}
                 </div>
                 <div className="admin-stat-subtitle">
-                  {stats.avgLCP <= 2500 ? 'Good' : stats.avgLCP <= 4000 ? 'Needs improvement' : 'Poor'}
+                  {stats.avgLCP > 0 
+                    ? (stats.avgLCP <= 2500 ? 'Good' : stats.avgLCP <= 4000 ? 'Needs improvement' : 'Poor')
+                    : 'No data'}
                 </div>
               </div>
 
               <div className="admin-stat-card">
-                <div className="admin-stat-label">Avg CLS</div>
+                <div className="admin-stat-label">CLS</div>
                 <div className={`admin-stat-value ${getCLSStatus(stats.avgCLS)}`}>
-                  {parseFloat(stats.avgCLS) > 0 ? stats.avgCLS : '-'}
+                  {parseFloat(stats.avgCLS) > 0 ? parseFloat(stats.avgCLS).toFixed(3) : '-'}
                 </div>
                 <div className="admin-stat-subtitle">
-                  {parseFloat(stats.avgCLS) <= 0.1 ? 'Good' : parseFloat(stats.avgCLS) <= 0.25 ? 'Needs improvement' : 'Poor'}
+                  {parseFloat(stats.avgCLS) > 0 
+                    ? (parseFloat(stats.avgCLS) <= 0.1 ? 'Good' : parseFloat(stats.avgCLS) <= 0.25 ? 'Needs improvement' : 'Poor')
+                    : 'No data'}
                 </div>
               </div>
 
@@ -283,13 +279,13 @@ function AdminDashboard() {
                 <ArrowRight size={20} className="admin-quick-link-arrow" />
               </Link>
 
-              <Link to="/admin/performance" className="admin-quick-link">
+              <Link to="/admin/lighthouse" className="admin-quick-link">
                 <div className="admin-quick-link-icon performance">
-                  <Activity size={24} />
+                  <Gauge size={24} />
                 </div>
                 <div className="admin-quick-link-content">
-                  <h3>Performance Metrics</h3>
-                  <p>Core Web Vitals and page speed</p>
+                  <h3>Lighthouse Audits</h3>
+                  <p>Performance, accessibility, and SEO scores</p>
                 </div>
                 <ArrowRight size={20} className="admin-quick-link-arrow" />
               </Link>
