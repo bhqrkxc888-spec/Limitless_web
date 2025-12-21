@@ -115,5 +115,11 @@
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/lighthouse",
+      "schedule": "0 2 * * *"
+    }
   ]
 }
