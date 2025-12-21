@@ -58,13 +58,14 @@ async function runPageSpeedInsights(url, strategy = 'desktop') {
 function extractLighthouseData(psiData) {
   const lighthouse = psiData.lighthouseResult;
   const audits = lighthouse.audits;
+  const categories = lighthouse.categories;
   
-  // Scores (0-100)
+  // Scores (0-100) - with null checking
   const scores = {
-    performance: Math.round(lighthouse.categories.performance.score * 100),
-    accessibility: Math.round(lighthouse.categories.accessibility.score * 100),
-    bestPractices: Math.round(lighthouse.categories['best-practices'].score * 100),
-    seo: Math.round(lighthouse.categories.seo.score * 100)
+    performance: categories?.performance?.score ? Math.round(categories.performance.score * 100) : 0,
+    accessibility: categories?.accessibility?.score ? Math.round(categories.accessibility.score * 100) : 0,
+    bestPractices: categories?.['best-practices']?.score ? Math.round(categories['best-practices'].score * 100) : 0,
+    seo: categories?.seo?.score ? Math.round(categories.seo.score * 100) : 0
   };
 
   // Core Web Vitals

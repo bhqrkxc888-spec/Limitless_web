@@ -74,7 +74,6 @@ const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
 const AdminErrors = lazy(() => import('./pages/admin/AdminErrors'))
 const AdminLighthouse = lazy(() => import('./pages/admin/AdminLighthouse'))
 const AdminSEO = lazy(() => import('./pages/admin/AdminSEO'))
-const AdminProjectStatus = lazy(() => import('./pages/admin/AdminProjectStatus'))
 const AdminDestinationHeroes = lazy(() => import('./pages/admin/AdminDestinationHeroes'))
 const AdminWebsiteAssets = lazy(() => import('./pages/admin/AdminWebsiteAssets'))
 const AdminWebsiteDestinations = lazy(() => import('./pages/admin/AdminWebsiteDestinations'))
@@ -132,7 +131,6 @@ function AppLayout() {
           {/* Admin Monitoring Dashboard */}
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/project-status" element={<AdminProjectStatus />} />
           <Route path="/admin/destination-heroes" element={<AdminDestinationHeroes />} />
           <Route path="/admin/errors" element={<AdminErrors />} />
           <Route path="/admin/lighthouse" element={<AdminLighthouse />} />
