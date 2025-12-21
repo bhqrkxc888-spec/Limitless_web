@@ -233,10 +233,13 @@ function FAQPage() {
           <div className="faq-search">
             <input
               type="text"
+              id="faq-search"
+              name="faq-search"
               placeholder="Search questions..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="faq-search-input"
+              aria-label="Search frequently asked questions"
             />
             {searchTerm && (
               <button 

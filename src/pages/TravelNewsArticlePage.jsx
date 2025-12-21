@@ -334,10 +334,13 @@ function TravelNewsArticlePage() {
                   <form onSubmit={handleContactSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                     <input
                       type="text"
+                      id="article-contact-name"
+                      name="name"
                       placeholder="Your Name *"
                       value={contactForm.name}
                       onChange={(e) => setContactForm(f => ({ ...f, name: e.target.value }))}
                       required
+                      aria-label="Your name"
                       style={{
                         padding: '10px 12px',
                         border: '1px solid var(--clr-border)',
@@ -348,10 +351,13 @@ function TravelNewsArticlePage() {
                     />
                     <input
                       type="email"
+                      id="article-contact-email"
+                      name="email"
                       placeholder="Email Address *"
                       value={contactForm.email}
                       onChange={(e) => setContactForm(f => ({ ...f, email: e.target.value }))}
                       required
+                      aria-label="Email address"
                       style={{
                         padding: '10px 12px',
                         border: '1px solid var(--clr-border)',
@@ -362,9 +368,12 @@ function TravelNewsArticlePage() {
                     />
                     <input
                       type="tel"
+                      id="article-contact-phone"
+                      name="phone"
                       placeholder="Phone Number"
                       value={contactForm.phone}
                       onChange={(e) => setContactForm(f => ({ ...f, phone: e.target.value }))}
+                      aria-label="Phone number"
                       style={{
                         padding: '10px 12px',
                         border: '1px solid var(--clr-border)',
@@ -374,10 +383,13 @@ function TravelNewsArticlePage() {
                       }}
                     />
                     <textarea
+                      id="article-contact-message"
+                      name="message"
                       placeholder="Your Message"
                       value={contactForm.message}
                       onChange={(e) => setContactForm(f => ({ ...f, message: e.target.value }))}
                       rows={3}
+                      aria-label="Your message"
                       style={{
                         padding: '10px 12px',
                         border: '1px solid var(--clr-border)',

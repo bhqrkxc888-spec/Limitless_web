@@ -7,6 +7,9 @@
   background-color: var(--clr-primary);
   color: var(--clr-text-on-primary);
   margin-top: auto;
+  /* Prevent CLS by reserving footer space */
+  min-height: 500px;
+  contain: layout style;
 }
 
 /* ========================================
@@ -307,6 +310,11 @@
 }
 
 @media (max-width: 767px) {
+  .footer {
+    /* Adjust min-height for mobile */
+    min-height: 800px;
+  }
+
   .footer-main {
     padding: var(--space-12) 0;
   }

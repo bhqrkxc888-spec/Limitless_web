@@ -12,9 +12,11 @@ export const siteConfig = {
   youtube: 'https://www.youtube.com/@LimitlessCruises',
   
   // Monitoring settings
+  // Note: errorTracking disabled until log_website_error RPC function is created in Supabase
+  // This prevents 404 errors in Lighthouse audits
   monitoring: {
     enabled: true,
-    errorTracking: true,
+    errorTracking: false,
     performanceTracking: true,
     seoTracking: true
   },

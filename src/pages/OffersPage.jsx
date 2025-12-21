@@ -174,10 +174,13 @@ function OffersPage() {
               </svg>
               <input
                 type="text"
+                id="offers-search"
+                name="offers-search"
                 placeholder="Search offers by cruise line, destination, ship..."
                 value={searchQuery}
                 onChange={handleSearchChange}
                 className="offers-search-input"
+                aria-label="Search cruise offers"
               />
               {searchQuery && (
                 <button
