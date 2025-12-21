@@ -32,7 +32,7 @@ export default async function handler(req, res) {
 
   try {
     // Check authentication (simple session check)
-    const session = req.cookies['limitless_admin_session'];
+    const session = req.cookies['admin_session'];
     if (!session) {
       return res.status(401).json({ error: 'Unauthorized' });
     }

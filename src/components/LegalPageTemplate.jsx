@@ -6,6 +6,7 @@
 
 import { useLocation } from 'react-router-dom';
 import SEO from './SEO';
+import { createSanitizedMarkup } from '../utils/sanitizeHtml';
 import './LegalPageTemplate.css';
 
 function LegalPageTemplate({ fallbackTitle, fallbackDescription, fallbackContent }) {
@@ -32,7 +33,7 @@ function LegalPageTemplate({ fallbackTitle, fallbackDescription, fallbackContent
       <div className="container">
         <article 
           className="legal-content"
-          dangerouslySetInnerHTML={{ __html: fallbackContent }}
+          dangerouslySetInnerHTML={createSanitizedMarkup(fallbackContent)}
         />
       </div>
     </main>

@@ -4,6 +4,7 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { Button, Accordion } from '../components/ui';
+import { createSanitizedMarkup } from '../utils/sanitizeHtml';
 import './FAQPage.css';
 
 // FAQ Data organized by category
@@ -262,7 +263,7 @@ function FAQPage() {
                 {filteredQuestions.map((q, index) => (
                   <Accordion key={index} title={q.question}>
                     <p className="faq-category-badge">{q.category}</p>
-                    <div dangerouslySetInnerHTML={{ __html: q.answer }} />
+                    <div dangerouslySetInnerHTML={createSanitizedMarkup(q.answer)} />
                   </Accordion>
                 ))}
               </div>
@@ -300,7 +301,7 @@ function FAQPage() {
                 <div className="faq-list">
                   {faqData[activeCategory].questions.map((q, index) => (
                     <Accordion key={index} title={q.question}>
-                      <div dangerouslySetInnerHTML={{ __html: q.answer }} />
+                      <div dangerouslySetInnerHTML={createSanitizedMarkup(q.answer)} />
                     </Accordion>
                   ))}
                 </div>

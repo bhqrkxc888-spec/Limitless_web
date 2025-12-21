@@ -6,6 +6,7 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import { Button, SectionHeader } from '../components/ui';
 import { useEffect, useState, useRef } from 'react';
+import { createSanitizedMarkup } from '../utils/sanitizeHtml';
 import './TravelNewsArticlePage.css';
 
 function TravelNewsArticlePage() {
@@ -281,7 +282,7 @@ function TravelNewsArticlePage() {
                 <div className="article-content">
                   <div 
                     className="article-content-body"
-                    dangerouslySetInnerHTML={{ __html: article.content }}
+                    dangerouslySetInnerHTML={createSanitizedMarkup(article.content)}
                   />
                 </div>
               )}

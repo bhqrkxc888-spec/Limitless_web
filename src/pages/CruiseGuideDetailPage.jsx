@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { getCruiseGuideBySlug } from '../services/cruiseGuidesAPI';
 import SEO from '../components/SEO';
 import { Button } from '../components/ui';
+import { createSanitizedMarkup } from '../utils/sanitizeHtml';
 import './CruiseGuideDetailPage.css';
 
 function CruiseGuideDetailPage() {
@@ -115,7 +116,7 @@ function CruiseGuideDetailPage() {
       <div className="guide-detail-content-section">
         <div className="container">
           <article className="guide-detail-article">
-            <div className="guide-detail-content" dangerouslySetInnerHTML={{ __html: guide.content }} />
+            <div className="guide-detail-content" dangerouslySetInnerHTML={createSanitizedMarkup(guide.content)} />
             
             <div className="guide-detail-footer">
               <div className="guide-detail-cta">

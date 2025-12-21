@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { logger } from '../utils/logger';
 import { Button } from './ui';
+import Turnstile from './Turnstile';
 import './ContactForm.css';
 
 function ContactForm({ context = 'general', offerId = null, offerTitle = null }) {
@@ -17,6 +18,24 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
   
   const [status, setStatus] = useState('idle'); // idle, submitting, success, error
   const [lastSubmitTime, setLastSubmitTime] = useState(0);
+  const [turnstileToken, setTurnstileToken] = useState(null);
+  
+  // Check if Turnstile is configured
+  const isTurnstileEnabled = !!import.meta.env.VITE_TURNSTILE_SITE_KEY;
+  
+  // Turnstile callbacks
+  const handleTurnstileVerify = useCallback((token) => {
+    setTurnstileToken(token);
+  }, []);
+  
+  const handleTurnstileError = useCallback(() => {
+    logger.warn('Turnstile verification failed');
+    setTurnstileToken(null);
+  }, []);
+  
+  const handleTurnstileExpire = useCallback(() => {
+    setTurnstileToken(null);
+  }, []);
 
   const handleChange = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
@@ -54,6 +73,14 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
       return;
     }
     
+    // Check Turnstile verification (if enabled and no token yet)
+    if (isTurnstileEnabled && !turnstileToken) {
+      logger.warn('Turnstile token not received - waiting for verification');
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 5000);
+      return;
+    }
+    
     setStatus('submitting');
     setLastSubmitTime(now);
 
@@ -64,7 +91,9 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
         phone: formData.phone,
         message: formData.message,
         source: formData.context,
-        status: 'new'
+        status: 'new',
+        // Include Turnstile token for server-side verification if needed
+        turnstile_token: turnstileToken || null
       };
 
       // Add offer linking if provided
@@ -96,6 +125,8 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
         context: context,
         consent: false
       });
+      // Reset Turnstile token for next submission
+      setTurnstileToken(null);
 
       // Reset success message after 5 seconds
       setTimeout(() => setStatus('idle'), 5000);
@@ -234,6 +265,15 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
           </span>
         </label>
       </div>
+
+      {/* Invisible CAPTCHA - Cloudflare Turnstile */}
+      <Turnstile
+        onVerify={handleTurnstileVerify}
+        onError={handleTurnstileError}
+        onExpire={handleTurnstileExpire}
+        action={`contact_${context}`}
+        mode="invisible"
+      />
 
       <Button
         type="submit"

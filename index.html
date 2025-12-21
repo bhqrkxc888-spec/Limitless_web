@@ -54,19 +54,29 @@
     <link rel="dns-prefetch" href="https://www.widgety.co.uk" />
     <link rel="dns-prefetch" href="https://api.openweathermap.org" />
     <link rel="dns-prefetch" href="https://api.stormglass.io" />
+    <link rel="dns-prefetch" href="https://challenges.cloudflare.com" />
     
     <!-- Preload hero image for faster LCP -->
     <link rel="preload" as="image" href="https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/HERO-home.webp" fetchpriority="high" />
     
-    <!-- Structured Data - Organization -->
+    <!-- Structured Data - Organization (Enhanced for rich results) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "TravelAgency",
+      "@id": "https://www.limitlesscruises.com/#organization",
       "name": "Limitless Cruises",
-      "description": "Your personal cruise consultant. Book cruise holidays with preferential rates, exclusive offers and expert advice.",
+      "alternateName": "Limitless Cruises Ltd",
+      "description": "Your personal cruise consultant. ABTA protected cruise specialist offering bespoke cruise holidays with preferential rates, exclusive offers and expert advice. Based in Sheffield, UK, serving clients nationwide.",
       "url": "https://www.limitlesscruises.com",
-      "telephone": "+44 114 321 3208",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Hero-logo.webp",
+        "width": 512,
+        "height": 512
+      },
+      "image": "https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/HERO-home.webp",
+      "telephone": "+441143213208",
       "email": "travel@limitlesscruises.com",
       "address": {
         "@type": "PostalAddress",
@@ -76,6 +86,35 @@
         "@type": "Country",
         "name": "United Kingdom"
       },
+      "priceRange": "££",
+      "currenciesAccepted": "GBP",
+      "paymentAccepted": "Credit Card, Debit Card, Bank Transfer",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday"],
+          "opens": "By appointment",
+          "closes": "By appointment"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Wednesday", "Thursday", "Friday"],
+          "opens": "10:00",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "10:00",
+          "closes": "21:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "10:00",
+          "closes": "18:00"
+        }
+      ],
       "sameAs": [
         "https://www.facebook.com/profile.php?id=61570469572535",
         "https://www.linkedin.com/company/limitless-cruises/",
@@ -83,8 +122,51 @@
       ],
       "memberOf": {
         "@type": "Organization",
-        "name": "ABTA",
+        "name": "ABTA - The Travel Association",
+        "url": "https://www.abta.com",
         "identifier": "P7541"
+      },
+      "knowsAbout": [
+        "Cruise Holidays",
+        "Ocean Cruises",
+        "River Cruises",
+        "Fly Cruise Packages",
+        "UK Cruise Departures",
+        "Caribbean Cruises",
+        "Mediterranean Cruises",
+        "World Cruises",
+        "Luxury Cruises",
+        "Family Cruises"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Cruise Holidays",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Personal Cruise Consultation",
+              "description": "One-to-one advice from your dedicated cruise consultant"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Cruise Booking Service",
+              "description": "Complete cruise booking and travel arrangement service"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Price Match Guarantee",
+              "description": "We match any like-for-like quote from ABTA members"
+            }
+          }
+        ]
       }
     }
     </script>

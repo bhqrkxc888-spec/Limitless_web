@@ -12,6 +12,7 @@ import AirportPricingList from '../components/AirportPricingTable';
 import OnboardCreditBadge from '../components/OnboardCreditBadge';
 import SoloTravellerInfo from '../components/SoloTravellerInfo';
 import OptimizedImage from '../components/OptimizedImage';
+import { createSanitizedMarkup } from '../utils/sanitizeHtml';
 import { useEffect, useMemo, useState, lazy, Suspense } from 'react';
 import './OfferPage.css';
 
@@ -662,7 +663,7 @@ function OfferPage() {
                   <h2 className="offer-section__title offer-section__title--large">About This {offer.offer_type === 'cruise_only' ? 'Cruise' : 'Offer'}</h2>
                   <div 
                     className="offer-description-content"
-                    dangerouslySetInnerHTML={{ __html: offer.full_description }}
+                    dangerouslySetInnerHTML={createSanitizedMarkup(offer.full_description)}
                   />
                 </div>
               )}
