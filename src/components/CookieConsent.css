@@ -9,6 +9,19 @@
   z-index: 1000;
   padding: var(--space-6);
   animation: slideUp 0.3s ease-out;
+  /* Reserve space to prevent CLS - element is always in DOM */
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hidden state - element remains in DOM but is visually hidden to prevent CLS */
+.cookie-consent--hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(100%);
+  animation: none;
 }
 
 @keyframes slideUp {

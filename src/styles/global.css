@@ -20,6 +20,7 @@
   ascent-override: 90%;
   descent-override: 22%;
   line-gap-override: 0%;
+  font-display: swap;
 }
 
 /* Fallback for Playfair Display - using Georgia with size adjustment */
@@ -30,10 +31,11 @@
   ascent-override: 95%;
   descent-override: 22%;
   line-gap-override: 0%;
+  font-display: swap;
 }
 
 /* Note: Google Fonts (Inter + Playfair Display) are loaded via index.html
-   with font-display: optional to prevent layout shifts */
+   with font-display: swap to prevent layout shifts */
 
 /* ========================================
    CSS RESET & BASE

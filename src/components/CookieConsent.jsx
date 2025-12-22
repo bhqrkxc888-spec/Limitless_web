@@ -8,11 +8,13 @@ import './CookieConsent.css';
 function CookieConsent() {
   const [isVisible, setIsVisible] = useState(false);
   const [showCookieSettings, setShowCookieSettings] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
     // Check if user has already made a choice
     if (!hasConsentDecision()) {
-      // Show banner after a short delay for better UX
+      // Always render to prevent CLS, but show after a short delay for better UX
+      setShouldRender(true);
       const timer = setTimeout(() => {
         setIsVisible(true);
       }, 1000);
@@ -32,10 +34,18 @@ function CookieConsent() {
     // Scripts will remain blocked
   };
 
-  if (!isVisible) return null;
+  // Always render if we should (user hasn't made a choice yet) to prevent CLS
+  // Hide with CSS instead of returning null
+  if (!shouldRender) return null;
 
   return (
-    <div className="cookie-consent" role="dialog" aria-label="Cookie consent" aria-live="polite">
+    <div 
+      className={`cookie-consent ${!isVisible ? 'cookie-consent--hidden' : ''}`}
+      role="dialog" 
+      aria-label="Cookie consent" 
+      aria-live="polite"
+      aria-hidden={!isVisible}
+    >
       <div className="cookie-consent-content">
         <div className="cookie-consent-text">
           <h3>We Use Cookies</h3>
