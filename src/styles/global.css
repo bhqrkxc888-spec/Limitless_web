@@ -47,6 +47,27 @@
   padding: 0;
 }
 
+/* ========================================
+   APP LAYOUT - Sticky Footer Pattern
+   Flex container ensures footer stays at bottom
+   and margin-top: auto works correctly
+   ======================================== */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app > main {
+  flex: 1 0 auto;
+}
+
+/* Ensure footer sticks to bottom */
+.app > footer {
+  flex-shrink: 0;
+}
+
 html {
   font-size: 16px;
   scroll-behavior: smooth;

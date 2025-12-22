@@ -14,14 +14,19 @@ import ErrorBoundary from './components/ErrorBoundary'
 import ProtectedRoute from './components/ProtectedRoute'
 import PublishGate from './components/PublishGate'
 
-// Loading fallback component
+// HomePage is eagerly loaded to prevent CLS on initial page load
+// This is the main landing page and must render without Suspense delay
+import HomePage from './pages/HomePage'
+
+// Loading fallback component - minimal height to prevent large CLS
+// Other pages use this during lazy load
 function PageLoader() {
   return (
     <div className="page-loader" style={{ 
       display: 'flex', 
       justifyContent: 'center', 
       alignItems: 'center', 
-      minHeight: '50vh',
+      minHeight: '100vh',
       padding: '2rem'
     }}>
       <div style={{ textAlign: 'center' }}>
@@ -46,8 +51,7 @@ function PageLoader() {
   )
 }
 
-// Lazy-loaded Pages (code splitting)
-const HomePage = lazy(() => import('./pages/HomePage'))
+// Lazy-loaded Pages (code splitting) - NOT HomePage
 const FindCruisePage = lazy(() => import('./pages/FindCruisePage'))
 const AboutPage = lazy(() => import('./pages/AboutPage'))
 const ContactPage = lazy(() => import('./pages/ContactPage'))

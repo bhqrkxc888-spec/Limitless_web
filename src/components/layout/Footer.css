@@ -6,9 +6,8 @@
 .footer {
   background-color: var(--clr-primary);
   color: var(--clr-text-on-primary);
-  margin-top: auto;
-  /* Remove content-visibility which was causing CLS with wrong size estimate */
-  /* The footer will render normally without virtualization */
+  /* margin-top: auto is now handled by flex parent (.app) */
+  /* Footer will stick to bottom via flex layout */
 }
 
 /* ========================================
