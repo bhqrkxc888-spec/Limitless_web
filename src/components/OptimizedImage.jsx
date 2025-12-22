@@ -82,12 +82,43 @@ function OptimizedImage({
     ? generateSrcSet(src, srcsetWidths, { quality })
     : undefined;
 
+  // Generate meaningful alt text from src if not provided
+  // Extract filename or meaningful part of URL for better SEO
+  const generateAltFromSrc = (imageSrc) => {
+    if (!imageSrc) return 'Image';
+    try {
+      const url = new URL(imageSrc);
+      const pathname = url.pathname;
+      // Extract filename without extension
+      const filename = pathname.split('/').pop() || '';
+      const nameWithoutExt = filename.replace(/\.[^/.]+$/, '');
+      // Convert kebab-case or snake_case to readable text
+      const readable = nameWithoutExt
+        .replace(/[-_]/g, ' ')
+        .replace(/\b\w/g, l => l.toUpperCase())
+        .trim();
+      return readable || 'Image';
+    } catch {
+      // If URL parsing fails, try to extract from path
+      const match = imageSrc.match(/\/([^/]+)\.(webp|jpg|jpeg|png|gif|svg)/i);
+      if (match) {
+        return match[1].replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'Image';
+      }
+      return 'Image';
+    }
+  };
+
+  // Use provided alt text, or generate from src, or use generic fallback
+  const finalAlt = alt && alt.trim() !== '' 
+    ? alt.trim() 
+    : generateAltFromSrc(src);
+
   return (
     <img
       src={optimizedSrc}
       srcSet={srcSet}
       sizes={srcSet ? sizes : undefined}
-      alt={alt || ''}
+      alt={finalAlt}
       width={width}
       height={height}
       loading={priority ? 'eager' : 'lazy'}

@@ -2,6 +2,7 @@ import { aboutImages } from '../utils/imageHelpers';
 import { Button } from '../components/ui';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
+import OptimizedImage from '../components/OptimizedImage';
 import './AboutPage.css';
 
 function AboutPage() {
@@ -37,12 +38,15 @@ function AboutPage() {
               </div>
             </div>
             <div className="about-hero-image">
-              <img 
+              <OptimizedImage 
                 src={aboutImages.katherine2}
                 alt="Your personal cruise consultant" 
-                width="1920"
-                height="1080"
-                loading="lazy"
+                width={1920}
+                height={1080}
+                priority={false}
+                sizes="(max-width: 768px) 100vw, 600px"
+                srcsetWidths={[400, 600, 800]}
+                quality={85}
               />
             </div>
           </div>
@@ -87,10 +91,15 @@ function AboutPage() {
         <div className="container">
           <div className="why-layout">
             <div className="why-image">
-              <img 
+              <OptimizedImage 
                 src={aboutImages.katherine1}
                 alt="Your cruise consultant on deck" 
-                loading="lazy"
+                width={800}
+                height={600}
+                priority={false}
+                sizes="(max-width: 768px) 100vw, 400px"
+                srcsetWidths={[400, 600, 800]}
+                quality={85}
               />
             </div>
             <div className="why-content">
@@ -154,21 +163,30 @@ function AboutPage() {
                   rel="noopener noreferrer"
                   className="elite-link"
                 >
-                  <img 
+                  <OptimizedImage 
                     src={aboutImages.holidayEliteLogo}
                     alt="Holiday Elite Travel Agent - Professional membership" 
-                    width="200" 
-                    loading="lazy" 
+                    width={200}
+                    height={100}
+                    priority={false}
+                    sizes="200px"
+                    srcsetWidths={[200, 400]}
+                    quality={85}
                   />
                   <span>View Holiday Elite Profile →</span>
                 </a>
               </div>
             </div>
             <div className="katherine-image">
-              <img 
+              <OptimizedImage 
                 src={aboutImages.katherine3}
                 alt="Family travel moments" 
-                loading="lazy"
+                width={800}
+                height={600}
+                priority={false}
+                sizes="(max-width: 768px) 100vw, 400px"
+                srcsetWidths={[400, 600, 800]}
+                quality={85}
               />
             </div>
           </div>

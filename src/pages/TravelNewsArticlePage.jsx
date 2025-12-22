@@ -5,6 +5,7 @@ import { supabase } from '../lib/supabase';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import { Button, SectionHeader } from '../components/ui';
+import OptimizedImage from '../components/OptimizedImage';
 import { useEffect, useState, useRef } from 'react';
 import { createSanitizedMarkup } from '../utils/sanitizeHtml';
 import './TravelNewsArticlePage.css';
@@ -262,11 +263,15 @@ function TravelNewsArticlePage() {
               {/* Featured Image */}
               {article.featured_image_url && (
                 <div className="article-featured-image" style={{ marginBottom: '32px' }}>
-                  <img 
+                  <OptimizedImage 
                     src={article.featured_image_url}
                     alt={article.title}
-                    width={article.featured_image_width}
-                    height={article.featured_image_height}
+                    width={article.featured_image_width || 1200}
+                    height={article.featured_image_height || 675}
+                    priority={true}
+                    sizes="(max-width: 768px) 100vw, 800px"
+                    srcsetWidths={[640, 800, 1200]}
+                    quality={85}
                     style={{ 
                       width: '100%', 
                       height: 'auto',
@@ -294,9 +299,15 @@ function TravelNewsArticlePage() {
                   <div className="gallery-grid">
                     {article.gallery_images.map((imageUrl, index) => (
                       <div key={index} className="gallery-item">
-                        <img 
+                        <OptimizedImage 
                           src={imageUrl} 
                           alt={`${article.title} - Image ${index + 1}`}
+                          width={600}
+                          height={400}
+                          priority={false}
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+                          srcsetWidths={[400, 600, 800]}
+                          quality={85}
                           loading="lazy"
                         />
                       </div>
