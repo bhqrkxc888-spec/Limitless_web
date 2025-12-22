@@ -8,18 +8,21 @@ import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   AlertTriangle, 
-  Activity, 
   Search, 
+  Image,
+  MapPin,
   LogOut,
   RefreshCw,
+  Clock,
+  Gauge,
+  TrendingUp,
+  BarChart3,
   Menu,
   X,
   FileText,
   ExternalLink,
-  ClipboardList,
-  Image,
-  MapPin,
-  Gauge
+  Activity,
+  ClipboardList
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import './AdminLayout.css';
@@ -69,6 +72,8 @@ function AdminLayout({ children, onLogout, lastUpdated, onRefresh, isRefreshing 
     { path: '/admin', icon: LayoutDashboard, label: 'Overview', exact: true },
     { path: '/admin/errors', icon: AlertTriangle, label: 'Errors' },
     { path: '/admin/lighthouse', icon: Gauge, label: 'Lighthouse' },
+    { path: '/admin/analytics', icon: TrendingUp, label: 'Analytics' },
+    { path: '/admin/search-console', icon: BarChart3, label: 'Search Console' },
     { path: '/admin/seo', icon: Search, label: 'SEO' },
     { type: 'divider' },
     { type: 'section', label: 'Website' },

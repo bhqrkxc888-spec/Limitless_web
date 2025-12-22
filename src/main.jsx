@@ -4,6 +4,7 @@ import './styles/global.css'
 import App from './App.jsx'
 import { logError, logNetworkError, logApiError } from './services/errorTracking'
 import { initSEOMonitoring } from './services/seoMonitoring'
+import { Analytics } from '@vercel/analytics/react'
 
 // Initialize global error handlers and monitoring
 // Note: Performance monitoring disabled - using Lighthouse instead
@@ -105,5 +106,6 @@ initMonitoring()
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
+    <Analytics />
   </StrictMode>,
 )

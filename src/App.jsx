@@ -74,6 +74,8 @@ const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
 const AdminErrors = lazy(() => import('./pages/admin/AdminErrors'))
 const AdminLighthouse = lazy(() => import('./pages/admin/AdminLighthouse'))
 const AdminSEO = lazy(() => import('./pages/admin/AdminSEO'))
+const AdminAnalytics = lazy(() => import('./pages/admin/AdminAnalytics'))
+const AdminSearchConsole = lazy(() => import('./pages/admin/AdminSearchConsole'))
 const AdminDestinationHeroes = lazy(() => import('./pages/admin/AdminDestinationHeroes'))
 const AdminWebsiteAssets = lazy(() => import('./pages/admin/AdminWebsiteAssets'))
 const AdminWebsiteDestinations = lazy(() => import('./pages/admin/AdminWebsiteDestinations'))
@@ -134,11 +136,12 @@ function AppLayout() {
           <Route path="/admin/destination-heroes" element={<AdminDestinationHeroes />} />
           <Route path="/admin/errors" element={<AdminErrors />} />
           <Route path="/admin/lighthouse" element={<AdminLighthouse />} />
+          <Route path="/admin/analytics" element={<AdminAnalytics />} />
+          <Route path="/admin/search-console" element={<AdminSearchConsole />} />
           <Route path="/admin/seo" element={<AdminSEO />} />
           {/* Admin Website Section */}
           <Route path="/admin/website/assets" element={<AdminWebsiteAssets />} />
           <Route path="/admin/website/destinations" element={<AdminWebsiteDestinations />} />
-          <Route path="/admin/offers/debug" element={<AdminOffersDebug />} />
         </Routes>
       </Suspense>
     );
