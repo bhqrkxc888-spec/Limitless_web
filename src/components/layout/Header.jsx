@@ -116,6 +116,7 @@ function Header() {
                 <span></span>
                 <span></span>
               </span>
+              <span className="menu-text">Menu</span>
             </button>
 
             {/* Navigation */}
