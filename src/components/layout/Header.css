@@ -10,6 +10,9 @@
   background-color: var(--clr-surface);
   box-shadow: 0 2px 8px rgba(44, 52, 76, 0.08);
   border-bottom: 1px solid var(--clr-border);
+  /* Prevent CLS - reserve header space with explicit min-height */
+  min-height: 120px; /* top bar (36px) + main header (84px) */
+  contain: layout style;
 }
 
 /* ========================================

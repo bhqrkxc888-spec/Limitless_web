@@ -9,6 +9,8 @@
   align-items: center;
   overflow: hidden;
   color: var(--clr-text-on-primary);
+  /* Prevent CLS by containing layout */
+  contain: layout style paint;
 }
 
 /* ========================================

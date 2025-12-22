@@ -26,7 +26,7 @@ let scriptLoaded = false;
 const loadCallbacks = [];
 
 /**
- * Load Turnstile script dynamically
+ * Load Turnstile script dynamically - delayed to avoid CLS
  */
 function loadTurnstileScript() {
   return new Promise((resolve) => {
@@ -43,24 +43,34 @@ function loadTurnstileScript() {
 
     scriptLoading = true;
 
-    const script = document.createElement('script');
-    script.src = TURNSTILE_SCRIPT_URL;
-    script.async = true;
-    script.defer = true;
+    // Delay loading to avoid CLS during initial render
+    const loadScript = () => {
+      const script = document.createElement('script');
+      script.src = TURNSTILE_SCRIPT_URL;
+      script.async = true;
+      script.defer = true;
 
-    script.onload = () => {
-      scriptLoaded = true;
-      loadCallbacks.forEach(cb => cb(window.turnstile));
-      loadCallbacks.length = 0;
+      script.onload = () => {
+        scriptLoaded = true;
+        loadCallbacks.forEach(cb => cb(window.turnstile));
+        loadCallbacks.length = 0;
+      };
+
+      script.onerror = () => {
+        console.error('Failed to load Turnstile script');
+        loadCallbacks.forEach(cb => cb(null));
+        loadCallbacks.length = 0;
+      };
+
+      document.head.appendChild(script);
     };
 
-    script.onerror = () => {
-      console.error('Failed to load Turnstile script');
-      loadCallbacks.forEach(cb => cb(null));
-      loadCallbacks.length = 0;
-    };
-
-    document.head.appendChild(script);
+    // Wait for page to be fully loaded before loading Turnstile
+    if (document.readyState === 'complete') {
+      setTimeout(loadScript, 1000);
+    } else {
+      window.addEventListener('load', () => setTimeout(loadScript, 1000));
+    }
   });
 }
 

@@ -6,8 +6,34 @@
 /* Import Design Tokens */
 @import './tokens.css';
 
+/* ========================================
+   FONT FACE FALLBACKS - Prevent CLS
+   Define fallback fonts with size-adjust to match web fonts
+   This ensures text doesn't shift when web fonts load
+   ======================================== */
+
+/* Fallback for Inter - using system-ui with size adjustment */
+@font-face {
+  font-family: 'Inter-fallback';
+  src: local('system-ui'), local('-apple-system'), local('BlinkMacSystemFont'), local('Segoe UI'), local('Roboto');
+  size-adjust: 100%;
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+/* Fallback for Playfair Display - using Georgia with size adjustment */
+@font-face {
+  font-family: 'Playfair-fallback';
+  src: local('Georgia'), local('Times New Roman');
+  size-adjust: 107%;
+  ascent-override: 95%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+}
+
 /* Note: Google Fonts (Inter + Playfair Display) are loaded via index.html
-   for optimal performance with preload + stylesheet link */
+   with font-display: optional to prevent layout shifts */
 
 /* ========================================
    CSS RESET & BASE
