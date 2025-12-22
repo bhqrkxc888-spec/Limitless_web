@@ -10,9 +10,10 @@ const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://xrbusklskmeaa
 const VERCEL_BLOB_URL = 'https://public.blob.vercel-storage.com';
 
 // Cloudflare Images configuration
-const CLOUDFLARE_ACCOUNT_ID = import.meta.env.VITE_CLOUDFLARE_ACCOUNT_ID;
-const CLOUDFLARE_IMAGES_DOMAIN = CLOUDFLARE_ACCOUNT_ID 
-  ? `https://imagedelivery.net/${CLOUDFLARE_ACCOUNT_ID}`
+// IMPORTANT: Use Account HASH (not Account ID) for image delivery URLs
+const CLOUDFLARE_ACCOUNT_HASH = import.meta.env.VITE_CLOUDFLARE_ACCOUNT_HASH || 'kqSkXB_hQOtqvmoSeah6oQ';
+const CLOUDFLARE_IMAGES_DOMAIN = CLOUDFLARE_ACCOUNT_HASH 
+  ? `https://imagedelivery.net/${CLOUDFLARE_ACCOUNT_HASH}`
   : null;
 
 /**
