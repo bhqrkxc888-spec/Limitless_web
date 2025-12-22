@@ -363,6 +363,39 @@ function AdminLighthouse() {
                   </div>
                 </div>
 
+                {/* CLS Analysis */}
+                {selectedResult.cls > 0.1 && (
+                  <div className="admin-lighthouse-cls-analysis">
+                    <h3>⚠️ Layout Shift Issues (CLS: {selectedResult.cls.toFixed(3)})</h3>
+                    <p className="admin-lighthouse-cls-description">
+                      Your CLS is above the recommended 0.1 threshold. This means elements are shifting after the page loads, 
+                      which creates a poor user experience. Common causes:
+                    </p>
+                    <div className="admin-lighthouse-cls-causes">
+                      <div className="admin-lighthouse-cls-cause">
+                        <strong>• Images without dimensions</strong>
+                        <p>Add explicit width/height attributes to all images</p>
+                      </div>
+                      <div className="admin-lighthouse-cls-cause">
+                        <strong>• Dynamic content loading</strong>
+                        <p>Reserve space for ads, embeds, and dynamic content</p>
+                      </div>
+                      <div className="admin-lighthouse-cls-cause">
+                        <strong>• Web fonts causing FOIT/FOUT</strong>
+                        <p>Use font-display: swap and preload fonts</p>
+                      </div>
+                      <div className="admin-lighthouse-cls-cause">
+                        <strong>• Footer min-height may need adjustment</strong>
+                        <p>Check Footer.css min-height settings for different screen sizes</p>
+                      </div>
+                    </div>
+                    <div className="admin-lighthouse-cls-action">
+                      <strong>Quick Fix:</strong> Run Chrome DevTools → Performance → Record page load → 
+                      Look for red "Layout Shift" bars to see exactly which elements are shifting.
+                    </div>
+                  </div>
+                )}
+
                 {/* Opportunities */}
                 {selectedResult.opportunities && selectedResult.opportunities.length > 0 && (
                   <div className="admin-lighthouse-opportunities">
@@ -379,6 +412,24 @@ function AdminLighthouse() {
                             )}
                           </div>
                           <p>{opp.description}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Diagnostics */}
+                {selectedResult.diagnostics && selectedResult.diagnostics.length > 0 && (
+                  <div className="admin-lighthouse-diagnostics">
+                    <h3>Diagnostic Information</h3>
+                    <div className="admin-lighthouse-diagnostics-list">
+                      {selectedResult.diagnostics.map((diag, index) => (
+                        <div key={index} className="admin-lighthouse-diagnostic">
+                          <h4>{diag.title}</h4>
+                          <p>{diag.description}</p>
+                          {diag.displayValue && (
+                            <span className="admin-lighthouse-diagnostic-value">{diag.displayValue}</span>
+                          )}
                         </div>
                       ))}
                     </div>

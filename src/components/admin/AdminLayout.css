@@ -1092,6 +1092,117 @@
   cursor: not-allowed;
 }
 
+/* CLS Analysis */
+.admin-lighthouse-cls-analysis {
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.admin-lighthouse-cls-analysis h3 {
+  color: var(--admin-warning);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+}
+
+.admin-lighthouse-cls-description {
+  color: var(--admin-text-muted);
+  font-size: 0.875rem;
+  margin: 0 0 1rem 0;
+  line-height: 1.6;
+}
+
+.admin-lighthouse-cls-causes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.admin-lighthouse-cls-cause {
+  background: var(--admin-bg-tertiary);
+  padding: 0.75rem;
+  border-radius: 6px;
+}
+
+.admin-lighthouse-cls-cause strong {
+  color: var(--admin-text);
+  font-size: 0.875rem;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.admin-lighthouse-cls-cause p {
+  color: var(--admin-text-dim);
+  font-size: 0.8125rem;
+  margin: 0;
+}
+
+.admin-lighthouse-cls-action {
+  background: var(--admin-bg-tertiary);
+  padding: 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  color: var(--admin-text-muted);
+  line-height: 1.5;
+}
+
+.admin-lighthouse-cls-action strong {
+  color: var(--admin-warning);
+}
+
+/* Diagnostics */
+.admin-lighthouse-diagnostics {
+  margin-top: 2rem;
+}
+
+.admin-lighthouse-diagnostics h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--admin-text);
+  margin: 0 0 1rem 0;
+}
+
+.admin-lighthouse-diagnostics-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.admin-lighthouse-diagnostic {
+  background: var(--admin-bg-tertiary);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.admin-lighthouse-diagnostic h4 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--admin-text);
+  margin: 0 0 0.5rem 0;
+}
+
+.admin-lighthouse-diagnostic p {
+  font-size: 0.8125rem;
+  color: var(--admin-text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.admin-lighthouse-diagnostic-value {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--admin-primary);
+  background: rgba(79, 140, 255, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .admin-lighthouse-content {

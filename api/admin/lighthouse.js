@@ -98,7 +98,7 @@ function extractLighthouseData(psiData) {
     .sort((a, b) => b.savings - a.savings)
     .slice(0, 10); // Top 10 opportunities
 
-  // Diagnostics
+  // Diagnostics (more detailed)
   const diagnostics = Object.entries(audits)
     .filter(([, audit]) => 
       audit.details?.type === 'diagnostic' &&
@@ -109,18 +109,36 @@ function extractLighthouseData(psiData) {
       id: key,
       title: audit.title,
       description: audit.description,
-      score: audit.score
+      score: audit.score,
+      displayValue: audit.displayValue,
+      details: audit.details
     }))
     .slice(0, 10); // Top 10 diagnostics
+  
+  // CLS Contributors (what's causing layout shift)
+  const clsAudits = {
+    clsValue: audits['cumulative-layout-shift']?.displayValue || null,
+    contributors: audits['cumulative-layout-shift']?.details?.items || [],
+    imageAspectRatio: audits['image-aspect-ratio'] || null,
+    unsizedImages: audits['unsized-images'] || null
+  };
 
   return {
     scores,
     metrics,
     opportunities,
     diagnostics,
+    clsAudits,
     fetchTime: lighthouse.fetchTime,
     requestedUrl: lighthouse.requestedUrl,
-    finalUrl: lighthouse.finalUrl
+    finalUrl: lighthouse.finalUrl,
+    // Store additional useful audits
+    performanceAudits: {
+      largestContentfulPaint: audits['largest-contentful-paint'],
+      cumulativeLayoutShift: audits['cumulative-layout-shift'],
+      totalBlockingTime: audits['total-blocking-time'],
+      serverResponseTime: audits['server-response-time']
+    }
   };
 }
 
