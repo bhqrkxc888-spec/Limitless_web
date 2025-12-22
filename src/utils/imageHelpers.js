@@ -68,6 +68,9 @@ export const isCloudflareImage = (str) => {
   return idPattern.test(str) || shortHashPattern.test(str);
 };
 
+// Alias for backwards compatibility
+export const isCloudflareImageId = isCloudflareImage;
+
 /**
  * Extract Cloudflare Image ID from URL or return ID if already just an ID
  * @param {string} urlOrId - Cloudflare URL or image ID

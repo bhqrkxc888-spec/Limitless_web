@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import OptimizedImage from './OptimizedImage';
 import './GuideCard.css';
 
 function GuideCard({ guide }) {
@@ -10,7 +11,7 @@ function GuideCard({ guide }) {
     <Link to={`/cruise-guides/${guide.slug}`} className="guide-card">
       {imageUrl && (
         <div className="guide-card__image">
-          <img
+          <OptimizedImage
             src={imageUrl}
             alt={guide.title}
             width={imageWidth}
