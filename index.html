@@ -46,9 +46,9 @@
     <link rel="preconnect" href="https://xrbusklskmeaamwynfmm.supabase.co" crossorigin />
     <link rel="preconnect" href="https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com" crossorigin />
     
-    <!-- Google Fonts - use font-display: optional to prevent ANY layout shift -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=optional" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin />
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=optional" /></noscript>
+    <!-- Google Fonts - use font-display: swap to prevent render blocking -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" /></noscript>
     
     <!-- DNS prefetch for non-critical resources -->
     <link rel="dns-prefetch" href="https://www.widgety.co.uk" />
@@ -59,13 +59,26 @@
     <!-- Preload hero image for faster LCP -->
     <link rel="preload" as="image" href="https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/HERO-home.webp" fetchpriority="high" />
     
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GNY4BEL0HQ"></script>
+    <!-- Google Analytics 4 - Defer loading to not block LCP -->
     <script>
+      // Defer GTM loading until page is interactive
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-GNY4BEL0HQ');
+      gtag('config', 'G-GNY4BEL0HQ', { 'send_page_view': false });
+      
+      // Load GTM script after page load
+      window.addEventListener('load', function() {
+        var script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-GNY4BEL0HQ';
+        script.async = true;
+        document.head.appendChild(script);
+        
+        // Send initial pageview after script loads
+        script.onload = function() {
+          gtag('event', 'page_view');
+        };
+      });
     </script>
     
     <!-- Structured Data - Organization (Enhanced for rich results) -->

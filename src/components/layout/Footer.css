@@ -54,6 +54,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  /* Prevent CLS - reserve explicit height */
+  min-height: 56px;
 }
 
 .footer-logo .logo-icon {
@@ -62,6 +64,9 @@
   flex-shrink: 0;
   display: block;
   object-fit: contain;
+  /* Prevent CLS by reserving space */
+  aspect-ratio: 1 / 1;
+  background-color: transparent;
 }
 
 .footer-logo .logo-text {

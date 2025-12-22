@@ -32,15 +32,22 @@ export default defineConfig({
     },
     // Increase chunk size warning limit (we have large data files)
     chunkSizeWarningLimit: 1000,
-    // Enable CSS code splitting
+    // Enable CSS code splitting for better performance
     cssCodeSplit: true,
-    // Minify CSS
+    // Minify CSS and JS
     minify: 'terser',
     terserOptions: {
       compress: {
         drop_console: true, // Remove console.logs in production
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn']
+      },
+      mangle: {
+        safari10: true
       }
-    }
+    },
+    // Optimize CSS minification
+    cssMinify: 'lightningcss'
   },
   server: {
     proxy: {

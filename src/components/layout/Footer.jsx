@@ -79,6 +79,7 @@ function Footer() {
                     loading="lazy"
                     decoding="async"
                     fetchpriority="low"
+                    style={{ width: '56px', height: '56px' }}
                   />
                   <div className="logo-text">
                     <span className="logo-name">Limitless Cruises</span>

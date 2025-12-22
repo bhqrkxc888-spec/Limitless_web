@@ -8,9 +8,13 @@
 import { supabase } from '../lib/supabase'
 import { siteConfig } from '../config/siteConfig'
 
+// FEATURE FLAG: Disable database calls to prevent 404 errors during launch
+// Set to true once database functions are deployed
+const ENABLE_DATABASE_LOGGING = false
+
 // Check if SEO tracking is enabled in config
 function isMonitoringEnabled() {
-  return siteConfig.monitoring?.enabled && siteConfig.monitoring?.seoTracking
+  return ENABLE_DATABASE_LOGGING && siteConfig.monitoring?.enabled && siteConfig.monitoring?.seoTracking
 }
 
 /**

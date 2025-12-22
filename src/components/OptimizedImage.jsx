@@ -1,19 +1,20 @@
-import { getOptimizedImageUrl, generateSrcSet, isSupabaseUrl } from '../utils/imageHelpers';
+import { getOptimizedImageUrl, generateSrcSet, isSupabaseUrl, isCloudflareImage } from '../utils/imageHelpers';
 import { isVercelBlobUrl } from '../lib/vercelBlob';
 
 /**
  * OptimizedImage Component
- * Automatically optimizes images from Vercel Blob or Supabase Storage.
+ * Automatically optimizes images from Cloudflare Images, Vercel Blob, or Supabase Storage.
  * Falls back gracefully for external URLs.
  * 
  * Features:
- * - Automatic WebP conversion for Vercel Blob images (via Vercel CDN)
- * - Manual transforms for legacy Supabase images
+ * - Cloudflare Images: Flexible variants for responsive images with automatic WebP/AVIF
+ * - Vercel Blob: Automatic WebP conversion via Vercel CDN
+ * - Supabase Storage: Manual transforms (legacy support)
  * - Responsive srcset generation
  * - Proper loading/priority attributes for LCP optimization
  * - Maintains aspect ratio
  * 
- * @param {string} src - Original image URL
+ * @param {string} src - Original image URL or Cloudflare Image ID
  * @param {string} alt - Alt text (required for accessibility)
  * @param {number} width - Intrinsic width (for aspect ratio calculation)
  * @param {number} height - Intrinsic height (for aspect ratio calculation)
@@ -65,20 +66,22 @@ function OptimizedImage({
 
   const isVercelBlob = isVercelBlobUrl(src);
   const isSupabase = isSupabaseUrl(src);
+  const isCloudflare = isCloudflareImage(src);
   
   // Determine the max width for the primary src (use largest srcset width or provided width)
   const maxWidth = width || Math.max(...srcsetWidths);
   
   // Generate optimized URLs
+  // Cloudflare: uses flexible variants for automatic optimization
   // Vercel Blob: use as-is (Vercel CDN handles optimization automatically)
   // Supabase: use manual transforms
   // External: use as-is
-  const optimizedSrc = (isVercelBlob || isSupabase)
+  const optimizedSrc = (isCloudflare || isVercelBlob || isSupabase)
     ? getOptimizedImageUrl(src, { width: maxWidth, quality })
     : src;
   
-  // Generate srcset (only for Supabase - Vercel handles this automatically)
-  const srcSet = isSupabase && srcsetWidths.length > 0
+  // Generate srcset (Cloudflare and Supabase generate manually, Vercel handles automatically)
+  const srcSet = (isCloudflare || isSupabase) && srcsetWidths.length > 0
     ? generateSrcSet(src, srcsetWidths, { quality })
     : undefined;
 
