@@ -159,7 +159,8 @@ function AppLayout() {
         Skip to main content
       </a>
       <Header />
-      <main id="main-content">
+      {/* Using div instead of main to avoid nested <main> elements - each page has its own <main> */}
+      <div id="main-content" className="main-wrapper">
         <ErrorBoundary>
           <Suspense fallback={<PageLoader />}>
             <Routes>
@@ -226,7 +227,7 @@ function AppLayout() {
           </Routes>
         </Suspense>
         </ErrorBoundary>
-      </main>
+      </div>
       <Footer />
       <CookieConsent />
       <FloatingWhatsApp />

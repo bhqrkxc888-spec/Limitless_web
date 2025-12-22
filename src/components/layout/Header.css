@@ -352,6 +352,11 @@
    ======================================== */
 
 @media (max-width: 1023px) {
+  .header {
+    /* Top bar is hidden, so reduce min-height to prevent CLS */
+    min-height: 84px; /* Only main header height */
+  }
+
   .header-top {
     display: none;
   }
@@ -445,6 +450,11 @@
 }
 
 @media (max-width: 767px) {
+  .header {
+    /* Further reduce min-height for mobile with smaller padding */
+    min-height: 68px;
+  }
+
   .header-main {
     padding: var(--space-3) 0;
   }

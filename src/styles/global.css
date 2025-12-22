@@ -61,7 +61,16 @@
   min-height: 100vh;
 }
 
-.app > main {
+/* Main content wrapper - allows page <main> elements to exist without nesting */
+.main-wrapper {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Each page's <main> element should fill the wrapper */
+.main-wrapper > main,
+.main-wrapper [role="main"] {
   flex: 1 0 auto;
 }
 
