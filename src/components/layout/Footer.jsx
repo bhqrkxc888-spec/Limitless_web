@@ -69,22 +69,9 @@ function Footer() {
             {/* Brand Column */}
             <div className="footer-brand">
               <Link to="/" className="footer-logo">
-                <div className="logo-container">
-                  <img 
-                    src="https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Hero-logo.webp" 
-                    alt="Limitless Cruises logo - gold cruise ship icon" 
-                    className="logo-icon"
-                    width="56"
-                    height="56"
-                    loading="lazy"
-                    decoding="async"
-                    fetchpriority="low"
-                    style={{ width: '56px', height: '56px' }}
-                  />
-                  <div className="logo-text">
-                    <span className="logo-name">Limitless Cruises</span>
-                    <span className="logo-tagline">Personal Cruise Consultant</span>
-                  </div>
+                <div className="logo-text">
+                  <span className="logo-name">Limitless Cruises</span>
+                  <span className="logo-tagline">Personal Cruise Consultant</span>
                 </div>
               </Link>
               <p className="footer-tagline">{siteConfig.tagline}</p>
