@@ -39,9 +39,12 @@ function LatestNewsTile() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentIndex, news.length]);
 
-  // Don't render if no news or error (API not set up yet)
-  if (!loading && (news.length === 0 || error)) {
-    return null;
+  // Check if empty (no news or error)
+  const isEmpty = !loading && (news.length === 0 || error);
+
+  // When empty, render minimal container that collapses without CLS
+  if (isEmpty) {
+    return <section className="latest-news-tile latest-news-tile--empty" aria-hidden="true" />;
   }
 
   const handlePrevious = () => {

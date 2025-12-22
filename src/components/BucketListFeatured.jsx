@@ -47,8 +47,9 @@ function BucketListFeatured() {
   // Get visible items
   const visibleItems = allFeatured.slice(currentIndex, currentIndex + itemsToShow);
 
+  // When empty, render minimal container that collapses without CLS
   if (!allFeatured || allFeatured.length === 0) {
-    return null;
+    return <section className="bucket-list-featured bucket-list-featured--empty" aria-hidden="true" />;
   }
 
   return (

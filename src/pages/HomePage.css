@@ -32,9 +32,22 @@
   object-fit: cover;
   object-position: center right;
   display: block;
-  filter: brightness(1.05) saturate(1.1);
-  transform: scale(1.1);
+  /* Defer expensive filter/transform until after initial paint for better LCP */
+  /* These effects animate in smoothly instead of blocking render */
+  filter: brightness(1) saturate(1);
+  transform: scale(1);
   transform-origin: center right;
+  animation: heroImageEnhance 0.8s ease-out 0.1s forwards;
+  /* Hint browser to prepare for transform/filter changes */
+  will-change: transform, filter;
+}
+
+/* Animate in the subtle image enhancements after LCP */
+@keyframes heroImageEnhance {
+  to {
+    filter: brightness(1.05) saturate(1.1);
+    transform: scale(1.1);
+  }
 }
 
 /* Very subtle overlay - only a light shadow where text box sits */
@@ -77,6 +90,10 @@
   position: relative;
   animation: fadeInUp 0.8s ease-out;
   text-align: center;
+  /* GPU acceleration hint for smooth animation */
+  will-change: transform, opacity;
+  /* Use transform3d to force GPU layer */
+  transform: translateZ(0);
 }
 
 /* Gold accent line on top (centered) */

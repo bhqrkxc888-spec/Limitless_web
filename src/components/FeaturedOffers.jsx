@@ -42,9 +42,13 @@ function FeaturedOffers() {
 
   const visibleOffers = offers.slice(currentIndex, currentIndex + itemsToShow);
 
-  // Don't render if no offers or if there's an error (function not set up yet)
-  if (!loading && (offers.length === 0 || error)) {
-    return null;
+  // Return empty container with data attribute for CSS to handle gracefully
+  // This prevents CLS by not removing the element from the DOM
+  const isEmpty = !loading && (offers.length === 0 || error);
+
+  // When empty, render minimal container that collapses without CLS
+  if (isEmpty) {
+    return <section className="featured-offers featured-offers--empty" aria-hidden="true" />;
   }
 
   return (

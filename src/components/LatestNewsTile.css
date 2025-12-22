@@ -8,6 +8,16 @@
   padding: var(--space-16) 0;
 }
 
+/* Empty state - collapse without causing layout shift */
+.latest-news-tile--empty {
+  display: block;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  contain: layout style;
+}
+
 /* ========================================
    SECTION HEADER
    ======================================== */
@@ -70,6 +80,8 @@
   align-items: center;
   justify-content: center;
   padding: var(--space-12);
+  /* Maintain consistent height during loading to prevent CLS */
+  min-height: 400px;
 }
 
 .latest-news-tile__loading-spinner {
