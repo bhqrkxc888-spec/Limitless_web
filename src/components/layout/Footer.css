@@ -7,9 +7,8 @@
   background-color: var(--clr-primary);
   color: var(--clr-text-on-primary);
   margin-top: auto;
-  /* Prevent CLS with explicit content-visibility */
-  content-visibility: auto;
-  contain-intrinsic-size: auto 650px;
+  /* Remove content-visibility which was causing CLS with wrong size estimate */
+  /* The footer will render normally without virtualization */
 }
 
 /* ========================================
@@ -295,10 +294,6 @@
    ======================================== */
 
 @media (max-width: 1023px) {
-  .footer {
-    contain-intrinsic-size: auto 720px;
-  }
-
   .footer-main {
     padding: 40px 0 28px;
   }
@@ -319,10 +314,6 @@
 }
 
 @media (max-width: 767px) {
-  .footer {
-    contain-intrinsic-size: auto 900px;
-  }
-
   .footer-main {
     padding: 32px 0 24px;
   }
