@@ -69,9 +69,9 @@ function Footer() {
             {/* Brand Column */}
             <div className="footer-brand">
               <Link to="/" className="footer-logo">
-                <div className="logo-text">
-                  <span className="logo-name">Limitless Cruises</span>
-                  <span className="logo-tagline">Personal Cruise Consultant</span>
+                  <div className="logo-text">
+                    <span className="logo-name">Limitless Cruises</span>
+                    <span className="logo-tagline">Personal Cruise Consultant</span>
                 </div>
               </Link>
               <p className="footer-tagline">{siteConfig.tagline}</p>
