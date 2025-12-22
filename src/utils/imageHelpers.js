@@ -129,10 +129,9 @@ export const getCloudflareResponsiveUrls = (imageId, widths = [640, 1024, 1920])
   
   const cleanId = getCloudflareImageId(imageId) || imageId;
   
-  // Cloudflare Images: Use 'public' variant for now (flexible variants need to be enabled)
-  // TODO: Enable flexible variants in Cloudflare dashboard for dynamic resizing
+  // Cloudflare Images flexible variants: w={width},fit=scale-down
   return widths.map(width => ({
-    url: `${CLOUDFLARE_IMAGES_DOMAIN}/${cleanId}/public`,
+    url: `${CLOUDFLARE_IMAGES_DOMAIN}/${cleanId}/w=${width},fit=scale-down`,
     width
   }));
 };
@@ -154,9 +153,15 @@ export const getOptimizedImageUrl = (url, options = {}) => {
   // Cloudflare Images: Generate URL from ID or extract from URL
   if (isCloudflareImage(url)) {
     const imageId = getCloudflareImageId(url);
+    const { width, quality = 85 } = options;
     
-    // Use 'public' variant for now (flexible variants need to be enabled in Cloudflare)
-    // TODO: Enable flexible variants in dashboard for dynamic resizing
+    if (width) {
+      // Use flexible variants for custom sizing
+      // Format: w={width},fit=scale-down,q={quality}
+      return getCloudflareImageUrl(imageId, `w=${width},fit=scale-down,q=${quality}`);
+    }
+    
+    // No transforms requested, use 'public' variant
     return getCloudflareImageUrl(imageId, 'public');
   }
   
