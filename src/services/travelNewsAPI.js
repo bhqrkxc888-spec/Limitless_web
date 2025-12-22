@@ -30,15 +30,13 @@ export async function getTravelNews({
   }
 
   try {
-    const { data, error } = await supabase
-      .schema('crm')
-      .rpc('get_travel_news_public', {
-        p_limit: limit,
-        p_offset: offset,
-        p_featured: featured,
-        p_category: category,
-        p_tag: tag
-      });
+    const { data, error } = await supabase.rpc('get_travel_news_public', {
+      p_limit: limit,
+      p_offset: offset,
+      p_featured: featured,
+      p_category: category,
+      p_tag: tag
+    });
 
     if (error) {
       // If function not found, it's OK - travel news feature might not be set up yet
@@ -79,11 +77,9 @@ export async function getTravelNewsBySlug(slug) {
   }
 
   try {
-    const { data, error } = await supabase
-      .schema('crm')
-      .rpc('get_travel_news_by_slug_public', {
-        p_slug: slug
-      });
+    const { data, error } = await supabase.rpc('get_travel_news_by_slug_public', {
+      p_slug: slug
+    });
 
     if (error) {
       // If function not found, return null (not an error)
@@ -124,12 +120,10 @@ export async function getTravelNewsByCruiseLine(cruiseLineSlug, limit = 10) {
   }
 
   try {
-    const { data, error } = await supabase
-      .schema('crm')
-      .rpc('get_travel_news_by_cruise_line_public', {
-        p_cruise_line_slug: cruiseLineSlug,
-        p_limit: limit
-      });
+    const { data, error } = await supabase.rpc('get_travel_news_by_cruise_line_public', {
+      p_cruise_line_slug: cruiseLineSlug,
+      p_limit: limit
+    });
 
     if (error) {
       // If function not found, return empty - feature might not be set up yet
@@ -170,11 +164,9 @@ export async function incrementTravelNewsView(newsId) {
 
   try {
     // Fire and forget - we don't need to wait for this
-    const { error } = await supabase
-      .schema('crm')
-      .rpc('increment_travel_news_view', {
-        p_news_id: newsId
-      });
+    const { error } = await supabase.rpc('increment_travel_news_view', {
+      p_news_id: newsId
+    });
 
     if (error) {
       // Silently ignore if function doesn't exist - this is not critical

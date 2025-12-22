@@ -22,16 +22,14 @@ export async function getCruiseGuides(options = {}) {
   } = options
 
   try {
-    const { data, error } = await supabase
-      .schema('crm')
-      .rpc('get_cruise_guides_public', {
-        p_limit: limit,
-        p_offset: offset,
-        p_featured: featured,
-        p_guide_type: guideType,
-        p_cruise_line_slug: cruiseLineSlug,
-        p_destination_slug: destinationSlug,
-      })
+    const { data, error } = await supabase.rpc('get_cruise_guides_public', {
+      p_limit: limit,
+      p_offset: offset,
+      p_featured: featured,
+      p_guide_type: guideType,
+      p_cruise_line_slug: cruiseLineSlug,
+      p_destination_slug: destinationSlug,
+    })
 
     if (error) {
       console.error('Error fetching cruise guides:', error)
@@ -61,11 +59,9 @@ export async function getCruiseGuideBySlug(slug) {
   if (!slug) return null
 
   try {
-    const { data, error } = await supabase
-      .schema('crm')
-      .rpc('get_cruise_guide_by_slug_public', {
-        p_slug: slug,
-      })
+    const { data, error } = await supabase.rpc('get_cruise_guide_by_slug_public', {
+      p_slug: slug,
+    })
 
     if (error) {
       console.error('Error fetching guide by slug:', error)
@@ -74,9 +70,7 @@ export async function getCruiseGuideBySlug(slug) {
 
     // Increment view count (fire and forget)
     if (data?.id) {
-      supabase
-        .schema('crm')
-        .rpc('increment_cruise_guide_view', { p_guide_id: data.id })
+      supabase.rpc('increment_cruise_guide_view', { p_guide_id: data.id })
         .then(() => {})
         .catch((err) => console.error('Failed to increment view count:', err))
     }
