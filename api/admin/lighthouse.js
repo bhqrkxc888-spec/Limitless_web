@@ -33,10 +33,11 @@ async function runPageSpeedInsights(url, strategy = 'desktop') {
   const apiUrl = new URL('https://www.googleapis.com/pagespeedonline/v5/runPagespeed');
   apiUrl.searchParams.set('url', url);
   apiUrl.searchParams.set('strategy', strategy); // 'desktop' or 'mobile'
-  apiUrl.searchParams.set('category', 'PERFORMANCE');
-  apiUrl.searchParams.set('category', 'ACCESSIBILITY');
-  apiUrl.searchParams.set('category', 'BEST_PRACTICES');
-  apiUrl.searchParams.set('category', 'SEO');
+  // Use append() for multiple categories - set() would overwrite!
+  apiUrl.searchParams.append('category', 'PERFORMANCE');
+  apiUrl.searchParams.append('category', 'ACCESSIBILITY');
+  apiUrl.searchParams.append('category', 'BEST_PRACTICES');
+  apiUrl.searchParams.append('category', 'SEO');
   
   if (pagespeedApiKey) {
     apiUrl.searchParams.set('key', pagespeedApiKey);
