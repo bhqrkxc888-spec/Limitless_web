@@ -13,7 +13,7 @@ import OnboardCreditBadge from '../components/OnboardCreditBadge';
 import SoloTravellerInfo from '../components/SoloTravellerInfo';
 import OptimizedImage from '../components/OptimizedImage';
 import { createSanitizedMarkup } from '../utils/sanitizeHtml';
-import { getCloudflareImageUrl, isCloudflareImageId } from '../utils/imageHelpers';
+import { getOptimizedImageUrl, isSupabaseUrl } from '../utils/imageHelpers';
 import { useEffect, useMemo, useState, lazy, Suspense } from 'react';
 import './OfferPage.css';
 
@@ -66,11 +66,8 @@ function OfferPage() {
       
       let fullUrl = url;
       
-      // DEFENSIVE: Convert Cloudflare Image IDs to full URLs
-      // This handles legacy data where IDs were stored instead of URLs
-      if (isCloudflareImageId(url)) {
-        fullUrl = getCloudflareImageUrl(url);
-      }
+      // All images are now full URLs from Supabase Storage
+      // No conversion needed
       
       if (isValidImageUrl(fullUrl) && !seenUrls.has(fullUrl)) {
         seenUrls.add(fullUrl);

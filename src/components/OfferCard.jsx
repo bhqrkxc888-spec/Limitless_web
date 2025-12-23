@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Card } from './ui';
 import OptimizedImage from './OptimizedImage';
 import { getCardImageUrl } from '../utils/imageNaming';
-import { isCloudflareImageId } from '../utils/imageHelpers';
+import { isSupabaseUrl } from '../utils/imageHelpers';
 import './OfferCard.css';
 
 /**
@@ -15,14 +15,12 @@ import './OfferCard.css';
 function OfferCard({ offer, variant = 'default' }) {
   if (!offer) return null;
 
-  // Helper to validate URL is a proper image URL or Cloudflare Image ID
+  // Helper to validate URL is a proper image URL
   const isValidImageUrl = (url) => {
     if (!url || typeof url !== 'string') return false;
     const trimmed = url.trim();
     if (!trimmed) return false;
-    // Check for Cloudflare Image ID (UUID format)
-    if (isCloudflareImageId(trimmed)) return true;
-    // Check for regular URLs
+    // All images are now full URLs (Supabase or Vercel Blob)
     return trimmed.startsWith('http://') || 
            trimmed.startsWith('https://') || 
            trimmed.startsWith('/');
