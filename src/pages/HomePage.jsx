@@ -218,7 +218,7 @@ function HomePage() {
               </span>
               <div className="trust-text">
                 <strong>Family Friendly</strong>
-                <span>SEND Aware</span>
+                <span>SEND-aware</span>
               </div>
             </div>
           </div>
@@ -312,7 +312,7 @@ function HomePage() {
                 <CheckCircleIcon />
               </div>
               <h3>Stress-Free Planning</h3>
-              <p>From first enquiry to safe return - flights, hotels, transfers and every detail handled for you.</p>
+              <p>From first enquiry to safe return - flights, hotels, transfers and every detail are handled for you.</p>
             </div>
           </div>
         </div>

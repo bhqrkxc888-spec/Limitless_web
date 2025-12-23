@@ -353,8 +353,13 @@ ${urls.join('\n')}
     mkdirSync(publicDir, { recursive: true });
   }
 
+  // Write sitemap.xml (primary)
   const outputPath = join(publicDir, 'sitemap.xml');
   writeFileSync(outputPath, sitemap);
+
+  // Also write sitemaps.xml (plural) for Google Search Console compatibility
+  const outputPathPlural = join(publicDir, 'sitemaps.xml');
+  writeFileSync(outputPathPlural, sitemap);
 
   // Summary
   console.log('\n' + '='.repeat(60));
@@ -362,6 +367,7 @@ ${urls.join('\n')}
   console.log('='.repeat(60));
   console.log(`📄 Total URLs: ${totalCount}`);
   console.log(`📁 Output: public/sitemap.xml`);
+  console.log(`📁 Output: public/sitemaps.xml (plural for GSC)`);
   console.log('');
   console.log('❌ EXCLUDED (noindex patterns):');
   console.log('   - /travel-news/category/* (category archives)');

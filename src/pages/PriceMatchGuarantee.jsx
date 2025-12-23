@@ -1,7 +1,9 @@
 import LegalPageTemplate from '../components/LegalPageTemplate';
+import { siteConfig } from '../config/siteConfig';
 
-const fallbackContent = `
-<p>At Limitless Cruises, we endeavor to offer you the best value cruise holidays. If you find a better price, we'll match it.</p>
+function PriceMatchGuarantee() {
+  const fallbackContent = `
+<p>At Limitless Cruises, we endeavour to offer you the best value cruise holidays. If you find a better price, we'll match it.</p>
 
 <section>
   <h2>Our Promise</h2>
@@ -57,14 +59,13 @@ const fallbackContent = `
   <h2>Contact</h2>
   <p>To submit a price match request:</p>
   <ul>
-    <li>Email: <a href="mailto:dane@limitlesscruises.com">dane@limitlesscruises.com</a></li>
-    <li>Phone: 01246 823815</li>
+    <li>Email: <a href="mailto:${siteConfig.email}">${siteConfig.email}</a></li>
+    <li>Phone: ${siteConfig.phone}</li>
   </ul>
   <p>See our full Booking Terms & Conditions for additional information.</p>
 </section>
 `;
-
-function PriceMatchGuarantee() {
+  
   return (
     <LegalPageTemplate
       fallbackTitle="Price Match Guarantee"

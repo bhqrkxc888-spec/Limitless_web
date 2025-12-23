@@ -129,6 +129,10 @@
   ],
   "rewrites": [
     {
+      "source": "/sitemaps.xml",
+      "destination": "/sitemap.xml"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }

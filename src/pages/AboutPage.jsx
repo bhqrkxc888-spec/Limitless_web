@@ -115,15 +115,15 @@ function AboutPage() {
                 <div className="why-item">
                   <div className="why-number">2</div>
                   <div>
-                <h3>Stress Free Planning</h3>
+                <h3>Stress-Free Planning</h3>
                     <p>I handle each detail so planning feels simple while you enjoy the excitement.</p>
                   </div>
                 </div>
                 <div className="why-item">
                   <div className="why-number">3</div>
                   <div>
-                    <h3>SEND & Family Friendly</h3>
-                    <p>As a SEND mum I understand accessibility and recommend ships that keep things easy.</p>
+                    <h3>SEND & Family-Friendly</h3>
+                    <p>As a SEND mum, I understand accessibility and recommend ships that keep things easy.</p>
                   </div>
                 </div>
                 <div className="why-item">
