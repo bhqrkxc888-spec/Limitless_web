@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { Card } from './ui';
 import OptimizedImage from './OptimizedImage';
 import { getCardImageUrl } from '../utils/imageNaming';
-// Image helpers imported via other components if needed
 import './OfferCard.css';
 
 /**

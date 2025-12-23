@@ -48,7 +48,8 @@ function AdminSearchConsole() {
     try {
       // TODO: Implement Google Search Console API integration
       // For now, showing placeholder structure
-      // Future: Use timeframe variable to filter data
+      // Note: timeframe will be used to filter data once API is integrated
+      console.log('Fetching data for timeframe:', timeframe);
       
       const placeholderStats = {
         totalClicks: 0,

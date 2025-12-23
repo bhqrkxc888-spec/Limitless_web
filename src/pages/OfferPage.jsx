@@ -13,7 +13,6 @@ import OnboardCreditBadge from '../components/OnboardCreditBadge';
 import SoloTravellerInfo from '../components/SoloTravellerInfo';
 import OptimizedImage from '../components/OptimizedImage';
 import { createSanitizedMarkup } from '../utils/sanitizeHtml';
-// Image helpers imported via OptimizedImage component
 import { useEffect, useMemo, useState, lazy, Suspense } from 'react';
 import './OfferPage.css';
 
