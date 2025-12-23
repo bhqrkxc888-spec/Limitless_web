@@ -13,6 +13,7 @@ import OnboardCreditBadge from '../components/OnboardCreditBadge';
 import SoloTravellerInfo from '../components/SoloTravellerInfo';
 import OptimizedImage from '../components/OptimizedImage';
 import { createSanitizedMarkup } from '../utils/sanitizeHtml';
+import { getCloudflareImageUrl, isCloudflareImageId } from '../utils/imageHelpers';
 import { useEffect, useMemo, useState, lazy, Suspense } from 'react';
 import './OfferPage.css';
 
@@ -61,9 +62,19 @@ function OfferPage() {
     
     // Helper to add image only if not already seen and valid
     const addImage = (url, alt) => {
-      if (isValidImageUrl(url) && !seenUrls.has(url)) {
-        seenUrls.add(url);
-        images.push({ url, alt });
+      if (!url) return;
+      
+      let fullUrl = url;
+      
+      // DEFENSIVE: Convert Cloudflare Image IDs to full URLs
+      // This handles legacy data where IDs were stored instead of URLs
+      if (isCloudflareImageId(url)) {
+        fullUrl = getCloudflareImageUrl(url);
+      }
+      
+      if (isValidImageUrl(fullUrl) && !seenUrls.has(fullUrl)) {
+        seenUrls.add(fullUrl);
+        images.push({ url: fullUrl, alt });
       }
     };
     
