@@ -56,7 +56,7 @@ function Card({
  * Card Image Component
  * Uses OptimizedImage for automatic Supabase transforms
  */
-function CardImage({ src, alt = '', aspectRatio = '16/9', className = '', priority = false, objectFit = 'cover' }) {
+function CardImage({ src, alt = '', aspectRatio = '16/9', className = '', priority = false, objectFit }) {
   // Ensure alt text is provided for accessibility
   if (src && !alt) {
     logger.warn('Card.Image: alt text is recommended for accessibility');
@@ -64,6 +64,10 @@ function CardImage({ src, alt = '', aspectRatio = '16/9', className = '', priori
   
   // Handle 'auto' aspect ratio (no forced ratio)
   const isAutoRatio = aspectRatio === 'auto';
+  
+  // For auto aspect ratio, default to no cropping (contain or undefined to let image determine)
+  // For fixed aspect ratio, default to cover to fill the container
+  const defaultObjectFit = isAutoRatio ? undefined : (objectFit || 'cover');
   
   // Calculate dimensions from aspect ratio for image optimization
   let calculatedHeight = 450; // default
@@ -90,7 +94,7 @@ function CardImage({ src, alt = '', aspectRatio = '16/9', className = '', priori
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
           srcsetWidths={[400, 600, 800]}
           quality={85}
-          objectFit={objectFit}
+          objectFit={defaultObjectFit}
         />
       ) : (
         <div className="card-image-placeholder">

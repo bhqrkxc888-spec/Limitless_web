@@ -75,6 +75,7 @@
   width: 100%;
   height: auto;
   display: block;
+  object-fit: unset !important; /* Override any inline objectFit to prevent cropping */
 }
 
 .card-image img {

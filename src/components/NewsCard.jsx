@@ -159,7 +159,6 @@ function NewsCard({ article, variant = 'default' }) {
           src={article.featured_image_url || article.thumbnail_image_url}
           alt={article.title}
           aspectRatio="auto"
-          objectFit="cover"
         />
       )}
       
