@@ -1,15 +1,16 @@
 import { Button } from './ui';
-import OptimizedImage from './OptimizedImage';
 import './HeroSection.css';
 
 /**
  * HeroSection Component
  * Full-width hero with background image and overlay
+ * Supports responsive images with separate mobile version for performance
  * 
  * @param {Object} props
  * @param {string} props.title - Main heading
  * @param {string} props.subtitle - Subtitle text
- * @param {string} props.image - Background image URL
+ * @param {string} props.image - Background image URL (desktop)
+ * @param {string} props.mobileImage - Mobile-optimized image URL (optional, falls back to image)
  * @param {string} props.imageAlt - Alt text for background image
  * @param {Object} props.primaryCta - Primary CTA { label, href, to }
  * @param {Object} props.secondaryCta - Secondary CTA { label, href, to }
@@ -20,6 +21,7 @@ function HeroSection({
   title,
   subtitle,
   image,
+  mobileImage, // Optional: smaller image for mobile (e.g., 800x600)
   imageAlt = 'Hero background',
   primaryCta,
   secondaryCta,
@@ -37,20 +39,31 @@ function HeroSection({
 
   return (
     <section className={classes}>
-      {/* Background Image */}
+      {/* Background Image - uses picture element for mobile optimization */}
       <div className="hero-background">
         {image ? (
-          <OptimizedImage
-            src={image}
-            alt={imageAlt}
-            className="hero-image"
-            width={1920}
-            height={1080}
-            priority={true}
-            sizes="100vw"
-            srcsetWidths={[640, 1024, 1920]}
-            quality={85}
-          />
+          <picture>
+            {/* Mobile-optimized image (if provided) - for screens <= 768px */}
+            {mobileImage && (
+              <source 
+                media="(max-width: 768px)" 
+                srcSet={mobileImage}
+                type="image/webp"
+              />
+            )}
+            {/* Desktop image - priority loading for LCP */}
+            <img
+              src={image}
+              alt={imageAlt}
+              className="hero-image"
+              width={1920}
+              height={1080}
+              loading="eager"
+              fetchpriority="high"
+              decoding="sync"
+              style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+            />
+          </picture>
         ) : (
           <div className="hero-placeholder" />
         )}

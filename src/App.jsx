@@ -5,10 +5,13 @@ import { analyzePageSEO } from './services/seoMonitoring'
 // Layout Components (keep these eagerly loaded for fast initial render)
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
-import CookieConsent from './components/CookieConsent'
-import FloatingWhatsApp from './components/FloatingWhatsApp'
 import DevModeIndicator from './components/DevModeIndicator'
 import ErrorBoundary from './components/ErrorBoundary'
+
+// Deferred UI Components - loaded after initial render for better mobile performance
+// These are not needed for First Contentful Paint
+const CookieConsent = lazy(() => import('./components/CookieConsent'))
+const FloatingWhatsApp = lazy(() => import('./components/FloatingWhatsApp'))
 
 // Route Protection
 import ProtectedRoute from './components/ProtectedRoute'
@@ -19,27 +22,28 @@ import PublishGate from './components/PublishGate'
 import HomePage from './pages/HomePage'
 
 // Loading fallback component - minimal height to prevent large CLS
-// Other pages use this during lazy load
+// Optimized for mobile with smaller spinner and faster animation
 function PageLoader() {
   return (
     <div className="page-loader" style={{ 
       display: 'flex', 
       justifyContent: 'center', 
       alignItems: 'center', 
-      minHeight: '100vh',
-      padding: '2rem'
+      minHeight: '60vh', // Reduced from 100vh for less jarring on mobile
+      padding: '1rem',
+      background: '#fff'
     }}>
       <div style={{ textAlign: 'center' }}>
         <div className="loading-spinner" style={{
-          width: '40px',
-          height: '40px',
-          border: '3px solid #f3f3f3',
-          borderTop: '3px solid #2C344C',
+          width: '32px', // Smaller on mobile
+          height: '32px',
+          border: '2px solid #e8e8e8',
+          borderTop: '2px solid #2C344C',
           borderRadius: '50%',
-          animation: 'spin 1s linear infinite',
-          margin: '0 auto 1rem'
+          animation: 'spin 0.6s linear infinite', // Faster spin for perceived speed
+          margin: '0 auto 0.5rem'
         }} />
-        <p style={{ color: '#666' }}>Loading...</p>
+        <p style={{ color: '#888', fontSize: '0.875rem' }}>Loading...</p>
       </div>
       <style>{`
         @keyframes spin {
@@ -229,8 +233,13 @@ function AppLayout() {
         </ErrorBoundary>
       </div>
       <Footer />
-      <CookieConsent />
-      <FloatingWhatsApp />
+      {/* Deferred UI - loaded after main content for better mobile performance */}
+      <Suspense fallback={null}>
+        <CookieConsent />
+      </Suspense>
+      <Suspense fallback={null}>
+        <FloatingWhatsApp />
+      </Suspense>
       <DevModeIndicator />
     </div>
   );

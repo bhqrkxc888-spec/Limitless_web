@@ -1,4 +1,4 @@
-import { StrictMode } from 'react'
+import { StrictMode, lazy, Suspense, useState, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles/global.css'
 import App from './App.jsx'
@@ -6,7 +6,62 @@ import { logError, logNetworkError, logApiError } from './services/errorTracking
 import { initSEOMonitoring } from './services/seoMonitoring'
 import { initWebVitals } from './services/webVitals'
 import { initEnvValidation } from './utils/envValidation'
-import { Analytics } from '@vercel/analytics/react'
+
+// Lazy load Vercel Analytics - not needed for initial render
+const Analytics = lazy(() => 
+  import('@vercel/analytics/react').then(mod => ({ default: mod.Analytics }))
+)
+
+/**
+ * DeferredAnalytics - Loads analytics after page is interactive
+ * This improves mobile performance by deferring non-critical JS
+ */
+function DeferredAnalytics() {
+  const [shouldLoad, setShouldLoad] = useState(false)
+  
+  useEffect(() => {
+    // Load analytics after idle or user interaction (whichever comes first)
+    const loadAnalytics = () => setShouldLoad(true)
+    
+    // Method 1: Load when browser is idle (after critical work done)
+    if ('requestIdleCallback' in window) {
+      const idleId = requestIdleCallback(loadAnalytics, { timeout: 3000 })
+      
+      // Method 2: Also load on first user interaction
+      const interactionEvents = ['scroll', 'click', 'touchstart', 'keydown']
+      const handleInteraction = () => {
+        cancelIdleCallback(idleId)
+        loadAnalytics()
+        interactionEvents.forEach(event => 
+          window.removeEventListener(event, handleInteraction, { passive: true })
+        )
+      }
+      
+      interactionEvents.forEach(event => 
+        window.addEventListener(event, handleInteraction, { once: true, passive: true })
+      )
+      
+      return () => {
+        cancelIdleCallback(idleId)
+        interactionEvents.forEach(event => 
+          window.removeEventListener(event, handleInteraction)
+        )
+      }
+    } else {
+      // Fallback for older browsers: load after 2s
+      const timer = setTimeout(loadAnalytics, 2000)
+      return () => clearTimeout(timer)
+    }
+  }, [])
+  
+  if (!shouldLoad) return null
+  
+  return (
+    <Suspense fallback={null}>
+      <Analytics />
+    </Suspense>
+  )
+}
 
 // Validate environment variables on startup (dev only - production has them in Vercel)
 if (import.meta.env.DEV) {
@@ -116,6 +171,6 @@ initMonitoring()
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <App />
-    <Analytics />
+    <DeferredAnalytics />
   </StrictMode>,
 )

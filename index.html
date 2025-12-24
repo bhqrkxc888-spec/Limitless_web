@@ -40,25 +40,34 @@
     <!-- Telephone Format Detection -->
     <meta name="format-detection" content="telephone=yes" />
     
-    <!-- Preconnect to external resources (critical for performance) -->
+    <!-- Preconnect to critical external resources only -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://xrbusklskmeaamwynfmm.supabase.co" crossorigin />
     <link rel="preconnect" href="https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com" crossorigin />
     
-    <!-- Google Fonts - use font-display: swap to prevent render blocking -->
+    <!-- Google Fonts - deferred to not block render on mobile -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" /></noscript>
     
-    <!-- DNS prefetch for non-critical resources -->
+    <!-- Fallback to system fonts before web fonts load -->
+    <style>
+      body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    </style>
+    
+    <!-- DNS prefetch for secondary resources (cheaper than preconnect) -->
+    <link rel="dns-prefetch" href="https://xrbusklskmeaamwynfmm.supabase.co" />
     <link rel="dns-prefetch" href="https://www.widgety.co.uk" />
     <link rel="dns-prefetch" href="https://api.openweathermap.org" />
     <link rel="dns-prefetch" href="https://api.stormglass.io" />
     <link rel="dns-prefetch" href="https://challenges.cloudflare.com" />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     
-    <!-- Preload hero image for faster LCP with responsive hints -->
-    <link rel="preload" as="image" href="https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/HERO-home.webp" fetchpriority="high" imagesizes="100vw" />
+    <!-- Preload hero image for faster LCP with responsive hints - mobile optimized -->
+    <link rel="preload" as="image" 
+      href="https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/HERO-home.webp" 
+      fetchpriority="high" 
+      imagesrcset="https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/HERO-home.webp 1920w"
+      imagesizes="(max-width: 768px) 100vw, 1920px" />
     
     <!-- Critical CSS for hero section - prevents render blocking for LCP -->
     <style>
@@ -66,6 +75,17 @@
       .hero-elegant { position: relative; min-height: 600px; display: flex; align-items: center; overflow: hidden; background: #2C344C; }
       .hero-background-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; min-height: 600px; z-index: 0; }
       .hero-background-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      
+      /* Critical layout styles to prevent render blocking on mobile */
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: Inter, system-ui, -apple-system, sans-serif; line-height: 1.6; color: #333; background: #fff; }
+      #root { min-height: 100vh; display: flex; flex-direction: column; }
+      
+      /* Mobile optimizations */
+      @media (max-width: 768px) {
+        .hero-elegant { min-height: 400px; }
+        .hero-background-image { min-height: 400px; }
+      }
     </style>
     
     <!-- requestIdleCallback Polyfill for older browsers -->

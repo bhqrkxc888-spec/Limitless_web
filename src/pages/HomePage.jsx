@@ -5,8 +5,7 @@ import BucketListFeatured from '../components/BucketListFeatured'
 import FeaturedOffers from '../components/FeaturedOffers';
 import LatestNewsTile from '../components/LatestNewsTile';
 import { Button } from '../components/ui';
-import OptimizedImage from '../components/OptimizedImage';
-import { homeHeroImages } from '../utils/imageHelpers';
+import { homeHeroImages, homeHeroMobileImage } from '../utils/imageHelpers';
 import './HomePage.css';
 
 // Lazy load ContactForm (below the fold)
@@ -114,6 +113,7 @@ function HomePage() {
 
   // Single hero image (first image from array)
   const heroImage = homeHeroImages[0];
+  const heroImageMobile = homeHeroMobileImage; // Optional mobile-optimized version
 
   return (
     <main className="home-elegant">
@@ -125,19 +125,30 @@ function HomePage() {
       />
 
       {/* Hero Section - Image Background with Overlay Text */}
+      {/* Uses picture element for mobile optimization when mobile image is available */}
       <section className="hero-elegant">
         <div className="hero-background-image" style={{ aspectRatio: '16/9' }}>
-          <OptimizedImage
-            src={heroImage}
-            alt="Beautiful Caribbean beach with turquoise waters and a cruise ship on the horizon - Limitless Cruises destination"
-            width={1920}
-            height={1080}
-            priority={true}
-            sizes="100vw"
-            srcsetWidths={[640, 1024, 1920]}
-            quality={90}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
+          <picture>
+            {/* Mobile-optimized image (if provided) - smaller file for faster LCP on mobile */}
+            {heroImageMobile && (
+              <source 
+                media="(max-width: 768px)" 
+                srcSet={heroImageMobile}
+                type="image/webp"
+              />
+            )}
+            {/* Desktop/default image - priority loading for LCP */}
+            <img
+              src={heroImage}
+              alt="Beautiful Caribbean beach with turquoise waters and a cruise ship on the horizon - Limitless Cruises destination"
+              width={1920}
+              height={1080}
+              loading="eager"
+              fetchpriority="high"
+              decoding="sync"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </picture>
           <div className="hero-image-overlay"></div>
         </div>
         <div className="container">

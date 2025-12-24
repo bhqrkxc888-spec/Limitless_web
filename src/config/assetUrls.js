@@ -16,8 +16,13 @@ export const BLOB_BASE = 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.co
 // ============================================================================
 
 export const SITE_ASSETS = {
-  // Homepage hero image (16:9, 1920x1080+)
+  // Homepage hero image - Desktop (16:9, 1920x1080)
   homeHero: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/HERO-home.webp',
+  
+  // Homepage hero image - Mobile optimized (4:3 or 1:1, ~800x600)
+  // Upload path: site/HERO-home-mobile.webp
+  // Set this when you have a mobile-optimized version for better LCP on mobile
+  homeHeroMobile: null, // TODO: Upload mobile-optimized hero (800x600 or 640x480)
   
   // Social share image for Facebook/Twitter/LinkedIn (1200x630)
   ogImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/OG.webp',

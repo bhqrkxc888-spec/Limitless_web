@@ -138,11 +138,13 @@ export const aboutImages = {
 };
 
 /**
- * Get Homepage hero image
+ * Get Homepage hero images (desktop and mobile)
  * Now uses centralized config with proper fallback
+ * Mobile hero is optional - falls back to desktop if not provided
  */
 import { SITE_ASSETS, PLACEHOLDER_IMAGE } from '../config/assetUrls';
 export const homeHeroImages = [SITE_ASSETS.homeHero || PLACEHOLDER_IMAGE];
+export const homeHeroMobileImage = SITE_ASSETS.homeHeroMobile || null; // null = use desktop image
 
 /**
  * Image paths for Vercel Blob uploads
