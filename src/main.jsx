@@ -13,7 +13,7 @@ initEnvValidation()
 
 // Initialize global error handlers and monitoring
 function initMonitoring() {
-  // Initialize Web Vitals tracking (Core Web Vitals: LCP, FID, CLS, etc.)
+  // Initialize Web Vitals tracking (Core Web Vitals: LCP, INP, CLS, etc.)
   // Reports to console in dev, analytics in production
   initWebVitals()
   

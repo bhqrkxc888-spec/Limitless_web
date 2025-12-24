@@ -7,7 +7,7 @@
  * Based on web-vitals library (already installed in package.json)
  */
 
-import { onCLS, onFID, onFCP, onLCP, onTTFB, onINP } from 'web-vitals';
+import { onCLS, onFCP, onLCP, onTTFB, onINP } from 'web-vitals';
 import { siteConfig } from '../config/siteConfig';
 
 // Feature flag - enable once monitoring is fully set up
@@ -16,11 +16,10 @@ const ENABLE_WEB_VITALS_TRACKING = siteConfig.monitoring?.performanceTracking ??
 // Thresholds for Core Web Vitals (based on Google's recommendations)
 const THRESHOLDS = {
   LCP: { good: 2500, needsImprovement: 4000 },   // Largest Contentful Paint (ms)
-  FID: { good: 100, needsImprovement: 300 },     // First Input Delay (ms)
   CLS: { good: 0.1, needsImprovement: 0.25 },    // Cumulative Layout Shift
   FCP: { good: 1800, needsImprovement: 3000 },   // First Contentful Paint (ms)
   TTFB: { good: 800, needsImprovement: 1800 },   // Time to First Byte (ms)
-  INP: { good: 200, needsImprovement: 500 }      // Interaction to Next Paint (ms)
+  INP: { good: 200, needsImprovement: 500 }      // Interaction to Next Paint (ms) - replaces FID
 };
 
 /**
@@ -123,11 +122,10 @@ export function initWebVitals() {
   
   // Register all Core Web Vitals observers
   onCLS(handleMetric);    // Cumulative Layout Shift
-  onFID(handleMetric);    // First Input Delay (deprecated but still useful)
   onFCP(handleMetric);    // First Contentful Paint
   onLCP(handleMetric);    // Largest Contentful Paint
   onTTFB(handleMetric);   // Time to First Byte
-  onINP(handleMetric);    // Interaction to Next Paint (replaces FID)
+  onINP(handleMetric);    // Interaction to Next Paint (replaces deprecated FID)
   
   if (import.meta.env.DEV) {
     console.log('[Web Vitals] Monitoring initialized');
