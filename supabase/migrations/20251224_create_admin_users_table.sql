@@ -38,6 +38,13 @@ CREATE TRIGGER update_admin_users_updated_at
   EXECUTE FUNCTION web.update_updated_at_column();
 
 -- -----------------------------------------------------------------------------
+-- Grant Permissions
+-- Service role needs explicit table access grants
+-- -----------------------------------------------------------------------------
+GRANT SELECT, INSERT, UPDATE ON web.admin_users TO service_role;
+GRANT USAGE ON SCHEMA web TO service_role;
+
+-- -----------------------------------------------------------------------------
 -- RLS Policies
 -- Very restrictive - only service_role can access admin users
 -- No public access at all
