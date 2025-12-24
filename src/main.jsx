@@ -4,11 +4,19 @@ import './styles/global.css'
 import App from './App.jsx'
 import { logError, logNetworkError, logApiError } from './services/errorTracking'
 import { initSEOMonitoring } from './services/seoMonitoring'
+import { initWebVitals } from './services/webVitals'
+import { initEnvValidation } from './utils/envValidation'
 import { Analytics } from '@vercel/analytics/react'
 
+// Validate environment variables on startup
+initEnvValidation()
+
 // Initialize global error handlers and monitoring
-// Note: Performance monitoring disabled - using Lighthouse instead
 function initMonitoring() {
+  // Initialize Web Vitals tracking (Core Web Vitals: LCP, FID, CLS, etc.)
+  // Reports to console in dev, analytics in production
+  initWebVitals()
+  
   // Defer SEO monitoring until after page is interactive
   // This prevents blocking initial render
   if (typeof requestIdleCallback !== 'undefined') {
