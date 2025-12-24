@@ -7,26 +7,44 @@ export default defineConfig({
   build: {
     // Enable sourcemaps for production debugging (hidden sourcemaps for security)
     sourcemap: 'hidden',
-    // Optimize chunk splitting for better caching
+    // Optimize chunk splitting for better caching and performance
     rollupOptions: {
       output: {
-        manualChunks: {
-          // Separate vendor chunks
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'supabase-vendor': ['@supabase/supabase-js'],
+        manualChunks: (id) => {
+          // Granular node_modules splitting
+          if (id.includes('node_modules')) {
+            // Critical - React core (always needed)
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+              return 'react-vendor';
+            }
+            // Supabase client (large but needed)
+            if (id.includes('@supabase')) {
+              return 'supabase-vendor';
+            }
+            // Map libraries (only needed on itinerary/destination pages)
+            if (id.includes('leaflet') || id.includes('mapbox') || id.includes('ol/')) {
+              return 'map-vendor';
+            }
+            // Other vendor code
+            return 'vendor';
+          }
+          
           // Separate large data files
-          'cruise-data': ['./src/data/cruiseLines.js'],
-          'destination-data': ['./src/data/destinations.js'],
-          // Lazy-load weather APIs (only loaded with consent)
-          'weather-apis': [
-            './src/services/weatherAPI.js',
-            './src/services/marineAPI.js'
-          ],
-          // Separate form components (not needed on every page)
-          'forms': [
-            './src/components/ContactForm.jsx',
-            './src/components/PriceMatchForm.jsx'
-          ]
+          if (id.includes('/data/cruiseLines')) return 'cruise-data';
+          if (id.includes('/data/destinations')) return 'destination-data';
+          
+          // Admin pages (lazy-loaded, not needed for public)
+          if (id.includes('/pages/admin/')) return 'admin';
+          
+          // Weather APIs (only loaded with consent)
+          if (id.includes('/services/weather') || id.includes('/services/marine')) {
+            return 'weather-apis';
+          }
+          
+          // Form components (not needed on every page)
+          if (id.includes('ContactForm') || id.includes('PriceMatchForm')) {
+            return 'forms';
+          }
         }
       }
     },
