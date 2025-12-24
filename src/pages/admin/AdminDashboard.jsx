@@ -36,22 +36,25 @@ const sitePages = [
   { path: '/travel-news/:slug', name: 'News Article', status: 'public', description: 'Individual news articles' },
   { path: '/offers', name: 'Offers', status: 'public', description: 'Current cruise offers' },
   { path: '/offers/:slug', name: 'Offer Detail', status: 'public', description: 'Individual offer pages' },
+  { path: '/cruise-guides', name: 'Cruise Guides', status: 'public', description: 'Cruise guides hub (in nav)' },
+  { path: '/cruise-guides/:slug', name: 'Cruise Guide Detail', status: 'public', description: 'Individual guide pages' },
+  { path: '/cruise-lines', name: 'Cruise Lines', status: 'public', description: 'All cruise lines hub (16 pages)' },
+  { path: '/cruise-lines/:slug', name: 'Cruise Line Detail', status: 'public', description: 'Individual cruise line pages' },
+  { path: '/destinations', name: 'Destinations', status: 'public', description: 'All destinations hub (16 pages)' },
+  { path: '/destinations/:slug', name: 'Destination Detail', status: 'public', description: 'Individual destination pages' },
+  { path: '/bucket-list', name: 'Bucket List', status: 'public', description: 'Bucket list experiences hub (17 pages)' },
+  { path: '/bucket-list/:slug', name: 'Bucket List Detail', status: 'public', description: 'Individual experience pages' },
+  { path: '/cruise-types', name: 'Cruise Types', status: 'public', description: 'Types of cruises hub (7 pages)' },
+  { path: '/cruises/:slug', name: 'Cruise Type Detail', status: 'public', description: 'Individual cruise type pages' },
+  { path: '/faq', name: 'FAQ', status: 'public', description: 'Frequently asked questions' },
   { path: '/website-terms', name: 'Website Terms', status: 'public', description: 'Legal terms' },
   { path: '/privacy-policy', name: 'Privacy Policy', status: 'public', description: 'Privacy information' },
   { path: '/booking-terms', name: 'Booking Terms', status: 'public', description: 'Booking conditions' },
   { path: '/cookie-policy', name: 'Cookie Policy', status: 'public', description: 'Cookie usage' },
   { path: '/price-match-guarantee', name: 'Price Match', status: 'public', description: 'Price match T&Cs' },
   
-  // Hidden pages (require preview access)
-  { path: '/cruise-lines', name: 'Cruise Lines', status: 'hidden', description: 'All cruise lines hub' },
-  { path: '/cruise-lines/:slug', name: 'Cruise Line Detail', status: 'hidden', description: 'Individual cruise line pages' },
-  { path: '/destinations', name: 'Destinations', status: 'hidden', description: 'All destinations hub' },
-  { path: '/destinations/:slug', name: 'Destination Detail', status: 'hidden', description: 'Individual destination pages' },
-  { path: '/bucket-list', name: 'Bucket List', status: 'hidden', description: 'Bucket list experiences hub' },
-  { path: '/bucket-list/:slug', name: 'Bucket List Detail', status: 'hidden', description: 'Individual experience pages' },
-  { path: '/cruise-types', name: 'Cruise Types', status: 'hidden', description: 'Types of cruises hub' },
-  { path: '/faq', name: 'FAQ', status: 'hidden', description: 'Frequently asked questions' },
-  { path: '/testimonials', name: 'Testimonials', status: 'hidden', description: 'Customer reviews' },
+  // Hidden pages (coming soon - under development)
+  { path: '/testimonials', name: 'Testimonials', status: 'hidden', description: 'Customer reviews (coming soon)' },
 ];
 
 function AdminDashboard() {
