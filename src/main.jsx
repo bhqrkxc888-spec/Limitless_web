@@ -8,8 +8,10 @@ import { initWebVitals } from './services/webVitals'
 import { initEnvValidation } from './utils/envValidation'
 import { Analytics } from '@vercel/analytics/react'
 
-// Validate environment variables on startup
-initEnvValidation()
+// Validate environment variables on startup (dev only - production has them in Vercel)
+if (import.meta.env.DEV) {
+  initEnvValidation()
+}
 
 // Initialize global error handlers and monitoring
 function initMonitoring() {
