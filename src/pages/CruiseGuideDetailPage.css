@@ -126,6 +126,65 @@
   margin: var(--space-6) 0;
 }
 
+/* Enhanced figure styling for images with captions */
+.guide-detail-content figure {
+  margin: var(--space-8) 0;
+  padding: 0;
+}
+
+.guide-detail-content figure img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--clr-border-light);
+  display: block;
+}
+
+.guide-detail-content figcaption {
+  margin-top: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-muted);
+  font-style: italic;
+  text-align: center;
+  line-height: var(--line-height-relaxed);
+}
+
+/* Image alignment options */
+.guide-detail-content figure.img-left {
+  float: left;
+  max-width: 400px;
+  margin: var(--space-3) var(--space-6) var(--space-6) 0;
+}
+
+.guide-detail-content figure.img-right {
+  float: right;
+  max-width: 400px;
+  margin: var(--space-3) 0 var(--space-6) var(--space-6);
+}
+
+.guide-detail-content figure.img-full {
+  max-width: 100%;
+  clear: both;
+}
+
+/* Clear floats after paragraphs containing floated images */
+.guide-detail-content p::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media (max-width: 768px) {
+  /* Stack floated images on mobile */
+  .guide-detail-content figure.img-left,
+  .guide-detail-content figure.img-right {
+    float: none;
+    max-width: 100%;
+    margin: var(--space-6) 0;
+  }
+}
+
 .guide-detail-content a {
   color: var(--clr-accent);
   text-decoration: underline;
