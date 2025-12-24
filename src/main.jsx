@@ -16,6 +16,7 @@ const Analytics = lazy(() =>
  * DeferredAnalytics - Loads analytics after page is interactive
  * This improves mobile performance by deferring non-critical JS
  */
+// eslint-disable-next-line react-refresh/only-export-components
 function DeferredAnalytics() {
   const [shouldLoad, setShouldLoad] = useState(false)
   
