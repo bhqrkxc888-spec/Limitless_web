@@ -44,6 +44,11 @@ CREATE TRIGGER update_admin_users_updated_at
 -- -----------------------------------------------------------------------------
 ALTER TABLE web.admin_users ENABLE ROW LEVEL SECURITY;
 
+-- Drop existing policies if they exist (for idempotent migrations)
+DROP POLICY IF EXISTS "Service role can read admin users" ON web.admin_users;
+DROP POLICY IF EXISTS "Service role can update admin users" ON web.admin_users;
+DROP POLICY IF EXISTS "Service role can insert admin users" ON web.admin_users;
+
 -- Only service_role (API endpoints) can read admin users
 CREATE POLICY "Service role can read admin users"
   ON web.admin_users FOR SELECT

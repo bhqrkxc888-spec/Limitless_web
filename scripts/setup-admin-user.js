@@ -100,6 +100,7 @@ async function main() {
   
   // Check if user already exists
   const { data: existingUser, error: checkError } = await supabase
+    .schema('web')
     .from('admin_users')
     .select('id, username')
     .eq('username', username)
@@ -113,6 +114,7 @@ async function main() {
   if (existingUser) {
     // Update existing user
     const { error: updateError } = await supabase
+      .schema('web')
       .from('admin_users')
       .update({
         password_hash: passwordHash,
@@ -133,6 +135,7 @@ async function main() {
   } else {
     // Create new user
     const { error: insertError } = await supabase
+      .schema('web')
       .from('admin_users')
       .insert({
         username,
