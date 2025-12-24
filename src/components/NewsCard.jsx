@@ -158,7 +158,8 @@ function NewsCard({ article, variant = 'default' }) {
         <Card.Image
           src={article.featured_image_url || article.thumbnail_image_url}
           alt={article.title}
-          aspectRatio="16/10"
+          aspectRatio="auto"
+          objectFit="cover"
         />
       )}
       

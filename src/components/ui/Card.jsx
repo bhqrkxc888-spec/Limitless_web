@@ -62,21 +62,29 @@ function CardImage({ src, alt = '', aspectRatio = '16/9', className = '', priori
     logger.warn('Card.Image: alt text is recommended for accessibility');
   }
   
+  // Handle 'auto' aspect ratio (no forced ratio)
+  const isAutoRatio = aspectRatio === 'auto';
+  
   // Calculate dimensions from aspect ratio for image optimization
-  const [widthRatio, heightRatio] = aspectRatio.split('/').map(Number);
-  const baseWidth = 800;
-  const calculatedHeight = Math.round((baseWidth * heightRatio) / widthRatio);
+  let calculatedHeight = 450; // default
+  if (!isAutoRatio) {
+    const [widthRatio, heightRatio] = aspectRatio.split('/').map(Number);
+    const baseWidth = 800;
+    calculatedHeight = Math.round((baseWidth * heightRatio) / widthRatio);
+  }
+  
+  const containerStyle = isAutoRatio ? {} : { aspectRatio };
   
   return (
     <div 
-      className={`card-image ${className}`}
-      style={{ aspectRatio }}
+      className={`card-image ${className} ${isAutoRatio ? 'card-image--auto' : ''}`}
+      style={containerStyle}
     >
       {src ? (
         <OptimizedImage
           src={src}
           alt={alt || 'Card image'}
-          width={baseWidth}
+          width={800}
           height={calculatedHeight}
           priority={priority}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
