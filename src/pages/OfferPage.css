@@ -686,7 +686,16 @@
 .offer-inclusions-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-8);
+  gap: var(--space-6);
+}
+
+/* Boxed styling for includes/excludes sections */
+.offer-section--includes,
+.offer-section--excludes {
+  background: var(--clr-surface);
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--clr-border-light);
 }
 
 .offer-includes-list,

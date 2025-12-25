@@ -113,9 +113,18 @@ function InteractiveItineraryMap({ itinerary }) {
   const navigateToPort = async (index) => {
     if (!map.current || index < 0 || index >= ports.length) return;
     
+    // Store scroll position to prevent page jump
+    const scrollY = window.scrollY;
+    const scrollX = window.scrollX;
+    
     const port = ports[index];
     setCurrentPortIndex(index);
     setSelectedPort(port);
+    
+    // Restore scroll position
+    requestAnimationFrame(() => {
+      window.scrollTo(scrollX, scrollY);
+    });
     
     // Fly to the port - slower, smoother animation with less zoom
     map.current.flyTo({
@@ -183,15 +192,41 @@ function InteractiveItineraryMap({ itinerary }) {
     }
   };
   
-  // Return to itinerary view
+  // Return to itinerary view and reset map
   const returnToItinerary = () => {
+    // Store scroll position
+    const scrollY = window.scrollY;
+    const scrollX = window.scrollX;
+    
     setViewTransition(true);
+    
+    // Reset map to show all ports
+    if (map.current && ports.length > 0) {
+      setCurrentPortIndex(null);
+      if (popup.current) popup.current.remove();
+      
+      const lats = ports.map(p => p.lat);
+      const lons = ports.map(p => p.lon);
+      const bounds = [
+        [Math.min(...lons), Math.min(...lats)],
+        [Math.max(...lons), Math.max(...lats)]
+      ];
+      
+      map.current.fitBounds(bounds, {
+        padding: { top: 80, bottom: 80, left: 80, right: 80 },
+        duration: 1500
+      });
+    }
+    
     setTimeout(() => {
       setSidebarView('itinerary');
       setSelectedPort(null);
       setAttractions([]);
       setViewTransition(false);
     }, 200);
+    
+    // Restore scroll position
+    window.scrollTo(scrollX, scrollY);
   };
 
   // Navigation handlers - Circular navigation
@@ -658,20 +693,33 @@ function InteractiveItineraryMap({ itinerary }) {
                     const portIndex = ports.findIndex(p => p.day === day.day);
                     const isClickable = !isSeaDay && portIndex !== -1;
                     
+                    const handleDayClick = (e) => {
+                      if (!isClickable) return;
+                      e.preventDefault();
+                      e.stopPropagation();
+                      // Preserve scroll position
+                      const scrollY = window.scrollY;
+                      const scrollX = window.scrollX;
+                      navigateToPort(portIndex);
+                      // Restore scroll position after a tick
+                      requestAnimationFrame(() => {
+                        window.scrollTo(scrollX, scrollY);
+                      });
+                    };
+                    
                     return (
                       <div
                         key={index}
                         className={`itinerary-day-item ${isSeaDay ? 'sea-day' : 'port-day'} ${isClickable ? 'clickable' : ''}`}
-                        onClick={() => isClickable && navigateToPort(portIndex)}
+                        onClick={handleDayClick}
+                        role={isClickable ? 'button' : undefined}
+                        tabIndex={isClickable ? 0 : undefined}
                       >
                         <div className="day-number">Day {day.day}</div>
                         <div className="day-details">
                           <div className="day-port">{day.port || day.location || 'At Sea'}</div>
                           {day.description && (
                             <div className="day-description">{day.description}</div>
-                          )}
-                          {isSeaDay && (
-                            <div className="day-badge sea">Sea Day</div>
                           )}
                         </div>
                       </div>
@@ -799,9 +847,10 @@ function InteractiveItineraryMap({ itinerary }) {
       </div>
       
       {/* Disclaimer - small text below map */}
-      <p className="itinerary-map-disclaimer">
-        This map shows cruise ports only. Flights and hotels are not included in the route visualization.
-      </p>
+      <div className="itinerary-map-disclaimer">
+        <p>This map displays cruise ports only. Flights and hotels are not included in the route visualisation.</p>
+        <p>Attraction and destination information is provided by Google Places and is for guidance purposes only. Limitless Cruises is not affiliated with, endorsed by, or responsible for the accuracy of third-party data. We recommend verifying details independently before making plans.</p>
+      </div>
     </div>
   );
 }
