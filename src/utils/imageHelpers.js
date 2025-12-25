@@ -77,7 +77,8 @@ export const getOptimizedImageUrl = (url, options = {}) => {
     const {
       width,
       height,
-      quality = 85
+      quality = 85,
+      resize = 'contain' // 'contain' preserves aspect ratio, 'cover' crops, 'fill' stretches
     } = options;
     
     const transformUrl = convertToTransformUrl(url);
@@ -86,6 +87,8 @@ export const getOptimizedImageUrl = (url, options = {}) => {
     if (width) params.set('width', String(width));
     if (height) params.set('height', String(height));
     if (quality) params.set('quality', String(quality));
+    // Always specify resize mode to preserve aspect ratio (unless height is explicitly set for cropping)
+    if (width && !height) params.set('resize', resize);
     
     return params.toString() ? `${transformUrl}?${params}` : transformUrl;
   }

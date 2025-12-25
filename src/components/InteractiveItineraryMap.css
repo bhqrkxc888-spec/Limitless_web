@@ -467,16 +467,15 @@
 
 /* ========================================
    PORT ATTRACTIONS SIDE PANEL
-   Positioned to overlay the day-by-day section
+   Positioned next to map, overlaying the day-by-day section
    ======================================== */
 
 .port-attractions-overlay {
-  position: fixed;
-  top: 50%;
-  right: 40px;
-  transform: translateY(-50%);
+  position: absolute;
+  top: 0;
+  left: calc(100% + 32px);
   width: 420px;
-  max-height: 80vh;
+  max-height: 700px;
   background: white;
   border-radius: 20px;
   box-shadow: 
@@ -486,28 +485,29 @@
   display: flex;
   flex-direction: column;
   animation: slideInPanel 0.35s ease-out;
-  z-index: 1000;
+  z-index: 100;
   border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 @keyframes slideInPanel {
   from {
     opacity: 0;
-    transform: translateY(-50%) translateX(40px);
+    transform: translateX(-20px);
   }
   to {
     opacity: 1;
-    transform: translateY(-50%) translateX(0);
+    transform: translateX(0);
   }
 }
 
-/* Backdrop overlay */
+/* Backdrop overlay - subtle, doesn't block interaction */
 .port-attractions-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.3);
-  z-index: 999;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 99;
   animation: fadeIn 0.2s ease-out;
+  pointer-events: auto;
 }
 
 @keyframes fadeIn {
@@ -767,9 +767,10 @@
   height: 18px;
 }
 
-/* Mobile: Full screen overlay */
-@media (max-width: 1024px) {
+/* Tablet: Stack below map as slide-up panel */
+@media (max-width: 1200px) {
   .port-attractions-overlay {
+    position: fixed;
     top: auto;
     bottom: 0;
     left: 0;
@@ -777,7 +778,11 @@
     width: 100%;
     max-height: 70vh;
     border-radius: 20px 20px 0 0;
-    transform: none;
+    z-index: 1000;
+  }
+  
+  .port-attractions-backdrop {
+    z-index: 999;
   }
   
   @keyframes slideInPanel {
