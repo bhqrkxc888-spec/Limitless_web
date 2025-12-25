@@ -26,12 +26,13 @@ function InteractiveItineraryMap({ itinerary }) {
   const [currentStyle, setCurrentStyle] = useState('outdoors');
   const popup = useRef(null);
   
-  // Google Places integration - simplified
+  // Sidebar state - now permanent with two views
+  const [sidebarView, setSidebarView] = useState('itinerary'); // 'itinerary' or 'port-details'
   const [selectedPort, setSelectedPort] = useState(null);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [attractions, setAttractions] = useState([]);
   const [loadingAttractions, setLoadingAttractions] = useState(false);
   const [showAllAttractions, setShowAllAttractions] = useState(false);
+  const [viewTransition, setViewTransition] = useState(false);
 
   // Filter and enrich itinerary data - handle round-trips properly
   const ports = useMemo(() => {
@@ -160,8 +161,14 @@ function InteractiveItineraryMap({ itinerary }) {
         .addTo(map.current);
     }
     
+    // Switch to port details view with fade transition
+    setViewTransition(true);
+    setTimeout(() => {
+      setSidebarView('port-details');
+      setViewTransition(false);
+    }, 200);
+    
     // Fetch Google Places data via serverless proxy
-    setSidebarOpen(true);
     setShowAllAttractions(false);
     setLoadingAttractions(true);
     
@@ -176,11 +183,15 @@ function InteractiveItineraryMap({ itinerary }) {
     }
   };
   
-  // Close sidebar
-  const closeSidebar = () => {
-    setSidebarOpen(false);
-    setSelectedPort(null);
-    setAttractions([]);
+  // Return to itinerary view
+  const returnToItinerary = () => {
+    setViewTransition(true);
+    setTimeout(() => {
+      setSidebarView('itinerary');
+      setSelectedPort(null);
+      setAttractions([]);
+      setViewTransition(false);
+    }, 200);
   };
 
   // Navigation handlers - Circular navigation
@@ -546,124 +557,162 @@ function InteractiveItineraryMap({ itinerary }) {
 
   return (
     <div className="interactive-itinerary-map-container">
-      <div className="interactive-itinerary-map-wrapper">
-        <div ref={mapContainer} className="interactive-itinerary-map">
-          {/* Style Switcher - Inside map container for fullscreen access */}
-          <div className="map-style-switcher">
-            <button 
-              type="button"
-              className={`map-style-btn ${currentStyle === 'outdoors' ? 'active' : ''}`}
-              onClick={() => handleStyleChange('outdoors')}
-              title="Outdoors (Terrain)"
-            >
-              🗺️
-            </button>
-            <button 
-              type="button"
-              className={`map-style-btn ${currentStyle === 'satellite' ? 'active' : ''}`}
-              onClick={() => handleStyleChange('satellite')}
-              title="Satellite View"
-            >
-              🛰️
-            </button>
-            <button 
-              type="button"
-              className={`map-style-btn ${currentStyle === 'streets' ? 'active' : ''}`}
-              onClick={() => handleStyleChange('streets')}
-              title="Street Map"
-            >
-              📍
-            </button>
-          </div>
-
-          {/* Port Navigation - Bottom of map */}
-          <div className="map-port-navigation">
-            <button 
-              type="button"
-              className="map-nav-btn"
-              onClick={goToPrevPort}
-              title="Previous Port (loops to end)"
-            >
-              ← Prev
-            </button>
-            
-            <div className="map-nav-info">
-              {currentPortIndex !== null ? (
-                <>
-                  <span className="map-nav-current">
-                    {ports[currentPortIndex]?.name}
-                  </span>
-                  <span className="map-nav-counter">
-                    {currentPortIndex + 1} of {ports.length}
-                  </span>
-                </>
-              ) : (
-                <span className="map-nav-hint">Click a port or use arrows</span>
-              )}
+      <div className="interactive-itinerary-map-layout">
+        {/* Map Section - 2/3 width */}
+        <div className="interactive-itinerary-map-wrapper">
+          <div ref={mapContainer} className="interactive-itinerary-map">
+            {/* Style Switcher - Inside map container for fullscreen access */}
+            <div className="map-style-switcher">
+              <button 
+                type="button"
+                className={`map-style-btn ${currentStyle === 'outdoors' ? 'active' : ''}`}
+                onClick={() => handleStyleChange('outdoors')}
+                title="Outdoors (Terrain)"
+              >
+                🗺️
+              </button>
+              <button 
+                type="button"
+                className={`map-style-btn ${currentStyle === 'satellite' ? 'active' : ''}`}
+                onClick={() => handleStyleChange('satellite')}
+                title="Satellite View"
+              >
+                🛰️
+              </button>
+              <button 
+                type="button"
+                className={`map-style-btn ${currentStyle === 'streets' ? 'active' : ''}`}
+                onClick={() => handleStyleChange('streets')}
+                title="Street Map"
+              >
+                📍
+              </button>
             </div>
-            
-            <button 
-              type="button"
-              className="map-nav-btn"
-              onClick={goToNextPort}
-              title="Next Port (loops to start)"
-            >
-              Next →
-            </button>
-            
-            <button 
-              type="button"
-              className="map-nav-btn map-nav-reset"
-              onClick={resetView}
-              disabled={currentPortIndex === null}
-              title="Reset to Full View"
-            >
-              ⟲ Reset
-            </button>
+
+            {/* Port Navigation - Bottom of map */}
+            <div className="map-port-navigation">
+              <button 
+                type="button"
+                className="map-nav-btn"
+                onClick={goToPrevPort}
+                title="Previous Port (loops to end)"
+              >
+                ← Prev
+              </button>
+              
+              <div className="map-nav-info">
+                {currentPortIndex !== null ? (
+                  <>
+                    <span className="map-nav-current">
+                      {ports[currentPortIndex]?.name}
+                    </span>
+                    <span className="map-nav-counter">
+                      {currentPortIndex + 1} of {ports.length}
+                    </span>
+                  </>
+                ) : (
+                  <span className="map-nav-hint">Click a port or use arrows</span>
+                )}
+              </div>
+              
+              <button 
+                type="button"
+                className="map-nav-btn"
+                onClick={goToNextPort}
+                title="Next Port (loops to start)"
+              >
+                Next →
+              </button>
+              
+              <button 
+                type="button"
+                className="map-nav-btn map-nav-reset"
+                onClick={resetView}
+                disabled={currentPortIndex === null}
+                title="Reset to Full View"
+              >
+                ⟲ Reset
+              </button>
+            </div>
           </div>
         </div>
         
-        {/* Port Attractions Side Panel */}
-        {sidebarOpen && selectedPort && (
-          <>
-            {/* Backdrop */}
-            <div 
-              className="port-attractions-backdrop"
-              onClick={closeSidebar}
-            />
-            
-            {/* Panel */}
-            <aside className="port-attractions-overlay">
+        {/* Permanent Sidebar - 1/3 width */}
+        <aside className={`itinerary-sidebar ${viewTransition ? 'transitioning' : ''}`}>
+          {sidebarView === 'itinerary' ? (
+            /* Day-by-Day Itinerary View */
+            <div className="sidebar-itinerary-view">
+              <div className="sidebar-header">
+                <h3 className="sidebar-title">Day-by-Day Itinerary</h3>
+                <p className="sidebar-subtitle">Click any day to explore what to do in port</p>
+              </div>
+              
+              <div className="sidebar-content">
+                <div className="itinerary-day-list">
+                  {itinerary.map((day, index) => {
+                    const isSeaDay = day.is_sea_day || 
+                                   day.type === 'sea' || 
+                                   (day.port || '').toLowerCase().includes('at sea') ||
+                                   (day.port || '').toLowerCase().includes('cruising');
+                    
+                    const portIndex = ports.findIndex(p => p.day === day.day);
+                    const isClickable = !isSeaDay && portIndex !== -1;
+                    
+                    return (
+                      <div
+                        key={index}
+                        className={`itinerary-day-item ${isSeaDay ? 'sea-day' : 'port-day'} ${isClickable ? 'clickable' : ''}`}
+                        onClick={() => isClickable && navigateToPort(portIndex)}
+                      >
+                        <div className="day-number">Day {day.day}</div>
+                        <div className="day-details">
+                          <div className="day-port">{day.port || day.location || 'At Sea'}</div>
+                          {day.description && (
+                            <div className="day-description">{day.description}</div>
+                          )}
+                          {isSeaDay && (
+                            <div className="day-badge sea">Sea Day</div>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          ) : (
+            /* Port Details View */
+            <div className="sidebar-port-view">
               <button 
                 type="button" 
-                className="overlay-close-btn"
-                onClick={closeSidebar}
-                aria-label="Close attractions panel"
+                className="sidebar-back-btn"
+                onClick={returnToItinerary}
+                title="Back to itinerary"
               >
-                ✕
+                ← Back to Itinerary
               </button>
               
-              <div className="overlay-header">
-                <h3 className="overlay-port-name">{selectedPort.name}</h3>
-                <div className="overlay-port-date">
-                  {selectedPort.days?.length > 1 
+              <div className="sidebar-header">
+                <h3 className="sidebar-port-name">{selectedPort?.name}</h3>
+                <div className="sidebar-port-day">
+                  {selectedPort?.days?.length > 1 
                     ? `Days ${selectedPort.days.join(' & ')}` 
-                    : `Day ${selectedPort.day}`}
+                    : `Day ${selectedPort?.day}`}
                 </div>
               </div>
               
-              <div className="overlay-content">
+              <div className="sidebar-content">
                 {loadingAttractions ? (
-                  <div className="overlay-loading">
+                  <div className="sidebar-loading">
                     <div className="loading-spinner"></div>
                     <p>Discovering local attractions...</p>
                   </div>
                 ) : attractions.length > 0 ? (
                   <>
-                    <h4 className="overlay-section-title">
+                    <h4 className="sidebar-section-title">
                       🏛️ Things To Do
                     </h4>
-                    <p className="overlay-subtitle">
+                    <p className="sidebar-section-subtitle">
                       Top-rated attractions and experiences near the port
                     </p>
                     <div className="attractions-list">
@@ -721,7 +770,7 @@ function InteractiveItineraryMap({ itinerary }) {
                     )}
                   </>
                 ) : (
-                  <div className="overlay-empty">
+                  <div className="sidebar-empty">
                     <p>No attractions data available for this port yet.</p>
                     <p style={{ marginTop: '12px', fontSize: '13px' }}>
                       Try searching on Google Maps for local recommendations.
@@ -731,9 +780,9 @@ function InteractiveItineraryMap({ itinerary }) {
               </div>
               
               {/* Footer with Google Maps link */}
-              <div className="overlay-footer">
+              <div className="sidebar-footer">
                 <a 
-                  href={`https://www.google.com/maps/search/things+to+do+near+${encodeURIComponent(selectedPort.name)}`}
+                  href={`https://www.google.com/maps/search/things+to+do+near+${encodeURIComponent(selectedPort?.name || '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="google-maps-link"
@@ -745,9 +794,9 @@ function InteractiveItineraryMap({ itinerary }) {
                   Explore more on Google Maps
                 </a>
               </div>
-            </aside>
-          </>
-        )}
+            </div>
+          )}
+        </aside>
       </div>
       
       {/* Disclaimer - small text below map */}
