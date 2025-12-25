@@ -237,7 +237,7 @@ function OfferCard({ offer, variant = 'default' }) {
               sizes="(max-width: 768px) 100vw, 400px"
               srcsetWidths={[400, 600, 800]}
               quality={85}
-              objectFit="contain"
+              objectFit="cover"
             />
           ) : (
             <div className="offer-card-horizontal__placeholder">
@@ -346,7 +346,7 @@ function OfferCard({ offer, variant = 'default' }) {
           src={cardImageUrl || heroImageUrl}
           alt={offer.title}
           aspectRatio="16/9"
-          objectFit="contain"
+          objectFit="cover"
         />
       )}
       

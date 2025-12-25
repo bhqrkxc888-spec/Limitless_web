@@ -490,23 +490,21 @@
 .offer-card-horizontal__image {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
+  background: var(--clr-bg-alt, #f1f5f9);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-4);
   min-height: 200px;
-  /* Container centers the image with padding for visual breathing room */
+  /* Clean container for image */
 }
 
 .offer-card-horizontal__image img {
   width: 100%;
-  height: auto;
-  max-height: 260px;
+  height: 100%;
   display: block;
-  object-fit: contain;
-  border-radius: var(--radius-lg);
-  /* Show full image without cropping, rounded corners for polish */
+  object-fit: cover;
+  object-position: center;
+  /* Standard image display - fills container cleanly */
 }
 
 .offer-card-horizontal__placeholder {
