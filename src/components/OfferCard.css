@@ -213,11 +213,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform var(--transition-slow);
-}
-
-.offer-card-hero:hover .offer-card-hero__image img {
-  transform: scale(1.05);
+  /* No zoom on hover - keep image stable */
 }
 
 .offer-card-hero__placeholder {
@@ -468,11 +464,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform var(--transition-base);
-}
-
-.offer-card-horizontal:hover .offer-card-horizontal__image img {
-  transform: scale(1.05);
+  /* No zoom on hover - keep image stable */
 }
 
 .offer-card-horizontal__placeholder {

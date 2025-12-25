@@ -20,13 +20,11 @@
   width: 100%;
   height: 700px;
   scroll-margin-top: 100px; /* Prevent scroll jumping */
-  display: flex;
-  gap: 20px;
 }
 
 .interactive-itinerary-map {
-  flex: 1;
-  min-width: 0; /* Prevent flex overflow */
+  width: 100%;
+  height: 100%;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 
@@ -52,7 +50,6 @@
 /* Responsive height */
 @media (max-width: 768px) {
   .interactive-itinerary-map-wrapper {
-    flex-direction: column;
     height: auto;
   }
   
@@ -469,25 +466,28 @@
 }
 
 /* ========================================
-   PORT INFO SIDEBAR
+   PORT ATTRACTIONS FLOATING OVERLAY
    ======================================== */
 
-.port-info-sidebar {
-  width: 380px;
+.port-attractions-overlay {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 320px;
+  max-height: calc(100% - 100px);
   background: white;
   border-radius: 16px;
   box-shadow: 
-    0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 0;
+    0 20px 40px -10px rgba(0, 0, 0, 0.25),
+    0 10px 20px -5px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  animation: slideInRight 0.3s ease-out;
+  animation: slideInOverlay 0.3s ease-out;
+  z-index: 10;
 }
 
-@keyframes slideInRight {
+@keyframes slideInOverlay {
   from {
     opacity: 0;
     transform: translateX(20px);
@@ -498,152 +498,139 @@
   }
 }
 
-/* Port Info Header */
-.port-info-header {
-  padding: 24px;
-  border-bottom: 2px solid #e2e8f0;
-  background: linear-gradient(to bottom, #ffffff, #f8fafc);
+/* Close Button */
+.overlay-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: #64748b;
+  z-index: 1;
 }
 
-.port-info-name {
-  font-size: 24px;
+.overlay-close-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #0f172a;
+}
+
+/* Overlay Header */
+.overlay-header {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  background: linear-gradient(to bottom, #ffffff, #fafbfc);
+}
+
+.overlay-port-name {
+  font-size: 20px;
   font-weight: 700;
   color: #0f172a;
-  margin: 0 0 8px 0;
+  margin: 0 0 4px 0;
+  padding-right: 40px;
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
-.port-info-date {
-  font-size: 14px;
+.overlay-port-date {
+  font-size: 13px;
   color: var(--color-primary, #0066cc);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-bottom: 4px;
 }
 
-.port-info-country {
-  font-size: 14px;
-  color: #64748b;
-  font-weight: 500;
+/* Overlay Content */
+.overlay-content {
+  padding: 16px 20px 20px;
+  overflow-y: auto;
+  flex: 1;
 }
 
-/* Loading & Notice States */
-.port-info-loading,
-.port-info-notice {
-  padding: 40px 24px;
-  text-align: center;
-  color: #64748b;
-}
-
-.loading-spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #e2e8f0;
-  border-top-color: var(--color-primary, #0066cc);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin: 0 auto 16px;
-}
-
-.port-info-loading p,
-.port-info-notice p {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-/* Attractions Section */
-.attractions-section {
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-
-.attractions-category {
-  margin: 0;
-}
-
-.attractions-category-title {
-  font-size: 16px;
+.overlay-section-title {
+  font-size: 15px;
   font-weight: 700;
   color: #0f172a;
   margin: 0 0 12px 0;
   display: flex;
   align-items: center;
-  gap: 8px;
-  letter-spacing: -0.01em;
+  gap: 6px;
 }
 
-.category-icon {
-  font-size: 20px;
-  line-height: 1;
+/* Loading State */
+.overlay-loading {
+  padding: 32px 20px;
+  text-align: center;
+  color: #64748b;
 }
 
-/* Attraction Items */
-.attraction-item {
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e2e8f0;
+  border-top-color: var(--color-primary, #0066cc);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 12px;
+}
+
+.overlay-loading p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Empty State */
+.overlay-empty {
+  padding: 24px 0;
+  text-align: center;
+}
+
+.overlay-empty p {
+  margin: 0;
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+/* Attractions List */
+.attractions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.attraction-card {
   padding: 14px 16px;
-  background: #f8fafc;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  border-left: 4px solid #e2e8f0;
-  transition: all 0.2s ease;
-  cursor: default;
-}
-
-.attraction-item:hover {
-  background: #f1f5f9;
-  transform: translateX(2px);
-}
-
-.attraction-item:last-child {
-  margin-bottom: 0;
-}
-
-/* Premium styling */
-.attraction-item.premium {
-  border-left-color: #f59e0b;
   background: linear-gradient(to right, #fffbeb, #f8fafc);
+  border-radius: 10px;
+  border-left: 4px solid #f59e0b;
+  transition: all 0.2s ease;
 }
 
-.attraction-item.premium:hover {
+.attraction-card:hover {
   background: linear-gradient(to right, #fef3c7, #f1f5f9);
-}
-
-/* Kids styling */
-.attraction-item.kids {
-  border-left-color: #06b6d4;
-  background: linear-gradient(to right, #ecfeff, #f8fafc);
-}
-
-.attraction-item.kids:hover {
-  background: linear-gradient(to right, #cffafe, #f1f5f9);
-}
-
-/* Fun styling */
-.attraction-item.fun {
-  border-left-color: #8b5cf6;
-  background: linear-gradient(to right, #f5f3ff, #f8fafc);
-}
-
-.attraction-item.fun:hover {
-  background: linear-gradient(to right, #ede9fe, #f1f5f9);
+  transform: translateX(2px);
 }
 
 .attraction-name {
   font-weight: 600;
   color: #0f172a;
-  margin: 0 0 6px 0;
-  font-size: 15px;
+  margin: 0 0 4px 0;
+  font-size: 14px;
   line-height: 1.4;
 }
 
 .attraction-rating {
-  font-size: 13px;
+  font-size: 12px;
   color: #64748b;
-  margin: 0 0 4px 0;
+  margin: 0 0 2px 0;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -651,73 +638,65 @@
 
 .rating-count {
   color: #94a3b8;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .attraction-address {
-  font-size: 12px;
+  font-size: 11px;
   color: #94a3b8;
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
-.no-results {
+/* View More Button */
+.view-more-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 16px;
+  background: #f1f5f9;
+  border: none;
+  border-radius: 8px;
   font-size: 13px;
-  color: #94a3b8;
-  font-style: italic;
-  margin: 0;
-  padding: 12px;
-  background: #f8fafc;
-  border-radius: 8px;
-  text-align: center;
+  font-weight: 600;
+  color: var(--color-primary, #0066cc);
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* Sidebar Footer */
-.sidebar-footer {
-  margin-top: 8px;
-  padding-top: 20px;
-  border-top: 1px solid #e2e8f0;
+.view-more-btn:hover {
+  background: var(--color-primary, #0066cc);
+  color: white;
 }
 
-.sidebar-note {
-  font-size: 12px;
-  color: #64748b;
-  line-height: 1.6;
-  margin: 0;
-  padding: 12px;
-  background: #f8fafc;
-  border-radius: 8px;
-  border-left: 3px solid var(--color-primary, #0066cc);
+/* Mobile: Adjust overlay position */
+@media (max-width: 768px) {
+  .port-attractions-overlay {
+    top: auto;
+    bottom: 80px;
+    left: 16px;
+    right: 16px;
+    width: auto;
+    max-height: 280px;
+  }
+  
+  .overlay-port-name {
+    font-size: 18px;
+  }
+  
+  .overlay-content {
+    padding: 12px 16px 16px;
+  }
+  
+  .attraction-card {
+    padding: 10px 12px;
+  }
 }
 
-/* Mobile: Sidebar below map */
-@media (max-width: 1024px) {
-  .port-info-sidebar {
-    width: 100%;
-    max-height: 600px;
-    order: -1; /* Show sidebar above map on mobile */
-  }
-}
-
-@media (max-width: 640px) {
-  .port-info-sidebar {
-    max-height: 500px;
-  }
-  
-  .port-info-header {
-    padding: 20px;
-  }
-  
-  .port-info-name {
-    font-size: 20px;
-  }
-  
-  .attractions-section {
-    padding: 20px;
-    gap: 24px;
-  }
-  
-  .attraction-item {
-    padding: 12px 14px;
+@media (max-width: 480px) {
+  .port-attractions-overlay {
+    bottom: 70px;
+    left: 10px;
+    right: 10px;
+    max-height: 240px;
   }
 }

@@ -83,11 +83,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform var(--transition-slow);
-}
-
-.card-clickable:hover .card-image img {
-  transform: scale(1.05);
+  /* No zoom effect on hover - keeps images stable */
 }
 
 .card-image-placeholder {
