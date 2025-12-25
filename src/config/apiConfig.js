@@ -27,6 +27,13 @@ export const apiConfig = {
     accessToken: import.meta.env.VITE_MAPBOX_TOKEN || 'pk.eyJ1IjoiZGFuZWxhd3RvbiIsImEiOiJjbWpiNHM2b3EwNm10M2dyNjJ3eTA0ZHJyIn0.ltnRWBhmfiriKIsmGozQtw',
     style: 'mapbox://styles/mapbox/outdoors-v12',
     enabled: true
+  },
+
+  // Google Places API - Port information and attractions
+  googlePlaces: {
+    apiKey: import.meta.env.VITE_GOOGLE_PLACES_API_KEY || '',
+    baseUrl: 'https://maps.googleapis.com/maps/api/place',
+    enabled: !!import.meta.env.VITE_GOOGLE_PLACES_API_KEY
   }
 };
 

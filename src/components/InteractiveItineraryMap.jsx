@@ -15,6 +15,7 @@
 import { useEffect, useRef, useMemo, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { apiConfig } from '../config/apiConfig';
+import { getPortAttractions, formatPlace } from '../services/googlePlacesAPI';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './InteractiveItineraryMap.css';
 
@@ -24,6 +25,11 @@ function InteractiveItineraryMap({ itinerary }) {
   const [currentPortIndex, setCurrentPortIndex] = useState(null); // Track current port for navigation
   const [currentStyle, setCurrentStyle] = useState('outdoors');
   const popup = useRef(null);
+  
+  // Google Places integration
+  const [selectedPort, setSelectedPort] = useState(null);
+  const [attractions, setAttractions] = useState({ premium: [], kids: [], fun: [] });
+  const [loadingAttractions, setLoadingAttractions] = useState(false);
 
   // Filter and enrich itinerary data - handle round-trips properly
   const ports = useMemo(() => {
@@ -100,12 +106,13 @@ function InteractiveItineraryMap({ itinerary }) {
     return '#0ea5e9'; // Sky blue - consistent for all ports
   };
 
-  // Navigate to a specific port
-  const navigateToPort = (index) => {
+  // Navigate to a specific port and fetch Google Places data
+  const navigateToPort = async (index) => {
     if (!map.current || index < 0 || index >= ports.length) return;
     
     const port = ports[index];
     setCurrentPortIndex(index);
+    setSelectedPort(port);
     
     // Fly to the port - slower, smoother animation with less zoom
     map.current.flyTo({
@@ -149,6 +156,28 @@ function InteractiveItineraryMap({ itinerary }) {
         .setLngLat([port.lon, port.lat])
         .setHTML(popupHTML)
         .addTo(map.current);
+    }
+    
+    // Fetch Google Places data if API is enabled
+    if (apiConfig.googlePlaces.enabled) {
+      setLoadingAttractions(true);
+      try {
+        const portAttractions = await getPortAttractions(port.lat, port.lon);
+        
+        // Format attractions for display
+        const formattedAttractions = {
+          premium: portAttractions.premium.map(formatPlace),
+          kids: portAttractions.kids.map(formatPlace),
+          fun: portAttractions.fun.map(formatPlace)
+        };
+        
+        setAttractions(formattedAttractions);
+      } catch (error) {
+        console.error('Error fetching port attractions:', error);
+        setAttractions({ premium: [], kids: [], fun: [] });
+      } finally {
+        setLoadingAttractions(false);
+      }
     }
   };
 
@@ -591,6 +620,127 @@ function InteractiveItineraryMap({ itinerary }) {
             </button>
           </div>
         </div>
+        
+        {/* Port Info Sidebar */}
+        {selectedPort && (
+          <aside className="port-info-sidebar">
+            <div className="port-info-header">
+              <h3 className="port-info-name">{selectedPort.name}</h3>
+              <div className="port-info-date">
+                {selectedPort.days?.length > 1 
+                  ? `Days ${selectedPort.days.join(' & ')}` 
+                  : `Day ${selectedPort.day}`}
+              </div>
+              {selectedPort.country && (
+                <div className="port-info-country">{selectedPort.country}</div>
+              )}
+            </div>
+            
+            {!apiConfig.googlePlaces.enabled ? (
+              <div className="port-info-notice">
+                <p>💡 Enable Google Places API to see attractions and recommendations</p>
+              </div>
+            ) : loadingAttractions ? (
+              <div className="port-info-loading">
+                <div className="loading-spinner"></div>
+                <p>Discovering attractions...</p>
+              </div>
+            ) : (
+              <div className="attractions-section">
+                {/* Premium Experiences */}
+                <div className="attractions-category">
+                  <h4 className="attractions-category-title">
+                    <span className="category-icon">✨</span>
+                    Premium Experiences
+                  </h4>
+                  {attractions.premium.length > 0 ? (
+                    attractions.premium.map(place => (
+                      <div key={place.id} className="attraction-item premium">
+                        <div className="attraction-name">{place.name}</div>
+                        {place.rating > 0 && (
+                          <div className="attraction-rating">
+                            ⭐ {place.rating.toFixed(1)} 
+                            {place.ratingCount > 0 && (
+                              <span className="rating-count">({place.ratingCount})</span>
+                            )}
+                          </div>
+                        )}
+                        {place.address && (
+                          <div className="attraction-address">{place.address}</div>
+                        )}
+                      </div>
+                    ))
+                  ) : (
+                    <p className="no-results">No premium experiences found nearby</p>
+                  )}
+                </div>
+                
+                {/* Kids & Family */}
+                <div className="attractions-category">
+                  <h4 className="attractions-category-title">
+                    <span className="category-icon">👨‍👩‍👧‍👦</span>
+                    Kids & Family
+                  </h4>
+                  {attractions.kids.length > 0 ? (
+                    attractions.kids.map(place => (
+                      <div key={place.id} className="attraction-item kids">
+                        <div className="attraction-name">{place.name}</div>
+                        {place.rating > 0 && (
+                          <div className="attraction-rating">
+                            ⭐ {place.rating.toFixed(1)}
+                            {place.ratingCount > 0 && (
+                              <span className="rating-count">({place.ratingCount})</span>
+                            )}
+                          </div>
+                        )}
+                        {place.address && (
+                          <div className="attraction-address">{place.address}</div>
+                        )}
+                      </div>
+                    ))
+                  ) : (
+                    <p className="no-results">No family attractions found nearby</p>
+                  )}
+                </div>
+                
+                {/* Fun & Entertainment */}
+                <div className="attractions-category">
+                  <h4 className="attractions-category-title">
+                    <span className="category-icon">🎉</span>
+                    Fun & Entertainment
+                  </h4>
+                  {attractions.fun.length > 0 ? (
+                    attractions.fun.map(place => (
+                      <div key={place.id} className="attraction-item fun">
+                        <div className="attraction-name">{place.name}</div>
+                        {place.rating > 0 && (
+                          <div className="attraction-rating">
+                            ⭐ {place.rating.toFixed(1)}
+                            {place.ratingCount > 0 && (
+                              <span className="rating-count">({place.ratingCount})</span>
+                            )}
+                          </div>
+                        )}
+                        {place.address && (
+                          <div className="attraction-address">{place.address}</div>
+                        )}
+                      </div>
+                    ))
+                  ) : (
+                    <p className="no-results">No entertainment venues found nearby</p>
+                  )}
+                </div>
+                
+                <div className="sidebar-footer">
+                  <p className="sidebar-note">
+                    💡 These suggestions are based on highly-rated local attractions. 
+                    Perfect for shore excursions!
+                  </p>
+                </div>
+              </div>
+            )}
+          </aside>
+        )}
       </div>
       
       {/* Disclaimer - small text below map */}

@@ -20,11 +20,13 @@
   width: 100%;
   height: 700px;
   scroll-margin-top: 100px; /* Prevent scroll jumping */
+  display: flex;
+  gap: 20px;
 }
 
 .interactive-itinerary-map {
-  width: 100%;
-  height: 100%;
+  flex: 1;
+  min-width: 0; /* Prevent flex overflow */
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 
@@ -49,6 +51,11 @@
 
 /* Responsive height */
 @media (max-width: 768px) {
+  .interactive-itinerary-map-wrapper {
+    flex-direction: column;
+    height: auto;
+  }
+  
   .interactive-itinerary-map {
     height: 550px;
   }
@@ -458,5 +465,259 @@
   
   .map-nav-btn.map-nav-reset {
     flex: 0;
+  }
+}
+
+/* ========================================
+   PORT INFO SIDEBAR
+   ======================================== */
+
+.port-info-sidebar {
+  width: 380px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Port Info Header */
+.port-info-header {
+  padding: 24px;
+  border-bottom: 2px solid #e2e8f0;
+  background: linear-gradient(to bottom, #ffffff, #f8fafc);
+}
+
+.port-info-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.port-info-date {
+  font-size: 14px;
+  color: var(--color-primary, #0066cc);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.port-info-country {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Loading & Notice States */
+.port-info-loading,
+.port-info-notice {
+  padding: 40px 24px;
+  text-align: center;
+  color: #64748b;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top-color: var(--color-primary, #0066cc);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+
+.port-info-loading p,
+.port-info-notice p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Attractions Section */
+.attractions-section {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.attractions-category {
+  margin: 0;
+}
+
+.attractions-category-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: -0.01em;
+}
+
+.category-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* Attraction Items */
+.attraction-item {
+  padding: 14px 16px;
+  background: #f8fafc;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border-left: 4px solid #e2e8f0;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.attraction-item:hover {
+  background: #f1f5f9;
+  transform: translateX(2px);
+}
+
+.attraction-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Premium styling */
+.attraction-item.premium {
+  border-left-color: #f59e0b;
+  background: linear-gradient(to right, #fffbeb, #f8fafc);
+}
+
+.attraction-item.premium:hover {
+  background: linear-gradient(to right, #fef3c7, #f1f5f9);
+}
+
+/* Kids styling */
+.attraction-item.kids {
+  border-left-color: #06b6d4;
+  background: linear-gradient(to right, #ecfeff, #f8fafc);
+}
+
+.attraction-item.kids:hover {
+  background: linear-gradient(to right, #cffafe, #f1f5f9);
+}
+
+/* Fun styling */
+.attraction-item.fun {
+  border-left-color: #8b5cf6;
+  background: linear-gradient(to right, #f5f3ff, #f8fafc);
+}
+
+.attraction-item.fun:hover {
+  background: linear-gradient(to right, #ede9fe, #f1f5f9);
+}
+
+.attraction-name {
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 6px 0;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.attraction-rating {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0 0 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rating-count {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.attraction-address {
+  font-size: 12px;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.no-results {
+  font-size: 13px;
+  color: #94a3b8;
+  font-style: italic;
+  margin: 0;
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  margin-top: 8px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.sidebar-note {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.6;
+  margin: 0;
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border-left: 3px solid var(--color-primary, #0066cc);
+}
+
+/* Mobile: Sidebar below map */
+@media (max-width: 1024px) {
+  .port-info-sidebar {
+    width: 100%;
+    max-height: 600px;
+    order: -1; /* Show sidebar above map on mobile */
+  }
+}
+
+@media (max-width: 640px) {
+  .port-info-sidebar {
+    max-height: 500px;
+  }
+  
+  .port-info-header {
+    padding: 20px;
+  }
+  
+  .port-info-name {
+    font-size: 20px;
+  }
+  
+  .attractions-section {
+    padding: 20px;
+    gap: 24px;
+  }
+  
+  .attraction-item {
+    padding: 12px 14px;
   }
 }
