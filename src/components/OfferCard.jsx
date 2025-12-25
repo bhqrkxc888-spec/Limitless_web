@@ -269,9 +269,6 @@ function OfferCard({ offer, variant = 'default' }) {
                 {getOfferTypeLabel(offer.offer_type)}
               </span>
             )}
-            {offer.destination && (
-              <span className="offer-card-horizontal__destination">{offer.destination}</span>
-            )}
           </div>
           <h3 className="offer-card-horizontal__title">{offer.title}</h3>
           {offer.short_description && (
@@ -349,7 +346,7 @@ function OfferCard({ offer, variant = 'default' }) {
           src={cardImageUrl || heroImageUrl}
           alt={offer.title}
           aspectRatio="16/9"
-          objectFit="cover"
+          objectFit="contain"
         />
       )}
       
@@ -396,12 +393,52 @@ function OfferCard({ offer, variant = 'default' }) {
           </div>
         )}
         
-        {offer.short_description && (
+        {offer.short_description && variant !== 'compact' && (
           <Card.Description>{offer.short_description}</Card.Description>
         )}
 
-        {/* Meta Information */}
-        <div className="offer-meta">
+        {/* Cruise Details - Ordered: Date, Duration, Port, Cruise Line */}
+        <div className="offer-details-grid">
+          {offer.departure_date && (
+            <div className="offer-detail-row">
+              <span className="offer-detail-label">Departure</span>
+              <span className="offer-detail-value">{formatDate(offer.departure_date)}</span>
+            </div>
+          )}
+
+          {offer.duration_nights && (
+            <div className="offer-detail-row">
+              <span className="offer-detail-label">Duration</span>
+              <span className="offer-detail-value">{getDurationText(offer.duration_nights)}</span>
+            </div>
+          )}
+
+          {offer.departure_port && (
+            <div className="offer-detail-row">
+              <span className="offer-detail-label">From</span>
+              <span className="offer-detail-value">{offer.departure_port}</span>
+            </div>
+          )}
+
+          {offer.cruise_line_name && (
+            <div className="offer-detail-row">
+              <span className="offer-detail-label">Cruise Line</span>
+              <span className="offer-detail-value">{offer.cruise_line_name}</span>
+            </div>
+          )}
+        </div>
+
+        {/* Highlights (if any) */}
+        {offer.highlights && offer.highlights.length > 0 && variant !== 'compact' && (
+          <ul className="offer-highlights">
+            {offer.highlights.slice(0, 3).map((highlight, index) => (
+              <li key={index}>{highlight}</li>
+            ))}
+          </ul>
+        )}
+
+        {/* Price and CTA - at bottom */}
+        <div className="offer-card-footer">
           {(offer.price_from || displayPrice) && (
             <div className="offer-price">
               <span className="offer-price-label">From</span>
@@ -414,49 +451,12 @@ function OfferCard({ offer, variant = 'default' }) {
             </div>
           )}
 
-          <div className="offer-details">
-            {offer.duration_nights && (
-              <div className="offer-detail-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <circle cx="12" cy="12" r="10"/>
-                  <polyline points="12 6 12 12 16 14"/>
-                </svg>
-                <span>{getDurationText(offer.duration_nights)}</span>
-              </div>
-            )}
-
-            {offer.departure_date && (
-              <div className="offer-detail-item">
-                <span>{formatDate(offer.departure_date)}</span>
-              </div>
-            )}
-
-            {offer.departure_port && (
-              <div className="offer-detail-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                  <circle cx="12" cy="10" r="3"/>
-                </svg>
-                <span>{offer.departure_port}</span>
-              </div>
-            )}
+          <div className="offer-card-cta">
+            <span className="offer-card-cta-text">View Offer Details</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
           </div>
-        </div>
-
-        {/* Highlights (if any) */}
-        {offer.highlights && offer.highlights.length > 0 && variant !== 'compact' && (
-          <ul className="offer-highlights">
-            {offer.highlights.slice(0, 3).map((highlight, index) => (
-              <li key={index}>{highlight}</li>
-            ))}
-          </ul>
-        )}
-
-        <div className="offer-card-cta">
-          <span className="offer-card-cta-text">View Offer Details</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
         </div>
       </Card.Content>
     </Card>

@@ -43,28 +43,58 @@
   margin-bottom: var(--space-3);
 }
 
-.offer-meta {
+/* Cruise Details Grid - Clean label/value pairs */
+.offer-details-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
   margin-top: var(--space-4);
   padding-top: var(--space-4);
   border-top: 1px solid var(--clr-border-light);
 }
 
+.offer-detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: var(--font-size-sm);
+}
+
+.offer-detail-label {
+  color: var(--clr-text-muted);
+  font-weight: var(--font-weight-medium);
+}
+
+.offer-detail-value {
+  color: var(--clr-text-main);
+  font-weight: var(--font-weight-semibold);
+  text-align: right;
+}
+
+/* Card Footer - Price and CTA at bottom */
+.offer-card-footer {
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--clr-border-light);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
 .offer-price {
-  margin-bottom: var(--space-4);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  flex-wrap: wrap;
 }
 
 .offer-price-label {
-  display: block;
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--clr-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: var(--space-1);
 }
 
 .offer-price-value {
-  display: block;
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-bold);
   color: var(--clr-accent);
@@ -72,11 +102,16 @@
 }
 
 .offer-price-basis {
-  display: block;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-normal);
   color: var(--clr-text-muted);
-  margin-top: var(--space-1);
+}
+
+/* Legacy support for old structure */
+.offer-meta {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--clr-border-light);
 }
 
 .offer-details {
@@ -459,17 +494,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: var(--space-4);
   min-height: 200px;
-  /* Container centers the image, background provides letterbox for non-matching ratios */
+  /* Container centers the image with padding for visual breathing room */
 }
 
 .offer-card-horizontal__image img {
   width: 100%;
-  height: 100%;
-  max-height: 280px;
+  height: auto;
+  max-height: 260px;
   display: block;
   object-fit: contain;
-  /* Show full image without cropping - letterbox if needed */
+  border-radius: var(--radius-lg);
+  /* Show full image without cropping, rounded corners for polish */
 }
 
 .offer-card-horizontal__placeholder {
