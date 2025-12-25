@@ -109,6 +109,31 @@ function InteractiveItineraryMap({ itinerary }) {
     return '#0ea5e9'; // Sky blue - consistent for all ports
   };
 
+  // Calculate distance between two coordinates (Haversine formula)
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371; // Earth's radius in km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = 
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+    return distance; // Returns distance in km
+  };
+
+  // Format distance for display
+  const formatDistance = (km) => {
+    if (km < 1) {
+      return `${Math.round(km * 1000)}m`;
+    } else if (km < 10) {
+      return `${km.toFixed(1)}km`;
+    } else {
+      return `${Math.round(km)}km`;
+    }
+  };
+
   // Navigate to a specific port and fetch Google Places data
   const navigateToPort = async (index) => {
     if (!map.current || index < 0 || index >= ports.length) return;
@@ -183,7 +208,60 @@ function InteractiveItineraryMap({ itinerary }) {
     
     try {
       const portAttractions = await getPortAttractions(port.lat, port.lon);
-      setAttractions(portAttractions);
+      
+      // Add distance to each attraction
+      const attractionsWithDistance = portAttractions.map(attraction => ({
+        ...attraction,
+        distance: calculateDistance(port.lat, port.lon, attraction.lat, attraction.lng)
+      }));
+      
+      setAttractions(attractionsWithDistance);
+      
+      // Add markers for attractions on the map
+      if (map.current) {
+        // Remove any existing attraction markers
+        if (map.current.getLayer('attraction-markers')) {
+          map.current.removeLayer('attraction-markers');
+        }
+        if (map.current.getSource('attractions')) {
+          map.current.removeSource('attractions');
+        }
+        
+        // Create GeoJSON for attractions
+        const attractionsGeoJSON = {
+          type: 'FeatureCollection',
+          features: attractionsWithDistance.slice(0, 8).map(attraction => ({
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [attraction.lng, attraction.lat]
+            },
+            properties: {
+              name: attraction.name,
+              rating: attraction.rating
+            }
+          }))
+        };
+        
+        // Add source and layer
+        map.current.addSource('attractions', {
+          type: 'geojson',
+          data: attractionsGeoJSON
+        });
+        
+        map.current.addLayer({
+          id: 'attraction-markers',
+          type: 'circle',
+          source: 'attractions',
+          paint: {
+            'circle-radius': 6,
+            'circle-color': '#c9a961',
+            'circle-stroke-width': 2,
+            'circle-stroke-color': '#ffffff',
+            'circle-opacity': 0.8
+          }
+        });
+      }
     } catch (error) {
       console.error('Error fetching port attractions:', error);
       setAttractions([]);
@@ -200,10 +278,18 @@ function InteractiveItineraryMap({ itinerary }) {
     
     setViewTransition(true);
     
-    // Reset map to show all ports
+    // Reset map to show all ports and remove attraction markers
     if (map.current && ports.length > 0) {
       setCurrentPortIndex(null);
       if (popup.current) popup.current.remove();
+      
+      // Remove attraction markers
+      if (map.current.getLayer('attraction-markers')) {
+        map.current.removeLayer('attraction-markers');
+      }
+      if (map.current.getSource('attractions')) {
+        map.current.removeSource('attractions');
+      }
       
       const lats = ports.map(p => p.lat);
       const lons = ports.map(p => p.lon);
@@ -278,7 +364,7 @@ function InteractiveItineraryMap({ itinerary }) {
     return false;
   };
 
-  // Reset view to show all ports
+  // Reset view to show all ports and return sidebar to itinerary
   const resetView = (e) => {
     if (e) {
       e.preventDefault();
@@ -294,6 +380,23 @@ function InteractiveItineraryMap({ itinerary }) {
     setCurrentPortIndex(null);
     if (popup.current) popup.current.remove();
     
+    // Remove attraction markers
+    if (map.current.getLayer('attraction-markers')) {
+      map.current.removeLayer('attraction-markers');
+    }
+    if (map.current.getSource('attractions')) {
+      map.current.removeSource('attractions');
+    }
+    
+    // Return sidebar to itinerary view
+    setViewTransition(true);
+    setTimeout(() => {
+      setSidebarView('itinerary');
+      setSelectedPort(null);
+      setAttractions([]);
+      setViewTransition(false);
+    }, 150);
+    
     const lats = ports.map(p => p.lat);
     const lons = ports.map(p => p.lon);
     const bounds = [
@@ -303,7 +406,7 @@ function InteractiveItineraryMap({ itinerary }) {
     
     map.current.fitBounds(bounds, {
       padding: { top: 80, bottom: 80, left: 80, right: 80 },
-      duration: 2000 // Increased from 1500ms for smoother transition
+      duration: 1500
     });
     
     // Restore scroll position immediately
@@ -381,10 +484,10 @@ function InteractiveItineraryMap({ itinerary }) {
       bearing: 0
     });
 
-    // Add navigation controls (with compass for pitch/tilt)
+    // Add navigation controls (zoom only, no compass)
     map.current.addControl(new mapboxgl.NavigationControl({ 
-      showCompass: true,
-      visualizePitch: true 
+      showCompass: false,
+      visualizePitch: false 
     }), 'top-right');
 
     // Wait for map to load before adding layers
@@ -622,6 +725,14 @@ function InteractiveItineraryMap({ itinerary }) {
               >
                 📍
               </button>
+              <button 
+                type="button"
+                className="map-style-btn map-centre-btn"
+                onClick={resetView}
+                title="Show Full Itinerary"
+              >
+                ⟲
+              </button>
             </div>
 
             {/* Port Navigation - Bottom of map */}
@@ -657,16 +768,6 @@ function InteractiveItineraryMap({ itinerary }) {
                 title="Next Port (loops to start)"
               >
                 Next →
-              </button>
-              
-              <button 
-                type="button"
-                className="map-nav-btn map-nav-reset"
-                onClick={resetView}
-                disabled={currentPortIndex === null}
-                title="Reset to Full View"
-              >
-                ⟲ Reset
               </button>
             </div>
           </div>
@@ -772,17 +873,21 @@ function InteractiveItineraryMap({ itinerary }) {
                           rel="noopener noreferrer"
                         >
                           <div className="attraction-name">{place.name}</div>
-                          {place.rating > 0 && (
-                            <div className="attraction-rating">
-                              ⭐ {place.rating.toFixed(1)}
-                              {place.ratingCount > 0 && (
-                                <span className="rating-count">({place.ratingCount.toLocaleString()} reviews)</span>
-                              )}
-                            </div>
-                          )}
-                          {place.address && (
-                            <div className="attraction-address">📍 {place.address}</div>
-                          )}
+                          <div className="attraction-meta">
+                            {place.rating > 0 && (
+                              <div className="attraction-rating">
+                                ⭐ {place.rating.toFixed(1)}
+                                {place.ratingCount > 0 && (
+                                  <span className="rating-count">({place.ratingCount.toLocaleString()})</span>
+                                )}
+                              </div>
+                            )}
+                            {place.distance !== undefined && (
+                              <div className="attraction-distance">
+                                📍 {formatDistance(place.distance)} from port
+                              </div>
+                            )}
+                          </div>
                           {place.types && place.types.length > 0 && (
                             <div className="attraction-types">
                               {place.types.slice(0, 3).map((type, idx) => (
