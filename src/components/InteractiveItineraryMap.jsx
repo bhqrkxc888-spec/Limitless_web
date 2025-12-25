@@ -623,84 +623,130 @@ function InteractiveItineraryMap({ itinerary }) {
           </div>
         </div>
         
-        {/* Port Attractions Overlay - Floating panel */}
+        {/* Port Attractions Side Panel */}
         {sidebarOpen && selectedPort && (
-          <aside className="port-attractions-overlay">
-            <button 
-              type="button" 
-              className="overlay-close-btn"
+          <>
+            {/* Backdrop */}
+            <div 
+              className="port-attractions-backdrop"
               onClick={closeSidebar}
-              aria-label="Close attractions panel"
-            >
-              ✕
-            </button>
+            />
             
-            <div className="overlay-header">
-              <h3 className="overlay-port-name">{selectedPort.name}</h3>
-              <div className="overlay-port-date">
-                {selectedPort.days?.length > 1 
-                  ? `Days ${selectedPort.days.join(' & ')}` 
-                  : `Day ${selectedPort.day}`}
+            {/* Panel */}
+            <aside className="port-attractions-overlay">
+              <button 
+                type="button" 
+                className="overlay-close-btn"
+                onClick={closeSidebar}
+                aria-label="Close attractions panel"
+              >
+                ✕
+              </button>
+              
+              <div className="overlay-header">
+                <h3 className="overlay-port-name">{selectedPort.name}</h3>
+                <div className="overlay-port-date">
+                  {selectedPort.days?.length > 1 
+                    ? `Days ${selectedPort.days.join(' & ')}` 
+                    : `Day ${selectedPort.day}`}
+                </div>
               </div>
-            </div>
-            
-            <div className="overlay-content">
-              {loadingAttractions ? (
-                <div className="overlay-loading">
-                  <div className="loading-spinner"></div>
-                  <p>Finding experiences...</p>
-                </div>
-              ) : attractions.length > 0 ? (
-                <>
-                  <h4 className="overlay-section-title">
-                    ✨ Top Experiences
-                  </h4>
-                  <div className="attractions-list">
-                    {(showAllAttractions ? attractions : attractions.slice(0, 3)).map(place => (
-                      <div key={place.id} className="attraction-card">
-                        <div className="attraction-name">{place.name}</div>
-                        {place.rating > 0 && (
-                          <div className="attraction-rating">
-                            ⭐ {place.rating.toFixed(1)}
-                            {place.ratingCount > 0 && (
-                              <span className="rating-count">({place.ratingCount} reviews)</span>
-                            )}
-                          </div>
-                        )}
-                        {place.address && (
-                          <div className="attraction-address">{place.address}</div>
-                        )}
-                      </div>
-                    ))}
+              
+              <div className="overlay-content">
+                {loadingAttractions ? (
+                  <div className="overlay-loading">
+                    <div className="loading-spinner"></div>
+                    <p>Discovering local attractions...</p>
                   </div>
-                  
-                  {attractions.length > 3 && !showAllAttractions && (
-                    <button 
-                      type="button"
-                      className="view-more-btn"
-                      onClick={() => setShowAllAttractions(true)}
-                    >
-                      View {attractions.length - 3} more →
-                    </button>
-                  )}
-                  
-                  {showAllAttractions && attractions.length > 3 && (
-                    <button 
-                      type="button"
-                      className="view-more-btn"
-                      onClick={() => setShowAllAttractions(false)}
-                    >
-                      Show less
-                    </button>
-                  )}
-                </>
-              ) : (
-                <div className="overlay-empty">
-                  <p>No attractions data available for this port yet.</p>
-                </div>
-              )}
-            </div>
-          </aside>
+                ) : attractions.length > 0 ? (
+                  <>
+                    <h4 className="overlay-section-title">
+                      🏛️ Things To Do
+                    </h4>
+                    <p className="overlay-subtitle">
+                      Top-rated attractions and experiences near the port
+                    </p>
+                    <div className="attractions-list">
+                      {(showAllAttractions ? attractions : attractions.slice(0, 4)).map(place => (
+                        <a 
+                          key={place.id} 
+                          className="attraction-card"
+                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name)}&query_place_id=${place.id}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <div className="attraction-name">{place.name}</div>
+                          {place.rating > 0 && (
+                            <div className="attraction-rating">
+                              ⭐ {place.rating.toFixed(1)}
+                              {place.ratingCount > 0 && (
+                                <span className="rating-count">({place.ratingCount.toLocaleString()} reviews)</span>
+                              )}
+                            </div>
+                          )}
+                          {place.address && (
+                            <div className="attraction-address">📍 {place.address}</div>
+                          )}
+                          {place.types && place.types.length > 0 && (
+                            <div className="attraction-types">
+                              {place.types.slice(0, 3).map((type, idx) => (
+                                <span key={idx} className="attraction-type-tag">
+                                  {type.replace(/_/g, ' ')}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                        </a>
+                      ))}
+                    </div>
+                    
+                    {attractions.length > 4 && !showAllAttractions && (
+                      <button 
+                        type="button"
+                        className="view-more-btn"
+                        onClick={() => setShowAllAttractions(true)}
+                      >
+                        View {attractions.length - 4} more attractions →
+                      </button>
+                    )}
+                    
+                    {showAllAttractions && attractions.length > 4 && (
+                      <button 
+                        type="button"
+                        className="view-more-btn"
+                        onClick={() => setShowAllAttractions(false)}
+                      >
+                        Show less
+                      </button>
+                    )}
+                  </>
+                ) : (
+                  <div className="overlay-empty">
+                    <p>No attractions data available for this port yet.</p>
+                    <p style={{ marginTop: '12px', fontSize: '13px' }}>
+                      Try searching on Google Maps for local recommendations.
+                    </p>
+                  </div>
+                )}
+              </div>
+              
+              {/* Footer with Google Maps link */}
+              <div className="overlay-footer">
+                <a 
+                  href={`https://www.google.com/maps/search/things+to+do+near+${encodeURIComponent(selectedPort.name)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="google-maps-link"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                  Explore more on Google Maps
+                </a>
+              </div>
+            </aside>
+          </>
         )}
       </div>
       
