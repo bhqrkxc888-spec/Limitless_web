@@ -454,18 +454,10 @@
   gap: var(--space-10);
 }
 
-/* Itinerary Grid - Map & Timeline Side by Side */
-.offer-itinerary-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: var(--space-8);
+/* Interactive Map Section - Full Width with Integrated Sidebar */
+.offer-itinerary-map-section {
+  width: 100%;
   margin-top: var(--space-6);
-}
-
-.offer-itinerary-map-column {
-  position: sticky;
-  top: var(--space-8);
-  align-self: start;
 }
 
 .offer-itinerary-timeline-column h3 {
@@ -1102,14 +1094,7 @@
     position: static;
   }
   
-  /* Itinerary grid stacks on tablet */
-  .offer-itinerary-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .offer-itinerary-map-column {
-    position: static;
-  }
+  /* Map section - no changes needed on tablet, handled by component */
   
   /* Enquiry already stacked, no change needed */
 }

@@ -725,49 +725,26 @@ function OfferPage() {
                     </div>
                   )}
 
-                  {/* Map & Day-by-Day Side by Side */}
-                  {offer.itinerary_detailed && Array.isArray(offer.itinerary_detailed) && offer.itinerary_detailed.length > 0 && (
-                    <div className="offer-itinerary-grid">
-                      {/* Interactive Map - Lazy loaded */}
-                      {offer.show_itinerary_map !== false && (
-                        <div className="offer-itinerary-map-column">
-                          <Suspense fallback={
-                            <div style={{ 
-                              minHeight: '400px', 
-                              display: 'flex', 
-                              alignItems: 'center', 
-                              justifyContent: 'center',
-                              background: '#f5f5f5',
-                              borderRadius: '8px'
-                            }}>
-                              <p>Loading interactive map...</p>
-                            </div>
-                          }>
-                            <InteractiveItineraryMap 
-                              itinerary={offer.itinerary_detailed}
-                              title={offer.title}
-                            />
-                          </Suspense>
+                  {/* Interactive Map with Integrated Day-by-Day Sidebar */}
+                  {offer.itinerary_detailed && Array.isArray(offer.itinerary_detailed) && offer.itinerary_detailed.length > 0 && offer.show_itinerary_map !== false && (
+                    <div className="offer-itinerary-map-section">
+                      <Suspense fallback={
+                        <div style={{ 
+                          minHeight: '400px', 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          justifyContent: 'center',
+                          background: '#f5f5f5',
+                          borderRadius: '8px'
+                        }}>
+                          <p>Loading interactive map...</p>
                         </div>
-                      )}
-                      
-                      {/* Day-by-Day Timeline */}
-                      <div className="offer-itinerary-timeline-column">
-                        <h3>Day-by-Day</h3>
-                        <div className="offer-itinerary-timeline">
-                          {offer.itinerary_detailed.map((item, index) => (
-                            <div key={index} className="offer-itinerary-item">
-                              <div className="offer-itinerary-day">
-                                <span className="day-number">Day {item.day || index + 1}</span>
-                              </div>
-                              <div className="offer-itinerary-content">
-                                <h4>{safeRender(item.location || item.port || 'At Sea')}</h4>
-                                {item.description && <p>{safeRender(item.description)}</p>}
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
+                      }>
+                        <InteractiveItineraryMap 
+                          itinerary={offer.itinerary_detailed}
+                          title={offer.title}
+                        />
+                      </Suspense>
                     </div>
                   )}
                 </div>

@@ -683,22 +683,21 @@ function InteractiveItineraryMap({ itinerary }) {
           ) : (
             /* Port Details View */
             <div className="sidebar-port-view">
-              <button 
-                type="button" 
-                className="sidebar-back-btn"
-                onClick={returnToItinerary}
-                title="Back to itinerary"
-              >
-                ← Back to Itinerary
-              </button>
-              
               <div className="sidebar-header">
-                <h3 className="sidebar-port-name">{selectedPort?.name}</h3>
+                <button 
+                  type="button" 
+                  className="sidebar-back-btn"
+                  onClick={returnToItinerary}
+                  title="Back to itinerary"
+                >
+                  ← Back to Itinerary
+                </button>
                 <div className="sidebar-port-day">
                   {selectedPort?.days?.length > 1 
                     ? `Days ${selectedPort.days.join(' & ')}` 
                     : `Day ${selectedPort?.day}`}
                 </div>
+                <h3 className="sidebar-port-name">{selectedPort?.name}</h3>
               </div>
               
               <div className="sidebar-content">
