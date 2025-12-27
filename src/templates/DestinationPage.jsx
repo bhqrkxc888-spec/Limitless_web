@@ -4,7 +4,8 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, SectionHeader } from '../components/ui';
-import { getHeroImage, getOgImage } from '../utils/imageHelpers';
+import { getOgImage } from '../utils/imageHelpers';
+import { getDestinationHero } from '../utils/assetHelpers';
 import './DestinationPage.css';
 
 // Weather carousel temporarily disabled - will reintroduce with improved port data
@@ -53,7 +54,7 @@ function DestinationPage() {
       <HeroSection
         title={`${destination.name} Cruises`}
         subtitle={destination.description}
-        image={getHeroImage(destination.image)}
+        image={getDestinationHero(destination.slug)}
         imageAlt={`${destination.name} cruise destination`}
         size="md"
         align="left"

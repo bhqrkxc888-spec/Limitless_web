@@ -4,7 +4,7 @@ import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader } from '../components/ui';
 import { useState, useEffect } from 'react';
-import { getCardImage } from '../utils/imageHelpers';
+import { getBucketListCard } from '../utils/assetHelpers';
 import './BucketListPage.css';
 
 function BucketListPage() {
@@ -60,9 +60,9 @@ function BucketListPage() {
       {experiences.map((experience) => (
         <Card key={experience.id} to={`/bucket-list/${experience.slug}`} variant="default" className="bucket-list-card">
           <Card.Image 
-            src={getCardImage(experience.cardImage || experience.heroImage)} 
+            src={getBucketListCard(experience.slug)} 
             alt={experience.title}
-            aspectRatio="16/10"
+            aspectRatio="3/2"
           />
           <Card.Content>
             <div className="bucket-list-badge">Bucket List</div>
@@ -135,9 +135,9 @@ function BucketListPage() {
                     className="bucket-list-featured-card"
                   >
                     <Card.Image 
-                      src={getCardImage(experience.cardImage || experience.heroImage)} 
+                      src={getBucketListCard(experience.slug)} 
                       alt={experience.title}
-                      aspectRatio="16/10"
+                      aspectRatio="3/2"
                     />
                     <Card.Content>
                       <div className="bucket-list-badge">Bucket List</div>

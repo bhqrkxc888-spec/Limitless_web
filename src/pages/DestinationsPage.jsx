@@ -3,7 +3,7 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader } from '../components/ui';
-import { getCardImage } from '../utils/imageHelpers';
+import { getDestinationCard } from '../utils/assetHelpers';
 import './DestinationsPage.css';
 
 function DestinationsPage() {
@@ -33,9 +33,9 @@ function DestinationsPage() {
       {dests.map((destination) => (
         <Card key={destination.id} to={`/destinations/${destination.slug}`} variant="default">
           <Card.Image 
-            src={getCardImage(destination.image)} 
+            src={getDestinationCard(destination.slug)} 
             alt={`${destination.name} cruise destination`}
-            aspectRatio="16/10"
+            aspectRatio="3/2"
           />
           <Card.Content>
             <Card.Title as="h3">{destination.name}</Card.Title>

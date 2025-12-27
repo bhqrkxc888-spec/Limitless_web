@@ -5,7 +5,8 @@ import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, SectionHeader, Accordion, Card } from '../components/ui';
 import { useState } from 'react';
-import { getHeroImage, getCardImage, getOgImage } from '../utils/imageHelpers';
+import { getOgImage } from '../utils/imageHelpers';
+import { getBucketListHero, getBucketListCard } from '../utils/assetHelpers';
 import './BucketListExperiencePage.css';
 
 function BucketListExperiencePage() {
@@ -67,7 +68,7 @@ function BucketListExperiencePage() {
       <HeroSection
         title={experience.title}
         subtitle={experience.tagline}
-        image={getHeroImage(experience.heroImage)}
+        image={getBucketListHero(experience.slug)}
         imageAlt={experience.title}
         size="lg"
         align="left"
@@ -259,9 +260,9 @@ function BucketListExperiencePage() {
                       .map((exp) => (
                         <Card key={exp.id} to={`/bucket-list/${exp.slug}`} variant="outlined" className="related-card">
                           <Card.Image 
-                            src={getCardImage(exp.cardImage || exp.heroImage)} 
+                            src={getBucketListCard(exp.slug)} 
                             alt={exp.title}
-                            aspectRatio="16/9"
+                            aspectRatio="3/2"
                           />
                           <Card.Content>
                             <Card.Title as="h4" className="small-title">{exp.title}</Card.Title>

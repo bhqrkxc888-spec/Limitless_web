@@ -1,17 +1,18 @@
 /**
  * Asset Helpers
- * Simple helper functions to get hardcoded asset URLs
+ * Automatically constructs image URLs from Supabase Storage based on entity slugs
  * 
- * All URLs are defined in src/config/assetUrls.js
- * To update images: Upload to Vercel Blob, update URL in config, deploy.
+ * Images uploaded via admin interface automatically work - no manual URL updates needed!
+ * Upload path pattern: {bucket}/{entity-slug}/{image-type}.webp
  */
 
 import {
   SITE_ASSETS,
-  DESTINATION_HEROES,
-  CRUISE_LINE_LOGOS,
-  CRUISE_LINE_HEROES,
-  CRUISE_LINE_CARDS,
+  getDestinationImageUrl,
+  getCruiseLineImageUrl,
+  getShipImageUrl,
+  getCategoryImageUrl,
+  getBucketListImageUrl,
   PLACEHOLDER_IMAGE,
 } from '../config/assetUrls';
 
@@ -37,42 +38,125 @@ export function getFavicon() {
 
 // ============================================================================
 // DESTINATION ASSETS
+// Automatically uses images uploaded to: WEB_destinations/{slug}/hero.webp
 // ============================================================================
 
 export function getDestinationHero(slug, fallback = PLACEHOLDER_IMAGE) {
-  return DESTINATION_HEROES[slug] || fallback;
+  if (!slug) return fallback;
+  // Automatically constructs URL from uploaded image path
+  return getDestinationImageUrl(slug, 'hero');
+}
+
+export function getDestinationCard(slug, fallback = PLACEHOLDER_IMAGE) {
+  if (!slug) return fallback;
+  return getDestinationImageUrl(slug, 'card');
 }
 
 // ============================================================================
 // CRUISE LINE ASSETS
+// Automatically uses images uploaded to: WEB_cruise-lines/{slug}/{type}.webp
 // ============================================================================
 
-export function getCruiseLineLogo(id, fallback = PLACEHOLDER_IMAGE) {
-  return CRUISE_LINE_LOGOS[id] || fallback;
+export function getCruiseLineLogo(slug, fallback = PLACEHOLDER_IMAGE) {
+  if (!slug) return fallback;
+  // Automatically constructs URL from uploaded image path
+  return getCruiseLineImageUrl(slug, 'logo');
 }
 
-export function getCruiseLineHero(id, fallback = PLACEHOLDER_IMAGE) {
-  return CRUISE_LINE_HEROES[id] || fallback;
+export function getCruiseLineHero(slug, fallback = PLACEHOLDER_IMAGE) {
+  if (!slug) return fallback;
+  return getCruiseLineImageUrl(slug, 'hero');
 }
 
-export function getCruiseLineCard(id, fallback = PLACEHOLDER_IMAGE) {
-  return CRUISE_LINE_CARDS[id] || fallback;
+export function getCruiseLineCard(slug, fallback = PLACEHOLDER_IMAGE) {
+  if (!slug) return fallback;
+  return getCruiseLineImageUrl(slug, 'card');
+}
+
+// Legacy function name support (for backwards compatibility)
+export function getCruiseLineLogoById(id, fallback = PLACEHOLDER_IMAGE) {
+  return getCruiseLineLogo(id, fallback);
+}
+
+export function getCruiseLineHeroById(id, fallback = PLACEHOLDER_IMAGE) {
+  return getCruiseLineHero(id, fallback);
+}
+
+export function getCruiseLineCardById(id, fallback = PLACEHOLDER_IMAGE) {
+  return getCruiseLineCard(id, fallback);
 }
 
 // ============================================================================
-// SHIP ASSETS (ships use cruise line images for now)
+// SHIP ASSETS
+// Automatically uses images uploaded to: WEB_cruise-lines/{cruiseLineSlug}/ships/{shipSlug}/{type}.webp
 // ============================================================================
 
-export function getShipHero(shipKey, fallback = PLACEHOLDER_IMAGE) {
-  // Ship key format: cruiseLineId-ship-name
-  // For now, fall back to cruise line hero
-  const cruiseLineId = shipKey?.split('-')[0];
-  return CRUISE_LINE_HEROES[cruiseLineId] || fallback;
+export function getShipHero(cruiseLineSlug, shipSlug, fallback = PLACEHOLDER_IMAGE) {
+  if (!cruiseLineSlug || !shipSlug) return fallback;
+  return getShipImageUrl(cruiseLineSlug, shipSlug, 'hero');
 }
 
-export function getShipCard(shipKey, fallback = PLACEHOLDER_IMAGE) {
-  const cruiseLineId = shipKey?.split('-')[0];
-  return CRUISE_LINE_CARDS[cruiseLineId] || fallback;
+export function getShipCard(cruiseLineSlug, shipSlug, fallback = PLACEHOLDER_IMAGE) {
+  if (!cruiseLineSlug || !shipSlug) return fallback;
+  return getShipImageUrl(cruiseLineSlug, shipSlug, 'card');
+}
+
+// Legacy function support (shipKey format: "cruiseLineSlug-ship-slug")
+export function getShipHeroByKey(shipKey, fallback = PLACEHOLDER_IMAGE) {
+  if (!shipKey) return fallback;
+  const parts = shipKey.split('-');
+  if (parts.length < 2) return fallback;
+  // Simplified - assumes cruise line slug is first part
+  // For full implementation, need to parse cruise line + ship slugs properly
+  return fallback;
+}
+
+export function getShipCardByKey(shipKey, fallback = PLACEHOLDER_IMAGE) {
+  return getShipHeroByKey(shipKey, fallback);
+}
+
+// ============================================================================
+// CATEGORY ASSETS
+// Automatically uses images uploaded to: WEB_categories/{slug}/card.webp
+// ============================================================================
+
+export function getCategoryCard(slug, fallback = PLACEHOLDER_IMAGE) {
+  if (!slug) return fallback;
+  return getCategoryImageUrl(slug, 'card');
+}
+
+export function getCategoryHero(slug, fallback = PLACEHOLDER_IMAGE) {
+  if (!slug) return fallback;
+  return getCategoryImageUrl(slug, 'hero');
+}
+
+// ============================================================================
+// BUCKET LIST ASSETS
+// Automatically uses images uploaded to: WEB_categories/bucket-list/{slug}/{type}.webp
+// ============================================================================
+
+export function getBucketListHero(slug, fallback = PLACEHOLDER_IMAGE) {
+  if (!slug) return fallback;
+  return getBucketListImageUrl(slug, 'hero');
+}
+
+export function getBucketListCard(slug, fallback = PLACEHOLDER_IMAGE) {
+  if (!slug) return fallback;
+  return getBucketListImageUrl(slug, 'card');
+}
+
+// ============================================================================
+// DESTINATION GALLERY IMAGES (for SEO-rich content)
+// Upload to: WEB_destinations/{slug}/gallery-1.webp, gallery-2.webp, etc.
+// ============================================================================
+
+export function getDestinationGallery(slug, count = 3) {
+  if (!slug) return [];
+  const gallery = [];
+  for (let i = 1; i <= count; i++) {
+    gallery.push(getDestinationImageUrl(slug, `gallery-${i}`));
+  }
+  return gallery;
 }
 
 // ============================================================================

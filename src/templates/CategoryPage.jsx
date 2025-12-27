@@ -4,7 +4,8 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, SectionHeader } from '../components/ui';
-import { getHeroImage, getOgImage } from '../utils/imageHelpers';
+import { getOgImage } from '../utils/imageHelpers';
+import { getCategoryImageUrl } from '../config/assetUrls';
 import './CategoryPage.css';
 
 function CategoryPage() {
@@ -50,7 +51,7 @@ function CategoryPage() {
       <HeroSection
         title={category.name}
         subtitle={category.description}
-        image={getHeroImage(category.image)}
+        image={getCategoryImageUrl(category.slug, 'hero')}
         imageAlt={category.name}
         size="md"
         align="left"

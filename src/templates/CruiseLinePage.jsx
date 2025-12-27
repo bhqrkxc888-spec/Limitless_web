@@ -7,7 +7,8 @@ import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader, Accordion, DataTable } from '../components/ui';
 import NewsCard from '../components/NewsCard';
 import { useEffect, useState } from 'react';
-import { getHeroImage, getOgImage } from '../utils/imageHelpers';
+import { getOgImage } from '../utils/imageHelpers';
+import { getCruiseLineHero, getCruiseLineLogo } from '../utils/assetHelpers';
 import './CruiseLinePage.css';
 
 /**
@@ -90,7 +91,7 @@ function CruiseLinePage() {
       <HeroSection
         title={cruiseLine.name}
         subtitle={cruiseLine.description}
-        image={getHeroImage(cruiseLine.image)}
+        image={getCruiseLineHero(cruiseLine.slug)}
         imageAlt={`${cruiseLine.name} cruise ship`}
         size="md"
         align="left"
