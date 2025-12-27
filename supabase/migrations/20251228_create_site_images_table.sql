@@ -59,29 +59,16 @@ CREATE INDEX IF NOT EXISTS idx_site_images_uploaded_at ON site_images(uploaded_a
 -- ROW LEVEL SECURITY (RLS) POLICIES
 -- ============================================================================
 
--- Enable RLS
-ALTER TABLE site_images ENABLE ROW LEVEL SECURITY;
+-- RLS is DISABLED because admin area uses custom cookie-based auth
+-- Admin routes are already protected by the custom authentication system
+ALTER TABLE site_images DISABLE ROW LEVEL SECURITY;
 
--- Public read access (website needs to query images)
-CREATE POLICY "site_images_public_read" ON site_images
-  FOR SELECT
-  USING (true);
-
--- Authenticated users can insert
-CREATE POLICY "site_images_authenticated_insert" ON site_images
-  FOR INSERT
-  WITH CHECK (auth.role() = 'authenticated');
-
--- Authenticated users can update their own uploads
-CREATE POLICY "site_images_authenticated_update" ON site_images
-  FOR UPDATE
-  USING (auth.role() = 'authenticated')
-  WITH CHECK (auth.role() = 'authenticated');
-
--- Authenticated users can delete
-CREATE POLICY "site_images_authenticated_delete" ON site_images
-  FOR DELETE
-  USING (auth.role() = 'authenticated');
+-- Note: If you switch to Supabase auth in the future, enable RLS and use:
+-- ALTER TABLE site_images ENABLE ROW LEVEL SECURITY;
+-- CREATE POLICY "site_images_public_read" ON site_images FOR SELECT USING (true);
+-- CREATE POLICY "site_images_authenticated_insert" ON site_images FOR INSERT WITH CHECK (true);
+-- CREATE POLICY "site_images_authenticated_update" ON site_images FOR UPDATE USING (true);
+-- CREATE POLICY "site_images_authenticated_delete" ON site_images FOR DELETE USING (true);
 
 -- ============================================================================
 -- HELPER FUNCTIONS
