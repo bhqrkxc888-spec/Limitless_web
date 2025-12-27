@@ -16,6 +16,9 @@ const SITE_IMAGES = [
   { id: 'logo', type: 'logo', label: 'Site Logo', required: true },
   { id: 'og-image', type: 'og-image', label: 'OG Image (Social Sharing)', required: true },
   { id: 'favicon', type: 'favicon', label: 'Favicon', required: true },
+  { id: 'about-hero', type: 'about-hero', label: 'About Page - Katherine Photo', required: true },
+  { id: 'about-katherine2', type: 'about-katherine2', label: 'About Page - Katherine Photo 2', required: false },
+  { id: 'contact-hero', type: 'contact-hero', label: 'Contact Page Hero', required: false },
 ];
 
 function AdminSiteImages() {

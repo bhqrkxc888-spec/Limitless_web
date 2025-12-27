@@ -46,7 +46,7 @@ function ImageUpload({
     if (suggestedAltText && !altText) {
       setAltText(suggestedAltText);
     }
-  }, [suggestedAltText]);
+  }, [suggestedAltText, altText]);
 
   // Handle drag events
   const handleDrag = (e) => {
@@ -193,7 +193,7 @@ function ImageUpload({
       const filePath = generateFilePath();
       
       // Upload to Supabase Storage
-      const { data: uploadData, error: uploadError } = await uploadImage(file, bucket, filePath);
+      const { error: uploadError } = await uploadImage(file, bucket, filePath);
 
       if (uploadError) throw uploadError;
 
