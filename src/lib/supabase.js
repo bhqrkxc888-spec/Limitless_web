@@ -22,15 +22,17 @@ export const supabase = isConfigured
  * @param {File} file - The file to upload
  * @param {string} bucket - The storage bucket name (e.g., 'cruise-lines')
  * @param {string} path - The file path within the bucket
+ * @param {object} options - Upload options
  * @returns {Promise<{data, error}>}
  */
-export async function uploadImage(file, bucket, path) {
+export async function uploadImage(file, bucket, path, options = {}) {
   try {
     const { data, error } = await supabase.storage
       .from(bucket)
       .upload(path, file, {
         cacheControl: '3600',
-        upsert: false
+        upsert: options.upsert !== undefined ? options.upsert : true, // Default to true to allow replacements
+        ...options
       });
 
     if (error) throw error;

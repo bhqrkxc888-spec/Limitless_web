@@ -220,8 +220,14 @@ function ImageUpload({
       // Generate file path
       const filePath = generateFilePath();
       
-      // Upload to Supabase Storage
-      const { error: uploadError } = await uploadImage(file, bucket, filePath);
+      // If replacing an existing image, delete it first (only if the path will be different)
+      // Or use upsert: true to overwrite
+      const isReplacing = existingImage && existingData;
+      
+      // Upload to Supabase Storage (with upsert to allow replacements)
+      const { error: uploadError } = await uploadImage(file, bucket, filePath, { 
+        upsert: true // Allow overwriting existing files
+      });
 
       if (uploadError) throw uploadError;
 
