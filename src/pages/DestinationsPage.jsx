@@ -1,4 +1,5 @@
-import { destinations } from '../data/destinations';
+import { destinations as destinationsData } from '../data/destinations';
+import { destinations as destinationsConfig } from '../config/destinations';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
@@ -7,6 +8,21 @@ import { getDestinationCard } from '../utils/assetHelpers';
 import './DestinationsPage.css';
 
 function DestinationsPage() {
+  // Use data/destinations for full details, but map slugs from config/destinations for images
+  // Create a mapping of full data with correct image slugs
+  const destinations = destinationsData.map(dest => {
+    // Find matching config destination by name or similar logic
+    const configDest = destinationsConfig.find(c => {
+      // Match by removing "-cruises" from data slug or matching names
+      const dataSlugShort = dest.slug.replace('-cruises', '');
+      return c.slug === dataSlugShort || c.name.toLowerCase() === dest.name.toLowerCase();
+    });
+    
+    return {
+      ...dest,
+      imageSlug: configDest?.slug || dest.slug // Use config slug for images, fallback to data slug
+    };
+  });
   // Group destinations by region (placeholder structure - can be enhanced)
   const featuredDestinations = destinations.filter(d => d.featured);
   const otherDestinations = destinations.filter(d => !d.featured);
@@ -33,7 +49,7 @@ function DestinationsPage() {
       {dests.map((destination) => (
         <Card key={destination.id} to={`/destinations/${destination.slug}`} variant="default">
           <Card.Image 
-            src={getDestinationCard(destination.slug)} 
+            src={getDestinationCard(destination.imageSlug || destination.slug)} 
             alt={`${destination.name} cruise destination`}
             aspectRatio="3/2"
           />

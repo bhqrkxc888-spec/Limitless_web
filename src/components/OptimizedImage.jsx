@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { getOptimizedImageUrl, generateSrcSet, isSupabaseUrl } from '../utils/imageHelpers';
 import { isVercelBlobUrl } from '../lib/vercelBlob';
+import { SITE_ASSETS } from '../config/assetUrls';
 
-// Fallback placeholder for missing/failed images
+// Fallback placeholder for missing/failed images - uses Limitless Cruises logo
 const COMING_SOON_PLACEHOLDER = '/images/placeholders/coming-soon.svg';
+const LOGO_URL = SITE_ASSETS.logo;
 
 /**
  * OptimizedImage Component
@@ -56,23 +58,56 @@ function OptimizedImage({
     }
   };
   
-  // Return "Coming Soon" placeholder if no src provided
+  // Return Limitless Cruises logo placeholder if no src provided
   if (!src || src === 'null' || src === 'undefined') {
     if (showComingSoon) {
       return (
-        <img
-          src={COMING_SOON_PLACEHOLDER}
-          alt={alt || 'Image coming soon'}
-          width={width}
-          height={height}
-          loading={priority ? 'eager' : 'lazy'}
-          className={className}
-          style={{
-            objectFit,
+        <div 
+          className={`optimized-image-placeholder ${className}`}
+          style={{ 
+            width: width ? `${width}px` : '100%', 
+            height: height ? `${height}px` : 'auto',
+            aspectRatio: width && height ? `${width}/${height}` : undefined,
+            backgroundColor: '#2C344C',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '16px',
+            padding: '32px',
             ...style
           }}
           {...props}
-        />
+        >
+          <img 
+            src={LOGO_URL} 
+            alt="Limitless Cruises" 
+            style={{ 
+              width: 'auto', 
+              height: 'min(80px, 30%)',
+              opacity: 0.6,
+              objectFit: 'contain'
+            }}
+            loading="lazy"
+          />
+          <div style={{ 
+            color: '#B9953C', 
+            fontSize: '16px', 
+            fontWeight: '500',
+            textAlign: 'center',
+            fontFamily: 'system-ui, -apple-system, sans-serif'
+          }}>
+            Image Coming Soon
+          </div>
+          <div style={{ 
+            color: '#8892a8', 
+            fontSize: '12px',
+            textAlign: 'center',
+            fontFamily: 'system-ui, -apple-system, sans-serif'
+          }}>
+            High-quality imagery will be added shortly
+          </div>
+        </div>
       );
     }
     
