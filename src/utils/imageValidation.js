@@ -61,6 +61,20 @@ export const DIMENSION_SPECS = {
   'destination-hero': { width: 1920, height: 1080 },
   'destination-card': { width: 600, height: 400 },
   'destination-mobile': { width: 800, height: 600 },
+  // Cruise-line-specific destination cards (any cruise line slug)
+  'destination-card-p-and-o-cruises': { width: 600, height: 400 },
+  'destination-card-royal-caribbean': { width: 600, height: 400 },
+  'destination-card-norwegian-cruise-line': { width: 600, height: 400 },
+  'destination-card-msc-cruises': { width: 600, height: 400 },
+  'destination-card-celebrity-cruises': { width: 600, height: 400 },
+  'destination-card-princess-cruises': { width: 600, height: 400 },
+  'destination-card-cunard-cruises': { width: 600, height: 400 },
+  'destination-card-viking-ocean-cruises': { width: 600, height: 400 },
+  // Generic gallery images
+  'destination-gallery-1': { width: 600, height: 400 },
+  'destination-gallery-2': { width: 600, height: 400 },
+  'destination-gallery-3': { width: 600, height: 400 },
+  'destination-gallery-4': { width: 600, height: 400 },
   
   // Cruise line images
   'cruise-line-logo': { width: 400, height: 200 },
@@ -147,9 +161,14 @@ export function validateDimensions(image, entityType, imageType) {
   const actualWidth = image.width;
   const actualHeight = image.height;
 
-  // Construct spec key (e.g., 'destination-hero', 'ship-exterior')
+  // Construct spec key (e.g., 'destination-hero', 'destination-card-p-and-o-cruises')
   const specKey = `${entityType}-${imageType}`;
-  const expectedDims = DIMENSION_SPECS[specKey];
+  let expectedDims = DIMENSION_SPECS[specKey];
+
+  // If no exact match and it's a card with a cruise line slug, try generic card dimensions
+  if (!expectedDims && imageType.startsWith('card-')) {
+    expectedDims = DIMENSION_SPECS[`${entityType}-card`];
+  }
 
   if (!expectedDims) {
     // No specific dimension requirement for this type

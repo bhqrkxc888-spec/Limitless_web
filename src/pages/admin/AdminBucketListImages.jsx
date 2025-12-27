@@ -108,18 +108,26 @@ function AdminBucketListImages() {
           </header>
 
           <div className="entity-grid">
-            {experiences.map(experience => (
-              <Link
-                key={experience.id}
-                to={`/admin/images/bucket-list/${experience.slug}`}
-                className="entity-card"
-              >
-                <h3>{experience.title}</h3>
-                <p className="entity-card-meta">
-                  {experience.duration} • {experience.category}
-                </p>
-              </Link>
-            ))}
+            {experiences.map(experience => {
+              // Check if images exist for this experience
+              const hasImages = false; // TODO: Load actual stats
+              
+              return (
+                <Link
+                  key={experience.id}
+                  to={`/admin/images/bucket-list/${experience.slug}`}
+                  className="entity-card"
+                >
+                  <div className="entity-card-header">
+                    <h3>{experience.title}</h3>
+                    <StatusIndicator status={hasImages ? 'pass' : 'missing'} size="small" />
+                  </div>
+                  <p className="entity-card-meta">
+                    {experience.duration} • {experience.category}
+                  </p>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </AdminLayout>

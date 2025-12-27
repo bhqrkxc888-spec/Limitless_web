@@ -1,8 +1,3 @@
-/**
- * Admin Destination Images Page
- * Manages images for all 30 destinations
- */
-
 import { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
@@ -15,12 +10,23 @@ import { supabase, getPublicUrl } from '../../lib/supabase';
 import { STORAGE_BUCKETS } from '../../config/supabaseConfig';
 import './AdminImagesShared.css';
 
+// Featured cruise lines to show as dedicated image slots
+const FEATURED_CRUISE_LINES = [
+  { slug: 'p-and-o-cruises', name: 'P&O Cruises', shortName: 'P&O' },
+  { slug: 'royal-caribbean', name: 'Royal Caribbean', shortName: 'Royal Caribbean' },
+  { slug: 'norwegian-cruise-line', name: 'Norwegian Cruise Line', shortName: 'NCL' },
+  { slug: 'msc-cruises', name: 'MSC Cruises', shortName: 'MSC' },
+  { slug: 'celebrity-cruises', name: 'Celebrity Cruises', shortName: 'Celebrity' },
+  { slug: 'princess-cruises', name: 'Princess Cruises', shortName: 'Princess' },
+  { slug: 'cunard-cruises', name: 'Cunard', shortName: 'Cunard' },
+  { slug: 'viking-ocean-cruises', name: 'Viking Ocean', shortName: 'Viking' },
+];
+
 function AdminDestinationImages() {
   const navigate = useNavigate();
   const { isAuthenticated, isLoading: authLoading, logout } = useAdminAuth();
-  
-  const [images, setImages] = useState({});
   const [selectedDestination, setSelectedDestination] = useState(null);
+  const [images, setImages] = useState({});
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -40,18 +46,21 @@ function AdminDestinationImages() {
         .select('*')
         .eq('entity_type', 'destination');
 
-      const imageMap = {};
+      const imagesByDestination = {};
       data?.forEach(img => {
-        if (!imageMap[img.entity_id]) imageMap[img.entity_id] = {};
-        imageMap[img.entity_id][img.image_type] = {
+        if (!imagesByDestination[img.entity_id]) {
+          imagesByDestination[img.entity_id] = {};
+        }
+        imagesByDestination[img.entity_id][img.image_type] = {
           url: getPublicUrl(img.bucket, img.path),
           ...img
         };
       });
-      setImages(imageMap);
+
+      setImages(imagesByDestination);
       setLastUpdated(Date.now());
     } catch (error) {
-      console.error('Error loading images:', error);
+      console.error('Error loading destination images:', error);
     } finally {
       setLoading(false);
       setIsRefreshing(false);
@@ -64,14 +73,19 @@ function AdminDestinationImages() {
     }
   }, [isAuthenticated, loadImages]);
 
+  const handleUploadComplete = () => {
+    loadImages();
+  };
+
   const getDestinationStatus = (slug) => {
-    const destImages = images[slug] || {};
-    const hasHero = !!destImages.hero;
-    const hasCard = !!destImages.card;
+    const destImages = images[slug];
+    if (!destImages) return 'missing';
     
-    if (!hasHero || !hasCard) return 'error';
-    if (destImages.hero?.seo_compliant && destImages.card?.seo_compliant) return 'pass';
-    return 'warning';
+    const hasRequired = destImages.hero && destImages.card;
+    if (!hasRequired) return 'missing';
+    
+    const hasWarnings = Object.values(destImages).some(img => !img.seo_compliant);
+    return hasWarnings ? 'warning' : 'pass';
   };
 
   // Show loading while checking auth
@@ -104,7 +118,7 @@ function AdminDestinationImages() {
             Back to Image Management
           </Link>
           <h1 className="admin-page-title">Destination Images</h1>
-          <p className="admin-page-subtitle">Manage hero and card images for all 30 destinations</p>
+          <p className="admin-page-subtitle">Manage hero, card, and cruise-line-specific images for all 16 destinations</p>
         </header>
 
         {loading ? (
@@ -144,8 +158,19 @@ function AdminDestinationImages() {
             </button>
             
             <h2 className="entity-detail-title">{selectedDestination.name}</h2>
+            <p style={{ 
+              marginBottom: '2rem', 
+              color: 'var(--admin-text-muted)',
+              fontSize: '0.9375rem',
+              lineHeight: '1.5'
+            }}>
+              Upload a <strong>hero</strong> and <strong>card</strong> image for the main destination page, 
+              then add <strong>cruise-line-specific cards</strong> to show different images on each cruise line's destination grid.
+              Plus <strong>4 gallery slots</strong> for general site use.
+            </p>
             
             <div className="images-list">
+              {/* Hero Image */}
               <div className="admin-card image-card">
                 <div className="image-card-header">
                   <div className="image-card-title">
@@ -157,7 +182,10 @@ function AdminDestinationImages() {
                     size="small" 
                   />
                 </div>
-                <p className="image-card-specs">Recommended: 1920×1080px, WebP format</p>
+                <p className="image-card-specs">
+                  Main banner for destination page
+                  <br />Recommended: 1920×1080px, WebP format
+                </p>
                 <ImageUpload
                   bucket={STORAGE_BUCKETS.DESTINATIONS}
                   entityType="destination"
@@ -166,14 +194,15 @@ function AdminDestinationImages() {
                   suggestedAltText={`${selectedDestination.name} cruise destination`}
                   existingImage={images[selectedDestination.slug]?.hero?.url}
                   existingData={images[selectedDestination.slug]?.hero}
-                  onUploadComplete={loadImages}
+                  onUploadComplete={handleUploadComplete}
                 />
               </div>
               
+              {/* Card Image */}
               <div className="admin-card image-card">
                 <div className="image-card-header">
                   <div className="image-card-title">
-                    <h3>Card Image</h3>
+                    <h3>Card Image (Default)</h3>
                     <span className="badge badge-required">Required</span>
                   </div>
                   <StatusIndicator 
@@ -181,7 +210,10 @@ function AdminDestinationImages() {
                     size="small" 
                   />
                 </div>
-                <p className="image-card-specs">Recommended: 600×400px, WebP format</p>
+                <p className="image-card-specs">
+                  Default thumbnail for destination listings (used if no cruise-line-specific card exists)
+                  <br />Recommended: 600×400px, WebP format
+                </p>
                 <ImageUpload
                   bucket={STORAGE_BUCKETS.DESTINATIONS}
                   entityType="destination"
@@ -190,10 +222,119 @@ function AdminDestinationImages() {
                   suggestedAltText={`${selectedDestination.name} cruise card`}
                   existingImage={images[selectedDestination.slug]?.card?.url}
                   existingData={images[selectedDestination.slug]?.card}
-                  onUploadComplete={loadImages}
+                  onUploadComplete={handleUploadComplete}
                 />
               </div>
 
+              {/* Cruise Line Specific Cards */}
+              <div style={{
+                background: 'var(--admin-bg-secondary)',
+                border: '1px solid var(--admin-border)',
+                borderRadius: '12px',
+                padding: '1.5rem',
+                marginTop: '1rem'
+              }}>
+                <h3 style={{
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                  color: 'var(--admin-text)',
+                  marginBottom: '0.5rem'
+                }}>
+                  Cruise Line Specific Cards
+                </h3>
+                <p style={{
+                  fontSize: '0.875rem',
+                  color: 'var(--admin-text-muted)',
+                  marginBottom: '1.5rem',
+                  lineHeight: '1.5'
+                }}>
+                  Upload different images for each cruise line's destination grid. 
+                  For example: P&O's Caribbean card can show a British Virgin Islands scene, 
+                  while Royal Caribbean's shows Nassau, Bahamas.
+                </p>
+
+                {FEATURED_CRUISE_LINES.map((cruiseLine) => (
+                  <div key={cruiseLine.slug} className="admin-card image-card" style={{ marginBottom: '1rem' }}>
+                    <div className="image-card-header">
+                      <div className="image-card-title">
+                        <h3>{cruiseLine.shortName} Card</h3>
+                        <span className="badge badge-optional">Optional</span>
+                      </div>
+                      <StatusIndicator 
+                        status={images[selectedDestination.slug]?.[`card-${cruiseLine.slug}`] ? 'pass' : 'missing'} 
+                        size="small" 
+                      />
+                    </div>
+                    <p className="image-card-specs">
+                      Shown on {cruiseLine.name} destination grid • 600×400px, WebP
+                    </p>
+                    <ImageUpload
+                      bucket={STORAGE_BUCKETS.DESTINATIONS}
+                      entityType="destination"
+                      entityId={selectedDestination.slug}
+                      imageType={`card-${cruiseLine.slug}`}
+                      suggestedAltText={`${selectedDestination.name} cruise for ${cruiseLine.name}`}
+                      existingImage={images[selectedDestination.slug]?.[`card-${cruiseLine.slug}`]?.url}
+                      existingData={images[selectedDestination.slug]?.[`card-${cruiseLine.slug}`]}
+                      onUploadComplete={handleUploadComplete}
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* General Gallery Images */}
+              <div style={{
+                background: 'var(--admin-bg-secondary)',
+                border: '1px solid var(--admin-border)',
+                borderRadius: '12px',
+                padding: '1.5rem',
+                marginTop: '1rem'
+              }}>
+                <h3 style={{
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                  color: 'var(--admin-text)',
+                  marginBottom: '0.5rem'
+                }}>
+                  General Gallery Images
+                </h3>
+                <p style={{
+                  fontSize: '0.875rem',
+                  color: 'var(--admin-text-muted)',
+                  marginBottom: '1.5rem',
+                  lineHeight: '1.5'
+                }}>
+                  Additional images for general site use (blog posts, promotional materials, etc.)
+                </p>
+
+                {[1, 2, 3, 4].map((num) => (
+                  <div key={num} className="admin-card image-card" style={{ marginBottom: '1rem' }}>
+                    <div className="image-card-header">
+                      <div className="image-card-title">
+                        <h3>Gallery Image {num}</h3>
+                        <span className="badge badge-optional">Optional</span>
+                      </div>
+                      <StatusIndicator 
+                        status={images[selectedDestination.slug]?.[`gallery-${num}`] ? 'pass' : 'missing'} 
+                        size="small" 
+                      />
+                    </div>
+                    <p className="image-card-specs">600×400px, WebP format</p>
+                    <ImageUpload
+                      bucket={STORAGE_BUCKETS.DESTINATIONS}
+                      entityType="destination"
+                      entityId={selectedDestination.slug}
+                      imageType={`gallery-${num}`}
+                      suggestedAltText={`${selectedDestination.name} destination gallery image ${num}`}
+                      existingImage={images[selectedDestination.slug]?.[`gallery-${num}`]?.url}
+                      existingData={images[selectedDestination.slug]?.[`gallery-${num}`]}
+                      onUploadComplete={handleUploadComplete}
+                    />
+                  </div>
+                ))}
+              </div>
+
+              {/* Mobile Hero */}
               <div className="admin-card image-card">
                 <div className="image-card-header">
                   <div className="image-card-title">
@@ -205,7 +346,7 @@ function AdminDestinationImages() {
                     size="small" 
                   />
                 </div>
-                <p className="image-card-specs">Recommended: 768×1024px, WebP format</p>
+                <p className="image-card-specs">Vertical format for mobile devices • 768×1024px, WebP format</p>
                 <ImageUpload
                   bucket={STORAGE_BUCKETS.DESTINATIONS}
                   entityType="destination"
@@ -214,7 +355,7 @@ function AdminDestinationImages() {
                   suggestedAltText={`${selectedDestination.name} mobile hero`}
                   existingImage={images[selectedDestination.slug]?.mobile?.url}
                   existingData={images[selectedDestination.slug]?.mobile}
-                  onUploadComplete={loadImages}
+                  onUploadComplete={handleUploadComplete}
                 />
               </div>
             </div>
@@ -308,7 +449,7 @@ function AdminDestinationImages() {
           font-size: 1.5rem;
           font-weight: 700;
           color: var(--admin-text);
-          margin: 0 0 1.5rem 0;
+          margin: 0 0 0.5rem 0;
         }
       `}</style>
     </AdminLayout>

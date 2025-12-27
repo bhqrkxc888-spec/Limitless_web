@@ -90,7 +90,9 @@ function AdminImageManagement() {
 
       // Calculate missing (expected - uploaded)
       newStats.site.missing = Math.max(0, 12 - newStats.site.total); // Updated to 12 (added trust badges + agency logo)
-      newStats.destinations.missing = Math.max(0, 32 - newStats.destinations.total); // 16 destinations x 2 images
+      // Destinations: 16 × 13 images = 208 total
+      // (hero, card, 8 cruise-line cards, 4 gallery, mobile)
+      newStats.destinations.missing = Math.max(0, 208 - newStats.destinations.total);
       newStats.cruiseLines.missing = Math.max(0, 171 - newStats.cruiseLines.total);
       newStats.categories.missing = Math.max(0, 6 - newStats.categories.total);
       newStats.bucketList.missing = Math.max(0, 102 - newStats.bucketList.total); // 17 experiences x 6 images
@@ -148,7 +150,7 @@ function AdminImageManagement() {
     {
       id: 'destinations',
       title: 'Destinations',
-      description: '16 destinations with hero and card images',
+      description: '16 destinations: hero, card, 8 cruise-line cards, 4 gallery, mobile',
       icon: MapPin,
       path: '/admin/images/destinations',
       stats: stats.destinations,
