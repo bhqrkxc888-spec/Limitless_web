@@ -1,11 +1,12 @@
 /**
  * Admin Cruise Line Images Page
- * Manages images for all 57 cruise lines (logos, heroes, cards)
+ * Unified management for cruise lines and ships
+ * - Select cruise line → General images (logo/hero/card) + Ships section
  */
 
 import { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Ship } from 'lucide-react';
 import { cruiseLines } from '../../data/cruiseLines';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
@@ -15,12 +16,17 @@ import { supabase, getPublicUrl } from '../../lib/supabase';
 import { STORAGE_BUCKETS } from '../../config/supabaseConfig';
 import './AdminImagesShared.css';
 
+const REQUIRED_SHIP_GALLERY = ['exterior', 'deck', 'suite', 'dining'];
+const OPTIONAL_SHIP_GALLERY = ['pool', 'entertainment', 'spa', 'theater'];
+
 function AdminCruiseLineImages() {
   const navigate = useNavigate();
   const { isAuthenticated, isLoading: authLoading, logout } = useAdminAuth();
   
   const [images, setImages] = useState({});
+  const [shipImages, setShipImages] = useState({});
   const [selectedCruiseLine, setSelectedCruiseLine] = useState(null);
+  const [selectedShip, setSelectedShip] = useState(null);
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -35,20 +41,38 @@ function AdminCruiseLineImages() {
   const loadImages = useCallback(async () => {
     setIsRefreshing(true);
     try {
-      const { data } = await supabase
+      // Load cruise line images
+      const { data: clData } = await supabase
         .from('site_images')
         .select('*')
         .eq('entity_type', 'cruise-line');
 
-      const imageMap = {};
-      data?.forEach(img => {
-        if (!imageMap[img.entity_id]) imageMap[img.entity_id] = {};
-        imageMap[img.entity_id][img.image_type] = {
+      const clImageMap = {};
+      clData?.forEach(img => {
+        if (!clImageMap[img.entity_id]) clImageMap[img.entity_id] = {};
+        clImageMap[img.entity_id][img.image_type] = {
           url: getPublicUrl(img.bucket, img.path),
           ...img
         };
       });
-      setImages(imageMap);
+      setImages(clImageMap);
+
+      // Load ship images
+      const { data: shipData } = await supabase
+        .from('site_images')
+        .select('*')
+        .eq('entity_type', 'ship');
+
+      const shipImageMap = {};
+      shipData?.forEach(img => {
+        if (!shipImageMap[img.entity_id]) shipImageMap[img.entity_id] = {};
+        shipImageMap[img.entity_id][img.image_type] = {
+          url: getPublicUrl(img.bucket, img.path),
+          ...img
+        };
+      });
+      setShipImages(shipImageMap);
+
       setLastUpdated(Date.now());
     } catch (error) {
       console.error('Error loading images:', error);
@@ -75,6 +99,17 @@ function AdminCruiseLineImages() {
     return 'warning';
   };
 
+  const getShipStatus = (cruiseLineSlug, ship) => {
+    const shipKey = `${cruiseLineSlug}/ships/${ship.slug || ship.name.toLowerCase().replace(/\s+/g, '-')}`;
+    const shipImgs = shipImages[shipKey] || {};
+    
+    const hasRequired = REQUIRED_SHIP_GALLERY.every(type => shipImgs[type]);
+    if (!hasRequired) return 'error';
+    
+    const allCompliant = Object.values(shipImgs).every(img => img.seo_compliant);
+    return allCompliant ? 'pass' : 'warning';
+  };
+
   // Show loading while checking auth
   if (authLoading || (!isAuthenticated && !authLoading)) {
     return (
@@ -99,47 +134,59 @@ function AdminCruiseLineImages() {
       isRefreshing={isRefreshing}
     >
       <div className="admin-images-page">
-        <header className="admin-page-header">
-          <Link to="/admin/images" className="back-link">
-            <ArrowLeft size={18} />
-            Back to Image Management
-          </Link>
-          <h1 className="admin-page-title">Cruise Line Images</h1>
-          <p className="admin-page-subtitle">Manage logos, heroes, and cards for all {cruiseLines.length} cruise lines</p>
-        </header>
+        {!selectedCruiseLine ? (
+          // Cruise Line Selection
+          <>
+            <header className="admin-page-header">
+              <Link to="/admin/images" className="back-link">
+                <ArrowLeft size={18} />
+                Back to Image Management
+              </Link>
+              <h1 className="admin-page-title">Cruise Lines & Ships</h1>
+              <p className="admin-page-subtitle">Manage logos, heroes, cards, and ship images for all {cruiseLines.length} cruise lines</p>
+            </header>
 
-        {loading ? (
-          <div className="admin-loading">
-            <div className="admin-loading-spinner" />
-            <p>Loading cruise lines...</p>
-          </div>
-        ) : !selectedCruiseLine ? (
-          <div className="entity-grid">
-            {[...cruiseLines]
-              .sort((a, b) => {
-                const nameA = (a.name || '').toLowerCase();
-                const nameB = (b.name || '').toLowerCase();
-                return nameA.localeCompare(nameB);
-              })
-              .map(cl => (
-              <button
-                key={cl.slug}
-                className="entity-card"
-                onClick={() => setSelectedCruiseLine(cl)}
-              >
-                <div className="entity-card-header">
-                  <h3>{cl.name}</h3>
-                  <StatusIndicator status={getCruiseLineStatus(cl.slug)} size="small" />
-                </div>
-                <p className="entity-card-stats">
-                  <span className={images[cl.slug]?.logo ? 'stat-ok' : 'stat-missing'}>Logo</span>
-                  <span className={images[cl.slug]?.hero ? 'stat-ok' : 'stat-missing'}>Hero</span>
-                  <span className={images[cl.slug]?.card ? 'stat-ok' : 'stat-missing'}>Card</span>
-                </p>
-              </button>
-            ))}
-          </div>
-        ) : (
+            {loading ? (
+              <div className="admin-loading">
+                <div className="admin-loading-spinner" />
+                <p>Loading cruise lines...</p>
+              </div>
+            ) : (
+              <div className="entity-grid">
+                {[...cruiseLines]
+                  .sort((a, b) => {
+                    const nameA = (a.name || '').toLowerCase();
+                    const nameB = (b.name || '').toLowerCase();
+                    return nameA.localeCompare(nameB);
+                  })
+                  .map(cl => (
+                  <button
+                    key={cl.slug}
+                    className="entity-card"
+                    onClick={() => setSelectedCruiseLine(cl)}
+                  >
+                    <div className="entity-card-header">
+                      <h3>{cl.name}</h3>
+                      <StatusIndicator status={getCruiseLineStatus(cl.slug)} size="small" />
+                    </div>
+                    <p className="entity-card-stats">
+                      <span className={images[cl.slug]?.logo ? 'stat-ok' : 'stat-missing'}>Logo</span>
+                      <span className={images[cl.slug]?.hero ? 'stat-ok' : 'stat-missing'}>Hero</span>
+                      <span className={images[cl.slug]?.card ? 'stat-ok' : 'stat-missing'}>Card</span>
+                      {cl.fleet && cl.fleet.length > 0 && (
+                        <span style={{ marginLeft: 'auto', color: 'var(--admin-text-muted)' }}>
+                          <Ship size={12} style={{ marginRight: '4px', verticalAlign: 'middle' }} />
+                          {cl.fleet.length}
+                        </span>
+                      )}
+                    </p>
+                  </button>
+                ))}
+              </div>
+            )}
+          </>
+        ) : !selectedShip ? (
+          // Cruise Line Detail (General Images + Ships List)
           <div className="entity-detail">
             <button className="back-btn" onClick={() => setSelectedCruiseLine(null)}>
               <ArrowLeft size={16} /> Back to Cruise Lines
@@ -147,6 +194,10 @@ function AdminCruiseLineImages() {
             
             <h2 className="entity-detail-title">{selectedCruiseLine.name}</h2>
             
+            {/* General Images */}
+            <h3 style={{ color: 'var(--admin-text)', fontSize: '1.25rem', marginBottom: '1rem', marginTop: '1.5rem' }}>
+              General Images
+            </h3>
             <div className="images-list">
               <div className="admin-card image-card">
                 <div className="image-card-header">
@@ -220,6 +271,113 @@ function AdminCruiseLineImages() {
                 />
               </div>
             </div>
+
+            {/* Ships Section */}
+            {selectedCruiseLine.fleet && selectedCruiseLine.fleet.length > 0 && (
+              <>
+                <h3 style={{ color: 'var(--admin-text)', fontSize: '1.25rem', marginTop: '3rem', marginBottom: '1rem' }}>
+                  <Ship size={20} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
+                  Ships ({selectedCruiseLine.fleet.length})
+                </h3>
+                <div className="entity-grid">
+                  {[...selectedCruiseLine.fleet]
+                    .sort((a, b) => {
+                      const nameA = (a.name || '').toLowerCase();
+                      const nameB = (b.name || '').toLowerCase();
+                      return nameA.localeCompare(nameB);
+                    })
+                    .map(ship => {
+                      const shipSlug = ship.slug || ship.name.toLowerCase().replace(/\s+/g, '-');
+                      return (
+                        <button
+                          key={shipSlug}
+                          className="entity-card"
+                          onClick={() => setSelectedShip(ship)}
+                        >
+                          <div className="entity-card-header">
+                            <h3>{ship.name}</h3>
+                            <StatusIndicator status={getShipStatus(selectedCruiseLine.slug, ship)} size="small" />
+                          </div>
+                        </button>
+                      );
+                    })}
+                </div>
+              </>
+            )}
+          </div>
+        ) : (
+          // Ship Detail (Gallery Images)
+          <div className="entity-detail">
+            <button className="back-btn" onClick={() => setSelectedShip(null)}>
+              <ArrowLeft size={16} /> Back to {selectedCruiseLine.name}
+            </button>
+
+            <h2 className="entity-detail-title">{selectedShip.name}</h2>
+            <p style={{ color: 'var(--admin-text-muted)', marginBottom: '1.5rem' }}>{selectedCruiseLine.name}</p>
+
+            {(() => {
+              const shipSlug = selectedShip.slug || selectedShip.name.toLowerCase().replace(/\s+/g, '-');
+              const shipEntityId = `${selectedCruiseLine.slug}/ships/${shipSlug}`;
+              const shipImgs = shipImages[shipEntityId] || {};
+
+              return (
+                <div className="images-list">
+                  <h3 style={{ color: 'var(--admin-text)', marginBottom: '1rem' }}>Required Gallery Images</h3>
+                  {REQUIRED_SHIP_GALLERY.map(type => (
+                    <div key={type} className="admin-card image-card">
+                      <div className="image-card-header">
+                        <div className="image-card-title">
+                          <h3>{type.charAt(0).toUpperCase() + type.slice(1)}</h3>
+                          <span className="badge badge-required">Required</span>
+                        </div>
+                        <StatusIndicator 
+                          status={shipImgs[type] ? 'pass' : 'missing'} 
+                          size="small" 
+                        />
+                      </div>
+                      <p className="image-card-specs">Recommended: 1200×800px, WebP format</p>
+                      <ImageUpload
+                        bucket={STORAGE_BUCKETS.CRUISE_LINES}
+                        entityType="ship"
+                        entityId={shipEntityId}
+                        imageType={type}
+                        suggestedAltText={`${selectedShip.name} ${type}`}
+                        existingImage={shipImgs[type]?.url}
+                        existingData={shipImgs[type]}
+                        onUploadComplete={loadImages}
+                      />
+                    </div>
+                  ))}
+
+                  <h3 style={{ color: 'var(--admin-text)', margin: '2rem 0 1rem' }}>Optional Gallery Images</h3>
+                  {OPTIONAL_SHIP_GALLERY.map(type => (
+                    <div key={type} className="admin-card image-card">
+                      <div className="image-card-header">
+                        <div className="image-card-title">
+                          <h3>{type.charAt(0).toUpperCase() + type.slice(1)}</h3>
+                          <span className="badge badge-optional">Optional</span>
+                        </div>
+                        <StatusIndicator 
+                          status={shipImgs[type] ? 'pass' : 'missing'} 
+                          size="small" 
+                        />
+                      </div>
+                      <p className="image-card-specs">Recommended: 1200×800px, WebP format</p>
+                      <ImageUpload
+                        bucket={STORAGE_BUCKETS.CRUISE_LINES}
+                        entityType="ship"
+                        entityId={shipEntityId}
+                        imageType={type}
+                        suggestedAltText={`${selectedShip.name} ${type}`}
+                        existingImage={shipImgs[type]?.url}
+                        existingData={shipImgs[type]}
+                        onUploadComplete={loadImages}
+                      />
+                    </div>
+                  ))}
+                </div>
+              );
+            })()}
           </div>
         )}
       </div>
@@ -265,6 +423,7 @@ function AdminCruiseLineImages() {
           gap: 0.5rem;
           margin: 0;
           font-size: 0.75rem;
+          align-items: center;
         }
 
         .entity-card-stats span {

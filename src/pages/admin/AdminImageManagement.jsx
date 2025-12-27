@@ -139,21 +139,17 @@ function AdminImageManagement() {
     },
     {
       id: 'cruiseLines',
-      title: 'Cruise Lines',
-      description: '57 cruise lines with logos, heroes, and cards',
+      title: 'Cruise Lines & Ships',
+      description: '57 cruise lines with logos, heroes, cards, and ship galleries',
       icon: Anchor,
       path: '/admin/images/cruise-lines',
-      stats: stats.cruiseLines,
+      stats: { 
+        total: stats.cruiseLines.total + stats.ships.total,
+        compliant: stats.cruiseLines.compliant + stats.ships.compliant,
+        warnings: stats.cruiseLines.warnings + stats.ships.warnings,
+        missing: stats.cruiseLines.missing + stats.ships.missing
+      },
       color: '#8b5cf6'
-    },
-    {
-      id: 'ships',
-      title: 'Ships',
-      description: 'Ship images and gallery photos',
-      icon: Ship,
-      path: '/admin/images/ships',
-      stats: stats.ships,
-      color: '#f59e0b'
     },
     {
       id: 'categories',
