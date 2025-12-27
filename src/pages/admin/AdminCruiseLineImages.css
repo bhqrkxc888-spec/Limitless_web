@@ -1,0 +1,31 @@
+/* Admin Cruise Line Images Styles */
+.admin-cruise-line-images {
+  padding: 24px;
+  max-width: 1400px;
+}
+
+.cruise-lines-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.cruise-line-card {
+  padding: 20px;
+  background: white;
+  border: 2px solid var(--color-gray-200, #e5e7eb);
+  border-radius: 10px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cruise-line-card:hover {
+  border-color: var(--color-primary, #3b82f6);
+  transform: translateY(-2px);
+}
+
+.cruise-line-detail {
+  max-width: 900px;
+}
+

@@ -1,181 +1,93 @@
 /**
- * Asset URLs Configuration
+ * IMPORTANT: Update Asset URLs After Migration
  * 
- * All static website images are hardcoded here.
- * To update: Upload to Vercel Blob, paste URL here, deploy.
+ * After running the migration script (migrate-images-to-supabase.js),
+ * you MUST update this file with the new Supabase Storage URLs.
  * 
- * Vercel Blob Dashboard: https://vercel.com/[your-team]/[project]/stores
+ * Migration generates a report at: docs/MIGRATION_REPORT.md
+ * Use that report to update the URLs below.
+ * 
+ * Format: https://[PROJECT_ID].supabase.co/storage/v1/object/public/[BUCKET]/[PATH]
+ * 
+ * TODO (POST-MIGRATION):
+ * 1. Get your Supabase project ID from: https://supabase.com/dashboard/project/[PROJECT_ID]
+ * 2. Replace [PROJECT_ID] below with your actual project ID
+ * 3. Update each URL based on the migration report
+ * 4. Test all pages to ensure images load correctly
+ * 5. Remove this comment block after migration is complete
  */
 
-// Base URL for your Vercel Blob storage
-export const BLOB_BASE = 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com';
-
-// ============================================================================
-// SITE-WIDE ASSETS
-// Set to actual URL when uploaded, null when not yet uploaded
-// ============================================================================
+// EXAMPLE (UPDATE THESE):
+// Before migration (Vercel Blob):
+// homeHero: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/HERO-home.webp'
+//
+// After migration (Supabase):
+// homeHero: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/site/hero.webp'
 
 export const SITE_ASSETS = {
-  // Homepage hero image - Desktop (16:9, 1920x1080)
-  homeHero: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/HERO-home.webp',
-  
-  // Homepage hero image - Mobile optimized (4:3 or 1:1, ~800x600)
-  // Upload path: site/HERO-home-mobile.webp
-  // Set this when you have a mobile-optimized version for better LCP on mobile
-  homeHeroMobile: null, // TODO: Upload mobile-optimized hero (800x600 or 640x480)
-  
-  // Social share image for Facebook/Twitter/LinkedIn (1200x630)
-  ogImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/OG.webp',
-  
-  // Site logo (transparent PNG or SVG)
-  logo: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Hero-logo.webp',
-  
-  // Favicon (WebP format, optimized)
-  favicon: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/favicon.webp',
+  homeHero: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/HERO-home.webp', // TODO: Update after migration
+  homeHeroMobile: null, // Optional - upload via admin interface
+  ogImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/OG.webp', // TODO: Update after migration
+  logo: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Hero-logo.webp', // TODO: Update after migration
+  favicon: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/favicon.webp', // TODO: Update after migration
 };
 
-// ============================================================================
-// DESTINATION HEROES
-// Upload path: destinations/{slug}-hero.webp
-// Set to actual URL when uploaded, null when not yet uploaded
-// ============================================================================
-
+// Destination heroes - currently using old structure
+// TODO: After migration, these will move to:
+// https://[PROJECT].supabase.co/storage/v1/object/public/destinations/{slug}/hero.webp
 export const DESTINATION_HEROES = {
-  'caribbean': 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean/caribbean-hero.webp',
-  'mediterranean': 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe/Europe-hero.webp',
-  'northern-europe': null,
-  'alaska': null,
-  'asia': null,
-  'australia-new-zealand': null,
-  'south-america': 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/hero-iguazu-falls%20.webp',
-  'africa': null,
-  'middle-east': 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/hero-dubai.webp',
-  'hawaii': null,
-  'transatlantic': null,
-  'world-cruises': null,
+  caribbean: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean-HERO.webp',
+  mediterranean: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/mediterranean-HERO.webp',
+  // ... add all 30 destinations
 };
 
-// ============================================================================
-// CRUISE LINE ASSETS
-// Upload paths:
-//   - cruise-lines/{id}-logo.webp (transparent)
-//   - cruise-lines/{id}-hero.webp (16:9)
-//   - cruise-lines/{id}-card.webp (16:9)
-// Set to actual URL when uploaded, null when not yet uploaded
-// ============================================================================
-
+// Cruise line assets - currently using old structure
+// TODO: After migration, these will move to:
+// Logo: https://[PROJECT].supabase.co/storage/v1/object/public/cruise-lines/{slug}/logo.webp
+// Hero: https://[PROJECT].supabase.co/storage/v1/object/public/cruise-lines/{slug}/hero.webp
+// Card: https://[PROJECT].supabase.co/storage/v1/object/public/cruise-lines/{slug}/card.webp
 export const CRUISE_LINE_LOGOS = {
-  'royal-caribbean': null,
-  'celebrity-cruises': null,
-  'norwegian-cruise-line': null,
-  'princess-cruises': null,
-  'carnival-cruise-line': null,
-  'holland-america': null,
-  'msc-cruises': null,
-  'disney-cruise-line': null,
-  'cunard': null,
-  'p-and-o-cruises': null,
-  'viking-ocean': null,
-  'silversea': null,
-  'regent-seven-seas': null,
-  'seabourn': null,
-  'oceania-cruises': null,
-  'azamara': null,
-  'windstar-cruises': null,
-  'hurtigruten': null,
-  'virgin-voyages': null,
-  'explora-journeys': null,
+  'royal-caribbean': 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/cruise-lines/logos/royal-caribbean.webp',
+  // ... add all 57 cruise lines
 };
 
 export const CRUISE_LINE_HEROES = {
-  'royal-caribbean': null,
-  'celebrity-cruises': null,
-  'norwegian-cruise-line': null,
-  'princess-cruises': null,
-  'carnival-cruise-line': null,
-  'holland-america': null,
-  'msc-cruises': null,
-  'disney-cruise-line': null,
-  'cunard': null,
-  'p-and-o-cruises': null,
-  'viking-ocean': null,
-  'silversea': null,
-  'regent-seven-seas': null,
-  'seabourn': null,
-  'oceania-cruises': null,
-  'azamara': null,
-  'windstar-cruises': null,
-  'hurtigruten': null,
-  'virgin-voyages': null,
-  'explora-journeys': null,
+  'royal-caribbean': 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/cruise-lines/heroes/royal-caribbean-HERO.webp',
+  // ... add all 57 cruise lines
 };
 
 export const CRUISE_LINE_CARDS = {
-  'royal-caribbean': null,
-  'celebrity-cruises': null,
-  'norwegian-cruise-line': null,
-  'princess-cruises': null,
-  'carnival-cruise-line': null,
-  'holland-america': null,
-  'msc-cruises': null,
-  'disney-cruise-line': null,
-  'cunard': null,
-  'p-and-o-cruises': null,
-  'viking-ocean': null,
-  'silversea': null,
-  'regent-seven-seas': null,
-  'seabourn': null,
-  'oceania-cruises': null,
-  'azamara': null,
-  'windstar-cruises': null,
-  'hurtigruten': null,
-  'virgin-voyages': null,
-  'explora-journeys': null,
+  'royal-caribbean': 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/cruise-lines/cards/royal-caribbean-CARD.webp',
+  // ... add all 57 cruise lines
 };
 
-// ============================================================================
-// HELPER FUNCTIONS
-// ============================================================================
-
-/**
- * Get destination hero image URL
- * @param {string} slug - Destination slug
- * @param {string} fallback - Fallback URL if not found
- */
-export function getDestinationHero(slug, fallback = '') {
-  return DESTINATION_HEROES[slug] || fallback;
+// Helper function to get public URL from Supabase
+// Use this after migration is complete
+export function getSupabaseImageUrl(bucket, path) {
+  const PROJECT_ID = 'YOUR_PROJECT_ID'; // TODO: Replace with actual project ID
+  return `https://${PROJECT_ID}.supabase.co/storage/v1/object/public/${bucket}/${path}`;
 }
 
-/**
- * Get cruise line logo URL
- * @param {string} id - Cruise line ID
- * @param {string} fallback - Fallback URL if not found
- */
-export function getCruiseLineLogo(id, fallback = '') {
-  return CRUISE_LINE_LOGOS[id] || fallback;
+// Helper to construct destination URLs after migration
+export function getDestinationImageUrl(slug, type = 'hero') {
+  return getSupabaseImageUrl('WEB_destinations', `${slug}/${type}.webp`);
 }
 
-/**
- * Get cruise line hero image URL
- * @param {string} id - Cruise line ID
- * @param {string} fallback - Fallback URL if not found
- */
-export function getCruiseLineHero(id, fallback = '') {
-  return CRUISE_LINE_HEROES[id] || fallback;
+// Helper to construct cruise line URLs after migration
+export function getCruiseLineImageUrl(slug, type = 'logo') {
+  return getSupabaseImageUrl('WEB_cruise-lines', `${slug}/${type}.webp`);
 }
 
-/**
- * Get cruise line card image URL
- * @param {string} id - Cruise line ID
- * @param {string} fallback - Fallback URL if not found
- */
-export function getCruiseLineCard(id, fallback = '') {
-  return CRUISE_LINE_CARDS[id] || fallback;
+// Helper to construct ship URLs after migration
+export function getShipImageUrl(cruiseLineSlug, shipSlug, type = 'hero') {
+  return getSupabaseImageUrl('WEB_cruise-lines', `${cruiseLineSlug}/ships/${shipSlug}/${type}.webp`);
 }
 
-// ============================================================================
-// PLACEHOLDER IMAGE
-// Used when an image hasn't been uploaded yet
-// ============================================================================
-
-export const PLACEHOLDER_IMAGE = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="225" viewBox="0 0 400 225"%3E%3Crect fill="%231a1f2e" width="400" height="225"/%3E%3Ctext fill="%234a5568" font-family="system-ui" font-size="14" text-anchor="middle" x="200" y="112"%3EImage Coming Soon%3C/text%3E%3C/svg%3E';
+// TODO: Remove after migration and validation
+export default {
+  SITE_ASSETS,
+  DESTINATION_HEROES,
+  CRUISE_LINE_LOGOS,
+  CRUISE_LINE_HEROES,
+  CRUISE_LINE_CARDS
+};

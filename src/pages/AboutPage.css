@@ -508,6 +508,34 @@
   gap: var(--space-4);
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: var(--space-8);
+}
+
+.cta-contact-links {
+  display: flex;
+  gap: var(--space-6);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-6);
+}
+
+.cta-contact-item {
+  color: white;
+  text-decoration: none;
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.cta-contact-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
 }
 
 /* ========================================

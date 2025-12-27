@@ -84,10 +84,16 @@ const AdminLighthouse = lazy(() => import('./pages/admin/AdminLighthouse'))
 const AdminSEO = lazy(() => import('./pages/admin/AdminSEO'))
 const AdminAnalytics = lazy(() => import('./pages/admin/AdminAnalytics'))
 const AdminSearchConsole = lazy(() => import('./pages/admin/AdminSearchConsole'))
-const AdminDestinationHeroes = lazy(() => import('./pages/admin/AdminDestinationHeroes'))
-const AdminWebsiteAssets = lazy(() => import('./pages/admin/AdminWebsiteAssets'))
 const AdminWebsiteDestinations = lazy(() => import('./pages/admin/AdminWebsiteDestinations'))
 const AdminOffersDebug = lazy(() => import('./pages/admin/AdminOffersDebug'))
+
+// Image Management
+const AdminImageManagement = lazy(() => import('./pages/admin/AdminImageManagement'))
+const AdminSiteImages = lazy(() => import('./pages/admin/AdminSiteImages'))
+const AdminDestinationImages = lazy(() => import('./pages/admin/AdminDestinationImages'))
+const AdminCruiseLineImages = lazy(() => import('./pages/admin/AdminCruiseLineImages'))
+const AdminShipImages = lazy(() => import('./pages/admin/AdminShipImages'))
+const AdminCategoryImages = lazy(() => import('./pages/admin/AdminCategoryImages'))
 
 // Legal Pages
 const WebsiteTerms = lazy(() => import('./pages/WebsiteTerms'))
@@ -141,15 +147,23 @@ function AppLayout() {
           {/* Admin Monitoring Dashboard */}
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/destination-heroes" element={<AdminDestinationHeroes />} />
           <Route path="/admin/errors" element={<AdminErrors />} />
           <Route path="/admin/lighthouse" element={<AdminLighthouse />} />
           <Route path="/admin/analytics" element={<AdminAnalytics />} />
           <Route path="/admin/search-console" element={<AdminSearchConsole />} />
           <Route path="/admin/seo" element={<AdminSEO />} />
+          
+          {/* Image Management */}
+          <Route path="/admin/images" element={<AdminImageManagement />} />
+          <Route path="/admin/images/site" element={<AdminSiteImages />} />
+          <Route path="/admin/images/destinations" element={<AdminDestinationImages />} />
+          <Route path="/admin/images/cruise-lines" element={<AdminCruiseLineImages />} />
+          <Route path="/admin/images/ships" element={<AdminShipImages />} />
+          <Route path="/admin/images/categories" element={<AdminCategoryImages />} />
+          
           {/* Admin Website Section */}
-          <Route path="/admin/website/assets" element={<AdminWebsiteAssets />} />
           <Route path="/admin/website/destinations" element={<AdminWebsiteDestinations />} />
+          <Route path="/admin/offers-debug" element={<AdminOffersDebug />} />
         </Routes>
       </Suspense>
     );

@@ -3,12 +3,22 @@
  * Centralized configuration for Supabase buckets, tables, and policies
  */
 
-// Storage bucket names
+// Storage bucket names (Perfect naming structure with prefixes)
 export const STORAGE_BUCKETS = {
-  CRUISE_LINES: 'cruise-lines',
-  DESTINATIONS: 'destinations',
-  CATEGORIES: 'categories',
-  PRICE_MATCH_DOCS: 'price-match-documents'
+  // Website static images
+  CRUISE_LINES: 'WEB_cruise-lines',
+  DESTINATIONS: 'WEB_destinations',
+  SITE: 'WEB_site', // Site-wide assets (home hero, logo, favicon, about page images)
+  CATEGORIES: 'WEB_categories', // Category card images
+  
+  // CMS content
+  OFFERS: 'CMS_offers',
+  GUIDES: 'CMS_guides',
+  TRAVEL_NEWS: 'CMS_travel-news',
+  
+  // CRM (if needed from website)
+  CRM_ASSETS: 'CRM_assets',
+  PRICE_MATCH_DOCS: 'CRM_price-match-documents'
 };
 
 // Database table names (website-specific to avoid conflicts with CRM)

@@ -8,6 +8,7 @@ export const siteConfig = {
   email: 'travel@limitlesscruises.com',
   address: '51 Fairfields Way, Aston, Sheffield, S26 2HB',
   facebook: 'https://www.facebook.com/profile.php?id=61570469572535',
+  personalFacebook: 'https://www.facebook.com/profile.php?id=100089180896967',
   linkedin: 'https://www.linkedin.com/company/limitless-cruises/',
   youtube: 'https://www.youtube.com/@LimitlessCruises',
   

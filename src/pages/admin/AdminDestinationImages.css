@@ -1,0 +1,80 @@
+/* Admin Destination Images Styles */
+.admin-destination-images {
+  padding: 24px;
+  max-width: 1400px;
+}
+
+.destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.destination-card {
+  padding: 20px;
+  background: white;
+  border: 2px solid var(--color-gray-200, #e5e7eb);
+  border-radius: 10px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.destination-card:hover {
+  border-color: var(--color-primary, #3b82f6);
+  transform: translateY(-2px);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.card-stats {
+  margin: 0;
+  font-size: 13px;
+  color: var(--color-gray-600, #4b5563);
+}
+
+.destination-detail {
+  max-width: 900px;
+}
+
+.back-btn {
+  margin-bottom: 20px;
+  padding: 8px 16px;
+  background: white;
+  border: 1px solid var(--color-gray-300, #d1d5db);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.upload-sections {
+  display: grid;
+  gap: 32px;
+}
+
+.upload-section {
+  padding: 24px;
+  background: white;
+  border: 1px solid var(--color-gray-200, #e5e7eb);
+  border-radius: 12px;
+}
+
+.upload-section.optional {
+  background: var(--color-gray-50, #f9fafb);
+}
+
+.upload-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+}
+

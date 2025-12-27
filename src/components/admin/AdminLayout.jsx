@@ -76,8 +76,8 @@ function AdminLayout({ children, onLogout, lastUpdated, onRefresh, isRefreshing 
     { path: '/admin/search-console', icon: BarChart3, label: 'Search Console' },
     { path: '/admin/seo', icon: Search, label: 'SEO' },
     { type: 'divider' },
-    { type: 'section', label: 'Website' },
-    { path: '/admin/website/assets', icon: Image, label: 'Assets' },
+    { type: 'section', label: 'Content' },
+    { path: '/admin/images', icon: Image, label: 'Image Management' },
     { path: '/admin/website/destinations', icon: MapPin, label: 'Destinations' }
   ];
 

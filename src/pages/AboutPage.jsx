@@ -1,5 +1,6 @@
 import { aboutImages } from '../utils/imageHelpers';
 import { Button } from '../components/ui';
+import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
 import OptimizedImage from '../components/OptimizedImage';
@@ -290,6 +291,17 @@ function AboutPage() {
               <Button to="/contact" variant="secondary" size="lg">
                 Get in Touch
               </Button>
+            </div>
+            <div className="cta-contact-links">
+              <a href={`tel:${siteConfig.phone}`} className="cta-contact-item">
+                📞 {siteConfig.phone}
+              </a>
+              <a href={siteConfig.whatsappUrl} target="_blank" rel="noopener noreferrer" className="cta-contact-item">
+                💬 WhatsApp
+              </a>
+              <a href={siteConfig.personalFacebook} target="_blank" rel="noopener noreferrer" className="cta-contact-item">
+                💌 Message Katherine
+              </a>
             </div>
           </div>
         </div>
