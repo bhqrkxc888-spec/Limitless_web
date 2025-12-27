@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useEffect, lazy, Suspense } from 'react'
 import { analyzePageSEO } from './services/seoMonitoring'
 
