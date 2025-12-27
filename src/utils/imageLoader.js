@@ -7,6 +7,7 @@
 import { supabase, getPublicUrl } from '../lib/supabase';
 import { getDestinationImageUrl, getBucketListImageUrl, getCruiseLineImageUrl } from '../config/assetUrls';
 import { PLACEHOLDER_IMAGE } from '../config/assetUrls';
+import { getDestinationForBucketList } from '../config/bucketListDestinationMapping';
 
 // Cache for image URLs to avoid repeated queries
 const imageCache = new Map();
@@ -73,12 +74,42 @@ export async function getDestinationImage(slug, type = 'hero') {
 }
 
 /**
- * Get bucket list image URL (checks database first, then falls back)
+ * Get bucket list image URL (checks database first, then falls back to destination images)
  * Note: bucket-list uses 'id' as entityId in database, not slug
+ * Some bucket list experiences share images with destinations
  */
 export async function getBucketListImage(id, type = 'hero') {
-  const fallback = getBucketListImageUrl(id, type);
-  return getImageUrlFromDb('bucket-list', id, type, fallback);
+  if (!id) return PLACEHOLDER_IMAGE;
+  
+  // First try bucket list images
+  const bucketListFallback = getBucketListImageUrl(id, type);
+  const bucketListUrl = await getImageUrlFromDb('bucket-list', id, type, null);
+  
+  // If found in bucket list, return it
+  if (bucketListUrl && bucketListUrl !== PLACEHOLDER_IMAGE) {
+    return bucketListUrl;
+  }
+  
+  // Check if we can use destination images (image sharing)
+  const destinationSlug = getDestinationForBucketList(id);
+  
+  if (destinationSlug) {
+    const destinationFallback = getDestinationImageUrl(destinationSlug, type);
+    const destinationUrl = await getImageUrlFromDb('destination', destinationSlug, type, null);
+    
+    // If found in destination, return it
+    if (destinationUrl && destinationUrl !== PLACEHOLDER_IMAGE) {
+      return destinationUrl;
+    }
+    
+    // Fallback to constructed destination URL
+    if (destinationFallback && destinationFallback !== PLACEHOLDER_IMAGE) {
+      return destinationFallback;
+    }
+  }
+  
+  // Final fallback to bucket list constructed URL or placeholder
+  return bucketListFallback || PLACEHOLDER_IMAGE;
 }
 
 /**

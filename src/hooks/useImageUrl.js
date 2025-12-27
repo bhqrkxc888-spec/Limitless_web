@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 import { getImageUrlFromDb } from '../utils/imageLoader';
 import { getDestinationImageUrl, getBucketListImageUrl, getCruiseLineImageUrl } from '../config/assetUrls';
 import { PLACEHOLDER_IMAGE } from '../config/assetUrls';
+import { getDestinationForBucketList } from '../config/bucketListDestinationMapping';
 
 /**
  * Hook to get destination image URL
@@ -42,6 +43,7 @@ export function useDestinationImage(slug, type = 'hero') {
 /**
  * Hook to get bucket list image URL
  * Note: bucket-list uses 'id' as entityId in database, not slug
+ * Automatically checks destination images if bucket list image not found (image sharing)
  */
 export function useBucketListImage(id, type = 'hero') {
   const [imageUrl, setImageUrl] = useState(PLACEHOLDER_IMAGE);
@@ -54,16 +56,34 @@ export function useBucketListImage(id, type = 'hero') {
       return;
     }
 
-    const fallback = getBucketListImageUrl(id, type);
-    setImageUrl(fallback); // Set fallback immediately
+    const bucketListFallback = getBucketListImageUrl(id, type);
+    setImageUrl(bucketListFallback); // Set fallback immediately
     
-    getImageUrlFromDb('bucket-list', id, type, fallback)
+    // First try bucket list images
+    getImageUrlFromDb('bucket-list', id, type, null)
+      .then(bucketListUrl => {
+        // If found in bucket list, use it
+        if (bucketListUrl && bucketListUrl !== PLACEHOLDER_IMAGE) {
+          setImageUrl(bucketListUrl);
+          setLoading(false);
+          return;
+        }
+        
+        // Check if we can use destination images (image sharing)
+        const destinationSlug = getDestinationForBucketList(id);
+        if (destinationSlug) {
+          const destinationFallback = getDestinationImageUrl(destinationSlug, type);
+          return getImageUrlFromDb('destination', destinationSlug, type, destinationFallback);
+        }
+        
+        return bucketListFallback;
+      })
       .then(url => {
-        setImageUrl(url);
+        setImageUrl(url || bucketListFallback);
         setLoading(false);
       })
       .catch(() => {
-        setImageUrl(fallback);
+        setImageUrl(bucketListFallback);
         setLoading(false);
       });
   }, [id, type]);
