@@ -8,19 +8,8 @@ import ImageUpload from '../../components/admin/ImageUpload';
 import StatusIndicator from '../../components/admin/StatusIndicator';
 import { supabase, getPublicUrl } from '../../lib/supabase';
 import { STORAGE_BUCKETS } from '../../config/supabaseConfig';
+import { getCruiseLinesForDestination } from '../../config/destinationCruiseLines';
 import './AdminImagesShared.css';
-
-// Featured cruise lines to show as dedicated image slots
-const FEATURED_CRUISE_LINES = [
-  { slug: 'p-and-o-cruises', name: 'P&O Cruises', shortName: 'P&O' },
-  { slug: 'royal-caribbean', name: 'Royal Caribbean', shortName: 'Royal Caribbean' },
-  { slug: 'norwegian-cruise-line', name: 'Norwegian Cruise Line', shortName: 'NCL' },
-  { slug: 'msc-cruises', name: 'MSC Cruises', shortName: 'MSC' },
-  { slug: 'celebrity-cruises', name: 'Celebrity Cruises', shortName: 'Celebrity' },
-  { slug: 'princess-cruises', name: 'Princess Cruises', shortName: 'Princess' },
-  { slug: 'cunard-cruises', name: 'Cunard', shortName: 'Cunard' },
-  { slug: 'viking-ocean-cruises', name: 'Viking Ocean', shortName: 'Viking' },
-];
 
 function AdminDestinationImages() {
   const navigate = useNavigate();
@@ -226,61 +215,70 @@ function AdminDestinationImages() {
                 />
               </div>
 
-              {/* Cruise Line Specific Cards */}
-              <div style={{
-                background: 'var(--admin-bg-secondary)',
-                border: '1px solid var(--admin-border)',
-                borderRadius: '12px',
-                padding: '1.5rem',
-                marginTop: '1rem'
-              }}>
-                <h3 style={{
-                  fontSize: '1rem',
-                  fontWeight: 600,
-                  color: 'var(--admin-text)',
-                  marginBottom: '0.5rem'
-                }}>
-                  Cruise Line Specific Cards
-                </h3>
-                <p style={{
-                  fontSize: '0.875rem',
-                  color: 'var(--admin-text-muted)',
-                  marginBottom: '1.5rem',
-                  lineHeight: '1.5'
-                }}>
-                  Upload different images for each cruise line's destination grid. 
-                  For example: P&O's Caribbean card can show a British Virgin Islands scene, 
-                  while Royal Caribbean's shows Nassau, Bahamas.
-                </p>
-
-                {FEATURED_CRUISE_LINES.map((cruiseLine) => (
-                  <div key={cruiseLine.slug} className="admin-card image-card" style={{ marginBottom: '1rem' }}>
-                    <div className="image-card-header">
-                      <div className="image-card-title">
-                        <h3>{cruiseLine.shortName} Card</h3>
-                        <span className="badge badge-optional">Optional</span>
-                      </div>
-                      <StatusIndicator 
-                        status={images[selectedDestination.slug]?.[`card-${cruiseLine.slug}`] ? 'pass' : 'missing'} 
-                        size="small" 
-                      />
-                    </div>
-                    <p className="image-card-specs">
-                      Shown on {cruiseLine.name} destination grid • 600×400px, WebP
+              {/* Cruise Line Specific Cards - Only show lines that actually go to this destination */}
+              {(() => {
+                const cruiseLinesForDest = getCruiseLinesForDestination(selectedDestination.slug);
+                
+                if (cruiseLinesForDest.length === 0) {
+                  return null; // No cruise-line-specific cards for this destination
+                }
+                
+                return (
+                  <div style={{
+                    background: 'var(--admin-bg-secondary)',
+                    border: '1px solid var(--admin-border)',
+                    borderRadius: '12px',
+                    padding: '1.5rem',
+                    marginTop: '1rem'
+                  }}>
+                    <h3 style={{
+                      fontSize: '1rem',
+                      fontWeight: 600,
+                      color: 'var(--admin-text)',
+                      marginBottom: '0.5rem'
+                    }}>
+                      Cruise Line Specific Cards
+                    </h3>
+                    <p style={{
+                      fontSize: '0.875rem',
+                      color: 'var(--admin-text-muted)',
+                      marginBottom: '1.5rem',
+                      lineHeight: '1.5'
+                    }}>
+                      Only showing cruise lines that actually sail to {selectedDestination.name}. 
+                      Upload different images for each line to show variety on their destination grids.
                     </p>
-                    <ImageUpload
-                      bucket={STORAGE_BUCKETS.DESTINATIONS}
-                      entityType="destination"
-                      entityId={selectedDestination.slug}
-                      imageType={`card-${cruiseLine.slug}`}
-                      suggestedAltText={`${selectedDestination.name} cruise for ${cruiseLine.name}`}
-                      existingImage={images[selectedDestination.slug]?.[`card-${cruiseLine.slug}`]?.url}
-                      existingData={images[selectedDestination.slug]?.[`card-${cruiseLine.slug}`]}
-                      onUploadComplete={handleUploadComplete}
-                    />
+
+                    {cruiseLinesForDest.map((cruiseLine) => (
+                      <div key={cruiseLine.slug} className="admin-card image-card" style={{ marginBottom: '1rem' }}>
+                        <div className="image-card-header">
+                          <div className="image-card-title">
+                            <h3>{cruiseLine.shortName} Card</h3>
+                            <span className="badge badge-optional">Optional</span>
+                          </div>
+                          <StatusIndicator 
+                            status={images[selectedDestination.slug]?.[`card-${cruiseLine.slug}`] ? 'pass' : 'missing'} 
+                            size="small" 
+                          />
+                        </div>
+                        <p className="image-card-specs">
+                          Shown on {cruiseLine.name} destination grid • 600×400px, WebP
+                        </p>
+                        <ImageUpload
+                          bucket={STORAGE_BUCKETS.DESTINATIONS}
+                          entityType="destination"
+                          entityId={selectedDestination.slug}
+                          imageType={`card-${cruiseLine.slug}`}
+                          suggestedAltText={`${selectedDestination.name} cruise for ${cruiseLine.name}`}
+                          existingImage={images[selectedDestination.slug]?.[`card-${cruiseLine.slug}`]?.url}
+                          existingData={images[selectedDestination.slug]?.[`card-${cruiseLine.slug}`]}
+                          onUploadComplete={handleUploadComplete}
+                        />
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                );
+              })()}
 
               {/* General Gallery Images */}
               <div style={{

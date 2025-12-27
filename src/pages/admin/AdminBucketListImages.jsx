@@ -205,6 +205,52 @@ function AdminBucketListImages() {
             })}
           </div>
         )}
+
+        <style>{`
+          .entity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+          }
+
+          .entity-card {
+            background: var(--admin-bg-secondary);
+            border: 1px solid var(--admin-border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: block;
+            color: inherit;
+            text-decoration: none;
+          }
+
+          .entity-card:hover {
+            border-color: var(--admin-primary);
+            transform: translateY(-2px);
+          }
+
+          .entity-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+          }
+
+          .entity-card h3 {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--admin-text);
+          }
+
+          .entity-card-meta {
+            margin: 0;
+            font-size: 0.8125rem;
+            color: var(--admin-text-muted);
+          }
+        `}</style>
       </div>
     </AdminLayout>
   );

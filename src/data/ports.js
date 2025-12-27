@@ -598,7 +598,7 @@ export const ports = [
       'Try ginjinha (cherry liqueur) at the tiny bars near Rossio',
     ],
     
-    relatedDestinations: ['mediterranean-cruises', 'canary-islands-cruises', 'transatlantic-cruises'],
+    relatedDestinations: ['mediterranean-cruises', 'atlantic-islands-cruises', 'transatlantic-cruises'],
     
     meta: {
       title: 'Lisbon Cruise Port Guide | Pastéis de Belém, Tram 28 & Sintra',
@@ -708,7 +708,7 @@ export const ports = [
       'Teide is cold at altitude - bring a jacket even in summer',
     ],
     
-    relatedDestinations: ['canary-islands-cruises', 'transatlantic-cruises'],
+    relatedDestinations: ['atlantic-islands-cruises', 'transatlantic-cruises'],
     
     meta: {
       title: 'Tenerife Cruise Port Guide | Mount Teide & Beaches',
