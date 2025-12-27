@@ -229,8 +229,8 @@ function ImageUpload({
 
       setUploadProgress(50);
 
-      // Get public URL
-      const publicUrl = getPublicUrl(bucket, filePath);
+      // Get public URL with cache-busting parameter to force browser refresh
+      const publicUrl = `${getPublicUrl(bucket, filePath)}?t=${Date.now()}`;
 
       setUploadProgress(75);
 
@@ -283,14 +283,16 @@ function ImageUpload({
         URL.revokeObjectURL(previewRef.current);
       }
 
-      // Reset form
+      // Reset form with new image (force browser to reload with timestamp)
       setTimeout(() => {
         setFile(null);
         setValidationResult(null);
         setUploading(false);
         setUploadProgress(0);
-        setPreview(publicUrl);
-        previewRef.current = publicUrl;
+        // Add timestamp to force browser cache refresh
+        const urlWithTimestamp = publicUrl.includes('?') ? publicUrl : `${publicUrl}?t=${Date.now()}`;
+        setPreview(urlWithTimestamp);
+        previewRef.current = urlWithTimestamp;
       }, 1000);
 
     } catch (error) {
