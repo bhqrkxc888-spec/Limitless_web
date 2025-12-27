@@ -1,0 +1,112 @@
+# Vercel Blob Image URLs - Download List
+
+Copy these URLs to download images from Vercel Blob Storage.
+
+## Site-Wide Images
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/HERO-home.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/OG.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/home/hero.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/about/About1.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/about/About2.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/about/About3.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/about/HolidayEliteLogo.png
+
+## Cruise Type/Category Images
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Cruise%20Type/family.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Cruise%20Type/Adult-Only.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Cruise%20Type/no-fly.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Cruise%20Type/luxury.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Cruise%20Type/expedition.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe-river/danube-river.webp
+
+## Destination Images
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe/Med-coast.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean-HERO.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/mediterranean-HERO.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean/nassau-bahamas.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean/caribbean-1.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean/caribbean-2.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean/caribbean-3.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean/caribbean-4.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean/us-virgin-islands.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northernlights-hero.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/Northernlights.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/canary-islands/tenerife-beach.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/canary-islands/tenerife-tiede.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/canary-islands/canary-1.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Alaska/alaska-hero.jpg
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Baltics/Copenhagen.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Baltics/copenhagen-2.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Baltics/tallin-oldtown.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Baltics/tallin-skyline.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Baltics/Stockholm.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/British-islands/Scotland-1.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/British-islands/britishislands-1.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/British-islands/ireland.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/worldcruise-hero.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/worldcruise.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/grandvoyage.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/hawaii/hawaii.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Australia/Australia.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Australia/Great-barrier-reef.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Australia/westernaustralia.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Adriatic/Adriatic.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Scandanavia/scandanavia.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe/med-card.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/singapore/singapore.webp
+
+## Middle East Images
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/hero-dubai.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/Abu-Dhabi.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/muscat.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/Petra.webp
+
+## Japan Images
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Japan/japan-hero.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Japan/Japan-card.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Japan/DowntownTokyo%20.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Japan/southkorea.webp
+
+## Antarctica Images
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antarctica-hero.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/Northernlights.webp
+
+## Galapagos Images
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/galapagos/galapagos-hero.webp
+
+## South America Images
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/hero-iguazu-falls.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/Patagonian-glaciers.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/patagonia.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/Machu-Picchu.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/rio-christ.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/Rio-beech.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/city-in-Peru.webp
+
+## Pacific Images
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Pacific/NewZealand-hero.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/pacific/newzealand.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Pacific/Sydney.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Pacific/sydneybridge.webp
+
+## Iceland Images
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Iceland/iceland.webp
+
+## European River Images
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe-river/europe-river-hero.webp
+
+## Great Barrier Reef Images
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Greatbarrierreef/greatbarrierreef-hero.webp
+
+## Midnight Sun Images
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Midnight-sun/midnightsun-hero.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Midnight-sun/midnight-sun.webp
+
+## Canada Images
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Canada/rockymountains.webp
+
+## Cruise Line Images (Royal Caribbean - deprecated, use auto URLs)
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/cruise-lines/logos/royal-caribbean.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/cruise-lines/heroes/royal-caribbean-HERO.webp
+https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/cruise-lines/cards/royal-caribbean-CARD.webp
+

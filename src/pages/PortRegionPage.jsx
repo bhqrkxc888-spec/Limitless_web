@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { getRegionBySlug, getPortsByRegion, getAllRegions } from '../data/ports';
+import { getPortsByRegion, getAllRegions } from '../data/ports';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';

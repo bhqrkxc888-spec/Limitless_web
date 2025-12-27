@@ -273,37 +273,47 @@ function AdminCruiseLineImages() {
             </div>
 
             {/* Ships Section */}
-            {selectedCruiseLine.fleet && selectedCruiseLine.fleet.length > 0 && (
-              <>
-                <h3 style={{ color: 'var(--admin-text)', fontSize: '1.25rem', marginTop: '3rem', marginBottom: '1rem' }}>
-                  <Ship size={20} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
-                  Ships ({selectedCruiseLine.fleet.length})
-                </h3>
-                <div className="entity-grid">
-                  {[...selectedCruiseLine.fleet]
-                    .sort((a, b) => {
-                      const nameA = (a.name || '').toLowerCase();
-                      const nameB = (b.name || '').toLowerCase();
-                      return nameA.localeCompare(nameB);
-                    })
-                    .map(ship => {
-                      const shipSlug = ship.slug || ship.name.toLowerCase().replace(/\s+/g, '-');
-                      return (
-                        <button
-                          key={shipSlug}
-                          className="entity-card"
-                          onClick={() => setSelectedShip(ship)}
-                        >
-                          <div className="entity-card-header">
-                            <h3>{ship.name}</h3>
-                            <StatusIndicator status={getShipStatus(selectedCruiseLine.slug, ship)} size="small" />
-                          </div>
-                        </button>
-                      );
-                    })}
-                </div>
-              </>
-            )}
+            {(() => {
+              // Handle both 'fleet' (array of objects) and 'ships' (array of strings)
+              const shipList = selectedCruiseLine.fleet || 
+                (selectedCruiseLine.ships ? selectedCruiseLine.ships.map(name => ({ name })) : []);
+              
+              if (shipList.length === 0) return null;
+              
+              return (
+                <>
+                  <h3 style={{ color: 'var(--admin-text)', fontSize: '1.25rem', marginTop: '3rem', marginBottom: '1rem' }}>
+                    <Ship size={20} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
+                    Ships ({shipList.length})
+                  </h3>
+                  <div className="entity-grid">
+                    {[...shipList]
+                      .sort((a, b) => {
+                        const nameA = (typeof a === 'string' ? a : a.name || '').toLowerCase();
+                        const nameB = (typeof b === 'string' ? b : b.name || '').toLowerCase();
+                        return nameA.localeCompare(nameB);
+                      })
+                      .map(ship => {
+                        // Normalize: handle both string and object formats
+                        const shipObj = typeof ship === 'string' ? { name: ship } : ship;
+                        const shipSlug = shipObj.slug || shipObj.name.toLowerCase().replace(/\s+/g, '-');
+                        return (
+                          <button
+                            key={shipSlug}
+                            className="entity-card"
+                            onClick={() => setSelectedShip(shipObj)}
+                          >
+                            <div className="entity-card-header">
+                              <h3>{shipObj.name}</h3>
+                              <StatusIndicator status={getShipStatus(selectedCruiseLine.slug, shipObj)} size="small" />
+                            </div>
+                          </button>
+                        );
+                      })}
+                  </div>
+                </>
+              );
+            })()}
           </div>
         ) : (
           // Ship Detail (Gallery Images)

@@ -44,16 +44,25 @@ function ImageUpload({
   const [copied, setCopied] = useState(false);
   
   const fileInputRef = useRef(null);
+  const previewRef = useRef(null);
 
   // Update preview when existingImage changes (only if no file selected)
   useEffect(() => {
     if (!file && existingImage) {
-      // Clean up any previous blob URL
-      if (preview && preview.startsWith('blob:')) {
-        URL.revokeObjectURL(preview);
+      // Clean up previous blob URL if it exists
+      if (previewRef.current && previewRef.current.startsWith('blob:')) {
+        URL.revokeObjectURL(previewRef.current);
       }
       setPreview(existingImage);
+      previewRef.current = existingImage;
     }
+    
+    // Cleanup function to revoke blob URLs on unmount
+    return () => {
+      if (previewRef.current && previewRef.current.startsWith('blob:')) {
+        URL.revokeObjectURL(previewRef.current);
+      }
+    };
   }, [existingImage, file]);
 
   // Update alt text when suggested changes
@@ -90,8 +99,8 @@ function ImageUpload({
     if (!selectedFile) return;
 
     // Clean up previous object URL if it was a file preview (not existingImage)
-    if (preview && preview.startsWith('blob:')) {
-      URL.revokeObjectURL(preview);
+    if (previewRef.current && previewRef.current.startsWith('blob:')) {
+      URL.revokeObjectURL(previewRef.current);
     }
 
     setFile(selectedFile);
@@ -99,6 +108,7 @@ function ImageUpload({
     // Create preview
     const objectUrl = URL.createObjectURL(selectedFile);
     setPreview(objectUrl);
+    previewRef.current = objectUrl;
 
     // Validate image
     try {
@@ -267,8 +277,8 @@ function ImageUpload({
       });
 
       // Clean up object URL before resetting
-      if (preview && preview.startsWith('blob:')) {
-        URL.revokeObjectURL(preview);
+      if (previewRef.current && previewRef.current.startsWith('blob:')) {
+        URL.revokeObjectURL(previewRef.current);
       }
 
       // Reset form
@@ -278,6 +288,7 @@ function ImageUpload({
         setUploading(false);
         setUploadProgress(0);
         setPreview(publicUrl);
+        previewRef.current = publicUrl;
       }, 1000);
 
     } catch (error) {
@@ -294,12 +305,13 @@ function ImageUpload({
   // Clear selection
   const handleClear = () => {
     // Clean up object URL if it was a file preview
-    if (preview && preview.startsWith('blob:')) {
-      URL.revokeObjectURL(preview);
+    if (previewRef.current && previewRef.current.startsWith('blob:')) {
+      URL.revokeObjectURL(previewRef.current);
     }
     
     setFile(null);
     setPreview(existingImage);
+    previewRef.current = existingImage;
     setValidationResult(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';

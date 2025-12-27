@@ -8,7 +8,7 @@ import { Button, Card, SectionHeader, Accordion, DataTable } from '../components
 import NewsCard from '../components/NewsCard';
 import { useEffect, useState } from 'react';
 import { getOgImage } from '../utils/imageHelpers';
-import { getCruiseLineHero, getCruiseLineLogo } from '../utils/assetHelpers';
+import { getCruiseLineHero } from '../utils/assetHelpers';
 import './CruiseLinePage.css';
 
 /**

@@ -1,6 +1,6 @@
 /**
  * Admin Category Images Page
- * Manages 6 category card images (luxury, family, river, expedition, adults-only, budget)
+ * Manages cruise category card images matching cruiseTypes.js data
  */
 
 import { useState, useEffect, useCallback } from 'react';
@@ -12,16 +12,16 @@ import ImageUpload from '../../components/admin/ImageUpload';
 import StatusIndicator from '../../components/admin/StatusIndicator';
 import { supabase, getPublicUrl } from '../../lib/supabase';
 import { STORAGE_BUCKETS } from '../../config/supabaseConfig';
+import { getAllCruiseTypes } from '../../data/cruiseTypes';
 import './AdminImagesShared.css';
 
-const CATEGORIES = [
-  { id: 'luxury', label: 'Luxury Cruises' },
-  { id: 'family', label: 'Family Cruises' },
-  { id: 'river', label: 'River Cruises' },
-  { id: 'expedition', label: 'Expedition Cruises' },
-  { id: 'adults-only', label: 'Adults-Only Cruises' },
-  { id: 'budget', label: 'Budget Cruises' }
-];
+// Get categories from cruiseTypes data (only featured ones for admin management)
+const CATEGORIES = getAllCruiseTypes()
+  .filter(cat => cat.featured) // Only show featured categories in admin
+  .map(cat => ({
+    id: cat.id,
+    label: cat.name
+  }));
 
 function AdminCategoryImages() {
   const navigate = useNavigate();
@@ -100,7 +100,7 @@ function AdminCategoryImages() {
             Back to Image Management
           </Link>
           <h1 className="admin-page-title">Category Images</h1>
-          <p className="admin-page-subtitle">Manage card images for all 6 cruise categories</p>
+          <p className="admin-page-subtitle">Manage card images for all cruise categories</p>
         </header>
 
         {loading ? (
