@@ -59,17 +59,17 @@ export const DIMENSION_SPECS = {
   
   // Destination images
   'destination-hero': { width: 1920, height: 1080 },
-  'destination-card': { width: 400, height: 300 },
+  'destination-card': { width: 600, height: 400 },
   'destination-mobile': { width: 800, height: 600 },
   
   // Cruise line images
   'cruise-line-logo': { width: 400, height: 200 },
   'cruise-line-hero': { width: 1920, height: 1080 },
-  'cruise-line-card': { width: 400, height: 300 },
+  'cruise-line-card': { width: 600, height: 400 },
   
   // Ship images
   'ship-hero': { width: 1920, height: 800 },
-  'ship-card': { width: 400, height: 300 },
+  'ship-card': { width: 600, height: 400 },
   'ship-exterior': { width: 1920, height: 1080 },
   'ship-deck': { width: 1920, height: 1080 },
   'ship-suite': { width: 1920, height: 1080 },
@@ -80,7 +80,7 @@ export const DIMENSION_SPECS = {
   'ship-theater': { width: 1920, height: 1080 },
   
   // Category images
-  'category-card': { width: 400, height: 300 },
+  'category-card': { width: 600, height: 400 },
   
   // Team images
   'team-gallery': { width: 1200, height: 800 },

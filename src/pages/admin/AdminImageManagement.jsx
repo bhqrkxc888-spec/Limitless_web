@@ -28,6 +28,8 @@ function AdminImageManagement() {
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [showWarningsOnly, setShowWarningsOnly] = useState(false);
+  const [warningImages, setWarningImages] = useState([]);
 
   // Redirect if not authenticated
   useEffect(() => {
@@ -42,7 +44,7 @@ function AdminImageManagement() {
       // Query site_images table for stats
       const { data, error } = await supabase
         .from('site_images')
-        .select('entity_type, seo_compliant, validation_warnings');
+        .select('entity_type, seo_compliant, validation_warnings, entity_id, image_type, path');
 
       if (error) throw error;
 
@@ -54,6 +56,8 @@ function AdminImageManagement() {
         ships: { total: 0, compliant: 0, warnings: 0, missing: 0 },
         categories: { total: 0, compliant: 0, warnings: 0, missing: 0 },
       };
+
+      const imagesWithWarnings = [];
 
       data?.forEach(img => {
         const type = img.entity_type === 'cruise-line' ? 'cruiseLines' :
@@ -67,8 +71,16 @@ function AdminImageManagement() {
           if (img.seo_compliant) {
             newStats[type].compliant++;
           }
-          if (img.validation_warnings && JSON.parse(img.validation_warnings).length > 0) {
+          const warnings = img.validation_warnings ? JSON.parse(img.validation_warnings) : [];
+          if (warnings.length > 0) {
             newStats[type].warnings++;
+            imagesWithWarnings.push({
+              entityType: img.entity_type,
+              entityId: img.entity_id,
+              imageType: img.image_type,
+              path: img.path,
+              warnings
+            });
           }
         }
       });
@@ -80,6 +92,7 @@ function AdminImageManagement() {
       newStats.categories.missing = Math.max(0, 6 - newStats.categories.total);
 
       setStats(newStats);
+      setWarningImages(imagesWithWarnings);
       setLastUpdated(Date.now());
     } catch (error) {
       logger.error('Error loading stats:', error);
@@ -202,9 +215,18 @@ function AdminImageManagement() {
                 <div className="admin-stat-label">Compliant</div>
                 <div className="admin-stat-value success">{totalCompliant}</div>
               </div>
-              <div className="admin-stat-card">
+              <div 
+                className="admin-stat-card admin-stat-card-clickable" 
+                onClick={() => setShowWarningsOnly(!showWarningsOnly)}
+                style={{ cursor: 'pointer' }}
+              >
                 <div className="admin-stat-label">With Warnings</div>
                 <div className="admin-stat-value warning">{totalWarnings}</div>
+                {totalWarnings > 0 && (
+                  <div style={{ fontSize: '0.75rem', color: 'var(--admin-text-muted)', marginTop: '0.25rem' }}>
+                    Click to {showWarningsOnly ? 'hide' : 'view'}
+                  </div>
+                )}
               </div>
               <div className="admin-stat-card">
                 <div className="admin-stat-label">Missing</div>
@@ -215,6 +237,61 @@ function AdminImageManagement() {
                 <div className="admin-stat-value">{compliancePercentage}%</div>
               </div>
             </div>
+
+            {/* Warnings Detail View */}
+            {showWarningsOnly && warningImages.length > 0 && (
+              <div className="admin-card" style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                  <h3 style={{ margin: 0, color: 'var(--admin-text)' }}>Images with Warnings ({warningImages.length})</h3>
+                  <button 
+                    onClick={() => setShowWarningsOnly(false)}
+                    style={{
+                      background: 'var(--admin-bg-tertiary)',
+                      border: '1px solid var(--admin-border)',
+                      borderRadius: '6px',
+                      padding: '0.5rem 1rem',
+                      color: 'var(--admin-text)',
+                      cursor: 'pointer',
+                      fontSize: '0.875rem'
+                    }}
+                  >
+                    Close
+                  </button>
+                </div>
+                <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
+                  <table className="admin-table">
+                    <thead>
+                      <tr>
+                        <th>Type</th>
+                        <th>Entity</th>
+                        <th>Image</th>
+                        <th>Warnings</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {warningImages.map((img, idx) => (
+                        <tr key={idx}>
+                          <td style={{ textTransform: 'capitalize' }}>{img.entityType}</td>
+                          <td><code style={{ fontSize: '0.8rem' }}>{img.entityId || 'site'}</code></td>
+                          <td style={{ textTransform: 'capitalize' }}>{img.imageType}</td>
+                          <td>
+                            {img.warnings.map((warning, wIdx) => (
+                              <div key={wIdx} style={{ 
+                                fontSize: '0.875rem', 
+                                color: warning.severity === 'error' ? 'var(--admin-error)' : 'var(--admin-warning)',
+                                marginBottom: '0.25rem'
+                              }}>
+                                <strong>{warning.type.replace(/_/g, ' ')}:</strong> {warning.message}
+                              </div>
+                            ))}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
 
             {/* Category cards */}
             <div className="image-categories-grid">
