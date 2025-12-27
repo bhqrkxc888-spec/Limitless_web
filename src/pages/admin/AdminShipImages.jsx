@@ -4,11 +4,14 @@
  */
 
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 import { cruiseLines } from '../../data/cruiseLines';
 import ImageUpload from '../../components/admin/ImageUpload';
 import StatusIndicator from '../../components/admin/StatusIndicator';
 import { supabase, getPublicUrl } from '../../lib/supabase';
 import { STORAGE_BUCKETS } from '../../config/supabaseConfig';
+import './AdminImagesShared.css';
 import './AdminShipImages.css';
 
 const REQUIRED_GALLERY = ['exterior', 'deck', 'suite', 'dining'];
@@ -63,8 +66,12 @@ function AdminShipImages() {
 
   if (!selectedCruiseLine) {
     return (
-      <div className="admin-ship-images">
-        <div className="page-header">
+      <div className="admin-ship-images admin-images-page">
+        <div className="page-header-with-back">
+          <Link to="/admin/images" className="back-button">
+            <ArrowLeft size={20} />
+            <span>Back to Image Management</span>
+          </Link>
           <h1>Ship Images</h1>
           <p>Select a cruise line to manage ship images</p>
         </div>

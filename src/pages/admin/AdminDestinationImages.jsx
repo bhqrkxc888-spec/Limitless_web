@@ -4,11 +4,14 @@
  */
 
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 import { destinations } from '../../config/destinations';
 import ImageUpload from '../../components/admin/ImageUpload';
 import StatusIndicator from '../../components/admin/StatusIndicator';
 import { supabase, getPublicUrl } from '../../lib/supabase';
 import { STORAGE_BUCKETS } from '../../config/supabaseConfig';
+import './AdminImagesShared.css';
 import './AdminDestinationImages.css';
 
 function AdminDestinationImages() {
@@ -56,8 +59,12 @@ function AdminDestinationImages() {
   if (loading) return <div className="loading">Loading...</div>;
 
   return (
-    <div className="admin-destination-images">
-      <div className="page-header">
+    <div className="admin-destination-images admin-images-page">
+      <div className="page-header-with-back">
+        <Link to="/admin/images" className="back-button">
+          <ArrowLeft size={20} />
+          <span>Back to Image Management</span>
+        </Link>
         <h1>Destination Images</h1>
         <p>Manage hero and card images for all 30 destinations</p>
       </div>

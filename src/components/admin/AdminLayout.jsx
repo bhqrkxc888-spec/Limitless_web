@@ -22,7 +22,9 @@ import {
   FileText,
   ExternalLink,
   Activity,
-  ClipboardList
+  ClipboardList,
+  Moon,
+  Sun
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import './AdminLayout.css';
@@ -57,6 +59,19 @@ function AdminLayout({ children, onLogout, lastUpdated, onRefresh, isRefreshing 
   const navigate = useNavigate();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('adminTheme') || 'dark';
+  });
+
+  // Apply theme
+  useEffect(() => {
+    document.documentElement.setAttribute('data-admin-theme', theme);
+    localStorage.setItem('adminTheme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
 
   // Close sidebar on route change (mobile)
   useEffect(() => {
@@ -155,6 +170,14 @@ function AdminLayout({ children, onLogout, lastUpdated, onRefresh, isRefreshing 
             <span className="label">Last updated:</span>
             <span className="value">{formatLastUpdated()}</span>
           </div>
+          <button 
+            className="admin-theme-toggle"
+            onClick={toggleTheme}
+            title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          >
+            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+          </button>
           <a 
             href="/" 
             target="_blank" 

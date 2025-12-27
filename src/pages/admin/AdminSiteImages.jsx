@@ -4,10 +4,13 @@
  */
 
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 import ImageUpload from '../../components/admin/ImageUpload';
 import StatusIndicator from '../../components/admin/StatusIndicator';
 import { supabase, getPublicUrl } from '../../lib/supabase';
 import { STORAGE_BUCKETS } from '../../config/supabaseConfig';
+import './AdminImagesShared.css';
 import './AdminSiteImages.css';
 
 const SITE_IMAGES = [
@@ -58,8 +61,12 @@ function AdminSiteImages() {
   if (loading) return <div className="loading">Loading...</div>;
 
   return (
-    <div className="admin-site-images">
-      <div className="page-header">
+    <div className="admin-site-images admin-images-page">
+      <div className="page-header-with-back">
+        <Link to="/admin/images" className="back-button">
+          <ArrowLeft size={20} />
+          <span>Back to Image Management</span>
+        </Link>
         <h1>Site Assets</h1>
         <p>Manage site-wide images and branding assets</p>
       </div>

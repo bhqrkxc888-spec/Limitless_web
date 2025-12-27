@@ -1,10 +1,10 @@
 /* ========================================
    ADMIN LAYOUT STYLES
-   Dark mode monitoring dashboard
+   Premium dark/light mode
    ======================================== */
 
-/* CSS Variables for Admin Theme */
-.admin-layout {
+/* DARK MODE (Default) */
+[data-admin-theme="dark"] {
   --admin-bg: #0f1117;
   --admin-bg-secondary: #1a1d26;
   --admin-bg-tertiary: #252836;
@@ -18,6 +18,31 @@
   --admin-success: #34d399;
   --admin-warning: #fbbf24;
   --admin-error: #f87171;
+  --admin-gold: #c9a962;
+  --admin-gold-bg: rgba(201, 169, 98, 0.1);
+}
+
+/* LIGHT MODE */
+[data-admin-theme="light"] {
+  --admin-bg: #f8fafc;
+  --admin-bg-secondary: #ffffff;
+  --admin-bg-tertiary: #f1f5f9;
+  --admin-border: #e2e8f0;
+  --admin-border-light: #cbd5e1;
+  --admin-text: #0f172a;
+  --admin-text-muted: #475569;
+  --admin-text-dim: #64748b;
+  --admin-primary: #3b82f6;
+  --admin-primary-hover: #2563eb;
+  --admin-success: #10b981;
+  --admin-warning: #f59e0b;
+  --admin-error: #ef4444;
+  --admin-gold: #b8860b;
+  --admin-gold-bg: rgba(184, 134, 11, 0.1);
+}
+
+/* CSS Variables for Admin Theme */
+.admin-layout {
   --admin-sidebar-width: 260px;
   --admin-header-height: 56px;
   --admin-transition: 0.2s ease;
@@ -236,14 +261,39 @@
 }
 
 .admin-site-link {
-  background: rgba(201, 169, 98, 0.1);
+  background: var(--admin-gold-bg);
   border-color: rgba(201, 169, 98, 0.3);
-  color: #c9a962;
+  color: var(--admin-gold);
 }
 
 .admin-site-link:hover {
   background: rgba(201, 169, 98, 0.2);
-  border-color: #c9a962;
+  border-color: var(--admin-gold);
+}
+
+.admin-theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.625rem 1rem;
+  border: 1px solid var(--admin-border);
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--admin-text-muted);
+  background: var(--admin-bg-tertiary);
+  transition: all var(--admin-transition);
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.admin-theme-toggle:hover {
+  color: var(--admin-primary);
+  border-color: var(--admin-primary);
+  background: rgba(79, 140, 255, 0.05);
 }
 
 .admin-preview-link {
@@ -272,6 +322,8 @@
   margin-left: var(--admin-sidebar-width);
   padding: 2rem;
   min-height: 100vh;
+  max-width: 1600px;
+  margin-right: auto;
 }
 
 /* Mobile Overlay */
