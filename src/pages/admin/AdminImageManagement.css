@@ -1,8 +1,7 @@
 /* Admin Image Management Styles */
 
 .admin-image-management {
-  max-width: 1400px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 .admin-image-management.loading {
@@ -17,27 +16,50 @@
   color: var(--admin-text-muted);
 }
 
-.page-header {
+/* Header with back button */
+.admin-image-management .page-header-with-back {
   margin-bottom: 2rem;
 }
 
-.page-header h1 {
+.admin-image-management .back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--admin-bg-secondary);
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+  color: var(--admin-text-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  margin-bottom: 1.5rem;
+}
+
+.admin-image-management .back-button:hover {
+  color: var(--admin-text);
+  border-color: var(--admin-primary);
+  background: rgba(79, 140, 255, 0.05);
+}
+
+.admin-image-management .page-header-with-back h1 {
   margin: 0 0 0.5rem 0;
   font-size: 2rem;
   font-weight: 700;
   color: var(--admin-text);
 }
 
-.page-header p {
+.admin-image-management .page-header-with-back p {
   margin: 0;
   font-size: 1rem;
   color: var(--admin-text-muted);
 }
 
-/* Stats grid */
+/* Stats grid - 5 columns on desktop, 3 on tablet */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
   margin-bottom: 2rem;
 }
@@ -87,11 +109,11 @@
   line-height: 1;
 }
 
-/* Categories grid */
+/* Categories grid - 3 columns */
 .categories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
   margin-bottom: 2.5rem;
 }
 
@@ -213,22 +235,18 @@
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .stats-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .categories-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 768px) {
-  .admin-image-management {
-    padding: 0;
-  }
-
-  .page-header h1 {
+  .admin-image-management .page-header-with-back h1 {
     font-size: 1.5rem;
   }
 

@@ -6,7 +6,7 @@
 
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Image, MapPin, Ship, Anchor, Grid, Users } from 'lucide-react';
+import { Image, MapPin, Ship, Anchor, Grid, Users, ArrowLeft } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import StatusIndicator from '../../components/admin/StatusIndicator';
 import { logger } from '../../utils/logger';
@@ -154,7 +154,11 @@ function AdminImageManagement() {
 
   return (
     <div className="admin-image-management">
-      <div className="page-header">
+      <div className="page-header-with-back">
+        <Link to="/admin" className="back-button">
+          <ArrowLeft size={20} />
+          <span>Back to Dashboard</span>
+        </Link>
         <h1>Image Management</h1>
         <p>Manage all static website images with SEO validation</p>
       </div>

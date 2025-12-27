@@ -3,10 +3,9 @@
    Used across Site, Destinations, Cruise Lines, Ships, Categories
    ======================================== */
 
-/* Page container */
+/* Page container - full width */
 .admin-images-page {
-  max-width: 1400px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 /* Header with back button */
