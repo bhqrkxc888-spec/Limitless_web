@@ -58,13 +58,13 @@ export const DIMENSION_SPECS = {
   'site-katherine3': { width: 800, height: 1000 },
   
   // Destination images
-  'destination-hero': { width: 1920, height: 800 },
+  'destination-hero': { width: 1920, height: 1080 },
   'destination-card': { width: 400, height: 300 },
   'destination-mobile': { width: 800, height: 600 },
   
   // Cruise line images
   'cruise-line-logo': { width: 400, height: 200 },
-  'cruise-line-hero': { width: 1920, height: 800 },
+  'cruise-line-hero': { width: 1920, height: 1080 },
   'cruise-line-card': { width: 400, height: 300 },
   
   // Ship images
