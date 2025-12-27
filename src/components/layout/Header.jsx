@@ -89,7 +89,7 @@ function Header() {
             <Link to="/" className="header-logo" onClick={closeMobileMenu}>
               <div className="logo-container">
                 <img 
-                  src="https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Hero-logo.webp" 
+                  src="https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/logo.webp" 
                   alt="Limitless Cruises logo - gold cruise ship icon" 
                   className="logo-icon"
                   width="56"

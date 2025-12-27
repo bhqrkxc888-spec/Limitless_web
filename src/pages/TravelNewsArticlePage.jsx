@@ -167,7 +167,7 @@ function TravelNewsArticlePage() {
       name: 'Limitless Cruises',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Hero-logo.webp',
+        url: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/logo.webp',
         width: 512,
         height: 512
       }

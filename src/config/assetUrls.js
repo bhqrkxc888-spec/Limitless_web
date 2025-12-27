@@ -28,8 +28,8 @@ export const SITE_ASSETS = {
   homeHero: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/HERO-home.webp', // TODO: Update after migration
   homeHeroMobile: null, // Optional - upload via admin interface
   ogImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/OG.webp', // TODO: Update after migration
-  logo: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Hero-logo.webp', // TODO: Update after migration
-  favicon: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/favicon.webp', // TODO: Update after migration
+  logo: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/logo.webp',
+  favicon: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/favicon.webp',
 };
 
 // Destination heroes - currently using old structure

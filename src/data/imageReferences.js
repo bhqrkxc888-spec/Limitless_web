@@ -18,9 +18,9 @@ export const imageReferences = {
   // ====================
   site: {
     // ✅ Uploaded - manage via Admin → Website → Assets → Site
-    favicon: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/favicon.webp',
+    favicon: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/favicon.webp',
     heroHome: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/home/hero.webp',
-    logo: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Hero-logo.webp',
+    logo: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/logo.webp',
     // 📷 Upload via Admin: Social share image (1200x630px)
     ogImage: null,
   },

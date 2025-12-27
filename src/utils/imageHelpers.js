@@ -134,9 +134,9 @@ export const generateSrcSet = (url, widths = [640, 1024, 1920], options = {}) =>
  * Get About page images
  */
 export const aboutImages = {
-  katherine1: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/about/About1.webp',
-  katherine2: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/about/About2.webp',
-  katherine3: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/about/About3.webp',
+  katherine1: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/katherine1.webp',
+  katherine2: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/katherine2.webp',
+  katherine3: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/katherine3.webp',
   holidayEliteLogo: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/categories/about/HolidayEliteLogo.png'
 };
 
