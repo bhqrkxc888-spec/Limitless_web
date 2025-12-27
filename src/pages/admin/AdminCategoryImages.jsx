@@ -62,9 +62,6 @@ function AdminCategoryImages() {
           <span>Back to Image Management</span>
         </Link>
         <h1>Category Images</h1>
-        <p>Manage category card images for homepage</p>
-      </div>
-        <h1>Category Images</h1>
         <p>Manage card images for all 6 cruise categories</p>
       </div>
 
