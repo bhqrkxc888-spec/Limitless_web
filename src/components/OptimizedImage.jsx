@@ -1,10 +1,14 @@
+import { useState } from 'react';
 import { getOptimizedImageUrl, generateSrcSet, isSupabaseUrl } from '../utils/imageHelpers';
 import { isVercelBlobUrl } from '../lib/vercelBlob';
+
+// Fallback placeholder for missing/failed images
+const COMING_SOON_PLACEHOLDER = '/images/placeholders/coming-soon.svg';
 
 /**
  * OptimizedImage Component
  * Automatically optimizes images from Vercel Blob or Supabase Storage.
- * Falls back gracefully for external URLs.
+ * Falls back gracefully for external URLs or missing images.
  * 
  * Features:
  * - Vercel Blob: Automatic WebP conversion via Vercel CDN
@@ -12,6 +16,7 @@ import { isVercelBlobUrl } from '../lib/vercelBlob';
  * - Responsive srcset generation
  * - Proper loading/priority attributes for LCP optimization
  * - Maintains aspect ratio
+ * - "Image Coming Soon" fallback for missing images
  * 
  * @param {string} src - Original image URL
  * @param {string} alt - Alt text (required for accessibility)
@@ -23,6 +28,7 @@ import { isVercelBlobUrl } from '../lib/vercelBlob';
  * @param {number[]} srcsetWidths - Widths to generate for srcset (default: [640, 1024, 1920])
  * @param {number} quality - Image quality 1-100 (default: 85)
  * @param {string} objectFit - CSS object-fit value (default: 'cover')
+ * @param {boolean} showComingSoon - If true, shows "Coming Soon" placeholder when no image (default: true)
  */
 function OptimizedImage({
   src,
@@ -37,10 +43,40 @@ function OptimizedImage({
   // format parameter removed - not supported by Supabase
   objectFit = 'cover',
   style = {},
+  showComingSoon = true,
   ...props
 }) {
-  // Return placeholder if no src
-  if (!src) {
+  const [hasError, setHasError] = useState(false);
+  
+  // Handle image load errors
+  const handleError = (e) => {
+    if (!hasError && showComingSoon) {
+      setHasError(true);
+      e.target.src = COMING_SOON_PLACEHOLDER;
+    }
+  };
+  
+  // Return "Coming Soon" placeholder if no src provided
+  if (!src || src === 'null' || src === 'undefined') {
+    if (showComingSoon) {
+      return (
+        <img
+          src={COMING_SOON_PLACEHOLDER}
+          alt={alt || 'Image coming soon'}
+          width={width}
+          height={height}
+          loading={priority ? 'eager' : 'lazy'}
+          className={className}
+          style={{
+            objectFit,
+            ...style
+          }}
+          {...props}
+        />
+      );
+    }
+    
+    // Fallback to simple placeholder div if showComingSoon is false
     return (
       <div 
         className={`optimized-image-placeholder ${className}`}
@@ -115,9 +151,9 @@ function OptimizedImage({
 
   return (
     <img
-      src={optimizedSrc}
-      srcSet={srcSet}
-      sizes={srcSet ? sizes : undefined}
+      src={hasError ? COMING_SOON_PLACEHOLDER : optimizedSrc}
+      srcSet={hasError ? undefined : srcSet}
+      sizes={srcSet && !hasError ? sizes : undefined}
       alt={finalAlt}
       width={width}
       height={height}
@@ -129,6 +165,7 @@ function OptimizedImage({
         objectFit,
         ...style
       }}
+      onError={handleError}
       {...props}
     />
   );
