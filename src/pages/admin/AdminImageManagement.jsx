@@ -122,7 +122,7 @@ function AdminImageManagement() {
     {
       id: 'site',
       title: 'Site Assets',
-      description: 'Hero, logo, OG image, favicon, team photos',
+      description: 'Hero, logo, OG image, favicon, Katherine photos',
       icon: Image,
       path: '/admin/images/site',
       stats: stats.site,

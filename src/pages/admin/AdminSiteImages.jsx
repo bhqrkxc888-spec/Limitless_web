@@ -1,6 +1,6 @@
 /**
  * Admin Site Images Page
- * Manages site-wide assets: hero, logo, OG image, favicon, team photos
+ * Manages site-wide assets: hero, logo, OG image, favicon, Katherine photos
  */
 
 import { useState, useEffect, useCallback } from 'react';
@@ -20,9 +20,9 @@ const SITE_IMAGES = [
   { id: 'logo', type: 'logo', label: 'Site Logo', required: true, dimensions: '400×120px' },
   { id: 'og-image', type: 'og-image', label: 'OG Image (Social Sharing)', required: true, dimensions: '1200×630px' },
   { id: 'favicon', type: 'favicon', label: 'Favicon', required: true, dimensions: '512×512px' },
-  { id: 'about-hero', type: 'about-hero', label: 'About Page - Katherine Photo', required: true, dimensions: '800×1000px' },
-  { id: 'about-katherine2', type: 'about-katherine2', label: 'About Page - Katherine Photo 2', required: false, dimensions: '800×1000px' },
-  { id: 'contact-hero', type: 'contact-hero', label: 'Contact Page Hero', required: false, dimensions: '1920×600px' },
+  { id: 'katherine1', type: 'katherine1', label: 'About Page - Katherine Photo 1 (Why Choose section)', required: true, dimensions: '800×1000px portrait' },
+  { id: 'katherine2', type: 'katherine2', label: 'About Page - Katherine Photo 2 (Hero section)', required: true, dimensions: '800×1000px portrait' },
+  { id: 'katherine3', type: 'katherine3', label: 'About Page - Katherine Photo 3 (Meet Consultant section)', required: true, dimensions: '800×1000px portrait' },
 ];
 
 function AdminSiteImages() {
@@ -151,21 +151,6 @@ function AdminSiteImages() {
             })}
           </div>
         )}
-
-        <div className="admin-card" style={{ marginTop: '2rem' }}>
-          <h3>Team Photos</h3>
-          <p style={{ color: 'var(--admin-text-muted)', marginBottom: '1rem' }}>
-            Upload numbered team gallery images (001.webp, 002.webp, etc.)
-          </p>
-          <ImageUpload
-            bucket={STORAGE_BUCKETS.SITE}
-            entityType="team"
-            entityId="001"
-            imageType="gallery"
-            suggestedAltText="Limitless Cruises team member"
-            onUploadComplete={handleUploadComplete}
-          />
-        </div>
       </div>
     </AdminLayout>
   );
