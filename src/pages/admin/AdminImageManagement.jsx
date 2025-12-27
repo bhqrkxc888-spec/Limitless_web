@@ -5,14 +5,19 @@
  */
 
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Image, MapPin, Ship, Anchor, Grid, Users, ArrowLeft } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Image, MapPin, Ship, Anchor, Grid, ArrowLeft } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
+import useAdminAuth from '../../hooks/useAdminAuth';
+import AdminLayout from '../../components/admin/AdminLayout';
 import StatusIndicator from '../../components/admin/StatusIndicator';
 import { logger } from '../../utils/logger';
 import './AdminImageManagement.css';
 
 function AdminImageManagement() {
+  const navigate = useNavigate();
+  const { isAuthenticated, isLoading: authLoading, logout } = useAdminAuth();
+  
   const [stats, setStats] = useState({
     site: { total: 0, compliant: 0, warnings: 0, missing: 0 },
     destinations: { total: 0, compliant: 0, warnings: 0, missing: 0 },
@@ -21,12 +26,18 @@ function AdminImageManagement() {
     categories: { total: 0, compliant: 0, warnings: 0, missing: 0 },
   });
   const [loading, setLoading] = useState(true);
+  const [lastUpdated, setLastUpdated] = useState(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
+  // Redirect if not authenticated
   useEffect(() => {
-    loadStats();
-  }, []);
+    if (!authLoading && !isAuthenticated) {
+      navigate('/admin/login');
+    }
+  }, [authLoading, isAuthenticated, navigate]);
 
   const loadStats = async () => {
+    setIsRefreshing(true);
     try {
       // Query site_images table for stats
       const { data, error } = await supabase
@@ -63,25 +74,42 @@ function AdminImageManagement() {
       });
 
       // Calculate missing (expected - uploaded)
-      // Site: 4 required (hero, logo, og, favicon)
       newStats.site.missing = Math.max(0, 4 - newStats.site.total);
-      
-      // Destinations: 30 destinations × 2 required (hero, card) = 60
       newStats.destinations.missing = Math.max(0, 60 - newStats.destinations.total);
-      
-      // Cruise lines: 57 lines × 3 (logo, hero, card) = 171
       newStats.cruiseLines.missing = Math.max(0, 171 - newStats.cruiseLines.total);
-      
-      // Categories: 6 categories × 1 (card) = 6
       newStats.categories.missing = Math.max(0, 6 - newStats.categories.total);
 
       setStats(newStats);
+      setLastUpdated(Date.now());
     } catch (error) {
       logger.error('Error loading stats:', error);
     } finally {
       setLoading(false);
+      setIsRefreshing(false);
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      loadStats();
+    }
+  }, [isAuthenticated]);
+
+  // Show loading while checking auth
+  if (authLoading || (!isAuthenticated && !authLoading)) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        minHeight: '100vh',
+        background: '#0f1117',
+        color: '#e8eaed'
+      }}>
+        <div>Loading...</div>
+      </div>
+    );
+  }
 
   const getStatusForCategory = (categoryStats) => {
     if (categoryStats.missing > 0 || categoryStats.total === 0) return 'error';
@@ -138,14 +166,6 @@ function AdminImageManagement() {
     }
   ];
 
-  if (loading) {
-    return (
-      <div className="admin-image-management loading">
-        <div className="loading-spinner">Loading...</div>
-      </div>
-    );
-  }
-
   const totalImages = Object.values(stats).reduce((sum, s) => sum + s.total, 0);
   const totalCompliant = Object.values(stats).reduce((sum, s) => sum + s.compliant, 0);
   const totalWarnings = Object.values(stats).reduce((sum, s) => sum + s.warnings, 0);
@@ -153,101 +173,112 @@ function AdminImageManagement() {
   const compliancePercentage = totalImages > 0 ? Math.round((totalCompliant / totalImages) * 100) : 0;
 
   return (
-    <div className="admin-image-management">
-      <div className="page-header-with-back">
-        <Link to="/admin" className="back-button">
-          <ArrowLeft size={20} />
-          <span>Back to Dashboard</span>
-        </Link>
-        <h1>Image Management</h1>
-        <p>Manage all static website images with SEO validation</p>
-      </div>
+    <AdminLayout 
+      onLogout={logout} 
+      lastUpdated={lastUpdated}
+      onRefresh={loadStats}
+      isRefreshing={isRefreshing}
+    >
+      <div className="admin-image-management">
+        <header className="admin-page-header">
+          <Link to="/admin" className="back-link">
+            <ArrowLeft size={18} />
+            Back to Dashboard
+          </Link>
+          <h1 className="admin-page-title">Image Management</h1>
+          <p className="admin-page-subtitle">Manage all static website images with SEO validation</p>
+        </header>
 
-      {/* Overall stats */}
-      <div className="stats-grid">
-        <div className="stat-card">
-          <div className="stat-label">Total Images</div>
-          <div className="stat-value">{totalImages}</div>
-        </div>
-        <div className="stat-card stat-success">
-          <div className="stat-label">Compliant</div>
-          <div className="stat-value">{totalCompliant}</div>
-        </div>
-        <div className="stat-card stat-warning">
-          <div className="stat-label">With Warnings</div>
-          <div className="stat-value">{totalWarnings}</div>
-        </div>
-        <div className="stat-card stat-error">
-          <div className="stat-label">Missing</div>
-          <div className="stat-value">{totalMissing}</div>
-        </div>
-        <div className="stat-card stat-primary">
-          <div className="stat-label">Compliance</div>
-          <div className="stat-value">{compliancePercentage}%</div>
-        </div>
-      </div>
-
-      {/* Category cards */}
-      <div className="categories-grid">
-        {categories.map(category => {
-          const CategoryIcon = category.icon;
-          const status = getStatusForCategory(category.stats);
-          
-          return (
-            <Link 
-              key={category.id} 
-              to={category.path} 
-              className="category-card"
-              style={{ '--category-color': category.color }}
-            >
-              <div className="category-header">
-                <div className="category-icon" style={{ background: `${category.color}15` }}>
-                  <CategoryIcon size={24} style={{ color: category.color }} />
-                </div>
-                <StatusIndicator status={status} size="small" />
+        {loading ? (
+          <div className="admin-loading">
+            <div className="admin-loading-spinner" />
+            <p>Loading image stats...</p>
+          </div>
+        ) : (
+          <>
+            {/* Overall stats */}
+            <div className="admin-stats-grid">
+              <div className="admin-stat-card">
+                <div className="admin-stat-label">Total Images</div>
+                <div className="admin-stat-value">{totalImages}</div>
               </div>
-              
-              <h3>{category.title}</h3>
-              <p>{category.description}</p>
-              
-              <div className="category-stats">
-                <div className="category-stat">
-                  <span className="label">Uploaded:</span>
-                  <span className="value">{category.stats.total}</span>
-                </div>
-                <div className="category-stat">
-                  <span className="label">Compliant:</span>
-                  <span className="value">{category.stats.compliant}</span>
-                </div>
-                {category.stats.missing > 0 && (
-                  <div className="category-stat stat-missing">
-                    <span className="label">Missing:</span>
-                    <span className="value">{category.stats.missing}</span>
-                  </div>
-                )}
+              <div className="admin-stat-card">
+                <div className="admin-stat-label">Compliant</div>
+                <div className="admin-stat-value success">{totalCompliant}</div>
               </div>
-            </Link>
-          );
-        })}
-      </div>
+              <div className="admin-stat-card">
+                <div className="admin-stat-label">With Warnings</div>
+                <div className="admin-stat-value warning">{totalWarnings}</div>
+              </div>
+              <div className="admin-stat-card">
+                <div className="admin-stat-label">Missing</div>
+                <div className="admin-stat-value error">{totalMissing}</div>
+              </div>
+              <div className="admin-stat-card">
+                <div className="admin-stat-label">Compliance</div>
+                <div className="admin-stat-value">{compliancePercentage}%</div>
+              </div>
+            </div>
 
-      {/* Help section */}
-      <div className="help-section">
-        <h3>Getting Started</h3>
-        <ol>
-          <li>Review each category to see what images are required</li>
-          <li>Upload images with correct dimensions (specs shown on each page)</li>
-          <li>Provide descriptive ALT text for accessibility and SEO</li>
-          <li>Address any validation warnings (amber) or errors (red)</li>
-          <li>Aim for 100% compliance before launch</li>
-        </ol>
-        <p>
-          <strong>Note:</strong> All images are stored in Supabase Storage. Make sure bucket policies are set correctly.
-        </p>
+            {/* Category cards */}
+            <div className="image-categories-grid">
+              {categories.map(category => {
+                const CategoryIcon = category.icon;
+                const status = getStatusForCategory(category.stats);
+                
+                return (
+                  <Link 
+                    key={category.id} 
+                    to={category.path} 
+                    className="image-category-card"
+                  >
+                    <div className="category-header">
+                      <div className="category-icon" style={{ background: `${category.color}20`, color: category.color }}>
+                        <CategoryIcon size={24} />
+                      </div>
+                      <StatusIndicator status={status} size="small" />
+                    </div>
+                    
+                    <h3>{category.title}</h3>
+                    <p>{category.description}</p>
+                    
+                    <div className="category-stats">
+                      <div className="category-stat">
+                        <span className="label">Uploaded:</span>
+                        <span className="value">{category.stats.total}</span>
+                      </div>
+                      <div className="category-stat">
+                        <span className="label">Compliant:</span>
+                        <span className="value">{category.stats.compliant}</span>
+                      </div>
+                      {category.stats.missing > 0 && (
+                        <div className="category-stat stat-missing">
+                          <span className="label">Missing:</span>
+                          <span className="value">{category.stats.missing}</span>
+                        </div>
+                      )}
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Help section */}
+            <div className="admin-card" style={{ marginTop: '2rem' }}>
+              <h3 style={{ marginBottom: '1rem' }}>Getting Started</h3>
+              <ol style={{ paddingLeft: '1.5rem', color: 'var(--admin-text-muted)', lineHeight: '1.8' }}>
+                <li>Review each category to see what images are required</li>
+                <li>Upload images with correct dimensions (specs shown on each page)</li>
+                <li>Provide descriptive ALT text for accessibility and SEO</li>
+                <li>Address any validation warnings (amber) or errors (red)</li>
+                <li>Aim for 100% compliance before launch</li>
+              </ol>
+            </div>
+          </>
+        )}
       </div>
-    </div>
+    </AdminLayout>
   );
 }
 
 export default AdminImageManagement;
-

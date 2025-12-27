@@ -9,10 +9,12 @@
  * - Progress indicator
  * - Uploads to Supabase Storage
  * - Stores metadata in site_images table
+ * - Shows stats for existing images
+ * - Copy URL button
  */
 
 import { useState, useRef, useEffect } from 'react';
-import { Upload, X, AlertTriangle, CheckCircle, Loader } from 'lucide-react';
+import { Upload, X, AlertTriangle, CheckCircle, Loader, Copy, Check } from 'lucide-react';
 import { supabase, uploadImage, getPublicUrl } from '../../lib/supabase';
 import { validateImage, getExpectedDimensions } from '../../utils/imageValidation';
 import StatusIndicator from './StatusIndicator';
@@ -28,6 +30,7 @@ function ImageUpload({
   onUploadComplete,
   onUploadError,
   existingImage = null,
+  existingData = null,
   autoRename = true,
   className = ''
 }) {
@@ -38,8 +41,14 @@ function ImageUpload({
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [dragActive, setDragActive] = useState(false);
+  const [copied, setCopied] = useState(false);
   
   const fileInputRef = useRef(null);
+
+  // Update preview when existingImage changes
+  useEffect(() => {
+    setPreview(existingImage);
+  }, [existingImage]);
 
   // Update alt text when suggested changes
   useEffect(() => {
@@ -137,7 +146,6 @@ function ImageUpload({
     // Generate path based on entity type
     switch (entityType) {
       case 'site':
-        // site/hero.webp, site/logo.webp, site/team/001.webp
         if (imageType.startsWith('team-')) {
           const teamNumber = imageType.split('-')[1] || '001';
           return `team/${teamNumber}.${ext}`;
@@ -145,24 +153,18 @@ function ImageUpload({
         return `${imageType}.${ext}`;
 
       case 'destination':
-        // destinations/{slug}/hero.webp
         return `${entityId}/${imageType}.${ext}`;
 
       case 'cruise-line':
-        // cruise-lines/{slug}/logo.webp
         return `${entityId}/${imageType}.${ext}`;
 
       case 'ship':
-        // cruise-lines/{cruise-line-slug}/ships/{ship-slug}/{type}.webp
-        // entityId should be: '{cruise-line-slug}/ships/{ship-slug}'
         return `${entityId}/${imageType}.${ext}`;
 
       case 'category':
-        // categories/{category-slug}.webp
         return `${entityId}.${ext}`;
 
       case 'team':
-        // site/team/{number}.webp
         return `team/${entityId}.${ext}`;
 
       default:
@@ -228,7 +230,6 @@ function ImageUpload({
 
       if (metadataError) {
         logger.warn('Failed to store metadata:', metadataError);
-        // Don't fail upload if metadata storage fails
       }
 
       setUploadProgress(100);
@@ -279,145 +280,215 @@ function ImageUpload({
     }
   };
 
+  // Copy URL to clipboard
+  const handleCopyUrl = async () => {
+    if (existingImage) {
+      try {
+        await navigator.clipboard.writeText(existingImage);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch (err) {
+        logger.error('Copy failed:', err);
+      }
+    }
+  };
+
   // Get expected dimensions for display
   const expectedDims = getExpectedDimensions(entityType, imageType);
 
+  // Format file size
+  const formatFileSize = (bytes) => {
+    if (!bytes) return '-';
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
+    return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+  };
+
   return (
-    <div className={`image-upload ${className}`}>
-      {/* Expected specs display */}
-      {expectedDims && (
-        <div className="upload-specs">
-          <strong>Required:</strong> {expectedDims.width}×{expectedDims.height}px, WebP format preferred
+    <div className={`image-upload ${className} ${file ? 'has-selection' : ''}`}>
+      {/* When there's an existing image but no new file selected */}
+      {existingImage && !file && (
+        <div className="existing-image">
+          <div className="existing-preview">
+            <img src={preview} alt="Current" />
+          </div>
+          <div className="existing-details">
+            {existingData && (
+              <div className="existing-stats">
+                <div className="stat-row">
+                  <span className="stat-label">Dimensions:</span>
+                  <span className="stat-value">
+                    {existingData.width && existingData.height 
+                      ? `${existingData.width}×${existingData.height}px` 
+                      : '-'}
+                  </span>
+                </div>
+                <div className="stat-row">
+                  <span className="stat-label">File size:</span>
+                  <span className="stat-value">{formatFileSize(existingData.file_size)}</span>
+                </div>
+                <div className="stat-row">
+                  <span className="stat-label">Format:</span>
+                  <span className="stat-value">{existingData.format?.toUpperCase() || '-'}</span>
+                </div>
+                <div className="stat-row">
+                  <span className="stat-label">ALT text:</span>
+                  <span className="stat-value">{existingData.alt_text || '-'}</span>
+                </div>
+                <div className="stat-row">
+                  <span className="stat-label">Status:</span>
+                  <StatusIndicator 
+                    status={existingData.seo_compliant ? 'pass' : 'warning'} 
+                    size="small" 
+                  />
+                </div>
+              </div>
+            )}
+            <div className="existing-actions">
+              <button 
+                type="button" 
+                className="btn-copy"
+                onClick={handleCopyUrl}
+              >
+                {copied ? <Check size={14} /> : <Copy size={14} />}
+                {copied ? 'Copied!' : 'Copy URL'}
+              </button>
+              <button
+                type="button"
+                className="btn-replace"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                <Upload size={14} />
+                Replace Image
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
-      {/* Drop zone */}
-      <div
-        className={`upload-dropzone ${dragActive ? 'active' : ''} ${file ? 'has-file' : ''}`}
-        onDragEnter={handleDrag}
-        onDragLeave={handleDrag}
-        onDragOver={handleDrag}
-        onDrop={handleDrop}
-        onClick={() => !file && fileInputRef.current?.click()}
-      >
-        {preview ? (
-          <div className="upload-preview">
-            <img src={preview} alt="Preview" />
-            {file && (
-              <button
-                type="button"
-                className="preview-clear"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleClear();
-                }}
-              >
-                <X size={20} />
-              </button>
-            )}
-          </div>
-        ) : (
-          <div className="upload-placeholder">
-            <Upload size={48} />
-            <p>Drag & drop image here, or click to select</p>
-            <span className="upload-hint">Supports JPG, PNG, WebP</span>
-          </div>
-        )}
-
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/jpeg,image/jpg,image/png,image/webp"
-          onChange={handleFileInputChange}
-          style={{ display: 'none' }}
-        />
-      </div>
-
-      {/* File info and validation */}
-      {file && (
-        <div className="upload-info">
-          <div className="file-details">
-            <strong>{file.name}</strong>
-            <span className="file-size">
-              {(file.size / 1024).toFixed(0)} KB
-            </span>
-          </div>
-
-          {/* ALT text input */}
-          <div className="alt-text-input">
-            <label htmlFor={`alt-${imageType}`}>
-              ALT Text <span className="required">*</span>
-            </label>
-            <input
-              id={`alt-${imageType}`}
-              type="text"
-              value={altText}
-              onChange={handleAltTextChange}
-              placeholder="Describe the image for accessibility and SEO"
-              className={validationResult?.validations.find(v => v.message.includes('ALT'))?.status === 'error' ? 'error' : ''}
-            />
-            <span className="input-hint">
-              Required for accessibility and SEO ({altText.length} characters)
-            </span>
-          </div>
-
-          {/* Validation results */}
-          {validationResult && (
-            <div className="validation-results">
-              <h4>Validation Results:</h4>
-              {validationResult.validations.map((validation, index) => (
-                <div key={index} className={`validation-item validation-${validation.status}`}>
-                  {validation.status === 'pass' && <CheckCircle size={16} />}
-                  {validation.status === 'warning' && <AlertTriangle size={16} />}
-                  {validation.status === 'error' && <X size={16} />}
-                  <span>{validation.message}</span>
-                </div>
-              ))}
-              
-              <div className="validation-summary">
-                <StatusIndicator 
-                  status={validationResult.status} 
-                  warnings={validationResult.warnings}
-                  showDetails
-                />
-              </div>
+      {/* When selecting a new file OR no existing image */}
+      {(file || !existingImage) && (
+        <>
+          {/* Expected specs display */}
+          {expectedDims && !file && (
+            <div className="upload-specs">
+              <strong>Required:</strong> {expectedDims.width}×{expectedDims.height}px, WebP format preferred
             </div>
           )}
 
-          {/* Upload button */}
-          <div className="upload-actions">
-            <button
-              type="button"
-              className="btn-secondary"
-              onClick={handleClear}
-              disabled={uploading}
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              className="btn-primary"
-              onClick={handleUpload}
-              disabled={!validationResult || validationResult.status === 'error' || uploading}
-            >
-              {uploading ? (
-                <>
-                  <Loader size={16} className="spinning" />
-                  Uploading... {uploadProgress}%
-                </>
-              ) : (
-                <>
-                  <Upload size={16} />
-                  Upload Image
-                </>
-              )}
-            </button>
+          {/* Drop zone */}
+          <div
+            className={`upload-dropzone ${dragActive ? 'active' : ''} ${file ? 'has-file' : ''}`}
+            onDragEnter={handleDrag}
+            onDragLeave={handleDrag}
+            onDragOver={handleDrag}
+            onDrop={handleDrop}
+            onClick={() => !file && fileInputRef.current?.click()}
+          >
+            {preview && file ? (
+              <div className="upload-preview">
+                <img src={preview} alt="Preview" />
+                <button
+                  type="button"
+                  className="preview-clear"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleClear();
+                  }}
+                >
+                  <X size={20} />
+                </button>
+              </div>
+            ) : (
+              <div className="upload-placeholder">
+                <Upload size={40} />
+                <p>Drag & drop image here</p>
+                <span className="upload-hint">or click to select • JPG, PNG, WebP</span>
+              </div>
+            )}
           </div>
-        </div>
+
+          {/* File info and validation */}
+          {file && (
+            <div className="upload-info">
+              <div className="file-details">
+                <strong>{file.name}</strong>
+                <span className="file-size">{formatFileSize(file.size)}</span>
+              </div>
+
+              {/* ALT text input */}
+              <div className="alt-text-input">
+                <label htmlFor={`alt-${imageType}`}>
+                  ALT Text <span className="required">*</span>
+                </label>
+                <input
+                  id={`alt-${imageType}`}
+                  type="text"
+                  value={altText}
+                  onChange={handleAltTextChange}
+                  placeholder="Describe the image for accessibility and SEO"
+                  className={validationResult?.validations.find(v => v.message.includes('ALT'))?.status === 'error' ? 'error' : ''}
+                />
+              </div>
+
+              {/* Validation results */}
+              {validationResult && (
+                <div className="validation-results">
+                  <h4>Validation:</h4>
+                  {validationResult.validations.map((validation, index) => (
+                    <div key={index} className={`validation-item validation-${validation.status}`}>
+                      {validation.status === 'pass' && <CheckCircle size={14} />}
+                      {validation.status === 'warning' && <AlertTriangle size={14} />}
+                      {validation.status === 'error' && <X size={14} />}
+                      <span>{validation.message}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* Upload button */}
+              <div className="upload-actions">
+                <button
+                  type="button"
+                  className="btn-secondary"
+                  onClick={handleClear}
+                  disabled={uploading}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  className="btn-primary"
+                  onClick={handleUpload}
+                  disabled={!validationResult || validationResult.status === 'error' || uploading}
+                >
+                  {uploading ? (
+                    <>
+                      <Loader size={14} className="spinning" />
+                      {uploadProgress}%
+                    </>
+                  ) : (
+                    <>
+                      <Upload size={14} />
+                      Upload
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+          )}
+        </>
       )}
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/jpeg,image/jpg,image/png,image/webp"
+        onChange={handleFileInputChange}
+        style={{ display: 'none' }}
+      />
     </div>
   );
 }
 
 export default ImageUpload;
-
