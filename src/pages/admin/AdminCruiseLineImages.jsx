@@ -115,7 +115,13 @@ function AdminCruiseLineImages() {
           </div>
         ) : !selectedCruiseLine ? (
           <div className="entity-grid">
-            {cruiseLines.map(cl => (
+            {[...cruiseLines]
+              .sort((a, b) => {
+                const nameA = (a.name || '').toLowerCase();
+                const nameB = (b.name || '').toLowerCase();
+                return nameA.localeCompare(nameB);
+              })
+              .map(cl => (
               <button
                 key={cl.slug}
                 className="entity-card"

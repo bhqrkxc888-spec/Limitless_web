@@ -114,7 +114,13 @@ function AdminDestinationImages() {
           </div>
         ) : !selectedDestination ? (
           <div className="entity-grid">
-            {destinations.map(dest => (
+            {[...destinations]
+              .sort((a, b) => {
+                const nameA = (a.name || '').toLowerCase();
+                const nameB = (b.name || '').toLowerCase();
+                return nameA.localeCompare(nameB);
+              })
+              .map(dest => (
               <button
                 key={dest.slug}
                 className="entity-card"
