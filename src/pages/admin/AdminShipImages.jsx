@@ -95,8 +95,14 @@ function AdminShipImages() {
     );
   }
 
-  // Cruise lines that have ships
-  const cruiseLinesWithShips = cruiseLines.filter(cl => cl.fleet && cl.fleet.length > 0);
+  // Cruise lines that have ships, sorted A-Z
+  const cruiseLinesWithShips = cruiseLines
+    .filter(cl => cl.fleet && cl.fleet.length > 0)
+    .sort((a, b) => {
+      const nameA = (a.name || '').toLowerCase();
+      const nameB = (b.name || '').toLowerCase();
+      return nameA.localeCompare(nameB);
+    });
 
   return (
     <AdminLayout 
@@ -148,21 +154,27 @@ function AdminShipImages() {
             </header>
 
             <div className="entity-grid">
-              {selectedCruiseLine.fleet.map(ship => {
-                const shipSlug = ship.slug || ship.name.toLowerCase().replace(/\s+/g, '-');
-                return (
-                  <button
-                    key={shipSlug}
-                    className="entity-card"
-                    onClick={() => setSelectedShip(ship)}
-                  >
-                    <div className="entity-card-header">
-                      <h3>{ship.name}</h3>
-                      <StatusIndicator status={getShipStatus(selectedCruiseLine.slug, ship)} size="small" />
-                    </div>
-                  </button>
-                );
-              })}
+              {[...selectedCruiseLine.fleet]
+                .sort((a, b) => {
+                  const nameA = (a.name || '').toLowerCase();
+                  const nameB = (b.name || '').toLowerCase();
+                  return nameA.localeCompare(nameB);
+                })
+                .map(ship => {
+                  const shipSlug = ship.slug || ship.name.toLowerCase().replace(/\s+/g, '-');
+                  return (
+                    <button
+                      key={shipSlug}
+                      className="entity-card"
+                      onClick={() => setSelectedShip(ship)}
+                    >
+                      <div className="entity-card-header">
+                        <h3>{ship.name}</h3>
+                        <StatusIndicator status={getShipStatus(selectedCruiseLine.slug, ship)} size="small" />
+                      </div>
+                    </button>
+                  );
+                })}
             </div>
           </>
         ) : (
