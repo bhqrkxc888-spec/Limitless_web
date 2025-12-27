@@ -95,6 +95,21 @@ export const DIMENSION_SPECS = {
   
   // Category images
   'category-card': { width: 600, height: 400 },
+  'category-hero': { width: 1920, height: 1080 },
+  
+  // Bucket list images
+  'bucket-list-hero': { width: 1920, height: 1080 },
+  'bucket-list-card': { width: 600, height: 400 },
+  'bucket-list-gallery-1': { width: 1200, height: 800 },
+  'bucket-list-gallery-2': { width: 1200, height: 800 },
+  'bucket-list-gallery-3': { width: 1200, height: 800 },
+  'bucket-list-gallery-4': { width: 1200, height: 800 },
+  
+  // Site trust badges and agency logo
+  'site-agency-logo': { width: 400, height: 200 },
+  'site-abta-badge': { width: 200, height: 200 },
+  'site-atol-badge': { width: 200, height: 200 },
+  'site-clia-badge': { width: 200, height: 200 },
   
   // Team images
   'team-gallery': { width: 1200, height: 800 },

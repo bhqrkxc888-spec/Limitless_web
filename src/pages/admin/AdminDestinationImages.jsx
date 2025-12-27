@@ -254,7 +254,19 @@ function AdminDestinationImages() {
                         <div className="image-card-header">
                           <div className="image-card-title">
                             <h3>{cruiseLine.shortName} Card</h3>
-                            <span className="badge badge-optional">Optional</span>
+                            <span 
+                              className={`badge ${cruiseLine.priority >= 9 ? 'badge-required' : cruiseLine.priority >= 7 ? 'badge-warning' : 'badge-optional'}`}
+                              title={`Priority ${cruiseLine.priority}/10`}
+                            >
+                              P{cruiseLine.priority}
+                            </span>
+                            {cruiseLine.type !== 'mainstream' && (
+                              <span className="badge badge-info" style={{ marginLeft: '0.25rem', fontSize: '0.65rem' }}>
+                                {cruiseLine.type === 'luxury' ? '⭐ Luxury' : 
+                                 cruiseLine.type === 'expedition' ? '🧭 Expedition' : 
+                                 '⭐🧭 Lux/Exp'}
+                              </span>
+                            )}
                           </div>
                           <StatusIndicator 
                             status={images[selectedDestination.slug]?.[`card-${cruiseLine.slug}`] ? 'pass' : 'missing'} 

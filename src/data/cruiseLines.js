@@ -842,7 +842,7 @@ export const cruiseLines = [
     tagline: 'Intimate luxury at sea',
     description: 'Seabourn delivers ultra-luxury cruising on intimate ships with exceptional service, all-inclusive luxury, and unique destinations. With all ocean-front suites, open bars, and a crew-to-guest ratio that ensures personalised attention, Seabourn represents the pinnacle of cruise luxury.',
     category: 'ultra-luxury',
-    featured: false,
+    featured: true,
     image: 'null',
     logo: null, // Logo to be uploaded to CRM
     
@@ -1046,7 +1046,7 @@ export const cruiseLines = [
     tagline: 'Destination immersion at sea',
     description: 'Azamara specializes in destination-intensive cruising with longer stays, more overnights, and night touring in unique ports. Their boutique ships carry just 600-700 guests to smaller harbours that larger ships cannot access.',
     category: 'luxury',
-    featured: false,
+    featured: true,
     image: 'null',
     logo: null, // Logo to be uploaded to CRM
     
@@ -1168,7 +1168,7 @@ export const cruiseLines = [
     tagline: 'Adventure expedition cruising',
     description: 'Aurora Expeditions offers adventure expedition cruises to the world\'s most remote destinations. With small ships, expert expedition teams, and a focus on active exploration, Aurora delivers authentic polar and adventure experiences.',
     category: 'expedition',
-    featured: false,
+    featured: true,
     image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antarctica-hero.webp',
     logo: null, // Logo to be uploaded to CRM
     
@@ -1238,6 +1238,111 @@ export const cruiseLines = [
     meta: {
       title: 'Aurora Expeditions | Antarctic & Arctic Expedition Cruises',
       description: 'Explore Antarctica, the Arctic, and beyond with Aurora Expeditions. Expert-led adventure cruising. Book with Limitless Cruises.'
+    }
+  },
+  {
+    id: 'hurtigruten',
+    slug: 'hurtigruten',
+    name: 'Hurtigruten',
+    shortName: 'Hurtigruten',
+    tagline: 'The world leader in exploration travel',
+    description: 'Hurtigruten has been exploring the Norwegian coast since 1893 and is now the world leader in expedition cruising. From the Arctic to Antarctica, their purpose-built expedition ships deliver authentic exploration experiences with expert teams.',
+    category: 'expedition',
+    featured: true,
+    image: 'null',
+    logo: null,
+    
+    whyChoose: [
+      { title: 'Norwegian Coastal Experts', description: 'Operating the iconic Norwegian coastal voyage since 1893.', icon: 'heritage' },
+      { title: 'Expedition Excellence', description: 'Purpose-built hybrid-powered expedition ships with ice-strengthened hulls.', icon: 'ship' },
+      { title: 'Expert Teams', description: 'Onboard expedition team of scientists, historians, and naturalists.', icon: 'experts' },
+      { title: 'Authentic Exploration', description: 'Small-group excursions and activities in remote destinations.', icon: 'adventure' }
+    ],
+    
+    highlights: [
+      'Norwegian Coastal Express since 1893',
+      'Hybrid-powered expedition ships',
+      'Arctic and Antarctic specialists',
+      'Northern Lights voyages',
+      'Expert expedition teams',
+      'Sustainable exploration focus'
+    ],
+    ships: ['MS Fridtjof Nansen', 'MS Roald Amundsen', 'MS Maud', 'MS Otto Sverdrup', 'MS Kong Harald', 'MS Nordnorge'],
+    destinations: ['Norwegian Fjords', 'Arctic', 'Antarctica', 'Iceland', 'Greenland', 'British Isles'],
+    suitableFor: ['Adventure Seekers', 'Nature Lovers', 'Aurora Hunters', 'Wildlife Enthusiasts', 'Polar Explorers'],
+    meta: {
+      title: 'Hurtigruten Expeditions | Norwegian Coastal & Polar Cruises',
+      description: 'Experience Hurtigruten expedition cruises to Norway, Arctic, and Antarctica. World leaders in exploration travel. Book with Limitless Cruises.'
+    }
+  },
+  {
+    id: 'silversea',
+    slug: 'silversea',
+    name: 'Silversea Cruises',
+    shortName: 'Silversea',
+    tagline: 'All-inclusive ultra-luxury cruising',
+    description: 'Silversea delivers the finest ultra-luxury cruise experiences with intimate ships, all-inclusive fares, and butler service in every suite. Their expedition ships bring luxury to the world\'s most remote destinations.',
+    category: 'ultra-luxury',
+    featured: true,
+    image: 'null',
+    logo: null,
+    
+    whyChoose: [
+      { title: 'All-Inclusive Luxury', description: 'Butler service, premium drinks, gratuities, and shore excursions included.', icon: 'luxury' },
+      { title: 'Intimate Ships', description: 'Small ships with high crew-to-guest ratios for personalised service.', icon: 'ship' },
+      { title: 'Expedition Fleet', description: 'Luxury expedition ships for Antarctica, Arctic, and Galapagos.', icon: 'expedition' },
+      { title: 'World-Class Cuisine', description: 'Gourmet dining including SALT culinary program.', icon: 'dining' }
+    ],
+    
+    highlights: [
+      'All-suite, all-inclusive luxury',
+      'Butler service in every suite',
+      'Expedition and ocean cruise options',
+      'Galapagos specialists',
+      'Antarctica luxury expeditions',
+      'SALT culinary experiences'
+    ],
+    ships: ['Silver Dawn', 'Silver Nova', 'Silver Ray', 'Silver Moon', 'Silver Muse', 'Silver Spirit', 'Silver Cloud', 'Silver Wind', 'Silver Endeavour', 'Silver Origin'],
+    destinations: ['Mediterranean', 'Alaska', 'Antarctica', 'Galapagos', 'Arctic', 'Asia', 'Caribbean'],
+    suitableFor: ['Luxury Seekers', 'Couples', 'Expedition Enthusiasts', 'Gourmets', 'Discerning Travellers'],
+    meta: {
+      title: 'Silversea Cruises | Ultra-Luxury All-Inclusive Cruising',
+      description: 'Experience Silversea ultra-luxury cruising with butler service and all-inclusive fares. Expedition and ocean cruises worldwide. Book with Limitless Cruises.'
+    }
+  },
+  {
+    id: 'ponant',
+    slug: 'ponant',
+    name: 'Ponant',
+    shortName: 'Ponant',
+    tagline: 'French luxury expedition cruising',
+    description: 'Ponant combines French elegance with expedition expertise aboard their fleet of small luxury ships. From polar regions to tropical islands, Ponant delivers refined exploration with an unmistakable French touch.',
+    category: 'luxury-expedition',
+    featured: true,
+    image: 'null',
+    logo: null,
+    
+    whyChoose: [
+      { title: 'French Elegance', description: 'Refined French hospitality and Ducasse Conseil cuisine.', icon: 'luxury' },
+      { title: 'Small Luxury Ships', description: 'Intimate vessels carrying 92-264 guests with zodiac fleets.', icon: 'ship' },
+      { title: 'Expedition Excellence', description: 'Purpose-built polar vessels with PC2 ice class ratings.', icon: 'expedition' },
+      { title: 'All-Inclusive', description: 'Open bar, included excursions, and expedition gear.', icon: 'inclusive' }
+    ],
+    
+    highlights: [
+      'French luxury and service',
+      'Ducasse Conseil dining',
+      'Purpose-built expedition ships',
+      'Antarctica and Arctic experts',
+      'All-inclusive expedition fares',
+      'Blue Eye underwater lounge'
+    ],
+    ships: ['Le Commandant Charcot', 'Le Bellot', 'Le Jacques Cartier', 'Le Bougainville', 'Le Champlain', 'Le Dumont-d\'Urville', 'Le Lapérouse', 'Le Lyrial', 'L\'Austral', 'Le Boréal'],
+    destinations: ['Antarctica', 'Arctic', 'Mediterranean', 'Northern Europe', 'Polynesia', 'Australia'],
+    suitableFor: ['Luxury Seekers', 'Expedition Lovers', 'Francophiles', 'Polar Explorers', 'Gourmets'],
+    meta: {
+      title: 'Ponant | French Luxury Expedition Cruises',
+      description: 'Experience Ponant French luxury expedition cruising to Antarctica, Arctic, and beyond. Elegant ships and refined service. Book with Limitless Cruises.'
     }
   }
 ];
