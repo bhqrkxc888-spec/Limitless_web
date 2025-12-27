@@ -1,10 +1,10 @@
 /**
- * Admin Site Images Page
- * Manages site-wide assets: hero, logo, OG image, favicon, Katherine photos
+ * Admin Bucket List Images Page
+ * Manages bucket list experience images (hero, card, and gallery images)
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
@@ -12,31 +12,24 @@ import ImageUpload from '../../components/admin/ImageUpload';
 import StatusIndicator from '../../components/admin/StatusIndicator';
 import { supabase, getPublicUrl } from '../../lib/supabase';
 import { STORAGE_BUCKETS } from '../../config/supabaseConfig';
+import { bucketListExperiences } from '../../data/bucketList';
 import './AdminImagesShared.css';
 
-const SITE_IMAGES = [
-  { id: 'hero', type: 'hero', label: 'Home Hero (Desktop)', required: true, dimensions: '1920×1080px' },
-  { id: 'hero-mobile', type: 'hero-mobile', label: 'Home Hero (Mobile)', required: false, dimensions: '768×1024px' },
-  { id: 'logo', type: 'logo', label: 'Site Logo (Square Icon)', required: true, dimensions: '512×512px square' },
-  { id: 'og-image', type: 'og-image', label: 'OG Image (Social Sharing)', required: true, dimensions: '1200×630px' },
-  { id: 'favicon', type: 'favicon', label: 'Favicon', required: true, dimensions: '512×512px' },
-  { id: 'katherine1', type: 'katherine1', label: 'About Page - Katherine Photo 1 (Why Choose section)', required: true, dimensions: '800×1000px portrait' },
-  { id: 'katherine2', type: 'katherine2', label: 'About Page - Katherine Photo 2 (Hero section)', required: true, dimensions: '800×1000px portrait' },
-  { id: 'katherine3', type: 'katherine3', label: 'About Page - Katherine Photo 3 (Meet Consultant section)', required: true, dimensions: '800×1000px portrait' },
-  { id: 'agency-logo', type: 'agency-logo', label: 'Agency Logo (Holiday Elite/Partner Agency)', required: false, dimensions: 'Any size, PNG preferred for transparency' },
-  { id: 'trust-abta', type: 'trust-abta', label: 'Trust Badge - ABTA', required: false, dimensions: 'Any size, PNG preferred' },
-  { id: 'trust-atol', type: 'trust-atol', label: 'Trust Badge - ATOL', required: false, dimensions: 'Any size, PNG preferred' },
-  { id: 'trust-clia', type: 'trust-clia', label: 'Trust Badge - CLIA', required: false, dimensions: 'Any size, PNG preferred' },
-];
-
-function AdminSiteImages() {
+function AdminBucketListImages() {
   const navigate = useNavigate();
+  const { slug } = useParams();
   const { isAuthenticated, isLoading: authLoading, logout } = useAdminAuth();
   
   const [images, setImages] = useState({});
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
+
+  // Get bucket list experiences sorted A-Z
+  const experiences = bucketListExperiences
+    .sort((a, b) => a.title.localeCompare(b.title));
+
+  const selectedExperience = slug ? experiences.find(exp => exp.slug === slug) : null;
 
   // Redirect if not authenticated
   useEffect(() => {
@@ -46,12 +39,15 @@ function AdminSiteImages() {
   }, [authLoading, isAuthenticated, navigate]);
 
   const loadImages = useCallback(async () => {
+    if (!selectedExperience) return;
+    
     setIsRefreshing(true);
     try {
       const { data } = await supabase
         .from('site_images')
         .select('*')
-        .eq('entity_type', 'site');
+        .eq('entity_type', 'bucket-list')
+        .eq('entity_id', selectedExperience.id);
 
       const imageMap = {};
       data?.forEach(img => {
@@ -68,17 +64,13 @@ function AdminSiteImages() {
       setLoading(false);
       setIsRefreshing(false);
     }
-  }, []);
+  }, [selectedExperience]);
 
   useEffect(() => {
     if (isAuthenticated) {
       loadImages();
     }
   }, [isAuthenticated, loadImages]);
-
-  const handleUploadComplete = () => {
-    loadImages();
-  };
 
   // Show loading while checking auth
   if (authLoading || (!isAuthenticated && !authLoading)) {
@@ -96,6 +88,54 @@ function AdminSiteImages() {
     );
   }
 
+  // If no experience selected, show list
+  if (!selectedExperience) {
+    return (
+      <AdminLayout 
+        onLogout={logout} 
+        lastUpdated={lastUpdated}
+        onRefresh={loadImages}
+        isRefreshing={isRefreshing}
+      >
+        <div className="admin-images-page">
+          <header className="admin-page-header">
+            <Link to="/admin/images" className="back-link">
+              <ArrowLeft size={18} />
+              Back to Image Management
+            </Link>
+            <h1 className="admin-page-title">Bucket List Experience Images</h1>
+            <p className="admin-page-subtitle">Select an experience to manage its images (hero, card, gallery)</p>
+          </header>
+
+          <div className="entity-grid">
+            {experiences.map(experience => (
+              <Link
+                key={experience.id}
+                to={`/admin/images/bucket-list/${experience.slug}`}
+                className="entity-card"
+              >
+                <h3>{experience.title}</h3>
+                <p className="entity-card-meta">
+                  {experience.duration} • {experience.category}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </AdminLayout>
+    );
+  }
+
+  // Show experience images
+  const IMAGE_TYPES = [
+    { id: 'hero', type: 'hero', label: 'Hero Image', required: true, dimensions: '1920×1080px' },
+    { id: 'card', type: 'card', label: 'Card Image', required: true, dimensions: '600×400px' },
+    { id: 'gallery-1', type: 'gallery-1', label: 'Gallery Image 1', required: false, dimensions: '1200×800px' },
+    { id: 'gallery-2', type: 'gallery-2', label: 'Gallery Image 2', required: false, dimensions: '1200×800px' },
+    { id: 'gallery-3', type: 'gallery-3', label: 'Gallery Image 3', required: false, dimensions: '1200×800px' },
+    { id: 'gallery-4', type: 'gallery-4', label: 'Gallery Image 4', required: false, dimensions: '1200×800px' },
+  ];
+
   return (
     <AdminLayout 
       onLogout={logout} 
@@ -105,12 +145,14 @@ function AdminSiteImages() {
     >
       <div className="admin-images-page">
         <header className="admin-page-header">
-          <Link to="/admin/images" className="back-link">
+          <Link to="/admin/images/bucket-list" className="back-link">
             <ArrowLeft size={18} />
-            Back to Image Management
+            Back to Bucket List
           </Link>
-          <h1 className="admin-page-title">Site Assets</h1>
-          <p className="admin-page-subtitle">Manage site-wide images and branding assets</p>
+          <h1 className="admin-page-title">{selectedExperience.title}</h1>
+          <p className="admin-page-subtitle">
+            {selectedExperience.duration} • {selectedExperience.category}
+          </p>
         </header>
 
         {loading ? (
@@ -120,7 +162,7 @@ function AdminSiteImages() {
           </div>
         ) : (
           <div className="images-list">
-            {SITE_IMAGES.map(imageSpec => {
+            {IMAGE_TYPES.map(imageSpec => {
               const existing = images[imageSpec.type];
               return (
                 <div key={imageSpec.id} className="admin-card image-card">
@@ -141,14 +183,14 @@ function AdminSiteImages() {
                   </p>
                   
                   <ImageUpload
-                    bucket={STORAGE_BUCKETS.SITE}
-                    entityType="site"
-                    entityId="site"
+                    bucket={STORAGE_BUCKETS.CATEGORIES}
+                    entityType="bucket-list"
+                    entityId={selectedExperience.id}
                     imageType={imageSpec.type}
-                    suggestedAltText={`${imageSpec.label} for Limitless Cruises`}
+                    suggestedAltText={`${selectedExperience.title} - ${imageSpec.label}`}
                     existingImage={existing?.url}
                     existingData={existing}
-                    onUploadComplete={handleUploadComplete}
+                    onUploadComplete={loadImages}
                   />
                 </div>
               );
@@ -160,4 +202,5 @@ function AdminSiteImages() {
   );
 }
 
-export default AdminSiteImages;
+export default AdminBucketListImages;
+

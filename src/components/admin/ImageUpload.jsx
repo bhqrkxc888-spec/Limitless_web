@@ -42,6 +42,7 @@ function ImageUpload({
   const [uploadProgress, setUploadProgress] = useState(0);
   const [dragActive, setDragActive] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [imageKey, setImageKey] = useState(Date.now()); // Key to force image refresh
   
   const fileInputRef = useRef(null);
   const previewRef = useRef(null);
@@ -53,8 +54,13 @@ function ImageUpload({
       if (previewRef.current && previewRef.current.startsWith('blob:')) {
         URL.revokeObjectURL(previewRef.current);
       }
-      setPreview(existingImage);
-      previewRef.current = existingImage;
+      // Add cache-busting parameter to force browser refresh
+      const urlWithTimestamp = existingImage.includes('?') 
+        ? existingImage 
+        : `${existingImage}?t=${Date.now()}`;
+      setPreview(urlWithTimestamp);
+      previewRef.current = urlWithTimestamp;
+      setImageKey(Date.now()); // Update key to force re-render
     }
     
     // Cleanup function to revoke blob URLs on unmount
@@ -190,6 +196,9 @@ function ImageUpload({
       case 'category':
         return `${entityId}.${ext}`;
 
+      case 'bucket-list':
+        return `${entityId}/${imageType}.${ext}`;
+
       case 'team':
         return `team/${entityId}.${ext}`;
 
@@ -293,6 +302,7 @@ function ImageUpload({
         const urlWithTimestamp = publicUrl.includes('?') ? publicUrl : `${publicUrl}?t=${Date.now()}`;
         setPreview(urlWithTimestamp);
         previewRef.current = urlWithTimestamp;
+        setImageKey(Date.now()); // Update key to force img re-render
       }, 1000);
 
     } catch (error) {
@@ -352,7 +362,7 @@ function ImageUpload({
       {existingImage && !file && (
         <div className="existing-image">
           <div className="existing-preview">
-            <img src={preview} alt="Current" />
+            <img key={imageKey} src={preview} alt="Current" />
           </div>
           <div className="existing-details">
             {existingData && (
@@ -429,7 +439,7 @@ function ImageUpload({
           >
             {preview && file ? (
               <div className="upload-preview">
-                <img src={preview} alt="Preview" />
+                <img key={imageKey} src={preview} alt="Preview" />
                 <button
                   type="button"
                   className="preview-clear"

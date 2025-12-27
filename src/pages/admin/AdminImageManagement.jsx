@@ -24,6 +24,7 @@ function AdminImageManagement() {
     cruiseLines: { total: 0, compliant: 0, warnings: 0, missing: 0 },
     ships: { total: 0, compliant: 0, warnings: 0, missing: 0 },
     categories: { total: 0, compliant: 0, warnings: 0, missing: 0 },
+    bucketList: { total: 0, compliant: 0, warnings: 0, missing: 0 },
   });
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
@@ -55,6 +56,7 @@ function AdminImageManagement() {
         cruiseLines: { total: 0, compliant: 0, warnings: 0, missing: 0 },
         ships: { total: 0, compliant: 0, warnings: 0, missing: 0 },
         categories: { total: 0, compliant: 0, warnings: 0, missing: 0 },
+        bucketList: { total: 0, compliant: 0, warnings: 0, missing: 0 },
       };
 
       const imagesWithWarnings = [];
@@ -64,6 +66,7 @@ function AdminImageManagement() {
                      img.entity_type === 'destination' ? 'destinations' :
                      img.entity_type === 'ship' ? 'ships' :
                      img.entity_type === 'category' ? 'categories' :
+                     img.entity_type === 'bucket-list' ? 'bucketList' :
                      img.entity_type === 'site' ? 'site' : null;
 
         if (type) {
@@ -86,10 +89,11 @@ function AdminImageManagement() {
       });
 
       // Calculate missing (expected - uploaded)
-      newStats.site.missing = Math.max(0, 4 - newStats.site.total);
-      newStats.destinations.missing = Math.max(0, 60 - newStats.destinations.total);
+      newStats.site.missing = Math.max(0, 12 - newStats.site.total); // Updated to 12 (added trust badges + agency logo)
+      newStats.destinations.missing = Math.max(0, 32 - newStats.destinations.total); // 16 destinations x 2 images
       newStats.cruiseLines.missing = Math.max(0, 171 - newStats.cruiseLines.total);
       newStats.categories.missing = Math.max(0, 6 - newStats.categories.total);
+      newStats.bucketList.missing = Math.max(0, 102 - newStats.bucketList.total); // 17 experiences x 6 images
 
       setStats(newStats);
       setWarningImages(imagesWithWarnings);
@@ -135,7 +139,7 @@ function AdminImageManagement() {
     {
       id: 'site',
       title: 'Site Assets',
-      description: 'Hero, logo, OG image, favicon, Katherine photos',
+      description: 'Hero, logo, OG image, favicon, Katherine photos, trust badges',
       icon: Image,
       path: '/admin/images/site',
       stats: stats.site,
@@ -144,7 +148,7 @@ function AdminImageManagement() {
     {
       id: 'destinations',
       title: 'Destinations',
-      description: '30 destinations with hero and card images',
+      description: '16 destinations with hero and card images',
       icon: MapPin,
       path: '/admin/images/destinations',
       stats: stats.destinations,
@@ -172,6 +176,15 @@ function AdminImageManagement() {
       path: '/admin/images/categories',
       stats: stats.categories,
       color: '#ec4899'
+    },
+    {
+      id: 'bucketList',
+      title: 'Bucket List Experiences',
+      description: '17 experiences with hero, card, and gallery images',
+      icon: Ship,
+      path: '/admin/images/bucket-list',
+      stats: stats.bucketList || { total: 0, compliant: 0, warnings: 0, missing: 0 },
+      color: '#f59e0b'
     }
   ];
 

@@ -93,6 +93,7 @@ const AdminSiteImages = lazy(() => import('./pages/admin/AdminSiteImages'))
 const AdminDestinationImages = lazy(() => import('./pages/admin/AdminDestinationImages'))
 const AdminCruiseLineImages = lazy(() => import('./pages/admin/AdminCruiseLineImages'))
 const AdminCategoryImages = lazy(() => import('./pages/admin/AdminCategoryImages'))
+const AdminBucketListImages = lazy(() => import('./pages/admin/AdminBucketListImages'))
 
 // Legal Pages
 const WebsiteTerms = lazy(() => import('./pages/WebsiteTerms'))
@@ -162,7 +163,10 @@ function AppLayout() {
           <Route path="/admin/images/site" element={<AdminSiteImages />} />
           <Route path="/admin/images/destinations" element={<AdminDestinationImages />} />
           <Route path="/admin/images/cruise-lines" element={<AdminCruiseLineImages />} />
+          <Route path="/admin/images/cruise-lines/:slug" element={<AdminCruiseLineImages />} />
           <Route path="/admin/images/categories" element={<AdminCategoryImages />} />
+          <Route path="/admin/images/bucket-list" element={<AdminBucketListImages />} />
+          <Route path="/admin/images/bucket-list/:slug" element={<AdminBucketListImages />} />
           {/* Redirect old ships route to cruise lines */}
           <Route path="/admin/images/ships" element={<Navigate to="/admin/images/cruise-lines" replace />} />
           
