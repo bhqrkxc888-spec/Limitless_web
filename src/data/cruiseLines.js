@@ -405,7 +405,7 @@ export const cruiseLines = [
     shortName: 'Fred. Olsen',
     tagline: 'Smaller ships for a more personal experience',
     description: 'Fred. Olsen offers intimate cruising on smaller ships with friendly British service and access to smaller ports that larger ships cannot reach. Family-owned for five generations, they specialise in no-fly cruises from multiple UK regional ports including Southampton, Liverpool, Newcastle, Dover, and Edinburgh.',
-    category: 'traditional',
+    category: 'mainstream',
     featured: true, // Important for UK market
     image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northernlights-hero.webp',
     logo: null, // Logo to be uploaded to CRM
@@ -1136,7 +1136,7 @@ export const cruiseLines = [
     shortName: 'Cunard',
     tagline: 'The most famous ocean liners in the world',
     description: 'Cunard offers timeless elegance aboard the world\'s most iconic ocean liners, including Queen Mary 2, Queen Victoria, and Queen Elizabeth.',
-    category: 'luxury',
+    category: 'premium',
     featured: true,
     image: 'null',
     logo: null, // Logo to be uploaded to CRM

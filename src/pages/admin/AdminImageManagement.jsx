@@ -12,6 +12,9 @@ import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
 import StatusIndicator from '../../components/admin/StatusIndicator';
 import { logger } from '../../utils/logger';
+import { cruiseLines } from '../../data/cruiseLines';
+import { destinations } from '../../config/destinations';
+import { bucketListExperiences } from '../../data/bucketList';
 import './AdminImageManagement.css';
 
 function AdminImageManagement() {
@@ -19,12 +22,12 @@ function AdminImageManagement() {
   const { isAuthenticated, isLoading: authLoading, logout } = useAdminAuth();
   
   const [stats, setStats] = useState({
-    site: { total: 0, compliant: 0, warnings: 0, missing: 0 },
-    destinations: { total: 0, compliant: 0, warnings: 0, missing: 0 },
-    cruiseLines: { total: 0, compliant: 0, warnings: 0, missing: 0 },
-    ships: { total: 0, compliant: 0, warnings: 0, missing: 0 },
-    categories: { total: 0, compliant: 0, warnings: 0, missing: 0 },
-    bucketList: { total: 0, compliant: 0, warnings: 0, missing: 0 },
+    site: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0 },
+    destinations: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0 },
+    cruiseLines: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0 },
+    ships: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0 },
+    categories: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0 },
+    bucketList: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0 },
   });
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
@@ -49,18 +52,38 @@ function AdminImageManagement() {
 
       if (error) throw error;
 
+      // Define required vs optional image types
+      const REQUIRED_IMAGE_TYPES = {
+        site: ['hero', 'logo', 'og-image', 'favicon', 'katherine1', 'katherine2', 'katherine3'],
+        destination: ['hero', 'card'],
+        'cruise-line': ['logo', 'hero', 'card'],
+        ship: ['exterior', 'deck', 'suite', 'dining'],
+        category: ['card'],
+        'bucket-list': ['hero', 'card']
+      };
+
+      const OPTIONAL_IMAGE_TYPES = {
+        site: ['hero-mobile', 'agency-logo', 'trust-abta', 'trust-atol', 'trust-clia'],
+        destination: ['mobile'], // gallery and cruise-line-specific cards are optional
+        'cruise-line': [],
+        ship: ['pool', 'entertainment', 'spa', 'theater'],
+        category: [],
+        'bucket-list': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4']
+      };
+
       // Calculate stats per entity type
       const newStats = {
-        site: { total: 0, compliant: 0, warnings: 0, missing: 0 },
-        destinations: { total: 0, compliant: 0, warnings: 0, missing: 0 },
-        cruiseLines: { total: 0, compliant: 0, warnings: 0, missing: 0 },
-        ships: { total: 0, compliant: 0, warnings: 0, missing: 0 },
-        categories: { total: 0, compliant: 0, warnings: 0, missing: 0 },
-        bucketList: { total: 0, compliant: 0, warnings: 0, missing: 0 },
+        site: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
+        destinations: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
+        cruiseLines: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
+        ships: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
+        categories: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
+        bucketList: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
       };
 
       const imagesWithWarnings = [];
 
+      // Count uploaded images by type
       data?.forEach(img => {
         const type = img.entity_type === 'cruise-line' ? 'cruiseLines' :
                      img.entity_type === 'destination' ? 'destinations' :
@@ -85,17 +108,77 @@ function AdminImageManagement() {
               warnings
             });
           }
+
+          // Check if image is required or optional
+          const requiredTypes = REQUIRED_IMAGE_TYPES[img.entity_type] || [];
+          const optionalTypes = OPTIONAL_IMAGE_TYPES[img.entity_type] || [];
+          
+          // Check if it's a required type
+          // For destinations: 'hero' and 'card' are required, 'card-{cruise-line}' are optional
+          // For ships: 'exterior', 'deck', 'suite', 'dining' are required
+          // For bucket-list: 'hero' and 'card' are required, 'gallery-*' are optional
+          let isRequired = false;
+          let isOptional = false;
+          
+          if (img.entity_type === 'destination') {
+            isRequired = img.image_type === 'hero' || img.image_type === 'card';
+            isOptional = img.image_type === 'mobile' || 
+                       img.image_type.startsWith('gallery-') || 
+                       (img.image_type.startsWith('card-') && img.image_type !== 'card');
+          } else if (img.entity_type === 'ship') {
+            isRequired = ['exterior', 'deck', 'suite', 'dining'].includes(img.image_type);
+            isOptional = ['pool', 'entertainment', 'spa', 'theater'].includes(img.image_type);
+          } else if (img.entity_type === 'bucket-list') {
+            isRequired = img.image_type === 'hero' || img.image_type === 'card';
+            isOptional = img.image_type.startsWith('gallery-');
+          } else {
+            // For other types, check against defined lists
+            isRequired = requiredTypes.includes(img.image_type);
+            isOptional = optionalTypes.includes(img.image_type);
+          }
+
+          if (isRequired) {
+            newStats[type].requiredUploaded++;
+          } else if (isOptional) {
+            newStats[type].optionalUploaded++;
+          }
         }
       });
 
-      // Calculate missing (expected - uploaded)
-      newStats.site.missing = Math.max(0, 12 - newStats.site.total); // Updated to 12 (added trust badges + agency logo)
-      // Destinations: 16 × 13 images = 208 total
-      // (hero, card, 8 cruise-line cards, 4 gallery, mobile)
-      newStats.destinations.missing = Math.max(0, 208 - newStats.destinations.total);
-      newStats.cruiseLines.missing = Math.max(0, 171 - newStats.cruiseLines.total);
-      newStats.categories.missing = Math.max(0, 6 - newStats.categories.total);
-      newStats.bucketList.missing = Math.max(0, 102 - newStats.bucketList.total); // 17 experiences x 6 images
+      // Calculate missing REQUIRED images only (not counting optional)
+      // Site: 7 required (hero, logo, og-image, favicon, katherine1-3)
+      const requiredSite = 7;
+      newStats.site.missing = Math.max(0, requiredSite - newStats.site.requiredUploaded);
+      newStats.site.optional = newStats.site.optionalUploaded; // Count of uploaded optional images
+      
+      // Destinations: count actual destinations × 2 required (hero, card)
+      const requiredDestinations = destinations.length * 2; // hero + card per destination
+      newStats.destinations.missing = Math.max(0, requiredDestinations - newStats.destinations.requiredUploaded);
+      newStats.destinations.optional = newStats.destinations.optionalUploaded; // Count of uploaded optional images
+      
+      // Cruise Lines: count actual cruise lines × 3 required (logo, hero, card)
+      const requiredCruiseLines = cruiseLines.length * 3;
+      newStats.cruiseLines.missing = Math.max(0, requiredCruiseLines - newStats.cruiseLines.requiredUploaded);
+      newStats.cruiseLines.optional = newStats.cruiseLines.optionalUploaded;
+      
+      // Ships: Count actual ships from cruise lines data
+      const totalShips = cruiseLines.reduce((count, cl) => {
+        const shipList = cl.ships || cl.fleet || [];
+        return count + shipList.length;
+      }, 0);
+      const requiredShips = totalShips * 4; // 4 required images per ship (exterior, deck, suite, dining)
+      newStats.ships.missing = Math.max(0, requiredShips - newStats.ships.requiredUploaded);
+      newStats.ships.optional = newStats.ships.optionalUploaded;
+      
+      // Categories: 6 categories × 1 required (card) = 6 required
+      const requiredCategories = 6;
+      newStats.categories.missing = Math.max(0, requiredCategories - newStats.categories.requiredUploaded);
+      newStats.categories.optional = newStats.categories.optionalUploaded;
+      
+      // Bucket List: count actual experiences × 2 required (hero, card)
+      const requiredBucketList = bucketListExperiences.length * 2;
+      newStats.bucketList.missing = Math.max(0, requiredBucketList - newStats.bucketList.requiredUploaded);
+      newStats.bucketList.optional = newStats.bucketList.optionalUploaded;
 
       setStats(newStats);
       setWarningImages(imagesWithWarnings);
@@ -131,9 +214,10 @@ function AdminImageManagement() {
   }
 
   const getStatusForCategory = (categoryStats) => {
-    if (categoryStats.missing > 0 || categoryStats.total === 0) return 'error';
-    if (categoryStats.warnings > 0) return 'warning';
-    if (categoryStats.compliant === categoryStats.total) return 'pass';
+    // Status based on REQUIRED images only
+    if (categoryStats.missing > 0) return 'error'; // Missing required images
+    if (categoryStats.warnings > 0) return 'warning'; // Has validation warnings
+    if (categoryStats.requiredUploaded > 0 && categoryStats.compliant === categoryStats.requiredUploaded) return 'pass';
     return 'warning';
   };
 
@@ -194,6 +278,7 @@ function AdminImageManagement() {
   const totalCompliant = Object.values(stats).reduce((sum, s) => sum + s.compliant, 0);
   const totalWarnings = Object.values(stats).reduce((sum, s) => sum + s.warnings, 0);
   const totalMissing = Object.values(stats).reduce((sum, s) => sum + s.missing, 0);
+  const totalOptional = Object.values(stats).reduce((sum, s) => sum + s.optional, 0);
   const compliancePercentage = totalImages > 0 ? Math.round((totalCompliant / totalImages) * 100) : 0;
 
   return (
@@ -244,8 +329,12 @@ function AdminImageManagement() {
                 )}
               </div>
               <div className="admin-stat-card">
-                <div className="admin-stat-label">Missing</div>
+                <div className="admin-stat-label">Missing (Required)</div>
                 <div className="admin-stat-value error">{totalMissing}</div>
+              </div>
+              <div className="admin-stat-card">
+                <div className="admin-stat-label">Optional</div>
+                <div className="admin-stat-value" style={{ color: 'var(--admin-text-muted)' }}>{totalOptional}</div>
               </div>
               <div className="admin-stat-card">
                 <div className="admin-stat-label">Compliance</div>
@@ -341,8 +430,14 @@ function AdminImageManagement() {
                       </div>
                       {category.stats.missing > 0 && (
                         <div className="category-stat stat-missing">
-                          <span className="label">Missing:</span>
+                          <span className="label">Missing (Required):</span>
                           <span className="value">{category.stats.missing}</span>
+                        </div>
+                      )}
+                      {category.stats.optional > 0 && (
+                        <div className="category-stat" style={{ color: 'var(--admin-text-muted)' }}>
+                          <span className="label">Optional:</span>
+                          <span className="value">{category.stats.optional}</span>
                         </div>
                       )}
                     </div>

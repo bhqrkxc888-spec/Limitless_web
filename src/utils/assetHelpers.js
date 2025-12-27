@@ -135,14 +135,16 @@ export function getCategoryHero(slug, fallback = PLACEHOLDER_IMAGE) {
 // Automatically uses images uploaded to: WEB_categories/bucket-list/{slug}/{type}.webp
 // ============================================================================
 
-export function getBucketListHero(slug, fallback = PLACEHOLDER_IMAGE) {
-  if (!slug) return fallback;
-  return getBucketListImageUrl(slug, 'hero');
+export function getBucketListHero(id, fallback = PLACEHOLDER_IMAGE) {
+  if (!id) return fallback;
+  // Note: bucket-list uses 'id' as entityId in database, not slug
+  return getBucketListImageUrl(id, 'hero');
 }
 
-export function getBucketListCard(slug, fallback = PLACEHOLDER_IMAGE) {
-  if (!slug) return fallback;
-  return getBucketListImageUrl(slug, 'card');
+export function getBucketListCard(id, fallback = PLACEHOLDER_IMAGE) {
+  if (!id) return fallback;
+  // Note: bucket-list uses 'id' as entityId in database, not slug
+  return getBucketListImageUrl(id, 'card');
 }
 
 // ============================================================================

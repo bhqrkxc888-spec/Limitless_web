@@ -68,7 +68,7 @@ function BucketListExperiencePage() {
       <HeroSection
         title={experience.title}
         subtitle={experience.tagline}
-        image={getBucketListHero(experience.slug)}
+        image={getBucketListHero(experience.id)}
         imageAlt={experience.title}
         size="lg"
         align="left"
@@ -260,7 +260,7 @@ function BucketListExperiencePage() {
                       .map((exp) => (
                         <Card key={exp.id} to={`/bucket-list/${exp.slug}`} variant="outlined" className="related-card">
                           <Card.Image 
-                            src={getBucketListCard(exp.slug)} 
+                            src={getBucketListCard(exp.id)} 
                             alt={exp.title}
                             aspectRatio="3/2"
                           />

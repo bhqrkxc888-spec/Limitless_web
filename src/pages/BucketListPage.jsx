@@ -60,7 +60,7 @@ function BucketListPage() {
       {experiences.map((experience) => (
         <Card key={experience.id} to={`/bucket-list/${experience.slug}`} variant="default" className="bucket-list-card">
           <Card.Image 
-            src={getBucketListCard(experience.slug)} 
+            src={getBucketListCard(experience.id)} 
             alt={experience.title}
             aspectRatio="3/2"
           />
@@ -135,7 +135,7 @@ function BucketListPage() {
                     className="bucket-list-featured-card"
                   >
                     <Card.Image 
-                      src={getBucketListCard(experience.slug)} 
+                      src={getBucketListCard(experience.id)} 
                       alt={experience.title}
                       aspectRatio="3/2"
                     />

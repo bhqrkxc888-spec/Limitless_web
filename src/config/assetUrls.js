@@ -92,8 +92,9 @@ export function getCategoryImageUrl(slug, type = 'card') {
 }
 
 // Helper to construct bucket list experience image URLs
+// Note: Images are stored at WEB_categories/{slug}/{type}.webp (not bucket-list/{slug}/...)
 export function getBucketListImageUrl(slug, type = 'hero') {
-  return getSupabaseImageUrl('WEB_categories', `bucket-list/${slug}/${type}.webp`);
+  return getSupabaseImageUrl('WEB_categories', `${slug}/${type}.webp`);
 }
 
 // ============================================================================
