@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { getPublishStatus } from '../config/publishStatus';
+import { isPreviewAuthenticated } from '../config/launchConfig';
 import ComingSoon from './ComingSoon';
 
 /**
@@ -7,8 +8,8 @@ import ComingSoon from './ComingSoon';
  * 
  * Controls access to content based on publish status.
  * - published: Render children (content is live)
- * - draft: Show ComingSoon component
- * - preview: Show ComingSoon (can be extended to support preview unlock)
+ * - draft: Show ComingSoon (unless admin/preview authenticated)
+ * - preview: Show ComingSoon (unless admin/preview authenticated)
  * - protected: Should not be used with PublishGate (use ProtectedRoute instead)
  * 
  * @param {Object} props
@@ -33,8 +34,13 @@ function PublishGate({
     return children;
   }
   
-  // For draft or preview, show ComingSoon
-  // (Preview unlock can be added here in the future)
+  // For draft or preview status, check if user is authenticated for preview access
+  // This allows admin users to preview draft content while hiding it from public
+  if ((status === 'draft' || status === 'preview') && isPreviewAuthenticated()) {
+    return children;
+  }
+  
+  // Not published and not authenticated - show ComingSoon
   return (
     <ComingSoon
       title={title}

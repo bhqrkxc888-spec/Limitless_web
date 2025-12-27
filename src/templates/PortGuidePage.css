@@ -1,0 +1,415 @@
+/**
+ * Port Guide Page Styles
+ */
+
+.port-guide-page {
+  background: var(--color-background);
+}
+
+/* Breadcrumb */
+.port-breadcrumb {
+  background: var(--color-gray-50);
+  padding: 0.75rem 0;
+  font-size: 0.875rem;
+}
+
+.port-breadcrumb a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.port-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.port-breadcrumb .separator {
+  margin: 0 0.5rem;
+  color: var(--color-gray-400);
+}
+
+.port-breadcrumb .current {
+  color: var(--color-gray-600);
+}
+
+/* Quick Facts Bar */
+.port-quick-facts {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  padding: 1.5rem 0;
+  color: white;
+}
+
+.quick-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+}
+
+.quick-fact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.quick-fact-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.quick-fact-label {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.quick-fact-value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-top: 0.125rem;
+}
+
+@media (max-width: 1024px) {
+  .quick-facts-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .quick-facts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Main Grid Layout */
+.port-guide-grid {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 3rem;
+}
+
+@media (max-width: 1024px) {
+  .port-guide-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .port-guide-sidebar {
+    order: -1;
+  }
+}
+
+/* Introduction */
+.port-intro {
+  margin-bottom: 3rem;
+}
+
+.port-intro .lead {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: var(--color-gray-700);
+}
+
+/* Port Sections */
+.port-section {
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.port-section:last-child {
+  border-bottom: none;
+}
+
+/* Things to Do Grid */
+.things-to-do-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.thing-card {
+  background: white;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.thing-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+.thing-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.thing-category-icon {
+  font-size: 1.5rem;
+}
+
+.thing-meta {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.thing-duration,
+.thing-price {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--color-gray-100);
+  border-radius: 4px;
+  color: var(--color-gray-600);
+}
+
+.thing-card h3 {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-gray-900);
+}
+
+.thing-card p {
+  font-size: 0.9rem;
+  color: var(--color-gray-600);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Excursions */
+.excursions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.excursion-card {
+  background: linear-gradient(135deg, var(--color-gray-50) 0%, white 100%);
+  border: 1px solid var(--color-gray-200);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.excursion-card h3 {
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-primary);
+}
+
+.excursion-card p {
+  font-size: 0.9rem;
+  color: var(--color-gray-600);
+  margin-bottom: 1rem;
+}
+
+.excursion-meta {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--color-gray-500);
+}
+
+/* Getting Around */
+.getting-around-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .getting-around-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.getting-around-item {
+  background: white;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.getting-around-item h4 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-gray-900);
+}
+
+.getting-around-item p {
+  font-size: 0.9rem;
+  color: var(--color-gray-600);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Food & Drink */
+.food-drink-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.food-drink-item {
+  background: white;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.food-drink-item h4 {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  color: var(--color-gray-900);
+}
+
+.food-drink-item .place-type {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.food-drink-item p {
+  font-size: 0.875rem;
+  color: var(--color-gray-600);
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.food-drink-item .price-range {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-gray-500);
+}
+
+/* Insider Tips */
+.insider-tips-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+}
+
+.insider-tips-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%);
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  color: var(--color-gray-800);
+  line-height: 1.5;
+}
+
+.insider-tips-list .tip-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* Sidebar */
+.port-guide-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sidebar-card {
+  background: white;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.sidebar-cta-card {
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, white 100%);
+  border-color: var(--color-primary-light);
+}
+
+.sidebar-card h3 {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+  color: var(--color-gray-900);
+}
+
+.sidebar-card p {
+  font-size: 0.9rem;
+  color: var(--color-gray-600);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+/* Practical Info List */
+.practical-info-list {
+  margin: 0;
+}
+
+.practical-info-list dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-gray-500);
+  margin-top: 1rem;
+}
+
+.practical-info-list dt:first-child {
+  margin-top: 0;
+}
+
+.practical-info-list dd {
+  font-size: 0.9rem;
+  color: var(--color-gray-800);
+  margin: 0.25rem 0 0;
+}
+
+/* Related Destinations */
+.related-destinations-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.related-destinations-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-gray-100);
+}
+
+.related-destinations-list li:last-child {
+  border-bottom: none;
+}
+
+.related-destinations-list a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.related-destinations-list a:hover {
+  text-decoration: underline;
+}
+
+/* CTA Section */
+.section-dark .cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .section-dark .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+

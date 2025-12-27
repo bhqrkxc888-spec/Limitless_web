@@ -38,6 +38,9 @@ export const PUBLISH_STATUS = {
   faq: 'published',
   testimonials: 'draft',         // Coming soon - under development
   
+  // Port Guides (Draft - under development)
+  ports: 'draft',                // Port guides hub and individual port pages
+  
   // Legal pages (always published)
   legal: 'published',
   
@@ -107,6 +110,11 @@ export function getPublishStatus(path) {
   if (normalizedPath === '/faq') return PUBLISH_STATUS.faq;
   if (normalizedPath === '/testimonials') return PUBLISH_STATUS.testimonials;
   
+  // Port guides
+  if (normalizedPath === '/ports' || normalizedPath.startsWith('/ports/')) {
+    return PUBLISH_STATUS.ports;
+  }
+  
   // Legal pages (always published)
   if (['/privacy-policy', '/cookie-policy', '/booking-terms', '/website-terms', '/price-match-guarantee'].includes(normalizedPath)) {
     return PUBLISH_STATUS.legal;
@@ -170,6 +178,7 @@ export function getPublishedRoutes() {
   if (PUBLISH_STATUS.bucketList === 'published') routes.push('/bucket-list');
   if (PUBLISH_STATUS.faq === 'published') routes.push('/faq');
   if (PUBLISH_STATUS.testimonials === 'published') routes.push('/testimonials');
+  if (PUBLISH_STATUS.ports === 'published') routes.push('/ports');
   
   // Legal pages (always published)
   if (PUBLISH_STATUS.legal === 'published') {

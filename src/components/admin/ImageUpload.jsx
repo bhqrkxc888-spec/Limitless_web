@@ -45,10 +45,16 @@ function ImageUpload({
   
   const fileInputRef = useRef(null);
 
-  // Update preview when existingImage changes
+  // Update preview when existingImage changes (only if no file selected)
   useEffect(() => {
-    setPreview(existingImage);
-  }, [existingImage]);
+    if (!file && existingImage) {
+      // Clean up any previous blob URL
+      if (preview && preview.startsWith('blob:')) {
+        URL.revokeObjectURL(preview);
+      }
+      setPreview(existingImage);
+    }
+  }, [existingImage, file]);
 
   // Update alt text when suggested changes
   useEffect(() => {
@@ -83,6 +89,11 @@ function ImageUpload({
   const handleFileSelect = async (selectedFile) => {
     if (!selectedFile) return;
 
+    // Clean up previous object URL if it was a file preview (not existingImage)
+    if (preview && preview.startsWith('blob:')) {
+      URL.revokeObjectURL(preview);
+    }
+
     setFile(selectedFile);
     
     // Create preview
@@ -111,6 +122,11 @@ function ImageUpload({
   const handleFileInputChange = (e) => {
     if (e.target.files && e.target.files[0]) {
       handleFileSelect(e.target.files[0]);
+    } else {
+      // Reset file input if no file selected
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
     }
   };
 
@@ -250,6 +266,11 @@ function ImageUpload({
         }
       });
 
+      // Clean up object URL before resetting
+      if (preview && preview.startsWith('blob:')) {
+        URL.revokeObjectURL(preview);
+      }
+
       // Reset form
       setTimeout(() => {
         setFile(null);
@@ -272,6 +293,11 @@ function ImageUpload({
 
   // Clear selection
   const handleClear = () => {
+    // Clean up object URL if it was a file preview
+    if (preview && preview.startsWith('blob:')) {
+      URL.revokeObjectURL(preview);
+    }
+    
     setFile(null);
     setPreview(existingImage);
     setValidationResult(null);

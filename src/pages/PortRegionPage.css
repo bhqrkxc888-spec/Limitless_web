@@ -1,0 +1,109 @@
+/**
+ * Port Region Page Styles
+ */
+
+.port-region-page {
+  background: var(--color-background);
+}
+
+/* Breadcrumb */
+.port-breadcrumb {
+  background: var(--color-gray-50);
+  padding: 0.75rem 0;
+  font-size: 0.875rem;
+}
+
+.port-breadcrumb a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.port-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.port-breadcrumb .separator {
+  margin: 0 0.5rem;
+  color: var(--color-gray-400);
+}
+
+.port-breadcrumb .current {
+  color: var(--color-gray-600);
+}
+
+/* Ports Grid */
+.ports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.port-card .port-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.port-card .port-country {
+  font-size: 0.8rem;
+  color: var(--color-gray-500);
+}
+
+.port-card .port-quick-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--color-gray-500);
+}
+
+.port-card .port-quick-info span {
+  background: var(--color-gray-100);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* No Ports Message */
+.no-ports {
+  text-align: center;
+  padding: 3rem;
+  background: var(--color-gray-50);
+  border-radius: 12px;
+}
+
+.no-ports p {
+  font-size: 1.125rem;
+  color: var(--color-gray-600);
+  margin-bottom: 1.5rem;
+}
+
+/* CTA Section */
+.section-dark {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: white;
+}
+
+.section-dark h2 {
+  color: white;
+}
+
+.section-dark p {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.section-dark .cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .section-dark .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+

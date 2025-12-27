@@ -106,6 +106,11 @@ const CruiseLinePage = lazy(() => import('./templates/CruiseLinePage'))
 const DestinationPage = lazy(() => import('./templates/DestinationPage'))
 const CategoryPage = lazy(() => import('./templates/CategoryPage'))
 const BucketListExperiencePage = lazy(() => import('./templates/BucketListExperiencePage'))
+const PortGuidePage = lazy(() => import('./templates/PortGuidePage'))
+
+// Port Guide Pages (Draft)
+const PortsPage = lazy(() => import('./pages/PortsPage'))
+const PortRegionPage = lazy(() => import('./pages/PortRegionPage'))
 
 // Scroll to top on route change and trigger SEO analysis
 function ScrollToTop() {
@@ -232,6 +237,32 @@ function AppLayout() {
             {/* Cruise Guides - Published */}
             <Route path="/cruise-guides" element={<CruiseGuidesPage />} />
             <Route path="/cruise-guides/:slug" element={<CruiseGuideDetailPage />} />
+            
+            {/* Port Guides - Draft (Coming Soon) */}
+            <Route 
+              path="/ports" 
+              element={
+                <PublishGate section="Port Guides" title="Port Guides" backLink="/" backLabel="Return Home">
+                  <PortsPage />
+                </PublishGate>
+              } 
+            />
+            <Route 
+              path="/ports/region/:slug" 
+              element={
+                <PublishGate section="Port Guides" title="Port Guides" backLink="/ports" backLabel="All Ports">
+                  <PortRegionPage />
+                </PublishGate>
+              } 
+            />
+            <Route 
+              path="/ports/:slug" 
+              element={
+                <PublishGate section="Port Guides" title="Port Guide" backLink="/ports" backLabel="All Ports">
+                  <PortGuidePage />
+                </PublishGate>
+              } 
+            />
             
             {/* Legal Pages - Always Public */}
             <Route path="/website-terms" element={<WebsiteTerms />} />

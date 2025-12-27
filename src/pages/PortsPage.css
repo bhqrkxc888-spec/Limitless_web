@@ -1,0 +1,130 @@
+/**
+ * Ports Hub Page Styles
+ */
+
+.ports-page {
+  background: var(--color-background);
+}
+
+/* Introduction */
+.ports-intro {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.ports-intro h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-gray-900);
+}
+
+.ports-intro .lead {
+  font-size: 1.125rem;
+  color: var(--color-gray-600);
+  line-height: 1.8;
+}
+
+/* Regions Grid */
+.regions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.region-card .region-meta {
+  margin-top: 0.75rem;
+}
+
+.region-card .port-count {
+  font-size: 0.875rem;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* Region Header */
+.region-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+.region-header .section-header {
+  margin-bottom: 0;
+}
+
+.view-all-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.view-all-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .region-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+/* Ports Grid */
+.ports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.port-card .port-card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.port-card .port-country {
+  font-size: 0.8rem;
+  color: var(--color-gray-500);
+}
+
+.port-card .port-quick-info {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--color-gray-500);
+}
+
+/* CTA Section */
+.section-dark {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  color: white;
+}
+
+.section-dark h2 {
+  color: white;
+}
+
+.section-dark p {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.section-dark .cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .section-dark .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
