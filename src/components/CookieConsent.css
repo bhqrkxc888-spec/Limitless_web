@@ -6,7 +6,7 @@
   background: var(--clr-surface);
   border-top: 2px solid var(--clr-accent);
   box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  z-index: var(--z-modal); /* Use token instead of 1000 */
   padding: var(--space-6);
   animation: slideUp 0.3s ease-out;
   /* Reserve space to prevent CLS - element is always in DOM */

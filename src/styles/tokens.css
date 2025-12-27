@@ -157,15 +157,16 @@
   --transition-slower: 500ms ease;
 
   /* ========================================
-     Z-INDEX SCALE
+     Z-INDEX SCALE - Updated for better separation
+     Increased values to prevent conflicts with third-party libraries
      ======================================== */
 
   --z-base: 0;
-  --z-dropdown: 100;
-  --z-sticky: 200;
-  --z-fixed: 300;
-  --z-modal-backdrop: 400;
-  --z-modal: 500;
-  --z-popover: 600;
-  --z-tooltip: 700;
+  --z-dropdown: 1000;       /* Dropdowns and mega menus */
+  --z-sticky: 1100;         /* Sticky headers */
+  --z-fixed: 1200;          /* Fixed position elements (mobile toggle, etc) */
+  --z-modal-backdrop: 1300; /* Modal backdrops */
+  --z-modal: 1400;          /* Modals and overlays */
+  --z-popover: 1500;        /* Popovers */
+  --z-tooltip: 1600;        /* Tooltips (highest) */
 }

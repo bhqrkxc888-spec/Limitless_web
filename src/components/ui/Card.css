@@ -6,7 +6,8 @@
   background-color: var(--clr-surface);
   border-radius: var(--radius-xl);
   overflow: hidden;
-  transition: all var(--transition-base);
+  /* Optimize: only transition specific properties for better performance */
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
 }
 
 /* ========================================

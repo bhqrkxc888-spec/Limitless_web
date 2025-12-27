@@ -128,6 +128,7 @@
 .selector-group select:focus {
   outline: none;
   border-color: var(--admin-primary);
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 /* Entity images section */
@@ -182,7 +183,7 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .image-card-header {
     flex-direction: column;
     align-items: flex-start;

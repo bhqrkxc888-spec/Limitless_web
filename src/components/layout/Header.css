@@ -217,7 +217,7 @@
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 9999;
+  z-index: var(--z-dropdown); /* Use token instead of 9999 */
   min-width: 300px;
   max-width: 900px;
   background-color: var(--clr-surface);
@@ -377,7 +377,7 @@
 
   .header-mobile-toggle {
     display: flex; /* Changed from block to flex */
-    z-index: 1001;
+    z-index: var(--z-fixed); /* Use token instead of 1001 */
     min-width: 44px; /* WCAG minimum touch target */
     min-height: 44px;
     padding: var(--space-2);

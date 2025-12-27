@@ -504,7 +504,7 @@
   display: flex;
   flex-direction: column;
   animation: slideInPanel 0.35s ease-out;
-  z-index: 99999;
+  z-index: var(--z-modal); /* Use token instead of 99999 */
   border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
@@ -524,7 +524,7 @@
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.25);
-  z-index: 99998;
+  z-index: calc(var(--z-modal) - 1); /* Use token instead of 99998 */
   animation: fadeIn 0.2s ease-out;
 }
 
@@ -808,11 +808,11 @@
     width: 100%;
     max-height: 70vh;
     border-radius: 20px 20px 0 0;
-    z-index: 99999;
+    z-index: var(--z-modal); /* Use token instead of 99999 */
   }
   
   .port-attractions-backdrop {
-    z-index: 99998;
+    z-index: calc(var(--z-modal) - 1); /* Use token instead of 99998 */
   }
   
   @keyframes slideInPanel {
@@ -1119,7 +1119,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .itinerary-sidebar {
     height: 450px;
   }

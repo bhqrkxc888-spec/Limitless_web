@@ -314,6 +314,32 @@ button {
 }
 
 /* ========================================
+   CTA BUTTONS - Global Styles
+   ======================================== */
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-6); /* 24px - comfortable spacing between buttons */
+  flex-wrap: wrap;
+  margin-top: var(--space-8);
+}
+
+@media (max-width: 767px) {
+  .cta-buttons {
+    flex-direction: column;
+    gap: var(--space-4);
+    width: 100%;
+  }
+
+  .cta-buttons .btn {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+/* ========================================
    GRID UTILITIES
    ======================================== */
 

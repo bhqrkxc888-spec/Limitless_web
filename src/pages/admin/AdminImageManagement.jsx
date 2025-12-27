@@ -57,16 +57,16 @@ function AdminImageManagement() {
         site: ['hero', 'logo', 'og-image', 'favicon', 'katherine1', 'katherine2', 'katherine3'],
         destination: ['hero', 'card'],
         'cruise-line': ['logo', 'hero', 'card'],
-        ship: ['exterior', 'deck', 'suite', 'dining'],
+        ship: [], // SHIPS ARE OPTIONAL - Future enhancement, not required for launch
         category: ['card'],
         'bucket-list': ['hero', 'card']
       };
 
       const OPTIONAL_IMAGE_TYPES = {
         site: ['hero-mobile', 'agency-logo', 'trust-abta', 'trust-atol', 'trust-clia'],
-        destination: ['mobile'], // gallery and cruise-line-specific cards are optional
+        destination: ['mobile', 'gallery-1', 'gallery-2', 'gallery-3', 'gallery-4'], // gallery and cruise-line-specific cards are optional
         'cruise-line': [],
-        ship: ['pool', 'entertainment', 'spa', 'theater'],
+        ship: ['exterior', 'deck', 'suite', 'dining', 'pool', 'entertainment', 'spa', 'theater'], // ALL SHIP IMAGES ARE OPTIONAL
         category: [],
         'bucket-list': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4']
       };
@@ -126,8 +126,9 @@ function AdminImageManagement() {
                        img.image_type.startsWith('gallery-') || 
                        (img.image_type.startsWith('card-') && img.image_type !== 'card');
           } else if (img.entity_type === 'ship') {
-            isRequired = ['exterior', 'deck', 'suite', 'dining'].includes(img.image_type);
-            isOptional = ['pool', 'entertainment', 'spa', 'theater'].includes(img.image_type);
+            // ALL SHIP IMAGES ARE OPTIONAL - not building ship profiles now
+            isRequired = false;
+            isOptional = ['exterior', 'deck', 'suite', 'dining', 'pool', 'entertainment', 'spa', 'theater'].includes(img.image_type);
           } else if (img.entity_type === 'bucket-list') {
             isRequired = img.image_type === 'hero' || img.image_type === 'card';
             isOptional = img.image_type.startsWith('gallery-');
@@ -161,14 +162,15 @@ function AdminImageManagement() {
       newStats.cruiseLines.missing = Math.max(0, requiredCruiseLines - newStats.cruiseLines.requiredUploaded);
       newStats.cruiseLines.optional = newStats.cruiseLines.optionalUploaded;
       
-      // Ships: Count actual ships from cruise lines data
+      // Ships: NOT REQUIRED - Future enhancement only
+      // Ships are optional for now as we're not building ship profile pages
       const totalShips = cruiseLines.reduce((count, cl) => {
         const shipList = cl.ships || cl.fleet || [];
         return count + shipList.length;
       }, 0);
-      const requiredShips = totalShips * 4; // 4 required images per ship (exterior, deck, suite, dining)
-      newStats.ships.missing = Math.max(0, requiredShips - newStats.ships.requiredUploaded);
-      newStats.ships.optional = newStats.ships.optionalUploaded;
+      const requiredShips = 0; // Changed from totalShips * 4 - ships are NOT required
+      newStats.ships.missing = 0; // Ships don't count as missing since they're optional
+      newStats.ships.optional = newStats.ships.optionalUploaded; // All ship uploads count as optional
       
       // Categories: 6 categories × 1 required (card) = 6 required
       const requiredCategories = 6;

@@ -16,8 +16,8 @@ import { supabase, getPublicUrl } from '../../lib/supabase';
 import { STORAGE_BUCKETS } from '../../config/supabaseConfig';
 import './AdminImagesShared.css';
 
-const REQUIRED_SHIP_GALLERY = ['exterior', 'deck', 'suite', 'dining'];
-const OPTIONAL_SHIP_GALLERY = ['pool', 'entertainment', 'spa', 'theater'];
+const REQUIRED_SHIP_GALLERY = []; // Ships are OPTIONAL - future enhancement
+const OPTIONAL_SHIP_GALLERY = ['exterior', 'deck', 'suite', 'dining', 'pool', 'entertainment', 'spa', 'theater']; // All ship images are optional
 
 function AdminCruiseLineImages() {
   const navigate = useNavigate();
@@ -103,8 +103,9 @@ function AdminCruiseLineImages() {
     const shipKey = `${cruiseLineSlug}/ships/${ship.slug || ship.name.toLowerCase().replace(/\s+/g, '-')}`;
     const shipImgs = shipImages[shipKey] || {};
     
-    const hasRequired = REQUIRED_SHIP_GALLERY.every(type => shipImgs[type]);
-    if (!hasRequired) return 'error';
+    // Ships are optional - no error status for missing images
+    const hasAnyImages = Object.keys(shipImgs).length > 0;
+    if (!hasAnyImages) return 'missing'; // No images uploaded yet
     
     const allCompliant = Object.values(shipImgs).every(img => img.seo_compliant);
     return allCompliant ? 'pass' : 'warning';
@@ -282,10 +283,23 @@ function AdminCruiseLineImages() {
               
               return (
                 <>
-                  <h3 style={{ color: 'var(--admin-text)', fontSize: '1.25rem', marginTop: '3rem', marginBottom: '1rem' }}>
-                    <Ship size={20} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
-                    Ships ({shipList.length})
-                  </h3>
+            <h3 style={{ color: 'var(--admin-text)', fontSize: '1.25rem', marginTop: '3rem', marginBottom: '1rem' }}>
+              <Ship size={20} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
+              Ships ({shipList.length}) - Optional / Future Enhancement
+            </h3>
+            <p style={{
+              color: 'var(--admin-text-muted)',
+              fontSize: '0.875rem',
+              marginBottom: '1.5rem',
+              background: 'var(--admin-bg-secondary)',
+              padding: '0.75rem 1rem',
+              borderRadius: '8px',
+              borderLeft: '3px solid var(--admin-warning)'
+            }}>
+              ℹ️ Ship images are <strong>optional</strong> and not required for site launch. 
+              We're not building individual ship profile pages at this time. 
+              Upload these images only if available and time permits.
+            </p>
                   <div className="entity-grid">
                     {[...shipList]
                       .sort((a, b) => {
@@ -332,34 +346,7 @@ function AdminCruiseLineImages() {
 
               return (
                 <div className="images-list">
-                  <h3 style={{ color: 'var(--admin-text)', marginBottom: '1rem' }}>Required Gallery Images</h3>
-                  {REQUIRED_SHIP_GALLERY.map(type => (
-                    <div key={type} className="admin-card image-card">
-                      <div className="image-card-header">
-                        <div className="image-card-title">
-                          <h3>{type.charAt(0).toUpperCase() + type.slice(1)}</h3>
-                          <span className="badge badge-required">Required</span>
-                        </div>
-                        <StatusIndicator 
-                          status={shipImgs[type] ? 'pass' : 'missing'} 
-                          size="small" 
-                        />
-                      </div>
-                      <p className="image-card-specs">Recommended: 1200×800px, WebP format</p>
-                      <ImageUpload
-                        bucket={STORAGE_BUCKETS.CRUISE_LINES}
-                        entityType="ship"
-                        entityId={shipEntityId}
-                        imageType={type}
-                        suggestedAltText={`${selectedShip.name} ${type}`}
-                        existingImage={shipImgs[type]?.url}
-                        existingData={shipImgs[type]}
-                        onUploadComplete={loadImages}
-                      />
-                    </div>
-                  ))}
-
-                  <h3 style={{ color: 'var(--admin-text)', margin: '2rem 0 1rem' }}>Optional Gallery Images</h3>
+                  <h3 style={{ color: 'var(--admin-text)', marginBottom: '1rem' }}>Ship Gallery Images (All Optional)</h3>
                   {OPTIONAL_SHIP_GALLERY.map(type => (
                     <div key={type} className="admin-card image-card">
                       <div className="image-card-header">

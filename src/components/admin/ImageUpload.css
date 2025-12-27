@@ -74,7 +74,7 @@
   font-size: 0.8125rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
 }
 
 .btn-copy {
@@ -122,7 +122,7 @@
   padding: 1.5rem;
   text-align: center;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: border-color 0.2s, background-color 0.2s, transform 0.2s;
   background: var(--admin-bg-secondary, #f9fafb);
   min-height: 160px;
   display: flex;
@@ -336,7 +336,7 @@
   align-items: center;
   gap: 0.375rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background-color 0.2s, transform 0.2s;
   border: none;
 }
 
@@ -379,7 +379,7 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .existing-image {
     grid-template-columns: 1fr;
     gap: 1rem;
