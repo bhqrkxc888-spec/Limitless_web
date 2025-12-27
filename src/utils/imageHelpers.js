@@ -145,8 +145,8 @@ export const aboutImages = {
  * Now uses centralized config with proper fallback
  * Mobile hero is optional - falls back to desktop if not provided
  */
-import { SITE_ASSETS, PLACEHOLDER_IMAGE } from '../config/assetUrls';
-export const homeHeroImages = [SITE_ASSETS.homeHero || PLACEHOLDER_IMAGE];
+import { SITE_ASSETS } from '../config/assetUrls';
+export const homeHeroImages = [SITE_ASSETS.homeHero || '/images/placeholders/hero.svg'];
 export const homeHeroMobileImage = SITE_ASSETS.homeHeroMobile || null; // null = use desktop image
 
 /**
