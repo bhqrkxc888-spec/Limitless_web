@@ -164,11 +164,6 @@ function AdminImageManagement() {
       
       // Ships: NOT REQUIRED - Future enhancement only
       // Ships are optional for now as we're not building ship profile pages
-      const totalShips = cruiseLines.reduce((count, cl) => {
-        const shipList = cl.ships || cl.fleet || [];
-        return count + shipList.length;
-      }, 0);
-      const requiredShips = 0; // Changed from totalShips * 4 - ships are NOT required
       newStats.ships.missing = 0; // Ships don't count as missing since they're optional
       newStats.ships.optional = newStats.ships.optionalUploaded; // All ship uploads count as optional
       
