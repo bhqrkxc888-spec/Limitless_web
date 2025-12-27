@@ -17,7 +17,7 @@ import './AdminImagesShared.css';
 const SITE_IMAGES = [
   { id: 'hero', type: 'hero', label: 'Home Hero (Desktop)', required: true, dimensions: '1920×1080px' },
   { id: 'hero-mobile', type: 'hero-mobile', label: 'Home Hero (Mobile)', required: false, dimensions: '768×1024px' },
-  { id: 'logo', type: 'logo', label: 'Site Logo', required: true, dimensions: '400×120px' },
+  { id: 'logo', type: 'logo', label: 'Site Logo (Square Icon)', required: true, dimensions: '512×512px square' },
   { id: 'og-image', type: 'og-image', label: 'OG Image (Social Sharing)', required: true, dimensions: '1200×630px' },
   { id: 'favicon', type: 'favicon', label: 'Favicon', required: true, dimensions: '512×512px' },
   { id: 'katherine1', type: 'katherine1', label: 'About Page - Katherine Photo 1 (Why Choose section)', required: true, dimensions: '800×1000px portrait' },

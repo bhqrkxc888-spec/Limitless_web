@@ -48,7 +48,7 @@ export const DIMENSION_SPECS = {
   // Site assets
   'site-hero': { width: 1920, height: 1080 },
   'site-hero-mobile': { width: 768, height: 1024 },
-  'site-logo': { width: 400, height: 120 },
+  'site-logo': { width: 512, height: 512 }, // Square icon (displays at 56×56px, text is separate HTML)
   'site-og-image': { width: 1200, height: 630 },
   'site-favicon': { width: 512, height: 512 },
   
