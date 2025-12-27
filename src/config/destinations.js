@@ -154,20 +154,6 @@ export const destinations = [
     description: 'Scandinavia, Arctic Circle, midnight sun'
   },
   {
-    id: 22,
-    slug: 'atlantic-islands',
-    name: 'Atlantic Islands',
-    heroFilename: 'atlantic-islands-HERO.jpg',
-    description: 'Azores, Madeira, Cape Verde, island hopping'
-  },
-  {
-    id: 23,
-    slug: 'africa',
-    name: 'Africa',
-    heroFilename: 'africa-HERO.jpg',
-    description: 'Cape Town, safaris, exotic coastlines'
-  },
-  {
     id: 24,
     slug: 'western-mediterranean',
     name: 'Western Mediterranean',
@@ -182,13 +168,6 @@ export const destinations = [
     description: 'Turkey, Israel, Cyprus, ancient history'
   },
   {
-    id: 26,
-    slug: 'pacific-islands',
-    name: 'Pacific Islands',
-    heroFilename: 'pacific-islands-HERO.jpg',
-    description: 'Tahiti, Fiji, Bora Bora, South Pacific paradise'
-  },
-  {
     id: 27,
     slug: 'world-cruise',
     name: 'World Cruise',
@@ -201,13 +180,6 @@ export const destinations = [
     name: 'Bermuda',
     heroFilename: 'bermuda-HERO.jpg',
     description: 'Pink sand beaches, British charm, crystal waters'
-  },
-  {
-    id: 29,
-    slug: 'black-sea',
-    name: 'Black Sea',
-    heroFilename: 'black-sea-HERO.jpg',
-    description: 'Ukraine, Bulgaria, Turkey, ancient ports'
   },
   {
     id: 30,
@@ -255,20 +227,20 @@ export function getDestinationsByRegion() {
     'Europe': destinations.filter(d => 
       ['mediterranean', 'baltic', 'british-isles', 'greece-islands', 'adriatic', 
        'iceland', 'northern-europe', 'western-mediterranean', 'eastern-mediterranean',
-       'black-sea', 'norway', 'canary-islands'].includes(d.slug)
+       'norway', 'canary-islands'].includes(d.slug)
     ),
     'Caribbean & Americas': destinations.filter(d => 
       ['caribbean', 'bermuda', 'mexico', 'south-america', 'panama-canal', 
        'canada-new-england', 'hawaii'].includes(d.slug)
     ),
     'Asia & Pacific': destinations.filter(d => 
-      ['asia', 'japan', 'australia-new-zealand', 'pacific-islands', 'dubai-middle-east'].includes(d.slug)
+      ['asia', 'japan', 'australia-new-zealand', 'dubai-middle-east'].includes(d.slug)
     ),
     'Polar & Adventure': destinations.filter(d => 
       ['alaska', 'antarctica', 'iceland'].includes(d.slug)
     ),
     'Other': destinations.filter(d => 
-      ['transatlantic', 'world-cruise', 'atlantic-islands', 'africa'].includes(d.slug)
+      ['transatlantic', 'world-cruise'].includes(d.slug)
     )
   };
 }

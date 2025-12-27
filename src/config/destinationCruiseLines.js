@@ -77,16 +77,6 @@ export const DESTINATION_CRUISE_LINE_MAP = {
     ]
   },
   
-  'atlantic-islands-cruises': {
-    cruiseLines: [
-      { slug: 'p-and-o-cruises', name: 'P&O Cruises', shortName: 'P&O', priority: 8, type: 'mainstream' },
-      { slug: 'royal-caribbean', name: 'Royal Caribbean', shortName: 'Royal Caribbean', priority: 7, type: 'mainstream' },
-      { slug: 'msc-cruises', name: 'MSC Cruises', shortName: 'MSC', priority: 6, type: 'mainstream' },
-      { slug: 'princess-cruises', name: 'Princess Cruises', shortName: 'Princess', priority: 6, type: 'mainstream' },
-      { slug: 'cunard-cruises', name: 'Cunard', shortName: 'Cunard', priority: 6, type: 'mainstream' },
-    ]
-  },
-  
   'alaska-cruises': {
     cruiseLines: [
       { slug: 'princess-cruises', name: 'Princess Cruises', shortName: 'Princess', priority: 10, type: 'mainstream' },
@@ -105,6 +95,16 @@ export const DESTINATION_CRUISE_LINE_MAP = {
       { slug: 'p-and-o-cruises', name: 'P&O Cruises', shortName: 'P&O', priority: 7, type: 'mainstream' },
       { slug: 'msc-cruises', name: 'MSC Cruises', shortName: 'MSC', priority: 7, type: 'mainstream' },
       { slug: 'cunard-cruises', name: 'Cunard', shortName: 'Cunard', priority: 6, type: 'mainstream' },
+    ]
+  },
+  
+  'canary-islands-cruises': {
+    cruiseLines: [
+      { slug: 'p-and-o-cruises', name: 'P&O Cruises', shortName: 'P&O', priority: 8, type: 'mainstream' },
+      { slug: 'marella-cruises', name: 'Marella Cruises', shortName: 'Marella', priority: 7, type: 'mainstream' },
+      { slug: 'msc-cruises', name: 'MSC Cruises', shortName: 'MSC', priority: 6, type: 'mainstream' },
+      { slug: 'fred-olsen-cruises', name: 'Fred. Olsen', shortName: 'Fred. Olsen', priority: 6, type: 'mainstream' },
+      { slug: 'princess-cruises', name: 'Princess Cruises', shortName: 'Princess', priority: 5, type: 'mainstream' },
     ]
   },
   

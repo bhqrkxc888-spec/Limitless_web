@@ -111,40 +111,6 @@ export const destinations = [
       description: 'Book Norwegian Fjords cruises. Dramatic landscapes, midnight sun and more. Expert advice from Limitless Cruises.'
     }
   },
-  {
-    id: 'atlantic-islands',
-    slug: 'atlantic-islands-cruises',
-    name: 'Atlantic Islands',
-    tagline: 'Canaries, Azores & Madeira',
-    description: 'Discover the volcanic landscapes, year-round sunshine, and unique cultures of the Atlantic Islands including the Canaries, Azores, and Madeira.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/canary-islands/tenerife-beach.webp',
-    featured: false,
-    // Coordinates for API integration (Tenerife as primary port)
-    coordinates: {
-      lat: 28.4636,
-      lon: -16.2518,
-      ports: [
-        { name: 'Tenerife', country: 'Spain', lat: 28.4636, lon: -16.2518 },
-        { name: 'Madeira', country: 'Portugal', lat: 32.6457, lon: -16.9255 },
-        { name: 'Lanzarote', country: 'Spain', lat: 28.9630, lon: -13.5477 },
-        { name: 'Gran Canaria', country: 'Spain', lat: 27.9202, lon: -15.5474 },
-        { name: 'La Palma', country: 'Spain', lat: 28.6835, lon: -17.7642 }
-      ]
-    },
-    regions: ['Canary Islands', 'Azores', 'Madeira', 'Cape Verde'],
-    highlights: [
-      'Year-round sunshine',
-      'Volcanic landscapes',
-      'Botanical gardens',
-      'Unique local cultures'
-    ],
-    bestTime: 'Year-round',
-    cruiseLines: ['P&O Cruises', 'Marella Cruises', 'Fred. Olsen', 'MSC Cruises'],
-    meta: {
-      title: 'Atlantic Islands Cruises | Canary Islands, Madeira & Azores',
-      description: 'Book Atlantic Islands cruises. Canaries, Madeira, Azores and more. Expert advice from Limitless Cruises.'
-    }
-  },
   // NEW DESTINATIONS BELOW
   {
     id: 'alaska',
