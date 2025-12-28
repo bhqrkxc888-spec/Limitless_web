@@ -404,8 +404,7 @@ function PortGuidePage() {
                     rel="noopener noreferrer"
                     className="google-maps-link google-maps-link-large"
                   >
-                    <MapPin size={18} />
-                    <span>Open in Google Maps</span>
+                    Google Maps
                   </a>
                 </div>
               </div>
