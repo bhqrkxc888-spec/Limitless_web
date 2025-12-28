@@ -246,30 +246,9 @@ function AppLayout() {
             <Route path="/cruise-guides/:slug" element={<CruiseGuideDetailPage />} />
             
             {/* Port Guides - Published (20 ports live) */}
-            <Route 
-              path="/ports" 
-              element={
-                <PublishGate section="Port Guides" title="Port Guides" backLink="/" backLabel="Return Home">
-                  <PortsPage />
-                </PublishGate>
-              } 
-            />
-            <Route 
-              path="/ports/region/:slug" 
-              element={
-                <PublishGate section="Port Guides" title="Port Guides" backLink="/ports" backLabel="All Ports">
-                  <PortRegionPage />
-                </PublishGate>
-              } 
-            />
-            <Route 
-              path="/ports/:slug" 
-              element={
-                <PublishGate section="Port Guides" title="Port Guide" backLink="/ports" backLabel="All Ports">
-                  <PortGuidePage />
-                </PublishGate>
-              } 
-            />
+            <Route path="/ports" element={<PortsPage />} />
+            <Route path="/ports/region/:slug" element={<PortRegionPage />} />
+            <Route path="/ports/:slug" element={<PortGuidePage />} />
             
             {/* Legal Pages - Always Public */}
             <Route path="/website-terms" element={<WebsiteTerms />} />
