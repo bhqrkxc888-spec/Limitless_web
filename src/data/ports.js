@@ -455,7 +455,7 @@ export const ports = [
       {
         title: 'Seafront & Waterloo Crescent',
         category: 'stroll',
-        description: 'Regency crescent with cafes, Prince Regent pub serving fish and chips, and harbour people-watching overlooking ferries.',
+        description: 'Regency crescent with cafes, Prince Regent pub serving fish and chips, and harbour relaxing overlooking ferries.',
         duration: '45 minutes to 1 hour for a relaxed pace',
         tips: [
           'Stop for traditional fish and chips lunch at seafront pubs',
@@ -1700,7 +1700,7 @@ export const ports = [
       {
         title: 'Trevi Fountain & Spanish Steps',
         category: 'landmark',
-        description: 'Baroque fountain coin toss and elegant staircase shopping/people-watching.',
+        description: 'Baroque fountain coin toss and elegant staircase shopping/relaxing.',
         duration: '1 to 1.5 hours for a relaxed pace',
         tips: [
           'Trevi 8am empty',
@@ -2001,7 +2001,7 @@ export const ports = [
         busRoute: 'Metro M2 to Rond-Point du Prado then tram',
         notes: 'Family-friendly with shallow sections',
       },
-      bestFor: ['families with children', 'swimming', 'people watching'],
+      bestFor: ['families with children', 'swimming', 'relaxing'],
       tip: 'Northern Prado quieter than main beach area.',
     },
     
@@ -2516,7 +2516,7 @@ export const ports = [
         busRoute: 'Local buses available',
         notes: 'Flat promenade; surf conditions variable',
       },
-      bestFor: ['swimming', 'people watching', 'seafood lunch'],
+      bestFor: ['swimming', 'relaxing', 'seafood lunch'],
       tip: 'Fresh grilled sardines at beach restaurants post-swim.',
     },
     
@@ -2971,7 +2971,7 @@ export const ports = [
         description: 'Heroine statue, town hall, cafés in glass-balconied core. The heart of A Coruña with historic buildings, lively atmosphere and traditional Galician character.',
         duration: '45 minutes to 1 hour for a relaxed pace',
         tips: [
-          'Perfect for morning coffee and people-watching',
+          'Perfect for morning coffee and relaxing',
           'Free WiFi available in the square',
           'Nearby cafés offer excellent views of the historic architecture'
         ],
@@ -3010,7 +3010,7 @@ export const ports = [
         description: 'Urban twin golden sands with promenade, surf, and city backdrop. Wide double beach with excellent facilities, perfect for families and beach activities.',
         duration: '2 to 3 hours for a relaxed pace',
         tips: [
-          'Riazor is quieter than Orzán for a more relaxed experience',
+          'Riazor Beach is quieter than Orzán Beach for a more relaxed experience',
           'Surfing lessons available in summer months',
           'Promenade restaurants offer excellent seafood with beach views'
         ],
@@ -3091,15 +3091,15 @@ export const ports = [
         busRoute: 'Bus 3A',
         notes: 'Flat promenade walk, no steep paths',
       },
-      bestFor: ['families with children', 'surfing', 'people watching'],
-      tip: 'Riazor quieter than Orzán.',
+      bestFor: ['families with children', 'surfing', 'relaxing'],
+      tip: 'Riazor Beach is quieter than Orzán Beach.',
     },
     
     foodAndDrink: [
       {
         name: 'Maria Pita tapas',
         type: 'Tapas Bar',
-        description: 'Pulpo gallego and traditional Galician tapas in square cafés. Perfect spot for authentic local flavours and people-watching.',
+        description: 'Pulpo gallego and traditional Galician tapas in square cafés. Perfect spot for authentic local flavours and relaxing.',
       },
       {
         name: 'Orzán beach chiringuitos',
@@ -3600,7 +3600,7 @@ export const ports = [
       {
         title: 'Main Street & Grand Casemates Square',
         category: 'stroll',
-        description: 'Pedestrian shopping street with pubs, duty-free, and Trafalgar Cemetery; lively people-watching.',
+        description: 'Pedestrian shopping street with pubs, duty-free, and Trafalgar Cemetery; lively relaxing.',
         duration: '1 to 2 hours for a relaxed pace',
         tips: [
           'Morning before coaches',
@@ -3932,7 +3932,7 @@ export const ports = [
         busRoute: 'Bus 01',
         notes: 'Elevator to castle starts here; flat access',
       },
-      bestFor: ['families with children', 'swimming', 'people watching'],
+      bestFor: ['families with children', 'swimming', 'relaxing'],
       tip: 'Castle side quieter than promenade end',
     },
     
@@ -4216,7 +4216,7 @@ export const ports = [
         busRoute: 'Bus 1 (20 minutes)',
         notes: 'Bus from Almirante Reis; rocky pools safer for kids',
       },
-      bestFor: ['swimming', 'snorkelling', 'people watching'],
+      bestFor: ['swimming', 'snorkelling', 'relaxing'],
       tip: 'Rock pools at low tide perfect for families despite waves.',
     },
     
@@ -4497,7 +4497,7 @@ export const ports = [
         busRoute: 'City buses run parallel to the beach but walking from the pier is usually simplest',
         notes: 'The route is flat and suitable for most mobility levels; there are ramps from the promenade to the sand in several places',
       },
-      bestFor: ['families with children', 'swimming', 'people watching'],
+      bestFor: ['families with children', 'swimming', 'relaxing'],
       tip: 'Check the tide before you go, as low tide reveals more sheltered shallows and tidal-pool style areas, while higher tide brings livelier waves and better surf towards some sections',
     },
 
@@ -5290,7 +5290,7 @@ export const ports = [
         busRoute: 'Train Line 1 (25 minutes)',
         notes: 'Flat promenade; family-friendly',
       },
-      bestFor: ['families with children', 'swimming', 'people watching'],
+      bestFor: ['families with children', 'swimming', 'relaxing'],
       tip: 'Train drops beachfront; arrive before 11am to avoid peak crowds.',
     },
 
@@ -5516,7 +5516,7 @@ export const ports = [
       {
         title: 'Fish Market & Waterfront',
         category: 'markets',
-        description: 'Salmon, king crab stalls amid seagull chaos; waterfront people-watching. Vibrant market with fresh seafood, local produce, and lively atmosphere.',
+        description: 'Salmon, king crab stalls amid seagull chaos; waterfront relaxing. Vibrant market with fresh seafood, local produce, and lively atmosphere.',
         duration: '45 minutes to 1 hour for a relaxed pace',
         tips: [
           'Cash only at many stalls; bring Norwegian Krone',

@@ -352,17 +352,6 @@ function PortGuidePage() {
                     </div>
                   )}
                   
-                  {/* Facilities - v4 format */}
-                  {port.nearestBeach.facilities && (
-                    <div className="beach-facilities">
-                      {port.nearestBeach.facilities.lifeguards && <span className="facility-tag">🛟 Lifeguards</span>}
-                      {port.nearestBeach.facilities.sunbeds && <span className="facility-tag">🛏️ Sunbeds</span>}
-                      {port.nearestBeach.facilities.restaurants && <span className="facility-tag">🍽️ Restaurants</span>}
-                      {port.nearestBeach.facilities.showers && <span className="facility-tag">🚿 Showers</span>}
-                      {port.nearestBeach.facilities.toilets && <span className="facility-tag">🚻 Toilets</span>}
-                    </div>
-                  )}
-                  
                   {/* Best for - v4 format */}
                   {port.nearestBeach.bestFor && port.nearestBeach.bestFor.length > 0 && (
                     <div className="beach-best-for">
@@ -376,7 +365,7 @@ function PortGuidePage() {
                       <>
                         {port.nearestBeach.access.walkTime && <p><strong>Walk:</strong> {port.nearestBeach.access.walkTime}</p>}
                         {port.nearestBeach.access.taxiTime && <p><strong>Taxi:</strong> {port.nearestBeach.access.taxiTime}</p>}
-                        {port.nearestBeach.access.busRoute && <p><strong>Bus:</strong> {port.nearestBeach.access.busRoute}</p>}
+                        {port.nearestBeach.access.busRoute && <p><strong>Bus:</strong> {port.nearestBeach.access.busRoute} (check local bus schedules for full details)</p>}
                         {port.nearestBeach.access.notes && <p className="access-notes">{port.nearestBeach.access.notes}</p>}
                       </>
                     ) : port.nearestBeach.distance && (
