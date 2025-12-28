@@ -110,7 +110,7 @@ function PortGuidePage() {
       {/* Hero Section */}
       <HeroSection
         title={port.name}
-        subtitle={port.tagline || port.description}
+        subtitle={port.description}
         image={heroImage}
         imageAlt={`${port.name} cruise port`}
         size="md"
@@ -173,9 +173,50 @@ function PortGuidePage() {
             )}
           </section>
 
-          {/* ============================================
-              THINGS TO SEE AND DO - Priority Section
-              ============================================ */}
+          {/* About the Port */}
+          {port.aboutPort && (
+            <section className="port-section port-about">
+              <h2>About {port.name} Cruise Port</h2>
+              <div className="about-grid">
+                <div className="about-card">
+                  <h3>Overview</h3>
+                  <p>{port.aboutPort.overview}</p>
+                </div>
+                {port.aboutPort.terminals && (
+                  <div className="about-card">
+                    <h3>Cruise Terminals</h3>
+                    <p>{port.aboutPort.terminals}</p>
+                  </div>
+                )}
+                {port.aboutPort.shuttle && (
+                  <div className="about-card">
+                    <h3>Shuttle Services</h3>
+                    <p>{port.aboutPort.shuttle}</p>
+                  </div>
+                )}
+                {port.aboutPort.walkability && (
+                  <div className="about-card">
+                    <h3>Getting into Town</h3>
+                    <p>{port.aboutPort.walkability}</p>
+                  </div>
+                )}
+                {port.practicalInfo?.bestTimeToVisit && (
+                  <div className="about-card">
+                    <h3>Best Time to Visit</h3>
+                    <p>{port.practicalInfo.bestTimeToVisit}</p>
+                  </div>
+                )}
+                {port.practicalInfo?.visaInfo && (
+                  <div className="about-card">
+                    <h3>Visa Information</h3>
+                    <p>{port.practicalInfo.visaInfo}</p>
+                  </div>
+                )}
+              </div>
+            </section>
+          )}
+
+          {/* Things to See and Do */}
           {attractions.length > 0 && (
             <section className="port-section port-attractions">
               <h2>Things to See and Do</h2>
@@ -210,9 +251,7 @@ function PortGuidePage() {
             </section>
           )}
 
-          {/* ============================================
-              WEATHER SECTION
-              ============================================ */}
+          {/* Weather Section */}
           {weatherMonths.length > 0 && (
             <section className="port-section port-weather">
               <h2>{port.name} Weather</h2>
@@ -295,9 +334,62 @@ function PortGuidePage() {
             </section>
           )}
 
-          {/* ============================================
-              GETTING AROUND
-              ============================================ */}
+          {/* Nearest Beach */}
+          {port.nearestBeach && (
+            <section className="port-section port-beach">
+              <h2>Nearest Beach</h2>
+              <div className="beach-layout">
+                <div className="beach-image">
+                  <OptimizedImage
+                    src={beachImage}
+                    alt={`${port.nearestBeach.name} near ${port.name}`}
+                    width={600}
+                    height={400}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+                <div className="beach-info">
+                  <h3>{port.nearestBeach.name}</h3>
+                  <p>{port.nearestBeach.description}</p>
+                  <div className="beach-distance">
+                    <strong>Getting there:</strong> {port.nearestBeach.distance}
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Food and Drink */}
+          {port.foodAndDrink && port.foodAndDrink.length > 0 && (
+            <section className="port-section port-food">
+              <h2>Where to Eat and Drink</h2>
+              <div className="food-grid">
+                {port.foodAndDrink.map((place, index) => {
+                  const foodImage = getSupabaseImageUrl('WEB_categories', `ports/${port.region}/${port.slug}/food-${index + 1}.webp`);
+                  return (
+                    <div key={index} className="food-card">
+                      <div className="food-image">
+                        <OptimizedImage
+                          src={foodImage}
+                          alt={place.name}
+                          width={300}
+                          height={200}
+                          sizes="(max-width: 768px) 50vw, 25vw"
+                        />
+                      </div>
+                      <div className="food-body">
+                        <span className="food-type">{place.type}</span>
+                        <h3>{place.name}</h3>
+                        <p>{place.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          )}
+
+          {/* Getting Around */}
           {port.gettingAround && (
             <section className="port-section port-getting-around">
               <h2>Getting Around {port.name}</h2>
@@ -334,89 +426,7 @@ function PortGuidePage() {
             </section>
           )}
 
-          {/* ============================================
-              NEAREST BEACH
-              ============================================ */}
-          {port.nearestBeach && (
-            <section className="port-section port-beach">
-              <h2>Nearest Beach</h2>
-              <div className="beach-layout">
-                <div className="beach-image">
-                  <OptimizedImage
-                    src={beachImage}
-                    alt={`${port.nearestBeach.name} near ${port.name}`}
-                    width={600}
-                    height={400}
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
-                <div className="beach-info">
-                  <h3>{port.nearestBeach.name}</h3>
-                  <p>{port.nearestBeach.description}</p>
-                  <div className="beach-distance">
-                    <strong>Getting there:</strong> {port.nearestBeach.distance}
-                  </div>
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* ============================================
-              FOOD AND DRINK
-              ============================================ */}
-          {port.foodAndDrink && port.foodAndDrink.length > 0 && (
-            <section className="port-section port-food">
-              <h2>Where to Eat and Drink</h2>
-              <div className="food-grid">
-                {port.foodAndDrink.map((place, index) => {
-                  const foodImage = getSupabaseImageUrl('WEB_categories', `ports/${port.region}/${port.slug}/food-${index + 1}.webp`);
-                  return (
-                    <div key={index} className="food-card">
-                      <div className="food-image">
-                        <OptimizedImage
-                          src={foodImage}
-                          alt={place.name}
-                          width={300}
-                          height={200}
-                          sizes="(max-width: 768px) 50vw, 25vw"
-                        />
-                      </div>
-                      <div className="food-body">
-                        <span className="food-type">{place.type}</span>
-                        <h3>{place.name}</h3>
-                        <p>{place.description}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </section>
-          )}
-
-          {/* ============================================
-              SHORE EXCURSIONS
-              ============================================ */}
-          {port.shoreExcursions && port.shoreExcursions.length > 0 && (
-            <section className="port-section port-excursions">
-              <h2>Popular Excursions</h2>
-              <div className="excursions-grid">
-                {port.shoreExcursions.map((exc, index) => (
-                  <div key={index} className="excursion-card">
-                    <h3>{exc.title}</h3>
-                    <p>{exc.description}</p>
-                    <div className="excursion-meta">
-                      <span className="exc-duration">{exc.duration}</span>
-                      <span className="exc-book">{exc.bookWith}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {/* ============================================
-              LOCAL TIPS
-              ============================================ */}
+          {/* Local Tips */}
           {port.insiderTips && port.insiderTips.length > 0 && (
             <section className="port-section port-tips">
               <h2>Local Tips</h2>
@@ -430,58 +440,11 @@ function PortGuidePage() {
             </section>
           )}
 
-          {/* ============================================
-              ABOUT THE PORT - Lower priority
-              ============================================ */}
-          {port.aboutPort && (
-            <section className="port-section port-about">
-              <h2>About {port.name} Cruise Port</h2>
-              <div className="about-grid">
-                <div className="about-card">
-                  <h3>Overview</h3>
-                  <p>{port.aboutPort.overview}</p>
-                </div>
-                {port.aboutPort.terminals && (
-                  <div className="about-card">
-                    <h3>Cruise Terminals</h3>
-                    <p>{port.aboutPort.terminals}</p>
-                  </div>
-                )}
-                {port.aboutPort.shuttle && (
-                  <div className="about-card">
-                    <h3>Shuttle Services</h3>
-                    <p>{port.aboutPort.shuttle}</p>
-                  </div>
-                )}
-                {port.aboutPort.walkability && (
-                  <div className="about-card">
-                    <h3>Getting into Town</h3>
-                    <p>{port.aboutPort.walkability}</p>
-                  </div>
-                )}
-                {port.practicalInfo?.bestTimeToVisit && (
-                  <div className="about-card">
-                    <h3>Best Time to Visit</h3>
-                    <p>{port.practicalInfo.bestTimeToVisit}</p>
-                  </div>
-                )}
-                {port.practicalInfo?.visaInfo && (
-                  <div className="about-card">
-                    <h3>Visa Information</h3>
-                    <p>{port.practicalInfo.visaInfo}</p>
-                  </div>
-                )}
-              </div>
-            </section>
-          )}
-
-          {/* ============================================
-              AIRPORT AND TRANSPORT - Near bottom
-              ============================================ */}
+          {/* Airport and Transport Connections - 3 Column */}
           {port.transportConnections && (
             <section className="port-section port-transport">
-              <h2>Airport and Train Connections</h2>
-              <div className="connections-grid">
+              <h2>Airport and Transport Connections</h2>
+              <div className="connections-grid-three">
                 {port.transportConnections.airport && (
                   <div className="connection-card">
                     <h3>{port.transportConnections.airport.name}</h3>
@@ -499,6 +462,15 @@ function PortGuidePage() {
                     )}
                   </div>
                 )}
+                {port.gettingAround?.taxis && (
+                  <div className="connection-card">
+                    <h3>Taxis</h3>
+                    <p>{port.gettingAround.taxis}</p>
+                    {port.practicalInfo?.nearbyAirport && (
+                      <p><strong>To Airport:</strong> {port.practicalInfo.nearbyAirport}</p>
+                    )}
+                  </div>
+                )}
               </div>
               {port.transportConnections.cruiseLines && (
                 <div className="cruise-lines-note">
@@ -508,9 +480,7 @@ function PortGuidePage() {
             </section>
           )}
 
-          {/* ============================================
-              FAQ
-              ============================================ */}
+          {/* FAQ */}
           {port.faq && port.faq.length > 0 && (
             <section className="port-section port-faq">
               <h2>Frequently Asked Questions</h2>

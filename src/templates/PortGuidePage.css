@@ -9,7 +9,7 @@
    ======================================== */
 
 .port-guide-page {
-  background: var(--color-background);
+  background: var(--clr-bg);
   min-height: 100vh;
 }
 
@@ -18,8 +18,8 @@
    ======================================== */
 
 .port-nav-bar {
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border-light);
+  background: var(--clr-surface);
+  border-bottom: 1px solid var(--clr-border);
   padding: var(--space-4) 0;
 }
 
@@ -28,7 +28,7 @@
   align-items: center;
   gap: var(--space-2);
   padding: var(--space-3) var(--space-5);
-  background: var(--color-primary);
+  background: var(--clr-primary);
   color: white;
   font-weight: 500;
   font-size: var(--font-size-sm);
@@ -38,7 +38,7 @@
 }
 
 .port-back-btn:hover {
-  background: var(--color-primary-dark);
+  background: var(--clr-primary-dark);
   transform: translateX(-3px);
   color: white;
 }
@@ -48,7 +48,7 @@
    ======================================== */
 
 .port-facts-bar {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
   padding: var(--space-8) 0;
 }
 
@@ -112,10 +112,10 @@
   font-family: var(--font-heading);
   font-size: var(--font-size-2xl);
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--clr-text-main);
   margin-bottom: var(--space-6);
   padding-bottom: var(--space-3);
-  border-bottom: 2px solid var(--color-accent);
+  border-bottom: 2px solid var(--clr-accent);
   display: inline-block;
 }
 
@@ -123,14 +123,14 @@
   font-family: var(--font-heading);
   font-size: var(--font-size-lg);
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--clr-text-main);
   margin-bottom: var(--space-2);
 }
 
 .section-intro {
   font-size: var(--font-size-base);
   line-height: 1.7;
-  color: var(--color-text-secondary);
+  color: var(--clr-text-muted);
   margin-bottom: var(--space-6);
   max-width: 70ch;
 }
@@ -146,14 +146,14 @@
 .intro-text {
   font-size: var(--font-size-lg);
   line-height: 1.8;
-  color: var(--color-text-secondary);
+  color: var(--clr-text-muted);
   max-width: 80ch;
 }
 
 .intro-highlight {
   margin-top: var(--space-6);
   padding: var(--space-6);
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
   border-radius: var(--radius-lg);
   color: white;
 }
@@ -192,7 +192,7 @@
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s, box-shadow 0.3s;
-  border: 1px solid var(--color-border-light);
+  border: 1px solid var(--clr-border);
 }
 
 .attraction-card:hover {
@@ -203,7 +203,7 @@
 .attraction-image {
   aspect-ratio: 16 / 11;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
 }
 
 .attraction-image img {
@@ -229,7 +229,7 @@
 .attraction-body p {
   font-size: var(--font-size-sm);
   line-height: 1.6;
-  color: var(--color-text-secondary);
+  color: var(--clr-text-muted);
   margin-bottom: var(--space-3);
 }
 
@@ -237,7 +237,7 @@
   display: inline-block;
   font-size: var(--font-size-xs);
   font-weight: 500;
-  color: var(--color-accent);
+  color: var(--clr-accent);
   padding: var(--space-1) var(--space-3);
   background: rgba(212, 175, 55, 0.1);
   border-radius: var(--radius-full);
@@ -248,12 +248,12 @@
    ======================================== */
 
 .port-weather {
-  background: var(--color-surface);
+  background: var(--clr-surface);
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
   padding: var(--space-12) calc(50vw - 50%);
-  border-top: 1px solid var(--color-border-light);
-  border-bottom: 1px solid var(--color-border-light);
+  border-top: 1px solid var(--clr-border);
+  border-bottom: 1px solid var(--clr-border);
 }
 
 .weather-carousel-wrapper {
@@ -271,16 +271,16 @@
   align-items: center;
   justify-content: center;
   background: white;
-  border: 2px solid var(--color-border-light);
+  border: 2px solid var(--clr-border);
   border-radius: var(--radius-full);
-  color: var(--color-text-primary);
+  color: var(--clr-text-main);
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .weather-arrow:hover:not(:disabled) {
-  background: var(--color-primary);
-  border-color: var(--color-primary);
+  background: var(--clr-primary);
+  border-color: var(--clr-primary);
   color: white;
 }
 
@@ -311,7 +311,7 @@
 }
 
 .weather-card {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
   border-radius: var(--radius-xl);
   padding: var(--space-6);
   color: white;
@@ -383,7 +383,7 @@
 }
 
 .best-time-box h3 {
-  color: var(--color-primary);
+  color: var(--clr-primary);
   margin-bottom: var(--space-6);
   font-size: var(--font-size-xl);
 }
@@ -404,22 +404,22 @@
 .best-time-item strong {
   display: block;
   font-size: var(--font-size-sm);
-  color: var(--color-accent);
+  color: var(--clr-accent);
   margin-bottom: var(--space-2);
 }
 
 .best-time-item p {
   font-size: var(--font-size-sm);
   line-height: 1.5;
-  color: var(--color-text-secondary);
+  color: var(--clr-text-muted);
   margin: 0;
 }
 
 .best-time-rec {
   font-style: italic;
-  color: var(--color-text-secondary);
+  color: var(--clr-text-muted);
   padding-top: var(--space-4);
-  border-top: 1px solid var(--color-border-light);
+  border-top: 1px solid var(--clr-border);
   margin: 0;
 }
 
@@ -447,7 +447,7 @@
 
 .transport-card {
   background: white;
-  border: 1px solid var(--color-border-light);
+  border: 1px solid var(--clr-border);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -459,7 +459,7 @@
 }
 
 .transport-card h3 {
-  color: var(--color-primary);
+  color: var(--clr-primary);
   font-size: var(--font-size-base);
   margin-bottom: var(--space-3);
 }
@@ -467,7 +467,7 @@
 .transport-card p {
   font-size: var(--font-size-sm);
   line-height: 1.6;
-  color: var(--color-text-secondary);
+  color: var(--clr-text-muted);
   margin: 0;
 }
 
@@ -495,7 +495,7 @@
 .beach-image {
   height: 100%;
   min-height: 300px;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
 }
 
 .beach-image img {
@@ -510,21 +510,21 @@
 
 .beach-info h3 {
   font-size: var(--font-size-2xl);
-  color: var(--color-primary);
+  color: var(--clr-primary);
   margin-bottom: var(--space-4);
 }
 
 .beach-info p {
   font-size: var(--font-size-base);
   line-height: 1.7;
-  color: var(--color-text-secondary);
+  color: var(--clr-text-muted);
   margin-bottom: var(--space-4);
 }
 
 .beach-distance {
   font-size: var(--font-size-sm);
   padding: var(--space-4);
-  background: var(--color-surface);
+  background: var(--clr-surface);
   border-radius: var(--radius-md);
 }
 
@@ -556,7 +556,7 @@
   overflow: hidden;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   transition: transform 0.2s, box-shadow 0.2s;
-  border: 1px solid var(--color-border-light);
+  border: 1px solid var(--clr-border);
 }
 
 .food-card:hover {
@@ -567,7 +567,7 @@
 .food-image {
   aspect-ratio: 3 / 2;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
 }
 
 .food-image img {
@@ -584,7 +584,7 @@
   display: inline-block;
   font-size: var(--font-size-xs);
   font-weight: 600;
-  color: var(--color-accent);
+  color: var(--clr-accent);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: var(--space-1);
@@ -598,7 +598,7 @@
 .food-body p {
   font-size: var(--font-size-sm);
   line-height: 1.5;
-  color: var(--color-text-secondary);
+  color: var(--clr-text-muted);
   margin: 0;
 }
 
@@ -620,7 +620,7 @@
 
 .excursion-card {
   background: white;
-  border: 1px solid var(--color-border-light);
+  border: 1px solid var(--clr-border);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -634,7 +634,7 @@
 .excursion-card p {
   font-size: var(--font-size-sm);
   line-height: 1.6;
-  color: var(--color-text-secondary);
+  color: var(--clr-text-muted);
   margin-bottom: var(--space-4);
 }
 
@@ -648,9 +648,9 @@
 .exc-book {
   font-size: var(--font-size-xs);
   padding: var(--space-1) var(--space-3);
-  background: var(--color-surface);
+  background: var(--clr-surface);
   border-radius: var(--radius-full);
-  color: var(--color-text-secondary);
+  color: var(--clr-text-muted);
 }
 
 /* ========================================
@@ -671,7 +671,7 @@
 
 .tip-card {
   background: white;
-  border-left: 4px solid var(--color-accent);
+  border-left: 4px solid var(--clr-accent);
   border-radius: var(--radius-md);
   padding: var(--space-5);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -680,7 +680,7 @@
 .tip-card p {
   font-size: var(--font-size-sm);
   line-height: 1.6;
-  color: var(--color-text-secondary);
+  color: var(--clr-text-muted);
   margin: 0;
 }
 
@@ -708,7 +708,7 @@
 
 .about-card {
   background: white;
-  border: 1px solid var(--color-border-light);
+  border: 1px solid var(--clr-border);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -717,20 +717,43 @@
 .about-card h3 {
   font-size: var(--font-size-base);
   font-weight: 600;
-  color: var(--color-primary);
+  color: var(--clr-primary);
   margin-bottom: var(--space-3);
 }
 
 .about-card p {
   font-size: var(--font-size-sm);
   line-height: 1.6;
-  color: var(--color-text-secondary);
+  color: var(--clr-text-muted);
   margin: 0;
 }
 
 /* ========================================
    TRANSPORT CONNECTIONS
    ======================================== */
+
+/* ========================================
+   TRANSPORT CONNECTIONS
+   ======================================== */
+
+.connections-grid-three {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+@media (max-width: 1023px) {
+  .connections-grid-three {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .connections-grid-three {
+    grid-template-columns: 1fr;
+  }
+}
 
 .connections-grid {
   display: grid;
@@ -746,7 +769,7 @@
 }
 
 .connection-card {
-  background: var(--color-surface);
+  background: var(--clr-surface);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
 }
@@ -759,7 +782,7 @@
 .connection-card p {
   font-size: var(--font-size-sm);
   line-height: 1.6;
-  color: var(--color-text-secondary);
+  color: var(--clr-text-muted);
   margin-bottom: var(--space-2);
 }
 
@@ -768,7 +791,7 @@
 }
 
 .cruise-lines-note {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
   color: white;
@@ -791,7 +814,7 @@
 
 .faq-item {
   background: white;
-  border: 1px solid var(--color-border-light);
+  border: 1px solid var(--clr-border);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -800,14 +823,14 @@
 .faq-item h3 {
   font-size: var(--font-size-base);
   font-weight: 600;
-  color: var(--color-primary);
+  color: var(--clr-primary);
   margin-bottom: var(--space-2);
 }
 
 .faq-item p {
   font-size: var(--font-size-sm);
   line-height: 1.6;
-  color: var(--color-text-secondary);
+  color: var(--clr-text-muted);
   margin: 0;
 }
 
@@ -820,7 +843,7 @@
 }
 
 .cta-box {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
   border-radius: var(--radius-xl);
   padding: var(--space-12);
   text-align: center;
@@ -858,7 +881,7 @@
 
 .cta-buttons .btn-outline:hover {
   background: white;
-  color: var(--color-primary);
+  color: var(--clr-primary);
 }
 
 /* ========================================
@@ -866,22 +889,22 @@
    ======================================== */
 
 .port-footer {
-  background: var(--color-surface);
-  border-top: 1px solid var(--color-border-light);
+  background: var(--clr-surface);
+  border-top: 1px solid var(--clr-border);
   padding: var(--space-8) 0;
   text-align: center;
 }
 
 .port-footer p {
   font-size: var(--font-size-sm);
-  color: var(--color-text-tertiary);
+  color: var(--clr-text-light);
   line-height: 1.6;
   margin: 0 0 var(--space-2);
 }
 
 .update-date {
   font-weight: 500;
-  color: var(--color-text-secondary);
+  color: var(--clr-text-muted);
 }
 
 /* ========================================
