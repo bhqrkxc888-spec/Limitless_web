@@ -2,16 +2,10 @@ import { aboutImages } from '../utils/imageHelpers';
 import { Button } from '../components/ui';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
-import Breadcrumbs from '../components/Breadcrumbs';
 import OptimizedImage from '../components/OptimizedImage';
 import './AboutPage.css';
 
 function AboutPage() {
-  const breadcrumbs = [
-    { label: 'Home', path: '/' },
-    { label: 'About', path: '/about' }
-  ];
-
   return (
     <main className="about-page-modern">
       <SEO
@@ -19,9 +13,6 @@ function AboutPage() {
         description="Meet Katherine, your personal UK cruise consultant. CLIA Cruise Master, ABTA protected, specialising in bespoke cruise holidays tailored to you."
         canonical="https://www.limitlesscruises.com/about"
       />
-      <div className="container">
-        <Breadcrumbs items={breadcrumbs} />
-      </div>
 
       {/* Hero Section */}
       <section className="about-hero">

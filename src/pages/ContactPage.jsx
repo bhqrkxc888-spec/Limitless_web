@@ -1,16 +1,10 @@
 import { siteConfig } from '../config/siteConfig';
 import ContactForm from '../components/ContactForm';
 import SEO from '../components/SEO';
-import Breadcrumbs from '../components/Breadcrumbs';
 import { aboutImages } from '../utils/imageHelpers';
 import './ContactPage.css';
 
 function ContactPage() {
-  const breadcrumbs = [
-    { label: 'Home', path: '/' },
-    { label: 'Contact', path: '/contact' }
-  ];
-
   return (
     <main className="contact-elegant">
       <SEO
@@ -18,9 +12,6 @@ function ContactPage() {
         description="Speak with your personal cruise consultant. Call, WhatsApp, email or enquire online. ABTA protected, UK based, expert guidance for your perfect cruise."
         canonical="https://www.limitlesscruises.com/contact"
       />
-      <div className="container">
-        <Breadcrumbs items={breadcrumbs} />
-      </div>
 
       {/* Hero */}
       <section className="contact-hero">

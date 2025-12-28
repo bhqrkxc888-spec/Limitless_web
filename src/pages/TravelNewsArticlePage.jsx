@@ -193,20 +193,6 @@ function TravelNewsArticlePage() {
       {/* Clean Article Header */}
       <section className="article-header">
         <div className="container">
-          {/* Breadcrumb */}
-          <nav className="article-breadcrumb">
-            <Link to="/">Home</Link>
-            <span className="breadcrumb-separator">/</span>
-            <Link to="/travel-news">Travel News</Link>
-            {article.category && (
-              <>
-                <span className="breadcrumb-separator">/</span>
-                <Link to={`/travel-news/category/${article.category}`}>
-                  {formatCategory(article.category)}
-                </Link>
-              </>
-            )}
-          </nav>
 
           {/* Article Meta */}
           <div className="article-header-meta">

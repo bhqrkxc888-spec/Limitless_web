@@ -94,13 +94,6 @@ function CruiseGuideDetailPage() {
 
       <div className="guide-detail-header">
         <div className="container">
-          <div className="guide-detail-breadcrumb">
-            <Link to="/">Home</Link>
-            <span className="breadcrumb-separator">›</span>
-            <Link to="/cruise-guides">Cruise Guides</Link>
-            <span className="breadcrumb-separator">›</span>
-            <span>{guide.title}</span>
-          </div>
           {guide.guide_type && (
             <span className="guide-detail-type">
               {guide.guide_type.replace('_', ' ')}

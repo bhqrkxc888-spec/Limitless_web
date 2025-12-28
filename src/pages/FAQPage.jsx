@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
-import Breadcrumbs from '../components/Breadcrumbs';
 import { Button, Accordion } from '../components/ui';
 import { createSanitizedMarkup } from '../utils/sanitizeHtml';
 import './FAQPage.css';
@@ -166,11 +165,6 @@ function FAQPage() {
   const [activeCategory, setActiveCategory] = useState('booking');
   const [searchTerm, setSearchTerm] = useState('');
 
-  const breadcrumbs = [
-    { label: 'Home', path: '/' },
-    { label: 'FAQ', path: '/faq' }
-  ];
-
   // Filter questions based on search
   const getFilteredQuestions = () => {
     if (!searchTerm) return null;
@@ -215,10 +209,6 @@ function FAQPage() {
         canonical="https://www.limitlesscruises.com/faq"
         structuredData={structuredData}
       />
-
-      <div className="container">
-        <Breadcrumbs items={breadcrumbs} />
-      </div>
 
       {/* Hero */}
       <section className="faq-hero">

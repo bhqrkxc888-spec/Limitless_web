@@ -1,17 +1,12 @@
 import { useEffect, useState } from 'react';
 import SEO from '../components/SEO';
 import ContactForm from '../components/ContactForm';
-import Breadcrumbs from '../components/Breadcrumbs';
 import { siteConfig } from '../config/siteConfig';
 import { hasConsent, loadScriptsWithConsent } from '../utils/consentManager';
 import { Button } from '../components/ui';
 import './FindCruisePage.css';
 
 function FindCruisePage() {
-  const breadcrumbs = [
-    { label: 'Home', path: '/' },
-    { label: 'Find a Cruise', path: '/find-a-cruise' }
-  ];
   const [scriptsLoaded, setScriptsLoaded] = useState(false);
   const [showConsentPrompt, setShowConsentPrompt] = useState(false);
 
@@ -76,9 +71,6 @@ function FindCruisePage() {
         description="Discover your ideal cruise holiday with expert guidance. River cruises, ocean voyages, expedition adventures - all personally curated for you."
         canonical="https://www.limitlesscruises.com/find-a-cruise"
       />
-      <div className="container">
-        <Breadcrumbs items={breadcrumbs} />
-      </div>
 
       {/* Hero */}
       <section className="finder-hero">

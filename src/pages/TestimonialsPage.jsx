@@ -121,11 +121,6 @@ const StarRating = ({ rating }) => (
 );
 
 function TestimonialsPage() {
-  const breadcrumbs = [
-    { label: 'Home', path: '/' },
-    { label: 'Testimonials', path: '/testimonials' }
-  ];
-
   const featuredTestimonials = testimonials.filter(t => t.featured);
   const otherTestimonials = testimonials.filter(t => !t.featured);
 
@@ -140,10 +135,6 @@ function TestimonialsPage() {
         description="Read genuine experiences from clients who've booked their cruise holidays through Limitless Cruises. See why travellers trust our personal consultant service."
         canonical="https://www.limitlesscruises.com/testimonials"
       />
-
-      <div className="container">
-        <Breadcrumbs items={breadcrumbs} />
-      </div>
 
       {/* Hero */}
       <section className="testimonials-hero">

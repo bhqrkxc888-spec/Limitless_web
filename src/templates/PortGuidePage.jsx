@@ -88,21 +88,6 @@ function PortGuidePage() {
         secondaryCta={{ label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone}` }}
       />
 
-      {/* Breadcrumb */}
-      <nav className="port-breadcrumb">
-        <div className="container">
-          <Link to="/ports">Port Guides</Link>
-          <span className="separator">›</span>
-          {region && (
-            <>
-              <Link to={`/ports/region/${region.slug}`}>{region.name}</Link>
-              <span className="separator">›</span>
-            </>
-          )}
-          <span className="current">{port.name}</span>
-        </div>
-      </nav>
-
       {/* Quick Facts Bar */}
       <section className="port-quick-facts">
         <div className="container">

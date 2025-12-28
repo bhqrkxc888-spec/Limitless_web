@@ -3,7 +3,6 @@ import { useOffer } from '../hooks/useOffers';
 import { incrementOfferView } from '../services/offersAPI';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
-import Breadcrumbs from '../components/Breadcrumbs';
 import { Button, SectionHeader } from '../components/ui';
 import ContactForm from '../components/ContactForm';
 // V2 Components
@@ -246,12 +245,6 @@ function OfferPage() {
     );
   }
 
-  // Breadcrumb items
-  const breadcrumbItems = [
-    { label: 'Offers', path: '/offers' },
-    { label: offer.title || 'Offer' }
-  ];
-
   const savingsDisplay = offer.savings_percentage
     ? `${offer.savings_percentage}%`
     : offer.savings_amount
@@ -269,13 +262,6 @@ function OfferPage() {
         image={galleryImages[0]?.url}
         structuredData={structuredData}
       />
-
-      {/* Breadcrumbs */}
-      <div className="offer-breadcrumbs">
-        <div className="container">
-          <Breadcrumbs items={breadcrumbItems} />
-        </div>
-      </div>
 
       {/* Offer Header with Gallery */}
       <section className="offer-header">
