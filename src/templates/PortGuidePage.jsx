@@ -96,6 +96,16 @@ function PortGuidePage() {
     setWeatherIndex(prev => Math.min(maxIndex, prev + 1));
   };
 
+  // Get season class for weather card
+  const getSeasonClass = (monthName) => {
+    const summerMonths = ['Jun', 'Jul', 'Aug'];
+    const winterMonths = ['Dec', 'Jan', 'Feb'];
+    
+    if (summerMonths.includes(monthName)) return 'weather-card-summer';
+    if (winterMonths.includes(monthName)) return 'weather-card-winter';
+    return 'weather-card-spring';
+  };
+
   return (
     <main className="port-guide-page">
       {/* SEO */}
@@ -116,16 +126,6 @@ function PortGuidePage() {
         size="md"
         align="left"
       />
-
-      {/* Back Navigation */}
-      <div className="port-nav-bar">
-        <div className="container">
-          <Link to="/ports" className="port-back-btn">
-            <ArrowLeft size={18} />
-            <span>Back to Port Guides</span>
-          </Link>
-        </div>
-      </div>
 
       {/* Quick Facts Bar */}
       <section className="port-facts-bar">
@@ -163,15 +163,13 @@ function PortGuidePage() {
       <article className="port-content">
         <div className="container">
 
-          {/* Introduction */}
-          <section className="port-intro">
-            <p className="intro-text">{port.description}</p>
-            {port.timeRequired?.summary && (
-              <div className="intro-highlight">
-                <p>{port.timeRequired.summary}</p>
-              </div>
-            )}
-          </section>
+          {/* Back Navigation */}
+          <div className="port-back-section">
+            <Link to="/ports" className="port-back-btn">
+              <ArrowLeft size={18} />
+              <span>Back to Port Guides</span>
+            </Link>
+          </div>
 
           {/* About the Port */}
           {port.aboutPort && (
@@ -269,7 +267,7 @@ function PortGuidePage() {
                 
                 <div className="weather-track">
                   {weatherMonths.slice(weatherIndex, weatherIndex + visibleWeatherCount).map((month, idx) => (
-                    <div key={idx} className="weather-card">
+                    <div key={idx} className={`weather-card ${getSeasonClass(month.month)}`}>
                       <div className="weather-month">{month.month}</div>
                       <div className="weather-temps">
                         <div className="temp-high">
