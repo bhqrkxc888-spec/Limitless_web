@@ -28,6 +28,7 @@ function AdminImageManagement() {
     ships: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0 },
     categories: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0 },
     bucketList: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0 },
+    portGuides: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0 },
   });
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
@@ -79,6 +80,7 @@ function AdminImageManagement() {
         ships: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
         categories: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
         bucketList: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
+        portGuides: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
       };
 
       const imagesWithWarnings = [];
@@ -90,6 +92,7 @@ function AdminImageManagement() {
                      img.entity_type === 'ship' ? 'ships' :
                      img.entity_type === 'category' ? 'categories' :
                      img.entity_type === 'bucket-list' ? 'bucketList' :
+                     img.entity_type === 'port-guide' ? 'portGuides' :
                      img.entity_type === 'site' ? 'site' : null;
 
         if (type) {
@@ -268,6 +271,15 @@ function AdminImageManagement() {
       path: '/admin/images/bucket-list',
       stats: stats.bucketList || { total: 0, compliant: 0, warnings: 0, missing: 0 },
       color: '#f59e0b'
+    },
+    {
+      id: 'portGuides',
+      title: 'Port Guides',
+      description: 'Cruise port hero and attraction images',
+      icon: MapPin,
+      path: '/admin/images/port-guides',
+      stats: stats.portGuides || { total: 0, compliant: 0, warnings: 0, missing: 0 },
+      color: '#06b6d4'
     }
   ];
 

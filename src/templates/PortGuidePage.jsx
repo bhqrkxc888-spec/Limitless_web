@@ -137,6 +137,89 @@ function PortGuidePage() {
                 <p className="lead">{port.description}</p>
               </div>
 
+              {/* About the Port */}
+              {port.aboutPort && (
+                <div className="port-section">
+                  <SectionHeader
+                    title="About the Cruise Port"
+                    subtitle="Terminal information and access"
+                  />
+                  <div className="about-port-content">
+                    <p>{port.aboutPort.overview}</p>
+                    {port.aboutPort.terminals && (
+                      <div className="port-info-item">
+                        <h4>🚢 Terminals</h4>
+                        <p>{port.aboutPort.terminals}</p>
+                      </div>
+                    )}
+                    {port.aboutPort.shuttle && (
+                      <div className="port-info-item">
+                        <h4>🚌 Shuttle Service</h4>
+                        <p>{port.aboutPort.shuttle}</p>
+                      </div>
+                    )}
+                    {port.aboutPort.walkability && (
+                      <div className="port-info-item">
+                        <h4>🚶 Walkability</h4>
+                        <p>{port.aboutPort.walkability}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Transport Connections */}
+              {port.transportConnections && (
+                <div className="port-section">
+                  <SectionHeader
+                    title="Airport, Trains & Cruise Lines"
+                    subtitle="Getting to and from the port"
+                  />
+                  <div className="transport-grid">
+                    {port.transportConnections.airport && (
+                      <div className="transport-item">
+                        <h4>✈️ {port.transportConnections.airport.name}</h4>
+                        <p><strong>Distance:</strong> {port.transportConnections.airport.distance}</p>
+                        <p>{port.transportConnections.airport.options}</p>
+                      </div>
+                    )}
+                    {port.transportConnections.trains && (
+                      <div className="transport-item">
+                        <h4>🚆 Train Connections</h4>
+                        <p><strong>{port.transportConnections.trains.mainStation}:</strong> {port.transportConnections.trains.description}</p>
+                        {port.transportConnections.trains.localHubs && (
+                          <p>{port.transportConnections.trains.localHubs}</p>
+                        )}
+                      </div>
+                    )}
+                    {port.transportConnections.cruiseLines && (
+                      <div className="transport-item transport-item-full">
+                        <h4>🛳️ Cruise Lines</h4>
+                        <p>{port.transportConnections.cruiseLines}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Must-See Sights */}
+              {port.mustSeeSights && port.mustSeeSights.length > 0 && (
+                <div className="port-section">
+                  <SectionHeader
+                    title={`Must-See Sights in ${port.name}`}
+                    subtitle="The headline attractions you shouldn't miss"
+                  />
+                  <div className="must-see-grid">
+                    {port.mustSeeSights.map((sight, index) => (
+                      <div key={index} className="must-see-card">
+                        <h3>{sight.title}</h3>
+                        <p>{sight.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Things to Do */}
               {port.thingsToDo && port.thingsToDo.length > 0 && (
                 <div className="port-section">
@@ -186,6 +269,20 @@ function PortGuidePage() {
                 </div>
               )}
 
+              {/* Nearest Beach */}
+              {port.nearestBeach && (
+                <div className="port-section">
+                  <SectionHeader
+                    title="Nearest Beach"
+                    subtitle={port.nearestBeach.name}
+                  />
+                  <div className="beach-info">
+                    <p>{port.nearestBeach.description}</p>
+                    <p className="beach-distance"><strong>Getting there:</strong> {port.nearestBeach.distance}</p>
+                  </div>
+                </div>
+              )}
+
               {/* Getting Around */}
               <div className="port-section">
                 <SectionHeader
@@ -209,6 +306,12 @@ function PortGuidePage() {
                     <h4>🚶 Walking</h4>
                     <p>{port.gettingAround.walkingDistance}</p>
                   </div>
+                  {port.gettingAround.sightseeingBus && (
+                    <div className="getting-around-item getting-around-full">
+                      <h4>🚍 Sightseeing Bus</h4>
+                      <p>{port.gettingAround.sightseeingBus}</p>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -232,11 +335,32 @@ function PortGuidePage() {
                 </div>
               )}
 
+              {/* Time Required */}
+              {port.timeRequired && (
+                <div className="port-section">
+                  <SectionHeader
+                    title="Time Required"
+                    subtitle={port.timeRequired.intro}
+                  />
+                  <div className="time-required-content">
+                    <ul className="time-estimates-list">
+                      {port.timeRequired.estimates.map((item, index) => (
+                        <li key={index}>
+                          <span className="sight-name">{item.sight}</span>
+                          <span className="sight-time">{item.time}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="time-summary">{port.timeRequired.summary}</p>
+                  </div>
+                </div>
+              )}
+
               {/* Insider Tips */}
               {port.insiderTips && port.insiderTips.length > 0 && (
                 <div className="port-section">
                   <SectionHeader
-                    title="Insider Tips"
+                    title="Top Tips"
                     subtitle="Advice from experienced cruisers"
                   />
                   <ul className="insider-tips-list">
@@ -247,6 +371,73 @@ function PortGuidePage() {
                       </li>
                     ))}
                   </ul>
+                </div>
+              )}
+
+              {/* FAQ Section */}
+              {port.faq && port.faq.length > 0 && (
+                <div className="port-section">
+                  <SectionHeader
+                    title="Frequently Asked Questions"
+                    subtitle={`Common questions about visiting ${port.name}`}
+                  />
+                  <div className="faq-list">
+                    {port.faq.map((item, index) => (
+                      <div key={index} className="faq-item">
+                        <h4>{item.question}</h4>
+                        <p>{item.answer}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Weather Section */}
+              {port.weather && (
+                <div className="port-section">
+                  <SectionHeader
+                    title={`${port.name} Weather Guide`}
+                    subtitle={port.weather.intro}
+                  />
+                  <div className="weather-content">
+                    <div className="weather-table-wrapper">
+                      <table className="weather-table">
+                        <thead>
+                          <tr>
+                            <th>Month</th>
+                            <th>High °C</th>
+                            <th>Low °C</th>
+                            <th>Rain mm</th>
+                            <th>Sun Days</th>
+                            <th>Sea °C</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {port.weather.months.map((m, index) => (
+                            <tr key={index}>
+                              <td>{m.month}</td>
+                              <td>{m.highC}°</td>
+                              <td>{m.lowC}°</td>
+                              <td>{m.rainMm}</td>
+                              <td>{m.sunDays}</td>
+                              <td>{m.seaTempC}°</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    {port.weather.bestTime && (
+                      <div className="best-time-visit">
+                        <h4>Best Time to Visit</h4>
+                        <ul>
+                          <li><strong>Best overall:</strong> {port.weather.bestTime.overall}</li>
+                          <li><strong>Peak season:</strong> {port.weather.bestTime.hottest}</li>
+                          <li><strong>Quieter months:</strong> {port.weather.bestTime.quietest}</li>
+                        </ul>
+                        <p className="recommendation">{port.weather.bestTime.recommendation}</p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
             </div>

@@ -1,6 +1,5 @@
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
-import Breadcrumbs from '../components/Breadcrumbs';
 import { Button } from '../components/ui';
 import './TestimonialsPage.css';
 

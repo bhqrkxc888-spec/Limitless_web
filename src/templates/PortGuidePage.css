@@ -398,6 +398,286 @@
   text-decoration: underline;
 }
 
+/* About Port Section */
+.about-port-content {
+  margin-top: 1.5rem;
+}
+
+.about-port-content > p:first-child {
+  font-size: 1.1rem;
+  color: var(--color-gray-700);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.port-info-item {
+  background: white;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 8px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.port-info-item h4 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-gray-900);
+}
+
+.port-info-item p {
+  font-size: 0.9rem;
+  color: var(--color-gray-600);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Transport Connections */
+.transport-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.transport-item {
+  background: white;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.transport-item-full {
+  grid-column: 1 / -1;
+}
+
+.transport-item h4 {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  color: var(--color-primary);
+}
+
+.transport-item p {
+  font-size: 0.9rem;
+  color: var(--color-gray-600);
+  margin: 0 0 0.5rem;
+  line-height: 1.6;
+}
+
+.transport-item p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  .transport-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Must-See Sights */
+.must-see-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.must-see-card {
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, white 100%);
+  border: 1px solid var(--color-primary-light);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.must-see-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-primary-dark);
+}
+
+.must-see-card p {
+  font-size: 0.9rem;
+  color: var(--color-gray-600);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Beach Info */
+.beach-info {
+  background: linear-gradient(135deg, #e0f2fe 0%, white 100%);
+  border: 1px solid #bae6fd;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.beach-info p {
+  font-size: 1rem;
+  color: var(--color-gray-700);
+  line-height: 1.7;
+  margin: 0 0 1rem;
+}
+
+.beach-info p:last-child {
+  margin-bottom: 0;
+}
+
+.beach-distance {
+  font-size: 0.95rem;
+  color: var(--color-gray-600);
+}
+
+/* Getting Around Full Width */
+.getting-around-full {
+  grid-column: 1 / -1;
+}
+
+/* Time Required */
+.time-required-content {
+  margin-top: 1.5rem;
+}
+
+.time-estimates-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+.time-estimates-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.time-estimates-list .sight-name {
+  font-weight: 500;
+  color: var(--color-gray-800);
+}
+
+.time-estimates-list .sight-time {
+  font-size: 0.9rem;
+  color: var(--color-gray-500);
+  background: var(--color-gray-100);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+
+.time-summary {
+  background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  font-size: 0.95rem;
+  color: var(--color-gray-800);
+  line-height: 1.6;
+}
+
+/* FAQ Section */
+.faq-list {
+  margin-top: 1.5rem;
+}
+
+.faq-item {
+  background: white;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.faq-item h4 {
+  font-size: 1rem;
+  color: var(--color-gray-900);
+  margin-bottom: 0.5rem;
+}
+
+.faq-item p {
+  font-size: 0.9rem;
+  color: var(--color-gray-600);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Weather Section */
+.weather-content {
+  margin-top: 1.5rem;
+}
+
+.weather-table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+
+.weather-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  min-width: 500px;
+}
+
+.weather-table th,
+.weather-table td {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.weather-table th {
+  background: var(--color-gray-50);
+  font-weight: 600;
+  color: var(--color-gray-700);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.weather-table td:first-child {
+  font-weight: 500;
+  text-align: left;
+}
+
+.weather-table tbody tr:hover {
+  background: var(--color-gray-50);
+}
+
+.best-time-visit {
+  background: linear-gradient(135deg, #ecfdf5 0%, white 100%);
+  border: 1px solid #a7f3d0;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.best-time-visit h4 {
+  font-size: 1.1rem;
+  color: var(--color-gray-900);
+  margin-bottom: 1rem;
+}
+
+.best-time-visit ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.best-time-visit li {
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+  color: var(--color-gray-700);
+  line-height: 1.5;
+}
+
+.best-time-visit .recommendation {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--color-gray-600);
+  margin: 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-gray-200);
+}
+
 /* CTA Section */
 .section-dark .cta-buttons {
   display: flex;
