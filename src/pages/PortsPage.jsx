@@ -46,9 +46,6 @@ function PortCardWithImage({ port }) {
 function PortsPage() {
   const regions = getAllRegions();
 
-  // Hero image
-  const heroImage = getSupabaseImageUrl('WEB_categories', 'ports/hero.webp');
-
   // Structured Data for SEO
   const structuredData = {
     '@context': 'https://schema.org',

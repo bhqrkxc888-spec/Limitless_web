@@ -2,16 +2,14 @@ import { useParams, Link } from 'react-router-dom';
 import { getPortsByRegion, getAllRegions } from '../data/ports';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
-import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader } from '../components/ui';
-import { getSupabaseImageUrl } from '../config/assetUrls';
 import { usePortGuideImage } from '../hooks/useImageUrl';
 import './PortRegionPage.css';
 
 /**
  * Port Card with Database Image
  */
-function PortCardWithImage({ port, region }) {
+function PortCardWithImage({ port }) {
   const { imageUrl: portImage } = usePortGuideImage(port.slug, 'card');
   
   return (
@@ -65,7 +63,6 @@ function PortRegionPage() {
   }
 
   const ports = getPortsByRegion(region.id);
-  const heroImage = getSupabaseImageUrl('WEB_categories', `ports/${region.id}/hero.webp`);
 
   // Structured Data for SEO
   const structuredData = {
