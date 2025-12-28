@@ -109,6 +109,28 @@
   border-radius: var(--radius-lg);
   padding: var(--space-4);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 90px;
+}
+
+.fact-label {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--space-2);
+}
+
+.fact-value {
+  display: block;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: white;
 }
 
 .fact-label {

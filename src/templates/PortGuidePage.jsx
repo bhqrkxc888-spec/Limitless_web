@@ -137,7 +137,7 @@ function PortGuidePage() {
             </div>
             <div className="fact-box">
               <span className="fact-label">Language</span>
-              <span className="fact-value">{port.quickFacts?.language || 'Local'}</span>
+              <span className="fact-value">Spanish & English</span>
             </div>
             <div className="fact-box">
               <span className="fact-label">Timezone</span>
@@ -149,11 +149,11 @@ function PortGuidePage() {
             </div>
             <div className="fact-box">
               <span className="fact-label">Walkable</span>
-              <span className="fact-value">{port.quickFacts?.walkable ? 'Yes' : 'Transport needed'}</span>
+              <span className="fact-value">{port.quickFacts?.walkable ? 'Yes' : 'No'}</span>
             </div>
             <div className="fact-box">
               <span className="fact-label">Tender</span>
-              <span className="fact-value">{port.quickFacts?.tenderRequired ? 'Required' : 'No'}</span>
+              <span className="fact-value">{port.quickFacts?.tenderRequired ? 'Yes' : 'No'}</span>
             </div>
           </div>
         </div>

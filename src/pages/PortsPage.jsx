@@ -118,14 +118,12 @@ function PortsPage() {
         return (
           <section key={region.id} className="section">
             <div className="container">
-              <div className="region-header">
+              <div className="region-section-header">
                 <SectionHeader
                   title={`${region.name} Ports`}
                   subtitle={`Popular cruise ports in ${region.name}`}
+                  align="center"
                 />
-                <Link to={`/ports/region/${region.slug}`} className="view-all-link">
-                  View all {region.name} ports →
-                </Link>
               </div>
 
               <div className="ports-grid">
@@ -150,14 +148,21 @@ function PortsPage() {
                           <span className="port-country">{port.country}</span>
                         </div>
                         <Card.Description>{port.tagline}</Card.Description>
-                        <div className="port-quick-info">
-                          <span>{port.quickFacts.portType}</span>
-                          {port.quickFacts.walkable && <span>✓ Walkable</span>}
+                        <div className="port-card-footer">
+                          <Button to={`/ports/${port.slug}`} variant="outline" size="sm" className="port-view-btn">
+                            View Port Guide →
+                          </Button>
                         </div>
                       </Card.Content>
                     </Card>
                   );
                 })}
+              </div>
+              
+              <div className="view-all-container">
+                <Link to={`/ports/region/${region.slug}`} className="view-all-link">
+                  View all {region.name} ports →
+                </Link>
               </div>
             </div>
           </section>

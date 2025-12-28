@@ -61,7 +61,7 @@
   border-bottom: 1px solid var(--clr-border-light);
   position: sticky;
   top: 0;
-  z-index: var(--z-sticky);
+  z-index: var(--z-sticky-content);
   box-shadow: var(--shadow-sm);
 }
 

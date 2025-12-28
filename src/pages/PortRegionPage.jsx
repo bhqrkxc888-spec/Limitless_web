@@ -102,10 +102,10 @@ function PortRegionPage() {
                         <span className="port-country">{port.country}</span>
                       </div>
                       <Card.Description>{port.tagline}</Card.Description>
-                      <div className="port-quick-info">
-                        <span>{port.quickFacts.currency}</span>
-                        <span>{port.quickFacts.portType}</span>
-                        {port.quickFacts.walkable && <span>✓ Walkable</span>}
+                      <div className="port-card-footer">
+                        <Button to={`/ports/${port.slug}`} variant="outline" size="sm" className="port-view-btn">
+                          View Port Guide →
+                        </Button>
                       </div>
                     </Card.Content>
                   </Card>

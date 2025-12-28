@@ -159,14 +159,20 @@
   /* ========================================
      Z-INDEX SCALE - Updated for better separation
      Increased values to prevent conflicts with third-party libraries
+     Fixed hierarchy to ensure dropdowns work correctly
      ======================================== */
 
   --z-base: 0;
-  --z-dropdown: 1000;       /* Dropdowns and mega menus */
-  --z-sticky: 1100;         /* Sticky headers */
-  --z-fixed: 1200;          /* Fixed position elements (mobile toggle, etc) */
+  --z-content: 10;          /* Page content sections */
+  --z-sticky-content: 900;  /* Sticky page filters (below header) */
+  --z-header: 1000;         /* Sticky header (contains dropdowns) */
+  --z-dropdown: 1050;       /* Dropdowns and mega menus (must be above header) */
+  --z-fixed: 1100;          /* Fixed position elements (mobile toggle, WhatsApp) */
   --z-modal-backdrop: 1300; /* Modal backdrops */
   --z-modal: 1400;          /* Modals and overlays */
   --z-popover: 1500;        /* Popovers */
   --z-tooltip: 1600;        /* Tooltips (highest) */
+  
+  /* Legacy aliases - maintain backward compatibility */
+  --z-sticky: var(--z-header); /* Alias for header */
 }
