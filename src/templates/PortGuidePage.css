@@ -379,9 +379,6 @@
   color: var(--clr-accent);
   font-weight: bold;
 }
-  color: var(--clr-text-muted);
-  margin-bottom: var(--space-3);
-}
 
 .attraction-footer {
   display: flex;
