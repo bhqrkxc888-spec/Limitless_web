@@ -766,6 +766,82 @@
   border-radius: var(--radius-md);
 }
 
+/* Beach characteristics - v4 format */
+.beach-characteristics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.beach-tag {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  background: var(--clr-surface);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  color: var(--clr-text-muted);
+  text-transform: capitalize;
+}
+
+/* Beach facilities - v4 format */
+.beach-facilities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.facility-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2);
+  background: var(--clr-primary-light);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  color: var(--clr-primary);
+}
+
+/* Beach best for */
+.beach-best-for {
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+/* Beach access - v4 format */
+.beach-access {
+  font-size: var(--font-size-sm);
+  padding: var(--space-4);
+  background: var(--clr-surface);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-3);
+}
+
+.beach-access p {
+  margin-bottom: var(--space-2);
+}
+
+.beach-access p:last-child {
+  margin-bottom: 0;
+}
+
+.access-notes {
+  font-style: italic;
+  color: var(--clr-text-muted);
+}
+
+/* Beach tip */
+.beach-tip {
+  font-size: var(--font-size-sm);
+  padding: var(--space-3);
+  background: var(--clr-warning-light);
+  border-left: 3px solid var(--clr-warning);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-4);
+}
+
 .beach-info .google-maps-link-large {
   margin-top: auto;
   align-self: flex-end;

@@ -349,9 +349,56 @@ function PortGuidePage() {
                 <div className="beach-info">
                   <h3>{port.nearestBeach.name}</h3>
                   <p>{port.nearestBeach.description}</p>
-                  <div className="beach-distance">
-                    <strong>Getting there:</strong> {port.nearestBeach.distance}
+                  
+                  {/* Beach characteristics - v4 format */}
+                  {(port.nearestBeach.type || port.nearestBeach.waterEntry || port.nearestBeach.shelter) && (
+                    <div className="beach-characteristics">
+                      {port.nearestBeach.type && <span className="beach-tag">{port.nearestBeach.type}</span>}
+                      {port.nearestBeach.waterEntry && <span className="beach-tag">{port.nearestBeach.waterEntry}</span>}
+                      {port.nearestBeach.shelter && <span className="beach-tag">{port.nearestBeach.shelter}</span>}
+                      {port.nearestBeach.crowdLevel && <span className="beach-tag">{port.nearestBeach.crowdLevel}</span>}
+                    </div>
+                  )}
+                  
+                  {/* Facilities - v4 format */}
+                  {port.nearestBeach.facilities && (
+                    <div className="beach-facilities">
+                      {port.nearestBeach.facilities.lifeguards && <span className="facility-tag">🛟 Lifeguards</span>}
+                      {port.nearestBeach.facilities.sunbeds && <span className="facility-tag">🛏️ Sunbeds</span>}
+                      {port.nearestBeach.facilities.restaurants && <span className="facility-tag">🍽️ Restaurants</span>}
+                      {port.nearestBeach.facilities.showers && <span className="facility-tag">🚿 Showers</span>}
+                      {port.nearestBeach.facilities.toilets && <span className="facility-tag">🚻 Toilets</span>}
+                    </div>
+                  )}
+                  
+                  {/* Best for - v4 format */}
+                  {port.nearestBeach.bestFor && port.nearestBeach.bestFor.length > 0 && (
+                    <div className="beach-best-for">
+                      <strong>Best for:</strong> {port.nearestBeach.bestFor.join(', ')}
+                    </div>
+                  )}
+                  
+                  {/* Access info - v4 format or fallback to v3 distance */}
+                  <div className="beach-access">
+                    {port.nearestBeach.access ? (
+                      <>
+                        {port.nearestBeach.access.walkTime && <p><strong>Walk:</strong> {port.nearestBeach.access.walkTime}</p>}
+                        {port.nearestBeach.access.taxiTime && <p><strong>Taxi:</strong> {port.nearestBeach.access.taxiTime}</p>}
+                        {port.nearestBeach.access.busRoute && <p><strong>Bus:</strong> {port.nearestBeach.access.busRoute}</p>}
+                        {port.nearestBeach.access.notes && <p className="access-notes">{port.nearestBeach.access.notes}</p>}
+                      </>
+                    ) : port.nearestBeach.distance && (
+                      <p><strong>Getting there:</strong> {port.nearestBeach.distance}</p>
+                    )}
                   </div>
+                  
+                  {/* Insider tip - v4 format */}
+                  {port.nearestBeach.tip && (
+                    <div className="beach-tip">
+                      <strong>Tip:</strong> {port.nearestBeach.tip}
+                    </div>
+                  )}
+                  
                   <a 
                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(port.nearestBeach.name + ', ' + port.name)}`}
                     target="_blank" 
