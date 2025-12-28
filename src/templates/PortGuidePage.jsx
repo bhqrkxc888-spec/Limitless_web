@@ -258,12 +258,43 @@ function PortGuidePage() {
                         />
                       </div>
                       <div className="attraction-body">
-                        <h3>{item.title}</h3>
-                        <p>{item.description}</p>
-                        <div className="attraction-footer">
+                        <div className="attraction-header">
+                          <h3>{item.title}</h3>
                           {item.duration && (
-                            <span className="attraction-time">Allow {item.duration}</span>
+                            <span className="attraction-duration">{item.duration}</span>
                           )}
+                        </div>
+                        <p>{item.description}</p>
+                        
+                        {/* Highlights */}
+                        {item.highlights && item.highlights.length > 0 && (
+                          <div className="attraction-highlights">
+                            {item.highlights.map((highlight, i) => (
+                              <span key={i} className="highlight-tag">{highlight}</span>
+                            ))}
+                          </div>
+                        )}
+                        
+                        {/* Good For */}
+                        {item.goodFor && item.goodFor.length > 0 && (
+                          <div className="attraction-good-for">
+                            <strong>Good for:</strong> {item.goodFor.join(', ')}
+                          </div>
+                        )}
+                        
+                        {/* Tips - Stacked vertically, 1 per row */}
+                        {item.tips && item.tips.length > 0 && (
+                          <div className="attraction-tips">
+                            <strong>Insider Tips:</strong>
+                            <ul>
+                              {item.tips.map((tip, i) => (
+                                <li key={i}>{tip}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                        
+                        <div className="attraction-footer">
                           <a 
                             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.title + ', ' + port.name)}`}
                             target="_blank" 
