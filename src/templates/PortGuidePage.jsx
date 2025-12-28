@@ -23,6 +23,22 @@ function PortGuidePage() {
   const port = getPortBySlug(slug);
   const [weatherIndex, setWeatherIndex] = useState(0);
 
+  // Combine attractions - ONLY use mustSeeSights if available, otherwise thingsToDo
+  // This prevents duplication
+  const attractions = useMemo(() => {
+    if (!port) return [];
+    if (port.mustSeeSights && port.mustSeeSights.length > 0) {
+      return port.mustSeeSights.map(sight => ({
+        ...sight,
+        // Add time estimate if available
+        duration: port.timeRequired?.estimates?.find(
+          e => sight.title.toLowerCase().includes(e.sight.toLowerCase().split(',')[0].toLowerCase())
+        )?.time || null
+      }));
+    }
+    return port.thingsToDo || [];
+  }, [port]);
+
   // Handle port not found
   if (!port) {
     return (
@@ -58,21 +74,6 @@ function PortGuidePage() {
       name: port.country,
     },
   };
-
-  // Combine attractions - ONLY use mustSeeSights if available, otherwise thingsToDo
-  // This prevents duplication
-  const attractions = useMemo(() => {
-    if (port.mustSeeSights && port.mustSeeSights.length > 0) {
-      return port.mustSeeSights.map(sight => ({
-        ...sight,
-        // Add time estimate if available
-        duration: port.timeRequired?.estimates?.find(
-          e => sight.title.toLowerCase().includes(e.sight.toLowerCase().split(',')[0].toLowerCase())
-        )?.time || null
-      }));
-    }
-    return port.thingsToDo || [];
-  }, [port]);
 
   // Format date as DD MONTH YYYY
   const formatDate = (dateString) => {
