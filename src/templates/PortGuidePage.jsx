@@ -6,7 +6,7 @@ import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import OptimizedImage from '../components/OptimizedImage';
 import { Button, SectionHeader } from '../components/ui';
-import { getSupabaseImageUrl, SITE_ASSETS } from '../config/assetUrls';
+import { SITE_ASSETS } from '../config/assetUrls';
 import { usePortGuideImage } from '../hooks/useImageUrl';
 import { ArrowLeft, ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
 import './PortGuidePage.css';
