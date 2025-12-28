@@ -40,6 +40,7 @@ docs/
 *.md
 !README.md
 !TODO.md
+!PERPLEXITY_PORT_GUIDE_PROMPT.md
 
 # Reports and generated files
 reports/
