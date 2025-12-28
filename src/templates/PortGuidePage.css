@@ -1,733 +1,806 @@
 /**
  * Port Guide Page Styles
+ * Clean, modern, sophisticated design
+ * Full-width layout with premium feel
  */
+
+/* ========================================
+   PAGE LAYOUT
+   ======================================== */
 
 .port-guide-page {
   background: var(--color-background);
 }
 
-/* Breadcrumb */
-.port-breadcrumb {
-  background: var(--color-gray-50);
-  padding: 0.75rem 0;
-  font-size: 0.875rem;
+.port-guide-content {
+  padding: var(--space-16) 0;
 }
 
-.port-breadcrumb a {
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-.port-breadcrumb a:hover {
-  text-decoration: underline;
-}
-
-.port-breadcrumb .separator {
-  margin: 0 0.5rem;
-  color: var(--color-gray-400);
-}
-
-.port-breadcrumb .current {
-  color: var(--color-gray-600);
-}
-
-/* Quick Facts Bar */
-.port-quick-facts {
-  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-  padding: 1.5rem 0;
-  color: white;
-}
-
-.quick-facts-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 1rem;
-}
-
-.quick-fact {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 0.5rem;
-}
-
-.quick-fact-icon {
-  font-size: 1.5rem;
-  margin-bottom: 0.25rem;
-}
-
-.quick-fact-label {
-  font-size: 0.75rem;
-  opacity: 0.8;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.quick-fact-value {
-  font-size: 0.875rem;
-  font-weight: 600;
-  margin-top: 0.125rem;
-}
-
-@media (max-width: 1024px) {
-  .quick-facts-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 640px) {
-  .quick-facts-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Main Grid Layout */
-.port-guide-grid {
-  display: grid;
-  grid-template-columns: 1fr 350px;
-  gap: 3rem;
-}
-
-@media (max-width: 1024px) {
-  .port-guide-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .port-guide-sidebar {
-    order: -1;
-  }
-}
-
-/* Introduction */
-.port-intro {
-  margin-bottom: 3rem;
-}
-
-.port-intro .lead {
-  font-size: 1.25rem;
-  line-height: 1.8;
-  color: var(--color-gray-700);
-}
-
-/* Port Sections */
 .port-section {
-  margin-bottom: 3rem;
-  padding-bottom: 3rem;
-  border-bottom: 1px solid var(--color-gray-200);
+  margin-bottom: var(--space-16);
+  padding-bottom: var(--space-12);
+  border-bottom: 1px solid var(--color-border-light);
 }
 
 .port-section:last-child {
   border-bottom: none;
 }
 
-/* Things to Do Grid */
-.things-to-do-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+.port-section h2 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-3xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-6);
+  letter-spacing: -0.02em;
 }
 
-.thing-card {
-  background: white;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 12px;
-  padding: 1.5rem;
-  transition: box-shadow 0.2s, transform 0.2s;
+.port-section h3 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-3);
 }
 
-.thing-card:hover {
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-  transform: translateY(-2px);
+.port-lead {
+  font-size: var(--font-size-lg);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  max-width: 80ch;
+  margin-bottom: var(--space-8);
 }
 
-.thing-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 0.75rem;
-}
-
-.thing-category-icon {
-  font-size: 1.5rem;
-}
-
-.thing-meta {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.thing-duration,
-.thing-price {
-  font-size: 0.75rem;
-  padding: 0.25rem 0.5rem;
-  background: var(--color-gray-100);
-  border-radius: 4px;
-  color: var(--color-gray-600);
-}
-
-.thing-card h3 {
-  font-size: 1.125rem;
-  margin-bottom: 0.5rem;
-  color: var(--color-gray-900);
-}
-
-.thing-card p {
-  font-size: 0.9rem;
-  color: var(--color-gray-600);
+.section-intro {
+  font-size: var(--font-size-base);
   line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-8);
+  max-width: 70ch;
+}
+
+/* ========================================
+   NAVIGATION SECTION
+   ======================================== */
+
+.port-nav-section {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border-light);
+  padding: var(--space-6) 0;
+}
+
+.port-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-primary);
+  color: white;
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.2s;
+  margin-bottom: var(--space-6);
+}
+
+.port-back-button:hover {
+  background: var(--color-primary-dark);
+  transform: translateX(-2px);
+}
+
+/* ========================================
+   QUICK FACTS
+   ======================================== */
+
+.port-quick-facts {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-4);
+}
+
+@media (max-width: 1023px) {
+  .port-quick-facts {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .port-quick-facts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.quick-fact-item {
+  background: white;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.quick-fact-label {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2);
+}
+
+.quick-fact-value {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* ========================================
+   INFO BLOCKS
+   ======================================== */
+
+.port-info-block {
+  margin-bottom: var(--space-6);
+  padding: var(--space-4) var(--space-6);
+  background: var(--color-surface);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+}
+
+.port-info-block h3 {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  color: var(--color-text-primary);
+}
+
+.port-info-block p {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
   margin: 0;
 }
 
-/* Excursions */
-.excursions-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
+/* ========================================
+   GETTING AROUND GRID
+   ======================================== */
 
-.excursion-card {
-  background: linear-gradient(135deg, var(--color-gray-50) 0%, white 100%);
-  border: 1px solid var(--color-gray-200);
-  border-radius: 12px;
-  padding: 1.5rem;
-}
-
-.excursion-card h3 {
-  font-size: 1.125rem;
-  margin-bottom: 0.5rem;
-  color: var(--color-primary);
-}
-
-.excursion-card p {
-  font-size: 0.9rem;
-  color: var(--color-gray-600);
-  margin-bottom: 1rem;
-}
-
-.excursion-meta {
-  display: flex;
-  gap: 1.5rem;
-  font-size: 0.875rem;
-  color: var(--color-gray-500);
-}
-
-/* Getting Around */
 .getting-around-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
   .getting-around-grid {
     grid-template-columns: 1fr;
   }
 }
 
-.getting-around-item {
+.getting-around-card {
   background: white;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 8px;
-  padding: 1.25rem;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
-.getting-around-item h4 {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  color: var(--color-gray-900);
-}
-
-.getting-around-item p {
-  font-size: 0.9rem;
-  color: var(--color-gray-600);
-  margin: 0;
-  line-height: 1.6;
-}
-
-/* Food & Drink */
-.food-drink-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin-top: 1.5rem;
-}
-
-.food-drink-item {
-  background: white;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 8px;
-  padding: 1.25rem;
-}
-
-.food-drink-item h4 {
-  font-size: 1rem;
-  margin-bottom: 0.25rem;
-  color: var(--color-gray-900);
-}
-
-.food-drink-item .place-type {
-  display: inline-block;
-  font-size: 0.75rem;
-  color: var(--color-primary);
-  background: var(--color-primary-light);
-  padding: 0.125rem 0.5rem;
-  border-radius: 4px;
-  margin-bottom: 0.5rem;
-}
-
-.food-drink-item p {
-  font-size: 0.875rem;
-  color: var(--color-gray-600);
-  margin-bottom: 0.5rem;
-  line-height: 1.5;
-}
-
-.food-drink-item .price-range {
-  font-size: 0.875rem;
+.getting-around-card h3 {
+  font-size: var(--font-size-base);
   font-weight: 600;
-  color: var(--color-gray-500);
-}
-
-/* Insider Tips */
-.insider-tips-list {
-  list-style: none;
-  padding: 0;
-  margin: 1.5rem 0 0;
-}
-
-.insider-tips-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 1rem;
-  background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%);
-  border-radius: 8px;
-  margin-bottom: 0.75rem;
-  font-size: 0.95rem;
-  color: var(--color-gray-800);
-  line-height: 1.5;
-}
-
-.insider-tips-list .tip-icon {
-  font-size: 1.25rem;
-  flex-shrink: 0;
-}
-
-/* Sidebar */
-.port-guide-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.sidebar-card {
-  background: white;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 12px;
-  padding: 1.5rem;
-}
-
-.sidebar-cta-card {
-  background: linear-gradient(135deg, var(--color-primary-light) 0%, white 100%);
-  border-color: var(--color-primary-light);
-}
-
-.sidebar-card h3 {
-  font-size: 1.125rem;
-  margin-bottom: 1rem;
-  color: var(--color-gray-900);
-}
-
-.sidebar-card p {
-  font-size: 0.9rem;
-  color: var(--color-gray-600);
-  margin-bottom: 1rem;
-  line-height: 1.6;
-}
-
-/* Practical Info List */
-.practical-info-list {
-  margin: 0;
-}
-
-.practical-info-list dt {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-gray-500);
-  margin-top: 1rem;
-}
-
-.practical-info-list dt:first-child {
-  margin-top: 0;
-}
-
-.practical-info-list dd {
-  font-size: 0.9rem;
-  color: var(--color-gray-800);
-  margin: 0.25rem 0 0;
-}
-
-/* Related Destinations */
-.related-destinations-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.related-destinations-list li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--color-gray-100);
-}
-
-.related-destinations-list li:last-child {
-  border-bottom: none;
-}
-
-.related-destinations-list a {
   color: var(--color-primary);
-  text-decoration: none;
-  font-size: 0.9rem;
+  margin-bottom: var(--space-3);
 }
 
-.related-destinations-list a:hover {
-  text-decoration: underline;
-}
-
-/* About Port Section */
-.about-port-content {
-  margin-top: 1.5rem;
-}
-
-.about-port-content > p:first-child {
-  font-size: 1.1rem;
-  color: var(--color-gray-700);
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-}
-
-.port-info-item {
-  background: white;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 8px;
-  padding: 1.25rem;
-  margin-bottom: 1rem;
-}
-
-.port-info-item h4 {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  color: var(--color-gray-900);
-}
-
-.port-info-item p {
-  font-size: 0.9rem;
-  color: var(--color-gray-600);
-  margin: 0;
+.getting-around-card p {
+  font-size: var(--font-size-sm);
   line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0;
 }
 
-/* Transport Connections */
+/* ========================================
+   TRANSPORT GRID
+   ======================================== */
+
 .transport-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+  gap: var(--space-6);
 }
 
-.transport-item {
-  background: white;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 8px;
-  padding: 1.25rem;
-}
-
-.transport-item-full {
-  grid-column: 1 / -1;
-}
-
-.transport-item h4 {
-  font-size: 1rem;
-  margin-bottom: 0.75rem;
-  color: var(--color-primary);
-}
-
-.transport-item p {
-  font-size: 0.9rem;
-  color: var(--color-gray-600);
-  margin: 0 0 0.5rem;
-  line-height: 1.6;
-}
-
-.transport-item p:last-child {
-  margin-bottom: 0;
-}
-
-@media (max-width: 640px) {
+@media (max-width: 767px) {
   .transport-grid {
     grid-template-columns: 1fr;
   }
 }
 
-/* Must-See Sights */
-.must-see-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+.transport-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
 }
 
-.must-see-card {
-  background: white;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 12px;
-  overflow: hidden;
-  transition: box-shadow 0.2s, transform 0.2s;
+.transport-card-wide {
+  grid-column: span 2;
 }
 
-.must-see-card:hover {
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-  transform: translateY(-3px);
+@media (max-width: 767px) {
+  .transport-card-wide {
+    grid-column: span 1;
+  }
 }
 
-.must-see-image {
-  width: 100%;
-  height: 180px;
-  overflow: hidden;
-  background: var(--color-gray-100);
+.transport-card h3 {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
 }
 
-.must-see-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s;
-}
-
-.must-see-card:hover .must-see-image img {
-  transform: scale(1.05);
-}
-
-.must-see-content {
-  padding: 1.25rem;
-}
-
-.must-see-card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
-  color: var(--color-primary-dark);
-}
-
-.must-see-card p {
-  font-size: 0.9rem;
-  color: var(--color-gray-600);
-  margin: 0;
+.transport-card p {
+  font-size: var(--font-size-sm);
   line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2);
 }
 
-/* Card without image */
-.must-see-card:not(:has(.must-see-image)) {
-  background: linear-gradient(135deg, var(--color-primary-light) 0%, white 100%);
-  border-color: var(--color-primary-light);
-}
-
-.must-see-card:not(:has(.must-see-image)) .must-see-content {
-  padding: 1.5rem;
-}
-
-/* Beach Info */
-.beach-info {
-  background: linear-gradient(135deg, #e0f2fe 0%, white 100%);
-  border: 1px solid #bae6fd;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-top: 1.5rem;
-}
-
-.beach-info p {
-  font-size: 1rem;
-  color: var(--color-gray-700);
-  line-height: 1.7;
-  margin: 0 0 1rem;
-}
-
-.beach-info p:last-child {
+.transport-card p:last-child {
   margin-bottom: 0;
 }
 
-.beach-distance {
-  font-size: 0.95rem;
-  color: var(--color-gray-600);
+/* ========================================
+   ATTRACTIONS GRID
+   ======================================== */
+
+.attractions-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
 }
 
-/* Getting Around Full Width */
-.getting-around-full {
-  grid-column: 1 / -1;
+@media (max-width: 1023px) {
+  .attractions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-/* Time Required */
-.time-required-content {
-  margin-top: 1.5rem;
+@media (max-width: 639px) {
+  .attractions-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-.time-estimates-list {
+.attraction-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid var(--color-border-light);
+}
+
+.attraction-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.attraction-featured {
+  border-left: 3px solid var(--color-accent);
+}
+
+.attraction-image {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.attraction-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.attraction-content {
+  padding: var(--space-5);
+}
+
+.attraction-content h3 {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.attraction-content p {
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+}
+
+.attraction-duration {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--color-text-tertiary);
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-surface);
+  border-radius: var(--radius-full);
+}
+
+.time-summary-box {
+  margin-top: var(--space-8);
+  padding: var(--space-6);
+  background: var(--color-primary);
+  color: white;
+  border-radius: var(--radius-lg);
+}
+
+.time-summary-box p {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ========================================
+   EXCURSIONS GRID
+   ======================================== */
+
+.excursions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+
+@media (max-width: 767px) {
+  .excursions-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.excursion-card {
+  background: white;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.excursion-card h3 {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+.excursion-card p {
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.excursion-details {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.excursion-duration,
+.excursion-book {
+  font-size: var(--font-size-xs);
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border-radius: var(--radius-full);
+  color: var(--color-text-secondary);
+}
+
+/* ========================================
+   BEACH SECTION
+   ======================================== */
+
+.beach-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .beach-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+.beach-image-container {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.beach-image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.beach-details h3 {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+  color: var(--color-primary);
+}
+
+.beach-details p {
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-4);
+}
+
+.beach-getting-there {
+  font-size: var(--font-size-sm);
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+}
+
+/* ========================================
+   FOOD AND DRINK GRID
+   ======================================== */
+
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+@media (max-width: 1023px) {
+  .food-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .food-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.food-card {
+  background: white;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.food-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.food-image {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.food-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.food-content {
+  padding: var(--space-4);
+}
+
+.food-type {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2);
+}
+
+.food-content h3 {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.food-content p {
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* ========================================
+   TIPS LIST
+   ======================================== */
+
+.tips-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 1.5rem;
+  margin: 0;
+  display: grid;
+  gap: var(--space-4);
 }
 
-.time-estimates-list li {
+.tips-list li {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  padding: var(--space-4) var(--space-6);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--color-accent);
+}
+
+/* ========================================
+   WEATHER CAROUSEL
+   ======================================== */
+
+.weather-carousel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.weather-nav {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-full);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.weather-nav:hover:not(:disabled) {
+  background: var(--color-surface);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.weather-nav:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.weather-cards-container {
+  flex: 1;
+  overflow: hidden;
+}
+
+.weather-cards {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.weather-card {
+  flex: 0 0 calc(33.333% - var(--space-4));
+  margin-right: var(--space-4);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  color: white;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .weather-card {
+    flex: 0 0 calc(100% - var(--space-4));
+  }
+}
+
+.weather-card h3 {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+  color: white;
+}
+
+.weather-temps {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+.weather-high,
+.weather-low {
+  text-align: center;
+}
+
+.temp-value {
+  display: block;
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.temp-label {
+  display: block;
+  font-size: var(--font-size-xs);
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: var(--space-1);
+}
+
+.weather-details {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background: white;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
+  padding-top: var(--space-4);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.time-estimates-list .sight-name {
-  font-weight: 500;
-  color: var(--color-gray-800);
+.weather-detail {
+  text-align: center;
 }
 
-.time-estimates-list .sight-time {
-  font-size: 0.9rem;
-  color: var(--color-gray-500);
-  background: var(--color-gray-100);
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
+.detail-label {
+  display: block;
+  font-size: var(--font-size-xs);
+  opacity: 0.8;
+  margin-bottom: var(--space-1);
 }
 
-.time-summary {
-  background: linear-gradient(135deg, #fef3c7 0%, #fef9c3 100%);
-  border-radius: 8px;
-  padding: 1rem 1.25rem;
-  font-size: 0.95rem;
-  color: var(--color-gray-800);
+.detail-value {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.best-time-section {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.best-time-section h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--space-4);
+}
+
+.best-time-section p {
+  font-size: var(--font-size-sm);
   line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
 }
 
-/* FAQ Section */
+.best-time-section .recommendation {
+  font-style: italic;
+  color: var(--color-text-primary);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border-light);
+  margin-top: var(--space-4);
+}
+
+/* ========================================
+   FAQ SECTION
+   ======================================== */
+
 .faq-list {
-  margin-top: 1.5rem;
+  display: grid;
+  gap: var(--space-4);
 }
 
 .faq-item {
   background: white;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 8px;
-  padding: 1.25rem 1.5rem;
-  margin-bottom: 1rem;
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
 }
 
-.faq-item h4 {
-  font-size: 1rem;
-  color: var(--color-gray-900);
-  margin-bottom: 0.5rem;
+.faq-item h3 {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+  color: var(--color-primary);
 }
 
 .faq-item p {
-  font-size: 0.9rem;
-  color: var(--color-gray-600);
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
   margin: 0;
+}
+
+/* ========================================
+   CTA SECTION
+   ======================================== */
+
+.port-cta-section {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  padding: var(--space-16) 0;
+  text-align: center;
+}
+
+.port-cta-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.port-cta-content h2 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-3xl);
+  font-weight: 600;
+  color: white;
+  margin-bottom: var(--space-4);
+}
+
+.port-cta-content p {
+  font-size: var(--font-size-lg);
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: var(--space-8);
   line-height: 1.6;
 }
 
-/* Weather Section */
-.weather-content {
-  margin-top: 1.5rem;
-}
-
-.weather-table-wrapper {
-  overflow-x: auto;
-  margin-bottom: 2rem;
-}
-
-.weather-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.875rem;
-  min-width: 500px;
-}
-
-.weather-table th,
-.weather-table td {
-  padding: 0.75rem 1rem;
-  text-align: center;
-  border-bottom: 1px solid var(--color-gray-200);
-}
-
-.weather-table th {
-  background: var(--color-gray-50);
-  font-weight: 600;
-  color: var(--color-gray-700);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.weather-table td:first-child {
-  font-weight: 500;
-  text-align: left;
-}
-
-.weather-table tbody tr:hover {
-  background: var(--color-gray-50);
-}
-
-.best-time-visit {
-  background: linear-gradient(135deg, #ecfdf5 0%, white 100%);
-  border: 1px solid #a7f3d0;
-  border-radius: 12px;
-  padding: 1.5rem;
-}
-
-.best-time-visit h4 {
-  font-size: 1.1rem;
-  color: var(--color-gray-900);
-  margin-bottom: 1rem;
-}
-
-.best-time-visit ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 1rem;
-}
-
-.best-time-visit li {
-  padding: 0.5rem 0;
-  font-size: 0.9rem;
-  color: var(--color-gray-700);
-  line-height: 1.5;
-}
-
-.best-time-visit .recommendation {
-  font-size: 0.95rem;
-  font-style: italic;
-  color: var(--color-gray-600);
-  margin: 0;
-  padding-top: 0.5rem;
-  border-top: 1px solid var(--color-gray-200);
-}
-
-/* CTA Section */
-.section-dark .cta-buttons {
+.port-cta-buttons {
   display: flex;
-  gap: 1rem;
   justify-content: center;
-  margin-top: 1.5rem;
+  gap: var(--space-4);
+  flex-wrap: wrap;
 }
 
-@media (max-width: 640px) {
-  .section-dark .cta-buttons {
-    flex-direction: column;
-    align-items: center;
+.port-cta-buttons .btn-outline {
+  border-color: white;
+  color: white;
+}
+
+.port-cta-buttons .btn-outline:hover {
+  background: white;
+  color: var(--color-primary);
+}
+
+/* ========================================
+   DISCLAIMER
+   ======================================== */
+
+.port-disclaimer {
+  padding: var(--space-8) 0;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.port-disclaimer p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  text-align: center;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 767px) {
+  .port-guide-content {
+    padding: var(--space-10) 0;
+  }
+  
+  .port-section {
+    margin-bottom: var(--space-10);
+    padding-bottom: var(--space-8);
+  }
+  
+  .port-section h2 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .port-cta-content h2 {
+    font-size: var(--font-size-2xl);
   }
 }
-

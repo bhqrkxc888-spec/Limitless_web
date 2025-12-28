@@ -78,22 +78,19 @@ export const ports = [
         title: 'SeaCity Museum',
         description: 'Explore Southampton\'s maritime heritage including the Titanic story. The museum features interactive exhibits about the city\'s connection to the famous ship.',
         category: 'culture',
-        duration: '2-3 hours',
-        price: '£',
+        duration: '2 to 3 hours',
       },
       {
         title: 'Old Town Walls',
         description: 'Walk along the medieval walls that once protected the city. These are some of the best-preserved medieval walls in England.',
         category: 'history',
         duration: '1 hour',
-        price: 'Free',
       },
       {
         title: 'West Quay Shopping Centre',
         description: 'Major shopping destination with over 100 stores, restaurants, and a cinema. Perfect for pre-cruise shopping.',
         category: 'shopping',
-        duration: '2-4 hours',
-        price: 'Varies',
+        duration: '2 to 4 hours',
       },
     ],
     
@@ -127,14 +124,12 @@ export const ports = [
       {
         name: 'The Pig in the Wall',
         type: 'Restaurant',
-        description: 'Boutique hotel restaurant with excellent British cuisine',
-        priceRange: '££',
+        description: 'Boutique hotel restaurant with excellent British cuisine.',
       },
       {
         name: 'Oxford Street',
         type: 'Area',
-        description: 'Pedestrianised street with numerous cafes, pubs and restaurants',
-        priceRange: '£-££',
+        description: 'Pedestrianised street with numerous cafes, pubs and restaurants.',
       },
     ],
     
@@ -191,15 +186,13 @@ export const ports = [
         title: 'Dover Castle',
         description: 'Explore the largest castle in England with over 2,000 years of history, including secret wartime tunnels.',
         category: 'history',
-        duration: '3-4 hours',
-        price: '££',
+        duration: '3 to 4 hours',
       },
       {
         title: 'White Cliffs of Dover',
         description: 'Walk along the iconic chalk cliffs with stunning views across the English Channel to France.',
         category: 'nature',
-        duration: '2-3 hours',
-        price: 'Free',
+        duration: '2 to 3 hours',
       },
     ],
     
@@ -254,14 +247,14 @@ export const ports = [
     country: 'Spain',
     region: 'mediterranean',
     coordinates: { lat: 41.3851, lon: 2.1734 },
-    tagline: 'Europe\'s busiest cruise hub with Gaudí, beaches, and world-class tapas',
-    description: 'Barcelona is one of Europe\'s biggest and easiest cruise ports, with terminals close to the city centre and excellent links to the airport and trains. With one full day you can see several headline sights; 2–3 days lets you add beaches, food and maybe a day trip.',
+    tagline: 'Europe\'s busiest cruise hub with Gaudi, beaches, and world-class tapas',
+    description: 'Barcelona is one of Europe\'s biggest and easiest cruise ports, with terminals close to the city centre and excellent links to the airport and trains. With one full day you can see several headline sights. Two or three days lets you add beaches, food and maybe a day trip.',
     
     // Detailed port information
     aboutPort: {
       overview: 'Barcelona Cruise Port is Europe\'s busiest cruise hub, with large, modern terminals mainly on Moll Adossat plus a smaller terminal at the World Trade Center (Port Vell) near the city.',
-      terminals: 'Most big ships dock at Terminals A–E on Moll Adossat; smaller or luxury ships sometimes use the World Trade Center / Maremagnum berths just by the lower end of La Rambla.',
-      shuttle: 'A shuttle bus (often called the "blue bus") usually runs between Moll Adossat and the Columbus Monument at the bottom of La Rambla, putting you a short walk from the Gothic Quarter.',
+      terminals: 'Most big ships dock at Terminals A to E on Moll Adossat. Smaller or luxury ships sometimes use the World Trade Center or Maremagnum berths just by the lower end of La Rambla.',
+      shuttle: 'A shuttle bus (often called the blue bus) usually runs between Moll Adossat and the Columbus Monument at the bottom of La Rambla, putting you a short walk from the Gothic Quarter.',
       walkability: 'The World Trade Center terminal is walkable to La Rambla in about 10 minutes, which is ideal if your ship docks there. From Moll Adossat, most people use the shuttle or a taxi first, then walk within the historic centre.',
     },
 
@@ -278,54 +271,54 @@ export const ports = [
     transportConnections: {
       airport: {
         name: 'Barcelona El Prat (BCN)',
-        distance: '25–35 minutes from cruise port by taxi',
-        options: 'Common options from the airport into the city are taxi, the Aerobús shuttle to Plaça de Catalunya, or the R2 Nord train to Sants/Estació de França, then taxi/metro to the port.',
+        distance: '25 to 35 minutes from cruise port by taxi',
+        options: 'Common options from the airport into the city are taxi, the Aerobus shuttle to Placa de Catalunya, or the R2 Nord train to Sants or Estacio de Franca, then taxi or metro to the port.',
       },
       trains: {
         mainStation: 'Barcelona Sants',
-        description: 'Barcelona Sants is the main long-distance station for high-speed trains to Madrid, Paris and beyond; from Sants it is about 15–25 minutes by taxi to the cruise terminals.',
-        localHubs: 'For local trains, Sants and Passeig de Gràcia are the main city hubs, and both connect easily by metro and taxi to the port area.',
+        description: 'Barcelona Sants is the main long-distance station for high-speed trains to Madrid, Paris and beyond. From Sants it is about 15 to 25 minutes by taxi to the cruise terminals.',
+        localHubs: 'For local trains, Sants and Passeig de Gracia are the main city hubs, and both connect easily by metro and taxi to the port area.',
       },
       cruiseLines: 'Barcelona is a major homeport for Western Mediterranean itineraries, regularly handling ships from MSC, Costa, Royal Caribbean, Norwegian, Celebrity, Carnival, Princess and others.',
     },
 
     gettingAround: {
-      fromPort: 'The main cruise wharf (Moll Adossat) sits at the southern edge of the city, roughly 10–15 minutes by taxi to the Gothic Quarter in normal traffic. Use the port shuttle or taxi rather than walking the whole way, as parts of the walk are exposed and industrial.',
-      publicTransport: 'Dense metro and bus network makes it easy to reach Sagrada Família, Park Güell and Montjuïc. The Hola Barcelona travel card gives unlimited public transport for 2–5 days.',
-      taxis: 'Plentiful, metered and relatively straightforward for hops between port, Sagrada Família, Park Güell and beaches.',
-      walkingDistance: 'From the Columbus Monument you can walk La Rambla, the Gothic Quarter and much of Port Vell; expect cobbles and occasional crowds.',
+      fromPort: 'The main cruise wharf (Moll Adossat) sits at the southern edge of the city, roughly 10 to 15 minutes by taxi to the Gothic Quarter in normal traffic. Use the port shuttle or taxi rather than walking the whole way, as parts of the walk are exposed and industrial.',
+      publicTransport: 'Dense metro and bus network makes it easy to reach Sagrada Familia, Park Guell and Montjuic. The Hola Barcelona travel card gives unlimited public transport for 2 to 5 days.',
+      taxis: 'Plentiful, metered and relatively straightforward for hops between port, Sagrada Familia, Park Guell and beaches.',
+      walkingDistance: 'From the Columbus Monument you can walk La Rambla, the Gothic Quarter and much of Port Vell. Expect cobbles and occasional crowds.',
       sightseeingBus: 'Hop-on hop-off buses loop between major sights, useful if you want an overview without navigating public transport on a tight schedule.',
     },
     
     // Must-see sights (the headline attractions)
     mustSeeSights: [
       {
-        title: 'La Sagrada Família',
-        description: 'Gaudí\'s iconic, still-unfinished basilica. Pre-book timed entry if at all possible.',
+        title: 'La Sagrada Familia',
+        description: 'Gaudi\'s iconic, still-unfinished basilica. Pre-book timed entry if at all possible.',
         image: 'sagrada-familia.webp',
       },
       {
-        title: 'Gothic Quarter (Barri Gòtic)',
+        title: 'Gothic Quarter',
         description: 'Medieval lanes, Roman remains and Barcelona Cathedral, just off La Rambla.',
         image: 'gothic-quarter.webp',
       },
       {
-        title: 'La Rambla & La Boqueria Market',
-        description: 'The classic pedestrian boulevard from Plaça de Catalunya to the port, with the colourful food market about halfway.',
+        title: 'La Rambla and La Boqueria Market',
+        description: 'The classic pedestrian boulevard from Placa de Catalunya to the port, with the colourful food market about halfway.',
         image: 'la-boqueria.webp',
       },
       {
-        title: 'Park Güell',
-        description: 'Gaudí\'s park with mosaics and city views; most of the Monumental Zone requires a timed ticket and a bit of uphill walking.',
+        title: 'Park Guell',
+        description: 'Gaudi\'s park with mosaics and city views; most of the Monumental Zone requires a timed ticket and a bit of uphill walking.',
         image: 'park-guell.webp',
       },
       {
-        title: 'Passeig de Gràcia',
-        description: 'Elegant shopping avenue lined with Modernista buildings including Gaudí\'s famous Casa Batlló and La Pedrera.',
+        title: 'Passeig de Gracia',
+        description: 'Elegant shopping avenue lined with Modernista buildings including Gaudi\'s famous Casa Batllo and La Pedrera.',
         image: 'casa-batllo.webp',
       },
       {
-        title: 'Montjuïc Hill',
+        title: 'Montjuic Hill',
         description: 'Overlooks port and city with a castle, museums and gardens; reachable by cable car, bus or taxi from the waterfront.',
         image: 'montjuic.webp',
       },
@@ -333,46 +326,40 @@ export const ports = [
 
     thingsToDo: [
       {
-        title: 'La Sagrada Família + Eixample Stroll',
-        description: 'Visit the basilica inside, then stroll through the Eixample district to admire more Gaudí facades.',
+        title: 'La Sagrada Familia and Eixample',
+        description: 'Visit the basilica inside, then stroll through the Eixample district to admire more Gaudi facades.',
         category: 'culture',
-        duration: '2–3 hours',
-        price: '££',
+        duration: '2 to 3 hours',
       },
       {
-        title: 'Gothic Quarter & La Rambla',
-        description: 'Explore the Gothic Quarter, cathedral and Plaça Reial, combined with La Rambla and La Boqueria market.',
+        title: 'Gothic Quarter and La Rambla',
+        description: 'Explore the Gothic Quarter, cathedral and Placa Reial, combined with La Rambla and La Boqueria market.',
         category: 'exploration',
-        duration: '3–4 hours',
-        price: 'Free',
+        duration: '3 to 4 hours',
       },
       {
-        title: 'Park Güell & Passeig de Gràcia',
-        description: 'Head to Park Güell for views, then continue down to Passeig de Gràcia for Casa Batlló/La Pedrera exteriors.',
+        title: 'Park Guell and Passeig de Gracia',
+        description: 'Head to Park Guell for views, then continue down to Passeig de Gracia for Casa Batllo and La Pedrera exteriors.',
         category: 'culture',
-        duration: '3–4 hours',
-        price: '£-££',
+        duration: '3 to 4 hours',
       },
       {
-        title: 'Montjuïc Panoramas',
-        description: 'Ride up Montjuïc for port and city panoramas, possibly combining with MNAC museum or the Olympic area.',
+        title: 'Montjuic Hill',
+        description: 'Ride up Montjuic for port and city panoramas, possibly combining with MNAC museum or the Olympic area.',
         category: 'nature',
-        duration: '2–3 hours',
-        price: '£',
+        duration: '2 to 3 hours',
       },
       {
         title: 'Barceloneta Beach',
         description: 'Spend relaxed hours at Barceloneta Beach and the Port Vell waterfront promenade.',
         category: 'beach',
-        duration: '2–4 hours',
-        price: 'Free',
+        duration: '2 to 4 hours',
       },
       {
         title: 'City Highlights Tour',
-        description: 'Join an organised city highlights tour that bundles Sagrada Família photo stops, Park Güell, Gothic Quarter and Montjuïc to maximise limited time.',
+        description: 'Join an organised city highlights tour that bundles Sagrada Familia photo stops, Park Guell, Gothic Quarter and Montjuic to maximise limited time.',
         category: 'experience',
         duration: 'Full day',
-        price: '££',
       },
     ],
     
@@ -380,20 +367,20 @@ export const ports = [
     nearestBeach: {
       name: 'Barceloneta Beach',
       description: 'The closest major beach to the cruise area, stretching along the seafront east of Port Vell.',
-      distance: 'From Moll Adossat you can take a taxi (about 10–15 minutes depending on traffic) or walk from the Columbus Monument in roughly 20–25 minutes along the waterfront.',
+      distance: 'From Moll Adossat you can take a taxi (about 10 to 15 minutes depending on traffic) or walk from the Columbus Monument in roughly 20 to 25 minutes along the waterfront.',
     },
 
     shoreExcursions: [
       {
-        title: 'Gaudí Highlights Tour',
-        description: 'See Sagrada Família, Park Güell, Casa Batlló, and La Pedrera in one comprehensive tour.',
+        title: 'Gaudi Highlights Tour',
+        description: 'See Sagrada Familia, Park Guell, Casa Batllo, and La Pedrera in one comprehensive tour.',
         duration: 'Full day',
         bookWith: 'Cruise line or independent',
       },
       {
         title: 'Montserrat Monastery',
-        description: 'Mountain monastery with a basilica and views; typical tours run 4–6 hours from Barcelona and combine the rack railway or cable car with free time.',
-        duration: '4–6 hours',
+        description: 'Mountain monastery with a basilica and views. Typical tours run 4 to 6 hours from Barcelona and combine the rack railway or cable car with free time.',
+        duration: '4 to 6 hours',
         bookWith: 'Cruise line recommended',
       },
       {
@@ -403,35 +390,35 @@ export const ports = [
         bookWith: 'Cruise line',
       },
       {
-        title: 'Cava & Wine Country (Penedès)',
-        description: 'Tastings and vineyard visits roughly 1 hour from Barcelona.',
+        title: 'Cava and Wine Country',
+        description: 'Tastings and vineyard visits in the Penedes region, roughly 1 hour from Barcelona.',
         duration: 'Half day',
         bookWith: 'Either',
       },
     ],
     
     practicalInfo: {
-      bestTimeToVisit: 'Late April–June and September–early October – warm but not extreme, longer daylight and generally comfortable for walking.',
-      cruiseTerminals: ['Moll Adossat Terminals A–E', 'World Trade Center', 'Maremagnum'],
+      bestTimeToVisit: 'Late April to June and September to early October. Warm but not extreme, longer daylight and generally comfortable for walking.',
+      cruiseTerminals: ['Moll Adossat Terminals A to E', 'World Trade Center', 'Maremagnum'],
       parking: 'Not applicable for cruise passengers',
-      nearbyAirport: 'Barcelona El Prat (BCN) – 25–35 mins',
+      nearbyAirport: 'Barcelona El Prat (BCN), 25 to 35 minutes',
       visaInfo: 'Schengen visa requirements apply',
       timeZone: 'Central European Time (CET), Central European Summer Time (CEST) in summer',
       power: 'Type C and F plugs, 230V',
       water: 'Tap water is generally safe to drink, though some visitors prefer bottled due to taste.',
-      dressCode: 'Churches (including Sagrada Família) expect shoulders and thighs reasonably covered.',
+      dressCode: 'Churches (including Sagrada Familia) expect shoulders and thighs reasonably covered.',
     },
 
     // Time required estimates
     timeRequired: {
-      intro: 'Idea of time required for key sights:',
+      intro: 'Here is an idea of how long you will need for the key sights in Barcelona.',
       estimates: [
-        { sight: 'Gothic Quarter + La Rambla + Boqueria', time: '3–4 hours at a relaxed pace' },
-        { sight: 'Sagrada Família inside + transport', time: '2–3 hours' },
-        { sight: 'Park Güell (Monumental Zone)', time: '1.5–2 hours plus travel' },
-        { sight: 'Montjuïc viewpoint + MNAC/Olympic area', time: '2–3 hours' },
+        { sight: 'Gothic Quarter, La Rambla and Boqueria', time: '3 to 4 hours at a relaxed pace' },
+        { sight: 'Sagrada Familia inside plus transport', time: '2 to 3 hours' },
+        { sight: 'Park Guell Monumental Zone', time: '1.5 to 2 hours plus travel' },
+        { sight: 'Montjuic viewpoint and MNAC or Olympic area', time: '2 to 3 hours' },
       ],
-      summary: 'For a standard cruise day (8–10 hours ashore), combining one major Gaudí site, the Gothic Quarter/Rambla and a quick beach or Montjuïc stop is realistic if you use taxis efficiently.',
+      summary: 'For a standard cruise day of 8 to 10 hours ashore, combining one major Gaudi site, the Gothic Quarter and La Rambla, and a quick beach or Montjuic stop is realistic if you use taxis efficiently.',
     },
 
     foodAndDrink: [
@@ -439,25 +426,21 @@ export const ports = [
         name: 'La Boqueria Market',
         type: 'Market',
         description: 'Numerous stalls and small counters for tapas, fresh fruit and seafood right off La Rambla.',
-        priceRange: '£-££',
       },
       {
         name: 'El Nacional',
         type: 'Food Hall',
-        description: 'Multi-restaurant food hall on Passeig de Gràcia with tapas, seafood, and grilled dishes in a stylish setting.',
-        priceRange: '££-£££',
+        description: 'Multi-restaurant food hall on Passeig de Gracia with tapas, seafood, and grilled dishes in a stylish setting.',
       },
       {
         name: 'Cal Pep',
         type: 'Tapas Bar',
         description: 'Classic bustling tapas bar in the Born district known for seafood; often a queue, but great for a quick, authentic stop.',
-        priceRange: '££',
       },
       {
         name: 'Tapeo',
         type: 'Tapas',
         description: 'Modern tapas with inventive small plates in El Born, walkable from the Gothic Quarter.',
-        priceRange: '££',
       },
     ],
     
@@ -469,11 +452,11 @@ export const ports = [
     },
 
     insiderTips: [
-      'Pre-book timed entries for Sagrada Família and Park Güell, especially in spring–autumn, to avoid disappointment.',
-      'Keep valuables secure; pickpocketing can be an issue in busy areas like La Rambla, metro stations and markets.',
-      'Factor in queues, security checks and traffic when planning an independent day; always aim to be back at the ship at least 1–2 hours before all-aboard.',
+      'Pre-book timed entries for Sagrada Familia and Park Guell, especially in spring to autumn, to avoid disappointment.',
+      'Keep valuables secure as pickpocketing can be an issue in busy areas like La Rambla, metro stations and markets.',
+      'Factor in queues, security checks and traffic when planning your day. Always aim to be back at the ship at least 1 to 2 hours before the all-aboard time.',
       'If docking at Moll Adossat, use the port shuttle or taxi rather than walking the whole way, as parts of the walk are exposed and industrial.',
-      'Avoid tourist trap restaurants on La Rambla – head to side streets for authentic food.',
+      'Avoid tourist trap restaurants on La Rambla. Head to side streets for authentic food.',
       'The hop-on hop-off bus is actually good value for hitting major sights on a tight schedule.',
     ],
     
@@ -481,11 +464,11 @@ export const ports = [
     faq: [
       {
         question: 'Is Barcelona walkable from the cruise port?',
-        answer: 'From the World Trade Center terminal, yes – La Rambla is about 10 minutes on foot. From Moll Adossat, most people use the shuttle or a taxi first, then walk within the historic centre.',
+        answer: 'From the World Trade Center terminal, yes. La Rambla is about 10 minutes on foot. From Moll Adossat, most people use the shuttle or a taxi first, then walk within the historic centre.',
       },
       {
         question: 'How long do you need in Barcelona?',
-        answer: 'For a cruise stop, one full day covers a few key sights; two days allows Sagrada Família inside, Park Güell, Gothic Quarter and a beach or Montjuïc. A dedicated city break of 3–4 days lets you explore at a calmer pace.',
+        answer: 'For a cruise stop, one full day covers a few key sights. Two days allows Sagrada Familia inside, Park Guell, Gothic Quarter and a beach or Montjuic. A dedicated city break of 3 to 4 days lets you explore at a calmer pace.',
       },
       {
         question: 'Is English widely spoken?',
@@ -501,23 +484,23 @@ export const ports = [
     weather: {
       intro: 'Figures below are approximate long-term averages for Barcelona; conditions vary year to year.',
       months: [
-        { month: 'Jan', highC: 13, lowC: 5, rainMm: 40, rainyDays: 5, sunDays: 18, seaTempC: 14, uv: 'Low–moderate', wind: 'Light to moderate, often NW/NE' },
-        { month: 'Feb', highC: 14, lowC: 6, rainMm: 35, rainyDays: 5, sunDays: 18, seaTempC: 13, uv: 'Moderate', wind: 'Light–moderate breezes' },
+        { month: 'Jan', highC: 13, lowC: 5, rainMm: 40, rainyDays: 5, sunDays: 18, seaTempC: 14, uv: 'Low to moderate', wind: 'Light to moderate, often NW or NE' },
+        { month: 'Feb', highC: 14, lowC: 6, rainMm: 35, rainyDays: 5, sunDays: 18, seaTempC: 13, uv: 'Moderate', wind: 'Light to moderate breezes' },
         { month: 'Mar', highC: 16, lowC: 8, rainMm: 40, rainyDays: 6, sunDays: 20, seaTempC: 14, uv: 'Moderate', wind: 'Breezier at times with fronts' },
         { month: 'Apr', highC: 18, lowC: 10, rainMm: 45, rainyDays: 7, sunDays: 20, seaTempC: 15, uv: 'Moderate', wind: 'Variable spring winds' },
         { month: 'May', highC: 22, lowC: 14, rainMm: 55, rainyDays: 7, sunDays: 22, seaTempC: 18, uv: 'High', wind: 'Often light sea breezes' },
-        { month: 'Jun', highC: 26, lowC: 18, rainMm: 40, rainyDays: 5, sunDays: 24, seaTempC: 21, uv: 'High–very high', wind: 'Light onshore winds' },
+        { month: 'Jun', highC: 26, lowC: 18, rainMm: 40, rainyDays: 5, sunDays: 24, seaTempC: 21, uv: 'High to very high', wind: 'Light onshore winds' },
         { month: 'Jul', highC: 29, lowC: 21, rainMm: 20, rainyDays: 3, sunDays: 27, seaTempC: 24, uv: 'Very high', wind: 'Often light, occasional hotter inland winds' },
         { month: 'Aug', highC: 29, lowC: 22, rainMm: 50, rainyDays: 5, sunDays: 25, seaTempC: 26, uv: 'Very high', wind: 'Warm, humid sea breezes' },
         { month: 'Sep', highC: 26, lowC: 19, rainMm: 75, rainyDays: 7, sunDays: 22, seaTempC: 24, uv: 'High', wind: 'Stormier days mixed with calm spells' },
         { month: 'Oct', highC: 22, lowC: 15, rainMm: 95, rainyDays: 8, sunDays: 19, seaTempC: 22, uv: 'Moderate', wind: 'Autumn fronts, some gusty days' },
-        { month: 'Nov', highC: 17, lowC: 10, rainMm: 55, rainyDays: 6, sunDays: 18, seaTempC: 18, uv: 'Low–moderate', wind: 'Mixed calm and breezy spells' },
-        { month: 'Dec', highC: 14, lowC: 6, rainMm: 45, rainyDays: 6, sunDays: 17, seaTempC: 15, uv: 'Low–moderate', wind: 'Generally light–moderate winds' },
+        { month: 'Nov', highC: 17, lowC: 10, rainMm: 55, rainyDays: 6, sunDays: 18, seaTempC: 18, uv: 'Low to moderate', wind: 'Mixed calm and breezy spells' },
+        { month: 'Dec', highC: 14, lowC: 6, rainMm: 45, rainyDays: 6, sunDays: 17, seaTempC: 15, uv: 'Low to moderate', wind: 'Generally light to moderate winds' },
       ],
       bestTime: {
-        overall: 'Late April–June and September–early October – warm but not extreme, longer daylight and generally comfortable for walking.',
-        hottest: 'July–August – great for beach time, but heat, humidity and crowds can make intensive sightseeing harder.',
-        quietest: 'November–March – fewer tourists and milder temperatures, but shorter days and more risk of unsettled weather.',
+        overall: 'Late April to June and September to early October. Warm but not extreme, longer daylight and generally comfortable for walking.',
+        hottest: 'July and August are great for beach time, but heat, humidity and crowds can make intensive sightseeing harder.',
+        quietest: 'November to March sees fewer tourists and milder temperatures, but shorter days and more risk of unsettled weather.',
         recommendation: 'For a first-time cruise visit, spring or early autumn are usually the sweet spot for comfort and still-pleasant sea temperatures.',
       },
     },
@@ -566,21 +549,18 @@ export const ports = [
         description: 'Extensive collection of Picasso\'s work in a beautiful 16th-century palace. The artist was born just around the corner.',
         category: 'culture',
         duration: '2 hours',
-        price: '£',
       },
       {
         title: 'Alcazaba',
         description: 'Moorish fortress-palace with beautiful gardens and views over the city and port.',
         category: 'history',
         duration: '1-2 hours',
-        price: '£',
       },
       {
         title: 'Málaga Cathedral',
         description: 'Impressive Renaissance cathedral known as "La Manquita" (the one-armed lady) due to its unfinished tower.',
         category: 'history',
         duration: '1 hour',
-        price: '£',
       },
     ],
     
@@ -612,13 +592,11 @@ export const ports = [
         name: 'Atarazanas Market',
         type: 'Market',
         description: 'Beautiful 19th-century market with fresh produce and tapas bars',
-        priceRange: '£',
       },
       {
         name: 'El Pimpi',
         type: 'Restaurant/Bar',
         description: 'Famous bodega serving local wines and traditional tapas',
-        priceRange: '££',
       },
     ],
     
@@ -675,28 +653,24 @@ export const ports = [
         description: 'UNESCO World Heritage sites showcasing Portugal\'s Age of Discovery. Don\'t miss the monastery\'s stunning cloisters.',
         category: 'history',
         duration: '3-4 hours',
-        price: '£',
       },
       {
         title: 'Tram 28',
         description: 'Ride the iconic yellow tram through Alfama, Graça, and the historic neighbourhoods.',
         category: 'experience',
         duration: '1 hour',
-        price: '£',
       },
       {
         title: 'Alfama District',
         description: 'Wander the oldest neighbourhood\'s narrow streets, discover hidden viewpoints, and listen for Fado music.',
         category: 'exploration',
         duration: '2-3 hours',
-        price: 'Free',
       },
       {
         title: 'Pastéis de Belém',
         description: 'Queue for the original pastel de nata (custard tart) at this legendary bakery since 1837.',
         category: 'food',
         duration: '30 mins',
-        price: '£',
       },
     ],
     
@@ -728,19 +702,16 @@ export const ports = [
         name: 'Pastéis de Belém',
         type: 'Bakery',
         description: 'The original home of pastel de nata since 1837',
-        priceRange: '£',
       },
       {
         name: 'Time Out Market',
         type: 'Food Hall',
         description: 'Curated food hall with the best of Lisbon\'s restaurants',
-        priceRange: '££',
       },
       {
         name: 'A Cevicheria',
         type: 'Restaurant',
         description: 'Famous for creative Peruvian-Portuguese fusion',
-        priceRange: '£££',
       },
     ],
     
@@ -798,21 +769,18 @@ export const ports = [
         description: 'Spain\'s highest peak (3,718m) with lunar landscapes. Cable car takes you near the summit for incredible views.',
         category: 'nature',
         duration: 'Full day',
-        price: '££',
       },
       {
         title: 'Loro Parque',
         description: 'World-famous zoo and aquarium with orcas, dolphins, penguins, and the largest parrot collection.',
         category: 'attraction',
         duration: 'Half day',
-        price: '££',
       },
       {
         title: 'Playa de las Teresitas',
         description: 'Beautiful golden sand beach (imported from the Sahara) with calm waters.',
         category: 'beach',
         duration: '3-4 hours',
-        price: 'Free',
       },
     ],
     
@@ -844,13 +812,11 @@ export const ports = [
         name: 'La Hierbita',
         type: 'Restaurant',
         description: 'Traditional Canarian cuisine in a historic building',
-        priceRange: '££',
       },
       {
         name: 'Mercado de Nuestra Señora de África',
         type: 'Market',
         description: 'Vibrant local market with fresh produce and flowers',
-        priceRange: '£',
       },
     ],
     
@@ -908,21 +874,18 @@ export const ports = [
         description: 'Iconic ancient Roman amphitheatre and the heart of the Roman Empire. Book skip-the-line tickets.',
         category: 'history',
         duration: '3-4 hours',
-        price: '££',
       },
       {
         title: 'Vatican City',
         description: 'St. Peter\'s Basilica, the Sistine Chapel, and Vatican Museums. Allow ample time.',
         category: 'culture',
         duration: '4-5 hours',
-        price: '££',
       },
       {
         title: 'Trevi Fountain & Spanish Steps',
         description: 'Toss a coin in the famous fountain and climb the iconic steps.',
         category: 'exploration',
         duration: '1-2 hours',
-        price: 'Free',
       },
     ],
     
@@ -954,13 +917,11 @@ export const ports = [
         name: 'Trastevere',
         type: 'Neighbourhood (Rome)',
         description: 'Charming area with authentic Roman trattorias',
-        priceRange: '££',
       },
       {
         name: 'In Civitavecchia',
         type: 'Note',
         description: 'If staying local, try fresh seafood at restaurants near the old port',
-        priceRange: '££',
       },
     ],
     
