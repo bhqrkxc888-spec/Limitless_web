@@ -649,6 +649,8 @@
 
 .beach-info {
   padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
 }
 
 .beach-info h3 {
@@ -669,6 +671,11 @@
   padding: var(--space-4);
   background: var(--clr-surface);
   border-radius: var(--radius-md);
+}
+
+.beach-info .google-maps-link-large {
+  margin-top: auto;
+  align-self: flex-end;
 }
 
 /* ========================================
@@ -693,21 +700,22 @@
   }
 }
 
-/* Simple food cards (no images) */
+/* Food cards - styled like other cards with box/layer */
 .food-card-simple {
   background: white;
   border: 1px solid var(--clr-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-5);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
   transition: all 0.3s;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  min-height: 200px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .food-card-simple:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+  transform: translateY(-4px);
   border-color: var(--clr-primary);
 }
 
@@ -722,13 +730,14 @@
   padding: var(--space-1) var(--space-3);
   border-radius: var(--radius-full);
   width: fit-content;
+  margin-bottom: var(--space-2);
 }
 
 .food-card-simple h3 {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-xl);
   font-weight: bold;
   color: var(--clr-text);
-  margin: 0;
+  margin: 0 0 var(--space-2) 0;
 }
 
 .food-card-simple p {
@@ -740,8 +749,9 @@
 }
 
 .food-card-simple .google-maps-link {
-  margin-top: var(--space-2);
-  align-self: flex-start;
+  margin-top: auto;
+  padding-top: var(--space-4);
+  align-self: flex-end;
 }
 
 .food-card {
