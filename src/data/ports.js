@@ -74,7 +74,7 @@ export const ports = [
     quickFacts: {
       currency: 'GBP (£)',
       language: 'English',
-      timezone: 'GMT (UTC+0, +1 summer)',
+      timezone: 'GMT+0',
       portType: 'Both',
       walkable: true,
       tenderRequired: false,
@@ -355,10 +355,10 @@ export const ports = [
     },
     
     quickFacts: {
-      currency: 'Pound sterling (GBP, £)',
+      currency: 'GBP (£)',
       language: 'English',
-      timezone: 'GMT (UTC+0, +1 summer)',
-      portType: 'Home Port & Port of Call',
+      timezone: 'GMT+0',
+      portType: 'Both',
       walkable: true,
       tenderRequired: false,
     },
@@ -615,9 +615,9 @@ export const ports = [
 
     quickFacts: {
       currency: 'EUR (€)',
-      language: 'Spanish & Catalan',
-      timezone: 'CET/CEST',
-      portType: 'Home Port & Port of Call',
+      language: 'Spanish, Catalan',
+      timezone: 'GMT+1',
+      portType: 'Both',
       walkable: false, // Port is large, need transport to city
       tenderRequired: false,
     },
@@ -890,10 +890,10 @@ export const ports = [
     },
 
     quickFacts: {
-      currency: 'EUR',
-      language: 'Spanish is the main language; English is widely used in tourist, port and hospitality areas',
-      timezone: 'CET/CEST',
-      portType: 'Home Port & Port of Call',
+      currency: 'EUR (€)',
+      language: 'Spanish',
+      timezone: 'GMT+1',
+      portType: 'Both',
       walkable: true,
       tenderRequired: false,
     },
@@ -1122,9 +1122,9 @@ export const ports = [
 
     quickFacts: {
       currency: 'EUR (€)',
-      language: 'Portuguese is the official language; English is widely spoken in tourist, port and hospitality sectors',
-      timezone: 'Western European Time (WET), Western European Summer Time (WEST) in summer',
-      portType: 'Home Port & Port of Call',
+      language: 'Portuguese',
+      timezone: 'GMT+0',
+      portType: 'Both',
       walkable: true,
       tenderRequired: false,
     },
@@ -1432,9 +1432,9 @@ export const ports = [
 
     quickFacts: {
       currency: 'EUR (€)',
-      language: 'Spanish is the main language; English is widely understood in tourist areas and at port, with some German also heard',
-      timezone: 'WET/WEST',
-      portType: 'Home Port & Port of Call',
+      language: 'Spanish',
+      timezone: 'GMT+0',
+      portType: 'Both',
       walkable: true,
       tenderRequired: false,
     },
@@ -1627,9 +1627,9 @@ export const ports = [
     
     quickFacts: {
       currency: 'EUR (€)',
-      language: 'Italian, English (tourist/port areas)',
-      timezone: 'CET (UTC+1, +2 summer)',
-      portType: 'Port of Call/Both',
+      language: 'Italian',
+      timezone: 'GMT+1',
+      portType: 'Both',
       walkable: true, // Yes (but minimal attractions)
       tenderRequired: false,
     },
@@ -1880,8 +1880,8 @@ export const ports = [
 
     quickFacts: {
       currency: 'EUR (€)',
-      language: 'French, English (tourist areas)',
-      timezone: 'CET/CEST',
+      language: 'French',
+      timezone: 'GMT+1',
       portType: 'Both',
       walkable: false,
       tenderRequired: false,
@@ -2148,9 +2148,9 @@ export const ports = [
 
     quickFacts: {
       currency: 'EUR (€)',
-      language: 'Spanish & Galician',
-      timezone: 'CET/CEST',
-      portType: 'Home Port & Port of Call',
+      language: 'Spanish, Galician',
+      timezone: 'GMT+1',
+      portType: 'Both',
       walkable: true,
       tenderRequired: false,
     },
@@ -2382,8 +2382,8 @@ export const ports = [
 
     quickFacts: {
       currency: 'EUR (€)',
-      language: 'Portuguese, English (tourist areas)',
-      timezone: 'WET (UTC+0, +1 summer)',
+      language: 'Portuguese',
+      timezone: 'GMT+0',
       portType: 'Port of Call',
       walkable: false,
       tenderRequired: false,
@@ -2675,9 +2675,9 @@ export const ports = [
 
     quickFacts: {
       currency: 'EUR (€)',
-      language: 'Spanish is the main language; English is commonly understood in tourist, port and service areas',
-      timezone: 'CET/CEST',
-      portType: 'Primarily Port of Call with some home-porting and turnaround operations',
+      language: 'Spanish',
+      timezone: 'GMT+1',
+      portType: 'Port of Call',
       walkable: true,
       tenderRequired: false,
     },
@@ -2921,8 +2921,8 @@ export const ports = [
 
     quickFacts: {
       currency: 'EUR (€)',
-      language: 'Galician, Spanish, English (tourist areas)',
-      timezone: 'CET (UTC+1, +2 summer)',
+      language: 'Galician, Spanish',
+      timezone: 'GMT+1',
       portType: 'Port of Call',
       walkable: true,
       tenderRequired: false,
@@ -3235,8 +3235,8 @@ export const ports = [
 
     quickFacts: {
       currency: 'EUR (€)',
-      language: 'Spanish, Basque, English (tourist areas)',
-      timezone: 'CET (UTC+1, +2 summer)',
+      language: 'Spanish, Basque',
+      timezone: 'GMT+1',
       portType: 'Port of Call',
       walkable: false,
       tenderRequired: false,
@@ -3540,9 +3540,9 @@ export const ports = [
     },
     
     quickFacts: {
-      currency: 'Gibraltar Pound, Euro widely accepted',
-      language: 'English, Spanish (border areas)',
-      timezone: 'GMT (UTC+0, +1 summer)',
+      currency: 'GBP (£), EUR (€)',
+      language: 'English, Spanish',
+      timezone: 'GMT+0',
       portType: 'Port of Call',
       walkable: true,
       tenderRequired: false,
@@ -3796,8 +3796,8 @@ export const ports = [
     
     quickFacts: {
       currency: 'EUR (€)',
-      language: 'Spanish, English (tourist areas)',
-      timezone: 'CET (UTC+1, +2 summer)',
+      language: 'Spanish',
+      timezone: 'GMT+1',
       portType: 'Port of Call',
       walkable: true,
       tenderRequired: false,
@@ -4080,9 +4080,9 @@ export const ports = [
     
     quickFacts: {
       currency: 'EUR (€)',
-      language: 'Portuguese, English (tourist areas)',
-      timezone: 'WET (UTC+0, +1 summer)',
-      portType: 'Port of Call & Home Port',
+      language: 'Portuguese',
+      timezone: 'GMT+0',
+      portType: 'Both',
       walkable: true,
       tenderRequired: false,
     },
@@ -4362,9 +4362,9 @@ export const ports = [
 
     quickFacts: {
       currency: 'EUR (€)',
-      language: 'Spanish, English widely in tourist areas',
-      timezone: 'WET (UTC+0, UTC+1 in summer)',
-      portType: 'Port of Call & Home Port',
+      language: 'Spanish',
+      timezone: 'GMT+0',
+      portType: 'Both',
       walkable: true,
       tenderRequired: false,
     },
@@ -4642,8 +4642,8 @@ export const ports = [
 
     quickFacts: {
       currency: 'EUR (€)',
-      language: 'Italian, English (tourist areas)',
-      timezone: 'CET/CEST',
+      language: 'Italian',
+      timezone: 'GMT+1',
       portType: 'Port of Call',
       walkable: true,
       tenderRequired: false,
@@ -4898,8 +4898,8 @@ export const ports = [
 
     quickFacts: {
       currency: 'EUR (€)',
-      language: 'Italian, English (tourist areas)',
-      timezone: 'CET/CEST',
+      language: 'Italian',
+      timezone: 'GMT+1',
       portType: 'Both',
       walkable: false,
       tenderRequired: false,
@@ -5151,9 +5151,9 @@ export const ports = [
 
     quickFacts: {
       currency: 'EUR (€)',
-      language: 'Spanish, Catalan, English (tourist areas)',
-      timezone: 'CET (UTC+1, +2 summer)',
-      portType: 'Port of Call/Both',
+      language: 'Spanish, Catalan',
+      timezone: 'GMT+1',
+      portType: 'Both',
       walkable: false,
       tenderRequired: false,
     },
@@ -5456,8 +5456,8 @@ export const ports = [
 
     quickFacts: {
       currency: 'Norwegian Krone (NOK)',
-      language: 'Norwegian, English (universal)',
-      timezone: 'CET (UTC+1, +2 summer)',
+      language: 'Norwegian, English',
+      timezone: 'GMT+1',
       portType: 'Port of Call',
       walkable: true,
       tenderRequired: false,
@@ -5709,8 +5709,8 @@ export const ports = [
 
     quickFacts: {
       currency: 'Norwegian Krone (NOK)',
-      language: 'Norwegian, English (universal)',
-      timezone: 'CET (UTC+1 summer)',
+      language: 'Norwegian, English',
+      timezone: 'GMT+1',
       portType: 'Port of Call',
       walkable: true,
       tenderRequired: true,
@@ -5962,8 +5962,8 @@ export const ports = [
 
     quickFacts: {
       currency: 'Norwegian Krone (NOK)',
-      language: 'Norwegian, English (universal)',
-      timezone: 'CET (UTC+1 summer)',
+      language: 'Norwegian, English',
+      timezone: 'GMT+1',
       portType: 'Port of Call',
       walkable: true,
       tenderRequired: true,
@@ -6215,8 +6215,8 @@ export const ports = [
 
     quickFacts: {
       currency: 'Norwegian Krone (NOK)',
-      language: 'Norwegian, English (universal)',
-      timezone: 'CET (UTC+1 summer)',
+      language: 'Norwegian, English',
+      timezone: 'GMT+1',
       portType: 'Port of Call',
       walkable: true,
       tenderRequired: false,
@@ -6468,8 +6468,8 @@ export const ports = [
 
     quickFacts: {
       currency: 'Norwegian Krone (NOK)',
-      language: 'Norwegian, English (universal)',
-      timezone: 'CET (UTC+1 summer)',
+      language: 'Norwegian, English',
+      timezone: 'GMT+1',
       portType: 'Port of Call',
       walkable: true,
       tenderRequired: false,
@@ -6721,8 +6721,8 @@ export const ports = [
 
     quickFacts: {
       currency: 'Norwegian Krone (NOK)',
-      language: 'Norwegian, English (universal)',
-      timezone: 'CET (UTC+1 summer)',
+      language: 'Norwegian, English',
+      timezone: 'GMT+1',
       portType: 'Port of Call',
       walkable: false,
       tenderRequired: true,
@@ -6999,8 +6999,8 @@ export const ports = [
 
     quickFacts: {
       currency: 'Norwegian Krone (NOK)',
-      language: 'Norwegian, English (universal)',
-      timezone: 'CET (UTC+1 summer)',
+      language: 'Norwegian, English',
+      timezone: 'GMT+1',
       portType: 'Port of Call',
       walkable: true,
       tenderRequired: false,
@@ -7252,8 +7252,8 @@ export const ports = [
 
     quickFacts: {
       currency: 'Norwegian Krone (NOK)',
-      language: 'Norwegian, English (universal)',
-      timezone: 'CET (UTC+1 summer)',
+      language: 'Norwegian, English',
+      timezone: 'GMT+1',
       portType: 'Port of Call',
       walkable: true,
       tenderRequired: false,
@@ -7495,8 +7495,8 @@ export const ports = [
 
     quickFacts: {
       currency: 'Norwegian Krone (NOK)',
-      language: 'Norwegian, English (universal)',
-      timezone: 'CET (UTC+1 summer)',
+      language: 'Norwegian, English',
+      timezone: 'GMT+1',
       portType: 'Port of Call',
       walkable: true,
       tenderRequired: false,
@@ -7747,8 +7747,8 @@ export const ports = [
 
     quickFacts: {
       currency: 'Norwegian Krone (NOK)',
-      language: 'Norwegian, English (universal)',
-      timezone: 'CET (UTC+1 summer)',
+      language: 'Norwegian, English',
+      timezone: 'GMT+1',
       portType: 'Port of Call',
       walkable: true,
       tenderRequired: false,
