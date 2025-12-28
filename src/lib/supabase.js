@@ -26,6 +26,10 @@ export const supabase = isConfigured
  * @returns {Promise<{data, error}>}
  */
 export async function uploadImage(file, bucket, path, options = {}) {
+  if (!supabase) {
+    return { data: null, error: new Error('Supabase not configured') };
+  }
+  
   try {
     const { data, error } = await supabase.storage
       .from(bucket)
@@ -51,6 +55,11 @@ export async function uploadImage(file, bucket, path, options = {}) {
  * @returns {string} The public URL
  */
 export function getPublicUrl(bucket, path) {
+  if (!supabase) {
+    // Return placeholder when Supabase not configured
+    return '/images/placeholders/hero.svg';
+  }
+  
   const { data } = supabase.storage
     .from(bucket)
     .getPublicUrl(path);
@@ -66,6 +75,10 @@ export function getPublicUrl(bucket, path) {
  * @returns {Promise<{data, error}>}
  */
 export async function uploadDocument(file, bucket, path) {
+  if (!supabase) {
+    return { data: null, error: new Error('Supabase not configured') };
+  }
+  
   try {
     const { data, error } = await supabase.storage
       .from(bucket)
@@ -90,6 +103,10 @@ export async function uploadDocument(file, bucket, path) {
  * @returns {Promise<{data, error}>}
  */
 export async function deleteImage(bucket, path) {
+  if (!supabase) {
+    return { data: null, error: new Error('Supabase not configured') };
+  }
+  
   try {
     const { data, error } = await supabase.storage
       .from(bucket)
@@ -111,6 +128,10 @@ export async function deleteImage(bucket, path) {
  * @returns {Promise<{data, error}>}
  */
 export async function listFiles(bucket, folder = '') {
+  if (!supabase) {
+    return { data: [], error: new Error('Supabase not configured') };
+  }
+  
   try {
     const { data, error } = await supabase.storage
       .from(bucket)
