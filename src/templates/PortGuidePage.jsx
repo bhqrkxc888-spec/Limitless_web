@@ -70,8 +70,8 @@ function PortGuidePage() {
 
   // Image URLs now loaded via usePortGuideImage hook above
 
-  // Structured Data for SEO
-  const structuredData = {
+  // Structured Data for SEO - TouristDestination + FAQPage schemas
+  const destinationSchema = {
     '@context': 'https://schema.org',
     '@type': 'TouristDestination',
     name: `${port.name} Cruise Port`,
@@ -87,6 +87,25 @@ function PortGuidePage() {
       name: port.country,
     },
   };
+
+  // FAQ Schema for rich snippets (only if port has FAQ data)
+  const faqSchema = port.faq?.length > 0 ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: port.faq.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  } : null;
+
+  // Combine schemas - SEO component handles arrays
+  const structuredData = faqSchema 
+    ? [destinationSchema, faqSchema] 
+    : destinationSchema;
 
   // Format date as DD MONTH YYYY
   const formatDate = (dateString) => {
