@@ -46,12 +46,6 @@ function AdminPortGuideImages() {
     return a.name.localeCompare(b.name);
   });
 
-  // Group ports by region
-  const portsByRegion = portRegions.map(region => ({
-    ...region,
-    ports: sortedPorts.filter(p => p.region === region.id)
-  })).filter(r => r.ports.length > 0);
-
   // Redirect if not authenticated
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {

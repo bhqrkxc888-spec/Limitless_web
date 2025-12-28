@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { getPortBySlug, getRegionBySlug } from '../data/ports';
+import { getPortBySlug } from '../data/ports';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
@@ -32,8 +32,6 @@ function PortGuidePage() {
       </main>
     );
   }
-
-  const region = getRegionBySlug(port.region);
 
   // Construct hero image URL with fallback
   const heroImage = getSupabaseImageUrl('WEB_categories', `ports/${port.region}/${port.slug}/hero.webp`) || FALLBACK_HERO;
