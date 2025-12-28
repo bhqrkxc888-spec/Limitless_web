@@ -25,10 +25,8 @@ function PortGuidePage() {
   const [weatherIndex, setWeatherIndex] = useState(0);
 
   // Load images from database
-  const { imageUrl: heroImage, loading: heroLoading } = usePortGuideImage(slug, 'hero');
-  const { imageUrl: cardImage } = usePortGuideImage(slug, 'card');
+  const { imageUrl: heroImage } = usePortGuideImage(slug, 'hero');
   const { imageUrl: beachImage } = usePortGuideImage(slug, 'beach');
-  const { imageUrl: foodImage } = usePortGuideImage(slug, 'food');
   
   // Load attraction images (up to 6)
   const { imageUrl: attraction1Image } = usePortGuideImage(slug, 'attraction-1');
