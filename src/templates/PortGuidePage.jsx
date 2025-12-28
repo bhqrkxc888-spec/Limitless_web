@@ -8,11 +8,20 @@ import OptimizedImage from '../components/OptimizedImage';
 import { Button, SectionHeader } from '../components/ui';
 import { getSupabaseImageUrl, SITE_ASSETS } from '../config/assetUrls';
 import { usePortGuideImage } from '../hooks/useImageUrl';
-import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
 import './PortGuidePage.css';
 
 // Fallback hero image
 const FALLBACK_HERO = SITE_ASSETS.heroDefault || '/images/placeholders/coming-soon.svg';
+
+/**
+ * Generate Google Maps URL for a location
+ * No API key needed - uses simple URL scheme
+ */
+const getGoogleMapsUrl = (placeName, cityName) => {
+  const query = encodeURIComponent(`${placeName}, ${cityName}`);
+  return `https://www.google.com/maps/search/?api=1&query=${query}`;
+};
 
 /**
  * Port Guide Page Template
@@ -37,6 +46,14 @@ function PortGuidePage() {
   const { imageUrl: attraction6Image } = usePortGuideImage(slug, 'attraction-6');
   
   const attractionImages = [attraction1Image, attraction2Image, attraction3Image, attraction4Image, attraction5Image, attraction6Image];
+  
+  // Load food images (up to 4)
+  const { imageUrl: food1Image } = usePortGuideImage(slug, 'food-1');
+  const { imageUrl: food2Image } = usePortGuideImage(slug, 'food-2');
+  const { imageUrl: food3Image } = usePortGuideImage(slug, 'food-3');
+  const { imageUrl: food4Image } = usePortGuideImage(slug, 'food-4');
+  
+  const foodImages = [food1Image, food2Image, food3Image, food4Image];
 
   // Combine attractions - ONLY use mustSeeSights if available, otherwise thingsToDo
   // This prevents duplication
@@ -260,9 +277,20 @@ function PortGuidePage() {
                       <div className="attraction-body">
                         <h3>{item.title}</h3>
                         <p>{item.description}</p>
-                        {item.duration && (
-                          <span className="attraction-time">Allow {item.duration}</span>
-                        )}
+                        <div className="attraction-footer">
+                          {item.duration && (
+                            <span className="attraction-time">Allow {item.duration}</span>
+                          )}
+                          <a 
+                            href={getGoogleMapsUrl(item.title, port.name)} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="google-maps-link"
+                          >
+                            <MapPin size={16} />
+                            <span>Open in Maps</span>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   );
@@ -291,6 +319,15 @@ function PortGuidePage() {
                   <div className="beach-distance">
                     <strong>Getting there:</strong> {port.nearestBeach.distance}
                   </div>
+                  <a 
+                    href={getGoogleMapsUrl(port.nearestBeach.name, port.name)} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="google-maps-link google-maps-link-large"
+                  >
+                    <MapPin size={18} />
+                    <span>Open in Google Maps</span>
+                  </a>
                 </div>
               </div>
             </section>
@@ -302,7 +339,8 @@ function PortGuidePage() {
               <h2>Where to Eat and Drink</h2>
               <div className="food-grid">
                 {port.foodAndDrink.map((place, index) => {
-                  const foodImage = getSupabaseImageUrl('WEB_categories', `ports/${port.region}/${port.slug}/food-${index + 1}.webp`);
+                  // Get pre-loaded food image from database
+                  const foodImage = foodImages[index];
                   return (
                     <div key={index} className="food-card">
                       <div className="food-image">
@@ -318,6 +356,15 @@ function PortGuidePage() {
                         <span className="food-type">{place.type}</span>
                         <h3>{place.name}</h3>
                         <p>{place.description}</p>
+                        <a 
+                          href={getGoogleMapsUrl(place.name, port.name)} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="google-maps-link"
+                        >
+                          <MapPin size={16} />
+                          <span>Open in Maps</span>
+                        </a>
                       </div>
                     </div>
                   );

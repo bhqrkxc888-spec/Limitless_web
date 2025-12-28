@@ -54,13 +54,15 @@ const getPortImageTypes = (port) => {
     });
   }
 
-  // Add food if port has food recommendations
+  // Add food if port has food recommendations - ADD MULTIPLE FOOD IMAGES
   if (port.foodAndDrink && Array.isArray(port.foodAndDrink) && port.foodAndDrink.length > 0) {
-    imageTypes.push({
-      id: 'food',
-      label: 'Food & Dining',
-      required: false,
-      specs: 'Local food or restaurant scene. Recommended: 800×600px, WebP format'
+    port.foodAndDrink.forEach((foodPlace, index) => {
+      imageTypes.push({
+        id: `food-${index + 1}`,
+        label: foodPlace.name || `Food ${index + 1}`,
+        required: false,
+        specs: `${foodPlace.name || 'Food venue'} image. Recommended: 800×600px, WebP format`
+      });
     });
   }
 
