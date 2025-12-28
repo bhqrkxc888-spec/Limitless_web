@@ -1,11 +1,43 @@
 import { getAllRegions, getPortsByRegion, getPortsCountByRegion } from '../data/ports';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
-import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader } from '../components/ui';
 import { Link } from 'react-router-dom';
-import { getSupabaseImageUrl } from '../config/assetUrls';
+import { usePortGuideImage } from '../hooks/useImageUrl';
 import './PortsPage.css';
+
+/**
+ * Port Card with Database Image
+ */
+function PortCardWithImage({ port }) {
+  const { imageUrl: portImage } = usePortGuideImage(port.slug, 'card');
+  
+  return (
+    <Card 
+      to={`/ports/${port.slug}`} 
+      variant="default"
+      className="port-card"
+    >
+      <Card.Image 
+        src={portImage}
+        alt={`${port.name} cruise port`}
+        aspectRatio="3/2"
+      />
+      <Card.Content>
+        <div className="port-card-header">
+          <Card.Title as="h3">{port.name}</Card.Title>
+          <Card.Subtitle>{port.country}</Card.Subtitle>
+        </div>
+        <Card.Text>{port.tagline}</Card.Text>
+        <div className="port-card-button-wrapper">
+          <Button to={`/ports/${port.slug}`} variant="outline" size="sm" className="port-card-button">
+            View Port Guide →
+          </Button>
+        </div>
+      </Card.Content>
+    </Card>
+  );
+}
 
 /**
  * Ports Hub Page
@@ -44,17 +76,19 @@ function PortsPage() {
         structuredData={structuredData}
       />
 
-      {/* Hero Section */}
-      <HeroSection
-        title="Cruise Port Guides"
-        subtitle="Everything you need to know for your port days"
-        image={heroImage}
-        imageAlt="Cruise ship in port"
-        size="md"
-        align="center"
-        primaryCta={{ label: 'Find a Cruise', to: '/find-a-cruise' }}
-        secondaryCta={{ label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone}` }}
-      />
+      {/* Hero Section - No hero requirement */}
+      <section className="page-header">
+        <div className="container">
+          <div className="page-header-content">
+            <h1>Cruise Port Guides</h1>
+            <p className="page-header-subtitle">Everything you need to know for your port days</p>
+            <div className="page-header-actions">
+              <Button to="/find-a-cruise" variant="primary">Find a Cruise</Button>
+              <Button href={`tel:${siteConfig.phone}`} variant="outline">Call {siteConfig.phone}</Button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Introduction */}
       <section className="section">
@@ -127,36 +161,9 @@ function PortsPage() {
               </div>
 
               <div className="ports-grid">
-                {ports.slice(0, 3).map((port) => {
-                  const portImage = getSupabaseImageUrl('WEB_categories', `ports/${region.id}/${port.slug}/card.webp`);
-                  
-                  return (
-                    <Card 
-                      key={port.id} 
-                      to={`/ports/${port.slug}`} 
-                      variant="default"
-                      className="port-card"
-                    >
-                      <Card.Image 
-                        src={portImage}
-                        alt={`${port.name} cruise port`}
-                        aspectRatio="3/2"
-                      />
-                      <Card.Content>
-                        <div className="port-card-header">
-                          <Card.Title as="h3">{port.name}</Card.Title>
-                          <span className="port-country">{port.country}</span>
-                        </div>
-                        <Card.Description>{port.tagline}</Card.Description>
-                        <div className="port-card-footer">
-                          <Button to={`/ports/${port.slug}`} variant="outline" size="sm" className="port-view-btn">
-                            View Port Guide →
-                          </Button>
-                        </div>
-                      </Card.Content>
-                    </Card>
-                  );
-                })}
+                {ports.slice(0, 3).map((port) => (
+                  <PortCardWithImage key={port.id} port={port} />
+                ))}
               </div>
               
               <div className="view-all-container">

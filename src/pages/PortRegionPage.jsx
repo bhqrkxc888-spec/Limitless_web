@@ -5,7 +5,42 @@ import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader } from '../components/ui';
 import { getSupabaseImageUrl } from '../config/assetUrls';
+import { usePortGuideImage } from '../hooks/useImageUrl';
 import './PortRegionPage.css';
+
+/**
+ * Port Card with Database Image
+ */
+function PortCardWithImage({ port, region }) {
+  const { imageUrl: portImage } = usePortGuideImage(port.slug, 'card');
+  
+  return (
+    <Card 
+      key={port.id} 
+      to={`/ports/${port.slug}`} 
+      variant="default"
+      className="port-card"
+    >
+      <Card.Image 
+        src={portImage}
+        alt={`${port.name} cruise port`}
+        aspectRatio="3/2"
+      />
+      <Card.Content>
+        <div className="port-card-header">
+          <Card.Title as="h3">{port.name}</Card.Title>
+          <Card.Subtitle>{port.country}</Card.Subtitle>
+        </div>
+        <Card.Text>{port.tagline}</Card.Text>
+        <div className="port-card-button-wrapper">
+          <Button to={`/ports/${port.slug}`} variant="outline" size="sm" className="port-card-button">
+            View Port Guide →
+          </Button>
+        </div>
+      </Card.Content>
+    </Card>
+  );
+}
 
 /**
  * Port Region Page
@@ -59,17 +94,19 @@ function PortRegionPage() {
         structuredData={structuredData}
       />
 
-      {/* Hero Section */}
-      <HeroSection
-        title={`${region.name} Cruise Ports`}
-        subtitle={region.description}
-        image={heroImage}
-        imageAlt={`${region.name} cruise ports`}
-        size="md"
-        align="center"
-        primaryCta={{ label: 'Find a Cruise', to: '/find-a-cruise' }}
-        secondaryCta={{ label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone}` }}
-      />
+      {/* Hero Section - No hero requirement */}
+      <section className="page-header">
+        <div className="container">
+          <div className="page-header-content">
+            <h1>{region.name} Cruise Ports</h1>
+            <p className="page-header-subtitle">{region.description}</p>
+            <div className="page-header-actions">
+              <Button to="/find-a-cruise" variant="primary">Find a Cruise</Button>
+              <Button href={`tel:${siteConfig.phone}`} variant="outline">Call {siteConfig.phone}</Button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Ports Grid */}
       <section className="section">

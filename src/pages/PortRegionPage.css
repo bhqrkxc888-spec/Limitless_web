@@ -2,6 +2,34 @@
  * Port Region Page Styles
  */
 
+/* Page Header (replaces hero) */
+.page-header {
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
+  padding: var(--space-16) 0 var(--space-12);
+  color: white;
+  text-align: center;
+}
+
+.page-header-content h1 {
+  font-size: var(--font-size-4xl);
+  font-weight: bold;
+  margin-bottom: var(--space-4);
+  color: white;
+}
+
+.page-header-subtitle {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-8);
+  opacity: 0.95;
+}
+
+.page-header-actions {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .port-region-page {
   background: var(--color-background);
 }
