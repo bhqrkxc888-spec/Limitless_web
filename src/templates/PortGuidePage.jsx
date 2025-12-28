@@ -15,15 +15,6 @@ import './PortGuidePage.css';
 const FALLBACK_HERO = SITE_ASSETS.heroDefault || '/images/placeholders/coming-soon.svg';
 
 /**
- * Generate Google Maps URL for a location
- * No API key needed - uses simple URL scheme
- */
-const getGoogleMapsUrl = (placeName, cityName) => {
-  const query = encodeURIComponent(`${placeName}, ${cityName}`);
-  return `https://www.google.com/maps/search/?api=1&query=${query}`;
-};
-
-/**
  * Port Guide Page Template
  * Premium, comprehensive cruise port guide
  * Clean, modern design with proper visual hierarchy
@@ -46,14 +37,6 @@ function PortGuidePage() {
   const { imageUrl: attraction6Image } = usePortGuideImage(slug, 'attraction-6');
   
   const attractionImages = [attraction1Image, attraction2Image, attraction3Image, attraction4Image, attraction5Image, attraction6Image];
-  
-  // Load food images (up to 4)
-  const { imageUrl: food1Image } = usePortGuideImage(slug, 'food-1');
-  const { imageUrl: food2Image } = usePortGuideImage(slug, 'food-2');
-  const { imageUrl: food3Image } = usePortGuideImage(slug, 'food-3');
-  const { imageUrl: food4Image } = usePortGuideImage(slug, 'food-4');
-  
-  const foodImages = [food1Image, food2Image, food3Image, food4Image];
 
   // Combine attractions - ONLY use mustSeeSights if available, otherwise thingsToDo
   // This prevents duplication
@@ -282,7 +265,7 @@ function PortGuidePage() {
                             <span className="attraction-time">Allow {item.duration}</span>
                           )}
                           <a 
-                            href={getGoogleMapsUrl(item.title, port.name)} 
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.title + ', ' + port.name)}`}
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="google-maps-link"
@@ -320,7 +303,7 @@ function PortGuidePage() {
                     <strong>Getting there:</strong> {port.nearestBeach.distance}
                   </div>
                   <a 
-                    href={getGoogleMapsUrl(port.nearestBeach.name, port.name)} 
+                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(port.nearestBeach.name + ', ' + port.name)}`}
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="google-maps-link google-maps-link-large"
@@ -338,37 +321,22 @@ function PortGuidePage() {
             <section className="port-section port-food">
               <h2>Where to Eat and Drink</h2>
               <div className="food-grid">
-                {port.foodAndDrink.map((place, index) => {
-                  // Get pre-loaded food image from database
-                  const foodImage = foodImages[index];
-                  return (
-                    <div key={index} className="food-card">
-                      <div className="food-image">
-                        <OptimizedImage
-                          src={foodImage}
-                          alt={place.name}
-                          width={300}
-                          height={200}
-                          sizes="(max-width: 768px) 50vw, 25vw"
-                        />
-                      </div>
-                      <div className="food-body">
-                        <span className="food-type">{place.type}</span>
-                        <h3>{place.name}</h3>
-                        <p>{place.description}</p>
-                        <a 
-                          href={getGoogleMapsUrl(place.name, port.name)} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="google-maps-link"
-                        >
-                          <MapPin size={16} />
-                          <span>Open in Maps</span>
-                        </a>
-                      </div>
-                    </div>
-                  );
-                })}
+                {port.foodAndDrink.map((place, index) => (
+                  <div key={index} className="food-card-simple">
+                    <span className="food-type">{place.type}</span>
+                    <h3>{place.name}</h3>
+                    <p>{place.description}</p>
+                    <a 
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name + ', ' + port.name)}`}
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="google-maps-link"
+                    >
+                      <MapPin size={16} />
+                      <span>Open in Maps</span>
+                    </a>
+                  </div>
+                ))}
               </div>
             </section>
           )}
