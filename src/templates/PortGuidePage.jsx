@@ -4,8 +4,9 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import OptimizedImage from '../components/OptimizedImage';
-import { Button, SectionHeader, Card } from '../components/ui';
+import { Button, SectionHeader } from '../components/ui';
 import { getSupabaseImageUrl, SITE_ASSETS } from '../config/assetUrls';
+import { ArrowLeft } from 'lucide-react';
 import './PortGuidePage.css';
 
 // Fallback hero image uses site's default hero or logo
@@ -14,6 +15,7 @@ const FALLBACK_HERO = SITE_ASSETS.heroDefault || '/images/placeholders/coming-so
 /**
  * Port Guide Page Template
  * Comprehensive cruise port guide with things to do, practical info, etc.
+ * Full-width layout with clean, sophisticated design
  */
 function PortGuidePage() {
   const { slug } = useParams();
@@ -35,6 +37,11 @@ function PortGuidePage() {
 
   // Construct hero image URL with fallback
   const heroImage = getSupabaseImageUrl('WEB_categories', `ports/${port.region}/${port.slug}/hero.webp`) || FALLBACK_HERO;
+  
+  // Beach image if available
+  const beachImage = port.nearestBeach?.image 
+    ? getSupabaseImageUrl('WEB_categories', `ports/${port.region}/${port.slug}/${port.nearestBeach.image}`)
+    : null;
 
   // Structured Data for SEO
   const structuredData = {
@@ -54,19 +61,6 @@ function PortGuidePage() {
     },
   };
 
-  // Category icons
-  const categoryIcons = {
-    culture: '🏛️',
-    history: '🏰',
-    nature: '🌿',
-    beach: '🏖️',
-    food: '🍽️',
-    shopping: '🛍️',
-    exploration: '🚶',
-    experience: '✨',
-    attraction: '🎢',
-  };
-
   return (
     <main className="port-guide-page">
       {/* SEO */}
@@ -78,51 +72,47 @@ function PortGuidePage() {
         structuredData={structuredData}
       />
 
-      {/* Hero Section */}
+      {/* Hero Section - with opening statement */}
       <HeroSection
         title={port.name}
-        subtitle={port.tagline}
+        subtitle={port.description}
         image={heroImage}
         imageAlt={`${port.name} cruise port`}
         size="md"
         align="left"
-        primaryCta={{ label: 'Find Cruises', to: '/find-a-cruise' }}
-        secondaryCta={{ label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone}` }}
       />
 
-      {/* Quick Facts Bar */}
+      {/* Quick Facts Bar - Premium Square Boxes */}
       <section className="port-quick-facts">
         <div className="container">
+          <Link to="/ports" className="back-to-ports">
+            <ArrowLeft size={18} />
+            <span>Back to Port Guides</span>
+          </Link>
           <div className="quick-facts-grid">
-            <div className="quick-fact">
-              <span className="quick-fact-icon">💱</span>
+            <div className="quick-fact-box">
               <span className="quick-fact-label">Currency</span>
               <span className="quick-fact-value">{port.quickFacts.currency}</span>
             </div>
-            <div className="quick-fact">
-              <span className="quick-fact-icon">🗣️</span>
+            <div className="quick-fact-box">
               <span className="quick-fact-label">Language</span>
               <span className="quick-fact-value">{port.quickFacts.language}</span>
             </div>
-            <div className="quick-fact">
-              <span className="quick-fact-icon">🕐</span>
+            <div className="quick-fact-box">
               <span className="quick-fact-label">Timezone</span>
               <span className="quick-fact-value">{port.quickFacts.timezone}</span>
             </div>
-            <div className="quick-fact">
-              <span className="quick-fact-icon">🚢</span>
+            <div className="quick-fact-box">
               <span className="quick-fact-label">Port Type</span>
               <span className="quick-fact-value">{port.quickFacts.portType}</span>
             </div>
-            <div className="quick-fact">
-              <span className="quick-fact-icon">{port.quickFacts.walkable ? '✅' : '🚌'}</span>
-              <span className="quick-fact-label">Walkable</span>
-              <span className="quick-fact-value">{port.quickFacts.walkable ? 'Yes' : 'Transport needed'}</span>
+            <div className="quick-fact-box">
+              <span className="quick-fact-label">Walkability</span>
+              <span className="quick-fact-value">{port.quickFacts.walkable ? 'Walkable' : 'Transport needed'}</span>
             </div>
-            <div className="quick-fact">
-              <span className="quick-fact-icon">{port.quickFacts.tenderRequired ? '🚤' : '🛳️'}</span>
-              <span className="quick-fact-label">Tender</span>
-              <span className="quick-fact-value">{port.quickFacts.tenderRequired ? 'Required' : 'Docks at pier'}</span>
+            <div className="quick-fact-box">
+              <span className="quick-fact-label">Docking</span>
+              <span className="quick-fact-value">{port.quickFacts.tenderRequired ? 'Tender required' : 'Pier docking'}</span>
             </div>
           </div>
         </div>

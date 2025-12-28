@@ -92,7 +92,12 @@ export const navigation = {
               description: 'Latest cruise and travel updates'
             },
             {
-              label: 'Cruise Guides',
+              label: 'Port Guides',
+              path: '/ports',
+              description: 'Detailed cruise port information'
+            },
+            {
+              label: 'Guides',
               path: '/cruise-guides',
               description: 'Expert guides and travel tips'
             }
@@ -158,7 +163,8 @@ export const navigation = {
       { label: 'Latest Offers', path: '/offers' },
       { label: 'Find a Cruise', path: '/find-a-cruise' },
       { label: 'Travel News', path: '/travel-news' },
-      { label: 'Cruise Guides', path: '/cruise-guides' }
+      { label: 'Port Guides', path: '/ports' },
+      { label: 'Guides', path: '/cruise-guides' }
     ]
   }
 };

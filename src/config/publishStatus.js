@@ -38,8 +38,8 @@ export const PUBLISH_STATUS = {
   faq: 'published',
   testimonials: 'draft',         // Coming soon - under development
   
-  // Port Guides (Draft - under development)
-  ports: 'draft',                // Port guides hub and individual port pages
+  // Port Guides (Preview - accessible when authenticated)
+  ports: 'preview',              // Port guides hub and individual port pages
   
   // Legal pages (always published)
   legal: 'published',

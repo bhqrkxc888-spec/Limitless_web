@@ -14,35 +14,28 @@ export const portRegions = [
     id: 'uk',
     slug: 'united-kingdom',
     name: 'United Kingdom',
-    description: 'Major UK cruise ports including Southampton, Dover, and Liverpool',
+    description: 'Major UK cruise ports including Southampton and Dover',
     image: null, // Will use WEB_categories/ports/uk/hero.webp
-  },
-  {
-    id: 'spain',
-    slug: 'spain',
-    name: 'Spain',
-    description: 'Popular Spanish cruise ports from Barcelona to the Balearic Islands',
-    image: null,
-  },
-  {
-    id: 'portugal',
-    slug: 'portugal',
-    name: 'Portugal',
-    description: 'Portuguese cruise ports including Lisbon and Madeira',
-    image: null,
-  },
-  {
-    id: 'canary-islands',
-    slug: 'canary-islands',
-    name: 'Canary Islands',
-    description: 'Year-round sun in the Canary Islands cruise ports',
-    image: null,
   },
   {
     id: 'mediterranean',
     slug: 'mediterranean',
     name: 'Mediterranean',
-    description: 'Classic Mediterranean cruise ports across Italy, France, Croatia and more',
+    description: 'Classic Mediterranean cruise ports across Spain, Italy, France, and beyond',
+    image: null,
+  },
+  {
+    id: 'atlantic-coast',
+    slug: 'atlantic-coast',
+    name: 'Atlantic Coast',
+    description: 'Mainland Atlantic ports from Portugal to Spain including Lisbon, Vigo, and Cádiz',
+    image: null,
+  },
+  {
+    id: 'atlantic-islands',
+    slug: 'atlantic-islands',
+    name: 'Atlantic Islands',
+    description: 'Island ports including Madeira and the Canary Islands',
     image: null,
   },
 ];
@@ -259,7 +252,7 @@ export const ports = [
     slug: 'barcelona',
     name: 'Barcelona',
     country: 'Spain',
-    region: 'spain',
+    region: 'mediterranean',
     coordinates: { lat: 41.3851, lon: 2.1734 },
     tagline: 'Europe\'s busiest cruise hub with Gaudí, beaches, and world-class tapas',
     description: 'Barcelona is one of Europe\'s biggest and easiest cruise ports, with terminals close to the city centre and excellent links to the airport and trains. With one full day you can see several headline sights; 2–3 days lets you add beaches, food and maybe a day trip.',
@@ -546,7 +539,7 @@ export const ports = [
     slug: 'malaga',
     name: 'Málaga',
     country: 'Spain',
-    region: 'spain',
+    region: 'mediterranean',
     coordinates: { lat: 36.7213, lon: -4.4214 },
     tagline: 'Birthplace of Picasso on the Costa del Sol',
     description: 'Málaga combines rich cultural heritage with beautiful beaches and excellent weather. As Picasso\'s birthplace, it offers world-class museums alongside historic sites and vibrant tapas bars.',
@@ -655,7 +648,7 @@ export const ports = [
     slug: 'lisbon',
     name: 'Lisbon',
     country: 'Portugal',
-    region: 'portugal',
+    region: 'atlantic-coast',
     coordinates: { lat: 38.7223, lon: -9.1393 },
     tagline: 'City of seven hills and pastel de nata',
     description: 'Lisbon is Portugal\'s sun-drenched capital, famous for its colourful tiled buildings, historic trams, world-class custard tarts, and vibrant nightlife. The city offers a perfect blend of history, culture, and modern creativity.',
@@ -778,7 +771,7 @@ export const ports = [
     slug: 'santa-cruz-de-tenerife',
     name: 'Santa Cruz de Tenerife',
     country: 'Spain (Canary Islands)',
-    region: 'canary-islands',
+    region: 'atlantic-islands',
     coordinates: { lat: 28.4636, lon: -16.2518 },
     tagline: 'Gateway to Spain\'s highest peak and year-round sun',
     description: 'Tenerife is the largest Canary Island, offering everything from black volcanic beaches to Spain\'s highest mountain (Mount Teide). The capital Santa Cruz is a vibrant city with excellent shopping and dining.',
@@ -989,6 +982,309 @@ export const ports = [
     status: 'template',
     lastUpdated: '2025-01-01',
   },
+
+  // ============================================================================
+  // ATLANTIC COAST - NEW PORTS
+  // ============================================================================
+  
+  // Vigo - PLACEHOLDER - Content needed
+  {
+    id: 'vigo',
+    slug: 'vigo',
+    name: 'Vigo',
+    country: 'Spain',
+    region: 'atlantic-coast',
+    coordinates: { lat: 42.2406, lon: -8.7207 },
+    tagline: 'Gateway to Galicia and Santiago de Compostela',
+    description: 'Vigo is Spain\'s largest fishing port on the Atlantic coast, offering access to Santiago de Compostela, beautiful Galician cuisine, and stunning coastal scenery.',
+    
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Spanish & Galician',
+      timezone: 'CET/CEST',
+      portType: 'Tender & Pier',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Port is close to city centre. Shuttle buses typically provided by cruise lines.',
+      publicTransport: 'Local buses connect port area to city centre and nearby beaches.',
+      taxis: 'Taxis available at cruise terminal.',
+      walkingDistance: 'City centre approximately 15-20 minutes walk.',
+    },
+    
+    thingsToDo: [],
+    shoreExcursions: [],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'May to September',
+      cruiseTerminals: ['Port of Vigo'],
+      nearbyAirport: 'Vigo-Peinador Airport (12km)',
+      visaInfo: 'Schengen visa requirements apply',
+    },
+    
+    relatedDestinations: ['mediterranean-cruises', 'transatlantic-cruises'],
+    
+    meta: {
+      title: 'Vigo Cruise Port Guide | Gateway to Galicia | UK Cruise Consultant',
+      description: 'Complete Vigo cruise port guide. Things to do, getting around, and expert tips for your Atlantic coast port day.',
+      keywords: ['Vigo cruise port', 'Vigo Spain', 'Galicia', 'Atlantic coast cruises']
+    },
+    
+    status: 'template',
+    lastUpdated: '2025-01-01',
+  },
+
+  // Cádiz - PLACEHOLDER - Content needed
+  {
+    id: 'cadiz',
+    slug: 'cadiz',
+    name: 'Cádiz',
+    country: 'Spain',
+    region: 'atlantic-coast',
+    coordinates: { lat: 36.5271, lon: -6.2886 },
+    tagline: 'Europe\'s oldest city with golden beaches',
+    description: 'Cádiz is one of Europe\'s oldest continuously inhabited cities, offering beautiful beaches, historic architecture, and easy access to Seville and Jerez.',
+    
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Spanish',
+      timezone: 'CET/CEST',
+      portType: 'Pier',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Port is within walking distance of old town.',
+      publicTransport: 'Excellent local bus network connects all areas.',
+      taxis: 'Taxis available at cruise terminal.',
+      walkingDistance: 'Old town is walkable from port (15-20 mins).',
+    },
+    
+    thingsToDo: [],
+    shoreExcursions: [],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'April to October',
+      cruiseTerminals: ['Puerto de Cádiz'],
+      nearbyAirport: 'Jerez Airport (45km), Seville Airport (120km)',
+      visaInfo: 'Schengen visa requirements apply',
+    },
+    
+    relatedDestinations: ['mediterranean-cruises', 'canary-islands-cruises'],
+    
+    meta: {
+      title: 'Cádiz Cruise Port Guide | Historic Spanish Port | UK Cruise Consultant',
+      description: 'Complete Cádiz cruise port guide. Gateway to Seville, beautiful beaches, and Andalusian culture.',
+      keywords: ['Cádiz cruise port', 'Cadiz Spain', 'Seville excursions', 'Atlantic coast']
+    },
+    
+    status: 'template',
+    lastUpdated: '2025-01-01',
+  },
+
+  // Gibraltar - PLACEHOLDER - Content needed
+  {
+    id: 'gibraltar',
+    slug: 'gibraltar',
+    name: 'Gibraltar',
+    country: 'British Overseas Territory',
+    region: 'mediterranean',
+    coordinates: { lat: 36.1408, lon: -5.3536 },
+    tagline: 'The Rock at the gateway to the Mediterranean',
+    description: 'Gibraltar is a unique British territory at the southern tip of Spain, famous for the Rock of Gibraltar, Barbary macaques, and duty-free shopping.',
+    
+    quickFacts: {
+      currency: 'GBP (£) & EUR accepted',
+      language: 'English',
+      timezone: 'CET/CEST',
+      portType: 'Tender',
+      walkable: true,
+      tenderRequired: true,
+    },
+    
+    gettingAround: {
+      fromPort: 'Tender to town centre. Most attractions walkable.',
+      publicTransport: 'Small territory - walking is main option. Cable car to top of Rock.',
+      taxis: 'Available but rarely needed for cruise passengers.',
+      walkingDistance: 'Everything is within walking distance.',
+    },
+    
+    thingsToDo: [],
+    shoreExcursions: [],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'Year-round - mild Mediterranean climate',
+      cruiseTerminals: ['Tender only'],
+      nearbyAirport: 'Gibraltar International Airport',
+      visaInfo: 'British territory - UK visa rules apply',
+    },
+    
+    relatedDestinations: ['mediterranean-cruises', 'canary-islands-cruises'],
+    
+    meta: {
+      title: 'Gibraltar Cruise Port Guide | The Rock | UK Cruise Consultant',
+      description: 'Complete Gibraltar cruise port guide. The Rock, duty-free shopping, and British culture on the Med.',
+      keywords: ['Gibraltar cruise', 'Rock of Gibraltar', 'Gibraltar port', 'Mediterranean cruises']
+    },
+    
+    status: 'template',
+    lastUpdated: '2025-01-01',
+  },
+
+  // Alicante - PLACEHOLDER - Content needed
+  {
+    id: 'alicante',
+    slug: 'alicante',
+    name: 'Alicante',
+    country: 'Spain',
+    region: 'mediterranean',
+    coordinates: { lat: 38.3452, lon: -0.4815 },
+    tagline: 'Costa Blanca\'s vibrant port city',
+    description: 'Alicante offers beautiful beaches, historic castles, palm-lined promenades, and authentic Spanish culture on the Costa Blanca.',
+    
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Spanish',
+      timezone: 'CET/CEST',
+      portType: 'Pier',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Port is close to city centre and beach promenade.',
+      publicTransport: 'Excellent tram system connects city and beaches.',
+      taxis: 'Available at cruise terminal.',
+      walkingDistance: 'City centre and beach walkable (10-15 mins).',
+    },
+    
+    thingsToDo: [],
+    shoreExcursions: [],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'April to October',
+      cruiseTerminals: ['Puerto de Alicante'],
+      nearbyAirport: 'Alicante-Elche Airport (15km)',
+      visaInfo: 'Schengen visa requirements apply',
+    },
+    
+    relatedDestinations: ['mediterranean-cruises', 'balearic-islands-cruises'],
+    
+    meta: {
+      title: 'Alicante Cruise Port Guide | Costa Blanca | UK Cruise Consultant',
+      description: 'Complete Alicante cruise port guide. Beaches, castle, and Spanish culture on the Mediterranean.',
+      keywords: ['Alicante cruise port', 'Costa Blanca', 'Alicante Spain', 'Mediterranean ports']
+    },
+    
+    status: 'template',
+    lastUpdated: '2025-01-01',
+  },
+
+  // ============================================================================
+  // ATLANTIC ISLANDS - NEW PORTS
+  // ============================================================================
+  
+  // Funchal, Madeira - PLACEHOLDER - Content needed
+  {
+    id: 'funchal',
+    slug: 'funchal-madeira',
+    name: 'Funchal, Madeira',
+    country: 'Portugal',
+    region: 'atlantic-islands',
+    coordinates: { lat: 32.6669, lon: -16.9241 },
+    tagline: 'Island of eternal spring',
+    description: 'Funchal is the capital of Madeira, Portugal\'s beautiful Atlantic island known for year-round mild weather, fortified wine, stunning gardens, and dramatic landscapes.',
+    
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Portuguese',
+      timezone: 'WET/WEST',
+      portType: 'Pier & Tender',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Port is in city centre. Most attractions walkable.',
+      publicTransport: 'Local buses connect to villages and attractions.',
+      taxis: 'Available at cruise terminal.',
+      walkingDistance: 'City centre is immediately accessible from port.',
+    },
+    
+    thingsToDo: [],
+    shoreExcursions: [],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'Year-round - mild subtropical climate',
+      cruiseTerminals: ['Porto do Funchal'],
+      nearbyAirport: 'Madeira Airport (20km)',
+      visaInfo: 'Schengen visa requirements apply',
+    },
+    
+    relatedDestinations: ['canary-islands-cruises', 'transatlantic-cruises'],
+    
+    meta: {
+      title: 'Funchal Madeira Cruise Port Guide | Island Paradise | UK Cruise Consultant',
+      description: 'Complete Funchal Madeira cruise port guide. Gardens, wine, and year-round sunshine.',
+      keywords: ['Funchal cruise', 'Madeira port', 'Funchal Portugal', 'Atlantic islands']
+    },
+    
+    status: 'template',
+    lastUpdated: '2025-01-01',
+  },
+
+  // Las Palmas, Gran Canaria - PLACEHOLDER - Content needed
+  {
+    id: 'las-palmas',
+    slug: 'las-palmas-gran-canaria',
+    name: 'Las Palmas, Gran Canaria',
+    country: 'Spain (Canary Islands)',
+    region: 'atlantic-islands',
+    coordinates: { lat: 28.1248, lon: -15.4300 },
+    tagline: 'Year-round sunshine and golden beaches',
+    description: 'Las Palmas is the capital of Gran Canaria, offering year-round warm weather, beautiful city beaches, historic Vegueta district, and excellent shopping.',
+    
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Spanish',
+      timezone: 'WET/WEST',
+      portType: 'Pier',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Port is close to city centre and Las Canteras beach.',
+      publicTransport: 'Excellent bus network across the city.',
+      taxis: 'Available at cruise terminal.',
+      walkingDistance: 'Beach and shopping area 10-15 mins walk.',
+    },
+    
+    thingsToDo: [],
+    shoreExcursions: [],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'Year-round - average 22°C',
+      cruiseTerminals: ['Puerto de la Luz'],
+      nearbyAirport: 'Gran Canaria Airport (25km)',
+      visaInfo: 'Schengen visa requirements apply',
+    },
+    
+    relatedDestinations: ['canary-islands-cruises', 'west-africa-cruises'],
+    
+    meta: {
+      title: 'Las Palmas Gran Canaria Cruise Port Guide | Year-Round Sun | UK Cruise Consultant',
+      description: 'Complete Las Palmas cruise port guide. Beaches, shopping, and Canary Islands sunshine.',
+      keywords: ['Las Palmas cruise', 'Gran Canaria port', 'Canary Islands', 'Atlantic islands']
+    },
+    
+    status: 'template',
+    lastUpdated: '2025-01-01',
+  },
+
 ];
 
 // ============================================================================

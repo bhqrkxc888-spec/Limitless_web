@@ -8,12 +8,9 @@ import './CruiseGuidesPage.css';
 
 const GUIDE_TYPES = [
   { value: null, label: 'All Guides' },
-  { value: 'destination', label: 'Destinations' },
-  { value: 'ship_review', label: 'Ship Reviews' },
   { value: 'cruise_line', label: 'Cruise Lines' },
   { value: 'how_to', label: 'How-To & Tips' },
-  { value: 'comparison', label: 'Comparisons' },
-  { value: 'port_guide', label: 'Port Guides' }
+  { value: 'comparison', label: 'Comparisons' }
 ];
 
 function CruiseGuidesPage() {
@@ -33,17 +30,17 @@ function CruiseGuidesPage() {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: 'Cruise Guides',
-    description: 'Comprehensive cruise guides, destination tips, ship reviews, and expert advice from Limitless Cruises.',
+    description: 'Comprehensive cruise guides and expert advice from Limitless Cruises covering cruise lines, how-to tips, comparisons, and port guides.',
     url: 'https://www.limitlesscruises.com/cruise-guides',
   };
 
   return (
     <main className="cruise-guides-page">
       <SEO
-        title="Cruise Guides | Expert Tips & Destination Guides | UK Consultant"
-        description="Comprehensive cruise guides from your personal UK cruise consultant. Destination guides, ship reviews, how-to tips, and expert comparisons to help plan your perfect cruise."
+        title="Cruise Guides | Expert Tips & Travel Guides | UK Consultant"
+        description="Comprehensive cruise guides from your personal UK cruise consultant. Cruise line guides, port guides, how-to tips, and expert comparisons to help plan your perfect cruise."
         canonical="https://www.limitlesscruises.com/cruise-guides"
-        keywords="cruise guides, destination guides, ship reviews, cruise tips, how to cruise, cruise planning, UK cruise consultant"
+        keywords="cruise guides, cruise line guides, port guides, cruise tips, how to cruise, cruise planning, UK cruise consultant"
         structuredData={structuredData}
       />
 
@@ -53,8 +50,7 @@ function CruiseGuidesPage() {
             <span className="guides-page-header__eyebrow">Expert Resources</span>
             <h1 className="guides-page-header__title">Cruise Guides</h1>
             <p className="guides-page-header__subtitle">
-              Your complete resource for cruise planning. From destination guides to ship reviews,
-              we've got everything you need to plan the perfect voyage.
+              Your complete resource for cruise planning. Expert guides covering cruise lines, port guides, how-to tips, and comparisons to help you plan the perfect voyage.
             </p>
           </div>
         </div>
@@ -107,7 +103,7 @@ function CruiseGuidesPage() {
           <div className="container">
             <div className="guides-empty">
               <h3>Coming Soon</h3>
-              <p>We're currently creating comprehensive cruise guides for you. Our expert guides covering destinations, ship reviews, and travel tips will be available soon.</p>
+              <p>We're currently creating comprehensive cruise guides for you. Our expert guides covering cruise lines, port guides, and travel tips will be available soon.</p>
               <p>In the meantime, feel free to <a href="/contact">contact us</a> for personalised cruise advice.</p>
             </div>
           </div>
