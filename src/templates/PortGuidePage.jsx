@@ -164,12 +164,12 @@ function PortGuidePage() {
         <div className="container">
           <div className="facts-grid">
             <div className="fact-box">
-              <span className="fact-label">Currency</span>
+              <span className="fact-label">Local Currency</span>
               <span className="fact-value">{port.quickFacts?.currency || 'EUR'}</span>
             </div>
             <div className="fact-box">
               <span className="fact-label">Language</span>
-              <span className="fact-value">Spanish & English</span>
+              <span className="fact-value">{port.quickFacts?.language || 'English'}</span>
             </div>
             <div className="fact-box">
               <span className="fact-label">Timezone</span>
@@ -180,11 +180,11 @@ function PortGuidePage() {
               <span className="fact-value">{port.quickFacts?.portType || 'Pier'}</span>
             </div>
             <div className="fact-box">
-              <span className="fact-label">Walkable</span>
+              <span className="fact-label">Walkable to City</span>
               <span className="fact-value">{port.quickFacts?.walkable ? 'Yes' : 'No'}</span>
             </div>
             <div className="fact-box">
-              <span className="fact-label">Tender</span>
+              <span className="fact-label">Tender Boat</span>
               <span className="fact-value">{port.quickFacts?.tenderRequired ? 'Yes' : 'No'}</span>
             </div>
           </div>
