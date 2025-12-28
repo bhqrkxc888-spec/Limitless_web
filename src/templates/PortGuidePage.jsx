@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useMemo } from 'react';
-import { getPortBySlug } from '../data/ports';
+import { getPortBySlug, getAdjacentPorts } from '../data/ports';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
@@ -22,6 +22,7 @@ const FALLBACK_HERO = SITE_ASSETS.heroDefault || '/images/placeholders/coming-so
 function PortGuidePage() {
   const { slug } = useParams();
   const port = getPortBySlug(slug);
+  const { prev: prevPort, next: nextPort } = getAdjacentPorts(slug);
   const [weatherIndex, setWeatherIndex] = useState(0);
 
   // Load images from database
@@ -194,14 +195,6 @@ function PortGuidePage() {
       {/* Main Content */}
       <article className="port-content">
         <div className="container">
-
-          {/* Back Navigation */}
-          <div className="port-back-section">
-            <Link to="/ports" className="port-back-btn">
-              <ArrowLeft size={18} />
-              <span>Back to Port Guides</span>
-            </Link>
-          </div>
 
           {/* Coming Soon Banner for Template Ports */}
           {port.status === 'template' && (
@@ -644,6 +637,27 @@ function PortGuidePage() {
                 Find a Cruise
               </Button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Port Navigation Footer */}
+      <section className="port-navigation-footer">
+        <div className="container">
+          <div className="port-nav-links">
+            {prevPort && (
+              <Link to={`/ports/${prevPort.slug}`} className="port-nav-link port-nav-prev">
+                ← {prevPort.name}
+              </Link>
+            )}
+            <Link to="/ports" className="port-nav-link port-nav-home">
+              Back to Port Guides
+            </Link>
+            {nextPort && (
+              <Link to={`/ports/${nextPort.slug}`} className="port-nav-link port-nav-next">
+                {nextPort.name} →
+              </Link>
+            )}
           </div>
         </div>
       </section>

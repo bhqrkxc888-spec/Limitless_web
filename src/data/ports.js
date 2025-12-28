@@ -8052,3 +8052,20 @@ export function searchPorts(query) {
   );
 }
 
+/**
+ * Get previous and next port for navigation
+ * Returns { prev: port | null, next: port | null }
+ */
+export function getAdjacentPorts(currentSlug) {
+  const currentIndex = ports.findIndex(p => p.slug === currentSlug);
+  
+  if (currentIndex === -1) {
+    return { prev: null, next: null };
+  }
+  
+  const prevPort = currentIndex > 0 ? ports[currentIndex - 1] : null;
+  const nextPort = currentIndex < ports.length - 1 ? ports[currentIndex + 1] : null;
+  
+  return { prev: prevPort, next: nextPort };
+}
+
