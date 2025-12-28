@@ -247,6 +247,9 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s, box-shadow 0.3s;
   border: 1px solid var(--clr-border);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .attraction-card:hover {
@@ -276,12 +279,14 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
+  flex: 1;
 }
 
 .attraction-header {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
+  min-height: 4rem;
 }
 
 .attraction-body h3 {
@@ -306,6 +311,7 @@
   line-height: 1.6;
   color: var(--clr-text-muted);
   margin: 0;
+  min-height: 3.5rem;
 }
 
 /* Highlights - Horizontal tags */
@@ -314,14 +320,15 @@
   flex-wrap: wrap;
   gap: var(--space-2);
   margin: var(--space-2) 0;
+  min-height: 2rem;
 }
 
 .highlight-tag {
   display: inline-block;
   font-size: var(--font-size-xs);
-  font-weight: 500;
-  color: var(--clr-accent);
-  background: rgba(212, 175, 55, 0.1);
+  font-weight: 600;
+  color: #8B6914;
+  background: rgba(212, 175, 55, 0.15);
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-md);
 }
@@ -331,6 +338,7 @@
   font-size: var(--font-size-sm);
   color: var(--clr-text-muted);
   margin: var(--space-2) 0;
+  min-height: 2rem;
 }
 
 .attraction-good-for strong {
@@ -383,10 +391,9 @@
 .attraction-footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-top: var(--space-3);
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-top: var(--space-3);
 }
 
 .attraction-time {
@@ -399,42 +406,18 @@
   border-radius: var(--radius-full);
 }
 
-/* Google Maps Link */
+/* Google Maps Link - Text only, bottom right */
 .google-maps-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
   font-size: var(--font-size-xs);
   font-weight: 500;
   color: var(--clr-primary);
-  text-decoration: none;
-  padding: 0.375rem 0.75rem;
-  border-radius: var(--radius-md);
-  background: rgba(25, 103, 178, 0.08);
-  transition: all 0.2s;
-  border: 1px solid transparent;
+  text-decoration: underline;
+  transition: color 0.2s;
 }
 
 .google-maps-link:hover {
-  background: var(--clr-primary);
-  color: white;
-  border-color: var(--clr-primary);
-  transform: translateY(-1px);
-}
-
-.google-maps-link svg {
-  flex-shrink: 0;
-}
-
-.google-maps-link-large {
-  font-size: var(--font-size-sm);
-  padding: 0.625rem 1rem;
-  margin-top: var(--space-4);
-}
-
-.google-maps-link-large svg {
-  width: 18px;
-  height: 18px;
+  color: var(--clr-primary-dark);
+  text-decoration: none;
 }
 
 /* ========================================

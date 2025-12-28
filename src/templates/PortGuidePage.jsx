@@ -320,8 +320,7 @@ function PortGuidePage() {
                             rel="noopener noreferrer"
                             className="google-maps-link"
                           >
-                            <MapPin size={16} />
-                            <span>Open in Maps</span>
+                            Google Maps
                           </a>
                         </div>
                       </div>
@@ -429,8 +428,7 @@ function PortGuidePage() {
                       rel="noopener noreferrer"
                       className="google-maps-link"
                     >
-                      <MapPin size={16} />
-                      <span>Open in Maps</span>
+                      Google Maps
                     </a>
                   </div>
                 ))}
