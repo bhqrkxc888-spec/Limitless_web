@@ -6,12 +6,31 @@
     </linearGradient>
   </defs>
   <rect width="800" height="600" fill="url(#bgGradient)"/>
-  <g transform="translate(400,260)">
-    <circle cx="0" cy="0" r="50" fill="none" stroke="#B9953C" stroke-width="2" opacity="0.3"/>
-    <path d="M-25,-10 L-25,10 L0,0 Z" fill="#B9953C" opacity="0.6"/>
-    <rect x="-20" y="-30" width="8" height="60" fill="#B9953C" opacity="0.4" transform="rotate(45)"/>
+  
+  <!-- Limitless Ship Logo (Gold) -->
+  <g transform="translate(400,240) scale(2.5)">
+    <!-- Ship Hull -->
+    <path d="M-20,8 L-18,2 L-15,-2 L-10,-4 L0,-5 L10,-4 L15,-2 L18,2 L20,8 Z" 
+          fill="#D4B86A" stroke="#C0A558" stroke-width="0.5"/>
+    <!-- Ship Deck -->
+    <rect x="-18" y="-8" width="36" height="4" fill="#D4B86A" stroke="#C0A558" stroke-width="0.5"/>
+    <!-- Cabin -->
+    <rect x="-10" y="-16" width="20" height="8" fill="#D4B86A" stroke="#C0A558" stroke-width="0.5"/>
+    <!-- Funnel -->
+    <rect x="-4" y="-22" width="8" height="6" fill="#D4B86A" stroke="#C0A558" stroke-width="0.5"/>
+    <rect x="-5" y="-24" width="10" height="2" fill="#E5D299"/>
+    <!-- Windows -->
+    <circle cx="-6" cy="-12" r="1.5" fill="#2C344C" opacity="0.6"/>
+    <circle cx="0" cy="-12" r="1.5" fill="#2C344C" opacity="0.6"/>
+    <circle cx="6" cy="-12" r="1.5" fill="#2C344C" opacity="0.6"/>
+    <!-- Waves -->
+    <path d="M-25,10 Q-20,8 -15,10 Q-10,12 -5,10 Q0,8 5,10 Q10,12 15,10 Q20,8 25,10" 
+          stroke="#5FA8D3" stroke-width="1" fill="none" opacity="0.4"/>
+    <path d="M-25,14 Q-20,12 -15,14 Q-10,16 -5,14 Q0,12 5,14 Q10,16 15,14 Q20,12 25,14" 
+          stroke="#4A8FB8" stroke-width="1" fill="none" opacity="0.3"/>
   </g>
-  <text x="400" y="360" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="500" fill="#B9953C" text-anchor="middle">Image Coming Soon</text>
-  <text x="400" y="395" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#8892a8" text-anchor="middle">High-quality imagery will be added shortly</text>
+  
+  <!-- Text -->
+  <text x="400" y="380" font-family="'Playfair Display', Georgia, serif" font-size="28" font-weight="600" fill="#D4B86A" text-anchor="middle">Image Coming Soon</text>
+  <text x="400" y="410" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#8892a8" text-anchor="middle">High-quality imagery will be added shortly</text>
 </svg>
-

@@ -171,6 +171,16 @@ function PortGuidePage() {
             </Link>
           </div>
 
+          {/* Coming Soon Banner for Template Ports */}
+          {port.status === 'template' && (
+            <div className="port-coming-soon-banner">
+              <div className="coming-soon-content">
+                <h3>Full Guide Coming Soon</h3>
+                <p>We're currently gathering detailed information for {port.name}. In the meantime, basic port information is available above. Full guide with attractions, dining, and local tips will be published shortly.</p>
+              </div>
+            </div>
+          )}
+
           {/* About the Port */}
           {port.aboutPort && (
             <section className="port-section port-about">
@@ -246,89 +256,6 @@ function PortGuidePage() {
                   );
                 })}
               </div>
-            </section>
-          )}
-
-          {/* Weather Section */}
-          {weatherMonths.length > 0 && (
-            <section className="port-section port-weather">
-              <h2>{port.name} Weather</h2>
-              {port.weather?.intro && <p className="section-intro">{port.weather.intro}</p>}
-              
-              <div className="weather-carousel-wrapper">
-                <button 
-                  className="weather-arrow weather-arrow-left"
-                  onClick={handleWeatherPrev}
-                  disabled={weatherIndex === 0}
-                  aria-label="Previous months"
-                >
-                  <ChevronLeft size={24} />
-                </button>
-                
-                <div className="weather-track">
-                  {weatherMonths.slice(weatherIndex, weatherIndex + visibleWeatherCount).map((month, idx) => (
-                    <div key={idx} className={`weather-card ${getSeasonClass(month.month)}`}>
-                      <div className="weather-month">{month.month}</div>
-                      <div className="weather-temps">
-                        <div className="temp-high">
-                          <span className="temp-num">{month.highC}°</span>
-                          <span className="temp-type">High</span>
-                        </div>
-                        <div className="temp-low">
-                          <span className="temp-num">{month.lowC}°</span>
-                          <span className="temp-type">Low</span>
-                        </div>
-                      </div>
-                      <div className="weather-stats">
-                        <div className="stat">
-                          <span className="stat-val">{month.rainMm}mm</span>
-                          <span className="stat-lbl">Rain</span>
-                        </div>
-                        <div className="stat">
-                          <span className="stat-val">{month.sunDays}</span>
-                          <span className="stat-lbl">Sun Days</span>
-                        </div>
-                        <div className="stat">
-                          <span className="stat-val">{month.seaTempC}°</span>
-                          <span className="stat-lbl">Sea</span>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                
-                <button 
-                  className="weather-arrow weather-arrow-right"
-                  onClick={handleWeatherNext}
-                  disabled={weatherIndex >= maxIndex}
-                  aria-label="Next months"
-                >
-                  <ChevronRight size={24} />
-                </button>
-              </div>
-
-              {port.weather?.bestTime && (
-                <div className="best-time-box">
-                  <h3>When to Visit</h3>
-                  <div className="best-time-grid">
-                    <div className="best-time-item">
-                      <strong>Best overall</strong>
-                      <p>{port.weather.bestTime.overall}</p>
-                    </div>
-                    <div className="best-time-item">
-                      <strong>Peak season</strong>
-                      <p>{port.weather.bestTime.hottest}</p>
-                    </div>
-                    <div className="best-time-item">
-                      <strong>Quieter months</strong>
-                      <p>{port.weather.bestTime.quietest}</p>
-                    </div>
-                  </div>
-                  {port.weather.bestTime.recommendation && (
-                    <p className="best-time-rec">{port.weather.bestTime.recommendation}</p>
-                  )}
-                </div>
-              )}
             </section>
           )}
 
@@ -435,6 +362,89 @@ function PortGuidePage() {
                   </div>
                 ))}
               </div>
+            </section>
+          )}
+
+          {/* Weather Section */}
+          {weatherMonths.length > 0 && (
+            <section className="port-section port-weather">
+              <h2>{port.name} Weather</h2>
+              {port.weather?.intro && <p className="section-intro">{port.weather.intro}</p>}
+              
+              <div className="weather-carousel-wrapper">
+                <button 
+                  className="weather-arrow weather-arrow-left"
+                  onClick={handleWeatherPrev}
+                  disabled={weatherIndex === 0}
+                  aria-label="Previous months"
+                >
+                  <ChevronLeft size={24} />
+                </button>
+                
+                <div className="weather-track">
+                  {weatherMonths.slice(weatherIndex, weatherIndex + visibleWeatherCount).map((month, idx) => (
+                    <div key={idx} className={`weather-card ${getSeasonClass(month.month)}`}>
+                      <div className="weather-month">{month.month}</div>
+                      <div className="weather-temps">
+                        <div className="temp-high">
+                          <span className="temp-num">{month.highC}°</span>
+                          <span className="temp-type">High</span>
+                        </div>
+                        <div className="temp-low">
+                          <span className="temp-num">{month.lowC}°</span>
+                          <span className="temp-type">Low</span>
+                        </div>
+                      </div>
+                      <div className="weather-stats">
+                        <div className="stat">
+                          <span className="stat-val">{month.rainMm}mm</span>
+                          <span className="stat-lbl">Rain</span>
+                        </div>
+                        <div className="stat">
+                          <span className="stat-val">{month.sunDays}</span>
+                          <span className="stat-lbl">Sun Days</span>
+                        </div>
+                        <div className="stat">
+                          <span className="stat-val">{month.seaTempC}°</span>
+                          <span className="stat-lbl">Sea</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                <button 
+                  className="weather-arrow weather-arrow-right"
+                  onClick={handleWeatherNext}
+                  disabled={weatherIndex >= maxIndex}
+                  aria-label="Next months"
+                >
+                  <ChevronRight size={24} />
+                </button>
+              </div>
+
+              {port.weather?.bestTime && (
+                <div className="best-time-box">
+                  <h3>When to Visit</h3>
+                  <div className="best-time-grid">
+                    <div className="best-time-item">
+                      <strong>Best overall</strong>
+                      <p>{port.weather.bestTime.overall}</p>
+                    </div>
+                    <div className="best-time-item">
+                      <strong>Peak season</strong>
+                      <p>{port.weather.bestTime.hottest}</p>
+                    </div>
+                    <div className="best-time-item">
+                      <strong>Quieter months</strong>
+                      <p>{port.weather.bestTime.quietest}</p>
+                    </div>
+                  </div>
+                  {port.weather.bestTime.recommendation && (
+                    <p className="best-time-rec">{port.weather.bestTime.recommendation}</p>
+                  )}
+                </div>
+              )}
             </section>
           )}
 

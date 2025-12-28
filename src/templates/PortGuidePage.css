@@ -20,6 +20,8 @@
 .port-back-section {
   margin-bottom: var(--space-8);
   padding-top: var(--space-6);
+  display: flex;
+  justify-content: flex-end;
 }
 
 .port-back-btn {
@@ -40,6 +42,36 @@
   background: var(--clr-primary-dark);
   transform: translateX(-3px);
   color: white;
+}
+
+/* ========================================
+   COMING SOON BANNER
+   ======================================== */
+
+.port-coming-soon-banner {
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-6);
+  margin-bottom: var(--space-10);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  border: 3px solid var(--clr-accent);
+}
+
+.coming-soon-content h3 {
+  color: var(--clr-accent);
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  margin-bottom: var(--space-4);
+  font-family: var(--font-heading);
+}
+
+.coming-soon-content p {
+  color: white;
+  font-size: var(--font-size-lg);
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 /* ========================================

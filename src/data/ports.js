@@ -513,7 +513,7 @@ export const ports = [
       keywords: ['Barcelona cruise port', 'Barcelona shore excursions', 'Barcelona things to do', 'Barcelona from cruise ship', 'Barcelona Moll Adossat', 'Barcelona cruise terminal'],
     },
     
-    status: 'draft', // Ready for review
+    status: 'published', // Fully live - complete guide
     lastUpdated: '2025-12-28',
   },
   
