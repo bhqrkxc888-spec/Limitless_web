@@ -14,6 +14,13 @@ Create a comprehensive cruise port guide for [PORT NAME], [COUNTRY] with the fol
 - Tagline (short catchy phrase about the port):
 - Description (2-3 sentences for hero section):
 - Coordinates (latitude and longitude):
+- Port character: Choose one that best fits:
+  * beach-city (Mediterranean/Caribbean with city and beaches)
+  * city-culture (Major city, cultural focus, no significant beach)
+  * gateway (Main attraction is a day trip away, e.g. Civitavecchia for Rome)
+  * fjord-nature (Norwegian fjords, scenic nature focus)
+  * island (Island destination with beaches and local attractions)
+  * expedition (Remote/bucket list destination, e.g. Tromsø, Antarctica ports)
 
 2. QUICK FACTS
 - Currency (with symbol):
@@ -49,21 +56,62 @@ Trains:
 
 Cruise Lines: Which major cruise lines use this port regularly
 
-6. TOP 6 ATTRACTIONS (Must-see sights for cruise passengers)
+6. ATTRACTIONS (6-9 depending on port, categorised)
+
+Provide 6 to 9 attractions covering these CATEGORIES (include what's relevant to this port):
+
+REQUIRED CATEGORIES (include at least one from each):
+- LANDMARK: The signature must-see sight (e.g. Sagrada Familia, Colosseum)
+- HISTORIC/CULTURE: Museums, old towns, cathedrals, historic sites
+- EASY STROLL: Walkable areas, promenades, pleasant wandering spots
+
+OPTIONAL CATEGORIES (include if relevant to this port):
+- NATURE/VIEWS: Parks, viewpoints, gardens, scenic spots
+- MARKETS/SHOPPING: Local markets, shopping streets, artisan areas
+- ACTIVE/ADVENTURE: Hiking, cable cars, longer walks, physical activities
+- DAY EXCURSION: Major attraction outside the port city (e.g. Pompeii from Naples)
+- FAMILY-FRIENDLY: Specifically great for kids and families
+- BEACH: Only if this is a beach destination
+
 For EACH attraction provide ALL of the following:
 - Name
+- Category: One of the categories above
 - 2-3 sentence description of the attraction
 - Duration: Suggested visit time in format "X to Y hours for a relaxed pace"
 - 3 Insider Tips: Practical advice (e.g. best time to visit, booking tips, what to prioritize, photo spots, what to skip)
-- Highlights: 3-5 from this list: Shopping, Food, History, Photography, Architecture, Gardens, Views, Culture, Art, Family-friendly, Religious, Museums, Markets, Beaches, Nature
-- Good For: 2-4 from this list: First-time visitors, History buffs, Families, Photographers, Architecture lovers, Foodies, Active travelers, Art lovers, Culture seekers, Couples
+- Highlights: 3-5 from this list: Shopping, Food, History, Photography, Architecture, Gardens, Views, Culture, Art, Family-friendly, Religious, Museums, Markets, Beaches, Nature, Wildlife, Scenic
+- Good For: 2-4 from this list: First-time visitors, History buffs, Families, Photographers, Architecture lovers, Foodies, Active travelers, Art lovers, Culture seekers, Couples, Solo travelers
 
-7. NEAREST BEACH
+7. BEACH SECTION (Only if applicable - skip for fjord/northern/city-only ports)
+
+If this port has accessible beaches, provide:
 - Beach name
 - Description (2-3 sentences)
-- How to get there from the port with distance/time
-- Facilities (sunbeds, restaurants, toilets)
-- Best for (families/swimming/watersports/quiet relaxation)
+- Beach type: sand / pebbles / rocky / mixed
+- Water entry: shallow entry / drops off quickly / varies
+- Shelter: sheltered / exposed / partially sheltered
+- Crowd level: quiet / moderate / busy in summer / very busy
+
+Facilities (Yes/No for each):
+- Lifeguards (note if seasonal)
+- Sunbeds/loungers for hire
+- Umbrellas for hire
+- Showers
+- Toilets
+- Restaurants/bars nearby
+- Changing rooms
+
+Access from port:
+- Walking time from port/shuttle stop
+- Taxi time
+- Bus route if available
+- Any notes (e.g. "steep path", "flat promenade")
+
+Best for: (pick 2-3) families with children / swimming / watersports / quiet relaxation / people watching / snorkelling
+
+Insider tip for the beach (1 sentence)
+
+NOTE: For fjord ports (Bergen, Geiranger), northern ports (Tromsø), or city-focused ports (Venice, Rome gateway), SKIP the beach section entirely and add an extra attraction instead.
 
 8. TOP 4 FOOD VENUES
 For each provide:
@@ -108,7 +156,7 @@ Best time to visit:
 11. FAQ (10 QUESTIONS - IMPORTANT FOR SEO)
 Provide 10 commonly asked questions that cruise passengers search for. Answer each in 2-3 sentences.
 
-REQUIRED questions (adapt wording to the port):
+CORE questions (always include these 8):
 1. Is [PORT NAME] walkable from the cruise port?
 2. How long do you need in [PORT NAME]?
 3. Is English widely spoken in [PORT NAME]?
@@ -117,10 +165,29 @@ REQUIRED questions (adapt wording to the port):
 6. Do I need cash in [PORT NAME] or can I use card?
 7. Should I book a ship excursion or explore independently?
 8. What is the best thing to do in [PORT NAME] on a cruise day?
-9. Is [PORT NAME] wheelchair accessible / good for limited mobility?
-10. Can you do [NEARBY DAY TRIP] from [PORT NAME] on a cruise day?
 
-For question 10, choose the most popular day trip from this port (e.g. Pompeii from Naples, Seville from Cadiz, Montserrat from Barcelona).
+CONDITIONAL questions (pick 2 that are most relevant to this port):
+
+For BEACH PORTS (Mediterranean, Caribbean, Islands):
+- Is [PORT NAME] good for swimming / Are the beaches nice?
+- Is [PORT NAME] family-friendly?
+
+For GATEWAY PORTS (day trip destinations):
+- Can you do [NEARBY DAY TRIP] from [PORT NAME] on a cruise day?
+- Is [DAY TRIP] worth it from [PORT NAME]?
+
+For FJORD/NATURE PORTS:
+- What's the best way to see the fjords from [PORT NAME]?
+- Is [PORT NAME] good for hiking / outdoor activities?
+
+For EXPEDITION/BUCKET LIST PORTS:
+- What wildlife can you see in [PORT NAME]?
+- What's the weather like in [PORT NAME]?
+
+For ALL PORTS (good universal options):
+- Is [PORT NAME] wheelchair accessible / good for limited mobility?
+- What should I avoid in [PORT NAME]?
+- Is [PORT NAME] good for families with children?
 
 12. PRACTICAL INFO
 - Best time to visit (1 sentence)
@@ -169,42 +236,66 @@ Create a comprehensive cruise port guide for Dover, UK following the format abov
 
 ---
 
-## KEY ENHANCEMENTS IN V3
+## KEY ENHANCEMENTS IN V4
 
-### 1. Expanded FAQ (10 Questions)
-SEO rich snippets require comprehensive FAQ coverage. The 10 required questions target high-volume cruise passenger searches:
-- Safety concerns
-- Cost/budget questions
-- Accessibility
-- Independent vs ship excursion debate
-- Day trip feasibility
+### 1. Port Character Types
+Define what type of port this is to determine relevant sections:
+- **beach-city**: Mediterranean/Caribbean with beaches (include beach section)
+- **city-culture**: Major cultural city, no significant beach (skip beach)
+- **gateway**: Main attraction is a day trip (emphasise excursions)
+- **fjord-nature**: Norwegian fjords (nature focus, skip beach)
+- **island**: Island destination (include beach, local focus)
+- **expedition**: Remote/bucket list (unique experiences, skip beach)
 
-### 2. Enhanced Attractions
-Each attraction now requires:
-- **Duration**: "2 to 3 hours for a relaxed pace"
-- **3 Tips**: Practical insider advice
-- **Highlights**: Tags for filtering (History, Photography, etc.)
-- **Good For**: Audience tags (Families, History buffs, etc.)
+### 2. Categorised Attractions (6-9)
+Instead of generic "6 attractions", we now use categories:
+- **REQUIRED**: Landmark, Historic/Culture, Easy Stroll (at least 1 each)
+- **OPTIONAL**: Nature/Views, Markets/Shopping, Active/Adventure, Day Excursion, Family-Friendly, Beach
+- Pick 6-9 total based on what the port offers
 
-### 3. Time Required Section
-Separate detailed section with realistic estimates for each sight plus a summary itinerary suggestion.
+### 3. Conditional Beach Section
+Only include for beach-city/island ports. Now with detailed properties:
+- Beach type (sand/pebbles/rocky/mixed)
+- Water entry (shallow/drops off/varies)
+- Facilities checklist (lifeguards, sunbeds, toilets, etc.)
+- Access details (walk time, taxi time, bus routes)
+- Best for (families, swimming, watersports, quiet relaxation)
 
-### 4. Expanded Local Tips (6-8)
-Now covers money, customs, siesta, and "quick wins" visitors often miss.
+### 4. Conditional FAQ Questions
+8 core questions for all ports, plus 2 conditional based on port type:
+- Beach ports: swimming quality, family-friendly
+- Gateway ports: day trip feasibility
+- Fjord ports: hiking, outdoor activities
+- Expedition ports: wildlife, weather
 
-### 5. Enhanced Practical Info
-Added emergency number, tipping customs, and siesta info.
+### 5. Previous Enhancements (v3)
+- 10 FAQ questions for rich snippets
+- Duration, tips, highlights, goodFor for each attraction
+- Time required estimates
+- Expanded local tips (6-8)
 
 ---
 
 ## DATA STRUCTURE FOR ports.js
 
-When you receive Perplexity data, attractions should be formatted as:
+### Port Character (Basic Info)
+```javascript
+{
+  id: 'barcelona',
+  slug: 'barcelona',
+  name: 'Barcelona',
+  country: 'Spain',
+  portCharacter: 'beach-city', // beach-city | city-culture | gateway | fjord-nature | island | expedition
+  // ... rest of basic info
+}
+```
 
+### Attractions (with categories)
 ```javascript
 mustSeeSights: [
   {
     title: 'La Sagrada Familia',
+    category: 'landmark', // landmark | historic | nature | markets | stroll | active | excursion | family | beach
     description: 'Gaudí\'s iconic, still-unfinished basilica with stunning facades and interior.',
     duration: '2 to 3 hours for a relaxed pace',
     tips: [
@@ -215,19 +306,68 @@ mustSeeSights: [
     highlights: ['Architecture', 'Photography', 'Religious', 'Art'],
     goodFor: ['First-time visitors', 'Architecture lovers', 'Photographers'],
   },
+  {
+    title: 'Gothic Quarter',
+    category: 'historic',
+    description: 'Medieval lanes with Roman remains and Barcelona Cathedral.',
+    duration: '2 to 3 hours for a relaxed pace',
+    tips: [
+      'Start early before the crowds arrive',
+      'Free cathedral entry in the morning',
+      'Get lost in the side streets for hidden gems'
+    ],
+    highlights: ['History', 'Architecture', 'Photography', 'Culture'],
+    goodFor: ['History buffs', 'Photographers', 'Culture seekers'],
+  },
   // ... more attractions
 ],
 ```
 
-FAQ should be formatted as:
+### Beach (conditional - only for beach-city/island ports)
+```javascript
+nearestBeach: {
+  name: 'Barceloneta Beach',
+  description: 'City beach stretching along the seafront east of Port Vell.',
+  type: 'sand', // sand | pebbles | rocky | mixed
+  waterEntry: 'shallow entry', // shallow entry | drops off quickly | varies
+  shelter: 'exposed', // sheltered | exposed | partially sheltered
+  crowdLevel: 'busy in summer', // quiet | moderate | busy in summer | very busy
+  facilities: {
+    lifeguards: true,
+    lifeguardsSeasonal: true, // true if only in summer
+    sunbeds: true,
+    umbrellas: true,
+    showers: true,
+    toilets: true,
+    restaurants: true,
+    changingRooms: false,
+  },
+  access: {
+    walkTime: '20 to 25 minutes from Columbus Monument',
+    taxiTime: '10 to 15 minutes from port',
+    busRoute: 'Bus 59 from Plaça Catalunya',
+    notes: 'Flat promenade walk, no steep paths',
+  },
+  bestFor: ['swimming', 'sunbathing', 'people watching'],
+  tip: 'Arrive before 11am for a good spot in peak season.',
+},
 
+// For non-beach ports, simply omit the nearestBeach field or set to null:
+nearestBeach: null, // Fjord port - no beach section
+```
+
+### FAQ (10 questions)
 ```javascript
 faq: [
   {
     question: 'Is Barcelona walkable from the cruise port?',
     answer: 'From the World Trade Center terminal, yes - La Rambla is about 10 minutes on foot. From Moll Adossat terminals, most people use the shuttle or taxi first, then walk within the historic centre.',
   },
-  // ... 9 more questions
+  {
+    question: 'Is Barcelona safe for tourists?',
+    answer: 'Generally very safe, but watch for pickpockets on La Rambla, in the metro, and at popular tourist spots. Keep valuables secure and be aware of your surroundings.',
+  },
+  // ... 8 more questions
 ],
 ```
 
@@ -272,10 +412,11 @@ Use the enhanced prompt for these ports:
 
 ---
 
-**Version:** 3.0 (Enhanced for SEO Rich Snippets)  
+**Version:** 4.0 (Categorised Attractions + Conditional Sections)  
 **Updated:** 28 December 2024
 
 ### Changelog:
+- v4.0: Categorised attractions (landmark, historic, nature, etc.), conditional beach section with detailed facilities, port character types, conditional FAQ questions based on port type
 - v3.0: Added 10 FAQ questions, attraction enhancements (duration, tips, highlights, goodFor), expanded local tips, time required section
 - v2.0: Initial Perplexity-optimised format
 - v1.0: Basic template
