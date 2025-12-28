@@ -14,7 +14,6 @@ function PortCardWithImage({ port }) {
   
   return (
     <Card 
-      key={port.id} 
       to={`/ports/${port.slug}`} 
       variant="default"
       className="port-card"
