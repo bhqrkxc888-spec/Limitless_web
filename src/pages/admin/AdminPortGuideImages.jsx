@@ -16,19 +16,56 @@ import { ports, portRegions } from '../../data/ports';
 import './AdminImagesShared.css';
 
 /**
- * Define required images per port
- * These are the images needed for each port guide
+ * Get dynamic image types for a specific port
+ * This generates labels based on actual attraction names from the port data
  */
-const PORT_IMAGE_TYPES = [
-  { id: 'hero', label: 'Hero Image', required: true, specs: 'Main banner for port guide page. Recommended: 1920×1080px, WebP format' },
-  { id: 'port-terminal', label: 'Port Terminal', required: false, specs: 'Image of the cruise terminal. Recommended: 800×600px, WebP format' },
-  { id: 'attraction-1', label: 'Attraction 1', required: false, specs: 'First must-see sight. Recommended: 800×600px, WebP format' },
-  { id: 'attraction-2', label: 'Attraction 2', required: false, specs: 'Second must-see sight. Recommended: 800×600px, WebP format' },
-  { id: 'attraction-3', label: 'Attraction 3', required: false, specs: 'Third must-see sight. Recommended: 800×600px, WebP format' },
-  { id: 'attraction-4', label: 'Attraction 4', required: false, specs: 'Fourth must-see sight. Recommended: 800×600px, WebP format' },
-  { id: 'beach', label: 'Beach', required: false, specs: 'Nearest beach image. Recommended: 800×600px, WebP format' },
-  { id: 'food', label: 'Food & Dining', required: false, specs: 'Food or restaurant scene. Recommended: 800×600px, WebP format' },
-];
+const getPortImageTypes = (port) => {
+  if (!port) {
+    return [
+      { id: 'hero', label: 'Hero Image', required: true, specs: 'Main banner for port guide page. Recommended: 1920×1080px, WebP format' },
+      { id: 'card', label: 'Card Image', required: true, specs: 'Thumbnail for listing pages. Recommended: 800×600px, WebP format, 3:2 ratio' },
+    ];
+  }
+
+  const imageTypes = [
+    { id: 'hero', label: 'Hero Image', required: true, specs: 'Main banner for port guide page. Recommended: 1920×1080px, WebP format' },
+    { id: 'card', label: 'Card Image', required: true, specs: 'Thumbnail for listing pages. Recommended: 800×600px, WebP format, 3:2 ratio' },
+  ];
+
+  // Add attractions with real names
+  if (port.mustSeeSights && Array.isArray(port.mustSeeSights)) {
+    port.mustSeeSights.forEach((sight, index) => {
+      imageTypes.push({
+        id: `attraction-${index + 1}`,
+        label: sight.title || `Attraction ${index + 1}`,
+        required: false,
+        specs: `${sight.title || 'Attraction image'}. Recommended: 800×600px, WebP format`
+      });
+    });
+  }
+
+  // Add beach if port has one
+  if (port.nearestBeach) {
+    imageTypes.push({
+      id: 'beach',
+      label: port.nearestBeach.name || 'Beach',
+      required: false,
+      specs: `${port.nearestBeach.name || 'Beach'} image. Recommended: 800×600px, WebP format`
+    });
+  }
+
+  // Add food if port has food recommendations
+  if (port.foodAndDrink && Array.isArray(port.foodAndDrink) && port.foodAndDrink.length > 0) {
+    imageTypes.push({
+      id: 'food',
+      label: 'Food & Dining',
+      required: false,
+      specs: 'Local food or restaurant scene. Recommended: 800×600px, WebP format'
+    });
+  }
+
+  return imageTypes;
+};
 
 function AdminPortGuideImages() {
   const navigate = useNavigate();
@@ -99,9 +136,10 @@ function AdminPortGuideImages() {
   const getPortStatus = (portId) => {
     const portImages = images[portId] || {};
     const hero = portImages['hero'];
+    const card = portImages['card'];
     
-    // Hero is required
-    if (!hero) return 'missing';
+    // Both hero and card are required
+    if (!hero || !card) return 'missing';
     
     // Check for any warnings
     const hasWarnings = Object.values(portImages).some(img => !img.seo_compliant);
@@ -182,6 +220,7 @@ function AdminPortGuideImages() {
               ).map(port => {
                 const imageCount = getImageCount(port.id);
                 const region = portRegions.find(r => r.id === port.region);
+                const portImageTypes = getPortImageTypes(port);
                 
                 return (
                   <button
@@ -196,7 +235,7 @@ function AdminPortGuideImages() {
                     <p className="entity-card-region">{region?.name || port.country}</p>
                     <p className="entity-card-stats">
                       <span className={imageCount > 0 ? 'stat-ok' : 'stat-missing'}>
-                        {imageCount} / {PORT_IMAGE_TYPES.length} images
+                        {imageCount} / {portImageTypes.length} images
                       </span>
                     </p>
                   </button>
@@ -220,7 +259,7 @@ function AdminPortGuideImages() {
             </p>
 
             <div className="images-list">
-              {PORT_IMAGE_TYPES.map(imageType => {
+              {getPortImageTypes(selectedPort).map(imageType => {
                 const img = images[selectedPort.id]?.[imageType.id];
                 
                 return (

@@ -62,7 +62,7 @@ function AdminImageManagement() {
         ship: [], // SHIPS ARE OPTIONAL - Future enhancement, not required for launch
         category: ['card'],
         'bucket-list': ['hero', 'card'],
-        'port-guide': ['hero'] // Port guides require hero image
+        'port-guide': ['hero', 'card'] // Port guides require hero and card images
       };
 
       const OPTIONAL_IMAGE_TYPES = {
@@ -72,7 +72,7 @@ function AdminImageManagement() {
         ship: ['exterior', 'deck', 'suite', 'dining', 'pool', 'entertainment', 'spa', 'theater'], // ALL SHIP IMAGES ARE OPTIONAL
         category: [],
         'bucket-list': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4'],
-        'port-guide': ['port-terminal', 'attraction-1', 'attraction-2', 'attraction-3', 'attraction-4', 'attraction-5', 'attraction-6', 'beach', 'food'] // Optional port images
+        'port-guide': ['attraction-1', 'attraction-2', 'attraction-3', 'attraction-4', 'attraction-5', 'attraction-6', 'beach', 'food'] // Optional port images (attractions vary by port)
       };
 
       // Calculate stats per entity type
@@ -183,9 +183,9 @@ function AdminImageManagement() {
       newStats.bucketList.missing = Math.max(0, requiredBucketList - newStats.bucketList.requiredUploaded);
       newStats.bucketList.optional = newStats.bucketList.optionalUploaded;
 
-      // Port Guides: count published ports × 1 required (hero)
+      // Port Guides: count published ports × 2 required (hero, card)
       const publishedPorts = ports.filter(p => p.status === 'published');
-      const requiredPortGuides = publishedPorts.length * 1; // hero per port
+      const requiredPortGuides = publishedPorts.length * 2; // hero + card per port
       newStats.portGuides.missing = Math.max(0, requiredPortGuides - newStats.portGuides.requiredUploaded);
       newStats.portGuides.optional = newStats.portGuides.optionalUploaded;
 
