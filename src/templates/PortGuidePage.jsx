@@ -7,6 +7,7 @@ import HeroSection from '../components/HeroSection';
 import OptimizedImage from '../components/OptimizedImage';
 import { Button, SectionHeader } from '../components/ui';
 import { getSupabaseImageUrl, SITE_ASSETS } from '../config/assetUrls';
+import { usePortGuideImage } from '../hooks/useImageUrl';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import './PortGuidePage.css';
 
@@ -22,6 +23,22 @@ function PortGuidePage() {
   const { slug } = useParams();
   const port = getPortBySlug(slug);
   const [weatherIndex, setWeatherIndex] = useState(0);
+
+  // Load images from database
+  const { imageUrl: heroImage, loading: heroLoading } = usePortGuideImage(slug, 'hero');
+  const { imageUrl: cardImage } = usePortGuideImage(slug, 'card');
+  const { imageUrl: beachImage } = usePortGuideImage(slug, 'beach');
+  const { imageUrl: foodImage } = usePortGuideImage(slug, 'food');
+  
+  // Load attraction images (up to 6)
+  const { imageUrl: attraction1Image } = usePortGuideImage(slug, 'attraction-1');
+  const { imageUrl: attraction2Image } = usePortGuideImage(slug, 'attraction-2');
+  const { imageUrl: attraction3Image } = usePortGuideImage(slug, 'attraction-3');
+  const { imageUrl: attraction4Image } = usePortGuideImage(slug, 'attraction-4');
+  const { imageUrl: attraction5Image } = usePortGuideImage(slug, 'attraction-5');
+  const { imageUrl: attraction6Image } = usePortGuideImage(slug, 'attraction-6');
+  
+  const attractionImages = [attraction1Image, attraction2Image, attraction3Image, attraction4Image, attraction5Image, attraction6Image];
 
   // Combine attractions - ONLY use mustSeeSights if available, otherwise thingsToDo
   // This prevents duplication
@@ -53,9 +70,7 @@ function PortGuidePage() {
     );
   }
 
-  // Construct image URLs
-  const heroImage = getSupabaseImageUrl('WEB_categories', `ports/${port.region}/${port.slug}/hero.webp`) || FALLBACK_HERO;
-  const beachImage = getSupabaseImageUrl('WEB_categories', `ports/${port.region}/${port.slug}/beach.webp`);
+  // Image URLs now loaded via usePortGuideImage hook above
 
   // Structured Data for SEO
   const structuredData = {
@@ -230,9 +245,8 @@ function PortGuidePage() {
               <h2>Things to See and Do</h2>
               <div className="attractions-grid">
                 {attractions.slice(0, 6).map((item, index) => {
-                  const itemImage = item.image 
-                    ? getSupabaseImageUrl('WEB_categories', `ports/${port.region}/${port.slug}/${item.image}`)
-                    : null;
+                  // Get pre-loaded attraction image
+                  const itemImage = attractionImages[index];
                   
                   return (
                     <div key={index} className="attraction-card">

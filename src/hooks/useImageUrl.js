@@ -122,3 +122,36 @@ export function useCruiseLineImage(slug, type = 'logo') {
   return { imageUrl, loading };
 }
 
+/**
+ * Hook to get port guide image URL
+ * Note: port-guide uses 'slug' as entityId in database (e.g., 'barcelona')
+ * Images are uploaded as: WEB_categories/{slug}/{imageType}.webp
+ */
+export function usePortGuideImage(slug, type = 'hero') {
+  const [imageUrl, setImageUrl] = useState(PLACEHOLDER_IMAGE);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!slug) {
+      setImageUrl(PLACEHOLDER_IMAGE);
+      setLoading(false);
+      return;
+    }
+
+    // Fallback to placeholder
+    setImageUrl(PLACEHOLDER_IMAGE);
+    
+    getImageUrlFromDb('port-guide', slug, type, PLACEHOLDER_IMAGE)
+      .then(url => {
+        setImageUrl(url);
+        setLoading(false);
+      })
+      .catch(() => {
+        setImageUrl(PLACEHOLDER_IMAGE);
+        setLoading(false);
+      });
+  }, [slug, type]);
+
+  return { imageUrl, loading };
+}
+
