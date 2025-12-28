@@ -245,7 +245,7 @@ function AppLayout() {
             <Route path="/cruise-guides" element={<CruiseGuidesPage />} />
             <Route path="/cruise-guides/:slug" element={<CruiseGuideDetailPage />} />
             
-            {/* Port Guides - Draft (Coming Soon) */}
+            {/* Port Guides - Published (20 ports live) */}
             <Route 
               path="/ports" 
               element={

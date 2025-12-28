@@ -50,94 +50,184 @@ export const ports = [
     name: 'Southampton',
     country: 'United Kingdom',
     region: 'uk',
-    coordinates: { lat: 50.9097, lon: -1.4044 },
-    tagline: 'The UK\'s premier cruise port',
-    description: 'Southampton is the busiest cruise port in the UK, serving as the home port for major cruise lines including P&O Cruises, Cunard, and Royal Caribbean. Located on England\'s south coast, it offers excellent transport links to London and beyond.',
+    coordinates: { lat: 50.90, lon: -1.40 },
+    tagline: 'UK\'s cruise capital with Titanic history and maritime heritage',
+    description: 'Southampton\'s deep-water port on the Solent welcomes large ships for Northern Europe, Mediterranean and world cruises, with terminals integrated into secure docks near the city centre. Passengers enjoy quick access to medieval walls, museums and rail links to London just 70 minutes away.',
     
+    // Detailed port information
+    aboutPort: {
+      overview: 'Southampton Cruise Port features five world-class terminals spread across Eastern and Western Docks, handling around three million passengers yearly with shore power and sustainable facilities. The newest Horizon Terminal (opened 2021) accommodates the largest ships with solar panels and dual berths.',
+      terminals: 'Terminals include City and Horizon (Western Docks, closest to station), Mayflower (Western), Ocean and QEII (Eastern Docks). Each offers check-in, lounges, Wi-Fi, shops and parking; no public shuttles needed as gates lead directly to taxis and paths.',
+      shuttle: 'No shuttle required; all terminals connect via dock roads or 10 to 20-minute strolls.',
+      walkability: 'Walk to city centre takes 10 to 25 minutes depending on terminal (e.g., City Terminal 15 minutes).',
+    },
+
     // Quick facts for the info bar
     quickFacts: {
       currency: 'GBP (£)',
       language: 'English',
       timezone: 'GMT/BST',
-      portType: 'Home Port & Turnaround',
+      portType: 'Both, Europe\'s leading turnaround port',
       walkable: true,
       tenderRequired: false,
     },
     
+    // Airport and train connections
+    transportConnections: {
+      airport: {
+        name: 'Southampton Airport (SOU); Heathrow (LHR) or Gatwick (LGW) for international',
+        distance: 'SOU 5 km (10 to 15 minutes); LHR 100 km (90 minutes)',
+        options: 'Taxi: 10 minutes from SOU; trains from Heathrow/Gatwick to Southampton Central then taxi. Train: Frequent from Central station (5-minute taxi from port). Bus: Airport shuttles to city centre.',
+      },
+      trains: {
+        mainStation: 'Southampton Central',
+        description: 'Southampton Central, 1.5 to 2 km from terminals. Frequent trains to London Waterloo (70 minutes), Portsmouth, Bournemouth and UK network.',
+        localHubs: 'Southampton Central links to national rail.',
+      },
+      cruiseLines: 'Home port for Cunard (Queen Mary liners), P&O Cruises, Princess, MSC, Celebrity and many others on summer Europe sailings.',
+    },
+
     // Getting around section
     gettingAround: {
-      fromPort: 'The cruise terminals are well-connected with taxi ranks, bus services, and a short walk to the city centre.',
-      publicTransport: 'Regular bus services connect the port to Southampton Central station. Trains run frequently to London Waterloo (1h 20m).',
-      taxis: 'Licensed taxis available at all terminals. Expect £5-10 to city centre.',
-      walkingDistance: 'City centre is approximately 15-20 minutes walk from Ocean Terminal.',
+      fromPort: 'Passengers exit terminals through secure gates to taxi ranks, coach bays and walking paths into town; all terminals connect via dock roads or 10 to 20-minute strolls. City and Horizon are nearest stations (15-minute walk).',
+      publicTransport: 'Public buses and trains serve Southampton Central station (2 km from most terminals); no metro but frequent services to London Waterloo (70 minutes). Hop-on hop-off buses operate from near terminals, covering maritime sites, parks and New Forest edges.',
+      taxis: 'Taxis queue at every terminal for short hops or airport runs.',
+      walkingDistance: 'Central attractions like SeaCity Museum and Tudor House are 15 to 30 minutes on foot.',
     },
     
     // Things to do - main content
     thingsToDo: [
       {
         title: 'SeaCity Museum',
-        description: 'Explore Southampton\'s maritime heritage including the Titanic story. The museum features interactive exhibits about the city\'s connection to the famous ship.',
+        description: 'Titanic interactive exhibits in the city where the ship departed, plus maritime history.',
         category: 'culture',
-        duration: '2 to 3 hours',
+        duration: '1.5 to 2 hours',
       },
       {
-        title: 'Old Town Walls',
-        description: 'Walk along the medieval walls that once protected the city. These are some of the best-preserved medieval walls in England.',
+        title: 'Medieval Town Walls',
+        description: '1.4 km intact circuit with Sea Gates, towers and Bargate; walkable from port.',
         category: 'history',
+        duration: '1 to 1.5 hours',
+      },
+      {
+        title: 'Tudor House and Garden',
+        description: 'Restored 15th-century home with gardens and period rooms.',
+        category: 'culture',
+        duration: '1 to 1.5 hours',
+      },
+      {
+        title: 'Southampton City Art Gallery',
+        description: 'Pre-Raphaelite collection in historic building near Westquay mall.',
+        category: 'culture',
         duration: '1 hour',
       },
       {
-        title: 'West Quay Shopping Centre',
-        description: 'Major shopping destination with over 100 stores, restaurants, and a cinema. Perfect for pre-cruise shopping.',
-        category: 'shopping',
-        duration: '2 to 4 hours',
+        title: 'New Forest National Park day trip',
+        description: 'Ancient woodland, ponies and villages 20 minutes by train/bus.',
+        category: 'nature',
+        duration: '4 to 5 hours',
+      },
+      {
+        title: 'Day trip to Winchester Cathedral',
+        description: 'Gothic masterpiece with Jane Austen links, 20 minutes by train.',
+        category: 'history',
+        duration: '3 to 4 hours',
       },
     ],
     
     // Shore excursions tips
     shoreExcursions: [
       {
-        title: 'Stonehenge & Salisbury',
-        description: 'Visit the iconic prehistoric monument and the beautiful cathedral city of Salisbury.',
-        duration: 'Full day',
-        bookWith: 'Cruise line or independent',
+        title: 'New Forest National Park',
+        description: 'Ancient woodland, ponies and villages 20 minutes by train/bus.',
+        duration: 'Half day',
+        bookWith: 'Independent recommended',
       },
       {
         title: 'Winchester Cathedral',
-        description: 'Explore England\'s ancient capital and its magnificent cathedral.',
+        description: 'Gothic masterpiece with Jane Austen links, 20 minutes by train.',
         duration: 'Half day',
         bookWith: 'Independent recommended',
       },
     ],
     
+    // Beaches section
+    nearestBeach: {
+      name: 'Town Quay or Southampton Common lake beach area',
+      description: 'Urban waterfront or park lake for dips; proper beaches at nearby Calshot or Hill Head (20 minutes drive).',
+      howToGetThere: '10-minute walk to Town Quay from most terminals.',
+    },
+
     // Practical information
     practicalInfo: {
-      bestTimeToVisit: 'May to September for warmest weather',
-      cruiseTerminals: ['Ocean Terminal', 'City Cruise Terminal', 'Mayflower Cruise Terminal', 'Queen Elizabeth II Terminal'],
-      parking: 'Long-term parking available at ABP Southampton. Book in advance for best rates.',
-      nearbyAirport: 'Southampton Airport (15 mins), London Heathrow (1h 15m), London Gatwick (1h 30m)',
-      visaInfo: 'UK visa requirements apply for non-UK/EU citizens',
+      bestTimeToVisit: 'Late spring to early autumn for comfortable embarkation',
+      cruiseTerminals: ['City', 'Horizon', 'Mayflower', 'Ocean', 'QEII'],
+      parking: 'Long-term parking available at all terminals. Book in advance for best rates.',
+      nearbyAirport: 'Southampton Airport (SOU), 5 km',
+      visaInfo: 'UK; no visa for most visitors up to 6 months',
     },
     
     // Food & drink recommendations
     foodAndDrink: [
       {
-        name: 'The Pig in the Wall',
-        type: 'Restaurant',
-        description: 'Boutique hotel restaurant with excellent British cuisine.',
+        name: 'Oxford Street pubs',
+        type: 'Pub area',
+        description: 'Traditional fish and chips near historic centre.',
       },
       {
-        name: 'Oxford Street',
-        type: 'Area',
-        description: 'Pedestrianised street with numerous cafes, pubs and restaurants.',
+        name: 'Westquay mall food court',
+        type: 'Food Hall',
+        description: 'Diverse quick eats post-shopping.',
+      },
+      {
+        name: 'Above Bar Street cafés',
+        type: 'Café strip',
+        description: 'Coffee and pastries near Bargate.',
+      },
+      {
+        name: 'Docks seafood spots',
+        type: 'Restaurant',
+        description: 'Maritime-themed near Ocean Terminal.',
       },
     ],
     
     // Tips from experienced cruisers
     insiderTips: [
-      'Arrive the day before for stress-free embarkation',
-      'The Mayflower Park offers great views of ships departing',
-      'Book airport transfers in advance, especially during peak season',
+      'Pre-book SeaCity or New Forest tours for groups',
+      'Very safe port city; normal vigilance',
+      'Terminals efficient; arrive 2 to 3 hours early for home-porting',
+      'Walk to centre; taxis for stations or Forest',
+      'Don\'t overlook Titanic connections on short calls',
+      'Layer for changeable UK coastal climate',
+    ],
+
+    // Weather information
+    weather: {
+      jan: { high: 8, low: 3, rain: 70, sunnyDays: 10, seaTemp: 8 },
+      feb: { high: 8, low: 3, rain: 60, sunnyDays: 11, seaTemp: 8 },
+      mar: { high: 10, low: 4, rain: 50, sunnyDays: 14, seaTemp: 8 },
+      apr: { high: 13, low: 6, rain: 45, sunnyDays: 16, seaTemp: 10 },
+      may: { high: 16, low: 9, rain: 40, sunnyDays: 19, seaTemp: 12 },
+      jun: { high: 19, low: 12, rain: 40, sunnyDays: 21, seaTemp: 15 },
+      jul: { high: 21, low: 14, rain: 40, sunnyDays: 23, seaTemp: 17 },
+      aug: { high: 22, low: 14, rain: 45, sunnyDays: 22, seaTemp: 18 },
+      sep: { high: 19, low: 12, rain: 50, sunnyDays: 19, seaTemp: 17 },
+      oct: { high: 15, low: 9, rain: 70, sunnyDays: 16, seaTemp: 15 },
+      nov: { high: 11, low: 6, rain: 80, sunnyDays: 12, seaTemp: 12 },
+      dec: { high: 9, low: 4, rain: 80, sunnyDays: 10, seaTemp: 10 },
+      bestMonths: 'May to September for milder weather and longer days',
+      peakSeason: 'Summer lively but busier terminals',
+      quieterMonths: 'Spring/autumn pleasant with fewer ships',
+      recommendation: 'June to August for optimal embarkation weather',
+    },
+
+    // FAQ section
+    faq: [
+      { question: 'Is the port walkable?', answer: 'Yes to city centre from all terminals.' },
+      { question: 'How long do you need?', answer: 'Half-day for Southampton sights; full day adds trips.' },
+      { question: 'Is English spoken?', answer: 'Yes universally.' },
+      { question: 'What\'s the best way to get around?', answer: 'Walking or taxis; trains for London.' },
+      { question: 'Can you do London on a cruise day?', answer: 'Yes, 70-minute train from Central station.' },
     ],
     
     // Related destinations (for internal linking)
@@ -145,14 +235,14 @@ export const ports = [
     
     // SEO metadata
     meta: {
-      title: 'Southampton Cruise Port Guide | Things to Do & Practical Info',
-      description: 'Complete guide to Southampton cruise port. Discover things to do, shore excursions, restaurants, and practical tips for your cruise from the UK\'s busiest port.',
-      keywords: ['Southampton cruise port', 'Southampton cruise terminal', 'things to do Southampton', 'Southampton shore excursions'],
+      title: 'Southampton Cruise Port Guide | UK\'s Cruise Capital',
+      description: 'Complete guide to Southampton cruise port. Discover Europe\'s leading turnaround port with five modern terminals, Titanic heritage, medieval walls, and rail links to London in 70 minutes.',
+      keywords: ['Southampton cruise port', 'Southampton cruise terminal', 'things to do Southampton', 'Southampton shore excursions', 'UK cruise port', 'Cunard Southampton'],
     },
     
     // Content status
-    status: 'template', // template | draft | review | published
-    lastUpdated: '2025-01-01',
+    status: 'published', // template | draft | review | published
+    lastUpdated: '2025-12-28',
   },
   
   {
@@ -161,80 +251,224 @@ export const ports = [
     name: 'Dover',
     country: 'United Kingdom',
     region: 'uk',
-    coordinates: { lat: 51.1279, lon: 1.3134 },
-    tagline: 'Gateway to Europe with iconic white cliffs',
-    description: 'Dover is famous for its white cliffs and historic castle. As a cruise port, it offers easy access to London and Kent\'s beautiful countryside.',
+    coordinates: { lat: 51.12, lon: 1.32 },
+    tagline: 'White Cliffs gateway to Europe and history',
+    description: 'Dover Cruise Port lies within the busy Western Docks, featuring historic and modern terminals that handle up to three ships simultaneously during peak season. Passengers enjoy quick walks into town for shops, castles and cliffs, with efficient facilities blending maritime heritage and contemporary services.',
+    
+    aboutPort: {
+      overview: 'Dover Cruise Port at Western Docks includes two main terminals plus a multipurpose berth (WD4), accommodating seasonal traffic with historic architecture and modern upgrades. Cruise Terminal 1 (former 1914 railway station) offers renovated lounges; Terminal 2 (built 2000) provides panoramic cliff and castle views from its upper level.',
+      terminals: 'Facilities across terminals feature fast check-ins, comfortable lounges, cafés, free Wi-Fi, disabled access, lifts, valet parking and secure berths with baggage handling. No routine shuttles needed as terminals connect directly to paths and taxi ranks; town centre is a short flat walk.',
+      shuttle: 'No dedicated shuttles required as terminals are walkable to town.',
+      walkability: 'Yes, 10 to 20 minutes from terminals to Dover town centre.',
+    },
     
     quickFacts: {
-      currency: 'GBP (£)',
+      currency: 'British Pound (GBP, £)',
       language: 'English',
-      timezone: 'GMT/BST',
-      portType: 'Turnaround & Port of Call',
+      timezone: 'Greenwich Mean Time (GMT), British Summer Time (BST) in summer',
+      portType: 'Both, peaking April to October',
       walkable: true,
       tenderRequired: false,
     },
     
-    gettingAround: {
-      fromPort: 'The cruise terminal is close to Dover Priory station with regular trains to London.',
-      publicTransport: 'Trains to London St Pancras take approximately 1 hour.',
-      taxis: 'Available at the terminal.',
-      walkingDistance: 'Town centre is a 10-minute walk.',
+    transportConnections: {
+      airport: {
+        name: 'London Gatwick (LGW) or Heathrow (LHR); Manston (MSE) closest small field',
+        distance: 'LGW 130 km (90 to 120 minutes); LHR 140 km (2 hours)',
+        options: 'Taxi: 90 to 120 minutes from Gatwick/LHR. Train: Dover Priory to London stations, then Gatwick Express or Heathrow Express (total 2 to 3 hours). Coach: National Express from Dover to airports.',
+      },
+      trains: {
+        mainStation: 'Dover Priory, 1.5 km from terminals (10-minute taxi or bus)',
+        description: 'Frequent Southeastern services to London St Pancras/Victoria (90 minutes), Canterbury and Kent network.',
+        localHubs: 'London St Pancras International for Eurostar connections.',
+      },
+      cruiseLines: 'Popular home port for P&O Cruises, Princess, Fred. Olsen and Ambassador on summer Europe sailings.',
     },
+    
+    gettingAround: {
+      fromPort: 'Passengers exit terminals to immediate taxi ranks, bus stops and pedestrian routes into Dover town, with all facilities designed for easy flow. The compact port-town layout supports walking to most local sights.',
+      publicTransport: 'Public buses link terminals to Dover Priory station (10-minute ride) for trains to London; no metro or trams. No dedicated hop-on hop-off from port, but local tours and National Express coaches operate nearby for regional day trips.',
+      taxis: 'Taxis are plentiful for short trips to cliffs or station, with metered fares.',
+      walkingDistance: 'Key attractions like the cliffs and castle are 20 to 40 minutes on foot or quick taxi; London requires full transit planning.',
+      sightseeingBus: 'No dedicated hop-on hop-off from port, but local tours and National Express coaches operate nearby for regional day trips.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Dover Castle',
+        description: 'Massive clifftop fortress with WWII tunnels, medieval great tower and panoramic channel views.',
+        image: '',
+      },
+      {
+        title: 'White Cliffs of Dover',
+        description: 'Iconic chalk cliffs with walking trails, lighthouse and nature reserve above the port.',
+        image: '',
+      },
+      {
+        title: 'Dover Museum',
+        description: 'Bronze Age boat exhibit plus Roman and maritime history in town centre.',
+        image: '',
+      },
+      {
+        title: 'South Foreland Lighthouse',
+        description: 'Highest cliffs viewpoint with Victorian optics and WWII radar history.',
+        image: '',
+      },
+      {
+        title: 'St Margaret\'s Bay',
+        description: 'Charming hidden cove beach with pub and cliff walks below the lighthouse.',
+        image: '',
+      },
+      {
+        title: 'Canterbury Cathedral day trip',
+        description: 'UNESCO Gothic masterpiece, 30 minutes by train for history lovers.',
+        image: '',
+      },
+    ],
     
     thingsToDo: [
       {
         title: 'Dover Castle',
-        description: 'Explore the largest castle in England with over 2,000 years of history, including secret wartime tunnels.',
+        description: 'Massive clifftop fortress with WWII tunnels, medieval great tower and panoramic channel views.',
         category: 'history',
-        duration: '3 to 4 hours',
+        duration: '2 to 3 hours',
       },
       {
         title: 'White Cliffs of Dover',
-        description: 'Walk along the iconic chalk cliffs with stunning views across the English Channel to France.',
+        description: 'Iconic chalk cliffs with walking trails, lighthouse and nature reserve above the port.',
         category: 'nature',
-        duration: '2 to 3 hours',
+        duration: '1.5 to 2 hours',
+      },
+      {
+        title: 'Dover Museum',
+        description: 'Bronze Age boat exhibit plus Roman and maritime history in town centre.',
+        category: 'culture',
+        duration: '1 to 1.5 hours',
+      },
+      {
+        title: 'South Foreland Lighthouse',
+        description: 'Highest cliffs viewpoint with Victorian optics and WWII radar history.',
+        category: 'history',
+        duration: '1 to 1.5 hours',
+      },
+      {
+        title: 'St Margaret\'s Bay',
+        description: 'Charming hidden cove beach with pub and cliff walks below the lighthouse.',
+        category: 'beach',
+        duration: '2 hours',
+      },
+      {
+        title: 'Canterbury Cathedral day trip',
+        description: 'UNESCO Gothic masterpiece, 30 minutes by train for history lovers.',
+        category: 'culture',
+        duration: '4 hours plus travel',
       },
     ],
     
-    shoreExcursions: [
+    beaches: [
       {
-        title: 'Canterbury Cathedral',
-        description: 'Visit the famous cathedral, seat of the Archbishop of Canterbury.',
-        duration: 'Half day',
-        bookWith: 'Independent recommended',
+        name: 'Dover Seafront or St Margaret\'s Bay',
+        description: 'Pebble beaches with promenades for walks; St Margaret\'s offers calmer waters and cliffs.',
+        distance: '10 to 15-minute walk along seafront from terminals; bus/taxi to bay (10 minutes)',
+      },
+    ],
+    
+    foodAndDrink: [
+      {
+        name: 'Town centre pubs near Market Square',
+        type: 'Pub area',
+        description: 'Fish and chips, ales in historic surroundings.',
+        location: 'Dover town centre',
       },
       {
-        title: 'Leeds Castle',
-        description: 'Explore one of the most beautiful castles in England.',
-        duration: 'Half day',
-        bookWith: 'Cruise line or independent',
+        name: 'Terminal cafés',
+        type: 'Café',
+        description: 'Quick bites with cliff views pre-boarding.',
+        location: 'Cruise terminals',
+      },
+      {
+        name: 'Seafront restaurants',
+        type: 'Seafood',
+        description: 'Fresh catch overlooking the harbour.',
+        location: 'Dover seafront',
+      },
+      {
+        name: 'Dover Museum café',
+        type: 'Café',
+        description: 'Light lunches amid exhibits.',
+        location: 'Dover Museum',
+      },
+    ],
+    
+    insiderTips: [
+      'Pre-book castle combo tickets; parking via port site.',
+      'Safe port town; normal caution advised.',
+      'Peak April to October; arrive 2 to 3 hours early for turnaround.',
+      'Walk town and cliffs; taxis for station or bay.',
+      'Don\'t underestimate London train times on short calls.',
+      'Layer for windy coastal conditions year-round.',
+    ],
+    
+    weather: {
+      jan: { high: 8, low: 4, rain: 70, sunnyDays: 10, seaTemp: 8 },
+      feb: { high: 8, low: 4, rain: 60, sunnyDays: 11, seaTemp: 8 },
+      mar: { high: 10, low: 5, rain: 50, sunnyDays: 14, seaTemp: 8 },
+      apr: { high: 12, low: 6, rain: 45, sunnyDays: 16, seaTemp: 9 },
+      may: { high: 15, low: 9, rain: 45, sunnyDays: 19, seaTemp: 11 },
+      jun: { high: 18, low: 11, rain: 45, sunnyDays: 21, seaTemp: 14 },
+      jul: { high: 20, low: 13, rain: 45, sunnyDays: 23, seaTemp: 16 },
+      aug: { high: 21, low: 14, rain: 50, sunnyDays: 22, seaTemp: 17 },
+      sep: { high: 18, low: 12, rain: 55, sunnyDays: 19, seaTemp: 16 },
+      oct: { high: 14, low: 9, rain: 70, sunnyDays: 16, seaTemp: 14 },
+      nov: { high: 11, low: 7, rain: 80, sunnyDays: 12, seaTemp: 12 },
+      dec: { high: 9, low: 5, rain: 80, sunnyDays: 10, seaTemp: 10 },
+      bestMonths: 'May to September for milder weather and peak sailings',
+      peakSeason: 'Summer lively but busier terminals',
+      quieterMonths: 'Spring and autumn pleasant with fewer crowds',
+      recommendation: 'June to August for optimal cliff views',
+    },
+    
+    faq: [
+      {
+        question: 'Is the port walkable?',
+        answer: 'Yes to Dover town and cliffs.',
+      },
+      {
+        question: 'How long do you need?',
+        answer: 'Half-day for castle and cliffs; full day adds Canterbury.',
+      },
+      {
+        question: 'Is English spoken?',
+        answer: 'Yes everywhere.',
+      },
+      {
+        question: 'What\'s the best way to get around?',
+        answer: 'Walking town; trains for London and Canterbury.',
+      },
+      {
+        question: 'Can you do London on a cruise day?',
+        answer: 'Yes, 90-minute train fits longer calls.',
       },
     ],
     
     practicalInfo: {
-      bestTimeToVisit: 'May to September',
-      cruiseTerminals: ['Dover Cruise Terminal'],
-      parking: 'Cruise parking available, book in advance',
-      nearbyAirport: 'London Gatwick (1h 30m), London Heathrow (2h)',
-      visaInfo: 'UK visa requirements apply',
+      bestTimeToVisit: 'Late spring to early autumn for comfortable coastal exploration',
+      cruiseTerminals: ['Cruise Terminal 1', 'Cruise Terminal 2', 'WD4 (Port of Call berth)'],
+      parking: 'Available, book in advance',
+      nearbyAirport: 'London Gatwick (LGW), 130 km',
+      visaInfo: 'UK; visa-free for most up to 6 months',
     },
-    
-    foodAndDrink: [],
-    insiderTips: [
-      'The castle is a steep walk from town - consider a taxi',
-      'Book White Cliffs walks for the morning when lighting is best',
-    ],
     
     relatedDestinations: ['british-isles-cruises', 'northern-europe-cruises'],
     
     meta: {
-      title: 'Dover Cruise Port Guide | White Cliffs & Castle',
-      description: 'Complete guide to Dover cruise port. Visit Dover Castle, walk the White Cliffs, and discover practical tips for your UK cruise.',
-      keywords: ['Dover cruise port', 'Dover white cliffs', 'Dover castle', 'Dover shore excursions'],
+      title: 'Dover Cruise Port Guide | White Cliffs & Castle Visits',
+      description: 'Complete Dover cruise port guide with White Cliffs walks, Dover Castle, London day trips, and practical tips for UK home port departures.',
+      keywords: ['Dover cruise port', 'Dover white cliffs', 'Dover castle', 'London from Dover', 'UK cruise port'],
     },
     
-    status: 'template',
-    lastUpdated: '2025-01-01',
+    status: 'published',
+    lastUpdated: '2024-12-28',
   },
 
   // ============================================================================
@@ -1411,6 +1645,240 @@ export const ports = [
     lastUpdated: '2024-12-28',
   },
 
+  {
+    id: 'marseille',
+    slug: 'marseille',
+    name: 'Marseille',
+    country: 'France',
+    region: 'mediterranean',
+    coordinates: { lat: 43.30, lon: 5.35 },
+    tagline: 'Provençal gateway to calanques and bouillabaisse',
+    description: 'Marseille sprawls around its historic Vieux Port with cruise facilities split between the industrial MPCT for large ships and J4 for smaller ones closer to town. The port welcomed over 2.4 million passengers in 2024, offering shore power readiness by 2026 and quick links to Aix-en-Provence and the Calanques National Park.',
+    
+    aboutPort: {
+      overview: 'Marseille\'s cruise infrastructure includes the MPCT at Mole Leon Gourret (Terminals A to F via Gate 4) for large vessels and J4 at Joliette for smaller or luxury ships near the city centre. MPCT features modern lounges, Wi-Fi, shops and parking; J4 offers direct access to Vieux Port and MuCEM museum.',
+      terminals: 'MPCT (Terminals A to F at Gate 4) for large vessels; J4 Joliette for smaller or luxury ships near city centre.',
+      shuttle: 'Free shuttles run every 20 minutes from MPCT to Joliette on cruise days, dropping near the old port (9 to 10 km, 20 to 30 minutes). Walking from MPCT is impractical (over an hour); J4 places passengers amid historic sites immediately.',
+      walkability: 'MPCT no (shuttle needed); J4 yes to Vieux Port (5 to 10 minutes).',
+    },
+
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'French primary; English common in port and tourist areas',
+      timezone: 'Central European Time (CET), Central European Summer Time (CEST) in summer',
+      portType: 'Both, France\'s leading cruise hub',
+      walkable: false, // MPCT requires shuttle; J4 is walkable
+      tenderRequired: false,
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Marseille Provence Airport (MRS)',
+        distance: '25 km north-west (25 to 40 minutes)',
+        options: 'Taxi: 25 to 40 minutes direct. Bus: Line 91 or 50 to city centre then shuttle (50 to 60 minutes).',
+      },
+      trains: {
+        mainStation: 'Marseille St-Charles (3 km from MPCT, taxi 10 minutes)',
+        description: 'TGV to Paris, Aix-en-Provence, Nice and Italy',
+        localHubs: 'St-Charles for regional TER services',
+      },
+      cruiseLines: 'Major Mediterranean hub for MSC, Costa, Royal Caribbean, Norwegian and premium lines',
+    },
+
+    gettingAround: {
+      fromPort: 'From MPCT, take the free shuttle to Joliette or Vieux Port, then explore on foot, metro (Line 1 to Prado beaches) or buses. J4 exits directly into the maritime district.',
+      publicTransport: 'Metro, trams and buses connect to Aix (30 minutes), Calanques and airport; taxis plentiful at terminals. Vieux Port and basilica are 5 to 10 minutes from J4 or shuttle drop; beaches 20 to 30 minutes by public transport.',
+      taxis: 'Plentiful at terminals; standard metered fares.',
+      walkingDistance: 'J4 to Vieux Port 5 to 10 minutes; MPCT requires shuttle.',
+      sightseeingBus: 'Hop-on hop-off buses depart from near Vieux Port, covering basilica, forts and MuCEM.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Basilique Notre-Dame de la Garde',
+        description: 'Hilltop basilica with golden Madonna overlooking the city and sea.',
+        image: 'basilique-notre-dame.webp',
+        duration: '1.5 to 2 hours',
+      },
+      {
+        title: 'Vieux Port and MuCEM',
+        description: 'Historic fishing harbour with modern European-Mediterranean museum.',
+        image: 'vieux-port-mucem.webp',
+        duration: '2 hours',
+      },
+      {
+        title: 'Le Panier neighbourhood',
+        description: 'Colourful old quarter with street art, cafés and sea views.',
+        image: 'le-panier.webp',
+        duration: '1.5 hours',
+      },
+      {
+        title: 'Calanques National Park',
+        description: 'Limestone cliffs and turquoise inlets by boat or hike (30 minutes).',
+        image: 'calanques-national-park.webp',
+        duration: '3 to 4 hours',
+      },
+      {
+        title: 'Cathédrale de la Major',
+        description: 'Byzantine-Romanesque cathedral near J4 terminal.',
+        image: 'cathedrale-major.webp',
+        duration: '1 hour',
+      },
+      {
+        title: 'Aix-en-Provence day trip',
+        description: 'Elegant town with Cézanne sites, markets (30 minutes by train).',
+        image: 'aix-en-provence.webp',
+        duration: '4 hours',
+      },
+    ],
+
+    thingsToDo: [
+      {
+        title: 'Basilique Notre-Dame de la Garde',
+        description: 'Hilltop basilica with golden Madonna overlooking the city and sea.',
+        category: 'culture',
+        duration: '1.5 to 2 hours',
+      },
+      {
+        title: 'Vieux Port and MuCEM',
+        description: 'Historic fishing harbour with modern European-Mediterranean museum.',
+        category: 'culture',
+        duration: '2 hours',
+      },
+      {
+        title: 'Le Panier neighbourhood',
+        description: 'Colourful old quarter with street art, cafés and sea views.',
+        category: 'exploration',
+        duration: '1.5 hours',
+      },
+      {
+        title: 'Calanques National Park',
+        description: 'Limestone cliffs and turquoise inlets by boat or hike.',
+        category: 'nature',
+        duration: '3 to 4 hours',
+      },
+    ],
+    
+    shoreExcursions: [
+      {
+        title: 'Aix-en-Provence',
+        description: 'Visit the elegant town with Cézanne sites and Provençal markets.',
+        duration: 'Half day',
+        bookWith: 'Cruise line or independent (easy train access)',
+      },
+      {
+        title: 'Calanques boat tour',
+        description: 'Explore the stunning limestone cliffs and turquoise inlets by boat.',
+        duration: 'Half day',
+        bookWith: 'Independent or cruise line (book early)',
+      },
+    ],
+    
+    nearestBeach: {
+      name: 'Plage des Catalans or Prado beaches',
+      description: 'Urban sandy strands with promenades, ideal for swimming near city.',
+      gettingThere: 'Metro Line 1 from Joliette (15 to 20 minutes) or taxi.',
+      image: 'plage-catalans.webp',
+    },
+    
+    foodAndDrink: [
+      {
+        name: 'Vieux Port seafood',
+        type: 'Restaurant area',
+        description: 'Bouillabaisse and fresh catch quayside',
+      },
+      {
+        name: 'Le Panier cafés',
+        type: 'Café or Tapas',
+        description: 'Provençal pastis, socca pancakes in alleys',
+      },
+      {
+        name: 'Noailles market',
+        type: 'Market',
+        description: 'North African spices, olives, street eats',
+      },
+      {
+        name: 'Joliette bistros',
+        type: 'Bistro',
+        description: 'Niçoise influences near small-ship terminal',
+      },
+    ],
+    
+    insiderTips: [
+      'Booking tickets in advance: Calanques boat tours; basilica free but early for views',
+      'Safety and pickpockets: Watch bags in markets; port areas secure',
+      'Timing and queues: Shuttle crowds midday; Vieux Port peaks lunch',
+      'Transport advice: Use shuttle from MPCT; validate tickets on buses or metro',
+      'Things to avoid: Walking MPCT to town (too far or hot); unregulated taxis',
+      'Dress: Comfortable shoes for cobblestones; sun protection year-round',
+    ],
+    
+    faq: [
+      {
+        question: 'Is the port walkable?',
+        answer: 'MPCT no (shuttle); J4 yes to Vieux Port.',
+      },
+      {
+        question: 'How long do you need?',
+        answer: 'Half-day old port or basilica; full day Calanques.',
+      },
+      {
+        question: 'Is English spoken?',
+        answer: 'Port or tourist areas yes.',
+      },
+      {
+        question: 'What\'s the best way to get around?',
+        answer: 'Shuttle plus metro or bus.',
+      },
+      {
+        question: 'Can you do Aix on a cruise day?',
+        answer: 'Yes, 30-minute train fits.',
+      },
+    ],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'Late spring or early autumn for comfortable exploration',
+      cruiseTerminals: ['MPCT (A to F, Gate 4)', 'J4 Joliette'],
+      nearbyAirport: 'Marseille Provence (MRS), 25 km',
+      visaInfo: 'Schengen (France); visa-free short stays for many—check rules',
+    },
+
+    weather: {
+      intro: 'Marseille has a Mediterranean climate with hot, dry summers and mild winters. Spring and autumn offer the best balance of weather and comfortable sightseeing.',
+      months: [
+        { month: 'Jan', highC: 12, lowC: 5, rainMm: 70, sunDays: 15, seaTempC: 13 },
+        { month: 'Feb', highC: 13, lowC: 5, rainMm: 60, sunDays: 16, seaTempC: 13 },
+        { month: 'Mar', highC: 15, lowC: 7, rainMm: 50, sunDays: 18, seaTempC: 14 },
+        { month: 'Apr', highC: 17, lowC: 9, rainMm: 50, sunDays: 20, seaTempC: 15 },
+        { month: 'May', highC: 20, lowC: 12, rainMm: 40, sunDays: 23, seaTempC: 17 },
+        { month: 'Jun', highC: 24, lowC: 16, rainMm: 30, sunDays: 26, seaTempC: 20 },
+        { month: 'Jul', highC: 27, lowC: 19, rainMm: 15, sunDays: 29, seaTempC: 22 },
+        { month: 'Aug', highC: 28, lowC: 19, rainMm: 25, sunDays: 28, seaTempC: 23 },
+        { month: 'Sep', highC: 25, lowC: 17, rainMm: 50, sunDays: 25, seaTempC: 22 },
+        { month: 'Oct', highC: 21, lowC: 13, rainMm: 80, sunDays: 21, seaTempC: 20 },
+        { month: 'Nov', highC: 16, lowC: 9, rainMm: 90, sunDays: 16, seaTempC: 17 },
+        { month: 'Dec', highC: 13, lowC: 6, rainMm: 70, sunDays: 15, seaTempC: 14 },
+      ],
+      bestTime: {
+        overall: 'May to June and September for warmth without peak heat',
+        hottest: 'July to August sunny but crowded beaches',
+        quietest: 'Spring or autumn mild, fewer tourists',
+        recommendation: 'Late spring for basilica views and calanques boats',
+      },
+    },
+    
+    relatedDestinations: ['mediterranean-cruises', 'french-cruises'],
+    
+    meta: {
+      title: 'Marseille Cruise Port Guide | Vieux Port, Calanques & Provence',
+      description: 'Complete Marseille cruise port guide. Explore Vieux Port, visit Notre-Dame de la Garde, discover Calanques National Park, and enjoy bouillabaisse in France\'s leading cruise hub.',
+      keywords: ['Marseille cruise port', 'Marseille France', 'Vieux Port', 'Calanques cruise', 'Marseille shore excursions', 'MPCT terminal'],
+    },
+    
+    status: 'published',
+    lastUpdated: '2024-12-28',
+  },
+
   // ============================================================================
   // ATLANTIC COAST - NEW PORTS
   // ============================================================================
@@ -1647,6 +2115,241 @@ export const ports = [
     
     status: 'published',
     lastUpdated: '2025-12-28',
+  },
+
+  {
+    id: 'porto',
+    slug: 'porto',
+    name: 'Porto',
+    country: 'Portugal',
+    region: 'atlantic-coast',
+    coordinates: { lat: 41.18, lon: -8.70 },
+    tagline: 'Port wine and Douro River from the Atlantic quay',
+    description: 'The Porto Leixões Cruise Terminal, opened in 2015, features a striking architect-designed building on a 340m quay capable of handling ships up to 320m long, serving as both home port and transit hub. Passengers enjoy efficient facilities blending maritime function with regional research centre, just minutes from Porto\'s UNESCO centre by public transport.',
+    
+    aboutPort: {
+      overview: 'The award-winning Porto Cruise Terminal at Leixões South Pier includes spacious lounges for 2,500 turnaround passengers, ISPS security, ship services and bus and taxi parking, with no transit capacity limits. Designed by Luís Pedro Silva, it integrates urban access and won Seatrade\'s Best Port in 2015.',
+      terminals: 'Porto (Leixões), Portugal is the North\'s primary cruise gateway on the Atlantic coast, with the modern Porto Cruise Terminal located about 7 km north of the historic city centre in Matosinhos, offering shuttles and metro links for easy access to port wine cellars and Ribeira district.',
+      shuttle: 'Shuttle buses run from terminal to Porto centre (drop near Ribeira or Trindade metro); metro Line A connects in 30 minutes (€2 to 3). The 7 km distance makes walking impractical, but port gates lead directly to transport.',
+      walkability: 'No, requires shuttle or metro (15 to 30 minutes to Porto Ribeira). The port is 7 km from the city centre.',
+    },
+
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Portuguese primary; English widely available in port and city tourist areas',
+      timezone: 'Western European Time (WET), Western European Summer Time (WEST) in summer',
+      portType: 'Both, growing Northern Europe hub',
+      walkable: false,
+      tenderRequired: false,
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Porto Airport (OPO)',
+        distance: '15 km (20 to 30 minutes)',
+        options: 'Taxi: 20 to 30 minutes direct. Metro: Line E from airport to Senhora da Hora, change to A for port (40 minutes).',
+      },
+      trains: {
+        mainStation: 'Porto Campanhã or São Bento (city centre, 30 minutes from port)',
+        description: 'High-speed Alfa Pendular to Lisbon; regional Douro Valley.',
+        localHubs: 'São Bento for scenic routes.',
+      },
+      cruiseLines: ['P&O Cruises', 'Princess Cruises', 'Fred. Olsen Cruise Lines'],
+    },
+    
+    gettingAround: {
+      fromPort: 'Shuttle or 15-minute walk to Senha or Mercado metro stop (Line A to Trindade), then city exploration; taxis (€15 to 20) available at terminal. Metro and buses cover Ribeira, port cellars and Douro cruises efficiently.',
+      publicTransport: 'Metro Line A + walking. No trams in port area, but Porto\'s historic tram 1 runs riverside; funiculars access upper levels. City centre 30 minutes total; beaches and wine tours require buses or taxis.',
+      taxis: 'Taxis available at terminal, €15 to 20 to city centre.',
+      walkingDistance: 'Port is not walkable to city; transport essential.',
+      sightseeingBus: 'Hop-on hop-off tours depart near Ribeira shuttle drop.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Ribeira District and Douro riverfront',
+        description: 'UNESCO waterfront with azulejo cafés, port wine bars and bridge views.',
+        image: 'ribeira-district.webp',
+        duration: '2 to 3 hours',
+      },
+      {
+        title: 'Port wine cellars (Vila Nova de Gaia)',
+        description: 'Cave tastings across iconic Dom Luís I bridge.',
+        image: 'port-wine-cellars.webp',
+        duration: '1.5 to 2 hours',
+      },
+      {
+        title: 'Livraria Lello bookstore',
+        description: 'Staircase-inspired Harry Potter landmark.',
+        image: 'livraria-lello.webp',
+        duration: '45 minutes to 1 hour',
+      },
+      {
+        title: 'Clérigos Tower and Church',
+        description: 'Baroque tower with 360° city panoramas.',
+        image: 'clerigos-tower.webp',
+        duration: '1 hour',
+      },
+      {
+        title: 'São Bento station',
+        description: 'Azulejo-tiled masterpiece with historic scenes.',
+        image: 'sao-bento-station.webp',
+        duration: '30 minutes',
+      },
+      {
+        title: 'Douro Valley day trip',
+        description: 'Vineyards and river by train or boat (full day).',
+        image: 'douro-valley.webp',
+        duration: '6 to 8 hours',
+      },
+    ],
+
+    thingsToDo: [
+      {
+        title: 'Port wine cellar tours',
+        description: 'Visit the iconic port wine cellars in Vila Nova de Gaia for tastings and tours.',
+        category: 'experience',
+        duration: '1.5 to 2 hours',
+      },
+      {
+        title: 'Ribeira waterfront exploration',
+        description: 'Wander the UNESCO-listed riverside district with colourful buildings and azulejo tiles.',
+        category: 'exploration',
+        duration: '2 to 3 hours',
+      },
+      {
+        title: 'Livraria Lello',
+        description: 'Step into one of the world\'s most beautiful bookstores, said to inspire Harry Potter.',
+        category: 'culture',
+        duration: '45 minutes to 1 hour',
+      },
+      {
+        title: 'Douro Valley excursion',
+        description: 'Full-day trip to the wine region by train or boat through stunning terraced vineyards.',
+        category: 'excursion',
+        duration: '6 to 8 hours',
+      },
+    ],
+
+    nearestBeach: {
+      name: 'Matosinhos Beach',
+      description: 'Wide Atlantic strand with seafood restaurants and surf, port-adjacent.',
+      gettingThere: '15-minute walk or 5-minute taxi from terminal.',
+      image: 'beach.webp',
+    },
+    
+    shoreExcursions: [
+      {
+        title: 'Douro Valley wine tour',
+        description: 'Full-day excursion to UNESCO-listed wine region with vineyard visits and river cruise.',
+        duration: 'Full day',
+        bookWith: 'Cruise line recommended (timing essential)',
+      },
+      {
+        title: 'Porto city walking tour',
+        description: 'Explore Ribeira, São Bento station, Clérigos Tower and Livraria Lello on foot.',
+        duration: 'Half day',
+        bookWith: 'Independent (easy by metro)',
+      },
+    ],
+    
+    foodAndDrink: [
+      {
+        name: 'Ribeira seafood restaurants',
+        type: 'Restaurant strip',
+        description: 'Grilled sardines, vinho verde overlooking river.',
+      },
+      {
+        name: 'Matosinhos fish markets',
+        type: 'Market and Seafood',
+        description: 'Fresh catch near beach, port terminal.',
+      },
+      {
+        name: 'Gaia port wine cellars',
+        type: 'Wine bar',
+        description: 'Tastings with francesinha sandwiches.',
+      },
+      {
+        name: 'Bolhão Market cafés',
+        type: 'Café and Market',
+        description: 'Pastéis de nata amid produce stalls.',
+      },
+    ],
+    
+    insiderTips: [
+      'Booking tickets in advance: Port cellar tours; Clérigos timed entry.',
+      'Safety and pickpockets: Watch bags in Ribeira crowds.',
+      'Timing and queues: Metro peaks rush hour; early shuttles best.',
+      'Transport advice: Andante card for metro and bus; validate tickets.',
+      'Things to avoid: Missing last shuttle or metro back to port.',
+      'Layer for Atlantic breezes.',
+    ],
+
+    weather: {
+      intro: 'Typical monthly climate averages for Porto, rounded.',
+      months: [
+        { month: 'Jan', highC: 14, lowC: 7, rainMm: 150, sunDays: 10, seaTempC: 14 },
+        { month: 'Feb', highC: 15, lowC: 8, rainMm: 130, sunDays: 12, seaTempC: 14 },
+        { month: 'Mar', highC: 17, lowC: 9, rainMm: 110, sunDays: 15, seaTempC: 14 },
+        { month: 'Apr', highC: 18, lowC: 10, rainMm: 100, sunDays: 17, seaTempC: 15 },
+        { month: 'May', highC: 20, lowC: 13, rainMm: 90, sunDays: 19, seaTempC: 16 },
+        { month: 'Jun', highC: 23, lowC: 15, rainMm: 60, sunDays: 23, seaTempC: 18 },
+        { month: 'Jul', highC: 25, lowC: 17, rainMm: 30, sunDays: 27, seaTempC: 19 },
+        { month: 'Aug', highC: 26, lowC: 17, rainMm: 25, sunDays: 27, seaTempC: 20 },
+        { month: 'Sep', highC: 24, lowC: 16, rainMm: 60, sunDays: 24, seaTempC: 20 },
+        { month: 'Oct', highC: 21, lowC: 14, rainMm: 100, sunDays: 20, seaTempC: 18 },
+        { month: 'Nov', highC: 17, lowC: 11, rainMm: 130, sunDays: 14, seaTempC: 16 },
+        { month: 'Dec', highC: 15, lowC: 8, rainMm: 150, sunDays: 11, seaTempC: 15 },
+      ],
+      bestTime: {
+        overall: 'June to September for dry warmth.',
+        hottest: 'Summer lively but busier transport.',
+        quietest: 'Spring and autumn mild, rainier.',
+        recommendation: 'July to August for riverfront vibrancy.',
+      },
+    },
+
+    faq: [
+      {
+        question: 'Is the port walkable?',
+        answer: 'No to city; shuttle or metro essential.',
+      },
+      {
+        question: 'How long do you need?',
+        answer: 'Half-day Ribeira and wine; full day Douro.',
+      },
+      {
+        question: 'Is English spoken?',
+        answer: 'Port and city tourist areas yes.',
+      },
+      {
+        question: 'What is the best way to get around?',
+        answer: 'Metro Line A + walking.',
+      },
+      {
+        question: 'Can you do Douro Valley on cruise day?',
+        answer: 'Limited—full-day tours only.',
+      },
+    ],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'Summer for optimal city exploration.',
+      cruiseTerminals: ['Porto Leixões Cruise Terminal (South Pier)'],
+      parking: 'Not applicable',
+      nearbyAirport: 'Porto (OPO), 15 km',
+      visaInfo: 'Schengen (Portugal); visa-free short stays—check rules.',
+    },
+    
+    relatedDestinations: ['mediterranean-cruises', 'transatlantic-cruises'],
+    
+    meta: {
+      title: 'Porto Cruise Port Guide | Port Wine & Douro River Gateway',
+      description: 'Complete Porto cruise port guide. Explore Ribeira district, visit port wine cellars, discover Livraria Lello, and experience the Douro Valley from Leixões cruise terminal.',
+      keywords: ['Porto cruise port', 'Leixões cruise terminal', 'Porto shore excursions', 'port wine tours', 'Douro Valley cruise excursions', 'Porto Portugal'],
+    },
+    
+    status: 'published',
+    lastUpdated: '2024-12-28',
   },
 
   {
@@ -1893,6 +2596,478 @@ export const ports = [
     
     status: 'published',
     lastUpdated: '2025-01-28',
+  },
+
+  {
+    id: 'a-coruna',
+    slug: 'a-coruna',
+    name: 'A Coruña',
+    country: 'Spain',
+    region: 'atlantic-coast',
+    coordinates: { lat: 43.37, lon: -8.40 },
+    tagline: 'Oldest lighthouse meets Galician glass galleries',
+    description: 'A Coruña is a compact Atlantic cruise port right in the city centre at the Transatlantic Quay, placing passengers just a 5-minute walk from the old town, glass-fronted Marina district and sandy beaches. Its modern terminal offers shopping, Wi-Fi and tourist info, making it ideal for short calls focused on the UNESCO-listed Tower of Hercules and Galician seafood.',
+    
+    aboutPort: {
+      overview: 'A Coruña\'s cruise facilities centre on the exclusive Transatlantic Quay (484m, 11m draft) with a passenger terminal featuring Los Cantones shopping and services, plus Calvo Sotelo Quay for multi-ship days. The port handled 140+ calls in 2023, docking downtown for immediate access to historic streets and promenades.',
+      terminals: 'Transatlantic Quay terminal provides check-in, free Wi-Fi, shops, cafés and info desks in a central location next to commercial areas. Calvo Sotelo (420m) handles overflow with provisional facilities and road access.',
+      shuttleServices: 'No shuttles needed: exits lead straight to Avenida da Mariña\'s glass buildings and promenades; taxis park nearby. Beaches and old town lie within 10 to 15 minutes on foot.',
+      walkability: 'The port is in the city centre with old town, Marina district and beaches just 5 minutes away on foot.',
+    },
+
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Spanish and Galician; English common at terminal',
+      timezone: 'Central European Time (CET), CEST in summer',
+      portType: 'Port of Call primarily',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'A Coruña Airport (LCG)',
+        distance: '8 km (15 minutes)',
+        options: 'Taxi: 15 minutes. Bus: Line A1 to city (20 minutes).',
+      },
+      trains: {
+        mainStation: 'A Coruña Station',
+        description: 'Regional to Santiago, Ferrol.',
+        localHubs: 'A Coruña Station is a 10-minute walk from the port.',
+      },
+      cruiseLines: ['Cunard', 'P&O Cruises', 'Celebrity Cruises'],
+    },
+    
+    gettingAround: {
+      fromPort: 'Walk from quay along waterfront to old town, aquarium or beaches; buses (1.30 euros cash) fan out from central hub. Taxis handle longer trips to Tower of Hercules.',
+      publicTransport: 'Buses serve beaches and Domus museum; no metro but efficient network covers city. Key sights 5 to 20 minutes walking; Tower 30 minutes by bus/taxi. Hop-on hop-off available near terminal.',
+      taxis: 'Taxis available at terminal for trips to Tower of Hercules or airport.',
+      walkingDistance: 'Most key sights are within 5 to 20 minutes walking from the port. Tower of Hercules is 30 minutes by bus or taxi.',
+      sightseeingBus: 'Hop-on hop-off bus available near terminal, covering major sights including Tower of Hercules, old town and beaches.',
+      accessibility: 'City centre is walkable with level paths. Tower of Hercules may require assistance for steep sections.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Tower of Hercules',
+        description: 'World\'s oldest working Roman lighthouse (UNESCO), clifftop views over the Atlantic. A historic landmark dating back to Roman times with stunning coastal panoramas.',
+        image: 'tower-of-hercules.webp',
+        duration: '2 hours',
+      },
+      {
+        title: 'Old Town (Ciudad Vieja)',
+        description: 'Medieval streets, churches, Maria Pita Square. The historic heart of A Coruña with charming narrow lanes and traditional architecture.',
+        image: 'old-town-coruna.webp',
+        duration: '1.5 hours',
+      },
+      {
+        title: 'Glass galleries (Marina)',
+        description: 'Iconic modern facades along promenade. The distinctive glass-fronted buildings that give A Coruña its nickname "Glass City", creating a unique waterfront aesthetic.',
+        image: 'glass-galleries-marina.webp',
+        duration: '45 minutes',
+      },
+      {
+        title: 'Riazor/Orzán Beaches',
+        description: 'Urban sands steps from port. Wide double beach with promenades, volleyball facilities and easy access from the cruise terminal.',
+        image: 'riazor-orzan-beaches.webp',
+        duration: '1 to 2 hours',
+      },
+      {
+        title: 'Domus (House of Man)',
+        description: 'Interactive science museum exploring human biology and evolution. Modern facility with engaging exhibits suitable for all ages.',
+        image: 'domus-house-of-man.webp',
+        duration: '1.5 hours',
+      },
+      {
+        title: 'Aquarium Finisterrae',
+        description: 'Marine life exhibits near beaches. Coastal aquarium featuring Atlantic marine species with tanks and interactive displays overlooking the ocean.',
+        image: 'aquarium-finisterrae.webp',
+        duration: '1.5 hours',
+      },
+    ],
+
+    thingsToDo: [
+      {
+        title: 'Visit Tower of Hercules',
+        description: 'Climb or view the world\'s oldest working Roman lighthouse with UNESCO status and clifftop Atlantic views.',
+        category: 'history',
+        duration: '2 hours',
+      },
+      {
+        title: 'Explore Old Town',
+        description: 'Wander medieval streets and visit Maria Pita Square in the historic Ciudad Vieja quarter.',
+        category: 'culture',
+        duration: '1.5 hours',
+      },
+      {
+        title: 'Stroll Marina glass galleries',
+        description: 'Admire the iconic glass-fronted buildings along the waterfront promenade that give the city its distinctive character.',
+        category: 'architecture',
+        duration: '45 minutes',
+      },
+      {
+        title: 'Relax at Riazor/Orzán Beaches',
+        description: 'Enjoy the urban double beach with promenades, just steps from the port.',
+        category: 'beach',
+        duration: '1 to 2 hours',
+      },
+    ],
+    
+    shoreExcursions: [
+      {
+        title: 'Santiago de Compostela',
+        description: 'Day trip to the famous pilgrimage city and cathedral, approximately one hour away by coach.',
+        duration: 'Full day',
+        bookWith: 'Cruise line recommended for longer calls',
+      },
+    ],
+    
+    nearestBeach: {
+      name: 'Riazor/Orzán (double urban beach)',
+      description: 'Wide sands with promenades, volleyball, near old town. Popular urban beaches directly accessible from the port area.',
+      gettingThere: '5 to 10 minute walk from terminal.',
+      image: 'beach.webp',
+    },
+    
+    foodAndDrink: [
+      {
+        name: 'Marina seafood',
+        type: 'Restaurant strip',
+        description: 'Pulpo a la gallega, razor clams quayside. Traditional Galician seafood restaurants along the waterfront serving fresh local specialities.',
+      },
+      {
+        name: 'Old town tapas',
+        type: 'Tapas bars',
+        description: 'Empanadas, albariño wine. Charming tapas bars in the historic quarter offering Galician flavours and local wines.',
+      },
+      {
+        name: 'Terminal cafés',
+        type: 'Café',
+        description: 'Quick Galician coffee and pastries. Convenient cafés in the terminal area for a quick refreshment before exploring.',
+      },
+      {
+        name: 'Beach chiringuitos',
+        type: 'Beach bar',
+        description: 'Seafood overlooking Atlantic. Beach bars along Riazor/Orzán serving fresh seafood with ocean views.',
+      },
+    ],
+    
+    insiderTips: [
+      'Booking tickets in advance: Tower of Hercules (2 to 3 euros).',
+      'Safety and pickpockets: Very safe; normal vigilance.',
+      'Timing and queues: Beaches busy weekends; early Tower best.',
+      'Transport advice: Bus cash only (1.30 euros); walk most sights.',
+      'Things to avoid: Forgetting beach towels in winter chill.',
+      'Try raxo (pork strips), a local Galician speciality.',
+    ],
+    
+    faq: [
+      {
+        question: 'Is the port walkable?',
+        answer: 'Yes to centre/beaches. The old town, Marina and beaches are just 5 to 10 minutes walk from the terminal.',
+      },
+      {
+        question: 'How long do you need?',
+        answer: 'Half-day Tower/old town. A standard cruise day allows time to visit the Tower of Hercules, explore the old town and enjoy the beaches.',
+      },
+      {
+        question: 'Is English spoken?',
+        answer: 'Terminal yes. English is commonly spoken at the terminal and in tourist areas, though Spanish and Galician are the main languages.',
+      },
+      {
+        question: 'What\'s the best way to get around?',
+        answer: 'Walking/bus. Most sights are walkable from the port; buses are useful for the Tower of Hercules or beaches if preferred.',
+      },
+      {
+        question: 'Can you do Tower on cruise day?',
+        answer: 'Yes, 30 minutes away. The Tower of Hercules is easily accessible by bus or taxi from the port within 30 minutes.',
+      },
+    ],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'Summer for beach and lighthouse combo. June to September offers the best weather for beach visits and lighthouse views.',
+      cruiseTerminals: ['Transatlantic Quay', 'Calvo Sotelo'],
+      nearbyAirport: 'A Coruña (LCG), 8 km',
+      visaInfo: 'Schengen (Spain); visa-free short stays—check rules',
+    },
+
+    weather: {
+      intro: 'A Coruña has an Atlantic climate with mild temperatures year-round. Summers are pleasant for beach visits, while winters are mild but wet.',
+      months: [
+        { month: 'Jan', highC: 13, lowC: 7, rainMm: 120, sunDays: 12, seaTempC: 14 },
+        { month: 'Feb', highC: 14, lowC: 7, rainMm: 110, sunDays: 13, seaTempC: 14 },
+        { month: 'Mar', highC: 15, lowC: 8, rainMm: 90, sunDays: 15, seaTempC: 14 },
+        { month: 'Apr', highC: 16, lowC: 9, rainMm: 80, sunDays: 16, seaTempC: 14 },
+        { month: 'May', highC: 18, lowC: 11, rainMm: 70, sunDays: 18, seaTempC: 15 },
+        { month: 'Jun', highC: 21, lowC: 13, rainMm: 50, sunDays: 21, seaTempC: 17 },
+        { month: 'Jul', highC: 23, lowC: 15, rainMm: 30, sunDays: 25, seaTempC: 19 },
+        { month: 'Aug', highC: 24, lowC: 16, rainMm: 30, sunDays: 24, seaTempC: 20 },
+        { month: 'Sep', highC: 22, lowC: 14, rainMm: 60, sunDays: 21, seaTempC: 19 },
+        { month: 'Oct', highC: 19, lowC: 12, rainMm: 100, sunDays: 17, seaTempC: 17 },
+        { month: 'Nov', highC: 16, lowC: 9, rainMm: 130, sunDays: 14, seaTempC: 15 },
+        { month: 'Dec', highC: 14, lowC: 8, rainMm: 120, sunDays: 13, seaTempC: 14 },
+      ],
+      bestTime: {
+        overall: 'June to September drier, warmer. These months offer the best balance of weather for sightseeing and beach visits.',
+        hottest: 'Summer beach perfect, busier. July and August provide ideal beach weather but with higher visitor numbers.',
+        quietest: 'Spring/autumn mild, wetter. April to May and September to October offer milder temperatures but more chance of rain.',
+        recommendation: 'July for Tower views. July typically offers the best combination of clear weather for lighthouse views and comfortable beach conditions.',
+      },
+    },
+    
+    relatedDestinations: ['mediterranean-cruises', 'transatlantic-cruises'],
+    
+    meta: {
+      title: 'A Coruña Cruise Port Guide | Tower of Hercules & Galician Beaches',
+      description: 'Complete A Coruña cruise port guide. Visit the UNESCO Tower of Hercules, explore the glass-fronted Marina, discover the old town and enjoy urban beaches in this walkable Atlantic port.',
+      keywords: ['A Coruña cruise port', 'La Coruña cruise', 'Tower of Hercules', 'Galician cruise port', 'Atlantic coast cruises', 'A Coruña shore excursions'],
+    },
+    
+    status: 'published',
+    lastUpdated: '2025-12-28',
+  },
+
+  // Bilbao
+  {
+    id: 'bilbao',
+    slug: 'bilbao',
+    name: 'Bilbao',
+    country: 'Spain',
+    region: 'atlantic-coast',
+    coordinates: { lat: 43.37, lon: -3.01 },
+    tagline: 'Guggenheim and Basque pintxos from the estuary',
+    description: 'Bilbao is a modern Basque cruise port located in Getxo, about 15 km west of the city centre along the Nervión estuary, featuring efficient terminals with shuttles to Bilbao\'s Guggenheim Museum and Casco Viejo.',
+    
+    aboutPort: {
+      overview: 'Bilbao Cruise Port at Getxo comprises three berths (Getxo 1 to 3) with the modern Olatua Terminal (Getxo 3, opened 2022) offering spacious lounges, VIP areas and direct gangways amid marinas and beaches. Passengers access the vibrant city via shuttles or metro, blending industrial heritage with Frank Gehry\'s iconic architecture.',
+      terminals: 'The facilities include the original Maritime Terminal (Getxo 1 and 2, 684m combined quay) and new Olatua Terminal (Getxo 3, 3200 square metre glass building with separate embark and disembark flows). Amenities cover check-in, baggage handling, Wi-Fi, tourist info and 222-space parking.',
+      shuttleServices: 'Shuttles run to Bilbao centre, dropping near Moyúa metro; metro Line 1 reaches the city in 25 minutes. The 15 km distance makes walking to the city impractical, but terminals sit beside Ereaga Beach and marina.',
+      walkability: 'Not walkable to Bilbao city centre (requires shuttle or metro, 20 to 30 minutes), though Getxo beach and marina areas are immediately accessible on foot from the terminal.',
+    },
+
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Spanish and Basque official; English common in port and tourist zones',
+      timezone: 'CET/CEST',
+      portType: 'Home Port & Port of Call',
+      walkable: false,
+      tenderRequired: false,
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Bilbao Airport (BIO)',
+        distance: '15 km (20 to 25 minutes)',
+        options: 'Taxi: 20 minutes direct. Bizkaibus A3247 to metro then Line 1 (40 minutes).',
+      },
+      trains: {
+        mainStation: 'Bilbao Abando (also known as Santander)',
+        description: 'City centre station, 25 minutes by metro. Regional services to Basque coast and San Sebastián; high-speed trains to Madrid.',
+        localHubs: 'Abando serves as the hub for RENFE and FEVE lines.',
+      },
+      cruiseLines: ['Oceania Cruises', 'Pullmantur'],
+    },
+    
+    gettingAround: {
+      fromPort: 'Shuttle to Bilbao centre (drop near Moyúa metro) then metro Line 1 or 2 or buses; taxis (25 to 30 euros) direct to Guggenheim or Casco Viejo. Bilbao Card offers transport and sightseeing discounts.',
+      publicTransport: 'Metro and tram connect Guggenheim (10 minutes from Moyúa), old town and airport; no port trams but historic ones in city. City centre 20 to 30 minutes total; beaches walkable from terminal.',
+      taxis: 'Taxis available at terminal, metered fares. Expect 25 to 30 euros from port to Guggenheim or Casco Viejo.',
+      walkingDistance: 'City centre not walkable from port (15 km away). Beaches and Getxo marina are within 5 to 10 minutes walk from terminals.',
+      sightseeingBus: 'Hop-on hop-off buses start near shuttle drop-off points in Bilbao city centre.',
+      accessibility: 'Modern terminals have good accessibility. Metro and city centre facilities are generally accessible with lifts at major stations.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Guggenheim Museum',
+        description: 'Titanium icon with modern art and spider sculpture. Frank Gehry\'s architectural masterpiece on the riverfront, featuring contemporary exhibitions and the famous Puppy sculpture.',
+        image: 'guggenheim-museum.webp',
+        duration: '2 to 3 hours',
+      },
+      {
+        title: 'Casco Viejo (Old Town)',
+        description: 'Seven streets with pintxos bars, cathedral and market. The historic heart of Bilbao with traditional architecture, lively atmosphere and authentic Basque culture.',
+        image: 'casco-viejo.webp',
+        duration: '2 hours',
+      },
+      {
+        title: 'Bizkaia Bridge (UNESCO)',
+        description: 'Transporter bridge across estuary (10 minutes from port). UNESCO World Heritage Site, the world\'s oldest transporter bridge offering walkway and gondola crossings.',
+        image: 'bizkaia-bridge.webp',
+        duration: '1 hour',
+      },
+      {
+        title: 'Getxo marinas and Ereaga Beach',
+        description: 'Port-side strolls with seafood and villas. Elegant waterfront promenade with Belle Époque mansions, yacht marinas and coastal views immediately accessible from cruise terminals.',
+        image: 'getxo-marina.webp',
+        duration: '1 to 1.5 hours',
+      },
+      {
+        title: 'Aixerrota Mill',
+        description: 'Historic watermill near beach (walkable from port). Restored 18th-century windmill on the Getxo clifftops with coastal panoramas.',
+        image: 'aixerrota-mill.webp',
+        duration: '45 minutes',
+      },
+      {
+        title: 'San Juan de Gaztelugatxe day trip',
+        description: 'Game of Thrones hermitage (1 hour drive). Dramatic island hermitage reached by 241 stone steps, featured in the television series, offering spectacular Atlantic coastline views.',
+        image: 'gaztelugatxe.webp',
+        duration: '4 to 5 hours',
+      },
+    ],
+
+    thingsToDo: [
+      {
+        title: 'Guggenheim Museum',
+        description: 'Visit Frank Gehry\'s titanium masterpiece and explore contemporary art collections.',
+        category: 'culture',
+        duration: '2 to 3 hours',
+      },
+      {
+        title: 'Casco Viejo pintxos crawl',
+        description: 'Explore the old town\'s seven streets and sample traditional Basque tapas.',
+        category: 'food',
+        duration: '2 hours',
+      },
+      {
+        title: 'Bizkaia Bridge',
+        description: 'Experience the UNESCO transporter bridge near the cruise port.',
+        category: 'history',
+        duration: '1 hour',
+      },
+      {
+        title: 'Ereaga Beach walk',
+        description: 'Stroll along the beach and marina promenade from the terminals.',
+        category: 'nature',
+        duration: '1 to 1.5 hours',
+      },
+      {
+        title: 'San Juan de Gaztelugatxe',
+        description: 'Day trip to the iconic Game of Thrones filming location.',
+        category: 'nature',
+        duration: '4 to 5 hours',
+      },
+    ],
+    
+    shoreExcursions: [
+      {
+        title: 'San Sebastián day trip',
+        description: 'Excursion to the elegant coastal resort (1 hour drive), famous for beaches and Michelin-starred cuisine.',
+        duration: 'Full day',
+        bookWith: 'Either',
+      },
+      {
+        title: 'Guggenheim and city highlights',
+        description: 'Half-day tour covering the museum, old town and key city sights.',
+        duration: 'Half day',
+        bookWith: 'Either',
+      },
+    ],
+
+    nearestBeach: {
+      name: 'Ereaga Beach',
+      description: 'Fine sand with promenade, lidos and marina views. Adjacent to terminals, offering a pleasant urban beach experience with facilities and seafront restaurants.',
+      gettingThere: '5 to 10 minute walk from cruise facilities.',
+      image: 'beach.webp',
+    },
+    
+    foodAndDrink: [
+      {
+        name: 'Getxo marina seafood',
+        type: 'Restaurant area',
+        description: 'Fresh Basque fish near beach. Waterfront restaurants along the marina serving local catch, grilled seafood and traditional preparations.',
+      },
+      {
+        name: 'Casco Viejo pintxos bars',
+        type: 'Tapas Bar crawl',
+        description: 'Gildas, txakoli wine hopping. Traditional Basque tapas bars in the old town serving classic pintxos with local cider and white wine.',
+      },
+      {
+        name: 'Ribera Market',
+        type: 'Market',
+        description: 'Local cheeses, txakoli tastings. Historic riverside market offering fresh produce, regional specialities and casual food stalls.',
+      },
+      {
+        name: 'Guggenheim café',
+        type: 'Café',
+        description: 'Modern Basque bites with art views. Museum café serving contemporary cuisine with riverside terrace overlooking the titanium structure.',
+      },
+    ],
+    
+    insiderTips: [
+      'Booking tickets in advance: Guggenheim timed slots essential. Book online weeks ahead to guarantee entry, especially during peak cruise season.',
+      'Safety and pickpockets: Safe area; normal caution in bars. Bilbao is generally very safe, but use standard precautions in crowded pintxos bars.',
+      'Timing and queues: Metro and bus peaks; early shuttles best. Avoid rush hour (8 to 9am, 6 to 7pm) on public transport when possible.',
+      'Transport advice: Bilbao Card (10 to 20 euros) offers good value; validate metro tickets. The tourist card includes transport and museum discounts.',
+      'Things to avoid: Forgetting last shuttle times. Verify return shuttle schedule from city to port, allowing buffer time before all-aboard.',
+      'Try pintxos etiquette: Bar hop, one drink per spot. Follow local custom of moving between bars, sampling different specialities at each.',
+      'Weather preparation: Bring layers and waterproof. Basque coast weather can change quickly, even in summer.',
+    ],
+    
+    faq: [
+      {
+        question: 'Is the port walkable?',
+        answer: 'To Getxo beach yes; Bilbao no (shuttle or metro required). The terminals are beside Ereaga Beach and marina, but the city centre is 15 km away.',
+      },
+      {
+        question: 'How long do you need?',
+        answer: 'Half-day for Guggenheim and old town. A typical cruise call allows time for the museum (2 to 3 hours) plus pintxos in Casco Viejo, with travel.',
+      },
+      {
+        question: 'Is English spoken?',
+        answer: 'Port and city yes. English is common in tourist areas, port facilities and major attractions, though less so in traditional bars.',
+      },
+      {
+        question: 'What is the best way to get around?',
+        answer: 'Shuttle plus metro Line 1. Take the cruise shuttle or taxi to city centre, then use the efficient metro system to reach attractions.',
+      },
+      {
+        question: 'Can you do Guggenheim on cruise day?',
+        answer: 'Yes, 20-minute metro fits. With advance booking and allowing 90 minutes each way for transport, the museum visit is very achievable on a cruise day.',
+      },
+    ],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'Summer maximises outdoor Basque experiences with warm weather and festivals',
+      cruiseTerminals: ['Getxo 1', 'Getxo 2 (Maritime Terminal)', 'Getxo 3 (Olatua Terminal)'],
+      nearbyAirport: 'Bilbao Airport (BIO), 15 km',
+      visaInfo: 'Spain forms part of the Schengen Area; visa-free short stays for many nationalities, but verify current Schengen and Spanish entry rules for your nationality and cruise itinerary before travel',
+    },
+
+    weather: {
+      intro: 'Bilbao has an oceanic climate with mild temperatures year-round but significant rainfall, especially in autumn and winter. Summer offers the best conditions for outdoor activities and sightseeing.',
+      months: [
+        { month: 'Jan', highC: 13, lowC: 5, rainMm: 140, sunDays: 11, seaTempC: 13 },
+        { month: 'Feb', highC: 14, lowC: 6, rainMm: 120, sunDays: 13, seaTempC: 13 },
+        { month: 'Mar', highC: 16, lowC: 7, rainMm: 100, sunDays: 15, seaTempC: 13 },
+        { month: 'Apr', highC: 17, lowC: 8, rainMm: 110, sunDays: 16, seaTempC: 14 },
+        { month: 'May', highC: 20, lowC: 11, rainMm: 90, sunDays: 18, seaTempC: 15 },
+        { month: 'Jun', highC: 23, lowC: 14, rainMm: 70, sunDays: 21, seaTempC: 17 },
+        { month: 'Jul', highC: 25, lowC: 16, rainMm: 50, sunDays: 25, seaTempC: 19 },
+        { month: 'Aug', highC: 26, lowC: 16, rainMm: 60, sunDays: 24, seaTempC: 20 },
+        { month: 'Sep', highC: 24, lowC: 14, rainMm: 80, sunDays: 21, seaTempC: 20 },
+        { month: 'Oct', highC: 21, lowC: 12, rainMm: 110, sunDays: 17, seaTempC: 18 },
+        { month: 'Nov', highC: 16, lowC: 9, rainMm: 140, sunDays: 13, seaTempC: 16 },
+        { month: 'Dec', highC: 14, lowC: 6, rainMm: 140, sunDays: 12, seaTempC: 14 },
+      ],
+      bestTime: {
+        overall: 'June to September offers drier, warmer weather ideal for exploring both city and coast',
+        hottest: 'Summer is vibrant with festivals and outdoor life but busier with tourists',
+        quietest: 'Spring and autumn are mild but wetter, offering fewer crowds',
+        recommendation: 'July to August provides the most comfortable conditions for first-time cruise visitors wanting to maximise time at the Guggenheim and enjoy outdoor pintxos culture',
+      },
+    },
+    
+    relatedDestinations: ['mediterranean-cruises', 'canary-islands-cruises'],
+    
+    meta: {
+      title: 'Bilbao Cruise Port Guide | Guggenheim & Basque Pintxos',
+      description: 'Complete Bilbao cruise port guide. Visit the Guggenheim Museum, explore Casco Viejo pintxos bars, discover Basque culture and enjoy beaches from this modern Atlantic port.',
+      keywords: ['Bilbao cruise port', 'Guggenheim Museum', 'Basque Country cruise', 'Bilbao shore excursions', 'Getxo cruise terminal', 'Bilbao pintxos'],
+    },
+    
+    status: 'published',
+    lastUpdated: '2025-12-28',
   },
 
   // Gibraltar
@@ -2703,6 +3878,666 @@ export const ports = [
       title: 'Las Palmas Gran Canaria Cruise Port Guide | Europe\'s Largest Terminal',
       description: 'Complete Las Palmas cruise port guide. Visit Las Canteras beach, explore Vegueta historic district, enjoy Canarian cuisine, and discover insider tips for your Atlantic cruise.',
       keywords: ['Las Palmas cruise port', 'Gran Canaria cruise', 'Las Palmas shore excursions', 'Canary Islands cruise', 'Las Palmas things to do', 'Santa Catalina cruise terminal']
+    },
+    
+    status: 'published',
+    lastUpdated: '2025-12-28',
+  },
+
+  {
+    id: 'naples',
+    slug: 'naples',
+    name: 'Naples',
+    country: 'Italy',
+    region: 'mediterranean',
+    coordinates: { lat: 40.84, lon: 14.26 },
+    tagline: 'Pizza capital steps from Pompeii and Vesuvius',
+    description: 'Naples Cruise Terminal at Stazione Marittima sits amid the bustling port area near Piazza Municipio, blending functional piers with city energy and views of Mount Vesuvius. Passengers exit directly into downtown chaos, with ferries to Capri, metro lines and taxis all nearby for day trips.',
+    
+    aboutPort: {
+      overview: 'Naples\' cruise facilities span seven piers totalling 1,100 metres at Molo Beverello and Stazione Marittima, handling thousands daily with modern gangways up to 11 to 12 metres deep. The multifunctional terminal offers lounges, information desks, security and bus staging in a 1930s rationalist building upgraded for efficiency.',
+      terminals: 'Key areas include Molo Angioino (main pier) and Beverello for ferries to islands; amenities cover Wi-Fi, ATMs, shops, cafés and post office.',
+      shuttleServices: 'No shuttles needed—exits lead straight to Via Nuova Marina and Piazza Municipio, with town just minutes away on foot.',
+      walkability: 'Yes, 5 to 10 minutes walk to historic core. Passengers walk from piers into the city via pedestrian routes to metro (line 1 at Municipio), taxis and buses; the layout immerses you in Neapolitan life immediately.',
+    },
+
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Italian dominant; English common at terminals and tourist spots',
+      timezone: 'CET/CEST',
+      portType: 'Both',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Naples International Airport (NAP)',
+        distance: '8 to 10 km north-east (20 to 30 minutes)',
+        options: 'Taxi: 20 to 30 minutes direct. Alibus: Direct shuttle every 20 minutes to port (5 euros, 20 minutes).',
+      },
+      trains: {
+        mainStation: 'Napoli Centrale',
+        description: 'High-speed to Rome, regional to Pompeii, Sorrento and Amalfi. Napoli Centrale is 20-minute taxi or metro from port. Nearby Napoli Piazza Garibaldi station serves Circumvesuviana trains.',
+        localHubs: 'Napoli Centrale for national links',
+      },
+      cruiseLines: 'Major hub for MSC, Costa, Royal Caribbean on Mediterranean itineraries',
+    },
+
+    gettingAround: {
+      fromPort: 'Passengers walk from piers into the city via pedestrian routes to metro (line 1 at Municipio), taxis and buses; the layout immerses you in Neapolitan life immediately. Alibus connects airport directly to port.',
+      publicTransport: 'Metro, buses and Circumvesuviana trains serve Pompeii (30 minutes), Sorrento and Amalfi; tuk-tuks and taxis handle short chaotic hops.',
+      taxis: 'Taxis rank at exits for fixed fares to key sites',
+      walkingDistance: 'Historic centre, markets and Castel Nuovo are 10 to 15 minutes on foot; Pompeii needs 30 to 45 minute train',
+      sightseeingBus: 'Hop-on hop-off buses start near terminal, looping Pompeii, Vesuvius and centre—useful for first-timers',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Pompeii archaeological site',
+        description: 'UNESCO ruins preserved by Vesuvius eruption, 30 minutes by Circumvesuviana train. Suggested visit duration: 3 to 4 hours.',
+        image: 'pompeii.webp',
+      },
+      {
+        title: 'Historic centre and Spaccanapoli',
+        description: 'Narrow streets, churches and street life slicing through old Naples. Suggested visit duration: 2 to 3 hours.',
+        image: 'spaccanapoli.webp',
+      },
+      {
+        title: 'Mount Vesuvius crater rim',
+        description: 'Active volcano hike with bay views, 45 minutes by bus and train combo. Suggested visit duration: 3 to 4 hours.',
+        image: 'vesuvius.webp',
+      },
+      {
+        title: 'National Archaeological Museum',
+        description: 'Pompeii artefacts, mosaics and frescoes near port. Suggested visit duration: 2 hours.',
+        image: 'archaeological-museum.webp',
+      },
+      {
+        title: 'Castel Nuovo (Maschio Angioino)',
+        description: '14th-century fortress with triumphal arch, steps from terminal. Suggested visit duration: 1 to 1.5 hours.',
+        image: 'castel-nuovo.webp',
+      },
+      {
+        title: 'Capri island day trip',
+        description: 'Blue Grotto and luxury via ferry from Beverello (50 minutes). Suggested visit duration: 5 to 6 hours.',
+        image: 'capri.webp',
+      },
+    ],
+
+    thingsToDo: [],
+    
+    nearestBeach: {
+      name: 'Mergellina or Posillipo area beaches',
+      description: 'City strands with promenades, lidos and Vesuvius views for swimming. Pebble and urban beaches.',
+      distance: '20-minute taxi or metro from port along Lungomare',
+    },
+
+    shoreExcursions: [],
+    
+    foodAndDrink: [
+      {
+        name: 'Pignasecca Market area',
+        type: 'Market',
+        description: 'Street food, pizza, seafood amid local bustle',
+      },
+      {
+        name: 'Historic centre pizzerias',
+        type: 'Pizzeria',
+        description: 'Authentic Neapolitan margherita near Spaccanapoli',
+      },
+      {
+        name: 'Terminal food court',
+        type: 'Food Hall',
+        description: 'Quick Italian bites pre-excursion',
+      },
+      {
+        name: 'Lungomare seafood',
+        type: 'Restaurant strip',
+        description: 'Fresh catch with bay views',
+      },
+    ],
+
+    insiderTips: [
+      'Book tickets in advance for Pompeii and Vesuvius; skip-the-line via official sites',
+      'Watch your valuables on crowds—use cross-body bags, avoid flashing items',
+      'Pompeii trains pack midday; go early; traffic chaotic',
+      'Validate metro tickets; negotiate taxi fares upfront',
+      'Avoid straying far alone at night; steer clear of unregulated taxis and scooters',
+      'Small vendors prefer euros over cards—keep cash handy',
+    ],
+    
+    faq: [
+      {
+        question: 'Is the port walkable to the city centre?',
+        answer: 'Yes, directly into city centre in 5 to 10 minutes from the terminal',
+      },
+      {
+        question: 'How long do you need in Naples?',
+        answer: 'Full day for Pompeii; half-day for the centre and pizza',
+      },
+      {
+        question: 'Is English spoken?',
+        answer: 'Terminal yes; on the streets basic Italian helps',
+      },
+      {
+        question: 'What\'s the best way to get around?',
+        answer: 'Walking in the centre, train to Pompeii',
+      },
+      {
+        question: 'Can you do Pompeii on a cruise day?',
+        answer: 'Yes, 30-minute train fits perfectly for a cruise day excursion',
+      },
+    ],
+
+    weather: {
+      intro: 'Naples has a Mediterranean climate with hot summers and mild, wetter winters.',
+      months: [
+        { month: 'Jan', highC: 13, lowC: 7, rainMm: 100, sunDays: 12, seaTempC: 15 },
+        { month: 'Feb', highC: 13, lowC: 7, rainMm: 90, sunDays: 13, seaTempC: 14 },
+        { month: 'Mar', highC: 15, lowC: 8, rainMm: 80, sunDays: 16, seaTempC: 15 },
+        { month: 'Apr', highC: 17, lowC: 10, rainMm: 70, sunDays: 18, seaTempC: 16 },
+        { month: 'May', highC: 21, lowC: 13, rainMm: 50, sunDays: 22, seaTempC: 18 },
+        { month: 'Jun', highC: 25, lowC: 17, rainMm: 30, sunDays: 26, seaTempC: 21 },
+        { month: 'Jul', highC: 28, lowC: 20, rainMm: 20, sunDays: 29, seaTempC: 23 },
+        { month: 'Aug', highC: 29, lowC: 20, rainMm: 25, sunDays: 28, seaTempC: 24 },
+        { month: 'Sep', highC: 26, lowC: 17, rainMm: 60, sunDays: 24, seaTempC: 23 },
+        { month: 'Oct', highC: 22, lowC: 14, rainMm: 90, sunDays: 20, seaTempC: 21 },
+        { month: 'Nov', highC: 17, lowC: 10, rainMm: 110, sunDays: 15, seaTempC: 18 },
+        { month: 'Dec', highC: 14, lowC: 8, rainMm: 100, sunDays: 13, seaTempC: 16 },
+      ],
+      bestTime: {
+        overall: 'Spring (April to June) and autumn (September to October) for mild weather',
+        hottest: 'Summer vibrant but hot and crowded',
+        quietest: 'Winter milder crowds, wetter',
+        recommendation: 'May or October for Pompeii comfort',
+      },
+    },
+    
+    practicalInfo: {
+      bestTimeToVisit: 'Spring and autumn balance warmth and crowds for excursions',
+      cruiseTerminals: ['Stazione Marittima', 'Molo Beverello', 'Molo Angioino piers'],
+      nearbyAirport: 'Naples International (NAP), 8 to 10 km',
+      visaInfo: 'Schengen (Italy); visa-free short stays for many—check rules',
+    },
+    
+    relatedDestinations: ['mediterranean-cruises', 'italy-cruises'],
+    
+    meta: {
+      title: 'Naples Cruise Port Guide | Pompeii, Vesuvius & Pizza',
+      description: 'Complete Naples cruise port guide. Visit Pompeii ruins, explore Spaccanapoli, climb Mount Vesuvius, enjoy authentic Neapolitan pizza, and discover insider tips for your Mediterranean cruise.',
+      keywords: ['Naples cruise port', 'Naples shore excursions', 'Naples things to do', 'Pompeii from cruise ship', 'Naples cruise terminal', 'Mount Vesuvius cruise']
+    },
+    
+    status: 'published',
+    lastUpdated: '2025-12-28',
+  },
+
+  {
+    id: 'venice',
+    slug: 'venice',
+    name: 'Venice',
+    country: 'Italy',
+    region: 'mediterranean',
+    coordinates: { lat: 45.44, lon: 12.33 },
+    tagline: 'Canals and gondolas amid Renaissance splendour',
+    description: 'Venice Cruise Terminal operates from multiple sites including Marittima basin for mid-size ships, San Basilio and Santa Marta piers for smaller vessels, and offshore mainland anchors at Marghera and Fusina for giants over 25,000 GRT due to canal restrictions. Passengers tender or shuttle to Piazzale Roma or directly into the lagoon city for vaporetto rides to St. Mark\'s Square.',
+    
+    aboutPort: {
+      overview: 'Venice\'s facilities split between historic Marittima basin with TM, Piave, Tagliamento and Isonzo quays with 10 terminals for ships under 25,000 GRT and mainland Marghera and Fusina for larger vessels, following 2021 regulations protecting the Giudecca Canal. San Basilio and Santa Marta handle boutique ships directly in the lagoon.',
+      terminals: 'Terminals provide check-in, lounges, Wi-Fi and People Mover links to Piazzale Roma; tenders shuttle offshore arrivals to Tronchetto or city stops.',
+      shuttleServices: 'Free shuttles often run weekends; walking from Marittima to centre takes 15 to 30 minutes over bridges with luggage challenging.',
+      walkability: 'Partially—San Basilio yes (10 minutes to Piazzale Roma); Marittima 15 to 20 minutes; offshore requires tender and vaporetto.',
+    },
+
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Italian primary; English widespread in tourist zones',
+      timezone: 'CET/CEST',
+      portType: 'Both',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Venice Marco Polo (VCE)',
+        distance: '13 km to Marittima (20 to 30 minutes)',
+        options: 'Taxi: 30 to 45 euros to Marittima or Piazzale Roma (20 minutes). Bus: ATVO or Alilaguna to Piazzale Roma or Tronchetto (20 to 40 minutes). Water taxi: 100 euros plus direct scenic ride (45 minutes).',
+      },
+      trains: {
+        mainStation: 'Venezia Santa Lucia',
+        description: 'High-speed to Milan, Rome; regional to Padua, Verona. Santa Lucia for lagoon access, 10-minute walk from Piazzale Roma.',
+        localHubs: 'Santa Lucia for lagoon access',
+      },
+      cruiseLines: 'Venice hosts MSC, Costa, Norwegian, Celebrity and luxury lines, with smaller ships in centre and large ones offshore',
+    },
+
+    gettingAround: {
+      fromPort: 'From Marittima and San Basilio, walk or People Mover to Piazzale Roma for vaporettos (water buses) into the canals; offshore tenders drop at Tronchetto (People Mover to centre). Vaporetto lines 1 and 2 serve Grand Canal to San Marco.',
+      publicTransport: 'No metro; extensive vaporetto network, gondolas, water taxis and traghetti (ferry gondolas) navigate canals; land taxis at Piazzale Roma and Tronchetto.',
+      taxis: 'Land taxis at Piazzale Roma and Tronchetto. Water taxis scenic but expensive.',
+      walkingDistance: 'Walking distances vary—Rialto 20 to 30 minutes from Marittima; San Marco 45 minutes plus vaporetto.',
+      sightseeingBus: 'Hop-on hop-off vaporettos or private boats cover major sights efficiently',
+      accessibility: 'Bridges and steps challenge wheelchairs; vaporettos have some accessible routes',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'St. Mark\'s Square and Basilica',
+        description: 'Piazza San Marco with golden mosaics, Doge\'s Palace and Campanile views. Suggested visit duration: 2 to 3 hours.',
+        image: 'st-marks-square.webp',
+      },
+      {
+        title: 'Rialto Bridge and Market',
+        description: 'Iconic bridge spanning Grand Canal amid fresh produce stalls. Suggested visit duration: 1 to 2 hours.',
+        image: 'rialto-bridge.webp',
+      },
+      {
+        title: 'Doge\'s Palace',
+        description: 'Gothic seat of Venetian power with Bridge of Sighs and prisons. Suggested visit duration: 2 hours.',
+        image: 'doges-palace.webp',
+      },
+      {
+        title: 'Grand Canal vaporetto ride',
+        description: 'Scenic water tour past palazzos from Rialto to San Marco. Suggested visit duration: 1 hour.',
+        image: 'grand-canal.webp',
+      },
+      {
+        title: 'Murano and Burano islands',
+        description: 'Glassworks on Murano, lace and colourful houses on Burano (vaporetto). Suggested visit duration: 3 to 4 hours.',
+        image: 'murano-burano.webp',
+      },
+      {
+        title: 'Peggy Guggenheim Collection',
+        description: 'Modern art in Dorsoduro canal palace garden. Suggested visit duration: 1.5 hours.',
+        image: 'guggenheim.webp',
+      },
+    ],
+
+    thingsToDo: [],
+    
+    nearestBeach: {
+      name: 'Lido di Venezia',
+      description: 'Wide urban beach with lidos, umbrellas and lagoon views across from San Marco on sand barrier island.',
+      distance: 'Vaporetto 1 or 5.1 from any centre stop (20 to 30 minutes)',
+    },
+
+    shoreExcursions: [],
+    
+    foodAndDrink: [
+      {
+        name: 'Rialto Market stalls',
+        type: 'Market',
+        description: 'Cicchetti (Venetian tapas), fresh seafood bites',
+      },
+      {
+        name: 'San Marco bacari',
+        type: 'Cicchetti bar',
+        description: 'Small plates, spritz aperitifs near square',
+      },
+      {
+        name: 'Dorsoduro trattorias',
+        type: 'Trattoria',
+        description: 'Seafood risotto, bigoli pasta away from crowds',
+      },
+      {
+        name: 'Canal-side gelaterias',
+        type: 'Café',
+        description: 'Artisanal ice cream post-sightseeing',
+      },
+    ],
+
+    insiderTips: [
+      'Book Doge\'s Palace and Basilica tickets online for skip-the-line access; vaporetto passes available online',
+      'Watch your valuables in San Marco crowds; secure bags against pickpockets',
+      'Visit early mornings to beat tourist floods; bridges bottleneck during peak times',
+      'Buy 24 or 48-hour vaporetto pass for best value; avoid peak-time water taxis',
+      'Avoid feeding pigeons (fines apply); steer clear of unregulated gondolas',
+      'Use station luggage storage (depositi) if exploring pre-boarding',
+    ],
+    
+    faq: [
+      {
+        question: 'Is the port walkable to the city centre?',
+        answer: 'Marittima and San Basilio yes; offshore requires tender. Walking takes 15 to 30 minutes depending on terminal.',
+      },
+      {
+        question: 'How long do you need in Venice?',
+        answer: 'Full day for vaporetto and major sights; half-day for essentials like San Marco and Rialto.',
+      },
+      {
+        question: 'Is English spoken?',
+        answer: 'Tourist areas yes; locals have variable English.',
+      },
+      {
+        question: 'What\'s the best way to get around?',
+        answer: 'Vaporetto pass for canals; walking for exploring neighbourhoods.',
+      },
+      {
+        question: 'Can you see St. Mark\'s on a cruise day?',
+        answer: 'Yes, vaporetto takes you direct from most terminals or tender drop points.',
+      },
+    ],
+
+    weather: {
+      intro: 'Venice has a humid subtropical climate with hot summers, mild winters and frequent autumn to winter acqua alta (high tides).',
+      months: [
+        { month: 'Jan', highC: 7, lowC: 2, rainMm: 60, sunDays: 10, seaTempC: 11 },
+        { month: 'Feb', highC: 9, lowC: 3, rainMm: 50, sunDays: 12, seaTempC: 11 },
+        { month: 'Mar', highC: 12, lowC: 6, rainMm: 50, sunDays: 15, seaTempC: 12 },
+        { month: 'Apr', highC: 15, lowC: 9, rainMm: 60, sunDays: 17, seaTempC: 14 },
+        { month: 'May', highC: 20, lowC: 13, rainMm: 70, sunDays: 20, seaTempC: 17 },
+        { month: 'Jun', highC: 24, lowC: 17, rainMm: 70, sunDays: 23, seaTempC: 22 },
+        { month: 'Jul', highC: 27, lowC: 20, rainMm: 60, sunDays: 26, seaTempC: 24 },
+        { month: 'Aug', highC: 27, lowC: 20, rainMm: 80, sunDays: 25, seaTempC: 25 },
+        { month: 'Sep', highC: 24, lowC: 17, rainMm: 80, sunDays: 22, seaTempC: 24 },
+        { month: 'Oct', highC: 19, lowC: 13, rainMm: 80, sunDays: 19, seaTempC: 21 },
+        { month: 'Nov', highC: 13, lowC: 8, rainMm: 90, sunDays: 14, seaTempC: 17 },
+        { month: 'Dec', highC: 9, lowC: 4, rainMm: 60, sunDays: 11, seaTempC: 13 },
+      ],
+      bestTime: {
+        overall: 'Spring (April to May) and autumn (September to October) for milder weather and fewer floods',
+        hottest: 'Summer vibrant but hot, crowded with acqua alta risk',
+        quietest: 'Winter atmospheric and cheaper but frequent high tides',
+        recommendation: 'May or September for canal comfort and pleasant weather',
+      },
+    },
+    
+    practicalInfo: {
+      bestTimeToVisit: 'Spring and autumn avoid summer heat and winter floods',
+      cruiseTerminals: ['Marittima (TM, Piave, Tagliamento, Isonzo)', 'San Basilio', 'Santa Marta', 'Marghera and Fusina (offshore)'],
+      nearbyAirport: 'Venice Marco Polo (VCE), 13 km',
+      visaInfo: 'Schengen (Italy); visa-free short stays for many—check rules',
+    },
+    
+    relatedDestinations: ['mediterranean-cruises', 'italy-cruises'],
+    
+    meta: {
+      title: 'Venice Cruise Port Guide | Canals, Gondolas & St. Mark\'s',
+      description: 'Complete Venice cruise port guide. Explore St. Mark\'s Square, ride vaporettos through canals, visit Doge\'s Palace, discover Rialto Bridge, and enjoy Venetian cicchetti with insider tips.',
+      keywords: ['Venice cruise port', 'Venice shore excursions', 'Venice things to do', 'Venice from cruise ship', 'Venice cruise terminal', 'Venice gondola cruise']
+    },
+    
+    status: 'published',
+    lastUpdated: '2025-12-28',
+  },
+
+  {
+    id: 'palma-de-mallorca',
+    slug: 'palma-de-mallorca',
+    name: 'Palma de Mallorca',
+    country: 'Spain',
+    region: 'mediterranean',
+    coordinates: { lat: 39.57, lon: 2.63 },
+    tagline: 'Cathedral views and Balearic beaches from the quay',
+    description: 'Palma Cruise Port lies in the Bay of Palma with six terminals at Estacion Maritima (1-5) connected by covered walkways, handling millions of passengers annually as both home port and transit stop. The waterfront location places the historic old town, cathedral and royal palace within easy reach on foot or short transport.',
+    
+    // Detailed port information
+    aboutPort: {
+      overview: 'Palma\'s cruise terminals cluster at Poniente/Paraires quays (Estacion Maritima 1-4) for most ships and Dique del Oeste (Terminal 5) for larger vessels, all featuring modern amenities like cafés, ATMs, restrooms and tourist info. The layout connects via pedestrian paths past yacht marinas to Porto Pi shopping centre.',
+      terminals: 'Six terminals at Estacion Maritima (1-5) connected by covered walkways, handling both home port and transit passengers with modern amenities.',
+      shuttle: 'No shuttles typically needed, though buses run from terminals; the 2 to 4 km walk to cathedral/old town follows a flat, scenic esplanade (40 minutes average).',
+      walkability: 'Yes, 30 to 45 minutes along marina boulevard to old town.',
+    },
+
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Spanish & Catalan',
+      timezone: 'CET/CEST',
+      portType: 'Both, Balearics\' busiest cruise facility',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    // Airport and train connections
+    transportConnections: {
+      airport: {
+        name: 'Palma de Mallorca Airport (PMI)',
+        distance: '8 to 10 km east (15 to 20 minutes)',
+        options: 'Taxi: 15 to 20 minutes direct. Bus: A1 to city interchange then 4/20 to port (30 to 40 minutes).',
+      },
+      trains: {
+        mainStation: 'Palma Intermodal',
+        description: 'Palma Intermodal (15-minute walk/bus from terminals). Narrow-gauge to Soller, regional to island towns.',
+        localHubs: 'Intermodal for buses/trains integration.',
+      },
+      cruiseLines: 'Key Mediterranean homeport for MSC, Royal Caribbean, Costa, TUI and premium lines.',
+    },
+
+    gettingAround: {
+      fromPort: 'Exit terminals to marina promenade for walking into Palma or bus stops (lines 1, 4, 20) to centre/beaches; taxis rank immediately outside. EMT buses link airport, city and resorts efficiently.',
+      publicTransport: 'No metro, but extensive bus network covers beaches (Playa de Palma 20 minutes), Valldemossa and trains from Palma Intermodal station (15-minute walk/bus). Distances modest: cathedral 2.5 miles, beaches 4 to 6 km.',
+      taxis: 'Taxis rank immediately outside terminals.',
+      walkingDistance: 'Cathedral/old town 30 to 45 minutes along marina (2 to 4 km).',
+      sightseeingBus: 'Hop-on hop-off buses depart near terminals, looping cathedral, palace and coastal viewpoints.',
+    },
+    
+    // Must-see sights (the headline attractions)
+    mustSeeSights: [
+      {
+        title: 'Palma Cathedral (La Seu)',
+        description: 'Gothic masterpiece with Gaudi interiors overlooking bay.',
+        image: 'palma-cathedral.webp',
+      },
+      {
+        title: 'Almudaina Palace',
+        description: 'Royal residence with Moorish patios and gardens.',
+        image: 'almudaina-palace.webp',
+      },
+      {
+        title: 'Old town and Santa Eulalia square',
+        description: 'Narrow lanes, boutiques and tapas bars in historic core.',
+        image: 'palma-old-town.webp',
+      },
+      {
+        title: 'Bellver Castle',
+        description: 'Hilltop fortress with panoramic city views.',
+        image: 'bellver-castle.webp',
+      },
+      {
+        title: 'Playa de Palma beach',
+        description: 'Long urban strand with watersports (bus 20 minutes).',
+        image: 'playa-de-palma.webp',
+      },
+      {
+        title: 'Valldemossa day trip',
+        description: 'Mountain village with Chopin history (train/bus 30 minutes).',
+        image: 'valldemossa.webp',
+      },
+    ],
+
+    thingsToDo: [
+      {
+        title: 'Palma Cathedral (La Seu)',
+        description: 'Gothic masterpiece with Gaudi interiors overlooking bay.',
+        category: 'culture',
+        duration: '1 to 1.5 hours',
+      },
+      {
+        title: 'Almudaina Palace',
+        description: 'Royal residence with Moorish patios and gardens.',
+        category: 'history',
+        duration: '1 hour',
+      },
+      {
+        title: 'Old town and Santa Eulalia square',
+        description: 'Narrow lanes, boutiques and tapas bars in historic core.',
+        category: 'exploration',
+        duration: '2 hours',
+      },
+      {
+        title: 'Bellver Castle',
+        description: 'Hilltop fortress with panoramic city views.',
+        category: 'history',
+        duration: '1.5 hours',
+      },
+      {
+        title: 'Playa de Palma beach',
+        description: 'Long urban strand with watersports (bus 20 minutes).',
+        category: 'beach',
+        duration: '2 to 3 hours',
+      },
+      {
+        title: 'Valldemossa day trip',
+        description: 'Mountain village with Chopin history (train/bus 30 minutes).',
+        category: 'experience',
+        duration: '4 hours',
+      },
+    ],
+    
+    // Nearest beach info
+    nearestBeach: {
+      name: 'Can Pere Antoni or city beaches along marina',
+      description: 'Sandy urban strands with promenades, bars and calm waters near terminals.',
+      distance: '20 to 30 minute walk/bus along coast from Poniente quays.',
+    },
+
+    shoreExcursions: [
+      {
+        title: 'Palma Cathedral and Old Town',
+        description: 'Explore the Gothic cathedral with Gaudi interiors, royal palace and historic centre.',
+        duration: 'Half day',
+        bookWith: 'Either',
+      },
+      {
+        title: 'Valldemossa Mountain Village',
+        description: 'Mountain village with Chopin history and scenic views, 30 minutes from port.',
+        duration: '4 hours',
+        bookWith: 'Either',
+      },
+      {
+        title: 'Beach Day at Playa de Palma',
+        description: 'Relax at the long urban beach with watersports and beach bars.',
+        duration: 'Half day',
+        bookWith: 'Independent',
+      },
+      {
+        title: 'Bellver Castle Tour',
+        description: 'Visit the hilltop fortress for panoramic city views and historical exhibits.',
+        duration: '2 hours',
+        bookWith: 'Either',
+      },
+    ],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'Late spring/early autumn for beach weather minus crowds',
+      cruiseTerminals: ['Estacion Maritima 1-5 (Poniente/Paraires/Dique del Oeste)'],
+      parking: 'Not applicable for cruise passengers',
+      nearbyAirport: 'Palma de Mallorca (PMI), 8 to 10 km',
+      visaInfo: 'Schengen (Spain); visa-free short stays for many—check rules',
+      timeZone: 'Central European Time (CET), Central European Summer Time (CEST) in summer',
+      power: 'Type C and F plugs, 230V',
+      water: 'Tap water is generally safe to drink',
+      dressCode: 'Cathedral expects shoulders and thighs reasonably covered',
+    },
+
+    // Time required estimates
+    timeRequired: {
+      intro: 'Here is an idea of how long you will need for the key sights in Palma de Mallorca.',
+      estimates: [
+        { sight: 'Palma Cathedral and Almudaina Palace', time: '2 to 2.5 hours' },
+        { sight: 'Old town exploration', time: '2 hours' },
+        { sight: 'Bellver Castle', time: '1.5 hours plus travel' },
+        { sight: 'Playa de Palma beach', time: '2 to 3 hours' },
+      ],
+      summary: 'For a standard cruise day of 8 to 10 hours ashore, combining the cathedral, palace, old town and beach is realistic with efficient planning.',
+    },
+
+    foodAndDrink: [
+      {
+        name: 'Porto Pi mall food court',
+        type: 'Food Hall',
+        description: 'Tapas, paella near terminals.',
+      },
+      {
+        name: 'Old town ensaimadas bakeries',
+        type: 'Bakery',
+        description: 'Sweet spiral pastries and coffee.',
+      },
+      {
+        name: 'Marina seafood',
+        type: 'Restaurant strip',
+        description: 'Fresh fish along promenade walk.',
+      },
+      {
+        name: 'Santa Catalina market',
+        type: 'Market',
+        description: 'Local sobrasada, olives in hip district.',
+      },
+    ],
+    
+    // Nearest familiar option
+    fastFood: {
+      name: 'McDonald\'s',
+      description: 'There are McDonald\'s locations in the city centre and near Porto Pi shopping centre, accessible from the cruise terminals.',
+      alternatives: 'Other familiar chains can be found in the city centre and shopping areas.',
+    },
+
+    insiderTips: [
+      'Cathedral/palace combo tickets online save time and money.',
+      'Normal vigilance in crowds; pickpockets can be an issue.',
+      'Early cathedral visits avoid lines; buses peak midday.',
+      'Bus 4/20 to centre; validate tickets.',
+      'Avoid long walks in heat; unregulated beach vendors.',
+      'Sun protection essential year-round.',
+    ],
+    
+    // FAQ section
+    faq: [
+      {
+        question: 'Is the port walkable?',
+        answer: 'Yes to old town via marina (30 to 45 minutes).',
+      },
+      {
+        question: 'How long do you need?',
+        answer: 'Half-day cathedral/old town; full day beach/trip.',
+      },
+      {
+        question: 'Is English spoken?',
+        answer: 'Port/tourist areas yes.',
+      },
+      {
+        question: 'What\'s the best way to get around?',
+        answer: 'Walking promenade or buses 4/20.',
+      },
+      {
+        question: 'Can you do beaches on cruise day?',
+        answer: 'Yes, bus 20 minutes.',
+      },
+    ],
+
+    // Monthly weather data
+    weather: {
+      intro: 'Palma de Mallorca enjoys a Mediterranean climate with hot, dry summers and mild winters.',
+      months: [
+        { month: 'Jan', highC: 15, lowC: 8, rainMm: 50, sunDays: 18, seaTempC: 15 },
+        { month: 'Feb', highC: 15, lowC: 8, rainMm: 45, sunDays: 18, seaTempC: 15 },
+        { month: 'Mar', highC: 17, lowC: 10, rainMm: 40, sunDays: 20, seaTempC: 15 },
+        { month: 'Apr', highC: 19, lowC: 12, rainMm: 40, sunDays: 22, seaTempC: 16 },
+        { month: 'May', highC: 22, lowC: 15, rainMm: 30, sunDays: 25, seaTempC: 18 },
+        { month: 'Jun', highC: 26, lowC: 19, rainMm: 20, sunDays: 28, seaTempC: 21 },
+        { month: 'Jul', highC: 29, lowC: 22, rainMm: 10, sunDays: 30, seaTempC: 24 },
+        { month: 'Aug', highC: 30, lowC: 22, rainMm: 20, sunDays: 29, seaTempC: 25 },
+        { month: 'Sep', highC: 27, lowC: 20, rainMm: 40, sunDays: 26, seaTempC: 24 },
+        { month: 'Oct', highC: 23, lowC: 16, rainMm: 60, sunDays: 22, seaTempC: 22 },
+        { month: 'Nov', highC: 19, lowC: 12, rainMm: 70, sunDays: 19, seaTempC: 19 },
+        { month: 'Dec', highC: 16, lowC: 9, rainMm: 60, sunDays: 18, seaTempC: 16 },
+      ],
+      bestTime: {
+        overall: 'May-June/September for warmth without peak crowds',
+        hottest: 'July-August beach perfect but busy',
+        quietest: 'Spring/autumn mild, fewer tourists',
+        recommendation: 'Late spring for cathedral walks',
+      },
+    },
+
+    relatedDestinations: ['mediterranean-cruises', 'spain-cruises'],
+    
+    meta: {
+      title: 'Palma de Mallorca Cruise Port Guide | Cathedral, Beaches & Balearic Charm',
+      description: 'Complete Palma de Mallorca cruise port guide. Visit the Gothic cathedral, explore the old town, relax on beaches, discover Bellver Castle with insider tips for your Balearic cruise.',
+      keywords: ['Palma de Mallorca cruise port', 'Palma cruise terminal', 'Palma shore excursions', 'Palma things to do', 'Mallorca from cruise ship', 'Palma cathedral'],
     },
     
     status: 'published',

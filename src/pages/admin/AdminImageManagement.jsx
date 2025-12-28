@@ -15,6 +15,7 @@ import { logger } from '../../utils/logger';
 import { cruiseLines } from '../../data/cruiseLines';
 import { destinations } from '../../config/destinations';
 import { bucketListExperiences } from '../../data/bucketList';
+import { ports } from '../../data/ports';
 import './AdminImageManagement.css';
 
 function AdminImageManagement() {
@@ -60,7 +61,8 @@ function AdminImageManagement() {
         'cruise-line': ['logo', 'hero', 'card'],
         ship: [], // SHIPS ARE OPTIONAL - Future enhancement, not required for launch
         category: ['card'],
-        'bucket-list': ['hero', 'card']
+        'bucket-list': ['hero', 'card'],
+        'port-guide': ['hero'] // Port guides require hero image
       };
 
       const OPTIONAL_IMAGE_TYPES = {
@@ -69,7 +71,8 @@ function AdminImageManagement() {
         'cruise-line': [],
         ship: ['exterior', 'deck', 'suite', 'dining', 'pool', 'entertainment', 'spa', 'theater'], // ALL SHIP IMAGES ARE OPTIONAL
         category: [],
-        'bucket-list': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4']
+        'bucket-list': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4'],
+        'port-guide': ['port-terminal', 'attraction-1', 'attraction-2', 'attraction-3', 'attraction-4', 'attraction-5', 'attraction-6', 'beach', 'food'] // Optional port images
       };
 
       // Calculate stats per entity type
@@ -179,6 +182,12 @@ function AdminImageManagement() {
       const requiredBucketList = bucketListExperiences.length * 2;
       newStats.bucketList.missing = Math.max(0, requiredBucketList - newStats.bucketList.requiredUploaded);
       newStats.bucketList.optional = newStats.bucketList.optionalUploaded;
+
+      // Port Guides: count published ports × 1 required (hero)
+      const publishedPorts = ports.filter(p => p.status === 'published');
+      const requiredPortGuides = publishedPorts.length * 1; // hero per port
+      newStats.portGuides.missing = Math.max(0, requiredPortGuides - newStats.portGuides.requiredUploaded);
+      newStats.portGuides.optional = newStats.portGuides.optionalUploaded;
 
       setStats(newStats);
       setWarningImages(imagesWithWarnings);
