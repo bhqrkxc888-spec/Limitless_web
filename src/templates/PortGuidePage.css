@@ -476,16 +476,44 @@
 /* Must-See Sights */
 .must-see-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
   margin-top: 1.5rem;
 }
 
 .must-see-card {
-  background: linear-gradient(135deg, var(--color-primary-light) 0%, white 100%);
-  border: 1px solid var(--color-primary-light);
+  background: white;
+  border: 1px solid var(--color-gray-200);
   border-radius: 12px;
-  padding: 1.5rem;
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.must-see-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  transform: translateY(-3px);
+}
+
+.must-see-image {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  background: var(--color-gray-100);
+}
+
+.must-see-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.must-see-card:hover .must-see-image img {
+  transform: scale(1.05);
+}
+
+.must-see-content {
+  padding: 1.25rem;
 }
 
 .must-see-card h3 {
@@ -499,6 +527,16 @@
   color: var(--color-gray-600);
   margin: 0;
   line-height: 1.6;
+}
+
+/* Card without image */
+.must-see-card:not(:has(.must-see-image)) {
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, white 100%);
+  border-color: var(--color-primary-light);
+}
+
+.must-see-card:not(:has(.must-see-image)) .must-see-content {
+  padding: 1.5rem;
 }
 
 /* Beach Info */

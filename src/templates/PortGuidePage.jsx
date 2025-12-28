@@ -3,9 +3,13 @@ import { getPortBySlug, getRegionBySlug } from '../data/ports';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
+import OptimizedImage from '../components/OptimizedImage';
 import { Button, SectionHeader, Card } from '../components/ui';
-import { getSupabaseImageUrl } from '../config/assetUrls';
+import { getSupabaseImageUrl, SITE_ASSETS } from '../config/assetUrls';
 import './PortGuidePage.css';
+
+// Fallback hero image uses site's default hero or logo
+const FALLBACK_HERO = SITE_ASSETS.heroDefault || '/images/placeholders/coming-soon.svg';
 
 /**
  * Port Guide Page Template
@@ -31,8 +35,8 @@ function PortGuidePage() {
 
   const region = getRegionBySlug(port.region);
 
-  // Construct hero image URL
-  const heroImage = getSupabaseImageUrl('WEB_categories', `ports/${port.region}/${port.slug}/hero.webp`);
+  // Construct hero image URL with fallback
+  const heroImage = getSupabaseImageUrl('WEB_categories', `ports/${port.region}/${port.slug}/hero.webp`) || FALLBACK_HERO;
 
   // Structured Data for SEO
   const structuredData = {
@@ -168,6 +172,38 @@ function PortGuidePage() {
                 </div>
               )}
 
+              {/* Getting Around - MOVED UP for logical flow */}
+              <div className="port-section">
+                <SectionHeader
+                  title="Getting Around"
+                  subtitle="How to navigate from port to attractions"
+                />
+                <div className="getting-around-grid">
+                  <div className="getting-around-item">
+                    <h4>🚢 From the Port</h4>
+                    <p>{port.gettingAround.fromPort}</p>
+                  </div>
+                  <div className="getting-around-item">
+                    <h4>🚌 Public Transport</h4>
+                    <p>{port.gettingAround.publicTransport}</p>
+                  </div>
+                  <div className="getting-around-item">
+                    <h4>🚕 Taxis</h4>
+                    <p>{port.gettingAround.taxis}</p>
+                  </div>
+                  <div className="getting-around-item">
+                    <h4>🚶 Walking</h4>
+                    <p>{port.gettingAround.walkingDistance}</p>
+                  </div>
+                  {port.gettingAround.sightseeingBus && (
+                    <div className="getting-around-item getting-around-full">
+                      <h4>🚍 Sightseeing Bus</h4>
+                      <p>{port.gettingAround.sightseeingBus}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
               {/* Transport Connections */}
               {port.transportConnections && (
                 <div className="port-section">
@@ -210,12 +246,32 @@ function PortGuidePage() {
                     subtitle="The headline attractions you shouldn't miss"
                   />
                   <div className="must-see-grid">
-                    {port.mustSeeSights.map((sight, index) => (
-                      <div key={index} className="must-see-card">
-                        <h3>{sight.title}</h3>
-                        <p>{sight.description}</p>
-                      </div>
-                    ))}
+                    {port.mustSeeSights.map((sight, index) => {
+                      // Build image URL if sight has image reference
+                      const sightImage = sight.image 
+                        ? getSupabaseImageUrl('WEB_categories', `ports/${port.region}/${port.slug}/${sight.image}`)
+                        : null;
+                      
+                      return (
+                        <div key={index} className="must-see-card">
+                          {sightImage && (
+                            <div className="must-see-image">
+                              <OptimizedImage
+                                src={sightImage}
+                                alt={sight.title}
+                                width={400}
+                                height={250}
+                                sizes="(max-width: 768px) 100vw, 400px"
+                              />
+                            </div>
+                          )}
+                          <div className="must-see-content">
+                            <h3>{sight.title}</h3>
+                            <p>{sight.description}</p>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -282,38 +338,6 @@ function PortGuidePage() {
                   </div>
                 </div>
               )}
-
-              {/* Getting Around */}
-              <div className="port-section">
-                <SectionHeader
-                  title="Getting Around"
-                  subtitle="How to navigate from port to attractions"
-                />
-                <div className="getting-around-grid">
-                  <div className="getting-around-item">
-                    <h4>🚢 From the Port</h4>
-                    <p>{port.gettingAround.fromPort}</p>
-                  </div>
-                  <div className="getting-around-item">
-                    <h4>🚌 Public Transport</h4>
-                    <p>{port.gettingAround.publicTransport}</p>
-                  </div>
-                  <div className="getting-around-item">
-                    <h4>🚕 Taxis</h4>
-                    <p>{port.gettingAround.taxis}</p>
-                  </div>
-                  <div className="getting-around-item">
-                    <h4>🚶 Walking</h4>
-                    <p>{port.gettingAround.walkingDistance}</p>
-                  </div>
-                  {port.gettingAround.sightseeingBus && (
-                    <div className="getting-around-item getting-around-full">
-                      <h4>🚍 Sightseeing Bus</h4>
-                      <p>{port.gettingAround.sightseeingBus}</p>
-                    </div>
-                  )}
-                </div>
-              </div>
 
               {/* Food & Drink */}
               {port.foodAndDrink && port.foodAndDrink.length > 0 && (
