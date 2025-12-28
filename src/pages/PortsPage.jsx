@@ -113,28 +113,21 @@ function PortsPage() {
           <div className="regions-grid">
             {regions.map((region) => {
               const portCount = getPortsCountByRegion(region.id);
-              const regionImage = getSupabaseImageUrl('WEB_categories', `ports/${region.id}/hero.webp`);
               
               return (
-                <Card 
-                  key={region.id} 
-                  to={`/ports/region/${region.slug}`} 
-                  variant="default"
-                  className="region-card"
+                <Link
+                  key={region.id}
+                  to={`/ports/region/${region.slug}`}
+                  className="region-link-card"
                 >
-                  <Card.Image 
-                    src={regionImage}
-                    alt={`${region.name} cruise ports`}
-                    aspectRatio="3/2"
-                  />
-                  <Card.Content>
-                    <Card.Title as="h3">{region.name}</Card.Title>
-                    <Card.Description>{region.description}</Card.Description>
+                  <div className="region-card-content">
+                    <h3>{region.name}</h3>
+                    <p>{region.description}</p>
                     <div className="region-meta">
                       <span className="port-count">{portCount} port{portCount !== 1 ? 's' : ''}</span>
                     </div>
-                  </Card.Content>
-                </Card>
+                  </div>
+                </Link>
               );
             })}
           </div>

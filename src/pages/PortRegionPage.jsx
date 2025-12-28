@@ -115,36 +115,9 @@ function PortRegionPage() {
 
           {ports.length > 0 ? (
             <div className="ports-grid">
-              {ports.map((port) => {
-                const portImage = getSupabaseImageUrl('WEB_categories', `ports/${region.id}/${port.slug}/card.webp`);
-                
-                return (
-                  <Card 
-                    key={port.id} 
-                    to={`/ports/${port.slug}`} 
-                    variant="default"
-                    className="port-card"
-                  >
-                    <Card.Image 
-                      src={portImage}
-                      alt={`${port.name} cruise port`}
-                      aspectRatio="3/2"
-                    />
-                    <Card.Content>
-                      <div className="port-card-header">
-                        <Card.Title as="h3">{port.name}</Card.Title>
-                        <span className="port-country">{port.country}</span>
-                      </div>
-                      <Card.Description>{port.tagline}</Card.Description>
-                      <div className="port-card-footer">
-                        <Button to={`/ports/${port.slug}`} variant="outline" size="sm" className="port-view-btn">
-                          View Port Guide →
-                        </Button>
-                      </div>
-                    </Card.Content>
-                  </Card>
-                );
-              })}
+              {ports.map((port) => (
+                <PortCardWithImage key={port.id} port={port} />
+              ))}
             </div>
           ) : (
             <div className="no-ports">
