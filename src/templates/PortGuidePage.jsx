@@ -37,11 +37,19 @@ function PortGuidePage() {
 
   // Construct hero image URL with fallback
   const heroImage = getSupabaseImageUrl('WEB_categories', `ports/${port.region}/${port.slug}/hero.webp`) || FALLBACK_HERO;
-  
-  // Beach image if available
-  const beachImage = port.nearestBeach?.image 
-    ? getSupabaseImageUrl('WEB_categories', `ports/${port.region}/${port.slug}/${port.nearestBeach.image}`)
-    : null;
+
+  // Category icons for things to do
+  const categoryIcons = {
+    culture: '🏛️',
+    history: '🏰',
+    nature: '🌿',
+    beach: '🏖️',
+    food: '🍽️',
+    shopping: '🛍️',
+    exploration: '🚶',
+    experience: '✨',
+    attraction: '🎢',
+  };
 
   // Structured Data for SEO
   const structuredData = {
