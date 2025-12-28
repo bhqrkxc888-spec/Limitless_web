@@ -134,3 +134,4 @@ export const portRegions = [
 **Created:** 28 December 2024  
 **Based on:** User request for fjords "all the way up to Tromsø and Arctic Circle"
 
+

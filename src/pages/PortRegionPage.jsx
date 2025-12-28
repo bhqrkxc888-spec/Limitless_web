@@ -26,13 +26,13 @@ function PortCardWithImage({ port }) {
       <Card.Content>
         <div className="port-card-header">
           <Card.Title as="h3">{port.name}</Card.Title>
-          <Card.Subtitle>{port.country}</Card.Subtitle>
+          <span className="port-card-subtitle">{port.country}</span>
         </div>
-        <Card.Text>{port.tagline}</Card.Text>
+        <Card.Description>{port.tagline}</Card.Description>
         <div className="port-card-button-wrapper">
-          <Button to={`/ports/${port.slug}`} variant="outline" size="sm" className="port-card-button">
+          <span className="btn btn-outline btn-sm port-card-button">
             View Port Guide →
-          </Button>
+          </span>
         </div>
       </Card.Content>
     </Card>

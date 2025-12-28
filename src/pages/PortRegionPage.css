@@ -73,7 +73,8 @@
   gap: 0.25rem;
 }
 
-.port-card .port-country {
+.port-card .port-country,
+.port-card .port-card-subtitle {
   font-size: 0.8rem;
   color: var(--color-gray-500);
 }
