@@ -1276,6 +1276,15 @@
   margin: 0 0 var(--space-2);
 }
 
+.port-footer .disclaimer-text {
+  max-width: 800px;
+  margin: 0 auto var(--space-4);
+}
+
+.port-footer .disclaimer-text strong {
+  color: var(--clr-text);
+}
+
 .update-date {
   font-weight: 500;
   color: var(--clr-text-muted);

@@ -38,6 +38,13 @@ export const portRegions = [
     description: 'Island ports including Madeira and the Canary Islands',
     image: null,
   },
+  {
+    id: 'norwegian-fjords',
+    slug: 'norwegian-fjords',
+    name: 'Norwegian Fjords',
+    description: 'Dramatic fjords, Arctic Circle and Northern Lights destinations',
+    image: null,
+  },
 ];
 
 export const ports = [
@@ -2901,22 +2908,22 @@ export const ports = [
     name: 'A Coruña',
     country: 'Spain',
     region: 'atlantic-coast',
-    coordinates: { lat: 43.37, lon: -8.40 },
-    tagline: 'Oldest lighthouse meets Galician glass galleries',
-    description: 'A Coruña is a compact Atlantic cruise port right in the city centre at the Transatlantic Quay, placing passengers just a 5-minute walk from the old town, glass-fronted Marina district and sandy beaches. Its modern terminal offers shopping, Wi-Fi and tourist info, making it ideal for short calls focused on the UNESCO-listed Tower of Hercules and Galician seafood.',
+    coordinates: { lat: 43.3719, lon: -8.3954 },
+    tagline: 'Glass city by the Atlantic',
+    description: 'A Coruña charms with distinctive galería buildings, a promontory harbour, and the world\'s oldest functioning lighthouse amid Galician seafood culture. Cruise ships dock centrally for walkable access to Maria Pita Square and old town, with quick trips to Santiago\'s cathedral.',
     
     aboutPort: {
-      overview: 'A Coruña\'s cruise facilities centre on the exclusive Transatlantic Quay (484m, 11m draft) with a passenger terminal featuring Los Cantones shopping and services, plus Calvo Sotelo Quay for multi-ship days. The port handled 140+ calls in 2023, docking downtown for immediate access to historic streets and promenades.',
+      overview: 'Transatlantic Quay offers direct downtown docking with modern terminal, WiFi, tourist info, and taxi ranks; Calvo Sotelo handles overflow. Record 2022 season with 136 calls.',
       terminals: 'Transatlantic Quay terminal provides check-in, free Wi-Fi, shops, cafés and info desks in a central location next to commercial areas. Calvo Sotelo (420m) handles overflow with provisional facilities and road access.',
-      shuttleServices: 'No shuttles needed: exits lead straight to Avenida da Mariña\'s glass buildings and promenades; taxis park nearby. Beaches and old town lie within 10 to 15 minutes on foot.',
-      walkability: 'The port is in the city centre with old town, Marina district and beaches just 5 minutes away on foot.',
+      shuttleServices: 'No shuttles needed: exits lead straight to Avenida da Mariña\'s glass buildings and promenades; taxis park nearby.',
+      walkability: '5-minute walk to Maria Pita Square; no shuttles needed. Beaches and old town lie within 10 to 15 minutes on foot.',
     },
 
     quickFacts: {
       currency: 'EUR (€)',
-      language: 'Spanish and Galician; English common at terminal',
-      timezone: 'Central European Time (CET), CEST in summer',
-      portType: 'Port of Call primarily',
+      language: 'Galician, Spanish, English (tourist areas)',
+      timezone: 'CET (UTC+1, +2 summer)',
+      portType: 'Port of Call',
       walkable: true,
       tenderRequired: false,
     },
@@ -2924,191 +2931,275 @@ export const ports = [
     transportConnections: {
       airport: {
         name: 'A Coruña Airport (LCG)',
-        distance: '8 km (15 minutes)',
-        options: 'Taxi: 15 minutes. Bus: Line A1 to city (20 minutes).',
+        distance: '8 km, 15 minutes taxi',
+        options: 'Taxi: 15 minutes. Bus: C2 line (1.50 euros) to city centre.',
       },
       trains: {
         mainStation: 'A Coruña Station',
-        description: 'Regional to Santiago, Ferrol.',
-        localHubs: 'A Coruña Station is a 10-minute walk from the port.',
+        description: 'Regional services to Santiago (40 minutes) and Ferrol. A Coruña Station is a 15-minute walk from the port.',
+        localHubs: 'A Coruña Station connects to Santiago de Compostela for pilgrimage routes and regional travel.',
       },
-      cruiseLines: ['Cunard', 'P&O Cruises', 'Celebrity Cruises'],
+      cruiseLines: ['P&O Cruises', 'MSC Cruises', 'AIDA Cruises', 'Fred. Olsen Cruise Lines'],
     },
     
     gettingAround: {
-      fromPort: 'Walk from quay along waterfront to old town, aquarium or beaches; buses (1.30 euros cash) fan out from central hub. Taxis handle longer trips to Tower of Hercules.',
-      publicTransport: 'Buses serve beaches and Domus museum; no metro but efficient network covers city. Key sights 5 to 20 minutes walking; Tower 30 minutes by bus/taxi. Hop-on hop-off available near terminal.',
-      taxis: 'Taxis available at terminal for trips to Tower of Hercules or airport.',
-      walkingDistance: 'Most key sights are within 5 to 20 minutes walking from the port. Tower of Hercules is 30 minutes by bus or taxi.',
-      sightseeingBus: 'Hop-on hop-off bus available near terminal, covering major sights including Tower of Hercules, old town and beaches.',
-      accessibility: 'City centre is walkable with level paths. Tower of Hercules may require assistance for steep sections.',
+      fromPort: 'Exit terminal for 5-minute flat walk to old town and Maria Pita Square. Buses available to Santiago and beaches; taxis for longer trips.',
+      publicTransport: 'Buses serve beaches and Domus museum; no metro but efficient network covers city. Bus to Santiago costs 12 euros return. Hop-on hop-off bus loops Tower of Hercules and beaches (15 euros).',
+      taxis: 'Taxis available at terminal. Expect around 80 euros for trips to Santiago. Short city trips are affordable.',
+      walkingDistance: 'Most key sights are within 5 to 20 minutes walking from the port. Tower of Hercules is 30 minutes walk or by bus.',
+      sightseeingBus: 'Hop-on hop-off bus available near terminal, covering major sights including Tower of Hercules, beaches and city centre. Tickets 15 euros.',
+      accessibility: 'City centre is walkable with level paths. Tower of Hercules has 234 steps and may require assistance for steep sections.',
     },
     
     mustSeeSights: [
       {
         title: 'Tower of Hercules',
-        description: 'World\'s oldest working Roman lighthouse (UNESCO), clifftop views over the Atlantic. A historic landmark dating back to Roman times with stunning coastal panoramas.',
-        image: 'tower-of-hercules.webp',
-        duration: '2 hours',
+        category: 'landmark',
+        description: 'Roman lighthouse (UNESCO), 2nd-century, 55m climb for panoramas over the Atlantic. World\'s oldest working Roman lighthouse with stunning coastal views from the top.',
+        duration: '1.5 to 2 hours for a relaxed pace',
+        tips: [
+          'Entry costs 2.50 euros; book online to avoid weekend queues',
+          'Climb all 234 steps for the best views from the top',
+          'Visit at sunset for spectacular coastal panoramas'
+        ],
+        highlights: ['History', 'Views', 'Architecture'],
+        goodFor: ['First-time visitors', 'Photographers'],
       },
       {
-        title: 'Old Town (Ciudad Vieja)',
-        description: 'Medieval streets, churches, Maria Pita Square. The historic heart of A Coruña with charming narrow lanes and traditional architecture.',
-        image: 'old-town-coruna.webp',
-        duration: '1.5 hours',
+        title: 'Maria Pita Square',
+        category: 'historic',
+        description: 'Heroine statue, town hall, cafés in glass-balconied core. The heart of A Coruña with historic buildings, lively atmosphere and traditional Galician character.',
+        duration: '45 minutes to 1 hour for a relaxed pace',
+        tips: [
+          'Perfect for morning coffee and people-watching',
+          'Free WiFi available in the square',
+          'Nearby cafés offer excellent views of the historic architecture'
+        ],
+        highlights: ['Culture', 'Architecture', 'Food'],
+        goodFor: ['First-time visitors'],
       },
       {
-        title: 'Glass galleries (Marina)',
-        description: 'Iconic modern facades along promenade. The distinctive glass-fronted buildings that give A Coruña its nickname "Glass City", creating a unique waterfront aesthetic.',
-        image: 'glass-galleries-marina.webp',
-        duration: '45 minutes',
+        title: 'Old Town & San Carlos Garden',
+        category: 'stroll',
+        description: 'Medieval alleys, British general\'s tomb, boutique shops. Charming historic quarter with narrow lanes, traditional architecture and peaceful gardens.',
+        duration: '1 to 1.5 hours for a relaxed pace',
+        tips: [
+          'San Carlos Garden is free and perfect for a quiet break',
+          'Explore side streets for authentic local atmosphere',
+          'Stop for tapas lunch in one of the traditional tavernas'
+        ],
+        highlights: ['History', 'Culture', 'Photography'],
+        goodFor: ['Culture seekers'],
+      },
+      {
+        title: 'Domus Museum',
+        category: 'family',
+        description: 'Interactive science house with planetarium exploring human biology and evolution. Modern facility with engaging exhibits suitable for all ages.',
+        duration: '1 to 2 hours for a relaxed pace',
+        tips: [
+          '6 euros for combo ticket includes planetarium',
+          'Excellent hands-on exhibits for children',
+          'English displays available throughout'
+        ],
+        highlights: ['Museums', 'Family-friendly'],
+        goodFor: ['Families', 'First-time visitors'],
       },
       {
         title: 'Riazor/Orzán Beaches',
-        description: 'Urban sands steps from port. Wide double beach with promenades, volleyball facilities and easy access from the cruise terminal.',
-        image: 'riazor-orzan-beaches.webp',
-        duration: '1 to 2 hours',
+        category: 'beach',
+        description: 'Urban twin golden sands with promenade, surf, and city backdrop. Wide double beach with excellent facilities, perfect for families and beach activities.',
+        duration: '2 to 3 hours for a relaxed pace',
+        tips: [
+          'Riazor is quieter than Orzán for a more relaxed experience',
+          'Surfing lessons available in summer months',
+          'Promenade restaurants offer excellent seafood with beach views'
+        ],
+        highlights: ['Beaches', 'Nature', 'Active'],
+        goodFor: ['Families', 'Active travelers'],
       },
       {
-        title: 'Domus (House of Man)',
-        description: 'Interactive science museum exploring human biology and evolution. Modern facility with engaging exhibits suitable for all ages.',
-        image: 'domus-house-of-man.webp',
-        duration: '1.5 hours',
-      },
-      {
-        title: 'Aquarium Finisterrae',
-        description: 'Marine life exhibits near beaches. Coastal aquarium featuring Atlantic marine species with tanks and interactive displays overlooking the ocean.',
-        image: 'aquarium-finisterrae.webp',
-        duration: '1.5 hours',
+        title: 'Santiago de Compostela Excursion',
+        category: 'excursion',
+        description: 'Pilgrim cathedral, UNESCO old town (1 hour bus). The famous pilgrimage city with stunning cathedral and historic streets. Best suited to longer port calls.',
+        duration: '6 to 8 hours for a relaxed pace',
+        tips: [
+          'Bus costs 12 euros return; book ahead for peak times',
+          'Focus on cathedral square for the main highlights',
+          'Time your visit to potentially see the botafumeiro ceremony'
+        ],
+        highlights: ['History', 'Religious', 'Architecture'],
+        goodFor: ['Culture seekers', 'First-time visitors'],
       },
     ],
 
     thingsToDo: [
       {
         title: 'Visit Tower of Hercules',
-        description: 'Climb or view the world\'s oldest working Roman lighthouse with UNESCO status and clifftop Atlantic views.',
+        description: 'Climb the world\'s oldest working Roman lighthouse with UNESCO status and clifftop Atlantic views.',
         category: 'history',
-        duration: '2 hours',
+        duration: '1.5 to 2 hours',
       },
       {
-        title: 'Explore Old Town',
-        description: 'Wander medieval streets and visit Maria Pita Square in the historic Ciudad Vieja quarter.',
+        title: 'Explore Maria Pita Square and Old Town',
+        description: 'Discover the historic heart of A Coruña with its heroine statue, traditional architecture and charming medieval streets.',
         category: 'culture',
-        duration: '1.5 hours',
+        duration: '1.5 to 2 hours',
       },
       {
         title: 'Stroll Marina glass galleries',
-        description: 'Admire the iconic glass-fronted buildings along the waterfront promenade that give the city its distinctive character.',
-        category: 'architecture',
+        description: 'Admire the iconic glass-fronted buildings along the waterfront promenade that give the city its distinctive "Glass City" character.',
+        category: 'stroll',
         duration: '45 minutes',
       },
       {
         title: 'Relax at Riazor/Orzán Beaches',
-        description: 'Enjoy the urban double beach with promenades, just steps from the port.',
+        description: 'Enjoy the urban twin beaches with promenades, surf culture and excellent facilities, just minutes from the port.',
         category: 'beach',
-        duration: '1 to 2 hours',
+        duration: '2 to 3 hours',
       },
     ],
     
     shoreExcursions: [
       {
         title: 'Santiago de Compostela',
-        description: 'Day trip to the famous pilgrimage city and cathedral, approximately one hour away by coach.',
+        description: 'Day trip to the famous pilgrimage city and cathedral, approximately one hour away by coach or bus.',
         duration: 'Full day',
-        bookWith: 'Cruise line recommended for longer calls',
+        bookWith: 'Cruise line recommended for longer calls, or independent via bus',
       },
     ],
     
     nearestBeach: {
-      name: 'Riazor/Orzán (double urban beach)',
-      description: 'Wide sands with promenades, volleyball, near old town. Popular urban beaches directly accessible from the port area.',
-      gettingThere: '5 to 10 minute walk from terminal.',
-      image: 'beach.webp',
+      name: 'Riazor/Orzán Beaches',
+      description: 'Urban twin golden sands with promenade, surf, and city backdrop. Wide double beach with excellent facilities and easy access from the port.',
+      type: 'sand',
+      waterEntry: 'shallow entry',
+      shelter: 'partially sheltered',
+      crowdLevel: 'busy in summer',
+      facilities: {
+        lifeguards: true,
+        lifeguardsSeasonal: true,
+        sunbeds: true,
+        umbrellas: true,
+        showers: true,
+        toilets: true,
+        restaurants: true,
+        changingRooms: true,
+      },
+      access: {
+        walkTime: '20 minutes from port',
+        taxiTime: '5 minutes',
+        busRoute: 'Bus 3A',
+        notes: 'Flat promenade walk, no steep paths',
+      },
+      bestFor: ['families with children', 'surfing', 'people watching'],
+      tip: 'Riazor quieter than Orzán.',
     },
     
     foodAndDrink: [
       {
-        name: 'Marina seafood',
-        type: 'Restaurant strip',
-        description: 'Pulpo a la gallega, razor clams quayside. Traditional Galician seafood restaurants along the waterfront serving fresh local specialities.',
+        name: 'Maria Pita tapas',
+        type: 'Tapas Bar',
+        description: 'Pulpo gallego and traditional Galician tapas in square cafés. Perfect spot for authentic local flavours and people-watching.',
       },
       {
-        name: 'Old town tapas',
-        type: 'Tapas bars',
-        description: 'Empanadas, albariño wine. Charming tapas bars in the historic quarter offering Galician flavours and local wines.',
+        name: 'Orzán beach chiringuitos',
+        type: 'Beach Bar',
+        description: 'Fresh sardines and seafood at beachfront bars. Relaxed atmosphere with excellent views of the Atlantic.',
       },
       {
-        name: 'Terminal cafés',
-        type: 'Café',
-        description: 'Quick Galician coffee and pastries. Convenient cafés in the terminal area for a quick refreshment before exploring.',
+        name: 'Old town markets',
+        type: 'Market',
+        description: 'Empanadas, cheeses and local produce at traditional market stalls. Authentic Galician flavours in the historic quarter.',
       },
       {
-        name: 'Beach chiringuitos',
-        type: 'Beach bar',
-        description: 'Seafood overlooking Atlantic. Beach bars along Riazor/Orzán serving fresh seafood with ocean views.',
+        name: 'Harbour seafood',
+        type: 'Restaurant',
+        description: 'Razor clams and fresh seafood near terminal. Traditional Galician restaurants serving the day\'s catch.',
       },
     ],
     
     insiderTips: [
-      'Booking tickets in advance: Tower of Hercules (2 to 3 euros).',
-      'Safety and pickpockets: Very safe; normal vigilance.',
-      'Timing and queues: Beaches busy weekends; early Tower best.',
-      'Transport advice: Bus cash only (1.30 euros); walk most sights.',
-      'Things to avoid: Forgetting beach towels in winter chill.',
-      'Try raxo (pork strips), a local Galician speciality.',
+      'Tower tickets online; queues weekends. Book in advance to avoid waiting, especially during peak summer months.',
+      'Pickpockets low; standard vigilance. Very safe city but maintain normal precautions in busy areas.',
+      'Lighthouse mornings; Santiago buses book ahead. Early visits to Tower of Hercules have better light; reserve bus tickets to Santiago in advance.',
+      'Walk centre/beaches; buses excursions. Most sights are easily walkable; use buses for longer trips like Santiago.',
+      'Cards everywhere; cash useful for markets; minimal tip. Cards widely accepted; have some euros for market stalls and small tips.',
+      'Siesta 2 to 5pm; relaxed Galician pace. Many shops and restaurants close during siesta hours; plan accordingly.',
+      'Skip tourist traps; local pulperías authentic. Head away from main squares for authentic Galician octopus and seafood.',
+      'Free terminal WiFi; Google Maps. Terminal offers free WiFi; download offline maps before exploring.',
     ],
     
     faq: [
       {
-        question: 'Is the port walkable?',
-        answer: 'Yes to centre/beaches. The old town, Marina and beaches are just 5 to 10 minutes walk from the terminal.',
+        question: 'Is A Coruña walkable from the cruise port?',
+        answer: 'Yes, 5 minutes to Maria Pita Square. The old town, Marina and beaches are easily accessible on foot from the terminal.',
       },
       {
-        question: 'How long do you need?',
-        answer: 'Half-day Tower/old town. A standard cruise day allows time to visit the Tower of Hercules, explore the old town and enjoy the beaches.',
+        question: 'How long do you need in A Coruña?',
+        answer: '6 to 8 hours for city and beach; full day if including Santiago excursion. A standard cruise day allows time to visit the Tower of Hercules, explore the old town and enjoy the beaches.',
       },
       {
-        question: 'Is English spoken?',
-        answer: 'Terminal yes. English is commonly spoken at the terminal and in tourist areas, though Spanish and Galician are the main languages.',
+        question: 'Is English widely spoken in A Coruña?',
+        answer: 'Tourist areas yes. English is commonly spoken at the terminal, in restaurants and tourist venues, though Spanish and Galician are the main languages.',
       },
       {
-        question: 'What\'s the best way to get around?',
-        answer: 'Walking/bus. Most sights are walkable from the port; buses are useful for the Tower of Hercules or beaches if preferred.',
+        question: 'Is A Coruña safe for tourists?',
+        answer: 'Very safe. A Coruña is considered one of Spain\'s safest cities with low crime rates and friendly locals. Standard vigilance recommended in busy areas.',
       },
       {
-        question: 'Can you do Tower on cruise day?',
-        answer: 'Yes, 30 minutes away. The Tower of Hercules is easily accessible by bus or taxi from the port within 30 minutes.',
+        question: 'Is A Coruña expensive?',
+        answer: 'Affordable; tapas around 10 euros. Prices are reasonable with excellent value in local restaurants and markets compared to major tourist destinations.',
+      },
+      {
+        question: 'Do I need cash in A Coruña or can I use card?',
+        answer: 'Cards dominant; euros useful for markets. Credit and debit cards are widely accepted, but carry some cash for market stalls and small local vendors.',
+      },
+      {
+        question: 'Should I book a ship excursion or explore independently?',
+        answer: 'Independent perfect. The city is easily walkable and accessible, making independent exploration ideal. Ship excursions may be useful for Santiago day trips.',
+      },
+      {
+        question: 'What is the best thing to do in A Coruña on a cruise day?',
+        answer: 'Tower to beach stroll. Combine a morning visit to the Tower of Hercules with an afternoon at the beaches and old town exploration for the perfect day.',
+      },
+      {
+        question: 'Are the beaches nice in A Coruña?',
+        answer: 'Urban sands family-friendly. Riazor and Orzán beaches offer excellent facilities, good surf conditions and are perfect for families with golden sand and clean waters.',
+      },
+      {
+        question: 'Can you do Santiago from A Coruña on a cruise day?',
+        answer: 'Yes, 1-hour bus. Santiago de Compostela is easily accessible via bus (12 euros return) or organised excursion, best suited to longer port calls of 8 hours or more.',
       },
     ],
     
     practicalInfo: {
-      bestTimeToVisit: 'Summer for beach and lighthouse combo. June to September offers the best weather for beach visits and lighthouse views.',
+      bestTimeToVisit: 'May to September for pleasant weather and beach conditions',
       cruiseTerminals: ['Transatlantic Quay', 'Calvo Sotelo'],
       nearbyAirport: 'A Coruña (LCG), 8 km',
-      visaInfo: 'Schengen (Spain); visa-free short stays—check rules',
+      visaInfo: 'None (Schengen). UK passport holders and EU citizens can visit visa-free for up to 90 days within 180 days.',
     },
 
     weather: {
-      intro: 'A Coruña has an Atlantic climate with mild temperatures year-round. Summers are pleasant for beach visits, while winters are mild but wet.',
+      intro: 'A Coruña has a mild Atlantic climate with pleasant summers and mild, wet winters. Summer months offer the best conditions for beach visits and sightseeing.',
       months: [
-        { month: 'Jan', highC: 13, lowC: 7, rainMm: 120, sunDays: 12, seaTempC: 14 },
-        { month: 'Feb', highC: 14, lowC: 7, rainMm: 110, sunDays: 13, seaTempC: 14 },
-        { month: 'Mar', highC: 15, lowC: 8, rainMm: 90, sunDays: 15, seaTempC: 14 },
-        { month: 'Apr', highC: 16, lowC: 9, rainMm: 80, sunDays: 16, seaTempC: 14 },
-        { month: 'May', highC: 18, lowC: 11, rainMm: 70, sunDays: 18, seaTempC: 15 },
-        { month: 'Jun', highC: 21, lowC: 13, rainMm: 50, sunDays: 21, seaTempC: 17 },
-        { month: 'Jul', highC: 23, lowC: 15, rainMm: 30, sunDays: 25, seaTempC: 19 },
-        { month: 'Aug', highC: 24, lowC: 16, rainMm: 30, sunDays: 24, seaTempC: 20 },
-        { month: 'Sep', highC: 22, lowC: 14, rainMm: 60, sunDays: 21, seaTempC: 19 },
-        { month: 'Oct', highC: 19, lowC: 12, rainMm: 100, sunDays: 17, seaTempC: 17 },
-        { month: 'Nov', highC: 16, lowC: 9, rainMm: 130, sunDays: 14, seaTempC: 15 },
-        { month: 'Dec', highC: 14, lowC: 8, rainMm: 120, sunDays: 13, seaTempC: 14 },
+        { month: 'Jan', highC: 13, lowC: 7, rainMm: 120, sunDays: 10, seaTempC: 13 },
+        { month: 'Feb', highC: 13, lowC: 7, rainMm: 110, sunDays: 12, seaTempC: 13 },
+        { month: 'Mar', highC: 15, lowC: 9, rainMm: 90, sunDays: 14, seaTempC: 14 },
+        { month: 'Apr', highC: 16, lowC: 10, rainMm: 90, sunDays: 16, seaTempC: 15 },
+        { month: 'May', highC: 19, lowC: 13, rainMm: 70, sunDays: 18, seaTempC: 17 },
+        { month: 'Jun', highC: 22, lowC: 16, rainMm: 50, sunDays: 21, seaTempC: 19 },
+        { month: 'Jul', highC: 24, lowC: 18, rainMm: 30, sunDays: 25, seaTempC: 21 },
+        { month: 'Aug', highC: 25, lowC: 18, rainMm: 40, sunDays: 24, seaTempC: 22 },
+        { month: 'Sep', highC: 23, lowC: 16, rainMm: 70, sunDays: 20, seaTempC: 21 },
+        { month: 'Oct', highC: 20, lowC: 13, rainMm: 120, sunDays: 16, seaTempC: 19 },
+        { month: 'Nov', highC: 16, lowC: 10, rainMm: 140, sunDays: 12, seaTempC: 16 },
+        { month: 'Dec', highC: 14, lowC: 8, rainMm: 130, sunDays: 10, seaTempC: 14 },
       ],
       bestTime: {
-        overall: 'June to September drier, warmer. These months offer the best balance of weather for sightseeing and beach visits.',
-        hottest: 'Summer beach perfect, busier. July and August provide ideal beach weather but with higher visitor numbers.',
-        quietest: 'Spring/autumn mild, wetter. April to May and September to October offer milder temperatures but more chance of rain.',
-        recommendation: 'July for Tower views. July typically offers the best combination of clear weather for lighthouse views and comfortable beach conditions.',
+        overall: 'June to September mild. These months offer the best balance of pleasant temperatures, lower rainfall and ideal conditions for both sightseeing and beach visits.',
+        hottest: 'Peak season (July to August): Festivals and lively atmosphere, but beaches can be busier during these popular months.',
+        quietest: 'Quieter months (May, September): Perfect weather with fewer crowds. May and September offer mild temperatures, good beach conditions and more relaxed atmosphere.',
+        recommendation: 'First-timers: Summer Santiago. July and August provide the best weather for a full day combining city exploration with a Santiago de Compostela excursion.',
       },
     },
     
@@ -5336,6 +5427,2566 @@ export const ports = [
       title: 'Palma de Mallorca Cruise Port Guide | Cathedral, Beaches & Balearic Charm',
       description: 'Complete Palma de Mallorca cruise port guide. Visit the Gothic cathedral, explore the old town, relax on beaches, discover Bellver Castle with insider tips for your Balearic cruise.',
       keywords: ['Palma de Mallorca cruise port', 'Palma cruise terminal', 'Palma shore excursions', 'Palma things to do', 'Mallorca from cruise ship', 'Palma cathedral'],
+    },
+    
+    status: 'published',
+    lastUpdated: '2025-12-28',
+  },
+
+  // ============================================================================
+  // NORWEGIAN FJORDS
+  // ============================================================================
+  {
+    id: 'bergen',
+    slug: 'bergen',
+    name: 'Bergen',
+    country: 'Norway',
+    region: 'norwegian-fjords',
+    coordinates: { lat: 60.3913, lon: 5.3221 },
+    tagline: 'Fjords between seven mountains',
+    description: 'Bergen thrives as Norway\'s fjord capital where wooden Bryggen wharves face Mount Fløyen funiculars and fish market stalls overflow with salmon. Cruise terminals cluster centrally for immediate access to funiculars, fjord boats, and Mount Ulriken cable cars amid constant rain and mountain mist.',
+    portCharacter: 'fjord-nature',
+    
+    aboutPort: {
+      overview: 'Bergen features five terminals (Skolten, Bontelabo, Jekteviken, Dokken, Dreggsallmenningen) handling mega-ships with WiFi, tourist info; Skolten serves largest vessels steps from Bryggen. No shuttles needed; 5-minute walk to fish market. Strict 4-ship/8,000-passenger daily limits.',
+      terminals: 'Skolten, Bontelabo, Jekteviken, Dokken, and Dreggsallmenningen terminals all offer WiFi, tourist information, and direct access to city centre.',
+      shuttleServices: 'No shuttles needed; all terminals are within 5 to 10 minutes walk to Bryggen and fish market.',
+      walkability: 'All terminals walk 5 to 10 minutes to Bryggen, funiculars, and fish market. City centre is compact and easily accessible on foot.',
+    },
+
+    quickFacts: {
+      currency: 'Norwegian Krone (NOK)',
+      language: 'Norwegian, English (universal)',
+      timezone: 'CET (UTC+1, +2 summer)',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'All terminals walk 5 to 10 minutes to Bryggen and funiculars. Funiculars to Fløyen, cable car to Ulriken. Light rail to airport; hop-on hop-off fjord boats available.',
+      publicTransport: 'Light rail connects to airport. Hop-on hop-off fjord boats offer scenic tours. Funiculars and cable cars provide mountain access.',
+      taxis: 'Taxis available at terminals. Expect higher costs than European cities; cards accepted everywhere.',
+      walkingDistance: 'Fish Market 5 minutes, Fløyen funicular 7 minutes, Bryggen wharf 5 minutes from terminals. City centre is compact and walkable.',
+      sightseeingBus: 'Hop-on hop-off fjord boats available for scenic tours of the harbour and nearby fjords.',
+      accessibility: 'Bergen is fairly accessible with flat paths in city centre. Funiculars and cable cars have good access, though mountain trails may be challenging.',
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Bergen Airport (BGO)',
+        distance: '16km, 25 minutes by light rail',
+        options: 'Flybussen express bus (20 minutes) or light rail (25 minutes) connect airport to city centre. Taxi available but expensive.',
+      },
+      trains: {
+        mainStation: 'Bergen Station',
+        description: 'To Oslo (7 hours), Flåm (Norway\'s steepest railway). 15-minute walk from cruise terminals.',
+        localHubs: 'Bergen Station is the main hub for all rail connections including scenic Flåm Railway.',
+      },
+      cruiseLines: ['Hurtigruten', 'MSC Cruises', 'Royal Caribbean', 'Norwegian Cruise Line', 'Cunard'],
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Bryggen Hanseatic Wharf',
+        category: 'historic',
+        description: 'UNESCO wooden warehouses leaning at angles; alleys, shops, Hanseatic Museum. Iconic waterfront wharf dating from the 14th century with colourful wooden buildings.',
+        duration: '1 to 2 hours for a relaxed pace',
+        tips: [
+          'Alley photos best in mornings before crowds arrive',
+          'Free exteriors; museum entry costs around 120 NOK',
+          'Explore narrow passages between buildings for authentic atmosphere',
+        ],
+        highlights: ['History', 'Architecture', 'Photography'],
+        goodFor: ['First-time visitors', 'Photographers', 'History buffs'],
+      },
+      {
+        title: 'Fløyen Funicular & Summit',
+        category: 'nature',
+        description: 'Mountain panoramas, trolls, hiking trails above fjord-filled cityscape. Iconic funicular ride to Mount Fløyen with stunning views over Bergen and surrounding fjords.',
+        duration: '1.5 to 2.5 hours for a relaxed pace',
+        tips: [
+          'Book tickets online to avoid queues; costs around 150 NOK roundtrip',
+          'Breakfast cafe at summit offers excellent views',
+          'Troll path perfect for families with children',
+        ],
+        highlights: ['Views', 'Nature', 'Hiking', 'Family-friendly'],
+        goodFor: ['Families', 'Photographers', 'Active travelers'],
+      },
+      {
+        title: 'Fish Market & Waterfront',
+        category: 'markets',
+        description: 'Salmon, king crab stalls amid seagull chaos; waterfront people-watching. Vibrant market with fresh seafood, local produce, and lively atmosphere.',
+        duration: '45 minutes to 1 hour for a relaxed pace',
+        tips: [
+          'Cash only at many stalls; bring Norwegian Krone',
+          'Whale watching boats depart from nearby harbour',
+          'Avoid tourist trap restaurants; market stalls offer authentic experience',
+        ],
+        highlights: ['Food', 'Markets', 'Culture'],
+        goodFor: ['Foodies', 'First-time visitors', 'Culture seekers'],
+      },
+      {
+        title: 'Ulriken Cable Car',
+        category: 'nature',
+        description: 'Highest Bergen peak with revolving restaurant, zipline, paragliders. Dramatic cable car ascent to Mount Ulriken for panoramic views.',
+        duration: '1.5 to 2 hours for a relaxed pace',
+        tips: [
+          'Tickets cost around 300 NOK return; book online for discounts',
+          'On clear days, views extend far across the fjords',
+          'Summit restaurant offers lunch with spectacular panoramas',
+        ],
+        highlights: ['Views', 'Active', 'Adventure'],
+        goodFor: ['Active travelers', 'Photographers', 'Adventure seekers'],
+      },
+      {
+        title: 'Bergen Aquarium',
+        category: 'family',
+        description: 'Seals, penguins, sharks; king crab exhibits. Family-friendly aquarium showcasing Norwegian marine life and Arctic species.',
+        duration: '1.5 to 2 hours for a relaxed pace',
+        tips: [
+          'Penguin feeding at 11am is popular with families',
+          'Seal show offers entertaining demonstrations',
+          'Located near funicular for easy combined visit',
+        ],
+        highlights: ['Wildlife', 'Family-friendly', 'Nature'],
+        goodFor: ['Families', 'First-time visitors', 'Wildlife enthusiasts'],
+      },
+      {
+        title: 'Nærøyfjord Fjord Cruise',
+        category: 'excursion',
+        description: 'UNESCO narrow fjord past waterfalls, farms clinging to cliffs. Scenic boat journey through one of Norway\'s most dramatic fjords with stunning natural scenery.',
+        duration: '4 to 6 hours for a relaxed pace',
+        tips: [
+          'Fjord Line boats offer regular departures',
+          'Look for goats on traditional grass-roofed farms',
+          'Can connect with Flåm Railway for extended excursion',
+        ],
+        highlights: ['Nature', 'Views', 'Scenic'],
+        goodFor: ['First-time visitors', 'Photographers', 'Nature lovers'],
+      },
+    ],
+    
+    nearestBeach: null,
+    
+    foodAndDrink: [
+      {
+        name: 'Fish Market stalls',
+        type: 'Market',
+        description: 'King crab, salmon, and fresh seafood at waterfront market stalls. Authentic Norwegian fish market experience with local specialities.',
+      },
+      {
+        name: 'Bryggen seafood',
+        type: 'Restaurant',
+        description: 'Fjord trout and traditional Norwegian seafood in historic Hanseatic cellars. Atmospheric dining in restored wharf buildings.',
+      },
+      {
+        name: 'Fløyen summit cafe',
+        type: 'Cafe',
+        description: 'Waffles, coffee, and light meals with mountain views. Perfect refreshment stop after funicular ride with panoramic fjord vistas.',
+      },
+      {
+        name: 'Waterfront bryggens',
+        type: 'Pub',
+        description: 'Craft beers, fish cakes, and Norwegian pub fare in Bryggen alleys. Cosy atmosphere in historic waterfront setting.',
+      },
+    ],
+    
+    insiderTips: [
+      'Book funicular and cable car tickets online in advance; queues can be massive during cruise season',
+      'Pickpocket risk is low; rain gear essential year-round as Bergen is one of Europe\'s wettest cities',
+      'Visit attractions 9 to 11am before coach tours arrive for quieter experience',
+      'Walk everywhere in city centre; funiculars for mountains; fjord boats for excursions',
+      'Cards accepted everywhere; keep 100 to 200 NOK cash for market stalls; no tipping expected',
+      'No dress codes; practical layers essential for changeable mountain weather',
+      'Skip tourist menus; fish market offers authentic Norwegian experience',
+      'Check Yr.no for rain radar; Bergen Card offers discounts on attractions',
+    ],
+    
+    weather: {
+      intro: 'Bergen has a temperate maritime climate with mild winters and cool summers. Rain is frequent year-round, making it one of Europe\'s wettest cities. Summer offers the best weather for fjord cruises and mountain hikes.',
+      months: [
+        { month: 'Jan', highC: 3, lowC: -1, rainMm: 200, sunDays: 6, seaTempC: 6 },
+        { month: 'Feb', highC: 4, lowC: 0, rainMm: 150, sunDays: 8, seaTempC: 6 },
+        { month: 'Mar', highC: 6, lowC: 1, rainMm: 150, sunDays: 10, seaTempC: 7 },
+        { month: 'Apr', highC: 9, lowC: 4, rainMm: 130, sunDays: 12, seaTempC: 8 },
+        { month: 'May', highC: 14, lowC: 8, rainMm: 140, sunDays: 15, seaTempC: 11 },
+        { month: 'Jun', highC: 17, lowC: 11, rainMm: 160, sunDays: 16, seaTempC: 14 },
+        { month: 'Jul', highC: 19, lowC: 13, rainMm: 170, sunDays: 17, seaTempC: 16 },
+        { month: 'Aug', highC: 19, lowC: 13, rainMm: 190, sunDays: 16, seaTempC: 16 },
+        { month: 'Sep', highC: 16, lowC: 10, rainMm: 200, sunDays: 13, seaTempC: 14 },
+        { month: 'Oct', highC: 12, lowC: 7, rainMm: 220, sunDays: 11, seaTempC: 12 },
+        { month: 'Nov', highC: 7, lowC: 3, rainMm: 220, sunDays: 8, seaTempC: 10 },
+        { month: 'Dec', highC: 4, lowC: 0, rainMm: 200, sunDays: 6, seaTempC: 8 },
+      ],
+      bestTime: {
+        overall: 'June to August for midnight sun, warmest weather, and best fjord visibility',
+        hottest: 'July and August (peak season with festivals and rain, but longest days and warmest temperatures)',
+        quietest: 'May and September (fjords clearer, fewer tourists, but cooler temperatures)',
+        recommendation: 'Summer solstice period offers the best balance of weather and daylight for first-time visitors seeking the classic fjord experience.',
+      },
+    },
+    
+    faq: [
+      {
+        question: 'Is Bergen walkable from the cruise port?',
+        answer: 'Yes, all terminals are within 5 to 10 minutes walk to Bryggen, fish market, and funiculars. The city centre is compact and easily accessible on foot.',
+      },
+      {
+        question: 'How long do you need in Bergen?',
+        answer: 'Allow 6 to 8 hours to cover mountains, fjords, and city sights. A full day enables funicular rides, fjord cruises, and exploring Bryggen wharf.',
+      },
+      {
+        question: 'Is English widely spoken in Bergen?',
+        answer: 'Yes, English is universally spoken. Norway has excellent English proficiency and all tourist facilities communicate in English.',
+      },
+      {
+        question: 'Is Bergen safe for tourists?',
+        answer: 'Extremely safe. Norway has very low crime rates and Bergen is a welcoming, well-policed city with excellent safety standards.',
+      },
+      {
+        question: 'Is Bergen expensive?',
+        answer: 'Yes, very expensive. Expect lunch costs of 250 NOK or more. Norway is one of Europe\'s most expensive countries, though quality is high.',
+      },
+      {
+        question: 'Do I need cash in Bergen or can I use card?',
+        answer: 'Cards are accepted everywhere. Keep 100 to 200 NOK cash for market stalls. Contactless payment is universal throughout Norway.',
+      },
+      {
+        question: 'Should I book a ship excursion or explore independently?',
+        answer: 'Independent exploration works perfectly for Bergen city sights and funiculars. Ship excursions are convenient for coordinated fjord cruises and longer excursions.',
+      },
+      {
+        question: 'What is the best thing to do in Bergen on a cruise day?',
+        answer: 'Ride the Fløyen funicular for mountain views, explore Bryggen wharf, visit the fish market, and take a fjord cruise to see the dramatic Norwegian scenery.',
+      },
+      {
+        question: 'What\'s the best way to see the fjords from Bergen?',
+        answer: 'Nærøyfjord cruise offers the most dramatic fjord experience, passing waterfalls and traditional farms. Fjord Line boats provide regular departures from the harbour.',
+      },
+      {
+        question: 'Is Bergen good for hiking and outdoor activities?',
+        answer: 'Excellent. Trails from Fløyen funicular offer mountain hiking with fjord views. Ulriken cable car provides access to higher peaks and more challenging routes.',
+      },
+    ],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'June to August for midnight sun and warmest weather',
+      cruiseTerminals: ['Skolten', 'Bontelabo', 'Jekteviken', 'Dokken', 'Dreggsallmenningen'],
+      nearbyAirport: 'Bergen Airport (BGO), 16km',
+      visaInfo: 'None (Schengen 90/180 days for UK passport holders)',
+    },
+    
+    relatedDestinations: ['norwegian-fjords-cruises', 'northern-europe-cruises'],
+    
+    meta: {
+      title: 'Bergen Cruise Port Guide | Fjords, Mountains & Bryggen Wharf',
+      description: 'Complete Bergen cruise port guide. Explore Bryggen wharf, ride Fløyen funicular, visit the fish market, take fjord cruises, and discover insider tips for your Norwegian fjords cruise.',
+      keywords: ['Bergen cruise port', 'Bergen fjords', 'Bergen shore excursions', 'Bergen things to do', 'Bergen from cruise ship', 'Norwegian fjords cruise'],
+    },
+    
+    status: 'published',
+    lastUpdated: '2024-12-28',
+  },
+
+  {
+    id: 'geiranger',
+    slug: 'geiranger',
+    name: 'Geiranger',
+    country: 'Norway',
+    region: 'norwegian-fjords',
+    coordinates: { lat: 62.1012, lon: 7.2070 },
+    tagline: 'UNESCO fjord between cliffs',
+    description: 'Geiranger nestles at fjord\'s end surrounded by 1,000m peaks, Seven Sisters waterfall, and hovering eagles, where tenders deliver passengers to a compact village of 250 souls amid emerald farms and thundering cascades. Cruise calls create brief summer bustle before Hurtigruten ferries continue north.',
+    portCharacter: 'fjord-nature',
+    
+    aboutPort: {
+      overview: 'Ships anchor in the fjord; tenders operate to Kaiet pier (Geirangervegen 2) with small terminal, tourist info, and restrooms. Handles 180 plus calls seasonally (May to September); floating SeaWalk pier for one ship, others tender.',
+      terminals: 'Kaiet pier (tender landing) with small terminal building. Floating SeaWalk pier available for one ship.',
+      shuttleServices: 'Shuttle buses to viewpoints available from village centre (around 25 euros). Village itself is walkable from tender pier.',
+      walkability: 'Village is 2-minute walk from tender pier. Everything in the village is walkable within 1km. Viewpoints require transport.',
+    },
+
+    quickFacts: {
+      currency: 'Norwegian Krone (NOK)',
+      language: 'Norwegian, English (universal)',
+      timezone: 'CET (UTC+1 summer)',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: true,
+    },
+    
+    gettingAround: {
+      fromPort: 'Tender drops at Kaiet pier. Everything in village walkable (1km). Tourist buses to Dalsnibba, Flydalsjuvet, and Eagle Bend viewpoints.',
+      publicTransport: 'No public transport. Tourist buses run to viewpoints from village centre. Fjord sightseeing boats available.',
+      taxis: 'Taxis limited. Tourist buses are the main transport option for viewpoints. Agree fares in advance if hiring.',
+      walkingDistance: 'Norwegian Fjords Centre 5 minutes, village centre 2 minutes from tender pier. Viewpoints require bus transport.',
+      sightseeingBus: 'Tourist buses operate to Dalsnibba (around 35 euros, 1.5 hours), Flydalsjuvet, and Eagle Bend viewpoints. Fjord sightseeing boats available (around 40 euros, 1.5 hours).',
+      accessibility: 'Village is fairly flat and accessible. Viewpoint buses may have limited wheelchair access; check with operators. Fjord Centre has good access.',
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Ålesund Airport (AES)',
+        distance: '110km, 2 hours by bus',
+        options: 'Bus connections available. No direct flights. Journey takes around 2 hours from airport.',
+      },
+      trains: {
+        mainStation: 'None',
+        description: 'No trains. Hurtigruten ferry connects to Ålesund and Hellesylt. Stranda ferry takes around 1 hour.',
+        localHubs: 'Hurtigruten ferry provides connections along the coast.',
+      },
+      cruiseLines: ['Norwegian Coastal Express', 'MSC Cruises', 'Royal Caribbean', 'Cunard', 'Hurtigruten'],
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Seven Sisters & Suitor Waterfalls',
+        category: 'nature',
+        description: 'Iconic cascades with 250m Seven Sisters waterfall and persistent Suitor waterfall. Best viewed from fjord boats or Eagle Bend viewpoint. One of Norway\'s most photographed natural wonders.',
+        duration: '1 to 1.5 hours for a relaxed pace',
+        tips: [
+          'Fjord sightseeing boat tours position perfectly for waterfall views',
+          'Rainbows often appear post-shower creating spectacular photo opportunities',
+          'Drone-free zone; respect local regulations',
+        ],
+        highlights: ['Nature', 'Views', 'Photography', 'Waterfalls'],
+        goodFor: ['Photographers', 'First-time visitors', 'Nature lovers'],
+      },
+      {
+        title: 'Dalsnibba Viewpoint & Skywalk',
+        category: 'nature',
+        description: '1,500m plateau with glass platform over fjord and Ørnesvingen hairpin road. Breathtaking panoramic views across Geirangerfjord from Norway\'s highest fjord viewpoint.',
+        duration: '2 to 3 hours for a relaxed pace',
+        tips: [
+          'Tourist bus costs around 35 euros roundtrip; book immediately as fills fast',
+          'Cloudbase varies; visibility can change rapidly at altitude',
+          'Layers essential; temperatures drop significantly at summit',
+        ],
+        highlights: ['Views', 'Nature', 'Photography', 'Scenic'],
+        goodFor: ['Photographers', 'Active travelers', 'First-time visitors'],
+      },
+      {
+        title: 'Eagle Bend (Ørnesvingen)',
+        category: 'nature',
+        description: 'Fjord overlook with Seven Sisters and Suitor waterfalls framing cruise ships below. Classic viewpoint offering dramatic fjord panoramas from mountain road hairpin bend.',
+        duration: '45 minutes to 1 hour for a relaxed pace',
+        tips: [
+          'First bus stop on viewpoint circuit; wide panoramas perfect for photography',
+          'Eagle spotting possible; binoculars recommended',
+          'Best light in morning before coach tours arrive',
+        ],
+        highlights: ['Views', 'Nature', 'Photography', 'Scenic'],
+        goodFor: ['First-time visitors', 'Photographers', 'Nature lovers'],
+      },
+      {
+        title: 'Flydalsjuvet Viewpoint',
+        category: 'nature',
+        description: 'Classic postcard fjord overlook with farms clinging to cliffs. Iconic viewpoint providing picture-perfect framing of Geirangerfjord with traditional Norwegian farms in foreground.',
+        duration: '30 minutes to 45 minutes for a relaxed pace',
+        tips: [
+          'Second bus stop on viewpoint circuit',
+          'Foreground rock formations create natural framing for photos',
+          'Steady camera essential; views can be windy at exposed location',
+        ],
+        highlights: ['Views', 'Scenic', 'Photography'],
+        goodFor: ['Photographers', 'First-time visitors'],
+      },
+      {
+        title: 'Norwegian Fjords Centre',
+        category: 'historic',
+        description: 'Fjord history exhibits, films, and local crafts in modern building. Educational centre explaining Geirangerfjord\'s UNESCO status, geology, and cultural heritage through interactive displays.',
+        duration: '1 to 1.5 hours for a relaxed pace',
+        tips: [
+          'Perfect rainy day option with indoor exhibits and films',
+          'English audio guides available; very informative',
+          'Coffee terrace offers fjord views while you rest',
+        ],
+        highlights: ['Culture', 'Museums', 'History'],
+        goodFor: ['Culture seekers', 'Families', 'First-time visitors'],
+      },
+      {
+        title: 'Storseterfossen Waterfall Hike',
+        category: 'active',
+        description: '327-step climb behind thundering cascade with rainbow tunnel effect. Spectacular waterfall walk allowing visitors to stand directly behind the powerful waterfall for unique photo opportunities.',
+        duration: '1 to 2 hours for a relaxed pace',
+        tips: [
+          'Waterproof gear essential; you will get wet near waterfall',
+          'Non-slip shoes mandatory; path can be slippery',
+          '15-minute walk from pier to trail start; well signposted',
+        ],
+        highlights: ['Nature', 'Hiking', 'Waterfalls', 'Photography'],
+        goodFor: ['Active travelers', 'Photographers', 'Adventure seekers'],
+      },
+    ],
+    
+    nearestBeach: null,
+    
+    foodAndDrink: [
+      {
+        name: 'Pier kiosks',
+        type: 'Cafe',
+        description: 'Waffles and coffee at tender landing. Quick refreshments right at the pier with fjord views.',
+      },
+      {
+        name: 'Village bakeries',
+        type: 'Bakery',
+        description: 'Skillingsboller pastries and traditional Norwegian baked goods along main street. Authentic local treats perfect for morning refreshment.',
+      },
+      {
+        name: 'Fjord Centre cafe',
+        type: 'Restaurant',
+        description: 'Trout and salmon dishes near exhibits. Traditional Norwegian cuisine with fjord views from terrace.',
+      },
+      {
+        name: 'Hotel Union Geiranger',
+        type: 'Restaurant',
+        description: 'Fjord buffet in historic hotel. Classic Norwegian hospitality with extensive buffet featuring local specialities.',
+      },
+    ],
+    
+    insiderTips: [
+      'Book Dalsnibba bus immediately as spaces fill fast during cruise season',
+      'Waterproof everything; microclimates can vary 10 degrees between village and viewpoints',
+      'Visit viewpoints 9 to 11am before coach tours arrive for quieter experience and better light',
+      'Tender priority for elderly and families with children; buses timed to ship schedules',
+      'Cards accepted everywhere; keep 100 to 200 NOK cash for kiosks; no tipping expected',
+      'Sturdy shoes mandatory for hikes; leech socks recommended for waterfall trails',
+      'Skip souvenir stalls; local wool products offer authentic Norwegian keepsakes',
+      'Check Yr.no radar hourly for weather updates; Fjord Pass offers discounts on attractions',
+    ],
+    
+    weather: {
+      intro: 'Geiranger has a cool temperate climate with short, mild summers and long, cold winters. Cruise season runs May to September when weather is most favourable for fjord visits and outdoor activities.',
+      months: [
+        { month: 'Jan', highC: -1, lowC: -6, rainMm: 150, sunDays: 5, seaTempC: 7 },
+        { month: 'Feb', highC: 0, lowC: -5, rainMm: 120, sunDays: 7, seaTempC: 7 },
+        { month: 'Mar', highC: 2, lowC: -4, rainMm: 130, sunDays: 9, seaTempC: 8 },
+        { month: 'Apr', highC: 6, lowC: -1, rainMm: 110, sunDays: 11, seaTempC: 9 },
+        { month: 'May', highC: 11, lowC: 4, rainMm: 120, sunDays: 14, seaTempC: 11 },
+        { month: 'Jun', highC: 15, lowC: 8, rainMm: 140, sunDays: 15, seaTempC: 14 },
+        { month: 'Jul', highC: 17, lowC: 10, rainMm: 150, sunDays: 16, seaTempC: 16 },
+        { month: 'Aug', highC: 16, lowC: 9, rainMm: 160, sunDays: 15, seaTempC: 16 },
+        { month: 'Sep', highC: 12, lowC: 5, rainMm: 200, sunDays: 12, seaTempC: 14 },
+        { month: 'Oct', highC: 7, lowC: 2, rainMm: 220, sunDays: 9, seaTempC: 12 },
+        { month: 'Nov', highC: 2, lowC: -2, rainMm: 200, sunDays: 6, seaTempC: 10 },
+        { month: 'Dec', highC: -1, lowC: -5, rainMm: 170, sunDays: 5, seaTempC: 8 },
+      ],
+      bestTime: {
+        overall: 'June to August for midnight sun, warmest weather, and longest days',
+        hottest: 'July (peak season with busiest tenders, but summer solstice period offers best weather)',
+        quietest: 'June and August (fjords greener, fewer tourists, but still excellent weather)',
+        recommendation: 'July solstice period offers the best balance of weather and daylight for first-time visitors seeking the classic fjord experience.',
+      },
+    },
+    
+    faq: [
+      {
+        question: 'Is Geiranger walkable from the cruise port?',
+        answer: 'Yes, the tiny village is easily walkable from the tender pier. The village centre is just 2 minutes from the landing point, and everything within the village is accessible on foot.',
+      },
+      {
+        question: 'How long do you need in Geiranger?',
+        answer: 'Allow 6 to 8 hours to cover viewpoints, hikes, and village sights. A full day enables Dalsnibba bus circuit, waterfall hikes, and fjord boat tours.',
+      },
+      {
+        question: 'Is English widely spoken in Geiranger?',
+        answer: 'Yes, English is universally spoken. Norway has excellent English proficiency and all tourist facilities communicate in English.',
+      },
+      {
+        question: 'Is Geiranger safe for tourists?',
+        answer: 'Extremely safe. Norway has very low crime rates and Geiranger is a welcoming, peaceful village with excellent safety standards.',
+      },
+      {
+        question: 'Is Geiranger expensive?',
+        answer: 'Yes, very expensive. Expect costs such as waffles around 80 NOK. Norway is one of Europe\'s most expensive countries, though quality is high.',
+      },
+      {
+        question: 'Do I need cash in Geiranger or can I use card?',
+        answer: 'Cards are accepted everywhere. Keep 100 to 200 NOK cash for kiosks. Contactless payment is universal throughout Norway.',
+      },
+      {
+        question: 'Should I book a ship excursion or explore independently?',
+        answer: 'Bus tour DIY works perfectly for viewpoints and hikes. Independent exploration is straightforward, though ship excursions offer convenience for coordinated timing.',
+      },
+      {
+        question: 'What is the best thing to do in Geiranger on a cruise day?',
+        answer: 'Take the Dalsnibba bus circuit to see the fjord from above, visit Seven Sisters waterfall by boat, and hike to Storseterfossen waterfall for a complete fjord experience.',
+      },
+      {
+        question: 'What\'s the best way to see the fjords from Geiranger?',
+        answer: 'Fjord sightseeing boat tours offer close-up views of Seven Sisters and Suitor waterfalls. Combine with viewpoint buses to Dalsnibba, Flydalsjuvet, and Eagle Bend for comprehensive fjord perspectives from both water and mountain.',
+      },
+      {
+        question: 'Is Geiranger good for hiking and outdoor activities?',
+        answer: 'Excellent. Short trails to waterfalls like Storseterfossen offer accessible hiking with spectacular rewards. Viewpoint circuits and fjord boat tours provide varied outdoor experiences suitable for most fitness levels.',
+      },
+    ],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'June to August',
+      cruiseTerminals: ['Kaiet Pier (tender)', 'SeaWalk floating pier'],
+      nearbyAirport: 'Ålesund Airport (AES), 110km',
+      visaInfo: 'None (Schengen 90/180 days for UK passport holders)',
+    },
+    
+    relatedDestinations: ['norwegian-fjords-cruises', 'northern-europe-cruises'],
+    
+    meta: {
+      title: 'Geiranger Cruise Port Guide | UNESCO Fjord & Waterfalls',
+      description: 'Complete Geiranger cruise port guide. See Seven Sisters waterfall, visit Dalsnibba Skywalk, hike to Storseterfossen, and discover insider tips for your Norwegian fjords cruise.',
+      keywords: ['Geiranger cruise port', 'Geirangerfjord', 'Geiranger shore excursions', 'Geiranger things to do', 'Geiranger from cruise ship', 'Norwegian fjords cruise'],
+    },
+    
+    status: 'published',
+    lastUpdated: '2024-12-28',
+  },
+
+  {
+    id: 'flam',
+    slug: 'flam',
+    name: 'Flåm',
+    country: 'Norway',
+    region: 'norwegian-fjords',
+    coordinates: { lat: 60.8628, lon: 7.1133 },
+    tagline: 'Railway through the fjords',
+    description: 'Flåm\'s tiny village (450 residents) hugs the fjord beneath 1,800m peaks, where tenders or docks deliver passengers steps from the iconic Flåm Railway station and fjord cruise piers. Summer brings cruise crowds to this Norway in a Nutshell hub, blending engineering marvels with kayaks, hikes, and Viking village excursions.',
+    portCharacter: 'fjord-nature',
+    
+    aboutPort: {
+      overview: 'Modern pier handles smaller ships directly; larger vessels tender to Flåm Havn with tourist info, restrooms, WiFi. Steps from railway station and ferry pier; no shuttles needed. Peak season 100 plus calls May to September.',
+      terminals: 'Flåm Havn pier for smaller ships; tender landing for larger vessels. Terminal offers tourist information, restrooms, and WiFi.',
+      shuttleServices: 'No shuttles needed; everything is within walking distance from the pier and tender landing.',
+      walkability: 'Everything within 500m walk: railway, fjord boats, village shops. Compact village is easily accessible on foot.',
+    },
+
+    quickFacts: {
+      currency: 'Norwegian Krone (NOK)',
+      language: 'Norwegian, English (universal)',
+      timezone: 'CET (UTC+1 summer)',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: true,
+    },
+    
+    gettingAround: {
+      fromPort: 'Everything within 500m walk: railway, fjord boats, village shops. Buses to Stegastein Viewpoint, e-bikes, and RIB boats available.',
+      publicTransport: 'Flåm Railway connects to Myrdal (1 hour, connects to Bergen-Oslo line). Buses available for viewpoints and excursions.',
+      taxis: 'Taxis available but limited. Buses and organised tours are the main transport options for viewpoints and excursions.',
+      walkingDistance: 'Railway station 2 minutes, Nærøyfjord boat 5 minutes, village shops within 500m from pier. Everything central and walkable.',
+      sightseeingBus: 'Buses to Stegastein Viewpoint available. E-bikes and RIB boats offer alternative sightseeing options.',
+      accessibility: 'Village is fairly flat and accessible. Railway station and fjord boats have good access. Viewpoint buses may have limited wheelchair access.',
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Bergen Airport (BGO)',
+        distance: '170km, 3 hours via Norway in a Nutshell',
+        options: 'No local airport. Bergen Airport accessible via Norway in a Nutshell route (3 hours) combining train, bus, and ferry connections.',
+      },
+      trains: {
+        mainStation: 'Flåm Railway Station',
+        description: 'Flåm Railway to Myrdal (1 hour, connects to Bergen-Oslo line). On-site station steps from cruise pier.',
+        localHubs: 'Flåm Railway Station is the main hub, connecting to Myrdal and the Bergen-Oslo railway line.',
+      },
+      cruiseLines: ['MSC Cruises', 'Royal Caribbean', 'Norwegian Cruise Line', 'Cunard', 'Hurtigruten'],
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Flåm Railway (Flåmsbana)',
+        category: 'landmark',
+        description: 'World\'s steepest railway (5km climb of 865m) through waterfalls, ravines to Myrdal. Engineering marvel offering spectacular fjord and mountain views.',
+        duration: '2 hours roundtrip for a relaxed pace',
+        tips: [
+          'Book tickets in advance as they sell out quickly during cruise season',
+          'Choose outward window seats for best views of waterfalls and scenery',
+          'Don\'t miss the Kjosfossen waterfall stop for photos and experience',
+        ],
+        highlights: ['Scenic', 'Engineering', 'Photography'],
+        goodFor: ['First-time visitors', 'Train enthusiasts', 'Photographers'],
+      },
+      {
+        title: 'Nærøyfjord Cruise',
+        category: 'nature',
+        description: 'UNESCO narrow fjord past farms, waterfalls to Gudvangen (1.75 hours). One of Norway\'s most dramatic fjord experiences with stunning natural scenery.',
+        duration: '2 to 3 hours roundtrip for a relaxed pace',
+        tips: [
+          'Book fjord boat tickets early as they combine with railway for popular Norway in a Nutshell route',
+          'Bus return from Gudvangen offers alternative route back to Flåm',
+          'Look for traditional grass-roofed farms with goats on roofs along the fjord',
+        ],
+        highlights: ['Fjords', 'Views', 'Nature'],
+        goodFor: ['Photographers', 'Nature lovers', 'First-time visitors'],
+      },
+      {
+        title: 'Stegastein Viewpoint',
+        category: 'nature',
+        description: 'Cantilever platform 650m above Aurlandsfjord offering breathtaking panoramic views. Bus journey takes 15 minutes from village.',
+        duration: '1.5 to 2 hours roundtrip for a relaxed pace',
+        tips: [
+          'Book bus tickets in advance for popular times during cruise season',
+          'Glass edge platform offers dramatic photo opportunities',
+          'Clear mornings provide best visibility and lighting for photography',
+        ],
+        highlights: ['Views', 'Architecture', 'Photography'],
+        goodFor: ['Photographers', 'Active travelers', 'First-time visitors'],
+      },
+      {
+        title: 'Njardarheimr Viking Village',
+        category: 'historic',
+        description: 'Living Viking farm with mead, archery, longship rides. Authentic recreation of Viking settlement offering interactive experiences.',
+        duration: '1.5 to 2 hours for a relaxed pace',
+        tips: [
+          'Entry costs around 300 NOK; includes access to all activities',
+          'Dress-up photos in Viking costumes are popular with families',
+          'Mead tasting available for adults; non-alcoholic options for children',
+        ],
+        highlights: ['History', 'Culture', 'Family-friendly'],
+        goodFor: ['Families', 'History buffs', 'Culture seekers'],
+      },
+      {
+        title: 'Brekkefossen Waterfall Hike',
+        category: 'active',
+        description: '20-minute steep climb to 800m cascade base with village views. Accessible waterfall hike offering rewarding views and natural beauty.',
+        duration: '1 to 1.5 hours roundtrip for a relaxed pace',
+        tips: [
+          'Wear sturdy shoes as the path is steep and can be slippery',
+          'Free to access; no tickets required',
+          'Post-rain visits offer spectacular rainbows at the waterfall base',
+        ],
+        highlights: ['Hiking', 'Waterfalls', 'Views'],
+        goodFor: ['Active travelers', 'Nature lovers', 'Photographers'],
+      },
+      {
+        title: 'Ægir Brewery',
+        category: 'markets',
+        description: 'Award-winning craft beers in Viking longhall setting. Atmospheric brewery offering tastings and traditional Norwegian brewing experience.',
+        duration: '45 minutes to 1 hour for a relaxed pace',
+        tips: [
+          'Tastings cost around 150 NOK; includes several beer samples',
+          'Try the pretzels which pair perfectly with the craft beers',
+          'Non-alcoholic options available for those who don\'t drink',
+        ],
+        highlights: ['Food', 'Culture'],
+        goodFor: ['Foodies', 'Culture seekers', 'First-time visitors'],
+      },
+    ],
+    
+    nearestBeach: null,
+    
+    foodAndDrink: [
+      {
+        name: 'Ægir BrewPub',
+        type: 'Brewery',
+        description: 'Craft IPAs, pretzels in Viking longhall setting. Award-winning brewery offering atmospheric dining experience.',
+      },
+      {
+        name: 'Flåm Marina',
+        type: 'Seafood',
+        description: 'Salmon, seafood soup with fjord views. Traditional Norwegian seafood restaurant overlooking the harbour.',
+      },
+      {
+        name: 'Village bakery',
+        type: 'Cafe',
+        description: 'Skillingsbolle cinnamon buns near railway station. Local bakery offering traditional Norwegian pastries and coffee.',
+      },
+      {
+        name: 'Viking Village mead',
+        type: 'Tavern',
+        description: 'Honey mead tastings at Njardarheimr Viking Village. Authentic Viking drinking experience in historic setting.',
+      },
+    ],
+    
+    insiderTips: [
+      'Book railway tickets first thing as they sell out quickly; Nærøyfjord boats next priority',
+      'Waterproof layers essential; microclimates can vary by 10 degrees Celsius',
+      'Arrive 8 to 10am to beat peak crowds before coach tours arrive',
+      'Walk village for shops and cafes; buses for viewpoints; boats for fjords',
+      'Cards accepted everywhere; keep 100 NOK cash for kiosks; no tipping expected',
+      'E-bike and zipline activities should be booked ahead during peak season',
+      'Skip chain restaurants; local craft beer at Ægir offers authentic experience',
+      'Check Yr.no for weather forecasts; Flåm Card offers discounts on attractions',
+    ],
+    
+    weather: {
+      intro: 'Flåm has a temperate maritime climate with cool summers and cold winters. Summer offers the best weather for fjord cruises and railway journeys, with long daylight hours and milder temperatures.',
+      months: [
+        { month: 'Jan', highC: 1, lowC: -4, rainMm: 180, sunDays: 5, seaTempC: 6 },
+        { month: 'Feb', highC: 2, lowC: -3, rainMm: 150, sunDays: 7, seaTempC: 6 },
+        { month: 'Mar', highC: 4, lowC: -2, rainMm: 150, sunDays: 10, seaTempC: 7 },
+        { month: 'Apr', highC: 8, lowC: 1, rainMm: 120, sunDays: 12, seaTempC: 9 },
+        { month: 'May', highC: 13, lowC: 6, rainMm: 130, sunDays: 15, seaTempC: 12 },
+        { month: 'Jun', highC: 17, lowC: 10, rainMm: 140, sunDays: 16, seaTempC: 14 },
+        { month: 'Jul', highC: 19, lowC: 12, rainMm: 150, sunDays: 17, seaTempC: 16 },
+        { month: 'Aug', highC: 18, lowC: 11, rainMm: 160, sunDays: 16, seaTempC: 16 },
+        { month: 'Sep', highC: 14, lowC: 7, rainMm: 200, sunDays: 13, seaTempC: 14 },
+        { month: 'Oct', highC: 9, lowC: 3, rainMm: 220, sunDays: 10, seaTempC: 11 },
+        { month: 'Nov', highC: 4, lowC: -1, rainMm: 200, sunDays: 7, seaTempC: 9 },
+        { month: 'Dec', highC: 1, lowC: -4, rainMm: 180, sunDays: 5, seaTempC: 7 },
+      ],
+      bestTime: {
+        overall: 'June to August for midnight sun, warmest weather, and best fjord visibility',
+        hottest: 'July (peak season with busiest trains, but longest days and warmest temperatures)',
+        quietest: 'June and August (greener fjords, fewer tourists, but still excellent weather)',
+        recommendation: 'June or August offer the best balance of weather and crowds for first-time visitors seeking the classic fjord experience.',
+      },
+    },
+    
+    faq: [
+      {
+        question: 'Is Flåm walkable from the cruise port?',
+        answer: 'Yes, everything is central and within walking distance. The railway station is 2 minutes from the pier, and the village shops and fjord boats are all within 500m.',
+      },
+      {
+        question: 'How long do you need in Flåm?',
+        answer: 'Allow 6 to 8 hours to cover the railway and fjord cruise. A full day enables you to experience both the Flåm Railway and Nærøyfjord cruise, plus village exploration.',
+      },
+      {
+        question: 'Is English widely spoken in Flåm?',
+        answer: 'Yes, English is universally spoken. Norway has excellent English proficiency and all tourist facilities communicate in English.',
+      },
+      {
+        question: 'Is Flåm safe for tourists?',
+        answer: 'Extremely safe. Norway has very low crime rates and Flåm is a welcoming, well-maintained village with excellent safety standards.',
+      },
+      {
+        question: 'Is Flåm expensive?',
+        answer: 'Yes, very expensive. Expect lunch costs of 250 NOK or more. Norway is one of Europe\'s most expensive countries, though quality is high.',
+      },
+      {
+        question: 'Do I need cash in Flåm or can I use card?',
+        answer: 'Cards are accepted everywhere. Keep 100 NOK cash for kiosks. Contactless payment is universal throughout Norway.',
+      },
+      {
+        question: 'Should I book a ship excursion or explore independently?',
+        answer: 'Independent exploration works perfectly for railway and fjord boat tickets. DIY booking is straightforward, though ship excursions offer convenience for coordinated timing.',
+      },
+      {
+        question: 'What is the best thing to do in Flåm on a cruise day?',
+        answer: 'Ride the Flåm Railway for spectacular mountain and waterfall views, then take the Nærøyfjord cruise to experience one of Norway\'s most dramatic fjords.',
+      },
+      {
+        question: 'What\'s the best way to see the fjords from Flåm?',
+        answer: 'Nærøyfjord cruise offers the most dramatic fjord experience, passing waterfalls and traditional farms. Combine with the Flåm Railway for the complete Norway in a Nutshell experience.',
+      },
+      {
+        question: 'Is Flåm good for hiking and outdoor activities?',
+        answer: 'Excellent. Brekkefossen waterfall hike offers accessible mountain walking with rewarding views. E-bikes, kayaks, and RIB boats provide varied outdoor experiences suitable for most fitness levels.',
+      },
+    ],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'June to August for midnight sun and warmest weather',
+      cruiseTerminals: ['Flåm Havn pier', 'Tender landing'],
+      nearbyAirport: 'Bergen Airport (BGO), 170km',
+      visaInfo: 'None (Schengen 90/180 days for UK passport holders)',
+    },
+    
+    relatedDestinations: ['norwegian-fjords-cruises', 'northern-europe-cruises'],
+    
+    meta: {
+      title: 'Flåm Cruise Port Guide | Railway, Fjords & Viking Village',
+      description: 'Complete Flåm cruise port guide. Ride the Flåm Railway, cruise Nærøyfjord, visit Stegastein Viewpoint, explore Viking village, and discover insider tips for your Norwegian fjords cruise.',
+      keywords: ['Flåm cruise port', 'Flåm Railway', 'Flåm shore excursions', 'Flåm things to do', 'Flåm from cruise ship', 'Norwegian fjords cruise', 'Nærøyfjord'],
+    },
+    
+    status: 'published',
+    lastUpdated: '2024-12-28',
+  },
+
+  {
+    id: 'stavanger',
+    slug: 'stavanger',
+    name: 'Stavanger',
+    country: 'Norway',
+    region: 'norwegian-fjords',
+    coordinates: { lat: 58.9701, lon: 5.7333 },
+    tagline: 'Pulpit Rock fjord gateway',
+    description: 'Stavanger blends Viking heritage with modern oil wealth, where cruise ships dock steps from cobblestone Gamle Stavanger alleys and colourful Øvre Holmegate while fjord boats depart for dramatic Lysefjord cliffs and Preikestolen views. Compact layout suits short port calls amid North Sea breezes.',
+    portCharacter: 'fjord-nature',
+    
+    aboutPort: {
+      overview: 'Strandkaien terminal handles mega-ships directly with tourist info, restrooms, WiFi right at the harbour; 5-minute walk to old town. Viking House VR experience and fjord cruise departures adjacent. No shuttles needed for city core.',
+      terminals: 'Strandkaien terminal offers tourist information, restrooms, and WiFi. Direct docking for large cruise ships with immediate access to city centre.',
+      shuttleServices: 'No shuttles needed for city core; everything is within 5 minutes walk from the terminal.',
+      walkability: 'Gamle Stavanger and city centre are 5 minutes flat walk from terminal. Compact layout makes everything easily accessible on foot.',
+    },
+
+    quickFacts: {
+      currency: 'Norwegian Krone (NOK)',
+      language: 'Norwegian, English (universal)',
+      timezone: 'CET (UTC+1 summer)',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Exit for 5-minute flat stroll to Gamle Stavanger and Øvre Holmegate. Fjord cruises and RIB boats depart from harbour adjacent to terminal.',
+      publicTransport: 'Buses to Swords monument (around 30 NOK, 20 minutes). City centre is walkable; buses available for longer distances.',
+      taxis: 'Taxis available at terminal. Expect higher costs than European cities; cards accepted everywhere.',
+      walkingDistance: 'Old town 5 minutes, fjord cruise boats 3 minutes, Swords monument requires bus or taxi (20 minutes).',
+      sightseeingBus: 'No dedicated hop-on hop-off bus; city is compact enough to explore on foot.',
+      accessibility: 'Stavanger is fairly accessible with flat paths in city centre. Fjord cruises and museums have good access.',
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Stavanger Airport (SVG)',
+        distance: '14km, 20 minutes by taxi or bus',
+        options: 'Taxi or bus connect airport to city centre in 20 minutes. Airport express bus available.',
+      },
+      trains: {
+        mainStation: 'Stavanger Station',
+        description: 'To Oslo (7 hours). 15-minute walk from cruise terminal.',
+        localHubs: 'Stavanger Station is the main rail hub for connections to Oslo and other Norwegian cities.',
+      },
+      cruiseLines: ['MSC Cruises', 'Royal Caribbean', 'P&O Cruises', 'Cunard', 'Hurtigruten'],
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Lysefjord Cruise',
+        category: 'nature',
+        description: '42km fjord with 600m Pulpit Rock, Hengjanefossen waterfall, granite cliffs. Spectacular fjord journey showcasing Norway\'s dramatic natural scenery and iconic Preikestolen cliffs.',
+        duration: '3 to 3.5 hours for a relaxed pace',
+        tips: [
+          'Rødne electric boats are quieter and more environmentally friendly',
+          'Best photos of Pulpit Rock are from underneath during the cruise',
+          'Book at harbour first as tours fill fast during cruise season',
+        ],
+        highlights: ['Nature', 'Views', 'Waterfalls'],
+        goodFor: ['First-time visitors', 'Photographers', 'Nature lovers'],
+      },
+      {
+        title: 'Gamle Stavanger (Old Town)',
+        category: 'historic',
+        description: '173 preserved 18th-century white wooden houses on cobblestones. Charming historic quarter showcasing traditional Norwegian architecture and maritime heritage.',
+        duration: '1 to 1.5 hours for a relaxed pace',
+        tips: [
+          'Morning light offers best photography conditions',
+          'Free to explore; can combine with canning museum visit',
+          'Walk the narrow cobblestone alleys for authentic atmosphere',
+        ],
+        highlights: ['Architecture', 'History', 'Photography'],
+        goodFor: ['Culture seekers', 'Photographers', 'History buffs'],
+      },
+      {
+        title: 'Øvre Holmegate',
+        category: 'stroll',
+        description: 'Colourful street with street art, boutiques, cafes in pedestrian zone. Vibrant cultural hub known as Stavanger\'s most Instagram-worthy street.',
+        duration: '45 minutes to 1 hour for a relaxed pace',
+        tips: [
+          'Street food vendors offer authentic Norwegian snacks',
+          'Evening lights create beautiful atmosphere',
+          'Murals are Instagram-famous photo opportunities',
+        ],
+        highlights: ['Culture', 'Shopping', 'Photography'],
+        goodFor: ['Photographers', 'Shoppers', 'Culture seekers'],
+      },
+      {
+        title: 'Swords in Rock (Three Swords)',
+        category: 'landmark',
+        description: '10m bronze swords commemorating 872 Battle of Hafrsfjord. Iconic monument marking Norway\'s unification under King Harald Fairhair with dramatic waterfront setting.',
+        duration: '1 to 1.5 hours roundtrip for a relaxed pace',
+        tips: [
+          'Take bus 18 from city centre for around 30 NOK',
+          'Waterfront trails offer scenic walks around the monument',
+          'Learn about Harald Fairhair history at the site',
+        ],
+        highlights: ['History', 'Sculpture', 'Views'],
+        goodFor: ['History buffs', 'Photographers', 'Culture seekers'],
+      },
+      {
+        title: 'Norwegian Petroleum Museum',
+        category: 'historic',
+        description: 'Interactive oil rigs, drilling simulators, North Sea platforms. Fascinating museum exploring Norway\'s oil industry and North Sea energy heritage through hands-on exhibits.',
+        duration: '1.5 to 2 hours for a relaxed pace',
+        tips: [
+          'Entry costs around 140 NOK for adults',
+          'Escape room offers interactive experience',
+          'All exhibits have English translations',
+        ],
+        highlights: ['Museums', 'Technology', 'History'],
+        goodFor: ['First-time visitors', 'Families', 'Culture seekers'],
+      },
+      {
+        title: 'Viking House VR',
+        category: 'historic',
+        description: 'Immersive VR battle experience opposite tourist office. Interactive virtual reality attraction bringing Viking history to life with engaging storytelling.',
+        duration: '45 minutes for a relaxed pace',
+        tips: [
+          'Entry costs around 175 NOK',
+          'Book early as spaces fill quickly during cruise season',
+          'Suitable for children aged 10 and over',
+        ],
+        highlights: ['History', 'Culture', 'Family-friendly'],
+        goodFor: ['Families', 'History buffs', 'First-time visitors'],
+      },
+    ],
+    
+    nearestBeach: null,
+    
+    foodAndDrink: [
+      {
+        name: 'Øvre Holmegate cafes',
+        type: 'Cafe',
+        description: 'Cinnamon buns, coffee, and Norwegian pastries in colourful street setting. Perfect refreshment stop while exploring Stavanger\'s most vibrant street.',
+      },
+      {
+        name: 'Harbour seafood stalls',
+        type: 'Market',
+        description: 'Salmon, shrimp salad, and fresh North Sea catch near fjord cruise area. Authentic Norwegian seafood experience at the waterfront.',
+      },
+      {
+        name: 'Gamle Stavanger pubs',
+        type: 'Pub',
+        description: 'Local craft beers and traditional Norwegian pub fare in historic wooden house setting. Cosy atmosphere in preserved old town buildings.',
+      },
+      {
+        name: 'Pintxos bars',
+        type: 'Tapas',
+        description: 'Basque-style skewers and small plates in old town. International flavours with Norwegian ingredients in vibrant bar setting.',
+      },
+    ],
+    
+    insiderTips: [
+      'Fjord cruises book at harbour first as tours fill fast during peak season',
+      'Waterproof layers essential; wind off fjords can be strong',
+      'Visit old town in mornings before coach tour groups arrive',
+      'Walk city centre; buses for monuments; boats for fjords',
+      'Cards accepted everywhere; keep 100 NOK for kiosks; no tipping expected',
+      'Relaxed Nordic vibe; siesta uncommon; shops keep regular hours',
+      'Skip chain restaurants; street food offers authentic Norwegian experience',
+      'Check Yr.no for weather radar; Stavanger Card offers discounts on attractions',
+    ],
+    
+    weather: {
+      intro: 'Stavanger has a temperate maritime climate with mild winters and cool summers. North Sea breezes bring changeable weather year-round. Summer offers the best conditions for fjord cruises and outdoor exploration.',
+      months: [
+        { month: 'Jan', highC: 3, lowC: 0, rainMm: 130, sunDays: 8, seaTempC: 6 },
+        { month: 'Feb', highC: 3, lowC: 0, rainMm: 110, sunDays: 9, seaTempC: 6 },
+        { month: 'Mar', highC: 6, lowC: 2, rainMm: 100, sunDays: 11, seaTempC: 8 },
+        { month: 'Apr', highC: 9, lowC: 4, rainMm: 80, sunDays: 13, seaTempC: 10 },
+        { month: 'May', highC: 14, lowC: 8, rainMm: 90, sunDays: 16, seaTempC: 13 },
+        { month: 'Jun', highC: 17, lowC: 11, rainMm: 90, sunDays: 17, seaTempC: 15 },
+        { month: 'Jul', highC: 19, lowC: 13, rainMm: 100, sunDays: 18, seaTempC: 17 },
+        { month: 'Aug', highC: 19, lowC: 13, rainMm: 120, sunDays: 17, seaTempC: 17 },
+        { month: 'Sep', highC: 15, lowC: 10, rainMm: 140, sunDays: 14, seaTempC: 15 },
+        { month: 'Oct', highC: 11, lowC: 7, rainMm: 160, sunDays: 12, seaTempC: 13 },
+        { month: 'Nov', highC: 7, lowC: 4, rainMm: 160, sunDays: 9, seaTempC: 10 },
+        { month: 'Dec', highC: 4, lowC: 1, rainMm: 140, sunDays: 8, seaTempC: 7 },
+      ],
+      bestTime: {
+        overall: 'June to August for mild temperatures, longer days, and best fjord visibility',
+        hottest: 'July and August (peak season with festivals and longest days, but can be busy)',
+        quietest: 'June and September (fjords clearer, fewer tourists, but cooler temperatures)',
+        recommendation: 'Summer months offer the best balance of weather and daylight for first-time visitors seeking the classic fjord experience.',
+      },
+    },
+    
+    faq: [
+      {
+        question: 'Is Stavanger walkable from the cruise port?',
+        answer: 'Yes, Gamle Stavanger and city centre are just 5 minutes flat walk from Strandkaien terminal. The compact layout makes everything easily accessible on foot.',
+      },
+      {
+        question: 'How long do you need in Stavanger?',
+        answer: 'Allow 6 to 8 hours to cover fjord cruise, old town, and city sights. A full day enables Lysefjord boat trip, Gamle Stavanger exploration, and visiting key attractions.',
+      },
+      {
+        question: 'Is English widely spoken in Stavanger?',
+        answer: 'Yes, English is universally spoken. Norway has excellent English proficiency and all tourist facilities communicate in English.',
+      },
+      {
+        question: 'Is Stavanger safe for tourists?',
+        answer: 'Extremely safe. Norway has very low crime rates and Stavanger is a welcoming, well-policed city with excellent safety standards.',
+      },
+      {
+        question: 'Is Stavanger expensive?',
+        answer: 'Yes, very expensive. Expect lunch costs of 200 NOK or more. Norway is one of Europe\'s most expensive countries, though quality is high.',
+      },
+      {
+        question: 'Do I need cash in Stavanger or can I use card?',
+        answer: 'Cards are accepted everywhere. Keep 100 NOK cash for kiosks and market stalls. Contactless payment is universal throughout Norway.',
+      },
+      {
+        question: 'Should I book a ship excursion or explore independently?',
+        answer: 'Independent exploration works perfectly for city sights and fjord cruises can be booked at harbour. Ship excursions offer convenience for coordinated experiences.',
+      },
+      {
+        question: 'What is the best thing to do in Stavanger on a cruise day?',
+        answer: 'Take a Lysefjord cruise to see Pulpit Rock from below, explore Gamle Stavanger old town, and visit the colourful Øvre Holmegate street for a perfect Norwegian fjords experience.',
+      },
+      {
+        question: 'Is hiking Pulpit Rock possible on a cruise day?',
+        answer: 'Pulpit Rock hike requires a full day (8 to 10 hours) with transport to trailhead. Ship excursions are the only viable option for cruise passengers; independent trips are not recommended due to timing constraints.',
+      },
+      {
+        question: 'Is Stavanger family-friendly?',
+        answer: 'Yes, very family-friendly. Museums, walks, and fjord cruises are suitable for all ages. Norwegian Petroleum Museum and Viking House VR offer engaging experiences for children.',
+      },
+    ],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'June to August for mild weather and longest days',
+      cruiseTerminals: ['Strandkaien'],
+      nearbyAirport: 'Stavanger Airport (SVG), 14km',
+      visaInfo: 'None (Schengen 90/180 days for UK passport holders)',
+    },
+    
+    relatedDestinations: ['norwegian-fjords-cruises', 'northern-europe-cruises'],
+    
+    meta: {
+      title: 'Stavanger Cruise Port Guide | Lysefjord, Pulpit Rock & Old Town',
+      description: 'Complete Stavanger cruise port guide. Take Lysefjord cruise to Pulpit Rock, explore Gamle Stavanger old town, visit colourful Øvre Holmegate, and discover insider tips for your Norwegian fjords cruise.',
+      keywords: ['Stavanger cruise port', 'Stavanger fjords', 'Stavanger shore excursions', 'Stavanger things to do', 'Stavanger from cruise ship', 'Norwegian fjords cruise', 'Lysefjord', 'Pulpit Rock'],
+    },
+    
+    status: 'published',
+    lastUpdated: '2024-12-28',
+  },
+
+  {
+    id: 'tromso',
+    slug: 'tromso',
+    name: 'Tromsø',
+    country: 'Norway',
+    region: 'norwegian-fjords',
+    coordinates: { lat: 69.6492, lon: 18.9551 },
+    tagline: 'Arctic gateway to aurora',
+    description: 'Tromsø blends urban vibrancy with fjord wilderness where cruise terminals position ships for immediate access to Polaria aquarium, Fjellheisen cable car panoramas, and Arctic Cathedral\'s stark silhouette across the bridge. Passengers chase humpbacks, huskies, and green skies from this northernmost university city.',
+    portCharacter: 'fjord-nature',
+    
+    aboutPort: {
+      overview: 'Prostneset terminal docks centrally with WiFi and tourist info; larger ships use Breivika terminal (shuttle 15 minutes). Two-minute walk to Polaria; bridge to Arctic Cathedral 20 minutes. Year-round calls peak during winter aurora season.',
+      terminals: 'Prostneset terminal offers WiFi and tourist information. Breivika terminal serves larger ships with shuttle service to city centre.',
+      shuttleServices: 'Shuttle buses run from Breivika terminal to city centre (15 minutes). Prostneset terminal is walkable; no shuttle needed.',
+      walkability: 'Prostneset terminal is walkable to city centre (2 minutes to Polaria). Breivika terminal requires shuttle bus or taxi (15 minutes).',
+    },
+
+    quickFacts: {
+      currency: 'Norwegian Krone (NOK)',
+      language: 'Norwegian, English (universal)',
+      timezone: 'CET (UTC+1 summer)',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Flat walk to centre and cable car base (10 minutes from Prostneset). Buses to Sami camps; RIB boats for whale watching. City centre is compact and walkable.',
+      publicTransport: 'Buses connect to Sami camps and outskirts. RIB boats offer whale watching tours. City centre attractions are within walking distance.',
+      taxis: 'Taxis available at terminals. Expect higher costs than European cities; cards accepted everywhere.',
+      walkingDistance: 'Polaria 2 minutes, Fjellheisen cable car 15 minutes, Arctic Cathedral 20 minutes from Prostneset terminal. City centre is compact.',
+      sightseeingBus: 'City Sightseeing hop-on hop-off bus available seasonally for major attractions and viewpoints.',
+      accessibility: 'Tromsø is fairly accessible with flat paths in city centre. Polaria and Arctic Cathedral have good access. Cable car and outdoor activities may have limitations.',
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Tromsø Airport (TOS)',
+        distance: '5km, 10 minutes by taxi',
+        options: 'Taxi connects airport to city centre in 10 minutes. Airport bus available. Distance is short and straightforward.',
+      },
+      trains: {
+        mainStation: 'None',
+        description: 'No trains. Hurtigruten coastal ferry connects to other Norwegian ports along the coast.',
+        localHubs: 'Hurtigruten coastal ferry provides connections to other Arctic and Norwegian coastal destinations.',
+      },
+      cruiseLines: ['Hurtigruten', 'MSC Cruises', 'Royal Caribbean', 'Cunard'],
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Polaria Aquarium',
+        category: 'family',
+        description: 'Bearded seals, Arctic films, and climate exhibits steps from terminal. Educational centre showcasing Arctic marine life with engaging exhibits and seal feeding demonstrations.',
+        duration: '1 to 1.5 hours for a relaxed pace',
+        tips: [
+          'Seal feeding at 1pm is popular with visitors',
+          'Cinema shows offer immersive Arctic experiences',
+          'Perfect rainy day activity close to cruise terminal',
+        ],
+        highlights: ['Wildlife', 'Museums', 'Family-friendly'],
+        goodFor: ['Families', 'First-time visitors', 'Wildlife enthusiasts'],
+      },
+      {
+        title: 'Fjellheisen Cable Car',
+        category: 'nature',
+        description: 'Summit panoramas over fjords, city, and mountains with 421m ascent. Dramatic cable car ride offering spectacular views of Tromsø and surrounding Arctic landscape.',
+        duration: '1 to 1.5 hours for a relaxed pace',
+        tips: [
+          'Book tickets online in advance for convenience and to avoid queues',
+          'Midnight sun hikes available in summer months',
+          'Cafe at summit offers refreshments with panoramic views',
+        ],
+        highlights: ['Views', 'Nature', 'Photography'],
+        goodFor: ['Photographers', 'First-time visitors', 'Nature lovers'],
+      },
+      {
+        title: 'Arctic Cathedral',
+        category: 'landmark',
+        description: 'Triangular modernist icon with massive stained glass windows and organ concerts. Iconic architectural landmark representing Tromsø\'s Arctic character with stunning design.',
+        duration: '45 minutes to 1 hour for a relaxed pace',
+        tips: [
+          'Entry fee applies; bridge views offer excellent photography opportunities',
+          'Best visited during daylight hours for architectural details',
+          'Check concert schedule for musical performances',
+        ],
+        highlights: ['Architecture', 'Religious', 'Photography'],
+        goodFor: ['Architecture lovers', 'Photographers', 'First-time visitors'],
+      },
+      {
+        title: 'Northern Lights Hunt',
+        category: 'excursion',
+        description: 'Evening minibus or RIB chases aurora during winter season (September to April). Guided tours seeking the spectacular Northern Lights with expert photography tips and warm refreshments.',
+        duration: '4 to 6 hours for a relaxed pace',
+        tips: [
+          'Small group tours offer better experience and flexibility',
+          'Photo tips included; bring camera equipment',
+          'Clear skies essential; weather-dependent activity',
+        ],
+        highlights: ['Aurora', 'Night skies', 'Photography'],
+        goodFor: ['Photographers', 'First-time visitors', 'Nature lovers'],
+      },
+      {
+        title: 'Polar Museum',
+        category: 'historic',
+        description: 'Trappers, expeditions, and Amundsen artifacts in historic building. Fascinating museum exploring Arctic exploration history and Norwegian polar expeditions.',
+        duration: '1 to 1.5 hours for a relaxed pace',
+        tips: [
+          'Free entry in winter months',
+          'English audio guides available',
+          'Exhibits showcase challenging Arctic exploration history',
+        ],
+        highlights: ['History', 'Museums', 'Culture'],
+        goodFor: ['History buffs', 'Culture seekers', 'First-time visitors'],
+      },
+      {
+        title: 'Whale Watching',
+        category: 'excursion',
+        description: 'Humpback and orca RIB tours during feeding season (November to February). Exciting boat trips to see magnificent whales in their natural Arctic habitat.',
+        duration: '4 to 5 hours for a relaxed pace',
+        tips: [
+          'Warm suits provided by operators',
+          'Seasickness tablets recommended for sensitive passengers',
+          'Choose ethical operators following whale watching guidelines',
+        ],
+        highlights: ['Wildlife', 'Fjords', 'Nature'],
+        goodFor: ['Nature lovers', 'Wildlife enthusiasts', 'Photographers'],
+      },
+    ],
+    
+    nearestBeach: null,
+    
+    foodAndDrink: [
+      {
+        name: 'Mack Ølhallen',
+        type: 'Brewery',
+        description: 'Northernmost beer hall with historic brews and traditional Norwegian atmosphere. Authentic brewery experience in historic setting.',
+      },
+      {
+        name: 'Polaria cafe',
+        type: 'Cafe',
+        description: 'Seal-view seafood soup and light meals inside Polaria aquarium. Unique dining experience with views of Arctic marine life.',
+      },
+      {
+        name: 'Storgata restaurants',
+        type: 'Restaurant',
+        description: 'Reindeer, stockfish, and traditional Norwegian cuisine on pedestrian street. Variety of dining options showcasing local Arctic specialities.',
+      },
+      {
+        name: 'Waterfront kiosks',
+        type: 'Market',
+        description: 'King crab salads and fresh seafood at harbour stalls. Quick and authentic Norwegian street food experience at the waterfront.',
+      },
+    ],
+    
+    insiderTips: [
+      'Aurora and whale tours book ahead as weather-dependent activities sell out fast',
+      'Layered thermals essential; wind chill can drop temperatures significantly',
+      'Cable car mornings before crowds arrive offer better experience',
+      'Walk city centre; buses for outskirts; RIB boats for fjord excursions',
+      'Cards accepted everywhere; keep 100 NOK for kiosks; no tipping expected',
+      'Sami church visits require shoulders covered; respectful dress appreciated',
+      'Skip chain restaurants; craft brewery offers authentic Norwegian experience',
+      'Aurora forecast apps help plan evening activities; Tromsø Card offers discounts',
+    ],
+    
+    weather: {
+      intro: 'Tromsø has a subarctic climate with mild summers and cold, snowy winters. Winter brings Northern Lights opportunities while summer offers midnight sun. Layered clothing essential year-round.',
+      months: [
+        { month: 'Jan', highC: -1, lowC: -6, rainMm: 100, sunDays: 4, seaTempC: 2 },
+        { month: 'Feb', highC: 0, lowC: -6, rainMm: 90, sunDays: 6, seaTempC: 3 },
+        { month: 'Mar', highC: 1, lowC: -5, rainMm: 80, sunDays: 9, seaTempC: 5 },
+        { month: 'Apr', highC: 4, lowC: -2, rainMm: 60, sunDays: 12, seaTempC: 8 },
+        { month: 'May', highC: 9, lowC: 3, rainMm: 50, sunDays: 16, seaTempC: 12 },
+        { month: 'Jun', highC: 13, lowC: 7, rainMm: 50, sunDays: 19, seaTempC: 15 },
+        { month: 'Jul', highC: 15, lowC: 10, rainMm: 60, sunDays: 20, seaTempC: 17 },
+        { month: 'Aug', highC: 14, lowC: 9, rainMm: 80, sunDays: 18, seaTempC: 16 },
+        { month: 'Sep', highC: 10, lowC: 5, rainMm: 100, sunDays: 14, seaTempC: 12 },
+        { month: 'Oct', highC: 5, lowC: 0, rainMm: 120, sunDays: 10, seaTempC: 8 },
+        { month: 'Nov', highC: 1, lowC: -4, rainMm: 100, sunDays: 5, seaTempC: 4 },
+        { month: 'Dec', highC: -1, lowC: -6, rainMm: 100, sunDays: 3, seaTempC: 2 },
+      ],
+      bestTime: {
+        overall: 'Winter (December to March) for aurora hunting and summer (June to July) for midnight sun',
+        hottest: 'July (peak summer with midnight sun and warmest temperatures, but busy season)',
+        quietest: 'Shoulder seasons (May, September, October) offer balanced activities with fewer crowds',
+        recommendation: 'Winter months offer the best Northern Lights experience for first-time visitors seeking aurora, while summer provides midnight sun and whale watching opportunities.',
+      },
+    },
+    
+    faq: [
+      {
+        question: 'Is Tromsø walkable from the cruise port?',
+        answer: 'Yes, Prostneset terminal is walkable with Polaria just 2 minutes away. Breivika terminal requires shuttle bus (15 minutes) to city centre.',
+      },
+      {
+        question: 'How long do you need in Tromsø?',
+        answer: 'Allow 6 to 8 hours to cover city attractions and an excursion. A full day enables cable car, Polaria, Arctic Cathedral, and optional aurora or whale watching tour.',
+      },
+      {
+        question: 'Is English widely spoken in Tromsø?',
+        answer: 'Yes, English is universally spoken. Norway has excellent English proficiency and all tourist facilities communicate in English.',
+      },
+      {
+        question: 'Is Tromsø safe for tourists?',
+        answer: 'Extremely safe. Norway has very low crime rates and Tromsø is a welcoming, well-policed Arctic city with excellent safety standards.',
+      },
+      {
+        question: 'Is Tromsø expensive?',
+        answer: 'Yes, very expensive. Expect lunch costs of 250 NOK or more. Norway is one of Europe\'s most expensive countries, though quality is high.',
+      },
+      {
+        question: 'Do I need cash in Tromsø or can I use card?',
+        answer: 'Cards are accepted everywhere. Keep 100 NOK cash for kiosks. Contactless payment is universal throughout Norway.',
+      },
+      {
+        question: 'Should I book a ship excursion or explore independently?',
+        answer: 'Independent exploration works perfectly for city sights. Ship excursions are convenient for coordinated aurora hunts and whale watching tours, which are weather-dependent.',
+      },
+      {
+        question: 'What is the best thing to do in Tromsø on a cruise day?',
+        answer: 'Ride the Fjellheisen cable car for panoramic views, visit Polaria aquarium, see the Arctic Cathedral, and consider an aurora hunt or whale watching tour depending on season.',
+      },
+      {
+        question: 'Are Northern Lights guaranteed in Tromsø?',
+        answer: 'No, Northern Lights are weather-dependent and require clear skies. Aurora hunt tours increase chances by travelling to areas with better conditions, but sightings are never guaranteed.',
+      },
+      {
+        question: 'When is whale watching season in Tromsø?',
+        answer: 'Whale watching season runs from November to February when humpback and orca whales feed in Arctic waters. Summer offers different wildlife viewing opportunities.',
+      },
+    ],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'Winter (December to March) for aurora hunting and summer (June to July) for midnight sun',
+      cruiseTerminals: ['Prostneset', 'Breivika'],
+      nearbyAirport: 'Tromsø Airport (TOS), 5km',
+      visaInfo: 'None (Schengen 90/180 days for UK passport holders)',
+    },
+    
+    relatedDestinations: ['norwegian-fjords-cruises', 'northern-europe-cruises'],
+    
+    meta: {
+      title: 'Tromsø Cruise Port Guide | Northern Lights, Arctic & Fjords',
+      description: 'Complete Tromsø cruise port guide. Experience Northern Lights, ride Fjellheisen cable car, visit Polaria aquarium, see Arctic Cathedral, and discover insider tips for your Arctic cruise.',
+      keywords: ['Tromsø cruise port', 'Tromsø Northern Lights', 'Tromsø shore excursions', 'Tromsø things to do', 'Tromsø from cruise ship', 'Norwegian fjords cruise', 'Arctic cruise', 'Tromsø aurora'],
+    },
+    
+    status: 'published',
+    lastUpdated: '2024-12-31',
+  },
+
+  {
+    id: 'lofoten-islands',
+    slug: 'lofoten-islands',
+    name: 'Lofoten Islands',
+    country: 'Norway',
+    region: 'norwegian-fjords',
+    coordinates: { lat: 68.15, lon: 13.61 },
+    tagline: 'Rorbus beneath Arctic peaks',
+    description: 'Lofoten\'s Leknes-Gravdal piers (shared halfway between towns) anchor mega-ships for access to white-sand beaches, fishing villages like Ballstad and Nusfjord, and midnight sun hikes amid cod-drying racks. Vestvågøy Island\'s mountains frame turquoise seas in this UNESCO candidate above the Arctic Circle.',
+    portCharacter: 'fjord-nature',
+    
+    aboutPort: {
+      overview: 'Ships anchor offshore; tenders to shared pier (5 to 6 minute ride) with gift shop, WiFi (3.50 euros for 20 minutes), fishing gear rental between Leknes (admin centre) and Gravdal (residential). Shuttles to Ballstad (15 euros); taxis to Svolvær. Peak May to September sees 100 plus calls.',
+      terminals: 'Leknes-Gravdal shared pier (tender landing) with gift shop, WiFi, and fishing gear rental. Located halfway between Leknes and Gravdal towns.',
+      shuttleServices: 'Shuttle buses to Ballstad fishing village (15 euros). Taxis available for longer journeys to Svolvær and other destinations.',
+      walkability: 'Limited walkability from pier. Shuttles and taxis essential for reaching villages and attractions. Pier area has viewpoints accessible on foot.',
+    },
+
+    quickFacts: {
+      currency: 'Norwegian Krone (NOK)',
+      language: 'Norwegian, English (universal)',
+      timezone: 'CET (UTC+1 summer)',
+      portType: 'Port of Call',
+      walkable: false,
+      tenderRequired: true,
+    },
+    
+    gettingAround: {
+      fromPort: 'Tender pier has viewpoints walkable on foot. Shuttles and taxis to Ballstad (30 minutes), beach trails, and other villages. Buses along E10 highway; bikes available at pier (21 euros per day).',
+      publicTransport: 'Buses run along E10 highway connecting villages. Hurtigruten ferries provide coastal connections. No train service.',
+      taxis: 'Taxis available at pier for journeys to Ballstad, Svolvær, and beaches. Expect higher costs than European cities; agree fares in advance.',
+      walkingDistance: 'Pier viewpoints walkable. Leknes town 4km, Ballstad 30 minutes by shuttle, Svolvær 1 hour by taxi.',
+      sightseeingBus: 'Shuttle buses operate to Ballstad fishing village and other key destinations. Bikes available for hire at pier.',
+      accessibility: 'Limited accessibility due to tender requirement and remote location. Some paths may be challenging; check with operators for specific needs.',
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Leknes Airport (LKN)',
+        distance: '10km, 15 minutes by taxi',
+        options: 'Taxi available (15 minutes). No public transport connection from airport to pier.',
+      },
+      trains: {
+        mainStation: 'None',
+        description: 'No trains. Hurtigruten ferries provide coastal connections along the Lofoten Islands.',
+        localHubs: 'Hurtigruten ferry connections available for coastal travel.',
+      },
+      cruiseLines: ['MSC Cruises', 'Holland America Line', 'Fred. Olsen Cruise Lines', 'Hurtigruten'],
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Ballstad Fishing Village',
+        category: 'historic',
+        description: 'Traditional rorbu cabins, active harbour, cod drying racks, and whale spotting opportunities. Authentic fishing village experience showcasing Lofoten\'s maritime heritage.',
+        duration: '2 to 3 hours roundtrip for a relaxed pace',
+        tips: [
+          'Shuttle costs 15 euros; book early as it fills fast',
+          'Fresh seafood lunch available at village restaurants',
+          'Stokksnes beach walk offers additional scenic views',
+        ],
+        highlights: ['Culture', 'Photography', 'Food', 'History'],
+        goodFor: ['First-time visitors', 'Culture seekers', 'Photographers'],
+      },
+      {
+        title: 'Uttakleiv Beach',
+        category: 'beach',
+        description: 'White sands, turquoise Arctic surf, and midnight sun picnics. One of the world\'s most beautiful beaches with dramatic mountain backdrop and Arctic waters.',
+        duration: '1.5 to 2 hours roundtrip for a relaxed pace',
+        tips: [
+          'Taxi costs around 20 euros; best light at 10pm in summer',
+          'Shallow entry makes it suitable for brave swimmers',
+          'Northernmost palm trees create unique Arctic beach experience',
+        ],
+        highlights: ['Beaches', 'Nature', 'Photography', 'Views'],
+        goodFor: ['Photographers', 'Nature lovers', 'Adventure seekers'],
+      },
+      {
+        title: 'Nusfjord UNESCO Village',
+        category: 'historic',
+        description: '19th-century rorbu cabins, stockfish museum, and no modern buildings. Preserved fishing village offering authentic glimpse into traditional Lofoten life.',
+        duration: '3 to 4 hours roundtrip for a relaxed pace',
+        tips: [
+          'Bus or taxi takes 45 minutes; free to explore exteriors',
+          'Bakery offers fresh traditional pastries',
+          'Photography opportunities best in morning light',
+        ],
+        highlights: ['History', 'Architecture', 'Culture', 'Photography'],
+        goodFor: ['History buffs', 'Photographers', 'Culture seekers'],
+      },
+      {
+        title: 'Lofoten Stockfish Museum',
+        category: 'historic',
+        description: 'Cod drying process, Viking trade exhibits in Gravdal. Educational museum explaining the traditional stockfish industry that shaped Lofoten culture.',
+        duration: '1 to 1.5 hours for a relaxed pace',
+        tips: [
+          'Located near pier; easy to combine with other activities',
+          'English displays throughout; informative for all visitors',
+          'Cod liver oil tastings available for adventurous visitors',
+        ],
+        highlights: ['Museums', 'History', 'Culture', 'Food'],
+        goodFor: ['History buffs', 'First-time visitors', 'Culture seekers'],
+      },
+      {
+        title: 'Hiking Peaks (Reineskarvatnet)',
+        category: 'active',
+        description: 'Lake viewpoints, mountain passes, and moderate hikes. Scenic trails offering panoramic views over Lofoten\'s dramatic landscape and fjords.',
+        duration: '2 to 3 hours for a relaxed pace',
+        tips: [
+          'Sturdy shoes essential; trails can be challenging',
+          'Guided hikes available (around 50 euros); eagle spotting opportunities',
+          'Weather can change quickly; bring layers and waterproof gear',
+        ],
+        highlights: ['Hiking', 'Views', 'Nature', 'Wildlife'],
+        goodFor: ['Active travelers', 'Nature lovers', 'Adventure seekers'],
+      },
+      {
+        title: 'Svolvær Day Trip',
+        category: 'excursion',
+        description: 'Magic Ice bar, harbour, and 1 hour drive to other Lofoten port. Gateway town offering ice sculptures, galleries, and access to wider Lofoten attractions.',
+        duration: '4 to 6 hours for a relaxed pace',
+        tips: [
+          'Taxi costs around 100 euros return; consider combining with other port visits',
+          'Magic Ice bar offers unique Arctic experience',
+          'Harbour area has restaurants and shops for extended visit',
+        ],
+        highlights: ['Culture', 'Art', 'Food', 'Views'],
+        goodFor: ['First-time visitors', 'Culture seekers', 'Art lovers'],
+      },
+    ],
+    
+    nearestBeach: {
+      name: 'Uttakleiv Beach',
+      description: 'Arctic white sands with turquoise shallows, dunes, and mountain backdrop. One of the world\'s most beautiful beaches with dramatic Arctic scenery and midnight sun opportunities.',
+      type: 'sand',
+      waterEntry: 'shallow entry',
+      shelter: 'exposed',
+      crowdLevel: 'quiet',
+      facilities: {
+        lifeguards: false,
+        lifeguardsSeasonal: false,
+        sunbeds: false,
+        umbrellas: false,
+        showers: false,
+        toilets: true,
+        restaurants: false,
+        changingRooms: false,
+      },
+      access: {
+        walkTime: 'Not feasible from port',
+        taxiTime: '20 minutes from port',
+        busRoute: 'Local shuttles available',
+        notes: 'Midnight sun swims possible; cold water year-round',
+      },
+      bestFor: ['photography', 'swimming', 'solitude'],
+      tip: 'Best light at 10pm in summer for photography.',
+    },
+    
+    foodAndDrink: [
+      {
+        name: 'Ballstad rorbu restaurants',
+        type: 'Restaurant',
+        description: 'Fresh cod, whale, and traditional seafood in authentic fishing village setting. Experience traditional Lofoten cuisine in historic rorbu cabins.',
+      },
+      {
+        name: 'Pier kiosks',
+        type: 'Cafe',
+        description: 'Coffee, waffles, and light refreshments at tender area. Convenient stop for quick snacks and hot drinks after tender ride.',
+      },
+      {
+        name: 'Leknes bakeries',
+        type: 'Bakery',
+        description: 'Traditional skillingsboller and Norwegian pastries. Authentic local bakery experience accessible via town shuttle.',
+      },
+      {
+        name: 'Stockfish Museum cafe',
+        type: 'Cafe',
+        description: 'Cod liver pâté and traditional Norwegian dishes at cultural site. Unique dining experience combining food and local heritage.',
+      },
+    ],
+    
+    insiderTips: [
+      'Book Ballstad shuttle first as it fills fast during peak season',
+      'Waterproof layers essential; Arctic wind chill can be significant',
+      'Mornings offer quieter experience before coach tour crowds arrive',
+      'Shuttles for villages; taxis for beaches; bikes for flat areas',
+      'Cards accepted everywhere; keep 100 NOK for kiosks; no tipping expected',
+      'Sturdy shoes essential for trails; mosquito nets useful in summer',
+      'Skip tourist souvenirs; local wool products offer authentic keepsakes',
+      'Check Yr.no for weather radar; Lofoten Pass offers attraction discounts',
+    ],
+    
+    weather: {
+      intro: 'Lofoten has a subarctic climate with cool summers and cold winters. Summer brings midnight sun while winter offers Northern Lights opportunities. Weather can change quickly; layered clothing essential.',
+      months: [
+        { month: 'Jan', highC: 2, lowC: -2, rainMm: 120, sunDays: 5, seaTempC: 4 },
+        { month: 'Feb', highC: 2, lowC: -2, rainMm: 100, sunDays: 7, seaTempC: 4 },
+        { month: 'Mar', highC: 3, lowC: -2, rainMm: 90, sunDays: 10, seaTempC: 5 },
+        { month: 'Apr', highC: 6, lowC: 0, rainMm: 70, sunDays: 13, seaTempC: 8 },
+        { month: 'May', highC: 10, lowC: 4, rainMm: 60, sunDays: 17, seaTempC: 12 },
+        { month: 'Jun', highC: 14, lowC: 8, rainMm: 50, sunDays: 20, seaTempC: 15 },
+        { month: 'Jul', highC: 16, lowC: 10, rainMm: 60, sunDays: 21, seaTempC: 17 },
+        { month: 'Aug', highC: 15, lowC: 9, rainMm: 80, sunDays: 19, seaTempC: 16 },
+        { month: 'Sep', highC: 11, lowC: 6, rainMm: 110, sunDays: 15, seaTempC: 13 },
+        { month: 'Oct', highC: 7, lowC: 2, rainMm: 130, sunDays: 11, seaTempC: 9 },
+        { month: 'Nov', highC: 3, lowC: -1, rainMm: 110, sunDays: 6, seaTempC: 6 },
+        { month: 'Dec', highC: 1, lowC: -3, rainMm: 120, sunDays: 4, seaTempC: 4 },
+      ],
+      bestTime: {
+        overall: 'June to August for midnight sun, warmest weather, and best visibility',
+        hottest: 'July (peak season with busy shuttles, but warmest temperatures and longest days)',
+        quietest: 'June and September (clearer peaks, fewer tourists, but cooler temperatures)',
+        recommendation: 'June or July offer the best balance of weather and midnight sun experience for first-time visitors seeking the classic Lofoten experience.',
+      },
+    },
+    
+    faq: [
+      {
+        question: 'Is Lofoten walkable from the cruise port?',
+        answer: 'Limited walkability. The tender pier has viewpoints accessible on foot, but shuttles and taxis are essential for reaching villages, beaches, and main attractions.',
+      },
+      {
+        question: 'How long do you need in Lofoten?',
+        answer: 'Allow 8 to 10 hours for a full experience including tender, Ballstad shuttle (morning), beach visit, and museum (afternoon). Standard cruise day covers village and beach highlights.',
+      },
+      {
+        question: 'Is English widely spoken in Lofoten?',
+        answer: 'Yes, English is universally spoken. Norway has excellent English proficiency and all tourist facilities communicate in English.',
+      },
+      {
+        question: 'Is Lofoten safe for tourists?',
+        answer: 'Extremely safe. Norway has very low crime rates and Lofoten is a welcoming, well-policed destination with excellent safety standards.',
+      },
+      {
+        question: 'Is Lofoten expensive?',
+        answer: 'Yes, very expensive. Expect lunch costs of 250 NOK or more. Norway is one of Europe\'s most expensive countries, though quality is high.',
+      },
+      {
+        question: 'Do I need cash in Lofoten or can I use card?',
+        answer: 'Cards are accepted everywhere. Keep 100 NOK cash for kiosks. Contactless payment is universal throughout Norway.',
+      },
+      {
+        question: 'Should I book a ship excursion or explore independently?',
+        answer: 'Independent exploration with shuttles works perfectly for Ballstad village and beaches. Ship excursions are convenient for coordinated longer excursions and guaranteed transport.',
+      },
+      {
+        question: 'What is the best thing to do in Lofoten on a cruise day?',
+        answer: 'Visit Ballstad fishing village for authentic rorbu experience, explore Uttakleiv Beach for Arctic beauty, and visit Stockfish Museum to learn about local heritage.',
+      },
+      {
+        question: 'Can you see Northern Lights in Lofoten?',
+        answer: 'Yes, Northern Lights are visible in winter months (October to March) when skies are clear. Summer offers midnight sun instead of aurora opportunities.',
+      },
+      {
+        question: 'Is Lofoten family-friendly?',
+        answer: 'Yes, beaches and easy walks are suitable for families. Ballstad village offers safe exploration, and Stockfish Museum is educational for children.',
+      },
+    ],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'June to August for midnight sun and warmest weather',
+      cruiseTerminals: ['Leknes-Gravdal shared pier (tender)'],
+      nearbyAirport: 'Leknes Airport (LKN), 10km',
+      visaInfo: 'None (Schengen 90/180 days for UK passport holders)',
+    },
+    
+    relatedDestinations: ['norwegian-fjords-cruises', 'northern-europe-cruises'],
+    
+    meta: {
+      title: 'Lofoten Islands Cruise Port Guide | Arctic Beaches & Fishing Villages',
+      description: 'Complete Lofoten Islands cruise port guide. Visit Ballstad fishing village, explore Uttakleiv Beach, discover rorbu cabins, and find insider tips for your Norwegian fjords cruise.',
+      keywords: ['Lofoten Islands cruise port', 'Leknes Gravdal', 'Lofoten shore excursions', 'Lofoten things to do', 'Lofoten from cruise ship', 'Norwegian fjords cruise', 'Arctic cruise', 'Ballstad fishing village'],
+    },
+    
+    status: 'published',
+    lastUpdated: '2025-01-02',
+  },
+
+  {
+    id: 'honningsvag',
+    slug: 'honningsvag',
+    name: 'Honningsvåg',
+    country: 'Norway',
+    region: 'norwegian-fjords',
+    coordinates: { lat: 70.9833, lon: 25.9833 },
+    tagline: 'North Cape Arctic frontier',
+    description: 'Honningsvåg\'s deep-water pier welcomes ships into this northernmost town (2,500 residents) above the Arctic Circle, positioning passengers for 40-minute buses to North Cape\'s dramatic 307m cliffs, globe monument, and midnight sun views. Colourful houses and fishing harbour frame excursions to reindeer herds and bird cliffs.',
+    portCharacter: 'fjord-nature',
+    
+    aboutPort: {
+      overview: 'Central pier accommodates up to 4 ships with tourist office, North Cape Museum, WiFi, taxis adjacent; 5-minute walk to main street. Handles Hurtigruten and mega-ships; buses to North Cape depart pier.',
+      terminals: 'Central pier with tourist office, North Cape Museum, WiFi, and taxi rank. Accommodates up to 4 ships simultaneously.',
+      shuttleServices: 'Buses to North Cape depart from pier (50 euros return, 40 minutes each way). Tourist buses available for Gjesværstappan bird cliffs and other attractions.',
+      walkability: '5-minute flat walk to shops and church. Town centre is compact and easily accessible on foot from the pier.',
+    },
+
+    quickFacts: {
+      currency: 'Norwegian Krone (NOK)',
+      language: 'Norwegian, English (universal)',
+      timezone: 'CET (UTC+1 summer)',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: '5-minute flat walk to shops and church. Buses to North Cape depart from pier. Taxis and car rental available at pier.',
+      publicTransport: 'Tourist buses to North Cape and Gjesværstappan bird cliffs. No regular public transport; buses operate for cruise passengers.',
+      taxis: 'Taxis available at pier. Expect around 100 euros return for North Cape. Agree fares in advance for longer journeys.',
+      walkingDistance: 'Town centre 5 minutes, Honningsvåg Church 5 minutes from pier. North Cape 35km requires bus transport.',
+      sightseeingBus: 'Tourist buses operate to North Cape (50 euros return, 40 minutes each way) and Gjesværstappan bird cliffs (60 euros). Buses depart from pier area.',
+      accessibility: 'Pier and town centre are fairly flat and accessible. North Cape buses have good access. Museum and attractions have disabled facilities.',
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Lakselv Airport (LKL)',
+        distance: '90km, 1.5 hours by road',
+        options: 'Taxi or car rental available for 1.5-hour journey. No direct public transport connection from airport to port.',
+      },
+      trains: {
+        mainStation: 'None',
+        description: 'No trains. Hurtigruten coastal ferries provide connections along the Norwegian coast.',
+        localHubs: 'Hurtigruten ferry connections available for coastal travel.',
+      },
+      cruiseLines: ['MSC Cruises', 'Holland America Line', 'Cunard', 'Hurtigruten'],
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'North Cape Plateau',
+        category: 'landmark',
+        description: '307m cliff with globe monument, visitor centre, midnight sun chapel. Europe\'s northernmost mainland point offering dramatic views over the Arctic Ocean with iconic globe monument marking the continent\'s edge.',
+        duration: '3 to 4 hours roundtrip for a relaxed pace',
+        tips: [
+          'Bus costs 50 euros return; book at pier first as it fills instantly',
+          'North Cape certificate costs around 10 euros; popular souvenir',
+          'Summer sun operates 24/7, winter offers aurora viewing opportunities',
+        ],
+        highlights: ['Views', 'Nature', 'Photography'],
+        goodFor: ['First-time visitors', 'Photographers', 'Nature lovers'],
+      },
+      {
+        title: 'North Cape Museum',
+        category: 'historic',
+        description: 'Arctic exploration, Sami history, Nordkapp Hall exhibits pier-side. Comprehensive museum showcasing Honningsvåg\'s role as gateway to the Arctic, featuring exhibits on polar exploration and local Sami culture.',
+        duration: '45 minutes to 1 hour for a relaxed pace',
+        tips: [
+          'Free entry with North Cape bus ticket; check with operator',
+          'English audio guides available for exhibits',
+          'Postcards from top of world available in gift shop',
+        ],
+        highlights: ['Museums', 'History', 'Culture'],
+        goodFor: ['History buffs', 'First-time visitors', 'Culture seekers'],
+      },
+      {
+        title: 'Gjesværstappan Bird Cliffs',
+        category: 'nature',
+        description: 'Puffins, gannets on sea stacks accessible by RIB or bus. Dramatic bird cliffs with hundreds of thousands of nesting seabirds including puffins and gannets on towering sea stacks.',
+        duration: '3 to 4 hours for a relaxed pace',
+        tips: [
+          'Tours cost around 60 euros; book at tourist office',
+          'Binoculars essential for bird watching; provided on some tours',
+          'Summer nesting season offers best viewing opportunities',
+        ],
+        highlights: ['Wildlife', 'Photography', 'Nature'],
+        goodFor: ['Nature lovers', 'Photographers', 'Wildlife enthusiasts'],
+      },
+      {
+        title: 'King Crab Safari',
+        category: 'active',
+        description: 'Trap and pot-haul, tasting on RIB boat. Hands-on experience catching and tasting fresh king crab from Arctic waters, followed by traditional meal on board.',
+        duration: '3 to 4 hours for a relaxed pace',
+        tips: [
+          'Warm suits provided; dress in layers as Arctic winds can be cold',
+          'Fresh feast included with catch; authentic Norwegian seafood experience',
+          'Operators follow ethical quotas for sustainable fishing',
+        ],
+        highlights: ['Food', 'Wildlife', 'Adventure'],
+        goodFor: ['Foodies', 'Adventure seekers', 'Active travelers'],
+      },
+      {
+        title: 'Honningsvåg Church',
+        category: 'historic',
+        description: 'Colourful wooden Arctic cathedral with WWII history. Striking wooden church known as the Arctic Cathedral, featuring traditional Norwegian architecture and connections to World War II history.',
+        duration: '30 minutes for a relaxed pace',
+        tips: [
+          'Free entry; donations welcome',
+          '10-minute walk from pier; easily accessible',
+          'Midnight sun services available in summer months',
+        ],
+        highlights: ['Architecture', 'History', 'Religious'],
+        goodFor: ['First-time visitors', 'History buffs', 'Architecture lovers'],
+      },
+      {
+        title: 'Sami Reindeer Experience',
+        category: 'excursion',
+        description: 'Herding, joik songs, Arctic meal in authentic lavvu tents via bus tour. Immersive cultural experience with local Sami community, including traditional reindeer herding, joik singing, and Arctic cuisine.',
+        duration: '3 hours for a relaxed pace',
+        tips: [
+          'Tours cost around 70 euros; book in advance during peak season',
+          'Authentic lavvu tents provide traditional Sami atmosphere',
+          'Excellent photo opportunities with reindeer herds and traditional clothing',
+        ],
+        highlights: ['Culture', 'Wildlife', 'Food'],
+        goodFor: ['Culture seekers', 'First-time visitors', 'Families'],
+      },
+    ],
+    
+    nearestBeach: null,
+    
+    foodAndDrink: [
+      {
+        name: 'Pier seafood kiosks',
+        type: 'Cafe',
+        description: 'Fresh crab salads and seafood snacks at tourist office area. Convenient pier-side dining with local Arctic specialities.',
+      },
+      {
+        name: 'North Cape Hall',
+        type: 'Restaurant',
+        description: 'Traditional reindeer stew with cliff-top views over Arctic Ocean. Atmospheric dining at Europe\'s northernmost point.',
+      },
+      {
+        name: 'Main street cafes',
+        type: 'Cafe',
+        description: 'Authentic Norwegian waffles, coffee, and light meals amid colourful houses. Cosy local cafes offering traditional Norwegian hospitality.',
+      },
+      {
+        name: 'Ice Bar',
+        type: 'Bar',
+        description: 'Frozen drinks served in unique Arctic setting with souvenir glasses. Unique experience with drinks served in ice-carved surroundings.',
+      },
+    ],
+    
+    insiderTips: [
+      'Book North Cape buses at pier first as they fill instantly during cruise season',
+      'Thermals essential; Arctic wind chill can make temperatures feel 10 degrees colder',
+      'Mornings before coach tours arrive offer quieter experience; summer sun never sets',
+      'Walk town centre; buses for North Cape and cliffs; RIBs for crab safaris and bird watching',
+      'Cards accepted everywhere; keep 100 NOK for kiosks; no tipping expected in Norway',
+      'Sturdy shoes essential for trails; mosquito nets useful in summer months',
+      'Skip chain restaurants; local crab from safaris offers authentic Norwegian experience',
+      'Aurora apps useful in winter; North Cape certificate makes popular souvenir',
+    ],
+    
+    weather: {
+      intro: 'Honningsvåg has a subarctic climate above the Arctic Circle with cool summers and cold winters. Summer brings midnight sun from May to July, while winter offers Northern Lights opportunities. Weather can change rapidly; layered clothing essential.',
+      months: [
+        { month: 'Jan', highC: -2, lowC: -8, rainMm: 100, sunDays: 3, seaTempC: 1 },
+        { month: 'Feb', highC: -2, lowC: -8, rainMm: 90, sunDays: 5, seaTempC: 2 },
+        { month: 'Mar', highC: 0, lowC: -6, rainMm: 80, sunDays: 8, seaTempC: 4 },
+        { month: 'Apr', highC: 3, lowC: -3, rainMm: 60, sunDays: 11, seaTempC: 7 },
+        { month: 'May', highC: 8, lowC: 2, rainMm: 50, sunDays: 15, seaTempC: 11 },
+        { month: 'Jun', highC: 12, lowC: 6, rainMm: 50, sunDays: 18, seaTempC: 14 },
+        { month: 'Jul', highC: 14, lowC: 9, rainMm: 60, sunDays: 19, seaTempC: 16 },
+        { month: 'Aug', highC: 13, lowC: 8, rainMm: 80, sunDays: 17, seaTempC: 15 },
+        { month: 'Sep', highC: 9, lowC: 4, rainMm: 100, sunDays: 13, seaTempC: 12 },
+        { month: 'Oct', highC: 4, lowC: -1, rainMm: 110, sunDays: 9, seaTempC: 7 },
+        { month: 'Nov', highC: 0, lowC: -5, rainMm: 100, sunDays: 5, seaTempC: 3 },
+        { month: 'Dec', highC: -2, lowC: -7, rainMm: 100, sunDays: 3, seaTempC: 1 },
+      ],
+      bestTime: {
+        overall: 'June to August for midnight sun and warmest weather, or October to March for Northern Lights opportunities',
+        hottest: 'July (peak summer with busy buses, but warmest temperatures and 24-hour daylight)',
+        quietest: 'June and September (clearer skies, fewer tourists, but cooler temperatures than peak summer)',
+        recommendation: 'June or July offer the best balance of weather and midnight sun experience for first-time visitors seeking the classic Arctic frontier experience.',
+      },
+    },
+    
+    faq: [
+      {
+        question: 'Is Honningsvåg walkable from the cruise port?',
+        answer: 'Yes, the town centre is 5 minutes walk from the pier. Main street shops and Honningsvåg Church are easily accessible on foot. North Cape requires bus transport (35km).',
+      },
+      {
+        question: 'How long do you need in Honningsvåg?',
+        answer: 'Allow 4 to 6 hours for North Cape bus trip, or 8 to 10 hours to combine North Cape bus (morning), town and museum (afternoon). Standard cruise day covers North Cape and town highlights.',
+      },
+      {
+        question: 'Is English widely spoken in Honningsvåg?',
+        answer: 'Yes, English is universally spoken. Norway has excellent English proficiency and all tourist facilities communicate in English.',
+      },
+      {
+        question: 'Is Honningsvåg safe for tourists?',
+        answer: 'Extremely safe. Norway has very low crime rates and Honningsvåg is a welcoming, well-policed destination with excellent safety standards.',
+      },
+      {
+        question: 'Is Honningsvåg expensive?',
+        answer: 'Yes, very expensive. Expect lunch costs of around 250 NOK or more. Norway is one of Europe\'s most expensive countries, though quality is high.',
+      },
+      {
+        question: 'Do I need cash in Honningsvåg or can I use card?',
+        answer: 'Cards are accepted everywhere. Keep 100 NOK cash for kiosks. Contactless payment is universal throughout Norway.',
+      },
+      {
+        question: 'Should I book a ship excursion or explore independently?',
+        answer: 'Independent exploration with buses works perfectly for North Cape trips. Buses depart from pier and can be booked on arrival. Ship excursions offer guaranteed transport during busy periods.',
+      },
+      {
+        question: 'What is the best thing to do in Honningsvåg on a cruise day?',
+        answer: 'Take the bus to North Cape Plateau for Europe\'s northernmost mainland point, visit North Cape Museum, explore the colourful town centre, and consider a king crab safari or bird cliffs tour.',
+      },
+      {
+        question: 'What\'s the best way to see the fjords and Arctic scenery?',
+        answer: 'North Cape bus offers dramatic cliff views over Arctic Ocean. King Crab Safari and Gjesværstappan bird cliffs tours provide RIB boat experiences with spectacular coastal scenery.',
+      },
+      {
+        question: 'Can you see the midnight sun in Honningsvåg?',
+        answer: 'Yes, midnight sun is visible from May to July when the sun never sets. Best viewing is from North Cape Plateau during these months.',
+      },
+    ],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'Summer for midnight sun and warmest weather, or winter for Northern Lights opportunities',
+      cruiseTerminals: ['Central pier'],
+      nearbyAirport: 'Lakselv Airport (LKL), 90km',
+      visaInfo: 'None (Schengen 90/180 days for UK passport holders)',
+    },
+    
+    relatedDestinations: ['norwegian-fjords-cruises', 'northern-europe-cruises'],
+    
+    meta: {
+      title: 'Honningsvåg Cruise Port Guide | North Cape, Arctic & Midnight Sun',
+      description: 'Complete Honningsvåg cruise port guide. Visit North Cape Plateau, explore Arctic scenery, experience midnight sun, discover Sami culture, and find insider tips for your Norwegian fjords cruise.',
+      keywords: ['Honningsvåg cruise port', 'North Cape cruise', 'Honningsvåg shore excursions', 'Honningsvåg things to do', 'Honningsvåg from cruise ship', 'Norwegian fjords cruise', 'Arctic cruise', 'North Cape Plateau'],
+    },
+    
+    status: 'published',
+    lastUpdated: '2025-01-03',
+  },
+
+  {
+    id: 'alesund',
+    slug: 'alesund',
+    name: 'Ålesund',
+    country: 'Norway',
+    region: 'norwegian-fjords',
+    coordinates: { lat: 62.4722, lon: 6.1552 },
+    tagline: 'Art Nouveau fjord jewel',
+    description: 'Ålesund\'s islands sparkle with ornate facades, Jugendstil museums, and Brosundet harbour where cruise passengers climb 418 steps to Fjellstua viewpoint or bus to Atlantic Sea-Park seals amid Sunnmøre archipelago drama.',
+    portCharacter: 'fjord-nature',
+    
+    aboutPort: {
+      overview: 'Skansekaia terminal (Stornespiren/Prestebrygga) positions mega-ships 200 to 700m from centre with WiFi and tourist information; no shuttles needed. Hop-on bus Stop 1 outside terminal.',
+      terminals: 'Skansekaia terminal at Stornespiren/Prestebrygga handles mega-ships with WiFi and tourist information facilities.',
+      shuttleServices: 'No shuttles needed; terminal is within 5 to 10 minutes walk to city centre.',
+      walkability: 'Flat 5 to 10 minute walk to Art Nouveau streets and harbour. City centre is compact and easily accessible on foot.',
+    },
+
+    quickFacts: {
+      currency: 'Norwegian Krone (NOK)',
+      language: 'Norwegian, English (universal)',
+      timezone: 'CET (UTC+1 summer)',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: '5 to 10 minute flat walk to Art Nouveau streets. Stairs or taxi to Aksla; buses to aquarium and museum available. Hop-on bus Stop 1 outside terminal.',
+      publicTransport: 'Buses connect to Atlantic Sea-Park aquarium and Sunnmøre Open-Air Museum. Day pass costs around 30 euros. Hop-on hop-off bus available.',
+      taxis: 'Taxis available at terminal. Expect higher costs than European cities; taxi to Aksla costs around 10 euros. Cards accepted everywhere.',
+      walkingDistance: 'Jugendstilsenteret 300m, Kongens Gate pedestrian street 5 minutes, Brosundet harbour 5 minutes from terminal. City centre is compact and walkable.',
+      sightseeingBus: 'Hop-on hop-off bus available with Stop 1 outside terminal. Covers all major sights including Atlantic Sea-Park.',
+      accessibility: 'City centre is fairly accessible with flat paths. Mount Aksla stairs are challenging; taxi alternative available. Museums and aquarium have good access.',
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Ålesund Airport (AES)',
+        distance: '13km, 20 minutes by taxi',
+        options: 'Taxi takes 20 minutes from airport to cruise port. No direct public transport; taxi recommended.',
+      },
+      trains: {
+        mainStation: 'No trains',
+        description: 'No train connections. Buses available to Bergen and Oslo.',
+        localHubs: 'Bus connections available to Bergen and Oslo from Ålesund bus station.',
+      },
+      cruiseLines: ['MSC Cruises', 'Hurtigruten', 'Royal Caribbean'],
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Mount Aksla (Fjellstua Viewpoint)',
+        category: 'nature',
+        description: '360 degree panorama over islands and fjords from 160m summit. Iconic viewpoint accessible via 418 steps or taxi, offering breathtaking views of the Sunnmøre archipelago.',
+        duration: '1 to 1.5 hours roundtrip for a relaxed pace',
+        tips: [
+          '418 steps or taxi to summit; cafe at top offers refreshments',
+          'Clear mornings provide best visibility and lighting for photography',
+          'Allow time for the climb; taxi alternative available for those with mobility concerns',
+        ],
+        highlights: ['Views', 'Photography', 'Nature'],
+        goodFor: ['First-time visitors', 'Photographers', 'Active travelers'],
+      },
+      {
+        title: 'Jugendstilsenteret (Art Nouveau Centre)',
+        category: 'historic',
+        description: 'Fire rebuild exhibits in Swan Pharmacy building; architecture focus on the 1904 reconstruction. Museum dedicated to Ålesund\'s unique Art Nouveau heritage.',
+        duration: '45 minutes to 1 hour for a relaxed pace',
+        tips: [
+          'Entry costs around 120 NOK; English audio guides available',
+          'Located 300m walk from terminal; easy to combine with town centre stroll',
+          'Exhibits explain the 1904 fire and subsequent Art Nouveau rebuilding',
+        ],
+        highlights: ['Museums', 'Architecture', 'History'],
+        goodFor: ['History buffs', 'Architecture lovers', 'Culture seekers'],
+      },
+      {
+        title: 'Kongens Gate & Town Centre',
+        category: 'stroll',
+        description: 'Pedestrian street with turrets, spires, and pastel facades. Charming Art Nouveau architecture throughout the compact town centre with harbour views.',
+        duration: '1 to 1.5 hours for a relaxed pace',
+        tips: [
+          'Morning photos offer best light on colourful facades',
+          'Brosundet harbour reflections create beautiful photo opportunities',
+          'Explore side streets for hidden architectural details',
+        ],
+        highlights: ['Culture', 'Shopping', 'Architecture', 'Photography'],
+        goodFor: ['First-time visitors', 'Photographers', 'Culture seekers'],
+      },
+      {
+        title: 'Atlantic Sea-Park Aquarium',
+        category: 'family',
+        description: 'Seals, penguins, and underwater tunnel; Europe\'s largest saltwater aquarium. Family-friendly attraction showcasing Norwegian marine life with interactive exhibits.',
+        duration: '2 to 3 hours for a relaxed pace',
+        tips: [
+          'Bus Stop 8 connects to aquarium; day pass covers transport',
+          'Seal feeding at 2pm is popular; arrive early for good viewing spots',
+          'Entry costs around 295 NOK; family tickets available',
+        ],
+        highlights: ['Wildlife', 'Family-friendly', 'Nature'],
+        goodFor: ['Families', 'First-time visitors', 'Nature lovers'],
+      },
+      {
+        title: 'Sunnmøre Open-Air Museum',
+        category: 'historic',
+        description: '55 relocated houses, Viking boats, and coastal life exhibits. Living museum showcasing traditional Norwegian architecture and maritime heritage.',
+        duration: '1.5 to 2 hours for a relaxed pace',
+        tips: [
+          'Bus Stop 2 connects to museum; day pass covers transport',
+          'Entry costs around 120 NOK; medieval boat shed is highlight',
+          'Allow time to explore the relocated historic buildings',
+        ],
+        highlights: ['History', 'Culture', 'Museums'],
+        goodFor: ['History buffs', 'Culture seekers', 'First-time visitors'],
+      },
+    ],
+    
+    nearestBeach: null,
+    
+    foodAndDrink: [
+      {
+        name: 'Brosundet Waterfront',
+        type: 'Seafood',
+        description: 'Klipfish, mussels with harbour views. Traditional Norwegian seafood restaurant overlooking the picturesque harbour.',
+      },
+      {
+        name: 'Kongens Gate Cafes',
+        type: 'Cafe',
+        description: 'Waffles and coffee in Art Nouveau setting. Charming cafes along the pedestrian street offering traditional Norwegian pastries.',
+      },
+      {
+        name: 'Fjellstua Summit',
+        type: 'Restaurant',
+        description: 'Fjord panoramas from viewpoint cafe. Restaurant at Mount Aksla summit offering refreshments with spectacular views.',
+      },
+      {
+        name: 'Aquarium Cafe',
+        type: 'Cafe',
+        description: 'Seal-view lunches in Sea-Park interior. Cafe within Atlantic Sea-Park offering meals with views of marine life.',
+      },
+    ],
+    
+    insiderTips: [
+      'Aksla stairs early morning; hop-on bus day pass covers all attractions',
+      'Waterproof layers essential; fjord mist is common throughout the day',
+      'Arrive 9 to 11am to beat pre-coach tour crowds',
+      'Walk city centre; buses needed for outskirts attractions like aquarium and museum',
+      'Cards accepted everywhere; keep 100 NOK cash for kiosks; no tipping expected',
+      'Relaxed Nordic pace; allow time to appreciate Art Nouveau architecture',
+      'Skip chain restaurants; local bakeries offer authentic Norwegian experience',
+      'Check Yr.no weather radar; Ålesund Card offers discounts on attractions',
+    ],
+    
+    weather: {
+      intro: 'Ålesund has a temperate maritime climate with mild summers and cool winters. Summer offers the best weather for fjord views and outdoor activities, with long daylight hours.',
+      months: [
+        { month: 'Jan', highC: 3, lowC: -1, rainMm: 150, sunDays: 7, seaTempC: 5 },
+        { month: 'Feb', highC: 3, lowC: -1, rainMm: 120, sunDays: 9, seaTempC: 5 },
+        { month: 'Mar', highC: 5, lowC: 1, rainMm: 110, sunDays: 12, seaTempC: 7 },
+        { month: 'Apr', highC: 8, lowC: 3, rainMm: 90, sunDays: 14, seaTempC: 9 },
+        { month: 'May', highC: 13, lowC: 7, rainMm: 80, sunDays: 17, seaTempC: 13 },
+        { month: 'Jun', highC: 16, lowC: 10, rainMm: 90, sunDays: 18, seaTempC: 15 },
+        { month: 'Jul', highC: 18, lowC: 12, rainMm: 100, sunDays: 19, seaTempC: 17 },
+        { month: 'Aug', highC: 17, lowC: 11, rainMm: 120, sunDays: 18, seaTempC: 16 },
+        { month: 'Sep', highC: 14, lowC: 8, rainMm: 140, sunDays: 15, seaTempC: 14 },
+        { month: 'Oct', highC: 10, lowC: 5, rainMm: 160, sunDays: 12, seaTempC: 11 },
+        { month: 'Nov', highC: 6, lowC: 2, rainMm: 140, sunDays: 8, seaTempC: 8 },
+        { month: 'Dec', highC: 4, lowC: 0, rainMm: 150, sunDays: 7, seaTempC: 6 },
+      ],
+      bestTime: {
+        overall: 'June to August for mild weather, longest days, and clearest fjord views',
+        hottest: 'July (peak season with festivals and busiest period, but warmest temperatures and longest days)',
+        quietest: 'June and September (clearer views, fewer tourists, but still excellent weather)',
+        recommendation: 'June or August offer the best balance of weather and crowds for first-time visitors seeking Art Nouveau architecture and fjord panoramas.',
+      },
+    },
+    
+    faq: [
+      {
+        question: 'Is Ålesund walkable from the cruise port?',
+        answer: 'Yes, city centre is 5 to 10 minutes flat walk from terminal. Art Nouveau streets, harbour, and Jugendstilsenteret are all easily accessible on foot.',
+      },
+      {
+        question: 'How long do you need in Ålesund?',
+        answer: 'Allow 6 to 8 hours to cover Aksla climb, town centre, and aquarium. A full day enables you to experience Mount Aksla viewpoint, Art Nouveau architecture, and Atlantic Sea-Park.',
+      },
+      {
+        question: 'Is English widely spoken in Ålesund?',
+        answer: 'Yes, English is universally spoken. Norway has excellent English proficiency and all tourist facilities communicate in English.',
+      },
+      {
+        question: 'Is Ålesund safe for tourists?',
+        answer: 'Extremely safe. Norway has very low crime rates and Ålesund is a welcoming, well-maintained town with excellent safety standards.',
+      },
+      {
+        question: 'Is Ålesund expensive?',
+        answer: 'Yes, very expensive. Expect lunch costs of 250 NOK or more. Norway is one of Europe\'s most expensive countries, though quality is high.',
+      },
+      {
+        question: 'Do I need cash in Ålesund or can I use card?',
+        answer: 'Cards are accepted everywhere. Keep 100 NOK cash for kiosks. Contactless payment is universal throughout Norway.',
+      },
+      {
+        question: 'Should I book a ship excursion or explore independently?',
+        answer: 'Independent exploration with walk and buses works perfectly. DIY booking is straightforward; hop-on bus day pass covers all attractions.',
+      },
+      {
+        question: 'What is the best thing to do in Ålesund on a cruise day?',
+        answer: 'Climb Mount Aksla stairs for spectacular fjord panoramas, then explore the Art Nouveau town centre and harbour. Atlantic Sea-Park aquarium offers excellent family option.',
+      },
+      {
+        question: 'What\'s the best way to see the fjords and archipelago from Ålesund?',
+        answer: 'Mount Aksla viewpoint offers 360 degree panoramas over the Sunnmøre archipelago. Clear mornings provide best visibility for fjord and island views.',
+      },
+      {
+        question: 'Is Ålesund good for hiking and outdoor activities?',
+        answer: 'Mount Aksla stairs offer accessible mountain walking with rewarding views. Atlantic Sea-Park provides family-friendly outdoor experience. Waterproof layers essential for fjord mist.',
+      },
+    ],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'June to August for mild weather and clearest fjord views',
+      cruiseTerminals: ['Skansekaia terminal (Stornespiren/Prestebrygga)'],
+      nearbyAirport: 'Ålesund Airport (AES), 13km',
+      visaInfo: 'None (Schengen 90/180 days for UK passport holders)',
+    },
+    
+    relatedDestinations: ['norwegian-fjords-cruises', 'northern-europe-cruises'],
+    
+    meta: {
+      title: 'Ålesund Cruise Port Guide | Art Nouveau, Fjords & Mount Aksla',
+      description: 'Complete Ålesund cruise port guide. Climb Mount Aksla for fjord views, explore Art Nouveau architecture, visit Atlantic Sea-Park, and discover insider tips for your Norwegian fjords cruise.',
+      keywords: ['Ålesund cruise port', 'Ålesund shore excursions', 'Ålesund things to do', 'Ålesund from cruise ship', 'Norwegian fjords cruise', 'Mount Aksla', 'Art Nouveau Ålesund'],
+    },
+    
+    status: 'published',
+    lastUpdated: '2025-01-03',
+  },
+
+  // ============================================================================
+  // HAMMERFEST
+  // ============================================================================
+  {
+    id: 'hammerfest',
+    slug: 'hammerfest',
+    name: 'Hammerfest',
+    country: 'Norway',
+    region: 'norwegian-fjords',
+    coordinates: { lat: 70.6296, lon: 23.6820 },
+    tagline: 'Northernmost town\'s Arctic heritage',
+    description: 'Hammerfest blends polar bear history with LNG modernity where cruise piers enable immediate access to reconstruction museums, Salen Hill panoramas, and RIB safaris through ice-free fjords kept warm by the Gulf Stream.',
+    portCharacter: 'fjord-nature',
+    
+    aboutPort: {
+      overview: 'Central pier and Fuglenes (1.6km) handle mega-ships year-round with WiFi and tourist information; 5-minute walk to Strandgata main street. Hurtigruten stops daily.',
+      terminals: 'Central pier and Fuglenes terminal (1.6km) handle mega-ships year-round with WiFi and tourist information facilities.',
+      shuttleServices: 'No shuttles needed; central pier is within 5 minutes walk to Strandgata main street.',
+      walkability: 'Flat 5 to 10 minute walk to city centre. Church and museum are 10 minutes walk from port.',
+    },
+
+    quickFacts: {
+      currency: 'Norwegian Krone (NOK)',
+      language: 'Norwegian, English (universal)',
+      timezone: 'CET (UTC+1 summer)',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Flat 5 to 10 minute walk to Strandgata main street. Church and museum are 10 minutes walk from port. Buses available for North Cape and Sami camp tours.',
+      publicTransport: 'Buses available to North Cape (1.5 hours) and Sami cultural camp. Day passes available for multiple journeys.',
+      taxis: 'Taxis available at port. Expect around 20 euros to Salen Hill. Cards accepted everywhere.',
+      walkingDistance: 'Meridian Column 20 minutes, Museum of Reconstruction 10 minutes, Hammerfest Church 10 minutes, Strandgata main street 5 minutes from port.',
+      sightseeingBus: 'No hop-on hop-off bus; local buses connect to attractions outside town centre.',
+      accessibility: 'City centre is fairly accessible with flat paths. Salen Hill requires moderate hiking ability. Museums have good access.',
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Hammerfest Airport (HFT)',
+        distance: '3km, 10 minutes by taxi',
+        options: 'Taxi takes 10 minutes from airport to cruise port. No direct public transport; taxi recommended.',
+      },
+      trains: {
+        mainStation: 'No trains',
+        description: 'No train connections. Hurtigruten ferries provide coastal transport connections.',
+        localHubs: 'Hurtigruten ferries stop daily at Hammerfest, providing connections along the Norwegian coast.',
+      },
+      cruiseLines: ['Hurtigruten', 'MSC Cruises', 'Cunard'],
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Meridian Column (Struve Geodetic Arc)',
+        category: 'landmark',
+        description: 'UNESCO marker from 19th-century Earth measurement survey to Black Sea. Historic geodetic point marking the northern end of the Struve Geodetic Arc, a scientific achievement spanning from Norway to the Black Sea.',
+        duration: '45 minutes to 1 hour for a relaxed pace',
+        tips: [
+          '20-minute walk from port; information boards explain the scientific significance',
+          'Arctic views from the column site offer excellent photography opportunities',
+          'Combine with nearby attractions for a full morning exploration',
+        ],
+        highlights: ['History', 'Photography', 'Landmark'],
+        goodFor: ['First-time visitors', 'History buffs', 'Photographers'],
+      },
+      {
+        title: 'Museum of Reconstruction',
+        category: 'historic',
+        description: 'WWII scorched-earth rebuild story with tower views and period rooms. Museum documenting Hammerfest\'s complete destruction in 1944 and subsequent reconstruction, featuring exhibits on wartime history and post-war recovery.',
+        duration: '1 to 1.5 hours for a relaxed pace',
+        tips: [
+          'Multilingual guides available; tower panorama offers views over town and fjords',
+          'Central location makes it easy to combine with other attractions',
+          'Entry costs around 100 NOK; allow time for the tower climb',
+        ],
+        highlights: ['Museums', 'History', 'Views'],
+        goodFor: ['History buffs', 'First-time visitors', 'Culture seekers'],
+      },
+      {
+        title: 'Royal and Ancient Polar Bear Society',
+        category: 'historic',
+        description: 'Arctic hunting artifacts, taxidermy, and souvenirs in oldest club. Historic society celebrating Hammerfest\'s Arctic heritage with polar bear exhibits, hunting memorabilia, and traditional Norwegian Arctic culture.',
+        duration: '45 minutes for a relaxed pace',
+        tips: [
+          'Entry costs around 60 NOK; polar bear souvenirs available in gift shop',
+          'Harbour views from the society building add to the experience',
+          'Located near the port, making it an easy first stop',
+        ],
+        highlights: ['Culture', 'Wildlife', 'History'],
+        goodFor: ['History buffs', 'Culture seekers', 'First-time visitors'],
+      },
+      {
+        title: 'Salen Hill Viewpoint',
+        category: 'nature',
+        description: '360 degree panoramas over town and fjords from moderate hike. Scenic viewpoint accessible via taxi or moderate hiking trail, offering spectacular views of Hammerfest, surrounding fjords, and on clear days, the Lofoten Islands.',
+        duration: '1.5 to 2 hours roundtrip for a relaxed pace',
+        tips: [
+          'Taxi costs around 20 euros to summit; clear days offer views of Lofoten Islands',
+          'Moderate hiking trail available for those preferring to walk',
+          'Sturdy shoes essential; weather can change quickly at elevation',
+        ],
+        highlights: ['Views', 'Hiking', 'Nature', 'Photography'],
+        goodFor: ['Active travelers', 'Photographers', 'Nature lovers'],
+      },
+      {
+        title: 'Hammerfest Church',
+        category: 'landmark',
+        description: 'Modernist fan-shaped Arctic cathedral. Contemporary church architecture featuring distinctive fan-shaped design, stained glass windows, and modern Norwegian religious art in an Arctic setting.',
+        duration: '30 minutes for a relaxed pace',
+        tips: [
+          'Free entry; stained glass windows are particularly impressive',
+          '10-minute walk from port makes it easily accessible',
+          'Quiet atmosphere offers peaceful break from sightseeing',
+        ],
+        highlights: ['Architecture', 'Religious', 'Culture'],
+        goodFor: ['First-time visitors', 'Architecture lovers', 'Culture seekers'],
+      },
+      {
+        title: 'Sami Cultural Camp (Mikkelgammen)',
+        category: 'excursion',
+        description: 'Reindeer herding, joik songs, and Arctic meal bus tour. Authentic Sami cultural experience featuring traditional reindeer herding demonstrations, joik singing, and Arctic cuisine tastings in a traditional Sami camp setting.',
+        duration: '3 hours for a relaxed pace',
+        tips: [
+          'Bus tour required; costs around 70 euros with tastings included',
+          'Advance booking recommended for cruise day visits',
+          'Dress warmly; camp is located outside town in Arctic environment',
+        ],
+        highlights: ['Culture', 'Wildlife', 'Food'],
+        goodFor: ['Culture seekers', 'First-time visitors', 'Families'],
+      },
+    ],
+    
+    nearestBeach: null,
+    
+    foodAndDrink: [
+      {
+        name: 'Strandgata Seafood',
+        type: 'Restaurant',
+        description: 'King crab and stockfish on main street. Traditional Norwegian seafood restaurant specialising in fresh Arctic king crab and traditional stockfish dishes.',
+      },
+      {
+        name: 'Museum Cafe',
+        type: 'Cafe',
+        description: 'Reindeer stew near reconstruction exhibits. Cafe within Museum of Reconstruction offering traditional Norwegian dishes including reindeer stew and local specialities.',
+      },
+      {
+        name: 'Polar Bear Society',
+        type: 'Pub',
+        description: 'Local aquavit in historic club. Traditional Norwegian pub within the Royal and Ancient Polar Bear Society building, serving local aquavit and Norwegian beers.',
+      },
+      {
+        name: 'Harbor Kiosks',
+        type: 'Market',
+        description: 'Fish soup near pier area. Convenient kiosks near the cruise port offering traditional Norwegian fish soup and quick snacks for cruise passengers.',
+      },
+    ],
+    
+    insiderTips: [
+      'Visit Meridian Column and Salen Hill in mornings before wind picks up',
+      'Thermal layers essential; Gulf Stream keeps fjords ice-free but breezy conditions common',
+      'Walk city centre attractions; buses needed for Sami camp and North Cape tours',
+      'Cards accepted everywhere; keep 100 NOK cash for kiosks; no tipping expected',
+      'Sturdy shoes essential for Salen Hill; mosquito repellent recommended in summer',
+      'Skip chain restaurants; fresh king crab and authentic local venues offer better value',
+      'Aurora viewing possible in winter; midnight sun in summer offers unique Arctic experience',
+    ],
+    
+    weather: {
+      intro: 'Hammerfest has a subarctic climate with cool summers and cold winters, moderated by the Gulf Stream which keeps the fjords ice-free year-round. Summer offers midnight sun while winter provides opportunities for northern lights viewing.',
+      months: [
+        { month: 'Jan', highC: -2, lowC: -7, rainMm: 100, sunDays: 3, seaTempC: 1 },
+        { month: 'Feb', highC: -2, lowC: -7, rainMm: 90, sunDays: 5, seaTempC: 2 },
+        { month: 'Mar', highC: 0, lowC: -5, rainMm: 80, sunDays: 8, seaTempC: 4 },
+        { month: 'Apr', highC: 3, lowC: -3, rainMm: 60, sunDays: 11, seaTempC: 7 },
+        { month: 'May', highC: 8, lowC: 2, rainMm: 50, sunDays: 15, seaTempC: 11 },
+        { month: 'Jun', highC: 12, lowC: 6, rainMm: 50, sunDays: 18, seaTempC: 14 },
+        { month: 'Jul', highC: 14, lowC: 9, rainMm: 60, sunDays: 19, seaTempC: 16 },
+        { month: 'Aug', highC: 13, lowC: 8, rainMm: 80, sunDays: 17, seaTempC: 15 },
+        { month: 'Sep', highC: 9, lowC: 4, rainMm: 100, sunDays: 13, seaTempC: 12 },
+        { month: 'Oct', highC: 4, lowC: -1, rainMm: 110, sunDays: 9, seaTempC: 7 },
+        { month: 'Nov', highC: 0, lowC: -5, rainMm: 100, sunDays: 5, seaTempC: 3 },
+        { month: 'Dec', highC: -2, lowC: -7, rainMm: 100, sunDays: 3, seaTempC: 1 },
+      ],
+      bestTime: {
+        overall: 'June to August for midnight sun and mildest weather, or March to April for clearer skies and aurora viewing',
+        hottest: 'July and August (peak summer with longest days and warmest temperatures, but busiest period with more tourists)',
+        quietest: 'March to April and September to October (clearer skies for aurora, fewer tourists, but cooler temperatures)',
+        recommendation: 'June or July offer the best balance of weather and daylight for first-time visitors seeking Arctic experiences and fjord views.',
+      },
+    },
+    
+    faq: [
+      {
+        question: 'Is Hammerfest walkable from the cruise port?',
+        answer: 'Yes, city centre is 5 to 10 minutes walk from port. Meridian Column, Museum of Reconstruction, and Hammerfest Church are all easily accessible on foot.',
+      },
+      {
+        question: 'How long do you need in Hammerfest?',
+        answer: 'Allow 4 to 6 hours to cover museum, Salen Hill, and Meridian Column. A full day enables you to experience the Sami cultural camp and explore the Arctic heritage sites.',
+      },
+      {
+        question: 'Is English widely spoken in Hammerfest?',
+        answer: 'Yes, English is universally spoken. Norway has excellent English proficiency and all tourist facilities communicate in English.',
+      },
+      {
+        question: 'Is Hammerfest safe for tourists?',
+        answer: 'Extremely safe. Norway has very low crime rates and Hammerfest is a welcoming, well-maintained town with excellent safety standards.',
+      },
+      {
+        question: 'Is Hammerfest expensive?',
+        answer: 'Yes, very expensive. Expect lunch costs of 250 NOK or more. Norway is one of Europe\'s most expensive countries, though quality is high.',
+      },
+      {
+        question: 'Do I need cash in Hammerfest or can I use card?',
+        answer: 'Cards are accepted everywhere. Keep 100 NOK cash for kiosks. Contactless payment is universal throughout Norway.',
+      },
+      {
+        question: 'Should I book a ship excursion or explore independently?',
+        answer: 'Independent exploration works perfectly for city centre attractions. DIY booking is straightforward; buses available for Sami camp and North Cape tours.',
+      },
+      {
+        question: 'What is the best thing to do in Hammerfest on a cruise day?',
+        answer: 'Visit the Meridian Column UNESCO site and climb Salen Hill for spectacular fjord panoramas. Museum of Reconstruction offers fascinating WWII history, and the Polar Bear Society showcases Arctic heritage.',
+      },
+      {
+        question: 'Can you see northern lights from Hammerfest?',
+        answer: 'Yes, northern lights are visible in winter on clear nights. March to April and September to October offer best viewing conditions with clearer skies.',
+      },
+      {
+        question: 'Is Hammerfest good for hiking?',
+        answer: 'Salen Hill offers moderate hiking trails with rewarding fjord views. Sturdy shoes and weather-appropriate clothing essential. Trails are well-marked and suitable for most fitness levels.',
+      },
+    ],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'June to August for midnight sun and mildest weather',
+      cruiseTerminals: ['Central pier', 'Fuglenes'],
+      nearbyAirport: 'Hammerfest Airport (HFT), 3km',
+      visaInfo: 'None (Schengen 90/180 days for UK passport holders)',
+    },
+    
+    relatedDestinations: ['norwegian-fjords-cruises', 'northern-europe-cruises'],
+    
+    meta: {
+      title: 'Hammerfest Cruise Port Guide | Arctic Heritage & Fjords',
+      description: 'Complete Hammerfest cruise port guide. Visit the UNESCO Meridian Column, explore Arctic heritage at the Polar Bear Society, climb Salen Hill for fjord views, and discover insider tips for your Norwegian fjords cruise.',
+      keywords: ['Hammerfest cruise port', 'Hammerfest shore excursions', 'Hammerfest things to do', 'Hammerfest from cruise ship', 'Norwegian fjords cruise', 'Meridian Column', 'Arctic Circle cruise'],
+    },
+    
+    status: 'published',
+    lastUpdated: '2025-01-03',
+  },
+
+  {
+    id: 'bodo',
+    slug: 'bodo',
+    name: 'Bodø',
+    country: 'Norway',
+    region: 'norwegian-fjords',
+    coordinates: { lat: 67.2804, lon: 14.4050 },
+    tagline: 'Maelstrom above Arctic Circle',
+    description: 'Bodø serves as Nordland\'s capital where cruise piers position ships steps from the harbourfront, offering quick buses to Saltstraumen\'s tidal whirlpools, aviation history exhibits, and coastal trails like Mjelle Beach under midnight sun or northern lights.',
+    portCharacter: 'fjord-nature',
+    
+    aboutPort: {
+      overview: 'Central harbour quay handles mega-ships with WiFi and tourist info; 10 to 15 minute walk to Storgata shops. No shuttles needed; buses to Saltstraumen from pier area.',
+      terminals: 'Central harbour quay handles mega-ships with WiFi and tourist information facilities.',
+      shuttleServices: 'No shuttles needed; harbour quay is within 10 to 15 minutes walk to city centre.',
+      walkability: 'Flat 10 to 15 minute stroll to centre and cathedral. Harbour quay is easily accessible on foot.',
+    },
+
+    quickFacts: {
+      currency: 'Norwegian Krone (NOK)',
+      language: 'Norwegian, English (universal)',
+      timezone: 'CET (UTC+1 summer)',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Flat 10-minute stroll to centre and cathedral. Buses to maelstrom and aviation museum available from pier area.',
+      publicTransport: 'Buses to Saltstraumen maelstrom (30 minutes) and aviation museum (20 minutes). Day passes available.',
+      taxis: 'Taxis available at harbour. Expect higher costs than European cities. Cards accepted everywhere.',
+      walkingDistance: 'Bodø Cathedral 10 minutes, city centre 10 to 15 minutes, Storgata shops 15 minutes from harbour quay. City centre is compact and walkable.',
+      sightseeingBus: 'Local buses operate to Saltstraumen and Norwegian Aviation Museum. Tourist information provides timetables.',
+      accessibility: 'City centre is fairly accessible with flat paths. Buses to attractions have good access. Cathedral and museums have wheelchair access.',
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Bodø Airport (BOO)',
+        distance: '2km, 10 minutes by taxi',
+        options: 'Taxi takes 10 minutes from airport to harbour. Short distance makes taxi the most convenient option.',
+      },
+      trains: {
+        mainStation: 'None',
+        description: 'No trains. Hurtigruten ferries connect to Lofoten and coastal destinations.',
+        localHubs: 'Hurtigruten ferry provides connections to Lofoten Islands and other coastal ports.',
+      },
+      cruiseLines: ['Hurtigruten', 'MSC Cruises', 'Cunard'],
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Saltstraumen Maelstrom',
+        category: 'nature',
+        description: 'World\'s strongest tidal current with 400 cubic metres per second creating dramatic whirlpools. View from bridge or take RIB boat tours for closer experience of this natural phenomenon.',
+        duration: '2 to 3 hours roundtrip for a relaxed pace',
+        tips: [
+          'Check high tide schedule for best viewing times when whirlpools are most dramatic',
+          'Bus or taxi available from city; RIB boats offer closer experience',
+          'Bridge viewing is free; arrive early for best photography positions',
+        ],
+        highlights: ['Nature', 'Photography', 'Views'],
+        goodFor: ['First-time visitors', 'Photographers', 'Nature lovers'],
+      },
+      {
+        title: 'Norwegian Aviation Museum',
+        category: 'historic',
+        description: 'Cold War jets, flight simulators, and Arctic flying exhibits showcasing Norway\'s aviation history. Interactive displays and cockpit access provide engaging experience.',
+        duration: '1.5 to 2 hours for a relaxed pace',
+        tips: [
+          'Bus number 1 takes 20 minutes from city centre',
+          'Cockpit access available on several aircraft exhibits',
+          'English displays throughout; audio guides available',
+        ],
+        highlights: ['Museums', 'History', 'Culture'],
+        goodFor: ['History buffs', 'Families', 'First-time visitors'],
+      },
+      {
+        title: 'Keiservarden Viewpoint',
+        category: 'nature',
+        description: '403 metre summit panorama over city and Lofoten horizon. Accessible via 20-minute uphill walk with emperor monument and clear day views across the Arctic landscape.',
+        duration: '1 to 1.5 hours roundtrip for a relaxed pace',
+        tips: [
+          '20-minute uphill walk from city centre; sturdy shoes essential',
+          'Emperor monument at summit provides historical interest',
+          'Clear days offer best visibility across to Lofoten Islands',
+        ],
+        highlights: ['Views', 'Hiking', 'Nature', 'Photography'],
+        goodFor: ['Active travelers', 'Photographers', 'Nature lovers'],
+      },
+      {
+        title: 'Mjelle Beach',
+        category: 'nature',
+        description: 'Arctic white sands with dunes, surf, and WWII bunker ruins along coastal trail. Scenic coastal walk offering solitude and dramatic Arctic scenery.',
+        duration: '2 to 3 hours roundtrip for a relaxed pace',
+        tips: [
+          'Bus or taxi required; not walkable from city centre',
+          'Arctic flora and surf watching provide unique experiences',
+          'WWII bunkers offer interesting photo opportunities',
+        ],
+        highlights: ['Nature', 'Photography', 'History', 'Views'],
+        goodFor: ['Nature lovers', 'Photographers', 'Active travelers'],
+      },
+      {
+        title: 'Bodø Cathedral',
+        category: 'landmark',
+        description: 'Modernist 1956 church with detached tower. Significant example of post-war Norwegian architecture located in city centre.',
+        duration: '30 minutes for a relaxed pace',
+        tips: [
+          'Free entry; located in city centre near harbour',
+          'Organ recitals occasionally available; check schedule',
+          'Detached tower is architectural highlight',
+        ],
+        highlights: ['Architecture', 'History', 'Culture'],
+        goodFor: ['First-time visitors', 'Architecture lovers', 'Culture seekers'],
+      },
+      {
+        title: 'Kjerringøy Trading Post',
+        category: 'excursion',
+        description: '19th-century merchant village preserved with traditional jekts and historic buildings. Accessible by boat or bus, offering glimpse into Norway\'s trading heritage.',
+        duration: '4 to 5 hours for a relaxed pace',
+        tips: [
+          'Silent cruise tours available including transport',
+          'Preserved jekts (traditional boats) are highlight of the site',
+          'Full day excursion; plan timing carefully for cruise day',
+        ],
+        highlights: ['History', 'Culture', 'Museums'],
+        goodFor: ['History buffs', 'Culture seekers', 'First-time visitors'],
+      },
+      {
+        title: 'City Centre and Harbourfront',
+        category: 'stroll',
+        description: 'Compact pedestrian streets around Storgata with shops, cafes, and harbour views. Easy walk from cruise terminal offering authentic Norwegian town atmosphere.',
+        duration: '1 to 1.5 hours for a relaxed pace',
+        tips: [
+          'Storgata is the main shopping street with local shops and cafes',
+          'Harbourfront offers views across to mountains and fjords',
+          'Combine with cathedral visit for complete city centre experience',
+        ],
+        highlights: ['Shopping', 'Culture', 'Views'],
+        goodFor: ['First-time visitors', 'Culture seekers', 'Solo travelers'],
+      },
+    ],
+    
+    nearestBeach: null,
+    
+    foodAndDrink: [
+      {
+        name: 'Harbour seafood',
+        type: 'Restaurant',
+        description: 'Stockfish and salmon specialities at waterfront location. Traditional Norwegian seafood with harbour views.',
+      },
+      {
+        name: 'Storgata cafes',
+        type: 'Cafe',
+        description: 'Waffles and coffee in pedestrian street setting. Cosy cafes offering traditional Norwegian pastries and refreshments.',
+      },
+      {
+        name: 'Glasshuset food court',
+        type: 'Market',
+        description: 'Local produce and Norwegian specialities in shopping arcade. Food hall experience with regional ingredients.',
+      },
+      {
+        name: 'Museum cafe',
+        type: 'Cafe',
+        description: 'Aviation-themed cafe with views at Norwegian Aviation Museum. Refreshments available during museum visit.',
+      },
+    ],
+    
+    insiderTips: [
+      'Saltstraumen high tide schedule essential for best viewing times; check tide tables in advance',
+      'Waterproof layers essential; coastal wind can be strong and changeable',
+      'Mornings before buses arrive offer quieter experience at attractions',
+      'Walk city centre; buses needed for maelstrom and museum attractions',
+      'Cards accepted everywhere; keep 100 NOK for kiosks; no tipping expected',
+      'Sturdy shoes essential for coastal trails and viewpoint hikes',
+      'Skip chain restaurants; harbour seafood offers authentic Norwegian experience',
+      'Check Yr.no weather radar; Bodø Card offers discounts on attractions',
+    ],
+    
+    weather: {
+      intro: 'Bodø has a subarctic climate with cold winters and cool summers. Located above the Arctic Circle, it experiences midnight sun in summer and polar nights in winter.',
+      months: [
+        { month: 'Jan', highC: 0, lowC: -4, rainMm: 120, sunDays: 5, seaTempC: 2 },
+        { month: 'Feb', highC: 0, lowC: -4, rainMm: 110, sunDays: 7, seaTempC: 3 },
+        { month: 'Mar', highC: 2, lowC: -3, rainMm: 100, sunDays: 10, seaTempC: 5 },
+        { month: 'Apr', highC: 6, lowC: 0, rainMm: 80, sunDays: 13, seaTempC: 8 },
+        { month: 'May', highC: 11, lowC: 4, rainMm: 70, sunDays: 17, seaTempC: 12 },
+        { month: 'Jun', highC: 15, lowC: 8, rainMm: 70, sunDays: 19, seaTempC: 14 },
+        { month: 'Jul', highC: 17, lowC: 11, rainMm: 80, sunDays: 20, seaTempC: 16 },
+        { month: 'Aug', highC: 16, lowC: 10, rainMm: 100, sunDays: 18, seaTempC: 15 },
+        { month: 'Sep', highC: 12, lowC: 6, rainMm: 130, sunDays: 14, seaTempC: 13 },
+        { month: 'Oct', highC: 7, lowC: 2, rainMm: 140, sunDays: 10, seaTempC: 9 },
+        { month: 'Nov', highC: 3, lowC: -1, rainMm: 120, sunDays: 6, seaTempC: 6 },
+        { month: 'Dec', highC: 0, lowC: -4, rainMm: 120, sunDays: 5, seaTempC: 2 },
+      ],
+      bestTime: {
+        overall: 'June to August for midnight sun, warmest weather, and longest days',
+        hottest: 'July (peak season with busy periods, but warmest temperatures and midnight sun)',
+        quietest: 'June and September (clearer views, fewer tourists, but still excellent weather)',
+        recommendation: 'June or August offer the best balance of weather and crowds for first-time visitors seeking Arctic experiences and natural phenomena.',
+      },
+    },
+    
+    faq: [
+      {
+        question: 'Is Bodø walkable from the cruise port?',
+        answer: 'Yes, city centre is 10 to 15 minutes flat walk from harbour quay. Cathedral and Storgata shopping street are easily accessible on foot.',
+      },
+      {
+        question: 'How long do you need in Bodø?',
+        answer: 'Allow 6 to 8 hours to cover maelstrom, aviation museum, and city sights. A full day enables Saltstraumen visit, museum exploration, and coastal walks.',
+      },
+      {
+        question: 'Is English widely spoken in Bodø?',
+        answer: 'Yes, English is universally spoken. Norway has excellent English proficiency and all tourist facilities communicate in English.',
+      },
+      {
+        question: 'Is Bodø safe for tourists?',
+        answer: 'Extremely safe. Norway has very low crime rates and Bodø is a welcoming, well-maintained city with excellent safety standards.',
+      },
+      {
+        question: 'Is Bodø expensive?',
+        answer: 'Yes, very expensive. Expect lunch costs of 250 NOK or more. Norway is one of Europe\'s most expensive countries, though quality is high.',
+      },
+      {
+        question: 'Do I need cash in Bodø or can I use card?',
+        answer: 'Cards are accepted everywhere. Keep 100 NOK cash for kiosks. Contactless payment is universal throughout Norway.',
+      },
+      {
+        question: 'Should I book a ship excursion or explore independently?',
+        answer: 'Independent exploration with buses works perfectly. Buses to Saltstraumen and aviation museum are reliable and can be booked on arrival. Ship excursions offer guaranteed transport during busy periods.',
+      },
+      {
+        question: 'What is the best thing to do in Bodø on a cruise day?',
+        answer: 'Visit Saltstraumen maelstrom at high tide for the world\'s strongest tidal current, explore the Norwegian Aviation Museum, and climb Keiservarden viewpoint for panoramic views.',
+      },
+      {
+        question: 'What\'s the best way to see the fjords and Arctic scenery?',
+        answer: 'Keiservarden viewpoint offers panoramic views over city and Lofoten horizon. Coastal walks at Mjelle Beach provide dramatic Arctic scenery with dunes and surf.',
+      },
+      {
+        question: 'Can you see the northern lights from Bodø?',
+        answer: 'Yes, northern lights are visible in winter on clear nights. Bodø is located above the Arctic Circle, making it an excellent location for aurora viewing during darker months.',
+      },
+    ],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'June to August for midnight sun and warmest weather',
+      cruiseTerminals: ['Central harbour quay'],
+      nearbyAirport: 'Bodø Airport (BOO), 2km',
+      visaInfo: 'None (Schengen 90/180 days for UK passport holders)',
+    },
+    
+    relatedDestinations: ['norwegian-fjords-cruises', 'northern-europe-cruises'],
+    
+    meta: {
+      title: 'Bodø Cruise Port Guide | Saltstraumen Maelstrom & Arctic Circle',
+      description: 'Complete Bodø cruise port guide. Visit Saltstraumen maelstrom, explore the Norwegian Aviation Museum, climb Keiservarden viewpoint, and discover insider tips for your Norwegian fjords cruise.',
+      keywords: ['Bodø cruise port', 'Saltstraumen maelstrom', 'Bodø shore excursions', 'Bodø things to do', 'Bodø from cruise ship', 'Norwegian fjords cruise', 'Arctic Circle cruise'],
     },
     
     status: 'published',

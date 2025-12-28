@@ -654,9 +654,10 @@ function PortGuidePage() {
       {/* Disclaimer Footer */}
       <footer className="port-footer">
         <div className="container">
-          <p>
-            This guide is provided for informational purposes only. Details such as opening times 
-            and availability may change. We recommend verifying information before your visit.
+          <p className="disclaimer-text">
+            <strong>Disclaimer:</strong> This guide is compiled from publicly available information and our interpretation of that data. 
+            While we strive for accuracy, details such as opening times, prices, transport schedules, and availability may change. 
+            We strongly recommend verifying all information directly with official sources before travelling.
           </p>
           <p className="update-date">
             Guide last updated: {formatDate(port.lastUpdated || '2025-01-01')}
