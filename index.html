@@ -262,6 +262,29 @@
       }
     }
     </script>
+    
+    <!-- Unregister old service worker (PWA removed) -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+          for (let registration of registrations) {
+            registration.unregister().then(function(success) {
+              if (success) {
+                console.log('Old service worker unregistered successfully');
+                // Clear caches created by old service worker
+                if ('caches' in window) {
+                  caches.keys().then(function(names) {
+                    for (let name of names) {
+                      caches.delete(name);
+                    }
+                  });
+                }
+              }
+            });
+          }
+        });
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
