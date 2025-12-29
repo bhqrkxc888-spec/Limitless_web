@@ -10,6 +10,8 @@
  * This file remains for backward compatibility and as a reference for what images exist.
  */
 
+import { logger } from '../utils/logger';
+
 // Currently uploaded images (Vercel Blob)
 export const imageReferences = {
   
@@ -93,7 +95,7 @@ export function getImageByRef(path, fallback = null) {
     if (value && typeof value === 'object' && key in value) {
       value = value[key];
     } else {
-      console.warn(`Image reference not found: ${path}`);
+      logger.warn(`Image reference not found: ${path}`);
       return fallback;
     }
   }

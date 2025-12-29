@@ -5,6 +5,8 @@
  * that can crash React applications when serializing complex objects.
  */
 
+import { logger } from './logger';
+
 /**
  * Safely stringify an object, handling circular references
  * @param {*} obj - Object to stringify
@@ -44,7 +46,7 @@ export function safeStringify(obj, space = 0) {
       return value;
     }, space);
   } catch (error) {
-    console.error('[safeStringify] Error stringifying object:', error);
+    logger.error('[safeStringify] Error stringifying object:', error);
     
     // Return a minimal safe representation
     return JSON.stringify({
@@ -65,7 +67,7 @@ export function safeParse(str, fallback = null) {
   try {
     return JSON.parse(str);
   } catch (error) {
-    console.error('[safeParse] Error parsing JSON:', error);
+    logger.error('[safeParse] Error parsing JSON:', error);
     return fallback;
   }
 }

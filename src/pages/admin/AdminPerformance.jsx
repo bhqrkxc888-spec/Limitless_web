@@ -233,7 +233,8 @@ function AdminPerformance() {
       const interval = setInterval(fetchPerformanceData, 60000);
       return () => clearInterval(interval);
     }
-  }, [isAuthenticated, fetchPerformanceData]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated]); // Removed fetchPerformanceData from dependencies to prevent interval stacking
 
   useEffect(() => {
     if (!authLoading && !isAuthenticated) {

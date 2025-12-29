@@ -1,4 +1,5 @@
 import { supabase } from '../lib/supabase'
+import { logger } from '../utils/logger';
 
 /**
  * Fetch all published cruise guides with optional filters
@@ -32,7 +33,7 @@ export async function getCruiseGuides(options = {}) {
     })
 
     if (error) {
-      console.error('Error fetching cruise guides:', error)
+      logger.error('Error fetching cruise guides:', error)
       return { guides: [], total: 0 }
     }
 
@@ -45,7 +46,7 @@ export async function getCruiseGuides(options = {}) {
       total: data.total || 0,
     }
   } catch (err) {
-    console.error('Error in getCruiseGuides:', err)
+    logger.error('Error in getCruiseGuides:', err)
     return { guides: [], total: 0 }
   }
 }
@@ -64,7 +65,7 @@ export async function getCruiseGuideBySlug(slug) {
     })
 
     if (error) {
-      console.error('Error fetching guide by slug:', error)
+      logger.error('Error fetching guide by slug:', error)
       return null
     }
 
@@ -72,12 +73,12 @@ export async function getCruiseGuideBySlug(slug) {
     if (data?.id) {
       supabase.rpc('increment_cruise_guide_view', { p_guide_id: data.id })
         .then(() => {})
-        .catch((err) => console.error('Failed to increment view count:', err))
+        .catch((err) => logger.error('Failed to increment view count:', err))
     }
 
     return data || null
   } catch (err) {
-    console.error('Error in getCruiseGuideBySlug:', err)
+    logger.error('Error in getCruiseGuideBySlug:', err)
     return null
   }
 }

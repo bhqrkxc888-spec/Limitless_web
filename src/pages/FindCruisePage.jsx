@@ -4,6 +4,7 @@ import ContactForm from '../components/ContactForm';
 import { siteConfig } from '../config/siteConfig';
 import { hasConsent, loadScriptsWithConsent } from '../utils/consentManager';
 import { Button } from '../components/ui';
+import { logger } from '../utils/logger';
 import './FindCruisePage.css';
 
 function FindCruisePage() {
@@ -37,7 +38,7 @@ function FindCruisePage() {
           }
         })
         .catch((error) => {
-          console.error('Error loading Widgety scripts:', error);
+          logger.error('Error loading Widgety scripts:', error);
           // Still try to show the widget - it might work even if scripts partially loaded
           setScriptsLoaded(true);
           setShowConsentPrompt(false);

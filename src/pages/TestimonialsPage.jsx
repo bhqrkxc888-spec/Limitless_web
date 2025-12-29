@@ -124,7 +124,9 @@ function TestimonialsPage() {
   const otherTestimonials = testimonials.filter(t => !t.featured);
 
   // Calculate stats
-  const averageRating = (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1);
+  const averageRating = testimonials.length > 0 
+    ? (testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length).toFixed(1)
+    : '5.0'; // Default to 5.0 if no testimonials
   const totalReviews = testimonials.length;
 
   return (

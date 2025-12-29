@@ -3,6 +3,8 @@
  * Fetches port attractions via serverless proxy to avoid CORS issues
  */
 
+import { logger } from '../utils/logger';
+
 /**
  * Get attractions near a port using the serverless proxy
  * @param {number} lat - Latitude
@@ -29,7 +31,7 @@ export async function getPortAttractions(lat, lng, radius = 5000) {
     
     return data.results || [];
   } catch (error) {
-    console.error('Error fetching port attractions:', error);
+    logger.error('Error fetching port attractions:', error);
     return [];
   }
 }

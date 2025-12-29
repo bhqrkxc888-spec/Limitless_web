@@ -17,6 +17,8 @@
  * - Server-side (database): Records kept for 2 years for audit purposes
  */
 
+import { logger } from './logger';
+
 const CONSENT_KEY = 'cookie-consent';
 const CONSENT_DATE_KEY = 'cookie-consent-date';
 
@@ -129,7 +131,7 @@ export function clearConsent() {
  */
 export function loadScriptWithConsent(src, options = {}) {
   if (!hasConsent()) {
-    console.warn(`Script ${src} not loaded - consent not given`);
+    logger.warn(`Script ${src} not loaded - consent not given`);
     return Promise.resolve(false);
   }
 
@@ -160,7 +162,7 @@ export function loadScriptWithConsent(src, options = {}) {
  */
 export async function loadScriptsWithConsent(sources, options = {}) {
   if (!hasConsent()) {
-    console.warn('Scripts not loaded - consent not given');
+    logger.warn('Scripts not loaded - consent not given');
     return sources.map(() => false);
   }
 

@@ -132,7 +132,11 @@ function OfferPage() {
   const getDisplayPrice = (offerData) => {
     if (!offerData) return null;
     if (offerData.airport_prices?.length > 0) {
-      return Math.min(...offerData.airport_prices.map(ap => ap.price));
+      // Filter out null/undefined/invalid prices before finding minimum
+      const prices = offerData.airport_prices
+        .map(ap => ap?.price)
+        .filter(price => typeof price === 'number' && !isNaN(price) && price > 0);
+      return prices.length > 0 ? Math.min(...prices) : offerData.price_from;
     }
     return offerData.price_from;
   };

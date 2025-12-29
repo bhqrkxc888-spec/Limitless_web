@@ -16,6 +16,7 @@
  */
 
 import { useEffect, useRef, useCallback } from 'react';
+import { logger } from '../utils/logger';
 
 // Turnstile script URL
 const TURNSTILE_SCRIPT_URL = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
@@ -57,7 +58,7 @@ function loadTurnstileScript() {
       };
 
       script.onerror = () => {
-        console.error('Failed to load Turnstile script');
+        logger.error('Failed to load Turnstile script');
         loadCallbacks.forEach(cb => cb(null));
         loadCallbacks.length = 0;
       };
@@ -134,7 +135,7 @@ function Turnstile({
         }
       });
     } catch (error) {
-      console.error('Failed to render Turnstile widget:', error);
+      logger.error('Failed to render Turnstile widget:', error);
       onError?.();
     }
   }, [siteKey, action, mode, onVerify, onError, onExpire, isEnabled]);

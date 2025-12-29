@@ -8,6 +8,7 @@ import { supabase, getPublicUrl } from '../lib/supabase';
 import { getDestinationImageUrl, getBucketListImageUrl, getCruiseLineImageUrl } from '../config/assetUrls';
 import { PLACEHOLDER_IMAGE } from '../config/assetUrls';
 import { getDestinationForBucketList } from '../config/bucketListDestinationMapping';
+import { logger } from './logger';
 
 // Cache for image URLs to avoid repeated queries
 const imageCache = new Map();
@@ -41,7 +42,7 @@ export async function getImageUrlFromDb(entityType, entityId, imageType, fallbac
       .maybeSingle();
 
     if (error) {
-      console.warn(`Error fetching image from DB: ${error.message}`);
+      logger.warn(`Error fetching image from DB: ${error.message}`);
       const url = fallbackUrl || PLACEHOLDER_IMAGE;
       imageCache.set(cacheKey, url);
       return url;
@@ -58,7 +59,7 @@ export async function getImageUrlFromDb(entityType, entityId, imageType, fallbac
     imageCache.set(cacheKey, url);
     return url;
   } catch (error) {
-    console.warn(`Error in getImageUrlFromDb: ${error.message}`);
+    logger.warn(`Error in getImageUrlFromDb: ${error.message}`);
     const url = fallbackUrl || PLACEHOLDER_IMAGE;
     imageCache.set(cacheKey, url);
     return url;

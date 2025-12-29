@@ -105,14 +105,14 @@ function CruiseTypesPage() {
         <p className="cruise-type-description">{cruiseType.shortDescription}</p>
         <div className="cruise-type-highlights">
           <ul>
-            {cruiseType.highlights.slice(0, 3).map((highlight, idx) => (
+            {(cruiseType.highlights || []).slice(0, 3).map((highlight, idx) => (
               <li key={idx}>{highlight}</li>
             ))}
           </ul>
         </div>
         <div className="cruise-type-lines">
           <span className="lines-label">Recommended:</span>
-          <span className="lines-list">{cruiseType.recommendedLines.slice(0, 3).join(', ')}</span>
+          <span className="lines-list">{(cruiseType.recommendedLines || []).slice(0, 3).join(', ')}</span>
         </div>
         <Button to="/contact" variant="secondary" size="sm">
           Enquire About {cruiseType.name}

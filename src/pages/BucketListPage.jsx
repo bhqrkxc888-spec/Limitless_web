@@ -71,7 +71,7 @@ function BucketListPage() {
             <div className="bucket-list-meta">
               <span className="bucket-list-duration">{experience.duration}</span>
             </div>
-            {experience.highlights && experience.highlights.length > 0 && (
+            {experience.highlights && Array.isArray(experience.highlights) && experience.highlights.length > 0 && (
               <ul className="bucket-list-highlights">
                 {experience.highlights.slice(0, 3).map((highlight, idx) => (
                   <li key={idx}>{highlight}</li>

@@ -105,16 +105,26 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
       }
 
       // Add timeout to prevent hanging
-      const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Request timeout')), 10000)
-      );
+      let timeoutId;
+      const timeoutPromise = new Promise((_, reject) => {
+        timeoutId = setTimeout(() => reject(new Error('Request timeout')), 10000);
+      });
 
-      const { error } = await Promise.race([
-        supabase.from('website_enquiries').insert([enquiryData]),
-        timeoutPromise
-      ]);
+      try {
+        const result = await Promise.race([
+          supabase.from('website_enquiries').insert([enquiryData]).then(result => {
+            clearTimeout(timeoutId);
+            return result;
+          }),
+          timeoutPromise
+        ]);
 
-      if (error) throw error;
+        const { error } = result;
+        if (error) throw error;
+      } catch (err) {
+        clearTimeout(timeoutId);
+        throw err;
+      }
       
       setStatus('success');
       setFormData({

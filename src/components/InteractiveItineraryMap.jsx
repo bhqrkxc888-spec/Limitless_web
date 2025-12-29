@@ -95,10 +95,9 @@ function InteractiveItineraryMap({ itinerary }) {
         ];
         first.isRoundTrip = true;
         
-        // Remove the last port (duplicate)
-        enrichedPorts.pop();
-        
+        // Return new array without the last port (immutable operation)
         logger.debug(`Round-trip detected: ${first.name} (Days ${first.days.join(' & ')})`);
+        return enrichedPorts.slice(0, -1);
       }
     }
     
