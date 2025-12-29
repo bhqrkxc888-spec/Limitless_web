@@ -130,21 +130,29 @@ function Header() {
                   <li 
                     key={item.id}
                     className={`nav-item ${item.megaMenu ? 'has-mega-menu' : ''}`}
-                    onMouseEnter={() => item.megaMenu && handleMouseEnter(item.id)}
-                    onMouseLeave={handleMouseLeave}
+                    onMouseEnter={() => item.megaMenu && window.innerWidth >= 1024 && handleMouseEnter(item.id)}
+                    onMouseLeave={() => window.innerWidth >= 1024 && handleMouseLeave()}
                   >
-                    <NavLink 
-                      to={item.path}
-                      className={({ isActive }) => `nav-link ${isActive ? 'is-active' : ''}`}
-                      onClick={closeMobileMenu}
-                    >
-                      {item.label}
-                      {item.megaMenu && (
+                    {item.megaMenu ? (
+                      <button
+                        className="nav-link"
+                        onClick={() => setActiveMenu(activeMenu === item.id ? null : item.id)}
+                        aria-expanded={activeMenu === item.id}
+                      >
+                        {item.label}
                         <svg className="nav-chevron" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
                         </svg>
-                      )}
-                    </NavLink>
+                      </button>
+                    ) : (
+                      <NavLink 
+                        to={item.path}
+                        className={({ isActive }) => `nav-link ${isActive ? 'is-active' : ''}`}
+                        onClick={closeMobileMenu}
+                      >
+                        {item.label}
+                      </NavLink>
+                    )}
 
                     {/* Mega Menu */}
                     {item.megaMenu && item.columns && (
