@@ -15,10 +15,9 @@ const UNSPLASH_BASE = 'https://source.unsplash.com';
  * @param {string} portSlug - e.g., "barcelona", "santorini"
  * @param {string} imageType - "hero", "beach", "attraction-1", etc.
  * @param {string} portName - Full port name for better search
- * @param {string} country - Country name for context
  * @returns {string} Unsplash image URL
  */
-export function getPortPlaceholderImage(portSlug, imageType, portName = '', country = '') {
+export function getPortPlaceholderImage(portSlug, imageType, portName = '') {
   // Size based on image type
   const sizes = {
     hero: '1600x900',

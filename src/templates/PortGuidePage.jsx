@@ -30,8 +30,8 @@ function PortGuidePage() {
   const portCountry = port?.country || '';
   
   // Load images from database with smart placeholders
-  const { imageUrl: heroImage, isPlaceholder: heroIsPlaceholder } = usePortGuideImage(slug, 'hero', portName, portCountry);
-  const { imageUrl: beachImage, isPlaceholder: beachIsPlaceholder } = usePortGuideImage(slug, 'beach', portName, portCountry);
+  const { imageUrl: heroImage } = usePortGuideImage(slug, 'hero', portName, portCountry);
+  const { imageUrl: beachImage } = usePortGuideImage(slug, 'beach', portName, portCountry);
   
   // Load attraction images (up to 6)
   const { imageUrl: attraction1Image, isPlaceholder: attr1Placeholder } = usePortGuideImage(slug, 'attraction-1', portName, portCountry);
