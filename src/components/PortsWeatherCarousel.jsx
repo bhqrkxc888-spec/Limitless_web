@@ -70,15 +70,21 @@ function PortsWeatherCarousel({ ports, title, onPortChange, selectedPort = null 
     
     if (selectedPort && visiblePorts.length > 0) {
       const portIndex = visiblePorts.findIndex(p => p.name === selectedPort.name || p.id === selectedPort.id);
-      if (portIndex !== -1 && portIndex !== currentIndex) {
-        userInteractionRef.current = true; // Stop auto-rotation
-        if (intervalRef.current) {
-          clearInterval(intervalRef.current);
-        }
-        setCurrentIndex(portIndex);
+      if (portIndex !== -1) {
+        // Use functional update to avoid needing currentIndex in deps
+        setCurrentIndex(prev => {
+          if (prev !== portIndex) {
+            userInteractionRef.current = true; // Stop auto-rotation
+            if (intervalRef.current) {
+              clearInterval(intervalRef.current);
+            }
+            return portIndex;
+          }
+          return prev;
+        });
       }
     }
-  }, [selectedPort, visiblePorts, currentIndex]);
+  }, [selectedPort, visiblePorts]);
 
   // Auto-scroll through visible ports (only if user hasn't interacted and no external selection)
   useEffect(() => {

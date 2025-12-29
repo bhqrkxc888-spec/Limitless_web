@@ -1021,7 +1021,15 @@ export async function forceAnalyzePageSEO() {
   await analyzePageSEO()
 }
 
+// Track if already initialized to prevent duplicate intervals
+let seoMonitoringInitialized = false
+let seoIntervalId = null
+let seoPopstateHandler = null
+
 export function initSEOMonitoring() {
+  // Prevent multiple initializations (memory leak fix)
+  if (seoMonitoringInitialized) return
+  
   // Check if monitoring is enabled
   if (!isMonitoringEnabled()) {
     return
@@ -1051,6 +1059,9 @@ export function initSEOMonitoring() {
       return
     }
 
+    // Mark as initialized to prevent duplicate intervals
+    seoMonitoringInitialized = true
+
     // Functions exist - proceed with monitoring
     // Analyze on initial load
     analyzePageSEO()
@@ -1068,17 +1079,33 @@ export function initSEOMonitoring() {
       }
     }
 
-    // Check for route changes periodically
-    setInterval(checkRouteChange, 1000)
+    // Check for route changes periodically (store ID for potential cleanup)
+    seoIntervalId = setInterval(checkRouteChange, 1000)
 
     // Also listen to popstate (back/forward navigation)
-    window.addEventListener('popstate', () => {
+    seoPopstateHandler = () => {
       setTimeout(() => {
         analyzePageSEO()
       }, 1000)
-    })
+    }
+    window.addEventListener('popstate', seoPopstateHandler)
   }).catch(() => {
     // Silently fail if check fails
   })
+}
+
+/**
+ * Cleanup SEO monitoring (call on app unmount if needed)
+ */
+export function cleanupSEOMonitoring() {
+  if (seoIntervalId) {
+    clearInterval(seoIntervalId)
+    seoIntervalId = null
+  }
+  if (seoPopstateHandler) {
+    window.removeEventListener('popstate', seoPopstateHandler)
+    seoPopstateHandler = null
+  }
+  seoMonitoringInitialized = false
 }
 

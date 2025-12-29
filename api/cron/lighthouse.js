@@ -10,9 +10,23 @@
  */
 
 export default async function handler(req, res) {
-  // Verify cron secret (if set)
+  // Verify cron secret - required in production to prevent abuse
   const cronSecret = process.env.CRON_SECRET;
-  if (cronSecret && req.headers['authorization'] !== `Bearer ${cronSecret}`) {
+  const authHeader = req.headers['authorization'];
+  
+  // In production, always require auth. In dev, allow without secret for testing.
+  const isProduction = process.env.VERCEL_ENV === 'production' || process.env.NODE_ENV === 'production';
+  
+  if (isProduction) {
+    if (!cronSecret) {
+      console.error('[Cron] CRON_SECRET not configured in production!');
+      return res.status(500).json({ error: 'Server misconfigured' });
+    }
+    if (authHeader !== `Bearer ${cronSecret}`) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
+  } else if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
+    // In dev/preview, check auth if secret is set
     return res.status(401).json({ error: 'Unauthorized' });
   }
 

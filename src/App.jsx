@@ -145,8 +145,9 @@ function AppLayout() {
   // Admin routes have their own layout
   if (isAdminRoute) {
     return (
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
+      <ErrorBoundary>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
           {/* Preview Access for hidden/coming-soon pages */}
           <Route path="/preview" element={<AdminPage />} />
           
@@ -176,8 +177,9 @@ function AppLayout() {
           {/* Admin Website Section */}
           <Route path="/admin/website/destinations" element={<AdminWebsiteDestinations />} />
           <Route path="/admin/offers-debug" element={<AdminOffersDebug />} />
-        </Routes>
-      </Suspense>
+          </Routes>
+        </Suspense>
+      </ErrorBoundary>
     );
   }
   

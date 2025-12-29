@@ -16,6 +16,7 @@ import { useEffect, useRef, useMemo, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { apiConfig } from '../config/apiConfig';
 import { getPortAttractions } from '../services/googlePlacesAPI';
+import { logger } from '../utils/logger';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './InteractiveItineraryMap.css';
 
@@ -37,7 +38,7 @@ function InteractiveItineraryMap({ itinerary }) {
   // Filter and enrich itinerary data - handle round-trips properly
   const ports = useMemo(() => {
     if (!Array.isArray(itinerary)) {
-      console.warn('InteractiveItineraryMap: itinerary is not an array', itinerary);
+      logger.warn('InteractiveItineraryMap: itinerary is not an array', itinerary);
       return [];
     }
     
@@ -56,10 +57,10 @@ function InteractiveItineraryMap({ itinerary }) {
       return hasCoords && !isSeaDay;
     });
     
-    console.log(`InteractiveItineraryMap: Found ${filtered.length} ports with coordinates out of ${itinerary.length} total items`);
+    logger.debug(`InteractiveItineraryMap: Found ${filtered.length} ports with coordinates out of ${itinerary.length} total items`);
     
     if (filtered.length === 0 && itinerary.length > 0) {
-      console.error('InteractiveItineraryMap: No ports have coordinates!', itinerary);
+      logger.error('InteractiveItineraryMap: No ports have coordinates!', itinerary);
     }
     
     // Enrich port data
@@ -97,7 +98,7 @@ function InteractiveItineraryMap({ itinerary }) {
         // Remove the last port (duplicate)
         enrichedPorts.pop();
         
-        console.log(`Round-trip detected: ${first.name} (Days ${first.days.join(' & ')})`);
+        logger.debug(`Round-trip detected: ${first.name} (Days ${first.days.join(' & ')})`);
       }
     }
     
@@ -263,7 +264,7 @@ function InteractiveItineraryMap({ itinerary }) {
         });
       }
     } catch (error) {
-      console.error('Error fetching port attractions:', error);
+      logger.error('Error fetching port attractions:', error);
       setAttractions([]);
     } finally {
       setLoadingAttractions(false);
@@ -446,12 +447,12 @@ function InteractiveItineraryMap({ itinerary }) {
   // Initialize map
   useEffect(() => {
     if (!apiConfig.mapbox.enabled || !apiConfig.mapbox.accessToken) {
-      console.warn('Mapbox not enabled or no access token');
+      logger.warn('Mapbox not enabled or no access token');
       return;
     }
     
     if (ports.length === 0) {
-      console.warn('No ports to display on map');
+      logger.warn('No ports to display on map');
       return;
     }
 

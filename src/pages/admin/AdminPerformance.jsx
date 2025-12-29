@@ -18,6 +18,7 @@ import {
 import { supabase } from '../../lib/supabase';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
+import { logger } from '../../utils/logger';
 
 function AdminPerformance() {
   const navigate = useNavigate();
@@ -218,7 +219,7 @@ function AdminPerformance() {
       setInsights(newInsights);
       setLastUpdated(Date.now());
     } catch (err) {
-      console.error('Error fetching performance data:', err);
+      logger.error('Error fetching performance data:', err);
     } finally {
       setIsLoading(false);
       setIsRefreshing(false);

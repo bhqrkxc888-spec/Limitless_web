@@ -26,6 +26,8 @@ export function useWeather(lat, lon) {
       return;
     }
 
+    let cancelled = false;
+
     async function fetchWeather() {
       try {
         setLoading(true);
@@ -35,6 +37,8 @@ export function useWeather(lat, lon) {
           getCurrentWeather(lat, lon),
           getWeatherForecast(lat, lon)
         ]);
+
+        if (cancelled) return;
 
         // Validate current data structure
         if (!currentData || !currentData.weather || !Array.isArray(currentData.weather) || currentData.weather.length === 0) {
@@ -51,16 +55,21 @@ export function useWeather(lat, lon) {
           setForecast(groupForecastByDay(forecastData.list));
         }
       } catch (err) {
-        logger.error('Error fetching weather:', err);
-        setError(err.message || 'Weather data unavailable');
-        setCurrent(null);
-        setForecast(null);
+        if (!cancelled) {
+          logger.error('Error fetching weather:', err);
+          setError(err.message || 'Weather data unavailable');
+          setCurrent(null);
+          setForecast(null);
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
     }
 
     fetchWeather();
+    return () => { cancelled = true; };
   }, [lat, lon]);
 
   return { current, forecast, loading, error };

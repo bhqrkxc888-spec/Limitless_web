@@ -23,6 +23,7 @@ import {
 import { supabase } from '../../lib/supabase';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
+import { logger } from '../../utils/logger';
 import { isPreviewAuthenticated } from '../../config/launchConfig';
 
 // Site pages configuration
@@ -132,7 +133,7 @@ function AdminDashboard() {
       setRecentErrors((errors || []).slice(0, 5));
       setLastUpdated(Date.now());
     } catch (err) {
-      console.error('Error fetching dashboard data:', err);
+      logger.error('Error fetching dashboard data:', err);
     } finally {
       setIsLoading(false);
       setIsRefreshing(false);
@@ -147,7 +148,8 @@ function AdminDashboard() {
       const interval = setInterval(fetchData, 60000);
       return () => clearInterval(interval);
     }
-  }, [isAuthenticated, fetchData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated]); // fetchData is stable (no deps), safe to omit
 
   // Redirect if not authenticated
   useEffect(() => {

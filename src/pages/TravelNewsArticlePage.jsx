@@ -8,6 +8,7 @@ import { Button, SectionHeader } from '../components/ui';
 import OptimizedImage from '../components/OptimizedImage';
 import { useEffect, useState, useRef } from 'react';
 import { createSanitizedMarkup } from '../utils/sanitizeHtml';
+import { logger } from '../utils/logger';
 import './TravelNewsArticlePage.css';
 
 function TravelNewsArticlePage() {
@@ -85,7 +86,7 @@ function TravelNewsArticlePage() {
       setFormStatus({ submitting: false, submitted: true, error: null });
       setContactForm({ name: '', email: '', phone: '', message: '' });
     } catch (err) {
-      console.error('Contact form error:', err);
+      logger.error('Contact form error:', err);
       setFormStatus({ 
         submitting: false, 
         submitted: false, 

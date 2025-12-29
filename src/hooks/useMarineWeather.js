@@ -25,6 +25,8 @@ export function useMarineWeather(lat, lon) {
       return;
     }
 
+    let cancelled = false;
+
     async function fetchMarineWeather() {
       try {
         setLoading(true);
@@ -33,16 +35,23 @@ export function useMarineWeather(lat, lon) {
         const data = await getSeaConditions(lat, lon);
         const current = getCurrentSeaConditions(data);
 
-        setConditions(current);
+        if (!cancelled) {
+          setConditions(current);
+        }
       } catch (err) {
-        logger.error('Error fetching sea conditions:', err);
-        setError(err.message);
+        if (!cancelled) {
+          logger.error('Error fetching sea conditions:', err);
+          setError(err.message);
+        }
       } finally {
-        setLoading(false);
+        if (!cancelled) {
+          setLoading(false);
+        }
       }
     }
 
     fetchMarineWeather();
+    return () => { cancelled = true; };
   }, [lat, lon]);
 
   return { conditions, loading, error };

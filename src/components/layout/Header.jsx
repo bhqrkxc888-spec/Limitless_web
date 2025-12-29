@@ -70,6 +70,22 @@ function Header() {
     setActiveMenu(null);
   };
 
+  // Close mobile menu on ESC key (accessibility requirement)
+  useEffect(() => {
+    const handleEscKey = (e) => {
+      if (e.key === 'Escape') {
+        if (mobileMenuOpen) {
+          closeMobileMenu();
+        } else if (activeMenu) {
+          setActiveMenu(null);
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleEscKey);
+    return () => document.removeEventListener('keydown', handleEscKey);
+  }, [mobileMenuOpen, activeMenu]);
+
   return (
     <header className="header">
       {/* Top Bar */}
