@@ -34,15 +34,14 @@ function PortGuidePage() {
   const { imageUrl: beachImage } = usePortGuideImage(slug, 'beach', portName, portCountry);
   
   // Load attraction images (up to 6)
-  const { imageUrl: attraction1Image, isPlaceholder: attr1Placeholder } = usePortGuideImage(slug, 'attraction-1', portName, portCountry);
-  const { imageUrl: attraction2Image, isPlaceholder: attr2Placeholder } = usePortGuideImage(slug, 'attraction-2', portName, portCountry);
-  const { imageUrl: attraction3Image, isPlaceholder: attr3Placeholder } = usePortGuideImage(slug, 'attraction-3', portName, portCountry);
-  const { imageUrl: attraction4Image, isPlaceholder: attr4Placeholder } = usePortGuideImage(slug, 'attraction-4', portName, portCountry);
-  const { imageUrl: attraction5Image, isPlaceholder: attr5Placeholder } = usePortGuideImage(slug, 'attraction-5', portName, portCountry);
-  const { imageUrl: attraction6Image, isPlaceholder: attr6Placeholder } = usePortGuideImage(slug, 'attraction-6', portName, portCountry);
+  const { imageUrl: attraction1Image } = usePortGuideImage(slug, 'attraction-1', portName, portCountry);
+  const { imageUrl: attraction2Image } = usePortGuideImage(slug, 'attraction-2', portName, portCountry);
+  const { imageUrl: attraction3Image } = usePortGuideImage(slug, 'attraction-3', portName, portCountry);
+  const { imageUrl: attraction4Image } = usePortGuideImage(slug, 'attraction-4', portName, portCountry);
+  const { imageUrl: attraction5Image } = usePortGuideImage(slug, 'attraction-5', portName, portCountry);
+  const { imageUrl: attraction6Image } = usePortGuideImage(slug, 'attraction-6', portName, portCountry);
   
   const attractionImages = [attraction1Image, attraction2Image, attraction3Image, attraction4Image, attraction5Image, attraction6Image];
-  const attractionPlaceholders = [attr1Placeholder, attr2Placeholder, attr3Placeholder, attr4Placeholder, attr5Placeholder, attr6Placeholder];
 
   // Combine attractions - ONLY use mustSeeSights if available, otherwise thingsToDo
   // This prevents duplication
