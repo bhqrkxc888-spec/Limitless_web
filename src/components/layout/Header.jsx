@@ -119,30 +119,12 @@ function Header() {
               <span className="menu-text">Menu</span>
             </button>
 
-            {/* Mobile Menu Backdrop */}
-            {mobileMenuOpen && (
-              <div 
-                className="mobile-menu-backdrop" 
-                onClick={closeMobileMenu}
-                aria-hidden="true"
-              />
-            )}
-
             {/* Navigation */}
             <nav 
               id="main-navigation"
               className={`header-nav ${mobileMenuOpen ? 'is-open' : ''}`}
               aria-label="Main navigation"
             >
-              {/* Close button for mobile */}
-              <button 
-                className="mobile-menu-close"
-                onClick={closeMobileMenu}
-                aria-label="Close menu"
-              >
-                ×
-              </button>
-
               <ul className="nav-list">
                 {visibleNavItems.map((item) => (
                   <li 
