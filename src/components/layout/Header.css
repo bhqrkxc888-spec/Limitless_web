@@ -414,25 +414,15 @@
     align-items: stretch;
     gap: 0;
     width: 100%;
-    padding: var(--space-3) 0;
-    height: auto;
-    overflow: visible;
+    padding: var(--space-2) 0;
   }
 
   .nav-item {
-    display: flex;
-    flex-direction: column;
     border-bottom: 1px solid var(--clr-border-light);
-    overflow: visible;
   }
 
   .nav-item:last-child {
     border-bottom: none;
-  }
-
-  .nav-item.has-mega-menu {
-    position: relative;
-    z-index: 10;
   }
 
   .nav-link {
@@ -462,32 +452,22 @@
   }
 
   .mega-menu {
-    position: static !important;
-    transform: none !important;
-    left: auto !important;
-    top: auto !important;
-    display: block;
+    position: static;
+    transform: none;
+    left: auto;
+    top: auto;
+    display: none;
     width: 100%;
-    min-width: 100%;
-    max-width: 100%;
     border: none;
     border-radius: 0;
     box-shadow: none;
-    padding: 0;
+    padding: var(--space-2) var(--space-4);
     margin: 0;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    visibility: visible;
     background-color: var(--clr-bg-alt);
-    transition: max-height 0.25s ease-out, opacity 0.2s ease-out, padding 0.25s ease-out;
   }
 
   .mega-menu.is-visible {
-    max-height: 600px;
-    opacity: 1;
-    padding: var(--space-3) var(--space-4);
-    z-index: 100;
+    display: block;
   }
 
   .mega-menu-content {
