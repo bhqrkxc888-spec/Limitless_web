@@ -1379,11 +1379,22 @@
   border-radius: 4px;
   z-index: 5;
   pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
 }
 
 .placeholder-indicator::before {
-  content: '📷';
-  margin-right: 4px;
+  content: '📷 Image Required';
+}
+
+.placeholder-indicator::after {
+  content: 'Photo: Unsplash';
+  font-size: 8px;
+  font-weight: 400;
+  opacity: 0.7;
+  text-transform: none;
 }
 
 /* Hide indicator on small attraction cards */
@@ -1392,4 +1403,8 @@
   padding: 3px 6px;
   bottom: 4px;
   right: 4px;
+}
+
+.attraction-card .placeholder-indicator::after {
+  font-size: 6px;
 }

@@ -5,7 +5,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Download, Image as ImageIcon } from 'lucide-react';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
 import ImageUpload from '../../components/admin/ImageUpload';
@@ -13,6 +13,7 @@ import StatusIndicator from '../../components/admin/StatusIndicator';
 import { supabase, getPublicUrl } from '../../lib/supabase';
 import { STORAGE_BUCKETS } from '../../config/supabaseConfig';
 import { ports, portRegions } from '../../data/ports';
+import { getPortPlaceholderImage } from '../../utils/placeholderImages';
 import './AdminImagesShared.css';
 
 /**
@@ -253,14 +254,21 @@ function AdminPortGuideImages() {
             <div className="images-list">
               {getPortImageTypes(selectedPort).map(imageType => {
                 const img = images[selectedPort.id]?.[imageType.id];
+                const placeholderUrl = getPortPlaceholderImage(
+                  selectedPort.id, 
+                  imageType.id, 
+                  selectedPort.name, 
+                  selectedPort.country
+                );
+                const hasRealImage = !!img;
                 
                 return (
                   <div key={imageType.id} className="admin-card image-card">
                     <div className="image-card-header">
                       <div className="image-card-title">
                         <h3>{imageType.label}</h3>
-                        <span className={`badge ${imageType.required ? 'badge-required' : 'badge-optional'}`}>
-                          {imageType.required ? 'Required' : 'Optional'}
+                        <span className={`badge ${hasRealImage ? 'badge-uploaded' : 'badge-placeholder'}`}>
+                          {hasRealImage ? '✓ Uploaded' : '⏳ Placeholder'}
                         </span>
                       </div>
                       <StatusIndicator 
@@ -269,6 +277,47 @@ function AdminPortGuideImages() {
                       />
                     </div>
                     <p className="image-card-specs">{imageType.specs}</p>
+                    
+                    {/* Show Unsplash placeholder info when no real image */}
+                    {!hasRealImage && (
+                      <div className="placeholder-info">
+                        <div className="placeholder-preview">
+                          <img 
+                            src={placeholderUrl} 
+                            alt={`Placeholder for ${imageType.label}`}
+                            loading="lazy"
+                          />
+                          <span className="placeholder-badge">
+                            <ImageIcon size={12} />
+                            Unsplash Placeholder
+                          </span>
+                        </div>
+                        <div className="placeholder-actions">
+                          <a 
+                            href={placeholderUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="placeholder-link"
+                          >
+                            <ExternalLink size={14} />
+                            View on Unsplash
+                          </a>
+                          <a 
+                            href={placeholderUrl} 
+                            download={`${selectedPort.id}-${imageType.id}.jpg`}
+                            className="placeholder-link"
+                          >
+                            <Download size={14} />
+                            Download
+                          </a>
+                        </div>
+                        <p className="placeholder-note">
+                          If this image works, download and upload it. 
+                          Or search Unsplash for: <code>{selectedPort.name} {imageType.id.includes('beach') ? 'beach' : imageType.id.includes('attraction') ? 'landmark' : 'harbor'}</code>
+                        </p>
+                      </div>
+                    )}
+                    
                     <ImageUpload
                       bucket={STORAGE_BUCKETS.CATEGORIES}
                       entityType="port-guide"
@@ -415,6 +464,91 @@ function AdminPortGuideImages() {
           .badge-optional {
             background: rgba(100, 116, 139, 0.2);
             color: var(--admin-text-muted);
+          }
+
+          .badge-uploaded {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--admin-success);
+          }
+
+          .badge-placeholder {
+            background: rgba(251, 191, 36, 0.2);
+            color: #f59e0b;
+          }
+
+          .placeholder-info {
+            background: rgba(251, 191, 36, 0.05);
+            border: 1px dashed rgba(251, 191, 36, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+          }
+
+          .placeholder-preview {
+            position: relative;
+            margin-bottom: 0.75rem;
+            border-radius: 6px;
+            overflow: hidden;
+          }
+
+          .placeholder-preview img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            display: block;
+          }
+
+          .placeholder-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: white;
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+          }
+
+          .placeholder-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+          }
+
+          .placeholder-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 12px;
+            background: var(--admin-bg-secondary);
+            border: 1px solid var(--admin-border);
+            border-radius: 6px;
+            color: var(--admin-text);
+            text-decoration: none;
+            font-size: 12px;
+            transition: all 0.2s;
+          }
+
+          .placeholder-link:hover {
+            border-color: var(--admin-primary);
+            color: var(--admin-primary);
+          }
+
+          .placeholder-note {
+            margin: 0;
+            font-size: 11px;
+            color: var(--admin-text-muted);
+            line-height: 1.5;
+          }
+
+          .placeholder-note code {
+            background: var(--admin-bg-secondary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
           }
         `}</style>
       </div>
