@@ -22,6 +22,7 @@ export function getPortPlaceholderImage(portSlug, imageType, portName = '', coun
   // Size based on image type
   const sizes = {
     hero: '1600x900',
+    card: '800x600',
     beach: '800x600',
     'attraction-1': '600x400',
     'attraction-2': '600x400',
@@ -59,6 +60,82 @@ export function getPortPlaceholderImage(portSlug, imageType, portName = '', coun
 }
 
 /**
+ * Get a relevant placeholder for destinations
+ * @param {string} destinationSlug - e.g., "mediterranean", "caribbean"
+ * @param {string} imageType - "hero", "card", etc.
+ * @param {string} destinationName - Full destination name
+ * @returns {string} Unsplash image URL
+ */
+export function getDestinationPlaceholderImage(destinationSlug, imageType, destinationName = '') {
+  const size = imageType === 'hero' ? '1600x900' : '800x600';
+  const name = destinationName || destinationSlug;
+  
+  // Destination-specific keywords
+  const query = `${name},cruise,travel,ocean,vacation`;
+  const encodedQuery = encodeURIComponent(query);
+  
+  return `${UNSPLASH_BASE}/featured/${size}/?${encodedQuery}&sig=${destinationSlug}-${imageType}`;
+}
+
+/**
+ * Get a relevant placeholder for cruise lines
+ * @param {string} cruiseLineSlug - e.g., "norwegian", "celebrity"
+ * @param {string} imageType - "hero", "logo", "ship", etc.
+ * @param {string} cruiseLineName - Full cruise line name
+ * @returns {string} Unsplash image URL
+ */
+export function getCruiseLinePlaceholderImage(cruiseLineSlug, imageType, cruiseLineName = '') {
+  const size = imageType === 'hero' ? '1600x900' : imageType === 'logo' ? '400x400' : '800x600';
+  const name = cruiseLineName || cruiseLineSlug;
+  
+  let query = '';
+  if (imageType === 'hero' || imageType === 'ship') {
+    query = `${name},cruise,ship,ocean,luxury`;
+  } else if (imageType === 'logo') {
+    query = `cruise,ship,logo,maritime`;
+  } else {
+    query = `${name},cruise,travel`;
+  }
+  
+  const encodedQuery = encodeURIComponent(query);
+  return `${UNSPLASH_BASE}/featured/${size}/?${encodedQuery}&sig=${cruiseLineSlug}-${imageType}`;
+}
+
+/**
+ * Get a relevant placeholder for bucket list experiences
+ * @param {string} experienceId - e.g., "northern-lights"
+ * @param {string} imageType - "hero", "card", etc.
+ * @param {string} experienceName - Full experience name
+ * @returns {string} Unsplash image URL
+ */
+export function getBucketListPlaceholderImage(experienceId, imageType, experienceName = '') {
+  const size = imageType === 'hero' ? '1600x900' : '800x600';
+  const name = experienceName || experienceId.replace(/-/g, ' ');
+  
+  const query = `${name},travel,adventure,bucket list`;
+  const encodedQuery = encodeURIComponent(query);
+  
+  return `${UNSPLASH_BASE}/featured/${size}/?${encodedQuery}&sig=${experienceId}-${imageType}`;
+}
+
+/**
+ * Get a relevant placeholder for categories
+ * @param {string} categorySlug - e.g., "river-cruises", "family-cruises"
+ * @param {string} imageType - "hero", "card", etc.
+ * @param {string} categoryName - Full category name
+ * @returns {string} Unsplash image URL
+ */
+export function getCategoryPlaceholderImage(categorySlug, imageType, categoryName = '') {
+  const size = imageType === 'hero' ? '1600x900' : '800x600';
+  const name = categoryName || categorySlug.replace(/-/g, ' ');
+  
+  const query = `${name},cruise,travel,vacation`;
+  const encodedQuery = encodeURIComponent(query);
+  
+  return `${UNSPLASH_BASE}/featured/${size}/?${encodedQuery}&sig=${categorySlug}-${imageType}`;
+}
+
+/**
  * Check if a URL is a placeholder image
  * @param {string} url 
  * @returns {boolean}
@@ -83,6 +160,10 @@ export function getKeywordPlaceholder(keywords, size = '800x600') {
 
 export default {
   getPortPlaceholderImage,
+  getDestinationPlaceholderImage,
+  getCruiseLinePlaceholderImage,
+  getBucketListPlaceholderImage,
+  getCategoryPlaceholderImage,
   isPlaceholderImage,
   getKeywordPlaceholder
 };
