@@ -15,6 +15,7 @@ const FloatingWhatsApp = lazy(() => import('./components/FloatingWhatsApp'))
 
 // Route Protection
 import ProtectedRoute from './components/ProtectedRoute'
+import AdminProtectedRoute from './components/AdminProtectedRoute'
 import PublishGate from './components/PublishGate'
 
 // HomePage is eagerly loaded to prevent CLS on initial page load
@@ -153,30 +154,30 @@ function AppLayout() {
           
           {/* Admin Monitoring Dashboard */}
           <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/errors" element={<AdminErrors />} />
-          <Route path="/admin/lighthouse" element={<AdminLighthouse />} />
-          <Route path="/admin/analytics" element={<AdminAnalytics />} />
-          <Route path="/admin/search-console" element={<AdminSearchConsole />} />
-          <Route path="/admin/seo" element={<AdminSEO />} />
+          <Route path="/admin" element={<AdminProtectedRoute><AdminDashboard /></AdminProtectedRoute>} />
+          <Route path="/admin/errors" element={<AdminProtectedRoute><AdminErrors /></AdminProtectedRoute>} />
+          <Route path="/admin/lighthouse" element={<AdminProtectedRoute><AdminLighthouse /></AdminProtectedRoute>} />
+          <Route path="/admin/analytics" element={<AdminProtectedRoute><AdminAnalytics /></AdminProtectedRoute>} />
+          <Route path="/admin/search-console" element={<AdminProtectedRoute><AdminSearchConsole /></AdminProtectedRoute>} />
+          <Route path="/admin/seo" element={<AdminProtectedRoute><AdminSEO /></AdminProtectedRoute>} />
           
           {/* Image Management */}
-          <Route path="/admin/images" element={<AdminImageManagement />} />
-          <Route path="/admin/images/site" element={<AdminSiteImages />} />
-          <Route path="/admin/images/destinations" element={<AdminDestinationImages />} />
-          <Route path="/admin/images/cruise-lines" element={<AdminCruiseLineImages />} />
-          <Route path="/admin/images/cruise-lines/:slug" element={<AdminCruiseLineImages />} />
-          <Route path="/admin/images/categories" element={<AdminCategoryImages />} />
-          <Route path="/admin/images/bucket-list" element={<AdminBucketListImages />} />
-          <Route path="/admin/images/bucket-list/:slug" element={<AdminBucketListImages />} />
-          <Route path="/admin/images/port-guides" element={<AdminPortGuideImages />} />
-          <Route path="/admin/images/port-guides/:slug" element={<AdminPortGuideImages />} />
+          <Route path="/admin/images" element={<AdminProtectedRoute><AdminImageManagement /></AdminProtectedRoute>} />
+          <Route path="/admin/images/site" element={<AdminProtectedRoute><AdminSiteImages /></AdminProtectedRoute>} />
+          <Route path="/admin/images/destinations" element={<AdminProtectedRoute><AdminDestinationImages /></AdminProtectedRoute>} />
+          <Route path="/admin/images/cruise-lines" element={<AdminProtectedRoute><AdminCruiseLineImages /></AdminProtectedRoute>} />
+          <Route path="/admin/images/cruise-lines/:slug" element={<AdminProtectedRoute><AdminCruiseLineImages /></AdminProtectedRoute>} />
+          <Route path="/admin/images/categories" element={<AdminProtectedRoute><AdminCategoryImages /></AdminProtectedRoute>} />
+          <Route path="/admin/images/bucket-list" element={<AdminProtectedRoute><AdminBucketListImages /></AdminProtectedRoute>} />
+          <Route path="/admin/images/bucket-list/:slug" element={<AdminProtectedRoute><AdminBucketListImages /></AdminProtectedRoute>} />
+          <Route path="/admin/images/port-guides" element={<AdminProtectedRoute><AdminPortGuideImages /></AdminProtectedRoute>} />
+          <Route path="/admin/images/port-guides/:slug" element={<AdminProtectedRoute><AdminPortGuideImages /></AdminProtectedRoute>} />
           {/* Redirect old ships route to cruise lines */}
           <Route path="/admin/images/ships" element={<Navigate to="/admin/images/cruise-lines" replace />} />
           
           {/* Admin Website Section */}
-          <Route path="/admin/website/destinations" element={<AdminWebsiteDestinations />} />
-          <Route path="/admin/offers-debug" element={<AdminOffersDebug />} />
+          <Route path="/admin/website/destinations" element={<AdminProtectedRoute><AdminWebsiteDestinations /></AdminProtectedRoute>} />
+          <Route path="/admin/offers-debug" element={<AdminProtectedRoute><AdminOffersDebug /></AdminProtectedRoute>} />
           </Routes>
         </Suspense>
       </ErrorBoundary>

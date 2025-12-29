@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
+import useAdminAuth from '../../hooks/useAdminAuth';
 import './AdminOffersDebug.css';
 
 /**
@@ -7,14 +9,25 @@ import './AdminOffersDebug.css';
  * Diagnostic tool to check why offers aren't showing on the website
  */
 function AdminOffersDebug() {
+  const navigate = useNavigate();
+  const { isAuthenticated, isLoading: authLoading } = useAdminAuth();
   const [crmOffers, setCrmOffers] = useState([]);
   const [publicOffers, setPublicOffers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Redirect if not authenticated
   useEffect(() => {
-    checkOffers();
-  }, []);
+    if (!authLoading && !isAuthenticated) {
+      navigate('/admin/login');
+    }
+  }, [authLoading, isAuthenticated, navigate]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      checkOffers();
+    }
+  }, [isAuthenticated]);
 
   async function checkOffers() {
     setLoading(true);
@@ -61,6 +74,22 @@ function AdminOffersDebug() {
     };
     return colors[status] || '#6b7280';
   };
+
+  // Show loading while checking auth
+  if (authLoading || (!isAuthenticated && !authLoading)) {
+    return (
+      <div className="admin-offers-debug" style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        minHeight: '100vh',
+        background: '#0f1117',
+        color: '#e8eaed'
+      }}>
+        <div>Loading...</div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (
