@@ -390,6 +390,7 @@
     right: var(--space-4);
     left: auto;
     width: 280px;
+    height: auto;
     max-height: 0;
     background-color: white;
     flex-direction: column;
@@ -403,7 +404,8 @@
   }
 
   .header-nav.is-open {
-    max-height: 70vh;
+    max-height: calc(100vh - 100px);
+    min-height: 400px;
     overflow-y: auto;
   }
 
@@ -412,7 +414,8 @@
     align-items: stretch;
     gap: 0;
     width: 100%;
-    padding: var(--space-2) 0;
+    padding: var(--space-3) 0;
+    height: auto;
   }
 
   .nav-item {
