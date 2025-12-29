@@ -447,22 +447,31 @@
     background-color: var(--clr-bg-alt);
   }
 
+  /* Rotate chevron when submenu is open */
+  .nav-link[aria-expanded="true"] .nav-chevron {
+    transform: rotate(180deg);
+  }
+
   .mega-menu {
     position: static;
     transform: none;
-    min-width: 100%;
-    max-width: 100%;
+    width: 100%;
     border: none;
     border-radius: 0;
     box-shadow: none;
-    padding: var(--space-2) var(--space-4);
+    padding: 0;
     margin-top: 0;
-    display: none;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
     background-color: var(--clr-bg-alt);
+    transition: max-height 0.25s ease-out, opacity 0.2s ease-out, padding 0.25s ease-out;
   }
 
   .mega-menu.is-visible {
-    display: block;
+    max-height: 500px;
+    opacity: 1;
+    padding: var(--space-3) var(--space-4);
   }
 
   .mega-menu-content {
