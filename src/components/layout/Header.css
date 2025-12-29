@@ -418,15 +418,16 @@
     right: 0;
     bottom: 0;
     width: 100%;
-    max-width: 400px;
+    max-width: 85%;
     background-color: var(--clr-surface);
     flex-direction: column;
     justify-content: flex-start;
-    padding: var(--space-20) var(--space-6) var(--space-6);
+    padding: var(--space-20) var(--space-6) var(--space-8);
     transform: translateX(100%);
     transition: transform var(--transition-slow);
     box-shadow: var(--shadow-2xl);
     overflow-y: auto;
+    z-index: var(--z-modal);
   }
 
   .header-nav.is-open {
@@ -438,15 +439,26 @@
     align-items: stretch;
     gap: 0;
     width: 100%;
+    height: auto;
   }
 
   .nav-item {
     border-bottom: 1px solid var(--clr-border-light);
+    height: auto;
   }
 
   .nav-link {
-    padding: var(--space-4);
+    padding: var(--space-5) var(--space-4);
     justify-content: space-between;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+    height: auto;
+  }
+
+  .nav-chevron {
+    width: 24px;
+    height: 24px;
   }
 
   .mega-menu {
@@ -457,7 +469,7 @@
     border: none;
     border-radius: 0;
     box-shadow: none;
-    padding: var(--space-4);
+    padding: var(--space-6) var(--space-4);
     margin-top: 0;
     display: none;
     background-color: var(--clr-bg-alt);
@@ -469,13 +481,40 @@
 
   .mega-menu-content {
     grid-template-columns: 1fr;
-    gap: var(--space-6);
+    gap: var(--space-8);
+  }
+
+  .mega-menu-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: var(--space-4);
+  }
+
+  .mega-menu-link {
+    padding: var(--space-4) var(--space-3);
+  }
+
+  .mega-menu-link-label {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .mega-menu-link-desc {
+    font-size: 14px;
+    margin-top: var(--space-2);
+    line-height: 1.5;
   }
 
   .nav-cta-mobile {
     display: block;
     margin-top: auto;
-    padding-top: var(--space-6);
+    padding-top: var(--space-8);
+  }
+
+  .nav-cta-mobile .btn {
+    font-size: 18px;
+    padding: var(--space-4) var(--space-6);
+    font-weight: 700;
   }
 
   .logo-icon {
@@ -513,6 +552,24 @@
   }
 
   .menu-text {
+    font-size: 13px;
+  }
+
+  .header-nav {
+    max-width: 90%;
+    padding: var(--space-16) var(--space-5) var(--space-6);
+  }
+
+  .nav-link {
+    font-size: 17px;
+    padding: var(--space-4) var(--space-3);
+  }
+
+  .mega-menu-link-label {
+    font-size: 15px;
+  }
+
+  .mega-menu-link-desc {
     font-size: 13px;
   }
 
