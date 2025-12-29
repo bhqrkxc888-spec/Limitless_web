@@ -47,11 +47,22 @@ function Header() {
   }, []);
 
   const handleMouseEnter = (menuId) => {
-    setActiveMenu(menuId);
+    // Only work on desktop
+    if (window.innerWidth >= 1024) {
+      setActiveMenu(menuId);
+    }
   };
 
   const handleMouseLeave = () => {
-    setActiveMenu(null);
+    // Only work on desktop
+    if (window.innerWidth >= 1024) {
+      setActiveMenu(null);
+    }
+  };
+
+  const toggleMegaMenu = (menuId) => {
+    // For mobile - toggle accordion
+    setActiveMenu(activeMenu === menuId ? null : menuId);
   };
 
   const closeMobileMenu = () => {
@@ -133,18 +144,27 @@ function Header() {
                     onMouseEnter={() => item.megaMenu && handleMouseEnter(item.id)}
                     onMouseLeave={handleMouseLeave}
                   >
-                    <NavLink 
-                      to={item.path}
-                      className={({ isActive }) => `nav-link ${isActive ? 'is-active' : ''}`}
-                      onClick={closeMobileMenu}
-                    >
-                      {item.label}
-                      {item.megaMenu && (
+                    {item.megaMenu ? (
+                      <button
+                        className="nav-link"
+                        onClick={() => toggleMegaMenu(item.id)}
+                        aria-expanded={activeMenu === item.id}
+                        type="button"
+                      >
+                        {item.label}
                         <svg className="nav-chevron" viewBox="0 0 24 24" fill="currentColor">
                           <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
                         </svg>
-                      )}
-                    </NavLink>
+                      </button>
+                    ) : (
+                      <NavLink 
+                        to={item.path}
+                        className={({ isActive }) => `nav-link ${isActive ? 'is-active' : ''}`}
+                        onClick={closeMobileMenu}
+                      >
+                        {item.label}
+                      </NavLink>
+                    )}
 
                     {/* Mega Menu */}
                     {item.megaMenu && item.columns && (
