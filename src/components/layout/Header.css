@@ -387,23 +387,23 @@
   .header-nav {
     position: fixed;
     top: 84px;
-    right: 0;
-    left: 0;
-    width: 100%;
+    right: var(--space-4);
+    left: auto;
+    width: 280px;
     max-height: 0;
     background-color: white;
     flex-direction: column;
     justify-content: flex-start;
     padding: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: max-height 0.3s ease-in-out;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-lg);
     z-index: 1000;
   }
 
   .header-nav.is-open {
-    max-height: calc(100vh - 84px);
-    padding: var(--space-4) 0;
+    max-height: 70vh;
     overflow-y: auto;
   }
 
@@ -412,26 +412,32 @@
     align-items: stretch;
     gap: 0;
     width: 100%;
-    max-height: 60vh;
-    overflow-y: auto;
+    padding: var(--space-2) 0;
   }
 
   .nav-item {
     border-bottom: 1px solid var(--clr-border-light);
   }
 
+  .nav-item:last-child {
+    border-bottom: none;
+  }
+
   .nav-link {
-    padding: var(--space-4) var(--space-6);
+    padding: var(--space-3) var(--space-4);
     justify-content: space-between;
-    font-size: var(--font-size-base);
+    font-size: 15px;
+    line-height: 1.4;
     width: 100%;
     text-align: left;
     background: none;
     border: none;
     cursor: pointer;
     font-family: var(--font-family);
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-medium);
     color: var(--clr-text-main);
+    display: flex;
+    align-items: center;
   }
 
   .nav-link:hover {
@@ -446,7 +452,7 @@
     border: none;
     border-radius: 0;
     box-shadow: none;
-    padding: var(--space-3) var(--space-6);
+    padding: var(--space-2) var(--space-4);
     margin-top: 0;
     display: none;
     background-color: var(--clr-bg-alt);
@@ -458,16 +464,37 @@
 
   .mega-menu-content {
     grid-template-columns: 1fr;
-    gap: var(--space-4);
+    gap: var(--space-2);
   }
 
-  .mega-menu-title {
-    font-size: var(--font-size-xs);
+  .mega-menu-column {
     margin-bottom: var(--space-2);
   }
 
+  .mega-menu-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--clr-text-muted);
+    margin-bottom: var(--space-1);
+    padding-left: var(--space-2);
+  }
+
+  .mega-menu-list {
+    gap: 0;
+  }
+
   .mega-menu-link {
-    padding: var(--space-2) 0;
+    padding: var(--space-2);
+    border-radius: var(--radius-sm);
+  }
+
+  .mega-menu-link-label {
+    font-size: 14px;
+  }
+
+  .mega-menu-link-desc {
+    display: none;
   }
 
   .nav-cta-mobile {
