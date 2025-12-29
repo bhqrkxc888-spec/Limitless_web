@@ -131,6 +131,21 @@ export function getCategoryHero(slug, fallback = PLACEHOLDER_IMAGE) {
 }
 
 // ============================================================================
+// CRUISE TYPE ASSETS
+// Automatically uses images uploaded to: WEB_categories/{slug}/card.webp
+// ============================================================================
+
+export function getCruiseTypeCard(slug, fallback = PLACEHOLDER_IMAGE) {
+  if (!slug) return fallback;
+  return getCategoryImageUrl(slug, 'card');
+}
+
+export function getCruiseTypeHero(slug, fallback = PLACEHOLDER_IMAGE) {
+  if (!slug) return fallback;
+  return getCategoryImageUrl(slug, 'hero');
+}
+
+// ============================================================================
 // BUCKET LIST ASSETS
 // Automatically uses images uploaded to: WEB_categories/bucket-list/{slug}/{type}.webp
 // ============================================================================

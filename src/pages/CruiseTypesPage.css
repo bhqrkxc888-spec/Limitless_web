@@ -95,21 +95,42 @@
    ======================================== */
 
 .cruise-type-card {
-  display: grid;
-  grid-template-columns: 80px 1fr;
+  display: flex;
+  flex-direction: column;
   gap: var(--space-6);
-  padding: var(--space-8);
+  padding: 0;
   background: var(--clr-bg);
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-lg);
   transition: all var(--transition-base);
+  overflow: hidden;
 }
 
 .cruise-type-card:hover {
   border-color: var(--clr-accent);
   box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
 }
 
+.cruise-type-image {
+  width: 100%;
+  aspect-ratio: 3/2;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.cruise-type-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.cruise-type-card:hover .cruise-type-image img {
+  transform: scale(1.05);
+}
+
+/* Legacy icon styles - keep for backward compatibility if needed */
 .cruise-type-icon {
   width: 80px;
   height: 80px;
@@ -125,6 +146,10 @@
   width: 40px;
   height: 40px;
   color: var(--clr-accent);
+}
+
+.cruise-type-content {
+  padding: var(--space-6) var(--space-8) var(--space-8);
 }
 
 .cruise-type-content h3 {
@@ -323,9 +348,11 @@
 
 @media (max-width: 768px) {
   .cruise-type-card {
-    grid-template-columns: 1fr;
     gap: var(--space-4);
-    padding: var(--space-6);
+  }
+
+  .cruise-type-content {
+    padding: var(--space-4) var(--space-6) var(--space-6);
   }
 
   .cruise-type-icon {
@@ -378,10 +405,33 @@
   }
 }
 
+/* ========================================
+   BUTTON HOVER FIX
+   ======================================== */
+
+.cruise-type-card .btn-secondary {
+  background-color: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+}
+
+.cruise-type-card .btn-secondary:hover {
+  background-color: var(--clr-primary-dark);
+  color: var(--clr-text-on-primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.cruise-type-card .btn-secondary:active {
+  transform: translateY(0);
+}
+
+/* ========================================
+   LARGE SCREENS
+   ======================================== */
+
 @media (min-width: 1024px) {
-  .cruise-type-card {
-    grid-template-columns: 100px 1fr;
-    padding: var(--space-10);
+  .cruise-type-content {
+    padding: var(--space-8) var(--space-10) var(--space-10);
   }
 
   .cruise-type-icon {

@@ -3,6 +3,8 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, SectionHeader } from '../components/ui';
+import OptimizedImage from '../components/OptimizedImage';
+import { getCruiseTypeCard } from '../utils/assetHelpers';
 import './CruiseTypesPage.css';
 
 // Icon components for each cruise type
@@ -88,8 +90,14 @@ function CruiseTypesPage() {
 
   const renderTypeCard = (cruiseType) => (
     <div key={cruiseType.id} className="cruise-type-card">
-      <div className="cruise-type-icon">
-        <CruiseTypeIcon type={cruiseType.icon} />
+      <div className="cruise-type-image">
+        <OptimizedImage
+          src={cruiseType.image || getCruiseTypeCard(cruiseType.slug)}
+          alt={`${cruiseType.name} cruise holidays`}
+          width={600}
+          height={400}
+          loading="lazy"
+        />
       </div>
       <div className="cruise-type-content">
         <h3>{cruiseType.name}</h3>
