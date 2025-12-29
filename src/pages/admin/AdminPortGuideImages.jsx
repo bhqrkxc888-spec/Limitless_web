@@ -5,7 +5,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, Download, Image as ImageIcon } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
 import ImageUpload from '../../components/admin/ImageUpload';
@@ -278,7 +278,7 @@ function AdminPortGuideImages() {
                     </div>
                     <p className="image-card-specs">{imageType.specs}</p>
                     
-                    {/* Show Unsplash placeholder info when no real image */}
+                    {/* Show simple "Image Coming Soon" when no real image */}
                     {!hasRealImage && (
                       <div className="placeholder-info">
                         <div className="placeholder-preview">
@@ -287,33 +287,9 @@ function AdminPortGuideImages() {
                             alt={`Placeholder for ${imageType.label}`}
                             loading="lazy"
                           />
-                          <span className="placeholder-badge">
-                            <ImageIcon size={12} />
-                            Unsplash Placeholder
-                          </span>
                         </div>
-                        <div className="placeholder-actions">
-                          <a 
-                            href={placeholderUrl} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="placeholder-link"
-                          >
-                            <ExternalLink size={14} />
-                            View on Unsplash
-                          </a>
-                          <a 
-                            href={placeholderUrl} 
-                            download={`${selectedPort.id}-${imageType.id}.jpg`}
-                            className="placeholder-link"
-                          >
-                            <Download size={14} />
-                            Download
-                          </a>
-                        </div>
-                        <p className="placeholder-note">
-                          If this image works, download and upload it. 
-                          Or search Unsplash for: <code>{selectedPort.name} {imageType.id.includes('beach') ? 'beach' : imageType.id.includes('attraction') ? 'landmark' : 'harbor'}</code>
+                        <p className="placeholder-status">
+                          📷 Image Coming Soon - Upload using form below
                         </p>
                       </div>
                     )}
@@ -512,43 +488,11 @@ function AdminPortGuideImages() {
             gap: 4px;
           }
 
-          .placeholder-actions {
-            display: flex;
-            gap: 0.75rem;
-            margin-bottom: 0.75rem;
-          }
-
-          .placeholder-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            padding: 6px 12px;
-            background: var(--admin-bg-secondary);
-            border: 1px solid var(--admin-border);
-            border-radius: 6px;
-            color: var(--admin-text);
-            text-decoration: none;
-            font-size: 12px;
-            transition: all 0.2s;
-          }
-
-          .placeholder-link:hover {
-            border-color: var(--admin-primary);
-            color: var(--admin-primary);
-          }
-
-          .placeholder-note {
-            margin: 0;
-            font-size: 11px;
+          .placeholder-status {
+            font-size: 13px;
             color: var(--admin-text-muted);
-            line-height: 1.5;
-          }
-
-          .placeholder-note code {
-            background: var(--admin-bg-secondary);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 10px;
+            text-align: center;
+            margin: 0;
           }
         `}</style>
       </div>

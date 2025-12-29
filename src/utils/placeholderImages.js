@@ -1,137 +1,90 @@
 /**
  * Smart Placeholder Image Generator
  * 
- * Generates relevant, high-quality placeholder images using Unsplash
- * when real images haven't been uploaded yet.
- * 
- * All images are royalty-free and can be used commercially.
+ * Generates simple "Image Coming Soon" placeholders with ship icon.
+ * Replaces Unsplash integration - user will add images systematically.
  */
 
-// Unsplash Source API (free, no API key needed)
-const UNSPLASH_BASE = 'https://source.unsplash.com';
+// Simple data URI placeholder with "Image Coming Soon" and ship icon
+const createPlaceholder = (width, height) => {
+  // SVG with ship icon and "Image Coming Soon" text
+  const svg = `
+    <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="#2c3e50"/>
+      <g transform="translate(${width/2}, ${height/2 - 30})">
+        <path d="M-30,0 L-20,-10 L20,-10 L30,0 L25,10 L-25,10 Z M-15,-10 L-15,-20 L-10,-25 L10,-25 L15,-20 L15,-10" 
+              fill="#d4af37" stroke="#d4af37" stroke-width="2"/>
+      </g>
+      <text x="50%" y="${height/2 + 40}" font-family="system-ui, -apple-system, sans-serif" 
+            font-size="20" font-weight="600" fill="#d4af37" text-anchor="middle">
+        Image Coming Soon
+      </text>
+      <text x="50%" y="${height/2 + 65}" font-family="system-ui, -apple-system, sans-serif" 
+            font-size="14" fill="#95a5a6" text-anchor="middle">
+        High-quality images will be added shortly
+      </text>
+    </svg>
+  `;
+  
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+};
 
 /**
- * Get a relevant placeholder image for a port guide
- * @param {string} portSlug - e.g., "barcelona", "santorini"
- * @param {string} imageType - "hero", "beach", "attraction-1", etc.
- * @param {string} portName - Full port name for better search
- * @returns {string} Unsplash image URL
+ * Get a placeholder for any image type
+ * @param {string} imageType - "hero", "card", "beach", "attraction-1", etc.
+ * @returns {string} Data URI with SVG placeholder
  */
-export function getPortPlaceholderImage(portSlug, imageType, portName = '') {
+export function getPlaceholder(imageType) {
   // Size based on image type
   const sizes = {
-    hero: '1600x900',
-    card: '800x600',
-    beach: '800x600',
-    'attraction-1': '600x400',
-    'attraction-2': '600x400',
-    'attraction-3': '600x400',
-    'attraction-4': '600x400',
-    'attraction-5': '600x400',
-    'attraction-6': '600x400',
+    hero: [1600, 900],
+    card: [800, 600],
+    beach: [800, 600],
+    'attraction-1': [600, 400],
+    'attraction-2': [600, 400],
+    'attraction-3': [600, 400],
+    'attraction-4': [600, 400],
+    'attraction-5': [600, 400],
+    'attraction-6': [600, 400],
   };
   
-  const size = sizes[imageType] || '800x600';
-  
-  // Build search query based on image type
-  let query = '';
-  
-  if (imageType === 'hero') {
-    // Hero images: port/city skyline or harbor
-    query = `${portName || portSlug},harbor,cruise,coast`;
-  } else if (imageType === 'beach') {
-    // Beach images
-    query = `${portName || portSlug},beach,coast,mediterranean`;
-  } else if (imageType.startsWith('attraction')) {
-    // Attraction images: landmarks, sights
-    query = `${portName || portSlug},landmark,architecture,tourism`;
-  } else {
-    // Default
-    query = `${portName || portSlug},travel`;
-  }
-  
-  // Encode and build URL
-  const encodedQuery = encodeURIComponent(query);
-  
-  // Use featured endpoint for consistent, high-quality images
-  // Add port slug as seed for consistent images per port
-  return `${UNSPLASH_BASE}/featured/${size}/?${encodedQuery}&sig=${portSlug}-${imageType}`;
+  const [width, height] = sizes[imageType] || [800, 600];
+  return createPlaceholder(width, height);
 }
 
 /**
- * Get a relevant placeholder for destinations
- * @param {string} destinationSlug - e.g., "mediterranean", "caribbean"
- * @param {string} imageType - "hero", "card", etc.
- * @param {string} destinationName - Full destination name
- * @returns {string} Unsplash image URL
+ * Get a placeholder for port guide images
  */
-export function getDestinationPlaceholderImage(destinationSlug, imageType, destinationName = '') {
-  const size = imageType === 'hero' ? '1600x900' : '800x600';
-  const name = destinationName || destinationSlug;
-  
-  // Destination-specific keywords
-  const query = `${name},cruise,travel,ocean,vacation`;
-  const encodedQuery = encodeURIComponent(query);
-  
-  return `${UNSPLASH_BASE}/featured/${size}/?${encodedQuery}&sig=${destinationSlug}-${imageType}`;
+export function getPortPlaceholderImage(portSlug, imageType) {
+  return getPlaceholder(imageType);
 }
 
 /**
- * Get a relevant placeholder for cruise lines
- * @param {string} cruiseLineSlug - e.g., "norwegian", "celebrity"
- * @param {string} imageType - "hero", "logo", "ship", etc.
- * @param {string} cruiseLineName - Full cruise line name
- * @returns {string} Unsplash image URL
+ * Get a placeholder for destinations
  */
-export function getCruiseLinePlaceholderImage(cruiseLineSlug, imageType, cruiseLineName = '') {
-  const size = imageType === 'hero' ? '1600x900' : imageType === 'logo' ? '400x400' : '800x600';
-  const name = cruiseLineName || cruiseLineSlug;
-  
-  let query = '';
-  if (imageType === 'hero' || imageType === 'ship') {
-    query = `${name},cruise,ship,ocean,luxury`;
-  } else if (imageType === 'logo') {
-    query = `cruise,ship,logo,maritime`;
-  } else {
-    query = `${name},cruise,travel`;
-  }
-  
-  const encodedQuery = encodeURIComponent(query);
-  return `${UNSPLASH_BASE}/featured/${size}/?${encodedQuery}&sig=${cruiseLineSlug}-${imageType}`;
+export function getDestinationPlaceholderImage(destinationSlug, imageType) {
+  return getPlaceholder(imageType);
 }
 
 /**
- * Get a relevant placeholder for bucket list experiences
- * @param {string} experienceId - e.g., "northern-lights"
- * @param {string} imageType - "hero", "card", etc.
- * @param {string} experienceName - Full experience name
- * @returns {string} Unsplash image URL
+ * Get a placeholder for cruise lines
  */
-export function getBucketListPlaceholderImage(experienceId, imageType, experienceName = '') {
-  const size = imageType === 'hero' ? '1600x900' : '800x600';
-  const name = experienceName || experienceId.replace(/-/g, ' ');
-  
-  const query = `${name},travel,adventure,bucket list`;
-  const encodedQuery = encodeURIComponent(query);
-  
-  return `${UNSPLASH_BASE}/featured/${size}/?${encodedQuery}&sig=${experienceId}-${imageType}`;
+export function getCruiseLinePlaceholderImage(cruiseLineSlug, imageType) {
+  return getPlaceholder(imageType);
 }
 
 /**
- * Get a relevant placeholder for categories
- * @param {string} categorySlug - e.g., "river-cruises", "family-cruises"
- * @param {string} imageType - "hero", "card", etc.
- * @param {string} categoryName - Full category name
- * @returns {string} Unsplash image URL
+ * Get a placeholder for bucket list experiences
  */
-export function getCategoryPlaceholderImage(categorySlug, imageType, categoryName = '') {
-  const size = imageType === 'hero' ? '1600x900' : '800x600';
-  const name = categoryName || categorySlug.replace(/-/g, ' ');
-  
-  const query = `${name},cruise,travel,vacation`;
-  const encodedQuery = encodeURIComponent(query);
-  
-  return `${UNSPLASH_BASE}/featured/${size}/?${encodedQuery}&sig=${categorySlug}-${imageType}`;
+export function getBucketListPlaceholderImage(experienceId, imageType) {
+  return getPlaceholder(imageType);
+}
+
+/**
+ * Get a placeholder for categories
+ */
+export function getCategoryPlaceholderImage(categorySlug, imageType) {
+  return getPlaceholder(imageType);
 }
 
 /**
@@ -141,23 +94,21 @@ export function getCategoryPlaceholderImage(categorySlug, imageType, categoryNam
  */
 export function isPlaceholderImage(url) {
   if (!url) return true;
-  return url.includes('source.unsplash.com') || 
+  return url.startsWith('data:image/svg') || 
          url.includes('/images/placeholders/') ||
          url.includes('placeholder');
 }
 
 /**
- * Get keyword-based placeholder for any entity type
- * @param {string} keywords - Search keywords
- * @param {string} size - Image size "WIDTHxHEIGHT"
- * @returns {string} Unsplash URL
+ * Get keyword-based placeholder
  */
 export function getKeywordPlaceholder(keywords, size = '800x600') {
-  const encodedKeywords = encodeURIComponent(keywords);
-  return `${UNSPLASH_BASE}/featured/${size}/?${encodedKeywords}`;
+  const [width, height] = size.split('x').map(Number);
+  return createPlaceholder(width, height);
 }
 
 export default {
+  getPlaceholder,
   getPortPlaceholderImage,
   getDestinationPlaceholderImage,
   getCruiseLinePlaceholderImage,

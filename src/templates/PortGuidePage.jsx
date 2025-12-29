@@ -260,13 +260,12 @@ function PortGuidePage() {
               <h2>Things to See and Do</h2>
               <div className="attractions-grid">
                 {attractions.slice(0, 6).map((item, index) => {
-                  // Get pre-loaded attraction image and placeholder status
+                  // Get pre-loaded attraction image
                   const itemImage = attractionImages[index];
-                  const isPlaceholder = attractionPlaceholders[index];
                   
                   return (
                     <div key={index} className="attraction-card">
-                      <div className={`attraction-image ${isPlaceholder ? 'image-placeholder-wrapper' : ''}`}>
+                      <div className="attraction-image">
                         <OptimizedImage
                           src={itemImage}
                           alt={item.title}
@@ -274,7 +273,6 @@ function PortGuidePage() {
                           height={280}
                           sizes="(max-width: 768px) 100vw, 33vw"
                         />
-                        {isPlaceholder && <span className="placeholder-indicator">Image Required</span>}
                       </div>
                       <div className="attraction-body">
                         <div className="attraction-header">
