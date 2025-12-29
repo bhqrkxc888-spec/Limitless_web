@@ -94,7 +94,7 @@ function PortsPage() {
             <h2>Plan Your Perfect Port Day</h2>
             <p className="lead">
               Our comprehensive port guides help you make the most of your time ashore. 
-              Discover things to do, shore excursions, restaurants, and insider tips 
+              Find things to do, shore excursions, restaurants, and insider tips 
               from experienced cruisers.
             </p>
           </div>

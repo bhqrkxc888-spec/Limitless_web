@@ -85,7 +85,7 @@ function PortRegionPage() {
       {/* SEO */}
       <SEO
         title={`${region.name} Cruise Port Guides | Things to Do & Tips`}
-        description={`Comprehensive guides to cruise ports in ${region.name}. Discover things to do, shore excursions, and insider tips for your cruise.`}
+        description={`Comprehensive guides to cruise ports in ${region.name}. Find things to do, shore excursions, and insider tips for your cruise.`}
         canonical={`https://www.limitlesscruises.com/ports/region/${region.slug}`}
         structuredData={structuredData}
       />

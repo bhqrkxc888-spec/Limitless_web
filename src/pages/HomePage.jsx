@@ -157,7 +157,7 @@ function HomePage() {
             <div className="hero-text-box">
               <div className="hero-text">
                 <p className="hero-eyebrow">Personal Cruise Consultant</p>
-                <h1>Your Bespoke Cruise Journey</h1>
+                <h1>Your Bespoke Cruise Holiday</h1>
                 <p className="hero-lead">
                   Experience the difference of truly personal service. From ocean voyages to river cruises, 
                   we craft bespoke cruise holidays tailored to your preferences.

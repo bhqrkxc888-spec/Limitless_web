@@ -249,7 +249,7 @@ function TestimonialsPage() {
             <h2>Recently Cruised With Us?</h2>
             <p>
               We'd love to hear about your experience! Share your feedback and help other travellers 
-              discover their perfect cruise holiday.
+              find their perfect cruise holiday.
             </p>
             <Button to="/contact" variant="secondary" size="lg">
               Share Your Experience

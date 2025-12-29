@@ -57,7 +57,7 @@ function TravelNewsTagPage() {
       {/* Hero Section */}
       <HeroSection
         title={`Articles Tagged: ${decodedTag}`}
-        subtitle={`Browse all travel news articles tagged with "${decodedTag}". Discover related content and stay informed.`}
+        subtitle={`Browse all travel news articles tagged with "${decodedTag}". Find related content and stay informed.`}
         size="lg"
         align="center"
         primaryCta={{ label: 'View All News', to: '/travel-news' }}
@@ -142,7 +142,7 @@ function TravelNewsTagPage() {
         <div className="container text-center">
           <h2>Explore More Travel News</h2>
           <p>
-            Discover more articles or get in touch for personalised travel advice.
+            Browse more articles or get in touch for personalised travel advice.
           </p>
           <div className="cta-buttons">
             <Button to="/travel-news" variant="primary" size="lg">

@@ -32,7 +32,7 @@ function DestinationsPage() {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'Cruise Destinations',
-    description: 'Discover extraordinary cruise destinations around the world with Limitless Cruises',
+    description: 'Explore remarkable cruise destinations around the world with Limitless Cruises',
     itemListElement: destinations.map((dest, index) => ({
       '@type': 'ListItem',
       position: index + 1,
@@ -79,8 +79,8 @@ function DestinationsPage() {
 
       {/* Hero Section */}
       <HeroSection
-        title="Discover Extraordinary Destinations"
-        subtitle="From sun-soaked Mediterranean ports to dramatic Norwegian fjords, discover the world's most captivating cruise destinations with expert consultant guidance."
+        title="Explore Remarkable Destinations"
+        subtitle="From sun-soaked Mediterranean ports to dramatic Norwegian fjords, explore the world's most captivating cruise destinations with expert consultant guidance."
         size="md"
         align="center"
       />
@@ -106,7 +106,7 @@ function DestinationsPage() {
             <SectionHeader
               eyebrow="Explore More"
               title="More Destinations"
-              subtitle="Discover additional destinations for your perfect cruise holiday."
+              subtitle="Browse additional destinations for your perfect cruise holiday."
             />
             {renderDestinationCards(otherDestinations)}
           </div>

@@ -75,7 +75,7 @@ function CruiseTypesPage() {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'Types of Cruise Holidays',
-    description: 'Discover different types of cruise experiences from Limitless Cruises',
+    description: 'Explore different types of cruise experiences from Limitless Cruises',
     itemListElement: cruiseTypes.map((type, index) => ({
       '@type': 'ListItem',
       position: index + 1,
@@ -285,7 +285,7 @@ function CruiseTypesPage() {
         <div className="container text-center">
           <h2>Ready to Find Your Perfect Cruise?</h2>
           <p>
-            Speak with your dedicated cruise consultant to discover which cruise type will give you the holiday of your dreams.
+            Speak with your dedicated cruise consultant to find which cruise type will give you the holiday of your dreams.
           </p>
           <div className="cta-buttons">
             <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">

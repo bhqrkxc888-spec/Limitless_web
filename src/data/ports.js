@@ -897,7 +897,7 @@ export const ports = [
     
     transportConnections: {
       airport: {
-        name: 'Málaga–Costa del Sol Airport (AGP)',
+        name: 'Málaga-Costa del Sol Airport (AGP)',
         distance: 'Around 8 to 12 kilometres south-west of the city, typically 15 to 20 minutes by road in normal traffic',
         options: 'Taxi: Direct road transfer between port and airport usually takes 15 to 20 minutes. Train: Cercanías line C1 runs between the airport and Málaga María Zambrano station; from there it is about a 15-minute walk or a 5-minute taxi ride to the cruise area, giving a total journey of roughly 30 to 40 minutes. Bus: Airport buses also run into the city centre, from where you can walk or take a short taxi to the port.',
       },
@@ -1001,7 +1001,7 @@ export const ports = [
       bestTimeToVisit: 'Late spring and early autumn provide the best mix of warm weather, sunshine and manageable crowds for sightseeing and beach time',
       cruiseTerminals: ['Terminal A', 'Terminal B', 'Palm Grove Terminal (Palmeral)'],
       parking: 'Not applicable',
-      nearbyAirport: 'Málaga–Costa del Sol Airport (AGP), approximately 8 to 12 kilometres from the cruise port',
+      nearbyAirport: 'Málaga-Costa del Sol Airport (AGP), approximately 8 to 12 kilometres from the cruise port',
       visaInfo: 'Spain is part of the Schengen Area; EU citizens and many other nationalities can enter visa-free for short stays, but travellers should check current Schengen and Spanish entry rules for their nationality and itinerary before sailing',
     },
     
@@ -1436,7 +1436,7 @@ export const ports = [
     
     transportConnections: {
       airport: {
-        name: 'Tenerife North – Ciudad de La Laguna Airport (TFN) and Tenerife South Airport (TFS)',
+        name: 'Tenerife North - Ciudad de La Laguna Airport (TFN) and Tenerife South Airport (TFS)',
         distance: 'Tenerife North is about 10 to 15 kilometres from Santa Cruz (around 15 to 20 minutes by road), while Tenerife South is roughly 60 kilometres away (around 45 to 60 minutes by road)',
         options: 'Taxis connect the port with both airports, typically taking around 15 to 20 minutes to Tenerife North and 45 to 60 minutes to Tenerife South depending on traffic. TITSA buses operate frequent services between Santa Cruz bus station (Intercambiador) and both airports; from the bus station it is a short taxi or 15 to 20 minute walk to the port area. There is no direct train service on Tenerife.',
       },
@@ -2149,12 +2149,12 @@ export const ports = [
     
     transportConnections: {
       airport: {
-        name: 'Vigo–Peinador Airport (VGO)',
+        name: 'Vigo-Peinador Airport (VGO)',
         distance: 'Approximately 10 to 12 kilometres east of the waterfront, usually 20 to 25 minutes by road depending on traffic',
         options: 'Taxi readily available at both the port and airport, with a road journey of roughly 20 to 25 minutes in normal conditions. Local buses connect the airport with central Vigo; with walk or short taxi from central stops to the port, the total journey can take around 35 to 50 minutes. There is no direct rail link from the airport; passengers would typically combine bus or taxi to reach the main railway station.',
       },
       trains: {
-        mainStation: 'Vigo–Guixar and Vigo–Urzáiz are the key stations, with Vigo–Urzáiz used for many high-speed services',
+        mainStation: 'Vigo-Guixar and Vigo-Urzáiz are the key stations, with Vigo-Urzáiz used for many high-speed services',
         description: 'Services link Vigo with Santiago de Compostela, A Coruña, Ourense and other Galician cities, plus longer-distance and international routes towards Madrid and northern Portugal (via nearby connections)',
         localHubs: 'Santiago de Compostela and A Coruña act as regional hubs, while connections in Portugal (such as Porto) are accessible via regional cross-border services',
       },
@@ -2314,7 +2314,7 @@ export const ports = [
     practicalInfo: {
       bestTimeToVisit: 'Late spring and early autumn give the most comfortable mix of mild temperatures, manageable crowds and reasonable chances of dry, clear days',
       cruiseTerminals: ['Estación Marítima de Vigo at Muelle de Transatlánticos (Transatlantic Quay)'],
-      nearbyAirport: 'Vigo–Peinador Airport (VGO), roughly 10 to 12 kilometres from the cruise port',
+      nearbyAirport: 'Vigo-Peinador Airport (VGO), roughly 10 to 12 kilometres from the cruise port',
       visaInfo: 'Spain is part of the Schengen Area; EU and many other nationals can enter visa-free for short tourist stays, but passengers should check current Schengen and national entry rules for their nationality and cruise itinerary before travelling',
     },
 
@@ -4619,7 +4619,7 @@ export const ports = [
     aboutPort: {
       overview: 'Stazione Marittima terminals (Molo Angioino, Beverello) dock mega-ships centrally with WiFi, ATMs, shops, and excursion desks amid ferry traffic to Capri and Ischia. Modern facilities handle 1.5 million passengers yearly; free shuttles if needed. Old town gates 10-minute walk; taxis chaotic but plentiful.',
       terminals: 'Key areas include Molo Angioino (main pier) and Beverello for ferries to islands. Amenities cover WiFi, ATMs, shops, cafés and post office.',
-      shuttleServices: 'No shuttles needed—exits lead straight to Via Nuova Marina and Piazza Municipio, with town just minutes away on foot.',
+      shuttleServices: 'No shuttles needed - exits lead straight to Via Nuova Marina and Piazza Municipio, with town just minutes away on foot.',
       walkability: 'Yes, 5 to 10 minutes walk to historic core. Exit for 10-minute stroll to Piazza Municipio and Royal Palace. Metro Line 1 (Toledo station) connects to Pompeii train; Circumvesuviana for Herculaneum and Vesuvius.',
     },
 
@@ -4650,7 +4650,7 @@ export const ports = [
       publicTransport: 'Metro, buses and Circumvesuviana trains serve Pompeii (30 minutes), Sorrento and Amalfi. Validate metro tickets before boarding.',
       taxis: 'Taxis rank at exits for fixed fares to key sites. Negotiate fares upfront; expect 10 to 15 euros to city centre.',
       walkingDistance: 'Historic centre, markets and Castel Nuovo are 10 to 15 minutes on foot. Pompeii needs 30-minute train.',
-      sightseeingBus: 'Hop-on hop-off buses start near terminal, looping Pompeii, Vesuvius and centre—useful for first-timers.',
+      sightseeingBus: 'Hop-on hop-off buses start near terminal, looping Pompeii, Vesuvius and centre - useful for first-timers.',
       accessibility: 'Old town alleys challenging for wheelchairs. Metro has lifts at major stations. Pompeii ruins have uneven surfaces.',
     },
     

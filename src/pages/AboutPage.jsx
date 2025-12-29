@@ -56,7 +56,7 @@ function AboutPage() {
             </div>
             <div className="service-card">
               <h3>No Fly & Fly Options</h3>
-              <p>Prefer sailing from the UK or want worldwide destinations. I match flights to cruise dates for seamless travel.</p>
+              <p>Prefer sailing from the UK or want worldwide destinations. I match flights to cruise dates for straightforward travel.</p>
             </div>
             <div className="service-card">
               <h3>Multi Cruise & Stay</h3>
@@ -193,7 +193,7 @@ function AboutPage() {
             <div className="testimonial-card">
               <div className="testimonial-content">
                 <p className="testimonial-quote">
-                  "The expertise made planning our world cruise absolutely seamless. We were found the perfect itinerary with every detail handled with care. Couldn't recommend more highly."
+                  "The expertise made planning our world cruise straightforward. We were found the perfect itinerary with every detail handled with care. Couldn't recommend more highly."
                 </p>
               </div>
               <div className="testimonial-author">

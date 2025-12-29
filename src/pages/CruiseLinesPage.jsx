@@ -61,7 +61,7 @@ function CruiseLinesPage() {
       {/* Hero Section */}
       <HeroSection
         title="Cruise Lines"
-        subtitle="We partner with the world's leading cruise lines to bring you exceptional value and unforgettable experiences."
+        subtitle="We partner with the world's leading cruise lines to bring you exceptional value and memorable experiences."
         size="sm"
         align="center"
       />
@@ -83,7 +83,7 @@ function CruiseLinesPage() {
         <section className="section section-alt">
           <div className="container">
             <SectionHeader
-              eyebrow="Elevated Experience"
+              eyebrow="Premium Experience"
               title="Premium & Contemporary Lines"
               subtitle="Modern luxury and innovative experiences for discerning travellers."
             />

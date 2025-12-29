@@ -191,7 +191,7 @@ function AdminOffersDebug() {
                         <td>
                           {offer.published_at
                             ? new Date(offer.published_at).toLocaleDateString()
-                            : '—'}
+                            : '-'}
                         </td>
                         <td>
                           {offer.expires_at ? (
@@ -200,7 +200,7 @@ function AdminOffersDebug() {
                               {isExpired && ' (expired)'}
                             </span>
                           ) : (
-                            '—'
+                            '-'
                           )}
                         </td>
                         <td>
@@ -243,9 +243,9 @@ function AdminOffersDebug() {
                       <td>
                         {offer.price_from
                           ? `£${offer.price_from.toLocaleString()}`
-                          : '—'}
+                          : '-'}
                       </td>
-                      <td>{offer.destination || '—'}</td>
+                      <td>{offer.destination || '-'}</td>
                     </tr>
                   ))}
                 </tbody>

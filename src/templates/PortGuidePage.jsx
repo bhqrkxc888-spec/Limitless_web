@@ -655,8 +655,8 @@ function PortGuidePage() {
         <div className="container">
           <p className="disclaimer-text">
             <strong>Disclaimer:</strong> This guide is compiled from publicly available information and our interpretation of that data. 
-            While we strive for accuracy, details such as opening times, prices, transport schedules, and availability may change. 
-            We strongly recommend verifying all information directly with official sources before travelling.
+            Port facilities, transport links, opening hours, and prices may change. Always verify current details with the cruise line, 
+            port authority, or official tourism websites before travel. Prices and availability are indicative only.
           </p>
           <p className="update-date">
             Guide last updated: {formatDate(port.lastUpdated || '2025-01-01')}

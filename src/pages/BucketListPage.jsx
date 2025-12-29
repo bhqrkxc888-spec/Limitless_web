@@ -98,7 +98,7 @@ function BucketListPage() {
       {/* Hero Section */}
       <HeroSection
         title="Extraordinary Cruise Experiences"
-        subtitle="Extraordinary voyages that make a lasting impact. From world cruises to polar expeditions, these bucket list journeys create memories that last forever."
+        subtitle="Remarkable voyages that make a lasting impact. From world cruises to polar expeditions, these bucket list experiences create memories that last."
         size="lg"
         align="center"
         primaryCta={{ label: 'Enquire Now', to: '/contact' }}
@@ -112,7 +112,7 @@ function BucketListPage() {
             <SectionHeader
               eyebrow="Featured"
               title="Dream Experiences"
-              subtitle="These extraordinary voyages represent the pinnacle of cruise travel. Each journey is carefully curated to deliver unforgettable moments."
+              subtitle="These remarkable voyages represent the pinnacle of cruise travel. Each experience is carefully selected to deliver memorable moments."
             />
             <div className="bucket-list-carousel-wrapper">
               {featured.length > itemsToShow && (
@@ -172,7 +172,7 @@ function BucketListPage() {
           <SectionHeader
             eyebrow="Explore All"
             title="All Bucket List Experiences"
-            subtitle="Discover every extraordinary journey we offer. Each experience is designed to create lasting memories."
+            subtitle="Browse every remarkable experience we offer. Each cruise is selected to create lasting memories."
           />
           {renderExperienceCards(allExperiences)}
         </div>
@@ -181,7 +181,7 @@ function BucketListPage() {
       {/* CTA Section */}
       <section className="section section-dark">
         <div className="container text-center">
-          <h2>Ready to Start Your Journey?</h2>
+          <h2>Ready to Plan Your Experience?</h2>
           <p>
             Your expert cruise consultant is here to help you plan your bucket list adventure. 
             Get personalised advice and exclusive deals on these extraordinary voyages.

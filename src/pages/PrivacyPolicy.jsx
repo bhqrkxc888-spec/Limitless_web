@@ -83,12 +83,13 @@ const fallbackContent = `
 <h2>7. How long we keep your data (retention)</h2>
 <p>
   We keep personal data only as long as necessary for the purposes described above, including for legal, accounting, or reporting requirements.
-  Typical retention periods may include:
+  Typical retention periods include:
 </p>
 <ul>
-  <li><strong>Enquiries (not booked):</strong> retained for a reasonable period to manage follow-ups and business records.</li>
-  <li><strong>Booked travel / transaction records:</strong> retained for longer periods to meet legal/regulatory requirements and handle disputes.</li>
-  <li><strong>Uploaded documents:</strong> retained only as long as needed for the purpose provided (e.g., price match assessment) and then removed where appropriate.</li>
+  <li><strong>Enquiries (not booked):</strong> 2 years from last contact</li>
+  <li><strong>Booked travel / transaction records:</strong> 7 years (legal and accounting requirements)</li>
+  <li><strong>Marketing consent:</strong> Until withdrawn or 2 years of inactivity</li>
+  <li><strong>Uploaded documents:</strong> 90 days after purpose completion (e.g., price match assessment)</li>
 </ul>
 <p>
   If you want more detail on retention for a specific data type, contact us.
