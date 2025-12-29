@@ -1355,3 +1355,41 @@
     font-size: var(--font-size-2xl);
   }
 }
+
+/* ========================================
+   PLACEHOLDER IMAGE INDICATOR
+   ======================================== */
+
+.image-placeholder-wrapper {
+  position: relative;
+  display: block;
+}
+
+.placeholder-indicator {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.placeholder-indicator::before {
+  content: '📷';
+  margin-right: 4px;
+}
+
+/* Hide indicator on small attraction cards */
+.attraction-card .placeholder-indicator {
+  font-size: 8px;
+  padding: 3px 6px;
+  bottom: 4px;
+  right: 4px;
+}

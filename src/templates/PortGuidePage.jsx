@@ -25,19 +25,24 @@ function PortGuidePage() {
   const { prev: prevPort, next: nextPort } = getAdjacentPorts(slug);
   const [weatherIndex, setWeatherIndex] = useState(0);
 
-  // Load images from database
-  const { imageUrl: heroImage } = usePortGuideImage(slug, 'hero');
-  const { imageUrl: beachImage } = usePortGuideImage(slug, 'beach');
+  // Get port data first for image context
+  const portName = port?.name || '';
+  const portCountry = port?.country || '';
+  
+  // Load images from database with smart placeholders
+  const { imageUrl: heroImage, isPlaceholder: heroIsPlaceholder } = usePortGuideImage(slug, 'hero', portName, portCountry);
+  const { imageUrl: beachImage, isPlaceholder: beachIsPlaceholder } = usePortGuideImage(slug, 'beach', portName, portCountry);
   
   // Load attraction images (up to 6)
-  const { imageUrl: attraction1Image } = usePortGuideImage(slug, 'attraction-1');
-  const { imageUrl: attraction2Image } = usePortGuideImage(slug, 'attraction-2');
-  const { imageUrl: attraction3Image } = usePortGuideImage(slug, 'attraction-3');
-  const { imageUrl: attraction4Image } = usePortGuideImage(slug, 'attraction-4');
-  const { imageUrl: attraction5Image } = usePortGuideImage(slug, 'attraction-5');
-  const { imageUrl: attraction6Image } = usePortGuideImage(slug, 'attraction-6');
+  const { imageUrl: attraction1Image, isPlaceholder: attr1Placeholder } = usePortGuideImage(slug, 'attraction-1', portName, portCountry);
+  const { imageUrl: attraction2Image, isPlaceholder: attr2Placeholder } = usePortGuideImage(slug, 'attraction-2', portName, portCountry);
+  const { imageUrl: attraction3Image, isPlaceholder: attr3Placeholder } = usePortGuideImage(slug, 'attraction-3', portName, portCountry);
+  const { imageUrl: attraction4Image, isPlaceholder: attr4Placeholder } = usePortGuideImage(slug, 'attraction-4', portName, portCountry);
+  const { imageUrl: attraction5Image, isPlaceholder: attr5Placeholder } = usePortGuideImage(slug, 'attraction-5', portName, portCountry);
+  const { imageUrl: attraction6Image, isPlaceholder: attr6Placeholder } = usePortGuideImage(slug, 'attraction-6', portName, portCountry);
   
   const attractionImages = [attraction1Image, attraction2Image, attraction3Image, attraction4Image, attraction5Image, attraction6Image];
+  const attractionPlaceholders = [attr1Placeholder, attr2Placeholder, attr3Placeholder, attr4Placeholder, attr5Placeholder, attr6Placeholder];
 
   // Combine attractions - ONLY use mustSeeSights if available, otherwise thingsToDo
   // This prevents duplication
@@ -255,12 +260,13 @@ function PortGuidePage() {
               <h2>Things to See and Do</h2>
               <div className="attractions-grid">
                 {attractions.slice(0, 6).map((item, index) => {
-                  // Get pre-loaded attraction image
+                  // Get pre-loaded attraction image and placeholder status
                   const itemImage = attractionImages[index];
+                  const isPlaceholder = attractionPlaceholders[index];
                   
                   return (
                     <div key={index} className="attraction-card">
-                      <div className="attraction-image">
+                      <div className={`attraction-image ${isPlaceholder ? 'image-placeholder-wrapper' : ''}`}>
                         <OptimizedImage
                           src={itemImage}
                           alt={item.title}
@@ -268,6 +274,7 @@ function PortGuidePage() {
                           height={280}
                           sizes="(max-width: 768px) 100vw, 33vw"
                         />
+                        {isPlaceholder && <span className="placeholder-indicator">Image Required</span>}
                       </div>
                       <div className="attraction-body">
                         <div className="attraction-header">

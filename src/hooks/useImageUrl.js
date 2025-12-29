@@ -126,32 +126,48 @@ export function useCruiseLineImage(slug, type = 'logo') {
  * Hook to get port guide image URL
  * Note: port-guide uses 'slug' as entityId in database (e.g., 'barcelona')
  * Images are uploaded as: WEB_categories/{slug}/{imageType}.webp
+ * 
+ * Falls back to smart Unsplash placeholders when no image is uploaded
  */
-export function usePortGuideImage(slug, type = 'hero') {
+export function usePortGuideImage(slug, type = 'hero', portName = '', country = '') {
   const [imageUrl, setImageUrl] = useState(PLACEHOLDER_IMAGE);
   const [loading, setLoading] = useState(true);
+  const [isPlaceholder, setIsPlaceholder] = useState(true);
 
   useEffect(() => {
     if (!slug) {
       setImageUrl(PLACEHOLDER_IMAGE);
       setLoading(false);
+      setIsPlaceholder(true);
       return;
     }
 
-    // Fallback to placeholder
-    setImageUrl(PLACEHOLDER_IMAGE);
-    
-    getImageUrlFromDb('port-guide', slug, type, PLACEHOLDER_IMAGE)
-      .then(url => {
-        setImageUrl(url);
-        setLoading(false);
-      })
-      .catch(() => {
-        setImageUrl(PLACEHOLDER_IMAGE);
-        setLoading(false);
-      });
-  }, [slug, type]);
+    // Import the placeholder generator
+    import('../utils/placeholderImages.js').then(({ getPortPlaceholderImage }) => {
+      // Generate smart placeholder based on port context
+      const smartPlaceholder = getPortPlaceholderImage(slug, type, portName, country);
+      setImageUrl(smartPlaceholder);
+      
+      // Try to get real image from database
+      getImageUrlFromDb('port-guide', slug, type, null)
+        .then(url => {
+          if (url && !url.includes('placeholder')) {
+            setImageUrl(url);
+            setIsPlaceholder(false);
+          } else {
+            // Keep the smart placeholder
+            setIsPlaceholder(true);
+          }
+          setLoading(false);
+        })
+        .catch(() => {
+          // Keep the smart placeholder
+          setIsPlaceholder(true);
+          setLoading(false);
+        });
+    });
+  }, [slug, type, portName, country]);
 
-  return { imageUrl, loading };
+  return { imageUrl, loading, isPlaceholder };
 }
 
