@@ -102,7 +102,6 @@ export const ports = [
         description: 'Direct trains to London Waterloo (60 minutes), Winchester (15 minutes), Portsmouth, and UK network. 20-minute walk from terminals or short taxi ride.',
         localHubs: 'Southampton Central is the main hub for all rail connections.',
       },
-      cruiseLines: ['P&O Cruises', 'Cunard', 'Princess Cruises', 'MSC Cruises', 'Royal Caribbean', 'Celebrity Cruises'],
     },
     
     // Must-see sights (the headline attractions)
@@ -374,7 +373,6 @@ export const ports = [
         description: 'High-speed trains to London St Pancras in 60 minutes. Regular services to Canterbury and Kent network.',
         localHubs: 'Dover Priory is 20-minute walk or short taxi from terminals.',
       },
-      cruiseLines: ['P&O Cruises', 'Cunard', 'Princess Cruises', 'Saga Cruises', 'Fred. Olsen Cruise Lines'],
     },
     
     gettingAround: {
@@ -634,7 +632,6 @@ export const ports = [
         description: 'Barcelona Sants is the main long-distance station for high-speed trains to Madrid, Paris and beyond. From Sants it is about 15 to 25 minutes by taxi to the cruise terminals.',
         localHubs: 'For local trains, Sants and Passeig de Gracia are the main city hubs, and both connect easily by metro and taxi to the port area.',
       },
-      cruiseLines: 'Barcelona is a major homeport for Western Mediterranean itineraries, regularly handling ships from MSC, Costa, Royal Caribbean, Norwegian, Celebrity, Carnival, Princess and others.',
     },
 
     gettingAround: {
@@ -909,7 +906,6 @@ export const ports = [
         description: 'High-speed AVE and long-distance services connect Málaga with Madrid and other major Spanish cities, while regional trains link it with Córdoba, Seville and the wider Andalusian network',
         localHubs: 'María Zambrano serves as the primary hub for both high-speed and local Cercanías services along the coast and inland, making onward travel straightforward for pre- and post-cruise stays',
       },
-      cruiseLines: 'Málaga is featured on many Western Mediterranean, repositioning and Canary Islands itineraries, and is also used as a departure port. Cruise lines calling regularly include MSC Cruises, Costa Cruises, Royal Caribbean, Norwegian Cruise Line, Carnival, P&O Cruises, Celebrity Cruises and various premium and luxury operators',
     },
 
     gettingAround: {
@@ -1140,7 +1136,6 @@ export const ports = [
         description: 'To Porto, Algarve; local to Sintra/Cascais',
         localHubs: 'Adjacent to main terminal',
       },
-      cruiseLines: ['Royal Caribbean', 'MSC', 'Norwegian', 'Celebrity', 'Cunard', 'P&O'],
     },
     
     gettingAround: {
@@ -1450,7 +1445,6 @@ export const ports = [
         description: 'There is no conventional railway network on Tenerife; public transport relies on buses and tram. The tram links Santa Cruz with La Laguna, and buses connect to most major resorts and towns around the island.',
         localHubs: 'The modern tram (Tranvía de Tenerife) links Santa Cruz with La Laguna inland, reachable after a short walk or bus ride from the centre.',
       },
-      cruiseLines: ['AIDA', 'Cunard', 'Costa', 'Holland America', 'P&O Cruises (UK)', 'Princess', 'Seabourn'],
     },
 
     gettingAround: {
@@ -1654,7 +1648,6 @@ export const ports = [
         description: 'Frecciarossa to Rome Termini (40 to 60 minutes), Naples/Florence. Shuttle trains from outer berths.',
         localHubs: 'Rome Termini as primary interchange for high-speed and metro links',
       },
-      cruiseLines: 'MSC, Royal Caribbean, Norwegian, Celebrity, Costa dominate Rome itineraries',
     },
     
     mustSeeSights: [
@@ -1898,7 +1891,6 @@ export const ports = [
         description: 'TGV to Paris (3 hours), Aix (30 minutes)',
         localHubs: 'St-Charles for regional TER services and metro connections',
       },
-      cruiseLines: ['MSC', 'Royal Caribbean', 'Norwegian', 'Costa', 'Celebrity'],
     },
 
     gettingAround: {
@@ -2166,7 +2158,6 @@ export const ports = [
         description: 'Services link Vigo with Santiago de Compostela, A Coruña, Ourense and other Galician cities, plus longer-distance and international routes towards Madrid and northern Portugal (via nearby connections)',
         localHubs: 'Santiago de Compostela and A Coruña act as regional hubs, while connections in Portugal (such as Porto) are accessible via regional cross-border services',
       },
-      cruiseLines: 'Major cruise lines that regularly include Vigo as a port of call on Atlantic, Iberian Peninsula, Canary Islands and repositioning itineraries include Royal Caribbean, MSC Cruises, Norwegian Cruise Line, P&O Cruises, Cunard, Celebrity Cruises and others, particularly on sailings in and out of the UK',
     },
     
     gettingAround: {
@@ -2400,7 +2391,6 @@ export const ports = [
         description: 'High-speed to Lisbon; Douro Valley line.',
         localHubs: 'Metro from Matosinhos.',
       },
-      cruiseLines: ['MSC Cruises', 'Royal Caribbean', 'Celebrity Cruises', 'Azamara', 'Ponant'],
     },
     
     gettingAround: {
@@ -2693,7 +2683,6 @@ export const ports = [
         description: 'Services run to Jerez de la Frontera, El Puerto de Santa María, San Fernando and onwards to Seville and other Andalusian destinations, with some longer-distance connections into the Spanish rail network',
         localHubs: 'Seville functions as the principal hub for high-speed AVE and long-distance trains, while Jerez operates as a regional node for services in western Andalusia',
       },
-      cruiseLines: ['P&O Cruises', 'Cunard', 'Royal Caribbean', 'Norwegian Cruise Line', 'MSC Cruises', 'Costa Cruises', 'TUI Cruises'],
     },
     
     gettingAround: {
@@ -2939,7 +2928,6 @@ export const ports = [
         description: 'Regional services to Santiago (40 minutes) and Ferrol. A Coruña Station is a 15-minute walk from the port.',
         localHubs: 'A Coruña Station connects to Santiago de Compostela for pilgrimage routes and regional travel.',
       },
-      cruiseLines: ['P&O Cruises', 'MSC Cruises', 'AIDA Cruises', 'Fred. Olsen Cruise Lines'],
     },
     
     gettingAround: {
@@ -3253,7 +3241,6 @@ export const ports = [
         description: 'Euskotren to coast; metro integrated. Near shuttle drop. Regional services to Basque coast and San Sebastián; high-speed trains to Madrid.',
         localHubs: 'Abando serves as the hub for RENFE and FEVE lines.',
       },
-      cruiseLines: ['MSC Cruises', 'Royal Caribbean', 'Cunard', 'Disney Cruise Line', 'Virgin Voyages'],
     },
     
     gettingAround: {
@@ -3559,7 +3546,6 @@ export const ports = [
         description: 'None; Spanish Algeciras station 30 minutes cross-border bus.',
         localHubs: 'N/A',
       },
-      cruiseLines: ['Royal Caribbean', 'MSC', 'P&O', 'Celebrity', 'Norwegian'],
     },
     
     gettingAround: {
@@ -3814,7 +3800,6 @@ export const ports = [
         description: 'To Madrid, Valencia; local trams to beaches.',
         localHubs: '20-minute walk or short bus from port.',
       },
-      cruiseLines: 'MSC, Royal Caribbean, Norwegian, Costa, P&O regular callers.',
     },
     
     gettingAround: {
@@ -4098,7 +4083,6 @@ export const ports = [
         description: 'None (island buses and tram to Monte). Bus network covers levadas and east coast.',
         localHubs: 'Bus station 10-minute walk from port.',
       },
-      cruiseLines: ['P&O', 'Royal Caribbean', 'MSC', 'Celebrity', 'NCL'],
     },
     
     gettingAround: {
@@ -4380,7 +4364,6 @@ export const ports = [
         description: 'There is no train network on Gran Canaria; buses cover intercity and resort routes. The main hubs in Las Palmas are San Telmo bus station (for island-wide routes) and Santa Catalina (for local lines), both reachable by short bus or taxi from the pier.',
         localHubs: 'N/A',
       },
-      cruiseLines: 'Major cruise lines that regularly call include P&O Cruises, Cunard, Royal Caribbean, MSC Cruises and Norwegian Cruise Line, among others, on Canary Islands and Atlantic itineraries.',
     },
 
     gettingAround: {
@@ -4660,7 +4643,6 @@ export const ports = [
         description: 'Circumvesuviana to Pompeii (30 minutes); high-speed to Rome. Metro from port.',
         localHubs: 'Napoli Centrale for national links; Garibaldi for Circumvesuviana regional trains',
       },
-      cruiseLines: 'MSC, Royal Caribbean, Norwegian, Costa, Celebrity',
     },
 
     gettingAround: {
@@ -4916,7 +4898,6 @@ export const ports = [
         description: 'High-speed trains to Milan, Florence and Rome. Vaporetto connections from station to port area.',
         localHubs: 'Santa Lucia for lagoon access',
       },
-      cruiseLines: ['MSC Cruises', 'Royal Caribbean', 'Norwegian Cruise Line', 'Costa Cruises', 'Celebrity Cruises'],
     },
 
     gettingAround: {
@@ -5170,7 +5151,6 @@ export const ports = [
         description: 'Line 1 to beaches/Alcúdia. Shuttle drop-off at station.',
         localHubs: 'Plaça d\'Espanya for island connections.',
       },
-      cruiseLines: 'MSC, Costa, Royal Caribbean, Norwegian, AIDA frequent callers.',
     },
 
     gettingAround: {
@@ -5483,7 +5463,6 @@ export const ports = [
         description: 'To Oslo (7 hours), Flåm (Norway\'s steepest railway). 15-minute walk from cruise terminals.',
         localHubs: 'Bergen Station is the main hub for all rail connections including scenic Flåm Railway.',
       },
-      cruiseLines: ['Hurtigruten', 'MSC Cruises', 'Royal Caribbean', 'Norwegian Cruise Line', 'Cunard'],
     },
     
     mustSeeSights: [
@@ -5736,7 +5715,6 @@ export const ports = [
         description: 'No trains. Hurtigruten ferry connects to Ålesund and Hellesylt. Stranda ferry takes around 1 hour.',
         localHubs: 'Hurtigruten ferry provides connections along the coast.',
       },
-      cruiseLines: ['Norwegian Coastal Express', 'MSC Cruises', 'Royal Caribbean', 'Cunard', 'Hurtigruten'],
     },
     
     mustSeeSights: [
@@ -5989,7 +5967,6 @@ export const ports = [
         description: 'Flåm Railway to Myrdal (1 hour, connects to Bergen-Oslo line). On-site station steps from cruise pier.',
         localHubs: 'Flåm Railway Station is the main hub, connecting to Myrdal and the Bergen-Oslo railway line.',
       },
-      cruiseLines: ['MSC Cruises', 'Royal Caribbean', 'Norwegian Cruise Line', 'Cunard', 'Hurtigruten'],
     },
     
     mustSeeSights: [
@@ -6242,7 +6219,6 @@ export const ports = [
         description: 'To Oslo (7 hours). 15-minute walk from cruise terminal.',
         localHubs: 'Stavanger Station is the main rail hub for connections to Oslo and other Norwegian cities.',
       },
-      cruiseLines: ['MSC Cruises', 'Royal Caribbean', 'P&O Cruises', 'Cunard', 'Hurtigruten'],
     },
     
     mustSeeSights: [
@@ -6495,7 +6471,6 @@ export const ports = [
         description: 'No trains. Hurtigruten coastal ferry connects to other Norwegian ports along the coast.',
         localHubs: 'Hurtigruten coastal ferry provides connections to other Arctic and Norwegian coastal destinations.',
       },
-      cruiseLines: ['Hurtigruten', 'MSC Cruises', 'Royal Caribbean', 'Cunard'],
     },
     
     mustSeeSights: [
@@ -6748,7 +6723,6 @@ export const ports = [
         description: 'No trains. Hurtigruten ferries provide coastal connections along the Lofoten Islands.',
         localHubs: 'Hurtigruten ferry connections available for coastal travel.',
       },
-      cruiseLines: ['MSC Cruises', 'Holland America Line', 'Fred. Olsen Cruise Lines', 'Hurtigruten'],
     },
     
     mustSeeSights: [
@@ -7026,7 +7000,6 @@ export const ports = [
         description: 'No trains. Hurtigruten coastal ferries provide connections along the Norwegian coast.',
         localHubs: 'Hurtigruten ferry connections available for coastal travel.',
       },
-      cruiseLines: ['MSC Cruises', 'Holland America Line', 'Cunard', 'Hurtigruten'],
     },
     
     mustSeeSights: [
@@ -7279,7 +7252,6 @@ export const ports = [
         description: 'No train connections. Buses available to Bergen and Oslo.',
         localHubs: 'Bus connections available to Bergen and Oslo from Ålesund bus station.',
       },
-      cruiseLines: ['MSC Cruises', 'Hurtigruten', 'Royal Caribbean'],
     },
     
     mustSeeSights: [
@@ -7522,7 +7494,6 @@ export const ports = [
         description: 'No train connections. Hurtigruten ferries provide coastal transport connections.',
         localHubs: 'Hurtigruten ferries stop daily at Hammerfest, providing connections along the Norwegian coast.',
       },
-      cruiseLines: ['Hurtigruten', 'MSC Cruises', 'Cunard'],
     },
     
     mustSeeSights: [
@@ -7774,7 +7745,6 @@ export const ports = [
         description: 'No trains. Hurtigruten ferries connect to Lofoten and coastal destinations.',
         localHubs: 'Hurtigruten ferry provides connections to Lofoten Islands and other coastal ports.',
       },
-      cruiseLines: ['Hurtigruten', 'MSC Cruises', 'Cunard'],
     },
     
     mustSeeSights: [

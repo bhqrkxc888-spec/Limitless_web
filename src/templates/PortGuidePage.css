@@ -1149,19 +1149,6 @@
   margin-bottom: 0;
 }
 
-.cruise-lines-note {
-  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
-  border-radius: var(--radius-lg);
-  padding: var(--space-5);
-  color: white;
-}
-
-.cruise-lines-note p {
-  font-size: var(--font-size-sm);
-  line-height: 1.6;
-  margin: 0;
-}
-
 /* ========================================
    FAQ
    ======================================== */

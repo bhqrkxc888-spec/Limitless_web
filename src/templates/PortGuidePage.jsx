@@ -583,11 +583,6 @@ function PortGuidePage() {
                   </div>
                 )}
               </div>
-              {port.transportConnections.cruiseLines && (
-                <div className="cruise-lines-note">
-                  <p>{port.transportConnections.cruiseLines}</p>
-                </div>
-              )}
             </section>
           )}
 
