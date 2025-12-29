@@ -322,39 +322,56 @@
 
 .header-mobile-toggle {
   display: none;
-  background: none;
-  border: none;
-  padding: var(--space-2);
+  background: transparent;
+  border: 2px solid var(--clr-primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
   cursor: pointer;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-3);
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.header-mobile-toggle:hover {
+  background-color: var(--clr-primary);
+}
+
+.header-mobile-toggle:hover .hamburger span {
+  background-color: white;
+}
+
+.header-mobile-toggle:hover .menu-text {
+  color: white;
 }
 
 .hamburger {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  width: 24px;
+  width: 28px;
   flex-shrink: 0;
 }
 
 .hamburger span {
   display: block;
-  height: 2px;
+  height: 3px;
+  width: 100%;
   background-color: var(--clr-primary);
-  border-radius: 1px;
+  border-radius: 2px;
   transition: all var(--transition-fast);
 }
 
 .menu-text {
   font-family: var(--font-family);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
+  font-size: 14px;
+  font-weight: 700;
   color: var(--clr-primary);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   line-height: 1;
   white-space: nowrap;
+  transition: color var(--transition-fast);
 }
 
 .nav-cta-mobile {
@@ -376,11 +393,23 @@
   }
 
   .header-mobile-toggle {
-    display: flex; /* Changed from block to flex */
-    z-index: var(--z-fixed); /* Use token instead of 1001 */
-    min-width: 44px; /* WCAG minimum touch target */
-    min-height: 44px;
-    padding: var(--space-2);
+    display: flex;
+    z-index: var(--z-fixed);
+    min-width: auto;
+    min-height: 48px;
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .hamburger {
+    width: 26px;
+  }
+
+  .hamburger span {
+    height: 3px;
+  }
+
+  .menu-text {
+    font-size: 14px;
   }
 
   .header-nav {
@@ -471,6 +500,20 @@
 
   .header-main {
     padding: var(--space-3) 0;
+  }
+
+  .header-mobile-toggle {
+    min-height: 44px;
+    padding: var(--space-2) var(--space-3);
+    gap: var(--space-2);
+  }
+
+  .hamburger {
+    width: 24px;
+  }
+
+  .menu-text {
+    font-size: 13px;
   }
 
   .logo-icon {
