@@ -416,12 +416,14 @@
     width: 100%;
     padding: var(--space-3) 0;
     height: auto;
+    overflow: visible;
   }
 
   .nav-item {
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid var(--clr-border-light);
+    overflow: visible;
   }
 
   .nav-item:last-child {
@@ -430,6 +432,7 @@
 
   .nav-item.has-mega-menu {
     position: relative;
+    z-index: 10;
   }
 
   .nav-link {
@@ -484,6 +487,7 @@
     max-height: 600px;
     opacity: 1;
     padding: var(--space-3) var(--space-4);
+    z-index: 100;
   }
 
   .mega-menu-content {
