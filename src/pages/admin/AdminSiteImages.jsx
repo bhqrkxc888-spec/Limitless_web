@@ -122,6 +122,14 @@ function AdminSiteImages() {
           <div className="images-list">
             {SITE_IMAGES.map(imageSpec => {
               const existing = images[imageSpec.type];
+              // For optional images, don't show "missing" (red) - show neutral/info status
+              let status = 'missing';
+              if (existing) {
+                status = existing.seo_compliant ? 'pass' : 'warning';
+              } else if (!imageSpec.required) {
+                status = 'optional'; // Show neutral status for optional images not uploaded
+              }
+              
               return (
                 <div key={imageSpec.id} className="admin-card image-card">
                   <div className="image-card-header">
@@ -132,7 +140,7 @@ function AdminSiteImages() {
                       </span>
                     </div>
                     <StatusIndicator 
-                      status={existing ? (existing.seo_compliant ? 'pass' : 'warning') : 'missing'} 
+                      status={status} 
                       size="small"
                     />
                   </div>

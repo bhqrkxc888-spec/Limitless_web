@@ -34,6 +34,14 @@ function StatusIndicator({ status, warnings = [], showDetails = false, size = 'm
           label: status === 'missing' ? 'Missing' : 'Error',
           color: 'var(--color-error, #ef4444)'
         };
+      case 'optional':
+      case 'info':
+        return {
+          icon: HelpCircle,
+          className: 'status-optional',
+          label: 'Optional',
+          color: 'var(--color-gray-400, #6b7280)'
+        };
       default:
         return {
           icon: HelpCircle,

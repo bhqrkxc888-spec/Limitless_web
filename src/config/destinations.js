@@ -194,6 +194,20 @@ export const destinations = [
     name: 'Mexico',
     heroFilename: 'mexico-HERO.jpg',
     description: 'Mayan ruins, beaches, vibrant culture'
+  },
+  {
+    id: 31,
+    slug: 'scandinavia',
+    name: 'Scandinavia',
+    heroFilename: 'scandinavia-HERO.jpg',
+    description: 'Nordic capitals, fjords, northern lights'
+  },
+  {
+    id: 32,
+    slug: 'southeast-asia',
+    name: 'Southeast Asia',
+    heroFilename: 'southeast-asia-HERO.jpg',
+    description: 'Temples, beaches, exotic cultures'
   }
 ];
 

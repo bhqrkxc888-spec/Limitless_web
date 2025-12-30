@@ -8,9 +8,11 @@ import { getImageUrlFromDb } from '../utils/imageLoader';
 import { getDestinationImageUrl, getBucketListImageUrl, getCruiseLineImageUrl } from '../config/assetUrls';
 import { PLACEHOLDER_IMAGE } from '../config/assetUrls';
 import { getDestinationForBucketList } from '../config/bucketListDestinationMapping';
+import { getImageSlugForDestination } from '../config/destinationSlugMapping';
 
 /**
  * Hook to get destination image URL
+ * Automatically maps data slugs (e.g., "mediterranean-cruises") to image slugs (e.g., "mediterranean")
  */
 export function useDestinationImage(slug, type = 'hero', destinationName = '') {
   const [imageUrl, setImageUrl] = useState(PLACEHOLDER_IMAGE);
@@ -25,15 +27,20 @@ export function useDestinationImage(slug, type = 'hero', destinationName = '') {
       return;
     }
 
+    // Map the slug to the image slug used in database
+    // This handles cases like "mediterranean-cruises" -> "mediterranean"
+    // or "norwegian-fjords-cruises" -> "norway"
+    const imageSlug = getImageSlugForDestination(slug);
+
     // Import the placeholder generator
     import('../utils/placeholderImages.js').then(({ getDestinationPlaceholderImage }) => {
       // Generate smart placeholder
-      const smartPlaceholder = getDestinationPlaceholderImage(slug, type, destinationName);
+      const smartPlaceholder = getDestinationPlaceholderImage(imageSlug, type, destinationName);
       setImageUrl(smartPlaceholder);
       
-      const fallback = getDestinationImageUrl(slug, type);
+      const fallback = getDestinationImageUrl(imageSlug, type);
       
-      getImageUrlFromDb('destination', slug, type, fallback)
+      getImageUrlFromDb('destination', imageSlug, type, fallback)
         .then(url => {
           if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
             setImageUrl(url);

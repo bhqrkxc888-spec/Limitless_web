@@ -112,6 +112,26 @@ function AdminCategoryImages() {
           <div className="images-list">
             {CATEGORIES.map(category => {
               const existing = images[category.id];
+              // Check for validation warnings in the JSON field
+              const validationWarnings = existing?.validation_warnings 
+                ? (typeof existing.validation_warnings === 'string' 
+                    ? JSON.parse(existing.validation_warnings) 
+                    : existing.validation_warnings)
+                : [];
+              const hasWarnings = validationWarnings.length > 0;
+              
+              // Determine status: missing > not compliant (warning) > has warnings (warning) > pass
+              let status = 'missing';
+              if (existing) {
+                if (!existing.seo_compliant) {
+                  status = 'warning';
+                } else if (hasWarnings) {
+                  status = 'warning';
+                } else {
+                  status = 'pass';
+                }
+              }
+              
               return (
                 <div key={category.id} className="admin-card image-card">
                   <div className="image-card-header">
@@ -120,11 +140,23 @@ function AdminCategoryImages() {
                       <span className="badge badge-required">Required</span>
                     </div>
                     <StatusIndicator 
-                      status={existing ? (existing.seo_compliant ? 'pass' : 'warning') : 'missing'} 
+                      status={status} 
                       size="small"
                     />
                   </div>
                   <p className="image-card-specs">Recommended: 600×400px, WebP format</p>
+                  
+                  {/* Show validation warnings if any */}
+                  {hasWarnings && (
+                    <div className="image-validation-warnings">
+                      <p className="validation-warning-title">⚠️ Validation Warnings:</p>
+                      <ul className="validation-warning-list">
+                        {validationWarnings.map((warning, idx) => (
+                          <li key={idx}>{warning}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                   
                   <ImageUpload
                     bucket={STORAGE_BUCKETS.CATEGORIES}
