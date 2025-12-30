@@ -6,13 +6,16 @@ import HeroSection from '../components/HeroSection';
 import { Button, SectionHeader, Accordion, Card } from '../components/ui';
 import { useState } from 'react';
 import { getOgImage } from '../utils/imageHelpers';
-import { getBucketListHero, getBucketListCard } from '../utils/assetHelpers';
+import { useBucketListImage } from '../hooks/useImageUrl';
 import './BucketListExperiencePage.css';
 
 function BucketListExperiencePage() {
   const { slug } = useParams();
   const experience = getBucketListBySlug(slug);
   const [relatedExperiences] = useState(getRotatingFeatured(3));
+  
+  // Load images from database
+  const { imageUrl: heroImage } = useBucketListImage(experience?.id, 'hero', experience?.title);
 
   // Handle experience not found
   if (!experience) {
