@@ -3,7 +3,7 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader } from '../components/ui';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useBucketListImage } from '../hooks/useImageUrl';
 import './BucketListPage.css';
 
@@ -13,22 +13,6 @@ function BucketListPage() {
   const allExperiences = getAllBucketList();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsToShow] = useState(3); // Always 3 on desktop
-  
-  // Get a random featured experience for the hero image
-  const randomHeroExperience = useMemo(() => {
-    if (allExperiences.length === 0) return null;
-    const featured = allExperiences.filter(exp => exp.featured);
-    const experiencesToChoose = featured.length > 0 ? featured : allExperiences;
-    const randomIndex = Math.floor(Math.random() * experiencesToChoose.length);
-    return experiencesToChoose[randomIndex];
-  }, [allExperiences]); // Recalculate if experiences change
-  
-  // Load random hero image
-  const { imageUrl: heroImage } = useBucketListImage(
-    randomHeroExperience?.id || '', 
-    'hero', 
-    randomHeroExperience?.title || ''
-  );
   
   // Rotate featured on component mount (creates dynamic feel)
   useEffect(() => {
@@ -124,8 +108,6 @@ function BucketListPage() {
       <HeroSection
         title="Extraordinary Cruise Experiences"
         subtitle="Remarkable voyages that make a lasting impact. From world cruises to polar expeditions, these bucket list experiences create memories that last."
-        image={heroImage}
-        imageAlt={randomHeroExperience ? `${randomHeroExperience.title} bucket list experience` : 'Bucket list cruise experience'}
         size="md"
         align="center"
         primaryCta={{ label: 'Enquire Now', to: '/contact' }}

@@ -5,7 +5,6 @@ import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader } from '../components/ui';
 import { useDestinationImage } from '../hooks/useImageUrl';
-import { useMemo } from 'react';
 import './DestinationsPage.css';
 
 function DestinationsPage() {
@@ -24,23 +23,8 @@ function DestinationsPage() {
       imageSlug: configDest?.slug || dest.slug // Use config slug for images, fallback to data slug
     };
   });
-  
-  // Get a random featured destination for the hero image
-  const featuredDestinations = destinations.filter(d => d.featured);
-  const randomHeroDestination = useMemo(() => {
-    if (featuredDestinations.length === 0) return null;
-    const randomIndex = Math.floor(Math.random() * featuredDestinations.length);
-    return featuredDestinations[randomIndex];
-  }, [featuredDestinations]); // Recalculate if featured destinations change
-  
-  // Load random hero image
-  const { imageUrl: heroImage } = useDestinationImage(
-    randomHeroDestination?.imageSlug || randomHeroDestination?.slug, 
-    'hero', 
-    randomHeroDestination?.name || ''
-  );
-  
   // Group destinations by region (placeholder structure - can be enhanced)
+  const featuredDestinations = destinations.filter(d => d.featured);
   const otherDestinations = destinations.filter(d => !d.featured);
 
   // Structured Data for SEO
@@ -106,8 +90,6 @@ function DestinationsPage() {
       <HeroSection
         title="Explore Remarkable Destinations"
         subtitle="From sun-soaked Mediterranean ports to dramatic Norwegian fjords, explore the world's most captivating cruise destinations with expert consultant guidance."
-        image={heroImage}
-        imageAlt={randomHeroDestination ? `${randomHeroDestination.name} cruise destination` : 'Cruise destination'}
         size="md"
         align="center"
       />

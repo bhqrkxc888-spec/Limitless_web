@@ -300,6 +300,15 @@ function AdminImageManagement() {
       color: '#3b82f6'
     },
     {
+      id: 'pageHeroes',
+      title: 'Page Heroes',
+      description: 'Hero images for main listing pages (Destinations, Bucket List, Cruise Lines, etc.)',
+      icon: Image,
+      path: '/admin/images/page-heroes',
+      stats: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0 },
+      color: '#6366f1'
+    },
+    {
       id: 'destinations',
       title: 'Destinations',
       description: `${destinations.length} destinations: hero, card, cruise-line-specific cards (optional), gallery images (optional), mobile hero (optional)`,

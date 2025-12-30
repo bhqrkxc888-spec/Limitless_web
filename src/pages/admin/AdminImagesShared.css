@@ -79,6 +79,13 @@
   color: var(--admin-text-dim);
 }
 
+.image-card-description {
+  margin: 0.5rem 0 0.75rem 0;
+  font-size: 0.875rem;
+  color: var(--admin-text);
+  line-height: 1.5;
+}
+
 .image-card-specs {
   margin: 0 0 1.25rem 0;
   font-size: 0.875rem;

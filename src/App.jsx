@@ -91,6 +91,7 @@ const AdminOffersDebug = lazy(() => import('./pages/admin/AdminOffersDebug'))
 // Image Management
 const AdminImageManagement = lazy(() => import('./pages/admin/AdminImageManagement'))
 const AdminSiteImages = lazy(() => import('./pages/admin/AdminSiteImages'))
+const AdminPageHeroes = lazy(() => import('./pages/admin/AdminPageHeroes'))
 const AdminDestinationImages = lazy(() => import('./pages/admin/AdminDestinationImages'))
 const AdminCruiseLineImages = lazy(() => import('./pages/admin/AdminCruiseLineImages'))
 const AdminCategoryImages = lazy(() => import('./pages/admin/AdminCategoryImages'))
@@ -164,6 +165,7 @@ function AppLayout() {
           {/* Image Management */}
           <Route path="/admin/images" element={<AdminProtectedRoute><AdminImageManagement /></AdminProtectedRoute>} />
           <Route path="/admin/images/site" element={<AdminProtectedRoute><AdminSiteImages /></AdminProtectedRoute>} />
+          <Route path="/admin/images/page-heroes" element={<AdminProtectedRoute><AdminPageHeroes /></AdminProtectedRoute>} />
           <Route path="/admin/images/destinations" element={<AdminProtectedRoute><AdminDestinationImages /></AdminProtectedRoute>} />
           <Route path="/admin/images/cruise-lines" element={<AdminProtectedRoute><AdminCruiseLineImages /></AdminProtectedRoute>} />
           <Route path="/admin/images/cruise-lines/:slug" element={<AdminProtectedRoute><AdminCruiseLineImages /></AdminProtectedRoute>} />
