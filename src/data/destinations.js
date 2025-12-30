@@ -10,7 +10,7 @@ export const destinations = [
     name: 'Mediterranean',
     tagline: 'Sun-soaked history and culture',
     description: 'Explore ancient civilizations, stunning coastlines, and world-class cuisine on a Mediterranean cruise. From Barcelona to Athens, discover iconic destinations.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe/Med-coast.webp',
+    image: 'null',
     featured: true,
     // Coordinates for API integration (Barcelona as primary port)
     coordinates: {
@@ -49,7 +49,7 @@ export const destinations = [
     name: 'Caribbean',
     tagline: 'Paradise islands await',
     description: 'Crystal-clear waters, white sand beaches, and tropical adventures await in the Caribbean. From Jamaica to the Bahamas, find your perfect island escape.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean/nassau-bahamas.webp',
+    image: 'null',
     featured: true,
     // Coordinates for API integration (Nassau, Bahamas as primary port)
     coordinates: {
@@ -83,7 +83,7 @@ export const destinations = [
     name: 'Norwegian Fjords',
     tagline: 'Majestic natural beauty',
     description: 'Sail through dramatic fjords, past cascading waterfalls, and beneath towering mountains on a Norwegian Fjords cruise. Nature at its most spectacular.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northernlights-hero.webp',
+    image: 'null',
     featured: true,
     // Coordinates for API integration (Bergen as primary port)
     coordinates: {
@@ -118,7 +118,7 @@ export const destinations = [
     name: 'Alaska',
     tagline: 'America\'s last frontier',
     description: 'Experience the raw wilderness of Alaska with its towering glaciers, abundant wildlife, and pristine natural beauty. From the Inside Passage to Glacier Bay, discover one of the world\'s most spectacular cruise destinations.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Alaska/alaska-hero.jpg',
+    image: 'null',
     featured: true,
     coordinates: {
       lat: 58.3019,
@@ -152,7 +152,7 @@ export const destinations = [
     name: 'Baltic & Northern Europe',
     tagline: 'Historic capitals and cultural treasures',
     description: 'Discover the enchanting cities of the Baltic Sea, from the grandeur of St Petersburg to the charm of Copenhagen and Stockholm. Rich history, stunning architecture, and Nordic culture await.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Baltics/Copenhagen.webp',
+    image: 'null',
     featured: true,
     coordinates: {
       lat: 59.9311,
@@ -187,7 +187,7 @@ export const destinations = [
     name: 'British Isles',
     tagline: 'Discover the beauty of home',
     description: 'Explore the stunning coastlines, historic castles, and charming villages of the British Isles. From the Scottish Highlands to the Irish coast, discover the beauty and heritage on your doorstep.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/British-islands/Scotland-1.webp',
+    image: 'null',
     featured: false,
     coordinates: {
       lat: 57.4596,
@@ -223,7 +223,7 @@ export const destinations = [
     name: 'Transatlantic',
     tagline: 'Classic ocean voyages',
     description: 'Experience the romance of crossing the Atlantic Ocean in the tradition of the great ocean liners. Relaxing sea days, exceptional service, and the anticipation of arrival in a new world.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/worldcruise-hero.webp',
+    image: 'null',
     featured: false,
     coordinates: {
       lat: 40.6892,
@@ -256,7 +256,7 @@ export const destinations = [
     name: 'Hawaii',
     tagline: 'Aloha spirit and volcanic wonder',
     description: 'Discover the magic of the Hawaiian Islands with their stunning volcanic landscapes, pristine beaches, and rich Polynesian culture. Island-hop between Maui, Oahu, Kauai, and the Big Island.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/hawaii/hawaii.webp',
+    image: 'null',
     featured: false,
     coordinates: {
       lat: 21.3069,
@@ -290,7 +290,7 @@ export const destinations = [
     name: 'Australia',
     tagline: 'Discover Down Under',
     description: 'From the iconic Sydney Harbour to the Great Barrier Reef, experience Australia\'s diverse landscapes, unique wildlife, and vibrant cities on a cruise holiday.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Australia/Australia.webp',
+    image: 'null',
     featured: false,
     coordinates: {
       lat: -33.8688,
@@ -324,7 +324,7 @@ export const destinations = [
     name: 'Greek Isles',
     tagline: 'Ancient history meets island paradise',
     description: 'Island-hop through the stunning Greek Isles, from the whitewashed beauty of Santorini to the beaches of Mykonos. Discover ancient ruins, azure waters, and legendary Greek hospitality.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Adriatic/Adriatic.webp',
+    image: 'null',
     featured: true,
     coordinates: {
       lat: 36.3932,
@@ -359,7 +359,7 @@ export const destinations = [
     name: 'Adriatic',
     tagline: 'Croatia, Venice and Montenegro',
     description: 'Cruise the stunning Adriatic coastline, from the floating city of Venice to Croatia\'s medieval walled cities and Montenegro\'s dramatic fjords. A treasure trove of history and natural beauty.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Adriatic/Adriatic.webp',
+    image: 'null',
     featured: false,
     coordinates: {
       lat: 42.6507,
@@ -394,7 +394,7 @@ export const destinations = [
     name: 'Scandinavia',
     tagline: 'Nordic capitals and culture',
     description: 'Explore the stylish capitals and stunning landscapes of Scandinavia. From Copenhagen\'s hygge to Stockholm\'s archipelago and Oslo\'s fjords, discover the best of Nordic culture.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Scandanavia/scandanavia.webp',
+    image: 'null',
     featured: false,
     coordinates: {
       lat: 59.9139,
@@ -428,7 +428,7 @@ export const destinations = [
     name: 'Canada & New England',
     tagline: 'Fall foliage and maritime charm',
     description: 'Experience the spectacular autumn colours, historic ports, and maritime heritage of Canada and New England. From Boston to Quebec City, discover charming towns and stunning natural beauty.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Alaska/alaska-hero.jpg',
+    image: 'null',
     featured: false,
     coordinates: {
       lat: 46.8139,
@@ -463,7 +463,7 @@ export const destinations = [
     name: 'Panama Canal',
     tagline: 'Engineering marvel of the world',
     description: 'Transit one of the world\'s greatest engineering achievements on a Panama Canal cruise. Experience the wonder of crossing between two oceans while exploring Central American ports.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/caribbean/caribbean-1.webp',
+    image: 'null',
     featured: false,
     coordinates: {
       lat: 9.0801,
@@ -496,7 +496,7 @@ export const destinations = [
     name: 'Southeast Asia',
     tagline: 'Temples, beaches and exotic culture',
     description: 'Explore the exotic wonders of Southeast Asia, from Thailand\'s temples to Vietnam\'s halong Bay and Singapore\'s modernity. A sensory journey through rich cultures and stunning landscapes.',
-    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/singapore/singapore.webp',
+    image: 'null',
     featured: false,
     coordinates: {
       lat: 1.3521,

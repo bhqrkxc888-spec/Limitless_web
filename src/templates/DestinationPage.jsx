@@ -46,7 +46,7 @@ function DestinationPage() {
         title={destination.meta?.title || `${destination.name} Cruises`}
         description={destination.meta?.description || destination.description}
         canonical={`https://www.limitlesscruises.com/destinations/${destination.slug}`}
-        image={getOgImage(destination.image)}
+        image={getOgImage(getDestinationHero(destination.slug))}
         structuredData={structuredData}
       />
 

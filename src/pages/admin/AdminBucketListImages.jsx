@@ -122,14 +122,34 @@ function AdminBucketListImages() {
 
   /**
    * Get status for bucket list experience
+   * Checks both bucket list images and destination fallback images
    */
   const getExperienceStatus = (experienceId) => {
     const hero = getImage(experienceId, 'hero');
     const card = getImage(experienceId, 'card');
     
-    if (!hero || !card) return 'missing';
+    // Check if using destination fallback
+    const destinationSlug = getDestinationForBucketList(experienceId);
+    let hasHero = !!hero;
+    let hasCard = !!card;
     
-    const hasWarnings = (!hero.seo_compliant) || (!card.seo_compliant);
+    // If missing and has destination mapping, check destination images
+    if (destinationSlug) {
+      if (!hasHero) {
+        const destHero = destinationImages[`${destinationSlug}-hero`];
+        hasHero = !!destHero;
+      }
+      if (!hasCard) {
+        const destCard = destinationImages[`${destinationSlug}-card`];
+        hasCard = !!destCard;
+      }
+    }
+    
+    // If still missing both, return missing
+    if (!hasHero || !hasCard) return 'missing';
+    
+    // Check SEO compliance (only for actual bucket list images, not fallbacks)
+    const hasWarnings = (hero && !hero.seo_compliant) || (card && !card.seo_compliant);
     return hasWarnings ? 'warning' : 'pass';
   };
 
@@ -188,8 +208,21 @@ function AdminBucketListImages() {
                     <StatusIndicator status={getExperienceStatus(experience.id)} size="small" />
                   </div>
                   <p className="entity-card-stats">
-                    <span className={hero ? 'stat-ok' : 'stat-missing'}>Hero</span>
-                    <span className={card ? 'stat-ok' : 'stat-missing'}>Card</span>
+                    {(() => {
+                      const destinationSlug = getDestinationForBucketList(experience.id);
+                      const hasHero = hero || (destinationSlug && destinationImages[destinationSlug]?.['hero']);
+                      const hasCard = card || (destinationSlug && destinationImages[destinationSlug]?.['card']);
+                      return (
+                        <>
+                          <span className={hasHero ? 'stat-ok' : 'stat-missing'}>
+                            Hero {hero?.sharedFrom === 'destination' ? '(shared)' : ''}
+                          </span>
+                          <span className={hasCard ? 'stat-ok' : 'stat-missing'}>
+                            Card {card?.sharedFrom === 'destination' ? '(shared)' : ''}
+                          </span>
+                        </>
+                      );
+                    })()}
                   </p>
                 </button>
               );

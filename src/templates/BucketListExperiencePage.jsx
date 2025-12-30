@@ -60,7 +60,7 @@ function BucketListExperiencePage() {
         description={experience.meta?.description || experience.description}
         canonical={`https://www.limitlesscruises.com/bucket-list/${experience.slug}`}
         keywords={experience.meta?.keywords?.join(', ') || ''}
-        image={getOgImage(experience.heroImage)}
+        image={getOgImage(getBucketListHero(experience.id))}
         structuredData={structuredData}
       />
 

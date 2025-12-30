@@ -10,8 +10,9 @@ export const bucketListExperiences = [
     title: 'World Cruises',
     tagline: 'The ultimate voyage around the globe',
     description: 'Embark on the journey of a lifetime with a world cruise. Visit multiple continents, experience diverse cultures, and create unforgettable memories on a voyage that spans 30 to 180+ nights.',
-    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/worldcruise-hero.webp',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/worldcruise.webp',
+    // Images now loaded via getBucketListCard() and getBucketListHero() helpers (Supabase)
+    heroImage: null,
+    cardImage: null,
     duration: '30-180+ nights',
     season: 'Year-round departures',
     startingFrom: 'From £8,000 per person',
@@ -82,8 +83,8 @@ export const bucketListExperiences = [
     title: 'Antarctica Expeditions',
     tagline: 'Journey to the last great wilderness',
     description: 'Experience the pristine beauty of Antarctica, where penguins rule the ice, whales breach in icy waters, and towering icebergs create a landscape unlike anywhere else on Earth.',
-    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/antarctica-hero.webp',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/antarctica/Northernlights.webp',
+    heroImage: null,
+    cardImage: null,
     duration: '10-20 nights',
     season: 'November - March (Antarctic summer)',
     startingFrom: 'From £4,500 per person',
@@ -152,8 +153,8 @@ export const bucketListExperiences = [
     title: 'Japan & Asia Cruises',
     tagline: 'Where ancient traditions meet modern wonders',
     description: 'Discover the captivating blend of ancient traditions and cutting-edge innovation across Japan and Asia. From cherry blossoms to towering skyscrapers, serene temples to bustling markets.',
-    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Japan/japan-hero.webp',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Japan/Japan-card.webp',
+    heroImage: null,
+    cardImage: null,
     duration: '14-21+ nights',
     season: 'Year-round (cherry blossom season: March-May)',
     startingFrom: 'From £3,500 per person',
@@ -213,9 +214,9 @@ export const bucketListExperiences = [
       keywords: ['japan cruise', 'asia cruise', 'cherry blossom cruise', 'far east cruise', 'asian cruise holidays']
     },
     images: [
-      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Japan/DowntownTokyo%20.webp',
+      null,
       null, // Japan-mtfuji - Upload to Vercel
-      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Japan/southkorea.webp'
+      null
     ],
     featured: true,
     priority: 3
@@ -226,8 +227,8 @@ export const bucketListExperiences = [
     title: 'Rocky Mountaineer & Alaska',
     tagline: 'Iconic rail journey meets stunning cruise',
     description: 'Combine two bucket-list experiences: the legendary Rocky Mountaineer train journey through Canada\'s stunning mountain landscapes, followed by an Alaska cruise through the Inside Passage.',
-    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Alaska/alaska-hero.jpg',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Canada/rockymountains.webp',
+    heroImage: null,
+    cardImage: null,
     duration: '10-14 nights',
     season: 'May - September',
     startingFrom: 'From £5,500 per person',
@@ -301,8 +302,8 @@ export const bucketListExperiences = [
     title: 'Galápagos Islands',
     tagline: 'Darwin\'s living laboratory',
     description: 'Explore the Galápagos Islands, where unique wildlife found nowhere else on Earth inspired Charles Darwin. Snorkel with sea lions, observe giant tortoises, and discover endemic species.',
-    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/galapagos/galapagos-hero.webp',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/galapagos/galapagos-hero.webp',
+    heroImage: null,
+    cardImage: null,
     duration: '7-10 nights',
     season: 'Year-round (dry season: June-December)',
     startingFrom: 'From £3,500 per person',
@@ -369,8 +370,8 @@ export const bucketListExperiences = [
     title: 'Northern Lights & Arctic',
     tagline: 'Dance under the Aurora Borealis',
     description: 'Witness the magical Northern Lights in the Arctic regions of Norway, Iceland, and beyond. Combine Aurora viewing with husky sledding, snow activities, and Arctic landscapes.',
-    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/northernlights-hero.webp',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Fjords/Northernlights.webp',
+    heroImage: null,
+    cardImage: null,
     duration: '7-14 nights',
     season: 'September - March (best: November - February)',
     startingFrom: 'From £2,500 per person',
@@ -437,8 +438,8 @@ export const bucketListExperiences = [
     title: 'South America',
     tagline: 'Vibrant cultures and stunning landscapes',
     description: 'Discover the dramatic beauty and rich culture of South America. From the Amazon rainforest to the wilds of Patagonia, from vibrant cities to ancient Incan ruins, experience the continent\'s incredible diversity.',
-    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/hero-iguazu-falls.webp',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/Patagonian-glaciers.webp',
+    heroImage: null,
+    cardImage: null,
     duration: '10-21+ nights',
     season: 'Year-round (best: October-April)',
     startingFrom: 'From £2,000 per person',
@@ -498,10 +499,10 @@ export const bucketListExperiences = [
       keywords: ['south america cruise', 'amazon cruise', 'patagonia cruise', 'machu picchu cruise', 'south american voyage']
     },
     images: [
-      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/Machu-Picchu.webp',
-      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/rio-christ.webp',
-      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/Rio-beech.webp',
-      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/south-america/city-in-Peru.webp'
+      null,
+      null,
+      null,
+      null
     ],
     featured: true,
     priority: 7
@@ -512,8 +513,8 @@ export const bucketListExperiences = [
     title: 'Middle East & Arabian Peninsula',
     tagline: 'Ancient wonders meet modern luxury',
     description: 'Experience the fascinating blend of ancient history and contemporary luxury in the Middle East. From the architectural wonders of Dubai to the historical sites of Egypt, discover a region rich in culture and heritage.',
-    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/hero-dubai.webp',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/Abu-Dhabi.webp',
+    heroImage: null,
+    cardImage: null,
     duration: '7-14 nights',
     season: 'October - April (avoiding extreme summer heat)',
     startingFrom: 'From £1,500 per person',
@@ -572,9 +573,9 @@ export const bucketListExperiences = [
       keywords: ['middle east cruise', 'dubai cruise', 'abu dhabi cruise', 'arabian peninsula cruise', 'egypt cruise']
     },
     images: [
-      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/Abu-Dhabi.webp',
-      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/muscat.webp',
-      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/middle-east/Petra.webp'
+      null,
+      null,
+      null
     ],
     featured: true,
     priority: 8
@@ -585,8 +586,8 @@ export const bucketListExperiences = [
     title: 'Pacific Islands & New Zealand',
     tagline: 'Paradise found in the South Pacific',
     description: 'Discover the stunning beauty of the South Pacific and New Zealand. From pristine tropical islands with turquoise waters to New Zealand\'s dramatic landscapes, experience paradise in all its forms.',
-    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Pacific/NewZealand-hero.webp',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/pacific/newzealand.webp',
+    heroImage: null,
+    cardImage: null,
     duration: '10-18+ nights',
     season: 'Year-round (best: October-April for New Zealand)',
     startingFrom: 'From £2,200 per person',
@@ -647,8 +648,8 @@ export const bucketListExperiences = [
       keywords: ['pacific cruise', 'new zealand cruise', 'fiji cruise', 'south pacific cruise', 'new zealand fjords']
     },
     images: [
-      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Pacific/Sydney.webp',
-      'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Pacific/sydneybridge.webp'
+      null,
+      null
     ],
     featured: true,
     priority: 9
@@ -660,7 +661,7 @@ export const bucketListExperiences = [
     title: 'Transatlantic Crossings',
     tagline: 'The classic ocean voyage experience',
     description: 'Experience the romance of crossing the Atlantic in the tradition of the great ocean liners. Days of relaxation at sea, world-class entertainment, and the anticipation of arrival in a new world.',
-    heroImage: null, // Transatlantic hero - Upload to Vercel
+    heroImage: null, // Images now loaded via Supabase
     cardImage: null, // Transatlantic card - Upload to Vercel
     duration: '7-14 nights',
     season: 'Year-round (peak: April-May, September-October)',
@@ -725,8 +726,8 @@ export const bucketListExperiences = [
     title: 'Iceland Circumnavigation',
     tagline: 'Land of fire and ice',
     description: 'Sail around Iceland to discover its otherworldly landscapes of geysers, glaciers, volcanoes, and waterfalls. Witness the midnight sun or Northern Lights depending on the season.',
-    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Iceland/iceland.webp',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Iceland/iceland.webp',
+    heroImage: null,
+    cardImage: null,
     duration: '10-14 nights',
     season: 'May - September (summer), September - March (Northern Lights)',
     startingFrom: 'From £2,500 per person',
@@ -794,8 +795,8 @@ export const bucketListExperiences = [
     title: 'European River Cruises',
     tagline: 'Glide through the heart of Europe',
     description: 'Cruise the legendary rivers of Europe, from the romantic Rhine and Danube to the Seine and Douro. Pass fairytale castles, vineyard-covered hillsides, and charming medieval towns.',
-    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe-river/europe-river-hero.webp',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Europe-river/danube-river.webp',
+    heroImage: null,
+    cardImage: null,
     duration: '7-14 nights',
     season: 'March - December (peak: April-October)',
     startingFrom: 'From £1,800 per person',
@@ -864,8 +865,8 @@ export const bucketListExperiences = [
     title: 'Great Barrier Reef & Australia',
     tagline: 'Discover the world\'s largest coral reef',
     description: 'Experience Australia\'s natural wonder - the Great Barrier Reef. Snorkel or dive among vibrant coral and tropical fish, then explore Australia\'s stunning coastline and iconic cities.',
-    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Greatbarrierreef/greatbarrierreef-hero.webp',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Australia/Great-barrier-reef.webp',
+    heroImage: null,
+    cardImage: null,
     duration: '10-18 nights',
     season: 'Year-round (best: April-November for reef conditions)',
     startingFrom: 'From £3,500 per person',
@@ -933,8 +934,8 @@ export const bucketListExperiences = [
     title: 'Midnight Sun Voyages',
     tagline: 'Where the sun never sets',
     description: 'Experience the magic of the Arctic summer when the sun never dips below the horizon. Cruise Norway\'s coast, Svalbard, or Iceland under 24 hours of ethereal daylight.',
-    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Midnight-sun/midnightsun-hero.webp',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Midnight-sun/midnight-sun.webp',
+    heroImage: null,
+    cardImage: null,
     duration: '7-14 nights',
     season: 'May - July (peak midnight sun: June 21)',
     startingFrom: 'From £2,000 per person',
@@ -1002,8 +1003,8 @@ export const bucketListExperiences = [
     title: 'Grand Voyages',
     tagline: 'Extended journeys of discovery',
     description: 'Embark on an extended voyage of 30 to 60 nights, exploring multiple continents and oceans. These immersive journeys offer the depth of experience only possible with extended time at sea.',
-    heroImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/grandvoyage.webp',
-    cardImage: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/destinations/Worldcruise/grandvoyage.webp',
+    heroImage: null,
+    cardImage: null,
     duration: '30-60+ nights',
     season: 'Year-round (repositioning seasons optimal)',
     startingFrom: 'From £5,000 per person',
