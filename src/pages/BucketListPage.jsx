@@ -21,7 +21,7 @@ function BucketListPage() {
     const experiencesToChoose = featured.length > 0 ? featured : allExperiences;
     const randomIndex = Math.floor(Math.random() * experiencesToChoose.length);
     return experiencesToChoose[randomIndex];
-  }, []); // Only calculate once on mount
+  }, [allExperiences]); // Recalculate if experiences change
   
   // Load random hero image
   const { imageUrl: heroImage } = useBucketListImage(

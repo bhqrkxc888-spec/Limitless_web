@@ -5,7 +5,7 @@ import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader } from '../components/ui';
 import { useDestinationImage } from '../hooks/useImageUrl';
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import './DestinationsPage.css';
 
 function DestinationsPage() {
@@ -31,7 +31,7 @@ function DestinationsPage() {
     if (featuredDestinations.length === 0) return null;
     const randomIndex = Math.floor(Math.random() * featuredDestinations.length);
     return featuredDestinations[randomIndex];
-  }, []); // Only calculate once on mount
+  }, [featuredDestinations]); // Recalculate if featured destinations change
   
   // Load random hero image
   const { imageUrl: heroImage } = useDestinationImage(
