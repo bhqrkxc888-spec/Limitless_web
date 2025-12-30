@@ -1393,7 +1393,7 @@ export const ports = [
       visaInfo: 'None (Schengen 90/180 days)',
     },
     
-    relatedDestinations: ['mediterranean-cruises', 'transatlantic-cruises'],
+    relatedDestinations: ['mediterranean-cruises'],
     
     meta: {
       title: 'Lisbon Cruise Port Guide | Seven Hills, Fado & Discovery',
@@ -1587,7 +1587,7 @@ export const ports = [
       visaInfo: 'None (Schengen 90/180 days)',
     },
     
-    relatedDestinations: ['canary-islands-cruises', 'transatlantic-cruises'],
+    relatedDestinations: ['canary-islands-cruises'],
     
     meta: {
       title: 'Santa Cruz de Tenerife Cruise Port Guide | Mount Teide & Beaches',
@@ -2342,7 +2342,7 @@ export const ports = [
       },
     },
     
-    relatedDestinations: ['mediterranean-cruises', 'transatlantic-cruises'],
+    relatedDestinations: ['mediterranean-cruises'],
     
     meta: {
       title: 'Vigo Cruise Port Guide | Gateway to Galicia\'s Coast',
@@ -2634,7 +2634,7 @@ export const ports = [
       visaInfo: 'None for UK passport holders (Schengen 90/180 days). Check current rules for other nationalities.',
     },
     
-    relatedDestinations: ['mediterranean-cruises', 'transatlantic-cruises'],
+    relatedDestinations: ['mediterranean-cruises'],
     
     meta: {
       title: 'Porto Leixões Cruise Port Guide | Douro Gateway & Port Wine',
@@ -3191,7 +3191,7 @@ export const ports = [
       },
     },
     
-    relatedDestinations: ['mediterranean-cruises', 'transatlantic-cruises'],
+    relatedDestinations: ['mediterranean-cruises'],
     
     meta: {
       title: 'A Coruña Cruise Port Guide | Tower of Hercules & Galician Beaches',
@@ -4314,7 +4314,7 @@ export const ports = [
       visaInfo: 'None (Schengen 90/180 days)',
     },
     
-    relatedDestinations: ['canary-islands-cruises', 'transatlantic-cruises'],
+    relatedDestinations: ['canary-islands-cruises'],
     
     meta: {
       title: 'Funchal Madeira Cruise Port Guide | Cable Cars & Toboggans',

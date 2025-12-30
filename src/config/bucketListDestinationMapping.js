@@ -34,8 +34,9 @@ export const bucketListToDestinationMapping = {
   // World Cruises → World Cruise destination (if exists) or can use multiple
   'world-cruises': 'world-cruise',
   
-  // Transatlantic Crossings → Transatlantic destination
-  'transatlantic-crossings': 'transatlantic',
+  // Transatlantic Crossings → No destination fallback (bucket list only, not a geographic destination)
+  // Note: Transatlantic was removed from destinations - it's now only a bucket list experience
+  // 'transatlantic-crossings': null,
   
   // European River Cruises → Mediterranean (most European river cruises are in this region)
   'european-rivers': 'mediterranean',

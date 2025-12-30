@@ -117,14 +117,6 @@ export const DESTINATION_CRUISE_LINE_MAP = {
     ]
   },
   
-  'transatlantic-cruises': {
-    cruiseLines: [
-      { slug: 'cunard-cruises', name: 'Cunard', shortName: 'Cunard', priority: 10, type: 'mainstream' },
-      { slug: 'princess-cruises', name: 'Princess Cruises', shortName: 'Princess', priority: 7, type: 'mainstream' },
-      { slug: 'royal-caribbean', name: 'Royal Caribbean', shortName: 'Royal Caribbean', priority: 7, type: 'mainstream' },
-    ]
-  },
-  
   'hawaii-cruises': {
     cruiseLines: [
       { slug: 'norwegian-cruise-line', name: 'Norwegian Cruise Line', shortName: 'NCL', priority: 10, type: 'mainstream' },
@@ -157,14 +149,6 @@ export const DESTINATION_CRUISE_LINE_MAP = {
       { slug: 'celebrity-cruises', name: 'Celebrity Cruises', shortName: 'Celebrity', priority: 8, type: 'mainstream' },
       { slug: 'princess-cruises', name: 'Princess Cruises', shortName: 'Princess', priority: 7, type: 'mainstream' },
       { slug: 'royal-caribbean', name: 'Royal Caribbean', shortName: 'Royal Caribbean', priority: 7, type: 'mainstream' },
-    ]
-  },
-  
-  'scandinavia-cruises': {
-    cruiseLines: [
-      { slug: 'princess-cruises', name: 'Princess Cruises', shortName: 'Princess', priority: 8, type: 'mainstream' },
-      { slug: 'p-and-o-cruises', name: 'P&O Cruises', shortName: 'P&O', priority: 7, type: 'mainstream' },
-      { slug: 'cunard-cruises', name: 'Cunard', shortName: 'Cunard', priority: 6, type: 'mainstream' },
     ]
   },
   

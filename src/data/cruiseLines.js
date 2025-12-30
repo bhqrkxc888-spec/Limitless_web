@@ -68,7 +68,7 @@ export const cruiseLines = [
       { name: 'Norwegian Fjords', image: 'null', alt: 'Norwegian Fjords with Northern Lights' },
       { name: 'Northern Europe', image: 'null', alt: 'Northern European waterfront' },
       { name: 'Canary Islands', image: 'null', alt: 'Canary Islands volcanic landscape' },
-      { name: 'Scandinavia', image: 'null', alt: 'Scandinavian landscape under midnight sun' }
+      { name: 'Baltic & Northern Europe', image: 'null', alt: 'Nordic capitals and Baltic Sea' }
     ],
 
     // Kids Club section
@@ -130,7 +130,7 @@ export const cruiseLines = [
       'Arvia exclusive experiences: Altitude Skywalk high ropes and Mission Control submarine adventure'
     ],
     ships: ['Iona', 'Arvia', 'Britannia', 'Ventura', 'Azura', 'Aurora', 'Arcadia'],
-    destinations: ['Mediterranean', 'Norwegian Fjords', 'Caribbean', 'Canary Islands', 'Northern Europe', 'Scandinavia'],
+    destinations: ['Mediterranean', 'Norwegian Fjords', 'Caribbean', 'Canary Islands', 'Northern Europe', 'Baltic & Northern Europe'],
     suitableFor: ['Couples', 'Families', 'Solo Travellers'],
     meta: {
       title: 'P&O Cruises | UK Cruise Holidays from Southampton',
@@ -1153,7 +1153,7 @@ export const cruiseLines = [
       'Royal Nights themed events'
     ],
     ships: ['Queen Mary 2', 'Queen Victoria', 'Queen Elizabeth', 'Queen Anne'],
-    destinations: ['Transatlantic', 'World Cruises', 'Mediterranean', 'Northern Europe'],
+    destinations: ['World Cruises', 'Mediterranean', 'Northern Europe'],
     suitableFor: ['Couples', 'Mature Travellers', 'Luxury Seekers', 'History Enthusiasts'],
     meta: {
       title: 'Cunard | Luxury Ocean Liners | UK Expert Bookings',

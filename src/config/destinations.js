@@ -77,13 +77,6 @@ export const destinations = [
     description: 'Croatia, Venice, Dalmatian Coast'
   },
   {
-    id: 10,
-    slug: 'transatlantic',
-    name: 'Transatlantic',
-    heroFilename: 'transatlantic-HERO.jpg',
-    description: 'Cross-ocean voyages, relaxation at sea'
-  },
-  {
     id: 11,
     slug: 'iceland',
     name: 'Iceland',
@@ -142,9 +135,9 @@ export const destinations = [
   {
     id: 19,
     slug: 'panama-canal',
-    name: 'Panama Canal',
+    name: 'Panama Canal & Central America',
     heroFilename: 'panama-canal-HERO.jpg',
-    description: 'Engineering marvel, Pacific to Atlantic'
+    description: 'Engineering marvel, Pacific to Atlantic, Central American ports'
   },
   {
     id: 20,
@@ -158,7 +151,7 @@ export const destinations = [
     slug: 'northern-europe',
     name: 'Northern Europe',
     heroFilename: 'northern-europe-HERO.jpg',
-    description: 'Scandinavia, Arctic Circle, midnight sun'
+    description: 'Nordic capitals, Arctic Circle, midnight sun'
   },
   {
     id: 24,
@@ -194,13 +187,6 @@ export const destinations = [
     name: 'Mexico',
     heroFilename: 'mexico-HERO.jpg',
     description: 'Mayan ruins, beaches, vibrant culture'
-  },
-  {
-    id: 31,
-    slug: 'scandinavia',
-    name: 'Scandinavia',
-    heroFilename: 'scandinavia-HERO.jpg',
-    description: 'Nordic capitals, fjords, northern lights'
   },
   {
     id: 32,
@@ -246,7 +232,7 @@ export function getAllDestinationSlugs() {
 export function getDestinationsByRegion() {
   return {
     'Europe': destinations.filter(d => 
-      ['mediterranean', 'baltic', 'british-isles', 'greece-islands', 'adriatic', 
+      ['mediterranean', 'baltic', 'british-isles', 'greek-islands', 'adriatic', 
        'iceland', 'northern-europe', 'western-mediterranean', 'eastern-mediterranean',
        'norway', 'canary-islands', 'atlantic-islands'].includes(d.slug)
     ),
@@ -261,7 +247,7 @@ export function getDestinationsByRegion() {
       ['alaska', 'antarctica', 'iceland'].includes(d.slug)
     ),
     'Other': destinations.filter(d => 
-      ['transatlantic', 'world-cruise'].includes(d.slug)
+      ['world-cruise'].includes(d.slug)
     )
   };
 }

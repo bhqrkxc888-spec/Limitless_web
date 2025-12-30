@@ -14,7 +14,6 @@ export const destinationSlugToImageSlug = {
   'norwegian-fjords-cruises': 'norway',
   'australia-cruises': 'australia-new-zealand',
   'greek-isles-cruises': 'greek-islands',
-  'scandinavia-cruises': 'scandinavia',
   'southeast-asia-cruises': 'southeast-asia',
   'norway-cruises': 'norway', // Also map norway-cruises if it exists
   
@@ -24,7 +23,6 @@ export const destinationSlugToImageSlug = {
   'alaska-cruises': 'alaska',
   'baltic-cruises': 'baltic',
   'british-isles-cruises': 'british-isles',
-  'transatlantic-cruises': 'transatlantic',
   'hawaii-cruises': 'hawaii',
   'canada-new-england-cruises': 'canada-new-england',
   'panama-canal-cruises': 'panama-canal',

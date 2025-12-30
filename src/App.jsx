@@ -213,6 +213,7 @@ function AppLayout() {
             
             {/* Destinations - Published */}
             <Route path="/destinations" element={<DestinationsPage />} />
+            <Route path="/destinations/transatlantic-cruises" element={<Navigate to="/bucket-list/transatlantic-crossings" replace />} />
             <Route path="/destinations/:slug" element={<DestinationPage />} />
             
             {/* Bucket List Experiences - Published */}

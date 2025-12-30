@@ -166,7 +166,7 @@ export const destinations = [
         { name: 'Gdańsk', country: 'Poland', lat: 54.3520, lon: 18.6466 }
       ]
     },
-    regions: ['Scandinavia', 'Baltic States', 'Russia', 'Northern Germany'],
+    regions: ['Baltic States', 'Russia', 'Northern Germany', 'Nordic Capitals'],
     highlights: [
       'The Hermitage Museum in St Petersburg',
       'Copenhagen\'s Tivoli Gardens',
@@ -215,39 +215,6 @@ export const destinations = [
     meta: {
       title: 'British Isles Cruises | UK & Ireland Cruise Holidays',
       description: 'Book British Isles cruises. Explore Scotland, Ireland and UK coastline. No flights needed. Expert advice from Limitless Cruises.'
-    }
-  },
-  {
-    id: 'transatlantic',
-    slug: 'transatlantic-cruises',
-    name: 'Transatlantic',
-    tagline: 'Classic ocean voyages',
-    description: 'Experience the romance of crossing the Atlantic Ocean in the tradition of the great ocean liners. Relaxing sea days, exceptional service, and the anticipation of arrival in a new world.',
-    image: 'null',
-    featured: false,
-    coordinates: {
-      lat: 40.6892,
-      lon: -74.0445,
-      ports: [
-        { name: 'Southampton', country: 'England', lat: 50.8998, lon: -1.4044 },
-        { name: 'New York', country: 'USA', lat: 40.6892, lon: -74.0445 },
-        { name: 'Boston', country: 'USA', lat: 42.3601, lon: -71.0589 },
-        { name: 'Fort Lauderdale', country: 'USA', lat: 26.1224, lon: -80.1373 }
-      ]
-    },
-    regions: ['North Atlantic', 'Southampton to New York', 'Caribbean repositioning'],
-    highlights: [
-      'Classic ocean liner experience',
-      'Extended relaxing sea days',
-      'Excellent onboard enrichment',
-      'Cunard\'s Queen Mary 2',
-      'Repositioning cruise value'
-    ],
-    bestTime: 'April - May, September - November',
-    cruiseLines: ['Cunard', 'Celebrity Cruises', 'Norwegian Cruise Line', 'Holland America'],
-    meta: {
-      title: 'Transatlantic Cruises | Ocean Crossings & Voyages',
-      description: 'Book Transatlantic cruise crossings. Classic ocean voyages between UK and USA. Expert advice from Limitless Cruises.'
     }
   },
   {
@@ -389,40 +356,6 @@ export const destinations = [
     }
   },
   {
-    id: 'scandinavia',
-    slug: 'scandinavia-cruises',
-    name: 'Scandinavia',
-    tagline: 'Nordic capitals and culture',
-    description: 'Explore the stylish capitals and stunning landscapes of Scandinavia. From Copenhagen\'s hygge to Stockholm\'s archipelago and Oslo\'s fjords, discover the best of Nordic culture.',
-    image: 'null',
-    featured: false,
-    coordinates: {
-      lat: 59.9139,
-      lon: 10.7522,
-      ports: [
-        { name: 'Copenhagen', country: 'Denmark', lat: 55.6761, lon: 12.5683 },
-        { name: 'Stockholm', country: 'Sweden', lat: 59.3293, lon: 18.0686 },
-        { name: 'Oslo', country: 'Norway', lat: 59.9139, lon: 10.7522 },
-        { name: 'Gothenburg', country: 'Sweden', lat: 57.7089, lon: 11.9746 },
-        { name: 'Aarhus', country: 'Denmark', lat: 56.1629, lon: 10.2039 }
-      ]
-    },
-    regions: ['Denmark', 'Sweden', 'Norway', 'Nordic Capitals'],
-    highlights: [
-      'Copenhagen\'s Nyhavn and Tivoli',
-      'Stockholm\'s Gamla Stan',
-      'Oslo\'s Viking heritage',
-      'World-class Scandinavian design',
-      'Nordic cuisine and culture'
-    ],
-    bestTime: 'May - September',
-    cruiseLines: ['Viking', 'Celebrity Cruises', 'Princess Cruises', 'Holland America'],
-    meta: {
-      title: 'Scandinavia Cruises | Copenhagen, Stockholm & Oslo',
-      description: 'Book Scandinavia cruise holidays. Explore Nordic capitals and culture. Expert advice from Limitless Cruises.'
-    }
-  },
-  {
     id: 'canada-new-england',
     slug: 'canada-new-england-cruises',
     name: 'Canada & New England',
@@ -460,9 +393,9 @@ export const destinations = [
   {
     id: 'panama-canal',
     slug: 'panama-canal-cruises',
-    name: 'Panama Canal',
-    tagline: 'Engineering marvel of the world',
-    description: 'Transit one of the world\'s greatest engineering achievements on a Panama Canal cruise. Experience the wonder of crossing between two oceans while exploring Central American ports.',
+    name: 'Panama Canal & Central America',
+    tagline: 'Engineering marvel and tropical paradise',
+    description: 'Transit one of the world\'s greatest engineering achievements on a Panama Canal cruise. Experience the wonder of crossing between two oceans while exploring Central American ports, from the Caribbean coast to the Pacific shores.',
     image: 'null',
     featured: false,
     coordinates: {
@@ -486,8 +419,8 @@ export const destinations = [
     bestTime: 'December - April (dry season)',
     cruiseLines: ['Princess Cruises', 'Holland America', 'Celebrity Cruises', 'Norwegian Cruise Line'],
     meta: {
-      title: 'Panama Canal Cruises | Full Transit & Partial Crossings',
-      description: 'Book Panama Canal cruise holidays. Transit the famous locks and explore Central America. Expert advice from Limitless Cruises.'
+      title: 'Panama Canal & Central America Cruises | Full Transit & Partial Crossings',
+      description: 'Book Panama Canal & Central America cruise holidays. Transit the famous locks and explore Central American ports. Expert advice from Limitless Cruises.'
     }
   },
   {

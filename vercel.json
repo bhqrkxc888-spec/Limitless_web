@@ -11,6 +11,11 @@
           "value": "limitlesscruises.com"
         }
       ]
+    },
+    {
+      "source": "/destinations/transatlantic-cruises",
+      "destination": "/bucket-list/transatlantic-crossings",
+      "permanent": true
     }
   ],
   "headers": [

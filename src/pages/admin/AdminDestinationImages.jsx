@@ -107,7 +107,7 @@ function AdminDestinationImages() {
             Back to Image Management
           </Link>
           <h1 className="admin-page-title">Destination Images</h1>
-          <p className="admin-page-subtitle">Manage hero, card, and cruise-line-specific images for all 16 destinations</p>
+          <p className="admin-page-subtitle">Manage hero, card, and cruise-line-specific images for all destinations</p>
         </header>
 
         {loading ? (

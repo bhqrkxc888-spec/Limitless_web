@@ -137,8 +137,7 @@ export const navigation = {
       { label: 'Caribbean', path: '/destinations/caribbean-cruises' },
       { label: 'Norwegian Fjords', path: '/destinations/norwegian-fjords-cruises' },
       { label: 'Canary Islands', path: '/destinations/canary-islands-cruises' },
-      { label: 'Alaska', path: '/destinations/alaska-cruises' },
-      { label: 'Transatlantic', path: '/destinations/transatlantic-cruises' }
+      { label: 'Alaska', path: '/destinations/alaska-cruises' }
     ],
     cruiseTypes: [
       { label: 'All Cruise Types', path: '/cruise-types' },
