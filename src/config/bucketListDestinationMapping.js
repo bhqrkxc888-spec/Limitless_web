@@ -36,6 +36,21 @@ export const bucketListToDestinationMapping = {
   
   // Transatlantic Crossings → Transatlantic destination
   'transatlantic-crossings': 'transatlantic',
+  
+  // European River Cruises → Mediterranean (most European river cruises are in this region)
+  'european-rivers': 'mediterranean',
+  
+  // Great Barrier Reef → Australia & New Zealand destination
+  'great-barrier-reef': 'australia-new-zealand',
+  
+  // Iceland Circumnavigation → Iceland destination
+  'iceland-circumnavigation': 'iceland',
+  
+  // Grand Voyages → World Cruise destination (extended voyages)
+  'grand-voyages': 'world-cruise',
+  
+  // Midnight Sun Voyages → Norway destination (same region as Northern Lights)
+  'midnight-sun': 'norway',
 };
 
 /**

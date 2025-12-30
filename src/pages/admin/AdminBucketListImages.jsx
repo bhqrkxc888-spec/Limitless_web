@@ -123,32 +123,22 @@ function AdminBucketListImages() {
   /**
    * Get status for bucket list experience
    * Checks both bucket list images and destination fallback images
+   * Returns AMBER (warning) if using shared destination images
    */
   const getExperienceStatus = (experienceId) => {
     const hero = getImage(experienceId, 'hero');
     const card = getImage(experienceId, 'card');
     
-    // Check if using destination fallback
-    const destinationSlug = getDestinationForBucketList(experienceId);
-    let hasHero = !!hero;
-    let hasCard = !!card;
+    // If missing both, return missing
+    if (!hero || !card) return 'missing';
     
-    // If missing and has destination mapping, check destination images
-    if (destinationSlug) {
-      if (!hasHero) {
-        const destHero = destinationImages[`${destinationSlug}-hero`];
-        hasHero = !!destHero;
-      }
-      if (!hasCard) {
-        const destCard = destinationImages[`${destinationSlug}-card`];
-        hasCard = !!destCard;
-      }
+    // Check if using shared destination images - flag as AMBER (warning)
+    const isUsingShared = hero.sharedFrom === 'destination' || card.sharedFrom === 'destination';
+    if (isUsingShared) {
+      return 'warning'; // AMBER - using shared images, should upload bucket-list specific
     }
     
-    // If still missing both, return missing
-    if (!hasHero || !hasCard) return 'missing';
-    
-    // Check SEO compliance (only for actual bucket list images, not fallbacks)
+    // Check SEO compliance for actual bucket list images
     const hasWarnings = (hero && !hero.seo_compliant) || (card && !card.seo_compliant);
     return hasWarnings ? 'warning' : 'pass';
   };
@@ -212,13 +202,15 @@ function AdminBucketListImages() {
                       const destinationSlug = getDestinationForBucketList(experience.id);
                       const hasHero = hero || (destinationSlug && destinationImages[destinationSlug]?.['hero']);
                       const hasCard = card || (destinationSlug && destinationImages[destinationSlug]?.['card']);
+                      const heroIsShared = hero?.sharedFrom === 'destination' || (!hero && destinationSlug && destinationImages[destinationSlug]?.['hero']);
+                      const cardIsShared = card?.sharedFrom === 'destination' || (!card && destinationSlug && destinationImages[destinationSlug]?.['card']);
                       return (
                         <>
-                          <span className={hasHero ? 'stat-ok' : 'stat-missing'}>
-                            Hero {hero?.sharedFrom === 'destination' ? '(shared)' : ''}
+                          <span className={hasHero ? (heroIsShared ? 'stat-warning' : 'stat-ok') : 'stat-missing'}>
+                            Hero {heroIsShared ? '(shared)' : ''}
                           </span>
-                          <span className={hasCard ? 'stat-ok' : 'stat-missing'}>
-                            Card {card?.sharedFrom === 'destination' ? '(shared)' : ''}
+                          <span className={hasCard ? (cardIsShared ? 'stat-warning' : 'stat-ok') : 'stat-missing'}>
+                            Card {cardIsShared ? '(shared)' : ''}
                           </span>
                         </>
                       );
@@ -439,6 +431,11 @@ function AdminBucketListImages() {
           .stat-ok {
             background: rgba(16, 185, 129, 0.1);
             color: var(--admin-success);
+          }
+
+          .stat-warning {
+            background: rgba(251, 191, 36, 0.1);
+            color: var(--admin-warning);
           }
 
           .stat-missing {

@@ -16,6 +16,7 @@ import { cruiseLines } from '../../data/cruiseLines';
 import { destinations } from '../../config/destinations';
 import { bucketListExperiences } from '../../data/bucketList';
 import { ports } from '../../data/ports';
+import { getDestinationForBucketList } from '../../config/bucketListDestinationMapping';
 import './AdminImageManagement.css';
 
 function AdminImageManagement() {
@@ -179,8 +180,66 @@ function AdminImageManagement() {
       newStats.categories.optional = newStats.categories.optionalUploaded;
       
       // Bucket List: count actual experiences × 2 required (hero, card)
-      const requiredBucketList = bucketListExperiences.length * 2;
-      newStats.bucketList.missing = Math.max(0, requiredBucketList - newStats.bucketList.requiredUploaded);
+      // BUT: Account for shared destination images
+      // For each experience, check if it has bucket-list images OR can use destination images
+      const bucketListImagesByExperience = {};
+      data?.filter(img => img.entity_type === 'bucket-list').forEach(img => {
+        if (!bucketListImagesByExperience[img.entity_id]) {
+          bucketListImagesByExperience[img.entity_id] = {};
+        }
+        bucketListImagesByExperience[img.entity_id][img.image_type] = true;
+      });
+
+      const destinationImagesBySlug = {};
+      data?.filter(img => img.entity_type === 'destination').forEach(img => {
+        if (!destinationImagesBySlug[img.entity_id]) {
+          destinationImagesBySlug[img.entity_id] = {};
+        }
+        destinationImagesBySlug[img.entity_id][img.image_type] = true;
+      });
+
+      // Count how many experiences have BOTH hero and card (either bucket-list or shared destination)
+      // Also track which ones are using shared images (for warning count)
+      let experiencesWithBothImages = 0;
+      let experiencesUsingShared = 0;
+      
+      bucketListExperiences.forEach(exp => {
+        const bucketHero = bucketListImagesByExperience[exp.id]?.hero;
+        const bucketCard = bucketListImagesByExperience[exp.id]?.card;
+        
+        let hasHero = !!bucketHero;
+        let hasCard = !!bucketCard;
+        let usingShared = false;
+        
+        // If missing, check destination fallback
+        if (!hasHero || !hasCard) {
+          const destinationSlug = getDestinationForBucketList(exp.id);
+          if (destinationSlug) {
+            if (!hasHero && destinationImagesBySlug[destinationSlug]?.hero) {
+              hasHero = true;
+              usingShared = true;
+            }
+            if (!hasCard && destinationImagesBySlug[destinationSlug]?.card) {
+              hasCard = true;
+              usingShared = true;
+            }
+          }
+        }
+        
+        if (hasHero && hasCard) {
+          experiencesWithBothImages++;
+          if (usingShared) {
+            experiencesUsingShared++;
+          }
+        }
+      });
+      
+      // Add warnings for experiences using shared images
+      newStats.bucketList.warnings += experiencesUsingShared;
+
+      const requiredBucketList = bucketListExperiences.length * 2; // Total required images
+      const availableImages = experiencesWithBothImages * 2; // Images that are available (either bucket-list or shared)
+      newStats.bucketList.missing = Math.max(0, requiredBucketList - availableImages);
       newStats.bucketList.optional = newStats.bucketList.optionalUploaded;
 
       // Port Guides: count published ports × 2 required (hero, card)
@@ -243,7 +302,7 @@ function AdminImageManagement() {
     {
       id: 'destinations',
       title: 'Destinations',
-      description: '16 destinations: hero, card, 8 cruise-line cards, 4 gallery, mobile',
+      description: `${destinations.length} destinations: hero, card, cruise-line-specific cards (optional), gallery images (optional), mobile hero (optional)`,
       icon: MapPin,
       path: '/admin/images/destinations',
       stats: stats.destinations,
@@ -252,7 +311,7 @@ function AdminImageManagement() {
     {
       id: 'cruiseLines',
       title: 'Cruise Lines & Ships',
-      description: '57 cruise lines with logos, heroes, cards, and ship galleries',
+      description: `${cruiseLines.length} cruise lines: logo, hero, card (required). Ship images (optional, future enhancement)`,
       icon: Anchor,
       path: '/admin/images/cruise-lines',
       stats: { 
@@ -275,7 +334,7 @@ function AdminImageManagement() {
     {
       id: 'bucketList',
       title: 'Bucket List Experiences',
-      description: '17 experiences with hero, card, and gallery images',
+      description: `${bucketListExperiences.length} experiences: hero, card (can share with destinations)`,
       icon: Ship,
       path: '/admin/images/bucket-list',
       stats: stats.bucketList || { total: 0, compliant: 0, warnings: 0, missing: 0 },
@@ -284,7 +343,7 @@ function AdminImageManagement() {
     {
       id: 'portGuides',
       title: 'Port Guides',
-      description: 'Cruise port hero and attraction images',
+      description: `${ports.filter(p => p.status === 'published').length} published ports: hero, card (required), attractions & beach (optional)`,
       icon: MapPin,
       path: '/admin/images/port-guides',
       stats: stats.portGuides || { total: 0, compliant: 0, warnings: 0, missing: 0 },
