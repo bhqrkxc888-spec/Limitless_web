@@ -5,7 +5,7 @@ import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, SectionHeader } from '../components/ui';
 import { getOgImage } from '../utils/imageHelpers';
-import { getDestinationHero } from '../utils/assetHelpers';
+import { useDestinationImage } from '../hooks/useImageUrl';
 import './DestinationPage.css';
 
 // Weather carousel temporarily disabled - will reintroduce with improved port data
@@ -15,6 +15,9 @@ import './DestinationPage.css';
 function DestinationPage() {
   const { slug } = useParams();
   const destination = getDestinationBySlug(slug);
+  
+  // Load hero image from database
+  const { imageUrl: heroImage } = useDestinationImage(destination?.slug, 'hero', destination?.name);
 
   // Handle destination not found
   if (!destination) {
@@ -46,7 +49,7 @@ function DestinationPage() {
         title={destination.meta?.title || `${destination.name} Cruises`}
         description={destination.meta?.description || destination.description}
         canonical={`https://www.limitlesscruises.com/destinations/${destination.slug}`}
-        image={getOgImage(getDestinationHero(destination.slug))}
+        image={getOgImage(heroImage)}
         structuredData={structuredData}
       />
 
@@ -54,7 +57,7 @@ function DestinationPage() {
       <HeroSection
         title={`${destination.name} Cruises`}
         subtitle={destination.description}
-        image={getDestinationHero(destination.slug)}
+        image={heroImage}
         imageAlt={`${destination.name} cruise destination`}
         size="md"
         align="left"

@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import { getAllBucketList } from '../data/bucketList';
 import { Card } from './ui';
 import { Button } from './ui';
-import { getBucketListCard } from '../utils/assetHelpers';
+import { useBucketListImage } from '../hooks/useImageUrl';
 import './BucketListFeatured.css';
 
 function BucketListFeatured() {
@@ -79,35 +79,40 @@ function BucketListFeatured() {
           )}
 
           <div className="bucket-list-featured-grid">
-            {visibleItems.map((experience) => (
-              <Card 
-                key={experience.id} 
-                to={`/bucket-list/${experience.slug}`} 
-                variant="default"
-                className="bucket-list-featured-card"
-              >
-                <Card.Image 
-                  src={getBucketListCard(experience.id)} 
-                  alt={experience.title}
-                  aspectRatio="16/10"
-                  loading="lazy"
-                />
-                <Card.Content>
-                  <div className="bucket-list-badge">Bucket List</div>
-                  <Card.Title as="h3">{experience.title}</Card.Title>
-                  <Card.Description>{experience.tagline}</Card.Description>
-                  <div className="bucket-list-featured-meta">
-                    <span className="duration">{experience.duration}</span>
-                  </div>
-                  <div className="bucket-list-featured-cta-inline">
-                    <span className="bucket-list-cta-text">Enquire Now</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                  </div>
-                </Card.Content>
-              </Card>
-            ))}
+            {visibleItems.map((experience) => {
+              const ExperienceCard = () => {
+                const { imageUrl } = useBucketListImage(experience.id, 'card', experience.title);
+                return (
+                  <Card 
+                    to={`/bucket-list/${experience.slug}`} 
+                    variant="default"
+                    className="bucket-list-featured-card"
+                  >
+                    <Card.Image 
+                      src={imageUrl} 
+                      alt={experience.title}
+                      aspectRatio="16/10"
+                      loading="lazy"
+                    />
+                    <Card.Content>
+                      <div className="bucket-list-badge">Bucket List</div>
+                      <Card.Title as="h3">{experience.title}</Card.Title>
+                      <Card.Description>{experience.tagline}</Card.Description>
+                      <div className="bucket-list-featured-meta">
+                        <span className="duration">{experience.duration}</span>
+                      </div>
+                      <div className="bucket-list-featured-cta-inline">
+                        <span className="bucket-list-cta-text">Enquire Now</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                      </div>
+                    </Card.Content>
+                  </Card>
+                );
+              };
+              return <ExperienceCard key={experience.id} />;
+            })}
           </div>
 
           {allFeatured.length > itemsToShow && (

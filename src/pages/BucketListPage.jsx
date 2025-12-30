@@ -4,7 +4,7 @@ import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader } from '../components/ui';
 import { useState, useEffect } from 'react';
-import { getBucketListCard } from '../utils/assetHelpers';
+import { useBucketListImage } from '../hooks/useImageUrl';
 import './BucketListPage.css';
 
 function BucketListPage() {
@@ -55,31 +55,40 @@ function BucketListPage() {
     }))
   };
 
+  // Component for experience card with image hook
+  const ExperienceCard = ({ experience }) => {
+    const { imageUrl } = useBucketListImage(experience.id, 'card', experience.title);
+    
+    return (
+      <Card to={`/bucket-list/${experience.slug}`} variant="default" className="bucket-list-card">
+        <Card.Image 
+          src={imageUrl} 
+          alt={experience.title}
+          aspectRatio="3/2"
+        />
+        <Card.Content>
+          <div className="bucket-list-badge">Bucket List</div>
+          <Card.Title as="h3">{experience.title}</Card.Title>
+          <Card.Description>{experience.tagline}</Card.Description>
+          <div className="bucket-list-meta">
+            <span className="bucket-list-duration">{experience.duration}</span>
+          </div>
+          {experience.highlights && Array.isArray(experience.highlights) && experience.highlights.length > 0 && (
+            <ul className="bucket-list-highlights">
+              {experience.highlights.slice(0, 3).map((highlight, idx) => (
+                <li key={idx}>{highlight}</li>
+              ))}
+            </ul>
+          )}
+        </Card.Content>
+      </Card>
+    );
+  };
+
   const renderExperienceCards = (experiences) => (
     <div className="grid grid-3">
       {experiences.map((experience) => (
-        <Card key={experience.id} to={`/bucket-list/${experience.slug}`} variant="default" className="bucket-list-card">
-          <Card.Image 
-            src={getBucketListCard(experience.id)} 
-            alt={experience.title}
-            aspectRatio="3/2"
-          />
-          <Card.Content>
-            <div className="bucket-list-badge">Bucket List</div>
-            <Card.Title as="h3">{experience.title}</Card.Title>
-            <Card.Description>{experience.tagline}</Card.Description>
-            <div className="bucket-list-meta">
-              <span className="bucket-list-duration">{experience.duration}</span>
-            </div>
-            {experience.highlights && Array.isArray(experience.highlights) && experience.highlights.length > 0 && (
-              <ul className="bucket-list-highlights">
-                {experience.highlights.slice(0, 3).map((highlight, idx) => (
-                  <li key={idx}>{highlight}</li>
-                ))}
-              </ul>
-            )}
-          </Card.Content>
-        </Card>
+        <ExperienceCard key={experience.id} experience={experience} />
       ))}
     </div>
   );
@@ -127,28 +136,33 @@ function BucketListPage() {
                 </button>
               )}
               <div className="bucket-list-featured-grid">
-                {visibleItems.map((experience) => (
-                  <Card 
-                    key={experience.id} 
-                    to={`/bucket-list/${experience.slug}`} 
-                    variant="default"
-                    className="bucket-list-featured-card"
-                  >
-                    <Card.Image 
-                      src={getBucketListCard(experience.id)} 
-                      alt={experience.title}
-                      aspectRatio="3/2"
-                    />
-                    <Card.Content>
-                      <div className="bucket-list-badge">Bucket List</div>
-                      <Card.Title as="h3">{experience.title}</Card.Title>
-                      <Card.Description>{experience.tagline}</Card.Description>
-                      <div className="bucket-list-featured-meta">
-                        <span className="duration">{experience.duration}</span>
-                      </div>
-                    </Card.Content>
-                  </Card>
-                ))}
+                {visibleItems.map((experience) => {
+                  const FeaturedCard = () => {
+                    const { imageUrl } = useBucketListImage(experience.id, 'card', experience.title);
+                    return (
+                      <Card 
+                        to={`/bucket-list/${experience.slug}`} 
+                        variant="default"
+                        className="bucket-list-featured-card"
+                      >
+                        <Card.Image 
+                          src={imageUrl} 
+                          alt={experience.title}
+                          aspectRatio="3/2"
+                        />
+                        <Card.Content>
+                          <div className="bucket-list-badge">Bucket List</div>
+                          <Card.Title as="h3">{experience.title}</Card.Title>
+                          <Card.Description>{experience.tagline}</Card.Description>
+                          <div className="bucket-list-featured-meta">
+                            <span className="duration">{experience.duration}</span>
+                          </div>
+                        </Card.Content>
+                      </Card>
+                    );
+                  };
+                  return <FeaturedCard key={experience.id} />;
+                })}
               </div>
               {featured.length > itemsToShow && (
                 <button

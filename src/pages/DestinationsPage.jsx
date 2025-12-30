@@ -4,7 +4,7 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader } from '../components/ui';
-import { getDestinationCard } from '../utils/assetHelpers';
+import { useDestinationImage } from '../hooks/useImageUrl';
 import './DestinationsPage.css';
 
 function DestinationsPage() {
@@ -44,25 +44,34 @@ function DestinationsPage() {
     }))
   };
 
+  // Component for destination card with image hook
+  const DestinationCard = ({ destination }) => {
+    const { imageUrl } = useDestinationImage(destination.imageSlug || destination.slug, 'card', destination.name);
+    
+    return (
+      <Card to={`/destinations/${destination.slug}`} variant="default">
+        <Card.Image 
+          src={imageUrl} 
+          alt={`${destination.name} cruise destination`}
+          aspectRatio="3/2"
+        />
+        <Card.Content>
+          <Card.Title as="h3">{destination.name}</Card.Title>
+          <Card.Description>{destination.tagline}</Card.Description>
+          {destination.bestTime && (
+            <div className="destination-meta">
+              <span className="best-time">Best time: {destination.bestTime}</span>
+            </div>
+          )}
+        </Card.Content>
+      </Card>
+    );
+  };
+
   const renderDestinationCards = (dests) => (
     <div className="grid grid-2-md grid-3-lg">
       {dests.map((destination) => (
-        <Card key={destination.id} to={`/destinations/${destination.slug}`} variant="default">
-          <Card.Image 
-            src={getDestinationCard(destination.imageSlug || destination.slug)} 
-            alt={`${destination.name} cruise destination`}
-            aspectRatio="3/2"
-          />
-          <Card.Content>
-            <Card.Title as="h3">{destination.name}</Card.Title>
-            <Card.Description>{destination.tagline}</Card.Description>
-            {destination.bestTime && (
-              <div className="destination-meta">
-                <span className="best-time">Best time: {destination.bestTime}</span>
-              </div>
-            )}
-          </Card.Content>
-        </Card>
+        <DestinationCard key={destination.id} destination={destination} />
       ))}
     </div>
   );
