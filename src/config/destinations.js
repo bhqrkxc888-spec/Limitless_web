@@ -56,6 +56,13 @@ export const destinations = [
     description: 'Year-round sunshine, volcanic landscapes, beaches'
   },
   {
+    id: 22,
+    slug: 'atlantic-islands',
+    name: 'Atlantic Islands',
+    heroFilename: 'atlantic-islands-HERO.jpg',
+    description: 'Madeira, Azores, Canary Islands - Atlantic paradise'
+  },
+  {
     id: 8,
     slug: 'greek-islands',
     name: 'Greek Islands',
@@ -227,7 +234,7 @@ export function getDestinationsByRegion() {
     'Europe': destinations.filter(d => 
       ['mediterranean', 'baltic', 'british-isles', 'greece-islands', 'adriatic', 
        'iceland', 'northern-europe', 'western-mediterranean', 'eastern-mediterranean',
-       'norway', 'canary-islands'].includes(d.slug)
+       'norway', 'canary-islands', 'atlantic-islands'].includes(d.slug)
     ),
     'Caribbean & Americas': destinations.filter(d => 
       ['caribbean', 'bermuda', 'mexico', 'south-america', 'panama-canal', 
