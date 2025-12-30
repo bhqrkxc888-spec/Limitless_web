@@ -260,19 +260,25 @@ function BucketListExperiencePage() {
                     {relatedExperiences
                       .filter(exp => exp.id !== experience.id)
                       .slice(0, 3)
-                      .map((exp) => (
-                        <Card key={exp.id} to={`/bucket-list/${exp.slug}`} variant="outlined" className="related-card">
-                          <Card.Image 
-                            src={getBucketListCard(exp.id)} 
-                            alt={exp.title}
-                            aspectRatio="3/2"
-                          />
-                          <Card.Content>
-                            <Card.Title as="h4" className="small-title">{exp.title}</Card.Title>
-                            <Card.Description className="small-text">{exp.tagline}</Card.Description>
-                          </Card.Content>
-                        </Card>
-                      ))}
+                      .map((exp) => {
+                        const RelatedExperienceCard = () => {
+                          const { imageUrl: cardImage } = useBucketListImage(exp.id, 'card', exp.title);
+                          return (
+                            <Card to={`/bucket-list/${exp.slug}`} variant="outlined" className="related-card">
+                              <Card.Image 
+                                src={cardImage} 
+                                alt={exp.title}
+                                aspectRatio="3/2"
+                              />
+                              <Card.Content>
+                                <Card.Title as="h4" className="small-title">{exp.title}</Card.Title>
+                                <Card.Description className="small-text">{exp.tagline}</Card.Description>
+                              </Card.Content>
+                            </Card>
+                          );
+                        };
+                        return <RelatedExperienceCard key={exp.id} />;
+                      })}
                   </div>
                 </div>
               )}
