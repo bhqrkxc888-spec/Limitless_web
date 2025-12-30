@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react';
 import { getAllBucketList } from '../data/bucketList';
 import { Card } from './ui';
 import { Button } from './ui';
+import { getBucketListCard } from '../utils/assetHelpers';
 import './BucketListFeatured.css';
 
 function BucketListFeatured() {
@@ -86,7 +87,7 @@ function BucketListFeatured() {
                 className="bucket-list-featured-card"
               >
                 <Card.Image 
-                  src={experience.cardImage || experience.heroImage} 
+                  src={getBucketListCard(experience.id)} 
                   alt={experience.title}
                   aspectRatio="16/10"
                   loading="lazy"
