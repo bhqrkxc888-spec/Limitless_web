@@ -123,7 +123,7 @@ function AdminBucketListImages() {
   /**
    * Get status for bucket list experience
    * Checks both bucket list images and destination fallback images
-   * Returns AMBER (warning) if using shared destination images
+   * Only shows warning if REQUIRED images have SEO issues, not for shared images
    */
   const getExperienceStatus = (experienceId) => {
     const hero = getImage(experienceId, 'hero');
@@ -132,13 +132,8 @@ function AdminBucketListImages() {
     // If missing both, return missing
     if (!hero || !card) return 'missing';
     
-    // Check if using shared destination images - flag as AMBER (warning)
-    const isUsingShared = hero.sharedFrom === 'destination' || card.sharedFrom === 'destination';
-    if (isUsingShared) {
-      return 'warning'; // AMBER - using shared images, should upload bucket-list specific
-    }
-    
-    // Check SEO compliance for actual bucket list images
+    // Check SEO compliance for required images only
+    // Shared images are fine - don't flag as warning just for sharing
     const hasWarnings = (hero && !hero.seo_compliant) || (card && !card.seo_compliant);
     return hasWarnings ? 'warning' : 'pass';
   };

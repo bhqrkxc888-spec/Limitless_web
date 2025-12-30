@@ -73,7 +73,10 @@ function AdminDestinationImages() {
     const hasRequired = destImages.hero && destImages.card;
     if (!hasRequired) return 'missing';
     
-    const hasWarnings = Object.values(destImages).some(img => !img.seo_compliant);
+    // Only check REQUIRED images (hero and card) for status
+    // Optional images (gallery, cruise-line-specific cards, mobile) don't affect card status
+    const requiredImages = [destImages.hero, destImages.card].filter(Boolean);
+    const hasWarnings = requiredImages.some(img => !img.seo_compliant);
     return hasWarnings ? 'warning' : 'pass';
   };
 
