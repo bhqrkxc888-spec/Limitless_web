@@ -91,11 +91,10 @@ function AdminCruiseLineImages() {
   const getCruiseLineStatus = (slug) => {
     const clImages = images[slug] || {};
     const hasLogo = !!clImages.logo;
-    const hasHero = !!clImages.hero;
-    const hasCard = !!clImages.card;
     
-    if (!hasLogo || !hasHero || !hasCard) return 'error';
-    if (clImages.logo?.seo_compliant && clImages.hero?.seo_compliant && clImages.card?.seo_compliant) return 'pass';
+    // Only logo is required for cruise line pages
+    if (!hasLogo) return 'error';
+    if (clImages.logo?.seo_compliant) return 'pass';
     return 'warning';
   };
 
@@ -174,14 +173,29 @@ function AdminCruiseLineImages() {
                     </div>
                     <p className="entity-card-stats">
                       <span className={images[cl.slug]?.logo ? 'stat-ok' : 'stat-missing'}>Logo</span>
-                      <span className={images[cl.slug]?.hero ? 'stat-ok' : 'stat-missing'}>Hero</span>
-                      <span className={images[cl.slug]?.card ? 'stat-ok' : 'stat-missing'}>Card</span>
-                      {cl.fleet && cl.fleet.length > 0 && (
-                        <span style={{ marginLeft: 'auto', color: 'var(--admin-text-muted)' }}>
-                          <Ship size={12} style={{ marginRight: '4px', verticalAlign: 'middle' }} />
-                          {cl.fleet.length}
-                        </span>
-                      )}
+                      {(() => {
+                        const shipList = cl.fleet || (cl.ships ? cl.ships.map(name => ({ name })) : []);
+                        const shipCount = shipList.length;
+                        const shipSlugs = shipList.map(ship => {
+                          const shipObj = typeof ship === 'string' ? { name: ship } : ship;
+                          return shipObj.slug || shipObj.name.toLowerCase().replace(/\s+/g, '-');
+                        });
+                        const shipEntityIds = shipSlugs.map(shipSlug => `${cl.slug}/ships/${shipSlug}`);
+                        const shipsWithCards = shipEntityIds.filter(entityId => shipImages[entityId]?.card).length;
+                        return (
+                          <>
+                            {shipCount > 0 && (
+                              <span className={shipsWithCards === shipCount ? 'stat-ok' : shipsWithCards > 0 ? 'stat-warning' : 'stat-missing'}>
+                                Ships: {shipsWithCards}/{shipCount}
+                              </span>
+                            )}
+                            <span style={{ marginLeft: 'auto', color: 'var(--admin-text-muted)' }}>
+                              <Ship size={12} style={{ marginRight: '4px', verticalAlign: 'middle' }} />
+                              {shipCount}
+                            </span>
+                          </>
+                        );
+                      })()}
                     </p>
                   </button>
                 ))}
@@ -230,88 +244,53 @@ function AdminCruiseLineImages() {
                 />
               </div>
               
-              <div className="admin-card image-card">
-                <div className="image-card-header">
-                  <div className="image-card-title">
-                    <h3>Hero Image</h3>
-                    <span className="badge badge-required">Required</span>
-                  </div>
-                  <StatusIndicator 
-                    status={images[selectedCruiseLine.slug]?.hero ? 'pass' : 'missing'} 
-                    size="small" 
-                  />
-                </div>
-                <p className="image-card-specs">Recommended: 1920×1080px, WebP format</p>
-                <ImageUpload
-                  bucket={STORAGE_BUCKETS.CRUISE_LINES}
-                  entityType="cruise-line"
-                  entityId={selectedCruiseLine.slug}
-                  imageType="hero"
-                  suggestedAltText={`${selectedCruiseLine.name} cruise ship`}
-                  existingImage={images[selectedCruiseLine.slug]?.hero?.url}
-                  existingData={images[selectedCruiseLine.slug]?.hero}
-                  onUploadComplete={loadImages}
-                />
-              </div>
-
-              <div className="admin-card image-card">
-                <div className="image-card-header">
-                  <div className="image-card-title">
-                    <h3>Card Image</h3>
-                    <span className="badge badge-required">Required</span>
-                  </div>
-                  <StatusIndicator 
-                    status={images[selectedCruiseLine.slug]?.card ? 'pass' : 'missing'} 
-                    size="small" 
-                  />
-                </div>
-                <p className="image-card-specs">Recommended: 600×400px, WebP format</p>
-                <ImageUpload
-                  bucket={STORAGE_BUCKETS.CRUISE_LINES}
-                  entityType="cruise-line"
-                  entityId={selectedCruiseLine.slug}
-                  imageType="card"
-                  suggestedAltText={`${selectedCruiseLine.name} cruise card`}
-                  existingImage={images[selectedCruiseLine.slug]?.card?.url}
-                  existingData={images[selectedCruiseLine.slug]?.card}
-                  onUploadComplete={loadImages}
-                />
-              </div>
             </div>
 
             {/* Gallery Images (Optional) */}
             <h3 style={{ color: 'var(--admin-text)', fontSize: '1.25rem', marginTop: '3rem', marginBottom: '1rem' }}>
-              Gallery Images (Optional)
+              Gallery Images (Optional - Recommended)
             </h3>
             <p style={{ color: 'var(--admin-text-muted)', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
-              Add images to showcase life onboard: exterior, interior spaces, entertainment, dining, and staterooms.
+              These images are used in the "Why Choose" section cards (6 benefit cards). They display at 400×300px on the page. Upload at higher resolution (1200×800px recommended) for best quality. The system will intelligently match images to benefit cards based on content (e.g., dining images for food-related cards, ship exterior for fleet-related cards).
             </p>
             <div className="images-list">
-              {['exterior', 'interior', 'entertainment', 'food', 'cabin'].map(type => (
-                <div key={type} className="admin-card image-card">
-                  <div className="image-card-header">
-                    <div className="image-card-title">
-                      <h3>{type.charAt(0).toUpperCase() + type.slice(1)}</h3>
-                      <span className="badge badge-optional">Optional</span>
+              {['exterior', 'interior', 'entertainment', 'food', 'cabin'].map(type => {
+                const labels = {
+                  exterior: 'Ship Exterior',
+                  interior: 'Interior Spaces',
+                  entertainment: 'Entertainment',
+                  food: 'Dining',
+                  cabin: 'Staterooms'
+                };
+                return (
+                  <div key={type} className="admin-card image-card">
+                    <div className="image-card-header">
+                      <div className="image-card-title">
+                        <h3>{labels[type] || type.charAt(0).toUpperCase() + type.slice(1)}</h3>
+                        <span className="badge badge-optional">Optional</span>
+                      </div>
+                      <StatusIndicator 
+                        status={images[selectedCruiseLine.slug]?.[type] ? 'pass' : 'missing'} 
+                        size="small" 
+                      />
                     </div>
-                    <StatusIndicator 
-                      status={images[selectedCruiseLine.slug]?.[type] ? 'pass' : 'missing'} 
-                      size="small" 
+                    <p className="image-card-specs">
+                      Recommended: 1200×800px (displays at 400×300px), WebP format<br />
+                      <strong>Used in:</strong> "Why Choose" section benefit cards (automatically matched to relevant cards)
+                    </p>
+                    <ImageUpload
+                      bucket={STORAGE_BUCKETS.CRUISE_LINES}
+                      entityType="cruise-line"
+                      entityId={selectedCruiseLine.slug}
+                      imageType={type}
+                      suggestedAltText={`${selectedCruiseLine.name} ${labels[type] || type}`}
+                      existingImage={images[selectedCruiseLine.slug]?.[type]?.url}
+                      existingData={images[selectedCruiseLine.slug]?.[type]}
+                      onUploadComplete={loadImages}
                     />
                   </div>
-                  <p className="image-card-specs">Recommended: 1200×800px, WebP format</p>
-                  <ImageUpload
-                    bucket={STORAGE_BUCKETS.CRUISE_LINES}
-                    entityType="cruise-line"
-                    entityId={selectedCruiseLine.slug}
-                    imageType={type}
-                    suggestedAltText={`${selectedCruiseLine.name} ${type}`}
-                    existingImage={images[selectedCruiseLine.slug]?.[type]?.url}
-                    existingData={images[selectedCruiseLine.slug]?.[type]}
-                    onUploadComplete={loadImages}
-                  />
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* Ships Section */}
@@ -326,7 +305,7 @@ function AdminCruiseLineImages() {
                 <>
             <h3 style={{ color: 'var(--admin-text)', fontSize: '1.25rem', marginTop: '3rem', marginBottom: '1rem' }}>
               <Ship size={20} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
-              Ships ({shipList.length}) - Optional / Future Enhancement
+              Ships ({shipList.length}) - Card Images Required
             </h3>
             <p style={{
               color: 'var(--admin-text-muted)',
@@ -335,11 +314,11 @@ function AdminCruiseLineImages() {
               background: 'var(--admin-bg-secondary)',
               padding: '0.75rem 1rem',
               borderRadius: '8px',
-              borderLeft: '3px solid var(--admin-warning)'
+              borderLeft: '3px solid var(--admin-primary)'
             }}>
-              ℹ️ Ship images are <strong>optional</strong> and not required for site launch. 
-              We're not building individual ship profile pages at this time. 
-              Upload these images only if available and time permits.
+              ℹ️ <strong>Ship card images are required</strong> for the fleet carousel on the cruise line page. 
+              Each ship needs a card image (600×400px recommended, displays at 400×300px). 
+              Ships without card images will show "Image Coming Soon" placeholder.
             </p>
                   <div className="entity-grid">
                     {[...shipList]
@@ -388,10 +367,14 @@ function AdminCruiseLineImages() {
               return (
                 <div className="images-list">
                   {/* Ship Card Image - Required for ship cards on cruise line pages */}
-                  <div className="admin-card image-card">
+                  <div className="admin-card image-card" style={{ 
+                    border: '2px solid var(--admin-primary)', 
+                    background: 'var(--admin-bg-secondary)',
+                    marginBottom: '2rem'
+                  }}>
                     <div className="image-card-header">
                       <div className="image-card-title">
-                        <h3>Ship Card Image</h3>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: '600' }}>Ship Card Image</h3>
                         <span className="badge badge-required">Required</span>
                       </div>
                       <StatusIndicator 
@@ -399,9 +382,15 @@ function AdminCruiseLineImages() {
                         size="small" 
                       />
                     </div>
-                    <p className="image-card-specs">
-                      Recommended: 600×400px, WebP format<br />
-                      <strong>Used for:</strong> Ship cards on cruise line pages (opens Widgety ship page)
+                    <p className="image-card-specs" style={{ 
+                      fontSize: '0.9375rem',
+                      lineHeight: '1.6',
+                      marginBottom: '0.5rem'
+                    }}>
+                      <strong>Required for fleet carousel display</strong><br />
+                      Recommended: 600×400px (displays at 400×300px on page), WebP format<br />
+                      <strong>Used in:</strong> "Our Fleet" carousel section on the cruise line page<br />
+                      <strong>Note:</strong> Ships without card images will show "Image Coming Soon" placeholder
                     </p>
                     <ImageUpload
                       bucket={STORAGE_BUCKETS.CRUISE_LINES}

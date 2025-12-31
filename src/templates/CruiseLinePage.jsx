@@ -4,7 +4,7 @@ import { destinations } from '../data/destinations';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
-import { Button, Card, SectionHeader, DataTable } from '../components/ui';
+import { Button, Card, SectionHeader, DataTable, Accordion } from '../components/ui';
 import Carousel from '../components/Carousel';
 import { shipNameToSlug } from '../utils/widgetyHelpers';
 import { useCruiseLineImage, useShipImage } from '../hooks/useImageUrl';
@@ -248,7 +248,7 @@ function CruiseLinePage() {
         </section>
       )}
 
-      {/* Section 4: Top Destinations - Pills */}
+      {/* Section 4: Top Destinations - Top 5 Pills */}
       {cruiseLine.destinationImages && cruiseLine.destinationImages.length > 0 && (
         <section className="cruise-line-section">
           <div className="container">
@@ -256,21 +256,19 @@ function CruiseLinePage() {
               title={`Where ${cruiseLine.shortName} Sails Most`}
               align="center"
             />
-            <div className="destinations-pills-wrapper">
-              <Carousel itemsToShow={6} layout="flex" className="destinations-carousel">
-                {cruiseLine.destinationImages.map((dest, index) => {
-                  const destSlug = destinationNameToSlug(dest.name);
-                  return (
-                    <a
-                      key={index}
-                      href={`/destinations/${destSlug}`}
-                      className="destination-pill"
-                    >
-                      {dest.name} →
-                    </a>
-                  );
-                })}
-              </Carousel>
+            <div className="destinations-pills-row">
+              {cruiseLine.destinationImages.slice(0, 5).map((dest, index) => {
+                const destSlug = destinationNameToSlug(dest.name);
+                return (
+                  <a
+                    key={index}
+                    href={`/destinations/${destSlug}`}
+                    className="destination-pill"
+                  >
+                    {dest.name} →
+                  </a>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -280,27 +278,54 @@ function CruiseLinePage() {
       <section className="cruise-line-section section-alt">
         <div className="container">
           <div className="families-kids-content">
-            <div className="families-kids-image">
+            <div className="families-kids-images">
               {isAdultsOnly ? (
-                <img 
-                  src={galleryImages.interior || galleryImages.exterior} 
-                  alt="Adults-only relaxation"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
+                <>
+                  <div className="families-kids-image">
+                    <img 
+                      src={galleryImages.interior || galleryImages.exterior} 
+                      alt="Adults-only relaxation"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                  </div>
+                  <div className="families-kids-image">
+                    <img 
+                      src={galleryImages.exterior || galleryImages.interior} 
+                      alt="Adults-only pool area"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                  </div>
+                </>
               ) : (
-                <img 
-                  src={galleryImages.entertainment || galleryImages.interior} 
-                  alt="Kids club activities"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
+                <>
+                  <div className="families-kids-image">
+                    <img 
+                      src={galleryImages.entertainment || galleryImages.interior} 
+                      alt="Kids club activities"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                  </div>
+                  <div className="families-kids-image">
+                    <img 
+                      src={galleryImages.interior || galleryImages.entertainment} 
+                      alt="Family-friendly facilities"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                  </div>
+                </>
               )}
             </div>
             <div className="families-kids-text">
               <h2>Is {cruiseLine.name} Good for Families?</h2>
-              {isAdultsOnly ? (
+              {isAdultsOnly || cruiseLine.kidsClub === null ? (
                 <div className="adults-only-message">
-                  <p><strong>Adults-only line - child-free relaxation</strong></p>
-                  <p>{cruiseLine.name} offers a sophisticated, adults-only cruise experience perfect for couples and groups seeking peaceful, child-free relaxation.</p>
+                  <p><strong>Adults-only experience (16+ minimum age)</strong></p>
+                  <p>
+                    {cruiseLine.kidsClub === null 
+                      ? `${cruiseLine.name} offers a sophisticated adults-only experience (16+) perfect for mature travellers, couples, and multi-generational groups seeking relaxed elegance. No dedicated kids clubs as all ships operate adults-only policy. Focus on destination immersion, guest lectures, classical music, and evening ballroom dancing. Intergenerational appeal for grandparents with adult children/grandchildren. Perfect for discerning British travellers seeking small-ship intimacy without family facilities.`
+                      : `${cruiseLine.name} offers a sophisticated, adults-only cruise experience perfect for couples and groups seeking peaceful, child-free relaxation.`
+                    }
+                  </p>
                 </div>
               ) : cruiseLine.kidsClub ? (
                 <>
@@ -334,13 +359,6 @@ function CruiseLinePage() {
       <section className="cruise-line-section">
         <div className="container">
           <div className="loyalty-content">
-            <div className="loyalty-image">
-              <img 
-                src={galleryImages.interior || galleryImages.exterior} 
-                alt={`${cruiseLine.name} loyalty programme`}
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-            </div>
             <div className="loyalty-text">
               {cruiseLine.loyaltyProgram ? (
                 <>
@@ -375,39 +393,62 @@ function CruiseLinePage() {
         </div>
       </section>
 
-      {/* Section 7: Life Onboard */}
+      {/* Section 7: FAQ - SEO Gold */}
       <section className="cruise-line-section section-alt">
         <div className="container">
           <SectionHeader
-            title={`Life Onboard ${cruiseLine.name}`}
+            title={`Frequently Asked Questions about ${cruiseLine.name}`}
+            subtitle="Everything you need to know before booking"
             align="center"
           />
-          <div className="life-onboard-grid">
-            {[
-              { type: 'exterior', label: 'Ship Exterior', image: galleryImages.exterior },
-              { type: 'food', label: 'Dining', image: galleryImages.food },
-              { type: 'cabin', label: 'Staterooms', image: galleryImages.cabin },
-              { type: 'entertainment', label: 'Entertainment', image: galleryImages.entertainment },
-              { type: 'interior', label: 'Interior Spaces', image: galleryImages.interior },
-              { type: 'pool', label: 'Pool & Recreation', image: galleryImages.entertainment }
-            ].map((item, index) => (
-              <Card key={index} variant="default" className="life-onboard-card">
-                {item.image && !item.image.includes('placeholder') ? (
-                  <Card.Image 
-                    src={item.image} 
-                    alt={`${cruiseLine.name} ${item.label}`}
-                    aspectRatio="4/3"
-                  />
-                ) : (
-                  <div className="life-onboard-placeholder">
-                    <p>Image Coming Soon</p>
-                  </div>
-                )}
-                <Card.Content>
-                  <Card.Title as="h3">{item.label}</Card.Title>
-                </Card.Content>
-              </Card>
-            ))}
+          <div className="cruise-line-faq">
+            <Accordion
+              items={
+                cruiseLine.faq && cruiseLine.faq.length > 0
+                  ? cruiseLine.faq.map((item, index) => ({
+                      id: `faq-${index + 1}`,
+                      title: item.question,
+                      content: item.answer
+                    }))
+                  : [
+                      {
+                        id: 'faq-1',
+                        title: `What makes ${cruiseLine.name} different from other cruise lines?`,
+                        content: `${cruiseLine.name} ${cruiseLine.tagline ? `- ${cruiseLine.tagline}` : 'offers a unique cruise experience'}. ${cruiseLine.description || `With a focus on ${cruiseLine.category === 'luxury' ? 'luxury and sophistication' : cruiseLine.category === 'premium' ? 'premium service and comfort' : 'value and family-friendly experiences'}, ${cruiseLine.name} provides exceptional service and memorable voyages.`}
+                      },
+                      {
+                        id: 'faq-2',
+                        title: `What destinations does ${cruiseLine.name} sail to?`,
+                        content: `${cruiseLine.name} offers cruises to ${cruiseLine.destinationImages && cruiseLine.destinationImages.length > 0 ? `destinations including ${cruiseLine.destinationImages.slice(0, 3).map(d => d.name).join(', ')}` : 'a wide range of destinations worldwide'}. From ${cruiseLine.category === 'luxury' ? 'exotic' : 'popular'} ports to hidden gems, there's an itinerary to suit every traveller.`
+                      },
+                      {
+                        id: 'faq-3',
+                        title: `Is ${cruiseLine.name} suitable for families?`,
+                        content: isAdultsOnly 
+                          ? `${cruiseLine.name} is an adults-only cruise line, perfect for couples and groups seeking a child-free, sophisticated cruise experience.`
+                          : `${cruiseLine.name} ${cruiseLine.kidsClub ? `offers excellent family facilities including ${cruiseLine.kidsClub.name || 'dedicated kids clubs'}` : 'welcomes families'} with ${cruiseLine.kidsClub ? 'age-appropriate activities and programs' : 'family-friendly amenities and activities'}.`
+                      },
+                      {
+                        id: 'faq-4',
+                        title: `What is included in a ${cruiseLine.name} cruise?`,
+                        content: `A ${cruiseLine.name} cruise typically includes accommodation, main dining, entertainment, use of pools and fitness facilities, and ${cruiseLine.kidsClub ? 'kids club access' : 'access to onboard amenities'}. ${cruiseLine.category === 'luxury' ? 'Many luxury amenities, premium dining, and beverages may also be included.' : 'Additional services like specialty dining, spa treatments, and shore excursions are available at extra cost.'}`
+                      },
+                      {
+                        id: 'faq-5',
+                        title: `How do I join ${cruiseLine.name}'s loyalty programme?`,
+                        content: cruiseLine.loyaltyProgram
+                          ? `Join ${cruiseLine.loyaltyProgram.name} by sailing with ${cruiseLine.name}. ${cruiseLine.loyaltyProgram.intro || 'Earn points with each cruise and unlock exclusive benefits, discounts, and recognition as you progress through the tiers.'}`
+                          : `${cruiseLine.name} offers a loyalty programme to reward repeat guests. Contact us to learn more about membership benefits and how to join.`
+                      },
+                      {
+                        id: 'faq-6',
+                        title: `What should I know before booking a ${cruiseLine.name} cruise?`,
+                        content: `Before booking, consider your preferred destinations, travel dates, and cabin type. ${cruiseLine.category === 'luxury' ? 'Luxury cruises offer all-inclusive experiences with premium amenities.' : cruiseLine.category === 'premium' ? 'Premium cruises balance comfort and value with enhanced service.' : 'Mainstream cruises offer great value with family-friendly options.'} Our cruise consultants can help you find the perfect ${cruiseLine.name} itinerary for your needs.`
+                      }
+                    ]
+              }
+              allowMultiple={true}
+            />
           </div>
         </div>
       </section>

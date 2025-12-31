@@ -59,7 +59,7 @@ function AdminImageManagement() {
       const REQUIRED_IMAGE_TYPES = {
         site: ['hero', 'logo', 'og-image', 'favicon', 'katherine1', 'katherine2', 'katherine3'],
         destination: ['hero', 'card'],
-        'cruise-line': ['logo', 'hero', 'card'],
+        'cruise-line': ['logo'], // Only logo is required (hero/card removed, gallery images optional)
         ship: ['card'], // Ship card image required for ship cards on cruise line pages
         category: ['card'],
         'bucket-list': ['hero', 'card'],
@@ -69,7 +69,7 @@ function AdminImageManagement() {
       const OPTIONAL_IMAGE_TYPES = {
         site: ['hero-mobile', 'agency-logo', 'trust-abta', 'trust-atol', 'trust-clia'],
         destination: ['mobile', 'gallery-1', 'gallery-2', 'gallery-3', 'gallery-4'], // gallery and cruise-line-specific cards are optional
-        'cruise-line': [],
+        'cruise-line': ['exterior', 'interior', 'entertainment', 'food', 'cabin'], // Gallery images for "Why Choose" section (optional but recommended)
         ship: ['exterior', 'deck', 'suite', 'dining', 'pool', 'entertainment', 'spa', 'theater'], // Ship gallery images are optional (card is required)
         category: [],
         'bucket-list': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4'],
@@ -138,8 +138,9 @@ function AdminImageManagement() {
                        img.image_type.startsWith('gallery-') || 
                        (img.image_type.startsWith('card-') && img.image_type !== 'card');
           } else if (img.entity_type === 'ship') {
-            // ALL SHIP IMAGES ARE OPTIONAL - not building ship profiles now
-            isRequired = false;
+            // Ship card images are REQUIRED for fleet carousel
+            // Ship gallery images (exterior, deck, etc.) are optional
+            isRequired = img.image_type === 'card';
             isOptional = ['exterior', 'deck', 'suite', 'dining', 'pool', 'entertainment', 'spa', 'theater'].includes(img.image_type);
           } else if (img.entity_type === 'bucket-list') {
             isRequired = img.image_type === 'hero' || img.image_type === 'card';
@@ -177,15 +178,24 @@ function AdminImageManagement() {
       newStats.destinations.missing = Math.max(0, requiredDestinations - newStats.destinations.requiredUploaded);
       newStats.destinations.optional = newStats.destinations.optionalUploaded; // Count of uploaded optional images
       
-      // Cruise Lines: count actual cruise lines × 3 required (logo, hero, card)
-      const requiredCruiseLines = cruiseLines.length * 3;
+      // Cruise Lines: count actual cruise lines × 1 required (logo only - hero/card removed)
+      const requiredCruiseLines = cruiseLines.length * 1;
       newStats.cruiseLines.missing = Math.max(0, requiredCruiseLines - newStats.cruiseLines.requiredUploaded);
       newStats.cruiseLines.optional = newStats.cruiseLines.optionalUploaded;
       
-      // Ships: NOT REQUIRED - Future enhancement only
-      // Ships are optional for now as we're not building ship profile pages
-      newStats.ships.missing = 0; // Ships don't count as missing since they're optional
-      newStats.ships.optional = newStats.ships.optionalUploaded; // All ship uploads count as optional
+      // Ships: Count all ships and check for required card images
+      // Ship card images are required for fleet carousel on cruise line pages
+      const allShips = [];
+      cruiseLines.forEach(cl => {
+        const shipList = cl.fleet || (cl.ships ? cl.ships.map(name => ({ name })) : []);
+        shipList.forEach(ship => {
+          const shipObj = typeof ship === 'string' ? { name: ship } : ship;
+          allShips.push({ cruiseLine: cl.slug, ship: shipObj });
+        });
+      });
+      const requiredShipCards = allShips.length * 1; // 1 card per ship
+      newStats.ships.missing = Math.max(0, requiredShipCards - newStats.ships.requiredUploaded);
+      newStats.ships.optional = newStats.ships.optionalUploaded; // Gallery images are optional
       
       // Categories: 6 categories × 1 required (card) = 6 required
       const requiredCategories = 6;
@@ -333,7 +343,7 @@ function AdminImageManagement() {
     {
       id: 'cruiseLines',
       title: 'Cruise Lines & Ships',
-      description: `${cruiseLines.length} cruise lines: logo, hero, card (required). Ship images (optional, future enhancement)`,
+      description: `${cruiseLines.length} cruise lines: logo (required), gallery images (optional). Ship card images (required for fleet carousel)`,
       icon: Anchor,
       path: '/admin/images/cruise-lines',
       stats: { 

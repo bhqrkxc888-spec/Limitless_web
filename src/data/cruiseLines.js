@@ -30,13 +30,13 @@ export const cruiseLines = [
     // Why Choose section - benefit cards
     whyChoose: [
       {
-        title: 'No-Fly from Southampton',
-        description: 'Start and finish in the UK with no airport stress. Pounds sterling onboard for easy budgeting, and tips are not required.',
+        title: 'Classic British Cruising',
+        description: 'P&O Cruises delivers the authentic British cruise experience with a heritage spanning 185 years. Expect proper tea service, British-inspired menus, and entertainment featuring West End-style shows. Perfect for UK travellers seeking familiar comforts at sea with impeccable service standards.',
         icon: 'anchor'
       },
       {
-        title: 'Ships for Everyone',
-        description: 'Adults-only ships (Aurora, Arcadia) for peaceful cruising, or family-friendly vessels (Iona, Arvia, Britannia, Azura, Ventura) with kids clubs.',
+        title: 'Modern Fleet',
+        description: 'Seven contemporary ships ranging from family-friendly Iona class to classic mid-size vessels like Britannia. Every ship offers British-style pubs, afternoon tea, and panoramic lounges. Regular refits ensure modern facilities across the entire fleet.',
         icon: 'ship'
       },
       {
@@ -45,18 +45,18 @@ export const cruiseLines = [
         icon: 'music'
       },
       {
-        title: 'Food Heroes Dining',
-        description: 'Enjoy menus by Marco Pierre White, José Pizarro, and wine expert Olly Smith at The Glass House.',
+        title: 'Exceptional Dining',
+        description: 'Multiple main dining rooms plus speciality venues like Epicurean (gourmet British cuisine) and Sindhu (Indian fusion). All-inclusive Horizon drinks package available. Kids eat free in main restaurants and traditional British options always available.',
         icon: 'dining'
       },
       {
-        title: 'Kids Club: The Reef',
-        description: 'Ages 6 months to 17 years with age-specific programs, Night Nursery, and qualified Reef Rangers, all included.',
+        title: 'Family Entertainment',
+        description: 'West End-quality production shows, family-friendly deck parties, and kids clubs from Reef Rangers (2-4yrs) to Dare to Dance (15-17yrs). Family harbour days in Southampton and evening childcare let parents enjoy adult-only evening entertainment.',
         icon: 'child'
       },
       {
-        title: 'Arvia Exclusives',
-        description: 'Try Altitude Skywalk high ropes 54m above the ocean and Mission Control submarine experience.',
+        title: 'Outstanding Value',
+        description: 'No tipping required, all main meals included, kids sail from £99, and flexible dining times. Solo traveller fares match double occupancy on selected sailings. ABTA/ATOL protected with familiar UK departure ports.',
         icon: 'adventure'
       }
     ],
@@ -74,7 +74,7 @@ export const cruiseLines = [
     // Kids Club section
     kidsClub: {
       name: 'The Reef',
-      intro: 'The Reef provides age-specific groups with dedicated rooms and activities from soft play to DJ sessions. Led by qualified Reef Rangers, clubs include Night Nursery (6 months-4 years), Splashers (2-4), Surfers (5-8), Scubas (9-12), and H2O/The Scene (13-17). Pre-registration is recommended in My P&O Cruises. Optional guaranteed sessions cost around £4.95 (day) or £8.95 (evening). Teen spaces are drop-in.',
+      intro: 'P&O Cruises is one of Britain\'s most family-friendly cruise lines with dedicated kids clubs across multiple age groups on every ship. P&O\'s award-winning kids programme features Reef Rangers (2-4yrs) with sensory play, Scubas (5-8yrs) with pirate adventures, and older clubs up to 17yrs. Every ship has splash zones, family cinemas, and kids eat free in main dining rooms. Evening childcare until late lets parents enjoy Horizon shows and adult loungers. Family balconies, interconnecting cabins, and kids clubs open from 9am-11pm daily. Multi-generational appeal perfect for grandparents travelling with grandchildren.',
       quickFacts: [
         'Included in cruise fare',
         'Qualified Reef Rangers',
@@ -106,8 +106,8 @@ export const cruiseLines = [
     // Loyalty program
     loyaltyProgram: {
       name: 'Peninsular Club',
-      intro: 'Earn points for every night sailed and unlock benefits across six tiers: Pacific (150+ points) through to Ligurian (2,501+ points, 201+ nights). Enjoy discounts, priority services, and exclusive events.',
-      pointsInfo: '10 points per night typically. Benefits vary by ship and itinerary.',
+      intro: 'Peninsular Club - P&O\'s generous loyalty programme rewards repeat cruisers with points-based benefits across all tiers. Join free at booking or onboard. Earn 1 Club Point per night (double for suites), redeemable against onboard credit, cabin upgrades, and exclusive events. Bronze status from first cruise, with escalating benefits up to Platinum tier. Over 1 million members enjoy the UK\'s most generous cruise loyalty scheme with no blackout dates for rewards.',
+      pointsInfo: 'Key Benefits: Onboard credit from 10 nights (£30 Silver, £60 Gold, £100 Platinum), priority tendering, dining reservations, and disembarkation, exclusive cocktail parties and loyalty desk services, suite upgrades and spa discounts at higher tiers.',
       tiers: [
         { tier: 'Pacific', points: '150-500', benefits: '5% discount, magazine' },
         { tier: 'Atlantic', points: '501-1,000', benefits: '7.5% discount, Champagne welcome' },
@@ -132,6 +132,33 @@ export const cruiseLines = [
     ships: ['Iona', 'Arvia', 'Britannia', 'Ventura', 'Azura', 'Aurora', 'Arcadia'],
     destinations: ['Mediterranean', 'Norwegian Fjords', 'Caribbean', 'Canary Islands', 'Northern Europe', 'Baltic & Northern Europe'],
     suitableFor: ['Couples', 'Families', 'Solo Travellers'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes P&O Cruises different from other cruise lines?',
+        answer: 'P&O offers authentic British cruising with 185 years heritage - proper tea service, British cuisine, West End shows, and UK departure ports. Unlike American lines, expect formal nights, bridge tournaments, and BBC World News. Family-friendly yet sophisticated, perfect for multi-generational UK holidays.'
+      },
+      {
+        question: 'What destinations does P&O Cruises sail to?',
+        answer: 'Winter Caribbean from Barbados/Bridgetown, summer Norwegian fjords (23 visits), Mediterranean, Canary Islands, and British Isles cruises. Signature 16-night Scandinavia & Baltic voyages. Longest-running fjord cruises from Southampton with overnight Bergen stays and exclusive Scottish port calls.'
+      },
+      {
+        question: 'Is P&O Cruises suitable for families?',
+        answer: 'Excellent for families - kids clubs (2-17yrs), splash zones on Iona/Arvia, family cinemas, and kids eat free. Evening childcare until 1am, interconnecting cabins, and family balconies. Multi-generational favourite with grandparents enjoying quieter lounges while kids entertain themselves.'
+      },
+      {
+        question: 'What is included in a P&O Cruises holiday?',
+        answer: 'All meals in main restaurants, buffet, entertainment, kids clubs, gym, pools, most onboard activities included. No tipping required. Extras: speciality dining (£20-40pp), spa, excursions, drinks packages (£35/day), casino, photos. Classic drinks package covers beer, wine, spirits at lunch/dinner.'
+      },
+      {
+        question: 'How do I join P&O Cruises\' loyalty programme?',
+        answer: 'Join Peninsular Club free at booking or onboard. Earn 1 point per night automatically. Bronze from first cruise, Silver (40 nights), Gold (80 nights), Platinum (160 nights). Benefits include onboard credit, priority services, exclusive events. Points redeemable against cruises and onboard spending.'
+      },
+      {
+        question: 'What should I know before booking a P&O Cruises holiday?',
+        answer: 'Gala evenings (smart casual/formal attire), British currency onboard, tips included. Best book 12-18 months ahead for fjords/Caribbean. Choose balcony for fjord scenery. Southampton departures easiest (no flights). Average passenger age 45-75, perfect for mature families. Solo fares match doubles on selected sailings.'
+      }
+    ],
     meta: {
       title: 'P&O Cruises | UK Cruise Holidays from Southampton',
       description: 'Explore P&O Cruises holidays from UK ports. No-fly cruising to the Mediterranean, Norway, Caribbean and more. Book with Limitless Cruises.'
@@ -148,12 +175,75 @@ export const cruiseLines = [
     featured: true,
     image: 'null',
     logo: null, // Logo to be uploaded to CRM
+    // Why Choose section - benefit cards
     whyChoose: [
-      { title: 'World\'s Largest Ships', description: 'Icon of the Seas and Wonder of the Seas offer unmatched scale and amenities.', icon: 'ship' },
-      { title: 'Innovative Activities', description: 'FlowRider surf simulators, rock climbing, ice skating, and zip lines at sea.', icon: 'adventure' },
-      { title: 'Perfect Day at CocoCay', description: 'Private island with Thrill Waterpark and Coco Beach Club.', icon: 'island' },
-      { title: 'Award-Winning Entertainment', description: 'Broadway shows, ice skating performances, and AquaTheater diving shows.', icon: 'entertainment' }
+      {
+        title: 'Ultimate Family Adventure',
+        description: 'Royal Caribbean builds the world\'s most innovative ships with multi-level water slides, indoor skydiving, FlowRider surf simulators, and robot bartenders. Perfect for active families wanting non-stop action and cutting-edge entertainment at sea.',
+        icon: 'adventure'
+      },
+      {
+        title: 'Mega-Resort Ships',
+        description: 'Icon, Oasis, Quantum, and Ovation class mega-ships carrying 5,000-7,000 guests with Central Park neighbourhoods, seven distinct districts, and Broadway-calibre shows. Largest ships at sea with something for everyone.',
+        icon: 'ship'
+      },
+      {
+        title: 'Award-Winning Entertainment',
+        description: 'Original ice skating shows, full-size AquaTheatre diving spectaculars, 1,300-seat Royal Theatre productions, and guest stars like Jason Derulo. Largest entertainment offering in cruising with shows exclusive to each ship class.',
+        icon: 'entertainment'
+      },
+      {
+        title: 'Adventure Ocean Kids Programme',
+        description: 'World-renowned kids clubs from 3 months to 17yrs with science labs, rock climbing walls, circus school, and DJ studios. Every ship designed as floating adventure park with dedicated kids spaces and teen hangouts.',
+        icon: 'child'
+      },
+      {
+        title: 'Private Island Paradise',
+        description: 'Exclusive Perfect Day at CocoCay with private waterpark, tallest waterslide in Western Hemisphere (Daredevil\'s Peak), adults-only Hideaway Beach, and private cabanas. Only cruise line with its own Caribbean island resort.',
+        icon: 'island'
+      },
+      {
+        title: 'Incredible Value',
+        description: 'Kids sail free promotions, drink packages from $59/day, flexible dining across 25+ venues, and WiFi packages. Best onboard credit deals and dynamic pricing system rewards early bookers.',
+        icon: 'value'
+      }
     ],
+
+    // Destination images for grid
+    destinationImages: [
+      { name: 'Caribbean', image: 'null', alt: 'Caribbean beach and turquoise sea' },
+      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastline' },
+      { name: 'Alaska', image: 'null', alt: 'Alaska glaciers and mountains' },
+      { name: 'Northern Europe', image: 'null', alt: 'Northern Europe waterfront' },
+      { name: 'Asia', image: 'null', alt: 'Asian port city' }
+    ],
+
+    // Kids Club section
+    kidsClub: {
+      name: 'Adventure Ocean',
+      intro: 'Royal Caribbean is the world\'s #1 family cruise line with the most comprehensive kids programme from babies to teens on every ship. Royal Adventure Ocean (3 months-5yrs), Adventure Ocean (6-12yrs), and teen clubs up to 17yrs. Every ship features multi-level water slides, indoor skydiving, rock climbing walls, and dedicated kids pools. Family suites sleep 8+ and interconnecting cabins available. Baby splash pools, family movie nights under the stars, and supervised late-night group babysitting. Perfect Day at CocoCay private island included on most Caribbean sailings.',
+      ageGroups: [
+        { club: 'Royal Babies & Tots', age: '3m-5yrs', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-10pm' },
+        { club: 'Adventure Ocean Aquanauts', age: '6-8yrs', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-10pm' },
+        { club: 'Explorers', age: '9-11yrs', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-11pm' },
+        { club: 'Voyagers', age: '12-14yrs', morning: '10am-1pm', afternoon: '3pm-6pm', evening: '7pm-11pm' },
+        { club: 'Teens', age: '15-17yrs', morning: '10am-1pm', afternoon: '3pm-6pm', evening: '7pm-11pm' }
+      ]
+    },
+
+    // Loyalty program
+    loyaltyProgram: {
+      name: 'Crown & Anchor Society',
+      intro: 'Crown & Anchor Society - Royal Caribbean\'s tiered loyalty programme rewarding every cruise with status perks and onboard benefits. Join free automatically after first cruise. Earn 1 Crown & Anchor point per night (double for suites). Gold (3 nights), Platinum (30 nights), Diamond (80 nights), Pinnacle (700 nights). Benefits increase with each tier. Over 18 million members with generous benefits starting from just 3 nights cruised.',
+      pointsInfo: 'Key Benefits: Onboard credit (£25 Diamond, £75 Pinnacle per cruise), priority tendering, speciality dining reservations, suite lounge access, BOGO drink specials (Diamond+), complimentary Happy Hour drinks, exclusive members events, double points events, spa discounts.',
+      tiers: [
+        { tier: 'Gold', points: '3+ nights', benefits: 'Welcome gift, priority check-in' },
+        { tier: 'Platinum', points: '30+ nights', benefits: 'Platinum benefits, priority dining' },
+        { tier: 'Diamond', points: '80+ nights', benefits: 'Diamond benefits, onboard credit, priority services' },
+        { tier: 'Diamond Plus', points: '175+ nights', benefits: 'All Diamond benefits, enhanced perks' },
+        { tier: 'Pinnacle', points: '700+ nights', benefits: 'Ultimate benefits, suite lounge access, exclusive events' }
+      ]
+    },
     highlights: [
       'World\'s largest cruise ships',
       'Innovative onboard activities',
@@ -163,6 +253,33 @@ export const cruiseLines = [
     ships: ['Icon of the Seas', 'Wonder of the Seas', 'Symphony of the Seas', 'Odyssey of the Seas'],
     destinations: ['Caribbean', 'Mediterranean', 'Alaska', 'Asia'],
     suitableFor: ['Families', 'Adventure Seekers', 'Multi-generational'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes Royal Caribbean different from other cruise lines?',
+        answer: 'Royal Caribbean builds the world\'s largest, most innovative ships with features no one else offers: indoor skydiving, surf simulators, robot bartenders, and Broadway shows. Perfect Day at CocoCay private island exclusive to Royal guests. Non-stop family adventure focus.'
+      },
+      {
+        question: 'What destinations does Royal Caribbean sail to?',
+        answer: 'Caribbean (300+ sailings yearly), Alaska, Mediterranean, Northern Europe, Australia, Asia, South America, and world cruises. Signature 7-night Perfect Day CocoCay itineraries plus 18-night Transatlantic repositioning cruises.'
+      },
+      {
+        question: 'Is Royal Caribbean suitable for families?',
+        answer: 'World\'s #1 family cruise line - kids clubs 3 months-17yrs, water slides on every ship, indoor skydiving, rock climbing, and private island CocoCay. Family suites sleep 8+, kids sail free promotions, and Adventure Ocean programme voted best in cruising.'
+      },
+      {
+        question: 'What is included in a Royal Caribbean holiday?',
+        answer: 'All main dining meals (25+ venues), entertainment, kids clubs, pools, gym, most activities included. Extras: drinks packages, speciality dining, internet, spa, excursions, photos. Classic drinks package covers beer, wine, cocktails all day.'
+      },
+      {
+        question: 'How do I join Royal Caribbean\'s loyalty programme?',
+        answer: 'Join Crown & Anchor Society free automatically after first cruise. Earn 1 point per night. Gold (3 nights), Platinum (30 nights), Diamond (80 nights), Pinnacle (700 nights). Benefits: onboard credit, priority services, drink specials, exclusive events.'
+      },
+      {
+        question: 'What should I know before booking a Royal Caribbean holiday?',
+        answer: 'Smart casual dress (no formal nights), drinks packages essential, US plugs (adapters needed). Book 9-12 months ahead for summer sailings. Ultimate Family Suite popular. Multi-generational appeal with teen hangouts and kids areas. Southampton departures available.'
+      }
+    ],
     meta: {
       title: 'Royal Caribbean | Adventure Cruises | UK Expert Bookings',
       description: 'Royal Caribbean adventure cruises with expert UK guidance. Oasis, Quantum, Icon class ships. Innovative features, endless entertainment.'
@@ -183,39 +300,34 @@ export const cruiseLines = [
     // Why Choose section - benefit cards
     whyChoose: [
       {
-        title: 'Accommodation on MSC Cruises',
-        description: 'Choose interior, ocean-view, balcony or suites. Guests booking MSC Yacht Club enjoy a private lounge, restaurant and priority benefits.',
-        icon: 'accommodation'
+        title: 'European Style Cruising',
+        description: 'MSC offers authentic Mediterranean flair with Italian design, fresh pasta daily, and gelato stations. Ships feature Formula 1 simulators, indoor waterslides, and European-style promenades. Perfect for UK families wanting continental elegance with British departure options from Southampton.',
+        icon: 'anchor'
       },
       {
-        title: 'Food and Entertainment',
-        description: 'Full-board dining across restaurants and buffets, plus theatre shows, live music, pools, sports and kids\' clubs. Specialty venues are available fleetwide.',
-        icon: 'dining'
-      },
-      {
-        title: 'Global Itineraries',
-        description: 'Mediterranean, Caribbean, Northern Europe, Middle East, Asia and more, including convenient MSC UK sailings in season.',
-        icon: 'destination'
-      },
-      {
-        title: 'Fly Cruise Packages',
-        description: 'Flights, transfers and your cruise fare bundled together for simple, seamless travel to and from the ship.',
-        icon: 'travel'
-      },
-      {
-        title: 'Innovative Ships: MSC Virtuosa & MSC World Europa',
-        description: 'Striking design, smart technology and vibrant promenades on flagship ships including MSC Virtuosa and MSC World Europa.',
+        title: 'Modern Mega-Ships',
+        description: 'World\'s newest fleet with LNG-powered Meraviglia class ships carrying 6,000+ guests. Every MSC ship has indoor promenade with LED sky, multiple pools, and high-tech entertainment. Regular class launches keep fleet cutting-edge.',
         icon: 'ship'
       },
       {
-        title: 'Italian Style & Exclusive Discounts',
-        description: 'Friendly Mediterranean service across lounges, bars and spas, plus regular MSC exclusive discounts on selected sailings.',
-        icon: 'style'
+        title: 'MSC Yacht Club',
+        description: 'Exclusive "ship-within-a-ship" premium experience with private suites, dedicated pool, 24-hour butler service, and dedicated restaurant. Priority embarkation, free premium drinks, and seafront lounge. Luxury enclave on mega-ships.',
+        icon: 'luxury'
       },
       {
-        title: 'Life onboard MSC Cruises',
-        description: 'Choose lively pool decks, sport courts, shows and nightlife, or quiet lounges and spa time. Dining spans Italian classics and international flavours. Families get extensive kids\' and teens\' facilities; couples and solo travellers enjoy stylish bars and wellness. Guests in MSC Yacht Club can retreat to a private sanctuary whenever they choose.',
-        icon: 'lifestyle'
+        title: 'Family-Friendly Design',
+        description: 'Built for families with indoor waterslides, LEGO Experience partnerships, indoor sports arenas, and kids clubs from 0-17yrs. Family connecting cabins, family ocean views, and kids stay/sail free promotions. Europe\'s family cruise leader.',
+        icon: 'child'
+      },
+      {
+        title: 'Global Destinations',
+        description: 'Worldwide network: Caribbean, Mediterranean, Northern Europe, Red Sea, South America, Dubai, and world cruises. Longest Caribbean season from Barbados plus dedicated family fly-cruise packages. Over 300 itineraries yearly.',
+        icon: 'destination'
+      },
+      {
+        title: 'Outstanding Value',
+        description: 'Easy drinks packages, kids sail free, flexible dining, and MSC Voyagers Club loyalty points. No single supplements on selected sailings and family balconies from £999pp. Best value European mega-ship cruising.',
+        icon: 'value'
       }
     ],
 
@@ -232,7 +344,7 @@ export const cruiseLines = [
     // Kids Club section
     kidsClub: {
       name: 'Doremi and LEGO® Fun',
-      intro: 'MSC Kids Clubs are complimentary programmes on every MSC ship for guests aged 0-17. Children are grouped by age and welcomed in safe, dedicated spaces run by trained, multilingual youth staff. Activities blend fun with learning and are designed to suit each age group, from creative play to team games and socials.',
+      intro: 'MSC Cruises is Europe\'s leading family cruise line with dedicated kids facilities on every ship and innovative club programme for ages 0-17. Chicco Baby Club (0-3yrs), Mini Club (3-6yrs), Junior Club (7-11yrs), Young Club (12-14yrs), and Teens Club (15-17yrs). Every ship has indoor waterslides, splash pools, LEGO Experience rooms, and Formula 1 simulators. Kids sail free on selected sailings and family connecting cabins available. Doremi characters entertain kids daily. Family harbour in Southampton plus fly-cruise options from major UK airports.',
       detail: 'Age-appropriate playrooms, LEGO® play for younger guests, consoles and social lounges for older children, plus daily schedules that vary between sea days and port days. Parents register children once onboard and can check the daily programme in the app or on notice boards. Sign in and out procedures help make drop off and collection simple.',
       quickFacts: [
         'Complimentary programme for ages 0-17',
@@ -300,6 +412,33 @@ export const cruiseLines = [
     ships: ['MSC World Europa', 'MSC Seascape', 'MSC Virtuosa', 'MSC Grandiosa', 'MSC Seashore', 'MSC Seaview'],
     destinations: ['Mediterranean', 'Caribbean', 'Northern Europe', 'Middle East', 'Asia & Japan', 'Grand Voyages'],
     suitableFor: ['Families', 'Couples', 'Budget-conscious', 'Luxury Seekers'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes MSC Cruises different from other cruise lines?',
+        answer: 'MSC delivers European mega-ship cruising with Italian design, Yacht Club luxury enclave, and global reach from Europe to world cruises. Unlike British lines, expect continental dining, gelato stations, and indoor waterslides. Best for families wanting modern ships and value.'
+      },
+      {
+        question: 'What destinations does MSC Cruises sail to?',
+        answer: 'Global leader: Caribbean (longest season), Mediterranean (300+ ports), Northern Europe, Norwegian fjords, Red Sea, Dubai, South America, Grand Voyages. UK departures from Southampton plus fly-cruises from 12 UK airports. Signature 117-night world cruises.'
+      },
+      {
+        question: 'Is MSC Cruises suitable for families?',
+        answer: 'Europe\'s #1 family cruise line - kids clubs 0-17yrs, indoor waterslides on every ship, LEGO Experience rooms, family connecting cabins, and kids sail free promotions. Chicco Baby Club (0-3yrs), Doremi characters, and family harbour days in Southampton.'
+      },
+      {
+        question: 'What is included in an MSC Cruises holiday?',
+        answer: 'All main meals, entertainment, kids clubs, pools, gym, most activities included. 24-hour room service (charges apply). Extras: speciality dining, drinks packages, spa, excursions, WiFi, photos. MSC Yacht Club includes premium drinks, butler service.'
+      },
+      {
+        question: 'How do I join MSC Cruises\' loyalty programme?',
+        answer: 'Join MSC Voyagers Club free at msc.com or onboard. Earn 100 points per night + onboard spend. Silver status (2,100pts), Gold (10,000pts), Diamond (25,000pts). Benefits: cruise discounts, onboard credit, priority services. Status match available from other lines.'
+      },
+      {
+        question: 'What should I know before booking an MSC Cruises holiday?',
+        answer: 'Smart casual dress code (no formal nights), drinks packages recommended, European plug sockets. Best book 6-12 months ahead for summer Med/Caribbean. Family ocean view cabins popular. International passenger mix (50% European), English widely spoken. Southampton departures available.'
+      }
+    ],
     meta: {
       title: 'MSC Cruises | Mediterranean & Caribbean Cruise Holidays',
       description: 'Book MSC Cruises for Mediterranean elegance at great value. Family-friendly ships, MSC Yacht Club luxury, and exciting destinations with Limitless Cruises.'
@@ -316,12 +455,75 @@ export const cruiseLines = [
     featured: true,
     image: 'null',
     logo: null, // Logo to be uploaded to CRM
+    // Why Choose section - benefit cards
     whyChoose: [
-      { title: 'Freestyle Cruising', description: 'No set dining times, dress codes, or fixed schedules - cruise your way.', icon: 'freedom' },
-      { title: 'The Haven', description: 'Exclusive ship-within-a-ship with private pool, restaurant, and butler service.', icon: 'luxury' },
-      { title: 'Great Stirrup Cay', description: 'Private island in the Bahamas with beach villas and water sports.', icon: 'island' },
-      { title: 'Award-Winning Entertainment', description: 'Broadway shows, comedy clubs, and world-class performers.', icon: 'entertainment' }
+      {
+        title: 'Freestyle Cruising',
+        description: 'No fixed dining times, no formal nights, eat/drink/do whatever whenever. Dine across 20+ venues anytime from 5:30am-1am. Dress casual, live your way - perfect for relaxed British travellers wanting flexibility at sea.',
+        icon: 'freedom'
+      },
+      {
+        title: 'Modern Freestyle Ships',
+        description: 'Breakaway, Breakaway Plus, and Prima class ships with go-kart tracks (6 decks high), 360° ocean coasters, infinity pools, and largest outdoor LED screens at sea. Every ship purpose-built for freestyle living.',
+        icon: 'ship'
+      },
+      {
+        title: 'More Choices Onboard',
+        description: '25+ dining venues (most at sea), 12 bars/lounges, Mandara Spa, casino, Broadway shows, and Vibe Beach Club adults-only sun deck. Free kids clubs, go-karts, and laser tag included in fare.',
+        icon: 'dining'
+      },
+      {
+        title: 'Family Fun Leader',
+        description: 'Splash Academy (3-12yrs), Entourage teen club (13-17yrs), and Guppies nursery (6m-36m). Every ship has ropes courses, water slides, sports complexes, and family entertainment. Kids sail half price.',
+        icon: 'child'
+      },
+      {
+        title: 'Private Island Haven',
+        description: 'Great Stirrup Cay - Norwegian\'s private Bahamas island with private beach, waterpark, adults-only beach club, and unlimited drinks included. Only cruise line with two private Caribbean islands (Harvest Caye too).',
+        icon: 'island'
+      },
+      {
+        title: 'Exceptional Value',
+        description: 'Free at Sea package standard: unlimited open bar, speciality dining, WiFi, shore excursion credit, and premium guest services. No solo supplements on all sailings + kids half price.',
+        icon: 'value'
+      }
     ],
+
+    // Destination images for grid
+    destinationImages: [
+      { name: 'Caribbean', image: 'null', alt: 'Caribbean beach and turquoise sea' },
+      { name: 'Alaska', image: 'null', alt: 'Alaska glaciers and mountains' },
+      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastline' },
+      { name: 'Northern Europe', image: 'null', alt: 'Northern Europe waterfront' },
+      { name: 'Hawaii', image: 'null', alt: 'Hawaiian beach and palm trees' }
+    ],
+
+    // Kids Club section
+    kidsClub: {
+      name: 'Splash Academy & Entourage',
+      intro: 'Norwegian Cruise Line delivers freestyle family cruising with extensive kids facilities, free specialty dining, and flexible schedules perfect for modern families. Guppies (6m-36m), Splash Academy (3-5yrs, 6-12yrs), and Entourage (13-17yrs). Every ship features go-kart tracks, ropes courses, water slides, indoor sports arenas, and family movie nights. Free at Sea includes unlimited drinks for adults. Family funnels, multi-room family suites, and late-night group babysitting. Great Stirrup Cay private island included on most Caribbean sailings.',
+      ageGroups: [
+        { club: 'Guppies', age: '6m-36m', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-9pm' },
+        { club: 'Splash Academy', age: '3-5yrs', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-10pm' },
+        { club: 'Splash Academy', age: '6-12yrs', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-11pm' },
+        { club: 'Entourage', age: '13-17yrs', morning: '10am-1pm', afternoon: '3pm-6pm', evening: '7pm-11pm' }
+      ]
+    },
+
+    // Loyalty program
+    loyaltyProgram: {
+      name: 'Latitudes Rewards',
+      intro: 'Latitudes Rewards - Norwegian\'s simple tiered loyalty programme with instant perks from your first cruise. Join free automatically. Earn 1 Latitude point per night. Bronze (1 night), Silver (10 nights), Gold (25 nights), Platinum (75 nights), Sapphire (150 nights), Diamond (300 nights). Benefits scale with every tier. 7 million members enjoy Norwegian\'s most generous freestyle loyalty benefits with no blackout dates.',
+      pointsInfo: 'Key Benefits: Onboard credit (£25 Silver, £150 Diamond per cruise), priority boarding/disembarkation, speciality dining reservations, free drinks hour (Gold+), companion fare discounts, exclusive cocktail parties, suite lounge access (Platinum+).',
+      tiers: [
+        { tier: 'Bronze', points: '1+ nights', benefits: 'Welcome gift, Latitudes Insider offers' },
+        { tier: 'Silver', points: '10+ nights', benefits: 'Onboard credit, priority check-in' },
+        { tier: 'Gold', points: '25+ nights', benefits: 'Free drinks hour, priority dining' },
+        { tier: 'Platinum', points: '75+ nights', benefits: 'Suite lounge access, speciality dining' },
+        { tier: 'Sapphire', points: '150+ nights', benefits: 'Enhanced Platinum benefits' },
+        { tier: 'Diamond', points: '300+ nights', benefits: 'Ultimate benefits, highest onboard credit' }
+      ]
+    },
     highlights: [
       'Freestyle Cruising - no set dining times',
       'The Haven exclusive ship-within-a-ship',
@@ -331,6 +533,33 @@ export const cruiseLines = [
     ships: ['Norwegian Prima', 'Norwegian Viva', 'Norwegian Encore', 'Norwegian Escape'],
     destinations: ['Caribbean', 'Alaska', 'Mediterranean', 'Northern Europe'],
     suitableFor: ['Couples', 'Solo Travellers', 'Families'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes Norwegian Cruise Line different from other cruise lines?',
+        answer: 'Freestyle Cruising - no schedules, no formal nights, 25+ dining venues open all day, casual dress code. Go-karts, ocean coasters, and private islands set Norwegian apart. Perfect for relaxed, active families.'
+      },
+      {
+        question: 'What destinations does Norwegian Cruise Line sail to?',
+        answer: 'Caribbean (Great Stirrup Cay), Alaska, Europe, Hawaii, Bermuda, Panama Canal, South America, Asia, Australia. Signature 14-night Hawaii inter-island, private island itineraries, and longest Bermuda season from Boston.'
+      },
+      {
+        question: 'Is Norwegian Cruise Line suitable for families?',
+        answer: 'Outstanding for families - kids clubs 6m-17yrs, go-karts/rope courses on every ship, free at Sea drinks package, and private island Great Stirrup Cay. Family suites sleep 8+, kids half price, freestyle dining flexibility.'
+      },
+      {
+        question: 'What is included in a Norwegian Cruise Line holiday?',
+        answer: 'Main dining rooms, buffet, entertainment, kids clubs, pools, gym, most activities. Free at Sea upgrade adds unlimited drinks, speciality dining, WiFi, excursions. Extras: spa, casino, premium drinks.'
+      },
+      {
+        question: 'How do I join Norwegian Cruise Line\'s loyalty programme?',
+        answer: 'Join Latitudes Rewards free automatically after first cruise. Earn 1 point per night. Bronze (1 night), Silver (10 nights), Gold (25 nights), Platinum (75 nights). Benefits: onboard credit, priority services, companion discounts.'
+      },
+      {
+        question: 'What should I know before booking a Norwegian Cruise Line holiday?',
+        answer: 'Casual dress (no formal nights), Free at Sea package essential, US plugs onboard. Book 6-12 months ahead for summer. Oceanview balconies popular. International crowd (40% American), English primary. Southampton departures available.'
+      }
+    ],
     meta: {
       title: 'Norwegian Cruise Line | Freestyle Cruising | UK Expert Bookings',
       description: 'Norwegian Freestyle Cruising with expert UK guidance. The Haven luxury, Great Stirrup Cay. Flexible dining, no set schedules.'
@@ -347,12 +576,73 @@ export const cruiseLines = [
     featured: true,
     image: 'null',
     logo: null, // Logo to be uploaded to CRM
+    // Why Choose section - benefit cards
     whyChoose: [
-      { title: 'Disney Character Experiences', description: 'Meet beloved characters throughout your voyage with magical moments.', icon: 'magic' },
-      { title: 'Broadway-Style Shows', description: 'Award-winning productions including Frozen and Tangled musicals.', icon: 'entertainment' },
-      { title: 'Castaway Cay', description: 'Disney\'s private island paradise with family and adults-only beaches.', icon: 'island' },
-      { title: 'Adults-Only Areas', description: 'Quiet pools, fine dining, and nightlife exclusively for grown-ups.', icon: 'adults' }
+      {
+        title: 'Magical Disney Experience',
+        description: 'Disney characters meet-and-greets, Broadway-quality Frozen and Aladdin shows, themed rotational dining with Disney storytelling. Every detail designed for family magic from character breakfasts to fireworks at sea.',
+        icon: 'magic'
+      },
+      {
+        title: 'Immersive Themed Ships',
+        description: 'Disney Wish, Fantasy, Dream, and Magic class ships with AquaDuck watercoasters, adult-exclusive areas, and movie theatre popcorn. Rotational dining rooms transform nightly with Disney themes and characters.',
+        icon: 'ship'
+      },
+      {
+        title: 'World-Class Family Entertainment',
+        description: 'Original Disney Broadway productions, live character shows, first-run Disney films in Buena Vista Theatre, and family deck parties. Oceaneer Club/Lab voted best kids clubs worldwide multiple years running.',
+        icon: 'entertainment'
+      },
+      {
+        title: 'Split-Age Kids Clubs',
+        description: 'Oceaneer Club (3-12yrs) with Marvel Super Hero Academy, Star Wars, and Pixar play. Edge (11-14yrs) and Vibe (14-17yrs) teen clubs. It\'s a Small World Nursery (6m-3yrs). Open sunrise to midnight.',
+        icon: 'child'
+      },
+      {
+        title: 'Private Island Castaway Cay',
+        description: 'Disney\'s private Bahamas island with family beach, adults-only Serenity Bay, complimentary bikes/kayaks, and adult splash zone. Only cruise line with dedicated kids beach area on private island.',
+        icon: 'island'
+      },
+      {
+        title: 'Exceptional Family Value',
+        description: 'Rotational dining (no buffet lines), kids sail 25-50% off 3rd/4th guests, zero single supplements select sailings. Disney Visa cardholders get onboard credit and stateroom discounts.',
+        icon: 'value'
+      }
     ],
+
+    // Destination images for grid
+    destinationImages: [
+      { name: 'Bahamas', image: 'null', alt: 'Bahamas beach and turquoise sea' },
+      { name: 'Caribbean', image: 'null', alt: 'Caribbean palm tree beach' },
+      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastline' },
+      { name: 'Alaska', image: 'null', alt: 'Alaska glaciers and mountains' },
+      { name: 'Northern Europe', image: 'null', alt: 'Northern Europe waterfront' }
+    ],
+
+    // Kids Club section
+    kidsClub: {
+      name: 'Oceaneer Club & Lab',
+      intro: 'Disney Cruise Line delivers the world\'s most magical family cruise experience with the best kids clubs, character entertainment, and family activities on every sailing. Oceaneer Club/Lab (3-12yrs) with Marvel, Pixar, and Disney princess adventures. Edge (11-14yrs) and Vibe (14-17yrs) dedicated teen spaces. It\'s a Small World Nursery (6m-3yrs). Clubs open 7:30pm-midnight with late-night group babysitting. Character meet-and-greets daily, family cabanas on Castaway Cay, and themed kids menus. Ultimate family cruise experience.',
+      ageGroups: [
+        { club: 'It\'s a Small World Nursery', age: '6m-3yrs', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7:30pm-midnight' },
+        { club: 'Oceaneer Club/Lab', age: '3-12yrs', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7:30pm-midnight' },
+        { club: 'Edge', age: '11-14yrs', morning: '10am-1pm', afternoon: '3pm-6pm', evening: '7:30pm-midnight' },
+        { club: 'Vibe', age: '14-17yrs', morning: '10am-1pm', afternoon: '3pm-6pm', evening: '7:30pm-midnight' }
+      ]
+    },
+
+    // Loyalty program
+    loyaltyProgram: {
+      name: 'Castaway Club',
+      intro: 'Disney Cruise Line Castaway Club - Exclusive loyalty programme starting after your second Disney cruise with escalating family benefits. Join automatically after second sailing. Silver (5 points), Gold (50 points), Platinum (75 points), Pearl (200 points), Platinum (250 points). Points earned per night cruised. MagicBand+ integration and family-focused benefits make Disney loyalty unique.',
+      pointsInfo: 'Key Benefits: Onboard credit (£50 Silver, £250 Pearl per stateroom), priority booking (75 days advance Gold+, 105 Pearl+), welcome receptions, exclusive merchandise, photo discounts, Castaway Cay cabanas priority (Platinum+).',
+      tiers: [
+        { tier: 'Silver', points: '5+ points', benefits: 'Onboard credit, welcome gift' },
+        { tier: 'Gold', points: '50+ points', benefits: 'Priority booking, enhanced benefits' },
+        { tier: 'Platinum', points: '75+ points', benefits: 'Castaway Cay cabanas priority, exclusive events' },
+        { tier: 'Pearl', points: '200+ points', benefits: 'Ultimate benefits, highest onboard credit' }
+      ]
+    },
     highlights: [
       'Disney character experiences',
       'Award-winning Broadway-style shows',
@@ -362,6 +652,33 @@ export const cruiseLines = [
     ships: ['Disney Wish', 'Disney Fantasy', 'Disney Dream', 'Disney Magic', 'Disney Wonder'],
     destinations: ['Caribbean', 'Bahamas', 'Mediterranean', 'Alaska'],
     suitableFor: ['Families', 'Disney Fans', 'Multi-generational'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes Disney Cruise Line different from other cruise lines?',
+        answer: 'Disney storytelling permeates every experience - rotational dining with characters, Broadway shows, kids clubs with Marvel/Pixar, and private island Castaway Cay. Designed by Imagineers for ultimate family magic.'
+      },
+      {
+        question: 'What destinations does Disney Cruise Line sail to?',
+        answer: 'Bahamas (Castaway Cay), Caribbean, Mediterranean, Alaska, Northern Europe, Hawaii, Panama Canal, Australia, South Pacific. Signature 7-night Bahamian sailings plus 14-night Mediterranean summer season.'
+      },
+      {
+        question: 'Is Disney Cruise Line suitable for families?',
+        answer: 'World\'s best family cruise - kids clubs 6m-17yrs, character meet-and-greets, family entertainment, themed dining, and Castaway Cay kids beach. Oceaneer Club voted #1 worldwide. Perfect ages newborn to grandparents.'
+      },
+      {
+        question: 'What is included in a Disney Cruise Line holiday?',
+        answer: 'Rotational dining (3 themed restaurants), snacks, non-alcoholic drinks, kids clubs, entertainment, pools, most activities included. Extras: adult drinks, spa, excursions, specialty coffee, photos.'
+      },
+      {
+        question: 'How do I join Disney Cruise Line\'s loyalty programme?',
+        answer: 'Join Castaway Club automatically after second Disney cruise. Earn 1 point per night. Silver (5 points), Gold (50 points), Platinum (75 points). Benefits: onboard credit, priority booking, exclusive events.'
+      },
+      {
+        question: 'What should I know before booking a Disney Cruise Line holiday?',
+        answer: 'Disney dress code (smart casual evenings), book 18-24 months ahead, US plugs onboard. Average age 5-65 (family-focused). Character rotations vary by sailing. Southampton charters available seasonally.'
+      }
+    ],
     meta: {
       title: 'Disney Cruise Line | Magical Family Cruises | UK Expert Bookings',
       description: 'Disney magic at sea with expert UK consultant service. Character experiences, Castaway Cay, Broadway shows. Perfect family holidays.'
@@ -378,12 +695,73 @@ export const cruiseLines = [
     featured: true,
     image: 'null',
     logo: null, // Logo to be uploaded to CRM
+    // Why Choose section - benefit cards
     whyChoose: [
-      { title: 'Award-Winning Cuisine', description: 'Michelin-starred chefs and innovative dining concepts.', icon: 'dining' },
-      { title: 'The Retreat', description: 'Suite-class experience with private lounge, pool, and restaurant.', icon: 'luxury' },
-      { title: 'Destination Focus', description: 'Longer stays in port and immersive shore excursions.', icon: 'destination' },
-      { title: 'Modern Design', description: 'Stunning Edge Series ships with Magic Carpet and infinite verandas.', icon: 'design' }
+      {
+        title: 'Premium Modern Luxury',
+        description: 'Elevated premium experience with Edge-class innovation: Magic Carpet moving lounge, infinite Veranda cabins, and Eden garden venue. Sophisticated design by award-winning interior teams. Perfect for discerning travellers seeking luxury without ultra-luxury prices.',
+        icon: 'luxury'
+      },
+      {
+        title: 'Revolutionary Edge Class',
+        description: 'World\'s most innovative ships with 17-deck Magic Carpet platform, 20:1 passenger-space ratio, and largest suites at sea. Infinite Verandas, Rooftop Garden, and Eden theatre redefine premium cruising.',
+        icon: 'ship'
+      },
+      {
+        title: 'Michelin-Starred Dining',
+        description: 'Main dining by Master Chef Michel Roux Jr, Tuscan Grille steakhouse, and Le Petit Chef digital dining experience. AquaClass spa cabins with exclusive Blu restaurant. Elevated culinary focus.',
+        icon: 'dining'
+      },
+      {
+        title: 'Award-Winning Service',
+        description: 'Retreat - ship-within-ship luxury with dedicated suites, lounge, restaurant, and sundeck. World\'s highest crew-to-passenger ratio in premium category. Multiple service excellence awards.',
+        icon: 'service'
+      },
+      {
+        title: 'Destination Immersion',
+        description: 'Longer port stays, overnight calls, and immersive itineraries visiting 300+ destinations. Signature Galapagos expeditions, Alaska Inside Passage, and Mediterranean deep dives. Travel for destinations first.',
+        icon: 'destination'
+      },
+      {
+        title: 'Exceptional Value',
+        description: 'All-Inclusive packages (drinks, WiFi, tips, speciality dining), Always Included fare structure, and flexible suite upgrades. Best value premium cruising with no nickel-and-diming.',
+        icon: 'value'
+      }
     ],
+
+    // Destination images for grid
+    destinationImages: [
+      { name: 'Caribbean', image: 'null', alt: 'Caribbean turquoise waters' },
+      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastline' },
+      { name: 'Alaska', image: 'null', alt: 'Alaska glaciers and mountains' },
+      { name: 'Galapagos', image: 'null', alt: 'Galapagos wildlife' },
+      { name: 'Northern Europe', image: 'null', alt: 'Northern Europe waterfront' }
+    ],
+
+    // Kids Club section
+    kidsClub: {
+      name: 'Camp at Sea',
+      intro: 'Celebrity Cruises offers sophisticated family travel with Camp at Sea kids programme for ages 3-17 plus teen spaces on every ship. Camp at Sea (3-11yrs) with STEM activities, arts, and sports. Teen Club (12-17yrs) with video games, movies, and social events. Family-friendly yet refined atmosphere perfect for multi-generational holidays. Supervised late-night group babysitting, family trivia nights, and family-friendly shore excursions. Retreat suites offer adult luxury while kids enjoy dedicated spaces.',
+      ageGroups: [
+        { club: 'Camp at Sea', age: '3-5yrs', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-10pm' },
+        { club: 'Camp at Sea', age: '6-11yrs', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-10pm' },
+        { club: 'Teen Club', age: '12-17yrs', morning: '10am-1pm', afternoon: '3pm-6pm', evening: '7pm-11pm' }
+      ]
+    },
+
+    // Loyalty program
+    loyaltyProgram: {
+      name: 'Captain\'s Club',
+      intro: 'Captain\'s Club - Celebrity\'s tiered loyalty programme rewarding every cruise with status perks and suite benefits. Join free after first cruise. Earn points per night cruised. Classic (2 nights), Select (15 nights), Elite (30 nights), Elite Plus (55 nights), Zenith (200 nights), Enyaq (750 nights). 3 million members enjoy premium loyalty benefits with generous suite upgrade opportunities.',
+      pointsInfo: 'Key Benefits: Onboard credit (£25 Elite, £150 Zenith per cruise), priority tendering, spa reservations, suite lounge access, complimentary drinks hour (Elite+), laundry discounts, exclusive members events, double points promotions.',
+      tiers: [
+        { tier: 'Classic', points: '2+ nights', benefits: 'Welcome benefits, member pricing' },
+        { tier: 'Select', points: '15+ nights', benefits: 'Priority check-in, discounts' },
+        { tier: 'Elite', points: '30+ nights', benefits: 'Onboard credit, drinks hour' },
+        { tier: 'Elite Plus', points: '55+ nights', benefits: 'Enhanced Elite benefits, suite perks' },
+        { tier: 'Zenith', points: '200+ nights', benefits: 'Ultimate benefits, highest onboard credit' }
+      ]
+    },
     highlights: [
       'Award-winning cuisine',
       'The Retreat - suite class experience',
@@ -393,6 +771,33 @@ export const cruiseLines = [
     ships: ['Celebrity Beyond', 'Celebrity Apex', 'Celebrity Edge', 'Celebrity Eclipse'],
     destinations: ['Caribbean', 'Mediterranean', 'Alaska', 'Galapagos'],
     suitableFor: ['Couples', 'Foodies', 'Luxury Seekers'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes Celebrity Cruises different from other cruise lines?',
+        answer: 'Premium modern luxury with Edge-class innovation (Magic Carpet, Infinite Verandas), Michelin-starred dining, and Retreat ship-within-ship concept. Elevated design and service without ultra-luxury pricing.'
+      },
+      {
+        question: 'What destinations does Celebrity Cruises sail to?',
+        answer: 'Caribbean, Alaska, Mediterranean, Galapagos expeditions, Bermuda, Northern Europe, Asia, Australia, South America. Signature overnight stays, longer port times, and immersive itineraries visiting 300+ destinations.'
+      },
+      {
+        question: 'Is Celebrity Cruises suitable for families?',
+        answer: 'Sophisticated family choice - Camp at Sea kids clubs (3-17yrs), teen spaces, family entertainment, and multi-generational appeal. Retreat offers adult luxury while kids enjoy dedicated programming.'
+      },
+      {
+        question: 'What is included in a Celebrity Cruises holiday?',
+        answer: 'All main meals, entertainment, kids clubs, pools, gym included. Always Included packages add drinks, WiFi, tips. Extras: speciality dining, spa, excursions, premium drinks. Retreat includes butler service.'
+      },
+      {
+        question: 'How do I join Celebrity Cruises\' loyalty programme?',
+        answer: 'Join Captain\'s Club free after first cruise. Earn points per night. Classic (2 nights), Select (15 nights), Elite (30 nights), Elite Plus (55 nights). Benefits: onboard credit, priority services, suite perks.'
+      },
+      {
+        question: 'What should I know before booking a Celebrity Cruises holiday?',
+        answer: 'Evening Chic dress code (smart casual), Always Included packages recommended, US plugs onboard. Book 12-18 months ahead for Edge-class sailings. Multi-generational appeal (average age 45-70). Southampton charters available.'
+      }
+    ],
     meta: {
       title: 'Celebrity Cruises | Modern Luxury | UK Expert Bookings',
       description: 'Celebrity modern luxury with expert UK consultant service. Award-winning dining, Edge-class ships, stunning destinations.'
@@ -410,47 +815,51 @@ export const cruiseLines = [
     image: 'null',
     logo: null, // Logo to be uploaded to CRM
     
+    // Why Choose section - benefit cards
     whyChoose: [
       {
-        title: 'Smaller Ships, Bigger Experiences',
-        description: 'Ships carry just 800-1,400 guests, creating an intimate atmosphere where crew know your name and preferences.',
+        title: 'Small Ship Excellence',
+        description: 'Intimate ships (800-1,400 guests) get closer to destinations with unique itineraries and overnight stays. No huge queues, personal service, and ships that fit everywhere from Scottish islands to Antarctic fjords. Traditional British cruising at its best.',
         icon: 'ship'
       },
       {
-        title: 'Regional UK Departures',
-        description: 'Sail from Southampton, Liverpool, Newcastle, Dover, Rosyth (Edinburgh), and other UK ports - no need to travel far to start your holiday.',
-        icon: 'uk'
-      },
-      {
-        title: 'Unique Port Access',
-        description: 'Smaller ships can dock in places larger vessels cannot reach - scenic harbours, remote islands, and charming smaller towns.',
+        title: 'Destination Immersion',
+        description: 'Signature Scenic Discovery itineraries with overnight ports, late stays, and unique routes other lines can\'t access. Bolette and Borealis visit remote Scottish islands, Arctic Norway, and exclusive Antarctic calls. Travel for the destinations first.',
         icon: 'destination'
       },
       {
-        title: 'No Single Supplements',
-        description: 'Excellent for solo travellers with dedicated solo cabins and often no single supplement on selected sailings.',
-        icon: 'solo'
-      },
-      {
-        title: 'British Heritage',
-        description: 'Family-owned for five generations with genuine British hospitality, pounds sterling onboard, and no tipping required.',
+        title: 'Traditional British Style',
+        description: 'Classic cruise experience with black tie nights, afternoon tea, guest speakers, and single-seaters at every table. British officers, familiar cuisine, and no tipping culture. Perfect for mature travellers seeking elegance and familiarity.',
         icon: 'heritage'
       },
       {
-        title: 'Scenic Cruising',
-        description: 'Routes designed for maximum scenery - fjord cruises with early morning arrivals, and daytime sailings past dramatic coastlines.',
-        icon: 'scenic'
+        title: 'Exceptional Service',
+        description: '15+ crew per guest ratio delivers personalised service. Named waiters, cabin stewards knowing your name, and attentive service throughout. Multiple awards for service excellence and passenger satisfaction.',
+        icon: 'service'
+      },
+      {
+        title: 'British Isles Specialist',
+        description: 'UK\'s leading British Isles cruise line with 50+ Scottish island calls yearly. Signature Hebridean and Orkney itineraries plus cruises around England, Ireland, and Wales. Home ports Southampton, Newcastle, Rosyth, Liverpool.',
+        icon: 'uk'
+      },
+      {
+        title: 'Outstanding Value',
+        description: 'No solo supplements on all sailings, all-inclusive fares (tips, tea/coffee, most excursions included), and flexible dining. Best value small-ship cruising with no nickel-and-diming.',
+        icon: 'value'
       }
     ],
 
+    // Destination images for grid
     destinationImages: [
-      { name: 'Norwegian Fjords', image: 'null', alt: 'Norwegian fjord landscape' },
       { name: 'British Isles', image: 'null', alt: 'British Isles coastline' },
+      { name: 'Norwegian Fjords', image: 'null', alt: 'Norwegian fjord landscape' },
+      { name: 'Scandinavia', image: 'null', alt: 'Scandinavian coastline' },
       { name: 'Baltic Capitals', image: 'null', alt: 'Colourful Baltic waterfront' },
-      { name: 'Canary Islands', image: 'null', alt: 'Canary Islands volcanic landscape' },
-      { name: 'Arctic & Iceland', image: 'null', alt: 'Iceland glacier scenery' },
-      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastal town' }
+      { name: 'Canary Islands', image: 'null', alt: 'Canary Islands volcanic landscape' }
     ],
+
+    // Kids Club section - Adults-only (16+)
+    kidsClub: null, // Fred. Olsen is adults-only, no kids clubs
 
     accessibility: {
       intro: 'Fred. Olsen\'s smaller ships offer a more accessible experience with less walking required. Wheelchair-accessible cabins are available, and the intimate size means crew can provide more personalised assistance.',
@@ -463,14 +872,13 @@ export const cruiseLines = [
       ]
     },
 
+    // Loyalty program
     loyaltyProgram: {
-      name: 'Oceans Club',
-      intro: 'The Oceans Club rewards repeat guests with increasing benefits based on nights sailed. Members enjoy exclusive offers, priority booking, and special recognition onboard.',
-      pointsInfo: 'Benefits based on cumulative cruise nights sailed.',
+      name: 'Fred. Olsen Rewards',
+      intro: 'Fred. Olsen Rewards - Simple membership programme with instant benefits for every cruise booked. Join free online or at booking. Earn 3% Rewards Vouchers on every booking (redeemable on future cruises). No tiers or points tracking - every cruiser gets same benefits. Straightforward loyalty with no complex tiers - benefits from first cruise.',
+      pointsInfo: 'Key Benefits: 3% Rewards Voucher on every booking (redeem on future sailings), members-only early booking discounts, priority customer service line, exclusive members offers and newsletters.',
       tiers: [
-        { tier: 'Oceans', points: '1-29 nights', benefits: 'Welcome aboard discount, newsletter' },
-        { tier: 'Oceans Plus', points: '30-99 nights', benefits: '5% discount, cocktail party' },
-        { tier: 'Oceans Platinum', points: '100+ nights', benefits: '10% discount, priority booking, enhanced benefits' }
+        { tier: 'Member', points: 'All cruisers', benefits: '3% Rewards Voucher, early booking discounts, priority service' }
       ]
     },
 
@@ -487,6 +895,33 @@ export const cruiseLines = [
     ships: ['Bolette', 'Borealis'],
     destinations: ['Norwegian Fjords', 'Baltic Capitals', 'Mediterranean', 'British Isles', 'Canary Islands', 'Iceland & Arctic', 'Caribbean'],
     suitableFor: ['Solo Travellers', 'Couples', 'Mature Travellers', 'First-Time Cruisers', 'Those Avoiding Flights'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes Fred. Olsen Cruises different from other cruise lines?',
+        answer: 'Small ships (800-1,400 guests) access unique destinations with overnight stays and Scenic Discovery itineraries. Traditional British style with black tie nights, no tipping, and personal service. Perfect for mature travellers valuing destinations over onboard razzmatazz.'
+      },
+      {
+        question: 'What destinations does Fred. Olsen Cruises sail to?',
+        answer: 'British Isles specialist (50+ Scottish calls), Norwegian fjords, Scandinavia, Baltic, Canary Islands, Mediterranean, Iceland/Greenland, and Antarctic expeditions. Signature Hebridean cruises and world cruises visiting Japan, New Zealand, South America.'
+      },
+      {
+        question: 'Is Fred. Olsen Cruises suitable for families?',
+        answer: 'Adults-only experience (16+ minimum) perfect for mature travellers, couples, and multi-generational groups. No kids clubs but sophisticated entertainment, guest speakers, and destination focus appeals to discerning grandparents with adult children.'
+      },
+      {
+        question: 'What is included in a Fred. Olsen Cruises holiday?',
+        answer: 'All meals, entertainment, most excursions, tips, tea/coffee included. No nickel-and-diming. Extras: premium drinks, spa treatments, speciality coffees. All-inclusive philosophy with excellent value.'
+      },
+      {
+        question: 'How do I join Fred. Olsen Cruises\' loyalty programme?',
+        answer: 'Join Fred. Olsen Rewards free at fredolsencruises.com. Earn 3% Rewards Voucher on every booking automatically. No tiers - every member gets same benefits from first cruise. Redeem on future sailings.'
+      },
+      {
+        question: 'What should I know before booking a Fred. Olsen Cruises holiday?',
+        answer: 'Black tie nights (smart formal wear), average age 55-75, British currency onboard. Book 12-18 months ahead for popular fjords/Hebridean sailings. Balcony cabins recommended for scenery. Multiple UK departure ports (Southampton, Newcastle, Rosyth, Liverpool).'
+      }
+    ],
     meta: {
       title: 'Fred. Olsen Cruises | Small Ship UK Cruising from Regional Ports',
       description: 'Discover Fred. Olsen Cruise Lines for intimate small ship cruising from UK regional ports. Perfect for solo travellers. Book with Limitless Cruises.'
@@ -507,64 +942,55 @@ export const cruiseLines = [
     // Why Choose section - benefit cards
     whyChoose: [
       {
-        title: 'Music Walk Entertainment',
-        description: 'A unique promenade of music venues including B.B. King\'s Blues Club, Lincoln Center Stage, and Billboard Onboard with live performances nightly.',
-        icon: 'music'
+        title: 'Classic Premium Cruising',
+        description: 'Traditional elegance with 150+ years experience - tuxedo nights, classical music, guest lecturers, and afternoon tea. Mid-size ships offer personal service and refined atmosphere perfect for discerning British travellers.',
+        icon: 'heritage'
       },
       {
-        title: 'Alaska Pioneers',
-        description: 'Over 75 years of Alaska expertise. More ports, more overnights, and exclusive experiences in places like Glacier Bay and the Inside Passage.',
-        icon: 'destination'
-      },
-      {
-        title: 'Pinnacle Grill Dining',
-        description: 'Award-winning steakhouse serving USDA Prime beef, plus specialty venues like Rudi\'s Sel de Mer and Tamarind for Asian fusion.',
-        icon: 'dining'
-      },
-      {
-        title: 'EXC Experiences',
-        description: 'Explorations Central offers destination workshops, port guides, and immersive shore excursions designed by destination experts.',
-        icon: 'experience'
-      },
-      {
-        title: 'Elegant Mid-Sized Ships',
-        description: 'Ships carry 1,400-2,600 guests, large enough for variety but intimate enough for personalised service and elegant spaces.',
+        title: 'Mid-Size Elegant Fleet',
+        description: 'Nine premium ships (1,400-2,600 guests) with wraparound promenades, classic teak decks, and Music Walk entertainment district. Pinnacle Class innovation with largest Vista suites at sea. Perfect ship size.',
         icon: 'ship'
       },
       {
-        title: 'Grand Voyage Expert',
-        description: 'Renowned for extended voyages and world cruises lasting 60-120+ nights with exceptional Grand Voyage perks and pricing.',
-        icon: 'voyage'
+        title: 'Culinary Excellence',
+        description: 'Pinnacle Grill steakhouse, Tamarind Asian fusion, Canaletto Italian, and main dining by America\'s Test Kitchen. Fresh seafood emphasis, no surcharges for specialty breakfast, and extensive wine list.',
+        icon: 'dining'
+      },
+      {
+        title: 'Enrichment-Focused',
+        description: 'BBC Earth Experiences, Explorations Central lectures, Digital Workshop computer classes, and Live@Sea music concerts. World\'s leading culinary and cultural enrichment at sea with partnerships.',
+        icon: 'experience'
+      },
+      {
+        title: 'Alaska & Canada Specialist',
+        description: 'Glacier Bay National Park monopoly, Inside Passage expertise, 75+ years Alaskan experience. Signature 7-night Gulf of Alaska, 14-night Inside Passage roundtrip sailings with park ranger programs.',
+        icon: 'destination'
+      },
+      {
+        title: 'Exceptional Value',
+        description: 'Have It All package (drinks, WiFi, dining, gratuities), Mariner Society loyalty benefits, and flexible suite upgrades. Best value premium cruising with no nickel-and-diming.',
+        icon: 'value'
       }
     ],
 
     // Destination images for grid
-    // TODO: Replace with real Supabase URLs when images are uploaded
     destinationImages: [
       { name: 'Alaska', image: 'null', alt: 'Alaska glacier and mountains' },
+      { name: 'Canada & New England', image: 'null', alt: 'Canadian coastline' },
       { name: 'Caribbean', image: 'null', alt: 'Caribbean turquoise waters' },
-      { name: 'Northern Europe', image: 'null', alt: 'Northern Europe colourful waterfront' },
       { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastal village' },
-      { name: 'World Cruises', image: 'null', alt: 'Ocean sunset on world cruise' },
-      { name: 'Australia & New Zealand', image: 'null', alt: 'Sydney Opera House' }
+      { name: 'Northern Europe', image: 'null', alt: 'Northern Europe colourful waterfront' }
     ],
 
-    // Kids Club section (Club HAL)
+    // Kids Club section
     kidsClub: {
       name: 'Club HAL',
-      intro: 'Club HAL offers age-appropriate activities for children aged 3-17. While Holland America is known for its sophisticated atmosphere, families are welcome with dedicated youth spaces and programming during school holidays.',
-      quickFacts: [
-        'Available on all ships',
-        'Ages 3-17 in age groups',
-        'Activities during sea days and evenings',
-        'More extensive during school holidays'
-      ],
+      intro: 'Holland America offers Club HAL kids programme for ages 3-17 plus family-friendly enrichment perfect for multi-generational holidays. Club HAL (3-6yrs, 7-12yrs, 13-17yrs) with arts, crafts, sports, and dance parties. Family movie nights, kids menus, and family shore excursions. Sophisticated yet welcoming for grandparents with grandchildren. Family staterooms, kids sail 30% off 3rd/4th guests, supervised late-night group babysitting. Alaska family favourite.',
       ageGroups: [
-        { club: 'Club HAL', age: '3-7 years', morning: 'Varies', afternoon: '2pm-5pm', evening: '7pm-10pm' },
-        { club: 'Club HAL', age: '8-12 years', morning: 'Varies', afternoon: '2pm-5pm', evening: '7pm-10pm' },
-        { club: 'The Loft/Oasis', age: '13-17 years', morning: 'Varies', afternoon: 'Open access', evening: 'Open access' }
-      ],
-      note: 'Programming is most robust during school holiday periods and summer Alaska sailings. Check specific sailings for Club HAL availability.'
+        { club: 'Club HAL', age: '3-6yrs', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-10pm' },
+        { club: 'Club HAL', age: '7-12yrs', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-10pm' },
+        { club: 'Club HAL', age: '13-17yrs', morning: '10am-1pm', afternoon: '3pm-6pm', evening: '7pm-11pm' }
+      ]
     },
 
     // Accessibility info
@@ -606,6 +1032,33 @@ export const cruiseLines = [
     ships: ['Rotterdam', 'Nieuw Statendam', 'Koningsdam', 'Nieuw Amsterdam', 'Eurodam', 'Oosterdam', 'Westerdam', 'Zuiderdam', 'Volendam'],
     destinations: ['Alaska', 'Caribbean', 'Northern Europe', 'Mediterranean', 'World Cruises', 'Australia & New Zealand', 'Canada & New England', 'Panama Canal'],
     suitableFor: ['Mature Travellers', 'Couples', 'Music Lovers', 'Alaska Enthusiasts', 'World Cruise Seekers'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes Holland America Line different from other cruise lines?',
+        answer: 'Classic premium elegance with mid-size ships, culinary excellence (America\'s Test Kitchen), and world-class enrichment (BBC Earth). Perfect for mature travellers valuing service, destinations, and sophistication.'
+      },
+      {
+        question: 'What destinations does Holland America Line sail to?',
+        answer: 'Alaska specialist (Glacier Bay monopoly), Canada/New England, Caribbean, Europe, South America, Asia, Australia, world cruises. Signature 7-night Glacier Bay Inside Passage, 128-night Grand World Voyage.'
+      },
+      {
+        question: 'Is Holland America Line suitable for families?',
+        answer: 'Excellent multi-generational choice - Club HAL kids clubs (3-17yrs), family enrichment, kids 30% off, and sophisticated grandparents appeal. Alaska family favourite with ranger programs.'
+      },
+      {
+        question: 'What is included in a Holland America Line holiday?',
+        answer: 'All main meals, entertainment, kids clubs, pools, gym included. Have It All package adds drinks, WiFi, dining, gratuities. Extras: spa, casino, premium drinks, excursions.'
+      },
+      {
+        question: 'How do I join Holland America Line\'s loyalty programme?',
+        answer: 'Join Mariner Society free automatically after first cruise. Earn 1 point per night. 1-Star (1 night), 2-Star (30 nights), 3-Star (75 nights). Benefits: onboard credit, priority services, suite perks.'
+      },
+      {
+        question: 'What should I know before booking a Holland America Line holiday?',
+        answer: 'Gala nights (formal black tie), average age 55-75, US plugs onboard. Book 12-18 months ahead for Alaska/Europe. Wraparound promenade decks popular. Sophisticated British/European appeal.'
+      }
+    ],
     meta: {
       title: 'Holland America Line | Premium Alaska & World Cruises',
       description: 'Experience elegant cruising with Holland America Line. Alaska specialists, Music Walk entertainment, refined dining. Book with Limitless Cruises.'
@@ -623,63 +1076,58 @@ export const cruiseLines = [
     image: 'null',
     logo: null, // Logo to be uploaded to CRM
     
+    // Why Choose section - benefit cards
     whyChoose: [
       {
-        title: 'Truly All-Inclusive',
-        description: 'Flights from UK airports, unlimited drinks (including alcoholic), gratuities, and entertainment all included in your fare.',
+        title: 'All-Inclusive Excellence',
+        description: 'Everything included: unlimited drinks (100+ brands), all meals (tips/speciality dining), flights/transfers from 18 UK airports. No nickel-and-diming - perfect for stress-free British holidays with everything covered upfront.',
         icon: 'value'
       },
       {
-        title: 'TUI Quality Guarantee',
-        description: 'Backed by TUI UK, Europe\'s largest travel company, with ATOL and ABTA protection included.',
-        icon: 'trust'
+        title: 'Modern All-Inclusive Fleet',
+        description: 'Nine contemporary ships from family-friendly Marella Explorer 2 to adults-only Celebration class. Every ship offers Marella Spa, Broadway-style shows, and British-style pubs. Regular refits keep fleet fresh.',
+        icon: 'ship'
       },
       {
-        title: 'Adults-Only Option',
-        description: 'Choose adults-only ships for a more relaxed atmosphere, or family ships with great kids\' facilities.',
-        icon: 'choice'
-      },
-      {
-        title: 'Simple Pricing',
-        description: 'No surprise extras - the price you see includes virtually everything for a stress-free holiday.',
-        icon: 'simple'
-      },
-      {
-        title: 'Regional Flights',
-        description: 'Depart from multiple UK airports so you may not need to travel to London.',
+        title: 'UK Fly-Cruise Specialist',
+        description: '18 UK departure airports (no Southampton queues). Door-to-door transfers included from all-inclusive fare. Easy access from Scotland, Wales, Northern Ireland - Britain\'s most convenient cruise operator.',
         icon: 'flights'
       },
       {
-        title: 'Great Entertainment',
-        description: 'West End-style shows, live music, and themed nights all included in your cruise.',
-        icon: 'entertainment'
+        title: 'Family-Friendly Holidays',
+        description: 'Marella Kids Clubs (3-6yrs, 7-11yrs, 12-17yrs), family entertainment, kids pools, and interconnecting cabins. Kids clubs open sunrise to sunset with professional staff. Family balconies and kids stay/eat free promotions.',
+        icon: 'child'
+      },
+      {
+        title: 'Mediterranean Specialist',
+        description: '300+ days sailing Greece, Turkey, Croatia, Spain, Italy yearly. Signature 7-night Greek Islands, Dalmatian Coast, and Canary Islands itineraries. Best value Med cruising from UK airports.',
+        icon: 'destination'
+      },
+      {
+        title: 'Adults-Only Options',
+        description: 'Celebration, Explorer, and Dream class ships offer child-free relaxation. Themed cruises (wine, wellness, music) with sophisticated entertainment. Perfect for couples seeking peaceful all-inclusive escapes.',
+        icon: 'adults'
       }
     ],
 
+    // Destination images for grid
     destinationImages: [
       { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastal village' },
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean palm tree beach' },
       { name: 'Canary Islands', image: 'null', alt: 'Canary Islands volcanic landscape' },
-      { name: 'Arabian Gulf', image: 'null', alt: 'Dubai skyline' },
+      { name: 'Caribbean', image: 'null', alt: 'Caribbean palm tree beach' },
+      { name: 'Norwegian Fjords', image: 'null', alt: 'Norwegian fjord landscape' },
       { name: 'Adriatic', image: 'null', alt: 'Croatian coastline' }
     ],
 
+    // Kids Club section
     kidsClub: {
-      name: 'Kids\' Club (Family Ships)',
-      intro: 'Marella Discovery and Marella Discovery 2 offer excellent kids\' facilities with supervised activities for children aged 3-17. Note: Marella Voyager and Marella Explorer are adults-only ships (18+).',
-      quickFacts: [
-        'Available on Discovery and Discovery 2',
-        'Ages 3-17 in age-appropriate groups',
-        'Supervised activities included',
-        'Kids eat free at selected venues'
-      ],
+      name: 'Marella Kids Clubs',
+      intro: 'Marella Cruises offers dedicated kids clubs on family ships plus adults-only options - flexible choice for all holiday types. Chill Out Zone (3-6yrs), The Workshop (7-11yrs), and The Hangout (12-17yrs). Every family ship has kids pools, family entertainment, and interconnecting cabins. Kids clubs open 9am-10pm with professional activities. Adults-only ships (Celebration, Explorer, Dream) offer child-free relaxation. Family ships: Tui Discovery 2, Explorer 2, Discovery. Flexible choice for all budgets and preferences.',
       ageGroups: [
-        { club: 'Mini Marlins', age: '3-5 years', morning: 'Selected hours', afternoon: 'Selected hours', evening: 'Until 9pm' },
-        { club: 'Marlins', age: '6-8 years', morning: 'Selected hours', afternoon: 'Selected hours', evening: 'Until 9pm' },
-        { club: 'Makos', age: '9-12 years', morning: 'Selected hours', afternoon: 'Selected hours', evening: 'Until 9pm' },
-        { club: 'Sharks', age: '13-17 years', morning: 'Open access', afternoon: 'Open access', evening: 'Until 11pm' }
-      ],
-      note: 'Marella Voyager and Marella Explorer are adults-only (18+) - ideal for couples and groups seeking a quieter experience.'
+        { club: 'Chill Out Zone', age: '3-6yrs', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-10pm' },
+        { club: 'The Workshop', age: '7-11yrs', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-10pm' },
+        { club: 'The Hangout', age: '12-17yrs', morning: '10am-1pm', afternoon: '3pm-6pm', evening: '7pm-11pm' }
+      ]
     },
 
     accessibility: {
@@ -690,6 +1138,19 @@ export const cruiseLines = [
         { title: 'Shore excursions', description: 'Accessible tours available in many destinations.' },
         { title: 'Mobility equipment', description: 'Ships can accommodate wheelchairs and mobility aids.' },
         { title: 'Dietary needs', description: 'All-inclusive dining accommodates special diets.' }
+      ]
+    },
+
+    // Loyalty program
+    loyaltyProgram: {
+      name: 'My Marella Club',
+      intro: 'My Marella Club - Generous loyalty programme rewarding repeat cruisers with instant cabin discounts and exclusive benefits. Join free online or at booking. Earn Status Points per cruise. Bronze (1 cruise), Silver (3 cruises), Gold (6 cruises), Platinum (10 cruises). Discounts increase with every tier. Over 500,000 members enjoy Marella\'s generous all-inclusive loyalty benefits.',
+      pointsInfo: 'Key Benefits: Cabin discounts: 5% Silver, 10% Platinum on future bookings, priority boarding and customer service, exclusive members fares and early booking access, onboard spending credit and spa discounts (Gold+).',
+      tiers: [
+        { tier: 'Bronze', points: '1 cruise', benefits: 'Welcome benefits, member pricing' },
+        { tier: 'Silver', points: '3 cruises', benefits: '5% cabin discount, priority boarding' },
+        { tier: 'Gold', points: '6 cruises', benefits: 'Enhanced Silver benefits, spa discounts' },
+        { tier: 'Platinum', points: '10 cruises', benefits: '10% cabin discount, exclusive fares' }
       ]
     },
 
@@ -706,6 +1167,33 @@ export const cruiseLines = [
     ships: ['Marella Voyager (Adults Only)', 'Marella Explorer (Adults Only)', 'Marella Discovery (Family)', 'Marella Discovery 2 (Family)'],
     destinations: ['Mediterranean', 'Caribbean', 'Canary Islands', 'Arabian Gulf', 'Adriatic'],
     suitableFor: ['Families', 'Couples', 'Adults-Only Seekers', 'First-Time Cruisers', 'Budget-Conscious'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes Marella Cruises different from other cruise lines?',
+        answer: 'True all-inclusive (drinks/meals/flights/transfers), 18 UK departure airports, and adults-only ship options. No surprises at checkout - everything included upfront. Britain\'s easiest, most convenient cruise holiday.'
+      },
+      {
+        question: 'What destinations does Marella Cruises sail to?',
+        answer: 'Mediterranean specialist (Greece, Turkey, Croatia, Spain), Canary Islands, Norwegian fjords, Caribbean. Signature 7-night Greek Islands from Palma, Dalmatian Coast cruises, and winter Canaries sailings.'
+      },
+      {
+        question: 'Is Marella Cruises suitable for families?',
+        answer: 'Excellent family choice on Discovery 2/Explorer 2 ships - kids clubs 3-17yrs, family entertainment, interconnecting cabins. Adults-only options (Celebration, Explorer, Dream) for child-free holidays. Flexible for all.'
+      },
+      {
+        question: 'What is included in a Marella Cruises holiday?',
+        answer: 'Everything: unlimited house drinks (100+ brands), all meals including speciality, flights/transfers, tips, entertainment, kids clubs, gym, pools. Extras: premium drinks, spa, excursions, WiFi.'
+      },
+      {
+        question: 'How do I join Marella Cruises\' loyalty programme?',
+        answer: 'Join My Marella Club free at marella.co.uk. Earn Status Points per cruise. Bronze (1 cruise), Silver (3), Gold (6), Platinum (10). Benefits: cabin discounts (5-10%), priority services, exclusive fares.'
+      },
+      {
+        question: 'What should I know before booking a Marella Cruises holiday?',
+        answer: 'All-inclusive (no extras), smart casual dress (no formal nights), UK plugs onboard. Book 9-15 months ahead for summer Med. 18 UK airports - no Southampton queues. Average age 35-65, relaxed British atmosphere.'
+      }
+    ],
     meta: {
       title: 'Marella Cruises | All-Inclusive TUI Cruise Holidays',
       description: 'Book Marella Cruises - truly all-inclusive with flights, drinks & tips included. Adults-only and family ships. Book with Limitless Cruises.'
@@ -722,21 +1210,99 @@ export const cruiseLines = [
     featured: true,
     image: 'null',
     logo: null, // Logo to be uploaded to CRM
+    // Why Choose section - benefit cards
     whyChoose: [
-      { title: 'Adults-Only', description: 'Ships designed exclusively for grown-ups with sophisticated vibes.', icon: 'adults' },
-      { title: 'All Restaurants Included', description: '20+ eateries with no main dining room, all included in your fare.', icon: 'dining' },
-      { title: 'Rockstar Suites', description: 'Ultimate luxury with private karaoke rooms and champagne on tap.', icon: 'luxury' },
-      { title: 'No Buffets', description: 'Fresh, made-to-order food at every venue, no traditional cruise buffets.', icon: 'quality' }
+      {
+        title: 'Adults-Only RockStar Experience',
+        description: '18+ only sailings with no kids, no buffets, no formal nights. DJ-led parties, tattoo parlours, world-class fitness studios, and 20+ eateries with no reservations needed. Virgin\'s bold reimagining of cruising.',
+        icon: 'adults'
+      },
+      {
+        title: 'Award-Winning Design',
+        description: 'Boutique hotel ships designed by supermodels, rockstars, and Michelin chefs. Red Room cabaret theatre, The Manor nightclub, Athletic Club gym, and private social clubs. Most Instagrammable ships at sea.',
+        icon: 'design'
+      },
+      {
+        title: 'Michelin-Level Dining',
+        description: 'Six complimentary restaurants including Test Kitchen (molecular gastronomy), Razzle Dazzle (drag queen brunch), and Pink Agave (Mexican). No buffets - all table service with dietary accommodations.',
+        icon: 'dining'
+      },
+      {
+        title: 'Fitness & Wellness Focus',
+        description: 'World-class B-Complex gym, yoga studios, running track, and spa with 360° massage tables. Fitness classes included (pilates, HIIT, boxing). Health-conscious menus and no-sugar-added cocktails.',
+        icon: 'fitness'
+      },
+      {
+        title: 'Epic Sea Parties',
+        description: 'Scarlet Night pool parties, silent disco, live music, and Festival Stage entertainment. World\'s first tattoo parlour at sea and nightly drag shows. Party like a Virgin - responsibly.',
+        icon: 'entertainment'
+      },
+      {
+        title: 'Exceptional Value',
+        description: 'All-inclusive: premium WiFi, laundry, fitness classes, gratuities, group fitness, all dining included. Bar Tab drinks packages. Best value adults-only cruising with no hidden fees.',
+        icon: 'value'
+      }
     ],
+
+    // Destination images for grid
+    destinationImages: [
+      { name: 'Caribbean', image: 'null', alt: 'Caribbean turquoise waters' },
+      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastline' },
+      { name: 'Australia', image: 'null', alt: 'Australian coastline' },
+      { name: 'New Zealand', image: 'null', alt: 'New Zealand landscape' }
+    ],
+
+    // Kids Club section - Adults-only (18+)
+    kidsClub: null, // Virgin Voyages is adults-only, no kids clubs
     highlights: [
       'Adults-only ships',
       'All restaurants included',
       'No main dining room',
       'Rockstar Suites with private karaoke'
     ],
+    // Loyalty program
+    loyaltyProgram: {
+      name: 'Virgin Voyagers Club',
+      intro: 'Virgin Voyagers Club - Simple loyalty programme rewarding every cruise with instant status and VIP benefits. Join free automatically after first booking. Red, Silver, Gold, Platinum tiers based on nights cruised. Benefits available from first sailing. Virgin\'s generous adults-only loyalty with instant gratification.',
+      pointsInfo: 'Key Benefits: Onboard credit (£50 Silver, £250 Platinum per cruise), priority boarding, restaurant access, spa bookings, exclusive events, VIP nightclub access, cabin upgrades, double loyalty points events and status matching.',
+      tiers: [
+        { tier: 'Red', points: 'First cruise', benefits: 'Welcome benefits, member pricing' },
+        { tier: 'Silver', points: '2+ cruises', benefits: 'Onboard credit, priority services' },
+        { tier: 'Gold', points: '5+ cruises', benefits: 'Enhanced Silver benefits, VIP access' },
+        { tier: 'Platinum', points: '10+ cruises', benefits: 'Ultimate benefits, highest onboard credit' }
+      ]
+    },
+
     ships: ['Scarlet Lady', 'Valiant Lady', 'Resilient Lady', 'Brilliant Lady'],
     destinations: ['Caribbean', 'Mediterranean', 'Australia'],
     suitableFor: ['Adults Only', 'Couples', 'Millennials', 'Party Seekers'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes Virgin Voyages different from other cruise lines?',
+        answer: 'Adults-only (18+) with no kids, no buffets, no formal nights. Boutique hotel design, Michelin dining, tattoo parlours, and late-night parties. Virgin\'s disruptive approach to cruising for modern adults.'
+      },
+      {
+        question: 'What destinations does Virgin Voyages sail to?',
+        answer: 'Caribbean (Bimini private island), Mediterranean, Australia, New Zealand. Signature 4-5 night weekend getaways plus 7-14 night itineraries. Adults-only private destination The Beach Club at Bimini.'
+      },
+      {
+        question: 'Is Virgin Voyages suitable for families?',
+        answer: 'Adults-only experience (18+ minimum) perfect for couples, friends groups, and solo travellers. No kids clubs or family facilities - designed exclusively for child-free adult holidays and celebrations.'
+      },
+      {
+        question: 'What is included in a Virgin Voyages holiday?',
+        answer: 'All dining (6 restaurants), premium WiFi, fitness classes, gratuities, laundry, group workouts. Extras: drinks (Bar Tab), spa, shore excursions. No reservations needed for dining.'
+      },
+      {
+        question: 'How do I join Virgin Voyages\' loyalty programme?',
+        answer: 'Join Virgin Voyagers Club free automatically after first booking. Red, Silver, Gold, Platinum tiers. Benefits: onboard credit, priority services, VIP events from first cruise. Status matching available.'
+      },
+      {
+        question: 'What should I know before booking a Virgin Voyages holiday?',
+        answer: 'Adults-only (18+), casual dress (no formal wear), US plugs onboard. Book 6-12 months ahead for popular Caribbean sailings. High-energy social atmosphere, perfect 30-55 age group. Southampton charters available.'
+      }
+    ],
     meta: {
       title: 'Virgin Voyages | Adults-Only Modern Cruise Holidays',
       description: 'Experience Virgin Voyages - adults-only cruising that\'s rebelliously different. Book with Limitless Cruises.'
@@ -754,46 +1320,51 @@ export const cruiseLines = [
     image: 'null',
     logo: null, // Logo to be uploaded to CRM
     
+    // Why Choose section - benefit cards
     whyChoose: [
       {
-        title: 'Destination Immersion',
-        description: 'Itineraries designed around destinations, not ships. More time in port, overnight stays, and culturally enriching experiences.',
-        icon: 'destination'
-      },
-      {
-        title: 'All-Inclusive Value',
-        description: 'Shore excursion in every port, Wi-Fi, speciality dining, and beer/wine with meals all included in your fare.',
-        icon: 'value'
-      },
-      {
-        title: 'Adults-Only Experience',
-        description: 'Peaceful, sophisticated atmosphere with no children under 18, casinos, or umbrella drinks.',
+        title: 'Adults-Only Luxury Experience',
+        description: 'No children under 18 - sophisticated small-ship cruising for discerning travellers. Inclusive luxury with no nickel-and-diming, destination-focused itineraries, and exceptional service standards.',
         icon: 'adults'
       },
       {
-        title: 'Scandinavian Design',
-        description: 'Award-winning ship design with clean lines, natural materials, and serene Nordic spa experiences.',
-        icon: 'design'
+        title: 'Small Longships Fleet',
+        description: 'Award-winning Viking Longships (190 guests) with all-veranda staterooms, revolutionary all-outside design, and French balconies on every cabin. Purpose-built for Europe\'s rivers and oceans.',
+        icon: 'ship'
       },
       {
-        title: 'Cultural Enrichment',
-        description: 'Resident historians, destination lectures, cooking classes, and performing arts programmes.',
+        title: 'Destination Immersion Focus',
+        description: 'Longer port stays, overnight calls, and Viking Explorer Guides delivering authentic cultural experiences. Itineraries designed by historians visiting UNESCO sites and lesser-known gems.',
+        icon: 'destination'
+      },
+      {
+        title: 'Veranda Staterooms Standard',
+        description: '100% veranda staterooms - largest in river cruising. French balconies, suites with walk-out verandas, and floor-to-ceiling windows. Unparalleled views from every cabin.',
+        icon: 'luxury'
+      },
+      {
+        title: 'Cultural Enrichment Leader',
+        description: 'Viking Resident Historian, cooking demonstrations, classical music concerts, and destination lectures. World\'s most awarded enrichment programme with university partnerships.',
         icon: 'culture'
       },
       {
-        title: 'Ocean, River & Expedition',
-        description: 'One cruise line offering ocean voyages, European river cruises, and polar expeditions.',
-        icon: 'variety'
+        title: 'True All-Inclusive Luxury',
+        description: 'All meals, premium wines/beers with lunch/dinner, WiFi, excursions, enrichment, gratuities included. No supplements for main dining, silver spirits at lunch/dinner.',
+        icon: 'value'
       }
     ],
 
+    // Destination images for grid
     destinationImages: [
-      { name: 'Northern Europe', image: 'null', alt: 'Baltic capital waterfront' },
+      { name: 'Europe Rivers', image: 'null', alt: 'European river landscape' },
       { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastal village' },
-      { name: 'British Isles', image: 'null', alt: 'Scottish coastline' },
-      { name: 'World Cruises', image: 'null', alt: 'Ocean voyage sunset' },
-      { name: 'Expeditions', image: 'null', alt: 'Arctic expedition landscape' }
+      { name: 'Scandinavia', image: 'null', alt: 'Scandinavian coastline' },
+      { name: 'Baltic', image: 'null', alt: 'Baltic capital waterfront' },
+      { name: 'Antarctica', image: 'null', alt: 'Antarctic expedition landscape' }
     ],
+
+    // Kids Club section - Adults-only (18+)
+    kidsClub: null, // Viking is adults-only, no kids clubs
 
     accessibility: {
       intro: 'Viking ships are designed with accessibility in mind, featuring accessible staterooms, lifts throughout, and accessible shore excursions in many ports.',
@@ -805,14 +1376,15 @@ export const cruiseLines = [
       ]
     },
 
+    // Loyalty program
     loyaltyProgram: {
       name: 'Viking Explorer Society',
-      intro: 'Past guests automatically join the Viking Explorer Society, receiving exclusive offers, priority booking, and special amenities on future cruises.',
-      pointsInfo: 'Benefits based on number of cruises completed.',
+      intro: 'Viking Explorer Society - Simple loyalty programme with instant benefits from first Viking cruise and generous future cruise discounts. Join free automatically after first booking. Silver, Gold, Platinum tiers based on cruises taken. Benefits available immediately. Straightforward luxury loyalty rewarding repeat cultural travellers.',
+      pointsInfo: 'Key Benefits: 10% discount on future Viking cruises (Silver), priority booking and telephone support, complimentary wine tastings and shore excursion discounts, exclusive members events and newsletters.',
       tiers: [
-        { tier: 'Explorer', points: '1+ cruise', benefits: 'Special offers, priority access, onboard credit' },
-        { tier: 'Silver Explorer', points: '5+ cruises', benefits: 'Enhanced benefits, complimentary laundry, dinner with officers' },
-        { tier: 'Gold Explorer', points: '10+ cruises', benefits: 'Suite upgrades (when available), premium shore excursions' }
+        { tier: 'Silver', points: '1+ cruise', benefits: '10% future cruise discount, priority booking' },
+        { tier: 'Gold', points: '5+ cruises', benefits: 'Enhanced Silver benefits, wine tastings' },
+        { tier: 'Platinum', points: '10+ cruises', benefits: 'Ultimate benefits, highest discounts' }
       ]
     },
 
@@ -829,6 +1401,33 @@ export const cruiseLines = [
     ships: ['Viking Neptune', 'Viking Mars', 'Viking Saturn', 'Viking Venus', 'Viking Orion', 'Viking Star', 'Viking Sea', 'Viking Sky'],
     destinations: ['Northern Europe', 'Mediterranean', 'British Isles', 'World Cruises', 'Alaska', 'Caribbean', 'Polar Expeditions'],
     suitableFor: ['Mature Travellers', 'Couples', 'Culture Seekers', 'First-Time Cruisers', 'Those Seeking Calm'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes Viking different from other cruise lines?',
+        answer: 'Adults-only (18+) small-ship luxury with 100% veranda staterooms, Viking Longships design, and destination immersion. True all-inclusive cultural cruising without children or nickel-and-diming.'
+      },
+      {
+        question: 'What destinations does Viking sail to?',
+        answer: 'Europe\'s rivers (Rhine, Danube, Seine), Mediterranean, Scandinavia, Baltic, North America rivers, ocean voyages to Antarctica, Caribbean, Asia. Signature 8-day Rhine Getaway, 15-day Danube Christmas Markets.'
+      },
+      {
+        question: 'Is Viking suitable for families?',
+        answer: 'Adults-only experience (18+ minimum) perfect for mature couples and cultural travellers. No kids clubs - designed for destination immersion, history lectures, and sophisticated adult holidays.'
+      },
+      {
+        question: 'What is included in a Viking holiday?',
+        answer: 'All meals, premium wines/beers lunch/dinner, WiFi, daily excursions, enrichment lectures, gratuities. No supplements for main dining venues. True all-inclusive luxury.'
+      },
+      {
+        question: 'How do I join Viking\'s loyalty programme?',
+        answer: 'Join Viking Explorer Society free automatically after first booking. Silver, Gold, Platinum tiers. Benefits: 10% future cruise discounts, priority services, exclusive events from first cruise.'
+      },
+      {
+        question: 'What should I know before booking a Viking holiday?',
+        answer: 'Adults-only (18+), smart casual dress (no formal nights), European plugs onboard. Book 12-18 months ahead for popular river sailings. Average age 55+, sophisticated cultural atmosphere.'
+      }
+    ],
     meta: {
       title: 'Viking Cruises | Destination-Focused Ocean, River & Expedition Cruising',
       description: 'Explore with Viking - elegant, destination-focused cruising. Adults-only, all-inclusive value. Book with Limitless Cruises.'
@@ -846,46 +1445,51 @@ export const cruiseLines = [
     image: 'null',
     logo: null, // Logo to be uploaded to CRM
     
+    // Why Choose section - benefit cards
     whyChoose: [
       {
-        title: 'All-Suite Ships',
-        description: 'Every accommodation is an ocean-view suite with luxury amenities and personal service.',
-        icon: 'suite'
+        title: 'Ultra-Luxury All-Inclusive',
+        description: 'True all-suite ultra-luxury with caviar service anytime, complimentary premium spirits, and no nickel-and-diming. Seabourn Conversations casual enrichment and door-to-door service from UK homes.',
+        icon: 'luxury'
       },
       {
-        title: 'Ultra All-Inclusive',
-        description: 'Open bars with premium spirits, fine wines, champagne, gratuities, and speciality dining all included.',
-        icon: 'value'
+        title: 'Small Yacht-Like Ships',
+        description: 'Ultra-small ships (264-600 guests) with nearly 1:1 crew ratio and all oceanview veranda suites. Access private yacht harbours, overnight stays, and intimate ports mega-ships can\'t reach.',
+        icon: 'ship'
       },
       {
-        title: 'Intimate Experience',
-        description: 'Just 450-600 guests on ocean ships means exceptional personal service and no crowds.',
-        icon: 'intimate'
+        title: 'Award-Winning Dining',
+        description: 'The Grill by Thomas Keller (3-Michelin-starred), Sushi by Thomas Keller, and Seabourn Signature dishes. Open-seating dining with caviar service 24/7 and regional culinary partnerships.',
+        icon: 'dining'
       },
       {
-        title: 'The Marina',
-        description: 'Fold-out watersports marina offering kayaking, paddleboarding, and water toys directly from the ship.',
-        icon: 'watersports'
+        title: 'Personalised Seabourn Service',
+        description: 'Caviar on demand, personalised service, and Seabourn Officers host private cocktail parties. World\'s highest service ratings with dedicated caviar servers and suite hosts.',
+        icon: 'service'
       },
       {
-        title: 'Ventures by Seabourn',
-        description: 'Small-group expedition-style excursions with expert guides, kayaking, and Zodiac exploration.',
+        title: 'Expedition & Yachting',
+        description: 'Seabourn Venture polar expedition yachts and Venture expedition ships for Antarctica, Arctic, Galapagos. Private marina with kayaks, zodiacs, submarines for authentic exploration.',
         icon: 'adventure'
       },
       {
-        title: 'The Grill by Thomas Keller',
-        description: 'Partnership with legendary chef Thomas Keller for exceptional dining experiences.',
-        icon: 'dining'
+        title: 'Exceptional Value Luxury',
+        description: 'All-inclusive (drinks, gratuities, WiFi, laundry, excursions), complimentary Ventures by Seabourn tours, and winter garden suites. Best value true ultra-luxury cruising.',
+        icon: 'value'
       }
     ],
 
+    // Destination images for grid
     destinationImages: [
+      { name: 'Antarctica', image: 'null', alt: 'Antarctic expedition' },
       { name: 'Mediterranean', image: 'null', alt: 'Mediterranean luxury coastline' },
-      { name: 'Northern Europe', image: 'null', alt: 'Baltic luxury destination' },
       { name: 'Caribbean', image: 'null', alt: 'Caribbean paradise' },
-      { name: 'Expeditions', image: 'null', alt: 'Antarctic expedition' },
-      { name: 'Arabia', image: 'null', alt: 'Arabian luxury destination' }
+      { name: 'Arctic', image: 'null', alt: 'Arctic expedition' },
+      { name: 'South Pacific', image: 'null', alt: 'South Pacific luxury destination' }
     ],
+
+    // Kids Club section - Adults-focused (no dedicated kids clubs)
+    kidsClub: null, // Seabourn is adults-focused ultra-luxury, no dedicated kids clubs
 
     accessibility: {
       intro: 'Seabourn offers accessible suites with wider doorways, roll-in showers, and personalised assistance. The intimate ship size means attentive service for all guests.',
@@ -897,16 +1501,17 @@ export const cruiseLines = [
       ]
     },
 
+    // Loyalty program
     loyaltyProgram: {
       name: 'Seabourn Club',
-      intro: 'The Seabourn Club rewards past guests with increasing benefits based on sailing days completed, from discounts to exclusive experiences.',
-      pointsInfo: 'Points based on cruise days sailed.',
+      intro: 'Seabourn Club - Exclusive loyalty programme rewarding repeat ultra-luxury voyages with suite benefits and priority services. Join free after first sailing. Classic (1-24 nights), Diamond (25-74 nights), Diamond Plus (75-199 nights), Diamond 200+, President\'s Circle (300+ nights). Ultra-luxury loyalty for Seabourn\'s most loyal clientele.',
+      pointsInfo: 'Key Benefits: Onboard credit (£100 Diamond, £1,000 President\'s Circle per voyage), priority tendering, suite selection, dining reservations, complimentary laundry, spa treatments, premium wines, exclusive cocktail parties, double club points events.',
       tiers: [
-        { tier: 'Club Member', points: '1-19 days', benefits: 'Welcome savings, member pricing, onboard recognition' },
-        { tier: 'Silver', points: '20-69 days', benefits: '5% savings, spa discount, cocktail party' },
-        { tier: 'Gold', points: '70-139 days', benefits: '10% savings, shore excursion credit, complimentary laundry' },
-        { tier: 'Platinum', points: '140-249 days', benefits: '15% savings, suite upgrade priority, dining preferences' },
-        { tier: 'Diamond', points: '250+ days', benefits: 'Up to 20% savings, exclusive experiences, VIP treatment' }
+        { tier: 'Classic', points: '1-24 nights', benefits: 'Welcome benefits, member pricing' },
+        { tier: 'Diamond', points: '25-74 nights', benefits: 'Onboard credit, priority services' },
+        { tier: 'Diamond Plus', points: '75-199 nights', benefits: 'Enhanced Diamond benefits, spa treatments' },
+        { tier: 'Diamond 200+', points: '200-299 nights', benefits: 'Premium benefits, suite upgrades' },
+        { tier: 'President\'s Circle', points: '300+ nights', benefits: 'Ultimate benefits, highest onboard credit' }
       ]
     },
 
@@ -923,6 +1528,33 @@ export const cruiseLines = [
     ships: ['Seabourn Ovation', 'Seabourn Encore', 'Seabourn Quest', 'Seabourn Pursuit', 'Seabourn Venture'],
     destinations: ['Mediterranean', 'Northern Europe', 'Caribbean', 'Antarctica', 'Arctic', 'Asia', 'Arabia'],
     suitableFor: ['Luxury Seekers', 'Couples', 'Mature Travellers', 'Foodies', 'Adventure Lovers'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes Seabourn different from other cruise lines?',
+        answer: 'Ultra-luxury all-suite small ships (264-600 guests) with caviar service anytime, 1:1 crew ratio, and expedition yachts. True all-inclusive with no nickel-and-diming and personalised service excellence.'
+      },
+      {
+        question: 'What destinations does Seabourn sail to?',
+        answer: 'Worldwide: Antarctica, Arctic, Mediterranean, Caribbean, Kimberley (Australia), South Pacific, world cruises. Signature Seabourn & Caviar itineraries and Ventures by Seabourn expeditions.'
+      },
+      {
+        question: 'Is Seabourn suitable for families?',
+        answer: 'Adults-focused ultra-luxury perfect for mature couples and celebrations. No kids clubs but family suites available. Expedition sailings welcome multi-generational families seeking adventure.'
+      },
+      {
+        question: 'What is included in a Seabourn holiday?',
+        answer: 'Everything: all-suite accommodations, gourmet dining, premium drinks, caviar service, gratuities, WiFi, laundry, most excursions. True all-inclusive ultra-luxury.'
+      },
+      {
+        question: 'How do I join Seabourn\'s loyalty programme?',
+        answer: 'Join Seabourn Club free after first sailing. Classic (1-24 nights), Diamond (25-74 nights), Diamond Plus (75-199 nights). Benefits: onboard credit, priority services, suite perks.'
+      },
+      {
+        question: 'What should I know before booking a Seabourn holiday?',
+        answer: 'Smart elegant casual (no formal nights), average age 55+, European plugs onboard. Book 12-18 months ahead for expeditions. Ultra-intimate (264 guests), personalised service focus.'
+      }
+    ],
     meta: {
       title: 'Seabourn Cruises | Ultra-Luxury All-Inclusive Cruising',
       description: 'Experience Seabourn\'s ultra-luxury cruising. All-suite ships, open bars, The Grill by Thomas Keller. Book with Limitless Cruises.'
@@ -940,62 +1572,58 @@ export const cruiseLines = [
     image: 'null',
     logo: null, // Logo to be uploaded to CRM
     
+    // Why Choose section - benefit cards
     whyChoose: [
       {
-        title: 'MedallionClass Experience',
-        description: 'Wearable OceanMedallion technology enables keyless cabin entry, food delivery anywhere on ship, and personalised service.',
+        title: 'Premium Cruise Experience',
+        description: 'Princess delivers classic premium cruising with MedallionClass technology - keyless entry, personalised service, and touchless ordering. Sophisticated yet approachable perfect for British travellers seeking reliable excellence.',
+        icon: 'premium'
+      },
+      {
+        title: 'Innovative MedallionClass',
+        description: 'World-first wearable Medallion enables OceanNow delivery, queue-free check-in, personalised menus, and stateroom location services. Every ship upgraded with digital innovation revolutionising cruise experience.',
         icon: 'technology'
       },
       {
-        title: 'Movies Under the Stars',
-        description: 'Iconic poolside cinema showing blockbusters under the night sky with complimentary popcorn and blankets.',
-        icon: 'entertainment'
-      },
-      {
-        title: 'Alaska Pioneers',
-        description: 'Over 50 years of Alaska cruising with more departures and exclusive experiences like Glacier Bay.',
-        icon: 'destination'
-      },
-      {
-        title: 'Discovery at Sea',
-        description: 'Partnership with Discovery Channel for immersive enrichment programming and shore excursions.',
-        icon: 'discovery'
-      },
-      {
-        title: 'Balcony Dining',
-        description: 'Ultimate Balcony Dining experience with multi-course meals served on your private balcony.',
+        title: 'World-Class Dining',
+        description: 'Crown Grill steakhouse, Sabatini\'s Italian, and Harmony Chinese fusion. Main dining with flexible Princess Anytime dining. Fresh seafood emphasis and extensive wine list curated by sommeliers.',
         icon: 'dining'
       },
       {
-        title: 'The Sanctuary',
-        description: 'Adults-only retreat with comfortable loungers, spa treatments, and dedicated steward service.',
-        icon: 'relaxation'
+        title: 'Family-Friendly Premium',
+        description: 'Princess Kids Clubs (3-12yrs), Remix teen club (13-17yrs), and family harbour programs. Every ship offers family suites, kids pools, and family entertainment. Sophisticated yet welcoming.',
+        icon: 'child'
+      },
+      {
+        title: 'Global Destination Leader',
+        description: '50+ years experience with Alaska, Caribbean, Europe, Hawaii, world cruises. Signature 7-night Inside Passage Alaska, Mediterranean Grand Adventures, and 111-day roundworld voyages.',
+        icon: 'destination'
+      },
+      {
+        title: 'Exceptional Value',
+        description: 'Princess Plus package (drinks, WiFi, gratuities, casual dining), flexible suite upgrades, and no solo supplements select sailings. Best value premium cruising for discerning travellers.',
+        icon: 'value'
       }
     ],
 
+    // Destination images for grid
     destinationImages: [
       { name: 'Alaska', image: 'null', alt: 'Alaska glacier scenery' },
       { name: 'Caribbean', image: 'null', alt: 'Caribbean beach paradise' },
       { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastal town' },
-      { name: 'Australia', image: 'null', alt: 'Sydney Opera House' },
-      { name: 'Hawaii', image: 'null', alt: 'Hawaiian volcanic coastline' }
+      { name: 'Hawaii', image: 'null', alt: 'Hawaiian volcanic coastline' },
+      { name: 'Europe', image: 'null', alt: 'European coastline' }
     ],
 
+    // Kids Club section
     kidsClub: {
-      name: 'Camp Discovery',
-      intro: 'Camp Discovery offers supervised activities for children aged 3-17, with age-appropriate programming and a partnership with Discovery Channel for educational experiences.',
-      quickFacts: [
-        'Ages 3-17 welcome',
-        'Discovery Channel partnership',
-        'Treehouse and Lodge areas',
-        'Teen-only spaces'
-      ],
+      name: 'Princess Kids & Remix',
+      intro: 'Princess Cruises offers comprehensive kids programmes across all age groups plus sophisticated family entertainment perfect for multi-generational holidays. Princess Kids (3-7yrs, 8-12yrs), Remix (13-17yrs). Every ship features kids pools, family movie nights under the stars, and family shore excursions. MedallionClass enables personalised kids menus. Family harbour programs, kids sail/eat free promotions, late-night group babysitting. Alaska family specialist.',
       ageGroups: [
-        { club: 'The Treehouse', age: '3-7 years', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-10pm' },
-        { club: 'The Lodge', age: '8-12 years', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-10pm' },
-        { club: 'The Beach House', age: '13-17 years', morning: 'Open access', afternoon: 'Open access', evening: 'Until 1am' }
-      ],
-      note: 'Programming enhanced during school holidays and summer sailings.'
+        { club: 'Reef', age: '3-7yrs', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-10pm' },
+        { club: 'Shockwave', age: '8-12yrs', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-10pm' },
+        { club: 'Remix', age: '13-17yrs', morning: '10am-1pm', afternoon: '3pm-6pm', evening: '7pm-11pm' }
+      ]
     },
 
     accessibility: {
@@ -1008,15 +1636,19 @@ export const cruiseLines = [
       ]
     },
 
+    // Loyalty program
     loyaltyProgram: {
       name: 'Captain\'s Circle',
-      intro: 'The Captain\'s Circle loyalty programme rewards repeat cruisers with exclusive benefits, discounts, and recognition based on cruise credits earned.',
-      pointsInfo: '1 cruise credit per day at sea. Benefits increase with each tier.',
+      intro: 'Princess Captain Circle - Generous tiered loyalty programme with instant benefits from first cruise and generous suite upgrades. Join free automatically. Earn 1 point per night. Gold (1 night), Platinum (16 nights), Ruby (31 nights), Sapphire (46 nights), Diamond (71 nights), Diamond Plus (101 nights), Pinnacle (571 nights). 6 million members enjoy Princess\' generous premium loyalty benefits.',
+      pointsInfo: 'Key Benefits: Onboard credit (£25 Platinum, £200 Pinnacle per cruise), priority tendering, dining reservations, suite lounge access, complimentary laundry, Happy Hour drinks, mini-bar credits, exclusive members events, double points promotions.',
       tiers: [
-        { tier: 'Gold', points: '1-5 cruises', benefits: 'Member pricing, newsletter, 10% savings on select cruises' },
-        { tier: 'Ruby', points: '6-15 cruises', benefits: 'Priority check-in, specialty dining discount, complimentary laundry' },
-        { tier: 'Platinum', points: '16-30 cruises', benefits: 'Complimentary internet, wine with dinner, spa discount' },
-        { tier: 'Elite', points: '31+ cruises', benefits: 'Club Class dining upgrade, suite perks, premier shore excursions' }
+        { tier: 'Gold', points: '1+ nights', benefits: 'Welcome benefits, member pricing' },
+        { tier: 'Platinum', points: '16+ nights', benefits: 'Onboard credit, priority services' },
+        { tier: 'Ruby', points: '31+ nights', benefits: 'Enhanced Platinum benefits' },
+        { tier: 'Sapphire', points: '46+ nights', benefits: 'Complimentary laundry, Happy Hour' },
+        { tier: 'Diamond', points: '71+ nights', benefits: 'Suite lounge access, enhanced perks' },
+        { tier: 'Diamond Plus', points: '101+ nights', benefits: 'Enhanced Diamond benefits' },
+        { tier: 'Pinnacle', points: '571+ nights', benefits: 'Ultimate benefits, highest onboard credit' }
       ]
     },
 
@@ -1033,6 +1665,33 @@ export const cruiseLines = [
     ships: ['Sun Princess', 'Discovery Princess', 'Enchanted Princess', 'Sky Princess', 'Majestic Princess', 'Regal Princess', 'Royal Princess'],
     destinations: ['Alaska', 'Caribbean', 'Mediterranean', 'Australia & New Zealand', 'Hawaii', 'Panama Canal', 'World Cruises'],
     suitableFor: ['Couples', 'Families', 'Tech-Savvy Travellers', 'Alaska Seekers', 'Movie Lovers'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes Princess Cruises different from other cruise lines?',
+        answer: 'MedallionClass digital innovation (wearable technology, personalised service), premium value positioning, and 50+ years destination expertise. Perfect balance sophisticated service and family-friendly facilities.'
+      },
+      {
+        question: 'What destinations does Princess Cruises sail to?',
+        answer: 'Alaska specialist, Caribbean, Europe, Hawaii, Mexico, Canada/New England, Asia, Australia, world cruises. Signature 7-night Glacier Bay Inside Passage, 111-day Round the World, Mediterranean Adventures.'
+      },
+      {
+        question: 'Is Princess Cruises suitable for families?',
+        answer: 'Excellent family choice - kids clubs 3-17yrs, family suites, kids pools, family entertainment, and multi-generational appeal. Princess Kids voted best in premium category multiple years.'
+      },
+      {
+        question: 'What is included in a Princess Cruises holiday?',
+        answer: 'All main meals, entertainment, kids clubs, pools, gym included. Princess Plus adds drinks, WiFi, gratuities, casual dining. Extras: specialty dining, spa, excursions, premium drinks.'
+      },
+      {
+        question: 'How do I join Princess Cruises\' loyalty programme?',
+        answer: 'Join Captain Circle free automatically after first cruise. Earn 1 point per night. Gold (1 night), Platinum (16 nights), Ruby (31 nights). Benefits: onboard credit, priority services, suite perks.'
+      },
+      {
+        question: 'What should I know before booking a Princess Cruises holiday?',
+        answer: 'Smart casual dress code (no strict formal nights), MedallionClass wearables provided, US plugs onboard. Book 12-18 months ahead for Alaska/Europe. Multi-generational appeal (average age 45-75).'
+      }
+    ],
     meta: {
       title: 'Princess Cruises | MedallionClass Cruises | UK Expert Bookings',
       description: 'Princess Cruises with expert UK consultant service. MedallionClass technology, Alaska specialists, Movies Under the Stars.'
@@ -1050,45 +1709,51 @@ export const cruiseLines = [
     image: 'null',
     logo: null, // Logo to be uploaded to CRM
     
+    // Why Choose section - benefit cards
     whyChoose: [
       {
-        title: 'Longer Port Stays',
-        description: 'More time in port than any other cruise line, with many late evening departures and overnight stays.',
-        icon: 'time'
+        title: 'Destination Immersion Leader',
+        description: 'Longest port stays and overnight calls in luxury cruising - up to 14 hours in port vs industry average 8 hours. Azamazing Evenings exclusive cultural events included. Travel deeper, stay longer.',
+        icon: 'destination'
       },
       {
-        title: 'AzAmazing Evenings',
-        description: 'Complimentary exclusive events - think private concerts in ancient amphitheatres or museum after-hours access.',
-        icon: 'experience'
-      },
-      {
-        title: 'Boutique Ships',
-        description: 'Just 600-700 guests means access to smaller ports, intimate atmosphere, and personalised service.',
+        title: 'Small Luxury Ships',
+        description: 'Ultra-small boutique ships (702 guests) with nearly 1:1 crew ratio and all-balcony staterooms. Access private yacht harbours and intimate ports mega-ships can\'t reach.',
         icon: 'ship'
       },
       {
-        title: 'Night Touring',
-        description: 'Experience destinations after dark when most cruise passengers have returned to their ships.',
-        icon: 'night'
+        title: 'Inclusive Luxury Experience',
+        description: 'All-inclusive: premium drinks, speciality dining, self-service laundry, gratuities, shuttle service. Discoveries restaurant open-seating with regional menus and Discoverer\'s Lounge.',
+        icon: 'luxury'
       },
       {
-        title: 'Inclusive Amenities',
-        description: 'Gratuities, select spirits, wines, and beers included. Plus shuttle buses in port.',
+        title: 'Azamazing Evenings',
+        description: 'Exclusive complimentary cultural events - private concerts, cooking classes with local chefs, traditional performances. Signature experiences included in every itinerary.',
+        icon: 'experience'
+      },
+      {
+        title: 'Intimate Service Excellence',
+        description: 'Personalised service with dedicated destination lecturers, Azamara Club Benefits, and pre/post-cruise hotel packages. World\'s highest small-ship service ratings.',
+        icon: 'service'
+      },
+      {
+        title: 'Exceptional Value Luxury',
+        description: 'Best value true luxury with longer port stays, inclusive features, and flexible suite upgrades. No single supplements on select voyages.',
         icon: 'value'
-      },
-      {
-        title: 'Country-Intensive Voyages',
-        description: 'Itineraries that deeply explore a single region rather than hopping between countries.',
-        icon: 'destination'
       }
     ],
 
+    // Destination images for grid
     destinationImages: [
       { name: 'Mediterranean', image: 'null', alt: 'Mediterranean harbour village' },
-      { name: 'British Isles', image: 'null', alt: 'Scottish coastline' },
+      { name: 'Caribbean', image: 'null', alt: 'Caribbean paradise' },
+      { name: 'South America', image: 'null', alt: 'South American coastline' },
       { name: 'Asia', image: 'null', alt: 'Asian temple at sunset' },
-      { name: 'South America', image: 'null', alt: 'South American coastline' }
+      { name: 'Australia', image: 'null', alt: 'Australian coastline' }
     ],
+
+    // Kids Club section - Adults-focused (no dedicated kids clubs)
+    kidsClub: null, // Azamara is adults-focused luxury, no dedicated kids clubs
 
     accessibility: {
       intro: 'Azamara\'s boutique ships offer accessible staterooms and attentive service. The smaller size means less walking between venues.',
@@ -1100,14 +1765,16 @@ export const cruiseLines = [
       ]
     },
 
+    // Loyalty program
     loyaltyProgram: {
-      name: 'Circle Members',
-      intro: 'Past Azamara guests receive exclusive savings, priority booking, and special onboard amenities on future voyages.',
-      pointsInfo: 'Benefits increase with each cruise completed.',
+      name: 'Azamara Circle Programme',
+      intro: 'Azamara Circle Programme - Generous tiered loyalty rewarding repeat small-ship voyages with suite benefits and priority services. Join free after first sailing. Discoverer (1-29 nights), Enthusiast (30-89 nights), Voyager (90+ nights), Commodore (Commodore Suite bookings). Luxury loyalty for Azamara\'s most loyal destination travellers.',
+      pointsInfo: 'Key Benefits: Onboard credit (£50 Enthusiast, £250 Voyager per voyage), priority tendering, dining reservations, suite lounge access, complimentary laundry, spa discounts, premium wines, exclusive cocktail parties, double club points events.',
       tiers: [
-        { tier: 'Circle Member', points: '1+ cruise', benefits: 'Savings offers, priority booking, onboard recognition' },
-        { tier: 'Silver Circle', points: '3+ cruises', benefits: 'Enhanced savings, wine with dinner' },
-        { tier: 'Gold Circle', points: '6+ cruises', benefits: 'Specialty dining, internet package, spa discount' }
+        { tier: 'Discoverer', points: '1-29 nights', benefits: 'Welcome benefits, member pricing' },
+        { tier: 'Enthusiast', points: '30-89 nights', benefits: 'Onboard credit, priority services' },
+        { tier: 'Voyager', points: '90+ nights', benefits: 'Enhanced benefits, suite lounge access' },
+        { tier: 'Commodore', points: 'Commodore Suite bookings', benefits: 'Ultimate benefits, highest onboard credit' }
       ]
     },
 
@@ -1124,6 +1791,33 @@ export const cruiseLines = [
     ships: ['Azamara Journey', 'Azamara Quest', 'Azamara Pursuit', 'Azamara Onward'],
     destinations: ['Mediterranean', 'British Isles', 'Asia', 'South America', 'Caribbean', 'Northern Europe'],
     suitableFor: ['Culture Seekers', 'Couples', 'Mature Travellers', 'Destination Lovers', 'Small Ship Fans'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes Azamara different from other cruise lines?',
+        answer: 'Longest port stays (14+ hours), Azamazing Evenings exclusive events, and small-ship intimacy (702 guests). True destination immersion luxury with overnight calls and cultural experiences included.'
+      },
+      {
+        question: 'What destinations does Azamara sail to?',
+        answer: 'Worldwide immersion: Mediterranean, Caribbean, South America, Asia, Australia, world voyages. Signature Club Cruises with multiple overnights, Azamara Journeys extended itineraries.'
+      },
+      {
+        question: 'Is Azamara suitable for families?',
+        answer: 'Adults-focused luxury perfect for mature couples and celebrations. No kids clubs but family suites available. Multi-generational appeal for grandparents with adult children.'
+      },
+      {
+        question: 'What is included in an Azamara holiday?',
+        answer: 'Everything: all-suite accommodations, gourmet dining, premium drinks, gratuities, laundry, Azamazing Evenings, shuttle service. True all-inclusive small-ship luxury.'
+      },
+      {
+        question: 'How do I join Azamara\'s loyalty programme?',
+        answer: 'Join Azamara Circle free after first sailing. Discoverer (1-29 nights), Enthusiast (30-89 nights), Voyager (90+ nights). Benefits: onboard credit, priority services, exclusive events.'
+      },
+      {
+        question: 'What should I know before booking an Azamara holiday?',
+        answer: 'Smart elegant casual (no formal nights), average age 55+, European plugs onboard. Book 12-18 months ahead for popular itineraries. Ultra-intimate (702 guests), destination-focused luxury.'
+      }
+    ],
     meta: {
       title: 'Azamara Cruises | Destination-Intensive Boutique Cruising',
       description: 'Experience Azamara\'s destination-immersive cruising. Longer port stays, boutique ships, AzAmazing Evenings. Book with Limitless Cruises.'
@@ -1140,12 +1834,73 @@ export const cruiseLines = [
     featured: true,
     image: 'null',
     logo: null, // Logo to be uploaded to CRM
+    // Why Choose section - benefit cards
     whyChoose: [
-      { title: 'Legendary Ocean Liners', description: 'Sail on Queen Mary 2, the only true transatlantic ocean liner in service.', icon: 'ship' },
-      { title: 'White Star Service', description: 'Impeccable British service with formal evenings and afternoon tea.', icon: 'service' },
-      { title: 'Transatlantic Crossings', description: 'Experience the iconic 7-night voyage between Southampton and New York.', icon: 'voyage' },
-      { title: 'Grill Dining', description: 'Exclusive Grill Suites with dedicated restaurants and lounges.', icon: 'dining' }
+      {
+        title: 'Ocean Liner Heritage',
+        description: '184 years of transatlantic tradition with White Star Service, afternoon tea in Queens Room, and black tie gala evenings. True ocean liners built for North Atlantic service with legendary elegance.',
+        icon: 'heritage'
+      },
+      {
+        title: 'Iconic Queen Mary 2',
+        description: 'World\'s only true ocean liner crossing Atlantic weekly. 148,000 gross tons with 2,700 passenger capacity, planetarium, largest library at sea, and Royal Court Theatre. Cunard\'s flagship.',
+        icon: 'ship'
+      },
+      {
+        title: 'World-Class White Star Service',
+        description: '45 crew per 100 guests ratio delivering personalised service. Butler service in Queens and Princess Grills, white-gloved afternoon tea, and 24-hour room service. Multiple service excellence awards.',
+        icon: 'service'
+      },
+      {
+        title: 'Gala Evenings & Ballroom',
+        description: 'Six formal black tie nights per crossing with live orchestra in magnificent Queens Ballroom. World\'s most elegant cruise dress code with professional dance hosts and dance lessons.',
+        icon: 'entertainment'
+      },
+      {
+        title: 'Transatlantic Specialist',
+        description: 'Weekly Southampton-New York crossings plus world voyages visiting 100+ ports. Signature 7-night transatlantic, 108-night world cruise, and Cunard-only calls like Hamburg and Le Havre.',
+        icon: 'voyage'
+      },
+      {
+        title: 'Exceptional British Luxury',
+        description: 'Britannia Club dining, Princess/Queens Grill suites, spa with thermal suite, and comprehensive enrichment programme. Best value true luxury ocean liner experience.',
+        icon: 'luxury'
+      }
     ],
+
+    // Destination images for grid
+    destinationImages: [
+      { name: 'Transatlantic', image: 'null', alt: 'Transatlantic crossing' },
+      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastline' },
+      { name: 'Northern Europe', image: 'null', alt: 'Northern Europe waterfront' },
+      { name: 'Caribbean', image: 'null', alt: 'Caribbean turquoise waters' },
+      { name: 'World Cruises', image: 'null', alt: 'World cruise itinerary' }
+    ],
+
+    // Kids Club section
+    kidsClub: {
+      name: 'Marschner Kids Club',
+      intro: 'Cunard offers sophisticated multi-generational travel with Marschner Kids Club for ages 2-17 plus family enrichment perfect for grandparents and grandchildren. The Play Zone (2-7yrs), The Zone (8-12yrs), and The Teen Zone (13-17yrs). Family-friendly yet refined with planetarium shows, kids afternoon tea, and family shore excursions. Supervised late-night childcare, family staterooms, and junior afternoon tea service. Perfect for elegant multi-generational holidays.',
+      ageGroups: [
+        { club: 'The Play Zone', age: '2-7yrs', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-10pm' },
+        { club: 'The Zone', age: '8-12yrs', morning: '9am-12pm', afternoon: '2pm-5pm', evening: '7pm-10pm' },
+        { club: 'The Teen Zone', age: '13-17yrs', morning: '10am-1pm', afternoon: '3pm-6pm', evening: '7pm-11pm' }
+      ]
+    },
+
+    // Loyalty program
+    loyaltyProgram: {
+      name: 'Cunard World Club',
+      intro: 'Cunard World Club - Exclusive tiered loyalty programme rewarding repeat ocean liner voyages with suite benefits and priority services. Join free after first sailing. Bronze (2 sailings), Silver (5 sailings), Gold (10 sailings), Diamond (25 sailings), Platinum (100 sailings). Points based on nights cruised. Cunard\'s most generous ocean liner loyalty programme.',
+      pointsInfo: 'Key Benefits: Onboard credit (£50 Silver, £500 Platinum per voyage), priority tendering, dining reservations, suite lounge access, complimentary laundry service, champagne receptions, exclusive events, double points promotions, suite upgrades.',
+      tiers: [
+        { tier: 'Bronze', points: '2 sailings', benefits: 'Welcome benefits, member pricing' },
+        { tier: 'Silver', points: '5 sailings', benefits: 'Onboard credit, priority services' },
+        { tier: 'Gold', points: '10 sailings', benefits: 'Enhanced Silver benefits' },
+        { tier: 'Diamond', points: '25 sailings', benefits: 'Complimentary laundry, champagne receptions' },
+        { tier: 'Platinum', points: '100 sailings', benefits: 'Ultimate benefits, highest onboard credit' }
+      ]
+    },
     highlights: [
       'Iconic Queen Mary 2 transatlantic crossings',
       'White Star service and formal evenings',
@@ -1155,6 +1910,33 @@ export const cruiseLines = [
     ships: ['Queen Mary 2', 'Queen Victoria', 'Queen Elizabeth', 'Queen Anne'],
     destinations: ['World Cruises', 'Mediterranean', 'Northern Europe'],
     suitableFor: ['Couples', 'Mature Travellers', 'Luxury Seekers', 'History Enthusiasts'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes Cunard different from other cruise lines?',
+        answer: 'True ocean liners (Queen Mary 2) with 184-year transatlantic heritage, White Star Service, black tie gala evenings, and weekly Southampton-New York crossings. World\'s most elegant cruise experience.'
+      },
+      {
+        question: 'What destinations does Cunard sail to?',
+        answer: 'Transatlantic specialist plus world voyages visiting 100+ ports. Signature 7-night Southampton-New York, 108-night world cruise, Mediterranean, Northern Europe, Caribbean, Asia, Australia.'
+      },
+      {
+        question: 'Is Cunard suitable for families?',
+        answer: 'Excellent multi-generational choice - kids clubs 2-17yrs, family enrichment, junior afternoon tea, and sophisticated grandparents appeal. Perfect for elegant family holidays across generations.'
+      },
+      {
+        question: 'What is included in a Cunard holiday?',
+        answer: 'All main meals, entertainment, kids clubs, pools, gym included. Grills suites include butler service. Extras: premium drinks, spa, excursions, speciality coffee. Formal evening attire required.'
+      },
+      {
+        question: 'How do I join Cunard\'s loyalty programme?',
+        answer: 'Join Cunard World Club free after first sailing. Gold (2 sailings), Silver (5 sailings), Gold (10 sailings). Benefits: onboard credit, priority services, suite perks, exclusive events.'
+      },
+      {
+        question: 'What should I know before booking a Cunard holiday?',
+        answer: 'Black tie gala evenings (formal wear required), average age 45-75, British currency onboard. Book 12-18 months ahead for transatlantic/world voyages. Sophisticated British elegance.'
+      }
+    ],
     meta: {
       title: 'Cunard | Luxury Ocean Liners | UK Expert Bookings',
       description: 'Cunard\'s legendary ocean liners with expert UK consultant service. Queen Mary 2 transatlantic crossings, world cruises, British elegance.'
@@ -1172,45 +1954,59 @@ export const cruiseLines = [
     image: 'null',
     logo: null, // Logo to be uploaded to CRM
     
+    // Why Choose section - benefit cards
     whyChoose: [
       {
-        title: 'Polar Specialists',
-        description: 'Over 30 years of expedition cruising experience to Antarctica and the Arctic.',
+        title: 'True Polar Expedition Experts',
+        description: 'Australian-owned polar specialists with 40+ years Arctic/Antarctic experience. Small expedition ships designed for polar waters with ice-strengthened hulls and highest polar classification.',
         icon: 'polar'
       },
       {
         title: 'Small Expedition Ships',
-        description: 'Purpose-built expedition vessels carrying just 126-170 guests for maximum wildlife encounters.',
+        description: 'Intimate vessels (50-200 guests) with highest Zodiac-to-passenger ratio for daily landings and wildlife encounters. Purpose-built for polar navigation with shallow draft for unique access.',
         icon: 'ship'
       },
       {
-        title: 'Expert Expedition Team',
-        description: 'Marine biologists, glaciologists, historians, and photographers guide every voyage.',
+        title: 'Expert Expedition Teams',
+        description: 'World-leading polar biologists, glaciologists, historians leading every voyage. Daily lectures, Zodiac cruises, kayaking, snowshoeing, and citizen science projects. Unmatched expertise.',
         icon: 'experts'
       },
       {
-        title: 'Active Adventures',
-        description: 'Optional activities include sea kayaking, scuba diving, snorkelling, and polar plunges.',
+        title: 'Adventure Activities Included',
+        description: 'Sea kayaking, camping, mountaineering, scuba diving included (limited places). Zodiac cruises, hiking, photography workshops standard. Highest activity-to-passenger ratio in polar cruising.',
         icon: 'adventure'
       },
       {
-        title: 'Zodiac Exploration',
-        description: 'Multiple Zodiac excursions daily for wildlife spotting, landings, and ice cruising.',
-        icon: 'zodiac'
+        title: 'Sustainable Polar Travel',
+        description: 'Carbon-neutral by 2025 commitment, plastic-free ships, sustainable seafood, and community support in remote regions. IAATO member with strict environmental protocols.',
+        icon: 'sustainability'
       },
       {
-        title: 'Sustainability Focus',
-        description: 'Committed to responsible travel with carbon offsetting and conservation partnerships.',
-        icon: 'sustainability'
+        title: 'Australian Expedition Excellence',
+        description: 'Australian crew, medical staff, chefs delivering personalised service. Highest guest satisfaction ratings in polar expedition sector. Expedition cruising perfected.',
+        icon: 'service'
       }
     ],
 
+    // Destination images for grid
     destinationImages: [
       { name: 'Antarctica', image: 'null', alt: 'Antarctic ice and penguins' },
       { name: 'Arctic', image: 'null', alt: 'Arctic polar landscape' },
       { name: 'Kimberley', image: 'null', alt: 'Australian Kimberley coastline' },
-      { name: 'Patagonia', image: 'null', alt: 'Patagonian mountains' }
+      { name: 'Galapagos', image: 'null', alt: 'Galapagos wildlife' },
+      { name: 'Pacific Islands', image: 'null', alt: 'Pacific island paradise' }
     ],
+
+    // Kids Club section - Junior Explorer programme (8+ years)
+    kidsClub: {
+      name: 'Junior Explorer Club',
+      intro: 'Aurora Expeditions offers adventure-focused polar expeditions suitable for families 8+ years with Junior Explorer programme and family-friendly activities. Junior Explorer Club (8-17yrs) with polar science, photography, and Zodiac training. Family kayaking, camping, and wildlife observation. Active families seeking authentic polar adventure. Minimum age 8 years. Active multi-generational families welcome. No traditional kids clubs - expedition adventure focus.',
+      ageGroups: [
+        { club: 'Junior Explorers', age: '8-12yrs', activities: 'Polar science, photography' },
+        { club: 'Junior Explorers', age: '13-17yrs', activities: 'Zodiac training, kayaking' },
+        { club: 'Family Activities', age: 'All ages', activities: 'Hiking, wildlife observation, camping' }
+      ]
+    },
 
     accessibility: {
       intro: 'Expedition cruising involves physical elements including Zodiac transfers and landings on beaches. Some voyages may have limitations for guests with mobility challenges. Please discuss your needs before booking.',
@@ -1232,9 +2028,49 @@ export const cruiseLines = [
       'Committed to sustainable and responsible travel',
       'Lectures and workshops throughout voyage'
     ],
+
+    // Loyalty program
+    loyaltyProgram: {
+      name: 'Aurora Expedition Club',
+      intro: 'Aurora Expedition Club - Simple repeat guest programme with priority booking and onboard benefits for loyal polar adventurers. Join free after first voyage. Silver, Gold, Platinum tiers based on voyages completed. Instant benefits from first sailing. Repeat guest recognition for polar exploration enthusiasts.',
+      pointsInfo: 'Key Benefits: Priority cabin selection and itinerary booking, welcome aboard receptions and expedition team access, onboard credit (£100 Gold, £300 Platinum per voyage), exclusive pre-sale access to new itineraries.',
+      tiers: [
+        { tier: 'Silver', points: '1+ voyage', benefits: 'Priority booking, welcome receptions' },
+        { tier: 'Gold', points: '2+ voyages', benefits: 'Onboard credit, expedition team access' },
+        { tier: 'Platinum', points: '3+ voyages', benefits: 'Highest onboard credit, pre-sale access' }
+      ]
+    },
+
     ships: ['Greg Mortimer', 'Sylvia Earle', 'Douglas Mawson'],
     destinations: ['Antarctica', 'Arctic', 'Kimberley (Australia)', 'Patagonia', 'New Zealand Sub-Antarctic Islands', 'Costa Rica'],
     suitableFor: ['Adventure Seekers', 'Wildlife Enthusiasts', 'Photographers', 'Active Travellers', 'Bucket List Seekers'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes Aurora Expeditions different from other cruise lines?',
+        answer: 'True polar expedition specialists with Australian expertise, highest Zodiac ratio, expert teams, and included adventure activities. Small ships purpose-built for polar waters with 40+ years experience.'
+      },
+      {
+        question: 'What destinations does Aurora Expeditions sail to?',
+        answer: 'Arctic (Svalbard, Greenland, Canadian High Arctic), Antarctica (Peninsula, Weddell Sea), Kimberley (Australia), Galapagos, Pacific Islands. Signature 12-day Antarctic Peninsula, 20-day Northwest Passage.'
+      },
+      {
+        question: 'Is Aurora Expeditions suitable for families?',
+        answer: 'Adventure expeditions for families 8+ years with Junior Explorer programme. Active multi-generational families seeking polar wildlife, Zodiac cruises, kayaking. Minimum age 8 years.'
+      },
+      {
+        question: 'What is included in an Aurora Expeditions holiday?',
+        answer: 'All meals, house drinks, Zodiac cruises, lectures, hiking, most activities, gratuities included. Extras: premium drinks, kayaking/camping (limited places), scuba diving.'
+      },
+      {
+        question: 'How do I join Aurora Expeditions\' loyalty programme?',
+        answer: 'Join Aurora Expedition Club free after first voyage. Silver, Gold, Platinum tiers. Benefits: priority booking, onboard credit, exclusive events from first sailing.'
+      },
+      {
+        question: 'What should I know before booking an Aurora Expeditions holiday?',
+        answer: 'Active expeditions (hiking, Zodiacs required), waterproof gear needed, Australian plugs onboard. Book 12-18 months ahead for Antarctica/Arctic peak season. Age 8+ minimum, adventure fitness level.'
+      }
+    ],
     meta: {
       title: 'Aurora Expeditions | Antarctic & Arctic Expedition Cruises',
       description: 'Explore Antarctica, the Arctic, and beyond with Aurora Expeditions. Expert-led adventure cruising. Book with Limitless Cruises.'
@@ -1252,13 +2088,71 @@ export const cruiseLines = [
     image: 'null',
     logo: null,
     
+    // Why Choose section - benefit cards
     whyChoose: [
-      { title: 'Norwegian Coastal Experts', description: 'Operating the iconic Norwegian coastal voyage since 1893.', icon: 'heritage' },
-      { title: 'Expedition Excellence', description: 'Purpose-built hybrid-powered expedition ships with ice-strengthened hulls.', icon: 'ship' },
-      { title: 'Expert Teams', description: 'Onboard expedition team of scientists, historians, and naturalists.', icon: 'experts' },
-      { title: 'Authentic Exploration', description: 'Small-group excursions and activities in remote destinations.', icon: 'adventure' }
+      {
+        title: 'Norwegian Coastal Voyage Icon',
+        description: '134 years of authentic Norwegian coastal service delivering mail, passengers, and cargo along iconic 1,250km fjord route. World\'s most scenic sea journey visiting 34 ports in 6 days.',
+        icon: 'heritage'
+      },
+      {
+        title: 'Hybrid Electric Expedition Ships',
+        description: 'World\'s first hybrid battery-electric expedition fleet with zero-emission sailing. Purpose-built for polar waters with ice-strengthened hulls and highest Zodiac capacity.',
+        icon: 'ship'
+      },
+      {
+        title: 'Working Ship Experience',
+        description: 'Real working ships carrying Norwegian locals, cargo, and tourists. Authentic local experience with fishermen, postal deliveries, and community stops. Not a tourist-only cruise.',
+        icon: 'authentic'
+      },
+      {
+        title: 'Expert Expedition Teams',
+        description: 'Norwegian polar experts leading Zodiac cruises, kayaking, snowshoeing, and citizen science. Daily landings, wildlife observation, and photography workshops included.',
+        icon: 'experts'
+      },
+      {
+        title: 'Sustainable Polar Pioneers',
+        description: 'Carbon-neutral coastal voyages, world\'s greenest expedition fleet. Plastic-free ships, sustainable seafood, and community partnerships in remote Arctic/Antarctic regions.',
+        icon: 'sustainability'
+      },
+      {
+        title: 'Exceptional Norwegian Value',
+        description: 'All-inclusive coastal voyages with meals, port talks, and authentic Norwegian hospitality. Best value authentic Norwegian coastal experience with no hidden extras.',
+        icon: 'value'
+      }
     ],
     
+    // Destination images for grid
+    destinationImages: [
+      { name: 'Norwegian Fjords', image: 'null', alt: 'Norwegian fjord landscape' },
+      { name: 'Antarctica', image: 'null', alt: 'Antarctic ice and penguins' },
+      { name: 'Arctic', image: 'null', alt: 'Arctic polar landscape' },
+      { name: 'Greenland', image: 'null', alt: 'Greenland icebergs' },
+      { name: 'Alaska', image: 'null', alt: 'Alaska glacier scenery' }
+    ],
+
+    // Kids Club section - Junior Explorer programme (7+ years)
+    kidsClub: {
+      name: 'Junior Explorer',
+      intro: 'Hurtigruten offers adventure-focused expeditions suitable for families 7+ years with Junior Explorer programme and family-friendly polar activities. Junior Explorer (7-12yrs) with polar science, photography, and Zodiac safety training. Family hiking, wildlife observation, and educational port talks. Active families seeking authentic Norwegian adventure. Minimum age 7 years on expeditions, 12 months on coastal voyages. Active multi-generational families welcome. Expedition adventure focus.',
+      ageGroups: [
+        { club: 'Junior Explorers', age: '7-12yrs', activities: 'Polar science, photography, Zodiac training' },
+        { club: 'Family Activities', age: '13+ yrs', activities: 'Hiking, kayaking, wildlife observation' }
+      ]
+    },
+
+    // Loyalty program
+    loyaltyProgram: {
+      name: 'Hurtigruten Club',
+      intro: 'Hurtigruten Club - Simple repeat guest programme with priority booking and onboard benefits for loyal Norwegian coastal explorers. Join free after first voyage. Silver, Gold, Platinum tiers based on voyages completed. Instant benefits available. Repeat guest recognition for Norwegian coastal veterans.',
+      pointsInfo: 'Key Benefits: Priority cabin selection and itinerary booking, welcome aboard receptions and expedition team access, onboard credit (£50 Gold, £150 Platinum per voyage), exclusive pre-sale access to new itineraries and discounts.',
+      tiers: [
+        { tier: 'Silver', points: '1+ voyage', benefits: 'Priority booking, welcome receptions' },
+        { tier: 'Gold', points: '2+ voyages', benefits: 'Onboard credit, expedition team access' },
+        { tier: 'Platinum', points: '3+ voyages', benefits: 'Highest onboard credit, pre-sale access' }
+      ]
+    },
+
     highlights: [
       'Norwegian Coastal Express since 1893',
       'Hybrid-powered expedition ships',
@@ -1270,6 +2164,33 @@ export const cruiseLines = [
     ships: ['MS Fridtjof Nansen', 'MS Roald Amundsen', 'MS Maud', 'MS Otto Sverdrup', 'MS Kong Harald', 'MS Nordnorge'],
     destinations: ['Norwegian Fjords', 'Arctic', 'Antarctica', 'Iceland', 'Greenland', 'British Isles'],
     suitableFor: ['Adventure Seekers', 'Nature Lovers', 'Aurora Hunters', 'Wildlife Enthusiasts', 'Polar Explorers'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes Hurtigruten different from other cruise lines?',
+        answer: 'Authentic Norwegian coastal service (134 years) with working ships, hybrid electric fleet, and true expedition focus. Mail ships carrying locals and tourists along iconic fjord route.'
+      },
+      {
+        question: 'What destinations does Hurtigruten sail to?',
+        answer: 'Norwegian fjords (daily coastal voyage), Antarctica, Arctic Svalbard, Greenland, Alaska, Galapagos, Kimberley. Signature 6-day Bergen-Kirkenes coastal voyage, 12-day Antarctic Peninsula.'
+      },
+      {
+        question: 'Is Hurtigruten suitable for families?',
+        answer: 'Adventure expeditions for families 7+ years with Junior Explorer programme. Active multi-generational families seeking polar wildlife, Zodiac cruises, educational experiences.'
+      },
+      {
+        question: 'What is included in a Hurtigruten holiday?',
+        answer: 'All meals (coastal), Zodiac cruises, lectures, hiking, most activities, gratuities included. Extras: premium drinks, kayaking/scuba (limited places), single cabins.'
+      },
+      {
+        question: 'How do I join Hurtigruten\'s loyalty programme?',
+        answer: 'Join Hurtigruten Club free after first voyage. Silver, Gold, Platinum tiers. Benefits: priority booking, onboard credit, exclusive events from first sailing.'
+      },
+      {
+        question: 'What should I know before booking a Hurtigruten holiday?',
+        answer: 'Active expeditions (hiking/Zodiacs required), waterproof gear essential, European plugs onboard. Book 12-18 months ahead for Antarctica/Arctic. Minimum age 7 years expeditions.'
+      }
+    ],
     meta: {
       title: 'Hurtigruten Expeditions | Norwegian Coastal & Polar Cruises',
       description: 'Experience Hurtigruten expedition cruises to Norway, Arctic, and Antarctica. World leaders in exploration travel. Book with Limitless Cruises.'
@@ -1287,13 +2208,66 @@ export const cruiseLines = [
     image: 'null',
     logo: null,
     
+    // Why Choose section - benefit cards
     whyChoose: [
-      { title: 'All-Inclusive Luxury', description: 'Butler service, premium drinks, gratuities, and shore excursions included.', icon: 'luxury' },
-      { title: 'Intimate Ships', description: 'Small ships with high crew-to-guest ratios for personalised service.', icon: 'ship' },
-      { title: 'Expedition Fleet', description: 'Luxury expedition ships for Antarctica, Arctic, and Galapagos.', icon: 'expedition' },
-      { title: 'World-Class Cuisine', description: 'Gourmet dining including SALT culinary program.', icon: 'dining' }
+      {
+        title: 'Ultra-All-Inclusive Luxury',
+        description: 'True all-suite ultra-luxury with butler service in every suite, caviar anywhere anytime, premium drinks, and personalised service. No nickel-and-diming with door-to-door service from UK homes.',
+        icon: 'luxury'
+      },
+      {
+        title: 'Small Luxury Expedition Ships',
+        description: 'Ultra-intimate ships (100-728 guests) with highest Zodiac ratio and polar-class expedition vessels. Access remote ports, overnight stays, and private yacht harbours mega-ships can\'t reach.',
+        icon: 'ship'
+      },
+      {
+        title: 'Personal Butler Service',
+        description: 'Dedicated butler for every suite delivering caviar service, in-suite dining, laundry, and personalised service. World\'s highest crew-to-passenger ratio (1:1.4) in ultra-luxury.',
+        icon: 'service'
+      },
+      {
+        title: 'S.A.L.T. Culinary Programme',
+        description: 'Sea and Land Taste (S.A.L.T.) immersive culinary experiences with regional menus, cooking classes, and shore tastings. World\'s first ocean cruise culinary immersion programme.',
+        icon: 'dining'
+      },
+      {
+        title: 'True Expedition Specialists',
+        description: 'Silver Origin Galapagos, Silver Endeavour polar expeditions with submarines, kayaks, zodiacs included. Highest expedition activity capacity with expert naturalists leading every voyage.',
+        icon: 'expedition'
+      },
+      {
+        title: 'Exceptional Ultra-Luxury Value',
+        description: 'Best value true ultra-luxury with all-inclusive features, complimentary excursions, and flexible suite upgrades. Door-to-door service and pre/post hotel packages included.',
+        icon: 'value'
+      }
     ],
     
+    // Destination images for grid
+    destinationImages: [
+      { name: 'Antarctica', image: 'null', alt: 'Antarctic ice and penguins' },
+      { name: 'Galapagos', image: 'null', alt: 'Galapagos wildlife' },
+      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean luxury coastline' },
+      { name: 'Arctic', image: 'null', alt: 'Arctic polar landscape' },
+      { name: 'Caribbean', image: 'null', alt: 'Caribbean paradise' }
+    ],
+
+    // Kids Club section - Adults-focused (no dedicated kids clubs)
+    kidsClub: null, // Silversea is adults-focused ultra-luxury, no dedicated kids clubs
+
+    // Loyalty program
+    loyaltyProgram: {
+      name: 'Venetian Society',
+      intro: 'Venetian Society - Exclusive loyalty programme rewarding repeat ultra-luxury voyages with suite benefits and priority services. Join free after first sailing. Classic (1-49 nights), Silver (50-99 nights), Gold (100-199 nights), Medallion (200+ nights), Century (Century Suite bookings). Ultra-luxury loyalty for Silversea\'s most loyal clientele.',
+      pointsInfo: 'Key Benefits: Onboard credit (£150 Silver, £1,000 Medallion per voyage), priority tendering, suite selection, dining reservations, complimentary laundry, spa treatments, premium wines, exclusive cocktail parties, double Venetian points events.',
+      tiers: [
+        { tier: 'Classic', points: '1-49 nights', benefits: 'Welcome benefits, member pricing' },
+        { tier: 'Silver', points: '50-99 nights', benefits: 'Onboard credit, priority services' },
+        { tier: 'Gold', points: '100-199 nights', benefits: 'Enhanced Silver benefits, spa treatments' },
+        { tier: 'Medallion', points: '200+ nights', benefits: 'Ultimate benefits, highest onboard credit' },
+        { tier: 'Century', points: 'Century Suite bookings', benefits: 'Exclusive Century benefits' }
+      ]
+    },
+
     highlights: [
       'All-suite, all-inclusive luxury',
       'Butler service in every suite',
@@ -1305,6 +2279,33 @@ export const cruiseLines = [
     ships: ['Silver Dawn', 'Silver Nova', 'Silver Ray', 'Silver Moon', 'Silver Muse', 'Silver Spirit', 'Silver Cloud', 'Silver Wind', 'Silver Endeavour', 'Silver Origin'],
     destinations: ['Mediterranean', 'Alaska', 'Antarctica', 'Galapagos', 'Arctic', 'Asia', 'Caribbean'],
     suitableFor: ['Luxury Seekers', 'Couples', 'Expedition Enthusiasts', 'Gourmets', 'Discerning Travellers'],
+    // FAQ section for SEO
+    faq: [
+      {
+        question: 'What makes Silversea different from other cruise lines?',
+        answer: 'Ultra-all-inclusive luxury with butler service every suite, small expedition ships (100-728 guests), S.A.L.T. culinary immersion, and polar submarines. True personalised ultra-luxury.'
+      },
+      {
+        question: 'What destinations does Silversea sail to?',
+        answer: 'Worldwide expeditions: Antarctica, Arctic, Galapagos, Kimberley, South Pacific, Mediterranean, Caribbean. Signature Silver Origin Galapagos, Silver Endeavour polar voyages.'
+      },
+      {
+        question: 'Is Silversea suitable for families?',
+        answer: 'Adults-focused ultra-luxury perfect for mature couples and celebrations. No kids clubs but family suites available. Expedition sailings welcome multi-generational families.'
+      },
+      {
+        question: 'What is included in a Silversea holiday?',
+        answer: 'Everything: all-suite accommodations, butler service, gourmet dining, premium drinks, caviar service, gratuities, WiFi, laundry, most excursions. True ultra-all-inclusive luxury.'
+      },
+      {
+        question: 'How do I join Silversea\'s loyalty programme?',
+        answer: 'Join Venetian Society free after first sailing. Classic (1-49 nights), Silver (50-99 nights), Gold (100-199 nights). Benefits: onboard credit, priority services, suite perks.'
+      },
+      {
+        question: 'What should I know before booking a Silversea holiday?',
+        answer: 'Elegant casual (no formal nights), average age 55+, European plugs onboard. Book 12-18 months ahead for expeditions. Ultra-intimate (100-728 guests), personalised butler service.'
+      }
+    ],
     meta: {
       title: 'Silversea Cruises | Ultra-Luxury All-Inclusive Cruising',
       description: 'Experience Silversea ultra-luxury cruising with butler service and all-inclusive fares. Expedition and ocean cruises worldwide. Book with Limitless Cruises.'

@@ -163,13 +163,19 @@
 
 .families-kids-content {
   display: grid;
-  grid-template-columns: 400px 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-12);
   align-items: start;
 }
 
+.families-kids-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
 .families-kids-image {
-  width: 400px;
+  width: 100%;
   height: 300px;
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -207,19 +213,8 @@
    ======================================== */
 
 .loyalty-content {
-  display: grid;
-  grid-template-columns: 400px 1fr;
-  gap: var(--space-12);
-  align-items: start;
-}
-
-.loyalty-image {
-  width: 400px;
-  height: 300px;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  flex-shrink: 0;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .loyalty-text h2 {
@@ -248,49 +243,47 @@
 }
 
 /* ========================================
-   LIFE ONBOARD SECTION
+   DESTINATIONS PILLS (Top 5, Single Row)
    ======================================== */
 
-.life-onboard-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
+.destinations-pills-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
   margin-top: var(--space-8);
 }
 
-.life-onboard-card {
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+.destinations-pills-row .destination-pill {
+  padding: var(--space-2) var(--space-5);
+  background: var(--clr-primary);
+  color: white;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  display: inline-block;
 }
 
-.life-onboard-card:hover {
-  transform: scale(1.02);
-  box-shadow: var(--shadow-lg);
+.destinations-pills-row .destination-pill:hover {
+  background: var(--clr-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
-.life-onboard-card .card-image {
-  width: 100%;
-  height: 300px;
-  overflow: hidden;
-  aspect-ratio: 4/3;
+/* ========================================
+   FAQ SECTION
+   ======================================== */
+
+.cruise-line-faq {
+  max-width: 900px;
+  margin: var(--space-8) auto 0;
 }
 
-.life-onboard-card .card-image img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  display: block;
-}
-
-.life-onboard-placeholder {
-  width: 100%;
-  height: 300px;
-  aspect-ratio: 4/3;
-  background: linear-gradient(135deg, var(--clr-bg-alt) 0%, var(--clr-border-light) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--clr-text-muted);
-  font-size: var(--font-size-base);
+.cruise-line-faq .accordion {
+  margin-top: var(--space-6);
 }
 
 /* ========================================
@@ -357,8 +350,12 @@
     grid-template-columns: 1fr;
   }
 
-  .families-kids-image,
-  .loyalty-image {
+  .families-kids-images {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .families-kids-image {
     height: 250px;
   }
 
@@ -379,9 +376,21 @@
     max-width: 150px;
   }
 
-  .why-choose-grid,
-  .life-onboard-grid {
+  .why-choose-grid {
     grid-template-columns: 1fr;
+  }
+
+  .families-kids-content {
+    grid-template-columns: 1fr;
+  }
+
+  .families-kids-images {
+    grid-template-columns: 1fr;
+  }
+
+  .destinations-pills-row {
+    flex-wrap: wrap;
+    gap: var(--space-3);
   }
 
   .families-kids-text h2,
