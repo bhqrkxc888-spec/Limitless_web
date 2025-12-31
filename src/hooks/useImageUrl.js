@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from 'react';
 import { getImageUrlFromDb } from '../utils/imageLoader';
-import { getDestinationImageUrl, getBucketListImageUrl, getCruiseLineImageUrl } from '../config/assetUrls';
+import { getDestinationImageUrl, getBucketListImageUrl, getCruiseLineImageUrl, getShipImageUrl } from '../config/assetUrls';
 import { PLACEHOLDER_IMAGE } from '../config/assetUrls';
 import { getDestinationForBucketList } from '../config/bucketListDestinationMapping';
 import { getImageSlugForDestination } from '../config/destinationSlugMapping';
@@ -222,7 +222,8 @@ export function usePortGuideImage(slug, type = 'hero', portName = '', country = 
  * Note: Ships use entityId format: "{cruiseLineSlug}/ships/{shipSlug}"
  * Images are uploaded as: WEB_cruise-lines/{cruiseLineSlug}/ships/{shipSlug}/{imageType}.webp
  * 
- * Falls back to cruise line card image if ship image not found
+ * Uses direct URL construction as primary source (images are stored at this exact path)
+ * Falls back to cruise line card image if ship image doesn't exist
  */
 export function useShipImage(cruiseLineSlug, shipSlug, type = 'card', shipName = '') {
   const [imageUrl, setImageUrl] = useState(PLACEHOLDER_IMAGE);
@@ -239,38 +240,27 @@ export function useShipImage(cruiseLineSlug, shipSlug, type = 'card', shipName =
 
     const entityId = `${cruiseLineSlug}/ships/${shipSlug}`;
     
-    // Import the placeholder generator
-    import('../utils/placeholderImages.js').then(({ getCruiseLinePlaceholderImage }) => {
-      // Use cruise line placeholder as fallback
-      const smartPlaceholder = getCruiseLinePlaceholderImage(cruiseLineSlug, 'card', '');
-      setImageUrl(smartPlaceholder);
-      
-      // Try to get ship image from database
-      getImageUrlFromDb('ship', entityId, type, null)
-        .then(url => {
-          if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
-            setImageUrl(url);
-            setIsPlaceholder(false);
-          } else {
-            // Fallback to cruise line card image
-            const cruiseLineFallback = getCruiseLineImageUrl(cruiseLineSlug, 'card');
-            return getImageUrlFromDb('cruise-line', cruiseLineSlug, 'card', cruiseLineFallback);
-          }
-        })
-        .then(url => {
-          if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
-            setImageUrl(url);
-            setIsPlaceholder(false);
-          } else {
-            setIsPlaceholder(true);
-          }
-          setLoading(false);
-        })
-        .catch(() => {
-          setIsPlaceholder(true);
-          setLoading(false);
-        });
-    });
+    // Construct direct URL (images are stored at this exact path in Supabase Storage)
+    // This is the PRIMARY source since images are uploaded to this path
+    const directUrl = getShipImageUrl(cruiseLineSlug, shipSlug, type);
+    
+    // Set direct URL immediately (images are uploaded to this path)
+    setImageUrl(directUrl);
+    setIsPlaceholder(false); // Assume it exists since images are uploaded to this path
+    
+    // Also try database for metadata/validation, but don't wait for it
+    getImageUrlFromDb('ship', entityId, type, directUrl)
+      .then(url => {
+        // If database has a valid URL, use it (may have better caching or metadata)
+        if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE && url !== directUrl) {
+          setImageUrl(url);
+        }
+        setLoading(false);
+      })
+      .catch(() => {
+        // Database query failed, but direct URL should still work
+        setLoading(false);
+      });
   }, [cruiseLineSlug, shipSlug, type, shipName]);
 
   return { imageUrl, loading, isPlaceholder };

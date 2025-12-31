@@ -7,7 +7,6 @@ import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader, DataTable, Accordion } from '../components/ui';
 import Carousel from '../components/Carousel';
 import { shipNameToSlug } from '../utils/widgetyHelpers';
-import { getShipLink } from '../config/shipLinks';
 import { useCruiseLineImage, useShipImage } from '../hooks/useImageUrl';
 import { getCruiseLinePlaceholderImage } from '../utils/placeholderImages';
 import './CruiseLinePage.css';
@@ -38,29 +37,21 @@ function destinationNameToSlug(name) {
 
 /**
  * Ship Card Component for Fleet Carousel
+ * Images are loaded from: WEB_cruise-lines/{cruiseLineSlug}/ships/{shipSlug}/card.webp
+ * All images managed via Admin → Images → Cruise Lines & Ships
  */
 function FleetShipCard({ ship, cruiseLineSlug, shipSlug, shipPageUrl, cruiseLineName }) {
   const { imageUrl: shipImageUrl, isPlaceholder } = useShipImage(cruiseLineSlug, shipSlug, 'card', ship);
-  const hasImage = !isPlaceholder && !shipImageUrl.includes('placeholder');
-  
-  // Get Widgety link from CRM (via shipLinks.js config)
-  const shipLink = getShipLink(ship);
-  const finalShipUrl = shipLink && shipLink.startsWith('http')
-    ? shipLink  // Full Widgety URL from CRM
-    : shipPageUrl;  // Fallback to slug-based ship page
-  const isClickable = !!finalShipUrl;
+  // Show image if we have a URL that's not a placeholder
+  // Direct URLs from getShipImageUrl() are valid even if isPlaceholder is true
+  const hasImage = shipImageUrl && 
+                   shipImageUrl !== '/images/placeholders/hero.svg' && 
+                   !shipImageUrl.includes('placeholder');
   
   return (
     <Card 
-      href={isClickable ? finalShipUrl : undefined}
       variant="default"
       className="fleet-ship-card"
-      target={isClickable ? "_blank" : undefined}
-      rel={isClickable ? "noopener noreferrer" : undefined}
-      onClick={isClickable ? (e) => {
-        e.preventDefault();
-        window.open(finalShipUrl, '_blank', 'noopener,noreferrer');
-      } : undefined}
     >
       {hasImage ? (
         <Card.Image 
@@ -76,7 +67,7 @@ function FleetShipCard({ ship, cruiseLineSlug, shipSlug, shipPageUrl, cruiseLine
       <Card.Content>
         <Card.Title as="h3">{ship}</Card.Title>
         <Card.Description>
-          {isClickable ? 'View Ship →' : hasImage ? 'View Ship →' : 'Ship information coming soon'}
+          {hasImage ? `${cruiseLineName} ship` : 'Ship information coming soon'}
         </Card.Description>
       </Card.Content>
     </Card>
