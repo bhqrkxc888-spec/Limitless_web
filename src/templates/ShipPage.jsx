@@ -5,7 +5,6 @@ import SEO from '../components/SEO';
 import { siteConfig } from '../config/siteConfig';
 import { hasConsent, loadScriptsWithConsent } from '../utils/consentManager';
 import { logger } from '../utils/logger';
-import { getWidgetyShipUrl, shipNameToSlug } from '../utils/widgetyHelpers';
 import './ShipPage.css';
 
 /**

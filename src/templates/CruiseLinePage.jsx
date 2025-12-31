@@ -71,9 +71,6 @@ function CruiseLinePage() {
     url: `https://www.limitlesscruises.com/cruise-lines/${cruiseLine.slug}`
   };
 
-  // Load cruise line logo
-  const { imageUrl: logoUrl } = useCruiseLineImage(cruiseLine.slug, 'logo', cruiseLine.name);
-
   // Check what extended content is available
   const hasWhyChoose = cruiseLine.whyChoose && cruiseLine.whyChoose.length > 0;
   const hasDestinationImages = cruiseLine.destinationImages && cruiseLine.destinationImages.length > 0;

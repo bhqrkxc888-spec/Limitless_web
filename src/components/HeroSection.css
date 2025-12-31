@@ -51,7 +51,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
+}
+
+/* Cruise line hero images - center ships vertically */
+.cruise-line-page .hero-image {
+  object-position: center 30%;
 }
 
 .hero-placeholder {
