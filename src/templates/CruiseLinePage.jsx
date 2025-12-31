@@ -42,11 +42,13 @@ function destinationNameToSlug(name) {
  */
 function FleetShipCard({ ship, cruiseLineSlug, shipSlug, shipPageUrl, cruiseLineName }) {
   const { imageUrl: shipImageUrl, isPlaceholder } = useShipImage(cruiseLineSlug, shipSlug, 'card', ship);
-  // Show image if we have a URL that's not a placeholder
-  // Direct URLs from getShipImageUrl() are valid even if isPlaceholder is true
+  
+  // Show image if we have a valid URL (not the default placeholder)
+  // Card.Image component will handle 404 errors gracefully
   const hasImage = shipImageUrl && 
                    shipImageUrl !== '/images/placeholders/hero.svg' && 
-                   !shipImageUrl.includes('placeholder');
+                   !shipImageUrl.includes('placeholder') &&
+                   !isPlaceholder;
   
   return (
     <Card 

@@ -222,8 +222,11 @@ export function usePortGuideImage(slug, type = 'hero', portName = '', country = 
  * Note: Ships use entityId format: "{cruiseLineSlug}/ships/{shipSlug}"
  * Images are uploaded as: WEB_cruise-lines/{cruiseLineSlug}/ships/{shipSlug}/{imageType}.webp
  * 
- * Uses direct URL construction as primary source (images are stored at this exact path)
- * Falls back to cruise line card image if ship image doesn't exist
+ * Follows same pattern as other image hooks (useCruiseLineImage, useDestinationImage):
+ * 1. Check database first (source of truth for metadata and validation)
+ * 2. Fall back to direct URL construction (images are stored at this exact path)
+ * 3. Only mark as non-placeholder if we have a valid URL from database or direct construction
+ * 4. Card.Image component handles 404 errors gracefully
  */
 export function useShipImage(cruiseLineSlug, shipSlug, type = 'card', shipName = '') {
   const [imageUrl, setImageUrl] = useState(PLACEHOLDER_IMAGE);
@@ -240,27 +243,47 @@ export function useShipImage(cruiseLineSlug, shipSlug, type = 'card', shipName =
 
     const entityId = `${cruiseLineSlug}/ships/${shipSlug}`;
     
-    // Construct direct URL (images are stored at this exact path in Supabase Storage)
-    // This is the PRIMARY source since images are uploaded to this path
+    // Construct direct URL as fallback (images are stored at this exact path in Supabase Storage)
     const directUrl = getShipImageUrl(cruiseLineSlug, shipSlug, type);
     
-    // Set direct URL immediately (images are uploaded to this path)
-    setImageUrl(directUrl);
-    setIsPlaceholder(false); // Assume it exists since images are uploaded to this path
-    
-    // Also try database for metadata/validation, but don't wait for it
-    getImageUrlFromDb('ship', entityId, type, directUrl)
-      .then(url => {
-        // If database has a valid URL, use it (may have better caching or metadata)
-        if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE && url !== directUrl) {
-          setImageUrl(url);
-        }
-        setLoading(false);
-      })
-      .catch(() => {
-        // Database query failed, but direct URL should still work
-        setLoading(false);
-      });
+    // Import the placeholder generator
+    import('../utils/placeholderImages.js').then(({ getCruiseLinePlaceholderImage }) => {
+      // Start with cruise line placeholder as initial fallback (same pattern as other hooks)
+      const smartPlaceholder = getCruiseLinePlaceholderImage(cruiseLineSlug, 'card', '');
+      setImageUrl(smartPlaceholder);
+      
+      // Check database first (source of truth) with direct URL as fallback
+      getImageUrlFromDb('ship', entityId, type, directUrl)
+        .then(url => {
+          // Use URL if it's valid and not a placeholder
+          if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
+            setImageUrl(url);
+            setIsPlaceholder(false);
+          } else {
+            // Database didn't have it, but direct URL might work (images uploaded to this path)
+            // Use direct URL but mark as placeholder initially - Card.Image will handle 404s
+            if (directUrl && directUrl !== PLACEHOLDER_IMAGE) {
+              setImageUrl(directUrl);
+              // Don't assume it exists - let Card.Image component handle errors
+              // If image loads successfully, component will show it; if 404, it will show placeholder
+              setIsPlaceholder(false); // Try to show it, component handles errors
+            } else {
+              setIsPlaceholder(true);
+            }
+          }
+          setLoading(false);
+        })
+        .catch(() => {
+          // Database query failed, use direct URL fallback
+          if (directUrl && directUrl !== PLACEHOLDER_IMAGE) {
+            setImageUrl(directUrl);
+            setIsPlaceholder(false); // Try to show it, component handles errors
+          } else {
+            setIsPlaceholder(true);
+          }
+          setLoading(false);
+        });
+    });
   }, [cruiseLineSlug, shipSlug, type, shipName]);
 
   return { imageUrl, loading, isPlaceholder };
