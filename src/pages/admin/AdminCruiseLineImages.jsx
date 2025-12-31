@@ -279,6 +279,41 @@ function AdminCruiseLineImages() {
               </div>
             </div>
 
+            {/* Gallery Images (Optional) */}
+            <h3 style={{ color: 'var(--admin-text)', fontSize: '1.25rem', marginTop: '3rem', marginBottom: '1rem' }}>
+              Gallery Images (Optional)
+            </h3>
+            <p style={{ color: 'var(--admin-text-muted)', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
+              Add images to showcase life onboard: exterior, interior spaces, entertainment, dining, and staterooms.
+            </p>
+            <div className="images-list">
+              {['exterior', 'interior', 'entertainment', 'food', 'cabin'].map(type => (
+                <div key={type} className="admin-card image-card">
+                  <div className="image-card-header">
+                    <div className="image-card-title">
+                      <h3>{type.charAt(0).toUpperCase() + type.slice(1)}</h3>
+                      <span className="badge badge-optional">Optional</span>
+                    </div>
+                    <StatusIndicator 
+                      status={images[selectedCruiseLine.slug]?.[type] ? 'pass' : 'missing'} 
+                      size="small" 
+                    />
+                  </div>
+                  <p className="image-card-specs">Recommended: 1200×800px, WebP format</p>
+                  <ImageUpload
+                    bucket={STORAGE_BUCKETS.CRUISE_LINES}
+                    entityType="cruise-line"
+                    entityId={selectedCruiseLine.slug}
+                    imageType={type}
+                    suggestedAltText={`${selectedCruiseLine.name} ${type}`}
+                    existingImage={images[selectedCruiseLine.slug]?.[type]?.url}
+                    existingData={images[selectedCruiseLine.slug]?.[type]}
+                    onUploadComplete={loadImages}
+                  />
+                </div>
+              ))}
+            </div>
+
             {/* Ships Section */}
             {(() => {
               // Handle both 'fleet' (array of objects) and 'ships' (array of strings)

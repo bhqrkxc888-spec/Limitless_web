@@ -15,38 +15,44 @@ import './CruiseLinePage.css';
 
 /**
  * Ship Card Component
- * Individual ship card with image from database or fallback
- * Only shows if ship card image is uploaded
+ * Individual ship card with image from database or "Coming Soon" placeholder
  */
 function ShipCard({ ship, cruiseLineSlug, shipSlug, shipPageUrl, cruiseLineName }) {
   const { imageUrl: shipImageUrl, isPlaceholder } = useShipImage(cruiseLineSlug, shipSlug, 'card', ship);
   
-  // Only show card if we have an actual image (not placeholder)
-  if (isPlaceholder || shipImageUrl.includes('placeholder')) {
-    return null;
-  }
+  const hasImage = !isPlaceholder && !shipImageUrl.includes('placeholder');
   
   return (
     <Card 
-      href={shipPageUrl}
+      href={hasImage ? shipPageUrl : undefined}
       variant="default"
       className="ship-card"
-      target="_blank"
-      rel="noopener noreferrer"
-      onClick={(e) => {
+      target={hasImage ? "_blank" : undefined}
+      rel={hasImage ? "noopener noreferrer" : undefined}
+      onClick={hasImage ? (e) => {
         // Ensure it opens in new tab even if href is relative
         e.preventDefault();
         window.open(shipPageUrl, '_blank', 'noopener,noreferrer');
-      }}
+      } : undefined}
     >
-      <Card.Image 
-        src={shipImageUrl} 
-        alt={`${ship} - ${cruiseLineName}`}
-        aspectRatio="16/10"
-      />
+      {hasImage ? (
+        <Card.Image 
+          src={shipImageUrl} 
+          alt={`${ship} - ${cruiseLineName}`}
+          aspectRatio="16/10"
+        />
+      ) : (
+        <div className="ship-card-coming-soon">
+          <div className="coming-soon-overlay">
+            <p className="coming-soon-text">Image Coming Soon</p>
+          </div>
+        </div>
+      )}
       <Card.Content>
         <Card.Title as="h3">{ship}</Card.Title>
-        <Card.Description>View deck plans, staterooms & itineraries</Card.Description>
+        <Card.Description>
+          {hasImage ? 'View deck plans, staterooms & itineraries' : 'Ship information coming soon'}
+        </Card.Description>
       </Card.Content>
     </Card>
   );
@@ -116,9 +122,20 @@ function CruiseLinePage() {
   // Check what extended content is available
   const hasWhyChoose = cruiseLine.whyChoose && cruiseLine.whyChoose.length > 0;
   const hasDestinationImages = cruiseLine.destinationImages && cruiseLine.destinationImages.length > 0;
-  const hasKidsClub = cruiseLine.kidsClub;
+  // Only show kids club if cruise line is family-friendly (not adults-only)
+  const isAdultsOnly = cruiseLine.suitableFor?.some(item => 
+    item.toLowerCase().includes('adults') || item.toLowerCase().includes('couples')
+  ) && !cruiseLine.suitableFor?.some(item => item.toLowerCase().includes('families'));
+  const hasKidsClub = cruiseLine.kidsClub && !isAdultsOnly;
   const hasAccessibility = cruiseLine.accessibility;
   const hasLoyaltyProgram = cruiseLine.loyaltyProgram;
+  // Check for premium sections (Yacht Club for MSC, The Haven for NCL, etc.)
+  const hasYachtClub = cruiseLine.highlights?.some(h => h.toLowerCase().includes('yacht club')) || 
+                       cruiseLine.whyChoose?.some(w => w.description?.toLowerCase().includes('yacht club'));
+  const hasPremiumSection = hasYachtClub || cruiseLine.whyChoose?.some(w => 
+    w.title?.toLowerCase().includes('haven') || w.title?.toLowerCase().includes('grill') ||
+    w.title?.toLowerCase().includes('exclusive') || w.title?.toLowerCase().includes('premium')
+  );
 
   return (
     <main className="cruise-line-page">
@@ -131,12 +148,12 @@ function CruiseLinePage() {
         structuredData={structuredData}
       />
 
-      {/* Hero Section - Colored Background, Left Aligned */}
+      {/* Hero Section - Blue Banner Only, No Image */}
       <HeroSection
         title={cruiseLine.name}
         subtitle={cruiseLine.description}
-        image={heroImage}
-        imageAlt={`${cruiseLine.name} cruise line`}
+        image={null}
+        imageAlt=""
         size="md"
         align="left"
         primaryCta={{ label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone}` }}
@@ -176,6 +193,32 @@ function CruiseLinePage() {
                     </Card>
                   ))}
                 </div>
+
+                {/* Fleet Section - Right After Why Choose */}
+                {cruiseLine.ships && cruiseLine.ships.length > 0 && (
+                  <div className="ships-section mt-12">
+                    <SectionHeader
+                      title={`The ${cruiseLine.shortName} Fleet`}
+                      subtitle={`Explore the ships of ${cruiseLine.name}`}
+                    />
+                    <div className="ships-cards-grid">
+                      {cruiseLine.ships.map((ship, index) => {
+                        const shipSlug = shipNameToSlug(ship);
+                        const shipPageUrl = `/ships/${shipSlug}`;
+                        return (
+                          <ShipCard 
+                            key={index}
+                            ship={ship}
+                            cruiseLineSlug={cruiseLine.slug}
+                            shipSlug={shipSlug}
+                            shipPageUrl={shipPageUrl}
+                            cruiseLineName={cruiseLine.name}
+                          />
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
 
               <aside className="cruise-line-sidebar">
@@ -382,6 +425,68 @@ function CruiseLinePage() {
         </section>
       )}
 
+      {/* Premium Section (Yacht Club, The Haven, etc.) */}
+      {hasPremiumSection && (
+        <section className="section section-alt">
+          <div className="container">
+            {hasYachtClub && (
+              <>
+                <SectionHeader
+                  title="MSC Yacht Club"
+                  subtitle="An exclusive ship-within-a-ship experience"
+                  align="center"
+                />
+                <div className="cruise-line-grid">
+                  <div className="cruise-line-main">
+                    <div className="premium-content">
+                      <p>
+                        MSC Yacht Club offers an ultra-luxury, all-inclusive experience with private suites, 
+                        dedicated restaurant, exclusive lounge, private pool deck, and 24-hour butler service. 
+                        Enjoy priority embarkation, complimentary drinks, and access to the Thermal Suite.
+                      </p>
+                      <div className="premium-features">
+                        <div className="premium-feature">
+                          <h4>Private Suites</h4>
+                          <p>Spacious suites with premium amenities and butler service</p>
+                        </div>
+                        <div className="premium-feature">
+                          <h4>Exclusive Restaurant</h4>
+                          <p>Dedicated fine dining restaurant with curated menus</p>
+                        </div>
+                        <div className="premium-feature">
+                          <h4>Private Pool Deck</h4>
+                          <p>Exclusive outdoor area with pool, bar, and relaxation space</p>
+                        </div>
+                        <div className="premium-feature">
+                          <h4>24-Hour Butler</h4>
+                          <p>Personal butler service for all your needs</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <aside className="cruise-line-sidebar">
+                    <div className="sidebar-card">
+                      <h3 className="sidebar-title">Yacht Club Benefits</h3>
+                      <ul className="suitable-list">
+                        <li>✓ Priority embarkation & disembarkation</li>
+                        <li>✓ Private lounge & restaurant</li>
+                        <li>✓ Exclusive pool deck</li>
+                        <li>✓ 24-hour butler service</li>
+                        <li>✓ Premium drinks included</li>
+                        <li>✓ Thermal Suite access</li>
+                      </ul>
+                    </div>
+                  </aside>
+                </div>
+              </>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* Image Gallery Section */}
+      <CruiseLineImageGallery cruiseLineSlug={cruiseLine.slug} cruiseLineName={cruiseLine.name} />
+
       {/* Accessibility & Loyalty Section */}
       {(hasAccessibility || hasLoyaltyProgram) && (
         <section className="section section-alt">
@@ -426,7 +531,7 @@ function CruiseLinePage() {
                 <div className="section-card">
                   <h3>{cruiseLine.loyaltyProgram.name}</h3>
                   <p>{cruiseLine.loyaltyProgram.intro}</p>
-
+                  
                   {cruiseLine.loyaltyProgram.tiers && (
                     <Accordion
                       variant="bordered"
@@ -462,46 +567,6 @@ function CruiseLinePage() {
         </section>
       )}
 
-      {/* Fleet & Ships (for pages with whyChoose but showing ships) */}
-      {hasWhyChoose && cruiseLine.ships && cruiseLine.ships.length > 0 && (
-        <section className="section">
-          <div className="container">
-            <div className="cruise-line-grid">
-              <div className="cruise-line-main">
-                <SectionHeader
-                  title={`The ${cruiseLine.shortName} Fleet`}
-                  subtitle={`Explore the ships of ${cruiseLine.name}`}
-                />
-
-                {/* Ship Cards Grid - Only shows cards with images */}
-                <div className="ships-cards-grid">
-                  {cruiseLine.ships.map((ship, index) => {
-                    // Generate ship page URL (opens in new tab)
-                    const shipSlug = shipNameToSlug(ship);
-                    const shipPageUrl = `/ships/${shipSlug}`;
-                    
-                    return (
-                      <ShipCard 
-                        key={index}
-                        ship={ship}
-                        cruiseLineSlug={cruiseLine.slug}
-                        shipSlug={shipSlug}
-                        shipPageUrl={shipPageUrl}
-                        cruiseLineName={cruiseLine.name}
-                      />
-                    );
-                  }).filter(Boolean)}
-                </div>
-
-              </div>
-
-              <aside className="cruise-line-sidebar">
-                <SidebarContent cruiseLine={cruiseLine} />
-              </aside>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Latest News Section */}
       {!loadingNews && cruiseLineNews.length > 0 && (
@@ -571,12 +636,9 @@ function SidebarContent({ cruiseLine }) {
         </div>
       )}
 
-      {/* Contact Form */}
-      <div className="sidebar-card">
+      {/* Contact Form - Compact */}
+      <div className="sidebar-card sidebar-contact-form">
         <h3 className="sidebar-title">Get in Touch</h3>
-        <p className="sidebar-text">
-          Send us a message and we'll get back to you as soon as possible.
-        </p>
         <ContactForm context={`cruise-line-${cruiseLine.slug}`} />
       </div>
 
@@ -631,6 +693,61 @@ function SidebarContent({ cruiseLine }) {
         </div>
       </div>
     </>
+  );
+}
+
+/**
+ * Cruise Line Image Gallery Component
+ * Displays exterior, interior, entertainment, food, and cabin images
+ */
+function CruiseLineImageGallery({ cruiseLineSlug, cruiseLineName }) {
+  const imageTypes = ['exterior', 'interior', 'entertainment', 'food', 'cabin'];
+  
+  const images = imageTypes.map(type => {
+    const { imageUrl, isPlaceholder } = useCruiseLineImage(cruiseLineSlug, type, cruiseLineName);
+    return { type, imageUrl, isPlaceholder, hasImage: !isPlaceholder && !imageUrl.includes('placeholder') };
+  });
+
+  // Only show gallery if at least one image exists
+  const hasAnyImages = images.some(img => img.hasImage);
+  if (!hasAnyImages) return null;
+
+  return (
+    <section className="section section-alt">
+      <div className="container">
+        <SectionHeader
+          title="Life Onboard"
+          subtitle={`Experience the best of ${cruiseLineName}`}
+          align="center"
+        />
+        <div className="cruise-line-gallery-grid">
+          {images.map(({ type, imageUrl, hasImage }) => {
+            if (!hasImage) return null;
+            
+            const labels = {
+              exterior: 'Ship Exterior',
+              interior: 'Interior Spaces',
+              entertainment: 'Entertainment',
+              food: 'Dining',
+              cabin: 'Staterooms'
+            };
+            
+            return (
+              <Card key={type} variant="default" className="gallery-card">
+                <Card.Image 
+                  src={imageUrl} 
+                  alt={`${cruiseLineName} ${labels[type]}`}
+                  aspectRatio="16/10"
+                />
+                <Card.Content>
+                  <Card.Title as="h3">{labels[type]}</Card.Title>
+                </Card.Content>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }
 

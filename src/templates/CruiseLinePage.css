@@ -215,6 +215,108 @@
   margin-top: var(--space-3);
 }
 
+/* Ship Card Coming Soon Placeholder */
+.ship-card-coming-soon {
+  width: 100%;
+  aspect-ratio: 16/10;
+  background: linear-gradient(135deg, var(--clr-bg-alt) 0%, var(--clr-border-light) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.coming-soon-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.coming-soon-text {
+  color: var(--clr-text-on-primary);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  text-align: center;
+  padding: var(--space-4);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius-md);
+  margin: 0;
+}
+
+/* Compact Contact Form in Sidebar */
+.sidebar-contact-form .contact-form {
+  margin-top: var(--space-4);
+}
+
+.sidebar-contact-form .form-group {
+  margin-bottom: var(--space-3);
+}
+
+.sidebar-contact-form .form-label {
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-1);
+}
+
+.sidebar-contact-form .form-input,
+.sidebar-contact-form textarea {
+  font-size: var(--font-size-sm);
+  padding: var(--space-2) var(--space-3);
+}
+
+.sidebar-contact-form .form-grid {
+  display: block;
+}
+
+.sidebar-contact-form .form-grid .form-group {
+  margin-bottom: var(--space-3);
+}
+
+/* Premium Section */
+.premium-content {
+  max-width: 800px;
+}
+
+.premium-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.premium-feature h4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-primary);
+  margin: 0 0 var(--space-2);
+}
+
+.premium-feature p {
+  color: var(--clr-text-main);
+  margin: 0;
+  line-height: var(--line-height-relaxed);
+}
+
+/* Image Gallery */
+.cruise-line-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.gallery-card {
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.gallery-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
 /* ========================================
    INFO CARDS
    ======================================== */
