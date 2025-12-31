@@ -14,6 +14,7 @@ import ImageUpload from '../../components/admin/ImageUpload';
 import StatusIndicator from '../../components/admin/StatusIndicator';
 import { supabase, getPublicUrl } from '../../lib/supabase';
 import { STORAGE_BUCKETS } from '../../config/supabaseConfig';
+import { shipNameToSlug } from '../../utils/widgetyHelpers';
 import './AdminImagesShared.css';
 
 const REQUIRED_SHIP_GALLERY = []; // Ships are OPTIONAL - future enhancement
@@ -185,7 +186,7 @@ function AdminCruiseLineImages() {
                         const shipCount = shipList.length;
                         const shipSlugs = shipList.map(ship => {
                           const shipObj = typeof ship === 'string' ? { name: ship } : ship;
-                          return shipObj.slug || shipObj.name.toLowerCase().replace(/\s+/g, '-');
+                          return shipObj.slug || shipNameToSlug(shipObj.name);
                         });
                         const shipEntityIds = shipSlugs.map(shipSlug => `${cl.slug}/ships/${shipSlug}`);
                         const shipsWithCards = shipEntityIds.filter(entityId => shipImages[entityId]?.card).length;
@@ -420,7 +421,7 @@ function AdminCruiseLineImages() {
                         .map(ship => {
                           // Normalize: handle both string and object formats
                           const shipObj = typeof ship === 'string' ? { name: ship } : ship;
-                          const shipSlug = shipObj.slug || shipObj.name.toLowerCase().replace(/\s+/g, '-');
+                          const shipSlug = shipObj.slug || shipNameToSlug(shipObj.name);
                           const shipEntityId = `${selectedCruiseLine.slug}/ships/${shipSlug}`;
                           const shipImgs = shipImages[shipEntityId] || {};
                           
@@ -477,10 +478,10 @@ function AdminCruiseLineImages() {
                     Additional ship images are optional. These can be used for future ship detail pages or galleries. Upload at 600×400px (displays at 400×300px, 2x for retina), WebP format.
                   </p>
                   
-                  {shipList.map(ship => {
-                    const shipObj = typeof ship === 'string' ? { name: ship } : ship;
-                    const shipSlug = shipObj.slug || shipObj.name.toLowerCase().replace(/\s+/g, '-');
-                    const shipEntityId = `${selectedCruiseLine.slug}/ships/${shipSlug}`;
+                    {shipList.map(ship => {
+                      const shipObj = typeof ship === 'string' ? { name: ship } : ship;
+                      const shipSlug = shipObj.slug || shipNameToSlug(shipObj.name);
+                      const shipEntityId = `${selectedCruiseLine.slug}/ships/${shipSlug}`;
                     const shipImgs = shipImages[shipEntityId] || {};
                     
                     return (
