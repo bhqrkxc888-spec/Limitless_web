@@ -6,7 +6,7 @@ import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader, DataTable, Accordion } from '../components/ui';
 import Carousel from '../components/Carousel';
-import { shipNameToSlug, getWidgetyShipUrl } from '../utils/widgetyHelpers';
+import { shipNameToSlug } from '../utils/widgetyHelpers';
 import { getShipLink } from '../config/shipLinks';
 import { useCruiseLineImage, useShipImage } from '../hooks/useImageUrl';
 import { getCruiseLinePlaceholderImage } from '../utils/placeholderImages';
@@ -43,16 +43,12 @@ function FleetShipCard({ ship, cruiseLineSlug, shipSlug, shipPageUrl, cruiseLine
   const { imageUrl: shipImageUrl, isPlaceholder } = useShipImage(cruiseLineSlug, shipSlug, 'card', ship);
   const hasImage = !isPlaceholder && !shipImageUrl.includes('placeholder');
   
-  // Get Widgety link if available, otherwise use slug-based URL
+  // Get Widgety link from CRM (via shipLinks.js config)
   const shipLink = getShipLink(ship);
   const finalShipUrl = shipLink && shipLink.startsWith('http')
-    ? shipLink  // Full Widgety URL provided
-    : shipLink
-      ? getWidgetyShipUrl(ship)  // Widgety slug provided, convert to URL
-      : shipPageUrl;  // Fallback to slug-based ship page
-  
-  // Cards are clickable if we have a Widgety link OR an image
-  const isClickable = finalShipUrl && (hasImage || shipLink);
+    ? shipLink  // Full Widgety URL from CRM
+    : shipPageUrl;  // Fallback to slug-based ship page
+  const isClickable = !!finalShipUrl;
   
   return (
     <Card 
