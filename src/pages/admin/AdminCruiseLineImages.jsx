@@ -264,7 +264,7 @@ function AdminCruiseLineImages() {
               <p style={{ color: 'var(--admin-text-muted)', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
                 One image per benefit card. Each card needs its own specific image that matches the card content.
               </p>
-              <div className="images-grid">
+              <div className="images-grid why-choose-grid">
                 {selectedCruiseLine.whyChoose && selectedCruiseLine.whyChoose.length > 0 ? (
                   selectedCruiseLine.whyChoose.map((card, index) => {
                     const imageType = `why-choose-${index + 1}`;
