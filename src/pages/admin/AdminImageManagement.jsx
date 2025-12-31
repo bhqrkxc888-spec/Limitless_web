@@ -60,7 +60,7 @@ function AdminImageManagement() {
         site: ['hero', 'logo', 'og-image', 'favicon', 'katherine1', 'katherine2', 'katherine3'],
         destination: ['hero', 'card'],
         'cruise-line': ['logo', 'hero', 'card'],
-        ship: [], // SHIPS ARE OPTIONAL - Future enhancement, not required for launch
+        ship: ['card'], // Ship card image required for ship cards on cruise line pages
         category: ['card'],
         'bucket-list': ['hero', 'card'],
         'port-guide': ['hero', 'card'] // Port guides require hero and card images
@@ -70,7 +70,7 @@ function AdminImageManagement() {
         site: ['hero-mobile', 'agency-logo', 'trust-abta', 'trust-atol', 'trust-clia'],
         destination: ['mobile', 'gallery-1', 'gallery-2', 'gallery-3', 'gallery-4'], // gallery and cruise-line-specific cards are optional
         'cruise-line': [],
-        ship: ['exterior', 'deck', 'suite', 'dining', 'pool', 'entertainment', 'spa', 'theater'], // ALL SHIP IMAGES ARE OPTIONAL
+        ship: ['exterior', 'deck', 'suite', 'dining', 'pool', 'entertainment', 'spa', 'theater'], // Ship gallery images are optional (card is required)
         category: [],
         'bucket-list': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4'],
         'port-guide': ['attraction-1', 'attraction-2', 'attraction-3', 'attraction-4', 'attraction-5', 'attraction-6', 'beach', 'food'] // Optional port images (attractions vary by port)

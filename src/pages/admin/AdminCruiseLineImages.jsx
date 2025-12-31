@@ -100,15 +100,17 @@ function AdminCruiseLineImages() {
   };
 
   const getShipStatus = (cruiseLineSlug, ship) => {
-    const shipKey = `${cruiseLineSlug}/ships/${ship.slug || ship.name.toLowerCase().replace(/\s+/g, '-')}`;
-    const shipImgs = shipImages[shipKey] || {};
+    const shipSlug = ship.slug || ship.name.toLowerCase().replace(/\s+/g, '-');
+    const shipEntityId = `${cruiseLineSlug}/ships/${shipSlug}`;
+    const shipImgs = shipImages[shipEntityId] || {};
     
-    // Ships are optional - no error status for missing images
-    const hasAnyImages = Object.keys(shipImgs).length > 0;
-    if (!hasAnyImages) return 'missing'; // No images uploaded yet
+    // Ship card image is required for ship cards on cruise line pages
+    const hasCard = !!shipImgs.card;
+    if (!hasCard) return 'error';
     
-    const allCompliant = Object.values(shipImgs).every(img => img.seo_compliant);
-    return allCompliant ? 'pass' : 'warning';
+    // Check SEO compliance
+    if (shipImgs.card?.seo_compliant) return 'pass';
+    return 'warning';
   };
 
   // Show loading while checking auth
@@ -350,7 +352,38 @@ function AdminCruiseLineImages() {
 
               return (
                 <div className="images-list">
-                  <h3 style={{ color: 'var(--admin-text)', marginBottom: '1rem' }}>Ship Gallery Images (All Optional)</h3>
+                  {/* Ship Card Image - Required for ship cards on cruise line pages */}
+                  <div className="admin-card image-card">
+                    <div className="image-card-header">
+                      <div className="image-card-title">
+                        <h3>Ship Card Image</h3>
+                        <span className="badge badge-required">Required</span>
+                      </div>
+                      <StatusIndicator 
+                        status={shipImgs.card ? 'pass' : 'missing'} 
+                        size="small" 
+                      />
+                    </div>
+                    <p className="image-card-specs">
+                      Recommended: 600×400px, WebP format<br />
+                      <strong>Used for:</strong> Ship cards on cruise line pages (opens Widgety ship page)
+                    </p>
+                    <ImageUpload
+                      bucket={STORAGE_BUCKETS.CRUISE_LINES}
+                      entityType="ship"
+                      entityId={shipEntityId}
+                      imageType="card"
+                      suggestedAltText={`${selectedShip.name} ship card`}
+                      existingImage={shipImgs.card?.url}
+                      existingData={shipImgs.card}
+                      onUploadComplete={loadImages}
+                    />
+                  </div>
+
+                  {/* Ship Gallery Images (All Optional) */}
+                  <h3 style={{ color: 'var(--admin-text)', marginTop: '2rem', marginBottom: '1rem' }}>
+                    Ship Gallery Images (All Optional)
+                  </h3>
                   {OPTIONAL_SHIP_GALLERY.map(type => (
                     <div key={type} className="admin-card image-card">
                       <div className="image-card-header">

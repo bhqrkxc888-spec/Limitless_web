@@ -86,10 +86,31 @@
   position: relative;
 }
 
+/* Overlay to hide top navigation buttons and search elements */
+/* Positioned to hide search UI but preserve hero image */
+.ship-widget-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 180px; /* Cover search/navigation but allow hero image to show */
+  background: linear-gradient(
+    to bottom,
+    var(--clr-surface) 0%,
+    var(--clr-surface) 60%,
+    transparent 100%
+  );
+  z-index: 10;
+  pointer-events: none;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
 .ship-widget-container iframe {
   display: block;
   width: 100%;
   border: none;
+  position: relative;
+  z-index: 1;
 }
 
 /* Widget Loading State */

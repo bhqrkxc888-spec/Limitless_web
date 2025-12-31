@@ -217,3 +217,62 @@ export function usePortGuideImage(slug, type = 'hero', portName = '', country = 
   return { imageUrl, loading, isPlaceholder };
 }
 
+/**
+ * Hook to get ship image URL
+ * Note: Ships use entityId format: "{cruiseLineSlug}/ships/{shipSlug}"
+ * Images are uploaded as: WEB_cruise-lines/{cruiseLineSlug}/ships/{shipSlug}/{imageType}.webp
+ * 
+ * Falls back to cruise line card image if ship image not found
+ */
+export function useShipImage(cruiseLineSlug, shipSlug, type = 'card', shipName = '') {
+  const [imageUrl, setImageUrl] = useState(PLACEHOLDER_IMAGE);
+  const [loading, setLoading] = useState(true);
+  const [isPlaceholder, setIsPlaceholder] = useState(true);
+
+  useEffect(() => {
+    if (!cruiseLineSlug || !shipSlug) {
+      setImageUrl(PLACEHOLDER_IMAGE);
+      setLoading(false);
+      setIsPlaceholder(true);
+      return;
+    }
+
+    const entityId = `${cruiseLineSlug}/ships/${shipSlug}`;
+    
+    // Import the placeholder generator
+    import('../utils/placeholderImages.js').then(({ getCruiseLinePlaceholderImage }) => {
+      // Use cruise line placeholder as fallback
+      const smartPlaceholder = getCruiseLinePlaceholderImage(cruiseLineSlug, 'card', '');
+      setImageUrl(smartPlaceholder);
+      
+      // Try to get ship image from database
+      getImageUrlFromDb('ship', entityId, type, null)
+        .then(url => {
+          if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
+            setImageUrl(url);
+            setIsPlaceholder(false);
+          } else {
+            // Fallback to cruise line card image
+            const cruiseLineFallback = getCruiseLineImageUrl(cruiseLineSlug, 'card');
+            return getImageUrlFromDb('cruise-line', cruiseLineSlug, 'card', cruiseLineFallback);
+          }
+        })
+        .then(url => {
+          if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
+            setImageUrl(url);
+            setIsPlaceholder(false);
+          } else {
+            setIsPlaceholder(true);
+          }
+          setLoading(false);
+        })
+        .catch(() => {
+          setIsPlaceholder(true);
+          setLoading(false);
+        });
+    });
+  }, [cruiseLineSlug, shipSlug, type, shipName]);
+
+  return { imageUrl, loading, isPlaceholder };
+}
+

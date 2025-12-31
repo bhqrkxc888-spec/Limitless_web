@@ -3,15 +3,47 @@ import { getCruiseLineBySlug } from '../data/cruiseLines';
 import { getTravelNewsByCruiseLine } from '../services/travelNewsAPI';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
-import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader, Accordion, DataTable } from '../components/ui';
 import NewsCard from '../components/NewsCard';
 import { useEffect, useState } from 'react';
 import { getOgImage } from '../utils/imageHelpers';
-import { getCruiseLineHero } from '../utils/assetHelpers';
+import { getCruiseLineCard } from '../utils/assetHelpers';
 import { shipNameToSlug } from '../utils/widgetyHelpers';
-import { useCruiseLineImage } from '../hooks/useImageUrl';
+import { useCruiseLineImage, useShipImage } from '../hooks/useImageUrl';
 import './CruiseLinePage.css';
+
+/**
+ * Ship Card Component
+ * Individual ship card with image from database or fallback
+ */
+function ShipCard({ ship, cruiseLineSlug, shipSlug, shipPageUrl, cruiseLineName }) {
+  const { imageUrl: shipImageUrl } = useShipImage(cruiseLineSlug, shipSlug, 'card', ship);
+  
+  return (
+    <Card 
+      href={shipPageUrl}
+      variant="default"
+      className="ship-card"
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={(e) => {
+        // Ensure it opens in new tab even if href is relative
+        e.preventDefault();
+        window.open(shipPageUrl, '_blank', 'noopener,noreferrer');
+      }}
+    >
+      <Card.Image 
+        src={shipImageUrl} 
+        alt={`${ship} - ${cruiseLineName}`}
+        aspectRatio="16/10"
+      />
+      <Card.Content>
+        <Card.Title as="h3">{ship}</Card.Title>
+        <Card.Description>View deck plans, staterooms & itineraries</Card.Description>
+      </Card.Content>
+    </Card>
+  );
+}
 
 /**
  * CruiseLinePage Template
@@ -71,6 +103,9 @@ function CruiseLinePage() {
     url: `https://www.limitlesscruises.com/cruise-lines/${cruiseLine.slug}`
   };
 
+  // Load cruise line logo for header
+  const { imageUrl: logoUrl } = useCruiseLineImage(cruiseLine.slug, 'logo', cruiseLine.name);
+
   // Check what extended content is available
   const hasWhyChoose = cruiseLine.whyChoose && cruiseLine.whyChoose.length > 0;
   const hasDestinationImages = cruiseLine.destinationImages && cruiseLine.destinationImages.length > 0;
@@ -89,17 +124,36 @@ function CruiseLinePage() {
         structuredData={structuredData}
       />
 
-      {/* Hero Section */}
-      <HeroSection
-        title={cruiseLine.name}
-        subtitle={cruiseLine.description}
-        image={getCruiseLineHero(cruiseLine.slug)}
-        imageAlt={`${cruiseLine.name} cruise ship`}
-        size="md"
-        align="left"
-        primaryCta={{ label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone}` }}
-        secondaryCta={{ label: 'Find a Cruise', to: '/find-a-cruise' }}
-      />
+      {/* Header Section with Logo */}
+      <section className="cruise-line-header-section">
+        <div className="container">
+          <div className="cruise-line-header">
+            {/* Logo at Top */}
+            {logoUrl && !logoUrl.includes('placeholder') && (
+              <div className="cruise-line-logo-top">
+                <img 
+                  src={logoUrl} 
+                  alt={`${cruiseLine.name} logo`}
+                  className="cruise-line-logo-header"
+                />
+              </div>
+            )}
+            
+            <div className="cruise-line-header-content">
+              <h1 className="cruise-line-header-title">{cruiseLine.name}</h1>
+              <p className="cruise-line-header-subtitle">{cruiseLine.description}</p>
+              <div className="cruise-line-header-cta">
+                <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">
+                  Call {siteConfig.phone}
+                </Button>
+                <Button to="/find-a-cruise" variant="outline" size="lg">
+                  Find a Cruise
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Development Disclaimer */}
       <section className="section">
@@ -163,32 +217,25 @@ function CruiseLinePage() {
                 {cruiseLine.ships && cruiseLine.ships.length > 0 && (
                   <div className="ships-section mt-12">
                     <h3 className="section-subtitle">The Fleet</h3>
-                    <div className="ships-list">
+                    {/* Ship Cards Grid */}
+                    <div className="ships-cards-grid">
                       {cruiseLine.ships.map((ship, index) => {
                         // Generate ship page URL (opens in new tab)
                         const shipSlug = shipNameToSlug(ship);
                         const shipPageUrl = `/ships/${shipSlug}`;
                         
                         return (
-                          <a
+                          <ShipCard 
                             key={index}
-                            href={shipPageUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="ship-badge ship-badge-link"
-                            title={`View ${ship} details, deck plans, and availability`}
-                          >
-                            {ship}
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginLeft: '4px', display: 'inline-block', verticalAlign: 'middle' }}>
-                              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
-                            </svg>
-                          </a>
+                            ship={ship}
+                            cruiseLineSlug={cruiseLine.slug}
+                            shipSlug={shipSlug}
+                            shipPageUrl={shipPageUrl}
+                            cruiseLineName={cruiseLine.name}
+                          />
                         );
                       })}
                     </div>
-                    <p className="ships-note">
-                      <small>Click any ship name to view detailed information, deck plans, and availability (opens in new tab)</small>
-                    </p>
                   </div>
                 )}
 
@@ -442,32 +489,25 @@ function CruiseLinePage() {
                   subtitle={`Explore the ships of ${cruiseLine.name}`}
                 />
 
-                <div className="ships-list ships-list-large">
+                {/* Ship Cards Grid */}
+                <div className="ships-cards-grid">
                   {cruiseLine.ships.map((ship, index) => {
                     // Generate ship page URL (opens in new tab)
                     const shipSlug = shipNameToSlug(ship);
                     const shipPageUrl = `/ships/${shipSlug}`;
                     
                     return (
-                      <a
+                      <ShipCard 
                         key={index}
-                        href={shipPageUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="ship-badge ship-badge-link"
-                        title={`View ${ship} details, deck plans, and availability`}
-                      >
-                        {ship}
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginLeft: '4px', display: 'inline-block', verticalAlign: 'middle' }}>
-                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
-                        </svg>
-                      </a>
+                        ship={ship}
+                        cruiseLineSlug={cruiseLine.slug}
+                        shipSlug={shipSlug}
+                        shipPageUrl={shipPageUrl}
+                        cruiseLineName={cruiseLine.name}
+                      />
                     );
                   })}
                 </div>
-                <p className="ships-note">
-                  <small>Click any ship name to view detailed information, deck plans, and availability (opens in new tab)</small>
-                </p>
 
                 {/* Destinations */}
                 {cruiseLine.destinations && cruiseLine.destinations.length > 0 && !hasDestinationImages && (

@@ -153,20 +153,16 @@ function ShipPage() {
             </div>
           ) : scriptsLoaded ? (
             <div className="ship-widget-container">
+              {/* Overlay to hide top navigation buttons */}
+              <div className="ship-widget-overlay"></div>
               <iframe 
                 className="widgety-cruise-tour-search" 
                 frameBorder="0" 
-                height="860" 
+                height="940" 
                 preview-nav="false" 
                 results-nav="false" 
                 src={widgetyIframeSrc}
                 tabs="false"
-                search="false"
-                hide-search="true"
-                show-holiday-button="false"
-                show-ship-button="false"
-                hide-buttons="true"
-                navigation="false"
                 width="100%"
                 title={`${shipName} - Ship Information`}
               />
