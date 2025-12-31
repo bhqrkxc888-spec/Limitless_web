@@ -411,7 +411,10 @@ function CruiseLinePage() {
                     </div>
                   )}
                   {cruiseLine.loyaltyProgram.pointsInfo && (
-                    <p className="loyalty-note">{cruiseLine.loyaltyProgram.pointsInfo}</p>
+                    <div className="loyalty-key-benefits">
+                      <h3>Key Benefits</h3>
+                      <p>{cruiseLine.loyaltyProgram.pointsInfo}</p>
+                    </div>
                   )}
                 </>
               ) : (

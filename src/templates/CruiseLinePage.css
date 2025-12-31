@@ -235,11 +235,27 @@
   margin-top: var(--space-6);
 }
 
-.loyalty-note {
-  margin-top: var(--space-4);
-  font-size: var(--font-size-sm);
-  color: var(--clr-text-muted);
-  font-style: italic;
+.loyalty-key-benefits {
+  background: var(--clr-bg-secondary);
+  border: 2px solid var(--clr-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-top: var(--space-6);
+  box-shadow: var(--shadow-md);
+}
+
+.loyalty-key-benefits h3 {
+  font-size: 24px;
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-primary);
+  margin: 0 0 var(--space-4);
+}
+
+.loyalty-key-benefits p {
+  font-size: 18px;
+  line-height: var(--line-height-relaxed);
+  color: var(--clr-text-main);
+  margin: 0;
 }
 
 /* ========================================
@@ -402,6 +418,19 @@
   .families-kids-text p,
   .loyalty-text p {
     font-size: var(--font-size-base);
+  }
+
+  .loyalty-key-benefits {
+    padding: var(--space-4);
+    margin-top: var(--space-4);
+  }
+
+  .loyalty-key-benefits h3 {
+    font-size: 20px;
+  }
+
+  .loyalty-key-benefits p {
+    font-size: 16px;
   }
 
   .cruise-line-section .carousel-items-grid {

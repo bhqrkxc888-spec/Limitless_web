@@ -263,7 +263,10 @@ function AdminCruiseLineImages() {
               Gallery Images (Required)
             </h3>
             <p style={{ color: 'var(--admin-text-muted)', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
-              <strong>These images are required</strong> for the "Why Choose" section (6 benefit cards) and "Families & Kids" section. They display at 400×300px on the page. Upload at 600×400px (2x for retina displays) for optimal quality and smaller file sizes. The system will intelligently match images to benefit cards based on content (e.g., dining images for food-related cards, ship exterior for fleet-related cards).
+              <strong>These 5 gallery images are required:</strong><br />
+              • <strong>"Why Choose" section:</strong> All 5 images used for 6 benefit cards (system intelligently matches images to cards)<br />
+              • <strong>"Families & Kids" section:</strong> 2 images displayed (uses entertainment, interior, and/or exterior images)<br />
+              Images display at 400×300px on the page. Upload at 600×400px (2x for retina displays) for optimal quality and smaller file sizes.
             </p>
             <div className="images-list">
               {['exterior', 'interior', 'entertainment', 'food', 'cabin'].map(type => {
