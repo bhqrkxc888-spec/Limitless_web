@@ -6,7 +6,8 @@ import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader, DataTable, Accordion } from '../components/ui';
 import Carousel from '../components/Carousel';
-import { shipNameToSlug } from '../utils/widgetyHelpers';
+import { shipNameToSlug, getWidgetyShipUrl } from '../utils/widgetyHelpers';
+import { getShipLink } from '../config/shipLinks';
 import { useCruiseLineImage, useShipImage } from '../hooks/useImageUrl';
 import { getCruiseLinePlaceholderImage } from '../utils/placeholderImages';
 import './CruiseLinePage.css';
@@ -42,16 +43,24 @@ function FleetShipCard({ ship, cruiseLineSlug, shipSlug, shipPageUrl, cruiseLine
   const { imageUrl: shipImageUrl, isPlaceholder } = useShipImage(cruiseLineSlug, shipSlug, 'card', ship);
   const hasImage = !isPlaceholder && !shipImageUrl.includes('placeholder');
   
+  // Get Widgety link if available, otherwise use slug-based URL
+  const shipLink = getShipLink(ship);
+  const finalShipUrl = shipLink && shipLink.startsWith('http')
+    ? shipLink  // Full Widgety URL provided
+    : shipLink
+      ? getWidgetyShipUrl(ship)  // Widgety slug provided, convert to URL
+      : shipPageUrl;  // Fallback to slug-based ship page
+  
   return (
     <Card 
-      href={hasImage ? shipPageUrl : undefined}
+      href={hasImage ? finalShipUrl : undefined}
       variant="default"
       className="fleet-ship-card"
       target={hasImage ? "_blank" : undefined}
       rel={hasImage ? "noopener noreferrer" : undefined}
       onClick={hasImage ? (e) => {
         e.preventDefault();
-        window.open(shipPageUrl, '_blank', 'noopener,noreferrer');
+        window.open(finalShipUrl, '_blank', 'noopener,noreferrer');
       } : undefined}
     >
       {hasImage ? (
