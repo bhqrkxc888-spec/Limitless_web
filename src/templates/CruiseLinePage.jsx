@@ -7,7 +7,6 @@ import { Button, Card, SectionHeader, Accordion, DataTable } from '../components
 import NewsCard from '../components/NewsCard';
 import { useEffect, useState } from 'react';
 import { getOgImage } from '../utils/imageHelpers';
-import { getCruiseLineCard } from '../utils/assetHelpers';
 import { shipNameToSlug } from '../utils/widgetyHelpers';
 import { useCruiseLineImage, useShipImage } from '../hooks/useImageUrl';
 import './CruiseLinePage.css';
@@ -64,6 +63,10 @@ function CruiseLinePage() {
   const [cruiseLineNews, setCruiseLineNews] = useState([]);
   const [loadingNews, setLoadingNews] = useState(true);
 
+  // Load cruise line logo for header (must be called unconditionally)
+  // Hook will handle null/undefined gracefully
+  const { imageUrl: logoUrl } = useCruiseLineImage(cruiseLine?.slug || '', 'logo', cruiseLine?.name || '');
+
   // Fetch cruise line news
   useEffect(() => {
     if (!cruiseLine?.slug) return;
@@ -102,9 +105,6 @@ function CruiseLinePage() {
     description: cruiseLine.description,
     url: `https://www.limitlesscruises.com/cruise-lines/${cruiseLine.slug}`
   };
-
-  // Load cruise line logo for header
-  const { imageUrl: logoUrl } = useCruiseLineImage(cruiseLine.slug, 'logo', cruiseLine.name);
 
   // Check what extended content is available
   const hasWhyChoose = cruiseLine.whyChoose && cruiseLine.whyChoose.length > 0;
