@@ -59,7 +59,7 @@ function AdminImageManagement() {
       const REQUIRED_IMAGE_TYPES = {
         site: ['hero', 'logo', 'og-image', 'favicon', 'katherine1', 'katherine2', 'katherine3'],
         destination: ['hero', 'card'],
-        'cruise-line': ['logo'], // Only logo is required (hero/card removed, gallery images optional)
+        'cruise-line': ['logo', 'exterior', 'interior', 'entertainment', 'food', 'cabin'], // Logo + gallery images for "Why Choose" and "Families & Kids" sections
         ship: ['card'], // Ship card image required for ship cards on cruise line pages
         category: ['card'],
         'bucket-list': ['hero', 'card'],
@@ -69,7 +69,7 @@ function AdminImageManagement() {
       const OPTIONAL_IMAGE_TYPES = {
         site: ['hero-mobile', 'agency-logo', 'trust-abta', 'trust-atol', 'trust-clia'],
         destination: ['mobile', 'gallery-1', 'gallery-2', 'gallery-3', 'gallery-4'], // gallery and cruise-line-specific cards are optional
-        'cruise-line': ['exterior', 'interior', 'entertainment', 'food', 'cabin'], // Gallery images for "Why Choose" section (optional but recommended)
+        'cruise-line': [], // All gallery images are now required
         ship: ['exterior', 'deck', 'suite', 'dining', 'pool', 'entertainment', 'spa', 'theater'], // Ship gallery images are optional (card is required)
         category: [],
         'bucket-list': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4'],
@@ -178,8 +178,8 @@ function AdminImageManagement() {
       newStats.destinations.missing = Math.max(0, requiredDestinations - newStats.destinations.requiredUploaded);
       newStats.destinations.optional = newStats.destinations.optionalUploaded; // Count of uploaded optional images
       
-      // Cruise Lines: count actual cruise lines × 1 required (logo only - hero/card removed)
-      const requiredCruiseLines = cruiseLines.length * 1;
+      // Cruise Lines: count actual cruise lines × 6 required (logo + 5 gallery images: exterior, interior, entertainment, food, cabin)
+      const requiredCruiseLines = cruiseLines.length * 6;
       newStats.cruiseLines.missing = Math.max(0, requiredCruiseLines - newStats.cruiseLines.requiredUploaded);
       newStats.cruiseLines.optional = newStats.cruiseLines.optionalUploaded;
       
@@ -343,7 +343,7 @@ function AdminImageManagement() {
     {
       id: 'cruiseLines',
       title: 'Cruise Lines & Ships',
-      description: `${cruiseLines.length} cruise lines: logo (required), gallery images (optional). Ship card images (required for fleet carousel)`,
+      description: `${cruiseLines.length} cruise lines: logo + 5 gallery images (required for "Why Choose" & "Families & Kids" sections). Ship card images (required for fleet carousel)`,
       icon: Anchor,
       path: '/admin/images/cruise-lines',
       stats: { 

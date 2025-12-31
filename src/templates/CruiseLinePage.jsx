@@ -8,6 +8,7 @@ import { Button, Card, SectionHeader, DataTable, Accordion } from '../components
 import Carousel from '../components/Carousel';
 import { shipNameToSlug } from '../utils/widgetyHelpers';
 import { useCruiseLineImage, useShipImage } from '../hooks/useImageUrl';
+import { getCruiseLinePlaceholderImage } from '../utils/placeholderImages';
 import './CruiseLinePage.css';
 
 /**
@@ -198,7 +199,14 @@ function CruiseLinePage() {
             <div className="why-choose-grid">
               {cruiseLine.whyChoose.map((item, index) => {
                 const matchedImage = mapWhyChooseToImage(item, galleryImages);
-                const imageUrl = matchedImage || galleryImages.interior || galleryImages.exterior;
+                // Use placeholder if no valid image found
+                const imageUrl = (matchedImage && !matchedImage.includes('placeholder'))
+                  ? matchedImage
+                  : (galleryImages.interior && !galleryImages.interior.includes('placeholder'))
+                    ? galleryImages.interior
+                    : (galleryImages.exterior && !galleryImages.exterior.includes('placeholder'))
+                      ? galleryImages.exterior
+                      : getCruiseLinePlaceholderImage(cruiseLine.slug, 'card');
                 
                 return (
                   <Card key={index} variant="default" className="why-choose-card">
@@ -283,14 +291,26 @@ function CruiseLinePage() {
                 <>
                   <div className="families-kids-image">
                     <img 
-                      src={galleryImages.interior || galleryImages.exterior} 
+                      src={
+                        (galleryImages.interior && !galleryImages.interior.includes('placeholder')) 
+                          ? galleryImages.interior 
+                          : (galleryImages.exterior && !galleryImages.exterior.includes('placeholder'))
+                            ? galleryImages.exterior
+                            : getCruiseLinePlaceholderImage(cruiseLine.slug, 'card')
+                      } 
                       alt="Adults-only relaxation"
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
                   </div>
                   <div className="families-kids-image">
                     <img 
-                      src={galleryImages.exterior || galleryImages.interior} 
+                      src={
+                        (galleryImages.exterior && !galleryImages.exterior.includes('placeholder'))
+                          ? galleryImages.exterior
+                          : (galleryImages.interior && !galleryImages.interior.includes('placeholder'))
+                            ? galleryImages.interior
+                            : getCruiseLinePlaceholderImage(cruiseLine.slug, 'card')
+                      } 
                       alt="Adults-only pool area"
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
@@ -300,14 +320,26 @@ function CruiseLinePage() {
                 <>
                   <div className="families-kids-image">
                     <img 
-                      src={galleryImages.entertainment || galleryImages.interior} 
+                      src={
+                        (galleryImages.entertainment && !galleryImages.entertainment.includes('placeholder'))
+                          ? galleryImages.entertainment
+                          : (galleryImages.interior && !galleryImages.interior.includes('placeholder'))
+                            ? galleryImages.interior
+                            : getCruiseLinePlaceholderImage(cruiseLine.slug, 'card')
+                      } 
                       alt="Kids club activities"
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
                   </div>
                   <div className="families-kids-image">
                     <img 
-                      src={galleryImages.interior || galleryImages.entertainment} 
+                      src={
+                        (galleryImages.interior && !galleryImages.interior.includes('placeholder'))
+                          ? galleryImages.interior
+                          : (galleryImages.entertainment && !galleryImages.entertainment.includes('placeholder'))
+                            ? galleryImages.entertainment
+                            : getCruiseLinePlaceholderImage(cruiseLine.slug, 'card')
+                      } 
                       alt="Family-friendly facilities"
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />

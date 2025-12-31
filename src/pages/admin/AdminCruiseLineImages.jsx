@@ -92,9 +92,12 @@ function AdminCruiseLineImages() {
     const clImages = images[slug] || {};
     const hasLogo = !!clImages.logo;
     
-    // Only logo is required for cruise line pages
-    if (!hasLogo) return 'error';
-    if (clImages.logo?.seo_compliant) return 'pass';
+    // Required: logo + gallery images (exterior, interior, entertainment, food, cabin)
+    const requiredGalleryTypes = ['exterior', 'interior', 'entertainment', 'food', 'cabin'];
+    const hasAllGallery = requiredGalleryTypes.every(type => !!clImages[type]);
+    
+    if (!hasLogo || !hasAllGallery) return 'error';
+    if (clImages.logo?.seo_compliant && requiredGalleryTypes.every(type => clImages[type]?.seo_compliant)) return 'pass';
     return 'warning';
   };
 
@@ -174,6 +177,15 @@ function AdminCruiseLineImages() {
                     <p className="entity-card-stats">
                       <span className={images[cl.slug]?.logo ? 'stat-ok' : 'stat-missing'}>Logo</span>
                       {(() => {
+                        const requiredGalleryTypes = ['exterior', 'interior', 'entertainment', 'food', 'cabin'];
+                        const galleryCount = requiredGalleryTypes.filter(type => images[cl.slug]?.[type]).length;
+                        return (
+                          <span className={galleryCount === 5 ? 'stat-ok' : galleryCount > 0 ? 'stat-warning' : 'stat-missing'}>
+                            Gallery: {galleryCount}/5
+                          </span>
+                        );
+                      })()}
+                      {(() => {
                         const shipList = cl.fleet || (cl.ships ? cl.ships.map(name => ({ name })) : []);
                         const shipCount = shipList.length;
                         const shipSlugs = shipList.map(ship => {
@@ -246,28 +258,35 @@ function AdminCruiseLineImages() {
               
             </div>
 
-            {/* Gallery Images (Optional) */}
+            {/* Gallery Images (Required for Why Choose & Families & Kids sections) */}
             <h3 style={{ color: 'var(--admin-text)', fontSize: '1.25rem', marginTop: '3rem', marginBottom: '1rem' }}>
-              Gallery Images (Optional - Recommended)
+              Gallery Images (Required)
             </h3>
             <p style={{ color: 'var(--admin-text-muted)', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
-              These images are used in the "Why Choose" section cards (6 benefit cards). They display at 400×300px on the page. Upload at higher resolution (1200×800px recommended) for best quality. The system will intelligently match images to benefit cards based on content (e.g., dining images for food-related cards, ship exterior for fleet-related cards).
+              <strong>These images are required</strong> for the "Why Choose" section (6 benefit cards) and "Families & Kids" section. They display at 400×300px on the page. Upload at 600×400px (2x for retina displays) for optimal quality and smaller file sizes. The system will intelligently match images to benefit cards based on content (e.g., dining images for food-related cards, ship exterior for fleet-related cards).
             </p>
             <div className="images-list">
               {['exterior', 'interior', 'entertainment', 'food', 'cabin'].map(type => {
                 const labels = {
                   exterior: 'Ship Exterior',
                   interior: 'Interior Spaces',
-                  entertainment: 'Entertainment',
+                  entertainment: 'Entertainment / Kids Club',
                   food: 'Dining',
                   cabin: 'Staterooms'
+                };
+                const usage = {
+                  exterior: '"Why Choose" cards (fleet/ship related), "Families & Kids" section',
+                  interior: '"Why Choose" cards (general), "Families & Kids" section',
+                  entertainment: '"Why Choose" cards (entertainment/kids), "Families & Kids" section',
+                  food: '"Why Choose" cards (dining related)',
+                  cabin: '"Why Choose" cards (cabin/suite related)'
                 };
                 return (
                   <div key={type} className="admin-card image-card">
                     <div className="image-card-header">
                       <div className="image-card-title">
                         <h3>{labels[type] || type.charAt(0).toUpperCase() + type.slice(1)}</h3>
-                        <span className="badge badge-optional">Optional</span>
+                        <span className="badge badge-required">Required</span>
                       </div>
                       <StatusIndicator 
                         status={images[selectedCruiseLine.slug]?.[type] ? 'pass' : 'missing'} 
@@ -275,8 +294,8 @@ function AdminCruiseLineImages() {
                       />
                     </div>
                     <p className="image-card-specs">
-                      Recommended: 1200×800px (displays at 400×300px), WebP format<br />
-                      <strong>Used in:</strong> "Why Choose" section benefit cards (automatically matched to relevant cards)
+                      Required: 600×400px (displays at 400×300px, 2x for retina), WebP format<br />
+                      <strong>Used in:</strong> {usage[type]}
                     </p>
                     <ImageUpload
                       bucket={STORAGE_BUCKETS.CRUISE_LINES}
@@ -420,7 +439,7 @@ function AdminCruiseLineImages() {
                           size="small" 
                         />
                       </div>
-                      <p className="image-card-specs">Recommended: 1200×800px, WebP format</p>
+                      <p className="image-card-specs">Recommended: 600×400px, WebP format (optional - for future ship profile pages)</p>
                       <ImageUpload
                         bucket={STORAGE_BUCKETS.CRUISE_LINES}
                         entityType="ship"

@@ -82,12 +82,12 @@ export const DIMENSION_SPECS = {
   'cruise-line-logo': { width: 400, height: 120, flexible: true },
   'cruise-line-hero': { width: 1920, height: 1080 },
   'cruise-line-card': { width: 600, height: 400 },
-  // Cruise line gallery images
-  'cruise-line-exterior': { width: 1200, height: 800 },
-  'cruise-line-interior': { width: 1200, height: 800 },
-  'cruise-line-entertainment': { width: 1200, height: 800 },
-  'cruise-line-food': { width: 1200, height: 800 },
-  'cruise-line-cabin': { width: 1200, height: 800 },
+  // Cruise line gallery images (for "Why Choose" cards and "Families & Kids" section - displays at 400×300px)
+  'cruise-line-exterior': { width: 600, height: 400 },
+  'cruise-line-interior': { width: 600, height: 400 },
+  'cruise-line-entertainment': { width: 600, height: 400 },
+  'cruise-line-food': { width: 600, height: 400 },
+  'cruise-line-cabin': { width: 600, height: 400 },
   
   // Ship images
   'ship-hero': { width: 1920, height: 800 },
