@@ -246,16 +246,8 @@ export function useShipImage(cruiseLineSlug, shipSlug, type = 'card', shipName =
       setImageUrl(smartPlaceholder);
       
       // Try to get ship image from database
-      // Debug: Log entityId to help troubleshoot
-      if (process.env.NODE_ENV === 'development') {
-        console.log(`[useShipImage] Looking for ship image:`, { entityId, type, cruiseLineSlug, shipSlug });
-      }
-      
       getImageUrlFromDb('ship', entityId, type, null)
         .then(url => {
-          if (process.env.NODE_ENV === 'development') {
-            console.log(`[useShipImage] Image result:`, { entityId, url, isPlaceholder: url?.includes('placeholder') });
-          }
           if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
             setImageUrl(url);
             setIsPlaceholder(false);
