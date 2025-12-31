@@ -100,19 +100,6 @@ function AdminCruiseLineImages() {
     return 'warning';
   };
 
-  const getShipStatus = (cruiseLineSlug, ship) => {
-    const shipSlug = ship.slug || ship.name.toLowerCase().replace(/\s+/g, '-');
-    const shipEntityId = `${cruiseLineSlug}/ships/${shipSlug}`;
-    const shipImgs = shipImages[shipEntityId] || {};
-    
-    // Ship card image is required for ship cards on cruise line pages
-    const hasCard = !!shipImgs.card;
-    if (!hasCard) return 'error';
-    
-    // Check SEO compliance
-    if (shipImgs.card?.seo_compliant) return 'pass';
-    return 'warning';
-  };
 
   // Show loading while checking auth
   if (authLoading || (!isAuthenticated && !authLoading)) {
