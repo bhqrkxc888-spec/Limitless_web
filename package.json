@@ -14,6 +14,8 @@
     "validate:seo": "node scripts/validate-seo.js",
     "optimize:images": "node scripts/optimize-images.js",
     "sync:ship-links": "node scripts/sync-ship-links.js",
+    "fix:ship-entityids": "node scripts/fix-ship-image-entityids.js",
+    "debug:ship-images": "node scripts/debug-ship-images.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },

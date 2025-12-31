@@ -1,32 +1,32 @@
 /**
  * Ship Slug Mapping
  * 
- * Maps ship names to their correct Widgety slugs.
+ * Simple slug generation for ship names.
+ * Used for entityIds in image storage (e.g., "p-and-o-cruises/ships/iona")
  * 
  * Priority order:
- * 1. shipLinks.js (synced from CRM database)
- * 2. shipSlugOverrides (manual exceptions)
- * 3. Auto-generation
+ * 1. shipSlugOverrides (manual exceptions)
+ * 2. Auto-generation from ship name
+ * 
+ * NOTE: This is ONLY for generating slugs from ship names.
+ * For Widgety links/URLs, use getShipLink() from shipLinks.js instead.
  * 
  * Format: 'Ship Name': 'widgety-slug'
  */
 
-import { getShipLink } from './shipLinks';
-
 export const shipSlugOverrides = {
-  // Add ship name → Widgety slug mappings here for manual exceptions
-  // These override both shipLinks and auto-generation
+  // Add ship name → slug mappings here for manual exceptions
   // Example:
   // 'Queen Mary 2': 'queen-mary-ii',
   // 'L\'Austral': 'l-austral',
 };
 
 /**
- * Get the Widgety slug for a ship name
- * Checks in order: overrides → shipLinks (CRM) → auto-generation
+ * Get the slug for a ship name
+ * Used for entityIds in image storage
  * 
- * @param {string} shipName - Ship name (e.g., "Resilient Lady")
- * @returns {string} Widgety slug (e.g., "resilient-lady")
+ * @param {string} shipName - Ship name (e.g., "Iona")
+ * @returns {string} Slug (e.g., "iona")
  */
 export function getShipSlug(shipName) {
   if (!shipName) return '';
@@ -36,14 +36,7 @@ export function getShipSlug(shipName) {
     return shipSlugOverrides[shipName];
   }
   
-  // 2. Check shipLinks (synced from CRM)
-  const shipLink = getShipLink(shipName);
-  if (shipLink && shipLink !== shipName.toLowerCase().replace(/\s+/g, '-')) {
-    // If it's different from auto-generated, use it
-    return shipLink;
-  }
-  
-  // 3. Auto-generate slug (fallback)
+  // 2. Auto-generate slug from name (simple conversion)
   return shipName
     .toLowerCase()
     .trim()

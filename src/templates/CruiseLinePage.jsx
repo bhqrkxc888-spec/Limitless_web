@@ -51,14 +51,17 @@ function FleetShipCard({ ship, cruiseLineSlug, shipSlug, shipPageUrl, cruiseLine
       ? getWidgetyShipUrl(ship)  // Widgety slug provided, convert to URL
       : shipPageUrl;  // Fallback to slug-based ship page
   
+  // Cards are clickable if we have a Widgety link OR an image
+  const isClickable = finalShipUrl && (hasImage || shipLink);
+  
   return (
     <Card 
-      href={hasImage ? finalShipUrl : undefined}
+      href={isClickable ? finalShipUrl : undefined}
       variant="default"
       className="fleet-ship-card"
-      target={hasImage ? "_blank" : undefined}
-      rel={hasImage ? "noopener noreferrer" : undefined}
-      onClick={hasImage ? (e) => {
+      target={isClickable ? "_blank" : undefined}
+      rel={isClickable ? "noopener noreferrer" : undefined}
+      onClick={isClickable ? (e) => {
         e.preventDefault();
         window.open(finalShipUrl, '_blank', 'noopener,noreferrer');
       } : undefined}
@@ -77,7 +80,7 @@ function FleetShipCard({ ship, cruiseLineSlug, shipSlug, shipPageUrl, cruiseLine
       <Card.Content>
         <Card.Title as="h3">{ship}</Card.Title>
         <Card.Description>
-          {hasImage ? 'View Ship →' : 'Ship information coming soon'}
+          {isClickable ? 'View Ship →' : hasImage ? 'View Ship →' : 'Ship information coming soon'}
         </Card.Description>
       </Card.Content>
     </Card>

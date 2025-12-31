@@ -239,6 +239,17 @@ export function useShipImage(cruiseLineSlug, shipSlug, type = 'card', shipName =
 
     const entityId = `${cruiseLineSlug}/ships/${shipSlug}`;
     
+    // Debug logging (only in browser console)
+    if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+      console.log(`[useShipImage] Looking for:`, { 
+        entityId, 
+        type, 
+        cruiseLineSlug, 
+        shipSlug, 
+        shipName 
+      });
+    }
+    
     // Import the placeholder generator
     import('../utils/placeholderImages.js').then(({ getCruiseLinePlaceholderImage }) => {
       // Use cruise line placeholder as fallback
@@ -248,6 +259,15 @@ export function useShipImage(cruiseLineSlug, shipSlug, type = 'card', shipName =
       // Try to get ship image from database
       getImageUrlFromDb('ship', entityId, type, null)
         .then(url => {
+          // Debug logging
+          if (typeof window !== 'undefined') {
+            console.log(`[useShipImage] Result for ${entityId}:`, { 
+              url, 
+              isPlaceholder: url?.includes('placeholder'),
+              found: url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE
+            });
+          }
+          
           if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
             setImageUrl(url);
             setIsPlaceholder(false);
