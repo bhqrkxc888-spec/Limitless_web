@@ -41,25 +41,31 @@ function mapWhyChooseToImage(whyChooseItem, galleryImages) {
   const title = whyChooseItem.title.toLowerCase();
   const description = whyChooseItem.description.toLowerCase();
   
-  // Priority mapping
-  if (title.includes('fleet') || title.includes('ship') || description.includes('ship')) {
+  // Priority mapping - specific to cruise line content
+  if (title.includes('fleet') || title.includes('ship') || description.includes('ship') || description.includes('mega-ship')) {
     return galleryImages.exterior || galleryImages.interior || null;
   }
-  if (title.includes('dining') || title.includes('food') || title.includes('restaurant') || description.includes('dining') || description.includes('food')) {
+  if (title.includes('dining') || title.includes('food') || title.includes('restaurant') || title.includes('culinary') || description.includes('dining') || description.includes('food') || description.includes('cuisine')) {
     return galleryImages.food || null;
   }
-  if (title.includes('entertainment') || title.includes('show') || description.includes('entertainment')) {
+  if (title.includes('entertainment') || title.includes('show') || title.includes('theatre') || description.includes('entertainment') || description.includes('broadway')) {
     return galleryImages.entertainment || null;
   }
-  if (title.includes('cabin') || title.includes('suite') || title.includes('stateroom') || description.includes('cabin')) {
+  if (title.includes('cabin') || title.includes('suite') || title.includes('stateroom') || description.includes('cabin') || description.includes('suite')) {
     return galleryImages.cabin || null;
   }
-  if (title.includes('kids') || title.includes('club') || description.includes('kids')) {
+  if (title.includes('kids') || title.includes('club') || title.includes('family') || description.includes('kids') || description.includes('children')) {
     return galleryImages.entertainment || galleryImages.interior || null;
+  }
+  if (title.includes('pool') || title.includes('water') || title.includes('island') || title.includes('beach') || description.includes('pool') || description.includes('waterpark') || description.includes('island')) {
+    return galleryImages.pool || galleryImages.exterior || null;
+  }
+  if (title.includes('value') || title.includes('service') || title.includes('luxury') || title.includes('all-inclusive') || description.includes('value') || description.includes('service')) {
+    return galleryImages.pool || galleryImages.interior || null;
   }
   
   // Default fallback
-  return galleryImages.interior || galleryImages.exterior || null;
+  return galleryImages.interior || galleryImages.exterior || galleryImages.pool || null;
 }
 
 /**
@@ -115,6 +121,7 @@ function CruiseLinePage() {
   const entertainmentImage = useCruiseLineImage(cruiseLine?.slug || '', 'entertainment', cruiseLine?.name || '');
   const foodImage = useCruiseLineImage(cruiseLine?.slug || '', 'food', cruiseLine?.name || '');
   const cabinImage = useCruiseLineImage(cruiseLine?.slug || '', 'cabin', cruiseLine?.name || '');
+  const poolImage = useCruiseLineImage(cruiseLine?.slug || '', 'pool', cruiseLine?.name || '');
   const logoImage = useCruiseLineImage(cruiseLine?.slug || '', 'logo', cruiseLine?.name || '');
 
   // Handle cruise line not found
@@ -136,7 +143,8 @@ function CruiseLinePage() {
     interior: interiorImage.imageUrl,
     entertainment: entertainmentImage.imageUrl,
     food: foodImage.imageUrl,
-    cabin: cabinImage.imageUrl
+    cabin: cabinImage.imageUrl,
+    pool: poolImage.imageUrl
   };
 
   // Check if adults-only
@@ -170,13 +178,13 @@ function CruiseLinePage() {
       {/* Section 1: Hero */}
       <section className="cruise-line-hero-section">
         <div className="cruise-line-hero-wrapper">
-          <HeroSection
+      <HeroSection
             title={`${cruiseLine.name} Cruises | Ships, Kids Clubs & Loyalty Guide 2026`}
             subtitle={cruiseLine.tagline}
             image={null}
             imageAlt=""
-            size="md"
-            align="left"
+        size="md"
+        align="left"
             primaryCta={{ label: `Call Free ${siteConfig.phone}`, href: `tel:${siteConfig.phone}` }}
             secondaryCta={{ label: `Find ${cruiseLine.name} Cruises`, to: '/find-a-cruise' }}
           />
@@ -215,11 +223,11 @@ function CruiseLinePage() {
                       alt={item.title}
                       aspectRatio="4/3"
                     />
-                    <Card.Content>
-                      <Card.Title as="h3">{item.title}</Card.Title>
-                      <Card.Description>{item.description}</Card.Description>
-                    </Card.Content>
-                  </Card>
+                  <Card.Content>
+                    <Card.Title as="h3">{item.title}</Card.Title>
+                    <Card.Description>{item.description}</Card.Description>
+                  </Card.Content>
+                </Card>
                 );
               })}
             </div>
@@ -284,7 +292,7 @@ function CruiseLinePage() {
 
       {/* Section 5: Families & Kids - ALWAYS SHOW */}
       <section className="cruise-line-section section-alt">
-        <div className="container">
+          <div className="container">
           <div className="families-kids-content">
             <div className="families-kids-images">
               {isAdultsOnly ? (
@@ -330,7 +338,7 @@ function CruiseLinePage() {
                       alt="Kids club activities"
                       style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
-                  </div>
+                </div>
                   <div className="families-kids-image">
                     <img 
                       src={
@@ -364,32 +372,32 @@ function CruiseLinePage() {
                   <p>{cruiseLine.kidsClub.intro}</p>
                   {cruiseLine.kidsClub.ageGroups && (
                     <div className="kids-club-table">
-                      <DataTable
-                        columns={[
-                          { key: 'age', label: 'Age' },
+                              <DataTable
+                                columns={[
+                                  { key: 'age', label: 'Age' },
                           { key: 'club', label: 'Club Name' },
-                          { key: 'morning', label: 'Morning' },
-                          { key: 'afternoon', label: 'Afternoon' },
-                          { key: 'evening', label: 'Evening' }
-                        ]}
-                        rows={cruiseLine.kidsClub.ageGroups}
-                        variant="striped"
-                        compact
-                      />
-                    </div>
+                                  { key: 'morning', label: 'Morning' },
+                                  { key: 'afternoon', label: 'Afternoon' },
+                                  { key: 'evening', label: 'Evening' }
+                                ]}
+                                rows={cruiseLine.kidsClub.ageGroups}
+                                variant="striped"
+                                compact
+                              />
+                            </div>
                   )}
                 </>
               ) : (
                 <p>{cruiseLine.name} welcomes families with dedicated kids' facilities and family-friendly activities.</p>
               )}
             </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* Section 6: Loyalty Programme - ALWAYS SHOW */}
       <section className="cruise-line-section">
-        <div className="container">
+          <div className="container">
           <div className="loyalty-content">
             <div className="loyalty-text">
               {cruiseLine.loyaltyProgram ? (
@@ -398,19 +406,19 @@ function CruiseLinePage() {
                   <p>{cruiseLine.loyaltyProgram.intro}</p>
                   {cruiseLine.loyaltyProgram.tiers && (
                     <div className="loyalty-table">
-                      <DataTable
-                        columns={[
-                          { key: 'tier', label: 'Tier' },
-                          { key: 'points', label: 'Points' },
+                              <DataTable
+                                columns={[
+                                  { key: 'tier', label: 'Tier' },
+                                  { key: 'points', label: 'Points' },
                           { key: 'benefits', label: 'Benefits' }
-                        ]}
-                        rows={cruiseLine.loyaltyProgram.tiers}
-                        variant="striped"
-                        compact
-                      />
+                                ]}
+                                rows={cruiseLine.loyaltyProgram.tiers}
+                                variant="striped"
+                                compact
+                              />
                     </div>
                   )}
-                  {cruiseLine.loyaltyProgram.pointsInfo && (
+                              {cruiseLine.loyaltyProgram.pointsInfo && (
                     <div className="loyalty-key-benefits">
                       <h3>Key Benefits</h3>
                       <p>{cruiseLine.loyaltyProgram.pointsInfo}</p>
@@ -424,17 +432,17 @@ function CruiseLinePage() {
                 </>
               )}
             </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* Section 7: FAQ - SEO Gold */}
       <section className="cruise-line-section section-alt">
-        <div className="container">
-          <SectionHeader
+          <div className="container">
+            <SectionHeader
             title={`Frequently Asked Questions about ${cruiseLine.name}`}
             subtitle="Everything you need to know before booking"
-            align="center"
+              align="center"
           />
           <div className="cruise-line-faq">
             <Accordion
@@ -514,8 +522,8 @@ function CruiseLinePage() {
               allowMultiple={true}
             />
           </div>
-        </div>
-      </section>
+          </div>
+        </section>
 
       {/* Section 8: CTA */}
       <section className="cruise-line-cta section-dark">

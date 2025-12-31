@@ -26,7 +26,6 @@ function AdminCruiseLineImages() {
   const [images, setImages] = useState({});
   const [shipImages, setShipImages] = useState({});
   const [selectedCruiseLine, setSelectedCruiseLine] = useState(null);
-  const [selectedShip, setSelectedShip] = useState(null);
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -92,8 +91,8 @@ function AdminCruiseLineImages() {
     const clImages = images[slug] || {};
     const hasLogo = !!clImages.logo;
     
-    // Required: logo + gallery images (exterior, interior, entertainment, food, cabin)
-    const requiredGalleryTypes = ['exterior', 'interior', 'entertainment', 'food', 'cabin'];
+    // Required: logo + 6 gallery images (one for each of the 6 "Why Choose" cards)
+    const requiredGalleryTypes = ['exterior', 'interior', 'entertainment', 'food', 'cabin', 'pool'];
     const hasAllGallery = requiredGalleryTypes.every(type => !!clImages[type]);
     
     if (!hasLogo || !hasAllGallery) return 'error';
@@ -177,11 +176,11 @@ function AdminCruiseLineImages() {
                     <p className="entity-card-stats">
                       <span className={images[cl.slug]?.logo ? 'stat-ok' : 'stat-missing'}>Logo</span>
                       {(() => {
-                        const requiredGalleryTypes = ['exterior', 'interior', 'entertainment', 'food', 'cabin'];
+                        const requiredGalleryTypes = ['exterior', 'interior', 'entertainment', 'food', 'cabin', 'pool'];
                         const galleryCount = requiredGalleryTypes.filter(type => images[cl.slug]?.[type]).length;
                         return (
-                          <span className={galleryCount === 5 ? 'stat-ok' : galleryCount > 0 ? 'stat-warning' : 'stat-missing'}>
-                            Gallery: {galleryCount}/5
+                          <span className={galleryCount === 6 ? 'stat-ok' : galleryCount > 0 ? 'stat-warning' : 'stat-missing'}>
+                            Gallery: {galleryCount}/6
                           </span>
                         );
                       })()}
@@ -214,8 +213,8 @@ function AdminCruiseLineImages() {
               </div>
             )}
           </>
-        ) : !selectedShip ? (
-          // Cruise Line Detail (General Images + Ships List)
+        ) : (
+          // Cruise Line Detail (All Required Images)
           <div className="entity-detail">
             <button className="back-btn" onClick={() => setSelectedCruiseLine(null)}>
               <ArrowLeft size={16} /> Back to Cruise Lines
@@ -263,26 +262,28 @@ function AdminCruiseLineImages() {
               Gallery Images (Required)
             </h3>
             <p style={{ color: 'var(--admin-text-muted)', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
-              <strong>These 5 gallery images are required:</strong><br />
-              • <strong>"Why Choose" section:</strong> All 5 images used for 6 benefit cards (system intelligently matches images to cards)<br />
+              <strong>These 6 gallery images are required (one for each "Why Choose" benefit card):</strong><br />
+              • <strong>"Why Choose" section:</strong> 6 images for 6 benefit cards (system intelligently matches images to cards based on content)<br />
               • <strong>"Families & Kids" section:</strong> 2 images displayed (uses entertainment, interior, and/or exterior images)<br />
               Images display at 400×300px on the page. Upload at 600×400px (2x for retina displays) for optimal quality and smaller file sizes.
             </p>
             <div className="images-list">
-              {['exterior', 'interior', 'entertainment', 'food', 'cabin'].map(type => {
+              {['exterior', 'interior', 'entertainment', 'food', 'cabin', 'pool'].map(type => {
                 const labels = {
                   exterior: 'Ship Exterior',
                   interior: 'Interior Spaces',
                   entertainment: 'Entertainment / Kids Club',
                   food: 'Dining',
-                  cabin: 'Staterooms'
+                  cabin: 'Staterooms',
+                  pool: 'Pool / Activities / Value'
                 };
                 const usage = {
                   exterior: '"Why Choose" cards (fleet/ship related), "Families & Kids" section',
-                  interior: '"Why Choose" cards (general), "Families & Kids" section',
+                  interior: '"Why Choose" cards (general/heritage), "Families & Kids" section',
                   entertainment: '"Why Choose" cards (entertainment/kids), "Families & Kids" section',
-                  food: '"Why Choose" cards (dining related)',
-                  cabin: '"Why Choose" cards (cabin/suite related)'
+                  food: '"Why Choose" cards (dining/culinary related)',
+                  cabin: '"Why Choose" cards (cabin/suite related)',
+                  pool: '"Why Choose" cards (pool/activities/value/service/island related)'
                 };
                 return (
                   <div key={type} className="admin-card image-card">
@@ -315,7 +316,7 @@ function AdminCruiseLineImages() {
               })}
             </div>
 
-            {/* Ships Section */}
+            {/* Ship Card Images - Required for Fleet Carousel */}
             {(() => {
               // Handle both 'fleet' (array of objects) and 'ships' (array of strings)
               const shipList = selectedCruiseLine.fleet || 
@@ -327,7 +328,7 @@ function AdminCruiseLineImages() {
                 <>
             <h3 style={{ color: 'var(--admin-text)', fontSize: '1.25rem', marginTop: '3rem', marginBottom: '1rem' }}>
               <Ship size={20} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
-              Ships ({shipList.length}) - Card Images Required
+              Ship Card Images (Required) - {shipList.length} Ships
             </h3>
             <p style={{
               color: 'var(--admin-text-muted)',
@@ -339,123 +340,54 @@ function AdminCruiseLineImages() {
               borderLeft: '3px solid var(--admin-primary)'
             }}>
               ℹ️ <strong>Ship card images are required</strong> for the fleet carousel on the cruise line page. 
-              Each ship needs a card image (600×400px recommended, displays at 400×300px). 
+              Each ship needs a card image (600×400px, displays at 400×300px). 
               Ships without card images will show "Image Coming Soon" placeholder.
             </p>
-                  <div className="entity-grid">
-                    {[...shipList]
-                      .sort((a, b) => {
-                        const nameA = (typeof a === 'string' ? a : a.name || '').toLowerCase();
-                        const nameB = (typeof b === 'string' ? b : b.name || '').toLowerCase();
-                        return nameA.localeCompare(nameB);
-                      })
-                      .map(ship => {
-                        // Normalize: handle both string and object formats
-                        const shipObj = typeof ship === 'string' ? { name: ship } : ship;
-                        const shipSlug = shipObj.slug || shipObj.name.toLowerCase().replace(/\s+/g, '-');
-                        return (
-                          <button
-                            key={shipSlug}
-                            className="entity-card"
-                            onClick={() => setSelectedShip(shipObj)}
-                          >
-                            <div className="entity-card-header">
-                              <h3>{shipObj.name}</h3>
-                              <StatusIndicator status={getShipStatus(selectedCruiseLine.slug, shipObj)} size="small" />
-                            </div>
-                          </button>
-                        );
-                      })}
-                  </div>
-                </>
-              );
-            })()}
-          </div>
-        ) : (
-          // Ship Detail (Gallery Images)
-          <div className="entity-detail">
-            <button className="back-btn" onClick={() => setSelectedShip(null)}>
-              <ArrowLeft size={16} /> Back to {selectedCruiseLine.name}
-            </button>
-
-            <h2 className="entity-detail-title">{selectedShip.name}</h2>
-            <p style={{ color: 'var(--admin-text-muted)', marginBottom: '1.5rem' }}>{selectedCruiseLine.name}</p>
-
-            {(() => {
-              const shipSlug = selectedShip.slug || selectedShip.name.toLowerCase().replace(/\s+/g, '-');
-              const shipEntityId = `${selectedCruiseLine.slug}/ships/${shipSlug}`;
-              const shipImgs = shipImages[shipEntityId] || {};
-
-              return (
-                <div className="images-list">
-                  {/* Ship Card Image - Required for ship cards on cruise line pages */}
-                  <div className="admin-card image-card" style={{ 
-                    border: '2px solid var(--admin-primary)', 
-                    background: 'var(--admin-bg-secondary)',
-                    marginBottom: '2rem'
-                  }}>
-                    <div className="image-card-header">
-                      <div className="image-card-title">
-                        <h3 style={{ fontSize: '1.25rem', fontWeight: '600' }}>Ship Card Image</h3>
-                        <span className="badge badge-required">Required</span>
-                      </div>
-                      <StatusIndicator 
-                        status={shipImgs.card ? 'pass' : 'missing'} 
-                        size="small" 
-                      />
-                    </div>
-                    <p className="image-card-specs" style={{ 
-                      fontSize: '0.9375rem',
-                      lineHeight: '1.6',
-                      marginBottom: '0.5rem'
-                    }}>
-                      <strong>Required for fleet carousel display</strong><br />
-                      Recommended: 600×400px (displays at 400×300px on page), WebP format<br />
-                      <strong>Used in:</strong> "Our Fleet" carousel section on the cruise line page<br />
-                      <strong>Note:</strong> Ships without card images will show "Image Coming Soon" placeholder
-                    </p>
-                    <ImageUpload
-                      bucket={STORAGE_BUCKETS.CRUISE_LINES}
-                      entityType="ship"
-                      entityId={shipEntityId}
-                      imageType="card"
-                      suggestedAltText={`${selectedShip.name} ship card`}
-                      existingImage={shipImgs.card?.url}
-                      existingData={shipImgs.card}
-                      onUploadComplete={loadImages}
-                    />
-                  </div>
-
-                  {/* Ship Gallery Images (All Optional) */}
-                  <h3 style={{ color: 'var(--admin-text)', marginTop: '2rem', marginBottom: '1rem' }}>
-                    Ship Gallery Images (All Optional)
-                  </h3>
-                  {OPTIONAL_SHIP_GALLERY.map(type => (
-                    <div key={type} className="admin-card image-card">
+            <div className="images-list">
+              {[...shipList]
+                .sort((a, b) => {
+                  const nameA = (typeof a === 'string' ? a : a.name || '').toLowerCase();
+                  const nameB = (typeof b === 'string' ? b : b.name || '').toLowerCase();
+                  return nameA.localeCompare(nameB);
+                })
+                .map(ship => {
+                  // Normalize: handle both string and object formats
+                  const shipObj = typeof ship === 'string' ? { name: ship } : ship;
+                  const shipSlug = shipObj.slug || shipObj.name.toLowerCase().replace(/\s+/g, '-');
+                  const shipEntityId = `${selectedCruiseLine.slug}/ships/${shipSlug}`;
+                  const shipImgs = shipImages[shipEntityId] || {};
+                  
+                  return (
+                    <div key={shipSlug} className="admin-card image-card">
                       <div className="image-card-header">
                         <div className="image-card-title">
-                          <h3>{type.charAt(0).toUpperCase() + type.slice(1)}</h3>
-                          <span className="badge badge-optional">Optional</span>
+                          <h3>{shipObj.name} - Card Image</h3>
+                          <span className="badge badge-required">Required</span>
                         </div>
                         <StatusIndicator 
-                          status={shipImgs[type] ? 'pass' : 'missing'} 
+                          status={shipImgs.card ? (shipImgs.card.seo_compliant ? 'pass' : 'warning') : 'missing'} 
                           size="small" 
                         />
                       </div>
-                      <p className="image-card-specs">Recommended: 600×400px, WebP format (optional - for future ship profile pages)</p>
+                      <p className="image-card-specs">
+                        Required: 600×400px (displays at 400×300px), WebP format<br />
+                        <strong>Used in:</strong> "Our Fleet" carousel section on the cruise line page
+                      </p>
                       <ImageUpload
                         bucket={STORAGE_BUCKETS.CRUISE_LINES}
                         entityType="ship"
                         entityId={shipEntityId}
-                        imageType={type}
-                        suggestedAltText={`${selectedShip.name} ${type}`}
-                        existingImage={shipImgs[type]?.url}
-                        existingData={shipImgs[type]}
+                        imageType="card"
+                        suggestedAltText={`${shipObj.name} ship card`}
+                        existingImage={shipImgs.card?.url}
+                        existingData={shipImgs.card}
                         onUploadComplete={loadImages}
                       />
                     </div>
-                  ))}
-                </div>
+                  );
+                })}
+            </div>
+                </>
               );
             })()}
           </div>

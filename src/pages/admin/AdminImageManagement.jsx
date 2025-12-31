@@ -59,7 +59,7 @@ function AdminImageManagement() {
       const REQUIRED_IMAGE_TYPES = {
         site: ['hero', 'logo', 'og-image', 'favicon', 'katherine1', 'katherine2', 'katherine3'],
         destination: ['hero', 'card'],
-        'cruise-line': ['logo', 'exterior', 'interior', 'entertainment', 'food', 'cabin'], // Logo + gallery images for "Why Choose" and "Families & Kids" sections
+        'cruise-line': ['logo', 'exterior', 'interior', 'entertainment', 'food', 'cabin', 'pool'], // Logo + 6 gallery images (one for each of 6 "Why Choose" cards)
         ship: ['card'], // Ship card image required for ship cards on cruise line pages
         category: ['card'],
         'bucket-list': ['hero', 'card'],
@@ -178,8 +178,8 @@ function AdminImageManagement() {
       newStats.destinations.missing = Math.max(0, requiredDestinations - newStats.destinations.requiredUploaded);
       newStats.destinations.optional = newStats.destinations.optionalUploaded; // Count of uploaded optional images
       
-      // Cruise Lines: count actual cruise lines × 6 required (logo + 5 gallery images: exterior, interior, entertainment, food, cabin)
-      const requiredCruiseLines = cruiseLines.length * 6;
+      // Cruise Lines: count actual cruise lines × 7 required (logo + 6 gallery images: exterior, interior, entertainment, food, cabin, pool)
+      const requiredCruiseLines = cruiseLines.length * 7;
       newStats.cruiseLines.missing = Math.max(0, requiredCruiseLines - newStats.cruiseLines.requiredUploaded);
       newStats.cruiseLines.optional = newStats.cruiseLines.optionalUploaded;
       
@@ -343,7 +343,7 @@ function AdminImageManagement() {
     {
       id: 'cruiseLines',
       title: 'Cruise Lines & Ships',
-      description: `${cruiseLines.length} cruise lines: logo + 5 gallery images (required for "Why Choose" & "Families & Kids" sections). Ship card images (required for fleet carousel)`,
+      description: `${cruiseLines.length} cruise lines: logo + 6 gallery images (one for each of 6 "Why Choose" cards + "Families & Kids" section). Ship card images (required for fleet carousel)`,
       icon: Anchor,
       path: '/admin/images/cruise-lines',
       stats: { 
