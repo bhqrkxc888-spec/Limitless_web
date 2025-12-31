@@ -14,9 +14,15 @@ import './CruiseLinePage.css';
 /**
  * Ship Card Component
  * Individual ship card with image from database or fallback
+ * Only shows if ship card image is uploaded
  */
 function ShipCard({ ship, cruiseLineSlug, shipSlug, shipPageUrl, cruiseLineName }) {
-  const { imageUrl: shipImageUrl } = useShipImage(cruiseLineSlug, shipSlug, 'card', ship);
+  const { imageUrl: shipImageUrl, isPlaceholder } = useShipImage(cruiseLineSlug, shipSlug, 'card', ship);
+  
+  // Only show card if we have an actual image (not placeholder)
+  if (isPlaceholder || shipImageUrl.includes('placeholder')) {
+    return null;
+  }
   
   return (
     <Card 
@@ -63,9 +69,7 @@ function CruiseLinePage() {
   const [cruiseLineNews, setCruiseLineNews] = useState([]);
   const [loadingNews, setLoadingNews] = useState(true);
 
-  // Load cruise line logo for header (must be called unconditionally)
-  // Hook will handle null/undefined gracefully
-  const { imageUrl: logoUrl } = useCruiseLineImage(cruiseLine?.slug || '', 'logo', cruiseLine?.name || '');
+  // Logo not needed in header anymore - removed
 
   // Fetch cruise line news
   useEffect(() => {
@@ -124,33 +128,12 @@ function CruiseLinePage() {
         structuredData={structuredData}
       />
 
-      {/* Header Section with Logo */}
+      {/* Header Section - Simple Text Only */}
       <section className="cruise-line-header-section">
         <div className="container">
           <div className="cruise-line-header">
-            {/* Logo at Top */}
-            {logoUrl && !logoUrl.includes('placeholder') && (
-              <div className="cruise-line-logo-top">
-                <img 
-                  src={logoUrl} 
-                  alt={`${cruiseLine.name} logo`}
-                  className="cruise-line-logo-header"
-                />
-              </div>
-            )}
-            
-            <div className="cruise-line-header-content">
-              <h1 className="cruise-line-header-title">{cruiseLine.name}</h1>
-              <p className="cruise-line-header-subtitle">{cruiseLine.description}</p>
-              <div className="cruise-line-header-cta">
-                <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">
-                  Call {siteConfig.phone}
-                </Button>
-                <Button to="/find-a-cruise" variant="outline" size="lg">
-                  Find a Cruise
-                </Button>
-              </div>
-            </div>
+            <h1 className="cruise-line-header-title">{cruiseLine.name}</h1>
+            <p className="cruise-line-header-subtitle">{cruiseLine.description}</p>
           </div>
         </div>
       </section>
@@ -167,25 +150,32 @@ function CruiseLinePage() {
         </div>
       </section>
 
-      {/* Why Choose Section - Card Grid */}
+      {/* Why Choose Section - 2/3 - 1/3 Layout */}
       {hasWhyChoose ? (
         <section className="section">
           <div className="container">
-            <SectionHeader
-              title={`Why Choose ${cruiseLine.name}?`}
-              subtitle={cruiseLine.tagline}
-              align="center"
-            />
+            <div className="cruise-line-grid">
+              <div className="cruise-line-main">
+                <SectionHeader
+                  title={`Why Choose ${cruiseLine.name}?`}
+                  subtitle={cruiseLine.tagline}
+                />
 
-            <div className="grid grid-3">
-              {cruiseLine.whyChoose.map((item, index) => (
-                <Card key={index} variant="default">
-                  <Card.Content>
-                    <Card.Title as="h3">{item.title}</Card.Title>
-                    <Card.Description>{item.description}</Card.Description>
-                  </Card.Content>
-                </Card>
-              ))}
+                <div className="grid grid-2">
+                  {cruiseLine.whyChoose.map((item, index) => (
+                    <Card key={index} variant="default">
+                      <Card.Content>
+                        <Card.Title as="h3">{item.title}</Card.Title>
+                        <Card.Description>{item.description}</Card.Description>
+                      </Card.Content>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+
+              <aside className="cruise-line-sidebar">
+                <SidebarContent cruiseLine={cruiseLine} />
+              </aside>
             </div>
           </div>
         </section>
@@ -489,7 +479,7 @@ function CruiseLinePage() {
                   subtitle={`Explore the ships of ${cruiseLine.name}`}
                 />
 
-                {/* Ship Cards Grid */}
+                {/* Ship Cards Grid - Only shows cards with images */}
                 <div className="ships-cards-grid">
                   {cruiseLine.ships.map((ship, index) => {
                     // Generate ship page URL (opens in new tab)
@@ -506,7 +496,7 @@ function CruiseLinePage() {
                         cruiseLineName={cruiseLine.name}
                       />
                     );
-                  })}
+                  }).filter(Boolean)}
                 </div>
 
                 {/* Destinations */}

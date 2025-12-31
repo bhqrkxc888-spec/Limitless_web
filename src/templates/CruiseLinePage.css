@@ -8,73 +8,34 @@
 }
 
 /* ========================================
-   HEADER SECTION (No Hero Image)
+   HEADER SECTION (Simple Text Only)
    ======================================== */
 
 .cruise-line-header-section {
-  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-light) 100%);
-  padding: var(--space-16) 0;
-  color: var(--clr-text-on-primary);
+  background: var(--clr-bg);
+  padding: var(--space-12) 0;
+  border-bottom: 1px solid var(--clr-border);
 }
 
 .cruise-line-header {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-8);
-  align-items: center;
   text-align: center;
-}
-
-.cruise-line-logo-top {
-  margin-bottom: var(--space-4);
-}
-
-.cruise-line-logo-header {
-  max-width: 300px;
-  max-height: 120px;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-}
-
-.cruise-line-header-content {
-  max-width: 700px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .cruise-line-header-title {
   font-size: var(--font-size-5xl);
   font-weight: var(--font-weight-bold);
-  color: var(--clr-text-on-primary);
+  color: var(--clr-primary);
   margin: 0 0 var(--space-4);
   line-height: var(--line-height-tight);
 }
 
 .cruise-line-header-subtitle {
   font-size: var(--font-size-xl);
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--clr-text-main);
   line-height: var(--line-height-relaxed);
-  margin: 0 0 var(--space-8);
-}
-
-.cruise-line-header-cta {
-  display: flex;
-  gap: var(--space-4);
-  flex-wrap: wrap;
-}
-
-.cruise-line-header-image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cruise-line-card-preview {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-xl);
-  object-fit: cover;
+  margin: 0;
 }
 
 /* ========================================
@@ -592,14 +553,6 @@
 
   .cruise-line-header-subtitle {
     font-size: var(--font-size-lg);
-  }
-
-  .cruise-line-header-cta {
-    flex-direction: column;
-  }
-
-  .cruise-line-header-cta .btn {
-    width: 100%;
   }
 
   .highlights-grid {
