@@ -143,8 +143,20 @@
   transition: background-color var(--transition-fast);
 }
 
-.ship-badge:hover {
+.ship-badge-link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ship-badge-link:hover {
   background-color: var(--clr-primary-dark);
+  text-decoration: none;
+}
+
+.ships-note {
+  margin-top: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-muted);
 }
 
 .ships-list-large .ship-badge {
@@ -398,6 +410,31 @@
   justify-content: center;
   gap: var(--space-4);
   flex-wrap: wrap;
+}
+
+/* ========================================
+   DISCLAIMER BANNER
+   ======================================== */
+
+.cruise-line-disclaimer {
+  background-color: var(--clr-bg-alt);
+  border: 1px solid var(--clr-secondary);
+  border-left: 4px solid var(--clr-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+.cruise-line-disclaimer p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-main);
+  line-height: var(--line-height-relaxed);
+}
+
+.cruise-line-disclaimer strong {
+  color: var(--clr-primary);
+  font-weight: var(--font-weight-semibold);
 }
 
 /* ========================================

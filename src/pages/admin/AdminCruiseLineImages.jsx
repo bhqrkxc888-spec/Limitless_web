@@ -211,7 +211,11 @@ function AdminCruiseLineImages() {
                     size="small" 
                   />
                 </div>
-                <p className="image-card-specs">Recommended: 400×120px, transparent PNG or WebP</p>
+                <p className="image-card-specs">
+                  Recommended: 400px width (height flexible: 100-250px based on logo design)<br />
+                  Format: Transparent PNG or WebP preferred<br />
+                  <strong>Note:</strong> Logos can have different aspect ratios - width must be 400px, height can vary
+                </p>
                 <ImageUpload
                   bucket={STORAGE_BUCKETS.CRUISE_LINES}
                   entityType="cruise-line"

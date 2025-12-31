@@ -79,6 +79,7 @@ function AdminImageManagement() {
       // Calculate stats per entity type
       const newStats = {
         site: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
+        pageHeroes: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
         destinations: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
         cruiseLines: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
         ships: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
@@ -91,7 +92,11 @@ function AdminImageManagement() {
 
       // Count uploaded images by type
       data?.forEach(img => {
-        const type = img.entity_type === 'cruise-line' ? 'cruiseLines' :
+        // Check if this is a page hero (stored as site entity with page-hero-* image type)
+        const isPageHero = img.entity_type === 'site' && img.image_type?.startsWith('page-hero-');
+        
+        const type = isPageHero ? 'pageHeroes' :
+                     img.entity_type === 'cruise-line' ? 'cruiseLines' :
                      img.entity_type === 'destination' ? 'destinations' :
                      img.entity_type === 'ship' ? 'ships' :
                      img.entity_type === 'category' ? 'categories' :
@@ -139,6 +144,10 @@ function AdminImageManagement() {
           } else if (img.entity_type === 'bucket-list') {
             isRequired = img.image_type === 'hero' || img.image_type === 'card';
             isOptional = img.image_type.startsWith('gallery-');
+          } else if (isPageHero) {
+            // Page heroes are all optional
+            isRequired = false;
+            isOptional = true;
           } else {
             // For other types, check against defined lists
             isRequired = requiredTypes.includes(img.image_type);
@@ -154,10 +163,14 @@ function AdminImageManagement() {
       });
 
       // Calculate missing REQUIRED images only (not counting optional)
-      // Site: 7 required (hero, logo, og-image, favicon, katherine1-3)
+      // Site: 7 required (hero, logo, og-image, favicon, katherine1-3) - EXCLUDING page heroes
       const requiredSite = 7;
       newStats.site.missing = Math.max(0, requiredSite - newStats.site.requiredUploaded);
       newStats.site.optional = newStats.site.optionalUploaded; // Count of uploaded optional images
+      
+      // Page Heroes: All optional, just count what's uploaded
+      newStats.pageHeroes.optional = newStats.pageHeroes.optionalUploaded;
+      newStats.pageHeroes.missing = 0; // All optional, so no missing count
       
       // Destinations: count actual destinations × 2 required (hero, card)
       const requiredDestinations = destinations.length * 2; // hero + card per destination
@@ -305,7 +318,7 @@ function AdminImageManagement() {
       description: 'Hero images for main listing pages (Destinations, Bucket List, Cruise Lines, etc.)',
       icon: Image,
       path: '/admin/images/page-heroes',
-      stats: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0 },
+      stats: stats.pageHeroes || { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0 },
       color: '#6366f1'
     },
     {

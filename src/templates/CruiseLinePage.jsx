@@ -9,6 +9,7 @@ import NewsCard from '../components/NewsCard';
 import { useEffect, useState } from 'react';
 import { getOgImage } from '../utils/imageHelpers';
 import { getCruiseLineHero } from '../utils/assetHelpers';
+import { getWidgetyShipUrl } from '../utils/widgetyHelpers';
 import './CruiseLinePage.css';
 
 /**
@@ -99,6 +100,18 @@ function CruiseLinePage() {
         secondaryCta={{ label: 'Find a Cruise', to: '/find-a-cruise' }}
       />
 
+      {/* Development Disclaimer */}
+      <section className="section">
+        <div className="container">
+          <div className="cruise-line-disclaimer">
+            <p>
+              <strong>Note:</strong> Cruise line data is currently under development and construction for an improved experience. 
+              Some information may be updated as we enhance our content.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose Section - Card Grid */}
       {hasWhyChoose ? (
         <section className="section">
@@ -150,10 +163,30 @@ function CruiseLinePage() {
                   <div className="ships-section mt-12">
                     <h3 className="section-subtitle">The Fleet</h3>
                     <div className="ships-list">
-                      {cruiseLine.ships.map((ship, index) => (
-                        <span key={index} className="ship-badge">{ship}</span>
-                      ))}
+                      {cruiseLine.ships.map((ship, index) => {
+                        // Generate Widgety ship URL (opens in new tab to avoid iframe performance issues)
+                        const widgetyUrl = getWidgetyShipUrl(ship);
+                        
+                        return (
+                          <a
+                            key={index}
+                            href={widgetyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="ship-badge ship-badge-link"
+                            title={`View ${ship} details, deck plans, and availability`}
+                          >
+                            {ship}
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginLeft: '4px', display: 'inline-block', verticalAlign: 'middle' }}>
+                              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+                            </svg>
+                          </a>
+                        );
+                      })}
                     </div>
+                    <p className="ships-note">
+                      <small>Click any ship name to view detailed information, deck plans, and availability (opens in new tab)</small>
+                    </p>
                   </div>
                 )}
 
@@ -408,10 +441,30 @@ function CruiseLinePage() {
                 />
 
                 <div className="ships-list ships-list-large">
-                  {cruiseLine.ships.map((ship, index) => (
-                    <span key={index} className="ship-badge">{ship}</span>
-                  ))}
+                  {cruiseLine.ships.map((ship, index) => {
+                    // Generate Widgety ship URL (opens in new tab to avoid iframe performance issues)
+                    const widgetyUrl = getWidgetyShipUrl(ship);
+                    
+                    return (
+                      <a
+                        key={index}
+                        href={widgetyUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="ship-badge ship-badge-link"
+                        title={`View ${ship} details, deck plans, and availability`}
+                      >
+                        {ship}
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginLeft: '4px', display: 'inline-block', verticalAlign: 'middle' }}>
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+                        </svg>
+                      </a>
+                    );
+                  })}
                 </div>
+                <p className="ships-note">
+                  <small>Click any ship name to view detailed information, deck plans, and availability (opens in new tab)</small>
+                </p>
 
                 {/* Destinations */}
                 {cruiseLine.destinations && cruiseLine.destinations.length > 0 && !hasDestinationImages && (

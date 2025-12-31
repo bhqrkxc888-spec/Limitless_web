@@ -77,7 +77,9 @@ export const DIMENSION_SPECS = {
   'destination-gallery-4': { width: 600, height: 400 },
   
   // Cruise line images
-  'cruise-line-logo': { width: 400, height: 200 },
+  // Logo: Flexible aspect ratio - accepts wide (400x120) or standard (400x200)
+  // Width should be 400px, height can vary between 100-250px
+  'cruise-line-logo': { width: 400, height: 120, flexible: true },
   'cruise-line-hero': { width: 1920, height: 1080 },
   'cruise-line-card': { width: 600, height: 400 },
   
@@ -197,7 +199,43 @@ export function validateDimensions(image, entityType, imageType) {
   const widthDiff = Math.abs(actualWidth - expectedDims.width) / expectedDims.width;
   const heightDiff = Math.abs(actualHeight - expectedDims.height) / expectedDims.height;
 
-  // Check if within tolerance
+  // For flexible logos (like cruise-line-logo), only validate width strictly
+  // Height can vary significantly since logos have different aspect ratios
+  if (expectedDims.flexible && imageType === 'logo') {
+    // For logos: width must be exact (400px), height is flexible (100-250px acceptable)
+    if (widthDiff > DIMENSION_TOLERANCE) {
+      return {
+        status: 'error',
+        message: `Logo width (${actualWidth}px) should be ${expectedDims.width}px. Height can vary based on logo design.`,
+        details: {
+          actual: { width: actualWidth, height: actualHeight },
+          expected: { width: expectedDims.width, height: 'flexible (100-250px)' }
+        }
+      };
+    }
+    // Check height is reasonable (between 100-250px for 400px width logos)
+    if (actualHeight < 100 || actualHeight > 250) {
+      return {
+        status: 'warning',
+        message: `Logo height (${actualHeight}px) is outside recommended range (100-250px). Most logos work best between 120-200px height.`,
+        details: {
+          actual: { width: actualWidth, height: actualHeight },
+          expected: { width: expectedDims.width, height: 'flexible (100-250px)' }
+        }
+      };
+    }
+    // Width is correct and height is in acceptable range
+    return {
+      status: 'pass',
+      message: `Logo dimensions (${actualWidth}×${actualHeight}) are acceptable. Width matches requirement, height is within flexible range.`,
+      details: {
+        actual: { width: actualWidth, height: actualHeight },
+        expected: { width: expectedDims.width, height: 'flexible (100-250px)' }
+      }
+    };
+  }
+
+  // Check if within tolerance (standard validation for non-flexible images)
   if (widthDiff > DIMENSION_TOLERANCE || heightDiff > DIMENSION_TOLERANCE) {
     return {
       status: 'error',
