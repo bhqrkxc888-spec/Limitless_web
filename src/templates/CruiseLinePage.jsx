@@ -414,24 +414,53 @@ function CruiseLinePage() {
                       {
                         id: 'faq-1',
                         title: `What makes ${cruiseLine.name} different from other cruise lines?`,
-                        content: `${cruiseLine.name} ${cruiseLine.tagline ? `- ${cruiseLine.tagline}` : 'offers a unique cruise experience'}. ${cruiseLine.description || `With a focus on ${cruiseLine.category === 'luxury' ? 'luxury and sophistication' : cruiseLine.category === 'premium' ? 'premium service and comfort' : 'value and family-friendly experiences'}, ${cruiseLine.name} provides exceptional service and memorable voyages.`}
+                        content: (() => {
+                          const taglinePart = cruiseLine.tagline ? ` - ${cruiseLine.tagline}` : ' offers a unique cruise experience';
+                          const descPart = cruiseLine.description || (() => {
+                            const focus = cruiseLine.category === 'luxury' ? 'luxury and sophistication' : 
+                                         cruiseLine.category === 'premium' ? 'premium service and comfort' : 
+                                         'value and family-friendly experiences';
+                            return `With a focus on ${focus}, ${cruiseLine.name} provides exceptional service and memorable voyages.`;
+                          })();
+                          return `${cruiseLine.name}${taglinePart}. ${descPart}`;
+                        })()
                       },
                       {
                         id: 'faq-2',
                         title: `What destinations does ${cruiseLine.name} sail to?`,
-                        content: `${cruiseLine.name} offers cruises to ${cruiseLine.destinationImages && cruiseLine.destinationImages.length > 0 ? `destinations including ${cruiseLine.destinationImages.slice(0, 3).map(d => d.name).join(', ')}` : 'a wide range of destinations worldwide'}. From ${cruiseLine.category === 'luxury' ? 'exotic' : 'popular'} ports to hidden gems, there's an itinerary to suit every traveller.`
+                        content: (() => {
+                          const destPart = cruiseLine.destinationImages && cruiseLine.destinationImages.length > 0
+                            ? `destinations including ${cruiseLine.destinationImages.slice(0, 3).map(d => d.name).join(', ')}`
+                            : 'a wide range of destinations worldwide';
+                          const portType = cruiseLine.category === 'luxury' ? 'exotic' : 'popular';
+                          return `${cruiseLine.name} offers cruises to ${destPart}. From ${portType} ports to hidden gems, there's an itinerary to suit every traveller.`;
+                        })()
                       },
                       {
                         id: 'faq-3',
                         title: `Is ${cruiseLine.name} suitable for families?`,
                         content: isAdultsOnly 
                           ? `${cruiseLine.name} is an adults-only cruise line, perfect for couples and groups seeking a child-free, sophisticated cruise experience.`
-                          : `${cruiseLine.name} ${cruiseLine.kidsClub ? `offers excellent family facilities including ${cruiseLine.kidsClub.name || 'dedicated kids clubs'}` : 'welcomes families'} with ${cruiseLine.kidsClub ? 'age-appropriate activities and programs' : 'family-friendly amenities and activities'}.`
+                          : (() => {
+                              const facilities = cruiseLine.kidsClub 
+                                ? `offers excellent family facilities including ${cruiseLine.kidsClub.name || 'dedicated kids clubs'}`
+                                : 'welcomes families';
+                              const activities = cruiseLine.kidsClub 
+                                ? 'age-appropriate activities and programs'
+                                : 'family-friendly amenities and activities';
+                              return `${cruiseLine.name} ${facilities} with ${activities}.`;
+                            })()
                       },
                       {
                         id: 'faq-4',
                         title: `What is included in a ${cruiseLine.name} cruise?`,
-                        content: `A ${cruiseLine.name} cruise typically includes accommodation, main dining, entertainment, use of pools and fitness facilities, and ${cruiseLine.kidsClub ? 'kids club access' : 'access to onboard amenities'}. ${cruiseLine.category === 'luxury' ? 'Many luxury amenities, premium dining, and beverages may also be included.' : 'Additional services like specialty dining, spa treatments, and shore excursions are available at extra cost.'}`
+                        content: (() => {
+                          const amenities = cruiseLine.kidsClub ? 'kids club access' : 'access to onboard amenities';
+                          const extras = cruiseLine.category === 'luxury' 
+                            ? 'Many luxury amenities, premium dining, and beverages may also be included.'
+                            : 'Additional services like specialty dining, spa treatments, and shore excursions are available at extra cost.';
+                          return `A ${cruiseLine.name} cruise typically includes accommodation, main dining, entertainment, use of pools and fitness facilities, and ${amenities}. ${extras}`;
+                        })()
                       },
                       {
                         id: 'faq-5',
