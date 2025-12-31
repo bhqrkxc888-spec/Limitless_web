@@ -440,9 +440,8 @@ function AdminCruiseLineImages() {
                 );
               })()}
             </div>
-          </div>
 
-          {/* Optional Ship Gallery Images */}
+            {/* Optional Ship Gallery Images */}
             {(() => {
               const shipList = selectedCruiseLine.fleet || 
                 (selectedCruiseLine.ships ? selectedCruiseLine.ships.map(name => ({ name })) : []);
