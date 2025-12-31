@@ -83,6 +83,7 @@
   overflow: hidden;
   background-color: var(--clr-surface);
   box-shadow: var(--shadow-md);
+  position: relative;
 }
 
 .ship-widget-container iframe {

@@ -13,6 +13,7 @@
     "validate:sitemap": "node scripts/validate-sitemap.js",
     "validate:seo": "node scripts/validate-seo.js",
     "optimize:images": "node scripts/optimize-images.js",
+    "sync:ship-links": "node scripts/sync-ship-links.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },

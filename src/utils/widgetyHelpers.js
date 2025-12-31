@@ -3,21 +3,17 @@
  * Utilities for generating Widgety widget URLs
  */
 
+import { getShipSlug } from '../config/shipSlugMapping';
+
 /**
  * Convert ship name to Widgety slug format
+ * Uses override mapping if available, otherwise auto-generates
  * Examples: "Resilient Lady" -> "resilient-lady", "Queen Mary 2" -> "queen-mary-2"
  * @param {string} shipName - Ship name (e.g., "Resilient Lady")
  * @returns {string} Slug format (e.g., "resilient-lady")
  */
 export function shipNameToSlug(shipName) {
-  if (!shipName) return '';
-  return shipName
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')  // Replace spaces with hyphens
-    .replace(/[^a-z0-9-]/g, '')  // Remove special characters
-    .replace(/-+/g, '-')  // Replace multiple hyphens with single
-    .replace(/^-|-$/g, '');  // Remove leading/trailing hyphens
+  return getShipSlug(shipName);
 }
 
 /**

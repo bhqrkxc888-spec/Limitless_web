@@ -71,10 +71,11 @@ function ShipPage() {
   }, []);
 
   // Generate Widgety iframe src URL for this ship
-  // Direct widget URL: //www.widgety.co.uk/widgets/ugPj5zR1QMRisywLk13B/ships/{slug}.widget
+  // Direct widget URL with parameters to hide navigation
+  // Parameters: preview-nav=false, results-nav=false, tabs=false, search=false
   const widgetyIframeSrc = slug 
-    ? `//www.widgety.co.uk/widgets/ugPj5zR1QMRisywLk13B/ships/${slug}.widget`
-    : '//www.widgety.co.uk/widgets/ugPj5zR1QMRisywLk13B.widget';
+    ? `//www.widgety.co.uk/widgets/ugPj5zR1QMRisywLk13B/ships/${slug}.widget?preview-nav=false&results-nav=false&tabs=false&search=false&hide-header=true`
+    : '//www.widgety.co.uk/widgets/ugPj5zR1QMRisywLk13B.widget?preview-nav=false&results-nav=false&tabs=false&search=false';
 
   // Close button handler - closes window/tab if opened in new tab, otherwise navigates back
   const handleClose = () => {
@@ -155,11 +156,11 @@ function ShipPage() {
               <iframe 
                 className="widgety-cruise-tour-search" 
                 frameBorder="0" 
-                height="800" 
+                height="860" 
                 preview-nav="false" 
                 results-nav="false" 
                 src={widgetyIframeSrc}
-                tabs="false" 
+                tabs="false"
                 width="100%"
                 title={`${shipName} - Ship Information`}
               />
