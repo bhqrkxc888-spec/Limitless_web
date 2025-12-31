@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import SEO from '../components/SEO';
 import { siteConfig } from '../config/siteConfig';
@@ -14,7 +14,6 @@ import './ShipPage.css';
  */
 function ShipPage() {
   const { slug } = useParams();
-  const navigate = useNavigate();
   const [scriptsLoaded, setScriptsLoaded] = useState(false);
   const [showConsentPrompt, setShowConsentPrompt] = useState(false);
   const [shipName, setShipName] = useState('');
