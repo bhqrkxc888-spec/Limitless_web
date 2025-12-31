@@ -1,681 +1,414 @@
 /* ========================================
-   CRUISE LINE PAGE TEMPLATE
-   Flexible, data-driven layout for all cruise lines
+   CRUISE LINE PAGE - SEO OPTIMIZED
+   Single-column premium layout
    ======================================== */
 
-.cruise-line-page {
+.cruise-line-page-seo {
   min-height: 100vh;
 }
 
 /* ========================================
-   HEADER SECTION (Uses HeroSection component)
+   SECTION SPACING
    ======================================== */
 
-/* ========================================
-   GRID LAYOUTS
-   ======================================== */
-
-.cruise-line-grid {
-  display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: var(--space-12);
-  align-items: start;
+.cruise-line-section {
+  padding: 64px 0;
 }
 
-.cruise-line-main {
-  min-width: 0;
-}
-
-.cruise-line-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-  position: sticky;
-  top: 120px;
-}
-
-/* Content Grid (for Kids Club etc) */
-.content-grid {
-  display: grid;
-  grid-template-columns: 1fr 350px;
-  gap: var(--space-10);
-  align-items: start;
-}
-
-.content-main {
-  min-width: 0;
-}
-
-.content-sidebar {
-  position: sticky;
-  top: 120px;
-}
-
-/* Dual Section (side by side cards) */
-.dual-section {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-8);
+.cruise-line-section.section-alt {
+  background-color: var(--clr-bg-alt);
 }
 
 /* ========================================
-   HIGHLIGHTS SECTION
+   HERO SECTION
    ======================================== */
 
-.highlights-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-6);
+.cruise-line-hero-section {
+  position: relative;
 }
 
-.highlight-card {
-  display: flex;
-  gap: var(--space-4);
-  padding: var(--space-5);
-  background-color: var(--clr-surface);
-  border: 1px solid var(--clr-border);
+.cruise-line-hero-wrapper {
+  position: relative;
+}
+
+.cruise-line-hero-logo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: white;
+  padding: 20px;
   border-radius: var(--radius-lg);
-  transition: border-color var(--transition-fast),
-              box-shadow var(--transition-fast);
+  box-shadow: var(--shadow-lg);
+  z-index: 10;
+  max-width: 200px;
+  width: 200px;
 }
 
-.highlight-card:hover {
-  border-color: var(--clr-secondary);
-  box-shadow: var(--shadow-md);
-}
-
-.highlight-icon {
-  flex-shrink: 0;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--clr-secondary);
-  border-radius: 50%;
-}
-
-.highlight-icon svg {
-  width: 18px;
-  height: 18px;
-  fill: white;
-}
-
-.highlight-text {
-  margin: 0;
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-relaxed);
-  color: var(--clr-text-main);
+.cruise-line-hero-logo img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* ========================================
-   SHIPS & DESTINATIONS
+   WHY CHOOSE SECTION
    ======================================== */
 
-.ships-section,
-.destinations-section {
-  padding-top: var(--space-8);
-  border-top: 1px solid var(--clr-border);
-}
-
-.section-subtitle {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  color: var(--clr-primary);
-  margin: 0 0 var(--space-4);
-}
-
-.ships-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-}
-
-.ships-list-large {
-  gap: var(--space-4);
-}
-
-.ship-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: var(--space-2) var(--space-4);
-  background-color: var(--clr-primary);
-  color: var(--clr-text-on-primary);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  border-radius: var(--radius-full);
-  transition: background-color var(--transition-fast);
-}
-
-.ship-badge-link {
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.ship-badge-link:hover {
-  background-color: var(--clr-primary-dark);
-  text-decoration: none;
-}
-
-.ships-note {
-  margin-top: var(--space-3);
-  font-size: var(--font-size-sm);
-  color: var(--clr-text-muted);
-}
-
-.ships-list-large .ship-badge {
-  padding: var(--space-3) var(--space-5);
-  font-size: var(--font-size-base);
-}
-
-/* Ship Cards Grid */
-.ships-cards-grid {
+.why-choose-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--space-6);
-  margin-top: var(--space-6);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.ship-card {
-  cursor: pointer;
+.why-choose-card {
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.ship-card:hover {
-  transform: translateY(-4px);
+.why-choose-card:hover {
+  transform: scale(1.02);
   box-shadow: var(--shadow-lg);
 }
 
-.destinations-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-}
-
-.destination-tag {
-  display: inline-flex;
-  align-items: center;
-  padding: var(--space-2) var(--space-3);
-  background-color: var(--clr-bg-alt);
-  color: var(--clr-text-main);
-  font-size: var(--font-size-sm);
-  border: 1px solid var(--clr-border);
-  border-radius: var(--radius-md);
-  transition: all var(--transition-fast);
-}
-
-.destination-tag:hover {
-  background-color: var(--clr-secondary);
-  color: white;
-  border-color: var(--clr-secondary);
-}
-
-/* Destinations in Sidebar */
-.sidebar-card .destinations-list {
-  margin-top: var(--space-3);
-}
-
-/* Ship Card Coming Soon Placeholder */
-.ship-card-coming-soon {
+.why-choose-card .card-image {
   width: 100%;
-  aspect-ratio: 16/10;
+  height: 300px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.why-choose-card .card-image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+/* ========================================
+   FLEET CAROUSEL
+   ======================================== */
+
+.fleet-ship-card {
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.fleet-ship-card:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.fleet-ship-card .card-image {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.fleet-ship-card .card-image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+.ship-card-placeholder {
+  width: 100%;
+  aspect-ratio: 4/3;
   background: linear-gradient(135deg, var(--clr-bg-alt) 0%, var(--clr-border-light) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  overflow: hidden;
+  color: var(--clr-text-muted);
+  font-size: var(--font-size-base);
 }
 
-.coming-soon-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
+/* ========================================
+   DESTINATIONS PILLS
+   ======================================== */
+
+.destinations-carousel .carousel-items-flex .destination-pill {
+  flex: 0 0 auto;
+}
+
+.destination-pill {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.coming-soon-text {
-  color: var(--clr-text-on-primary);
-  font-size: var(--font-size-lg);
+  padding: var(--space-3) var(--space-6);
+  background: var(--clr-surface);
+  border: 2px solid var(--clr-primary);
+  border-radius: var(--radius-full);
+  color: var(--clr-primary);
+  text-decoration: none;
   font-weight: var(--font-weight-semibold);
-  text-align: center;
-  padding: var(--space-4);
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: var(--radius-md);
-  margin: 0;
+  font-size: var(--font-size-base);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
 }
 
-/* Compact Contact Form in Sidebar */
-.sidebar-contact-form .contact-form {
-  margin-top: var(--space-4);
+.destination-pill:hover {
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
-.sidebar-contact-form .form-group {
-  margin-bottom: var(--space-3);
-}
-
-.sidebar-contact-form .form-label {
-  font-size: var(--font-size-sm);
-  margin-bottom: var(--space-1);
-}
-
-.sidebar-contact-form .form-input,
-.sidebar-contact-form textarea {
-  font-size: var(--font-size-sm);
-  padding: var(--space-2) var(--space-3);
-}
-
-.sidebar-contact-form .form-grid {
-  display: block;
-}
-
-.sidebar-contact-form .form-grid .form-group {
-  margin-bottom: var(--space-3);
-}
-
-/* Premium Section */
-.premium-content {
-  max-width: 800px;
-}
-
-.premium-features {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: var(--space-6);
-  margin-top: var(--space-8);
-}
-
-.premium-feature h4 {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  color: var(--clr-primary);
-  margin: 0 0 var(--space-2);
-}
-
-.premium-feature p {
-  color: var(--clr-text-main);
-  margin: 0;
-  line-height: var(--line-height-relaxed);
-}
-
-/* Image Gallery */
-.cruise-line-gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--space-6);
-  margin-top: var(--space-8);
-}
-
-.gallery-card {
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-}
-
-.gallery-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-}
 
 /* ========================================
-   INFO CARDS
+   FAMILIES & KIDS SECTION
    ======================================== */
 
-.info-card {
-  background-color: var(--clr-bg-alt);
-  border: 1px solid var(--clr-border);
-  box-shadow: var(--shadow-card);
-  padding: var(--space-6);
-  border-radius: var(--radius-xl);
-  margin-bottom: var(--space-6);
+.families-kids-content {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: var(--space-12);
+  align-items: start;
 }
 
-.info-card p {
-  margin: 0 0 var(--space-4);
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-relaxed);
-  color: var(--clr-text-main);
+.families-kids-image {
+  width: 400px;
+  height: 300px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
 }
 
-.info-card p:last-child {
-  margin-bottom: 0;
-}
-
-/* Accordion wrapper for multiple accordions */
-.accordion-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-/* ========================================
-   SECTION CARDS
-   ======================================== */
-
-.section-card {
-  background-color: var(--clr-surface);
-  border: 1px solid var(--clr-border);
-  box-shadow: var(--shadow-card);
-  padding: var(--space-6);
-  border-radius: var(--radius-xl);
-}
-
-.section-card h3 {
-  font-size: var(--font-size-xl);
+.families-kids-text h2 {
+  font-size: 48px;
   font-weight: var(--font-weight-bold);
   color: var(--clr-primary);
-  margin: 0 0 var(--space-4);
-}
-
-.section-card > p {
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-relaxed);
-  color: var(--clr-text-main);
   margin: 0 0 var(--space-6);
 }
 
+.families-kids-text p {
+  font-size: 20px;
+  line-height: var(--line-height-relaxed);
+  color: var(--clr-text-main);
+  margin: 0 0 var(--space-4);
+}
+
+.adults-only-message {
+  padding: var(--space-6);
+  background: var(--clr-bg-alt);
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--clr-primary);
+}
+
+.kids-club-table {
+  margin-top: var(--space-6);
+}
+
 /* ========================================
-   SIDEBAR
+   LOYALTY PROGRAMME SECTION
    ======================================== */
 
-.sidebar-card {
-  background-color: var(--clr-surface);
-  border: 1px solid var(--clr-border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-6);
-  box-shadow: var(--shadow-card);
+.loyalty-content {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: var(--space-12);
+  align-items: start;
 }
 
-/* Logo Card in Sidebar */
-.sidebar-logo-card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-5);
-  background-color: var(--clr-bg-alt);
+.loyalty-image {
+  width: 400px;
+  height: 300px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
 }
 
-.cruise-line-logo-sidebar {
-  max-width: 100%;
-  height: auto;
-  max-height: 120px;
-  object-fit: contain;
-}
-
-.sidebar-title {
-  font-size: var(--font-size-lg);
+.loyalty-text h2 {
+  font-size: 48px;
   font-weight: var(--font-weight-bold);
   color: var(--clr-primary);
-  margin: 0 0 var(--space-3);
+  margin: 0 0 var(--space-6);
 }
 
-.sidebar-text {
-  font-size: var(--font-size-sm);
-  color: var(--clr-text-muted);
-  margin: 0 0 var(--space-5);
-  line-height: var(--line-height-relaxed);
-}
-
-.sidebar-cta {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-/* Suitable List */
-.suitable-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.suitable-list li {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-2) 0;
-  font-size: var(--font-size-sm);
-  color: var(--clr-text-main);
-}
-
-.suitable-list svg {
-  width: 18px;
-  height: 18px;
-  color: var(--clr-secondary);
-  flex-shrink: 0;
-}
-
-/* Trust Badges */
-.sidebar-trust {
-  background-color: var(--clr-bg-alt);
-}
-
-.sidebar-trust .trust-item {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-2) 0;
-  font-size: var(--font-size-sm);
-  color: var(--clr-text-main);
-  border-bottom: 1px solid var(--clr-border);
-}
-
-.sidebar-trust .trust-item:last-child {
-  border-bottom: none;
-}
-
-.sidebar-trust .trust-item svg {
-  width: 20px;
-  height: 20px;
-  color: var(--clr-secondary);
-  flex-shrink: 0;
-}
-
-/* ========================================
-   FACTS LIST
-   ======================================== */
-
-.facts-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.facts-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-3);
-  padding: var(--space-2) 0;
-  font-size: var(--font-size-base);
-  color: var(--clr-text-main);
-}
-
-.facts-list svg {
-  width: 18px;
-  height: 18px;
-  color: var(--clr-secondary);
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-
-/* ========================================
-   TIPS LIST
-   ======================================== */
-
-.tips-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.tips-list li {
-  padding: var(--space-2) 0;
+.loyalty-text p {
+  font-size: 20px;
   line-height: var(--line-height-relaxed);
   color: var(--clr-text-main);
-  border-bottom: 1px solid var(--clr-border-light);
+  margin: 0 0 var(--space-4);
 }
 
-.tips-list li:last-child {
-  border-bottom: none;
+.loyalty-table {
+  margin-top: var(--space-6);
 }
 
-/* ========================================
-   NOTES
-   ======================================== */
-
-.note {
+.loyalty-note {
+  margin-top: var(--space-4);
   font-size: var(--font-size-sm);
   color: var(--clr-text-muted);
   font-style: italic;
-  margin-top: var(--space-3);
+}
+
+/* ========================================
+   LIFE ONBOARD SECTION
+   ======================================== */
+
+.life-onboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-top: var(--space-8);
+}
+
+.life-onboard-card {
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.life-onboard-card:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.life-onboard-card .card-image {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.life-onboard-card .card-image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+.life-onboard-placeholder {
+  width: 100%;
+  height: 300px;
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, var(--clr-bg-alt) 0%, var(--clr-border-light) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-text-muted);
+  font-size: var(--font-size-base);
 }
 
 /* ========================================
    CTA SECTION
    ======================================== */
 
-.cta-content {
-  max-width: 700px;
+.cruise-line-cta {
+  padding: var(--space-16) 0;
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+}
+
+.cruise-line-cta .cta-content {
+  text-align: center;
+  max-width: 800px;
   margin: 0 auto;
 }
 
-.cta-content h2 {
+.cruise-line-cta h2 {
+  font-size: 48px;
+  font-weight: var(--font-weight-bold);
   color: var(--clr-text-on-primary);
-  margin-bottom: var(--space-4);
+  margin: 0 0 var(--space-6);
 }
 
-.cta-content p {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: var(--font-size-lg);
-  margin-bottom: var(--space-8);
-}
-
-.cta-buttons {
+.cruise-line-cta .cta-buttons {
   display: flex;
-  justify-content: center;
   gap: var(--space-4);
+  justify-content: center;
+  margin-bottom: var(--space-8);
   flex-wrap: wrap;
 }
 
-/* ========================================
-   DISCLAIMER BANNER
-   ======================================== */
-
-.cruise-line-disclaimer {
-  background-color: var(--clr-bg-alt);
-  border: 1px solid var(--clr-secondary);
-  border-left: 4px solid var(--clr-secondary);
-  border-radius: var(--radius-md);
-  padding: var(--space-4) var(--space-5);
-  margin-bottom: var(--space-6);
-}
-
-.cruise-line-disclaimer p {
-  margin: 0;
+.trust-badges {
+  display: flex;
+  gap: var(--space-6);
+  justify-content: center;
   font-size: var(--font-size-sm);
-  color: var(--clr-text-main);
-  line-height: var(--line-height-relaxed);
+  color: var(--clr-text-on-primary);
+  opacity: 0.9;
 }
 
-.cruise-line-disclaimer strong {
-  color: var(--clr-primary);
-  font-weight: var(--font-weight-semibold);
-}
-
-/* ========================================
-   UTILITY CLASSES
-   ======================================== */
-
-.mt-12 {
-  margin-top: var(--space-12);
+.trust-badges span {
+  padding: var(--space-2) var(--space-4);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
 }
 
 /* ========================================
    RESPONSIVE
    ======================================== */
 
-@media (max-width: 1023px) {
-  .cruise-line-header {
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
+@media (max-width: 1024px) {
+  .why-choose-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .cruise-line-logo-header {
-    max-width: 250px;
-    max-height: 100px;
+  .life-onboard-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .cruise-line-grid,
-  .content-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
-  }
-
-  .cruise-line-sidebar,
-  .content-sidebar {
-    position: static;
-  }
-
-  .dual-section {
+  .families-kids-content,
+  .loyalty-content {
     grid-template-columns: 1fr;
   }
 
-  .ships-cards-grid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: var(--space-4);
+  .families-kids-image,
+  .loyalty-image {
+    height: 250px;
+  }
+
+  .cruise-line-section .carousel-items-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 767px) {
-  .cruise-line-header-title {
-    font-size: var(--font-size-3xl);
+  .cruise-line-section {
+    padding: 48px 0;
   }
 
-  .cruise-line-header-subtitle {
-    font-size: var(--font-size-lg);
+  .cruise-line-hero-logo {
+    position: static;
+    margin: var(--space-4) auto;
+    display: block;
+    max-width: 150px;
   }
 
-  .highlights-grid {
+  .why-choose-grid,
+  .life-onboard-grid {
     grid-template-columns: 1fr;
   }
 
-  .highlight-card {
-    padding: var(--space-4);
+  .families-kids-text h2,
+  .loyalty-text h2,
+  .cruise-line-cta h2 {
+    font-size: 32px;
   }
 
-  .info-card,
-  .section-card,
-  .sidebar-card {
-    padding: var(--space-4);
+  .families-kids-text p,
+  .loyalty-text p {
+    font-size: var(--font-size-base);
   }
 
-  .cta-buttons {
+  .cruise-line-section .carousel-items-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cruise-line-cta .cta-buttons {
     flex-direction: column;
   }
 
-  .cta-buttons .btn {
+  .cruise-line-cta .cta-buttons .btn {
     width: 100%;
   }
 
-  .ships-list-large .ship-badge {
-    padding: var(--space-2) var(--space-4);
-    font-size: var(--font-size-sm);
-  }
-
-  .ships-cards-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-4);
-  }
-}
-
-/* ========================================
-   REDUCED MOTION
-   ======================================== */
-
-@media (prefers-reduced-motion: reduce) {
-  .highlight-card,
-  .destination-tag,
-  .ship-badge {
-    transition: none;
+  .trust-badges {
+    flex-direction: column;
+    gap: var(--space-3);
   }
 }
