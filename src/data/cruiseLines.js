@@ -23,7 +23,7 @@ export const cruiseLines = [
     description: 'P&O Cruises offers warm British hospitality from convenient UK ports. Choose adults-only ships (Aurora, Arcadia) or family-friendly vessels (Iona, Arvia, Britannia). No-fly departures from Southampton, pounds sterling onboard, and no tipping required.',
     category: 'mainstream',
     featured: true,
-    image: 'null',
+    
     logo: null, // Logo to be uploaded to CRM
     
     
@@ -63,12 +63,12 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'Caribbean', image: 'null', alt: 'Tropical Caribbean beach with turquoise waters' },
-      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastal harbour' },
-      { name: 'Norwegian Fjords', image: 'null', alt: 'Norwegian Fjords with Northern Lights' },
-      { name: 'Northern Europe', image: 'null', alt: 'Northern European waterfront' },
-      { name: 'Canary Islands', image: 'null', alt: 'Canary Islands volcanic landscape' },
-      { name: 'Baltic & Northern Europe', image: 'null', alt: 'Nordic capitals and Baltic Sea' }
+      { name: 'Caribbean',  alt: 'Tropical Caribbean beach with turquoise waters' },
+      { name: 'Mediterranean',  alt: 'Mediterranean coastal harbour' },
+      { name: 'Norwegian Fjords',  alt: 'Norwegian Fjords with Northern Lights' },
+      { name: 'Northern Europe',  alt: 'Northern European waterfront' },
+      { name: 'Canary Islands',  alt: 'Canary Islands volcanic landscape' },
+      { name: 'Baltic & Northern Europe',  alt: 'Nordic capitals and Baltic Sea' }
     ],
 
     // Kids Club section
@@ -173,7 +173,7 @@ export const cruiseLines = [
     description: 'Royal Caribbean is known for groundbreaking ships featuring incredible amenities like FlowRider surf simulators, rock climbing walls, and the iconic Central Park at sea.',
     category: 'mainstream',
     featured: true,
-    image: 'null',
+    
     logo: null, // Logo to be uploaded to CRM
     // Why Choose section - benefit cards
     whyChoose: [
@@ -211,11 +211,11 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean beach and turquoise sea' },
-      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastline' },
-      { name: 'Alaska', image: 'null', alt: 'Alaska glaciers and mountains' },
-      { name: 'Northern Europe', image: 'null', alt: 'Northern Europe waterfront' },
-      { name: 'Asia', image: 'null', alt: 'Asian port city' }
+      { name: 'Caribbean',  alt: 'Caribbean beach and turquoise sea' },
+      { name: 'Mediterranean',  alt: 'Mediterranean coastline' },
+      { name: 'Alaska',  alt: 'Alaska glaciers and mountains' },
+      { name: 'Northern Europe',  alt: 'Northern Europe waterfront' },
+      { name: 'Asia',  alt: 'Asian port city' }
     ],
 
     // Kids Club section
@@ -294,7 +294,7 @@ export const cruiseLines = [
     description: 'MSC Cruises is one of the world\'s largest and fastest-growing lines, offering Italian design, modern ships and global itineraries. Guests can sail from the UK or choose fly-cruise packages worldwide. Expect an international atmosphere with family-friendly fun, varied entertainment, and the exclusive Yacht Club for those seeking privacy and relaxation.',
     category: 'mainstream',
     featured: true,
-    image: 'null',
+    
     logo: null, // Logo to be uploaded to CRM
     
     // Why Choose section - benefit cards
@@ -333,12 +333,12 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean beach and turquoise sea' },
-      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean ruins and coastline' },
-      { name: 'Middle East', image: 'null', alt: 'Middle East Dubai skyline' },
-      { name: 'Northern Europe', image: 'null', alt: 'Northern Europe skyline and waterfront' },
-      { name: 'Asia & Japan', image: 'null', alt: 'Cherry blossom path in Japan' },
-      { name: 'Grand Voyages', image: 'null', alt: 'Sunset over the ocean on a Grand Voyage' }
+      { name: 'Caribbean',  alt: 'Caribbean beach and turquoise sea' },
+      { name: 'Mediterranean',  alt: 'Mediterranean ruins and coastline' },
+      { name: 'Middle East',  alt: 'Middle East Dubai skyline' },
+      { name: 'Northern Europe',  alt: 'Northern Europe skyline and waterfront' },
+      { name: 'Asia & Japan',  alt: 'Cherry blossom path in Japan' },
+      { name: 'Grand Voyages',  alt: 'Sunset over the ocean on a Grand Voyage' }
     ],
 
     // Kids Club section
@@ -453,7 +453,7 @@ export const cruiseLines = [
     description: 'Norwegian Cruise Line pioneered Freestyle Cruising, offering flexibility with no fixed dining times and a relaxed, resort-style atmosphere.',
     category: 'mainstream',
     featured: true,
-    image: 'null',
+    
     logo: null, // Logo to be uploaded to CRM
     // Why Choose section - benefit cards
     whyChoose: [
@@ -491,11 +491,11 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean beach and turquoise sea' },
-      { name: 'Alaska', image: 'null', alt: 'Alaska glaciers and mountains' },
-      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastline' },
-      { name: 'Northern Europe', image: 'null', alt: 'Northern Europe waterfront' },
-      { name: 'Hawaii', image: 'null', alt: 'Hawaiian beach and palm trees' }
+      { name: 'Caribbean',  alt: 'Caribbean beach and turquoise sea' },
+      { name: 'Alaska',  alt: 'Alaska glaciers and mountains' },
+      { name: 'Mediterranean',  alt: 'Mediterranean coastline' },
+      { name: 'Northern Europe',  alt: 'Northern Europe waterfront' },
+      { name: 'Hawaii',  alt: 'Hawaiian beach and palm trees' }
     ],
 
     // Kids Club section
@@ -574,7 +574,7 @@ export const cruiseLines = [
     description: 'Disney Cruise Line delivers magical family holidays with world-class entertainment, character experiences, and exceptional service.',
     category: 'premium',
     featured: true,
-    image: 'null',
+    
     logo: null, // Logo to be uploaded to CRM
     // Why Choose section - benefit cards
     whyChoose: [
@@ -612,11 +612,11 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'Bahamas', image: 'null', alt: 'Bahamas beach and turquoise sea' },
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean palm tree beach' },
-      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastline' },
-      { name: 'Alaska', image: 'null', alt: 'Alaska glaciers and mountains' },
-      { name: 'Northern Europe', image: 'null', alt: 'Northern Europe waterfront' }
+      { name: 'Bahamas',  alt: 'Bahamas beach and turquoise sea' },
+      { name: 'Caribbean',  alt: 'Caribbean palm tree beach' },
+      { name: 'Mediterranean',  alt: 'Mediterranean coastline' },
+      { name: 'Alaska',  alt: 'Alaska glaciers and mountains' },
+      { name: 'Northern Europe',  alt: 'Northern Europe waterfront' }
     ],
 
     // Kids Club section
@@ -693,7 +693,7 @@ export const cruiseLines = [
     description: 'Celebrity Cruises offers modern luxury with stylish ships, Michelin-inspired cuisine, and a focus on destination immersion.',
     category: 'premium',
     featured: true,
-    image: 'null',
+    
     logo: null, // Logo to be uploaded to CRM
     // Why Choose section - benefit cards
     whyChoose: [
@@ -731,11 +731,11 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean turquoise waters' },
-      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastline' },
-      { name: 'Alaska', image: 'null', alt: 'Alaska glaciers and mountains' },
-      { name: 'Galapagos', image: 'null', alt: 'Galapagos wildlife' },
-      { name: 'Northern Europe', image: 'null', alt: 'Northern Europe waterfront' }
+      { name: 'Caribbean',  alt: 'Caribbean turquoise waters' },
+      { name: 'Mediterranean',  alt: 'Mediterranean coastline' },
+      { name: 'Alaska',  alt: 'Alaska glaciers and mountains' },
+      { name: 'Galapagos',  alt: 'Galapagos wildlife' },
+      { name: 'Northern Europe',  alt: 'Northern Europe waterfront' }
     ],
 
     // Kids Club section
@@ -812,7 +812,7 @@ export const cruiseLines = [
     description: 'Fred. Olsen offers intimate cruising on smaller ships with friendly British service and access to smaller ports that larger ships cannot reach. Family-owned for five generations, they specialise in no-fly cruises from multiple UK regional ports including Southampton, Liverpool, Newcastle, Dover, and Edinburgh.',
     category: 'mainstream',
     featured: true, // Important for UK market
-    image: 'null',
+    
     logo: null, // Logo to be uploaded to CRM
     
     // Why Choose section - benefit cards
@@ -851,11 +851,11 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'British Isles', image: 'null', alt: 'British Isles coastline' },
-      { name: 'Norwegian Fjords', image: 'null', alt: 'Norwegian fjord landscape' },
-      { name: 'Scandinavia', image: 'null', alt: 'Scandinavian coastline' },
-      { name: 'Baltic Capitals', image: 'null', alt: 'Colourful Baltic waterfront' },
-      { name: 'Canary Islands', image: 'null', alt: 'Canary Islands volcanic landscape' }
+      { name: 'British Isles',  alt: 'British Isles coastline' },
+      { name: 'Norwegian Fjords',  alt: 'Norwegian fjord landscape' },
+      { name: 'Scandinavia',  alt: 'Scandinavian coastline' },
+      { name: 'Baltic Capitals',  alt: 'Colourful Baltic waterfront' },
+      { name: 'Canary Islands',  alt: 'Canary Islands volcanic landscape' }
     ],
 
     // Kids Club section - Adults-only (16+)
@@ -936,7 +936,7 @@ export const cruiseLines = [
     description: 'Holland America Line combines classic elegance with modern amenities, offering enriching destination experiences and refined dining. With over 150 years of heritage, their mid-sized ships provide the perfect balance between intimacy and variety, particularly excelling in Alaska and world cruise itineraries.',
     category: 'premium',
     featured: true, // Upgraded to featured as per user priority
-    image: 'null',
+    
     logo: null, // Logo to be uploaded to CRM
     
     // Why Choose section - benefit cards
@@ -975,11 +975,11 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'Alaska', image: 'null', alt: 'Alaska glacier and mountains' },
-      { name: 'Canada & New England', image: 'null', alt: 'Canadian coastline' },
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean turquoise waters' },
-      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastal village' },
-      { name: 'Northern Europe', image: 'null', alt: 'Northern Europe colourful waterfront' }
+      { name: 'Alaska',  alt: 'Alaska glacier and mountains' },
+      { name: 'Canada & New England',  alt: 'Canadian coastline' },
+      { name: 'Caribbean',  alt: 'Caribbean turquoise waters' },
+      { name: 'Mediterranean',  alt: 'Mediterranean coastal village' },
+      { name: 'Northern Europe',  alt: 'Northern Europe colourful waterfront' }
     ],
 
     // Kids Club section
@@ -1073,7 +1073,7 @@ export const cruiseLines = [
     description: 'Marella Cruises, part of TUI UK, offers exceptional value all-inclusive cruising with flights, drinks, and gratuities included. With both family-friendly and adults-only ships, Marella makes cruising simple with a truly hassle-free experience.',
     category: 'mainstream',
     featured: true, // Popular UK cruise line
-    image: 'null',
+    
     logo: null, // Logo to be uploaded to CRM
     
     // Why Choose section - benefit cards
@@ -1112,11 +1112,11 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastal village' },
-      { name: 'Canary Islands', image: 'null', alt: 'Canary Islands volcanic landscape' },
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean palm tree beach' },
-      { name: 'Norwegian Fjords', image: 'null', alt: 'Norwegian fjord landscape' },
-      { name: 'Adriatic', image: 'null', alt: 'Croatian coastline' }
+      { name: 'Mediterranean',  alt: 'Mediterranean coastal village' },
+      { name: 'Canary Islands',  alt: 'Canary Islands volcanic landscape' },
+      { name: 'Caribbean',  alt: 'Caribbean palm tree beach' },
+      { name: 'Norwegian Fjords',  alt: 'Norwegian fjord landscape' },
+      { name: 'Adriatic',  alt: 'Croatian coastline' }
     ],
 
     // Kids Club section
@@ -1208,7 +1208,7 @@ export const cruiseLines = [
     description: 'Virgin Voyages offers an adults-only, design-forward cruise experience that challenges traditional cruising conventions.',
     category: 'contemporary',
     featured: true,
-    image: 'null',
+    
     logo: null, // Logo to be uploaded to CRM
     // Why Choose section - benefit cards
     whyChoose: [
@@ -1246,10 +1246,10 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean turquoise waters' },
-      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastline' },
-      { name: 'Australia', image: 'null', alt: 'Australian coastline' },
-      { name: 'New Zealand', image: 'null', alt: 'New Zealand landscape' }
+      { name: 'Caribbean',  alt: 'Caribbean turquoise waters' },
+      { name: 'Mediterranean',  alt: 'Mediterranean coastline' },
+      { name: 'Australia',  alt: 'Australian coastline' },
+      { name: 'New Zealand',  alt: 'New Zealand landscape' }
     ],
 
     // Kids Club section - Adults-only (18+)
@@ -1317,7 +1317,7 @@ export const cruiseLines = [
     description: 'Viking offers destination-focused ocean and river cruises for curious travellers who want to explore the world thoughtfully. With elegant Scandinavian design, adults-only ships, and enriching cultural experiences, Viking has redefined what cruising can be.',
     category: 'luxury',
     featured: true,
-    image: 'null',
+    
     logo: null, // Logo to be uploaded to CRM
     
     // Why Choose section - benefit cards
@@ -1356,11 +1356,11 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'Europe Rivers', image: 'null', alt: 'European river landscape' },
-      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastal village' },
-      { name: 'Scandinavia', image: 'null', alt: 'Scandinavian coastline' },
-      { name: 'Baltic', image: 'null', alt: 'Baltic capital waterfront' },
-      { name: 'Antarctica', image: 'null', alt: 'Antarctic expedition landscape' }
+      { name: 'Europe Rivers',  alt: 'European river landscape' },
+      { name: 'Mediterranean',  alt: 'Mediterranean coastal village' },
+      { name: 'Scandinavia',  alt: 'Scandinavian coastline' },
+      { name: 'Baltic',  alt: 'Baltic capital waterfront' },
+      { name: 'Antarctica',  alt: 'Antarctic expedition landscape' }
     ],
 
     // Kids Club section - Adults-only (18+)
@@ -1442,7 +1442,7 @@ export const cruiseLines = [
     description: 'Seabourn delivers ultra-luxury cruising on intimate ships with exceptional service, all-inclusive luxury, and unique destinations. With all ocean-front suites, open bars, and a crew-to-guest ratio that ensures personalised attention, Seabourn represents the pinnacle of cruise luxury.',
     category: 'ultra-luxury',
     featured: true,
-    image: 'null',
+    
     logo: null, // Logo to be uploaded to CRM
     
     // Why Choose section - benefit cards
@@ -1481,11 +1481,11 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'Antarctica', image: 'null', alt: 'Antarctic expedition' },
-      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean luxury coastline' },
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean paradise' },
-      { name: 'Arctic', image: 'null', alt: 'Arctic expedition' },
-      { name: 'South Pacific', image: 'null', alt: 'South Pacific luxury destination' }
+      { name: 'Antarctica',  alt: 'Antarctic expedition' },
+      { name: 'Mediterranean',  alt: 'Mediterranean luxury coastline' },
+      { name: 'Caribbean',  alt: 'Caribbean paradise' },
+      { name: 'Arctic',  alt: 'Arctic expedition' },
+      { name: 'South Pacific',  alt: 'South Pacific luxury destination' }
     ],
 
     // Kids Club section - Adults-focused (no dedicated kids clubs)
@@ -1569,7 +1569,7 @@ export const cruiseLines = [
     description: 'Princess Cruises offers award-winning MedallionClass technology for a personalised cruise experience with innovative service. Known for their Alaska expertise, romantic destinations, and the famous Movies Under the Stars poolside cinema.',
     category: 'premium',
     featured: true,
-    image: 'null',
+    
     logo: null, // Logo to be uploaded to CRM
     
     // Why Choose section - benefit cards
@@ -1608,11 +1608,11 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'Alaska', image: 'null', alt: 'Alaska glacier scenery' },
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean beach paradise' },
-      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastal town' },
-      { name: 'Hawaii', image: 'null', alt: 'Hawaiian volcanic coastline' },
-      { name: 'Europe', image: 'null', alt: 'European coastline' }
+      { name: 'Alaska',  alt: 'Alaska glacier scenery' },
+      { name: 'Caribbean',  alt: 'Caribbean beach paradise' },
+      { name: 'Mediterranean',  alt: 'Mediterranean coastal town' },
+      { name: 'Hawaii',  alt: 'Hawaiian volcanic coastline' },
+      { name: 'Europe',  alt: 'European coastline' }
     ],
 
     // Kids Club section
@@ -1706,7 +1706,7 @@ export const cruiseLines = [
     description: 'Azamara specializes in destination-intensive cruising with longer stays, more overnights, and night touring in unique ports. Their boutique ships carry just 600-700 guests to smaller harbours that larger ships cannot access.',
     category: 'luxury',
     featured: true,
-    image: 'null',
+    
     logo: null, // Logo to be uploaded to CRM
     
     // Why Choose section - benefit cards
@@ -1745,11 +1745,11 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean harbour village' },
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean paradise' },
-      { name: 'South America', image: 'null', alt: 'South American coastline' },
-      { name: 'Asia', image: 'null', alt: 'Asian temple at sunset' },
-      { name: 'Australia', image: 'null', alt: 'Australian coastline' }
+      { name: 'Mediterranean',  alt: 'Mediterranean harbour village' },
+      { name: 'Caribbean',  alt: 'Caribbean paradise' },
+      { name: 'South America',  alt: 'South American coastline' },
+      { name: 'Asia',  alt: 'Asian temple at sunset' },
+      { name: 'Australia',  alt: 'Australian coastline' }
     ],
 
     // Kids Club section - Adults-focused (no dedicated kids clubs)
@@ -1832,7 +1832,7 @@ export const cruiseLines = [
     description: 'Cunard offers timeless elegance aboard the world\'s most iconic ocean liners, including Queen Mary 2, Queen Victoria, and Queen Elizabeth.',
     category: 'premium',
     featured: true,
-    image: 'null',
+    
     logo: null, // Logo to be uploaded to CRM
     // Why Choose section - benefit cards
     whyChoose: [
@@ -1870,11 +1870,11 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'Transatlantic', image: 'null', alt: 'Transatlantic crossing' },
-      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean coastline' },
-      { name: 'Northern Europe', image: 'null', alt: 'Northern Europe waterfront' },
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean turquoise waters' },
-      { name: 'World Cruises', image: 'null', alt: 'World cruise itinerary' }
+      { name: 'Transatlantic',  alt: 'Transatlantic crossing' },
+      { name: 'Mediterranean',  alt: 'Mediterranean coastline' },
+      { name: 'Northern Europe',  alt: 'Northern Europe waterfront' },
+      { name: 'Caribbean',  alt: 'Caribbean turquoise waters' },
+      { name: 'World Cruises',  alt: 'World cruise itinerary' }
     ],
 
     // Kids Club section
@@ -1951,7 +1951,7 @@ export const cruiseLines = [
     description: 'Aurora Expeditions offers adventure expedition cruises to the world\'s most remote destinations. With small ships, expert expedition teams, and a focus on active exploration, Aurora delivers authentic polar and adventure experiences.',
     category: 'expedition',
     featured: true,
-    image: 'null',
+    
     logo: null, // Logo to be uploaded to CRM
     
     // Why Choose section - benefit cards
@@ -1990,11 +1990,11 @@ export const cruiseLines = [
 
     // Destination images for grid
     destinationImages: [
-      { name: 'Antarctica', image: 'null', alt: 'Antarctic ice and penguins' },
-      { name: 'Arctic', image: 'null', alt: 'Arctic polar landscape' },
-      { name: 'Kimberley', image: 'null', alt: 'Australian Kimberley coastline' },
-      { name: 'Galapagos', image: 'null', alt: 'Galapagos wildlife' },
-      { name: 'Pacific Islands', image: 'null', alt: 'Pacific island paradise' }
+      { name: 'Antarctica',  alt: 'Antarctic ice and penguins' },
+      { name: 'Arctic',  alt: 'Arctic polar landscape' },
+      { name: 'Kimberley',  alt: 'Australian Kimberley coastline' },
+      { name: 'Galapagos',  alt: 'Galapagos wildlife' },
+      { name: 'Pacific Islands',  alt: 'Pacific island paradise' }
     ],
 
     // Kids Club section - Junior Explorer programme (8+ years)
@@ -2085,7 +2085,7 @@ export const cruiseLines = [
     description: 'Hurtigruten has been exploring the Norwegian coast since 1893 and is now the world leader in expedition cruising. From the Arctic to Antarctica, their purpose-built expedition ships deliver authentic exploration experiences with expert teams.',
     category: 'expedition',
     featured: true,
-    image: 'null',
+    
     logo: null,
     
     // Why Choose section - benefit cards
@@ -2124,11 +2124,11 @@ export const cruiseLines = [
     
     // Destination images for grid
     destinationImages: [
-      { name: 'Norwegian Fjords', image: 'null', alt: 'Norwegian fjord landscape' },
-      { name: 'Antarctica', image: 'null', alt: 'Antarctic ice and penguins' },
-      { name: 'Arctic', image: 'null', alt: 'Arctic polar landscape' },
-      { name: 'Greenland', image: 'null', alt: 'Greenland icebergs' },
-      { name: 'Alaska', image: 'null', alt: 'Alaska glacier scenery' }
+      { name: 'Norwegian Fjords',  alt: 'Norwegian fjord landscape' },
+      { name: 'Antarctica',  alt: 'Antarctic ice and penguins' },
+      { name: 'Arctic',  alt: 'Arctic polar landscape' },
+      { name: 'Greenland',  alt: 'Greenland icebergs' },
+      { name: 'Alaska',  alt: 'Alaska glacier scenery' }
     ],
 
     // Kids Club section - Junior Explorer programme (7+ years)
@@ -2205,7 +2205,7 @@ export const cruiseLines = [
     description: 'Silversea delivers the finest ultra-luxury cruise experiences with intimate ships, all-inclusive fares, and butler service in every suite. Their expedition ships bring luxury to the world\'s most remote destinations.',
     category: 'ultra-luxury',
     featured: true,
-    image: 'null',
+    
     logo: null,
     
     // Why Choose section - benefit cards
@@ -2244,11 +2244,11 @@ export const cruiseLines = [
     
     // Destination images for grid
     destinationImages: [
-      { name: 'Antarctica', image: 'null', alt: 'Antarctic ice and penguins' },
-      { name: 'Galapagos', image: 'null', alt: 'Galapagos wildlife' },
-      { name: 'Mediterranean', image: 'null', alt: 'Mediterranean luxury coastline' },
-      { name: 'Arctic', image: 'null', alt: 'Arctic polar landscape' },
-      { name: 'Caribbean', image: 'null', alt: 'Caribbean paradise' }
+      { name: 'Antarctica',  alt: 'Antarctic ice and penguins' },
+      { name: 'Galapagos',  alt: 'Galapagos wildlife' },
+      { name: 'Mediterranean',  alt: 'Mediterranean luxury coastline' },
+      { name: 'Arctic',  alt: 'Arctic polar landscape' },
+      { name: 'Caribbean',  alt: 'Caribbean paradise' }
     ],
 
     // Kids Club section - Adults-focused (no dedicated kids clubs)
@@ -2320,7 +2320,7 @@ export const cruiseLines = [
     description: 'Ponant combines French elegance with expedition expertise aboard their fleet of small luxury ships. From polar regions to tropical islands, Ponant delivers refined exploration with an unmistakable French touch.',
     category: 'luxury-expedition',
     featured: true,
-    image: 'null',
+    
     logo: null,
     
     whyChoose: [

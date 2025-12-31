@@ -157,15 +157,16 @@ function CruiseLinePage() {
       />
 
       {/* Section 1: Hero */}
+      {/* All images managed via Admin → Images → Cruise Lines & Ships */}
       <section className="cruise-line-hero-section">
         <div className="cruise-line-hero-wrapper">
-      <HeroSection
+          <HeroSection
             title={`${cruiseLine.name} Cruises | Ships, Kids Clubs & Loyalty Guide 2026`}
             subtitle={cruiseLine.tagline}
             image={null}
             imageAlt=""
-        size="md"
-        align="left"
+            size="md"
+            align="left"
             primaryCta={{ label: `Call Free ${siteConfig.phone}`, href: `tel:${siteConfig.phone}` }}
             secondaryCta={{ label: `Find ${cruiseLine.name} Cruises`, to: '/find-a-cruise' }}
           />
@@ -178,6 +179,7 @@ function CruiseLinePage() {
       </section>
 
       {/* Section 2: Why Choose [Line] - Image Cards */}
+      {/* Images: why-choose-1 through why-choose-6 (one per card, upload via Admin → Images → Cruise Lines & Ships) */}
       {cruiseLine.whyChoose && cruiseLine.whyChoose.length > 0 && (
         <section className="cruise-line-section">
           <div className="container">
@@ -212,6 +214,7 @@ function CruiseLinePage() {
       )}
 
       {/* Section 3: Our Fleet - Carousel */}
+      {/* Ship card images: Upload via Admin → Images → Cruise Lines & Ships → Select Cruise Line → Ship Card Images */}
       {cruiseLine.ships && cruiseLine.ships.length > 0 && (
         <section className="cruise-line-section section-alt">
           <div className="container">
@@ -267,8 +270,9 @@ function CruiseLinePage() {
       )}
 
       {/* Section 5: Families & Kids - ALWAYS SHOW */}
+      {/* Images: families-kids-1, families-kids-2 (upload via Admin → Images → Cruise Lines & Ships) */}
       <section className="cruise-line-section section-alt">
-          <div className="container">
+        <div className="container">
           <div className="families-kids-content">
             <div className="families-kids-images">
               <div className="families-kids-image">
@@ -311,28 +315,28 @@ function CruiseLinePage() {
                   <p>{cruiseLine.kidsClub.intro}</p>
                   {cruiseLine.kidsClub.ageGroups && (
                     <div className="kids-club-table">
-                              <DataTable
-                                columns={[
-                                  { key: 'age', label: 'Age' },
+                      <DataTable
+                        columns={[
+                          { key: 'age', label: 'Age' },
                           { key: 'club', label: 'Club Name' },
-                                  { key: 'morning', label: 'Morning' },
-                                  { key: 'afternoon', label: 'Afternoon' },
-                                  { key: 'evening', label: 'Evening' }
-                                ]}
-                                rows={cruiseLine.kidsClub.ageGroups}
-                                variant="striped"
-                                compact
-                              />
-                            </div>
+                          { key: 'morning', label: 'Morning' },
+                          { key: 'afternoon', label: 'Afternoon' },
+                          { key: 'evening', label: 'Evening' }
+                        ]}
+                        rows={cruiseLine.kidsClub.ageGroups}
+                        variant="striped"
+                        compact
+                      />
+                    </div>
                   )}
                 </>
               ) : (
                 <p>{cruiseLine.name} welcomes families with dedicated kids' facilities and family-friendly activities.</p>
               )}
             </div>
-            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
       {/* Section 6: Loyalty Programme - ALWAYS SHOW */}
       <section className="cruise-line-section">
@@ -345,19 +349,19 @@ function CruiseLinePage() {
                   <p>{cruiseLine.loyaltyProgram.intro}</p>
                   {cruiseLine.loyaltyProgram.tiers && (
                     <div className="loyalty-table">
-                              <DataTable
-                                columns={[
-                                  { key: 'tier', label: 'Tier' },
-                                  { key: 'points', label: 'Points' },
+                      <DataTable
+                        columns={[
+                          { key: 'tier', label: 'Tier' },
+                          { key: 'points', label: 'Points' },
                           { key: 'benefits', label: 'Benefits' }
-                                ]}
-                                rows={cruiseLine.loyaltyProgram.tiers}
-                                variant="striped"
-                                compact
-                              />
+                        ]}
+                        rows={cruiseLine.loyaltyProgram.tiers}
+                        variant="striped"
+                        compact
+                      />
                     </div>
                   )}
-                              {cruiseLine.loyaltyProgram.pointsInfo && (
+                  {cruiseLine.loyaltyProgram.pointsInfo && (
                     <div className="loyalty-key-benefits">
                       <h3>Key Benefits</h3>
                       <p>{cruiseLine.loyaltyProgram.pointsInfo}</p>
@@ -371,9 +375,9 @@ function CruiseLinePage() {
                 </>
               )}
             </div>
-            </div>
           </div>
-        </section>
+        </div>
+      </section>
 
       {/* Section 7: FAQ - SEO Gold */}
       <section className="cruise-line-section section-alt">

@@ -1,10 +1,46 @@
+import { useState, useEffect } from 'react';
 import { cruiseLines } from '../data/cruiseLines';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader } from '../components/ui';
-import { getCruiseLineCard } from '../utils/assetHelpers';
+import { getCruiseLineImageUrl } from '../config/assetUrls';
+import { getImageUrlFromDb } from '../utils/imageLoader';
 import './CruiseLinesPage.css';
+
+/**
+ * Cruise Line Card Component with Database-Backed Image
+ * Fetches image from database, falls back to constructed URL
+ * All images are managed via Admin → Images → Cruise Lines & Ships
+ */
+function CruiseLineCard({ cruiseLine }) {
+  const [imageUrl, setImageUrl] = useState(getCruiseLineImageUrl(cruiseLine.slug, 'card'));
+
+  useEffect(() => {
+    if (!cruiseLine.slug) return;
+    
+    const fallback = getCruiseLineImageUrl(cruiseLine.slug, 'card');
+    setImageUrl(fallback); // Show fallback immediately
+    
+    getImageUrlFromDb('cruise-line', cruiseLine.slug, 'card', fallback)
+      .then(url => setImageUrl(url))
+      .catch(() => setImageUrl(fallback));
+  }, [cruiseLine.slug]);
+
+  return (
+    <Card key={cruiseLine.id} to={`/cruise-lines/${cruiseLine.slug}`} variant="default">
+      <Card.Image 
+        src={imageUrl}
+        alt={cruiseLine.name}
+        aspectRatio="3/2"
+      />
+      <Card.Content>
+        <Card.Title as="h3">{cruiseLine.name}</Card.Title>
+        <Card.Description>{cruiseLine.tagline}</Card.Description>
+      </Card.Content>
+    </Card>
+  );
+}
 
 function CruiseLinesPage() {
   // Group cruise lines by category
@@ -33,17 +69,7 @@ function CruiseLinesPage() {
   const renderCruiseLineCards = (lines) => (
     <div className="grid grid-3">
       {lines.map((cruiseLine) => (
-        <Card key={cruiseLine.id} to={`/cruise-lines/${cruiseLine.slug}`} variant="default">
-          <Card.Image 
-            src={getCruiseLineCard(cruiseLine.slug)} 
-            alt={cruiseLine.name}
-            aspectRatio="3/2"
-          />
-          <Card.Content>
-            <Card.Title as="h3">{cruiseLine.name}</Card.Title>
-            <Card.Description>{cruiseLine.tagline}</Card.Description>
-          </Card.Content>
-        </Card>
+        <CruiseLineCard key={cruiseLine.id} cruiseLine={cruiseLine} />
       ))}
     </div>
   );
