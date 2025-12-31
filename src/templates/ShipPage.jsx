@@ -1,6 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { X } from 'lucide-react';
 import SEO from '../components/SEO';
 import { siteConfig } from '../config/siteConfig';
 import { hasConsent, loadScriptsWithConsent } from '../utils/consentManager';
@@ -77,23 +76,6 @@ function ShipPage() {
     ? `//www.widgety.co.uk/widgets/ugPj5zR1QMRisywLk13B/ships/${slug}.widget?preview-nav=false&results-nav=false&tabs=false&search=false&hide-buttons=true&navigation=false`
     : '//www.widgety.co.uk/widgets/ugPj5zR1QMRisywLk13B.widget?preview-nav=false&results-nav=false&tabs=false&search=false';
 
-  // Close button handler - closes window/tab if opened in new tab, otherwise navigates back
-  const handleClose = () => {
-    // Check if opened in new window/tab
-    if (window.opener || window.history.length <= 1) {
-      // If opened in new tab, try to close it
-      window.close();
-      // Fallback: navigate to home if close fails (some browsers block window.close())
-      setTimeout(() => {
-        if (document.visibilityState === 'visible') {
-          navigate('/');
-        }
-      }, 100);
-    } else {
-      // Navigate back if opened in same tab
-      navigate(-1);
-    }
-  };
 
   // SEO data
   const seoTitle = shipName ? `${shipName} | Ship Information & Deck Plans` : 'Ship Information';
@@ -108,26 +90,6 @@ function ShipPage() {
         description={seoDescription}
         canonical={`https://www.limitlesscruises.com/ships/${slug}`}
       />
-
-      {/* Header with Close Button */}
-      <header className="ship-page-header">
-        <div className="container">
-          <div className="ship-page-header-content">
-            <div className="ship-page-title">
-              <h1>{shipName || 'Ship Information'}</h1>
-              <p className="ship-page-subtitle">Deck Plans, Staterooms & Itineraries</p>
-            </div>
-            <button
-              className="ship-page-close-btn"
-              onClick={handleClose}
-              aria-label="Close ship information page"
-              title="Close (or press Escape)"
-            >
-              <X size={24} />
-            </button>
-          </div>
-        </div>
-      </header>
 
       {/* Widget Section */}
       <section className="ship-widget-section">
@@ -153,17 +115,16 @@ function ShipPage() {
             </div>
           ) : scriptsLoaded ? (
             <div className="ship-widget-container">
-              {/* Overlay to hide top navigation buttons */}
-              <div className="ship-widget-overlay"></div>
               <iframe 
                 className="widgety-cruise-tour-search" 
                 frameBorder="0" 
-                height="940" 
+                height="3000" 
                 preview-nav="false" 
                 results-nav="false" 
                 src={widgetyIframeSrc}
                 tabs="false"
                 width="100%"
+                scrolling="no"
                 title={`${shipName} - Ship Information`}
               />
             </div>
@@ -188,9 +149,9 @@ function ShipPage() {
               <a href={`tel:${siteConfig.phone}`} className="btn btn-primary">
                 Call {siteConfig.phone}
               </a>
-              <button onClick={handleClose} className="btn btn-outline">
-                Close
-              </button>
+              <a href="/find-a-cruise" className="btn btn-outline">
+                Search Cruises
+              </a>
             </div>
           </div>
         </div>

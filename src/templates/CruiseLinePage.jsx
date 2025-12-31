@@ -3,6 +3,8 @@ import { getCruiseLineBySlug } from '../data/cruiseLines';
 import { getTravelNewsByCruiseLine } from '../services/travelNewsAPI';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
+import HeroSection from '../components/HeroSection';
+import ContactForm from '../components/ContactForm';
 import { Button, Card, SectionHeader, Accordion, DataTable } from '../components/ui';
 import NewsCard from '../components/NewsCard';
 import { useEffect, useState } from 'react';
@@ -69,7 +71,8 @@ function CruiseLinePage() {
   const [cruiseLineNews, setCruiseLineNews] = useState([]);
   const [loadingNews, setLoadingNews] = useState(true);
 
-  // Logo not needed in header anymore - removed
+  // Load cruise line hero image for header
+  const { imageUrl: heroImage } = useCruiseLineImage(cruiseLine?.slug || '', 'hero', cruiseLine?.name || '');
 
   // Fetch cruise line news
   useEffect(() => {
@@ -128,15 +131,17 @@ function CruiseLinePage() {
         structuredData={structuredData}
       />
 
-      {/* Header Section - Simple Text Only */}
-      <section className="cruise-line-header-section">
-        <div className="container">
-          <div className="cruise-line-header">
-            <h1 className="cruise-line-header-title">{cruiseLine.name}</h1>
-            <p className="cruise-line-header-subtitle">{cruiseLine.description}</p>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section - Colored Background, Left Aligned */}
+      <HeroSection
+        title={cruiseLine.name}
+        subtitle={cruiseLine.description}
+        image={heroImage}
+        imageAlt={`${cruiseLine.name} cruise line`}
+        size="md"
+        align="left"
+        primaryCta={{ label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone}` }}
+        secondaryCta={{ label: 'Find a Cruise', to: '/find-a-cruise' }}
+      />
 
       {/* Development Disclaimer */}
       <section className="section">
@@ -229,17 +234,6 @@ function CruiseLinePage() {
                   </div>
                 )}
 
-                {/* Destinations Section */}
-                {cruiseLine.destinations && cruiseLine.destinations.length > 0 && (
-                  <div className="destinations-section mt-12">
-                    <h3 className="section-subtitle">Popular Destinations</h3>
-                    <div className="destinations-list">
-                      {cruiseLine.destinations.map((destination, index) => (
-                        <span key={index} className="destination-tag">{destination}</span>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
 
               {/* Sidebar */}
@@ -499,17 +493,6 @@ function CruiseLinePage() {
                   }).filter(Boolean)}
                 </div>
 
-                {/* Destinations */}
-                {cruiseLine.destinations && cruiseLine.destinations.length > 0 && !hasDestinationImages && (
-                  <div className="destinations-section mt-12">
-                    <h3 className="section-subtitle">Popular Destinations</h3>
-                    <div className="destinations-list">
-                      {cruiseLine.destinations.map((destination, index) => (
-                        <span key={index} className="destination-tag">{destination}</span>
-                      ))}
-                    </div>
-                  </div>
-                )}
               </div>
 
               <aside className="cruise-line-sidebar">
@@ -587,21 +570,27 @@ function SidebarContent({ cruiseLine }) {
           />
         </div>
       )}
-      
+
+      {/* Contact Form */}
       <div className="sidebar-card">
-        <h3 className="sidebar-title">Book Your {cruiseLine.shortName} Cruise</h3>
+        <h3 className="sidebar-title">Get in Touch</h3>
         <p className="sidebar-text">
-          Get expert advice and the best prices on {cruiseLine.name} cruises from your dedicated cruise consultant.
+          Send us a message and we'll get back to you as soon as possible.
         </p>
-        <div className="sidebar-cta">
-          <Button href={`tel:${siteConfig.phone}`} variant="primary" fullWidth>
-            Call {siteConfig.phone}
-          </Button>
-          <Button to="/contact" variant="outline" fullWidth>
-            Request a Quote
-          </Button>
-        </div>
+        <ContactForm context={`cruise-line-${cruiseLine.slug}`} />
       </div>
+
+      {/* Popular Destinations */}
+      {cruiseLine.destinations && cruiseLine.destinations.length > 0 && (
+        <div className="sidebar-card">
+          <h3 className="sidebar-title">Popular Destinations</h3>
+          <div className="destinations-list">
+            {cruiseLine.destinations.map((destination, index) => (
+              <span key={index} className="destination-tag">{destination}</span>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Suitable For */}
       {cruiseLine.suitableFor && cruiseLine.suitableFor.length > 0 && (

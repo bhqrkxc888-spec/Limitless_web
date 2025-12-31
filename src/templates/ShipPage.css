@@ -9,108 +9,25 @@
 }
 
 /* ========================================
-   HEADER
-   ======================================== */
-
-.ship-page-header {
-  background-color: var(--clr-surface);
-  border-bottom: 1px solid var(--clr-border);
-  padding: var(--space-6) 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.ship-page-header-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-}
-
-.ship-page-title h1 {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--clr-primary);
-  margin: 0 0 var(--space-1);
-}
-
-.ship-page-subtitle {
-  font-size: var(--font-size-sm);
-  color: var(--clr-text-muted);
-  margin: 0;
-}
-
-.ship-page-close-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border: 1px solid var(--clr-border);
-  border-radius: var(--radius-full);
-  background-color: var(--clr-surface);
-  color: var(--clr-text-main);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  flex-shrink: 0;
-}
-
-.ship-page-close-btn:hover {
-  background-color: var(--clr-bg-alt);
-  border-color: var(--clr-primary);
-  color: var(--clr-primary);
-}
-
-.ship-page-close-btn:active {
-  transform: scale(0.95);
-}
-
-/* ========================================
    WIDGET SECTION
    ======================================== */
 
 .ship-widget-section {
-  padding: var(--space-8) 0;
-  min-height: 600px;
+  padding: 0;
+  min-height: 100vh;
 }
 
 .ship-widget-container {
   width: 100%;
-  border: 1px solid var(--clr-border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
+  overflow: visible;
   background-color: var(--clr-surface);
-  box-shadow: var(--shadow-md);
-  position: relative;
-}
-
-/* Overlay to hide top navigation buttons and search elements */
-/* Positioned to hide search UI but preserve hero image */
-.ship-widget-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 180px; /* Cover search/navigation but allow hero image to show */
-  background: linear-gradient(
-    to bottom,
-    var(--clr-surface) 0%,
-    var(--clr-surface) 60%,
-    transparent 100%
-  );
-  z-index: 10;
-  pointer-events: none;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 
 .ship-widget-container iframe {
   display: block;
   width: 100%;
   border: none;
-  position: relative;
-  z-index: 1;
+  overflow: hidden;
 }
 
 /* Widget Loading State */
@@ -226,29 +143,8 @@
    ======================================== */
 
 @media (max-width: 767px) {
-  .ship-page-header-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-3);
-  }
-
-  .ship-page-close-btn {
-    position: absolute;
-    top: var(--space-6);
-    right: var(--space-4);
-  }
-
-  .ship-page-title h1 {
-    font-size: var(--font-size-xl);
-    padding-right: 60px; /* Space for close button */
-  }
-
-  .ship-widget-section {
-    padding: var(--space-4) 0;
-  }
-
   .ship-widget-container iframe {
-    height: 600px;
+    height: 2500px;
   }
 
   .ship-page-cta-buttons {

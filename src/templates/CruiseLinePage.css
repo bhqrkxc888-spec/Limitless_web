@@ -8,35 +8,8 @@
 }
 
 /* ========================================
-   HEADER SECTION (Simple Text Only)
+   HEADER SECTION (Uses HeroSection component)
    ======================================== */
-
-.cruise-line-header-section {
-  background: var(--clr-bg);
-  padding: var(--space-12) 0;
-  border-bottom: 1px solid var(--clr-border);
-}
-
-.cruise-line-header {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.cruise-line-header-title {
-  font-size: var(--font-size-5xl);
-  font-weight: var(--font-weight-bold);
-  color: var(--clr-primary);
-  margin: 0 0 var(--space-4);
-  line-height: var(--line-height-tight);
-}
-
-.cruise-line-header-subtitle {
-  font-size: var(--font-size-xl);
-  color: var(--clr-text-main);
-  line-height: var(--line-height-relaxed);
-  margin: 0;
-}
 
 /* ========================================
    GRID LAYOUTS
@@ -235,6 +208,11 @@
   background-color: var(--clr-secondary);
   color: white;
   border-color: var(--clr-secondary);
+}
+
+/* Destinations in Sidebar */
+.sidebar-card .destinations-list {
+  margin-top: var(--space-3);
 }
 
 /* ========================================
