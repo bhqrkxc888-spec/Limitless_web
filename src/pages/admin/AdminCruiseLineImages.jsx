@@ -280,10 +280,6 @@ function AdminCruiseLineImages() {
                             size="small" 
                           />
                         </div>
-                        <div className="image-card-description">
-                          <p><strong>{card.title}</strong></p>
-                          <p>{card.description}</p>
-                        </div>
                         <p className="image-card-specs">
                           600×400px (displays at 400×300px, 2x for retina), WebP format
                         </p>
@@ -390,7 +386,7 @@ function AdminCruiseLineImages() {
                     <p style={{ color: 'var(--admin-text-muted)', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
                       Ship card images are required for the fleet carousel on the cruise line page. Each ship needs a card image (600×400px, displays at 400×300px). Ships without card images will show "Image Coming Soon" placeholder.
                     </p>
-                    <div className="images-grid">
+                    <div className="images-grid ship-cards-grid">
                       {[...shipList]
                         .sort((a, b) => {
                           const nameA = (typeof a === 'string' ? a : a.name || '').toLowerCase();
@@ -523,8 +519,26 @@ function AdminCruiseLineImages() {
       <style>{`
         .entity-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-          gap: 1rem;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1.5rem;
+        }
+
+        @media (max-width: 1400px) {
+          .entity-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+        }
+
+        @media (max-width: 1024px) {
+          .entity-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (max-width: 767px) {
+          .entity-grid {
+            grid-template-columns: 1fr;
+          }
         }
 
         .entity-card {
