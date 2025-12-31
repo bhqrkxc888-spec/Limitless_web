@@ -698,8 +698,6 @@ function SidebarContent({ cruiseLine }) {
  * Displays exterior, interior, entertainment, food, and cabin images
  */
 function CruiseLineImageGallery({ cruiseLineSlug, cruiseLineName }) {
-  const imageTypes = ['exterior', 'interior', 'entertainment', 'food', 'cabin'];
-  
   // Call all hooks at the top level (React hooks rules)
   const exteriorImage = useCruiseLineImage(cruiseLineSlug, 'exterior', cruiseLineName);
   const interiorImage = useCruiseLineImage(cruiseLineSlug, 'interior', cruiseLineName);
