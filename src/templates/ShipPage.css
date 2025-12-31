@@ -1,0 +1,258 @@
+/* ========================================
+   SHIP PAGE TEMPLATE
+   Dedicated ship information page
+   ======================================== */
+
+.ship-page {
+  min-height: 100vh;
+  background-color: var(--clr-bg);
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+
+.ship-page-header {
+  background-color: var(--clr-surface);
+  border-bottom: 1px solid var(--clr-border);
+  padding: var(--space-6) 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.ship-page-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.ship-page-title h1 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-primary);
+  margin: 0 0 var(--space-1);
+}
+
+.ship-page-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-muted);
+  margin: 0;
+}
+
+.ship-page-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-full);
+  background-color: var(--clr-surface);
+  color: var(--clr-text-main);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.ship-page-close-btn:hover {
+  background-color: var(--clr-bg-alt);
+  border-color: var(--clr-primary);
+  color: var(--clr-primary);
+}
+
+.ship-page-close-btn:active {
+  transform: scale(0.95);
+}
+
+/* ========================================
+   WIDGET SECTION
+   ======================================== */
+
+.ship-widget-section {
+  padding: var(--space-8) 0;
+  min-height: 600px;
+}
+
+.ship-widget-container {
+  width: 100%;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--clr-surface);
+  box-shadow: var(--shadow-md);
+}
+
+.ship-widget-container iframe {
+  display: block;
+  width: 100%;
+  border: none;
+}
+
+/* Widget Loading State */
+.widget-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-12);
+  min-height: 400px;
+  text-align: center;
+}
+
+.widget-loading .loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--clr-border);
+  border-top: 4px solid var(--clr-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: var(--space-4);
+}
+
+.widget-loading p {
+  color: var(--clr-text-muted);
+  font-size: var(--font-size-base);
+}
+
+/* Widget Consent Prompt */
+.widget-consent-prompt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: var(--space-8);
+}
+
+.widget-consent-content {
+  max-width: 500px;
+  text-align: center;
+  background-color: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-lg);
+}
+
+.widget-consent-content h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-primary);
+  margin: 0 0 var(--space-4);
+}
+
+.widget-consent-content p {
+  color: var(--clr-text-main);
+  line-height: var(--line-height-relaxed);
+  margin: 0 0 var(--space-4);
+}
+
+.widget-consent-note {
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-muted);
+}
+
+.widget-consent-content .btn {
+  margin-top: var(--space-4);
+}
+
+/* ========================================
+   FOOTER CTA
+   ======================================== */
+
+.ship-page-footer {
+  background-color: var(--clr-bg-alt);
+  border-top: 1px solid var(--clr-border);
+  padding: var(--space-10) 0;
+}
+
+.ship-page-cta {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.ship-page-cta h2 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-primary);
+  margin: 0 0 var(--space-3);
+}
+
+.ship-page-cta p {
+  color: var(--clr-text-main);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  margin: 0 0 var(--space-6);
+}
+
+.ship-page-cta-buttons {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ship-page-cta-buttons .btn {
+  min-width: 160px;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 767px) {
+  .ship-page-header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .ship-page-close-btn {
+    position: absolute;
+    top: var(--space-6);
+    right: var(--space-4);
+  }
+
+  .ship-page-title h1 {
+    font-size: var(--font-size-xl);
+    padding-right: 60px; /* Space for close button */
+  }
+
+  .ship-widget-section {
+    padding: var(--space-4) 0;
+  }
+
+  .ship-widget-container iframe {
+    height: 600px;
+  }
+
+  .ship-page-cta-buttons {
+    flex-direction: column;
+  }
+
+  .ship-page-cta-buttons .btn {
+    width: 100%;
+  }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ========================================
+   KEYBOARD SHORTCUTS
+   ======================================== */
+
+.ship-page:focus-within .ship-page-close-btn {
+  outline: 2px solid var(--clr-primary);
+  outline-offset: 2px;
+}
+

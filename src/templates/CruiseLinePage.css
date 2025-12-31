@@ -257,6 +257,22 @@
   box-shadow: var(--shadow-card);
 }
 
+/* Logo Card in Sidebar */
+.sidebar-logo-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+  background-color: var(--clr-bg-alt);
+}
+
+.cruise-line-logo-sidebar {
+  max-width: 100%;
+  height: auto;
+  max-height: 120px;
+  object-fit: contain;
+}
+
 .sidebar-title {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);

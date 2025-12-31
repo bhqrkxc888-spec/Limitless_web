@@ -76,6 +76,7 @@ const TravelNewsTagPage = lazy(() => import('./pages/TravelNewsTagPage'))
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
 const FAQPage = lazy(() => import('./pages/FAQPage'))
 const TestimonialsPage = lazy(() => import('./pages/TestimonialsPage'))
+const ShipPage = lazy(() => import('./templates/ShipPage'))
 
 // Admin Monitoring Dashboard
 const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'))
@@ -212,6 +213,9 @@ function AppLayout() {
             {/* Cruise Lines - Published */}
             <Route path="/cruise-lines" element={<CruiseLinesPage />} />
             <Route path="/cruise-lines/:slug" element={<CruiseLinePage />} />
+            
+            {/* Ships - Published */}
+            <Route path="/ships/:slug" element={<ShipPage />} />
             
             {/* Destinations - Published */}
             <Route path="/destinations" element={<DestinationsPage />} />

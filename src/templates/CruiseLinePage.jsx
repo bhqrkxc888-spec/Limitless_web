@@ -9,7 +9,8 @@ import NewsCard from '../components/NewsCard';
 import { useEffect, useState } from 'react';
 import { getOgImage } from '../utils/imageHelpers';
 import { getCruiseLineHero } from '../utils/assetHelpers';
-import { getWidgetyShipUrl } from '../utils/widgetyHelpers';
+import { shipNameToSlug } from '../utils/widgetyHelpers';
+import { useCruiseLineImage } from '../hooks/useImageUrl';
 import './CruiseLinePage.css';
 
 /**
@@ -69,6 +70,9 @@ function CruiseLinePage() {
     description: cruiseLine.description,
     url: `https://www.limitlesscruises.com/cruise-lines/${cruiseLine.slug}`
   };
+
+  // Load cruise line logo
+  const { imageUrl: logoUrl } = useCruiseLineImage(cruiseLine.slug, 'logo', cruiseLine.name);
 
   // Check what extended content is available
   const hasWhyChoose = cruiseLine.whyChoose && cruiseLine.whyChoose.length > 0;
@@ -164,13 +168,14 @@ function CruiseLinePage() {
                     <h3 className="section-subtitle">The Fleet</h3>
                     <div className="ships-list">
                       {cruiseLine.ships.map((ship, index) => {
-                        // Generate Widgety ship URL (opens in new tab to avoid iframe performance issues)
-                        const widgetyUrl = getWidgetyShipUrl(ship);
+                        // Generate ship page URL (opens in new tab)
+                        const shipSlug = shipNameToSlug(ship);
+                        const shipPageUrl = `/ships/${shipSlug}`;
                         
                         return (
                           <a
                             key={index}
-                            href={widgetyUrl}
+                            href={shipPageUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="ship-badge ship-badge-link"
@@ -442,13 +447,14 @@ function CruiseLinePage() {
 
                 <div className="ships-list ships-list-large">
                   {cruiseLine.ships.map((ship, index) => {
-                    // Generate Widgety ship URL (opens in new tab to avoid iframe performance issues)
-                    const widgetyUrl = getWidgetyShipUrl(ship);
+                    // Generate ship page URL (opens in new tab)
+                    const shipSlug = shipNameToSlug(ship);
+                    const shipPageUrl = `/ships/${shipSlug}`;
                     
                     return (
                       <a
                         key={index}
-                        href={widgetyUrl}
+                        href={shipPageUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="ship-badge ship-badge-link"
@@ -539,8 +545,22 @@ function CruiseLinePage() {
  * Reused in multiple places
  */
 function SidebarContent({ cruiseLine }) {
+  // Load logo for sidebar
+  const { imageUrl: logoUrl } = useCruiseLineImage(cruiseLine.slug, 'logo', cruiseLine.name);
+  
   return (
     <>
+      {/* Logo in Sidebar (if available) */}
+      {logoUrl && !logoUrl.includes('placeholder') && (
+        <div className="sidebar-card sidebar-logo-card">
+          <img 
+            src={logoUrl} 
+            alt={`${cruiseLine.name} logo`}
+            className="cruise-line-logo-sidebar"
+          />
+        </div>
+      )}
+      
       <div className="sidebar-card">
         <h3 className="sidebar-title">Book Your {cruiseLine.shortName} Cruise</h3>
         <p className="sidebar-text">
