@@ -259,25 +259,21 @@ export function useShipImage(cruiseLineSlug, shipSlug, type = 'card', shipName =
           if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
             setImageUrl(url);
             setIsPlaceholder(false);
+          } else if (directUrl && directUrl !== PLACEHOLDER_IMAGE) {
+            // Database didn't have it, but images are uploaded to this exact path
+            // Use direct URL - Card.Image component will handle 404 errors gracefully
+            setImageUrl(directUrl);
+            setIsPlaceholder(false);
           } else {
-            // Database didn't have it, but direct URL might work (images uploaded to this path)
-            // Use direct URL but mark as placeholder initially - Card.Image will handle 404s
-            if (directUrl && directUrl !== PLACEHOLDER_IMAGE) {
-              setImageUrl(directUrl);
-              // Don't assume it exists - let Card.Image component handle errors
-              // If image loads successfully, component will show it; if 404, it will show placeholder
-              setIsPlaceholder(false); // Try to show it, component handles errors
-            } else {
-              setIsPlaceholder(true);
-            }
+            setIsPlaceholder(true);
           }
           setLoading(false);
         })
         .catch(() => {
-          // Database query failed, use direct URL fallback
+          // Database query failed, use direct URL fallback if available
           if (directUrl && directUrl !== PLACEHOLDER_IMAGE) {
             setImageUrl(directUrl);
-            setIsPlaceholder(false); // Try to show it, component handles errors
+            setIsPlaceholder(false);
           } else {
             setIsPlaceholder(true);
           }

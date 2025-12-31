@@ -9,6 +9,7 @@ import Carousel from '../components/Carousel';
 import { shipNameToSlug } from '../utils/widgetyHelpers';
 import { useCruiseLineImage, useShipImage } from '../hooks/useImageUrl';
 import { getCruiseLinePlaceholderImage } from '../utils/placeholderImages';
+import { PLACEHOLDER_IMAGE } from '../config/assetUrls';
 import './CruiseLinePage.css';
 
 /**
@@ -40,15 +41,15 @@ function destinationNameToSlug(name) {
  * Images are loaded from: WEB_cruise-lines/{cruiseLineSlug}/ships/{shipSlug}/card.webp
  * All images managed via Admin → Images → Cruise Lines & Ships
  */
-function FleetShipCard({ ship, cruiseLineSlug, shipSlug, shipPageUrl, cruiseLineName }) {
+function FleetShipCard({ ship, cruiseLineSlug, shipSlug, cruiseLineName }) {
   const { imageUrl: shipImageUrl, isPlaceholder } = useShipImage(cruiseLineSlug, shipSlug, 'card', ship);
   
-  // Show image if we have a valid URL (not the default placeholder)
-  // Card.Image component will handle 404 errors gracefully
-  const hasImage = shipImageUrl && 
-                   shipImageUrl !== '/images/placeholders/hero.svg' && 
-                   !shipImageUrl.includes('placeholder') &&
-                   !isPlaceholder;
+  // Show image if we have a valid URL (not a placeholder)
+  // Card.Image component handles 404 errors gracefully
+  const hasImage = !isPlaceholder && 
+                   shipImageUrl && 
+                   shipImageUrl !== PLACEHOLDER_IMAGE && 
+                   !shipImageUrl.includes('placeholder');
   
   return (
     <Card 
@@ -219,14 +220,12 @@ function CruiseLinePage() {
             <Carousel itemsToShow={3} layout="grid">
               {cruiseLine.ships.map((ship, index) => {
                 const shipSlug = shipNameToSlug(ship);
-                const shipPageUrl = `/ships/${shipSlug}`;
                 return (
                   <FleetShipCard
                     key={index}
                     ship={ship}
                     cruiseLineSlug={cruiseLine.slug}
                     shipSlug={shipSlug}
-                    shipPageUrl={shipPageUrl}
                     cruiseLineName={cruiseLine.name}
                   />
                 );
