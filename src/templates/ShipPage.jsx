@@ -71,10 +71,10 @@ function ShipPage() {
   }, []);
 
   // Generate Widgety iframe src URL for this ship
-  // Direct widget URL with parameters to hide navigation
-  // Parameters: preview-nav=false, results-nav=false, tabs=false, search=false
+  // Try URL parameters in addition to iframe attributes
+  // Widgety may support: preview-nav, results-nav, tabs, search, hide-buttons, etc.
   const widgetyIframeSrc = slug 
-    ? `//www.widgety.co.uk/widgets/ugPj5zR1QMRisywLk13B/ships/${slug}.widget?preview-nav=false&results-nav=false&tabs=false&search=false&hide-header=true`
+    ? `//www.widgety.co.uk/widgets/ugPj5zR1QMRisywLk13B/ships/${slug}.widget?preview-nav=false&results-nav=false&tabs=false&search=false&hide-buttons=true&navigation=false`
     : '//www.widgety.co.uk/widgets/ugPj5zR1QMRisywLk13B.widget?preview-nav=false&results-nav=false&tabs=false&search=false';
 
   // Close button handler - closes window/tab if opened in new tab, otherwise navigates back
@@ -161,6 +161,12 @@ function ShipPage() {
                 results-nav="false" 
                 src={widgetyIframeSrc}
                 tabs="false"
+                search="false"
+                hide-search="true"
+                show-holiday-button="false"
+                show-ship-button="false"
+                hide-buttons="true"
+                navigation="false"
                 width="100%"
                 title={`${shipName} - Ship Information`}
               />
