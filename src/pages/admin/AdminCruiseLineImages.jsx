@@ -223,9 +223,21 @@ function AdminCruiseLineImages() {
               <h2 style={{ color: 'var(--admin-text)', fontSize: '1.5rem', marginBottom: '0.5rem', marginTop: '1.5rem' }}>
                 Required Images
               </h2>
-              <p style={{ color: 'var(--admin-text-muted)', fontSize: '0.875rem', marginBottom: '2rem' }}>
+              <p style={{ color: 'var(--admin-text-muted)', fontSize: '0.875rem', marginBottom: '1rem' }}>
                 All images below are required for the cruise line page to display correctly. Upload at 600×400px (displays at 400×300px, 2x for retina), WebP format.
               </p>
+              <div style={{
+                background: 'var(--admin-bg-tertiary)',
+                border: '1px solid var(--admin-border)',
+                borderLeft: '3px solid var(--admin-primary)',
+                borderRadius: '8px',
+                padding: '1rem',
+                marginBottom: '2rem'
+              }}>
+                <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--admin-text)', lineHeight: '1.5' }}>
+                  <strong>📸 Image Note:</strong> These images are general representations of {selectedCruiseLine.name}'s offerings and facilities. Individual ships may vary in specific features, layouts, and amenities. Use representative images that best showcase the cruise line's overall experience.
+                </p>
+              </div>
 
               {/* Logo */}
               <div className="images-grid" style={{ marginBottom: '2rem' }}>
@@ -383,9 +395,21 @@ function AdminCruiseLineImages() {
                       <Ship size={20} style={{ verticalAlign: 'middle', marginRight: '0.5rem' }} />
                       Ship Card Images (Required) - {shipList.length} Ships
                     </h3>
-                    <p style={{ color: 'var(--admin-text-muted)', fontSize: '0.875rem', marginBottom: '1.5rem' }}>
+                    <p style={{ color: 'var(--admin-text-muted)', fontSize: '0.875rem', marginBottom: '1rem' }}>
                       Ship card images are required for the fleet carousel on the cruise line page. Each ship needs a card image (600×400px, displays at 400×300px). Ships without card images will show "Image Coming Soon" placeholder.
                     </p>
+                    <div style={{
+                      background: 'var(--admin-bg-tertiary)',
+                      border: '1px solid var(--admin-border)',
+                      borderLeft: '3px solid var(--admin-primary)',
+                      borderRadius: '8px',
+                      padding: '1rem',
+                      marginBottom: '1.5rem'
+                    }}>
+                      <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--admin-text)', lineHeight: '1.5' }}>
+                        <strong>🚢 Ship Images:</strong> Upload images of the actual ship when available. If a specific ship image is not available, use a representative image from the same class or similar ship, and note that features may vary by ship.
+                      </p>
+                    </div>
                     <div className="images-grid ship-cards-grid">
                       {[...shipList]
                         .sort((a, b) => {

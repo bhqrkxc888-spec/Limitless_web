@@ -476,6 +476,17 @@ function CruiseLinePage() {
           </div>
         </div>
       </section>
+
+      {/* Disclaimer Section */}
+      <section className="cruise-line-section">
+        <div className="container">
+          <div className="cruise-line-disclaimer">
+            <p>
+              <strong>Please Note:</strong> The images, facilities, and amenities shown on this page are general representations of {cruiseLine.name}'s offerings. Individual ships may vary in specific features, layouts, dining venues, entertainment options, and onboard facilities. Ship features, activities, bars, restaurants, and amenities may differ between vessels within the fleet. For specific details about a particular ship, please contact us or refer to individual ship information pages.
+            </p>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

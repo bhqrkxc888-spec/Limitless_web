@@ -259,6 +259,35 @@
 }
 
 /* ========================================
+   DISCLAIMER SECTION
+   ======================================== */
+
+.cruise-line-disclaimer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-4) 0;
+}
+
+.cruise-line-disclaimer p {
+  margin: 0;
+  font-size: 14px;
+  line-height: var(--line-height-relaxed);
+  color: var(--clr-text-muted);
+  text-align: center;
+}
+
+.cruise-line-disclaimer strong {
+  color: var(--clr-text-main);
+  font-weight: var(--font-weight-medium);
+}
+
+@media (max-width: 767px) {
+  .cruise-line-disclaimer p {
+    font-size: 13px;
+  }
+}
+
+/* ========================================
    DESTINATIONS PILLS (Top 5, Single Row)
    ======================================== */
 
