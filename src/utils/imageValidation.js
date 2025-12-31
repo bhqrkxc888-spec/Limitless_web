@@ -82,14 +82,16 @@ export const DIMENSION_SPECS = {
   'cruise-line-logo': { width: 400, height: 120, flexible: true },
   'cruise-line-hero': { width: 1920, height: 1080 },
   'cruise-line-card': { width: 600, height: 400 },
-  // Cruise line gallery images (for "Why Choose" cards and "Families & Kids" section - displays at 400×300px)
-  // 6 images for 6 benefit cards - each cruise line needs images specific to their whyChoose content
-  'cruise-line-exterior': { width: 600, height: 400 },
-  'cruise-line-interior': { width: 600, height: 400 },
-  'cruise-line-entertainment': { width: 600, height: 400 },
-  'cruise-line-food': { width: 600, height: 400 },
-  'cruise-line-cabin': { width: 600, height: 400 },
-  'cruise-line-pool': { width: 600, height: 400 }, // For pool/activities/value/service cards
+  // Cruise line "Why Choose" images (one per benefit card - 6 images total)
+  'cruise-line-why-choose-1': { width: 600, height: 400 },
+  'cruise-line-why-choose-2': { width: 600, height: 400 },
+  'cruise-line-why-choose-3': { width: 600, height: 400 },
+  'cruise-line-why-choose-4': { width: 600, height: 400 },
+  'cruise-line-why-choose-5': { width: 600, height: 400 },
+  'cruise-line-why-choose-6': { width: 600, height: 400 },
+  // Cruise line "Families & Kids" images (2 specific images)
+  'cruise-line-families-kids-1': { width: 600, height: 400 }, // Pool / Family Entertainment
+  'cruise-line-families-kids-2': { width: 600, height: 400 }, // Kids Entertainment / Kids Club
   
   // Ship images
   'ship-hero': { width: 1920, height: 800 },

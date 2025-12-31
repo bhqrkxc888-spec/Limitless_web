@@ -31,6 +31,25 @@
   gap: 1.5rem;
 }
 
+/* Images grid - 3 columns on desktop, 2 on tablet, 1 on mobile */
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .images-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .images-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Image card */
 .image-card {
   background: var(--admin-bg-secondary);
@@ -58,6 +77,31 @@
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--admin-text);
+}
+
+/* Image card description - visible text, not tooltip */
+.image-card-description {
+  margin: 0.75rem 0;
+  padding: 0.75rem;
+  background: var(--admin-bg-tertiary);
+  border-radius: 6px;
+  border-left: 3px solid var(--admin-primary);
+}
+
+.image-card-description p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--admin-text);
+  line-height: 1.5;
+}
+
+.image-card-description p:first-child {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.image-card-description p:not(:first-child) {
+  color: var(--admin-text-muted);
 }
 
 .badge {

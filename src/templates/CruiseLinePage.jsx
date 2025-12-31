@@ -34,39 +34,6 @@ function destinationNameToSlug(name) {
     .replace(/^-|-$/g, '') + '-cruises';
 }
 
-/**
- * Helper: Map whyChoose item to gallery image type
- */
-function mapWhyChooseToImage(whyChooseItem, galleryImages) {
-  const title = whyChooseItem.title.toLowerCase();
-  const description = whyChooseItem.description.toLowerCase();
-  
-  // Priority mapping - specific to cruise line content
-  if (title.includes('fleet') || title.includes('ship') || description.includes('ship') || description.includes('mega-ship')) {
-    return galleryImages.exterior || galleryImages.interior || null;
-  }
-  if (title.includes('dining') || title.includes('food') || title.includes('restaurant') || title.includes('culinary') || description.includes('dining') || description.includes('food') || description.includes('cuisine')) {
-    return galleryImages.food || null;
-  }
-  if (title.includes('entertainment') || title.includes('show') || title.includes('theatre') || description.includes('entertainment') || description.includes('broadway')) {
-    return galleryImages.entertainment || null;
-  }
-  if (title.includes('cabin') || title.includes('suite') || title.includes('stateroom') || description.includes('cabin') || description.includes('suite')) {
-    return galleryImages.cabin || null;
-  }
-  if (title.includes('kids') || title.includes('club') || title.includes('family') || description.includes('kids') || description.includes('children')) {
-    return galleryImages.entertainment || galleryImages.interior || null;
-  }
-  if (title.includes('pool') || title.includes('water') || title.includes('island') || title.includes('beach') || description.includes('pool') || description.includes('waterpark') || description.includes('island')) {
-    return galleryImages.pool || galleryImages.exterior || null;
-  }
-  if (title.includes('value') || title.includes('service') || title.includes('luxury') || title.includes('all-inclusive') || description.includes('value') || description.includes('service')) {
-    return galleryImages.pool || galleryImages.interior || null;
-  }
-  
-  // Default fallback
-  return galleryImages.interior || galleryImages.exterior || galleryImages.pool || null;
-}
 
 /**
  * Ship Card Component for Fleet Carousel
@@ -115,13 +82,18 @@ function CruiseLinePage() {
   const { slug } = useParams();
   const cruiseLine = getCruiseLineBySlug(slug);
 
-  // Load all gallery images - MUST be called before early return (React hooks rules)
-  const exteriorImage = useCruiseLineImage(cruiseLine?.slug || '', 'exterior', cruiseLine?.name || '');
-  const interiorImage = useCruiseLineImage(cruiseLine?.slug || '', 'interior', cruiseLine?.name || '');
-  const entertainmentImage = useCruiseLineImage(cruiseLine?.slug || '', 'entertainment', cruiseLine?.name || '');
-  const foodImage = useCruiseLineImage(cruiseLine?.slug || '', 'food', cruiseLine?.name || '');
-  const cabinImage = useCruiseLineImage(cruiseLine?.slug || '', 'cabin', cruiseLine?.name || '');
-  const poolImage = useCruiseLineImage(cruiseLine?.slug || '', 'pool', cruiseLine?.name || '');
+  // Load all images - MUST be called before early return (React hooks rules)
+  // Why Choose images (one per card - 6 images)
+  const whyChoose1Image = useCruiseLineImage(cruiseLine?.slug || '', 'why-choose-1', cruiseLine?.name || '');
+  const whyChoose2Image = useCruiseLineImage(cruiseLine?.slug || '', 'why-choose-2', cruiseLine?.name || '');
+  const whyChoose3Image = useCruiseLineImage(cruiseLine?.slug || '', 'why-choose-3', cruiseLine?.name || '');
+  const whyChoose4Image = useCruiseLineImage(cruiseLine?.slug || '', 'why-choose-4', cruiseLine?.name || '');
+  const whyChoose5Image = useCruiseLineImage(cruiseLine?.slug || '', 'why-choose-5', cruiseLine?.name || '');
+  const whyChoose6Image = useCruiseLineImage(cruiseLine?.slug || '', 'why-choose-6', cruiseLine?.name || '');
+  // Families & Kids images (2 specific images)
+  const familiesKids1Image = useCruiseLineImage(cruiseLine?.slug || '', 'families-kids-1', cruiseLine?.name || '');
+  const familiesKids2Image = useCruiseLineImage(cruiseLine?.slug || '', 'families-kids-2', cruiseLine?.name || '');
+  // Logo
   const logoImage = useCruiseLineImage(cruiseLine?.slug || '', 'logo', cruiseLine?.name || '');
 
   // Handle cruise line not found
@@ -138,14 +110,15 @@ function CruiseLinePage() {
     );
   }
 
-  const galleryImages = {
-    exterior: exteriorImage.imageUrl,
-    interior: interiorImage.imageUrl,
-    entertainment: entertainmentImage.imageUrl,
-    food: foodImage.imageUrl,
-    cabin: cabinImage.imageUrl,
-    pool: poolImage.imageUrl
-  };
+  // Why Choose images array (direct mapping - one image per card)
+  const whyChooseImages = [
+    whyChoose1Image.imageUrl,
+    whyChoose2Image.imageUrl,
+    whyChoose3Image.imageUrl,
+    whyChoose4Image.imageUrl,
+    whyChoose5Image.imageUrl,
+    whyChoose6Image.imageUrl
+  ];
 
   // Check if adults-only
   const isAdultsOnly = cruiseLine.suitableFor?.some(item => 
@@ -206,15 +179,10 @@ function CruiseLinePage() {
             />
             <div className="why-choose-grid">
               {cruiseLine.whyChoose.map((item, index) => {
-                const matchedImage = mapWhyChooseToImage(item, galleryImages);
-                // Use placeholder if no valid image found
-                const imageUrl = (matchedImage && !matchedImage.includes('placeholder'))
-                  ? matchedImage
-                  : (galleryImages.interior && !galleryImages.interior.includes('placeholder'))
-                    ? galleryImages.interior
-                    : (galleryImages.exterior && !galleryImages.exterior.includes('placeholder'))
-                      ? galleryImages.exterior
-                      : getCruiseLinePlaceholderImage(cruiseLine.slug, 'card');
+                // Direct mapping - each card has its own specific image (why-choose-1, why-choose-2, etc.)
+                const imageUrl = (whyChooseImages[index] && !whyChooseImages[index].includes('placeholder'))
+                  ? whyChooseImages[index]
+                  : getCruiseLinePlaceholderImage(cruiseLine.slug, 'card');
                 
                 return (
                   <Card key={index} variant="default" className="why-choose-card">
@@ -223,11 +191,11 @@ function CruiseLinePage() {
                       alt={item.title}
                       aspectRatio="4/3"
                     />
-                  <Card.Content>
-                    <Card.Title as="h3">{item.title}</Card.Title>
-                    <Card.Description>{item.description}</Card.Description>
-                  </Card.Content>
-                </Card>
+                    <Card.Content>
+                      <Card.Title as="h3">{item.title}</Card.Title>
+                      <Card.Description>{item.description}</Card.Description>
+                    </Card.Content>
+                  </Card>
                 );
               })}
             </div>
@@ -295,65 +263,28 @@ function CruiseLinePage() {
           <div className="container">
           <div className="families-kids-content">
             <div className="families-kids-images">
-              {isAdultsOnly ? (
-                <>
-                  <div className="families-kids-image">
-                    <img 
-                      src={
-                        (galleryImages.interior && !galleryImages.interior.includes('placeholder')) 
-                          ? galleryImages.interior 
-                          : (galleryImages.exterior && !galleryImages.exterior.includes('placeholder'))
-                            ? galleryImages.exterior
-                            : getCruiseLinePlaceholderImage(cruiseLine.slug, 'card')
-                      } 
-                      alt="Adults-only relaxation"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                  </div>
-                  <div className="families-kids-image">
-                    <img 
-                      src={
-                        (galleryImages.exterior && !galleryImages.exterior.includes('placeholder'))
-                          ? galleryImages.exterior
-                          : (galleryImages.interior && !galleryImages.interior.includes('placeholder'))
-                            ? galleryImages.interior
-                            : getCruiseLinePlaceholderImage(cruiseLine.slug, 'card')
-                      } 
-                      alt="Adults-only pool area"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="families-kids-image">
-                    <img 
-                      src={
-                        (galleryImages.entertainment && !galleryImages.entertainment.includes('placeholder'))
-                          ? galleryImages.entertainment
-                          : (galleryImages.interior && !galleryImages.interior.includes('placeholder'))
-                            ? galleryImages.interior
-                            : getCruiseLinePlaceholderImage(cruiseLine.slug, 'card')
-                      } 
-                      alt="Kids club activities"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                </div>
-                  <div className="families-kids-image">
-                    <img 
-                      src={
-                        (galleryImages.interior && !galleryImages.interior.includes('placeholder'))
-                          ? galleryImages.interior
-                          : (galleryImages.entertainment && !galleryImages.entertainment.includes('placeholder'))
-                            ? galleryImages.entertainment
-                            : getCruiseLinePlaceholderImage(cruiseLine.slug, 'card')
-                      } 
-                      alt="Family-friendly facilities"
-                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                    />
-                  </div>
-                </>
-              )}
+              <div className="families-kids-image">
+                <img 
+                  src={
+                    (familiesKids1Image.imageUrl && !familiesKids1Image.imageUrl.includes('placeholder'))
+                      ? familiesKids1Image.imageUrl
+                      : getCruiseLinePlaceholderImage(cruiseLine.slug, 'card')
+                  } 
+                  alt={isAdultsOnly ? "Adults-only relaxation" : "Pool / Family Entertainment"}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </div>
+              <div className="families-kids-image">
+                <img 
+                  src={
+                    (familiesKids2Image.imageUrl && !familiesKids2Image.imageUrl.includes('placeholder'))
+                      ? familiesKids2Image.imageUrl
+                      : getCruiseLinePlaceholderImage(cruiseLine.slug, 'card')
+                  } 
+                  alt={isAdultsOnly ? "Adults-only pool area" : "Kids Entertainment / Kids Club"}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </div>
             </div>
             <div className="families-kids-text">
               <h2>Is {cruiseLine.name} Good for Families?</h2>
@@ -397,7 +328,7 @@ function CruiseLinePage() {
 
       {/* Section 6: Loyalty Programme - ALWAYS SHOW */}
       <section className="cruise-line-section">
-          <div className="container">
+        <div className="container">
           <div className="loyalty-content">
             <div className="loyalty-text">
               {cruiseLine.loyaltyProgram ? (
