@@ -77,9 +77,6 @@ function CruiseLinePage() {
   const [cruiseLineNews, setCruiseLineNews] = useState([]);
   const [loadingNews, setLoadingNews] = useState(true);
 
-  // Load cruise line hero image for header
-  const { imageUrl: heroImage } = useCruiseLineImage(cruiseLine?.slug || '', 'hero', cruiseLine?.name || '');
-
   // Fetch cruise line news
   useEffect(() => {
     if (!cruiseLine?.slug) return;
@@ -703,10 +700,21 @@ function SidebarContent({ cruiseLine }) {
 function CruiseLineImageGallery({ cruiseLineSlug, cruiseLineName }) {
   const imageTypes = ['exterior', 'interior', 'entertainment', 'food', 'cabin'];
   
-  const images = imageTypes.map(type => {
-    const { imageUrl, isPlaceholder } = useCruiseLineImage(cruiseLineSlug, type, cruiseLineName);
-    return { type, imageUrl, isPlaceholder, hasImage: !isPlaceholder && !imageUrl.includes('placeholder') };
-  });
+  // Call all hooks at the top level (React hooks rules)
+  const exteriorImage = useCruiseLineImage(cruiseLineSlug, 'exterior', cruiseLineName);
+  const interiorImage = useCruiseLineImage(cruiseLineSlug, 'interior', cruiseLineName);
+  const entertainmentImage = useCruiseLineImage(cruiseLineSlug, 'entertainment', cruiseLineName);
+  const foodImage = useCruiseLineImage(cruiseLineSlug, 'food', cruiseLineName);
+  const cabinImage = useCruiseLineImage(cruiseLineSlug, 'cabin', cruiseLineName);
+  
+  // Map hook results to image data
+  const images = [
+    { type: 'exterior', ...exteriorImage, hasImage: !exteriorImage.isPlaceholder && !exteriorImage.imageUrl.includes('placeholder') },
+    { type: 'interior', ...interiorImage, hasImage: !interiorImage.isPlaceholder && !interiorImage.imageUrl.includes('placeholder') },
+    { type: 'entertainment', ...entertainmentImage, hasImage: !entertainmentImage.isPlaceholder && !entertainmentImage.imageUrl.includes('placeholder') },
+    { type: 'food', ...foodImage, hasImage: !foodImage.isPlaceholder && !foodImage.imageUrl.includes('placeholder') },
+    { type: 'cabin', ...cabinImage, hasImage: !cabinImage.isPlaceholder && !cabinImage.imageUrl.includes('placeholder') }
+  ];
 
   // Only show gallery if at least one image exists
   const hasAnyImages = images.some(img => img.hasImage);
