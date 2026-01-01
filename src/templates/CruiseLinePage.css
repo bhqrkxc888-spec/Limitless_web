@@ -205,7 +205,8 @@
 }
 
 .kids-club-table {
-  margin-top: var(--space-6);
+  margin-top: var(--space-8);
+  width: 100%;
 }
 
 /* ========================================
@@ -323,7 +324,7 @@
    ======================================== */
 
 .cruise-line-faq {
-  max-width: 900px;
+  max-width: 100%;
   margin: var(--space-8) auto 0;
 }
 

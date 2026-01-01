@@ -303,30 +303,29 @@ function CruiseLinePage() {
                   </p>
                 </div>
               ) : cruiseLine.kidsClub ? (
-                <>
-                  <p>{cruiseLine.kidsClub.intro}</p>
-                  {cruiseLine.kidsClub.ageGroups && (
-                    <div className="kids-club-table">
-                      <DataTable
-                        columns={[
-                          { key: 'age', label: 'Age' },
-                          { key: 'club', label: 'Club Name' },
-                          { key: 'morning', label: 'Morning' },
-                          { key: 'afternoon', label: 'Afternoon' },
-                          { key: 'evening', label: 'Evening' }
-                        ]}
-                        rows={cruiseLine.kidsClub.ageGroups}
-                        variant="striped"
-                        compact
-                      />
-                    </div>
-                  )}
-                </>
+                <p>{cruiseLine.kidsClub.intro}</p>
               ) : (
                 <p>{cruiseLine.name} welcomes families with dedicated kids' facilities and family-friendly activities.</p>
               )}
             </div>
           </div>
+          {/* Kids Club Table - Full Width Below 2-Column Layout */}
+          {cruiseLine.kidsClub && cruiseLine.kidsClub.ageGroups && !isAdultsOnly && (
+            <div className="kids-club-table">
+              <DataTable
+                columns={[
+                  { key: 'age', label: 'Age' },
+                  { key: 'club', label: 'Club Name' },
+                  { key: 'morning', label: 'Morning' },
+                  { key: 'afternoon', label: 'Afternoon' },
+                  { key: 'evening', label: 'Evening' }
+                ]}
+                rows={cruiseLine.kidsClub.ageGroups}
+                variant="striped"
+                compact
+              />
+            </div>
+          )}
         </div>
       </section>
 
@@ -373,11 +372,11 @@ function CruiseLinePage() {
 
       {/* Section 7: FAQ - SEO Gold */}
       <section className="cruise-line-section section-alt">
-          <div className="container">
-            <SectionHeader
+        <div className="container">
+          <SectionHeader
             title={`Frequently Asked Questions about ${cruiseLine.name}`}
             subtitle="Everything you need to know before booking"
-              align="center"
+            align="center"
           />
           <div className="cruise-line-faq">
             <Accordion
@@ -457,8 +456,8 @@ function CruiseLinePage() {
               allowMultiple={true}
             />
           </div>
-          </div>
-        </section>
+        </div>
+      </section>
 
       {/* Section 8: CTA */}
       <section className="cruise-line-cta section-dark">

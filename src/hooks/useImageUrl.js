@@ -229,9 +229,15 @@ export function usePortGuideImage(slug, type = 'hero', portName = '', country = 
  * 4. Card.Image component handles 404 errors gracefully
  */
 export function useShipImage(cruiseLineSlug, shipSlug, type = 'card', shipName = '') {
-  const [imageUrl, setImageUrl] = useState(PLACEHOLDER_IMAGE);
+  // Compute direct URL immediately from props to avoid initial placeholder flash
+  // Images are uploaded to this exact path, so we can show it right away
+  const directUrl = (cruiseLineSlug && shipSlug) 
+    ? getShipImageUrl(cruiseLineSlug, shipSlug, type)
+    : PLACEHOLDER_IMAGE;
+  
+  const [imageUrl, setImageUrl] = useState(() => directUrl);
   const [loading, setLoading] = useState(true);
-  const [isPlaceholder, setIsPlaceholder] = useState(true);
+  const [isPlaceholder, setIsPlaceholder] = useState(() => !cruiseLineSlug || !shipSlug);
 
   useEffect(() => {
     if (!cruiseLineSlug || !shipSlug) {
@@ -242,44 +248,27 @@ export function useShipImage(cruiseLineSlug, shipSlug, type = 'card', shipName =
     }
 
     const entityId = `${cruiseLineSlug}/ships/${shipSlug}`;
+    const currentDirectUrl = getShipImageUrl(cruiseLineSlug, shipSlug, type);
     
-    // Construct direct URL as fallback (images are stored at this exact path in Supabase Storage)
-    const directUrl = getShipImageUrl(cruiseLineSlug, shipSlug, type);
+    // Set direct URL immediately (already set in initial state, but update if props changed)
+    setImageUrl(currentDirectUrl);
+    setIsPlaceholder(false);
     
-    // Import the placeholder generator
-    import('../utils/placeholderImages.js').then(({ getCruiseLinePlaceholderImage }) => {
-      // Start with cruise line placeholder as initial fallback (same pattern as other hooks)
-      const smartPlaceholder = getCruiseLinePlaceholderImage(cruiseLineSlug, 'card', '');
-      setImageUrl(smartPlaceholder);
-      
-      // Check database first (source of truth) with direct URL as fallback
-      getImageUrlFromDb('ship', entityId, type, directUrl)
-        .then(url => {
-          // Use URL if it's valid and not a placeholder
-          if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
-            setImageUrl(url);
-            setIsPlaceholder(false);
-          } else if (directUrl && directUrl !== PLACEHOLDER_IMAGE) {
-            // Database didn't have it, but images are uploaded to this exact path
-            // Use direct URL - Card.Image component will handle 404 errors gracefully
-            setImageUrl(directUrl);
-            setIsPlaceholder(false);
-          } else {
-            setIsPlaceholder(true);
-          }
-          setLoading(false);
-        })
-        .catch(() => {
-          // Database query failed, use direct URL fallback if available
-          if (directUrl && directUrl !== PLACEHOLDER_IMAGE) {
-            setImageUrl(directUrl);
-            setIsPlaceholder(false);
-          } else {
-            setIsPlaceholder(true);
-          }
-          setLoading(false);
-        });
-    });
+    // Check database in parallel (may have better URL or metadata)
+    // This happens in background and updates if database has different URL
+    getImageUrlFromDb('ship', entityId, type, currentDirectUrl)
+      .then(url => {
+        // If database has a valid URL that's different from direct URL, use it
+        if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE && url !== currentDirectUrl) {
+          setImageUrl(url);
+        }
+        // If database returned placeholder/direct URL, we already have direct URL set, so keep it
+        setLoading(false);
+      })
+      .catch(() => {
+        // Database query failed, but we already have direct URL set, so we're good
+        setLoading(false);
+      });
   }, [cruiseLineSlug, shipSlug, type, shipName]);
 
   return { imageUrl, loading, isPlaceholder };
