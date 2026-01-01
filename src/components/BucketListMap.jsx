@@ -9,40 +9,53 @@
  * - No route plotting - just markers
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useMemo } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { apiConfig } from '../config/apiConfig';
+import { logger } from '../utils/logger';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './BucketListMap.css';
 
-function BucketListMap({ itinerary, title }) {
+function BucketListMap({ itinerary }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const markers = useRef([]);
   const [currentStyle, setCurrentStyle] = useState('outdoors');
 
-  // Filter itinerary items that have coordinates
-  const locations = itinerary?.filter(item => 
-    item.coordinates && 
-    item.coordinates.lat && 
-    item.coordinates.lon &&
-    item.location &&
-    !item.location.toLowerCase().includes('at sea')
-  ) || [];
+  // Filter itinerary items that have coordinates - memoized to prevent unnecessary re-renders
+  const locations = useMemo(() => {
+    if (!itinerary || !Array.isArray(itinerary)) {
+      return [];
+    }
+    
+    return itinerary.filter(item => 
+      item.coordinates && 
+      typeof item.coordinates.lat === 'number' && 
+      typeof item.coordinates.lon === 'number' &&
+      item.location &&
+      typeof item.location === 'string' &&
+      !item.location.toLowerCase().includes('at sea')
+    );
+  }, [itinerary]);
 
   // Initialize map
   useEffect(() => {
     if (!apiConfig.mapbox.enabled || !apiConfig.mapbox.accessToken) {
-      console.warn('Mapbox not enabled or no access token');
+      logger.warn('BucketListMap: Mapbox not enabled or no access token');
       return;
     }
     
     if (locations.length === 0) {
-      console.warn('No locations with coordinates to display');
+      logger.warn('BucketListMap: No locations with coordinates to display');
       return;
     }
 
     if (map.current) return; // Initialize map only once
+    
+    if (!mapContainer.current) {
+      logger.warn('BucketListMap: Map container ref is not available');
+      return;
+    }
 
     mapboxgl.accessToken = apiConfig.mapbox.accessToken;
 
@@ -81,16 +94,31 @@ function BucketListMap({ itinerary, title }) {
     map.current.on('load', () => {
       // Add markers for each location
       locations.forEach((item, index) => {
-        const { lat, lon } = item.coordinates;
-        const dayNumber = item.day?.match(/^\d+/)?.[0] || (index + 1).toString();
+        if (!item.coordinates || !item.location) {
+          logger.warn('BucketListMap: Skipping item with missing coordinates or location', item);
+          return;
+        }
         
-        // Create popup
+        const { lat, lon } = item.coordinates;
+        
+        // Validate coordinates are numbers
+        if (typeof lat !== 'number' || typeof lon !== 'number' || isNaN(lat) || isNaN(lon)) {
+          logger.warn('BucketListMap: Invalid coordinates for location', item.location);
+          return;
+        }
+        
+        // Extract day number safely
+        const dayNumber = (typeof item.day === 'string' && item.day.match(/^\d+/)?.[0]) || (index + 1).toString();
+        const locationName = String(item.location || 'Unknown Location');
+        const description = item.description ? String(item.description) : '';
+        
+        // Create popup with escaped content
         const popup = new mapboxgl.Popup({ offset: 25 })
           .setHTML(`
             <div class="bucket-list-map-popup">
               <strong>Day ${dayNumber}</strong>
-              <h4>${item.location}</h4>
-              ${item.description ? `<p>${item.description}</p>` : ''}
+              <h4>${locationName}</h4>
+              ${description ? `<p>${description}</p>` : ''}
             </div>
           `);
 
@@ -138,6 +166,11 @@ function BucketListMap({ itinerary, title }) {
       light: 'mapbox://styles/mapbox/light-v11',
       dark: 'mapbox://styles/mapbox/dark-v11'
     };
+
+    if (!styleMap[style]) {
+      logger.warn('BucketListMap: Invalid map style requested', style);
+      return;
+    }
 
     map.current.setStyle(styleMap[style]);
     setCurrentStyle(style);

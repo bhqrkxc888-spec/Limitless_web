@@ -168,7 +168,6 @@ function BucketListExperiencePage() {
                       }>
                         <BucketListMap 
                           itinerary={experience.itinerary}
-                          title={experience.title}
                         />
                       </Suspense>
                     </div>
