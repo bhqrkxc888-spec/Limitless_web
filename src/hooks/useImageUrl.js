@@ -7,7 +7,6 @@ import { useState, useEffect } from 'react';
 import { getImageUrlFromDb } from '../utils/imageLoader';
 import { getDestinationImageUrl, getBucketListImageUrl, getCruiseLineImageUrl, getShipImageUrl } from '../config/assetUrls';
 import { PLACEHOLDER_IMAGE } from '../config/assetUrls';
-import { getDestinationForBucketList } from '../config/bucketListDestinationMapping';
 import { getImageSlugForDestination } from '../config/destinationSlugMapping';
 
 /**
@@ -63,7 +62,7 @@ export function useDestinationImage(slug, type = 'hero', destinationName = '') {
 /**
  * Hook to get bucket list image URL
  * Note: bucket-list uses 'id' as entityId in database, not slug
- * Automatically checks destination images if bucket list image not found (image sharing)
+ * Only uses bucket list-specific images (no image sharing)
  */
 export function useBucketListImage(id, type = 'hero', experienceName = '') {
   const [imageUrl, setImageUrl] = useState(PLACEHOLDER_IMAGE);
@@ -85,30 +84,11 @@ export function useBucketListImage(id, type = 'hero', experienceName = '') {
       
       const bucketListFallback = getBucketListImageUrl(id, type);
       
-      // First try bucket list images
-      getImageUrlFromDb('bucket-list', id, type, null)
-        .then(bucketListUrl => {
-          // If found in bucket list, use it
-          if (bucketListUrl && bucketListUrl !== PLACEHOLDER_IMAGE) {
-            setImageUrl(bucketListUrl);
-            setIsPlaceholder(false);
-            setLoading(false);
-            return;
-          }
-          
-          // Check if we can use destination images (image sharing)
-          const destinationSlug = getDestinationForBucketList(id);
-          if (destinationSlug) {
-            const destinationFallback = getDestinationImageUrl(destinationSlug, type);
-            return getImageUrlFromDb('destination', destinationSlug, type, destinationFallback);
-          }
-          
-          setIsPlaceholder(true);
-          return bucketListFallback;
-        })
+      // Only use bucket list-specific images (no sharing)
+      getImageUrlFromDb('bucket-list', id, type, bucketListFallback)
         .then(url => {
-          if (url && url !== smartPlaceholder) {
-            setImageUrl(url || bucketListFallback);
+          if (url && url !== PLACEHOLDER_IMAGE && url !== smartPlaceholder) {
+            setImageUrl(url);
             setIsPlaceholder(false);
           } else {
             setIsPlaceholder(true);

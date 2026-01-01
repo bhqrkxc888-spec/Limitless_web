@@ -1,6 +1,6 @@
 /**
  * Admin Bucket List Images Page
- * Manages bucket list experience images (hero, card, and gallery images)
+ * Manages bucket list experience images (hero, card, OG images, and gallery images)
  * Matches the destinations page layout exactly
  */
 
@@ -14,7 +14,6 @@ import StatusIndicator from '../../components/admin/StatusIndicator';
 import { supabase, getPublicUrl } from '../../lib/supabase';
 import { STORAGE_BUCKETS } from '../../config/supabaseConfig';
 import { bucketListExperiences } from '../../data/bucketList';
-import { getDestinationForBucketList } from '../../config/bucketListDestinationMapping';
 import './AdminImagesShared.css';
 
 function AdminBucketListImages() {
@@ -22,7 +21,6 @@ function AdminBucketListImages() {
   const { isAuthenticated, isLoading: authLoading, logout } = useAdminAuth();
   const [selectedExperience, setSelectedExperience] = useState(null);
   const [images, setImages] = useState({});
-  const [destinationImages, setDestinationImages] = useState({});
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -59,26 +57,6 @@ function AdminBucketListImages() {
       });
 
       setImages(imagesByExperience);
-
-      // Load destination images for sharing
-      const { data: destinationData } = await supabase
-        .from('site_images')
-        .select('*')
-        .eq('entity_type', 'destination')
-        .in('image_type', ['hero', 'card']);
-
-      const destImagesBySlug = {};
-      destinationData?.forEach(img => {
-        if (!destImagesBySlug[img.entity_id]) {
-          destImagesBySlug[img.entity_id] = {};
-        }
-        destImagesBySlug[img.entity_id][img.image_type] = {
-          url: getPublicUrl(img.bucket, img.path),
-          ...img
-        };
-      });
-
-      setDestinationImages(destImagesBySlug);
       setLastUpdated(Date.now());
     } catch (error) {
       console.error('Error loading images:', error);
@@ -99,41 +77,25 @@ function AdminBucketListImages() {
   };
 
   /**
-   * Get image for bucket list experience, checking destination images if not found
+   * Get image for bucket list experience (bucket list images only - no sharing)
    */
   const getImage = (experienceId, imageType) => {
-    // First check bucket list images
-    if (images[experienceId]?.[imageType]) {
-      return images[experienceId][imageType];
-    }
-    
-    // Check if we can use destination images
-    const destinationSlug = getDestinationForBucketList(experienceId);
-    if (destinationSlug && destinationImages[destinationSlug]?.[imageType]) {
-      return {
-        ...destinationImages[destinationSlug][imageType],
-        sharedFrom: 'destination',
-        sharedDestination: destinationSlug
-      };
-    }
-    
-    return null;
+    // Only return bucket list-specific images
+    return images[experienceId]?.[imageType] || null;
   };
 
   /**
    * Get status for bucket list experience
-   * Checks both bucket list images and destination fallback images
-   * Only shows warning if REQUIRED images have SEO issues, not for shared images
+   * Checks only bucket list-specific images (no sharing)
    */
   const getExperienceStatus = (experienceId) => {
     const hero = getImage(experienceId, 'hero');
     const card = getImage(experienceId, 'card');
     
-    // If missing both, return missing
+    // If missing both required images, return missing
     if (!hero || !card) return 'missing';
     
-    // Check SEO compliance for required images only
-    // Shared images are fine - don't flag as warning just for sharing
+    // Check SEO compliance for required images
     const hasWarnings = (hero && !hero.seo_compliant) || (card && !card.seo_compliant);
     return hasWarnings ? 'warning' : 'pass';
   };
@@ -175,7 +137,7 @@ function AdminBucketListImages() {
             Back to Image Management
           </Link>
           <h1 className="admin-page-title">Bucket List Experience Images</h1>
-          <p className="admin-page-subtitle">Manage hero and card images for all {experiences.length} bucket list experiences</p>
+          <p className="admin-page-subtitle">Manage hero, card, and OG images for all {experiences.length} bucket list experiences</p>
         </header>
 
         {loading ? (
@@ -201,19 +163,14 @@ function AdminBucketListImages() {
                   </div>
                   <p className="entity-card-stats">
                     {(() => {
-                      const destinationSlug = getDestinationForBucketList(experience.id);
-                      const hasHero = hero || (destinationSlug && destinationImages[destinationSlug]?.['hero']);
-                      const hasCard = card || (destinationSlug && destinationImages[destinationSlug]?.['card']);
                       const ogImage = getOgImage(experience.id);
-                      const heroIsShared = hero?.sharedFrom === 'destination' || (!hero && destinationSlug && destinationImages[destinationSlug]?.['hero']);
-                      const cardIsShared = card?.sharedFrom === 'destination' || (!card && destinationSlug && destinationImages[destinationSlug]?.['card']);
                       return (
                         <>
-                          <span className={hasHero ? (heroIsShared ? 'stat-warning' : 'stat-ok') : 'stat-missing'}>
-                            Hero {heroIsShared ? '(shared)' : ''}
+                          <span className={hero ? 'stat-ok' : 'stat-missing'}>
+                            Hero
                           </span>
-                          <span className={hasCard ? (cardIsShared ? 'stat-warning' : 'stat-ok') : 'stat-missing'}>
-                            Card {cardIsShared ? '(shared)' : ''}
+                          <span className={card ? 'stat-ok' : 'stat-missing'}>
+                            Card
                           </span>
                           {ogImage && (
                             <span className="stat-ok">OG</span>
@@ -241,31 +198,6 @@ function AdminBucketListImages() {
               {selectedExperience.duration} • {selectedExperience.tagline}
             </p>
 
-            {/* Check if images are shared from destination */}
-            {(() => {
-              const destinationSlug = getDestinationForBucketList(selectedExperience.id);
-              const hero = getImage(selectedExperience.id, 'hero');
-              const card = getImage(selectedExperience.id, 'card');
-              const isSharing = (hero?.sharedFrom === 'destination') || (card?.sharedFrom === 'destination');
-              
-              if (isSharing && destinationSlug) {
-                return (
-                  <div style={{
-                    background: 'var(--admin-bg-secondary)',
-                    border: '1px solid var(--admin-border)',
-                    borderRadius: '8px',
-                    padding: '1rem',
-                    marginBottom: '1.5rem',
-                    fontSize: '0.875rem',
-                    color: 'var(--admin-text-muted)'
-                  }}>
-                    <strong style={{ color: 'var(--admin-text)' }}>ℹ️ Image Sharing:</strong> This experience shares images with the <strong>{destinationSlug}</strong> destination. 
-                    Upload bucket list-specific images below to override, or continue using destination images.
-                  </div>
-                );
-              }
-              return null;
-            })()}
 
             <div className="images-list">
               {/* Hero Image */}
@@ -291,34 +223,18 @@ function AdminBucketListImages() {
                 </p>
                 {(() => {
                   const hero = getImage(selectedExperience.id, 'hero');
-                  const isShared = hero?.sharedFrom === 'destination';
                   
                   return (
-                    <>
-                      {isShared && (
-                        <div style={{
-                          background: 'rgba(59, 130, 246, 0.1)',
-                          border: '1px solid rgba(59, 130, 246, 0.3)',
-                          borderRadius: '6px',
-                          padding: '0.75rem',
-                          marginBottom: '1rem',
-                          fontSize: '0.8125rem',
-                          color: 'var(--admin-text-muted)'
-                        }}>
-                          📎 Currently using shared image from destination. Upload below to use bucket list-specific image.
-                        </div>
-                      )}
-                      <ImageUpload
-                        bucket={STORAGE_BUCKETS.CATEGORIES}
-                        entityType="bucket-list"
-                        entityId={selectedExperience.id}
-                        imageType="hero"
-                        suggestedAltText={`${selectedExperience.title} - Hero image`}
-                        existingImage={hero?.url}
-                        existingData={hero}
-                        onUploadComplete={handleUploadComplete}
-                      />
-                    </>
+                    <ImageUpload
+                      bucket={STORAGE_BUCKETS.CATEGORIES}
+                      entityType="bucket-list"
+                      entityId={selectedExperience.id}
+                      imageType="hero"
+                      suggestedAltText={`${selectedExperience.title} - Hero image`}
+                      existingImage={hero?.url}
+                      existingData={hero}
+                      onUploadComplete={handleUploadComplete}
+                    />
                   );
                 })()}
               </div>
@@ -346,34 +262,18 @@ function AdminBucketListImages() {
                 </p>
                 {(() => {
                   const card = getImage(selectedExperience.id, 'card');
-                  const isShared = card?.sharedFrom === 'destination';
                   
                   return (
-                    <>
-                      {isShared && (
-                        <div style={{
-                          background: 'rgba(59, 130, 246, 0.1)',
-                          border: '1px solid rgba(59, 130, 246, 0.3)',
-                          borderRadius: '6px',
-                          padding: '0.75rem',
-                          marginBottom: '1rem',
-                          fontSize: '0.8125rem',
-                          color: 'var(--admin-text-muted)'
-                        }}>
-                          📎 Currently using shared image from destination. Upload below to use bucket list-specific image.
-                        </div>
-                      )}
-                      <ImageUpload
-                        bucket={STORAGE_BUCKETS.CATEGORIES}
-                        entityType="bucket-list"
-                        entityId={selectedExperience.id}
-                        imageType="card"
-                        suggestedAltText={`${selectedExperience.title} - Card image`}
-                        existingImage={card?.url}
-                        existingData={card}
-                        onUploadComplete={handleUploadComplete}
-                      />
-                    </>
+                    <ImageUpload
+                      bucket={STORAGE_BUCKETS.CATEGORIES}
+                      entityType="bucket-list"
+                      entityId={selectedExperience.id}
+                      imageType="card"
+                      suggestedAltText={`${selectedExperience.title} - Card image`}
+                      existingImage={card?.url}
+                      existingData={card}
+                      onUploadComplete={handleUploadComplete}
+                    />
                   );
                 })()}
               </div>
