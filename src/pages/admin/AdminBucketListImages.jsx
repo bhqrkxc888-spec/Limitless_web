@@ -138,6 +138,13 @@ function AdminBucketListImages() {
     return hasWarnings ? 'warning' : 'pass';
   };
 
+  /**
+   * Get OG image for bucket list experience
+   */
+  const getOgImage = (experienceId) => {
+    return getImage(experienceId, 'og-image');
+  };
+
   // Show loading while checking auth
   if (authLoading || (!isAuthenticated && !authLoading)) {
     return (
@@ -197,6 +204,7 @@ function AdminBucketListImages() {
                       const destinationSlug = getDestinationForBucketList(experience.id);
                       const hasHero = hero || (destinationSlug && destinationImages[destinationSlug]?.['hero']);
                       const hasCard = card || (destinationSlug && destinationImages[destinationSlug]?.['card']);
+                      const ogImage = getOgImage(experience.id);
                       const heroIsShared = hero?.sharedFrom === 'destination' || (!hero && destinationSlug && destinationImages[destinationSlug]?.['hero']);
                       const cardIsShared = card?.sharedFrom === 'destination' || (!card && destinationSlug && destinationImages[destinationSlug]?.['card']);
                       return (
@@ -207,6 +215,9 @@ function AdminBucketListImages() {
                           <span className={hasCard ? (cardIsShared ? 'stat-warning' : 'stat-ok') : 'stat-missing'}>
                             Card {cardIsShared ? '(shared)' : ''}
                           </span>
+                          {ogImage && (
+                            <span className="stat-ok">OG</span>
+                          )}
                         </>
                       );
                     })()}
@@ -363,6 +374,46 @@ function AdminBucketListImages() {
                         onUploadComplete={handleUploadComplete}
                       />
                     </>
+                  );
+                })()}
+              </div>
+
+              {/* OG Image */}
+              <div className="admin-card image-card">
+                <div className="image-card-header">
+                  <div className="image-card-title">
+                    <h3>OG Image (Social Sharing)</h3>
+                    <span className="badge badge-optional">Optional</span>
+                  </div>
+                  {(() => {
+                    const ogImage = getOgImage(selectedExperience.id);
+                    return (
+                      <StatusIndicator 
+                        status={ogImage ? (ogImage.seo_compliant ? 'pass' : 'warning') : 'missing'} 
+                        size="small" 
+                      />
+                    );
+                  })()}
+                </div>
+                <p className="image-card-specs">
+                  Optimized image for social media sharing (Facebook, Twitter, LinkedIn)
+                  <br />Recommended: 1200×630px, WebP format
+                  <br />If not provided, hero image will be used for social sharing
+                </p>
+                {(() => {
+                  const ogImage = getOgImage(selectedExperience.id);
+                  
+                  return (
+                    <ImageUpload
+                      bucket={STORAGE_BUCKETS.CATEGORIES}
+                      entityType="bucket-list"
+                      entityId={selectedExperience.id}
+                      imageType="og-image"
+                      suggestedAltText={`${selectedExperience.title} - Social sharing image`}
+                      existingImage={ogImage?.url}
+                      existingData={ogImage}
+                      onUploadComplete={handleUploadComplete}
+                    />
                   );
                 })()}
               </div>

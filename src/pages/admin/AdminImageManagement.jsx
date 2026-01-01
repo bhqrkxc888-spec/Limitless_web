@@ -72,7 +72,7 @@ function AdminImageManagement() {
         'cruise-line': [], // All gallery images are now required
         ship: ['exterior', 'deck', 'suite', 'dining', 'pool', 'entertainment', 'spa', 'theater'], // Ship gallery images are optional (card is required)
         category: [],
-        'bucket-list': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4'],
+        'bucket-list': ['gallery-1', 'gallery-2', 'gallery-3', 'gallery-4', 'og-image'],
         'port-guide': ['attraction-1', 'attraction-2', 'attraction-3', 'attraction-4', 'attraction-5', 'attraction-6', 'beach', 'food'] // Optional port images (attractions vary by port)
       };
 
@@ -144,7 +144,7 @@ function AdminImageManagement() {
             isOptional = ['exterior', 'deck', 'suite', 'dining', 'pool', 'entertainment', 'spa', 'theater'].includes(img.image_type);
           } else if (img.entity_type === 'bucket-list') {
             isRequired = img.image_type === 'hero' || img.image_type === 'card';
-            isOptional = img.image_type.startsWith('gallery-');
+            isOptional = img.image_type.startsWith('gallery-') || img.image_type === 'og-image';
           } else if (isPageHero) {
             // Page heroes are all optional
             isRequired = false;

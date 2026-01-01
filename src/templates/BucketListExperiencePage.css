@@ -96,6 +96,10 @@
   margin-top: var(--space-12);
 }
 
+.bucket-list-map-wrapper {
+  margin-bottom: var(--space-12);
+}
+
 .itinerary-timeline {
   display: flex;
   flex-direction: column;

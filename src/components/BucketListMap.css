@@ -1,0 +1,123 @@
+/* Bucket List Map Component Styles */
+
+.bucket-list-map-container {
+  margin: 2rem 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: var(--clr-surface);
+}
+
+.bucket-list-map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: var(--clr-bg-alt);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.bucket-list-map-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--clr-text-main);
+  font-family: var(--font-family-display);
+}
+
+.bucket-list-map-style-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.bucket-list-map-style-controls button {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  font-size: 1.25rem;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bucket-list-map-style-controls button:hover {
+  background: var(--clr-bg-alt);
+  border-color: var(--clr-accent);
+}
+
+.bucket-list-map-style-controls button.active {
+  background: var(--clr-accent);
+  border-color: var(--clr-accent);
+  color: var(--clr-text-on-accent);
+}
+
+.bucket-list-map {
+  width: 100%;
+  height: 500px;
+  min-height: 400px;
+}
+
+/* Custom Marker Styles */
+.bucket-list-marker {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.bucket-list-marker:hover {
+  transform: scale(1.1);
+}
+
+.bucket-list-marker-icon {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Popup Styles */
+.bucket-list-map-popup {
+  padding: 0.5rem;
+  min-width: 200px;
+}
+
+.bucket-list-map-popup strong {
+  display: block;
+  color: var(--clr-accent);
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.bucket-list-map-popup h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--clr-text-main);
+  font-family: var(--font-family-display);
+}
+
+.bucket-list-map-popup p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--clr-text-muted);
+  line-height: 1.4;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .bucket-list-map {
+    height: 400px;
+    min-height: 300px;
+  }
+
+  .bucket-list-map-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .bucket-list-map-style-controls {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+

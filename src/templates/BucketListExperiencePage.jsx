@@ -4,10 +4,12 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, SectionHeader, Accordion, Card } from '../components/ui';
-import { useState } from 'react';
+import { useState, Suspense, lazy } from 'react';
 import { getOgImage } from '../utils/imageHelpers';
 import { useBucketListImage } from '../hooks/useImageUrl';
 import './BucketListExperiencePage.css';
+
+const BucketListMap = lazy(() => import('../components/BucketListMap'));
 
 function BucketListExperiencePage() {
   const { slug } = useParams();
@@ -16,6 +18,7 @@ function BucketListExperiencePage() {
   
   // Load images from database
   const { imageUrl: heroImage } = useBucketListImage(experience?.id, 'hero', experience?.title);
+  const { imageUrl: ogImage } = useBucketListImage(experience?.id, 'og-image', experience?.title);
 
   // Handle experience not found
   if (!experience) {
@@ -63,7 +66,7 @@ function BucketListExperiencePage() {
         description={experience.meta?.description || experience.description}
         canonical={`https://www.limitlesscruises.com/bucket-list/${experience.slug}`}
         keywords={experience.meta?.keywords?.join(', ') || ''}
-        image={getOgImage(heroImage)}
+        image={ogImage ? getOgImage(ogImage) : getOgImage(heroImage)}
         structuredData={structuredData}
       />
 
@@ -146,6 +149,31 @@ function BucketListExperiencePage() {
                     title="Itinerary Overview"
                     subtitle="A glimpse into your journey"
                   />
+                  
+                  {/* Interactive Map */}
+                  {experience.itinerary.some(item => item.coordinates?.lat && item.coordinates?.lon) && (
+                    <div className="bucket-list-map-wrapper">
+                      <Suspense fallback={
+                        <div style={{ 
+                          minHeight: '400px', 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          justifyContent: 'center',
+                          background: 'var(--clr-bg-alt)',
+                          borderRadius: '12px',
+                          marginBottom: '2rem'
+                        }}>
+                          <p>Loading interactive map...</p>
+                        </div>
+                      }>
+                        <BucketListMap 
+                          itinerary={experience.itinerary}
+                          title={experience.title}
+                        />
+                      </Suspense>
+                    </div>
+                  )}
+
                   <div className="itinerary-timeline">
                     {experience.itinerary.map((item, index) => {
                       // Format day number - extract first number if range (e.g., "2-3" -> "D2")

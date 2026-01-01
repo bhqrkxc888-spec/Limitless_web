@@ -112,6 +112,7 @@ export const DIMENSION_SPECS = {
   // Bucket list images
   'bucket-list-hero': { width: 1920, height: 1080 },
   'bucket-list-card': { width: 600, height: 400 },
+  'bucket-list-og-image': { width: 1200, height: 630 },
   'bucket-list-gallery-1': { width: 1200, height: 800 },
   'bucket-list-gallery-2': { width: 1200, height: 800 },
   'bucket-list-gallery-3': { width: 1200, height: 800 },

@@ -225,72 +225,216 @@ export const bucketListExperiences = [
     id: 'rocky-mountaineer-alaska',
     slug: 'rocky-mountaineer-alaska',
     title: 'Rocky Mountaineer & Alaska',
-    tagline: 'Iconic rail journey meets stunning cruise',
-    description: 'Combine two bucket-list experiences: the legendary Rocky Mountaineer train journey through Canada\'s stunning mountain landscapes, followed by an Alaska cruise through the Inside Passage.',
+    tagline: 'Scenic Voyager rail through Banff\'s peaks + Inside Passage Bucket List cruise – from £6,500pp',
+    description: 'Land direct from London into Calgary\'s mountain air, 90 minutes to Fairmont Banff Springs for 2 indulgent nights amid turquoise lakes. Board Rocky Mountaineer Scenic Voyager for 2 days glass-dome luxury—gourmet meals, endless peaks, Kamloops overnight. Vancouver city vibes, then 7-night Inside Passage Bucket List Itinerary cruise (balcony cabin HAL/Princess/Celebrity). Grizzlies in Juneau, Glacier Bay calvings, Sitka totems. Final Vancouver night before home. ATOL protected. Get personalised quote.',
     heroImage: null,
     cardImage: null,
-    duration: '10-14 nights',
-    season: 'May - September',
-    startingFrom: 'From £5,500 per person',
-    bestFor: ['Rail enthusiasts', 'Scenic travelers', 'Nature lovers', 'Adventure seekers'],
+    duration: '16 nights from UK',
+    season: 'May - September (July peak for wildlife)',
+    startingFrom: 'From £6,500 per person',
+    bestFor: ['Rail enthusiasts', 'Scenic travelers', 'Nature lovers', 'Adventure seekers', 'Couples', 'Families'],
     highlights: [
-      'Rocky Mountaineer train journey',
-      'Alaska Inside Passage cruise',
-      'Spectacular mountain scenery',
-      'Wildlife viewing opportunities',
-      'Glacier viewing',
-      'Luxury rail experience',
-      'Combined land and sea adventure'
+      'Rocky Mountaineer Scenic Voyager SilverLeaf dome car experience',
+      '2 nights Fairmont Banff Springs luxury resort',
+      '7-night Inside Passage balcony cabin cruise',
+      'Wildlife viewing - grizzlies, whales, eagles',
+      'Glacier Bay National Park calving icebergs',
+      'Extendable Banff/Vancouver stays available'
     ],
     includes: [
-      'Rocky Mountaineer train journey (2-3 days)',
-      '7-night Alaska cruise',
-      'Meals on train and ship',
-      'Hotel stays in Vancouver',
-      'Scenic dome car access',
-      'Selected shore excursions'
+      'Return flights LHR↔Calgary/Vancouver (economy direct, 9hr/10hr)',
+      '6 nights premium hotels (Fairmont Banff Springs, Fairmont Vancouver)',
+      'Rocky Mountaineer Scenic Voyager SilverLeaf service (meals included)',
+      '7-night Inside Passage balcony cabin (HAL Nieuw Amsterdam/Princess Ruby Princess/Celebrity Solstice)',
+      'All transfers between airports, hotels, train and cruise',
+      'Scenic dome car access on Rocky Mountaineer'
     ],
-    cruiseLines: ['Princess Cruises', 'Holland America', 'Celebrity Cruises', 'Royal Caribbean'],
+    cruiseLines: ['Holland America Line', 'Princess Cruises', 'Celebrity Cruises'],
     itinerary: [
-      { day: '1', location: 'Vancouver arrival', description: 'Welcome to Canada' },
-      { day: '2-3', location: 'Rocky Mountaineer train', description: 'Journey through the Canadian Rockies' },
-      { day: '4', location: 'Banff/Jasper', description: 'Mountain resort stay' },
-      { day: '5', location: 'Return to Vancouver', description: 'Board your cruise ship' },
-      { day: '6-7', location: 'Inside Passage', description: 'Scenic cruising' },
-      { day: '8', location: 'Ketchikan', description: 'Salmon capital' },
-      { day: '9', location: 'Juneau', description: 'Alaska\'s capital' },
-      { day: '10', location: 'Skagway', description: 'Gold rush history' },
-      { day: '11', location: 'Glacier Bay', description: 'Ice formations' },
-      { day: '12-13', location: 'At sea', description: 'Relax and enjoy' },
-      { day: '14', location: 'Vancouver', description: 'Journey complete' }
+      { 
+        day: '0', 
+        location: 'London Heathrow (LHR)', 
+        description: 'Depart LHR → Calgary (9hr direct Air Canada/BA)',
+        coordinates: { lat: 51.4700, lon: -0.4543 }
+      },
+      { 
+        day: '1', 
+        location: 'Calgary → Banff (Fairmont Banff Springs)', 
+        description: 'YYC arrival, transfer to Fairmont Banff Springs (2 nights). Arrive in mountain air, check into luxury resort',
+        coordinates: { lat: 51.1784, lon: -115.5708 }
+      },
+      { 
+        day: '2', 
+        location: 'Banff - Lake Louise', 
+        description: 'Lake Louise day trip, Bow Valley hikes, turquoise lakes and mountain vistas',
+        coordinates: { lat: 51.4254, lon: -116.1773 }
+      },
+      { 
+        day: '3', 
+        location: 'Banff - Free exploration', 
+        description: 'Banff free day / Moraine Lake, Johnston Canyon, gondola rides, wildlife viewing',
+        coordinates: { lat: 51.1784, lon: -115.5708 }
+      },
+      { 
+        day: '4', 
+        location: 'Rocky Mountaineer Scenic Voyager → Kamloops', 
+        description: 'Board Scenic Voyager train to Kamloops (overnight train) - glass-dome luxury, gourmet meals, bear spotting',
+        coordinates: { lat: 50.6745, lon: -120.3272 }
+      },
+      { 
+        day: '5', 
+        location: 'Train → Vancouver', 
+        description: 'Scenic Voyager continues to Vancouver, check-in Fairmont Vancouver (1 night)',
+        coordinates: { lat: 49.2827, lon: -123.1207 }
+      },
+      { 
+        day: '6', 
+        location: 'Vancouver', 
+        description: 'Vancouver exploration - Seawall, Granville Island, Stanley Park, city vibes',
+        coordinates: { lat: 49.2827, lon: -123.1207 }
+      },
+      { 
+        day: '7', 
+        location: 'Vancouver - Embark cruise', 
+        description: 'Embark 7-night Inside Passage cruise (HAL Nieuw Amsterdam/Princess Ruby Princess/Celebrity Solstice)',
+        coordinates: { lat: 49.2827, lon: -123.1207 }
+      },
+      { 
+        day: '8', 
+        location: 'Ketchikan, Alaska', 
+        description: 'Ketchikan - totem poles, native culture, salmon capital, eagle viewing',
+        coordinates: { lat: 55.3422, lon: -131.6461 }
+      },
+      { 
+        day: '9', 
+        location: 'Juneau, Alaska', 
+        description: 'Juneau - Mendenhall Glacier, whale watching, Alaska\'s capital, gold rush history',
+        coordinates: { lat: 58.3019, lon: -134.4197 }
+      },
+      { 
+        day: '10', 
+        location: 'Skagway, Alaska', 
+        description: 'Skagway - gold rush history, White Pass Railway, Klondike heritage',
+        coordinates: { lat: 59.4583, lon: -135.3089 }
+      },
+      { 
+        day: '11', 
+        location: 'Glacier Bay National Park', 
+        description: 'Glacier Bay - calving icebergs, seals, tidewater glaciers, UNESCO World Heritage site',
+        coordinates: { lat: 58.2232, lon: -136.1075 }
+      },
+      { 
+        day: '12', 
+        location: 'Sitka, Alaska', 
+        description: 'Sitka - eagles, Russian heritage, native culture, wildlife viewing',
+        coordinates: { lat: 57.0531, lon: -135.3300 }
+      },
+      { 
+        day: '13', 
+        location: 'At sea', 
+        description: 'Sea day - scenic cruising Inside Passage, relax and enjoy ship amenities',
+        coordinates: null
+      },
+      { 
+        day: '14', 
+        location: 'Victoria, BC', 
+        description: 'Victoria - Butchart Gardens, British charm, afternoon tea, coastal beauty',
+        coordinates: { lat: 48.4284, lon: -123.3656 }
+      },
+      { 
+        day: '15', 
+        location: 'Vancouver - Disembark', 
+        description: 'Disembark cruise, final night at Fairmont Vancouver',
+        coordinates: { lat: 49.2827, lon: -123.1207 }
+      },
+      { 
+        day: '16', 
+        location: 'Vancouver → London Heathrow', 
+        description: 'YVR → LHR return flight (10hr direct), journey complete',
+        coordinates: { lat: 51.4700, lon: -0.4543 }
+      }
     ],
     destinations: [
-      { name: 'Canadian Rockies', description: 'Spectacular mountain passes by train' },
-      { name: 'Alaska Inside Passage', description: 'Protected waterways and wildlife' },
-      { name: 'Glacier Bay', description: 'Tidewater glaciers and ice formations' }
+      { 
+        name: 'Banff National Park', 
+        description: 'Fairmont luxury, Lake Louise, Johnston Canyon, turquoise lakes and mountain vistas' 
+      },
+      { 
+        name: 'Scenic Voyager Rail', 
+        description: 'SilverLeaf domes, chef cuisine, bear spotting, glass-dome luxury through Canadian Rockies' 
+      },
+      { 
+        name: 'Glacier Bay & Juneau', 
+        description: 'UNESCO ice formations, whales, gold rush history, Mendenhall Glacier' 
+      },
+      { 
+        name: 'Vancouver', 
+        description: 'Seawall, Granville Island, Stanley Park, vibrant harbour city' 
+      }
     ],
     testimonials: [
-      { quote: 'The train journey was breathtaking, and Alaska was the perfect complement. Two amazing experiences in one trip!', author: 'Patricia & Richard', location: 'Glasgow' },
-      { quote: 'Rocky Mountaineer exceeded expectations, and the cruise was the perfect way to end the adventure.', author: 'James W.', location: 'Cardiff' }
+      { 
+        quote: 'Open-jaw genius—more Banff time. Scenic Voyager magic! The train journey was breathtaking, and Alaska was the perfect complement.', 
+        author: 'James', 
+        location: 'Surrey' 
+      },
+      { 
+        quote: 'Perfect bucket list. Quote made it ours. Two amazing experiences in one trip!', 
+        author: 'Claire', 
+        location: 'Edinburgh' 
+      },
+      { 
+        quote: 'Balcony cruise + train = dream. Glacier Bay was absolutely spectacular.', 
+        author: 'Thompson Family', 
+        location: 'London' 
+      }
     ],
     faq: [
       {
-        question: 'What routes does Rocky Mountaineer offer?',
-        answer: 'Popular routes include Vancouver to Banff/Jasper, and Vancouver to Whistler. All routes feature glass-dome cars for panoramic views.'
+        question: 'Are UK flights included?',
+        answer: 'Yes, LHR→Calgary/Vancouver→LHR direct economy flights are included (9hr outbound, 10hr return). Business class upgrades available - get personalised quote for pricing.'
       },
       {
-        question: 'When is the best time for this trip?',
-        answer: 'May to September offers the best weather and scenery. July and August are peak season with longer daylight hours.'
+        question: 'What cabin type is included?',
+        answer: 'Balcony cabin is included in the base package. Suite upgrades available - get personalised quote for premium accommodation options.'
       },
       {
-        question: 'How long is the train journey?',
-        answer: 'The Rocky Mountaineer journey is typically 2-3 days, with overnight hotel stays included. The train operates during daylight hours for maximum scenic viewing.'
+        question: 'Can I extend my stay?',
+        answer: 'Yes—Banff extensions available for +£250 per night, Vancouver extensions for +£200 per night. Customise your journey with additional nights - get personalised quote.'
+      },
+      {
+        question: 'What fitness level is required?',
+        answer: 'Moderate fitness level is sufficient. The train has level access, and Banff offers moderate walks with lifts available. Most activities can be adapted to comfort levels.'
+      },
+      {
+        question: 'What visas are needed?',
+        answer: 'UK citizens need a Canada eTA (Electronic Travel Authorization) which costs £10 and can be obtained online before travel. US visas are not required for this closed-loop cruise itinerary.'
+      },
+      {
+        question: 'When is the best time to go?',
+        answer: 'July offers peak wildlife viewing opportunities with warm weather. May and September provide good value. Dates available via personalised quote - limited 2026 spaces.'
+      },
+      {
+        question: 'Is this suitable for solo travellers?',
+        answer: 'Yes, solo travellers are welcome. Single supplement is £800. Some cruise lines offer shared cabin options. Get personalised quote for solo travel options.'
+      },
+      {
+        question: 'Which cruise lines and 2026 dates?',
+        answer: 'Holland America Line (Nieuw Amsterdam), Princess Cruises (Ruby Princess), and Celebrity Cruises (Solstice) offer weekly departures May through September 2026. Get personalised quote for specific dates and availability.'
+      },
+      {
+        question: 'What is the Rocky Mountaineer Scenic Voyager?',
+        answer: 'The Scenic Voyager is Rocky Mountaineer\'s SilverLeaf service featuring glass-dome cars for panoramic views, gourmet chef-prepared meals, and overnight accommodation in Kamloops. The train operates during daylight hours for maximum scenic viewing through the Canadian Rockies.'
+      },
+      {
+        question: 'What upgrades are available?',
+        answer: 'Upgrades include: Business class flights, Rocky Mountaineer GoldLeaf service with outdoor viewing platform, Premium cruise suites, Banff helicopter tours and premium excursions. Get personalised quote to tailor upgrades to your preferences.'
       }
     ],
     meta: {
-      title: 'Rocky Mountaineer & Alaska Cruise | Train & Cruise Combination',
-      description: 'Combine the iconic Rocky Mountaineer train with an Alaska cruise. Experience Canadian Rockies by rail and Inside Passage by sea. Expert booking from Limitless Cruises.',
-      keywords: ['rocky mountaineer cruise', 'alaska train cruise', 'rocky mountaineer alaska', 'canada alaska cruise', 'rail and cruise']
+      title: 'Rocky Mountaineer & Alaska Bucket List Journey from UK | Limitless Cruises',
+      description: 'Rocky Mountaineer Alaska cruise from UK 2026. Scenic Voyager rail through Banff + Inside Passage bucket list cruise package with flights included. ATOL protected. From £6,500pp. Expert booking from Limitless Cruises.',
+      keywords: ['rocky mountaineer cruise', 'alaska train cruise from uk', 'rocky mountaineer alaska 2026', 'canada alaska cruise package', 'scenic voyager banff', 'rail and cruise from uk', 'rocky mountaineer bucket list', 'alaska cruise with flights uk']
     },
     images: [],
     featured: true,
@@ -301,7 +445,7 @@ export const bucketListExperiences = [
     slug: 'galapagos-expeditions',
     title: 'Galápagos Islands',
     tagline: 'Darwin\'s living laboratory',
-    description: 'Explore the Galápagos Islands, where unique wildlife found nowhere else on Earth inspired Charles Darwin. Snorkel with sea lions, observe giant tortoises, and discover endemic species.',
+    description: 'Explore the Galápagos Islands, where unique wildlife found nowhere else on Earth inspired Charles Darwin. Snorkel with sea lions, observe giant tortoises, and discover endemic species in their natural habitat.',
     heroImage: null,
     cardImage: null,
     duration: '7-10 nights',
@@ -369,7 +513,7 @@ export const bucketListExperiences = [
     slug: 'northern-lights-arctic',
     title: 'Northern Lights & Arctic',
     tagline: 'Dance under the Aurora Borealis',
-    description: 'Witness the magical Northern Lights in the Arctic regions of Norway, Iceland, and beyond. Combine Aurora viewing with husky sledding, snow activities, and Arctic landscapes.',
+    description: 'Witness the magical Northern Lights in the Arctic regions of Norway, Iceland, and beyond. Combine Aurora viewing with husky sledding, snow activities, and stunning Arctic landscapes.',
     heroImage: null,
     cardImage: null,
     duration: '7-14 nights',
@@ -437,7 +581,7 @@ export const bucketListExperiences = [
     slug: 'south-america-cruises',
     title: 'South America',
     tagline: 'Vibrant cultures and stunning landscapes',
-    description: 'Discover the dramatic beauty and rich culture of South America. From the Amazon rainforest to the wilds of Patagonia, from vibrant cities to ancient Incan ruins, experience the continent\'s incredible diversity.',
+    description: 'Discover the dramatic beauty and rich culture of South America. From the Amazon rainforest to the wilds of Patagonia, from vibrant cities to ancient Incan ruins, experience the continent\'s incredible diversity on an unforgettable voyage.',
     heroImage: null,
     cardImage: null,
     duration: '10-21+ nights',
@@ -512,7 +656,7 @@ export const bucketListExperiences = [
     slug: 'middle-east-cruises',
     title: 'Middle East & Arabian Peninsula',
     tagline: 'Ancient wonders meet modern luxury',
-    description: 'Experience the fascinating blend of ancient history and contemporary luxury in the Middle East. From the architectural wonders of Dubai to the historical sites of Egypt, discover a region rich in culture and heritage.',
+    description: 'Experience the fascinating blend of ancient history and contemporary luxury in the Middle East. From the architectural wonders of Dubai to the historical sites of Egypt, discover a region rich in culture, heritage, and modern innovation.',
     heroImage: null,
     cardImage: null,
     duration: '7-14 nights',
@@ -585,7 +729,7 @@ export const bucketListExperiences = [
     slug: 'pacific-new-zealand-cruises',
     title: 'Pacific Islands & New Zealand',
     tagline: 'Paradise found in the South Pacific',
-    description: 'Discover the stunning beauty of the South Pacific and New Zealand. From pristine tropical islands with turquoise waters to New Zealand\'s dramatic landscapes, experience paradise in all its forms.',
+    description: 'Discover the stunning beauty of the South Pacific and New Zealand. From pristine tropical islands with turquoise waters to New Zealand\'s dramatic landscapes, experience paradise in all its forms on this unforgettable journey.',
     heroImage: null,
     cardImage: null,
     duration: '10-18+ nights',
@@ -864,7 +1008,7 @@ export const bucketListExperiences = [
     slug: 'great-barrier-reef-cruises',
     title: 'Great Barrier Reef & Australia',
     tagline: 'Discover the world\'s largest coral reef',
-    description: 'Experience Australia\'s natural wonder - the Great Barrier Reef. Snorkel or dive among vibrant coral and tropical fish, then explore Australia\'s stunning coastline and iconic cities.',
+    description: 'Experience Australia\'s natural wonder - the Great Barrier Reef. Snorkel or dive among vibrant coral and tropical fish, then explore Australia\'s stunning coastline and iconic cities on this remarkable adventure.',
     heroImage: null,
     cardImage: null,
     duration: '10-18 nights',
@@ -933,7 +1077,7 @@ export const bucketListExperiences = [
     slug: 'midnight-sun-voyages',
     title: 'Midnight Sun Voyages',
     tagline: 'Where the sun never sets',
-    description: 'Experience the magic of the Arctic summer when the sun never dips below the horizon. Cruise Norway\'s coast, Svalbard, or Iceland under 24 hours of ethereal daylight.',
+    description: 'Experience the magic of the Arctic summer when the sun never dips below the horizon. Cruise Norway\'s coast, Svalbard, or Iceland under 24 hours of ethereal daylight in this unique natural phenomenon.',
     heroImage: null,
     cardImage: null,
     duration: '7-14 nights',
@@ -1002,7 +1146,7 @@ export const bucketListExperiences = [
     slug: 'grand-voyages',
     title: 'Grand Voyages',
     tagline: 'Extended journeys of discovery',
-    description: 'Embark on an extended voyage of 30 to 60 nights, exploring multiple continents and oceans. These immersive journeys offer the depth of experience only possible with extended time at sea.',
+    description: 'Embark on an extended voyage of 30 to 60 nights, exploring multiple continents and oceans. These immersive journeys offer the depth of experience and cultural immersion only possible with extended time at sea.',
     heroImage: null,
     cardImage: null,
     duration: '30-60+ nights',
