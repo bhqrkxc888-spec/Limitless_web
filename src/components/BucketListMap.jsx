@@ -21,24 +21,33 @@ function BucketListMap({ itinerary }) {
   const map = useRef(null);
   const markers = useRef([]);
   const [currentStyle, setCurrentStyle] = useState('outdoors');
+  const [currentDayIndex, setCurrentDayIndex] = useState(0);
 
   // Filter itinerary items that have coordinates - memoized to prevent unnecessary re-renders
+  // Exclude Day 0 (flight days) - everything should start at Day 1
   const locations = useMemo(() => {
     if (!itinerary || !Array.isArray(itinerary)) {
       return [];
     }
     
-    return itinerary.filter(item => 
-      item.coordinates && 
-      typeof item.coordinates.lat === 'number' && 
-      typeof item.coordinates.lon === 'number' &&
-      item.location &&
-      typeof item.location === 'string' &&
-      !item.location.toLowerCase().includes('at sea')
-    );
+    return itinerary.filter(item => {
+      // Check if it's Day 0
+      const dayStr = String(item.day || '');
+      const dayNumber = dayStr.match(/^\d+/)?.[0];
+      if (dayNumber === '0') {
+        return false; // Exclude Day 0
+      }
+      
+      return item.coordinates && 
+        typeof item.coordinates.lat === 'number' && 
+        typeof item.coordinates.lon === 'number' &&
+        item.location &&
+        typeof item.location === 'string' &&
+        !item.location.toLowerCase().includes('at sea');
+    });
   }, [itinerary]);
 
-  // Initialize map
+  // Initialize map - only run once when component mounts
   useEffect(() => {
     if (!apiConfig.mapbox.enabled || !apiConfig.mapbox.accessToken) {
       logger.warn('BucketListMap: Mapbox not enabled or no access token');
@@ -50,7 +59,8 @@ function BucketListMap({ itinerary }) {
       return;
     }
 
-    if (map.current) return; // Initialize map only once
+    // Prevent re-initialization if map already exists
+    if (map.current) return;
     
     if (!mapContainer.current) {
       logger.warn('BucketListMap: Map container ref is not available');
@@ -59,7 +69,7 @@ function BucketListMap({ itinerary }) {
 
     mapboxgl.accessToken = apiConfig.mapbox.accessToken;
 
-    // Calculate bounds from all locations
+    // Calculate center point for initial map view
     const lats = locations.map(l => l.coordinates.lat);
     const lons = locations.map(l => l.coordinates.lon);
     const minLat = Math.min(...lats);
@@ -67,31 +77,58 @@ function BucketListMap({ itinerary }) {
     const minLon = Math.min(...lons);
     const maxLon = Math.max(...lons);
 
-    const bounds = [
-      [minLon, minLat], // Southwest
-      [maxLon, maxLat]  // Northeast
-    ];
-
-    // Initialize map
+    // Initialize map with performance optimizations
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: apiConfig.mapbox.style,
-      bounds: bounds,
-      fitBoundsOptions: {
-        padding: { top: 80, bottom: 80, left: 80, right: 80 }
-      },
+      center: [(minLon + maxLon) / 2, (minLat + maxLat) / 2],
+      zoom: 5, // Initial zoom, will be adjusted by fitBounds
       pitch: 0,
-      bearing: 0
+      bearing: 0,
+      // Performance optimizations
+      renderWorldCopies: false, // Don't render multiple world copies
+      maxZoom: 15, // Limit max zoom for performance
+      minZoom: 2, // Limit min zoom
+      antialias: false, // Disable antialiasing for better performance
+      preserveDrawingBuffer: false, // Better performance
+      fadeDuration: 0 // Disable fade for instant rendering
     });
 
-    // Add navigation controls
+    // Add zoom controls only (no compass/direction button)
     map.current.addControl(new mapboxgl.NavigationControl({ 
-      showCompass: true,
-      visualizePitch: true 
+      showCompass: false,
+      visualizePitch: false,
+      showZoom: true
     }), 'top-right');
 
-    // Wait for map to load before adding markers
+    // Wait for map to load before adding markers and fitting bounds
     map.current.on('load', () => {
+      // Fit bounds to cruise area with proportional padding
+      const bounds = new mapboxgl.LngLatBounds();
+      locations.forEach(loc => {
+        bounds.extend([loc.coordinates.lon, loc.coordinates.lat]);
+      });
+      
+      // Add proportional padding
+      const boundsData = bounds.toArray();
+      const sw = boundsData[0];
+      const ne = boundsData[1];
+      const latSpan = ne[1] - sw[1];
+      const lonSpan = ne[0] - sw[0];
+      const maxSpan = Math.max(latSpan, lonSpan);
+      const paddingDegrees = Math.max(maxSpan * 0.15, 0.5);
+      
+      // Extend bounds with padding
+      bounds.extend([sw[0] - paddingDegrees, sw[1] - paddingDegrees]);
+      bounds.extend([ne[0] + paddingDegrees, ne[1] + paddingDegrees]);
+      
+      // Fit bounds with smooth animation
+      map.current.fitBounds(bounds, {
+        padding: { top: 60, bottom: 60, left: 60, right: 60 },
+        maxZoom: 12, // Limit zoom to keep cruise area in focus
+        duration: 0 // Instant fit for better UX
+      });
+      
       // Add markers for each location
       locations.forEach((item, index) => {
         if (!item.coordinates || !item.location) {
@@ -107,8 +144,12 @@ function BucketListMap({ itinerary }) {
           return;
         }
         
-        // Extract day number safely
-        const dayNumber = (typeof item.day === 'string' && item.day.match(/^\d+/)?.[0]) || (index + 1).toString();
+        // Extract day number safely - ensure it's never Day 0
+        let dayNumber = (typeof item.day === 'string' && item.day.match(/^\d+/)?.[0]) || (index + 1).toString();
+        // If somehow we get Day 0, convert to Day 1
+        if (dayNumber === '0') {
+          dayNumber = '1';
+        }
         const locationName = String(item.location || 'Unknown Location');
         const description = item.description ? String(item.description) : '';
         
@@ -124,7 +165,8 @@ function BucketListMap({ itinerary }) {
 
         // Create custom marker element
         const el = document.createElement('div');
-        el.className = 'bucket-list-marker';
+        el.className = `bucket-list-marker ${index === currentDayIndex ? 'active' : ''}`;
+        el.setAttribute('data-day-index', index);
         el.innerHTML = `
           <div class="bucket-list-marker-icon">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -140,8 +182,26 @@ function BucketListMap({ itinerary }) {
           .setPopup(popup)
           .addTo(map.current);
 
+        // Update current day index when marker is clicked
+        marker.getElement().addEventListener('click', () => {
+          setCurrentDayIndex(index);
+        });
+
         markers.current.push(marker);
       });
+      
+      // Performance: Disable unnecessary map features that cause lag
+      map.current.setRenderWorldCopies(false);
+      
+      // Optimize map interactions for better performance
+      map.current.on('moveend', () => {
+        // Debounce any heavy operations during map movement
+      });
+    });
+    
+    // Handle map errors gracefully
+    map.current.on('error', (e) => {
+      logger.error('BucketListMap: Map error', e);
     });
 
     // Cleanup
@@ -176,6 +236,72 @@ function BucketListMap({ itinerary }) {
     setCurrentStyle(style);
   };
 
+  // Navigate to specific day
+  const navigateToDay = (index) => {
+    if (!map.current || index < 0 || index >= locations.length) return;
+    
+    const location = locations[index];
+    const { lat, lon } = location.coordinates;
+    
+    // Fly to location with smooth animation
+    map.current.flyTo({
+      center: [lon, lat],
+      zoom: 10,
+      duration: 1500,
+      essential: true
+    });
+    
+    // Update marker active states
+    markers.current.forEach((marker, i) => {
+      const el = marker.getElement();
+      if (el) {
+        if (i === index) {
+          el.classList.add('active');
+        } else {
+          el.classList.remove('active');
+        }
+      }
+    });
+    
+    // Open popup for this location
+    const marker = markers.current[index];
+    if (marker && marker.getPopup()) {
+      marker.togglePopup();
+    }
+    
+    setCurrentDayIndex(index);
+  };
+
+  // Update marker active states when currentDayIndex changes
+  useEffect(() => {
+    if (!map.current || markers.current.length === 0) return;
+    
+    markers.current.forEach((marker, index) => {
+      const el = marker.getElement();
+      if (el) {
+        if (index === currentDayIndex) {
+          el.classList.add('active');
+        } else {
+          el.classList.remove('active');
+        }
+      }
+    });
+  }, [currentDayIndex]);
+
+  // Navigate to previous day
+  const handlePreviousDay = () => {
+    if (currentDayIndex > 0) {
+      navigateToDay(currentDayIndex - 1);
+    }
+  };
+
+  // Navigate to next day
+  const handleNextDay = () => {
+    if (currentDayIndex < locations.length - 1) {
+      navigateToDay(currentDayIndex + 1);
+    }
+  };
+
   if (!apiConfig.mapbox.enabled || locations.length === 0) {
     return null;
   }
@@ -184,31 +310,64 @@ function BucketListMap({ itinerary }) {
     <div className="bucket-list-map-container">
       <div className="bucket-list-map-header">
         <h3>Journey Map</h3>
-        <div className="bucket-list-map-style-controls">
-          <button 
-            className={currentStyle === 'outdoors' ? 'active' : ''}
-            onClick={() => handleStyleChange('outdoors')}
-            title="Outdoors"
-          >
-            🏔️
-          </button>
-          <button 
-            className={currentStyle === 'satellite' ? 'active' : ''}
-            onClick={() => handleStyleChange('satellite')}
-            title="Satellite"
-          >
-            🛰️
-          </button>
-          <button 
-            className={currentStyle === 'streets' ? 'active' : ''}
-            onClick={() => handleStyleChange('streets')}
-            title="Streets"
-          >
-            🗺️
-          </button>
+        <div className="bucket-list-map-controls">
+          <div className="bucket-list-map-style-controls">
+            <button 
+              className={currentStyle === 'outdoors' ? 'active' : ''}
+              onClick={() => handleStyleChange('outdoors')}
+              title="Outdoors"
+            >
+              🏔️
+            </button>
+            <button 
+              className={currentStyle === 'satellite' ? 'active' : ''}
+              onClick={() => handleStyleChange('satellite')}
+              title="Satellite"
+            >
+              🛰️
+            </button>
+            <button 
+              className={currentStyle === 'streets' ? 'active' : ''}
+              onClick={() => handleStyleChange('streets')}
+              title="Streets"
+            >
+              🗺️
+            </button>
+          </div>
         </div>
       </div>
       <div ref={mapContainer} className="bucket-list-map" />
+      {locations.length > 1 && (
+        <div className="bucket-list-map-day-navigation">
+          <button 
+            className="day-nav-button day-nav-prev"
+            onClick={handlePreviousDay}
+            disabled={currentDayIndex === 0}
+            title="Previous day"
+          >
+            ← Previous
+          </button>
+          <span className="day-nav-info">
+            Day {(() => {
+              const dayStr = locations[currentDayIndex]?.day || '';
+              let dayNumber = dayStr.match(/^\d+/)?.[0] || (currentDayIndex + 1).toString();
+              // Ensure never Day 0
+              if (dayNumber === '0') {
+                dayNumber = '1';
+              }
+              return dayNumber;
+            })()} of {locations.length}
+          </span>
+          <button 
+            className="day-nav-button day-nav-next"
+            onClick={handleNextDay}
+            disabled={currentDayIndex === locations.length - 1}
+            title="Next day"
+          >
+            Next →
+          </button>
+        </div>
+      )}
     </div>
   );
 }

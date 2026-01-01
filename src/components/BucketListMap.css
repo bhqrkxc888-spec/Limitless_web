@@ -70,6 +70,17 @@
   transform: scale(1.1);
 }
 
+.bucket-list-marker.active {
+  z-index: 1000;
+}
+
+.bucket-list-marker.active .bucket-list-marker-icon svg circle {
+  fill: var(--clr-primary);
+  stroke: var(--clr-accent);
+  stroke-width: 3;
+  filter: drop-shadow(0 0 8px rgba(212, 184, 106, 0.6));
+}
+
 .bucket-list-marker-icon {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
@@ -102,6 +113,49 @@
   line-height: 1.4;
 }
 
+/* Day Navigation Controls */
+.bucket-list-map-day-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: var(--clr-bg-alt);
+  border-top: 1px solid var(--clr-border);
+  gap: 1rem;
+}
+
+.day-nav-button {
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+  border: none;
+  border-radius: 6px;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-family);
+}
+
+.day-nav-button:hover:not(:disabled) {
+  background: var(--clr-accent);
+  color: var(--clr-text-on-accent);
+  transform: translateY(-1px);
+}
+
+.day-nav-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.day-nav-info {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--clr-text-main);
+  flex: 1;
+  text-align: center;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .bucket-list-map {
@@ -118,6 +172,19 @@
   .bucket-list-map-style-controls {
     width: 100%;
     justify-content: flex-end;
+  }
+
+  .bucket-list-map-day-navigation {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .day-nav-button {
+    width: 100%;
+  }
+
+  .day-nav-info {
+    order: -1;
   }
 }
 

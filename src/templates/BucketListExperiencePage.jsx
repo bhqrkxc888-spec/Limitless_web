@@ -222,10 +222,6 @@ function BucketListExperiencePage() {
                           </svg>
                         </div>
                         <p className="testimonial-text">"{testimonial.quote}"</p>
-                        <div className="testimonial-author">
-                          <strong>{testimonial.author}</strong>
-                          {testimonial.location && <span>, {testimonial.location}</span>}
-                        </div>
                       </div>
                     ))}
                   </div>
