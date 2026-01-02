@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { navigation } from '../../data/navigation';
 import { siteConfig } from '../../config/siteConfig';
 import { isSiteLaunched } from '../../config/launchConfig';
