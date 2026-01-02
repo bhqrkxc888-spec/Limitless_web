@@ -1,149 +1,169 @@
 /**
  * Ports Hub Page Styles
+ * Streamlined, modern design
  */
 
-/* Page Header (replaces hero) */
-.page-header {
+.ports-page {
+  background: var(--color-background);
+}
+
+/* Unified Hero Section */
+.ports-hero {
   background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
   padding: var(--space-16) 0 var(--space-12);
   color: white;
   text-align: center;
 }
 
-.page-header-content h1 {
+.ports-hero .page-header-content h1 {
   font-size: var(--font-size-4xl);
   font-weight: bold;
   margin-bottom: var(--space-4);
   color: white;
 }
 
-.page-header-subtitle {
+.ports-hero .page-header-subtitle {
   font-size: var(--font-size-xl);
   margin-bottom: var(--space-8);
   opacity: 0.95;
 }
 
-.page-header-actions {
+.ports-hero .page-header-actions {
   display: flex;
   gap: var(--space-4);
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.ports-page {
-  background: var(--color-background);
+/* Introduction Section */
+.ports-intro-section {
+  padding: var(--space-12) 0;
+  background: var(--clr-bg-alt, #f8f9fa);
 }
 
-/* Introduction */
-.ports-intro {
-  max-width: 800px;
-  margin: 0 auto;
+.ports-intro-content {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto var(--space-8);
 }
 
-.ports-intro h2 {
+.ports-intro-content h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: var(--color-gray-900);
+  color: var(--clr-text-main);
 }
 
-.ports-intro .lead {
+.ports-intro-content .lead {
   font-size: 1.125rem;
-  color: var(--color-gray-600);
-  line-height: 1.8;
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+  margin: 0;
 }
 
-/* Regions Grid */
-.regions-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.region-link-card {
-  display: block;
-  padding: 2rem;
+/* Regions Quick Nav - Inline Chips */
+.regions-quick-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
   background: white;
-  border: 1px solid var(--color-gray-200);
   border-radius: var(--radius-lg);
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.3s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.region-link-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  border-color: var(--color-primary);
-}
-
-.region-card-content h3 {
-  font-size: 1.5rem;
+.regions-label {
   font-weight: 600;
-  color: var(--color-gray-900);
-  margin-bottom: 0.75rem;
+  color: var(--clr-text-main);
+  font-size: 0.9375rem;
+  margin-right: 0.5rem;
 }
 
-.region-card-content p {
-  font-size: 0.95rem;
-  color: var(--color-gray-600);
-  line-height: 1.6;
-  margin-bottom: 0;
+.regions-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
 }
 
-.region-card-content .region-meta {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--color-gray-100);
-}
-
-.region-card-content .port-count {
-  font-size: 0.875rem;
-  color: var(--color-primary);
-  font-weight: 600;
-}
-
-.region-card .region-meta {
-  margin-top: 0.75rem;
-}
-
-.region-card .port-count {
-  font-size: 0.875rem;
-  color: var(--color-primary);
-  font-weight: 500;
-}
-
-/* Region Section Header */
-.region-section-header {
-  text-align: center;
-  margin-bottom: 2.5rem;
-}
-
-/* View All Container */
-.view-all-container {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-.view-all-link {
-  color: var(--color-primary);
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 600;
+.region-chip {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border: 2px solid var(--color-primary);
-  border-radius: var(--radius-md);
+  padding: 0.5rem 1rem;
+  background: var(--clr-bg-alt, #f4f5f7);
+  color: var(--clr-text-main);
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.region-chip:hover {
+  background: var(--clr-primary);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.region-chip .chip-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0 0.4rem;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.region-chip:hover .chip-count {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Region Sections */
+.ports-region-section {
+  padding: var(--space-10) 0;
+}
+
+.ports-region-section:nth-child(even) {
+  background: var(--clr-bg-alt, #f8f9fa);
+}
+
+.region-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.region-section-header h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--clr-text-main);
+  margin: 0;
+}
+
+.view-all-link {
+  color: var(--clr-primary);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
   transition: all 0.2s;
 }
 
 .view-all-link:hover {
-  background: var(--color-primary);
-  color: white;
-  transform: translateY(-2px);
+  color: var(--clr-accent);
+  transform: translateX(2px);
 }
 
 /* Ports Grid */
@@ -174,7 +194,7 @@
 .port-card .port-country,
 .port-card .port-card-subtitle {
   font-size: 0.85rem;
-  color: var(--color-gray-500);
+  color: var(--clr-text-muted);
   font-weight: 500;
 }
 
@@ -184,23 +204,20 @@
   min-height: 3em;
 }
 
-.port-card .port-card-footer {
+.port-card-button-wrapper {
   margin-top: auto;
-  padding-top: 1rem;
-  display: flex;
-  justify-content: center;
 }
 
-.port-view-btn {
-  width: 100%;
-  max-width: 200px;
-  justify-content: center;
+.port-card-button {
+  display: inline-flex;
+  align-items: center;
 }
 
 /* CTA Section */
 .section-dark {
   background: linear-gradient(135deg, #1e3a5f 0%, #0f1f3a 100%);
   color: white;
+  padding: var(--space-12) 0;
 }
 
 .section-dark h2 {
@@ -232,10 +249,41 @@
   color: #1e3a5f !important;
 }
 
+/* Responsive */
+@media (max-width: 768px) {
+  .ports-hero .page-header-content h1 {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .ports-intro-content h2 {
+    font-size: 1.5rem;
+  }
+  
+  .regions-quick-nav {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+  }
+  
+  .regions-label {
+    text-align: center;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+  
+  .region-section-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .region-section-header h2 {
+    font-size: 1.5rem;
+  }
+}
+
 @media (max-width: 640px) {
   .section-dark .cta-buttons {
     flex-direction: column;
     align-items: center;
   }
 }
-

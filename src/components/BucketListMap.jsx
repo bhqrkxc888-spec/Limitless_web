@@ -27,7 +27,7 @@ import './BucketListMap.css';
  * - Mapbox optimizations (no world copies, antialias off, no fade)
  * - Markers created once and cached in ref
  */
-function BucketListMap({ itinerary, isInteractive = true }) {
+function BucketListMap({ itinerary }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const markers = useRef([]);
@@ -114,13 +114,14 @@ function BucketListMap({ itinerary, isInteractive = true }) {
       trackResize: true, // Handle container resize
       pitchWithRotate: false, // Disable pitch for simpler interactions
       dragRotate: false, // Disable rotation for simpler interactions
-      // Interaction control based on isInteractive prop
-      scrollZoom: isInteractive, // Enable/disable scroll zoom
-      boxZoom: isInteractive, // Enable/disable box zoom
-      dragPan: isInteractive, // Enable/disable drag to pan
-      keyboard: isInteractive, // Enable/disable keyboard navigation
-      doubleClickZoom: isInteractive, // Enable/disable double click zoom
-      touchZoomRotate: isInteractive // Enable/disable touch zoom/rotate
+      // Interaction control - always interactive for modern UX
+      // Scroll zoom disabled to prevent scroll hijacking - users can use +/- buttons
+      scrollZoom: false, // Disabled to prevent scroll hijacking while scrolling page
+      boxZoom: true, // Enable box zoom (shift+drag)
+      dragPan: true, // Enable drag to pan - expected behavior for maps
+      keyboard: true, // Enable keyboard navigation (arrows)
+      doubleClickZoom: true, // Enable double click zoom
+      touchZoomRotate: true // Enable touch zoom/rotate on mobile
     });
 
     // Add zoom controls only (no compass/direction button)
@@ -334,36 +335,31 @@ function BucketListMap({ itinerary, isInteractive = true }) {
     });
   }, [currentDayIndex]);
 
-  // Toggle map interactions dynamically when isInteractive prop changes
+  // Map is always interactive except for scroll zoom (to prevent scroll hijack)
+  // No toggle needed - this effect is kept for potential future use
   useEffect(() => {
     if (!map.current) return;
-    
-    if (isInteractive) {
-      map.current.scrollZoom.enable();
-      map.current.boxZoom.enable();
-      map.current.dragPan.enable();
-      map.current.keyboard.enable();
-      map.current.doubleClickZoom.enable();
-      map.current.touchZoomRotate.enable();
-    } else {
-      map.current.scrollZoom.disable();
-      map.current.boxZoom.disable();
-      map.current.dragPan.disable();
-      map.current.keyboard.disable();
-      map.current.doubleClickZoom.disable();
-      map.current.touchZoomRotate.disable();
-    }
-  }, [isInteractive]);
+    // Scroll zoom always disabled to prevent scroll hijacking
+    map.current.scrollZoom.disable();
+  }, []);
 
-  // Navigate to previous day - stable callback
-  const handlePreviousDay = useCallback(() => {
+  // Navigate to previous day - stable callback, prevents scroll
+  const handlePreviousDay = useCallback((e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     if (currentDayIndex > 0) {
       navigateToDay(currentDayIndex - 1);
     }
   }, [currentDayIndex, navigateToDay]);
 
-  // Navigate to next day - stable callback
-  const handleNextDay = useCallback(() => {
+  // Navigate to next day - stable callback, prevents scroll
+  const handleNextDay = useCallback((e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     if (currentDayIndex < locations.length - 1) {
       navigateToDay(currentDayIndex + 1);
     }
@@ -386,6 +382,7 @@ function BucketListMap({ itinerary, isInteractive = true }) {
         <div className="bucket-list-map-controls">
           <div className="bucket-list-map-style-controls">
             <button 
+              type="button"
               className={currentStyle === 'outdoors' ? 'active' : ''}
               onClick={handleOutdoorsStyle}
               title="Outdoors"
@@ -394,6 +391,7 @@ function BucketListMap({ itinerary, isInteractive = true }) {
               🏔️
             </button>
             <button 
+              type="button"
               className={currentStyle === 'satellite' ? 'active' : ''}
               onClick={handleSatelliteStyle}
               title="Satellite"
@@ -402,6 +400,7 @@ function BucketListMap({ itinerary, isInteractive = true }) {
               🛰️
             </button>
             <button 
+              type="button"
               className={currentStyle === 'streets' ? 'active' : ''}
               onClick={handleStreetsStyle}
               title="Streets"
@@ -428,21 +427,25 @@ function BucketListMap({ itinerary, isInteractive = true }) {
       {locations.length > 1 && (
         <div className="bucket-list-map-day-navigation">
           <button 
+            type="button"
             className="day-nav-button day-nav-prev"
             onClick={handlePreviousDay}
             disabled={currentDayIndex === 0}
             title="Previous day"
+            aria-label="Go to previous day"
           >
             ← Previous
           </button>
-          <span className="day-nav-info">
+          <span className="day-nav-info" aria-live="polite">
             Day {currentDayLabel} of {locations.length}
           </span>
           <button 
+            type="button"
             className="day-nav-button day-nav-next"
             onClick={handleNextDay}
             disabled={currentDayIndex === locations.length - 1}
             title="Next day"
+            aria-label="Go to next day"
           >
             Next →
           </button>

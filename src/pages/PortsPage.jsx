@@ -1,7 +1,7 @@
 import { getAllRegions, getPortsByRegion, getPortsCountByRegion } from '../data/ports';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
-import { Button, Card, SectionHeader } from '../components/ui';
+import { Button, Card } from '../components/ui';
 import { Link } from 'react-router-dom';
 import { usePortGuideImage } from '../hooks/useImageUrl';
 import './PortsPage.css';
@@ -41,7 +41,7 @@ function PortCardWithImage({ port }) {
 
 /**
  * Ports Hub Page
- * Lists all port regions and featured ports
+ * Streamlined layout with consolidated hero section
  */
 function PortsPage() {
   const regions = getAllRegions();
@@ -73,12 +73,14 @@ function PortsPage() {
         structuredData={structuredData}
       />
 
-      {/* Hero Section - No hero requirement */}
-      <section className="page-header">
+      {/* Unified Hero Section */}
+      <section className="page-header ports-hero">
         <div className="container">
           <div className="page-header-content">
             <h1>Cruise Port Guides</h1>
-            <p className="page-header-subtitle">Everything you need to know for your port days</p>
+            <p className="page-header-subtitle">
+              Everything you need to know for your port days
+            </p>
             <div className="page-header-actions">
               <Button to="/find-a-cruise" variant="primary">Find a Cruise</Button>
               <Button href={`tel:${siteConfig.phone}`} variant="outline">Call {siteConfig.phone}</Button>
@@ -87,49 +89,35 @@ function PortsPage() {
         </div>
       </section>
 
-      {/* Introduction */}
-      <section className="section">
+      {/* Introduction + Regions Combined */}
+      <section className="section ports-intro-section">
         <div className="container">
-          <div className="ports-intro text-center">
+          <div className="ports-intro-content">
             <h2>Plan Your Perfect Port Day</h2>
             <p className="lead">
               Our comprehensive port guides help you make the most of your time ashore. 
-              Find things to do, shore excursions, restaurants, and insider tips 
-              from experienced cruisers.
+              Find things to do, shore excursions, restaurants, and insider tips from experienced cruisers.
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* Regions Grid */}
-      <section className="section section-alt">
-        <div className="container">
-          <SectionHeader
-            title="Browse by Region"
-            subtitle="Select a region to explore its cruise ports"
-            align="center"
-          />
-
-          <div className="regions-grid">
-            {regions.map((region) => {
-              const portCount = getPortsCountByRegion(region.id);
-              
-              return (
-                <Link
-                  key={region.id}
-                  to={`/ports/region/${region.slug}`}
-                  className="region-link-card"
-                >
-                  <div className="region-card-content">
-                    <h3>{region.name}</h3>
-                    <p>{region.description}</p>
-                    <div className="region-meta">
-                      <span className="port-count">{portCount} port{portCount !== 1 ? 's' : ''}</span>
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
+          {/* Inline Region Quick-Nav */}
+          <div className="regions-quick-nav">
+            <span className="regions-label">Browse by Region:</span>
+            <div className="regions-chips">
+              {regions.map((region) => {
+                const portCount = getPortsCountByRegion(region.id);
+                return (
+                  <Link
+                    key={region.id}
+                    to={`/ports/region/${region.slug}`}
+                    className="region-chip"
+                  >
+                    {region.name}
+                    <span className="chip-count">{portCount}</span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
@@ -140,26 +128,19 @@ function PortsPage() {
         if (ports.length === 0) return null;
 
         return (
-          <section key={region.id} className="section">
+          <section key={region.id} className="section ports-region-section">
             <div className="container">
               <div className="region-section-header">
-                <SectionHeader
-                  title={`${region.name} Ports`}
-                  subtitle={`Popular cruise ports in ${region.name}`}
-                  align="center"
-                />
+                <h2>{region.name}</h2>
+                <Link to={`/ports/region/${region.slug}`} className="view-all-link">
+                  View all {ports.length} ports →
+                </Link>
               </div>
 
               <div className="ports-grid">
                 {ports.slice(0, 3).map((port) => (
                   <PortCardWithImage key={port.id} port={port} />
                 ))}
-              </div>
-              
-              <div className="view-all-container">
-                <Link to={`/ports/region/${region.slug}`} className="view-all-link">
-                  View all {region.name} ports →
-                </Link>
               </div>
             </div>
           </section>
@@ -188,4 +169,3 @@ function PortsPage() {
 }
 
 export default PortsPage;
-
