@@ -196,13 +196,16 @@ function AppLayout() {
   }
   
   // Regular site layout with header/footer
+  // Hide header/footer in maintenance mode (HomePage handles its own minimal header)
+  const isMaintenanceHome = isMaintenanceMode && pathname === '/';
+  
   return (
     <div className="app">
       {/* Skip to main content - Accessibility */}
       <a href="#main-content" className="skip-link">
         Skip to main content
       </a>
-      <Header />
+      {!isMaintenanceHome && <Header />}
       {/* Using div instead of main to avoid nested <main> elements - each page has its own <main> */}
       <div id="main-content" className="main-wrapper">
         <ErrorBoundary>
@@ -318,7 +321,7 @@ function AppLayout() {
         </Suspense>
         </ErrorBoundary>
       </div>
-      <Footer />
+      {!isMaintenanceHome && <Footer />}
       {/* Deferred UI - loaded after main content for better mobile performance */}
       <Suspense fallback={null}>
         <CookieConsent />

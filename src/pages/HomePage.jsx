@@ -103,7 +103,7 @@ function HomePage() {
     const heroImageMobile = homeHeroMobileImage;
 
     return (
-      <main className="home-elegant">
+      <>
         <SEO
           title="Limitless Cruises - Website Updates in Progress"
           description="We're building a new site and experience. Get in touch with us directly for expert cruise advice."
@@ -111,161 +111,157 @@ function HomePage() {
           noindex={true}
         />
         
-        {/* Hero Section - Same style as normal home page */}
-        <section className="hero-elegant">
-          <div className="hero-background-image" style={{ aspectRatio: '16/9' }}>
-            <picture>
-              {heroImageMobile && (
-                <source 
-                  media="(max-width: 768px)" 
-                  srcSet={heroImageMobile}
-                  type="image/webp"
-                />
-              )}
-              <img
-                src={heroImage}
-                alt="Beautiful cruise destination"
-                width={1920}
-                height={1080}
-                loading="eager"
-                fetchpriority="high"
-                decoding="sync"
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-            </picture>
-            <div className="hero-image-overlay"></div>
+        {/* Minimal Header - Just contact info and logo */}
+        <div style={{ background: '#fff', borderBottom: '1px solid #e8e8e8' }}>
+          {/* Top contact bar */}
+          <div style={{ 
+            background: '#2C344C', 
+            color: '#fff', 
+            padding: '0.5rem 0',
+            fontSize: '0.875rem'
+          }}>
+            <div className="container" style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: '1rem'
+            }}>
+              <span>ABTA Protected | Personal Cruise Consultant</span>
+              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                <a href={`tel:${siteConfig.phone}`} style={{ color: '#fff', textDecoration: 'none' }}>
+                  {siteConfig.phone}
+                </a>
+                <span>|</span>
+                <a 
+                  href={siteConfig.whatsappUrl} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: '#fff', textDecoration: 'none' }}
+                >
+                  {siteConfig.whatsapp}
+                </a>
+              </div>
+            </div>
           </div>
-          <div className="container">
-            <div className="hero-content-overlay">
-              <div className="hero-text-box">
-                <div className="hero-text">
-                  <p className="hero-eyebrow">Website Updates</p>
-                  <h1>We're Building a New Site and Experience</h1>
-                  <p className="hero-lead">
-                    We're bringing exciting new features and enhancements to our website.
-                  </p>
-                  <p className="hero-note">
-                    Our website will be fully updated in approximately 2 weeks. In the meantime, 
-                    please get in touch with us directly for expert cruise advice and personalized service.
-                  </p>
-                  <div className="hero-cta-group">
-                    <a 
-                      href={`tel:${siteConfig.phone}`} 
-                      className="btn btn-primary"
-                      style={{ textDecoration: 'none' }}
-                    >
-                      Call Us: {siteConfig.phone}
-                    </a>
-                    <a 
-                      href={siteConfig.facebook}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-secondary"
-                      style={{ textDecoration: 'none' }}
-                    >
-                      Visit Our Facebook
-                    </a>
+
+          {/* Logo */}
+          <div className="container" style={{ padding: '1.5rem 0' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <img 
+                src="https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/logo.webp" 
+                alt="Limitless Cruises logo" 
+                width="56"
+                height="56"
+              />
+              <div>
+                <div style={{ fontSize: '1.5rem', fontWeight: 600, color: '#2C344C' }}>
+                  Limitless Cruises
+                </div>
+                <div style={{ fontSize: '0.875rem', color: '#666' }}>
+                  Personal Cruise Consultant
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <main className="home-elegant">
+          {/* Hero Section - Same style as normal home page */}
+          <section className="hero-elegant">
+            <div className="hero-background-image" style={{ aspectRatio: '16/9' }}>
+              <picture>
+                {heroImageMobile && (
+                  <source 
+                    media="(max-width: 768px)" 
+                    srcSet={heroImageMobile}
+                    type="image/webp"
+                  />
+                )}
+                <img
+                  src={heroImage}
+                  alt="Beautiful cruise destination"
+                  width={1920}
+                  height={1080}
+                  loading="eager"
+                  fetchpriority="high"
+                  decoding="sync"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </picture>
+              <div className="hero-image-overlay"></div>
+            </div>
+            <div className="container">
+              <div className="hero-content-overlay">
+                <div className="hero-text-box">
+                  <div className="hero-text">
+                    <p className="hero-eyebrow">Website Updates</p>
+                    <h1>We're Building a New Site and Experience</h1>
+                    <p className="hero-lead">
+                      We're bringing exciting new features and enhancements to our website.
+                    </p>
+                    <p className="hero-note">
+                      Our website will be fully updated in approximately 2 weeks. In the meantime, 
+                      please get in touch with us directly for expert cruise advice and personalized service.
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Contact Options - Using same style as home page */}
-        <section className="still-here">
-          <div className="container">
-            <div className="still-here-content">
-              <h2>Get In Touch</h2>
-              <p className="section-lead">
-                Your dedicated consultant is here to provide expert guidance 
-                and personalised recommendations for your next voyage.
-              </p>
-              
-              <div className="contact-grid">
-                <a href={`tel:${siteConfig.phone}`} className="contact-card-elegant">
-                  <span className="contact-icon contact-icon--phone">
-                    <PhoneIcon />
-                  </span>
-                  <h3>Telephone</h3>
-                  <p>{siteConfig.phone}</p>
-                </a>
-                
-                <a 
-                  href={siteConfig.whatsappUrl || 'https://wa.me/447359796108'} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="contact-card-elegant"
-                >
-                  <span className="contact-icon contact-icon--whatsapp">
-                    <WhatsAppIcon />
-                  </span>
-                  <h3>WhatsApp</h3>
-                  <p>{siteConfig.whatsapp}</p>
-                </a>
-                
-                <a 
-                  href={siteConfig.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="contact-card-elegant"
-                >
-                  <span className="contact-icon contact-icon--facebook">
-                    <FacebookIcon />
-                  </span>
-                  <h3>Facebook</h3>
-                  <p>Send Message</p>
-                </a>
-                
-                <a href={`mailto:${siteConfig.email}`} className="contact-card-elegant">
-                  <span className="contact-icon contact-icon--email">
-                    <MailIcon />
-                  </span>
-                  <h3>Email</h3>
-                  <p>{siteConfig.email}</p>
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Trust Bar */}
-        <section className="trust-bar">
-          <div className="container">
-            <div className="trust-items">
-              <div className="trust-item">
-                <span className="trust-icon">
-                  <ShieldIcon />
-                </span>
-                <div className="trust-text">
-                  <strong>ABTA Protected</strong>
-                  <span>P7541</span>
-                </div>
-              </div>
-              <span className="trust-divider" />
-              <div className="trust-item">
-                <span className="trust-icon">
-                  <AwardIcon />
-                </span>
-                <div className="trust-text">
-                  <strong>CLIA Cruise Master</strong>
-                  <span>Expert Certified</span>
-                </div>
-              </div>
-              <span className="trust-divider" />
-              <div className="trust-item">
-                <span className="trust-icon">
-                  <MapPinIcon />
-                </span>
-                <div className="trust-text">
-                  <strong>UK Based</strong>
-                  <span>Personal Service</span>
+          {/* Contact Options - Simple grid */}
+          <section className="still-here">
+            <div className="container">
+              <div className="still-here-content">
+                <div className="contact-grid">
+                  <a href={`tel:${siteConfig.phone}`} className="contact-card-elegant">
+                    <span className="contact-icon contact-icon--phone">
+                      <PhoneIcon />
+                    </span>
+                    <h3>Telephone</h3>
+                    <p>{siteConfig.phone}</p>
+                  </a>
+                  
+                  <a 
+                    href={siteConfig.whatsappUrl || 'https://wa.me/447359796108'} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="contact-card-elegant"
+                  >
+                    <span className="contact-icon contact-icon--whatsapp">
+                      <WhatsAppIcon />
+                    </span>
+                    <h3>WhatsApp</h3>
+                    <p>{siteConfig.whatsapp}</p>
+                  </a>
+                  
+                  <a 
+                    href={siteConfig.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-card-elegant"
+                  >
+                    <span className="contact-icon contact-icon--facebook">
+                      <FacebookIcon />
+                    </span>
+                    <h3>Facebook</h3>
+                    <p>Send Message</p>
+                  </a>
+                  
+                  <a href={`mailto:${siteConfig.email}`} className="contact-card-elegant">
+                    <span className="contact-icon contact-icon--email">
+                      <MailIcon />
+                    </span>
+                    <h3>Email</h3>
+                    <p>{siteConfig.email}</p>
+                  </a>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      </main>
+          </section>
+        </main>
+      </>
     );
   }
 
