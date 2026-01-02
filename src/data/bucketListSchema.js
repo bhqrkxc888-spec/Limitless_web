@@ -71,6 +71,28 @@
  */
 
 /**
+ * @typedef {Object} BucketListOptimalTiming
+ * @property {string} summary - Brief overview of best times to visit
+ * @property {Object[]} seasons - Seasonal breakdown
+ * @property {string} seasons.name - Season name (e.g., "Peak Season")
+ * @property {string} seasons.months - Month range (e.g., "December to January")
+ * @property {string[]} seasons.highlights - What makes this season special
+ */
+
+/**
+ * @typedef {Object} BucketListSignatureEncounter
+ * @property {string} category - Category (wildlife, culture, landscape, adventure)
+ * @property {string} title - Encounter title
+ * @property {string} description - What you will experience
+ */
+
+/**
+ * @typedef {Object} BucketListWhoForItem
+ * @property {string} type - Icon type (wildlife, adventure, culture, photography, couples, families, solo)
+ * @property {string} label - Display label
+ */
+
+/**
  * @typedef {Object} BucketListExperience
  * @property {string} id - Unique ID
  * @property {string} slug - URL slug
@@ -82,12 +104,17 @@
  * @property {BucketListNarrativeBlock[]} [narrative] - Long-form narrative blocks (optional)
  * @property {BucketListDestinationHighlight[]} [destinationHighlights] - Destination highlights (optional)
  * @property {BucketListItineraryItem[]} itinerary - Sample itinerary (required, at least 1 item)
- * @property {string[]} [included] - What's included list (optional)
- * @property {string[]} [upgrades] - Available upgrades (optional)
- * @property {string[]} [whoFor] - Who this experience is for (optional)
- * @property {BucketListFAQ[]} [faqs] - FAQs (optional)
- * @property {Object[]} [testimonials] - Testimonials (optional, existing format)
+ * @property {BucketListOptimalTiming} [optimalTiming] - When to visit section
+ * @property {BucketListSignatureEncounter[]} [signatureEncounters] - Destination highlights with categories
+ * @property {string[]} [bespokeTailoring] - Customisation messaging (replaces includes)
+ * @property {string[]|BucketListWhoForItem[]} [whoFor] - Who this experience is for
+ * @property {BucketListFAQ[]} [faqs] - FAQs (destination-focused, not trip logistics)
  * @property {string[]} [cruiseLines] - Recommended cruise lines (optional)
+ * 
+ * DEPRECATED FIELDS (removed from template):
+ * @property {string[]} [included] - DEPRECATED: Use bespokeTailoring instead
+ * @property {string[]} [upgrades] - DEPRECATED: Removed from template
+ * @property {Object[]} [testimonials] - DEPRECATED: Removed from template
  * 
  * LEGACY FIELDS (for backwards compatibility):
  * @property {string} tagline - Legacy tagline (use hero.subheadline instead)

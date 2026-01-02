@@ -91,6 +91,211 @@
   line-height: var(--line-height-relaxed);
 }
 
+/* Optimal Timing Section */
+.optimal-timing-section {
+  margin-top: var(--space-12);
+}
+
+.timing-summary {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--clr-text-main);
+  margin-bottom: var(--space-6);
+}
+
+.seasons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
+}
+
+.season-card {
+  background: var(--clr-bg-alt);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  border-top: 4px solid var(--clr-accent);
+}
+
+.season-card h4 {
+  margin: 0 0 var(--space-2) 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--clr-primary);
+  font-family: var(--font-family-display);
+}
+
+.season-months {
+  display: inline-block;
+  font-size: var(--font-size-sm);
+  color: var(--clr-accent-dark);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-4);
+}
+
+.season-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.season-highlights li {
+  padding: var(--space-2) 0;
+  padding-left: var(--space-5);
+  position: relative;
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-muted);
+  margin: 0;
+}
+
+.season-highlights li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--clr-accent);
+  font-weight: bold;
+}
+
+/* Signature Encounters Section */
+.signature-encounters-section {
+  margin-top: var(--space-12);
+}
+
+.encounters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-6);
+}
+
+.encounter-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: all var(--transition-base);
+}
+
+.encounter-card:hover {
+  border-color: var(--clr-accent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.encounter-category {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--clr-accent-dark);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-3);
+}
+
+.encounter-card h4 {
+  margin: 0 0 var(--space-3) 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--clr-text-main);
+  font-family: var(--font-family-display);
+}
+
+.encounter-card p {
+  margin: 0;
+  font-size: var(--font-size-base);
+  color: var(--clr-text-muted);
+  line-height: var(--line-height-relaxed);
+}
+
+/* Who For Section (styled with icons) */
+.who-for-section {
+  margin-top: var(--space-12);
+}
+
+.who-for-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-4);
+}
+
+.who-for-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--clr-bg-alt);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.who-for-item:hover {
+  background: var(--clr-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.who-for-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  color: var(--clr-accent);
+}
+
+.who-for-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.who-for-label {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--clr-text-main);
+}
+
+/* Bespoke Tailoring Section */
+.bespoke-section {
+  margin-top: var(--space-12);
+}
+
+.bespoke-intro {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--clr-text-main);
+  margin-bottom: var(--space-6);
+}
+
+.bespoke-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-3);
+}
+
+.bespoke-list li {
+  padding: var(--space-4);
+  padding-left: var(--space-8);
+  position: relative;
+  background: var(--clr-bg-alt);
+  border-radius: var(--radius-md);
+  margin: 0;
+}
+
+.bespoke-list li::before {
+  content: '✓';
+  position: absolute;
+  left: var(--space-4);
+  color: var(--clr-accent);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Itinerary Intro */
+.itinerary-intro {
+  font-size: var(--font-size-base);
+  color: var(--clr-text-muted);
+  margin-bottom: var(--space-6);
+  font-style: italic;
+}
+
 /* Itinerary Timeline */
 .itinerary-section {
   margin-top: var(--space-12);
@@ -187,49 +392,6 @@
   font-weight: var(--font-weight-bold);
 }
 
-/* Testimonials */
-.testimonials-section {
-  margin-top: var(--space-12);
-}
-
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--space-6);
-}
-
-.testimonial-card {
-  padding: var(--space-6);
-  background-color: var(--clr-bg-alt);
-  border-radius: var(--radius-lg);
-  position: relative;
-}
-
-.testimonial-quote {
-  position: absolute;
-  top: var(--space-4);
-  right: var(--space-4);
-  width: 48px;
-  height: 48px;
-  opacity: 0.1;
-}
-
-.testimonial-text {
-  font-size: var(--font-size-base);
-  line-height: var(--line-height-relaxed);
-  font-style: italic;
-  margin-bottom: var(--space-4);
-  color: var(--clr-text-main);
-}
-
-.testimonial-author {
-  font-size: var(--font-size-sm);
-  color: var(--clr-text-muted);
-}
-
-.testimonial-author strong {
-  color: var(--clr-text-main);
-}
 
 /* FAQ Section */
 .faq-section {
@@ -345,20 +507,32 @@
     grid-template-columns: 1fr;
   }
 
-  .testimonials-grid {
+  .seasons-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .encounters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .who-for-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bespoke-list {
     grid-template-columns: 1fr;
   }
 
   .itinerary-timeline {
-    padding-left: 80px; /* Maintain spacing on mobile */
+    padding-left: 80px;
   }
   
   .itinerary-day {
-    left: -60px; /* Adjust for mobile */
+    left: -60px;
   }
   
   .itinerary-timeline::before {
-    left: 16px; /* Adjust line position for mobile */
+    left: 16px;
   }
 }
 

@@ -11,6 +11,96 @@ import { useBucketListImage } from '../hooks/useImageUrl';
 import { createSanitizedMarkup } from '../utils/sanitizeHtml';
 import './BucketListExperiencePage.css';
 
+// Icon mapping for Who For section
+const whoForIcons = {
+  wildlife: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M12 3c-1.5 0-2.5 1-3 2-1 0-2 1-2 2 0 .5.2 1 .5 1.5C6.5 9 6 10 6 11c0 2 1.5 3 3 3h6c1.5 0 3-1 3-3 0-1-.5-2-1.5-2.5.3-.5.5-1 .5-1.5 0-1-1-2-2-2-.5-1-1.5-2-3-2z"/>
+      <path d="M8 14v4a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-4"/>
+    </svg>
+  ),
+  adventure: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+      <path d="m2 17 10 5 10-5"/>
+      <path d="m2 12 10 5 10-5"/>
+    </svg>
+  ),
+  culture: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M3 21h18"/>
+      <path d="M5 21V7l8-4v18"/>
+      <path d="M19 21V11l-6-4"/>
+      <path d="M9 9v.01"/>
+      <path d="M9 12v.01"/>
+      <path d="M9 15v.01"/>
+    </svg>
+  ),
+  photography: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+      <circle cx="12" cy="13" r="4"/>
+    </svg>
+  ),
+  couples: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+    </svg>
+  ),
+  families: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <circle cx="9" cy="7" r="4"/>
+      <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>
+      <circle cx="17" cy="11" r="2"/>
+      <path d="M17 21v-1a2 2 0 0 1 2-2h.5"/>
+    </svg>
+  ),
+  solo: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <circle cx="12" cy="8" r="5"/>
+      <path d="M20 21a8 8 0 1 0-16 0"/>
+    </svg>
+  ),
+  nature: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M12 22v-7"/>
+      <path d="M12 15c-4.5 0-7-2.5-7-7 0-3 2-5.5 5-6 .5 2.5 2 4 4 4s3.5-1.5 4-4c3 .5 5 3 5 6 0 4.5-2.5 7-7 7"/>
+    </svg>
+  ),
+  relaxation: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M2 12h6"/>
+      <path d="M22 12h-6"/>
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v4"/>
+      <path d="M12 18v4"/>
+    </svg>
+  ),
+  luxury: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>
+  ),
+  default: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="m9 12 2 2 4-4"/>
+    </svg>
+  )
+};
+
+// Category icons for Signature Encounters
+const categoryIcons = {
+  wildlife: '🦋',
+  culture: '🏛️',
+  landscape: '🏔️',
+  adventure: '🚀',
+  culinary: '🍷',
+  history: '📜',
+  nature: '🌿',
+  default: '✨'
+};
+
 function BucketListExperiencePage() {
   const { slug } = useParams();
   const experience = getBucketListBySlug(slug);
@@ -105,6 +195,30 @@ function BucketListExperiencePage() {
     return [tripSchema, breadcrumbSchema, faqSchema].filter(Boolean);
   }, [experience, seoData, ogImage, heroImage]);
 
+  // Helper to get whoFor items with backwards compatibility
+  const getWhoForItems = () => {
+    const items = experience.whoFor || experience.bestFor || [];
+    return items.map(item => {
+      if (typeof item === 'string') {
+        // Legacy format: simple string, guess icon from content
+        const lower = item.toLowerCase();
+        let type = 'default';
+        if (lower.includes('wildlife') || lower.includes('animal')) type = 'wildlife';
+        else if (lower.includes('adventure') || lower.includes('explorer')) type = 'adventure';
+        else if (lower.includes('culture') || lower.includes('heritage')) type = 'culture';
+        else if (lower.includes('photo')) type = 'photography';
+        else if (lower.includes('couple') || lower.includes('romantic')) type = 'couples';
+        else if (lower.includes('famil')) type = 'families';
+        else if (lower.includes('solo')) type = 'solo';
+        else if (lower.includes('nature') || lower.includes('enthusiast')) type = 'nature';
+        else if (lower.includes('relax')) type = 'relaxation';
+        else if (lower.includes('luxury')) type = 'luxury';
+        return { type, label: item };
+      }
+      return item;
+    });
+  };
+
   // Handle experience not found (after all hooks)
   if (!experience) {
     return (
@@ -159,12 +273,7 @@ function BucketListExperiencePage() {
               <div className="key-info-item">
                 <span className="key-info-label">Best For</span>
                 <span className="key-info-value">
-                  {Array.isArray(experience.whoFor) 
-                    ? experience.whoFor.join(', ') 
-                    : Array.isArray(experience.bestFor) 
-                      ? experience.bestFor.join(', ')
-                      : experience.whoFor || experience.bestFor
-                  }
+                  {getWhoForItems().slice(0, 3).map(item => item.label).join(', ')}
                 </span>
               </div>
             )}
@@ -179,7 +288,6 @@ function BucketListExperiencePage() {
             <div className="experience-main">
               {/* Description / Narrative */}
               {experience.narrative && experience.narrative.length > 0 ? (
-                // New schema: narrative blocks
                 <div className="experience-narrative">
                   {experience.narrative.map((block, index) => {
                     const HeadingTag = block.level === 'h3' ? 'h3' : 'h2';
@@ -192,36 +300,62 @@ function BucketListExperiencePage() {
                   })}
                 </div>
               ) : experience.description && (
-                // Legacy: single description
                 <div className="experience-description">
                   <p className="lead">{experience.description}</p>
                 </div>
               )}
 
-              {/* Destination Highlights (new schema) or Experience Highlights (legacy) */}
-              {experience.destinationHighlights && experience.destinationHighlights.length > 0 ? (
-                <div className="destination-highlights-section">
+              {/* Optimal Timing Section */}
+              {experience.optimalTiming && (
+                <div className="optimal-timing-section">
                   <SectionHeader
-                    title="Destination Highlights"
-                    subtitle="Discover the places you'll explore"
+                    title="When to Visit"
+                    subtitle="The best times to experience this destination"
                   />
-                  {experience.destinationHighlights.map((highlight, index) => (
-                    <div key={index} className="destination-highlight">
-                      <h3>{highlight.title}</h3>
-                      {highlight.image && (
-                        <img 
-                          src={highlight.image} 
-                          alt={highlight.imageAlt || highlight.title}
-                          className="destination-highlight-image"
-                          loading="lazy"
-                        />
-                      )}
-                      <div dangerouslySetInnerHTML={createSanitizedMarkup(highlight.body)} />
+                  {experience.optimalTiming.summary && (
+                    <p className="timing-summary">{experience.optimalTiming.summary}</p>
+                  )}
+                  {experience.optimalTiming.seasons && experience.optimalTiming.seasons.length > 0 && (
+                    <div className="seasons-grid">
+                      {experience.optimalTiming.seasons.map((season, index) => (
+                        <div key={index} className="season-card">
+                          <h4>{season.name}</h4>
+                          <span className="season-months">{season.months}</span>
+                          {season.highlights && season.highlights.length > 0 && (
+                            <ul className="season-highlights">
+                              {season.highlights.map((highlight, idx) => (
+                                <li key={idx}>{highlight}</li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  )}
+                </div>
+              )}
+
+              {/* Signature Encounters (new) or Experience Highlights (legacy) */}
+              {experience.signatureEncounters && experience.signatureEncounters.length > 0 ? (
+                <div className="signature-encounters-section">
+                  <SectionHeader
+                    title="What Awaits You"
+                    subtitle="The experiences that make this journey unforgettable"
+                  />
+                  <div className="encounters-grid">
+                    {experience.signatureEncounters.map((encounter, index) => (
+                      <div key={index} className="encounter-card">
+                        <span className="encounter-category">
+                          {categoryIcons[encounter.category] || categoryIcons.default}
+                          {encounter.category}
+                        </span>
+                        <h4>{encounter.title}</h4>
+                        <p>{encounter.description}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ) : experience.highlights && experience.highlights.length > 0 && (
-                // Legacy: simple highlights list
                 <div className="highlights-section">
                   <SectionHeader
                     title="Experience Highlights"
@@ -242,9 +376,8 @@ function BucketListExperiencePage() {
                 </div>
               )}
 
-              {/* Itinerary */}
+              {/* Example Journey (restyled itinerary) */}
               {experience.itinerary && experience.itinerary.length > 0 && (() => {
-                // Normalize itinerary: shift Day 0 to Day 1 (cruise days start at 1, not 0)
                 const displayItinerary = normalizeItinerary(experience.itinerary);
                 
                 if (displayItinerary.length === 0) return null;
@@ -252,13 +385,15 @@ function BucketListExperiencePage() {
                 return (
                   <div className="itinerary-section">
                     <SectionHeader
-                      title="Itinerary Overview"
-                      subtitle="A glimpse into your journey"
+                      title="Example Journey"
+                      subtitle="One way your adventure could unfold"
                     />
+                    <p className="itinerary-intro">
+                      Every voyage is tailored to your preferences. This sample itinerary shows the kind of experience we can create for you.
+                    </p>
 
                     <div className="itinerary-timeline">
                       {displayItinerary.map((item, index) => {
-                        // Format day number - use normalization helper (should already be normalized)
                         const dayNumber = normalizeDayNumber(item.day, index);
                         return (
                           <div key={index} className="itinerary-item">
@@ -275,79 +410,50 @@ function BucketListExperiencePage() {
                 );
               })()}
 
-              {/* What's Included */}
-              {(experience.included || experience.includes) && (experience.included || experience.includes).length > 0 && (
-                <div className="includes-section">
+              {/* Bespoke Tailoring (restyled What's Included) */}
+              {(experience.bespokeTailoring || experience.included || experience.includes) && (
+                <div className="bespoke-section">
                   <SectionHeader
-                    title="What's Included"
-                    subtitle="Everything that's part of your journey"
+                    title="Tailored to You"
+                    subtitle="Every journey is crafted around your preferences"
                   />
-                  <ul className="includes-list">
-                    {(experience.included || experience.includes).map((item, index) => (
+                  <p className="bespoke-intro">
+                    We work with you to design the perfect trip. Here is what we typically arrange:
+                  </p>
+                  <ul className="bespoke-list">
+                    {(experience.bespokeTailoring || experience.included || experience.includes).map((item, index) => (
                       <li key={index}>{item}</li>
                     ))}
                   </ul>
                 </div>
               )}
 
-              {/* Upgrades (new schema) */}
-              {experience.upgrades && experience.upgrades.length > 0 && (
-                <div className="upgrades-section">
-                  <SectionHeader
-                    title="Available Upgrades"
-                    subtitle="Enhance your experience"
-                  />
-                  <ul className="upgrades-list">
-                    {experience.upgrades.map((item, index) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Who This Is For (new schema) */}
+              {/* Who This Is For (styled with icons) */}
               {(experience.whoFor || experience.bestFor) && (
                 <div className="who-for-section">
                   <SectionHeader
-                    title="Who This Experience Is For"
-                    subtitle="Perfect for these travellers"
+                    title="Perfect For"
+                    subtitle="This experience suits travellers who seek"
                   />
-                  <ul className="who-for-list">
-                    {(experience.whoFor || experience.bestFor).map((item, index) => (
-                      <li key={index}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {/* Testimonials */}
-              {experience.testimonials && experience.testimonials.length > 0 && (
-                <div className="testimonials-section">
-                  <SectionHeader
-                    title="Guest Experiences"
-                    subtitle="What our guests say"
-                  />
-                  <div className="testimonials-grid">
-                    {experience.testimonials.map((testimonial, index) => (
-                      <div key={index} className="testimonial-card">
-                        <div className="testimonial-quote">
-                          <svg viewBox="0 0 24 24" fill="currentColor" opacity="0.2">
-                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                          </svg>
-                        </div>
-                        <p className="testimonial-text">"{testimonial.quote}"</p>
+                  <div className="who-for-grid">
+                    {getWhoForItems().map((item, index) => (
+                      <div key={index} className="who-for-item">
+                        <span className="who-for-icon">
+                          {whoForIcons[item.type] || whoForIcons.default}
+                        </span>
+                        <span className="who-for-label">{item.label}</span>
                       </div>
                     ))}
                   </div>
                 </div>
               )}
 
-              {/* FAQ */}
+              {/* FAQ (destination-focused) */}
               {(experience.faqs || experience.faq) && (experience.faqs || experience.faq).length > 0 && (
                 <div className="faq-section">
                   <SectionHeader
-                    title="Frequently Asked Questions"
-                    subtitle="Everything you need to know"
+                    title="Common Questions"
+                    subtitle="What travellers want to know about this destination"
                   />
                   <Accordion
                     items={(experience.faqs || experience.faq).map((faq, index) => ({
@@ -368,13 +474,13 @@ function BucketListExperiencePage() {
                 <div className="internal-links-grid">
                   <div className="internal-link-card">
                     <h4>More Bucket List Experiences</h4>
-                    <p>Discover other once-in-a-lifetime cruise adventures from the UK</p>
+                    <p>Discover other extraordinary cruise adventures from the UK</p>
                     <Button to="/bucket-list" variant="outline" size="sm">
                       View All Experiences
                     </Button>
                   </div>
                   <div className="internal-link-card">
-                    <h4>Travel Guides & Insights</h4>
+                    <h4>Travel Guides</h4>
                     <p>Expert advice, destination guides, and cruise planning tips</p>
                     <Button to="/guides" variant="outline" size="sm">
                       Browse Guides
@@ -394,9 +500,9 @@ function BucketListExperiencePage() {
             {/* Sidebar */}
             <aside className="experience-sidebar">
               <div className="sidebar-card booking-card">
-                <h3>Book This Experience</h3>
+                <h3>Start Planning</h3>
                 <p>
-                  Ready to embark on this extraordinary journey? Your expert consultant is here to help.
+                  Ready to explore this destination? Your expert consultant will help design your perfect journey.
                 </p>
                 <div className="sidebar-cta">
                   <Button href={`tel:${siteConfig.phone}`} variant="primary" fullWidth>
@@ -465,7 +571,7 @@ function BucketListExperiencePage() {
             <h2>Ready to Experience {experience.title}?</h2>
             <p>
               Get in touch today for a personalised quote and expert advice on this bucket list adventure. 
-              I'll help you find the perfect itinerary, dates, and exclusive deals.
+              We will help you find the perfect itinerary, dates, and exclusive deals.
             </p>
             <div className="cta-options">
               <div className="cta-option">
@@ -497,4 +603,3 @@ function BucketListExperiencePage() {
 }
 
 export default BucketListExperiencePage;
-
