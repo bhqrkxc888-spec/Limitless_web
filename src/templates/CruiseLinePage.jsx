@@ -201,7 +201,7 @@ function CruiseLinePage() {
                     <Card.Image 
                       src={imageUrl} 
                       alt={item.title}
-                      aspectRatio="4/3"
+                      aspectRatio="3/2"
                     />
                     <Card.Content>
                       <Card.Title as="h3">{item.title}</Card.Title>

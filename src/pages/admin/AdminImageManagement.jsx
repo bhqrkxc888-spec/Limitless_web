@@ -78,14 +78,14 @@ function AdminImageManagement() {
 
       // Calculate stats per entity type
       const newStats = {
-        site: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
-        pageHeroes: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
-        destinations: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
-        cruiseLines: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
-        ships: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
-        categories: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
-        bucketList: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
-        portGuides: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0 },
+        site: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0, requiredCompliant: 0 },
+        pageHeroes: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0, requiredCompliant: 0 },
+        destinations: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0, requiredCompliant: 0 },
+        cruiseLines: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0, requiredCompliant: 0 },
+        ships: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0, requiredCompliant: 0 },
+        categories: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0, requiredCompliant: 0 },
+        bucketList: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0, requiredCompliant: 0 },
+        portGuides: { total: 0, compliant: 0, warnings: 0, missing: 0, optional: 0, requiredUploaded: 0, optionalUploaded: 0, requiredCompliant: 0 },
       };
 
       const imagesWithWarnings = [];
@@ -106,9 +106,7 @@ function AdminImageManagement() {
 
         if (type) {
           newStats[type].total++;
-          if (img.seo_compliant) {
-            newStats[type].compliant++;
-          }
+          
           const warnings = img.validation_warnings ? JSON.parse(img.validation_warnings) : [];
           if (warnings.length > 0) {
             newStats[type].warnings++;
@@ -157,8 +155,17 @@ function AdminImageManagement() {
 
           if (isRequired) {
             newStats[type].requiredUploaded++;
+            // Track compliant REQUIRED images separately
+            if (img.seo_compliant) {
+              newStats[type].requiredCompliant++;
+            }
           } else if (isOptional) {
             newStats[type].optionalUploaded++;
+          }
+          
+          // Track total compliant images (both required and optional) for overall compliance percentage
+          if (img.seo_compliant) {
+            newStats[type].compliant++;
           }
         }
       });
@@ -308,7 +315,7 @@ function AdminImageManagement() {
     // Status based on REQUIRED images only
     if (categoryStats.missing > 0) return 'error'; // Missing required images
     if (categoryStats.warnings > 0) return 'warning'; // Has validation warnings
-    if (categoryStats.requiredUploaded > 0 && categoryStats.compliant === categoryStats.requiredUploaded) return 'pass';
+    if (categoryStats.requiredUploaded > 0 && categoryStats.requiredCompliant === categoryStats.requiredUploaded) return 'pass';
     return 'warning';
   };
 
@@ -531,11 +538,11 @@ function AdminImageManagement() {
                     <div className="category-stats">
                       <div className="category-stat">
                         <span className="label">Uploaded:</span>
-                        <span className="value">{category.stats.total}</span>
+                        <span className="value">{category.stats.requiredUploaded || 0}</span>
                       </div>
                       <div className="category-stat">
                         <span className="label">Compliant:</span>
-                        <span className="value">{category.stats.compliant}</span>
+                        <span className="value">{category.stats.requiredCompliant || 0}</span>
                       </div>
                       {category.stats.missing > 0 && (
                         <div className="category-stat stat-missing">

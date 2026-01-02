@@ -63,6 +63,8 @@ export function useDestinationImage(slug, type = 'hero', destinationName = '') {
  * Hook to get bucket list image URL
  * Note: bucket-list uses 'id' as entityId in database, not slug
  * Only uses bucket list-specific images (no image sharing)
+ * 
+ * Performance: Database lookup is deferred until after LCP/idle
  */
 export function useBucketListImage(id, type = 'hero', experienceName = '') {
   const [imageUrl, setImageUrl] = useState(PLACEHOLDER_IMAGE);
@@ -77,29 +79,46 @@ export function useBucketListImage(id, type = 'hero', experienceName = '') {
       return;
     }
 
-    // Import the placeholder generator
+    let cancelled = false;
+    
+    // Import the placeholder generator and set placeholder immediately
     import('../utils/placeholderImages.js').then(({ getBucketListPlaceholderImage }) => {
+      if (cancelled) return;
       const smartPlaceholder = getBucketListPlaceholderImage(id, type, experienceName);
       setImageUrl(smartPlaceholder);
       
       const bucketListFallback = getBucketListImageUrl(id, type);
       
-      // Only use bucket list-specific images (no sharing)
-      getImageUrlFromDb('bucket-list', id, type, bucketListFallback)
-        .then(url => {
-          if (url && url !== PLACEHOLDER_IMAGE && url !== smartPlaceholder) {
-            setImageUrl(url);
-            setIsPlaceholder(false);
-          } else {
+      // Defer database lookup until after LCP/idle for better mobile performance
+      const fetchFromDb = () => {
+        if (cancelled) return;
+        getImageUrlFromDb('bucket-list', id, type, bucketListFallback)
+          .then(url => {
+            if (cancelled) return;
+            if (url && url !== PLACEHOLDER_IMAGE && url !== smartPlaceholder) {
+              setImageUrl(url);
+              setIsPlaceholder(false);
+            } else {
+              setIsPlaceholder(true);
+            }
+            setLoading(false);
+          })
+          .catch(() => {
+            if (cancelled) return;
             setIsPlaceholder(true);
-          }
-          setLoading(false);
-        })
-        .catch(() => {
-          setIsPlaceholder(true);
-          setLoading(false);
-        });
+            setLoading(false);
+          });
+      };
+      
+      // Use requestIdleCallback to defer DB lookup
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(fetchFromDb, { timeout: 2000 });
+      } else {
+        setTimeout(fetchFromDb, 100);
+      }
     });
+    
+    return () => { cancelled = true; };
   }, [id, type, experienceName]);
 
   return { imageUrl, loading, isPlaceholder };

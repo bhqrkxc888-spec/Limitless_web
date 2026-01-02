@@ -97,11 +97,17 @@ function BucketListMap({ itinerary }) {
     mapboxgl.accessToken = apiConfig.mapbox.accessToken;
 
     // Initialize map with performance optimizations
+    // Start centered on the FIRST location (Day 1) for better UX
+    const firstLocation = locations[0];
+    const initialCenter = firstLocation 
+      ? [firstLocation.coordinates.lon, firstLocation.coordinates.lat]
+      : mapBounds.center;
+    
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: apiConfig.mapbox.style,
-      center: mapBounds.center, // Use memoized center
-      zoom: 5, // Initial zoom, will be adjusted by fitBounds
+      center: initialCenter, // Start on Day 1 location
+      zoom: 8, // Closer initial zoom for better detail on starting point
       pitch: 0,
       bearing: 0,
       // Performance optimizations
@@ -290,11 +296,14 @@ function BucketListMap({ itinerary }) {
     const location = locations[index];
     const { lat, lon } = location.coordinates;
     
-    // Fly to location with optimized animation (shorter duration for snappier feel)
+    // Fly to location with smooth, sophisticated animation
+    // Using easing curve for more natural movement
     map.current.flyTo({
       center: [lon, lat],
       zoom: 10,
-      duration: 800, // Reduced from 1500 for snappier feel
+      duration: 1800, // Longer, more elegant transition (was 800ms)
+      curve: 1.2, // Smoother arc (default 1.42, lower = gentler)
+      easing: (t) => t * (2 - t), // Ease-out quad for sophisticated deceleration
       essential: true
     });
     

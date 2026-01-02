@@ -76,7 +76,16 @@ export function useOffers({
   }, [limit, offset, featured, offerType, destination]);
 
   useEffect(() => {
-    fetchOffers();
+    // Defer initial fetch until after LCP/idle to improve mobile performance
+    const doFetch = () => fetchOffers();
+    
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(doFetch, { timeout: 2000 });
+      return () => cancelIdleCallback(id);
+    } else {
+      const timer = setTimeout(doFetch, 100);
+      return () => clearTimeout(timer);
+    }
   }, [fetchOffers]);
 
   return {

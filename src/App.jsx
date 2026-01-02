@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
-import { useEffect, lazy, Suspense } from 'react'
+import { useEffect, lazy, Suspense, useState } from 'react'
 import { analyzePageSEO } from './services/seoMonitoring'
 
 // Layout Components (keep these eagerly loaded for fast initial render)
@@ -8,11 +8,39 @@ import Footer from './components/layout/Footer'
 import DevModeIndicator from './components/DevModeIndicator'
 import ErrorBoundary from './components/ErrorBoundary'
 
-// Deferred UI Components - loaded after initial render for better mobile performance
-// These are not needed for First Contentful Paint
+// Deferred UI Components - loaded after LCP for better mobile performance
+// These are not needed for First Contentful Paint or LCP
 const CookieConsent = lazy(() => import('./components/CookieConsent'))
 const FloatingWhatsApp = lazy(() => import('./components/FloatingWhatsApp'))
-const ImageDebugger = lazy(() => import('./components/ImageDebugger'))
+// ImageDebugger only loaded in development mode
+const ImageDebugger = import.meta.env.DEV 
+  ? lazy(() => import('./components/ImageDebugger'))
+  : null
+
+/**
+ * DeferredUI - Renders children only after LCP/idle
+ * This ensures non-critical UI doesn't compete with LCP resources
+ */
+function DeferredUI({ children }) {
+  const [shouldRender, setShouldRender] = useState(false)
+  
+  useEffect(() => {
+    const show = () => setShouldRender(true)
+    
+    // Defer rendering until after LCP/idle (3 second max timeout)
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(show, { timeout: 3000 })
+      return () => cancelIdleCallback(id)
+    } else {
+      const timer = setTimeout(show, 2000)
+      return () => clearTimeout(timer)
+    }
+  }, [])
+  
+  if (!shouldRender) return null
+  
+  return <Suspense fallback={null}>{children}</Suspense>
+}
 
 // Route Protection - ProtectedRoute and PublishGate are light, kept eager
 // AdminProtectedRoute is lazy to prevent admin chunk from loading on non-admin routes
@@ -325,16 +353,20 @@ function AppLayout() {
         </ErrorBoundary>
       </div>
       {!isMaintenanceHome && <Footer />}
-      {/* Deferred UI - loaded after main content for better mobile performance */}
-      <Suspense fallback={null}>
+      {/* Deferred UI - loaded after LCP for better mobile performance */}
+      {/* These components load only after requestIdleCallback or 3s timeout */}
+      <DeferredUI>
         <CookieConsent />
-      </Suspense>
-      <Suspense fallback={null}>
+      </DeferredUI>
+      <DeferredUI>
         <FloatingWhatsApp />
-      </Suspense>
-      <Suspense fallback={null}>
-        <ImageDebugger />
-      </Suspense>
+      </DeferredUI>
+      {/* ImageDebugger only in development */}
+      {ImageDebugger && (
+        <DeferredUI>
+          <ImageDebugger />
+        </DeferredUI>
+      )}
       <DevModeIndicator />
     </div>
   );

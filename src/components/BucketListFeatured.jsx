@@ -2,20 +2,39 @@
  * BucketListFeatured Component
  * Dynamic rotating featured bucket list experiences for homepage
  * Carousel with 3 items visible on desktop, arrows to navigate
+ * 
+ * Performance: Data is lazy-loaded after LCP to reduce initial bundle size
  */
 
 import { useState, useEffect } from 'react';
-import { getAllBucketList } from '../data/bucketList';
 import { Card } from './ui';
 import { Button } from './ui';
 import { useBucketListImage } from '../hooks/useImageUrl';
 import './BucketListFeatured.css';
 
 function BucketListFeatured() {
-  // Get all featured experiences (filtered by featured: true)
-  const allFeatured = getAllBucketList().filter(exp => exp.featured);
+  // Lazy load bucket list data after LCP to reduce initial bundle (~46KB savings)
+  const [allFeatured, setAllFeatured] = useState([]);
+  const [dataLoaded, setDataLoaded] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsToShow, setItemsToShow] = useState(3);
+
+  // Lazy load bucket list data after idle/LCP
+  useEffect(() => {
+    const loadData = () => {
+      import('../data/bucketList').then(({ getAllBucketList }) => {
+        setAllFeatured(getAllBucketList().filter(exp => exp.featured));
+        setDataLoaded(true);
+      });
+    };
+
+    // Defer data loading until after LCP/idle
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadData, { timeout: 2000 });
+    } else {
+      setTimeout(loadData, 100);
+    }
+  }, []);
 
   // Determine items to show based on screen size
   useEffect(() => {
@@ -48,8 +67,8 @@ function BucketListFeatured() {
   // Get visible items
   const visibleItems = allFeatured.slice(currentIndex, currentIndex + itemsToShow);
 
-  // When empty, render minimal container that collapses without CLS
-  if (!allFeatured || allFeatured.length === 0) {
+  // When loading or empty, render minimal container that collapses without CLS
+  if (!dataLoaded || !allFeatured || allFeatured.length === 0) {
     return <section className="bucket-list-featured bucket-list-featured--empty" aria-hidden="true" />;
   }
 
@@ -91,7 +110,7 @@ function BucketListFeatured() {
                     <Card.Image 
                       src={imageUrl} 
                       alt={experience.title}
-                      aspectRatio="16/10"
+                      aspectRatio="3/2"
                       loading="lazy"
                     />
                     <Card.Content>

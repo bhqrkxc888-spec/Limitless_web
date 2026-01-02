@@ -142,6 +142,12 @@
   filter: drop-shadow(0 0 8px rgba(212, 184, 106, 0.6));
 }
 
+/* White text on active (blue) marker for readability */
+.bucket-list-marker.active .bucket-list-marker-icon svg text {
+  fill: #ffffff;
+  font-weight: bold;
+}
+
 .bucket-list-marker-icon {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
   /* Prevent marker from blocking scroll on mobile */
