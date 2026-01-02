@@ -101,6 +101,17 @@ function AdminBucketListImages() {
   };
 
   /**
+   * Count gallery images for an experience
+   */
+  const getGalleryCount = (experienceId) => {
+    let count = 0;
+    if (getImage(experienceId, 'gallery-1')) count++;
+    if (getImage(experienceId, 'gallery-2')) count++;
+    if (getImage(experienceId, 'gallery-3')) count++;
+    return count;
+  };
+
+  /**
    * Get OG image for bucket list experience
    */
   const getOgImage = (experienceId) => {
@@ -137,7 +148,24 @@ function AdminBucketListImages() {
             Back to Image Management
           </Link>
           <h1 className="admin-page-title">Bucket List Experience Images</h1>
-          <p className="admin-page-subtitle">Manage hero, card, and OG images for all {experiences.length} bucket list experiences</p>
+          <p className="admin-page-subtitle">Manage hero, card, OG, and gallery images for all {experiences.length} bucket list experiences</p>
+          <div style={{ 
+            background: 'var(--admin-card-bg)', 
+            padding: '1rem', 
+            borderRadius: '8px', 
+            marginTop: '1rem',
+            border: '1px solid var(--admin-border)'
+          }}>
+            <strong style={{ color: 'var(--admin-accent)' }}>Image Requirements:</strong>
+            <ul style={{ margin: '0.5rem 0 0 1.5rem', color: 'var(--admin-text-muted)', fontSize: '0.875rem' }}>
+              <li><strong>Hero</strong> (Required): Large banner image for experience page header - dramatic, wide landscape</li>
+              <li><strong>Card</strong> (Required): Thumbnail for bucket list overview cards - iconic, recognizable scene</li>
+              <li><strong>Gallery 1</strong> (Recommended): Scenery/landscape image showcasing the destination</li>
+              <li><strong>Gallery 2</strong> (Recommended): Wildlife/nature image or cultural experience</li>
+              <li><strong>Gallery 3</strong> (Recommended): Activity/experience image showing what travellers will do</li>
+              <li><strong>OG Image</strong> (Optional): Social media sharing image (defaults to hero if not set)</li>
+            </ul>
+          </div>
         </header>
 
         {loading ? (
@@ -164,6 +192,7 @@ function AdminBucketListImages() {
                   <p className="entity-card-stats">
                     {(() => {
                       const ogImage = getOgImage(experience.id);
+                      const galleryCount = getGalleryCount(experience.id);
                       return (
                         <>
                           <span className={hero ? 'stat-ok' : 'stat-missing'}>
@@ -175,6 +204,9 @@ function AdminBucketListImages() {
                           {ogImage && (
                             <span className="stat-ok">OG</span>
                           )}
+                          <span className={galleryCount === 3 ? 'stat-ok' : galleryCount > 0 ? 'stat-warning' : 'stat-missing'}>
+                            Gallery {galleryCount}/3
+                          </span>
                         </>
                       );
                     })()}
@@ -218,8 +250,9 @@ function AdminBucketListImages() {
                   })()}
                 </div>
                 <p className="image-card-specs">
-                  Main banner for bucket list experience page
+                  Main banner for bucket list experience page - should be dramatic, wide landscape
                   <br />Recommended: 1920×1080px, WebP format
+                  <br /><strong>Examples:</strong> Dramatic iceberg (Antarctica), cherry blossoms with temple (Japan), northern lights over fjord (Arctic)
                 </p>
                 {(() => {
                   const hero = getImage(selectedExperience.id, 'hero');
@@ -257,8 +290,9 @@ function AdminBucketListImages() {
                   })()}
                 </div>
                 <p className="image-card-specs">
-                  Thumbnail for bucket list experience cards
+                  Thumbnail for bucket list experience cards - should be iconic and instantly recognizable
                   <br />Recommended: 600×400px, WebP format
+                  <br /><strong>Examples:</strong> Penguin colony (Antarctica), Opera House (Australia), Queen Mary 2 (Transatlantic)
                 </p>
                 {(() => {
                   const card = getImage(selectedExperience.id, 'card');
@@ -312,6 +346,132 @@ function AdminBucketListImages() {
                       suggestedAltText={`${selectedExperience.title} - Social sharing image`}
                       existingImage={ogImage?.url}
                       existingData={ogImage}
+                      onUploadComplete={handleUploadComplete}
+                    />
+                  );
+                })()}
+              </div>
+
+              {/* Gallery Section Header */}
+              <div className="gallery-section-header">
+                <h3>Gallery Images</h3>
+                <p>These images appear on the experience page to showcase the destination. All three are recommended for best presentation.</p>
+              </div>
+
+              {/* Gallery Image 1 */}
+              <div className="admin-card image-card">
+                <div className="image-card-header">
+                  <div className="image-card-title">
+                    <h3>Gallery Image 1</h3>
+                    <span className="badge badge-recommended">Recommended</span>
+                  </div>
+                  {(() => {
+                    const gallery1 = getImage(selectedExperience.id, 'gallery-1');
+                    return (
+                      <StatusIndicator 
+                        status={gallery1 ? (gallery1.seo_compliant ? 'pass' : 'warning') : 'missing'} 
+                        size="small" 
+                      />
+                    );
+                  })()}
+                </div>
+                <p className="image-card-specs">
+                  Primary gallery image - featured prominently
+                  <br />Recommended: 800×600px, WebP format
+                  <br />Suggested: Landscape/scenery shot
+                </p>
+                {(() => {
+                  const gallery1 = getImage(selectedExperience.id, 'gallery-1');
+                  
+                  return (
+                    <ImageUpload
+                      bucket={STORAGE_BUCKETS.CATEGORIES}
+                      entityType="bucket-list"
+                      entityId={selectedExperience.id}
+                      imageType="gallery-1"
+                      suggestedAltText={`${selectedExperience.title} - Scenery`}
+                      existingImage={gallery1?.url}
+                      existingData={gallery1}
+                      onUploadComplete={handleUploadComplete}
+                    />
+                  );
+                })()}
+              </div>
+
+              {/* Gallery Image 2 */}
+              <div className="admin-card image-card">
+                <div className="image-card-header">
+                  <div className="image-card-title">
+                    <h3>Gallery Image 2</h3>
+                    <span className="badge badge-recommended">Recommended</span>
+                  </div>
+                  {(() => {
+                    const gallery2 = getImage(selectedExperience.id, 'gallery-2');
+                    return (
+                      <StatusIndicator 
+                        status={gallery2 ? (gallery2.seo_compliant ? 'pass' : 'warning') : 'missing'} 
+                        size="small" 
+                      />
+                    );
+                  })()}
+                </div>
+                <p className="image-card-specs">
+                  Secondary gallery image
+                  <br />Recommended: 800×600px, WebP format
+                  <br />Suggested: Wildlife or activity shot
+                </p>
+                {(() => {
+                  const gallery2 = getImage(selectedExperience.id, 'gallery-2');
+                  
+                  return (
+                    <ImageUpload
+                      bucket={STORAGE_BUCKETS.CATEGORIES}
+                      entityType="bucket-list"
+                      entityId={selectedExperience.id}
+                      imageType="gallery-2"
+                      suggestedAltText={`${selectedExperience.title} - Wildlife`}
+                      existingImage={gallery2?.url}
+                      existingData={gallery2}
+                      onUploadComplete={handleUploadComplete}
+                    />
+                  );
+                })()}
+              </div>
+
+              {/* Gallery Image 3 */}
+              <div className="admin-card image-card">
+                <div className="image-card-header">
+                  <div className="image-card-title">
+                    <h3>Gallery Image 3</h3>
+                    <span className="badge badge-recommended">Recommended</span>
+                  </div>
+                  {(() => {
+                    const gallery3 = getImage(selectedExperience.id, 'gallery-3');
+                    return (
+                      <StatusIndicator 
+                        status={gallery3 ? (gallery3.seo_compliant ? 'pass' : 'warning') : 'missing'} 
+                        size="small" 
+                      />
+                    );
+                  })()}
+                </div>
+                <p className="image-card-specs">
+                  Third gallery image
+                  <br />Recommended: 800×600px, WebP format
+                  <br />Suggested: Experience/atmosphere shot
+                </p>
+                {(() => {
+                  const gallery3 = getImage(selectedExperience.id, 'gallery-3');
+                  
+                  return (
+                    <ImageUpload
+                      bucket={STORAGE_BUCKETS.CATEGORIES}
+                      entityType="bucket-list"
+                      entityId={selectedExperience.id}
+                      imageType="gallery-3"
+                      suggestedAltText={`${selectedExperience.title} - Experience`}
+                      existingImage={gallery3?.url}
+                      existingData={gallery3}
                       onUploadComplete={handleUploadComplete}
                     />
                   );
@@ -418,6 +578,30 @@ function AdminBucketListImages() {
             font-size: 1.5rem;
             font-weight: 600;
             color: var(--admin-text);
+          }
+
+          .gallery-section-header {
+            margin: 2rem 0 1rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid var(--admin-border);
+          }
+
+          .gallery-section-header h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--admin-text);
+          }
+
+          .gallery-section-header p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: var(--admin-text-muted);
+          }
+
+          .badge-recommended {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
           }
         `}</style>
       </div>

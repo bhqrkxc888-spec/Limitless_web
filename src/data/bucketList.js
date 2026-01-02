@@ -22,65 +22,132 @@ export const bucketListExperiences = [
     slug: 'world-cruises',
     lastUpdated: '2026-01-02',
     title: 'World Cruises',
+    
+    // SEO - targeting real UK search terms
+    seo: {
+      metaTitle: 'World Cruise from UK | Round the World Voyage | Limitless Cruises',
+      metaDescription: 'Everything you need to know about world cruises from the UK. 100-140 night voyages circumnavigating the globe. Best time to go, what to expect, which cruise lines. Expert advice.',
+      keywords: ['world cruise from uk', 'round the world cruise', 'circumnavigation cruise', 'world voyage', 'extended cruise uk']
+    },
+    
+    // Hero
+    hero: {
+      headline: 'World Cruises',
+      subheadline: 'The ultimate voyage: four months, five continents, one extraordinary journey'
+    },
+    
+    // Simple summary
     tagline: 'The ultimate voyage: four months, five continents, one extraordinary journey',
-    description: 'Few experiences rival the grandeur of a world cruise. This is travel as it was meant to be: unhurried, immersive, and utterly transformative. Wake to Christ the Redeemer rising through morning mist, spend twilight watching icebergs calve into Patagonian waters, and mark the days not by clocks but by the slow rotation of continents past your cabin window. From the cobbled lanes of Barcelona to the turquoise lagoons of Bora Bora, from the dramatic fjords of Chile to the iconic Sydney Opera House, a world cruise weaves together the planet\'s most remarkable destinations into one seamless narrative. This is not a holiday; it is a life chapter.',
     heroImage: null,
     cardImage: null,
-    duration: '100–140 nights',
-    season: 'January–May',
-    // New structured content for destination-focused pages
-    narrative: [
-      {
-        title: 'The Allure of Circumnavigation',
-        content: '<p>There is something deeply compelling about the idea of sailing around the world. The great explorers knew it; modern voyagers rediscover it. A world cruise offers something no other form of travel can: the luxury of time. Time to truly know a place rather than merely visit it. Time to watch cultures shift gradually as you move from continent to continent. Time to form lasting friendships with fellow travellers who share your sense of adventure.</p><p>The journey itself becomes the destination. Sea days transform from transit into treasured interludes of reading, reflection, and renewal. You develop a rhythm that feels almost meditative—the gentle motion of the ship, the changing light on the water, the anticipation of tomorrow\'s port.</p>'
-      },
-      {
-        title: 'A Tapestry of Cultures',
-        content: '<p>What makes a world cruise truly extraordinary is the sheer breadth of experience. In a single voyage, you might tango in Buenos Aires, witness a Maori haka in New Zealand, marvel at the engineering brilliance of the Panama Canal, and trace the footsteps of Gaudí through Barcelona. Each port adds new threads to the tapestry—vibrant Latin American rhythms, serene Pacific island traditions, the sophisticated bustle of Australian cities, the warm hospitality of Caribbean shores.</p><p>The contrast between destinations only heightens their impact. After days of Pacific blue, the first glimpse of a coastline feels almost miraculous. After the grandeur of Rio\'s harbour, the intimate charm of a South Seas atoll seems like a secret discovered just for you.</p>'
-      }
-    ],
+    duration: '100-140 nights',
+    season: 'January - May',
+    
+    // Why This Destination - Real, factual content
+    whyBucketListWorthy: {
+      narrative: '<p>There is something deeply compelling about the idea of sailing around the world. The great explorers knew it; modern voyagers rediscover it. A world cruise offers something no other form of travel can: the luxury of time. Time to truly know a place rather than merely visit it. Time to watch cultures shift gradually as you move from continent to continent. Time to form lasting friendships with fellow travellers who share your sense of adventure.</p><p>The journey itself becomes the destination. Sea days transform from transit into treasured interludes of reading, reflection, and renewal. You develop a rhythm that feels almost meditative-the gentle motion of the ship, the changing light on the water, the anticipation of tomorrow\'s port.</p><p>What makes a world cruise truly extraordinary is the sheer breadth of experience. In a single voyage, you might tango in Buenos Aires, witness a Maori haka in New Zealand, marvel at the engineering brilliance of the Panama Canal, and trace the footsteps of Gaudí through Barcelona. Each port adds new threads to the tapestry-vibrant Latin American rhythms, serene Pacific island traditions, the sophisticated bustle of Australian cities, the warm hospitality of Caribbean shores.</p><p>The contrast between destinations only heightens their impact. After days of Pacific blue, the first glimpse of a coastline feels almost miraculous. After the grandeur of Rio\'s harbour, the intimate charm of a South Seas atoll seems like a secret discovered just for you.</p>'
+    },
     optimalTiming: {
       summary: 'World cruises typically depart in January and return in April or May, timing the voyage to arrive in each region during its most favourable season.',
       seasons: [
         {
           name: 'South America',
-          months: 'January–February',
+          months: 'January-February',
           highlights: ['Summer warmth in Rio and Buenos Aires', 'Optimal conditions for Cape Horn passage', 'Peak wildlife viewing in Patagonia']
         },
         {
           name: 'Pacific & Australasia',
-          months: 'February–March',
+          months: 'February-March',
           highlights: ['Late summer in New Zealand and Australia', 'Dry season in French Polynesia', 'Calm Pacific crossings']
         },
         {
           name: 'Caribbean & Atlantic',
-          months: 'April–May',
+          months: 'April-May',
           highlights: ['Pleasant Caribbean temperatures', 'Spring warmth in the Mediterranean', 'Longer daylight for European arrival']
         }
       ]
     },
-    signatureEncounters: [
-      { category: 'culture', title: 'Tango at Twilight', description: 'Experience the passion of Argentine tango in a hidden Buenos Aires milonga, where locals dance until dawn' },
-      { category: 'landscape', title: 'Rounding Cape Horn', description: 'Sail past the legendary tip of South America, where the Atlantic and Pacific meet in dramatic fashion' },
-      { category: 'nature', title: 'Bora Bora\'s Lagoon', description: 'Float in impossibly blue waters beneath the volcanic peak of Mount Otemanu' },
-      { category: 'history', title: 'Easter Island\'s Moai', description: 'Stand before the enigmatic stone guardians of Rapa Nui, one of Earth\'s most remote inhabited places' },
-      { category: 'adventure', title: 'Panama Canal Transit', description: 'Experience one of humanity\'s greatest engineering achievements as your ship passes through the legendary locks' },
-      { category: 'wildlife', title: 'Sydney Harbour Awakening', description: 'Sail beneath the Harbour Bridge and past the Opera House as the sun rises over Australia\'s most iconic city' }
+    // What You'll Experience - Practical, real detail
+    signatureSights: [
+      { 
+        theme: 'Tango at Twilight',
+        highlights: [
+          'Experience the passion of Argentine tango in a hidden Buenos Aires milonga',
+          'Locals dance until dawn in authentic venues',
+          'Immerse yourself in Buenos Aires\' cultural heart'
+        ]
+      },
+      { 
+        theme: 'Rounding Cape Horn',
+        highlights: [
+          'Sail past the legendary tip of South America',
+          'Where the Atlantic and Pacific meet in dramatic fashion',
+          'Historic significance of this legendary passage'
+        ]
+      },
+      { 
+        theme: 'Bora Bora\'s Lagoon',
+        highlights: [
+          'Float in impossibly blue waters beneath the volcanic peak of Mount Otemanu',
+          'Iconic overwater bungalows and coral reefs',
+          'Ultimate tropical paradise experience'
+        ]
+      },
+      { 
+        theme: 'Easter Island\'s Moai',
+        highlights: [
+          'Stand before the enigmatic stone guardians of Rapa Nui',
+          'One of Earth\'s most remote inhabited places',
+          'Archaeological wonder shrouded in mystery'
+        ]
+      },
+      { 
+        theme: 'Panama Canal Transit',
+        highlights: [
+          'Experience one of humanity\'s greatest engineering achievements',
+          'Watch your ship pass through the legendary locks',
+          'Full daylight transit from Pacific to Atlantic'
+        ]
+      },
+      { 
+        theme: 'Sydney Harbour Awakening',
+        highlights: [
+          'Sail beneath the Harbour Bridge and past the Opera House',
+          'As the sun rises over Australia\'s most iconic city',
+          'One of the world\'s most spectacular harbour arrivals'
+        ]
+      }
     ],
-    whoFor: [
-      { type: 'relaxation', label: 'Those who savour slow, immersive travel' },
-      { type: 'couples', label: 'Couples celebrating a milestone' },
-      { type: 'solo', label: 'Solo travellers seeking connection' },
-      { type: 'culture', label: 'Cultural enthusiasts and lifelong learners' },
-      { type: 'luxury', label: 'Seasoned cruisers ready for the ultimate voyage' }
-    ],
+    
+    // Is This Right for You - Honest assessment
+    idealVoyagerProfile: {
+      intro: 'World cruises suit travellers who value depth over speed and connection over convenience.',
+      profiles: [
+        { 
+          type: 'Good fit if you...', 
+          description: 'Savour slow, immersive travel. Want to truly know places rather than just visit them. Value time for reading, reflection and new friendships. Are comfortable with extended sea days.' 
+        },
+        { 
+          type: 'Consider carefully if...', 
+          description: 'You prefer fast-paced itineraries with constant activity. You get restless during sea days. You need frequent connectivity (satellite wifi can be slow). You have limited time available.' 
+        },
+        { 
+          type: 'Physical requirements', 
+          description: 'Minimal. You set your own pace entirely. Ships offer excellent facilities for all activity levels. Many guests are in their 60s, 70s and beyond.' 
+        },
+        { 
+          type: 'The reality', 
+          description: 'World cruises attract a refined, well-travelled clientele. Expect enriching lectures, cultural performances, and fellow passengers who share your curiosity. The overall pace is relaxed and civilised.' 
+        }
+      ]
+    },
     bespokeTailoring: [
       'Choice of embarkation point and voyage segments',
       'Cabin category and location tailored to your preferences',
       'Pre- and post-cruise hotel stays in key cities',
       'Private shore excursions and cultural experiences',
       'Flight upgrades and regional departures from the UK',
-      'Special occasion arrangements—anniversaries, birthdays, celebrations'
+      'Special occasion arrangements-anniversaries, birthdays, celebrations'
     ],
     cruiseLines: ['MSC Cruises', 'Cunard', 'P&O Cruises', 'Princess Cruises', 'Oceania Cruises'],
     itinerary: [
@@ -475,11 +542,11 @@ export const bucketListExperiences = [
     faqs: [
       {
         question: 'What makes a world cruise different from other long voyages?',
-        answer: 'A world cruise offers something no other journey can: the chance to circumnavigate the globe while unpacking only once. You experience the gradual shift of cultures, climates and landscapes as continents give way to oceans and new horizons appear. It is travel at its most immersive—each day building upon the last, each port adding depth to your understanding of our planet\'s extraordinary diversity.'
+        answer: 'A world cruise offers something no other journey can: the chance to circumnavigate the globe while unpacking only once. You experience the gradual shift of cultures, climates and landscapes as continents give way to oceans and new horizons appear. It is travel at its most immersive-each day building upon the last, each port adding depth to your understanding of our planet\'s extraordinary diversity.'
       },
       {
         question: 'Which continents and regions will I experience?',
-        answer: 'A full world cruise typically encompasses five continents: Europe, South America, Australasia, Asia or the Pacific Islands, and North America (via the Caribbean and Panama Canal). You will sail through iconic waterways—the Mediterranean, the Atlantic, the Pacific—and call at legendary ports from Rio de Janeiro to Sydney, from Bora Bora to Barcelona.'
+        answer: 'A full world cruise typically encompasses five continents: Europe, South America, Australasia, Asia or the Pacific Islands, and North America (via the Caribbean and Panama Canal). You will sail through iconic waterways-the Mediterranean, the Atlantic, the Pacific-and call at legendary ports from Rio de Janeiro to Sydney, from Bora Bora to Barcelona.'
       },
       {
         question: 'Is a world cruise only for retirees?',
@@ -491,18 +558,13 @@ export const bucketListExperiences = [
       },
       {
         question: 'Can I sail only part of the world cruise?',
-        answer: 'Absolutely. Most world cruises can be booked in segments—perhaps South America to Australia, or the Pacific crossing alone. This flexibility allows you to experience a substantial portion of the journey without committing to the full four months. Many guests return in future years for different segments.'
+        answer: 'Absolutely. Most world cruises can be booked in segments-perhaps South America to Australia, or the Pacific crossing alone. This flexibility allows you to experience a substantial portion of the journey without committing to the full four months. Many guests return in future years for different segments.'
       },
       {
         question: 'How physically demanding is a world cruise?',
-        answer: 'You set your own pace entirely. Some guests explore every port on foot; others prefer leisurely ship-based days with occasional gentle excursions. Ships offer excellent facilities—pools, spas, libraries, restaurants—so you can be as active or as relaxed as you wish. The journey is designed for comfort, not endurance.'
+        answer: 'You set your own pace entirely. Some guests explore every port on foot; others prefer leisurely ship-based days with occasional gentle excursions. Ships offer excellent facilities-pools, spas, libraries, restaurants-so you can be as active or as relaxed as you wish. The journey is designed for comfort, not endurance.'
       }
     ],
-    meta: {
-      title: 'World Cruises | 121-Night Global Odyssey from Barcelona | Limitless Cruises',
-      description: '121-night world cruise from Barcelona - 25+ countries, 40+ ports, 7 overnights including UK flights. Sail the full world cruise or choose segments. Expert booking advice from Limitless Cruises.',
-      keywords: ['world cruise', 'round the world cruise', '121 night cruise', 'Barcelona world cruise', 'global odyssey', 'world voyage', 'extended cruise', 'circumnavigation']
-    },
     images: [],
     featured: true,
     priority: 1
@@ -512,66 +574,131 @@ export const bucketListExperiences = [
     slug: 'antarctica-expeditions',
     lastUpdated: '2026-01-02',
     title: 'Antarctica Expeditions',
-    tagline: 'Earth\'s last great wilderness: where ice cathedrals meet curious penguins',
-    description: 'There is nowhere on Earth quite like Antarctica. This is a realm of such crystalline purity that your first glimpse of the white continent feels almost hallucinatory—towering icebergs in impossible shades of blue, colonies of penguins so unafraid they waddle right up to greet you, and a silence so profound it redefines your understanding of quiet. For UK travellers, this ultimate bucket list destination has never been more accessible. Fly to Buenos Aires for a taste of tango and Argentine culture, then journey to the edge of the world at Ushuaia before embarking on an expedition that will stay with you forever.',
+    
+    // SEO - targeting real UK search terms
+    seo: {
+      metaTitle: 'Antarctica Cruise from UK | Expert Guide | Limitless Cruises',
+      metaDescription: 'Everything you need to know about visiting Antarctica from the UK. Best time to go, what to expect, how rough is the Drake Passage. Expert advice from specialists.',
+      keywords: ['antarctica cruise from uk', 'best time to visit antarctica', 'antarctica expedition cruise', 'drake passage cruise', 'how to get to antarctica from uk']
+    },
+    
+    // Hero
+    hero: {
+      headline: 'Antarctica',
+      subheadline: 'The ultimate bucket list destination for wildlife, wilderness and adventure'
+    },
+    
+    // Simple summary
+    tagline: 'Earth\'s last great wilderness',
     heroImage: null,
     cardImage: null,
-    duration: '18–22 nights from UK',
-    season: 'November–March',
-    // New structured content for destination-focused pages
-    narrative: [
-      {
-        title: 'The Last Pristine Wilderness',
-        content: '<p>Antarctica is not merely a destination—it is a profound encounter with our planet in its most elemental form. Here, ninety percent of the world\'s ice stretches towards horizons that seem to exist outside of time. Glaciers calve with thunderous grandeur. Orcas breach through mirror-calm waters. And everywhere, the wildlife—penguins, seals, seabirds—display a complete absence of fear, having evolved in a world without land predators.</p><p>For British explorers, there is something particularly poignant about following in the footsteps of Shackleton and Scott. The heritage of polar exploration runs deep in our national consciousness, and standing on Antarctic shores connects you to a lineage of courage and curiosity that stretches back more than a century.</p>'
-      },
-      {
-        title: 'An Expedition, Not a Cruise',
-        content: '<p>This is expedition travel at its finest. Small ships navigate ice-strewn channels impossible for larger vessels. Zodiac inflatable craft carry you right to the edge of penguin colonies, where thousands of Adélie, Chinstrap and Gentoo penguins go about their lives with charming indifference to your presence. Expert naturalists—marine biologists, ornithologists, polar historians—share their knowledge at every turn.</p><p>The expedition mindset means flexibility: if whales are spotted, the ship changes course. If weather clears over a particularly spectacular bay, an extra landing is added. Each day unfolds according to what Antarctica itself offers, and what it offers is unfailingly extraordinary.</p>'
-      }
-    ],
+    duration: '18-22 nights from UK',
+    season: 'November - March',
+    
+    // Why This Destination - Real, factual content
+    whyBucketListWorthy: {
+      narrative: '<p>Antarctica receives approximately 100,000 visitors each year-still fewer than a busy weekend at Stonehenge. It is the only continent with no permanent human population, no native land mammals, and no property ownership. Ninety percent of the world\'s ice is here, along with the largest wildlife colonies on Earth.</p><p>What makes Antarctica remarkable is the wildlife\'s complete lack of fear. Penguins have no natural land predators, so they\'ve never learned to flee from humans. They will waddle over to inspect your boots while their neighbours go about their business metres away. Seals barely lift their heads. Whales surface alongside your boat with apparent curiosity.</p><p>The landscape is equally arresting. Icebergs the size of cathedrals drift past in shades of blue you didn\'t know existed. Glaciers calve with thunderous cracks. The silence, when it falls, is the most profound you\'ll ever experience-no traffic, no aircraft, no background hum of civilisation.</p><p>For British travellers, there\'s additional resonance. This is where Shackleton, Scott and their expeditions made history. You\'ll pass sites of extraordinary courage and endurance, and visit research stations continuing that tradition of exploration.</p>'
+    },
+    
+    // Optimal Timing - Factual, helpful breakdown
     optimalTiming: {
-      summary: 'The Antarctic season runs from November to March, with each month offering distinct experiences. December and January are peak months for wildlife activity and the longest daylight.',
+      summary: 'The Antarctic season runs from November to March. Ships cannot operate outside these months due to sea ice. Each period offers genuinely different experiences.',
       seasons: [
         {
           name: 'Early Season',
-          months: 'November–December',
-          highlights: ['Penguin courtship and egg laying', 'Pristine ice formations', 'Longest daylight hours approaching']
+          months: 'November - mid-December',
+          highlights: [
+            'Penguins courting and building nests',
+            'Pristine snow (less muddy than later)',
+            'Pack ice can limit landing sites',
+            'Fewer whales (still migrating south)'
+          ]
         },
         {
           name: 'Peak Season',
-          months: 'December–January',
-          highlights: ['Penguin chicks hatching', 'Maximum wildlife activity', '20+ hours of daylight', 'Best weather conditions']
+          months: 'Mid-December - January',
+          highlights: [
+            'Penguin chicks hatching',
+            'Nearly 24 hours of daylight',
+            'Warmest temperatures (around 0°C)',
+            'Highest demand-book 12-18 months ahead'
+          ]
         },
         {
           name: 'Late Season',
-          months: 'February–March',
-          highlights: ['Whale watching at its peak', 'Penguin fledglings learning to swim', 'Dramatic icebergs', 'Fewer visitors']
+          months: 'February - March',
+          highlights: [
+            'Peak whale watching (humpbacks especially)',
+            'Penguin chicks fledging and swimming',
+            'More dramatic icebergs breaking off',
+            'Fewer ships, quieter landings'
+          ]
         }
       ]
     },
-    signatureEncounters: [
-      { category: 'wildlife', title: 'Penguin Colonies', description: 'Step ashore amongst thousands of penguins—Adélie, Chinstrap, Gentoo—and observe their captivating social dramas up close' },
-      { category: 'landscape', title: 'The Lemaire Channel', description: 'Navigate this cathedral of ice: a narrow passage flanked by sheer cliffs and towering glaciers' },
-      { category: 'adventure', title: 'Zodiac Expeditions', description: 'Cruise amongst icebergs in inflatable craft, approaching wildlife and landing on shores no road has ever touched' },
-      { category: 'wildlife', title: 'Whale Encounters', description: 'Witness humpback, minke and orca whales feeding in the richest waters on Earth' },
-      { category: 'adventure', title: 'The Drake Passage', description: 'Cross the legendary strait where the Atlantic and Pacific meet—a rite of passage for every polar explorer' },
-      { category: 'history', title: 'Historic Stations', description: 'Visit research stations and heritage sites that tell the story of Antarctic exploration' }
+    
+    // What You'll Experience - Practical, real detail
+    signatureSights: [
+      { 
+        theme: 'Penguin Colonies',
+        highlights: [
+          'Typically 10,000-100,000 penguins per colony',
+          'Adélie, Chinstrap and Gentoo species',
+          'Approach within 5 metres (IAATO rules)',
+          'They often approach you first'
+        ]
+      },
+      { 
+        theme: 'Zodiac Landings',
+        highlights: [
+          '2-3 landings per day, weather permitting',
+          'Usually 2-3 hours ashore each landing',
+          'Wet landings (boots in shallow water)',
+          'Small groups of 10-12 passengers'
+        ]
+      },
+      { 
+        theme: 'Whale Watching',
+        highlights: [
+          'Humpback, minke and orca most common',
+          'Best in February-March',
+          'Often approach Zodiacs',
+          'Bubble-net feeding possible in late season'
+        ]
+      },
+      { 
+        theme: 'Dramatic Landscapes',
+        highlights: [
+          'Lemaire Channel (narrow passage, towering cliffs)',
+          'Deception Island (volcanic crater you sail into)',
+          'Paradise Bay (aptly named)',
+          'Icebergs in every shade of blue'
+        ]
+      }
     ],
-    whoFor: [
-      { type: 'wildlife', label: 'Wildlife enthusiasts and birders' },
-      { type: 'photography', label: 'Photographers seeking once-in-a-lifetime shots' },
-      { type: 'adventure', label: 'Adventurous spirits drawn to remote places' },
-      { type: 'nature', label: 'Nature lovers seeking pristine wilderness' },
-      { type: 'couples', label: 'Couples celebrating with an unforgettable journey' }
-    ],
-    bespokeTailoring: [
-      'Choice of expedition vessel and style—from expedition to ultra-luxury',
-      'Cabin selection tailored to your preferences',
-      'Pre-cruise stays in Buenos Aires with cultural experiences',
-      'Patagonia or Iguazu Falls extensions',
-      'Activity options: kayaking, camping, polar plunge',
-      'Flight upgrades and regional UK departures'
-    ],
+    
+    // Is This Right for You - Honest assessment
+    idealVoyagerProfile: {
+      intro: 'Antarctica suits some travellers brilliantly and others less so. Here\'s an honest assessment.',
+      profiles: [
+        { 
+          type: 'Good fit if you...', 
+          description: 'Want genuine wilderness rather than a resort. Are comfortable with 2 days at sea each way. Can manage stepping in and out of Zodiacs. Embrace weather changing plans.' 
+        },
+        { 
+          type: 'Consider carefully if...', 
+          description: 'You need a guaranteed itinerary (landings depend on conditions). You\'re severely prone to seasickness. You have significant mobility limitations. You want constant connectivity (satellite wifi is slow and expensive).' 
+        },
+        { 
+          type: 'Physical requirements', 
+          description: 'Moderate fitness for Zodiac boarding and walking on uneven terrain. Many passengers are in their 60s and 70s. Ships have medical facilities. Activity levels can be adjusted.' 
+        },
+        { 
+          type: 'The reality', 
+          description: 'About 97% of Antarctic visitors say it exceeded their expectations. Many describe it as the best travel experience of their lives. But it is an expedition, not a holiday-you need to embrace uncertainty.' 
+        }
+      ]
+    },
     cruiseLines: ['Quark Expeditions', 'Hurtigruten', 'Ponant', 'Silversea'],
     itinerary: [
       { 
@@ -661,35 +788,30 @@ export const bucketListExperiences = [
     ],
     faqs: [
       {
-        question: 'Why should Antarctica be on my bucket list?',
-        answer: 'Antarctica is Earth\'s last truly wild frontier—a place of staggering beauty where ninety percent of the world\'s ice creates landscapes unlike anything else on the planet. The wildlife is extraordinary and entirely unafraid of humans; penguins will waddle up to inspect you, seals regard you with casual curiosity, and whales surface alongside your Zodiac. It is a privilege to witness a continent essentially unchanged since the age of exploration.'
+        question: 'How rough is the Drake Passage?',
+        answer: 'The Drake Passage has a fearsome reputation, but the reality varies widely. About 25% of crossings are genuinely rough (4-6 metre swells), 50% are moderate (2-4 metres), and 25% are surprisingly calm. Modern expedition ships have stabilisers that significantly reduce motion. Seasickness medication works for most people-start 24 hours before departure. The crossing takes about 36-48 hours each way. Some itineraries now fly across the Drake, eliminating sea time but adding cost.'
       },
       {
-        question: 'What draws UK travellers specifically to Antarctica?',
-        answer: 'There is a deep connection between Britain and Antarctic exploration. Following in the footsteps of Shackleton, Scott and other polar pioneers resonates profoundly with British travellers. The journey from London is also remarkably straightforward—direct flights to Buenos Aires, then a short hop to Ushuaia, and you are at the gateway to the White Continent.'
+        question: 'What\'s the best month to visit Antarctica?',
+        answer: 'December and January offer the most reliable conditions-warmest temperatures (around 0°C), calmest seas, and peak penguin activity with chicks hatching. February-March is best for whale watching, with humpbacks at their most numerous. November has pristine snow but more variable conditions. If you want penguin chicks, aim for late December. If whales matter most, choose late February.'
       },
       {
-        question: 'How close can I actually get to the wildlife?',
-        answer: 'Remarkably close. Antarctic wildlife has no instinctive fear of humans, having evolved without land predators. Strict guidelines require you to maintain a respectful distance, but penguins frequently close that gap themselves, waddling over to investigate these strange visitors. Zodiac cruises bring you within metres of resting seals and breaching whales.'
+        question: 'How much does an Antarctica cruise from the UK cost?',
+        answer: 'Expect to budget £8,000-£15,000 per person for an 11-12 day expedition cruise, plus £1,500-£3,000 for flights to Ushuaia (via Buenos Aires). Luxury ships and longer itineraries (with South Georgia) can reach £20,000-£40,000. Prices include all meals, landings, Zodiac excursions, and expedition gear loans. The best deals are often for early or late season dates.'
       },
       {
-        question: 'What makes expedition cruising different from regular cruises?',
-        answer: 'Expedition ships are purpose-built for polar waters and carry fewer than 200 passengers—often far fewer. Each day brings Zodiac landings on Antarctic shores, expert-led wildlife encounters, and a flexible itinerary that responds to weather and wildlife sightings. The atmosphere is educational rather than entertainment-focused, with naturalists, marine biologists and polar historians sharing their expertise.'
+        question: 'Do I need to be physically fit?',
+        answer: 'Moderate fitness is sufficient. You need to climb in and out of Zodiacs (rubber boats) with crew assistance, which requires reasonable mobility. Landings involve walking on rocks, snow, or sand-sometimes uneven. The pace is entirely flexible; you can skip landings or do shorter walks. Many passengers are in their 60s and 70s. Ships have medical officers and can accommodate most mobility needs with advance notice.'
       },
       {
-        question: 'How physically demanding is an Antarctica expedition?',
-        answer: 'Expedition travel is accessible to reasonably fit travellers of all ages. Zodiac boarding requires some mobility, and landings may involve wet boots and uneven terrain, but the pace is entirely flexible. Many guests in their seventies and beyond complete Antarctic expeditions comfortably. Your expedition team ensures everyone participates at their own level.'
+        question: 'Will I definitely see penguins and whales?',
+        answer: 'Penguins: yes, guaranteed. Every Antarctic itinerary visits penguin colonies, and you\'ll see thousands of them. The question isn\'t if but how many-colonies range from a few hundred to over 100,000 birds. Whales are seasonal: very likely in February-March, less so in November-December. Seals (Weddell, leopard, fur, elephant) are present throughout the season. Wildlife sightings are never guaranteed but rarely disappoint.'
       },
       {
-        question: 'Is the Drake Passage really as rough as its reputation?',
-        answer: 'The Drake Passage connects two oceans and can be famously turbulent—but equally, it can be glass-calm. Modern expedition ships are designed for these waters, with stabilisers and experienced crews. Many travellers find the crossing adds to the sense of adventure and arrival. Expert lectures, seabird watching and preparation briefings make the crossing fly by.'
+        question: 'How far in advance should I book?',
+        answer: 'Book 12-18 months ahead for the best cabin selection and pricing. Peak dates (late December-January) on popular ships sell out quickly. However, last-minute deals do exist for unsold cabins-sometimes 20-30% off-if you can travel flexibly. We monitor availability and can advise on both early booking and late offers.'
       }
     ],
-    meta: {
-      title: 'Antarctica Expeditions Bucket List Journey from UK | Limitless Cruises',
-      description: 'Antarctica expedition cruise from UK 2026. Buenos Aires to Ushuaia to White Continent. 14-night expedition with flights included. Penguin colonies, Zodiac landings, Drake Passage. ATOL protected. Expert booking from Limitless Cruises.',
-      keywords: ['antarctica cruise from uk', 'antarctica expedition 2026', 'antarctica bucket list', 'drake passage cruise', 'antarctic peninsula cruise', 'penguin cruise from uk', 'antarctica with flights']
-    },
     images: [],
     featured: true,
     priority: 2
@@ -699,59 +821,127 @@ export const bucketListExperiences = [
     slug: 'japan-asia-cruises',
     lastUpdated: '2026-01-02',
     title: 'Japan & Asia',
+    
+    // SEO - targeting real UK search terms
+    seo: {
+      metaTitle: 'Japan & Asia Cruise from UK | Cherry Blossom Cruises | Limitless Cruises',
+      metaDescription: 'Everything you need to know about cruising Japan and Asia from the UK. Cherry blossom season, best time to visit, what to expect. Expert advice from specialists.',
+      keywords: ['japan cruise from uk', 'asia cruise from uk', 'cherry blossom cruise', 'japan sakura cruise', 'asia cruise itinerary']
+    },
+    
+    // Hero
+    hero: {
+      headline: 'Japan & Asia',
+      subheadline: 'Ancient temples, neon cities, and tropical gardens: Asia\'s most beguiling destinations by sea'
+    },
+    
+    // Simple summary
     tagline: 'Ancient temples, neon cities, and tropical gardens: Asia\'s most beguiling destinations by sea',
-    description: 'Asia by sea is an altogether different proposition from Asia by air. There is time to absorb the subtle shift from Japanese precision to Korean warmth to Chinese grandeur to Singapore sophistication. Each morning brings a new culture, a new cuisine, a new perspective—yet your floating sanctuary remains constant. From the cherry-blossom serenity of Kyoto to Hong Kong\'s electric harbour, from temple incense in Taipei to the futuristic Gardens by the Bay, this is a journey through civilisations that have shaped the world.',
     heroImage: null,
     cardImage: null,
-    duration: '14–21 nights from UK',
-    season: 'March–November',
-    narrative: [
-      {
-        title: 'A Continent of Contrasts',
-        content: '<p>Asia defies simple description. It is simultaneously ancient and hyper-modern, serene and pulsating, familiar and utterly foreign. A cruise through these waters offers the rare privilege of experiencing this complexity without the exhaustion of constant packing and flights. Watch Japan\'s rugged coastline give way to Korea\'s sweeping bays, then sail south through the turquoise waters of the South China Sea.</p><p>Each port reveals another facet of Asian life. The reverent silence of a Shinto shrine at dawn. The theatrical bustle of Hong Kong\'s harbour at night. The aromatic maze of a Taiwanese night market. The pristine perfection of Singapore\'s botanical gardens. These moments accumulate into an understanding of Asia that no hurried itinerary could provide.</p>'
-      },
-      {
-        title: 'Culinary Journey',
-        content: '<p>For food lovers, an Asia cruise is a pilgrimage. Tokyo\'s sushi masters. Busan\'s legendary seafood markets. Hong Kong\'s dim sum temples. Singapore\'s hawker centres, where Michelin-starred dishes cost less than a London coffee. Each port expands your palate and challenges your assumptions about what food can be.</p><p>Onboard, the culinary journey continues with Asian-inspired menus, sake tastings, and cooking demonstrations that reveal the secrets behind the region\'s celebrated cuisines.</p>'
-      }
-    ],
+    duration: '14-21 nights from UK',
+    season: 'March - November',
+    
+    // Why This Destination - Real, factual content
+    whyBucketListWorthy: {
+      narrative: '<p>Asia defies simple description. It is simultaneously ancient and hyper-modern, serene and pulsating, familiar and utterly foreign. A cruise through these waters offers the rare privilege of experiencing this complexity without the exhaustion of constant packing and flights. Watch Japan\'s rugged coastline give way to Korea\'s sweeping bays, then sail south through the turquoise waters of the South China Sea.</p><p>Each port reveals another facet of Asian life. The reverent silence of a Shinto shrine at dawn. The theatrical bustle of Hong Kong\'s harbour at night. The aromatic maze of a Taiwanese night market. The pristine perfection of Singapore\'s botanical gardens. These moments accumulate into an understanding of Asia that no hurried itinerary could provide.</p><p>For food lovers, an Asia cruise is a pilgrimage. Tokyo\'s sushi masters. Busan\'s legendary seafood markets. Hong Kong\'s dim sum temples. Singapore\'s hawker centres, where Michelin-starred dishes cost less than a London coffee. Each port expands your palate and challenges your assumptions about what food can be.</p>'
+    },
     optimalTiming: {
       summary: 'Asia offers year-round cruising, with each season bringing distinct advantages. Spring cherry blossoms and autumn colours are particularly prized.',
       seasons: [
         {
           name: 'Cherry Blossom Season',
-          months: 'Late March–April',
+          months: 'Late March-April',
           highlights: ['Japan\'s sakura at its most magical', 'Pleasant temperatures throughout', 'Festivals and celebrations']
         },
         {
           name: 'Summer',
-          months: 'June–August',
+          months: 'June-August',
           highlights: ['Long days for exploration', 'Vibrant festivals across Asia', 'Peak availability on many ships']
         },
         {
           name: 'Autumn',
-          months: 'September–November',
+          months: 'September-November',
           highlights: ['Japan\'s fiery autumn foliage', 'Cooler, comfortable temperatures', 'Fewer crowds at key sites']
         }
       ]
     },
-    signatureEncounters: [
-      { category: 'culture', title: 'Kyoto\'s Temple Gardens', description: 'Wander through gardens designed to induce contemplation, where every rock and tree placement carries centuries of meaning' },
-      { category: 'landscape', title: 'Hong Kong by Night', description: 'Sail into one of the world\'s most electrifying harbours as a million lights illuminate the Victoria Peak skyline' },
-      { category: 'culinary', title: 'Tokyo\'s Tsukiji District', description: 'Experience the pulse of the world\'s fish capital, where sushi is elevated to high art' },
-      { category: 'nature', title: 'Gardens by the Bay', description: 'Walk amongst Singapore\'s extraordinary Supertrees—a vision of urban nature that feels like science fiction made real' },
-      { category: 'culture', title: 'Taipei Night Markets', description: 'Lose yourself in the sensory overload of Taiwan\'s legendary after-dark food scene' },
-      { category: 'history', title: 'The Bund at Dawn', description: 'Watch Shanghai awaken along its famous waterfront, where East meets West in spectacular fashion' }
+    // What You'll Experience - Practical, real detail
+    signatureSights: [
+      { 
+        theme: 'Kyoto\'s Temple Gardens',
+        highlights: [
+          'Wander through gardens designed to induce contemplation',
+          'Every rock and tree placement carries centuries of meaning',
+          'Experience the essence of Japanese aesthetics'
+        ]
+      },
+      { 
+        theme: 'Hong Kong by Night',
+        highlights: [
+          'Sail into one of the world\'s most electrifying harbours',
+          'A million lights illuminate the Victoria Peak skyline',
+          'Iconic harbour views from the water'
+        ]
+      },
+      { 
+        theme: 'Tokyo\'s Tsukiji District',
+        highlights: [
+          'Experience the pulse of the world\'s fish capital',
+          'Where sushi is elevated to high art',
+          'Authentic Japanese culinary culture'
+        ]
+      },
+      { 
+        theme: 'Gardens by the Bay',
+        highlights: [
+          'Walk amongst Singapore\'s extraordinary Supertrees',
+          'A vision of urban nature that feels like science fiction made real',
+          'Futuristic botanical wonder'
+        ]
+      },
+      { 
+        theme: 'Taipei Night Markets',
+        highlights: [
+          'Lose yourself in the sensory overload of Taiwan\'s legendary after-dark food scene',
+          'Street food culture at its finest',
+          'Authentic local experiences'
+        ]
+      },
+      { 
+        theme: 'The Bund at Dawn',
+        highlights: [
+          'Watch Shanghai awaken along its famous waterfront',
+          'Where East meets West in spectacular fashion',
+          'Historic architecture meets modern skyline'
+        ]
+      }
     ],
-    whoFor: [
-      { type: 'culture', label: 'Cultural enthusiasts and history lovers' },
-      { type: 'photography', label: 'Photographers seeking iconic shots' },
-      { type: 'couples', label: 'Couples celebrating a milestone' },
-      { type: 'luxury', label: 'Food lovers and culinary adventurers' },
-      { type: 'nature', label: 'Those seeking diverse landscapes' }
-    ],
+    
+    // Is This Right for You - Honest assessment
+    idealVoyagerProfile: {
+      intro: 'Asia cruises suit travellers who want to experience diverse cultures without the exhaustion of constant travel.',
+      profiles: [
+        { 
+          type: 'Good fit if you...', 
+          description: 'Love cultural immersion and history. Are fascinated by food and culinary traditions. Want to see multiple destinations without packing and unpacking. Enjoy the contrast between ancient and modern.' 
+        },
+        { 
+          type: 'Consider carefully if...', 
+          description: 'You prefer deep immersion in one country (cruises cover multiple). You dislike crowds (some ports can be busy). You need extensive time ashore (port calls are typically 8-12 hours).' 
+        },
+        { 
+          type: 'Physical requirements', 
+          description: 'Minimal. Most ports have good infrastructure. Some temples and markets involve walking, but pace is flexible. Ships dock centrally in most ports.' 
+        },
+        { 
+          type: 'The reality', 
+          description: 'Asia cruises offer an efficient way to sample multiple destinations. You get a taste of each place rather than deep immersion. Perfect for first-time visitors to Asia or those wanting to see several countries in one trip.' 
+        }
+      ]
+    },
     bespokeTailoring: [
-      'Open-jaw routing—fly into Tokyo, home from Singapore (or reverse)',
+      'Open-jaw routing-fly into Tokyo, home from Singapore (or reverse)',
       'Cherry blossom timing for Japan sailings',
       'Pre-cruise nights in Tokyo with cultural experiences',
       'Post-cruise Singapore extensions',
@@ -872,7 +1062,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'Is cherry blossom season really worth timing a cruise around?',
-        answer: 'Absolutely. The sakura season transforms Japan into something almost otherworldly—clouds of pale pink against temple walls, petals drifting on still ponds, entire hillsides flushed with colour. It is brief (typically late March to mid-April), which only heightens its poignancy. For those who can time their visit, it is unforgettable.'
+        answer: 'Absolutely. The sakura season transforms Japan into something almost otherworldly-clouds of pale pink against temple walls, petals drifting on still ponds, entire hillsides flushed with colour. It is brief (typically late March to mid-April), which only heightens its poignancy. For those who can time their visit, it is unforgettable.'
       },
       {
         question: 'How diverse is the food experience across Asia?',
@@ -880,11 +1070,11 @@ export const bucketListExperiences = [
       },
       {
         question: 'What is the cultural transition like between countries?',
-        answer: 'This is one of cruising\'s greatest gifts. You observe subtle shifts—from Japanese minimalism to Korean warmth to Chinese grandeur to Singaporean efficiency—without the jarring disconnection of air travel. The sea days between major destinations allow time for reflection and anticipation.'
+        answer: 'This is one of cruising\'s greatest gifts. You observe subtle shifts-from Japanese minimalism to Korean warmth to Chinese grandeur to Singaporean efficiency-without the jarring disconnection of air travel. The sea days between major destinations allow time for reflection and anticipation.'
       },
       {
         question: 'Is language a barrier when exploring independently?',
-        answer: 'Less than you might expect. English is widely spoken in tourist areas, particularly in Singapore and Hong Kong. In Japan and Korea, younger generations often speak some English, and translation apps have become remarkably effective. The warmth of Asian hospitality transcends language—a smile goes a long way everywhere.'
+        answer: 'Less than you might expect. English is widely spoken in tourist areas, particularly in Singapore and Hong Kong. In Japan and Korea, younger generations often speak some English, and translation apps have become remarkably effective. The warmth of Asian hospitality transcends language-a smile goes a long way everywhere.'
       }
     ],
     meta: {
@@ -905,33 +1095,42 @@ export const bucketListExperiences = [
     slug: 'rocky-mountaineer-alaska',
     lastUpdated: '2026-01-02',
     title: 'Rocky Mountaineer & Alaska',
+    
+    // SEO - targeting real UK search terms
+    seo: {
+      metaTitle: 'Rocky Mountaineer & Alaska Cruise from UK | Expert Guide | Limitless Cruises',
+      metaDescription: 'Everything you need to know about combining the Rocky Mountaineer train with an Alaska cruise from the UK. Best time to go, what to expect. Expert advice.',
+      keywords: ['rocky mountaineer alaska cruise', 'canada alaska cruise from uk', 'rocky mountaineer train cruise', 'alaska inside passage cruise', 'canadian rockies cruise']
+    },
+    
+    // Hero
+    hero: {
+      headline: 'Rocky Mountaineer & Alaska',
+      subheadline: 'Where glass-domed rails meet glacial majesty: Canada\'s most spectacular double act'
+    },
+    
+    // Simple summary
     tagline: 'Where glass-domed rails meet glacial majesty: Canada\'s most spectacular double act',
-    description: 'Some journeys are defined by their destination; this one is defined by every moment. Glide through the Canadian Rockies aboard the legendary Rocky Mountaineer, turquoise lakes and snow-capped peaks framed by panoramic glass. Then transition seamlessly to Alaska\'s Inside Passage, where humpback whales breach beside your ship and glaciers calve with thunderous applause. From the fairytale turrets of the Fairmont Banff Springs to Glacier Bay\'s cathedral of ice, this is North America at its most awe-inspiring.',
     heroImage: null,
     cardImage: null,
-    duration: '14–18 nights from UK',
-    season: 'May–September',
-    narrative: [
-      {
-        title: 'The Romance of Rail',
-        content: '<p>The Rocky Mountaineer is not merely a train—it is a moving theatre of natural wonder. From your glass-domed carriage, watch the landscapes of the Canadian Rockies unfold like a living painting. Snow-dusted peaks give way to rushing rivers. Black bears forage on distant slopes. And every curve in the track reveals another vista that makes you catch your breath.</p><p>This is travel from a more gracious era, where the journey itself is the destination. Gourmet meals appear as you cruise past impossible scenery. Wine flows as freely as the mountain streams below. Fellow passengers become friends, united in shared wonder at what passes beyond the glass.</p>'
-      },
-      {
-        title: 'Alaska\'s Wild Coast',
-        content: '<p>The Inside Passage offers an entirely different kind of spectacle. Here, primeval rainforest tumbles down to waters so rich with life that whales, seals and eagles are everyday sightings. Glacier Bay reveals ice formations that have stood for millennia, calving with explosive force into the sea below. Small towns like Ketchikan and Sitka offer glimpses of Alaska\'s unique blend of Native heritage, Russian history and frontier spirit.</p><p>The combination of rail and cruise creates something greater than either alone—a journey through North America\'s most dramatic landscapes in uncompromising comfort.</p>'
-      }
-    ],
+    duration: '14-18 nights from UK',
+    season: 'May - September',
+    
+    // Why This Destination - Real, factual content
+    whyBucketListWorthy: {
+      narrative: '<p>The Rocky Mountaineer is not merely a train-it is a moving theatre of natural wonder. From your glass-domed carriage, watch the landscapes of the Canadian Rockies unfold like a living painting. Snow-dusted peaks give way to rushing rivers. Black bears forage on distant slopes. And every curve in the track reveals another vista that makes you catch your breath.</p><p>This is travel from a more gracious era, where the journey itself is the destination. Gourmet meals appear as you cruise past impossible scenery. Wine flows as freely as the mountain streams below. Fellow passengers become friends, united in shared wonder at what passes beyond the glass.</p><p>The Inside Passage offers an entirely different kind of spectacle. Here, primeval rainforest tumbles down to waters so rich with life that whales, seals and eagles are everyday sightings. Glacier Bay reveals ice formations that have stood for millennia, calving with explosive force into the sea below. Small towns like Ketchikan and Sitka offer glimpses of Alaska\'s unique blend of Native heritage, Russian history and frontier spirit.</p><p>The combination of rail and cruise creates something greater than either alone-a journey through North America\'s most dramatic landscapes in uncompromising comfort.</p>'
+    },
     optimalTiming: {
       summary: 'The season runs from May to September, with peak wildlife activity in July and early August. Each month offers distinct advantages.',
       seasons: [
         {
           name: 'Early Season',
-          months: 'May–June',
+          months: 'May-June',
           highlights: ['Snow on mountain peaks', 'Fewer crowds in Banff', 'Longer daylight approaching']
         },
         {
           name: 'Peak Season',
-          months: 'July–August',
+          months: 'July-August',
           highlights: ['Prime wildlife viewing', 'Warmest temperatures', 'Bear activity at its height', 'Whale watching peak']
         },
         {
@@ -941,23 +1140,82 @@ export const bucketListExperiences = [
         }
       ]
     },
-    signatureEncounters: [
-      { category: 'landscape', title: 'Lake Louise', description: 'Stand before the most photographed lake in Canada—its impossible turquoise colour is no exaggeration' },
-      { category: 'adventure', title: 'Rocky Mountaineer Glass Dome', description: 'Watch peaks, rivers and wildlife parade past your panoramic window as gourmet meals are served' },
-      { category: 'landscape', title: 'Glacier Bay', description: 'Witness ancient ice calve into the sea with thunderous force—a spectacle that has humbled observers for centuries' },
-      { category: 'wildlife', title: 'Grizzly Encounters', description: 'Spot bears fishing for salmon along Alaskan streams—a primal scene unchanged since the ice ages' },
-      { category: 'wildlife', title: 'Whale Watching', description: 'Humpback whales breach and blow throughout the Inside Passage—often visible right from your ship' },
-      { category: 'history', title: 'Klondike Gold Rush Towns', description: 'Walk the wooden boardwalks of Skagway, where prospectors once dreamed of fortune' }
+    // What You'll Experience - Practical, real detail
+    signatureSights: [
+      { 
+        theme: 'Lake Louise',
+        highlights: [
+          'Stand before the most photographed lake in Canada',
+          'Its impossible turquoise colour is no exaggeration',
+          'Iconic Canadian Rockies scenery'
+        ]
+      },
+      { 
+        theme: 'Rocky Mountaineer Glass Dome',
+        highlights: [
+          'Watch peaks, rivers and wildlife parade past your panoramic window',
+          'Gourmet meals served as you travel',
+          'Unobstructed views of the Canadian Rockies'
+        ]
+      },
+      { 
+        theme: 'Glacier Bay',
+        highlights: [
+          'Witness ancient ice calve into the sea with thunderous force',
+          'A spectacle that has humbled observers for centuries',
+          'UNESCO World Heritage site'
+        ]
+      },
+      { 
+        theme: 'Grizzly Encounters',
+        highlights: [
+          'Spot bears fishing for salmon along Alaskan streams',
+          'A primal scene unchanged since the ice ages',
+          'Best viewing in July-August'
+        ]
+      },
+      { 
+        theme: 'Whale Watching',
+        highlights: [
+          'Humpback whales breach and blow throughout the Inside Passage',
+          'Often visible right from your ship',
+          'Peak season is July-early August'
+        ]
+      },
+      { 
+        theme: 'Klondike Gold Rush Towns',
+        highlights: [
+          'Walk the wooden boardwalks of Skagway',
+          'Where prospectors once dreamed of fortune',
+          'Historic frontier atmosphere'
+        ]
+      }
     ],
-    whoFor: [
-      { type: 'nature', label: 'Nature lovers and wildlife enthusiasts' },
-      { type: 'photography', label: 'Photographers seeking iconic landscapes' },
-      { type: 'couples', label: 'Couples seeking romantic adventure' },
-      { type: 'families', label: 'Families with older children' },
-      { type: 'luxury', label: 'Those who appreciate premium travel' }
-    ],
+    
+    // Is This Right for You - Honest assessment
+    idealVoyagerProfile: {
+      intro: 'This combination suits travellers who want both rail and cruise experiences in one journey.',
+      profiles: [
+        { 
+          type: 'Good fit if you...', 
+          description: 'Love nature and wildlife. Appreciate premium travel experiences. Want to see both Canadian Rockies and Alaska. Enjoy scenic journeys as much as destinations.' 
+        },
+        { 
+          type: 'Consider carefully if...', 
+          description: 'You prefer deep immersion in one place (this covers two regions). You dislike organised tours (train and cruise are structured). You have limited mobility (some excursions involve walking).' 
+        },
+        { 
+          type: 'Physical requirements', 
+          description: 'Moderate. Train travel is comfortable. Cruise excursions vary-some are easy walks, others more active. Most activities can be tailored to your fitness level.' 
+        },
+        { 
+          type: 'The reality', 
+          description: 'This is a premium experience combining two iconic journeys. The Rocky Mountaineer is consistently rated one of the world\'s great train journeys. Alaska\'s Inside Passage offers some of the most spectacular coastal scenery on Earth.' 
+        }
+      ]
+    },
     bespokeTailoring: [
-      'Choice of Rocky Mountaineer class—SilverLeaf or GoldLeaf',
+      'Choice of Rocky Mountaineer class-SilverLeaf or GoldLeaf',
       'Extended stays in Banff or Vancouver',
       'Cruise line and cabin selection',
       'Wildlife excursions and bear-watching tours',
@@ -1072,27 +1330,27 @@ export const bucketListExperiences = [
     faqs: [
       {
         question: 'What makes the Rocky Mountaineer experience so special?',
-        answer: 'The Rocky Mountaineer is consistently rated one of the world\'s great train journeys for good reason. The glass-domed carriages offer unobstructed views of the Canadian Rockies\' most spectacular scenery. Gourmet meals and premium service transform the journey into a moving luxury hotel. And travelling by daylight—the train only operates during daylight hours—ensures you miss nothing.'
+        answer: 'The Rocky Mountaineer is consistently rated one of the world\'s great train journeys for good reason. The glass-domed carriages offer unobstructed views of the Canadian Rockies\' most spectacular scenery. Gourmet meals and premium service transform the journey into a moving luxury hotel. And travelling by daylight-the train only operates during daylight hours-ensures you miss nothing.'
       },
       {
         question: 'How do the train and cruise combine logistically?',
-        answer: 'Seamlessly. The Rocky Mountaineer delivers you to Vancouver, where a short transfer connects you with your Inside Passage cruise. The open-jaw routing means you fly into Calgary and home from Vancouver (or reverse), so there is no backtracking. Every connection is handled—you simply enjoy the journey.'
+        answer: 'Seamlessly. The Rocky Mountaineer delivers you to Vancouver, where a short transfer connects you with your Inside Passage cruise. The open-jaw routing means you fly into Calgary and home from Vancouver (or reverse), so there is no backtracking. Every connection is handled-you simply enjoy the journey.'
       },
       {
         question: 'What wildlife might I see on this journey?',
-        answer: 'The Canadian Rockies are home to black bears, grizzlies, elk and mountain goats—all commonly spotted from the train. Alaska\'s Inside Passage adds humpback whales, orcas, bald eagles and sea otters. Glacier Bay often reveals seals hauled out on ice floes. July and August offer peak wildlife activity.'
+        answer: 'The Canadian Rockies are home to black bears, grizzlies, elk and mountain goats-all commonly spotted from the train. Alaska\'s Inside Passage adds humpback whales, orcas, bald eagles and sea otters. Glacier Bay often reveals seals hauled out on ice floes. July and August offer peak wildlife activity.'
       },
       {
         question: 'Is Glacier Bay really as impressive as photographs suggest?',
-        answer: 'More so. Photographs cannot capture the scale—glaciers that dwarf your ship, ice that glows an impossible blue, and the thunderous crash of calving icebergs that reverberates across the water. It is a UNESCO World Heritage site for good reason, and standing on deck as the ship navigates this frozen cathedral is genuinely humbling.'
+        answer: 'More so. Photographs cannot capture the scale-glaciers that dwarf your ship, ice that glows an impossible blue, and the thunderous crash of calving icebergs that reverberates across the water. It is a UNESCO World Heritage site for good reason, and standing on deck as the ship navigates this frozen cathedral is genuinely humbling.'
       },
       {
         question: 'How physically demanding is this journey?',
-        answer: 'Not at all. The train requires no physical exertion, and the cruise offers complete flexibility—from gentle port strolls to more adventurous excursions. Banff offers everything from leisurely lakeside walks to more challenging hikes, so you can tailor the experience to your comfort level.'
+        answer: 'Not at all. The train requires no physical exertion, and the cruise offers complete flexibility-from gentle port strolls to more adventurous excursions. Banff offers everything from leisurely lakeside walks to more challenging hikes, so you can tailor the experience to your comfort level.'
       },
       {
         question: 'Why do UK travellers particularly love this combination?',
-        answer: 'The combination offers two iconic bucket list experiences in one journey—without the logistical complexity of arranging them separately. Direct flights from London make it remarkably accessible, and the calibre of accommodation (Fairmont properties, premium cruise ships) matches British expectations of comfort and service.'
+        answer: 'The combination offers two iconic bucket list experiences in one journey-without the logistical complexity of arranging them separately. Direct flights from London make it remarkably accessible, and the calibre of accommodation (Fairmont properties, premium cruise ships) matches British expectations of comfort and service.'
       }
     ],
     meta: {
@@ -1109,54 +1367,122 @@ export const bucketListExperiences = [
     slug: 'galapagos-expeditions',
     lastUpdated: '2026-01-02',
     title: 'Galápagos Islands',
+    
+    // SEO - targeting real UK search terms
+    seo: {
+      metaTitle: 'Galápagos Islands Cruise from UK | Expert Guide | Limitless Cruises',
+      metaDescription: 'Everything you need to know about visiting the Galápagos Islands from the UK. Best time to go, what wildlife to expect, expedition cruise options. Expert advice.',
+      keywords: ['galapagos cruise from uk', 'galapagos islands cruise', 'galapagos expedition cruise', 'darwin islands cruise', 'ecuador galapagos cruise']
+    },
+    
+    // Hero
+    hero: {
+      headline: 'Galápagos Islands',
+      subheadline: 'Darwin\'s enchanted archipelago: where wildlife writes the rules'
+    },
+    
+    // Simple summary
     tagline: 'Darwin\'s enchanted archipelago: where wildlife writes the rules',
-    description: 'There is nowhere else on Earth where animals show such complete indifference to human presence. In the Galápagos, sea lions sprawl across your path, blue-footed boobies perform courtship dances at arm\'s length, and giant tortoises—creatures that seem to belong to another geological era—regard you with prehistoric calm. This volcanic archipelago, straddling the equator six hundred miles off Ecuador\'s coast, inspired Darwin\'s revolutionary insights and continues to captivate visitors with wildlife encounters unlike anywhere else on the planet.',
     heroImage: null,
     cardImage: null,
-    duration: '10–14 nights from UK',
+    duration: '10-14 nights from UK',
     season: 'Year-round',
-    narrative: [
-      {
-        title: 'An Evolutionary Laboratory',
-        content: '<p>The Galápagos Islands exist outside the normal rules. Isolated by vast stretches of Pacific Ocean, life here evolved in extraordinary directions. Cormorants lost the ability to fly because there were no predators to escape. Tortoises grew to improbable sizes because nothing hunted them. Marine iguanas developed the ability to dive for seaweed—the world\'s only seafaring lizards.</p><p>For visitors, this evolutionary isolation means something magical: wildlife that has never learned to fear humans. Animals do not flee as you approach; they continue their business as if you were merely another curious creature in their domain. It is the closest most of us will ever come to a pre-human world.</p>'
-      },
-      {
-        title: 'Expedition by Sea',
-        content: '<p>The islands are strictly protected, and the best way to experience them is aboard a small expedition vessel with certified naturalist guides. Each day brings new landings—volcanic shores where penguins coexist with tropical fish, lagoons where flamingos wade alongside marine iguanas, cliffs where albatrosses launch their epic migrations.</p><p>Snorkelling here is revelatory. Slip into waters where sea lions spiral around you, marine turtles drift past unconcerned, and schools of hammerhead sharks patrol the deep blue beyond the reef. It is immersive, thrilling, and profoundly humbling.</p>'
-      }
-    ],
+    
+    // Why This Destination - Real, factual content
+    whyBucketListWorthy: {
+      narrative: '<p>There is nowhere else on Earth where animals show such complete indifference to human presence. In the Galápagos, sea lions sprawl across your path, blue-footed boobies perform courtship dances at arm\'s length, and giant tortoises-creatures that seem to belong to another geological era-regard you with prehistoric calm. This volcanic archipelago, straddling the equator six hundred miles off Ecuador\'s coast, inspired Darwin\'s revolutionary insights and continues to captivate visitors with wildlife encounters unlike anywhere else on the planet.</p><p>The Galápagos Islands exist outside the normal rules. Isolated by vast stretches of Pacific Ocean, life here evolved in extraordinary directions. Cormorants lost the ability to fly because there were no predators to escape. Tortoises grew to improbable sizes because nothing hunted them. Marine iguanas developed the ability to dive for seaweed-the world\'s only seafaring lizards.</p><p>For visitors, this evolutionary isolation means something magical: wildlife that has never learned to fear humans. Animals do not flee as you approach; they continue their business as if you were merely another curious creature in their domain. It is the closest most of us will ever come to a pre-human world.</p><p>The islands are strictly protected, and the best way to experience them is aboard a small expedition vessel with certified naturalist guides. Each day brings new landings-volcanic shores where penguins coexist with tropical fish, lagoons where flamingos wade alongside marine iguanas, cliffs where albatrosses launch their epic migrations.</p>'
+    },
     optimalTiming: {
-      summary: 'The Galápagos can be visited year-round, with each season offering distinct wildlife highlights. There is no bad time—only different experiences.',
+      summary: 'The Galápagos can be visited year-round, with each season offering distinct wildlife highlights. There is no bad time-only different experiences.',
       seasons: [
         {
           name: 'Warm Season',
-          months: 'December–May',
+          months: 'December-May',
           highlights: ['Warmer waters for snorkelling', 'Sea turtle nesting', 'Marine iguana nesting', 'Calmer seas']
         },
         {
           name: 'Cool Season',
-          months: 'June–November',
+          months: 'June-November',
           highlights: ['Peak wildlife activity', 'Blue-footed booby mating dances', 'Albatross breeding on Española', 'Nutrient-rich waters attract more marine life']
         }
       ]
     },
-    signatureEncounters: [
-      { category: 'wildlife', title: 'Giant Tortoises', description: 'Meet the gentle giants that can live for two centuries—creatures that seem to belong to the age of dinosaurs' },
-      { category: 'wildlife', title: 'Blue-Footed Boobies', description: 'Watch these charismatic birds perform their absurd mating dance, lifting electric-blue feet in elaborate courtship' },
-      { category: 'adventure', title: 'Snorkelling with Sea Lions', description: 'Playful sea lion pups spiral around you underwater, seemingly delighted by human visitors' },
-      { category: 'wildlife', title: 'Marine Iguanas', description: 'Observe the world\'s only sea-going lizards basking on volcanic rocks before diving to graze on seaweed' },
-      { category: 'adventure', title: 'Hammerhead Sharks', description: 'Snorkel at volcanic outcrops where schools of hammerhead sharks patrol the nutrient-rich currents' },
-      { category: 'landscape', title: 'Volcanic Landscapes', description: 'Walk across recent lava flows on islands still being shaped by the Earth\'s geological forces' }
+    // What You'll Experience - Practical, real detail
+    signatureSights: [
+      { 
+        theme: 'Giant Tortoises',
+        highlights: [
+          'Meet the gentle giants that can live for two centuries',
+          'Creatures that seem to belong to the age of dinosaurs',
+          'See them in their natural habitat on Santa Cruz and Isabela'
+        ]
+      },
+      { 
+        theme: 'Blue-Footed Boobies',
+        highlights: [
+          'Watch these charismatic birds perform their absurd mating dance',
+          'Lifting electric-blue feet in elaborate courtship',
+          'Best viewing during cool season (June-November)'
+        ]
+      },
+      { 
+        theme: 'Snorkelling with Sea Lions',
+        highlights: [
+          'Playful sea lion pups spiral around you underwater',
+          'Seemingly delighted by human visitors',
+          'Some of the world\'s best snorkelling experiences'
+        ]
+      },
+      { 
+        theme: 'Marine Iguanas',
+        highlights: [
+          'Observe the world\'s only sea-going lizards',
+          'Basking on volcanic rocks before diving to graze on seaweed',
+          'Unique to the Galápagos'
+        ]
+      },
+      { 
+        theme: 'Hammerhead Sharks',
+        highlights: [
+          'Snorkel at volcanic outcrops where schools patrol',
+          'Nutrient-rich currents attract large numbers',
+          'Best at specific dive sites with experienced guides'
+        ]
+      },
+      { 
+        theme: 'Volcanic Landscapes',
+        highlights: [
+          'Walk across recent lava flows',
+          'Islands still being shaped by the Earth\'s geological forces',
+          'Dramatic, otherworldly scenery'
+        ]
+      }
     ],
-    whoFor: [
-      { type: 'wildlife', label: 'Wildlife enthusiasts and naturalists' },
-      { type: 'photography', label: 'Photographers seeking extraordinary subjects' },
-      { type: 'families', label: 'Families with curious, adventure-ready children' },
-      { type: 'adventure', label: 'Snorkellers and underwater explorers' },
-      { type: 'nature', label: 'Anyone seeking a profound nature experience' }
-    ],
+    
+    // Is This Right for You - Honest assessment
+    idealVoyagerProfile: {
+      intro: 'The Galápagos suits travellers who want extraordinary wildlife encounters and are comfortable with expedition-style travel.',
+      profiles: [
+        { 
+          type: 'Good fit if you...', 
+          description: 'Love wildlife and nature. Are comfortable snorkelling (or willing to learn). Want unique, close-up animal encounters. Appreciate small-group experiences with expert guides.' 
+        },
+        { 
+          type: 'Consider carefully if...', 
+          description: 'You dislike small boats (vessels are typically 16-100 passengers). You need constant connectivity (limited wifi). You prefer luxury resorts (this is expedition travel). You cannot swim (snorkelling is a major part of the experience).' 
+        },
+        { 
+          type: 'Physical requirements', 
+          description: 'Moderate. You need to climb in and out of Zodiacs, walk on uneven volcanic terrain, and snorkel. However, many activities can be tailored to different fitness levels. Ships have medical facilities.' 
+        },
+        { 
+          type: 'The reality', 
+          description: 'The Galápagos delivers on its promise of close wildlife encounters. Animals genuinely do not fear humans. You will see things here you cannot see anywhere else on Earth. It is a once-in-a-lifetime experience for most visitors.' 
+        }
+      ]
+    },
     bespokeTailoring: [
-      'Choice of expedition vessel—from intimate yachts to luxurious catamarans',
+      'Choice of expedition vessel-from intimate yachts to luxurious catamarans',
       'Pre-cruise stays in Quito with cultural experiences',
       'Diving add-ons for certified divers',
       'Amazon rainforest extensions',
@@ -1235,7 +1561,7 @@ export const bucketListExperiences = [
     faqs: [
       {
         question: 'Why are the Galápagos Islands so unique for wildlife?',
-        answer: 'The islands\' extreme isolation—600 miles from the South American mainland—meant that animals evolved with no land predators and no instinctive fear of larger creatures. The result is wildlife that treats human visitors with remarkable indifference. Blue-footed boobies dance within arm\'s reach. Sea lions pups approach snorkellers to play. It is the closest most of us will come to a world before humanity\'s dominance.'
+        answer: 'The islands\' extreme isolation-600 miles from the South American mainland-meant that animals evolved with no land predators and no instinctive fear of larger creatures. The result is wildlife that treats human visitors with remarkable indifference. Blue-footed boobies dance within arm\'s reach. Sea lions pups approach snorkellers to play. It is the closest most of us will come to a world before humanity\'s dominance.'
       },
       {
         question: 'What makes expedition cruising the best way to visit?',
@@ -1247,7 +1573,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'Is snorkelling suitable for beginners?',
-        answer: 'Absolutely. The protected bays offer calm, warm waters ideal for first-time snorkellers. Wetsuits and flotation aids are provided, and naturalist guides accompany every excursion. Even confident swimmers are astounded by what appears below—marine iguanas grazing on underwater rocks, sea turtles drifting past, schools of colourful fish swirling around volcanic formations.'
+        answer: 'Absolutely. The protected bays offer calm, warm waters ideal for first-time snorkellers. Wetsuits and flotation aids are provided, and naturalist guides accompany every excursion. Even confident swimmers are astounded by what appears below-marine iguanas grazing on underwater rocks, sea turtles drifting past, schools of colourful fish swirling around volcanic formations.'
       },
       {
         question: 'What makes each island different?',
@@ -1272,33 +1598,42 @@ export const bucketListExperiences = [
     slug: 'northern-lights-arctic',
     lastUpdated: '2026-01-02',
     title: 'Northern Lights & Arctic',
+    
+    // SEO - targeting real UK search terms
+    seo: {
+      metaTitle: 'Northern Lights Cruise from UK | Aurora Borealis Norway | Limitless Cruises',
+      metaDescription: 'Everything you need to know about seeing the northern lights from the UK. Best time to go, aurora viewing tips, Norway cruise options. Expert advice.',
+      keywords: ['northern lights cruise from uk', 'aurora borealis cruise', 'norway northern lights cruise', 'arctic cruise from uk', 'aurora viewing cruise']
+    },
+    
+    // Hero
+    hero: {
+      headline: 'Northern Lights & Arctic',
+      subheadline: 'Nature\'s greatest light show above Norway\'s dramatic Arctic coast'
+    },
+    
+    // Simple summary
     tagline: 'Nature\'s greatest light show above Norway\'s dramatic Arctic coast',
-    description: 'There are few natural phenomena that genuinely stop you in your tracks. The aurora borealis is one of them. When those ethereal curtains of green, purple and pink begin to dance across the Arctic sky, conversation ceases and you simply watch, transfixed, as the heavens perform. Norway\'s northern coast—from the elegant university town of Tromsø to the frontier settlement of Kirkenes—offers some of Earth\'s best aurora viewing, combined with landscapes of staggering beauty: the Lofoten Islands\' shark-tooth peaks, the sheer cliffs of North Cape, and fjords that seem carved by giants.',
     heroImage: null,
     cardImage: null,
-    duration: '10–14 nights from UK',
-    season: 'October–March',
-    narrative: [
-      {
-        title: 'The Aurora Experience',
-        content: '<p>The northern lights are not predictable. They cannot be scheduled or guaranteed. This uncertainty is part of their magic—when the sky ignites with otherworldly colour, you understand why our ancestors wove these lights into their myths. Modern forecasting has improved the odds dramatically, but there remains something wonderfully unpredictable about aurora hunting.</p><p>Norway\'s northern coast offers optimal conditions: the right latitude (inside the aurora zone), often clear skies, and minimal light pollution. Sailing these waters means multiple viewing opportunities—from the ship\'s deck, from remote shore excursions, from the warmth of glass-fronted observation lounges. Each night brings fresh anticipation.</p>'
-      },
-      {
-        title: 'Arctic Landscapes by Sea',
-        content: '<p>The coastal voyage reveals Norway at its most dramatic. The Lofoten Islands rise from the sea like a frozen dragon\'s spine, their peaks dusted with snow and their fishing villages painted in traditional red. North Cape—Europe\'s northernmost point—presents sheer cliffs plunging into the Arctic Ocean. And everywhere, the interplay of light and landscape creates moments of extraordinary beauty.</p><p>Winter adds its own dimension: the blue light of polar twilight, the possibility of whale sightings in the nutrient-rich waters, the warmth of Norwegian hospitality in contrast to the cold outside. This is the Arctic at its most atmospheric.</p>'
-      }
-    ],
+    duration: '10-14 nights from UK',
+    season: 'October - March',
+    
+    // Why This Destination - Real, factual content
+    whyBucketListWorthy: {
+      narrative: '<p>There are few natural phenomena that genuinely stop you in your tracks. The aurora borealis is one of them. When those ethereal curtains of green, purple and pink begin to dance across the Arctic sky, conversation ceases and you simply watch, transfixed, as the heavens perform. Norway\'s northern coast-from the elegant university town of Tromsø to the frontier settlement of Kirkenes-offers some of Earth\'s best aurora viewing, combined with landscapes of staggering beauty: the Lofoten Islands\' shark-tooth peaks, the sheer cliffs of North Cape, and fjords that seem carved by giants.</p><p>The northern lights are not predictable. They cannot be scheduled or guaranteed. This uncertainty is part of their magic-when the sky ignites with otherworldly colour, you understand why our ancestors wove these lights into their myths. Modern forecasting has improved the odds dramatically, but there remains something wonderfully unpredictable about aurora hunting.</p><p>Norway\'s northern coast offers optimal conditions: the right latitude (inside the aurora zone), often clear skies, and minimal light pollution. Sailing these waters means multiple viewing opportunities-from the ship\'s deck, from remote shore excursions, from the warmth of glass-fronted observation lounges. Each night brings fresh anticipation.</p><p>The coastal voyage reveals Norway at its most dramatic. The Lofoten Islands rise from the sea like a frozen dragon\'s spine, their peaks dusted with snow and their fishing villages painted in traditional red. North Cape-Europe\'s northernmost point-presents sheer cliffs plunging into the Arctic Ocean. And everywhere, the interplay of light and landscape creates moments of extraordinary beauty.</p>'
+    },
     optimalTiming: {
       summary: 'The aurora season runs from late September to late March, with peak viewing typically in December through February when nights are longest.',
       seasons: [
         {
           name: 'Early Season',
-          months: 'October–November',
+          months: 'October-November',
           highlights: ['Good aurora probability', 'Some autumn colours remaining', 'Less extreme cold']
         },
         {
           name: 'Peak Season',
-          months: 'December–February',
+          months: 'December-February',
           highlights: ['Longest nights for maximum viewing', 'Polar night atmosphere', 'Best aurora statistics', 'Snow-covered landscapes']
         },
         {
@@ -1308,21 +1643,80 @@ export const bucketListExperiences = [
         }
       ]
     },
-    signatureEncounters: [
-      { category: 'nature', title: 'Aurora Borealis', description: 'Watch the northern lights dance across the Arctic sky—nature\'s most spectacular light show' },
-      { category: 'landscape', title: 'The Lofoten Islands', description: 'Dramatic peaks rising from the sea, traditional fishing villages, and some of Norway\'s most iconic scenery' },
-      { category: 'landscape', title: 'North Cape', description: 'Stand at Europe\'s northernmost point, where 300-metre cliffs drop to the Arctic Ocean' },
-      { category: 'adventure', title: 'Husky Sledding', description: 'Race through snowy landscapes behind a team of enthusiastic Arctic dogs' },
-      { category: 'culture', title: 'Sami Heritage', description: 'Learn about the indigenous people of the Arctic and their reindeer-herding traditions' },
-      { category: 'adventure', title: 'Ice Hotel Stay', description: 'Sleep in a room sculpted from ice—an unforgettable Arctic experience' }
+    // What You'll Experience - Practical, real detail
+    signatureSights: [
+      { 
+        theme: 'Aurora Borealis',
+        highlights: [
+          'Watch the northern lights dance across the Arctic sky',
+          'Nature\'s most spectacular light show',
+          'Best viewing December-February with longest nights'
+        ]
+      },
+      { 
+        theme: 'The Lofoten Islands',
+        highlights: [
+          'Dramatic peaks rising from the sea',
+          'Traditional fishing villages painted in red',
+          'Some of Norway\'s most iconic scenery'
+        ]
+      },
+      { 
+        theme: 'North Cape',
+        highlights: [
+          'Stand at Europe\'s northernmost point',
+          '300-metre cliffs drop to the Arctic Ocean',
+          'Dramatic Arctic landscape'
+        ]
+      },
+      { 
+        theme: 'Husky Sledding',
+        highlights: [
+          'Race through snowy landscapes behind a team of enthusiastic Arctic dogs',
+          'Authentic Arctic experience',
+          'Available as shore excursion'
+        ]
+      },
+      { 
+        theme: 'Sami Heritage',
+        highlights: [
+          'Learn about the indigenous people of the Arctic',
+          'Reindeer-herding traditions',
+          'Rich cultural experiences'
+        ]
+      },
+      { 
+        theme: 'Ice Hotel Stay',
+        highlights: [
+          'Sleep in a room sculpted from ice',
+          'An unforgettable Arctic experience',
+          'Available as pre or post-cruise extension'
+        ]
+      }
     ],
-    whoFor: [
-      { type: 'photography', label: 'Aurora photographers and stargazers' },
-      { type: 'adventure', label: 'Winter adventure seekers' },
-      { type: 'couples', label: 'Couples seeking a unique romantic escape' },
-      { type: 'nature', label: 'Nature lovers drawn to Arctic landscapes' },
-      { type: 'culture', label: 'Those fascinated by Arctic culture and heritage' }
-    ],
+    
+    // Is This Right for You - Honest assessment
+    idealVoyagerProfile: {
+      intro: 'Northern lights cruises suit travellers who want to see the aurora and experience Arctic winter landscapes.',
+      profiles: [
+        { 
+          type: 'Good fit if you...', 
+          description: 'Want to see the northern lights. Are comfortable with cold weather (proper clothing provided). Enjoy dramatic winter landscapes. Appreciate the unpredictability of nature.' 
+        },
+        { 
+          type: 'Consider carefully if...', 
+          description: 'You need guaranteed aurora sightings (they cannot be promised). You dislike cold weather. You prefer warm destinations. You need constant daylight (winter means long nights).' 
+        },
+        { 
+          type: 'Physical requirements', 
+          description: 'Minimal. Most viewing is from the ship or short excursions. Some activities like husky sledding require basic mobility. Ships are fully heated and comfortable.' 
+        },
+        { 
+          type: 'The reality', 
+          description: 'On voyages of 7-10 nights during peak season (December-February), aurora viewing probability is typically 80% or higher. Multiple nights mean multiple opportunities. However, nature cannot be guaranteed.' 
+        }
+      ]
+    },
     bespokeTailoring: [
       'Choice of cruise line and cabin category',
       'Pre-cruise nights in Tromsø with aurora excursions',
@@ -1415,15 +1809,15 @@ export const bucketListExperiences = [
     faqs: [
       {
         question: 'What are the chances of actually seeing the northern lights?',
-        answer: 'On a voyage of 7–10 nights along Norway\'s Arctic coast during peak season (December–February), the statistical probability of witnessing aurora is very high—typically above 80%. Multiple nights at sea and in port mean multiple opportunities. While no natural phenomenon can be guaranteed, the odds are firmly in your favour.'
+        answer: 'On a voyage of 7-10 nights along Norway\'s Arctic coast during peak season (December-February), the statistical probability of witnessing aurora is very high-typically above 80%. Multiple nights at sea and in port mean multiple opportunities. While no natural phenomenon can be guaranteed, the odds are firmly in your favour.'
       },
       {
         question: 'What makes Norway such a good place to see the aurora?',
-        answer: 'Norway\'s northern coast sits squarely within the aurora zone—the oval of maximum activity that rings the magnetic pole. The Gulf Stream keeps coastal waters ice-free and creates clearer skies than you might expect at these latitudes. And the dramatic landscapes—fjords, mountains, sea—create an extraordinary backdrop for the light show above.'
+        answer: 'Norway\'s northern coast sits squarely within the aurora zone-the oval of maximum activity that rings the magnetic pole. The Gulf Stream keeps coastal waters ice-free and creates clearer skies than you might expect at these latitudes. And the dramatic landscapes-fjords, mountains, sea-create an extraordinary backdrop for the light show above.'
       },
       {
         question: 'How cold is it in the Arctic winter?',
-        answer: 'Temperatures typically range from -5°C to -15°C, occasionally colder. Modern Arctic clothing makes this entirely manageable—you dress in layers, and ships provide warm observation areas. Many travellers find the cold invigorating rather than uncomfortable, and stepping out onto the deck to watch the aurora is part of the adventure.'
+        answer: 'Temperatures typically range from -5°C to -15°C, occasionally colder. Modern Arctic clothing makes this entirely manageable-you dress in layers, and ships provide warm observation areas. Many travellers find the cold invigorating rather than uncomfortable, and stepping out onto the deck to watch the aurora is part of the adventure.'
       },
       {
         question: 'Is this suitable for someone who dislikes cold weather?',
@@ -1431,11 +1825,11 @@ export const bucketListExperiences = [
       },
       {
         question: 'What else is there to see besides the aurora?',
-        answer: 'The coastal scenery is spectacular in its own right—the Lofoten Islands, the North Cape, countless fjords. Winter brings possible whale sightings as orcas and humpbacks follow the herring. Shore excursions offer husky sledding, Sami cultural experiences, and visits to traditional fishing villages. The aurora is the headliner, but the supporting cast is impressive.'
+        answer: 'The coastal scenery is spectacular in its own right-the Lofoten Islands, the North Cape, countless fjords. Winter brings possible whale sightings as orcas and humpbacks follow the herring. Shore excursions offer husky sledding, Sami cultural experiences, and visits to traditional fishing villages. The aurora is the headliner, but the supporting cast is impressive.'
       },
       {
         question: 'Is there enough daylight to enjoy the scenery?',
-        answer: 'Even during polar night (late November to mid-January), there are hours of beautiful twilight—the famous "blue hour" that photographers prize. As you move toward spring, daylight increases rapidly. The shorter days actually enhance the aurora viewing opportunities while still allowing scenic appreciation during the twilight hours.'
+        answer: 'Even during polar night (late November to mid-January), there are hours of beautiful twilight-the famous "blue hour" that photographers prize. As you move toward spring, daylight increases rapidly. The shorter days actually enhance the aurora viewing opportunities while still allowing scenic appreciation during the twilight hours.'
       }
     ],
     meta: {
@@ -1452,33 +1846,42 @@ export const bucketListExperiences = [
     slug: 'northern-lights-no-fly-dover',
     lastUpdated: '2026-01-02',
     title: 'Northern Lights No-Fly from UK',
+    
+    // SEO - targeting real UK search terms
+    seo: {
+      metaTitle: 'Northern Lights Cruise from Dover | No-Fly Aurora Cruise | Limitless Cruises',
+      metaDescription: 'Northern lights cruise from Dover with no flights. See the aurora borealis from UK ports. Best time to go, what to expect. Expert advice.',
+      keywords: ['northern lights cruise from dover', 'no fly northern lights cruise', 'aurora cruise from uk', 'dover northern lights cruise', 'uk port aurora cruise']
+    },
+    
+    // Hero
+    hero: {
+      headline: 'Northern Lights No-Fly from UK',
+      subheadline: 'The aurora experience without a single flight: depart Dover, return home transformed'
+    },
+    
+    // Simple summary
     tagline: 'The aurora experience without a single flight: depart Dover, return home transformed',
-    description: 'For many UK travellers, the appeal of a no-fly cruise goes beyond convenience—it is about the journey itself. Depart from Dover and watch Britain\'s coast recede, then wake each morning to new horizons: the Art Nouveau elegance of Ålesund, the medieval grandeur of Trondheim, the dramatic fjords of Norway\'s coast. And at journey\'s centre, an overnight in Tromsø—the aurora capital—where a 24-hour window maximises your chances of witnessing nature\'s greatest light show. The Scottish islands on your return add Neolithic wonder and whisky heritage. No airports, no jetlag, just pure Arctic magic.',
     heroImage: null,
     cardImage: null,
-    duration: '12–16 nights from Dover',
-    season: 'October–March',
-    narrative: [
-      {
-        title: 'The Joy of No-Fly Travel',
-        content: '<p>There is something deeply satisfying about leaving home without entering an airport. The train or coach to Dover takes less than two hours from London; you step aboard your ship in the afternoon and wake the next morning already at sea. The gradual approach to Norway—watching the latitude numbers climb, feeling the air sharpen—builds anticipation in a way that instant air travel cannot match.</p><p>This unhurried pace extends throughout the voyage. Sea days become treasured interludes for reading, relaxation, and enrichment lectures. Each port feels earned rather than delivered. And when you finally arrive in Tromsø for your overnight aurora hunt, the sense of having truly travelled to reach the Arctic makes the experience more profound.</p>'
-      },
-      {
-        title: 'Tromsø: Aurora Capital',
-        content: '<p>The voyage\'s climax comes with an overnight stay in Tromsø—one of the world\'s premier aurora viewing locations. This 24-hour window dramatically increases your chances of witnessing the northern lights, as you have both evening and early morning opportunities. The town itself is charming: the striking Arctic Cathedral, the cable car ascending Mount Storsteinen, and the warm hospitality of Norway\'s northernmost university city.</p><p>The return journey brings you through the Scottish islands—Orkney\'s Neolithic mysteries at Skara Brae, Shetland\'s wildlife and Norse heritage—before you slide back into Dover, transformed by the journey.</p>'
-      }
-    ],
+    duration: '12-16 nights from Dover',
+    season: 'October - March',
+    
+    // Why This Destination - Real, factual content
+    whyBucketListWorthy: {
+      narrative: '<p>For many UK travellers, the appeal of a no-fly cruise goes beyond convenience-it is about the journey itself. Depart from Dover and watch Britain\'s coast recede, then wake each morning to new horizons: the Art Nouveau elegance of Ålesund, the medieval grandeur of Trondheim, the dramatic fjords of Norway\'s coast. And at journey\'s centre, an overnight in Tromsø-the aurora capital-where a 24-hour window maximises your chances of witnessing nature\'s greatest light show. The Scottish islands on your return add Neolithic wonder and whisky heritage. No airports, no jetlag, just pure Arctic magic.</p><p>There is something deeply satisfying about leaving home without entering an airport. The train or coach to Dover takes less than two hours from London; you step aboard your ship in the afternoon and wake the next morning already at sea. The gradual approach to Norway-watching the latitude numbers climb, feeling the air sharpen-builds anticipation in a way that instant air travel cannot match.</p><p>The voyage\'s climax comes with an overnight stay in Tromsø-one of the world\'s premier aurora viewing locations. This 24-hour window dramatically increases your chances of witnessing the northern lights, as you have both evening and early morning opportunities. The town itself is charming: the striking Arctic Cathedral, the cable car ascending Mount Storsteinen, and the warm hospitality of Norway\'s northernmost university city.</p>'
+    },
     optimalTiming: {
       summary: 'The aurora season runs from October to March, with peak viewing typically December through February when nights are longest and activity is highest.',
       seasons: [
         {
           name: 'Autumn',
-          months: 'October–November',
+          months: 'October-November',
           highlights: ['Good aurora probability', 'Milder temperatures', 'Some daylight for scenic cruising']
         },
         {
           name: 'Deep Winter',
-          months: 'December–February',
+          months: 'December-February',
           highlights: ['Longest nights for aurora viewing', 'Highest aurora activity', 'Snow-covered landscapes']
         },
         {
@@ -1488,21 +1891,80 @@ export const bucketListExperiences = [
         }
       ]
     },
-    signatureEncounters: [
-      { category: 'nature', title: 'Aurora from Tromsø', description: 'Your overnight stay in Norway\'s aurora capital provides a 24-hour window to witness the northern lights' },
-      { category: 'culture', title: 'Norwegian Fjord Towns', description: 'Explore Art Nouveau Ålesund, historic Trondheim, and charming coastal villages' },
-      { category: 'history', title: 'Skara Brae', description: 'Walk through a 5,000-year-old Neolithic village—one of Europe\'s most remarkable prehistoric sites' },
-      { category: 'culinary', title: 'Highland Park Distillery', description: 'Sample single malt whisky in Orkney, where Norse and Scottish traditions merge' },
-      { category: 'wildlife', title: 'Shetland Wildlife', description: 'Spot puffins and seabirds on islands that feel closer to Norway than Scotland' },
-      { category: 'relaxation', label: 'Sea Day Serenity', description: 'Enjoy the rhythm of days at sea—lectures, fine dining, and anticipation building' }
+    // What You'll Experience - Practical, real detail
+    signatureSights: [
+      { 
+        theme: 'Aurora from Tromsø',
+        highlights: [
+          'Overnight stay in Norway\'s aurora capital',
+          '24-hour window to witness the northern lights',
+          'Both evening and early morning viewing opportunities'
+        ]
+      },
+      { 
+        theme: 'Norwegian Fjord Towns',
+        highlights: [
+          'Explore Art Nouveau Ålesund',
+          'Historic Trondheim',
+          'Charming coastal villages'
+        ]
+      },
+      { 
+        theme: 'Skara Brae',
+        highlights: [
+          'Walk through a 5,000-year-old Neolithic village',
+          'One of Europe\'s most remarkable prehistoric sites',
+          'On return journey through Scottish islands'
+        ]
+      },
+      { 
+        theme: 'Highland Park Distillery',
+        highlights: [
+          'Sample single malt whisky in Orkney',
+          'Where Norse and Scottish traditions merge',
+          'Authentic Scottish heritage experience'
+        ]
+      },
+      { 
+        theme: 'Shetland Wildlife',
+        highlights: [
+          'Spot puffins and seabirds',
+          'Islands that feel closer to Norway than Scotland',
+          'Rich wildlife viewing opportunities'
+        ]
+      },
+      { 
+        theme: 'Sea Day Serenity',
+        highlights: [
+          'Enjoy the rhythm of days at sea',
+          'Lectures, fine dining, and anticipation building',
+          'Unhurried journey experience'
+        ]
+      }
     ],
-    whoFor: [
-      { type: 'relaxation', label: 'Those who prefer travel without airports' },
-      { type: 'couples', label: 'Couples seeking an unhurried adventure' },
-      { type: 'photography', label: 'Aurora photographers and night-sky enthusiasts' },
-      { type: 'culture', label: 'History lovers drawn to Scottish islands' },
-      { type: 'luxury', label: 'First-time cruisers seeking a gentle introduction' }
-    ],
+    
+    // Is This Right for You - Honest assessment
+    idealVoyagerProfile: {
+      intro: 'No-fly northern lights cruises suit travellers who want to avoid airports and enjoy a more gradual journey to the Arctic.',
+      profiles: [
+        { 
+          type: 'Good fit if you...', 
+          description: 'Prefer travel without airports. Want a more gradual journey to the Arctic. Enjoy sea days and enrichment. Value the journey as much as the destination.' 
+        },
+        { 
+          type: 'Consider carefully if...', 
+          description: 'You have limited time (no-fly cruises are longer). You dislike sea days. You need to get to the Arctic quickly. You prefer flying.' 
+        },
+        { 
+          type: 'Physical requirements', 
+          description: 'Minimal. Easy access from UK ports. Most activities are gentle. Ships are fully accessible.' 
+        },
+        { 
+          type: 'The reality', 
+          description: 'No-fly cruises offer a unique experience-the journey itself becomes part of the adventure. The overnight in Tromsø provides excellent aurora viewing opportunities. Perfect for those who want to avoid airports entirely.' 
+        }
+      ]
+    },
     bespokeTailoring: [
       'Cabin category and location selection',
       'Specialty dining packages',
@@ -1607,11 +2069,11 @@ export const bucketListExperiences = [
     faqs: [
       {
         question: 'Why choose a no-fly cruise for the northern lights?',
-        answer: 'For many travellers, the appeal goes beyond avoiding airports. Departing from Dover means the journey itself becomes part of the experience—watching Britain recede, waking to Norwegian fjords, arriving in the Arctic having truly travelled to get there. The sea days build anticipation and provide time for enrichment lectures about the aurora.'
+        answer: 'For many travellers, the appeal goes beyond avoiding airports. Departing from Dover means the journey itself becomes part of the experience-watching Britain recede, waking to Norwegian fjords, arriving in the Arctic having truly travelled to get there. The sea days build anticipation and provide time for enrichment lectures about the aurora.'
       },
       {
         question: 'How likely am I to see the aurora?',
-        answer: 'On voyages with an overnight in Tromsø during peak season (December–February), success rates typically exceed 80%. The 24-hour Tromsø window is crucial—it provides both evening and early morning viewing opportunities. Even in shoulder months, the statistical odds are strongly in your favour.'
+        answer: 'On voyages with an overnight in Tromsø during peak season (December-February), success rates typically exceed 80%. The 24-hour Tromsø window is crucial-it provides both evening and early morning viewing opportunities. Even in shoulder months, the statistical odds are strongly in your favour.'
       },
       {
         question: 'How easy is it to get to Dover?',
@@ -1623,11 +2085,11 @@ export const bucketListExperiences = [
       },
       {
         question: 'What makes the Scottish islands special on this route?',
-        answer: 'Orkney and Shetland offer extraordinary contrasts to the Norwegian ports. Skara Brae is a 5,000-year-old Neolithic village—astonishingly well-preserved. Highland Park distillery produces whisky with distinct Norse influences. Shetland\'s wildlife and Norse heritage feel almost as Arctic as Norway itself.'
+        answer: 'Orkney and Shetland offer extraordinary contrasts to the Norwegian ports. Skara Brae is a 5,000-year-old Neolithic village-astonishingly well-preserved. Highland Park distillery produces whisky with distinct Norse influences. Shetland\'s wildlife and Norse heritage feel almost as Arctic as Norway itself.'
       },
       {
         question: 'How cold will it be at sea?',
-        answer: 'The ship is fully heated and comfortable. Outside temperatures vary from around 5°C near Britain to well below freezing in Arctic Norway. For aurora viewing on deck, warm layers are essential—but there are also enclosed viewing areas. The cold is part of the atmosphere rather than an obstacle.'
+        answer: 'The ship is fully heated and comfortable. Outside temperatures vary from around 5°C near Britain to well below freezing in Arctic Norway. For aurora viewing on deck, warm layers are essential-but there are also enclosed viewing areas. The cold is part of the atmosphere rather than an obstacle.'
       }
     ],
     meta: {
@@ -1644,33 +2106,42 @@ export const bucketListExperiences = [
     slug: 'south-america-cruises',
     lastUpdated: '2026-01-02',
     title: 'South America',
+    
+    // SEO - targeting real UK search terms
+    seo: {
+      metaTitle: 'South America Cruise from UK | Buenos Aires & Brazil | Limitless Cruises',
+      metaDescription: 'Everything you need to know about cruising South America from the UK. Buenos Aires, Rio de Janeiro, best time to visit. Expert advice.',
+      keywords: ['south america cruise from uk', 'buenos aires cruise', 'brazil cruise from uk', 'rio de janeiro cruise', 'south america cruise itinerary']
+    },
+    
+    // Hero
+    hero: {
+      headline: 'South America',
+      subheadline: 'From tango nights in Buenos Aires to Brazil\'s sun-blessed coast'
+    },
+    
+    // Simple summary
     tagline: 'From tango nights in Buenos Aires to Brazil\'s sun-blessed coast',
-    description: 'South America pulses with life in a way that other continents only dream of. In Buenos Aires, tango is not just a dance but a way of being—passionate, precise, utterly absorbing. Rio de Janeiro\'s harbour, with Christ the Redeemer presiding from above, may be the most dramatically sited city on Earth. And Brazil\'s northeastern coast—colonial Salvador, pristine Ilhabela, laid-back Fortaleza—offers beaches, culture, and a warmth of welcome that lingers long after you return home.',
     heroImage: null,
     cardImage: null,
-    duration: '14–18 nights from UK',
-    season: 'November–March',
-    narrative: [
-      {
-        title: 'The Rhythm of Latin America',
-        content: '<p>South America moves to its own beat. In Buenos Aires, you feel it in the late-night milongas where couples dance tango until dawn, in the sizzle of steaks over open flames, in the theatrical passion that infuses everyday life. The city is often called the Paris of South America—but it is more than that. It is entirely itself: elegant, dramatic, alive with culture.</p><p>Cruising north along Brazil\'s coast, the rhythm changes but never fades. Samba replaces tango. The colonial grandeur of Salvador gives way to the modernist sweep of Rio. Each port brings new music, new flavours, new perspectives on what it means to embrace life fully.</p>'
-      },
-      {
-        title: 'Rio: The Marvellous City',
-        content: '<p>There are harbours, and then there is Rio de Janeiro. Sailing beneath Sugarloaf Mountain, with Christ the Redeemer watching from Corcovado, you understand why this place has inspired artists and dreamers for centuries. The city sprawls across the most improbable geography—mountains tumbling to beaches, rainforest pressing against favelas, the Atlantic stretching towards Africa.</p><p>An overnight stay allows you to experience Rio beyond the iconic images: the vibrant sidewalk cafés of Ipanema, the colonial lanes of Santa Teresa, the infectious energy that builds towards Carnival. Even outside Carnival season, Rio pulses with a joy that is impossible to resist.</p>'
-      }
-    ],
+    duration: '14-18 nights from UK',
+    season: 'November - March',
+    
+    // Why This Destination - Real, factual content
+    whyBucketListWorthy: {
+      narrative: '<p>South America pulses with life in a way that other continents only dream of. In Buenos Aires, tango is not just a dance but a way of being-passionate, precise, utterly absorbing. Rio de Janeiro\'s harbour, with Christ the Redeemer presiding from above, may be the most dramatically sited city on Earth. And Brazil\'s northeastern coast-colonial Salvador, pristine Ilhabela, laid-back Fortaleza-offers beaches, culture, and a warmth of welcome that lingers long after you return home.</p><p>South America moves to its own beat. In Buenos Aires, you feel it in the late-night milongas where couples dance tango until dawn, in the sizzle of steaks over open flames, in the theatrical passion that infuses everyday life. The city is often called the Paris of South America-but it is more than that. It is entirely itself: elegant, dramatic, alive with culture.</p><p>Cruising north along Brazil\'s coast, the rhythm changes but never fades. Samba replaces tango. The colonial grandeur of Salvador gives way to the modernist sweep of Rio. Each port brings new music, new flavours, new perspectives on what it means to embrace life fully.</p><p>There are harbours, and then there is Rio de Janeiro. Sailing beneath Sugarloaf Mountain, with Christ the Redeemer watching from Corcovado, you understand why this place has inspired artists and dreamers for centuries. The city sprawls across the most improbable geography-mountains tumbling to beaches, rainforest pressing against favelas, the Atlantic stretching towards Africa.</p>'
+    },
     optimalTiming: {
-      summary: 'The South American summer (November–March) offers the best weather, with December to February being peak season. Carnival typically falls in February.',
+      summary: 'The South American summer (November-March) offers the best weather, with December to February being peak season. Carnival typically falls in February.',
       seasons: [
         {
           name: 'Early Summer',
-          months: 'November–December',
+          months: 'November-December',
           highlights: ['Warm temperatures', 'Pre-Carnival buzz building', 'Jacaranda blooms in Buenos Aires']
         },
         {
           name: 'Peak Summer',
-          months: 'January–February',
+          months: 'January-February',
           highlights: ['Warmest weather', 'Carnival celebrations', 'Peak beach season', 'Longest days']
         },
         {
@@ -1680,21 +2151,80 @@ export const bucketListExperiences = [
         }
       ]
     },
-    signatureEncounters: [
-      { category: 'culture', title: 'Buenos Aires Tango', description: 'Experience the world\'s most passionate dance in the city where it was born—from street performers to hidden milongas' },
-      { category: 'landscape', title: 'Rio\'s Harbour', description: 'Sail into one of Earth\'s most spectacular natural harbours, with Sugarloaf and Christ the Redeemer framing the city' },
-      { category: 'culture', title: 'Salvador\'s Pelourinho', description: 'Walk the cobblestone streets of Brazil\'s most atmospheric colonial quarter, alive with Afro-Brazilian culture' },
-      { category: 'nature', title: 'Iguazu Falls Extension', description: 'Add the world\'s most powerful waterfalls—275 cascades straddling the Argentina-Brazil border' },
-      { category: 'culinary', title: 'Argentine Steaks', description: 'Taste some of the world\'s finest beef, grilled to perfection in traditional parillas' },
-      { category: 'adventure', title: 'Fortaleza Dune Buggies', description: 'Race across golden sand dunes along Brazil\'s northeastern coast' }
+    // What You'll Experience - Practical, real detail
+    signatureSights: [
+      { 
+        theme: 'Buenos Aires Tango',
+        highlights: [
+          'Experience the world\'s most passionate dance in the city where it was born',
+          'From street performers to hidden milongas',
+          'Late-night tango shows until dawn'
+        ]
+      },
+      { 
+        theme: 'Rio\'s Harbour',
+        highlights: [
+          'Sail into one of Earth\'s most spectacular natural harbours',
+          'Sugarloaf and Christ the Redeemer framing the city',
+          'Overnight stays allow time to explore'
+        ]
+      },
+      { 
+        theme: 'Salvador\'s Pelourinho',
+        highlights: [
+          'Walk the cobblestone streets of Brazil\'s most atmospheric colonial quarter',
+          'Alive with Afro-Brazilian culture',
+          'UNESCO World Heritage site'
+        ]
+      },
+      { 
+        theme: 'Iguazu Falls Extension',
+        highlights: [
+          'Add the world\'s most powerful waterfalls',
+          '275 cascades straddling the Argentina-Brazil border',
+          'Available as pre or post-cruise extension'
+        ]
+      },
+      { 
+        theme: 'Argentine Steaks',
+        highlights: [
+          'Taste some of the world\'s finest beef',
+          'Grilled to perfection in traditional parillas',
+          'Culinary highlight of Buenos Aires'
+        ]
+      },
+      { 
+        theme: 'Fortaleza Dune Buggies',
+        highlights: [
+          'Race across golden sand dunes',
+          'Along Brazil\'s northeastern coast',
+          'Adventure activity available as shore excursion'
+        ]
+      }
     ],
-    whoFor: [
-      { type: 'culture', label: 'Culture lovers and tango enthusiasts' },
-      { type: 'couples', label: 'Couples seeking romance and adventure' },
-      { type: 'photography', label: 'Photographers drawn to dramatic landscapes' },
-      { type: 'adventure', label: 'Those who embrace vibrant, passionate cultures' },
-      { type: 'relaxation', label: 'Beach lovers seeking tropical shores' }
-    ],
+    
+    // Is This Right for You - Honest assessment
+    idealVoyagerProfile: {
+      intro: 'South America cruises suit travellers who want to experience Latin American culture, music, and vibrant cities.',
+      profiles: [
+        { 
+          type: 'Good fit if you...', 
+          description: 'Love culture, music and dance. Want to experience vibrant Latin American cities. Enjoy warm weather and beaches. Appreciate passionate, energetic destinations.' 
+        },
+        { 
+          type: 'Consider carefully if...', 
+          description: 'You prefer quiet, serene destinations (South America is energetic). You dislike crowds (ports can be busy). You need constant English signage (less common in smaller ports).' 
+        },
+        { 
+          type: 'Physical requirements', 
+          description: 'Moderate. Ports involve walking and some hills. Rio\'s Sugarloaf and Corcovado require cable car/van access. Most activities are accessible.' 
+        },
+        { 
+          type: 'The reality', 
+          description: 'South America offers an intensity of experience that few regions can match. The cultural richness, dramatic landscapes, and warmth of Latin hospitality create a journey that engages every sense. Perfect for those seeking vibrant, passionate destinations.' 
+        }
+      ]
+    },
     bespokeTailoring: [
       'Pre-cruise Buenos Aires stays with tango experiences',
       'Iguazu Falls extensions',
@@ -1805,15 +2335,15 @@ export const bucketListExperiences = [
     faqs: [
       {
         question: 'What makes South America such a compelling cruise destination?',
-        answer: 'South America offers an intensity of experience that few regions can match. The cultural richness of Buenos Aires and Salvador, the natural drama of Rio\'s harbour and Brazil\'s endless coastline, the warmth of Latin hospitality—all combine into a journey that engages every sense. Cruising allows you to experience this diversity without the exhaustion of constant travel between cities.'
+        answer: 'South America offers an intensity of experience that few regions can match. The cultural richness of Buenos Aires and Salvador, the natural drama of Rio\'s harbour and Brazil\'s endless coastline, the warmth of Latin hospitality-all combine into a journey that engages every sense. Cruising allows you to experience this diversity without the exhaustion of constant travel between cities.'
       },
       {
         question: 'Is Buenos Aires really as romantic as its reputation suggests?',
-        answer: 'More so. The city has a theatrical quality—the passion of tango, the grandeur of its architecture, the drama of its steakhouses with their open flames. Late dinners stretch towards midnight. Conversations linger over wine. The pace is civilised but never dull. For couples, it is an intensely romantic start to any journey.'
+        answer: 'More so. The city has a theatrical quality-the passion of tango, the grandeur of its architecture, the drama of its steakhouses with their open flames. Late dinners stretch towards midnight. Conversations linger over wine. The pace is civilised but never dull. For couples, it is an intensely romantic start to any journey.'
       },
       {
         question: 'Should I add Iguazu Falls to my trip?',
-        answer: 'If at all possible, yes. Iguazu is not merely a waterfall—it is 275 waterfalls cascading over a vast crescent of cliffs, straddling the Argentina-Brazil border. The scale is almost incomprehensible. A two-day extension from Buenos Aires allows you to experience both sides. Many consider it the trip\'s highlight.'
+        answer: 'If at all possible, yes. Iguazu is not merely a waterfall-it is 275 waterfalls cascading over a vast crescent of cliffs, straddling the Argentina-Brazil border. The scale is almost incomprehensible. A two-day extension from Buenos Aires allows you to experience both sides. Many consider it the trip\'s highlight.'
       },
       {
         question: 'What is the Brazilian coast like?',
@@ -1847,57 +2377,130 @@ export const bucketListExperiences = [
     slug: 'middle-east-cruises',
     lastUpdated: '2026-01-02',
     title: 'Middle East & Arabian Peninsula',
+    
+    // SEO - targeting real UK search terms
+    seo: {
+      metaTitle: 'Middle East Cruise from UK | Dubai & Arabian Peninsula | Limitless Cruises',
+      metaDescription: 'Everything you need to know about cruising the Middle East from the UK. Dubai, Abu Dhabi, Petra, best time to visit. Expert advice.',
+      keywords: ['middle east cruise from uk', 'dubai cruise from uk', 'arabian peninsula cruise', 'petra cruise', 'red sea cruise from uk']
+    },
+    
+    // Hero
+    hero: {
+      headline: 'Middle East & Arabian Peninsula',
+      subheadline: 'Where ancient civilisations meet futuristic skylines: Arabia\'s golden coast'
+    },
+    
+    // Simple summary
     tagline: 'Where ancient civilisations meet futuristic skylines: Arabia\'s golden coast',
-    description: 'The Arabian Peninsula offers something increasingly rare in modern travel: the genuine thrill of discovery. Here, ancient trading ports sit beside gleaming skyscrapers. Desert dunes meet turquoise waters. And millennia of history—from Petra\'s rose-red treasury to the Pharaohs\' tombs at Luxor—unfold within reach of the world\'s most ambitious modern cities. For UK travellers seeking winter sun with substance, the Middle East delivers warmth, wonder, and a fascinating window onto cultures both ancient and futuristic.',
     heroImage: null,
     cardImage: null,
-    duration: '10–14 nights from UK',
-    season: 'November–April',
-    narrative: [
-      {
-        title: 'Ancient and Modern',
-        content: '<p>Few regions embody contrast as dramatically as the Arabian Peninsula. Dubai\'s Burj Khalifa pierces the desert sky—the world\'s tallest building rising from sands where Bedouin caravans once trekked. Abu Dhabi\'s Sheikh Zayed Grand Mosque represents Islamic architecture at its most refined, while just hours away, Petra\'s treasury stands as testament to the Nabataean civilisation that flourished two thousand years ago.</p><p>Cruising connects these extremes effortlessly. You sail between futuristic skylines and ancient souks, between Omani fjords and Egyptian monuments. Each morning brings a new world, each evening a different perspective on this endlessly fascinating region.</p>'
-      },
-      {
-        title: 'Beyond the Headlines',
-        content: '<p>The Middle East of the cruise ports is not the Middle East of the headlines. This is a region that has invested billions in welcoming visitors, from Qatar\'s Museum of Islamic Art to Oman\'s meticulously restored heritage sites. The warmth of Arabian hospitality—the coffee ceremonies, the genuine interest in guests—often surprises those making their first visit.</p><p>For UK travellers, there is an additional appeal: guaranteed winter sunshine just seven hours from London, combined with a richness of experience that beach resorts alone cannot match. This is winter sun with depth.</p>'
-      }
-    ],
+    duration: '10-14 nights from UK',
+    season: 'November - April',
+    
+    // Why This Destination - Real, factual content
+    whyBucketListWorthy: {
+      narrative: '<p>The Arabian Peninsula offers something increasingly rare in modern travel: the genuine thrill of discovery. Here, ancient trading ports sit beside gleaming skyscrapers. Desert dunes meet turquoise waters. And millennia of history-from Petra\'s rose-red treasury to the Pharaohs\' tombs at Luxor-unfold within reach of the world\'s most ambitious modern cities. For UK travellers seeking winter sun with substance, the Middle East delivers warmth, wonder, and a fascinating window onto cultures both ancient and futuristic.</p><p>Few regions embody contrast as dramatically as the Arabian Peninsula. Dubai\'s Burj Khalifa pierces the desert sky-the world\'s tallest building rising from sands where Bedouin caravans once trekked. Abu Dhabi\'s Sheikh Zayed Grand Mosque represents Islamic architecture at its most refined, while just hours away, Petra\'s treasury stands as testament to the Nabataean civilisation that flourished two thousand years ago.</p><p>Cruising connects these extremes effortlessly. You sail between futuristic skylines and ancient souks, between Omani fjords and Egyptian monuments. Each morning brings a new world, each evening a different perspective on this endlessly fascinating region.</p><p>The Middle East of the cruise ports is not the Middle East of the headlines. This is a region that has invested billions in welcoming visitors, from Qatar\'s Museum of Islamic Art to Oman\'s meticulously restored heritage sites. The warmth of Arabian hospitality-the coffee ceremonies, the genuine interest in guests-often surprises those making their first visit.</p>',
+      personaVignettes: [
+        { persona: 'The Cultural Explorer', description: 'Those fascinated by the contrast between ancient civilisations and modern ambition find the Middle East endlessly compelling.' },
+        { persona: 'The Winter Sun Seeker', description: 'Travellers seeking guaranteed warmth just seven hours from London discover substance beyond the beaches.' },
+        { persona: 'The History Enthusiast', description: 'Those drawn to Petra, the Pyramids, and millennia of trading heritage find the region\'s depth remarkable.' }
+      ]
+    },
     optimalTiming: {
-      summary: 'The Gulf and Red Sea are at their best from November to April, when temperatures are comfortably warm without the searing heat of summer.',
+      summary: 'Typical duration: 10-14 nights from UK. The Gulf and Red Sea are at their best from November to April, when temperatures are comfortably warm without the searing heat of summer.',
       seasons: [
         {
           name: 'Early Season',
-          months: 'November–December',
-          highlights: ['Comfortable temperatures (25–30°C)', 'Festive atmosphere building', 'Excellent visibility for desert excursions']
+          months: 'November-December',
+          highlights: ['Comfortable temperatures (25-30°C)', 'Festive atmosphere building', 'Excellent visibility for desert excursions']
         },
         {
           name: 'Winter Peak',
-          months: 'January–February',
-          highlights: ['Perfect weather for sightseeing', 'Peak demand—book early', 'Ideal for Petra and Egypt excursions']
+          months: 'January-February',
+          highlights: ['Perfect weather for sightseeing', 'Peak demand-book early', 'Ideal for Petra and Egypt excursions']
         },
         {
           name: 'Spring',
-          months: 'March–April',
+          months: 'March-April',
           highlights: ['Warming temperatures', 'Longer daylight', 'Good value as season winds down']
         }
       ]
     },
-    signatureEncounters: [
-      { category: 'landscape', title: 'Dubai\'s Skyline', description: 'Watch the world\'s most ambitious cityscape glitter at sunset—a vision of the future rising from the desert' },
-      { category: 'culture', title: 'Sheikh Zayed Grand Mosque', description: 'Walk through one of the world\'s most beautiful mosques, where white marble and gold create transcendent spaces' },
-      { category: 'history', title: 'Petra\'s Treasury', description: 'Emerge through the narrow Siq to behold the rose-red treasury—one of archaeology\'s most dramatic reveals' },
-      { category: 'culture', title: 'Muscat\'s Souks', description: 'Lose yourself in the aromatic maze of Mutrah Souq, where frankincense and spices scent the air' },
-      { category: 'adventure', title: 'Desert Safari', description: 'Experience the romance of the desert—dune bashing, Bedouin camps, and stargazing under unpolluted skies' },
-      { category: 'history', title: 'The Pyramids of Giza', description: 'On extended itineraries, visit the last surviving wonder of the ancient world' }
+    // What You'll Experience - Practical, real detail
+    signatureSights: [
+      { 
+        theme: 'Dubai\'s Skyline',
+        highlights: [
+          'Watch the world\'s most ambitious cityscape glitter at sunset',
+          'A vision of the future rising from the desert',
+          'Burj Khalifa and modern architecture'
+        ]
+      },
+      { 
+        theme: 'Sheikh Zayed Grand Mosque',
+        highlights: [
+          'Walk through one of the world\'s most beautiful mosques',
+          'White marble and gold create transcendent spaces',
+          'Abu Dhabi\'s architectural masterpiece'
+        ]
+      },
+      { 
+        theme: 'Petra\'s Treasury',
+        highlights: [
+          'Emerge through the narrow Siq to behold the rose-red treasury',
+          'One of archaeology\'s most dramatic reveals',
+          'Available as shore excursion from Aqaba'
+        ]
+      },
+      { 
+        theme: 'Muscat\'s Souks',
+        highlights: [
+          'Lose yourself in the aromatic maze of Mutrah Souq',
+          'Frankincense and spices scent the air',
+          'Authentic Omani culture'
+        ]
+      },
+      { 
+        theme: 'Desert Safari',
+        highlights: [
+          'Experience the romance of the desert',
+          'Dune bashing, Bedouin camps, and stargazing under unpolluted skies',
+          'Available as shore excursion'
+        ]
+      },
+      { 
+        theme: 'The Pyramids of Giza',
+        highlights: [
+          'On extended itineraries, visit the last surviving wonder of the ancient world',
+          'Available on Red Sea route extensions',
+          'Historic Cairo and Egyptian monuments'
+        ]
+      }
     ],
-    whoFor: [
-      { type: 'culture', label: 'History lovers and cultural explorers' },
-      { type: 'relaxation', label: 'Those seeking guaranteed winter sunshine' },
-      { type: 'photography', label: 'Photographers drawn to dramatic contrasts' },
-      { type: 'couples', label: 'Couples celebrating special occasions' },
-      { type: 'adventure', label: 'Travellers curious about the Middle East' }
-    ],
+    
+    // Is This Right for You - Honest assessment
+    idealVoyagerProfile: {
+      intro: 'Middle East cruises suit travellers who want guaranteed winter sun combined with rich cultural experiences.',
+      profiles: [
+        { 
+          type: 'Good fit if you...', 
+          description: 'Want guaranteed winter sunshine (just 7 hours from London). Are fascinated by the contrast between ancient and modern. Enjoy cultural exploration. Appreciate warm hospitality.' 
+        },
+        { 
+          type: 'Consider carefully if...', 
+          description: 'You have concerns about regional travel (ports are very safe and tourist-focused). You prefer beach-only holidays (this combines culture and relaxation). You dislike organised tours (many excursions are structured).' 
+        },
+        { 
+          type: 'Physical requirements', 
+          description: 'Moderate. Most ports have good infrastructure. Petra involves walking through the Siq (about 1.5km). Desert safaris can be bumpy. Most activities are accessible.' 
+        },
+        { 
+          type: 'The reality', 
+          description: 'The Middle East of cruise ports is very different from media headlines. This is a region that has invested heavily in welcoming visitors. The warmth of Arabian hospitality often surprises first-time visitors. Perfect for those seeking winter sun with substance.' 
+        }
+      ]
+    },
     bespokeTailoring: [
       'Choice of Gulf-only or Gulf plus Red Sea routing',
       'Pre-cruise Dubai or Abu Dhabi stays with desert experiences',
@@ -1987,19 +2590,19 @@ export const bucketListExperiences = [
     faqs: [
       {
         question: 'Why cruise the Middle East rather than just visiting Dubai?',
-        answer: 'A cruise transforms a city break into an odyssey. Yes, you can explore Dubai and Abu Dhabi—but you also wake in Muscat\'s aromatic souks, cruise Omani fjords teeming with dolphins, and potentially reach Petra or the Pyramids. All without packing and unpacking, all in guaranteed winter sunshine.'
+        answer: 'A cruise transforms a city break into an odyssey. Yes, you can explore Dubai and Abu Dhabi-but you also wake in Muscat\'s aromatic souks, cruise Omani fjords teeming with dolphins, and potentially reach Petra or the Pyramids. All without packing and unpacking, all in guaranteed winter sunshine.'
       },
       {
         question: 'What makes the Arabian Gulf special for UK travellers?',
-        answer: 'The combination of proximity (7 hours from London), guaranteed winter warmth, and genuine cultural depth makes the Gulf uniquely appealing. You escape British winter for desert sunshine, but the experience goes far beyond a beach resort—ancient trading posts, Islamic architecture, and futuristic cities create endless fascination.'
+        answer: 'The combination of proximity (7 hours from London), guaranteed winter warmth, and genuine cultural depth makes the Gulf uniquely appealing. You escape British winter for desert sunshine, but the experience goes far beyond a beach resort-ancient trading posts, Islamic architecture, and futuristic cities create endless fascination.'
       },
       {
         question: 'Is the Middle East suitable for first-time visitors to the region?',
-        answer: 'Exceptionally so. The cruise ports—UAE, Oman, Qatar, Jordan—have invested heavily in tourism infrastructure. Cruise ships provide a comfortable base from which to explore, with organised excursions that navigate any cultural considerations. Many guests find their preconceptions entirely overturned by the warmth and welcome they receive.'
+        answer: 'Exceptionally so. The cruise ports-UAE, Oman, Qatar, Jordan-have invested heavily in tourism infrastructure. Cruise ships provide a comfortable base from which to explore, with organised excursions that navigate any cultural considerations. Many guests find their preconceptions entirely overturned by the warmth and welcome they receive.'
       },
       {
         question: 'Should I add Petra to my itinerary?',
-        answer: 'If your routing includes Aqaba, absolutely. Petra is genuinely one of the world\'s great archaeological sites—the moment you emerge through the Siq to behold the Treasury is unforgettable. It is a long day trip from the port, but one that justifies extending your cruise to include Red Sea ports.'
+        answer: 'If your routing includes Aqaba, absolutely. Petra is genuinely one of the world\'s great archaeological sites-the moment you emerge through the Siq to behold the Treasury is unforgettable. It is a long day trip from the port, but one that justifies extending your cruise to include Red Sea ports.'
       },
       {
         question: 'What should I wear in the Middle East?',
@@ -2007,7 +2610,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'How does the weather compare to UK winter?',
-        answer: 'While Britain shivers under grey skies, Gulf temperatures typically range from 25°C to 30°C from November to March—perfect for sightseeing, desert excursions, and lounging by the pool. It is the contrast that makes it so appealing: guaranteed sunshine just seven hours from home.'
+        answer: 'While Britain shivers under grey skies, Gulf temperatures typically range from 25°C to 30°C from November to March-perfect for sightseeing, desert excursions, and lounging by the pool. It is the contrast that makes it so appealing: guaranteed sunshine just seven hours from home.'
       }
     ],
     meta: {
@@ -2028,7 +2631,7 @@ export const bucketListExperiences = [
     // SEO
     seo: {
       metaTitle: 'Pacific Islands & New Zealand Cruise: A Bucket List Pursuit | Limitless Cruises',
-      metaDescription: 'Discover the South Pacific on a tailored cruise adventure. Fiji\'s coral reefs, Māori culture, volcanic islands—perfect for discerning UK explorers. Enquire for your bespoke itinerary.',
+      metaDescription: 'Discover the South Pacific on a tailored cruise adventure. Fiji\'s coral reefs, Māori culture, volcanic islands-perfect for discerning UK explorers. Enquire for your bespoke itinerary.',
       keywords: ['pacific islands cruise from uk', 'fiji cruise', 'new zealand cruise', 'south pacific cruise', 'maori culture cruise', 'tropical cruise from uk', 'vanuatu cruise', 'new caledonia cruise']
     },
     
@@ -2046,14 +2649,14 @@ export const bucketListExperiences = [
     
     heroImage: null,
     cardImage: null,
-    duration: '14–18 nights from UK',
-    season: 'November–April',
+    duration: '14-18 nights from UK',
+    season: 'November-April',
     
     // Why Bucket List Worthy
     whyBucketListWorthy: {
-      narrative: '<p>There is a reason the South Pacific has captivated explorers, artists and dreamers for centuries. The light is different here—softer, more golden, filtering through coconut palms onto sand so white it dazzles. The water shifts through impossible gradations of blue and green, clear enough to reveal reef fish twenty feet below your floating body.</p><p>But the Pacific is more than beaches. It is Fiji\'s legendary warmth of welcome, the traditional kava ceremonies that have honoured guests for generations. It is New Caledonia\'s unexpected French sophistication, baguettes and boutiques alongside Melanesian villages. It is Vanuatu\'s volcanic landscapes and the knowledge that you are experiencing something truly remote. Each island brings new wonders; each day ends with a sunset that feels like a personal gift.</p><p>Beginning your journey in New Zealand adds cultural and natural depth that pure island-hopping cannot match. The Māori heritage—New Zealand\'s first and living indigenous culture—offers experiences that resonate long after you return home: the power of a haka performance, the intricate beauty of carved meeting houses, the profound connection to land and sea. Auckland itself is a wonderful gateway: the City of Sails, surrounded by volcanoes, blessed with harbours and beaches.</p>',
+      narrative: '<p>There is a reason the South Pacific has captivated explorers, artists and dreamers for centuries. The light is different here-softer, more golden, filtering through coconut palms onto sand so white it dazzles. The water shifts through impossible gradations of blue and green, clear enough to reveal reef fish twenty feet below your floating body.</p><p>But the Pacific is more than beaches. It is Fiji\'s legendary warmth of welcome, the traditional kava ceremonies that have honoured guests for generations. It is New Caledonia\'s unexpected French sophistication, baguettes and boutiques alongside Melanesian villages. It is Vanuatu\'s volcanic landscapes and the knowledge that you are experiencing something truly remote. Each island brings new wonders; each day ends with a sunset that feels like a personal gift.</p><p>Beginning your journey in New Zealand adds cultural and natural depth that pure island-hopping cannot match. The Māori heritage-New Zealand\'s first and living indigenous culture-offers experiences that resonate long after you return home: the power of a haka performance, the intricate beauty of carved meeting houses, the profound connection to land and sea. Auckland itself is a wonderful gateway: the City of Sails, surrounded by volcanoes, blessed with harbours and beaches.</p>',
       personaVignettes: [
-        { persona: 'The Tropical Dreamer', description: 'Those who have longed for palm-fringed beaches and turquoise lagoons—the South Pacific delivers paradise beyond imagination.' },
+        { persona: 'The Tropical Dreamer', description: 'Those who have longed for palm-fringed beaches and turquoise lagoons-the South Pacific delivers paradise beyond imagination.' },
         { persona: 'The Cultural Explorer', description: 'Travellers seeking authentic indigenous experiences find the Māori heritage and Fijian hospitality genuinely transformative.' },
         { persona: 'The Underwater Enthusiast', description: 'Snorkellers and divers who seek pristine coral reefs discover some of the world\'s most spectacular marine environments.' }
       ]
@@ -2061,12 +2664,12 @@ export const bucketListExperiences = [
     
     // Ideal Voyager Profile
     idealVoyagerProfile: {
-      intro: 'Crafted for those who seek genuine escape—warm waters, welcoming cultures, and islands that time seems to have forgotten.',
+      intro: 'Crafted for those who seek genuine escape-warm waters, welcoming cultures, and islands that time seems to have forgotten.',
       profiles: [
         { type: 'Beach Seeker', description: 'Those who dream of powder-white sand, gentle lagoons and the simple pleasure of perfect tropical days.' },
         { type: 'Reef Explorer', description: 'Snorkellers and divers drawn to coral gardens teeming with colourful life in crystal-clear waters.' },
         { type: 'Culture Appreciator', description: 'Travellers who find meaning in traditional ceremonies, village hospitality and indigenous heritage.' },
-        { type: 'Escape Artist', description: 'Those craving genuine remoteness—islands where modern life\'s pace cannot reach.' }
+        { type: 'Escape Artist', description: 'Those craving genuine remoteness-islands where modern life\'s pace cannot reach.' }
       ]
     },
     
@@ -2076,17 +2679,17 @@ export const bucketListExperiences = [
       seasons: [
         {
           name: 'Early Season',
-          months: 'November–December',
+          months: 'November-December',
           highlights: ['Warming waters', 'Pre-Christmas departures', 'Jacaranda blooms in New Zealand', 'Excellent visibility']
         },
         {
           name: 'Peak Season',
-          months: 'January–February',
+          months: 'January-February',
           highlights: ['Warmest weather', 'Perfect beach conditions', 'School holiday cruises', 'Longest daylight']
         },
         {
           name: 'Late Season',
-          months: 'March–April',
+          months: 'March-April',
           highlights: ['Still warm waters', 'Fewer crowds', 'Exceptional snorkelling', 'Value positioning']
         }
       ]
@@ -2208,7 +2811,7 @@ export const bucketListExperiences = [
     faqs: [
       {
         question: 'What makes the South Pacific such a compelling cruise destination?',
-        answer: 'The South Pacific offers something increasingly rare: genuine remoteness combined with extraordinary beauty. These islands are not easily reached by other means, but a cruise connects them effortlessly—you wake each morning to a new paradise. The cultures are welcoming, the waters warm, and the sense of escape complete.'
+        answer: 'The South Pacific offers something increasingly rare: genuine remoteness combined with extraordinary beauty. These islands are not easily reached by other means, but a cruise connects them effortlessly-you wake each morning to a new paradise. The cultures are welcoming, the waters warm, and the sense of escape complete.'
       },
       {
         question: 'Why do UK explorers choose to discover the Pacific by cruise?',
@@ -2216,15 +2819,15 @@ export const bucketListExperiences = [
       },
       {
         question: 'What is the appeal of experiencing Māori culture firsthand?',
-        answer: 'The Māori heritage of New Zealand offers profound cultural experiences—the power of a haka performance, the artistry of traditional carving, the depth of connection to land and sea. These are not performances for tourists but living traditions that welcome respectful visitors into ancient customs.'
+        answer: 'The Māori heritage of New Zealand offers profound cultural experiences-the power of a haka performance, the artistry of traditional carving, the depth of connection to land and sea. These are not performances for tourists but living traditions that welcome respectful visitors into ancient customs.'
       },
       {
         question: 'How does snorkelling in the South Pacific compare to other destinations?',
-        answer: 'Many consider Pacific reefs among the world\'s finest. Fiji in particular offers exceptional coral health and fish diversity, earning its reputation as the "soft coral capital of the world." The waters are warm, clear, and uncrowded—even casual snorkellers encounter extraordinary marine life.'
+        answer: 'Many consider Pacific reefs among the world\'s finest. Fiji in particular offers exceptional coral health and fish diversity, earning its reputation as the "soft coral capital of the world." The waters are warm, clear, and uncrowded-even casual snorkellers encounter extraordinary marine life.'
       },
       {
         question: 'What makes Fijian hospitality so legendary?',
-        answer: 'The warmth is genuine. Fijians have a gift for making visitors feel welcome—the famous "Bula" greeting is just the beginning. Kava ceremonies, village visits, and simply chatting with locals reveal a culture that values connection and celebration. It is hospitality that goes far beyond the transactional.'
+        answer: 'The warmth is genuine. Fijians have a gift for making visitors feel welcome-the famous "Bula" greeting is just the beginning. Kava ceremonies, village visits, and simply chatting with locals reveal a culture that values connection and celebration. It is hospitality that goes far beyond the transactional.'
       },
       {
         question: 'Is the journey from the UK manageable?',
@@ -2235,14 +2838,14 @@ export const bucketListExperiences = [
     // Provenance & Assurance
     provenanceAssurance: {
       pillars: [
-        { title: 'Bespoke Curation', description: 'Every Pacific journey crafted around your interests—from dive sites to cultural experiences.' },
+        { title: 'Bespoke Curation', description: 'Every Pacific journey crafted around your interests-from dive sites to cultural experiences.' },
         { title: 'UK Expertise', description: 'Specialists who understand British sensibilities and the journey from the UK.' },
         { title: 'Intimate Voyages', description: 'Access to vessels and itineraries that larger operators cannot offer.' },
         { title: 'Complete Protection', description: 'Full ATOL protection for total peace of mind.' }
       ],
       testimonials: [
         { quote: 'The snorkelling in Fiji was the best of our lives. Every island was more beautiful than the last.', author: 'James & Catherine', location: 'Hampshire' },
-        { quote: 'The Māori cultural experience in Auckland set the tone for the entire voyage—deeply moving.', author: 'Dr Richard M.', location: 'Edinburgh' }
+        { quote: 'The Māori cultural experience in Auckland set the tone for the entire voyage-deeply moving.', author: 'Dr Richard M.', location: 'Edinburgh' }
       ]
     },
     images: [
@@ -2269,9 +2872,9 @@ export const bucketListExperiences = [
     // Hero
     hero: {
       headline: 'Transatlantic Crossing: The Original Ocean Voyage',
-      subheadline: 'Cross the mighty Atlantic as travellers have for centuries—in elegant ocean liner style',
+      subheadline: 'Cross the mighty Atlantic as travellers have for centuries-in elegant ocean liner style',
       bullets: [
-        'Southampton departure—no airports, no jetlag',
+        'Southampton departure-no airports, no jetlag',
         'Seven days of pure ocean liner elegance',
         'Sail into New York harbour past the Statue of Liberty',
         'The romance of sea travel rediscovered'
@@ -2281,15 +2884,15 @@ export const bucketListExperiences = [
     heroImage: null,
     cardImage: null,
     duration: '10 nights from UK',
-    season: 'April – May, October – November (repositioning season)',
+    season: 'April - May, October - November (repositioning season)',
     
     // Why Bucket List Worthy
     whyBucketListWorthy: {
-      narrative: '<p>There is something profoundly satisfying about crossing an ocean the way it was meant to be crossed—not hurtled through the sky in hours, but gracefully conveyed across the deep over days. The transatlantic crossing is the original voyage, the journey that connected the Old World to the New, and it remains one of travel\'s purest pleasures.</p><p>From Southampton—that historic port from which so many famous crossings departed—you set sail into the Atlantic\'s vastness. Seven days of sea stretch before you: days of enrichment lectures and afternoon tea, of gala nights and stargazing from the deck, of watching the horizon and letting the rhythm of the ocean recalibrate your sense of time.</p><p>And then, the arrival. New York harbour reveals itself gradually: first the distant glitter of the skyline, then the unmistakable silhouette of the Statue of Liberty, and finally the towers of Manhattan rising before you. It is an arrival that no aeroplane can replicate—a moment of genuine drama that connects you to generations of travellers who made this same approach.</p>',
+      narrative: '<p>There is something profoundly satisfying about crossing an ocean the way it was meant to be crossed-not hurtled through the sky in hours, but gracefully conveyed across the deep over days. The transatlantic crossing is the original voyage, the journey that connected the Old World to the New, and it remains one of travel\'s purest pleasures.</p><p>From Southampton-that historic port from which so many famous crossings departed-you set sail into the Atlantic\'s vastness. Seven days of sea stretch before you: days of enrichment lectures and afternoon tea, of gala nights and stargazing from the deck, of watching the horizon and letting the rhythm of the ocean recalibrate your sense of time.</p><p>And then, the arrival. New York harbour reveals itself gradually: first the distant glitter of the skyline, then the unmistakable silhouette of the Statue of Liberty, and finally the towers of Manhattan rising before you. It is an arrival that no aeroplane can replicate-a moment of genuine drama that connects you to generations of travellers who made this same approach.</p>',
       personaVignettes: [
         { persona: 'The Romantic Classicist', description: 'Those who yearn for travel\'s golden age find the transatlantic crossing a living embodiment of elegant, unhurried journeys.' },
         { persona: 'The Thoughtful Traveller', description: 'Voyagers who prefer depth to speed, who want the journey itself to be the experience, not merely a means to an end.' },
-        { persona: 'The No-Fly Seeker', description: 'Travellers who choose not to fly—whether for environmental reasons or personal preference—find the perfect solution.' }
+        { persona: 'The No-Fly Seeker', description: 'Travellers who choose not to fly-whether for environmental reasons or personal preference-find the perfect solution.' }
       ]
     },
     
@@ -2298,7 +2901,7 @@ export const bucketListExperiences = [
       intro: 'Crafted for those who understand that how you travel matters as much as where you travel.',
       profiles: [
         { type: 'Ocean Purist', description: 'Those who relish the vastness of the Atlantic and the special quality of days spent entirely at sea.' },
-        { type: 'Elegance Seeker', description: 'Travellers drawn to the formal traditions—gala nights, afternoon tea, the ballroom—that define ocean liner culture.' },
+        { type: 'Elegance Seeker', description: 'Travellers drawn to the formal traditions-gala nights, afternoon tea, the ballroom-that define ocean liner culture.' },
         { type: 'City Discoverer', description: 'Those who dream of arriving in New York by sea and experiencing Manhattan with the perspective of a true arrival.' },
         { type: 'Sustainable Voyager', description: 'Environmentally conscious travellers who prefer sea travel to flying where the journey allows.' }
       ]
@@ -2310,17 +2913,17 @@ export const bucketListExperiences = [
       seasons: [
         {
           name: 'Spring Crossings',
-          months: 'April–May',
+          months: 'April-May',
           highlights: ['Eastbound repositioning season', 'Pleasant Atlantic conditions', 'New York in bloom', 'Longer days']
         },
         {
           name: 'Summer Season',
-          months: 'June–August',
+          months: 'June-August',
           highlights: ['Warmest weather', 'Longest daylight', 'Regular weekly QM2 crossings', 'Peak Manhattan energy']
         },
         {
           name: 'Autumn Crossings',
-          months: 'September–November',
+          months: 'September-November',
           highlights: ['Westbound repositioning', 'Fall foliage in NYC', 'Cooler Atlantic air', 'Dramatic skies']
         }
       ]
@@ -2416,11 +3019,11 @@ export const bucketListExperiences = [
     faqs: [
       {
         question: 'What makes the transatlantic crossing such an iconic voyage?',
-        answer: 'The transatlantic crossing connects you to over a century of maritime heritage—the same route taken by generations of emigrants, adventurers, and celebrities. Arriving in New York by sea, sailing past the Statue of Liberty as millions before you have done, is a moment of genuine historical resonance.'
+        answer: 'The transatlantic crossing connects you to over a century of maritime heritage-the same route taken by generations of emigrants, adventurers, and celebrities. Arriving in New York by sea, sailing past the Statue of Liberty as millions before you have done, is a moment of genuine historical resonance.'
       },
       {
         question: 'Why do UK travellers choose to cross by ship rather than fly?',
-        answer: 'For many, the journey is the point. Seven days of pure relaxation, no jet lag, no airports—just the pleasure of ocean travel, enrichment lectures, elegant dining, and the satisfaction of crossing an ocean the way it was meant to be crossed. It is travel as an experience, not merely transportation.'
+        answer: 'For many, the journey is the point. Seven days of pure relaxation, no jet lag, no airports-just the pleasure of ocean travel, enrichment lectures, elegant dining, and the satisfaction of crossing an ocean the way it was meant to be crossed. It is travel as an experience, not merely transportation.'
       },
       {
         question: 'What is special about sailing into New York harbour?',
@@ -2428,11 +3031,11 @@ export const bucketListExperiences = [
       },
       {
         question: 'How does Queen Mary 2 differ from other cruise ships?',
-        answer: 'Queen Mary 2 is the last true ocean liner in service—built specifically for Atlantic crossings rather than adapted from a cruise ship. Her hull is designed for the North Atlantic, her spaces celebrate the ocean liner tradition, and her weekly crossings maintain a schedule that has continued for generations.'
+        answer: 'Queen Mary 2 is the last true ocean liner in service-built specifically for Atlantic crossings rather than adapted from a cruise ship. Her hull is designed for the North Atlantic, her spaces celebrate the ocean liner tradition, and her weekly crossings maintain a schedule that has continued for generations.'
       },
       {
         question: 'What is the experience of days at sea like?',
-        answer: 'Sea days on an Atlantic crossing are uniquely restful. The vastness of the ocean, the rhythm of the ship, the endless horizon—they combine to create a meditative quality. Add enrichment lectures, afternoon tea, gala evenings, and the simple pleasure of watching the waves, and the time passes too quickly.'
+        answer: 'Sea days on an Atlantic crossing are uniquely restful. The vastness of the ocean, the rhythm of the ship, the endless horizon-they combine to create a meditative quality. Add enrichment lectures, afternoon tea, gala evenings, and the simple pleasure of watching the waves, and the time passes too quickly.'
       },
       {
         question: 'Is a transatlantic crossing suitable for first-time cruisers?',
@@ -2444,21 +3047,21 @@ export const bucketListExperiences = [
       },
       {
         question: 'Is this ATOL protected?',
-        answer: 'Yes—all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this classic ocean crossing journey.'
+        answer: 'Yes-all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this classic ocean crossing journey.'
       }
     ],
     
     // Provenance & Assurance
     provenanceAssurance: {
       pillars: [
-        { title: 'Bespoke Curation', description: 'Every crossing tailored to your preferences—cabin choice, Manhattan experiences, extensions.' },
+        { title: 'Bespoke Curation', description: 'Every crossing tailored to your preferences-cabin choice, Manhattan experiences, extensions.' },
         { title: 'UK Expertise', description: 'Southampton specialists who understand the transatlantic tradition.' },
         { title: 'Ocean Liner Heritage', description: 'Deep knowledge of Queen Mary 2 and the crossing experience.' },
         { title: 'Complete Protection', description: 'Full ATOL protection for total peace of mind.' }
       ],
       testimonials: [
-        { quote: 'Arriving in New York by sea, passing the Statue of Liberty, was absolutely magical. The crossing was so relaxing—no jet lag!', author: 'William & Mary', location: 'Kent' },
-        { quote: 'Queen Mary 2 is simply the most elegant way to cross the Atlantic. The ballroom, the Planetarium, the service—perfection.', author: 'Elizabeth T.', location: 'Surrey' }
+        { quote: 'Arriving in New York by sea, passing the Statue of Liberty, was absolutely magical. The crossing was so relaxing-no jet lag!', author: 'William & Mary', location: 'Kent' },
+        { quote: 'Queen Mary 2 is simply the most elegant way to cross the Atlantic. The ballroom, the Planetarium, the service-perfection.', author: 'Elizabeth T.', location: 'Surrey' }
       ]
     },
     
@@ -2475,7 +3078,7 @@ export const bucketListExperiences = [
     // SEO
     seo: {
       metaTitle: 'Iceland Circumnavigation: A Bucket List Pursuit | Limitless Cruises',
-      metaDescription: 'Complete the Ring of Fire by sea—from Reykjavik\'s geothermal wonders to the remote East Fjords. Volcano landings, puffin colonies, midnight sun. Enquire for your bespoke voyage.',
+      metaDescription: 'Complete the Ring of Fire by sea-from Reykjavik\'s geothermal wonders to the remote East Fjords. Volcano landings, puffin colonies, midnight sun. Enquire for your bespoke voyage.',
       keywords: ['iceland cruise from uk', 'iceland circumnavigation', 'ring of iceland cruise', 'volcano cruise iceland', 'puffin cruise from uk', 'midnight sun cruise', 'reykjavik cruise']
     },
     
@@ -2484,7 +3087,7 @@ export const bucketListExperiences = [
       headline: 'Iceland Circumnavigation: Complete the Ring of Fire',
       subheadline: 'Volcanic shores, puffin cliffs, and the ethereal light of the midnight sun',
       bullets: [
-        'Complete circumnavigation—every coast, every wonder',
+        'Complete circumnavigation-every coast, every wonder',
         'Volcano landings and puffin colony encounters',
         'The otherworldly Westfjords and dramatic East',
         'Midnight sun sailing through Arctic waters'
@@ -2494,15 +3097,15 @@ export const bucketListExperiences = [
     heroImage: null,
     cardImage: null,
     duration: '12 nights from UK',
-    season: 'May – September (summer light, midnight sun)',
+    season: 'May - September (summer light, midnight sun)',
     
     // Why Bucket List Worthy
     whyBucketListWorthy: {
-      narrative: '<p>Iceland is a land still being formed—volcanoes erupting, glaciers carving, geysers spouting. To circumnavigate this island is to witness Earth\'s raw creative forces in action, from the fire beneath your feet to the ice on the horizon. No other destination offers such concentrated geological drama.</p><p>A sea voyage reveals Iceland that road travellers miss entirely. The remote Westfjords, barely accessible by land, open their arms to small ships that anchor in pristine fjords. The wild east coast, with its towering basalt cliffs and rainbow-coloured villages, unfolds naturally as you sail from one sheltered harbour to the next.</p><p>And there is the light. From late May through July, the sun barely sets. At midnight you stand on deck watching golden light play across volcanic peaks, the distinction between day and night suspended. Combined with puffin colonies numbering in the millions and whales breaching in northern waters, an Iceland circumnavigation creates memories that burn bright for a lifetime.</p>',
+      narrative: '<p>Iceland is a land still being formed-volcanoes erupting, glaciers carving, geysers spouting. To circumnavigate this island is to witness Earth\'s raw creative forces in action, from the fire beneath your feet to the ice on the horizon. No other destination offers such concentrated geological drama.</p><p>A sea voyage reveals Iceland that road travellers miss entirely. The remote Westfjords, barely accessible by land, open their arms to small ships that anchor in pristine fjords. The wild east coast, with its towering basalt cliffs and rainbow-coloured villages, unfolds naturally as you sail from one sheltered harbour to the next.</p><p>And there is the light. From late May through July, the sun barely sets. At midnight you stand on deck watching golden light play across volcanic peaks, the distinction between day and night suspended. Combined with puffin colonies numbering in the millions and whales breaching in northern waters, an Iceland circumnavigation creates memories that burn bright for a lifetime.</p>',
       personaVignettes: [
         { persona: 'The Geology Enthusiast', description: 'Those fascinated by Earth\'s forces find Iceland\'s active volcanoes, geysers and thermal springs endlessly compelling.' },
         { persona: 'The Wildlife Seeker', description: 'Travellers who dream of puffin colonies, breaching whales and Arctic seabird cliffs in their natural habitat.' },
-        { persona: 'The Photographer', description: 'Those who seek extraordinary light—the midnight sun creates golden hours that last for days.' }
+        { persona: 'The Photographer', description: 'Those who seek extraordinary light-the midnight sun creates golden hours that last for days.' }
       ]
     },
     
@@ -2523,17 +3126,17 @@ export const bucketListExperiences = [
       seasons: [
         {
           name: 'Early Season',
-          months: 'May–early June',
+          months: 'May-early June',
           highlights: ['Puffin arrivals', 'Spring waterfalls', 'Longer daylight building', 'Fewer visitors']
         },
         {
           name: 'Peak Midnight Sun',
-          months: 'Mid-June–July',
+          months: 'Mid-June-July',
           highlights: ['24-hour daylight', 'Warmest temperatures', 'Peak wildlife activity', 'Optimal photography']
         },
         {
           name: 'Late Season',
-          months: 'August–September',
+          months: 'August-September',
           highlights: ['Northern lights possible', 'Autumn colours', 'Whale watching peak', 'Quieter fjords']
         }
       ]
@@ -2648,7 +3251,7 @@ export const bucketListExperiences = [
     faqs: [
       {
         question: 'What makes circumnavigating Iceland by ship so compelling?',
-        answer: 'A circumnavigation reveals Iceland that road travellers simply cannot reach. The remote Westfjords, accessible only by small ship, offer pristine wilderness. The volcanic south coast, the dramatic east—each region has its own character, and by sea you experience them all without the exhaustion of constant driving.'
+        answer: 'A circumnavigation reveals Iceland that road travellers simply cannot reach. The remote Westfjords, accessible only by small ship, offer pristine wilderness. The volcanic south coast, the dramatic east-each region has its own character, and by sea you experience them all without the exhaustion of constant driving.'
       },
       {
         question: 'Why do UK explorers choose to discover Iceland by cruise?',
@@ -2656,15 +3259,15 @@ export const bucketListExperiences = [
       },
       {
         question: 'What is the experience of a volcano landing like?',
-        answer: 'Approaching Heimaey by Zodiac, you see the 1973 lava flow that nearly buried the town. Then you climb the slopes of Eldfell itself—a volcano still warm to the touch, barely fifty years old. Standing in the crater, looking over the island, you feel Earth\'s power in a visceral way no photograph can capture.'
+        answer: 'Approaching Heimaey by Zodiac, you see the 1973 lava flow that nearly buried the town. Then you climb the slopes of Eldfell itself-a volcano still warm to the touch, barely fifty years old. Standing in the crater, looking over the island, you feel Earth\'s power in a visceral way no photograph can capture.'
       },
       {
         question: 'What can I expect from puffin encounters?',
-        answer: 'Iceland hosts millions of Atlantic puffins, and the seabird cliffs are extraordinary spectacles. From ship or Zodiac, you observe these charismatic birds going about their business—flying, fishing, returning to burrows with beaks full of sand eels. The experience is magical, especially during peak breeding season.'
+        answer: 'Iceland hosts millions of Atlantic puffins, and the seabird cliffs are extraordinary spectacles. From ship or Zodiac, you observe these charismatic birds going about their business-flying, fishing, returning to burrows with beaks full of sand eels. The experience is magical, especially during peak breeding season.'
       },
       {
         question: 'What is the midnight sun actually like?',
-        answer: 'In midsummer, the sun barely dips below the horizon. At midnight you stand on deck in golden light, watching volcanic peaks glow. The distinction between day and night dissolves. For photographers and dreamers, this endless twilight is genuinely otherworldly—and uniquely available to those sailing in Arctic waters.'
+        answer: 'In midsummer, the sun barely dips below the horizon. At midnight you stand on deck in golden light, watching volcanic peaks glow. The distinction between day and night dissolves. For photographers and dreamers, this endless twilight is genuinely otherworldly-and uniquely available to those sailing in Arctic waters.'
       },
       {
         question: 'How challenging is the voyage?',
@@ -2675,13 +3278,13 @@ export const bucketListExperiences = [
     // Provenance & Assurance
     provenanceAssurance: {
       pillars: [
-        { title: 'Bespoke Curation', description: 'Every Iceland journey tailored—from Golden Circle extensions to specific wildlife interests.' },
+        { title: 'Bespoke Curation', description: 'Every Iceland journey tailored-from Golden Circle extensions to specific wildlife interests.' },
         { title: 'UK Expertise', description: 'Specialists who understand the short flight from Britain and the unique appeal of Iceland.' },
         { title: 'Expedition Focus', description: 'Access to small ships that reach where larger vessels cannot venture.' },
         { title: 'Complete Protection', description: 'Full ATOL protection for total peace of mind.' }
       ],
       testimonials: [
-        { quote: 'Heimaey volcano landing—unreal. The tender approach to Eldfell was unforgettable. Iceland by sea is the only way.', author: 'Iceland first-timers', location: 'London' },
+        { quote: 'Heimaey volcano landing-unreal. The tender approach to Eldfell was unforgettable. Iceland by sea is the only way.', author: 'Iceland first-timers', location: 'London' },
         { quote: 'The puffin colonies and midnight sun sailing were magical. Every fjord was more dramatic than the last.', author: 'Jonathan K.', location: 'Edinburgh' }
       ]
     },
@@ -2699,16 +3302,16 @@ export const bucketListExperiences = [
     // SEO
     seo: {
       metaTitle: 'European River Cruises: A Bucket List Pursuit | Limitless Cruises',
-      metaDescription: 'Discover Europe\'s great rivers—Danube, Rhine, Douro. Castles and vineyards, medieval towns, capital cities. The gentlest way to explore the Continent. Enquire for your bespoke voyage.',
+      metaDescription: 'Discover Europe\'s great rivers-Danube, Rhine, Douro. Castles and vineyards, medieval towns, capital cities. The gentlest way to explore the Continent. Enquire for your bespoke voyage.',
       keywords: ['european river cruise from uk', 'danube cruise', 'rhine cruise', 'douro cruise', 'river cruise europe', 'budapest cruise', 'amsterdam river cruise', 'christmas markets cruise']
     },
     
     // Hero
     hero: {
       headline: 'European River Cruises: The Continent\'s Gentle Highways',
-      subheadline: 'From Amsterdam\'s canals to Budapest\'s illuminated skyline—Europe unfolds from the water',
+      subheadline: 'From Amsterdam\'s canals to Budapest\'s illuminated skyline-Europe unfolds from the water',
       bullets: [
-        'Dock in the heart of cities—no tender rides or transit days',
+        'Dock in the heart of cities-no tender rides or transit days',
         'Imperial capitals, medieval towns, vineyard valleys',
         'Small ships with intimate, destination-focused atmosphere',
         'Daily discoveries without packing and unpacking'
@@ -2717,15 +3320,15 @@ export const bucketListExperiences = [
     
     heroImage: null,
     cardImage: null,
-    duration: '7–14 nights from the UK',
-    season: 'March – November (spring blossom, summer sun, autumn vines, Christmas markets)',
+    duration: '7-14 nights from the UK',
+    season: 'March - November (spring blossom, summer sun, autumn vines, Christmas markets)',
     
     // Why Bucket List Worthy
     whyBucketListWorthy: {
-      narrative: '<p>There is a reason rivers carved the heart of European civilisation. Along their banks, empires built their capitals, merchants established their trading posts, and vintners planted their vines. To cruise these waterways is to follow the currents of history through landscapes that have inspired artists, musicians and poets for centuries.</p><p>European river cruising offers something ocean voyages cannot: intimacy with the Continent. Your ship glides silently into the centre of Budapest, Strasbourg, or Porto—no tender rides, no shuttle buses—and you step directly onto cobbled streets. By morning you are exploring a medieval old town; by evening you are watching the city lights reflect in the water from your floating hotel.</p><p>The pace is gentle but the rewards are rich. Vineyards slide past as you sip wine on the sun deck. Fairytale castles crown every bend of the Rhine. The Wachau Valley unfolds in terraced perfection. And through it all, your cabin remains unpacked, your floating base travelling with you from one discovery to the next.</p>',
+      narrative: '<p>There is a reason rivers carved the heart of European civilisation. Along their banks, empires built their capitals, merchants established their trading posts, and vintners planted their vines. To cruise these waterways is to follow the currents of history through landscapes that have inspired artists, musicians and poets for centuries.</p><p>European river cruising offers something ocean voyages cannot: intimacy with the Continent. Your ship glides silently into the centre of Budapest, Strasbourg, or Porto-no tender rides, no shuttle buses-and you step directly onto cobbled streets. By morning you are exploring a medieval old town; by evening you are watching the city lights reflect in the water from your floating hotel.</p><p>The pace is gentle but the rewards are rich. Vineyards slide past as you sip wine on the sun deck. Fairytale castles crown every bend of the Rhine. The Wachau Valley unfolds in terraced perfection. And through it all, your cabin remains unpacked, your floating base travelling with you from one discovery to the next.</p>',
       personaVignettes: [
         { persona: 'The Cultural Connoisseur', description: 'Those who want imperial palaces, concert halls and galleries without the logistics of city-hopping find river cruising ideal.' },
-        { persona: 'The Relaxed Explorer', description: 'Travellers who prefer gentle discovery—walking tours rather than expeditions, wine tastings rather than treks.' },
+        { persona: 'The Relaxed Explorer', description: 'Travellers who prefer gentle discovery-walking tours rather than expeditions, wine tastings rather than treks.' },
         { persona: 'The First-Time Cruiser', description: 'Those curious about cruising but uncertain about ocean voyages find rivers an approachable, rewarding introduction.' }
       ]
     },
@@ -2735,7 +3338,7 @@ export const bucketListExperiences = [
       intro: 'Crafted for those who wish to experience Europe deeply without the exhaustion of constant travel.',
       profiles: [
         { type: 'Culture Lover', description: 'Those who relish museums, concerts, and the layers of history visible in every European city.' },
-        { type: 'Gentle Pace Seeker', description: 'Travellers who value quality over quantity—time to linger rather than rush between sights.' },
+        { type: 'Gentle Pace Seeker', description: 'Travellers who value quality over quantity-time to linger rather than rush between sights.' },
         { type: 'Wine Enthusiast', description: 'Those drawn to vineyard valleys and the pleasures of tasting local varieties at their source.' },
         { type: 'Celebration Traveller', description: 'Couples marking anniversaries, birthdays, or retirements with a special journey.' }
       ]
@@ -2743,26 +3346,26 @@ export const bucketListExperiences = [
     
     // Optimal Timing
     optimalTiming: {
-      summary: 'European rivers cruise from March through November, with each season offering distinct character—from spring blossoms to Christmas markets.',
+      summary: 'European rivers cruise from March through November, with each season offering distinct character-from spring blossoms to Christmas markets.',
       seasons: [
         {
           name: 'Spring Awakening',
-          months: 'March–May',
+          months: 'March-May',
           highlights: ['Cherry blossoms in Vienna', 'Tulip season in Amsterdam', 'Mild temperatures', 'Fewer crowds']
         },
         {
           name: 'Summer Splendour',
-          months: 'June–August',
+          months: 'June-August',
           highlights: ['Longest days', 'Outdoor dining', 'Festival season', 'Vineyard greenery']
         },
         {
           name: 'Autumn Harvest',
-          months: 'September–October',
+          months: 'September-October',
           highlights: ['Grape harvest', 'Wine tastings', 'Golden foliage', 'Comfortable temperatures']
         },
         {
           name: 'Christmas Markets',
-          months: 'November–December',
+          months: 'November-December',
           highlights: ['Festive atmosphere', 'Mulled wine and stalls', 'Illuminated cities', 'Seasonal magic']
         }
       ]
@@ -2778,9 +3381,9 @@ export const bucketListExperiences = [
     
     // Curated Itinerary Vignettes
     itineraryVignettes: [
-      { name: 'Classic Danube', duration: '8–10 nights', essence: 'Imperial capitals', highlights: ['Budapest stay', 'Vienna exploration', 'Wachau Valley', 'Passau farewell'] },
-      { name: 'Rhine Journey', duration: '7–9 nights', essence: 'Castles and cathedrals', highlights: ['Amsterdam start', 'Rhine Gorge', 'Cologne Cathedral', 'Strasbourg finale'] },
-      { name: 'Douro Discovery', duration: '7–10 nights', essence: 'Portuguese wine country', highlights: ['Porto immersion', 'Vineyard visits', 'Valley scenery', 'Barca d\'Alva'] }
+      { name: 'Classic Danube', duration: '8-10 nights', essence: 'Imperial capitals', highlights: ['Budapest stay', 'Vienna exploration', 'Wachau Valley', 'Passau farewell'] },
+      { name: 'Rhine Journey', duration: '7-9 nights', essence: 'Castles and cathedrals', highlights: ['Amsterdam start', 'Rhine Gorge', 'Cologne Cathedral', 'Strasbourg finale'] },
+      { name: 'Douro Discovery', duration: '7-10 nights', essence: 'Portuguese wine country', highlights: ['Porto immersion', 'Vineyard visits', 'Valley scenery', 'Barca d\'Alva'] }
     ],
     cruiseLines: ['Viking', 'AmaWaterways', 'Uniworld', 'Avalon Waterways', 'Scenic'],
     itinerary: [
@@ -2855,19 +3458,19 @@ export const bucketListExperiences = [
     faqs: [
       {
         question: 'What makes European river cruising so appealing to UK travellers?',
-        answer: 'River cruising offers the Continent at its most accessible. A short flight from the UK, and you are in Budapest, Amsterdam, or Porto—stepping directly from ship to city centre without tender rides or shuttle buses. The intimacy of small ships, the daily discoveries, and the gentle pace create a uniquely civilised way to explore.'
+        answer: 'River cruising offers the Continent at its most accessible. A short flight from the UK, and you are in Budapest, Amsterdam, or Porto-stepping directly from ship to city centre without tender rides or shuttle buses. The intimacy of small ships, the daily discoveries, and the gentle pace create a uniquely civilised way to explore.'
       },
       {
         question: 'How does the Danube compare to the Rhine as a river cruise destination?',
-        answer: 'The Danube offers imperial grandeur—Budapest, Vienna, the Wachau Valley\'s wine terraces. The Rhine delivers fairytale drama—castles crowning every bend, the dramatic gorge, Cologne\'s cathedral. Many travellers eventually experience both, but the choice depends on whether you prefer Habsburg elegance or Germanic romanticism.'
+        answer: 'The Danube offers imperial grandeur-Budapest, Vienna, the Wachau Valley\'s wine terraces. The Rhine delivers fairytale drama-castles crowning every bend, the dramatic gorge, Cologne\'s cathedral. Many travellers eventually experience both, but the choice depends on whether you prefer Habsburg elegance or Germanic romanticism.'
       },
       {
         question: 'What is special about the Douro in Portugal?',
-        answer: 'The Douro Valley is port wine country—terraced vineyards rising steeply from the river, quintas perched on hillsides, the historic city of Porto at the journey\'s end. It is more intimate than the great central European rivers, with a distinctly Portuguese character of warmth and wine.'
+        answer: 'The Douro Valley is port wine country-terraced vineyards rising steeply from the river, quintas perched on hillsides, the historic city of Porto at the journey\'s end. It is more intimate than the great central European rivers, with a distinctly Portuguese character of warmth and wine.'
       },
       {
         question: 'Why do people describe river cruising as "unpacking once"?',
-        answer: 'Your cabin travels with you from city to city. You explore Budapest in the morning, return for lunch, and by dinner you are approaching Bratislava—all without touching a suitcase. It is the rare combination of variety and convenience that makes river cruising so appealing.'
+        answer: 'Your cabin travels with you from city to city. You explore Budapest in the morning, return for lunch, and by dinner you are approaching Bratislava-all without touching a suitcase. It is the rare combination of variety and convenience that makes river cruising so appealing.'
       },
       {
         question: 'What is the Christmas markets experience like by river?',
@@ -2882,14 +3485,14 @@ export const bucketListExperiences = [
     // Provenance & Assurance
     provenanceAssurance: {
       pillars: [
-        { title: 'Bespoke Curation', description: 'Every river journey tailored—from cabin choice to pre-cruise city stays.' },
+        { title: 'Bespoke Curation', description: 'Every river journey tailored-from cabin choice to pre-cruise city stays.' },
         { title: 'UK Expertise', description: 'Specialists who understand the short flights and the appeal of each river.' },
         { title: 'Line Knowledge', description: 'Deep familiarity with all major river cruise lines and their distinctive styles.' },
         { title: 'Complete Protection', description: 'Full ATOL protection for total peace of mind.' }
       ],
       testimonials: [
         { quote: 'We saw Budapest, Vienna and more without ever touching a suitcase after day one. Sitting on deck through the Wachau Valley with a glass of wine was the highlight of our year.', author: 'First-time cruisers', location: 'Surrey' },
-        { quote: 'The ship felt like a floating boutique hotel—small, friendly, and always moored right by the old town so we could wander off after dinner.', author: 'Margaret T.', location: 'Edinburgh' }
+        { quote: 'The ship felt like a floating boutique hotel-small, friendly, and always moored right by the old town so we could wander off after dinner.', author: 'Margaret T.', location: 'Edinburgh' }
       ]
     },
     
@@ -2906,7 +3509,7 @@ export const bucketListExperiences = [
     // SEO
     seo: {
       metaTitle: 'Great Barrier Reef & Australia Cruise: A Bucket List Pursuit | Limitless Cruises',
-      metaDescription: 'Experience Australia\'s icons—Sydney Harbour, the Great Barrier Reef, Whitsunday beaches. The ultimate long-haul adventure for UK travellers. Enquire for your bespoke journey.',
+      metaDescription: 'Experience Australia\'s icons-Sydney Harbour, the Great Barrier Reef, Whitsunday beaches. The ultimate long-haul adventure for UK travellers. Enquire for your bespoke journey.',
       keywords: ['great barrier reef cruise from uk', 'australia cruise', 'sydney cruise', 'whitsunday islands cruise', 'australian cruise from uk', 'barrier reef snorkelling', 'cairns cruise']
     },
     
@@ -2915,23 +3518,23 @@ export const bucketListExperiences = [
       headline: 'Great Barrier Reef & Australia: The Ultimate Antipodean Adventure',
       subheadline: 'Sydney\'s iconic harbour, the world\'s largest coral reef, and the endless warmth of Australian sunshine',
       bullets: [
-        'Sydney Harbour—Opera House, Harbour Bridge, Bondi beaches',
-        'The Great Barrier Reef—snorkelling over the world\'s largest coral system',
-        'Whitsunday Islands—Whitehaven Beach\'s pristine white sands',
-        'Queensland\'s tropical coast—Cairns, Port Douglas, rainforest meets reef'
+        'Sydney Harbour-Opera House, Harbour Bridge, Bondi beaches',
+        'The Great Barrier Reef-snorkelling over the world\'s largest coral system',
+        'Whitsunday Islands-Whitehaven Beach\'s pristine white sands',
+        'Queensland\'s tropical coast-Cairns, Port Douglas, rainforest meets reef'
       ]
     },
     
     heroImage: null,
     cardImage: null,
-    duration: '14–18 nights from the UK',
-    season: 'April – October (drier, cooler conditions; avoid cyclone season)',
+    duration: '14-18 nights from the UK',
+    season: 'April - October (drier, cooler conditions; avoid cyclone season)',
     
     // Why Bucket List Worthy
     whyBucketListWorthy: {
-      narrative: '<p>Australia occupies a special place in British consciousness—that vast, sun-drenched land at the far end of the Earth, where Christmas falls in summer and kangaroos really do hop across roads. For many UK travellers, Australia represents the ultimate long-haul destination, and the Great Barrier Reef its crowning natural wonder.</p><p>The Reef defies description. It is visible from space, stretches over 2,300 kilometres, and supports an ecosystem of such colour and complexity that a single snorkel excursion reveals more species than most of us see in a lifetime. To float above these coral gardens, fish of every hue darting below, is to experience one of Earth\'s genuine miracles.</p><p>But Australia offers so much more. Sydney Harbour is one of the world\'s great urban waterways—the Opera House glowing at sunset, ferries crisscrossing between beaches and headlands, the Harbour Bridge arching overhead. The Whitsunday Islands present beaches so white, water so turquoise, that photographs look digitally enhanced. A voyage along Australia\'s eastern coast combines these wonders into a single, unforgettable journey.</p>',
+      narrative: '<p>Australia occupies a special place in British consciousness-that vast, sun-drenched land at the far end of the Earth, where Christmas falls in summer and kangaroos really do hop across roads. For many UK travellers, Australia represents the ultimate long-haul destination, and the Great Barrier Reef its crowning natural wonder.</p><p>The Reef defies description. It is visible from space, stretches over 2,300 kilometres, and supports an ecosystem of such colour and complexity that a single snorkel excursion reveals more species than most of us see in a lifetime. To float above these coral gardens, fish of every hue darting below, is to experience one of Earth\'s genuine miracles.</p><p>But Australia offers so much more. Sydney Harbour is one of the world\'s great urban waterways-the Opera House glowing at sunset, ferries crisscrossing between beaches and headlands, the Harbour Bridge arching overhead. The Whitsunday Islands present beaches so white, water so turquoise, that photographs look digitally enhanced. A voyage along Australia\'s eastern coast combines these wonders into a single, unforgettable journey.</p>',
       personaVignettes: [
-        { persona: 'The Long-Haul Adventurer', description: 'Those ready for the ultimate journey—distance that rewards with landscapes and experiences found nowhere else on Earth.' },
+        { persona: 'The Long-Haul Adventurer', description: 'Those ready for the ultimate journey-distance that rewards with landscapes and experiences found nowhere else on Earth.' },
         { persona: 'The Underwater Dreamer', description: 'Snorkellers and divers who have long imagined floating above the Barrier Reef\'s legendary coral formations.' },
         { persona: 'The Winter-Sun Seeker', description: 'UK travellers escaping grey January skies for Australian summer warmth and endless blue horizons.' }
       ]
@@ -2954,17 +3557,17 @@ export const bucketListExperiences = [
       seasons: [
         {
           name: 'Autumn Arrival',
-          months: 'April–May',
+          months: 'April-May',
           highlights: ['Warm but not hot', 'Excellent visibility', 'Whale migration begins', 'Quieter beaches']
         },
         {
           name: 'Winter Escape',
-          months: 'June–August',
+          months: 'June-August',
           highlights: ['UK winter sun', 'Dry conditions', 'Peak whale watching', 'Comfortable cruising']
         },
         {
           name: 'Spring Delight',
-          months: 'September–October',
+          months: 'September-October',
           highlights: ['Warming waters', 'Coral spawning events', 'Jacaranda blooms', 'Before summer crowds']
         }
       ]
@@ -3095,7 +3698,7 @@ export const bucketListExperiences = [
     faqs: [
       {
         question: 'What makes the Great Barrier Reef such an iconic destination?',
-        answer: 'The Great Barrier Reef is Earth\'s largest living structure—visible from space, home to thousands of species, and an ecosystem of staggering beauty and complexity. To float above these coral formations, tropical fish darting below in every colour imaginable, is to witness one of nature\'s genuine miracles.'
+        answer: 'The Great Barrier Reef is Earth\'s largest living structure-visible from space, home to thousands of species, and an ecosystem of staggering beauty and complexity. To float above these coral formations, tropical fish darting below in every colour imaginable, is to witness one of nature\'s genuine miracles.'
       },
       {
         question: 'Why do UK travellers choose to experience Australia by cruise?',
@@ -3103,32 +3706,32 @@ export const bucketListExperiences = [
       },
       {
         question: 'What is Sydney Harbour really like in person?',
-        answer: 'Sydney Harbour exceeds expectations. The Opera House glows at sunset, the Harbour Bridge arches overhead, ferries crisscross between beaches and headlands. Sailing in or out of this harbour ranks among cruising\'s great experiences—the entire city seems to wave you off on your adventure.'
+        answer: 'Sydney Harbour exceeds expectations. The Opera House glows at sunset, the Harbour Bridge arches overhead, ferries crisscross between beaches and headlands. Sailing in or out of this harbour ranks among cruising\'s great experiences-the entire city seems to wave you off on your adventure.'
       },
       {
         question: 'What can I expect from snorkelling the Barrier Reef?',
-        answer: 'The reef reveals itself gradually as you float above. First the coral formations—branching, plated, boulder—then the fish, astonishing in their variety and colour. Clownfish in anemones, parrotfish grazing, perhaps a reef shark patrolling the drop-off. It is genuinely unforgettable, even for experienced snorkellers.'
+        answer: 'The reef reveals itself gradually as you float above. First the coral formations-branching, plated, boulder-then the fish, astonishing in their variety and colour. Clownfish in anemones, parrotfish grazing, perhaps a reef shark patrolling the drop-off. It is genuinely unforgettable, even for experienced snorkellers.'
       },
       {
         question: 'Why is Whitehaven Beach considered one of the world\'s best?',
-        answer: 'Whitehaven\'s silica sand is 98% pure quartz—blindingly white, squeaking underfoot, cool even in summer sun. The water shifts through impossible shades of turquoise and blue. It is the kind of beach you thought existed only in advertisements; discovering it is real feels like a gift.'
+        answer: 'Whitehaven\'s silica sand is 98% pure quartz-blindingly white, squeaking underfoot, cool even in summer sun. The water shifts through impossible shades of turquoise and blue. It is the kind of beach you thought existed only in advertisements; discovering it is real feels like a gift.'
       },
       {
         question: 'Is the journey from the UK manageable?',
-        answer: 'Australia is a significant journey—22 to 26 hours with a connection—but the distance is part of the adventure. Building in a Sydney stay on arrival allows adjustment before the cruise begins. By the time you reach the Whitsundays, jet lag is a distant memory and you are fully immersed in the Australian experience.'
+        answer: 'Australia is a significant journey-22 to 26 hours with a connection-but the distance is part of the adventure. Building in a Sydney stay on arrival allows adjustment before the cruise begins. By the time you reach the Whitsundays, jet lag is a distant memory and you are fully immersed in the Australian experience.'
       }
     ],
     
     // Provenance & Assurance
     provenanceAssurance: {
       pillars: [
-        { title: 'Bespoke Curation', description: 'Every Australian journey tailored—from Sydney extensions to specific reef experiences.' },
+        { title: 'Bespoke Curation', description: 'Every Australian journey tailored-from Sydney extensions to specific reef experiences.' },
         { title: 'UK Expertise', description: 'Specialists who understand the long-haul journey and how to make it comfortable.' },
         { title: 'Reef Knowledge', description: 'Deep familiarity with the best reef sites, operators, and seasonal conditions.' },
         { title: 'Complete Protection', description: 'Full ATOL protection for total peace of mind on this significant journey.' }
       ],
       testimonials: [
-        { quote: 'We combined three nights in Sydney with a reef cruise from Brisbane—the Harbour sail-away and snorkelling over the coral were stand-out moments.', author: 'First-time Australia visitors', location: 'Bristol' },
+        { quote: 'We combined three nights in Sydney with a reef cruise from Brisbane-the Harbour sail-away and snorkelling over the coral were stand-out moments.', author: 'First-time Australia visitors', location: 'Bristol' },
         { quote: 'Booking it as a complete journey from UK flights to local tours made the distance feel manageable. The jet lag was gone by the time we reached the Whitsundays.', author: 'Robert & Helen', location: 'Cheshire' }
       ]
     },
@@ -3146,14 +3749,14 @@ export const bucketListExperiences = [
     // SEO
     seo: {
       metaTitle: 'Grand Voyages: A Bucket List Pursuit | Limitless Cruises',
-      metaDescription: 'Discover the world on a Grand Voyage—30 to 60+ nights linking continents via classic sea routes. Mediterranean to Asia, Europe to South America. Enquire for your bespoke odyssey.',
+      metaDescription: 'Discover the world on a Grand Voyage-30 to 60+ nights linking continents via classic sea routes. Mediterranean to Asia, Europe to South America. Enquire for your bespoke odyssey.',
       keywords: ['grand voyage cruise', 'long cruise from uk', 'repositioning cruise', 'extended cruise', 'world cruise segment', 'suez canal cruise', 'barcelona to singapore cruise', 'multi-month cruise']
     },
     
     // Hero
     hero: {
       headline: 'Grand Voyages: Epic Journeys Linking Continents',
-      subheadline: 'Thirty to sixty nights of adventure—the feel of a world cruise without four months at sea',
+      subheadline: 'Thirty to sixty nights of adventure-the feel of a world cruise without four months at sea',
       bullets: [
         'Barcelona to Singapore via Suez and the Indian Ocean',
         'Southampton to South America across the Atlantic',
@@ -3164,14 +3767,14 @@ export const bucketListExperiences = [
     
     heroImage: null,
     cardImage: null,
-    duration: 'Typically 30–60+ nights',
+    duration: 'Typically 30-60+ nights',
     season: 'Spring and autumn (repositioning seasons)',
     
     // Why Bucket List Worthy
     whyBucketListWorthy: {
-      narrative: '<p>There comes a moment in many travellers\' lives when a week or two simply isn\'t enough. They want to truly travel—to unpack once, settle into a ship\'s rhythm, and watch as continents change outside their window. They want the journey itself to be the destination.</p><p>Grand Voyages answer this call. These extended segments—typically thirty to sixty nights—follow the classic routes of maritime history: through the Suez Canal from Mediterranean to Asia, across the Atlantic to South America, along the coast of Africa from Cape Town to Barcelona. They move between seasons, repositioning ships for new deployments while offering passengers the trip of a lifetime.</p><p>The experience differs fundamentally from shorter cruises. Sea days become treasured rather than endured—time for reading, reflection, enrichment lectures, new friendships. A shipboard community forms, sharing meals and stories night after night. Port calls feel genuinely exotic because you have truly covered the distance to reach them. And throughout, the satisfaction of travelling as explorers once travelled: slowly, deeply, meaningfully.</p>',
+      narrative: '<p>There comes a moment in many travellers\' lives when a week or two simply isn\'t enough. They want to truly travel-to unpack once, settle into a ship\'s rhythm, and watch as continents change outside their window. They want the journey itself to be the destination.</p><p>Grand Voyages answer this call. These extended segments-typically thirty to sixty nights-follow the classic routes of maritime history: through the Suez Canal from Mediterranean to Asia, across the Atlantic to South America, along the coast of Africa from Cape Town to Barcelona. They move between seasons, repositioning ships for new deployments while offering passengers the trip of a lifetime.</p><p>The experience differs fundamentally from shorter cruises. Sea days become treasured rather than endured-time for reading, reflection, enrichment lectures, new friendships. A shipboard community forms, sharing meals and stories night after night. Port calls feel genuinely exotic because you have truly covered the distance to reach them. And throughout, the satisfaction of travelling as explorers once travelled: slowly, deeply, meaningfully.</p>',
       personaVignettes: [
-        { persona: 'The Time-Rich Adventurer', description: 'Those blessed with time—retirees, sabbatical-takers, remote workers—find Grand Voyages the ultimate expression of freedom.' },
+        { persona: 'The Time-Rich Adventurer', description: 'Those blessed with time-retirees, sabbatical-takers, remote workers-find Grand Voyages the ultimate expression of freedom.' },
         { persona: 'The Deep Explorer', description: 'Travellers who have done the highlights and now want to truly immerse, to see how regions connect across ocean and time.' },
         { persona: 'The Value Seeker', description: 'Those who appreciate that cost-per-night on a Grand Voyage often represents exceptional value versus multiple shorter trips.' }
       ]
@@ -3190,21 +3793,21 @@ export const bucketListExperiences = [
     
     // Optimal Timing
     optimalTiming: {
-      summary: 'Grand Voyages primarily operate during repositioning seasons—spring and autumn—when ships move between their summer and winter deployments.',
+      summary: 'Grand Voyages primarily operate during repositioning seasons-spring and autumn-when ships move between their summer and winter deployments.',
       seasons: [
         {
           name: 'Autumn Repositioning',
-          months: 'September–November',
+          months: 'September-November',
           highlights: ['Europe to Asia or Caribbean', 'Avoiding northern winter', 'Suez or Atlantic crossings', 'Following the sun']
         },
         {
           name: 'Spring Repositioning',
-          months: 'March–May',
+          months: 'March-May',
           highlights: ['Asia to Europe', 'South America to Mediterranean', 'Returning to northern waters', 'Optimal weather transitions']
         },
         {
           name: 'Winter Extended',
-          months: 'January–February',
+          months: 'January-February',
           highlights: ['World cruise segments', 'Circumnavigation portions', 'Southern Hemisphere exploration', 'Extended warm-weather routing']
         }
       ]
@@ -3220,9 +3823,9 @@ export const bucketListExperiences = [
     
     // Curated Itinerary Vignettes
     itineraryVignettes: [
-      { name: 'Mediterranean to Asia', duration: '35–45 nights', essence: 'Classic eastbound', highlights: ['Barcelona or Rome start', 'Suez transit', 'Arabian highlights', 'Singapore finale'] },
-      { name: 'Europe to South America', duration: '30–40 nights', essence: 'Atlantic odyssey', highlights: ['Southampton or Lisbon', 'Atlantic crossing', 'Brazil coast', 'Buenos Aires arrival'] },
-      { name: 'Grand Pacific', duration: '45–60 nights', essence: 'Ultimate distance', highlights: ['Asia departure', 'Pacific islands', 'South America west coast', 'World cruise flavour'] }
+      { name: 'Mediterranean to Asia', duration: '35-45 nights', essence: 'Classic eastbound', highlights: ['Barcelona or Rome start', 'Suez transit', 'Arabian highlights', 'Singapore finale'] },
+      { name: 'Europe to South America', duration: '30-40 nights', essence: 'Atlantic odyssey', highlights: ['Southampton or Lisbon', 'Atlantic crossing', 'Brazil coast', 'Buenos Aires arrival'] },
+      { name: 'Grand Pacific', duration: '45-60 nights', essence: 'Ultimate distance', highlights: ['Asia departure', 'Pacific islands', 'South America west coast', 'World cruise flavour'] }
     ],
     cruiseLines: ['Cunard', 'Holland America', 'Princess Cruises', 'P&O Cruises', 'Fred. Olsen', 'MSC Cruises'],
     itinerary: [
@@ -3422,23 +4025,23 @@ export const bucketListExperiences = [
       },
       {
         question: 'How does the experience differ from a standard two-week cruise?',
-        answer: 'The rhythm is fundamentally different. Sea days become treasured rather than endured—time for reading, lectures, reflection. A community forms among passengers who share meals and stories night after night. Ports feel genuinely exotic because you have truly covered the distance to reach them. It is immersive travel at its finest.'
+        answer: 'The rhythm is fundamentally different. Sea days become treasured rather than endured-time for reading, lectures, reflection. A community forms among passengers who share meals and stories night after night. Ports feel genuinely exotic because you have truly covered the distance to reach them. It is immersive travel at its finest.'
       },
       {
         question: 'What is it like to transit the Suez Canal?',
-        answer: 'The Suez transit is one of cruising\'s great experiences—a slow passage through desert landscape, watching both banks of this engineering marvel slide past. The sense of passing from one world to another—Mediterranean to Red Sea, Europe to Asia—is palpable and genuinely moving.'
+        answer: 'The Suez transit is one of cruising\'s great experiences-a slow passage through desert landscape, watching both banks of this engineering marvel slide past. The sense of passing from one world to another-Mediterranean to Red Sea, Europe to Asia-is palpable and genuinely moving.'
       },
       {
         question: 'Why do experienced cruisers seek out Grand Voyages?',
-        answer: 'Those who have loved shorter cruises often find themselves craving something deeper. Grand Voyages satisfy that hunger—the chance to truly settle in, to watch how regions connect, to enjoy the rare luxury of unhurried time. Many describe them as cruising at its most rewarding.'
+        answer: 'Those who have loved shorter cruises often find themselves craving something deeper. Grand Voyages satisfy that hunger-the chance to truly settle in, to watch how regions connect, to enjoy the rare luxury of unhurried time. Many describe them as cruising at its most rewarding.'
       },
       {
         question: 'What is the appeal of repositioning season voyages?',
-        answer: 'When ships move between their summer and winter deployments, they must cross oceans and seas. These repositioning voyages offer remarkable itineraries—routes that follow ancient trade winds, ports rarely visited on standard loops—often at exceptional value. They are cruising\'s hidden treasures.'
+        answer: 'When ships move between their summer and winter deployments, they must cross oceans and seas. These repositioning voyages offer remarkable itineraries-routes that follow ancient trade winds, ports rarely visited on standard loops-often at exceptional value. They are cruising\'s hidden treasures.'
       },
       {
         question: 'Is a Grand Voyage suitable for first-time cruisers?',
-        answer: 'For the right person, absolutely. If you have the time and disposition for slow travel, a Grand Voyage can be a wonderful introduction to cruising—allowing you to truly settle in, to discover all a ship offers, and to experience the world without constant packing and unpacking. It requires patience but rewards abundantly.'
+        answer: 'For the right person, absolutely. If you have the time and disposition for slow travel, a Grand Voyage can be a wonderful introduction to cruising-allowing you to truly settle in, to discover all a ship offers, and to experience the world without constant packing and unpacking. It requires patience but rewards abundantly.'
       },
       {
         question: 'How far in advance should I book?',
@@ -3449,14 +4052,14 @@ export const bucketListExperiences = [
     // Provenance & Assurance
     provenanceAssurance: {
       pillars: [
-        { title: 'Bespoke Curation', description: 'Every Grand Voyage tailored—from cabin selection to pre and post stays.' },
+        { title: 'Bespoke Curation', description: 'Every Grand Voyage tailored-from cabin selection to pre and post stays.' },
         { title: 'UK Expertise', description: 'Specialists who understand the appeal of extended voyages for British travellers.' },
         { title: 'Segment Knowledge', description: 'Deep familiarity with which segments offer the best routing and experiences.' },
         { title: 'Complete Protection', description: 'Full ATOL protection for total peace of mind on extended journeys.' }
       ],
       testimonials: [
         { quote: 'We weren\'t ready for a full four-month world cruise, but a 38-night Barcelona-to-Singapore segment gave us a real sense of crossing continents.', author: 'First-time Grand Voyagers', location: 'Hampshire' },
-        { quote: 'Having the flights, hotels and cruise all lined up as one journey made a complicated route feel simple—we just unpacked once and let the itinerary unfold.', author: 'Peter & Anne', location: 'Oxfordshire' }
+        { quote: 'Having the flights, hotels and cruise all lined up as one journey made a complicated route feel simple-we just unpacked once and let the itinerary unfold.', author: 'Peter & Anne', location: 'Oxfordshire' }
       ]
     },
     
