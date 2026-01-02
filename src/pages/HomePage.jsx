@@ -115,13 +115,18 @@ function HomePage() {
         />
         
         {/* Minimal Header - Just contact info and logo */}
-        <div style={{ background: '#fff', borderBottom: '1px solid #e8e8e8' }}>
+        <div style={{ 
+          background: '#fff', 
+          borderBottom: '1px solid #e8e8e8',
+          fontFamily: 'var(--font-family)'
+        }}>
           {/* Top contact bar */}
           <div style={{ 
             background: '#2C344C', 
             color: '#fff', 
             padding: '0.5rem 0',
-            fontSize: '0.875rem'
+            fontSize: 'var(--font-size-sm)',
+            fontFamily: 'var(--font-family)'
           }}>
             <div className="container" style={{ 
               display: 'flex', 
@@ -158,10 +163,19 @@ function HomePage() {
                 height="56"
               />
               <div>
-                <div style={{ fontSize: '1.5rem', fontWeight: 600, color: '#2C344C' }}>
+                <div style={{ 
+                  fontSize: 'var(--font-size-2xl)', 
+                  fontWeight: 'var(--font-weight-semibold)', 
+                  color: '#2C344C',
+                  fontFamily: 'var(--font-family-display)'
+                }}>
                   Limitless Cruises
                 </div>
-                <div style={{ fontSize: '0.875rem', color: '#666' }}>
+                <div style={{ 
+                  fontSize: 'var(--font-size-sm)', 
+                  color: '#666',
+                  fontFamily: 'var(--font-family)'
+                }}>
                   Personal Cruise Consultant
                 </div>
               </div>
