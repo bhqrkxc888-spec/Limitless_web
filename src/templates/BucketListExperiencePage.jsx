@@ -227,13 +227,13 @@ function BucketListExperiencePage() {
                     title="Frequently Asked Questions"
                     subtitle="Everything you need to know"
                   />
-                  <Accordion>
-                    {experience.faq.map((faq, index) => (
-                      <Accordion.Item key={index} title={faq.question}>
-                        <p>{faq.answer}</p>
-                      </Accordion.Item>
-                    ))}
-                  </Accordion>
+                  <Accordion
+                    items={experience.faq.map((faq, index) => ({
+                      id: `faq-${index}`,
+                      title: faq.question,
+                      content: faq.answer
+                    }))}
+                  />
                 </div>
               )}
             </div>

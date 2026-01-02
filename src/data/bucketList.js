@@ -13,8 +13,8 @@ export const bucketListExperiences = [
     // Images now loaded via getBucketListCard() and getBucketListHero() helpers (Supabase)
     heroImage: null,
     cardImage: null,
-    duration: '121 nights (approx. January–May)',
-    season: 'January–May',
+    duration: '121 nights (approx. January-May)',
+    season: 'January-May',
     bestFor: ['Retirees', 'Semi-retired guests', 'Seasoned cruisers', 'Slow-travel couples', 'Flexible professionals'],
     highlights: [
       'Overnights in Rio de Janeiro and Buenos Aires with time to see Christ the Redeemer, Sugarloaf, tango shows and Pampas ranch country',
@@ -22,7 +22,7 @@ export const bucketListExperiences = [
       'Call at ports such as Auckland, Bay of Islands, Wellington, Sydney or Melbourne with harbour cruises and Maori culture',
       'Sample Asian megacities or island paradises (e.g. Japan, Bali, Hawaii)',
       'Daylight transit of the Panama Canal before ending with warm Caribbean ports',
-      'Sail the full world cruise or choose one or more segments – contact us to discuss options and availability'
+      'Sail the full world cruise or choose one or more segments - contact us to discuss options and availability'
     ],
     includes: [
       'Return economy flights from a major UK airport to Barcelona and back (business class and regional departures also available)',
@@ -434,12 +434,12 @@ export const bucketListExperiences = [
     ],
     testimonials: [
       { quote: 'Four months, five continents and we still weren\'t ready to get off. The sea days became our rhythm, and waking up to Rio, Sydney and the Panama Canal felt unreal.' },
-      { quote: 'Booking through a specialist made the difference – cabin, dining and flight advice meant we got it right first time.' }
+      { quote: 'Booking through a specialist made the difference - cabin, dining and flight advice meant we got it right first time.' }
     ],
     faq: [
       {
         question: 'Can I book part of the world cruise instead of all 121 nights?',
-        answer: 'Yes. The voyage can usually be broken into 2–3 longer "segments" (for example: Europe–South America, South America–Australasia, and Australasia–Europe). Each segment can be booked on its own, and you can combine two segments for a shorter "Grand Voyage". Contact us to discuss segment options and availability for your preferred dates.'
+        answer: 'Yes. The voyage can usually be broken into 2-3 longer "segments" (for example: Europe-South America, South America-Australasia, and Australasia-Europe). Each segment can be booked on its own, and you can combine two segments for a shorter "Grand Voyage". Contact us to discuss segment options and availability for your preferred dates.'
       },
       {
         question: 'What flights from the UK are included?',
@@ -475,12 +475,12 @@ export const bucketListExperiences = [
       },
       {
         question: 'How far in advance should I book?',
-        answer: 'World cruises and their key segments often sell out 18–24 months ahead, especially for popular dates. Early booking also gives access to stronger early-booking offers and more flexible options. Last-minute availability is possible but limited. Contact us to check current availability for your preferred dates.'
+        answer: 'World cruises and their key segments often sell out 18-24 months ahead, especially for popular dates. Early booking also gives access to stronger early-booking offers and more flexible options. Last-minute availability is possible but limited. Contact us to check current availability for your preferred dates.'
       }
     ],
     meta: {
       title: 'World Cruises | 121-Night Global Odyssey from Barcelona | Limitless Cruises',
-      description: '121-night world cruise from Barcelona – 25+ countries, 40+ ports, 7 overnights including UK flights. Sail the full world cruise or choose segments. Expert booking advice from Limitless Cruises.',
+      description: '121-night world cruise from Barcelona - 25+ countries, 40+ ports, 7 overnights including UK flights. Sail the full world cruise or choose segments. Expert booking advice from Limitless Cruises.',
       keywords: ['world cruise', 'round the world cruise', '121 night cruise', 'Barcelona world cruise', 'global odyssey', 'world voyage', 'extended cruise', 'circumnavigation']
     },
     images: [],
@@ -492,7 +492,7 @@ export const bucketListExperiences = [
     slug: 'antarctica-expeditions',
     title: 'Antarctica Expeditions',
     tagline: 'The ultimate bucket list: penguins, icebergs, and pristine wilderness',
-    description: 'Direct from London to Buenos Aires\'s sophisticated tango culture—2 nights luxury immersion (Recoleta, steaks, jetlag buffer). Fly to Ushuaia, gateway to the White Continent—1 night Tierra del Fuego. Embark your 14-night expedition cruise: cross the legendary Drake Passage, daily Zodiac landings on the Antarctic Peninsula, thousands of penguins, whale breaches, towering icebergs, South Shetland Islands. Return Ushuaia, fly home via Buenos Aires. The ultimate once-in-a-lifetime journey. ATOL protected. Get a personalised quote.',
+    description: 'Direct from London to Buenos Aires\'s sophisticated tango culture-2 nights luxury immersion (Recoleta, steaks, jetlag buffer). Fly to Ushuaia, gateway to the White Continent-1 night Tierra del Fuego. Embark your 14-night expedition cruise: cross the legendary Drake Passage, daily Zodiac landings on the Antarctic Peninsula, thousands of penguins, whale breaches, towering icebergs, South Shetland Islands. Return Ushuaia, fly home via Buenos Aires. The ultimate once-in-a-lifetime journey. ATOL protected. Get a personalised quote.',
     heroImage: null,
     cardImage: null,
     duration: '18-20 nights from UK',
@@ -612,14 +612,14 @@ export const bucketListExperiences = [
       { name: 'South Shetland Islands', description: 'Penguin rookeries, seal colonies, research stations, first Antarctic encounters' }
     ],
     testimonials: [
-      { quote: 'Buenos Aires start was perfect—tango and steaks before the adventure. Antarctica itself was beyond words—penguins everywhere!', author: 'Sarah K.', location: 'Manchester' },
+      { quote: 'Buenos Aires start was perfect-tango and steaks before the adventure. Antarctica itself was beyond words-penguins everywhere!', author: 'Sarah K.', location: 'Manchester' },
       { quote: 'The expedition team made every landing special. Crossing the Drake was an adventure in itself. Truly once-in-a-lifetime.', author: 'Robert & Jane', location: 'Edinburgh' },
-      { quote: 'Worth every penny. The Zodiac landings, the silence, the wildlife—nothing compares to Antarctica.', author: 'David', location: 'London' }
+      { quote: 'Worth every penny. The Zodiac landings, the silence, the wildlife-nothing compares to Antarctica.', author: 'David', location: 'London' }
     ],
     faq: [
       {
         question: 'Are UK flights included?',
-        answer: 'Yes—direct LHR→Buenos Aires (13-14hr) and return flights are featured. Business class lie-flat seats are also available. Domestic flights Buenos Aires↔Ushuaia (3hr) are also featured.'
+        answer: 'Yes-direct LHR→Buenos Aires (13-14hr) and return flights are featured. Business class lie-flat seats are also available. Domestic flights Buenos Aires↔Ushuaia (3hr) are also featured.'
       },
       {
         question: 'Can I extend my stay in Buenos Aires?',
@@ -635,11 +635,11 @@ export const bucketListExperiences = [
       },
       {
         question: 'How rough is the Drake Passage?',
-        answer: 'The Drake Passage can be rough, but modern expedition ships are well-equipped with stabilizers. Many crossings are surprisingly calm ("Drake Lake"). Motion sickness medication is recommended. The crossing is part of the adventure—expedition team lectures and seabird watching help pass the time.'
+        answer: 'The Drake Passage can be rough, but modern expedition ships are well-equipped with stabilizers. Many crossings are surprisingly calm ("Drake Lake"). Motion sickness medication is recommended. The crossing is part of the adventure-expedition team lectures and seabird watching help pass the time.'
       },
       {
         question: 'Do I need special clothing?',
-        answer: 'Expedition cruises provide parkas and boots. You\'ll need warm base layers, waterproof trousers, gloves, and hats. A detailed packing list will be provided. No need to buy expensive gear—the expedition parka is yours to keep!'
+        answer: 'Expedition cruises provide parkas and boots. You\'ll need warm base layers, waterproof trousers, gloves, and hats. A detailed packing list will be provided. No need to buy expensive gear-the expedition parka is yours to keep!'
       },
       {
         question: 'Which cruise lines operate this route?',
@@ -647,15 +647,15 @@ export const bucketListExperiences = [
       },
       {
         question: 'What\'s included in the hotel stays?',
-        answer: '2 nights at luxury Buenos Aires hotel (Recoleta or Palermo area) and 1 night at Ushuaia gateway hotel. Both include breakfast. Hotels are centrally located for easy exploration. Higher room categories also available—get a personalised quote.'
+        answer: '2 nights at luxury Buenos Aires hotel (Recoleta or Palermo area) and 1 night at Ushuaia gateway hotel. Both include breakfast. Hotels are centrally located for easy exploration. Higher room categories also available-get a personalised quote.'
       },
       {
         question: 'Are Zodiac landings safe?',
-        answer: 'Yes—Zodiac landings are conducted by expert expedition teams with extensive polar experience. Safety briefings are mandatory. Life jackets are provided. Landings are weather-dependent and conducted in small groups with guides. All passengers receive comprehensive safety training.'
+        answer: 'Yes-Zodiac landings are conducted by expert expedition teams with extensive polar experience. Safety briefings are mandatory. Life jackets are provided. Landings are weather-dependent and conducted in small groups with guides. All passengers receive comprehensive safety training.'
       },
       {
         question: 'Is this ATOL protected?',
-        answer: 'Yes—all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this once-in-a-lifetime journey.'
+        answer: 'Yes-all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this once-in-a-lifetime journey.'
       }
     ],
     meta: {
@@ -672,7 +672,7 @@ export const bucketListExperiences = [
     slug: 'japan-asia-cruises',
     title: 'Japan & Asia',
     tagline: 'Tokyo temples to Singapore skyline via bucket list ports',
-    description: 'Direct from London to Tokyo\'s neon pulse—2 nights luxury immersion (sushi omakase, Shibuya Crossing, Meiji Shrine). Embark your 12‑night Asia odyssey: Busan\'s temples, Kagoshima volcanoes, Okinawa beaches, Taipei night markets, Hong Kong harbour lights, Shanghai Bund, arriving Singapore triumphant. 2 nights Marina Bay Sands finale—Infinity Pool, Gardens by the Bay. Open‑jaw genius. ATOL protected. Get a personalised quote.',
+    description: 'Direct from London to Tokyo\'s neon pulse-2 nights luxury immersion (sushi omakase, Shibuya Crossing, Meiji Shrine). Embark your 12‑night Asia odyssey: Busan\'s temples, Kagoshima volcanoes, Okinawa beaches, Taipei night markets, Hong Kong harbour lights, Shanghai Bund, arriving Singapore triumphant. 2 nights Marina Bay Sands finale-Infinity Pool, Gardens by the Bay. Open‑jaw genius. ATOL protected. Get a personalised quote.',
     heroImage: null,
     cardImage: null,
     duration: '16 nights from UK',
@@ -804,14 +804,14 @@ export const bucketListExperiences = [
       { name: 'Singapore', description: 'Marina Bay Sands, Gardens by the Bay, hawker centres, infinity pool' }
     ],
     testimonials: [
-      { quote: 'Tokyo start, Singapore end—perfect flow! The open-jaw flights made it seamless.', author: 'Emma', location: 'London' },
+      { quote: 'Tokyo start, Singapore end-perfect flow! The open-jaw flights made it seamless.', author: 'Emma', location: 'London' },
       { quote: 'The views of Hong Kong harbour were priceless. The whole itinerary was bucket list perfection.', author: 'Raj', location: 'Manchester' },
       { quote: 'Marina Bay Sands infinity pool was the perfect finale. Every port was incredible.', author: 'Sarah', location: 'Birmingham' }
     ],
     faq: [
       {
         question: 'Are UK flights included?',
-        answer: 'Yes—direct LHR→Tokyo (12hr) and Singapore→LHR (13hr) economy flights are featured. Business class lie-flat seats are also available. The open-jaw pattern means no backtracking—fly into Tokyo, out of Singapore.'
+        answer: 'Yes-direct LHR→Tokyo (12hr) and Singapore→LHR (13hr) economy flights are featured. Business class lie-flat seats are also available. The open-jaw pattern means no backtracking-fly into Tokyo, out of Singapore.'
       },
       {
         question: 'Can I extend my stay in Tokyo or Singapore?',
@@ -835,19 +835,19 @@ export const bucketListExperiences = [
       },
       {
         question: 'What\'s included in the hotel stays?',
-        answer: '2 nights at Park Hyatt Tokyo (or similar 5-star) and 2 nights at Marina Bay Sands Singapore. Both include breakfast. Hotels are centrally located for easy exploration. Higher room categories also available—get a personalised quote.'
+        answer: '2 nights at Park Hyatt Tokyo (or similar 5-star) and 2 nights at Marina Bay Sands Singapore. Both include breakfast. Hotels are centrally located for easy exploration. Higher room categories also available-get a personalised quote.'
       },
       {
         question: 'Are transfers included?',
-        answer: 'Yes—all transfers between airports, hotels, and cruise port are featured. Private transfers also available. No need to navigate public transport with luggage.'
+        answer: 'Yes-all transfers between airports, hotels, and cruise port are featured. Private transfers also available. No need to navigate public transport with luggage.'
       },
       {
         question: 'What about meals?',
-        answer: 'Hotel breakfasts included. Cruise includes all meals (main dining, buffet, specialty restaurants on Celebrity/HAL). Onboard Asian cuisine demonstrations and cultural enrichment programs. Port stops offer incredible street food and local dining—your cruise line can arrange restaurant reservations.'
+        answer: 'Hotel breakfasts included. Cruise includes all meals (main dining, buffet, specialty restaurants on Celebrity/HAL). Onboard Asian cuisine demonstrations and cultural enrichment programs. Port stops offer incredible street food and local dining-your cruise line can arrange restaurant reservations.'
       },
       {
         question: 'Is this ATOL protected?',
-        answer: 'Yes—all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure.'
+        answer: 'Yes-all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure.'
       }
     ],
     meta: {
@@ -868,7 +868,7 @@ export const bucketListExperiences = [
     slug: 'rocky-mountaineer-alaska',
     title: 'Rocky Mountaineer & Alaska',
     tagline: 'Scenic Voyager rail through Banff\'s peaks + Inside Passage Bucket List cruise',
-    description: 'Land direct from London into Calgary\'s mountain air, 90 minutes to Fairmont Banff Springs for 2 indulgent nights amid turquoise lakes. Board Rocky Mountaineer Scenic Voyager for 2 days glass-dome luxury—gourmet meals, endless peaks, Kamloops overnight. Vancouver city vibes, then 7-night Inside Passage Bucket List Itinerary cruise with HAL, Princess or Celebrity. Grizzlies in Juneau, Glacier Bay calvings, Sitka totems. Final Vancouver night before home. ATOL protected. Get a personalised quote.',
+    description: 'Land direct from London into Calgary\'s mountain air, 90 minutes to Fairmont Banff Springs for 2 indulgent nights amid turquoise lakes. Board Rocky Mountaineer Scenic Voyager for 2 days glass-dome luxury-gourmet meals, endless peaks, Kamloops overnight. Vancouver city vibes, then 7-night Inside Passage Bucket List Itinerary cruise with HAL, Princess or Celebrity. Grizzlies in Juneau, Glacier Bay calvings, Sitka totems. Final Vancouver night before home. ATOL protected. Get a personalised quote.',
     heroImage: null,
     cardImage: null,
     duration: '16 nights from UK',
@@ -1015,7 +1015,7 @@ export const bucketListExperiences = [
     ],
     testimonials: [
       { 
-        quote: 'Open-jaw genius—more Banff time. Scenic Voyager magic! The train journey was breathtaking, and Alaska was the perfect complement.', 
+        quote: 'Open-jaw genius-more Banff time. Scenic Voyager magic! The train journey was breathtaking, and Alaska was the perfect complement.', 
         author: 'James', 
         location: 'Surrey' 
       },
@@ -1041,7 +1041,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'Can I extend my stay?',
-        answer: 'Yes—Banff and Vancouver extensions can be arranged. Customise your journey with additional nights - get a personalised quote.'
+        answer: 'Yes-Banff and Vancouver extensions can be arranged. Customise your journey with additional nights - get a personalised quote.'
       },
       {
         question: 'What fitness level is required?',
@@ -1085,7 +1085,7 @@ export const bucketListExperiences = [
     id: 'galapagos',
     slug: 'galapagos-expeditions',
     title: 'Galápagos Islands',
-    tagline: 'Darwin\'s living laboratory – Quito culture to Galápagos wildlife',
+    tagline: 'Darwin\'s living laboratory - Quito culture to Galápagos wildlife',
     description: 'Direct to Quito\'s Andean heights for 2 nights acclimatisation (Mitad del Mundo equator, UNESCO Old Town). Fly to Baltra, board your intimate expedition ship for 7 nights Western Galápagos immersion: snorkel with hammerheads at Fernandina, track tortoises on Isabela, witness booby mating dances on Española. Final night Puerto Ayora tortoise sanctuary. Open‑jaw perfection. ATOL protected. Get a personalised quote.',
     heroImage: null,
     cardImage: null,
@@ -1187,14 +1187,14 @@ export const bucketListExperiences = [
       { name: 'Fernandina Island', description: 'Youngest island, marine iguana paradise, hammerhead snorkel, flightless cormorants' }
     ],
     testimonials: [
-      { quote: 'Tortoises feet away—Quito perfect intro. The 2-night stay helped with altitude, and the wildlife encounters were beyond words.', author: 'Wildlife family', location: 'Manchester' },
+      { quote: 'Tortoises feet away-Quito perfect intro. The 2-night stay helped with altitude, and the wildlife encounters were beyond words.', author: 'Wildlife family', location: 'Manchester' },
       { quote: 'Hammerheads snorkel = bucket list forever. The small ship made every landing intimate and special.', author: 'Dive couple', location: 'London' },
       { quote: 'Our kids were amazed by the blue-footed boobies. The naturalist guides made it educational and unforgettable.', author: 'The Johnson Family', location: 'Brighton' }
     ],
     faq: [
       {
         question: 'Are UK flights included?',
-        answer: 'Yes—LHR→Quito (12hr via US connection) and return flights are featured. Business class also available. The open-jaw pattern means no backtracking—fly into Quito, out of Puerto Ayora.'
+        answer: 'Yes-LHR→Quito (12hr via US connection) and return flights are featured. Business class also available. The open-jaw pattern means no backtracking-fly into Quito, out of Puerto Ayora.'
       },
       {
         question: 'Do I need visas?',
@@ -1222,15 +1222,15 @@ export const bucketListExperiences = [
       },
       {
         question: 'What wildlife will I see?',
-        answer: 'You\'ll see giant tortoises, marine iguanas, sea lions, blue-footed boobies, waved albatross, penguins, hammerhead sharks, flightless cormorants, and many other endemic species unique to the Galápagos. Wildlife encounters are guaranteed—animals are unafraid of humans.'
+        answer: 'You\'ll see giant tortoises, marine iguanas, sea lions, blue-footed boobies, waved albatross, penguins, hammerhead sharks, flightless cormorants, and many other endemic species unique to the Galápagos. Wildlife encounters are guaranteed-animals are unafraid of humans.'
       },
       {
         question: 'What\'s included in the hotel stays?',
-        answer: '2 nights at JW Marriott Quito (luxury, altitude-friendly) and 1 night at Puerto Ayora hotel. Both include breakfast. Hotels are strategically located for exploration. Higher room categories also available—get a personalised quote.'
+        answer: '2 nights at JW Marriott Quito (luxury, altitude-friendly) and 1 night at Puerto Ayora hotel. Both include breakfast. Hotels are strategically located for exploration. Higher room categories also available-get a personalised quote.'
       },
       {
         question: 'Is this ATOL protected?',
-        answer: 'Yes—all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this once-in-a-lifetime wildlife journey.'
+        answer: 'Yes-all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this once-in-a-lifetime wildlife journey.'
       }
     ],
     meta: {
@@ -1360,13 +1360,13 @@ export const bucketListExperiences = [
     ],
     testimonials: [
       { quote: 'Tromsø start + Kirkenes ice hotel = lights perfection. The aurora danced every night!', author: 'Nordic family', location: 'Manchester' },
-      { quote: 'Open-jaw made every night count. The coastal voyage was magical—fjords and lights everywhere.', author: 'Solo aurora hunter', location: 'London' },
+      { quote: 'Open-jaw made every night count. The coastal voyage was magical-fjords and lights everywhere.', author: 'Solo aurora hunter', location: 'London' },
       { quote: 'Husky sledding in Kirkenes was incredible. The whole journey was winter wonderland perfection.', author: 'Linda & Mark', location: 'Bristol' }
     ],
     faq: [
       {
         question: 'Are UK flights included?',
-        answer: 'Yes—direct LHR→Tromsø (3hr) and return flights via Oslo are featured. Business class also available. The open-jaw pattern means no backtracking—fly into Tromsø, out of Kirkenes.'
+        answer: 'Yes-direct LHR→Tromsø (3hr) and return flights via Oslo are featured. Business class also available. The open-jaw pattern means no backtracking-fly into Tromsø, out of Kirkenes.'
       },
       {
         question: 'Can I extend my stay in Tromsø or Kirkenes?',
@@ -1378,7 +1378,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'Is there an aurora guarantee?',
-        answer: 'Yes—most operators offer aurora guarantee excursions with free retry if the lights are missed. Multiple viewing opportunities throughout the voyage increase your chances. Peak season (December-February) offers the highest probability of sightings.'
+        answer: 'Yes-most operators offer aurora guarantee excursions with free retry if the lights are missed. Multiple viewing opportunities throughout the voyage increase your chances. Peak season (December-February) offers the highest probability of sightings.'
       },
       {
         question: 'How cold will it be?',
@@ -1390,11 +1390,11 @@ export const bucketListExperiences = [
       },
       {
         question: 'What\'s included in the hotel stays?',
-        answer: '2 nights at Tromsø aurora base hotel and 2 nights at Kirkenes ice hotel (or warm alternative). Both include breakfast. Hotels are strategically located for aurora viewing and activities. Ice hotel experience is weather-dependent—warm alternatives available.'
+        answer: '2 nights at Tromsø aurora base hotel and 2 nights at Kirkenes ice hotel (or warm alternative). Both include breakfast. Hotels are strategically located for aurora viewing and activities. Ice hotel experience is weather-dependent-warm alternatives available.'
       },
       {
         question: 'Are transfers included?',
-        answer: 'Yes—all transfers between airports, hotels, and cruise port are featured. Private transfers also available. No need to navigate Arctic conditions with luggage.'
+        answer: 'Yes-all transfers between airports, hotels, and cruise port are featured. Private transfers also available. No need to navigate Arctic conditions with luggage.'
       },
       {
         question: 'What about meals?',
@@ -1402,7 +1402,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'Is this ATOL protected?',
-        answer: 'Yes—all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this magical Arctic journey.'
+        answer: 'Yes-all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this magical Arctic journey.'
       }
     ],
     meta: {
@@ -1418,7 +1418,7 @@ export const bucketListExperiences = [
     id: 'northern-lights-no-fly',
     slug: 'northern-lights-no-fly-dover',
     title: 'Northern Lights No-Fly from UK',
-    tagline: 'Aurora hunting from your doorstep – Dover departures, Tromsø overnights',
+    tagline: 'Aurora hunting from your doorstep - Dover departures, Tromsø overnights',
     description: 'No airports. No jetlag. Pure Arctic magic. Coach or train to Dover, board Holland America Nieuw Statendam, wake to Norway\'s fjords. Tromsø overnight = your aurora jackpot with 24-hour lights window. Orkney stones, Shetland wildlife, North Cape round out the cultural immersion. HAL\'s "History Channel Northern Lights" lectures included. Door-to-door perfection. ATOL protected. Get a personalised quote.',
     heroImage: null,
     cardImage: null,
@@ -1558,7 +1558,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'How do I get to Dover?',
-        answer: 'Easy access from London: train 1.5 hours from London St Pancras or Victoria. Coach services available nationwide. Door-to-door convenience—no airport stress. Private transfers also available.'
+        answer: 'Easy access from London: train 1.5 hours from London St Pancras or Victoria. Coach services available nationwide. Door-to-door convenience-no airport stress. Private transfers also available.'
       },
       {
         question: 'What about solo travellers?',
@@ -1566,7 +1566,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'How cold will it be?',
-        answer: 'Temperatures range from -5°C to -15°C. HAL provides warm gear for outdoor viewing. Indoor options abundant—BB King Club, Music Walk, specialty dining. Ship is fully heated with excellent viewing areas.'
+        answer: 'Temperatures range from -5°C to -15°C. HAL provides warm gear for outdoor viewing. Indoor options abundant-BB King Club, Music Walk, specialty dining. Ship is fully heated with excellent viewing areas.'
       },
       {
         question: 'What are the 2026 dates?',
@@ -1578,7 +1578,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'Why choose HAL Nieuw Statendam for Northern Lights?',
-        answer: 'Pinnacle Class features excellent viewing opportunities, Music Walk evenings (BB King Club, Rolling Stone Rock Room), dark hull optimized for aurora viewing, strategic Norwegian routing, and HAL\'s signature Tromsø overnight—24-hour lights window.'
+        answer: 'Pinnacle Class features excellent viewing opportunities, Music Walk evenings (BB King Club, Rolling Stone Rock Room), dark hull optimized for aurora viewing, strategic Norwegian routing, and HAL\'s signature Tromsø overnight-24-hour lights window.'
       },
       {
         question: 'Are excursions included?',
@@ -1586,7 +1586,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'Is this ATOL protected?',
-        answer: 'Yes—all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this magical no-fly Arctic journey.'
+        answer: 'Yes-all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this magical no-fly Arctic journey.'
       }
     ],
     meta: {
@@ -1733,14 +1733,14 @@ export const bucketListExperiences = [
       { name: 'Brazilian Coast', description: 'Ilhabela pristine island, Salvador colonial charm, tropical beaches, Atlantic beauty' }
     ],
     testimonials: [
-      { quote: 'Buenos Aires tango start was perfect. Rio overnight was incredible—Christ Redeemer at sunset!', author: 'Tango dancers', location: 'London' },
+      { quote: 'Buenos Aires tango start was perfect. Rio overnight was incredible-Christ Redeemer at sunset!', author: 'Tango dancers', location: 'London' },
       { quote: 'The Brazilian coast was stunning. Fortaleza beaches and dune buggies were the perfect finale.', author: 'Carnival seekers', location: 'Manchester' },
       { quote: 'South America exceeded all expectations. The diversity of landscapes and cultures was incredible.', author: 'David M.', location: 'Manchester' }
     ],
     faq: [
       {
         question: 'Are UK flights included?',
-        answer: 'Yes—direct LHR→Buenos Aires (13hr) and return flights via Lisbon/Miami are featured. Business class also available. The open-jaw pattern means no backtracking—fly into Buenos Aires, out of Fortaleza.'
+        answer: 'Yes-direct LHR→Buenos Aires (13hr) and return flights via Lisbon/Miami are featured. Business class also available. The open-jaw pattern means no backtracking-fly into Buenos Aires, out of Fortaleza.'
       },
       {
         question: 'Can I extend my stay in Buenos Aires?',
@@ -1760,23 +1760,23 @@ export const bucketListExperiences = [
       },
       {
         question: 'What about Iguazu Falls?',
-        answer: 'Iguazu Falls can be added as a 2-day extension from Buenos Aires. Includes flights, hotel, and guided tours of both Argentine and Brazilian sides. One of the world\'s natural wonders—highly recommended!'
+        answer: 'Iguazu Falls can be added as a 2-day extension from Buenos Aires. Includes flights, hotel, and guided tours of both Argentine and Brazilian sides. One of the world\'s natural wonders-highly recommended!'
       },
       {
         question: 'What\'s included in the hotel stays?',
-        answer: '2 nights at luxury Buenos Aires hotel (Recoleta or Palermo area) and 2 nights at Fortaleza beach hotel. Both include breakfast. Hotels are strategically located for exploration. Higher room categories also available—get a personalised quote.'
+        answer: '2 nights at luxury Buenos Aires hotel (Recoleta or Palermo area) and 2 nights at Fortaleza beach hotel. Both include breakfast. Hotels are strategically located for exploration. Higher room categories also available-get a personalised quote.'
       },
       {
         question: 'Are transfers included?',
-        answer: 'Yes—all transfers between airports, hotels, and cruise port are featured. Private transfers also available. No need to navigate South American cities with luggage.'
+        answer: 'Yes-all transfers between airports, hotels, and cruise port are featured. Private transfers also available. No need to navigate South American cities with luggage.'
       },
       {
         question: 'What about meals?',
-        answer: 'Hotel breakfasts included. Cruise includes all meals (main dining, buffet, specialty restaurants on luxury lines). Onboard South American cuisine and local specialties. Port stops offer incredible dining—Brazilian churrascarias, Argentine steakhouses, local markets.'
+        answer: 'Hotel breakfasts included. Cruise includes all meals (main dining, buffet, specialty restaurants on luxury lines). Onboard South American cuisine and local specialties. Port stops offer incredible dining-Brazilian churrascarias, Argentine steakhouses, local markets.'
       },
       {
         question: 'Is this ATOL protected?',
-        answer: 'Yes—all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this vibrant South American journey.'
+        answer: 'Yes-all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this vibrant South American journey.'
       }
     ],
     meta: {
@@ -1801,8 +1801,8 @@ export const bucketListExperiences = [
     description: 'Fly direct from the UK into the warmth of the Arabian Gulf, swapping grey winter skies for skyscrapers, souks and desert sunsets. Your journey typically begins with a stay in Dubai or Abu Dhabi, giving time to explore futuristic skylines, the Sheikh Zayed Grand Mosque or the Museum of Islamic Art before you even sail. From there, the ship becomes your moving resort as you hop between Gulf capitals and Omani fjords: Muscat\'s Mutrah Corniche, Khasab\'s dolphin-filled khors, Sir Bani Yas wildlife island, Doha\'s Corniche and Souq Waqif. Longer itineraries branch into the Red Sea, opening up Aqaba for Petra, Safaga or Sokhna for Luxor and Cairo, and occasionally ports in Saudi Arabia such as Jeddah or Al Wajh for AlUla. Each day blends modern luxury with deep history and desert landscapes.',
     heroImage: null,
     cardImage: null,
-    duration: '10–14 nights from the UK',
-    season: 'November–April (cooler Gulf & Red Sea months)',
+    duration: '10-14 nights from the UK',
+    season: 'November-April (cooler Gulf & Red Sea months)',
     bestFor: ['Winter sun seekers', 'Culture lovers', 'First-time Middle East cruisers', 'UK travellers seeking winter warmth'],
     highlights: [
       'Dubai and Abu Dhabi with time to explore futuristic skylines, the Sheikh Zayed Grand Mosque and Museum of Islamic Art',
@@ -1810,12 +1810,12 @@ export const bucketListExperiences = [
       'Sir Bani Yas wildlife island and Doha\'s Corniche and Souq Waqif',
       'Longer itineraries branch into the Red Sea with Aqaba for Petra and Safaga or Sokhna for Luxor and Cairo',
       'Desert safaris and optional Petra / pyramids add-ons',
-      'Choose Gulf-only, Gulf+Red Sea or extended Holy Land option – contact us to discuss which itinerary works best for you'
+      'Choose Gulf-only, Gulf+Red Sea or extended Holy Land option - contact us to discuss which itinerary works best for you'
     ],
     includes: [
       'Return economy flights from the UK to the main embarkation and disembarkation airports (e.g. Dubai/Abu Dhabi/Amman), with regional departures and premium flight options also available',
-      'Pre-cruise hotel stay in Dubai or Abu Dhabi (usually 1–2 nights) and, on longer itineraries, 1 night post-cruise in Aqaba, Cairo or similar gateway city',
-      '7–10 nights on board a mainstream or premium ship with a range of accommodation options available',
+      'Pre-cruise hotel stay in Dubai or Abu Dhabi (usually 1-2 nights) and, on longer itineraries, 1 night post-cruise in Aqaba, Cairo or similar gateway city',
+      '7-10 nights on board a mainstream or premium ship with a range of accommodation options available',
       'Full-board dining on the ship and most onboard entertainment',
       'Port taxes and standard onboard gratuities',
       'Transfers between airport, hotel and port on embarkation and disembarkation days'
@@ -1907,7 +1907,7 @@ export const bucketListExperiences = [
       { name: 'Sir Bani Yas Island, UAE', description: 'Beach and wildlife reserve, desert island experience in the Arabian Gulf' }
     ],
     testimonials: [
-      { quote: 'We loved having Dubai and Abu Dhabi at the start, then finishing in Aqaba with Petra – it felt like three trips in one, but we only unpacked once.' },
+      { quote: 'We loved having Dubai and Abu Dhabi at the start, then finishing in Aqaba with Petra - it felt like three trips in one, but we only unpacked once.' },
       { quote: 'The mixture of desert safaris, mosques, souks and lazy sea days was spot on for our winter break. Flying into one city and home from another made the route feel logical rather than looping back.' }
     ],
     faq: [
@@ -1941,7 +1941,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'When should I book?',
-        answer: 'Winter-sun departures and itineraries including Petra or Luxor are particularly popular with UK guests and can sell out up to 12–18 months in advance. Early booking ensures the widest choice of sailing dates, accommodation options, and promotional offers. Contact us to check current availability for your preferred dates.'
+        answer: 'Winter-sun departures and itineraries including Petra or Luxor are particularly popular with UK guests and can sell out up to 12-18 months in advance. Early booking ensures the widest choice of sailing dates, accommodation options, and promotional offers. Contact us to check current availability for your preferred dates.'
       },
       {
         question: 'What accommodation options are available?',
@@ -1954,7 +1954,7 @@ export const bucketListExperiences = [
     ],
     meta: {
       title: 'Middle East Cruises | Dubai & Arabian Peninsula from UK | Limitless Cruises',
-      description: 'Middle East cruise from UK – Dubai skylines, desert dunes and ancient wonders. 10-14 nights including flights. Dubai, Abu Dhabi, Muscat, Doha, Petra. Expert booking from Limitless Cruises.',
+      description: 'Middle East cruise from UK - Dubai skylines, desert dunes and ancient wonders. 10-14 nights including flights. Dubai, Abu Dhabi, Muscat, Doha, Petra. Expert booking from Limitless Cruises.',
       keywords: ['middle east cruise from uk', 'dubai cruise from uk', 'abu dhabi cruise', 'arabian peninsula cruise', 'middle east winter sun', 'dubai abu dhabi cruise', 'petra cruise', 'red sea cruise']
     },
     images: [],
@@ -2096,14 +2096,14 @@ export const bucketListExperiences = [
       { name: 'Port Vila', description: 'Vanuatu volcanoes, tropical landscapes, Melanesian culture, island paradise' }
     ],
     testimonials: [
-      { quote: 'Auckland start was perfect—Māori culture and Sky Tower. The Fiji islands were pure paradise—overwater dreams!', author: 'Island hoppers', location: 'London' },
+      { quote: 'Auckland start was perfect-Māori culture and Sky Tower. The Fiji islands were pure paradise-overwater dreams!', author: 'Island hoppers', location: 'London' },
       { quote: 'The perfect combination of New Zealand adventure and Pacific relaxation. Every island was more beautiful than the last.', author: 'Helen T.', location: 'Bristol' },
       { quote: 'Snorkelling in Fiji\'s coral reefs was incredible. The whole journey was tropical perfection.', author: 'Snorkel families', location: 'Manchester' }
     ],
     faq: [
       {
         question: 'Are UK flights included?',
-        answer: 'Yes—LHR→Auckland (24hr via Asia/Sydney) and return flights are featured. Business class also available. The open-jaw pattern means no backtracking—fly into Auckland, out of final port.'
+        answer: 'Yes-LHR→Auckland (24hr via Asia/Sydney) and return flights are featured. Business class also available. The open-jaw pattern means no backtracking-fly into Auckland, out of final port.'
       },
       {
         question: 'Can I extend my stay in Auckland?',
@@ -2127,19 +2127,19 @@ export const bucketListExperiences = [
       },
       {
         question: 'What about the final port?',
-        answer: 'Final port varies by itinerary—typically Port Moresby (Papua New Guinea) or Cairns (Great Barrier Reef gateway). Both offer 2-night stays with beach relaxation and tropical exploration. Cairns option includes Barrier Reef tie-in opportunities.'
+        answer: 'Final port varies by itinerary-typically Port Moresby (Papua New Guinea) or Cairns (Great Barrier Reef gateway). Both offer 2-night stays with beach relaxation and tropical exploration. Cairns option includes Barrier Reef tie-in opportunities.'
       },
       {
         question: 'What\'s included in the hotel stays?',
-        answer: '2 nights at Auckland hotel and 2 nights at final port hotel. Both include breakfast. Hotels are strategically located for exploration. Higher room categories also available—get a personalised quote.'
+        answer: '2 nights at Auckland hotel and 2 nights at final port hotel. Both include breakfast. Hotels are strategically located for exploration. Higher room categories also available-get a personalised quote.'
       },
       {
         question: 'Are transfers included?',
-        answer: 'Yes—all transfers between airports, hotels, and cruise port are featured. Private transfers also available. No need to navigate Pacific destinations with luggage.'
+        answer: 'Yes-all transfers between airports, hotels, and cruise port are featured. Private transfers also available. No need to navigate Pacific destinations with luggage.'
       },
       {
         question: 'Is this ATOL protected?',
-        answer: 'Yes—all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this tropical paradise journey.'
+        answer: 'Yes-all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this tropical paradise journey.'
       }
     ],
     meta: {
@@ -2160,7 +2160,7 @@ export const bucketListExperiences = [
     slug: 'transatlantic-crossings',
     title: 'Transatlantic Crossings',
     tagline: 'Queen Mary 2 or MSC luxury across the pond',
-    description: 'Board Southampton for 7‑day Cunard QM2 or MSC luxury: gala nights, lectures, sea days. Arrive New York harbour like 1920s icons. 2 nights Manhattan magic—Statue of Liberty, Top of Rock, skyline views. No-fly perfection. ATOL protected. Get a personalised quote.',
+    description: 'Board Southampton for 7‑day Cunard QM2 or MSC luxury: gala nights, lectures, sea days. Arrive New York harbour like 1920s icons. 2 nights Manhattan magic-Statue of Liberty, Top of Rock, skyline views. No-fly perfection. ATOL protected. Get a personalised quote.',
     heroImage: null,
     cardImage: null,
     duration: '10 nights from UK',
@@ -2254,14 +2254,14 @@ export const bucketListExperiences = [
       { name: 'Atlantic Ocean', description: '7-day ocean crossing, sea days, gala nights, world-class entertainment, relaxation' }
     ],
     testimonials: [
-      { quote: 'Arriving in New York by sea, passing the Statue of Liberty, was absolutely magical. The crossing was so relaxing—no jetlag!', author: 'William & Mary', location: 'Kent' },
-      { quote: 'Queen Mary 2 is simply the most elegant way to cross the Atlantic. The ballroom, the Planetarium, the service—perfection.', author: 'Elizabeth T.', location: 'Surrey' },
+      { quote: 'Arriving in New York by sea, passing the Statue of Liberty, was absolutely magical. The crossing was so relaxing-no jetlag!', author: 'William & Mary', location: 'Kent' },
+      { quote: 'Queen Mary 2 is simply the most elegant way to cross the Atlantic. The ballroom, the Planetarium, the service-perfection.', author: 'Elizabeth T.', location: 'Surrey' },
       { quote: 'No-fly made it perfect. 7 days at sea, then 2 nights in NYC. The perfect combination of relaxation and city excitement.', author: 'Classicists', location: 'London' }
     ],
     faq: [
       {
         question: 'Are flights included?',
-        answer: 'Yes—return flight NYC→LHR (7hr direct) is featured. Business class also available. The no-fly outbound (Southampton embark) means no airports on departure—pure relaxation from day one.'
+        answer: 'Yes-return flight NYC→LHR (7hr direct) is featured. Business class also available. The no-fly outbound (Southampton embark) means no airports on departure-pure relaxation from day one.'
       },
       {
         question: 'Can I extend my stay in New York?',
@@ -2281,7 +2281,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'What is there to do on sea days?',
-        answer: 'Enrichment lectures, West End style shows, QM2 Planetarium (Cunard), fine dining, spa treatments, elegant afternoon tea, gala nights, and simply enjoying the ocean views. There\'s never a dull moment—or perfect for complete relaxation.'
+        answer: 'Enrichment lectures, West End style shows, QM2 Planetarium (Cunard), fine dining, spa treatments, elegant afternoon tea, gala nights, and simply enjoying the ocean views. There\'s never a dull moment-or perfect for complete relaxation.'
       },
       {
         question: 'Which cruise lines operate this route?',
@@ -2289,15 +2289,15 @@ export const bucketListExperiences = [
       },
       {
         question: 'What\'s included in the hotel stay?',
-        answer: '2 nights at Manhattan hotel (central location). Includes breakfast. Hotel is strategically located for easy exploration of New York attractions. Higher room categories also available—get a personalised quote.'
+        answer: '2 nights at Manhattan hotel (central location). Includes breakfast. Hotel is strategically located for easy exploration of New York attractions. Higher room categories also available-get a personalised quote.'
       },
       {
         question: 'Are transfers included?',
-        answer: 'Yes—all transfers between Southampton port, New York hotel, and JFK airport are featured. Private transfers also available. No need to navigate with luggage.'
+        answer: 'Yes-all transfers between Southampton port, New York hotel, and JFK airport are featured. Private transfers also available. No need to navigate with luggage.'
       },
       {
         question: 'Is this ATOL protected?',
-        answer: 'Yes—all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this classic ocean crossing journey.'
+        answer: 'Yes-all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this classic ocean crossing journey.'
       }
     ],
     meta: {
@@ -2313,8 +2313,8 @@ export const bucketListExperiences = [
     id: 'iceland-circumnavigation',
     slug: 'iceland-circumnavigation',
     title: 'Iceland Circumnavigation',
-    tagline: 'Ring of Fire complete – Reykjavik to East Fjords',
-    description: 'Direct to Reykjavik for geothermal Blue Lagoon and Harpa evenings. Embark 8‑night circumnavigation: Heimaey\'s Eldfell volcano landing, Ísafjörður\'s hot springs, Akureyri whale watch, Seyðisfjörður\'s rainbow street. East Fjords finale—waterfalls, hiking. Open‑jaw perfection. ATOL protected. Get a personalised quote.',
+    tagline: 'Ring of Fire complete - Reykjavik to East Fjords',
+    description: 'Direct to Reykjavik for geothermal Blue Lagoon and Harpa evenings. Embark 8‑night circumnavigation: Heimaey\'s Eldfell volcano landing, Ísafjörður\'s hot springs, Akureyri whale watch, Seyðisfjörður\'s rainbow street. East Fjords finale-waterfalls, hiking. Open‑jaw perfection. ATOL protected. Get a personalised quote.',
     heroImage: null,
     cardImage: null,
     duration: '12 nights from UK',
@@ -2426,14 +2426,14 @@ export const bucketListExperiences = [
       { name: 'Seyðisfjörður', description: 'East Fjords, rainbow street, waterfalls, hiking trails, dramatic landscapes' }
     ],
     testimonials: [
-      { quote: 'Heimaey volcano landing—unreal. The tender approach to Eldfell was unforgettable. Iceland by sea is the only way.', author: 'Iceland first-timers', location: 'London' },
+      { quote: 'Heimaey volcano landing-unreal. The tender approach to Eldfell was unforgettable. Iceland by sea is the only way.', author: 'Iceland first-timers', location: 'London' },
       { quote: 'The puffin colonies and midnight sun sailing were magical. Every fjord was more dramatic than the last.', author: 'Jonathan K.', location: 'Edinburgh' },
-      { quote: 'East Fjords finale was perfect—waterfalls, hiking, Icelandic horses. The complete ring was incredible.', author: 'Rachel & Tom', location: 'Manchester' }
+      { quote: 'East Fjords finale was perfect-waterfalls, hiking, Icelandic horses. The complete ring was incredible.', author: 'Rachel & Tom', location: 'Manchester' }
     ],
     faq: [
       {
         question: 'Are UK flights included?',
-        answer: 'Yes—direct LHR→Reykjavik (3hr) and return flights are featured. Business class also available. The open-jaw pattern means no backtracking—fly into Reykjavik, out of East Fjords.'
+        answer: 'Yes-direct LHR→Reykjavik (3hr) and return flights are featured. Business class also available. The open-jaw pattern means no backtracking-fly into Reykjavik, out of East Fjords.'
       },
       {
         question: 'Can I extend my stay in Reykjavik?',
@@ -2457,11 +2457,11 @@ export const bucketListExperiences = [
       },
       {
         question: 'What\'s included in the hotel stays?',
-        answer: '2 nights at Reykjavik hotel and 2 nights at East Fjords hotel. Both include breakfast. Hotels are strategically located for exploration. Higher room categories also available—get a personalised quote.'
+        answer: '2 nights at Reykjavik hotel and 2 nights at East Fjords hotel. Both include breakfast. Hotels are strategically located for exploration. Higher room categories also available-get a personalised quote.'
       },
       {
         question: 'Are transfers included?',
-        answer: 'Yes—all transfers between airports, hotels, and cruise port are featured. Private transfers also available. No need to navigate Icelandic conditions with luggage.'
+        answer: 'Yes-all transfers between airports, hotels, and cruise port are featured. Private transfers also available. No need to navigate Icelandic conditions with luggage.'
       },
       {
         question: 'What about meals?',
@@ -2469,7 +2469,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'Is this ATOL protected?',
-        answer: 'Yes—all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this magical Icelandic journey.'
+        answer: 'Yes-all packages are fully ATOL protected. Your financial protection is guaranteed. Book with confidence knowing your investment is secure for this magical Icelandic journey.'
       }
     ],
     meta: {
@@ -2485,15 +2485,15 @@ export const bucketListExperiences = [
     id: 'european-rivers',
     slug: 'european-river-cruises',
     title: 'European River Cruises',
-    tagline: 'Sail Europe\'s great rivers – from Amsterdam canals to Budapest\'s skyline',
-    description: 'European river cruises are a gentle way to see multiple countries in one trip without airport hopping or long coach days. You typically fly from the UK to your embarkation city (for example Amsterdam for the Rhine, Budapest for the Danube or Porto for the Douro), enjoy 1–2 nights in a hand-picked hotel, then join your river ship right in the heart of the city. From there, the river becomes your highway: castles and vineyards slide past as you sit on deck with a glass of wine, you step off into medieval old towns or capital-city centres, and the ship moves while you dine or sleep. There are no open seas, no long tender rides and no days lost in transit – just a sequence of cities, villages and landscapes strung together like beads on a necklace.',
+    tagline: 'Sail Europe\'s great rivers - from Amsterdam canals to Budapest\'s skyline',
+    description: 'European river cruises are a gentle way to see multiple countries in one trip without airport hopping or long coach days. You typically fly from the UK to your embarkation city (for example Amsterdam for the Rhine, Budapest for the Danube or Porto for the Douro), enjoy 1-2 nights in a hand-picked hotel, then join your river ship right in the heart of the city. From there, the river becomes your highway: castles and vineyards slide past as you sit on deck with a glass of wine, you step off into medieval old towns or capital-city centres, and the ship moves while you dine or sleep. There are no open seas, no long tender rides and no days lost in transit - just a sequence of cities, villages and landscapes strung together like beads on a necklace.',
     heroImage: null,
     cardImage: null,
-    duration: '7–14 nights from the UK',
-    season: 'March–November (spring blossom, summer sun, autumn vines, Christmas markets)',
+    duration: '7-14 nights from the UK',
+    season: 'March-November (spring blossom, summer sun, autumn vines, Christmas markets)',
     bestFor: ['Culture lovers', 'First-time cruisers', 'Relaxing slow-travel', 'Couples and friends', 'Guests with limited mobility', 'Seasoned ocean cruisers'],
     highlights: [
-      'Small ships (often 120–190 guests) with panoramic lounges and outdoor decks',
+      'Small ships (often 120-190 guests) with panoramic lounges and outdoor decks',
       'Daily port visits - no sea days, almost always scenery',
       'Dock in the heart of cities - step off into medieval old towns',
       'Castles and vineyards slide past as you sit on deck',
@@ -2501,10 +2501,10 @@ export const bucketListExperiences = [
       'Choose a single iconic route or combine two rivers into a longer Grand River Journey'
     ],
     includes: [
-      'Return economy flights between the UK and the river cruise start/end airports (for example London–Budapest and Munich–London), with regional departures by request',
+      'Return economy flights between the UK and the river cruise start/end airports (for example London-Budapest and Munich-London), with regional departures by request',
       'Transfers between airport, hotel and ship at the beginning and end of the trip',
-      '1–2 nights in a centrally located hotel in the embarkation or disembarkation city (Budapest, Amsterdam, Porto etc.), including breakfast',
-      '7–10 nights on a European river cruise ship with a range of accommodation options available',
+      '1-2 nights in a centrally located hotel in the embarkation or disembarkation city (Budapest, Amsterdam, Porto etc.), including breakfast',
+      '7-10 nights on a European river cruise ship with a range of accommodation options available',
       'Full-board dining on the river cruise (breakfast, lunch and dinner) with tea/coffee and sometimes wine or beer with meals, depending on the line',
       'A programme of included walking tours or coach excursions in key ports, plus on-board talks to help you get more from each stop'
     ],
@@ -2561,7 +2561,7 @@ export const bucketListExperiences = [
       { 
         day: '8', 
         location: 'Passau → Munich → London Heathrow', 
-        description: 'Disembark Passau, transfer by coach to Munich airport (roughly 2–3 hours), then fly back to the UK',
+        description: 'Disembark Passau, transfer by coach to Munich airport (roughly 2-3 hours), then fly back to the UK',
         coordinates: { lat: 48.5667, lon: 13.4333 }
       }
     ],
@@ -2576,12 +2576,12 @@ export const bucketListExperiences = [
     ],
     testimonials: [
       { quote: 'We saw Budapest, Vienna and more without ever touching a suitcase after day one. Sitting on deck through the Wachau Valley with a glass of wine was the highlight of our year.' },
-      { quote: 'The ship felt like a floating boutique hotel – small, friendly, and always moored right by the old town so we could wander off after dinner.' }
+      { quote: 'The ship felt like a floating boutique hotel - small, friendly, and always moored right by the old town so we could wander off after dinner.' }
     ],
     faq: [
       {
         question: 'Do river cruises feel different from big ocean ships?',
-        answer: 'Yes. River ships are much smaller (often under 200 guests) and sail on calm inland waterways. There are no sea days in the traditional sense – almost every day includes time in port, and you\'re never far from land.'
+        answer: 'Yes. River ships are much smaller (often under 200 guests) and sail on calm inland waterways. There are no sea days in the traditional sense - almost every day includes time in port, and you\'re never far from land.'
       },
       {
         question: 'What is the typical dress code on a European river cruise?',
@@ -2601,7 +2601,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'When is the best time of year to cruise Europe\'s rivers?',
-        answer: 'Spring (April–May) brings blossom and cooler days, summer (June–August) is warm and lively, autumn (September–October) offers harvest colours in the vineyards, and late November–December is ideal for Christmas markets. Each has a distinct feel; your preferences can guide date recommendations.'
+        answer: 'Spring (April-May) brings blossom and cooler days, summer (June-August) is warm and lively, autumn (September-October) offers harvest colours in the vineyards, and late November-December is ideal for Christmas markets. Each has a distinct feel; your preferences can guide date recommendations.'
       },
       {
         question: 'Can water levels affect my cruise?',
@@ -2617,12 +2617,12 @@ export const bucketListExperiences = [
       },
       {
         question: 'How far in advance should I book?',
-        answer: 'Popular dates (spring blossom, wine-harvest weeks, Christmas markets) can sell out 9–18 months ahead, especially on smaller ships. Early booking gives you the best choice of route, accommodation options and promotional offers. Contact us to check current availability for your preferred dates.'
+        answer: 'Popular dates (spring blossom, wine-harvest weeks, Christmas markets) can sell out 9-18 months ahead, especially on smaller ships. Early booking gives you the best choice of route, accommodation options and promotional offers. Contact us to check current availability for your preferred dates.'
       }
     ],
     meta: {
       title: 'European River Cruises | Rhine, Danube, Douro from UK | Limitless Cruises',
-      description: 'European river cruise from UK – sail Europe\'s great rivers. 7-14 nights including flights. Danube, Rhine, Douro. Budapest, Vienna, Amsterdam. Expert booking from Limitless Cruises.',
+      description: 'European river cruise from UK - sail Europe\'s great rivers. 7-14 nights including flights. Danube, Rhine, Douro. Budapest, Vienna, Amsterdam. Expert booking from Limitless Cruises.',
       keywords: ['european river cruise from uk', 'danube cruise from uk', 'rhine cruise from uk', 'river cruise uk', 'budapest vienna cruise', 'douro river cruise', 'viking river cruise uk']
     },
     images: [],
@@ -2634,11 +2634,11 @@ export const bucketListExperiences = [
     slug: 'great-barrier-reef-cruises',
     title: 'Great Barrier Reef & Australia',
     tagline: 'Sydney icons, reef snorkelling and Aussie sunshine',
-    description: 'Most UK guests fly overnight to Sydney or Brisbane, with at least one connection in Asia or the Middle East. Building in a 2–3 night stay at the start helps with jetlag and gives time to explore Australia\'s flagship city: Sydney Harbour, the Opera House, Bondi and Manly beaches, and perhaps a day trip to the Blue Mountains. From there, you either join a reef-focused cruise from Brisbane or Sydney or take a short domestic flight up to a Queensland gateway such as Cairns or Airlie Beach, using a ship as your floating base for the Great Barrier Reef and Whitsunday Islands. Days are spent snorkelling over coral gardens, visiting white-sand beaches like Whitehaven and calling at relaxed coastal towns. On longer itineraries, you can also visit Melbourne, Adelaide, Tasmania or head further north towards tropical rainforest regions.',
+    description: 'Most UK guests fly overnight to Sydney or Brisbane, with at least one connection in Asia or the Middle East. Building in a 2-3 night stay at the start helps with jetlag and gives time to explore Australia\'s flagship city: Sydney Harbour, the Opera House, Bondi and Manly beaches, and perhaps a day trip to the Blue Mountains. From there, you either join a reef-focused cruise from Brisbane or Sydney or take a short domestic flight up to a Queensland gateway such as Cairns or Airlie Beach, using a ship as your floating base for the Great Barrier Reef and Whitsunday Islands. Days are spent snorkelling over coral gardens, visiting white-sand beaches like Whitehaven and calling at relaxed coastal towns. On longer itineraries, you can also visit Melbourne, Adelaide, Tasmania or head further north towards tropical rainforest regions.',
     heroImage: null,
     cardImage: null,
-    duration: '14–18 nights from the UK',
-    season: 'Approx. April–October for drier, cooler reef conditions (avoid peak tropical cyclone/humidity in mid-summer)',
+    duration: '14-18 nights from the UK',
+    season: 'Approx. April-October for drier, cooler reef conditions (avoid peak tropical cyclone/humidity in mid-summer)',
     bestFor: ['Long-haul first-timers', 'Reef lovers', 'Winter-sun seekers', 'First-time visitors to Australia', 'UK travellers seeking a winter-sun epic', 'Repeat cruisers'],
     highlights: [
       'Sydney Opera House and Harbour Bridge with 2-3 night city stay to explore harbour, Bondi and Manly beaches',
@@ -2651,8 +2651,8 @@ export const bucketListExperiences = [
     includes: [
       'Return economy flights between the UK and Australia (for example UK → Sydney, Brisbane → UK), including checked baggage',
       'All internal transfers on arrival and departure days (airport ↔ hotel ↔ port)',
-      '3–4 nights in 4- or 5-star city hotels in Sydney and/or Brisbane, including breakfast',
-      '7–10 nights on a mainstream or premium cruise line with a range of accommodation options available',
+      '3-4 nights in 4- or 5-star city hotels in Sydney and/or Brisbane, including breakfast',
+      '7-10 nights on a mainstream or premium cruise line with a range of accommodation options available',
       'Full-board dining on the cruise plus most onboard entertainment',
       'Port taxes and standard onboard gratuities where applicable'
     ],
@@ -2761,17 +2761,17 @@ export const bucketListExperiences = [
       { name: 'Hunter Valley', description: 'Optional winery regions for food and wine lovers' }
     ],
     testimonials: [
-      { quote: 'We combined three nights in Sydney with a reef cruise from Brisbane – the Harbour sail-away and snorkelling over the coral were stand-out moments.' },
+      { quote: 'We combined three nights in Sydney with a reef cruise from Brisbane - the Harbour sail-away and snorkelling over the coral were stand-out moments.' },
       { quote: 'Booking it as a complete journey from UK flights to local tours made the distance feel manageable. The jetlag was gone by the time we reached the Whitsundays.' }
     ],
     faq: [
       {
         question: 'How long are the flights from the UK and what routes do people usually take?',
-        answer: 'Flights from London to Sydney or Brisbane typically involve one stop and total around 22–26 hours including transit time. Common routes connect via hubs such as Dubai, Doha, Singapore or Hong Kong. Regional UK departures are often available with an additional short hop into the main long-haul gateway.'
+        answer: 'Flights from London to Sydney or Brisbane typically involve one stop and total around 22-26 hours including transit time. Common routes connect via hubs such as Dubai, Doha, Singapore or Hong Kong. Regional UK departures are often available with an additional short hop into the main long-haul gateway.'
       },
       {
         question: 'Is this trip too long or intense for a first-time long-haul traveller?',
-        answer: 'It\'s a big journey, but splitting it into stages with a 2–3 night stay on arrival and a comfortable cruise section makes it more manageable. Many first-time long-haul guests find that once they adjust to local time in Sydney or Brisbane, the rest of the trip feels surprisingly relaxed.'
+        answer: 'It\'s a big journey, but splitting it into stages with a 2-3 night stay on arrival and a comfortable cruise section makes it more manageable. Many first-time long-haul guests find that once they adjust to local time in Sydney or Brisbane, the rest of the trip feels surprisingly relaxed.'
       },
       {
         question: 'What level of fitness do I need for reef excursions?',
@@ -2783,7 +2783,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'What\'s the best time of year to go?',
-        answer: 'Conditions vary by region, but many UK travellers target the Australian autumn, winter and early spring months (roughly April–October) to avoid extreme heat and humidity in Queensland, while still enjoying warm air and water temperatures.'
+        answer: 'Conditions vary by region, but many UK travellers target the Australian autumn, winter and early spring months (roughly April-October) to avoid extreme heat and humidity in Queensland, while still enjoying warm air and water temperatures.'
       },
       {
         question: 'Are visas required for UK citizens?',
@@ -2803,12 +2803,12 @@ export const bucketListExperiences = [
       },
       {
         question: 'How far in advance should I book an Australia & Reef trip?',
-        answer: 'Because of limited capacity on long-haul flights and specific reef cruises or sailings, it\'s sensible to plan 9–18 months in advance, especially for peak UK holiday periods. Contact us to check current availability for your preferred dates and accommodation preferences.'
+        answer: 'Because of limited capacity on long-haul flights and specific reef cruises or sailings, it\'s sensible to plan 9-18 months in advance, especially for peak UK holiday periods. Contact us to check current availability for your preferred dates and accommodation preferences.'
       }
     ],
     meta: {
       title: 'Great Barrier Reef & Australia Cruise from UK | Sydney & Reef | Limitless Cruises',
-      description: 'Great Barrier Reef cruise from UK – Sydney icons, reef snorkelling and Aussie sunshine. 14-18 nights including flights. Sydney, Brisbane, Whitsundays, Cairns. Expert booking from Limitless Cruises.',
+      description: 'Great Barrier Reef cruise from UK - Sydney icons, reef snorkelling and Aussie sunshine. 14-18 nights including flights. Sydney, Brisbane, Whitsundays, Cairns. Expert booking from Limitless Cruises.',
       keywords: ['great barrier reef cruise from uk', 'australia cruise from uk', 'sydney reef cruise', 'great barrier reef snorkelling', 'australia bucket list', 'whitsundays cruise from uk', 'cairns cruise from uk']
     },
     images: [],
@@ -2819,26 +2819,26 @@ export const bucketListExperiences = [
     id: 'grand-voyages',
     slug: 'grand-voyages',
     title: 'Grand Voyages',
-    tagline: '30–60+ night Grand Voyages linking continents',
-    description: 'A Grand Voyage is essentially a long, one-way cruise segment that feels like a self-contained chapter of a world cruise. Instead of a 7–14 night loop, you might sail 35 nights from Barcelona to Cape Town or 45 nights from Rome to Singapore, with flights at each end. These journeys usually follow classic sea routes: across the Mediterranean and through the Suez Canal into the Red Sea and Indian Ocean, across the Atlantic to South America and the Caribbean, or along the coasts of Africa and Asia. You unpack once, settle into your ship routine and let the captain move you between regions while you pick off bucket list ports along the way.',
+    tagline: '30-60+ night Grand Voyages linking continents',
+    description: 'A Grand Voyage is essentially a long, one-way cruise segment that feels like a self-contained chapter of a world cruise. Instead of a 7-14 night loop, you might sail 35 nights from Barcelona to Cape Town or 45 nights from Rome to Singapore, with flights at each end. These journeys usually follow classic sea routes: across the Mediterranean and through the Suez Canal into the Red Sea and Indian Ocean, across the Atlantic to South America and the Caribbean, or along the coasts of Africa and Asia. You unpack once, settle into your ship routine and let the captain move you between regions while you pick off bucket list ports along the way.',
     heroImage: null,
     cardImage: null,
-    duration: 'Typically 30–60+ nights',
+    duration: 'Typically 30-60+ nights',
     season: 'Mainly spring and autumn (when ships reposition between regions)',
     bestFor: ['Travellers with time and flexibility', 'Retirees and semi-retired guests', 'Experienced cruisers', 'Remote or flexible workers'],
     highlights: [
-      'Super-segments that sit between standard itineraries and full world cruises – ideal if you want the feel of a world cruise without committing four months',
+      'Super-segments that sit between standard itineraries and full world cruises - ideal if you want the feel of a world cruise without committing four months',
       'Popular patterns include Mediterranean → Asia via Suez, Europe → South America & Amazon, and Asia → Europe via the Middle East',
       'You unpack once, settle into your ship routine and let the captain move you between regions',
-      'More sea days than typical cruises – time to truly switch off, enjoy the ship and feel the distance you\'re covering',
+      'More sea days than typical cruises - time to truly switch off, enjoy the ship and feel the distance you\'re covering',
       'Strong onboard community with enrichment lectures, workshops and destination talks',
       'Outstanding value per night when compared to multiple shorter cruises'
     ],
     includes: [
       'Return economy flights from the UK to the embarkation and from the final port back to the UK (e.g. UK → Barcelona, Singapore → UK)',
       'Transfers between airports, hotels and the port at the start and end of the voyage',
-      '1–3 nights hotel stays in the embarkation and/or disembarkation cities',
-      '30–60+ nights on a mainstream, premium or luxury cruise ship with a range of accommodation options available',
+      '1-3 nights hotel stays in the embarkation and/or disembarkation cities',
+      '30-60+ nights on a mainstream, premium or luxury cruise ship with a range of accommodation options available',
       'Full-board dining on the ship, with most entertainment and enrichment activities',
       'Port taxes and service charges where applicable'
     ],
@@ -2853,7 +2853,7 @@ export const bucketListExperiences = [
       { 
         day: '1', 
         location: 'Barcelona, Spain', 
-        description: 'Arrive Barcelona, transfer to hotel. Stay 1–2 nights to explore Las Ramblas, the Gothic Quarter and Sagrada Família',
+        description: 'Arrive Barcelona, transfer to hotel. Stay 1-2 nights to explore Las Ramblas, the Gothic Quarter and Sagrada Família',
         coordinates: { lat: 41.3851, lon: 2.1734 }
       },
       { 
@@ -3026,17 +3026,17 @@ export const bucketListExperiences = [
       { name: 'Asia to Europe (reverse Suez)', description: 'Fly from the UK to an Asian hub such as Singapore or Dubai, cruise via India, the Arabian Peninsula and Suez back into the Mediterranean and end in a European city like Rome or Barcelona' },
       { name: 'Suez Canal', description: 'Slow transit through the Suez Canal, engineering marvel, connecting Mediterranean to Red Sea, historic waterway' },
       { name: 'Arabian Peninsula', description: 'Cruise the Red Sea and Arabian Gulf; ports might include cities such as Jeddah, Muscat, Doha or Dubai/Abu Dhabi, combining modern skylines with desert landscapes' },
-      { name: 'Indian Ocean', description: 'Calls at ports along the Arabian Sea and Indian Ocean – potential stops could include Mumbai or Goa, Sri Lanka, or island calls in the Maldives or Seychelles on some routes' },
+      { name: 'Indian Ocean', description: 'Calls at ports along the Arabian Sea and Indian Ocean - potential stops could include Mumbai or Goa, Sri Lanka, or island calls in the Maldives or Seychelles on some routes' },
       { name: 'South & Southeast Asia', description: 'A mix of sea days and port calls in India and Southeast Asia: for example, Penang, Kuala Lumpur (Port Klang), Phuket or Ho Chi Minh City' }
     ],
     testimonials: [
       { quote: 'We weren\'t ready for a full four-month world cruise, but a 38-night Barcelona-to-Singapore segment gave us a real sense of crossing continents.' },
-      { quote: 'Having the flights, hotels and cruise all lined up as one journey made a complicated route feel simple – we just unpacked once and let the itinerary unfold.' }
+      { quote: 'Having the flights, hotels and cruise all lined up as one journey made a complicated route feel simple - we just unpacked once and let the itinerary unfold.' }
     ],
     faq: [
       {
         question: 'How is a Grand Voyage different from a World Cruise?',
-        answer: 'A World Cruise typically lasts three to four months and circles much of the globe. A Grand Voyage is shorter – often 30–60+ nights – and usually covers one broad arc (for example, Europe to Asia or South America to Europe). It\'s a "chapter" rather than the whole book.'
+        answer: 'A World Cruise typically lasts three to four months and circles much of the globe. A Grand Voyage is shorter - often 30-60+ nights - and usually covers one broad arc (for example, Europe to Asia or South America to Europe). It\'s a "chapter" rather than the whole book.'
       },
       {
         question: 'Are Grand Voyages only for luxury lines?',
@@ -3044,7 +3044,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'Will there be lots of sea days?',
-        answer: 'Yes, more than on a typical 7–14 night holiday cruise. That\'s part of the appeal: you get time to truly switch off, enjoy the ship and feel the distance you\'re covering. Long strings of sea days are usually broken up by clusters of ports.'
+        answer: 'Yes, more than on a typical 7-14 night holiday cruise. That\'s part of the appeal: you get time to truly switch off, enjoy the ship and feel the distance you\'re covering. Long strings of sea days are usually broken up by clusters of ports.'
       },
       {
         question: 'Do I need a lot of visas and paperwork?',
@@ -3060,7 +3060,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'Can I join or leave a Grand Voyage part-way through?',
-        answer: 'Some lines allow "segment within a segment" bookings (for example, only the Mediterranean–Red Sea portion of a longer cruise). Others restrict embarkation/disembarkation to specific ports. The easiest approach is to start with your ideal duration and let a specialist match that to available segments.'
+        answer: 'Some lines allow "segment within a segment" bookings (for example, only the Mediterranean-Red Sea portion of a longer cruise). Others restrict embarkation/disembarkation to specific ports. The easiest approach is to start with your ideal duration and let a specialist match that to available segments.'
       },
       {
         question: 'What\'s the onboard atmosphere like on longer voyages?',
@@ -3072,12 +3072,12 @@ export const bucketListExperiences = [
       },
       {
         question: 'How far in advance should I book?',
-        answer: 'Because Grand Voyages have limited capacity and appeal strongly to early planners, it\'s common to open sales 18–24 months ahead. Booking early gives the best accommodation choice and access to launch promotions; last-minute availability on popular segments is much less predictable. Contact us to check current availability for your preferred dates.'
+        answer: 'Because Grand Voyages have limited capacity and appeal strongly to early planners, it\'s common to open sales 18-24 months ahead. Booking early gives the best accommodation choice and access to launch promotions; last-minute availability on popular segments is much less predictable. Contact us to check current availability for your preferred dates.'
       }
     ],
     meta: {
       title: 'Grand Voyages | 30-60+ Night Multi-Continent Cruises from UK | Limitless Cruises',
-      description: 'Grand Voyages from UK – 30-60+ night journeys linking continents. Mediterranean to Asia, Europe to South America. Barcelona to Singapore. Expert booking from Limitless Cruises.',
+      description: 'Grand Voyages from UK - 30-60+ night journeys linking continents. Mediterranean to Asia, Europe to South America. Barcelona to Singapore. Expert booking from Limitless Cruises.',
       keywords: ['grand voyage', 'extended cruise from uk', 'multi-continent cruise', '30 night cruise', '60 night cruise', 'barcelona to singapore cruise', 'grand voyage uk']
     },
     images: [],

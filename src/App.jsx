@@ -145,12 +145,13 @@ function AppLayout() {
   const { pathname } = useLocation();
   const isAdminRoute = pathname.startsWith('/admin');
   
-  // MAINTENANCE MODE: Redirect all routes except home, preview, and admin to /preview/
+  // MAINTENANCE MODE: Simple redirect - all routes except home, preview, and admin go to /preview/
   const isMaintenanceMode = import.meta.env.VITE_MAINTENANCE_MODE === 'true';
   const isPreviewRoute = pathname.startsWith('/preview');
   
+  // Redirect to preview version (preserves path for better UX)
   if (isMaintenanceMode && pathname !== '/' && !isPreviewRoute && !isAdminRoute) {
-    return <Navigate to="/preview/" replace />;
+    return <Navigate to={`/preview${pathname}`} replace />;
   }
   
   // Admin routes have their own layout
@@ -201,16 +202,16 @@ function AppLayout() {
   
   return (
     <div className="app">
-      {/* Skip to main content - Accessibility */}
-      <a href="#main-content" className="skip-link">
-        Skip to main content
-      </a>
-      {!isMaintenanceHome && <Header />}
-      {/* Using div instead of main to avoid nested <main> elements - each page has its own <main> */}
-      <div id="main-content" className="main-wrapper">
-        <ErrorBoundary>
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
+        {/* Skip to main content - Accessibility */}
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
+        {!isMaintenanceHome && <Header />}
+        {/* Using div instead of main to avoid nested <main> elements - each page has its own <main> */}
+        <div id="main-content" className="main-wrapper">
+          <ErrorBoundary>
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
             {/* Preview routes - show full site when in maintenance mode */}
             {isMaintenanceMode && (
               <>
