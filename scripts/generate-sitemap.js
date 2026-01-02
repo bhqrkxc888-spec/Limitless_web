@@ -44,6 +44,51 @@ const SITE_URL = 'https://www.limitlesscruises.com';
 const today = new Date().toISOString().split('T')[0];
 
 // ============================================================================
+// CONTENT LAST MODIFIED DATES
+// ============================================================================
+// These represent when each content category was last meaningfully updated.
+// Update these dates when making significant content changes to each section.
+// Format: ISO 8601 date string (YYYY-MM-DD)
+//
+// For dynamic content (Supabase), per-item updated_at is used automatically.
+// For static/local data files, we use these section-level dates.
+// ============================================================================
+
+const CONTENT_LAST_MODIFIED = {
+  // Static pages - update when page content changes
+  static: {
+    '/': '2025-01-01',           // Homepage
+    '/about': '2025-01-01',      // About page
+    '/contact': '2025-01-01',    // Contact page
+    '/find-a-cruise': '2025-01-01', // Find a Cruise
+    '/offers': '2025-01-01',     // Offers hub
+    '/travel-news': '2025-01-01', // News hub
+    '/cruise-guides': '2025-01-01', // Guides hub
+    '/destinations': '2025-01-01', // Destinations hub
+    '/cruise-lines': '2025-01-01', // Cruise lines hub
+    '/cruise-types': '2025-01-01', // Cruise types hub
+    '/bucket-list': '2025-01-01', // Bucket list hub
+    '/faq': '2025-01-01',        // FAQ
+    '/testimonials': '2025-01-01', // Testimonials
+    '/privacy-policy': '2024-12-01',
+    '/cookie-policy': '2024-12-01',
+    '/booking-terms': '2024-12-01',
+    '/website-terms': '2024-12-01',
+    '/price-match-guarantee': '2024-12-01'
+  },
+  // Local data categories - update when data files change
+  cruiseLines: '2025-01-01',     // Update when cruiseLines.js changes
+  destinations: '2025-01-01',    // Update when destinations.js changes  
+  bucketList: '2025-01-01',      // Update when bucketList.js changes
+  cruiseTypes: '2025-01-01'      // Update when cruiseTypes.js changes
+};
+
+// Helper to get lastmod for a route
+function getLastModForRoute(url) {
+  return CONTENT_LAST_MODIFIED.static[url] || today;
+}
+
+// ============================================================================
 // STATIC ROUTES (always included)
 // ============================================================================
 
@@ -216,7 +261,9 @@ async function generateSitemap() {
   console.log('📋 Adding static routes...');
   STATIC_ROUTES.forEach(route => {
     if (shouldIncludeInSitemap(route.url)) {
-      const entry = generateUrlEntry(route.url, route.priority, route.changefreq);
+      // Use per-route lastmod date instead of today
+      const lastmod = getLastModForRoute(route.url);
+      const entry = generateUrlEntry(route.url, route.priority, route.changefreq, lastmod);
       if (entry) {
         urls.push(entry);
         totalCount++;
@@ -232,10 +279,11 @@ async function generateSitemap() {
   // Cruise lines (only if published)
   if (shouldIncludeDetailPages('cruiseLines') && localData.cruiseLines.length > 0) {
     console.log(`   Adding ${localData.cruiseLines.length} cruise lines (PUBLISHED)...`);
+    const cruiseLinesLastmod = CONTENT_LAST_MODIFIED.cruiseLines;
     localData.cruiseLines.forEach(line => {
       const urlPath = `/cruise-lines/${line.slug}`;
       if (shouldIncludeInSitemap(urlPath)) {
-        const entry = generateUrlEntry(urlPath, '0.8', 'weekly');
+        const entry = generateUrlEntry(urlPath, '0.8', 'weekly', cruiseLinesLastmod);
         if (entry) {
           urls.push(entry);
           totalCount++;
@@ -249,10 +297,11 @@ async function generateSitemap() {
   // Destinations (only if published)
   if (shouldIncludeDetailPages('destinations') && localData.destinations.length > 0) {
     console.log(`   Adding ${localData.destinations.length} destinations (PUBLISHED)...`);
+    const destinationsLastmod = CONTENT_LAST_MODIFIED.destinations;
     localData.destinations.forEach(dest => {
       const urlPath = `/destinations/${dest.slug}`;
       if (shouldIncludeInSitemap(urlPath)) {
-        const entry = generateUrlEntry(urlPath, '0.8', 'weekly');
+        const entry = generateUrlEntry(urlPath, '0.8', 'weekly', destinationsLastmod);
         if (entry) {
           urls.push(entry);
           totalCount++;
@@ -266,10 +315,13 @@ async function generateSitemap() {
   // Bucket list experiences (only if published)
   if (shouldIncludeDetailPages('bucketList') && localData.bucketList.length > 0) {
     console.log(`   Adding ${localData.bucketList.length} bucket list experiences (PUBLISHED)...`);
+    const fallbackLastmod = CONTENT_LAST_MODIFIED.bucketList;
     localData.bucketList.forEach(exp => {
       const urlPath = `/bucket-list/${exp.slug}`;
       if (shouldIncludeInSitemap(urlPath)) {
-        const entry = generateUrlEntry(urlPath, '0.7', 'weekly');
+        // Use lastUpdated from experience data, fallback to generic date
+        const lastmod = exp.lastUpdated || fallbackLastmod;
+        const entry = generateUrlEntry(urlPath, '0.7', 'weekly', lastmod);
         if (entry) {
           urls.push(entry);
           totalCount++;
@@ -284,10 +336,11 @@ async function generateSitemap() {
   // Note: The app routes use /cruises/:slug, not /cruise-types/:slug for detail pages
   if (shouldIncludeDetailPages('cruiseTypes') && localData.cruiseTypes.length > 0) {
     console.log(`   Adding ${localData.cruiseTypes.length} cruise types as /cruises/:slug (PUBLISHED)...`);
+    const cruiseTypesLastmod = CONTENT_LAST_MODIFIED.cruiseTypes;
     localData.cruiseTypes.forEach(type => {
       const urlPath = `/cruises/${type.slug}`;
       if (shouldIncludeInSitemap(urlPath)) {
-        const entry = generateUrlEntry(urlPath, '0.7', 'weekly');
+        const entry = generateUrlEntry(urlPath, '0.7', 'weekly', cruiseTypesLastmod);
         if (entry) {
           urls.push(entry);
           totalCount++;

@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { getCruiseLineBySlug } from '../data/cruiseLines';
 import { destinations } from '../data/destinations';
 import { siteConfig } from '../config/siteConfig';
-import SEO from '../components/SEO';
+import SEO, { getBreadcrumbSchema } from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader, DataTable, Accordion } from '../components/ui';
 import Carousel from '../components/Carousel';
@@ -132,13 +132,21 @@ function CruiseLinePage() {
   const seoDescription = `${cruiseLine.name} cruise guide: best kids clubs, full fleet, loyalty benefits, top destinations. Book ${cruiseLine.name} holidays`;
 
   // Structured Data
-  const structuredData = {
+  const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: cruiseLine.name,
     description: cruiseLine.description,
     url: `https://www.limitlesscruises.com/cruise-lines/${cruiseLine.slug}`
   };
+
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: 'Home', url: 'https://www.limitlesscruises.com/' },
+    { name: 'Cruise Lines', url: 'https://www.limitlesscruises.com/cruise-lines' },
+    { name: cruiseLine.name, url: `https://www.limitlesscruises.com/cruise-lines/${cruiseLine.slug}` }
+  ]);
+
+  const structuredData = [organizationSchema, breadcrumbSchema];
 
   return (
     <main className="cruise-line-page cruise-line-page-seo">

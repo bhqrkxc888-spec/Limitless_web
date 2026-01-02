@@ -1,0 +1,269 @@
+/* LazyBucketListMap - Lazy Loading Wrapper Styles */
+
+.lazy-bucket-list-map {
+  position: relative;
+  min-height: 500px; /* Match map height to prevent CLS */
+  margin: 2rem 0;
+}
+
+/* Placeholder (before map loads) */
+.lazy-map-placeholder {
+  width: 100%;
+  height: 500px; /* Fixed height = no CLS */
+  min-height: 400px;
+  background: var(--clr-bg-alt);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--clr-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.lazy-map-placeholder-content {
+  text-align: center;
+  padding: 2rem;
+  max-width: 400px;
+}
+
+.lazy-map-placeholder-icon {
+  margin: 0 auto 1rem;
+  width: 64px;
+  height: 64px;
+  color: var(--clr-text-muted);
+  opacity: 0.6;
+  animation: lazy-map-pulse 2s ease-in-out infinite;
+}
+
+@keyframes lazy-map-pulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .lazy-map-placeholder-icon {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+.lazy-map-placeholder-text {
+  font-size: 0.9375rem;
+  color: var(--clr-text-muted);
+  margin: 0;
+}
+
+.lazy-map-noscript {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--clr-warning-bg, #fff3cd);
+  color: var(--clr-warning-text, #856404);
+  border-radius: 6px;
+  font-size: 0.875rem;
+}
+
+/* Suspense Fallback (during React lazy load) */
+.lazy-map-suspense-fallback {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: var(--clr-bg-alt);
+  border-radius: 12px;
+  border: 1px solid var(--clr-border);
+}
+
+.lazy-map-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--clr-border);
+  border-top: 3px solid var(--clr-accent);
+  border-radius: 50%;
+  animation: lazy-map-spin 1s linear infinite;
+}
+
+@keyframes lazy-map-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lazy-map-loading-spinner {
+    animation: none;
+    border-top-color: var(--clr-accent);
+  }
+}
+
+.lazy-map-suspense-fallback span {
+  font-size: 0.875rem;
+  color: var(--clr-text-muted);
+}
+
+/* Loaded Map Wrapper */
+.lazy-map-loaded-wrapper {
+  position: relative;
+}
+
+/* Map Interaction Toggle */
+.map-interaction-toggle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: 8px;
+}
+
+.map-interaction-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-family);
+}
+
+.map-interaction-button:hover {
+  background: var(--clr-accent);
+  color: var(--clr-text-on-accent);
+  transform: translateY(-1px);
+}
+
+.map-interaction-button:focus-visible {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 2px;
+}
+
+.map-interaction-button.active {
+  background: var(--clr-accent);
+  color: var(--clr-text-on-accent);
+}
+
+.map-interaction-button svg {
+  flex-shrink: 0;
+}
+
+.map-interaction-hint {
+  font-size: 0.8125rem;
+  color: var(--clr-text-muted);
+  font-style: italic;
+}
+
+/* Map Content Container */
+.lazy-map-content {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Locked State (prevents scroll hijack) */
+.lazy-map-content.locked {
+  pointer-events: none; /* Disable all map interactions */
+}
+
+.lazy-map-content.interactive {
+  pointer-events: auto; /* Enable map interactions */
+}
+
+/* Lock Overlay */
+.map-lock-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(1px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  transition: opacity 0.2s ease;
+  pointer-events: auto; /* Allow clicking overlay to unlock */
+}
+
+.map-lock-overlay:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.map-lock-overlay:focus-visible {
+  outline: 3px solid var(--clr-accent);
+  outline-offset: -3px;
+}
+
+.map-lock-overlay-message {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  pointer-events: none;
+}
+
+.map-lock-overlay-message svg {
+  color: var(--clr-primary);
+  margin-bottom: 0.5rem;
+}
+
+.map-lock-overlay-message p {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--clr-text-main);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .lazy-map-placeholder,
+  .lazy-map-suspense-fallback {
+    height: 400px;
+    min-height: 300px;
+  }
+
+  .map-interaction-toggle {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .map-interaction-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .map-lock-overlay-message {
+    padding: 1rem 1.5rem;
+    max-width: 280px;
+  }
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  .map-interaction-button {
+    transition: none;
+  }
+  
+  .map-interaction-button:hover {
+    transform: none;
+  }
+  
+  .map-lock-overlay {
+    transition: none;
+  }
+}
+

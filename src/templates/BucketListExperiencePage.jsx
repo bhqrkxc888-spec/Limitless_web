@@ -1,15 +1,16 @@
 import { useParams } from 'react-router-dom';
-import { getBucketListBySlug, getRotatingFeatured } from '../data/bucketList';
+import { getBucketListBySlug, getRotatingFeatured, normalizeItinerary, normalizeDayNumber } from '../data/bucketList';
+import { getHeroFromLegacy, getSEOFromLegacy, getTripFactsFromLegacy } from '../data/bucketListSchema';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, SectionHeader, Accordion, Card } from '../components/ui';
-import { useState, Suspense, lazy } from 'react';
+import { useState, useMemo } from 'react';
 import { getOgImage } from '../utils/imageHelpers';
 import { useBucketListImage } from '../hooks/useImageUrl';
+import { createSanitizedMarkup } from '../utils/sanitizeHtml';
+import LazyBucketListMap from '../components/LazyBucketListMap';
 import './BucketListExperiencePage.css';
-
-const BucketListMap = lazy(() => import('../components/BucketListMap'));
 
 function BucketListExperiencePage() {
   const { slug } = useParams();
@@ -20,7 +21,92 @@ function BucketListExperiencePage() {
   const { imageUrl: heroImage } = useBucketListImage(experience?.id, 'hero', experience?.title);
   const { imageUrl: ogImage } = useBucketListImage(experience?.id, 'og-image', experience?.title);
 
-  // Handle experience not found
+  // Get schema-compliant data with fallbacks (must be before conditional return)
+  const seoData = experience ? getSEOFromLegacy(experience) : null;
+  const heroData = experience ? getHeroFromLegacy(experience) : null;
+  const tripFacts = experience ? getTripFactsFromLegacy(experience) : null;
+  
+  // Structured Data for SEO (must be before conditional return)
+  const structuredData = useMemo(() => {
+    if (!experience) return [];
+    
+    const baseUrl = 'https://www.limitlesscruises.com';
+    const pageUrl = `${baseUrl}/bucket-list/${experience.slug}`;
+    
+    // Main Product/Trip schema
+    const tripSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'TouristTrip',
+      name: experience.title,
+      description: seoData.metaDescription || experience.description,
+      url: pageUrl,
+      image: ogImage || heroImage,
+      ...(experience.lastUpdated && { dateModified: experience.lastUpdated }),
+      itinerary: {
+        '@type': 'ItemList',
+        itemListElement: normalizeItinerary(experience.itinerary || []).slice(0, 10).map((item, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: item.location,
+          description: item.description
+        }))
+      },
+      offers: {
+        '@type': 'Offer',
+        availability: 'https://schema.org/InStock',
+        url: `${baseUrl}/contact`,
+        priceSpecification: {
+          '@type': 'PriceSpecification',
+          priceCurrency: 'GBP'
+        }
+      }
+    };
+    
+    // Breadcrumb schema
+    const breadcrumbSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: baseUrl
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'Bucket List',
+          item: `${baseUrl}/bucket-list`
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: experience.title,
+          item: pageUrl
+        }
+      ]
+    };
+    
+    // FAQ schema (if FAQs exist)
+    const faqSchema = (experience.faqs || experience.faq || []).length > 0 ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: (experience.faqs || experience.faq || []).map(faq => ({
+        '@type': 'Question',
+        name: faq.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.answer
+        }
+      }))
+    } : null;
+    
+    // Combine all schemas
+    return [tripSchema, breadcrumbSchema, faqSchema].filter(Boolean);
+  }, [experience, seoData, ogImage, heroImage]);
+
+  // Handle experience not found (after all hooks)
   if (!experience) {
     return (
       <main className="bucket-list-experience-page">
@@ -34,50 +120,28 @@ function BucketListExperiencePage() {
     );
   }
 
-  // Structured Data for SEO
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: experience.title,
-    description: experience.description,
-    url: `https://www.limitlesscruises.com/bucket-list/${experience.slug}`,
-    category: 'Travel Package',
-    offers: {
-      '@type': 'Offer',
-      availability: 'https://schema.org/InStock',
-      priceSpecification: {
-        '@type': 'PriceSpecification'
-      }
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.8',
-      reviewCount: experience.testimonials?.length || 0
-    }
-  };
-
   return (
     <main className="bucket-list-experience-page">
       {/* SEO */}
       <SEO
-        title={experience.meta?.title || `${experience.title} | Bucket List Experience`}
-        description={experience.meta?.description || experience.description}
+        title={seoData.metaTitle}
+        description={seoData.metaDescription}
         canonical={`https://www.limitlesscruises.com/bucket-list/${experience.slug}`}
-        keywords={experience.meta?.keywords?.join(', ') || ''}
+        keywords={seoData.keywords?.join(', ') || ''}
         image={ogImage ? getOgImage(ogImage) : getOgImage(heroImage)}
         structuredData={structuredData}
       />
 
       {/* Hero Section */}
       <HeroSection
-        title={experience.title}
-        subtitle={experience.tagline}
+        title={heroData.headline}
+        subtitle={heroData.subheadline}
         image={heroImage}
         imageAlt={experience.title}
         size="lg"
         align="left"
-        primaryCta={{ label: 'Enquire Now', to: '/contact' }}
-        secondaryCta={{ label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone}` }}
+        primaryCta={heroData.ctaPrimary}
+        secondaryCta={heroData.ctaSecondary || { label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone}` }}
       />
 
       {/* Key Info Bar */}
@@ -86,16 +150,35 @@ function BucketListExperiencePage() {
           <div className="key-info-grid">
             <div className="key-info-item">
               <span className="key-info-label">Duration</span>
-              <span className="key-info-value">{experience.duration}</span>
+              <span className="key-info-value">{tripFacts.duration}</span>
             </div>
             <div className="key-info-item">
               <span className="key-info-label">Season</span>
-              <span className="key-info-value">{experience.season}</span>
+              <span className="key-info-value">{tripFacts.season}</span>
             </div>
-            {experience.bestFor && experience.bestFor.length > 0 && (
+            {(experience.whoFor || experience.bestFor) && (
               <div className="key-info-item">
                 <span className="key-info-label">Best For</span>
-                <span className="key-info-value">{experience.bestFor.join(', ')}</span>
+                <span className="key-info-value">
+                  {Array.isArray(experience.whoFor) 
+                    ? experience.whoFor.join(', ') 
+                    : Array.isArray(experience.bestFor) 
+                      ? experience.bestFor.join(', ')
+                      : experience.whoFor || experience.bestFor
+                  }
+                </span>
+              </div>
+            )}
+            {experience.lastUpdated && (
+              <div className="key-info-item key-info-last-updated">
+                <span className="key-info-label">Last Updated</span>
+                <span className="key-info-value">
+                  {new Date(experience.lastUpdated).toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                  })}
+                </span>
               </div>
             )}
           </div>
@@ -107,13 +190,51 @@ function BucketListExperiencePage() {
         <div className="container">
           <div className="experience-grid">
             <div className="experience-main">
-              {/* Description */}
-              <div className="experience-description">
-                <p className="lead">{experience.description}</p>
-              </div>
+              {/* Description / Narrative */}
+              {experience.narrative && experience.narrative.length > 0 ? (
+                // New schema: narrative blocks
+                <div className="experience-narrative">
+                  {experience.narrative.map((block, index) => {
+                    const HeadingTag = block.level === 'h3' ? 'h3' : 'h2';
+                    return (
+                      <div key={index} className="narrative-block">
+                        {block.title && <HeadingTag>{block.title}</HeadingTag>}
+                        <div dangerouslySetInnerHTML={createSanitizedMarkup(block.content)} />
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : experience.description && (
+                // Legacy: single description
+                <div className="experience-description">
+                  <p className="lead">{experience.description}</p>
+                </div>
+              )}
 
-              {/* Highlights */}
-              {experience.highlights && experience.highlights.length > 0 && (
+              {/* Destination Highlights (new schema) or Experience Highlights (legacy) */}
+              {experience.destinationHighlights && experience.destinationHighlights.length > 0 ? (
+                <div className="destination-highlights-section">
+                  <SectionHeader
+                    title="Destination Highlights"
+                    subtitle="Discover the places you'll explore"
+                  />
+                  {experience.destinationHighlights.map((highlight, index) => (
+                    <div key={index} className="destination-highlight">
+                      <h3>{highlight.title}</h3>
+                      {highlight.image && (
+                        <img 
+                          src={highlight.image} 
+                          alt={highlight.imageAlt || highlight.title}
+                          className="destination-highlight-image"
+                          loading="lazy"
+                        />
+                      )}
+                      <div dangerouslySetInnerHTML={createSanitizedMarkup(highlight.body)} />
+                    </div>
+                  ))}
+                </div>
+              ) : experience.highlights && experience.highlights.length > 0 && (
+                // Legacy: simple highlights list
                 <div className="highlights-section">
                   <SectionHeader
                     title="Experience Highlights"
@@ -135,63 +256,85 @@ function BucketListExperiencePage() {
               )}
 
               {/* Itinerary */}
-              {experience.itinerary && experience.itinerary.length > 0 && (
-                <div className="itinerary-section">
-                  <SectionHeader
-                    title="Itinerary Overview"
-                    subtitle="A glimpse into your journey"
-                  />
-                  
-                  {/* Interactive Map */}
-                  {experience.itinerary.some(item => item.coordinates?.lat && item.coordinates?.lon) && (
-                    <div className="bucket-list-map-wrapper">
-                      <Suspense fallback={
-                        <div style={{ 
-                          minHeight: '400px', 
-                          display: 'flex', 
-                          alignItems: 'center', 
-                          justifyContent: 'center',
-                          background: 'var(--clr-bg-alt)',
-                          borderRadius: '12px',
-                          marginBottom: '2rem'
-                        }}>
-                          <p>Loading interactive map...</p>
-                        </div>
-                      }>
-                        <BucketListMap 
-                          itinerary={experience.itinerary}
-                        />
-                      </Suspense>
-                    </div>
-                  )}
+              {experience.itinerary && experience.itinerary.length > 0 && (() => {
+                // Normalize itinerary: shift Day 0 to Day 1 (cruise days start at 1, not 0)
+                const displayItinerary = normalizeItinerary(experience.itinerary);
+                
+                if (displayItinerary.length === 0) return null;
+                
+                return (
+                  <div className="itinerary-section">
+                    <SectionHeader
+                      title="Itinerary Overview"
+                      subtitle="A glimpse into your journey"
+                    />
+                    
+                    {/* Interactive Map - CORE FEATURE: Bucket List pages MUST include an itinerary map. Do not remove. */}
+                    {displayItinerary.some(item => item.coordinates?.lat && item.coordinates?.lon) && (
+                      <LazyBucketListMap 
+                        itinerary={displayItinerary}
+                        className="bucket-list-map-wrapper"
+                      />
+                    )}
 
-                  <div className="itinerary-timeline">
-                    {experience.itinerary.map((item, index) => {
-                      // Format day number - extract first number if range (e.g., "2-3" -> "D2")
-                      const dayNumber = item.day.match(/^\d+/)?.[0] || (index + 1).toString();
-                      return (
-                        <div key={index} className="itinerary-item">
-                          <div className="itinerary-day">D{dayNumber}</div>
-                          <div className="itinerary-content">
-                            <h4>{item.location}</h4>
-                            {item.description && <p>{item.description}</p>}
+                    <div className="itinerary-timeline">
+                      {displayItinerary.map((item, index) => {
+                        // Format day number - use normalization helper (should already be normalized)
+                        const dayNumber = normalizeDayNumber(item.day, index);
+                        return (
+                          <div key={index} className="itinerary-item">
+                            <div className="itinerary-day">D{dayNumber}</div>
+                            <div className="itinerary-content">
+                              <h4>{item.location}</h4>
+                              {item.description && <p>{item.description}</p>}
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                    </div>
                   </div>
-                </div>
-              )}
+                );
+              })()}
 
               {/* What's Included */}
-              {experience.includes && experience.includes.length > 0 && (
+              {(experience.included || experience.includes) && (experience.included || experience.includes).length > 0 && (
                 <div className="includes-section">
                   <SectionHeader
                     title="What's Included"
                     subtitle="Everything that's part of your journey"
                   />
                   <ul className="includes-list">
-                    {experience.includes.map((item, index) => (
+                    {(experience.included || experience.includes).map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Upgrades (new schema) */}
+              {experience.upgrades && experience.upgrades.length > 0 && (
+                <div className="upgrades-section">
+                  <SectionHeader
+                    title="Available Upgrades"
+                    subtitle="Enhance your experience"
+                  />
+                  <ul className="upgrades-list">
+                    {experience.upgrades.map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Who This Is For (new schema) */}
+              {(experience.whoFor || experience.bestFor) && (
+                <div className="who-for-section">
+                  <SectionHeader
+                    title="Who This Experience Is For"
+                    subtitle="Perfect for these travellers"
+                  />
+                  <ul className="who-for-list">
+                    {(experience.whoFor || experience.bestFor).map((item, index) => (
                       <li key={index}>{item}</li>
                     ))}
                   </ul>
@@ -221,14 +364,14 @@ function BucketListExperiencePage() {
               )}
 
               {/* FAQ */}
-              {experience.faq && experience.faq.length > 0 && (
+              {(experience.faqs || experience.faq) && (experience.faqs || experience.faq).length > 0 && (
                 <div className="faq-section">
                   <SectionHeader
                     title="Frequently Asked Questions"
                     subtitle="Everything you need to know"
                   />
                   <Accordion
-                    items={experience.faq.map((faq, index) => ({
+                    items={(experience.faqs || experience.faq).map((faq, index) => ({
                       id: `faq-${index}`,
                       title: faq.question,
                       content: faq.answer
@@ -236,6 +379,37 @@ function BucketListExperiencePage() {
                   />
                 </div>
               )}
+
+              {/* Internal Links / Related Content */}
+              <div className="internal-links-section">
+                <SectionHeader
+                  title="Explore More"
+                  subtitle="Continue your journey planning"
+                />
+                <div className="internal-links-grid">
+                  <div className="internal-link-card">
+                    <h4>More Bucket List Experiences</h4>
+                    <p>Discover other once-in-a-lifetime cruise adventures from the UK</p>
+                    <Button to="/bucket-list" variant="outline" size="sm">
+                      View All Experiences
+                    </Button>
+                  </div>
+                  <div className="internal-link-card">
+                    <h4>Travel Guides & Insights</h4>
+                    <p>Expert advice, destination guides, and cruise planning tips</p>
+                    <Button to="/guides" variant="outline" size="sm">
+                      Browse Guides
+                    </Button>
+                  </div>
+                  <div className="internal-link-card">
+                    <h4>Special Offers</h4>
+                    <p>Current deals and exclusive cruise packages</p>
+                    <Button to="/offers" variant="outline" size="sm">
+                      View Offers
+                    </Button>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Sidebar */}
@@ -284,6 +458,9 @@ function BucketListExperiencePage() {
                                 src={cardImage} 
                                 alt={exp.title}
                                 aspectRatio="3/2"
+                                entityType="bucket-list"
+                                entityId={exp.slug}
+                                imageType="card-related"
                               />
                               <Card.Content>
                                 <Card.Title as="h4" className="small-title">{exp.title}</Card.Title>

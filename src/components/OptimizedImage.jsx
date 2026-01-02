@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { getOptimizedImageUrl, generateSrcSet, isSupabaseUrl } from '../utils/imageHelpers';
 import { isVercelBlobUrl } from '../lib/vercelBlob';
 import { SITE_ASSETS } from '../config/assetUrls';
+import { resolveImageSrc } from '../utils/imageResolver';
 
 // Fallback placeholder for missing/failed images - uses Limitless Cruises logo
 const COMING_SOON_PLACEHOLDER = '/images/placeholders/coming-soon.svg';
@@ -31,6 +32,9 @@ const LOGO_URL = SITE_ASSETS.logo;
  * @param {number} quality - Image quality 1-100 (default: 85)
  * @param {string} objectFit - CSS object-fit value (default: 'cover')
  * @param {boolean} showComingSoon - If true, shows "Coming Soon" placeholder when no image (default: true)
+ * @param {string} entityType - Entity type for image resolution logging (optional, for debugging)
+ * @param {string} entityId - Entity ID/slug for image resolution logging (optional, for debugging)
+ * @param {string} imageType - Image type for resolution logging (optional, for debugging)
  */
 function OptimizedImage({
   src,
@@ -46,9 +50,21 @@ function OptimizedImage({
   objectFit = 'cover',
   style = {},
   showComingSoon = true,
+  entityType = 'unknown',
+  entityId = 'unknown',
+  imageType = 'unknown',
   ...props
 }) {
   const [hasError, setHasError] = useState(false);
+  
+  // Resolve image source through universal resolver (handles all formats + logs issues)
+  const resolvedSrc = resolveImageSrc(src, {
+    entityType,
+    entityId,
+    imageType,
+    fallback: COMING_SOON_PLACEHOLDER,
+    silent: false // Log resolution issues in dev mode
+  });
   
   // Handle image load errors
   const handleError = (e) => {
@@ -58,8 +74,8 @@ function OptimizedImage({
     }
   };
   
-  // Return Limitless Cruises logo placeholder if no src provided
-  if (!src || src === 'null' || src === 'undefined') {
+  // Return Limitless Cruises logo placeholder if resolved to placeholder
+  if (resolvedSrc === COMING_SOON_PLACEHOLDER || !resolvedSrc || resolvedSrc === 'null' || resolvedSrc === 'undefined') {
     if (showComingSoon) {
       return (
         <div 
@@ -134,8 +150,8 @@ function OptimizedImage({
     );
   }
 
-  const isVercelBlob = isVercelBlobUrl(src);
-  const isSupabase = isSupabaseUrl(src);
+  const isVercelBlob = isVercelBlobUrl(resolvedSrc);
+  const isSupabase = isSupabaseUrl(resolvedSrc);
   
   // Determine the max width for the primary src (use largest srcset width or provided width)
   const maxWidth = width || Math.max(...srcsetWidths);
@@ -145,12 +161,12 @@ function OptimizedImage({
   // Supabase: use manual transforms for CMS content
   // External: use as-is
   const optimizedSrc = (isVercelBlob || isSupabase)
-    ? getOptimizedImageUrl(src, { width: maxWidth, quality })
-    : src;
+    ? getOptimizedImageUrl(resolvedSrc, { width: maxWidth, quality })
+    : resolvedSrc;
   
   // Generate srcset (Supabase generates manually, Vercel handles automatically)
   const srcSet = isSupabase && srcsetWidths.length > 0
-    ? generateSrcSet(src, srcsetWidths, { quality })
+    ? generateSrcSet(resolvedSrc, srcsetWidths, { quality })
     : undefined;
 
   // Generate meaningful alt text from src if not provided
@@ -182,7 +198,7 @@ function OptimizedImage({
   // Use provided alt text, or generate from src, or use generic fallback
   const finalAlt = alt && alt.trim() !== '' 
     ? alt.trim() 
-    : generateAltFromSrc(src);
+    : generateAltFromSrc(resolvedSrc);
 
   return (
     <img

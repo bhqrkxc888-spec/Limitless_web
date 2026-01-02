@@ -94,8 +94,8 @@ function CruiseTypesPage() {
         <OptimizedImage
           src={cruiseType.image || getCruiseTypeCard(cruiseType.slug)}
           alt={`${cruiseType.name} cruise holidays`}
-          width={600}
-          height={400}
+          width={300}
+          height={280}
           loading="lazy"
         />
       </div>

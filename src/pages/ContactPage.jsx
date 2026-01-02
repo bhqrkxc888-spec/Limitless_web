@@ -1,8 +1,59 @@
 import { siteConfig } from '../config/siteConfig';
 import ContactForm from '../components/ContactForm';
-import SEO from '../components/SEO';
+import SEO, { getOrganizationSchema, getBreadcrumbSchema } from '../components/SEO';
+import OptimizedImage from '../components/OptimizedImage';
 import { aboutImages } from '../utils/imageHelpers';
 import './ContactPage.css';
+
+// Structured data for Contact page with ContactPoint
+const getContactPageSchema = () => {
+  const baseOrg = getOrganizationSchema();
+  return {
+    ...baseOrg,
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        telephone: '+44-114-321-3208',
+        contactType: 'customer service',
+        areaServed: 'GB',
+        availableLanguage: 'English',
+        hoursAvailable: [
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Wednesday', 'Thursday', 'Friday'],
+            opens: '10:00',
+            closes: '20:00'
+          },
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: 'Saturday',
+            opens: '10:00',
+            closes: '21:00'
+          },
+          {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: 'Sunday',
+            opens: '10:00',
+            closes: '18:00'
+          }
+        ]
+      },
+      {
+        '@type': 'ContactPoint',
+        telephone: '+44-7359-796108',
+        contactType: 'customer service',
+        contactOption: 'TollFree',
+        areaServed: 'GB',
+        availableLanguage: 'English'
+      }
+    ]
+  };
+};
+
+const breadcrumbSchema = getBreadcrumbSchema([
+  { name: 'Home', url: 'https://www.limitlesscruises.com/' },
+  { name: 'Contact', url: 'https://www.limitlesscruises.com/contact' }
+]);
 
 function ContactPage() {
   return (
@@ -11,6 +62,7 @@ function ContactPage() {
         title="Contact Your Personal Cruise Consultant | UK Based | Limitless Cruises"
         description="Speak with your personal cruise consultant. Call, WhatsApp, email or enquire online. ABTA protected, UK based, expert guidance for your perfect cruise."
         canonical="https://www.limitlesscruises.com/contact"
+        structuredData={[getContactPageSchema(), breadcrumbSchema]}
       />
 
       {/* Hero */}
@@ -25,12 +77,15 @@ function ContactPage() {
               </p>
             </div>
             <div className="contact-hero-image">
-              <img 
+              <OptimizedImage 
                 src={aboutImages.katherine1} 
                 alt="Your cruise consultant" 
-                width="1920"
-                height="1080"
+                width={1920}
+                height={1080}
                 loading="lazy"
+                sizes="(max-width: 768px) 100vw, 600px"
+                srcsetWidths={[400, 600, 800]}
+                quality={85}
               />
             </div>
           </div>

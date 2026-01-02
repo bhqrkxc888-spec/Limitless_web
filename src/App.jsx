@@ -12,6 +12,7 @@ import ErrorBoundary from './components/ErrorBoundary'
 // These are not needed for First Contentful Paint
 const CookieConsent = lazy(() => import('./components/CookieConsent'))
 const FloatingWhatsApp = lazy(() => import('./components/FloatingWhatsApp'))
+const ImageDebugger = lazy(() => import('./components/ImageDebugger'))
 
 // Route Protection
 import ProtectedRoute from './components/ProtectedRoute'
@@ -329,6 +330,9 @@ function AppLayout() {
       </Suspense>
       <Suspense fallback={null}>
         <FloatingWhatsApp />
+      </Suspense>
+      <Suspense fallback={null}>
+        <ImageDebugger />
       </Suspense>
       <DevModeIndicator />
     </div>

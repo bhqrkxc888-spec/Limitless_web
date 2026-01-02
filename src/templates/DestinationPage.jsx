@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { getDestinationBySlug } from '../data/destinations';
 import { siteConfig } from '../config/siteConfig';
-import SEO from '../components/SEO';
+import SEO, { getBreadcrumbSchema } from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, SectionHeader } from '../components/ui';
 import { getOgImage } from '../utils/imageHelpers';
@@ -34,13 +34,21 @@ function DestinationPage() {
   }
 
   // Structured Data (JSON-LD) for SEO
-  const structuredData = {
+  const destinationSchema = {
     '@context': 'https://schema.org',
     '@type': 'TouristDestination',
     name: destination.name,
     description: destination.description,
     url: `https://www.limitlesscruises.com/destinations/${destination.slug}`
   };
+
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: 'Home', url: 'https://www.limitlesscruises.com/' },
+    { name: 'Destinations', url: 'https://www.limitlesscruises.com/destinations' },
+    { name: destination.name, url: `https://www.limitlesscruises.com/destinations/${destination.slug}` }
+  ]);
+
+  const structuredData = [destinationSchema, breadcrumbSchema];
 
   return (
     <main className="destination-page">

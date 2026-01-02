@@ -1,4 +1,5 @@
 /* Bucket List Map Component Styles */
+/* Performance optimized with GPU hints, contain, and touch handling */
 
 .bucket-list-map-container {
   margin: 2rem 0;
@@ -6,6 +7,44 @@
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   background: var(--clr-surface);
+  position: relative;
+  /* Isolate paint/layout for better performance */
+  contain: layout style;
+}
+
+/* Loading skeleton */
+.bucket-list-map-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: var(--clr-bg-alt);
+  z-index: 10;
+}
+
+.bucket-list-map-loading span {
+  font-size: 0.875rem;
+  color: var(--clr-text-muted);
+}
+
+.bucket-list-map-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--clr-border);
+  border-top: 3px solid var(--clr-accent);
+  border-radius: 50%;
+  animation: bucket-list-map-spin 1s linear infinite;
+}
+
+@keyframes bucket-list-map-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .bucket-list-map-header {
@@ -58,12 +97,33 @@
   width: 100%;
   height: 500px;
   min-height: 400px;
+  /* Performance: GPU acceleration hint */
+  will-change: transform;
+  /* Smooth opacity transition when loaded */
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  /* Mobile: allow map touch interactions, don't block page scroll */
+  touch-action: pan-x pan-y pinch-zoom;
+}
+
+.bucket-list-map--loaded {
+  opacity: 1;
+}
+
+/* Hide loading overlay when map is loaded */
+.bucket-list-map-container:has(.bucket-list-map--loaded) .bucket-list-map-loading {
+  display: none;
 }
 
 /* Custom Marker Styles */
 .bucket-list-marker {
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease-out;
+  /* Performance: hint browser about transform changes */
+  will-change: transform;
+  /* Prevent text selection on markers */
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .bucket-list-marker:hover {
@@ -72,6 +132,7 @@
 
 .bucket-list-marker.active {
   z-index: 1000;
+  transform: scale(1.15);
 }
 
 .bucket-list-marker.active .bucket-list-marker-icon svg circle {
@@ -83,6 +144,8 @@
 
 .bucket-list-marker-icon {
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  /* Prevent marker from blocking scroll on mobile */
+  pointer-events: auto;
 }
 
 /* Popup Styles */

@@ -1,4 +1,4 @@
-import { getAllBucketList, getRotatingFeatured } from '../data/bucketList';
+import { getAllBucketList, getRotatingFeatured, isRecentlyUpdated, formatLastUpdated } from '../data/bucketList';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
@@ -10,7 +10,7 @@ import './BucketListPage.css';
 function BucketListPage() {
   // Get dynamic rotating featured experiences (changes on each visit/refresh)
   const [featured, setFeatured] = useState(getRotatingFeatured(3)); // Max 3 for carousel
-  const allExperiences = getAllBucketList();
+  const allExperiences = getAllBucketList('lastUpdated'); // Sort by lastUpdated desc (newest first)
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsToShow] = useState(3); // Always 3 on desktop
   
@@ -58,6 +58,7 @@ function BucketListPage() {
   // Component for experience card with image hook
   const ExperienceCard = ({ experience }) => {
     const { imageUrl } = useBucketListImage(experience.id, 'card', experience.title);
+    const recentlyUpdated = isRecentlyUpdated(experience.lastUpdated);
     
     return (
       <Card to={`/bucket-list/${experience.slug}`} variant="default" className="bucket-list-card">
@@ -65,13 +66,26 @@ function BucketListPage() {
           src={imageUrl} 
           alt={experience.title}
           aspectRatio="3/2"
+          entityType="bucket-list"
+          entityId={experience.slug}
+          imageType="card"
         />
         <Card.Content>
-          <div className="bucket-list-badge">Bucket List</div>
+          <div className="bucket-list-badges">
+            <span className="bucket-list-badge">Bucket List</span>
+            {recentlyUpdated && (
+              <span className="bucket-list-badge bucket-list-badge-recent">Recently Updated</span>
+            )}
+          </div>
           <Card.Title as="h3">{experience.title}</Card.Title>
           <Card.Description>{experience.tagline}</Card.Description>
           <div className="bucket-list-meta">
             <span className="bucket-list-duration">{experience.duration}</span>
+            {experience.lastUpdated && (
+              <span className="bucket-list-last-updated">
+                Updated: {formatLastUpdated(experience.lastUpdated)}
+              </span>
+            )}
           </div>
           {experience.highlights && Array.isArray(experience.highlights) && experience.highlights.length > 0 && (
             <ul className="bucket-list-highlights">
@@ -139,6 +153,7 @@ function BucketListPage() {
                 {visibleItems.map((experience) => {
                   const FeaturedCard = () => {
                     const { imageUrl } = useBucketListImage(experience.id, 'card', experience.title);
+                    const recentlyUpdated = isRecentlyUpdated(experience.lastUpdated);
                     return (
                       <Card 
                         to={`/bucket-list/${experience.slug}`} 
@@ -149,13 +164,26 @@ function BucketListPage() {
                           src={imageUrl} 
                           alt={experience.title}
                           aspectRatio="3/2"
+                          entityType="bucket-list"
+                          entityId={experience.slug}
+                          imageType="card-featured"
                         />
                         <Card.Content>
-                          <div className="bucket-list-badge">Bucket List</div>
+                          <div className="bucket-list-badges">
+                            <span className="bucket-list-badge">Bucket List</span>
+                            {recentlyUpdated && (
+                              <span className="bucket-list-badge bucket-list-badge-recent">Recently Updated</span>
+                            )}
+                          </div>
                           <Card.Title as="h3">{experience.title}</Card.Title>
                           <Card.Description>{experience.tagline}</Card.Description>
                           <div className="bucket-list-featured-meta">
                             <span className="duration">{experience.duration}</span>
+                            {experience.lastUpdated && (
+                              <span className="last-updated">
+                                Updated: {formatLastUpdated(experience.lastUpdated)}
+                              </span>
+                            )}
                           </div>
                         </Card.Content>
                       </Card>

@@ -2,7 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useState, useMemo } from 'react';
 import { getPortBySlug, getAdjacentPorts } from '../data/ports';
 import { siteConfig } from '../config/siteConfig';
-import SEO from '../components/SEO';
+import SEO, { getBreadcrumbSchema } from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import OptimizedImage from '../components/OptimizedImage';
 import { Button, SectionHeader } from '../components/ui';
@@ -107,10 +107,17 @@ function PortGuidePage() {
     })),
   } : null;
 
+  // Breadcrumb schema
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: 'Home', url: 'https://www.limitlesscruises.com/' },
+    { name: 'Port Guides', url: 'https://www.limitlesscruises.com/ports' },
+    { name: port.name, url: `https://www.limitlesscruises.com/ports/${port.slug}` }
+  ]);
+
   // Combine schemas - SEO component handles arrays
   const structuredData = faqSchema 
-    ? [destinationSchema, faqSchema] 
-    : destinationSchema;
+    ? [destinationSchema, faqSchema, breadcrumbSchema] 
+    : [destinationSchema, breadcrumbSchema];
 
   // Format date as DD MONTH YYYY
   const formatDate = (dateString) => {

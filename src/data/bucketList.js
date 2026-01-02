@@ -1,12 +1,26 @@
 /**
  * Bucket List Experiences Data
  * Once-in-a-lifetime cruise experiences
+ * 
+ * Schema: See bucketListSchema.js for full type definitions and validation
+ */
+
+import { validateAllBucketListExperiences } from './bucketListSchema.js';
+
+/**
+ * Bucket List Experiences Data
+ * 
+ * AUTHORING RULE: Bucket list itineraries MUST start at Day 1.
+ * Day 1 is the first travel day (departure from home).
+ * Never use Day 0 in bucket list data.
+ * Schema validation will reject any Day 0 entries.
  */
 
 export const bucketListExperiences = [
   {
     id: 'world-cruises',
     slug: 'world-cruises',
+    lastUpdated: '2026-01-02',
     title: 'World Cruises',
     tagline: '121-night global odyssey from Barcelona',
     description: '25+ countries, 40+ ports, 7 overnights. The ultimate bucket list voyage from the UK. Start with a short hop from the UK to Barcelona, then step aboard for a four-month journey around the globe. Sail from the Mediterranean to the Atlantic, cross to South America for Rio Carnival energy and tango nights in Buenos Aires, then round Cape Horn to the fjords of Chile. Continue across the Pacific via Easter Island and French Polynesia to New Zealand and Australia, before turning north through Asia and the Pacific islands towards North America. Transit the Panama Canal, island-hop through the Caribbean, then return across the Atlantic to Spain. Every leg layers on new cultures, landscapes, and once-in-a-lifetime experiences, all while returning each night to the comfort of your cabin, favourite restaurant and familiar crew. This is slow, immersive travel at its most indulgent.',
@@ -34,388 +48,388 @@ export const bucketListExperiences = [
     cruiseLines: ['MSC Cruises', 'Cunard', 'P&O Cruises', 'Princess Cruises', 'Oceania Cruises'],
     itinerary: [
       { 
-        day: '0', 
+        day: '1', 
         location: 'London Heathrow (LHR)', 
         description: 'Depart LHR → Barcelona (2hr15 direct)',
         coordinates: { lat: 51.4700, lon: -0.4543 }
       },
       { 
-        day: '1', 
+        day: '2', 
         location: 'Barcelona, Spain - Embark', 
         description: 'Arrive Barcelona, transfer to port, embark world cruise. Begin your 121-night global odyssey',
         coordinates: { lat: 41.3851, lon: 2.1734 }
       },
       { 
-        day: '2', 
+        day: '3', 
         location: 'At Sea', 
         description: 'Relax and enjoy ship amenities, enrichment lectures, destination-focused entertainment'
       },
       { 
-        day: '3', 
+        day: '4', 
         location: 'Palma de Mallorca, Spain', 
         description: 'Palma - historic cathedral, Mediterranean charm, Spanish culture, beautiful beaches',
         coordinates: { lat: 39.5696, lon: 2.6502 }
       },
       { 
-        day: '4', 
+        day: '5', 
         location: 'At Sea', 
         description: 'Mediterranean sailing, onboard activities, formal evening'
       },
       { 
-        day: '5', 
+        day: '6', 
         location: 'Civitavecchia (Rome), Italy', 
         description: 'Civitavecchia - gateway to Rome, ancient history, Colosseum, Vatican City, Italian cuisine',
         coordinates: { lat: 42.0934, lon: 11.7964 }
       },
       { 
-        day: '6-7', 
+        day: '7-8', 
         location: 'At Sea', 
         description: 'Mediterranean crossing, enrichment programs, relaxation'
       },
       { 
-        day: '8', 
+        day: '9', 
         location: 'Las Palmas, Canary Islands', 
         description: 'Las Palmas - Atlantic gateway, Spanish culture, volcanic landscapes, Canarian cuisine',
         coordinates: { lat: 28.1248, lon: -15.4300 }
       },
       { 
-        day: '9-12', 
+        day: '10-13', 
         location: 'At Sea - Atlantic Crossing', 
         description: 'Atlantic crossing to South America, sea days, onboard entertainment'
       },
       { 
-        day: '13', 
+        day: '14', 
         location: 'Salvador, Brazil', 
         description: 'Salvador - colonial architecture, Afro-Brazilian culture, historic Pelourinho, Brazilian energy',
         coordinates: { lat: -12.9714, lon: -38.5014 }
       },
       { 
-        day: '14', 
+        day: '15', 
         location: 'At Sea', 
         description: 'Coastal sailing, Brazilian waters, onboard activities'
       },
       { 
-        day: '15', 
+        day: '16', 
         location: 'Rio de Janeiro, Brazil - Overnight', 
         description: 'Rio de Janeiro arrive - overnight stay, Christ the Redeemer, Sugarloaf Mountain, Copacabana Beach, iconic harbour, Carnival vibe',
         coordinates: { lat: -22.9068, lon: -43.1729 }
       },
       { 
-        day: '16', 
+        day: '17', 
         location: 'Rio de Janeiro, Brazil', 
         description: 'Rio de Janeiro - second day, explore Ipanema, Tijuca Forest, samba culture, Brazilian cuisine',
         coordinates: { lat: -22.9068, lon: -43.1729 }
       },
       { 
-        day: '17', 
+        day: '18', 
         location: 'At Sea', 
         description: 'Coastal sailing south, Brazilian coastline views'
       },
       { 
-        day: '18', 
+        day: '19', 
         location: 'Montevideo, Uruguay', 
         description: 'Montevideo - charming capital, colonial architecture, La Rambla waterfront, Uruguayan culture',
         coordinates: { lat: -34.9011, lon: -56.1645 }
       },
       { 
-        day: '19', 
+        day: '20', 
         location: 'Buenos Aires, Argentina - Overnight', 
         description: 'Buenos Aires arrive - overnight stay, tango shows, Recoleta Cemetery, steaks, Pampas culture, Argentine sophistication',
         coordinates: { lat: -34.6037, lon: -58.3816 }
       },
       { 
-        day: '20', 
+        day: '21', 
         location: 'Buenos Aires, Argentina', 
         description: 'Buenos Aires - second day, San Telmo markets, La Boca, Iguazu Falls day trip option, tango immersion',
         coordinates: { lat: -34.6037, lon: -58.3816 }
       },
       { 
-        day: '21', 
+        day: '22', 
         location: 'At Sea', 
         description: 'Sailing south, Patagonian waters approaching'
       },
       { 
-        day: '22', 
+        day: '23', 
         location: 'Puerto Madryn, Argentina', 
         description: 'Puerto Madryn - gateway to Peninsula Valdés, whale watching, penguin colonies, Patagonian wildlife',
         coordinates: { lat: -42.7692, lon: -65.0385 }
       },
       { 
-        day: '23', 
+        day: '24', 
         location: 'At Sea', 
         description: 'Patagonian sailing, approaching Cape Horn'
       },
       { 
-        day: '24', 
+        day: '25', 
         location: 'Ushuaia, Argentina', 
         description: 'Ushuaia - world\'s southernmost city, Tierra del Fuego, Beagle Channel, End of the World, dramatic landscapes',
         coordinates: { lat: -54.8019, lon: -68.3030 }
       },
       { 
-        day: '25', 
+        day: '26', 
         location: 'Cape Horn (Scenic Cruising)', 
         description: 'Cape Horn - legendary passage, dramatic cliffs, historic significance, weather permitting'
       },
       { 
-        day: '26', 
+        day: '27', 
         location: 'At Sea - Chilean Fjords', 
         description: 'Chilean fjords scenic cruising, glaciers, rugged coastline, Patagonian wilderness'
       },
       { 
-        day: '27', 
+        day: '28', 
         location: 'Punta Arenas, Chile', 
         description: 'Punta Arenas - Magellan Strait, penguin colonies, Patagonian culture, gateway to Torres del Paine',
         coordinates: { lat: -53.1638, lon: -70.9171 }
       },
       { 
-        day: '28-29', 
+        day: '29-30', 
         location: 'At Sea - Chilean Coast', 
         description: 'Coastal sailing north, Chilean fjords, Pacific waters'
       },
       { 
-        day: '30', 
+        day: '31', 
         location: 'Valparaíso, Chile', 
         description: 'Valparaíso - colourful hillside city, UNESCO World Heritage, Chilean culture, gateway to Santiago',
         coordinates: { lat: -33.0472, lon: -71.6127 }
       },
       { 
-        day: '31-33', 
+        day: '32-34', 
         location: 'At Sea - Pacific Crossing', 
         description: 'Pacific crossing to Easter Island, longest sea days, onboard enrichment'
       },
       { 
-        day: '34', 
+        day: '35', 
         location: 'Easter Island (Rapa Nui), Chile', 
         description: 'Easter Island - moai statues, Rapa Nui culture, remote Pacific island, archaeological wonder, weather permitting',
         coordinates: { lat: -27.1127, lon: -109.3497 }
       },
       { 
-        day: '35-38', 
+        day: '36-39', 
         location: 'At Sea - Pacific', 
         description: 'Pacific sailing to French Polynesia, tropical waters approaching'
       },
       { 
-        day: '39', 
+        day: '40', 
         location: 'Papeete (Tahiti), French Polynesia - Overnight', 
         description: 'Papeete arrive - overnight stay, Tahitian culture, overwater bungalows, turquoise lagoons, French Polynesian paradise',
         coordinates: { lat: -17.5390, lon: -149.5688 }
       },
       { 
-        day: '40', 
+        day: '41', 
         location: 'Papeete (Tahiti), French Polynesia', 
         description: 'Tahiti - second day, explore Moorea, coral reefs, tropical paradise, Polynesian hospitality',
         coordinates: { lat: -17.5390, lon: -149.5688 }
       },
       { 
-        day: '41', 
+        day: '42', 
         location: 'Moorea, French Polynesia', 
         description: 'Moorea - stunning lagoon, volcanic peaks, overwater bungalows, snorkelling, tropical beauty',
         coordinates: { lat: -17.5388, lon: -149.8295 }
       },
       { 
-        day: '42', 
+        day: '43', 
         location: 'Bora Bora, French Polynesia', 
         description: 'Bora Bora - iconic overwater bungalows, Mount Otemanu, turquoise water, coral reefs, ultimate paradise',
         coordinates: { lat: -16.5004, lon: -151.7415 }
       },
       { 
-        day: '43-45', 
+        day: '44-46', 
         location: 'At Sea - Pacific', 
         description: 'Pacific sailing towards New Zealand, Cook Islands region'
       },
       { 
-        day: '46', 
+        day: '47', 
         location: 'Rarotonga, Cook Islands', 
         description: 'Rarotonga - Polynesian culture, pristine beaches, tropical landscapes, South Pacific charm',
         coordinates: { lat: -21.2297, lon: -159.7747 }
       },
       { 
-        day: '47-49', 
+        day: '48-50', 
         location: 'At Sea - Pacific', 
         description: 'Pacific sailing to New Zealand, approaching Australasia'
       },
       { 
-        day: '50', 
+        day: '51', 
         location: 'Bay of Islands, New Zealand', 
         description: 'Bay of Islands - pristine beaches, dolphin watching, historic Waitangi, New Zealand beauty',
         coordinates: { lat: -35.2269, lon: 174.1617 }
       },
       { 
-        day: '51', 
+        day: '52', 
         location: 'Auckland, New Zealand', 
         description: 'Auckland - City of Sails, Sky Tower, harbour cruises, Maori culture, New Zealand gateway',
         coordinates: { lat: -36.8485, lon: 174.7633 }
       },
       { 
-        day: '52', 
+        day: '53', 
         location: 'Tauranga, New Zealand', 
         description: 'Tauranga - Mount Maunganui, geothermal wonders, Kiwi culture, beautiful coastline',
         coordinates: { lat: -37.6878, lon: 176.1651 }
       },
       { 
-        day: '53', 
+        day: '54', 
         location: 'Wellington, New Zealand', 
         description: 'Wellington - capital city, Te Papa Museum, cable car, wind city, New Zealand culture',
         coordinates: { lat: -41.2865, lon: 174.7762 }
       },
       { 
-        day: '54', 
+        day: '55', 
         location: 'Dunedin, New Zealand', 
         description: 'Dunedin - Scottish heritage, Larnach Castle, Otago Peninsula, wildlife, New Zealand charm',
         coordinates: { lat: -45.8741, lon: 170.5036 }
       },
       { 
-        day: '55-56', 
+        day: '56-57', 
         location: 'At Sea - Tasman Sea', 
         description: 'Tasman Sea crossing to Australia, approaching Sydney'
       },
       { 
-        day: '57', 
+        day: '58', 
         location: 'Hobart, Tasmania, Australia', 
         description: 'Hobart - historic port, MONA museum, Tasmanian wilderness, Australian culture',
         coordinates: { lat: -42.8821, lon: 147.3272 }
       },
       { 
-        day: '58', 
+        day: '59', 
         location: 'At Sea', 
         description: 'Sailing to Sydney, Australian coastline'
       },
       { 
-        day: '59', 
+        day: '60', 
         location: 'Sydney, Australia - Overnight', 
         description: 'Sydney arrive - overnight stay, Opera House, Harbour Bridge, iconic skyline, harbour cruises, Australian culture',
         coordinates: { lat: -33.8688, lon: 151.2093 }
       },
       { 
-        day: '60', 
+        day: '61', 
         location: 'Sydney, Australia', 
         description: 'Sydney - second day, Bondi Beach, Royal Botanic Gardens, Sydney Harbour, Australian lifestyle',
         coordinates: { lat: -33.8688, lon: 151.2093 }
       },
       { 
-        day: '61', 
+        day: '62', 
         location: 'At Sea', 
         description: 'Sailing north, Pacific islands approaching'
       },
       { 
-        day: '62', 
+        day: '63', 
         location: 'Nouméa, New Caledonia', 
         description: 'Nouméa - French Pacific, colonial architecture, tropical beauty, Melanesian culture',
         coordinates: { lat: -22.2558, lon: 166.4509 }
       },
       { 
-        day: '63', 
+        day: '64', 
         location: 'At Sea', 
         description: 'Pacific sailing, tropical waters'
       },
       { 
-        day: '64', 
+        day: '65', 
         location: 'Port Vila, Vanuatu', 
         description: 'Port Vila - Melanesian culture, tropical paradise, blue holes, Pacific charm',
         coordinates: { lat: -17.7333, lon: 168.3167 }
       },
       { 
-        day: '65', 
+        day: '66', 
         location: 'At Sea', 
         description: 'Pacific sailing towards Hawaii'
       },
       { 
-        day: '66', 
+        day: '67', 
         location: 'Honolulu, Hawaii, USA', 
         description: 'Honolulu - Waikiki Beach, Pearl Harbor, Diamond Head, Hawaiian culture, Pacific gateway',
         coordinates: { lat: 21.3099, lon: -157.8581 }
       },
       { 
-        day: '67', 
+        day: '68', 
         location: 'Lahaina (Maui), Hawaii, USA', 
         description: 'Lahaina - historic whaling town, Maui beauty, Hawaiian culture, tropical paradise',
         coordinates: { lat: 20.8783, lon: -156.6825 }
       },
       { 
-        day: '68-72', 
+        day: '69-73', 
         location: 'At Sea - Pacific', 
         description: 'Pacific crossing to North America, longest sea days'
       },
       { 
-        day: '73', 
+        day: '74', 
         location: 'Los Angeles, California, USA', 
         description: 'Los Angeles - Hollywood, Beverly Hills, Santa Monica, West Coast USA, American culture',
         coordinates: { lat: 34.0522, lon: -118.2437 }
       },
       { 
-        day: '74', 
+        day: '75', 
         location: 'At Sea', 
         description: 'Coastal sailing, Mexican Riviera approaching'
       },
       { 
-        day: '75', 
+        day: '76', 
         location: 'Cabo San Lucas, Mexico', 
         description: 'Cabo San Lucas - Baja California, El Arco, Mexican Riviera, Pacific beauty',
         coordinates: { lat: 22.8905, lon: -109.9167 }
       },
       { 
-        day: '76-78', 
+        day: '77-79', 
         location: 'At Sea - Pacific', 
         description: 'Pacific sailing to Panama Canal'
       },
       { 
-        day: '79', 
+        day: '80', 
         location: 'Panama Canal (Full Transit)', 
         description: 'Panama Canal - full daylight transit, engineering marvel, Gatun Locks, Miraflores Locks, Pacific to Atlantic',
         coordinates: { lat: 9.0810, lon: -79.5937 }
       },
       { 
-        day: '80', 
+        day: '81', 
         location: 'At Sea - Caribbean', 
         description: 'Caribbean waters, tropical sailing'
       },
       { 
-        day: '81', 
+        day: '82', 
         location: 'Aruba', 
         description: 'Aruba - Dutch Caribbean, white sand beaches, turquoise water, Caribbean paradise',
         coordinates: { lat: 12.5211, lon: -70.0370 }
       },
       { 
-        day: '82', 
+        day: '83', 
         location: 'Curaçao', 
         description: 'Curaçao - colourful Dutch architecture, Caribbean charm, Willemstad UNESCO site',
         coordinates: { lat: 12.1696, lon: -68.9900 }
       },
       { 
-        day: '83', 
+        day: '84', 
         location: 'At Sea', 
         description: 'Caribbean sailing, tropical waters'
       },
       { 
-        day: '84', 
+        day: '85', 
         location: 'Barbados', 
         description: 'Barbados - British Caribbean, rum culture, beautiful beaches, Caribbean hospitality',
         coordinates: { lat: 13.1939, lon: -59.5432 }
       },
       { 
-        day: '85', 
+        day: '86', 
         location: 'St Maarten', 
         description: 'St Maarten - dual nation island, Maho Beach, Caribbean charm, duty-free shopping',
         coordinates: { lat: 18.0425, lon: -63.0548 }
       },
       { 
-        day: '86-90', 
+        day: '87-91', 
         location: 'At Sea - Atlantic Crossing', 
         description: 'Atlantic crossing to Europe, final sea days, world cruise gala events'
       },
       { 
-        day: '91', 
+        day: '92', 
         location: 'Lisbon, Portugal', 
         description: 'Lisbon - historic capital, Belem Tower, Portuguese culture, European return',
         coordinates: { lat: 38.7223, lon: -9.1393 }
       },
       { 
-        day: '92', 
+        day: '93', 
         location: 'At Sea', 
         description: 'Mediterranean approaching, final sea day'
       },
       { 
-        day: '93', 
+        day: '94', 
         location: 'Barcelona, Spain - Disembark', 
         description: 'Arrive Barcelona, disembark world cruise. Transfer to airport, fly Barcelona → LHR (2hr15 direct)',
         coordinates: { lat: 41.3851, lon: 2.1734 }
@@ -490,6 +504,7 @@ export const bucketListExperiences = [
   {
     id: 'antarctica',
     slug: 'antarctica-expeditions',
+    lastUpdated: '2026-01-02',
     title: 'Antarctica Expeditions',
     tagline: 'The ultimate bucket list: penguins, icebergs, and pristine wilderness',
     description: 'Direct from London to Buenos Aires\'s sophisticated tango culture-2 nights luxury immersion (Recoleta, steaks, jetlag buffer). Fly to Ushuaia, gateway to the White Continent-1 night Tierra del Fuego. Embark your 14-night expedition cruise: cross the legendary Drake Passage, daily Zodiac landings on the Antarctic Peninsula, thousands of penguins, whale breaches, towering icebergs, South Shetland Islands. Return Ushuaia, fly home via Buenos Aires. The ultimate once-in-a-lifetime journey. ATOL protected. Get a personalised quote.',
@@ -521,85 +536,85 @@ export const bucketListExperiences = [
     cruiseLines: ['Quark Expeditions', 'Hurtigruten', 'Ponant', 'Silversea'],
     itinerary: [
       { 
-        day: '0', 
+        day: '1', 
         location: 'London Heathrow (LHR)', 
         description: 'Depart LHR → Buenos Aires EZE (13-14hr direct BA)',
         coordinates: { lat: 51.4700, lon: -0.4543 }
       },
       { 
-        day: '1', 
+        day: '2', 
         location: 'Buenos Aires, Argentina', 
         description: 'Arrive Buenos Aires EZE, transfer to luxury hotel. Check-in, explore Recoleta, tango show, Argentine steaks',
         coordinates: { lat: -34.6037, lon: -58.3816 }
       },
       { 
-        day: '2', 
+        day: '4', 
         location: 'Buenos Aires, Argentina', 
         description: 'Buenos Aires free day - San Telmo markets, La Boca, Palermo, cultural immersion, jetlag recovery',
         coordinates: { lat: -34.6037, lon: -58.3816 }
       },
       { 
-        day: '3', 
+        day: '5', 
         location: 'Buenos Aires → Ushuaia', 
         description: 'Transfer to airport, fly Buenos Aires → Ushuaia (3hr domestic). Arrive Ushuaia, gateway to Antarctica. Check-in hotel',
         coordinates: { lat: -54.8019, lon: -68.3030 }
       },
       { 
-        day: '4', 
+        day: '6', 
         location: 'Ushuaia - Embark cruise', 
         description: 'Ushuaia exploration - Tierra del Fuego National Park, penguin colonies nearby. Afternoon embark expedition ship',
         coordinates: { lat: -54.8019, lon: -68.3030 }
       },
       { 
-        day: '5-6', 
+        day: '7-8', 
         location: 'Drake Passage', 
         description: 'Cross the legendary Drake Passage - expedition team lectures, seabird watching, prepare for Antarctica',
         coordinates: { lat: -60.0, lon: -65.0 }
       },
       { 
-        day: '7', 
+        day: '9', 
         location: 'South Shetland Islands', 
         description: 'First Antarctic landings - penguin rookeries, seal colonies, research stations, Zodiac cruising',
         coordinates: { lat: -62.0, lon: -58.0 }
       },
       { 
-        day: '8-12', 
+        day: '10-14', 
         location: 'Antarctic Peninsula', 
         description: 'Daily Zodiac landings - penguin colonies (Adélie, Chinstrap, Gentoo), whale watching, icebergs, pristine wilderness',
         coordinates: { lat: -64.0, lon: -62.0 }
       },
       { 
-        day: '13', 
+        day: '15', 
         location: 'Lemaire Channel', 
         description: 'Navigate stunning Lemaire Channel - narrow passage between towering icebergs, kayaking opportunities, photography paradise',
         coordinates: { lat: -65.1, lon: -64.0 }
       },
       { 
-        day: '14-15', 
+        day: '16-17', 
         location: 'Antarctic Peninsula continued', 
         description: 'More Zodiac landings - additional penguin colonies, whale breaches, seal encounters, expedition activities',
         coordinates: { lat: -64.0, lon: -62.0 }
       },
       { 
-        day: '16-17', 
+        day: '18-19', 
         location: 'Drake Passage return', 
         description: 'Cross Drake Passage northbound - reflect on adventure, final lectures, seabird watching, expedition recap',
         coordinates: { lat: -60.0, lon: -65.0 }
       },
       { 
-        day: '18', 
+        day: '20', 
         location: 'Ushuaia - Disembark', 
         description: 'Arrive Ushuaia, disembark expedition ship. Transfer to airport, fly Ushuaia → Buenos Aires',
         coordinates: { lat: -54.8019, lon: -68.3030 }
       },
       { 
-        day: '19', 
+        day: '21', 
         location: 'Buenos Aires → London Heathrow', 
         description: 'Connect in Buenos Aires, depart EZE → LHR (13-14hr direct BA)',
         coordinates: { lat: -34.6037, lon: -58.3816 }
       },
       { 
-        day: '20', 
+        day: '22', 
         location: 'London Heathrow (LHR)', 
         description: 'Arrive LHR, journey complete',
         coordinates: { lat: 51.4700, lon: -0.4543 }
@@ -670,6 +685,7 @@ export const bucketListExperiences = [
   {
     id: 'japan-asia',
     slug: 'japan-asia-cruises',
+    lastUpdated: '2026-01-02',
     title: 'Japan & Asia',
     tagline: 'Tokyo temples to Singapore skyline via bucket list ports',
     description: 'Direct from London to Tokyo\'s neon pulse-2 nights luxury immersion (sushi omakase, Shibuya Crossing, Meiji Shrine). Embark your 12‑night Asia odyssey: Busan\'s temples, Kagoshima volcanoes, Okinawa beaches, Taipei night markets, Hong Kong harbour lights, Shanghai Bund, arriving Singapore triumphant. 2 nights Marina Bay Sands finale-Infinity Pool, Gardens by the Bay. Open‑jaw genius. ATOL protected. Get a personalised quote.',
@@ -697,101 +713,101 @@ export const bucketListExperiences = [
     cruiseLines: ['Celebrity Cruises', 'Holland America Line', 'Ponant'],
     itinerary: [
       { 
-        day: '0', 
+        day: '1', 
         location: 'London Heathrow (LHR)', 
         description: 'Depart LHR → Tokyo NRT (12hr direct JAL/ANA)',
         coordinates: { lat: 51.4700, lon: -0.4543 }
       },
       { 
-        day: '1', 
+        day: '2', 
         location: 'Tokyo, Japan', 
         description: 'Arrive Tokyo NRT, transfer to luxury hotel (Park Hyatt or similar). Check-in, explore Shibuya Crossing, Meiji Shrine',
         coordinates: { lat: 35.7649, lon: 140.3864 }
       },
       { 
-        day: '2', 
+        day: '4', 
         location: 'Tokyo, Japan', 
         description: 'Tokyo free day - sushi omakase, Tsukiji market, traditional ryokan experience, Mount Fuji views',
         coordinates: { lat: 35.7649, lon: 140.3864 }
       },
       { 
-        day: '3', 
+        day: '5', 
         location: 'Tokyo - Embark cruise', 
         description: 'Transfer to port, embark 12-night Asia cruise. Set sail for Busan',
         coordinates: { lat: 35.7649, lon: 140.3864 }
       },
       { 
-        day: '4', 
+        day: '6', 
         location: 'Busan, South Korea', 
         description: 'Busan - Haeundae Beach, Gamcheon Culture Village, Jagalchi Fish Market, temples',
         coordinates: { lat: 35.1796, lon: 129.0756 }
       },
       { 
-        day: '5', 
+        day: '7', 
         location: 'At sea', 
         description: 'Relax onboard, cultural enrichment programs, Asian cuisine demonstrations'
       },
       { 
-        day: '6', 
+        day: '8', 
         location: 'Kagoshima, Japan', 
         description: 'Kagoshima - active Sakurajima volcano views, Sengan-en Garden, samurai history',
         coordinates: { lat: 31.5968, lon: 130.5571 }
       },
       { 
-        day: '7', 
+        day: '9', 
         location: 'Okinawa (Naha), Japan', 
         description: 'Okinawa - pristine beaches, Shuri Castle, traditional Ryukyuan culture, crystal-clear waters',
         coordinates: { lat: 26.2124, lon: 127.6809 }
       },
       { 
-        day: '8', 
+        day: '10', 
         location: 'Taipei, Taiwan', 
         description: 'Taipei - night markets, Taipei 101 skyscraper, traditional temples, street food',
         coordinates: { lat: 25.0330, lon: 121.5654 }
       },
       { 
-        day: '9', 
+        day: '11', 
         location: 'Hong Kong', 
         description: 'Hong Kong - Victoria Peak, Star Ferry, harbour lights, dim sum, Temple Street Night Market',
         coordinates: { lat: 22.3964, lon: 114.1095 }
       },
       { 
-        day: '10', 
+        day: '12', 
         location: 'Shanghai, China', 
         description: 'Shanghai - The Bund, Yu Garden, French Concession, modern skyline, traditional markets',
         coordinates: { lat: 31.2304, lon: 121.4737 }
       },
       { 
-        day: '11', 
+        day: '13', 
         location: 'At sea', 
         description: 'Final sea day, prepare for Singapore arrival, onboard activities'
       },
       { 
-        day: '12', 
+        day: '14', 
         location: 'Singapore - Disembark', 
         description: 'Arrive Singapore, disembark cruise. Transfer to Marina Bay Sands (2 nights)',
         coordinates: { lat: 1.3521, lon: 103.8198 }
       },
       { 
-        day: '13', 
+        day: '15', 
         location: 'Singapore', 
         description: 'Singapore - Marina Bay Sands Infinity Pool, Gardens by the Bay, hawker centres, Orchard Road',
         coordinates: { lat: 1.3521, lon: 103.8198 }
       },
       { 
-        day: '14', 
+        day: '16', 
         location: 'Singapore', 
         description: 'Singapore free day - explore Little India, Chinatown, Sentosa Island, rooftop bars',
         coordinates: { lat: 1.3521, lon: 103.8198 }
       },
       { 
-        day: '15', 
+        day: '17', 
         location: 'Singapore → London Heathrow', 
         description: 'Transfer to Singapore Changi Airport, depart SIN → LHR (13hr direct)',
         coordinates: { lat: 1.3521, lon: 103.8198 }
       },
       { 
-        day: '16', 
+        day: '18', 
         location: 'London Heathrow (LHR)', 
         description: 'Arrive LHR, journey complete',
         coordinates: { lat: 51.4700, lon: -0.4543 }
@@ -866,6 +882,7 @@ export const bucketListExperiences = [
   {
     id: 'rocky-mountaineer-alaska',
     slug: 'rocky-mountaineer-alaska',
+    lastUpdated: '2026-01-02',
     title: 'Rocky Mountaineer & Alaska',
     tagline: 'Scenic Voyager rail through Banff\'s peaks + Inside Passage Bucket List cruise',
     description: 'Land direct from London into Calgary\'s mountain air, 90 minutes to Fairmont Banff Springs for 2 indulgent nights amid turquoise lakes. Board Rocky Mountaineer Scenic Voyager for 2 days glass-dome luxury-gourmet meals, endless peaks, Kamloops overnight. Vancouver city vibes, then 7-night Inside Passage Bucket List Itinerary cruise with HAL, Princess or Celebrity. Grizzlies in Juneau, Glacier Bay calvings, Sitka totems. Final Vancouver night before home. ATOL protected. Get a personalised quote.',
@@ -893,103 +910,103 @@ export const bucketListExperiences = [
     cruiseLines: ['Holland America Line', 'Princess Cruises', 'Celebrity Cruises'],
     itinerary: [
       { 
-        day: '0', 
+        day: '1', 
         location: 'London Heathrow (LHR)', 
         description: 'Depart LHR → Calgary (9hr direct Air Canada/BA)',
         coordinates: { lat: 51.4700, lon: -0.4543 }
       },
       { 
-        day: '1', 
+        day: '2', 
         location: 'Calgary → Banff (Fairmont Banff Springs)', 
         description: 'YYC arrival, transfer to Fairmont Banff Springs (2 nights). Arrive in mountain air, check into luxury resort',
         coordinates: { lat: 51.1784, lon: -115.5708 }
       },
       { 
-        day: '2', 
+        day: '4', 
         location: 'Banff - Lake Louise', 
         description: 'Lake Louise day trip, Bow Valley hikes, turquoise lakes and mountain vistas',
         coordinates: { lat: 51.4254, lon: -116.1773 }
       },
       { 
-        day: '3', 
+        day: '5', 
         location: 'Banff - Free exploration', 
         description: 'Banff free day / Moraine Lake, Johnston Canyon, gondola rides, wildlife viewing',
         coordinates: { lat: 51.1784, lon: -115.5708 }
       },
       { 
-        day: '4', 
+        day: '6', 
         location: 'Rocky Mountaineer Scenic Voyager → Kamloops', 
         description: 'Board Scenic Voyager train to Kamloops (overnight train) - glass-dome luxury, gourmet meals, bear spotting',
         coordinates: { lat: 50.6745, lon: -120.3272 }
       },
       { 
-        day: '5', 
+        day: '7', 
         location: 'Train → Vancouver', 
         description: 'Scenic Voyager continues to Vancouver, check-in Fairmont Vancouver (1 night)',
         coordinates: { lat: 49.2827, lon: -123.1207 }
       },
       { 
-        day: '6', 
+        day: '8', 
         location: 'Vancouver', 
         description: 'Vancouver exploration - Seawall, Granville Island, Stanley Park, city vibes',
         coordinates: { lat: 49.2827, lon: -123.1207 }
       },
       { 
-        day: '7', 
+        day: '9', 
         location: 'Vancouver - Embark cruise', 
         description: 'Embark 7-night Inside Passage cruise (HAL Nieuw Amsterdam/Princess Ruby Princess/Celebrity Solstice)',
         coordinates: { lat: 49.2827, lon: -123.1207 }
       },
       { 
-        day: '8', 
+        day: '10', 
         location: 'Ketchikan, Alaska', 
         description: 'Ketchikan - totem poles, native culture, salmon capital, eagle viewing',
         coordinates: { lat: 55.3422, lon: -131.6461 }
       },
       { 
-        day: '9', 
+        day: '11', 
         location: 'Juneau, Alaska', 
         description: 'Juneau - Mendenhall Glacier, whale watching, Alaska\'s capital, gold rush history',
         coordinates: { lat: 58.3019, lon: -134.4197 }
       },
       { 
-        day: '10', 
+        day: '12', 
         location: 'Skagway, Alaska', 
         description: 'Skagway - gold rush history, White Pass Railway, Klondike heritage',
         coordinates: { lat: 59.4583, lon: -135.3089 }
       },
       { 
-        day: '11', 
+        day: '13', 
         location: 'Glacier Bay National Park', 
         description: 'Glacier Bay - calving icebergs, seals, tidewater glaciers, UNESCO World Heritage site',
         coordinates: { lat: 58.2232, lon: -136.1075 }
       },
       { 
-        day: '12', 
+        day: '14', 
         location: 'Sitka, Alaska', 
         description: 'Sitka - eagles, Russian heritage, native culture, wildlife viewing',
         coordinates: { lat: 57.0531, lon: -135.3300 }
       },
       { 
-        day: '13', 
+        day: '15', 
         location: 'At sea', 
         description: 'Sea day - scenic cruising Inside Passage, relax and enjoy ship amenities',
         coordinates: null
       },
       { 
-        day: '14', 
+        day: '16', 
         location: 'Victoria, BC', 
         description: 'Victoria - Butchart Gardens, British charm, afternoon tea, coastal beauty',
         coordinates: { lat: 48.4284, lon: -123.3656 }
       },
       { 
-        day: '15', 
+        day: '17', 
         location: 'Vancouver - Disembark', 
         description: 'Disembark cruise, final night at Fairmont Vancouver',
         coordinates: { lat: 49.2827, lon: -123.1207 }
       },
       { 
-        day: '16', 
+        day: '18', 
         location: 'Vancouver → London Heathrow', 
         description: 'YVR → LHR return flight (10hr direct), journey complete',
         coordinates: { lat: 51.4700, lon: -0.4543 }
@@ -1084,6 +1101,7 @@ export const bucketListExperiences = [
   {
     id: 'galapagos',
     slug: 'galapagos-expeditions',
+    lastUpdated: '2026-01-02',
     title: 'Galápagos Islands',
     tagline: 'Darwin\'s living laboratory - Quito culture to Galápagos wildlife',
     description: 'Direct to Quito\'s Andean heights for 2 nights acclimatisation (Mitad del Mundo equator, UNESCO Old Town). Fly to Baltra, board your intimate expedition ship for 7 nights Western Galápagos immersion: snorkel with hammerheads at Fernandina, track tortoises on Isabela, witness booby mating dances on Española. Final night Puerto Ayora tortoise sanctuary. Open‑jaw perfection. ATOL protected. Get a personalised quote.',
@@ -1114,67 +1132,67 @@ export const bucketListExperiences = [
     cruiseLines: ['Celebrity Cruises', 'Silversea', 'Hurtigruten', 'Quasar Expeditions'],
     itinerary: [
       { 
-        day: '0', 
+        day: '1', 
         location: 'London Heathrow (LHR)', 
         description: 'Depart LHR → Quito UIO (12hr via Miami/US connection)',
         coordinates: { lat: 51.4700, lon: -0.4543 }
       },
       { 
-        day: '1', 
+        day: '2', 
         location: 'Quito, Ecuador', 
         description: 'Arrive Quito, transfer to JW Marriott. Check-in, altitude acclimatisation, explore UNESCO Old Town',
         coordinates: { lat: -0.2202, lon: -78.5123 }
       },
       { 
-        day: '2', 
+        day: '4', 
         location: 'Quito, Ecuador', 
         description: 'Quito free day - Mitad del Mundo equator monument, colonial architecture, Andean culture, continue acclimatisation',
         coordinates: { lat: -0.2202, lon: -78.5123 }
       },
       { 
-        day: '3', 
+        day: '5', 
         location: 'Quito → Baltra Airport - Embark', 
         description: 'Transfer to airport, fly Quito → Baltra Airport (2hr domestic). Arrive Baltra, transfer to port, embark expedition ship',
         coordinates: { lat: -0.4531, lon: -90.5947 }
       },
       { 
-        day: '4', 
+        day: '6', 
         location: 'Santa Cruz Island', 
         description: 'Santa Cruz - Charles Darwin Research Station, giant tortoise sanctuary, lava tunnels, snorkel with sea lions',
         coordinates: { lat: -0.7464, lon: -90.3143 }
       },
       { 
-        day: '5', 
+        day: '7', 
         location: 'Santiago Island', 
         description: 'Santiago - fur seals, lava lizards, marine iguanas, snorkel opportunities, volcanic landscapes',
         coordinates: { lat: -0.2289, lon: -90.9979 }
       },
       { 
-        day: '6', 
+        day: '8', 
         location: 'Isabela Island', 
         description: 'Isabela - world\'s largest tortoises in wild, flamingos, volcanic craters, giant tortoise tracking, endemic wildlife',
         coordinates: { lat: -0.9579, lon: -91.0000 }
       },
       { 
-        day: '7', 
+        day: '9', 
         location: 'Fernandina Island', 
         description: 'Fernandina - youngest island, marine iguana paradise, flightless cormorants, hammerhead shark snorkel, pristine wilderness',
         coordinates: { lat: -0.2807, lon: -91.6678 }
       },
       { 
-        day: '8', 
+        day: '10', 
         location: 'Española Island', 
         description: 'Española - albatross breeding ground, blue-footed booby courtship dances, blowholes, waved albatross, endemic species',
         coordinates: { lat: -1.3703, lon: -89.6049 }
       },
       { 
-        day: '9', 
+        day: '11', 
         location: 'Puerto Ayora, Santa Cruz', 
         description: 'Disembark expedition ship, transfer to Puerto Ayora hotel (1 night). Charles Darwin Station visit, tortoise reserve, final wildlife encounters',
         coordinates: { lat: -0.7464, lon: -90.3143 }
       },
       { 
-        day: '10', 
+        day: '12', 
         location: 'Puerto Ayora → Quito → London Heathrow', 
         description: 'Transfer to Baltra Airport, fly Puerto Ayora → Quito → LHR (via US connection)',
         coordinates: { lat: -0.7464, lon: -90.3143 }
@@ -1245,6 +1263,7 @@ export const bucketListExperiences = [
   {
     id: 'northern-lights',
     slug: 'northern-lights-arctic',
+    lastUpdated: '2026-01-02',
     title: 'Northern Lights & Arctic',
     tagline: 'Aurora hunting coastal voyage from Tromsø to the Russian border',
     description: 'Fly direct to aurora capital Tromsø for 2 nights of midnight hunts, Arctic Cathedral visits, and cable car panoramas. Embark your 7‑night coastal masterpiece North: Lofoten\'s dramatic peaks, Honningsvåg\'s North Cape cliff, endless fjords alive with lights. Disembark Kirkenes for ice hotel thrills, husky sleds, and Russian border walks. Pure winter magic. ATOL protected. Get a personalised quote.',
@@ -1274,79 +1293,79 @@ export const bucketListExperiences = [
     cruiseLines: ['Hurtigruten', 'Ponant', 'HX (Hurtigruten Expeditions)'],
     itinerary: [
       { 
-        day: '0', 
+        day: '1', 
         location: 'London Heathrow (LHR)', 
         description: 'Depart LHR → Tromsø TOS (3hr direct Norwegian/SAS)',
         coordinates: { lat: 51.4700, lon: -0.4543 }
       },
       { 
-        day: '1', 
+        day: '2', 
         location: 'Tromsø, Norway', 
         description: 'Arrive Tromsø, transfer to hotel. Check-in, explore Arctic Cathedral, cable car to Mount Storsteinen for panoramic views',
         coordinates: { lat: 69.6500, lon: 18.9600 }
       },
       { 
-        day: '2', 
+        day: '4', 
         location: 'Tromsø, Norway', 
         description: 'Tromsø free day - aurora hunting tours, whale watching, Sami culture experiences, midnight aurora viewing',
         coordinates: { lat: 69.6500, lon: 18.9600 }
       },
       { 
-        day: '3', 
+        day: '5', 
         location: 'Tromsø - Embark cruise', 
         description: 'Transfer to port, embark coastal voyage. Set sail north along Norwegian coast, begin aurora watching',
         coordinates: { lat: 69.6500, lon: 18.9600 }
       },
       { 
-        day: '4', 
+        day: '6', 
         location: 'Lofoten Islands', 
         description: 'Lofoten Islands - Reine fishing village, rugged peaks, red cabins, midnight hikes, dramatic fjord landscapes',
         coordinates: { lat: 68.3500, lon: 14.2500 }
       },
       { 
-        day: '5', 
+        day: '7', 
         location: 'At sea - Aurora viewing', 
         description: 'Sea day along Norwegian coast - aurora viewing opportunities, fjord cruising, onboard activities, lights forecast',
         coordinates: { lat: 70.0, lon: 20.0 }
       },
       { 
-        day: '6', 
+        day: '8', 
         location: 'Honningsvåg / North Cape', 
         description: 'Honningsvåg - North Cape visit (Europe\'s northernmost point), 1,000ft cliffs, Arctic Ocean views, winter solstice drama',
         coordinates: { lat: 71.1800, lon: 25.7800 }
       },
       { 
-        day: '7', 
+        day: '9', 
         location: 'At sea - Lights forecast', 
         description: 'Sea day continuing north - aurora viewing, coastal scenery, expedition lectures, prepare for Kirkenes arrival',
         coordinates: { lat: 70.5, lon: 28.0 }
       },
       { 
-        day: '8', 
+        day: '10', 
         location: 'Kirkenes - Disembark', 
         description: 'Arrive Kirkenes, disembark coastal voyage. Transfer to ice hotel, check-in for 2-night stay. Russian border nearby',
         coordinates: { lat: 69.7200, lon: 30.0500 }
       },
       { 
-        day: '9', 
+        day: '11', 
         location: 'Kirkenes', 
         description: 'Kirkenes - husky sledding, snowmobile adventures, ice hotel experience, Arctic activities, aurora viewing',
         coordinates: { lat: 69.7200, lon: 30.0500 }
       },
       { 
-        day: '10', 
+        day: '12', 
         location: 'Kirkenes', 
         description: 'Kirkenes free day - Sami reindeer experiences, Russian border walks, ice fishing, additional winter activities',
         coordinates: { lat: 69.7200, lon: 30.0500 }
       },
       { 
-        day: '11', 
+        day: '13', 
         location: 'Kirkenes → London Heathrow', 
         description: 'Transfer to Kirkenes airport, fly KKN → OSL → LHR (via Oslo connection)',
         coordinates: { lat: 69.7200, lon: 30.0500 }
       },
       { 
-        day: '12', 
+        day: '14', 
         location: 'London Heathrow (LHR)', 
         description: 'Arrive LHR, journey complete',
         coordinates: { lat: 51.4700, lon: -0.4543 }
@@ -1417,6 +1436,7 @@ export const bucketListExperiences = [
   {
     id: 'northern-lights-no-fly',
     slug: 'northern-lights-no-fly-dover',
+    lastUpdated: '2026-01-02',
     title: 'Northern Lights No-Fly from UK',
     tagline: 'Aurora hunting from your doorstep - Dover departures, Tromsø overnights',
     description: 'No airports. No jetlag. Pure Arctic magic. Coach or train to Dover, board Holland America Nieuw Statendam, wake to Norway\'s fjords. Tromsø overnight = your aurora jackpot with 24-hour lights window. Orkney stones, Shetland wildlife, North Cape round out the cultural immersion. HAL\'s "History Channel Northern Lights" lectures included. Door-to-door perfection. ATOL protected. Get a personalised quote.',
@@ -1452,85 +1472,85 @@ export const bucketListExperiences = [
         coordinates: { lat: 51.1294, lon: 1.3089 }
       },
       { 
-        day: '2', 
+        day: '3', 
         location: 'At sea - English Channel', 
         description: 'Sea day - English Channel crossing, HAL welcome events, explore ship amenities, BB King Club blues',
         coordinates: { lat: 50.5, lon: 1.0 }
       },
       { 
-        day: '3', 
+        day: '4', 
         location: 'Rotterdam, Netherlands', 
         description: 'Arrive Rotterdam - overnight stay, explore windmills, canals, Dutch culture, evening in port',
         coordinates: { lat: 51.9244, lon: 4.4777 }
       },
       { 
-        day: '4', 
+        day: '5', 
         location: 'Rotterdam, Netherlands', 
         description: 'Rotterdam - continue exploration, depart afternoon, begin North Sea crossing',
         coordinates: { lat: 51.9244, lon: 4.4777 }
       },
       { 
-        day: '5', 
+        day: '6', 
         location: 'At sea - North Sea', 
         description: 'Sea day - North Sea crossing, onboard activities, prepare for Norwegian coast, aurora viewing begins',
         coordinates: { lat: 57.0, lon: 2.0 }
       },
       { 
-        day: '6', 
+        day: '7', 
         location: 'Lerwick, Shetland Islands', 
         description: 'Lerwick 08:00-17:00 - Shetland Islands, puffin watching, Jarlshof ruins, Scottish heritage, wildlife',
         coordinates: { lat: 60.1550, lon: -1.1450 }
       },
       { 
-        day: '7', 
+        day: '8', 
         location: 'At sea - Norwegian Sea', 
         description: 'Sea day - Norwegian Sea, aurora viewing opportunities, lights forecast, onboard lectures',
         coordinates: { lat: 62.0, lon: 4.0 }
       },
       { 
-        day: '8', 
+        day: '9', 
         location: 'Ålesund, Norway', 
         description: 'Ålesund 08:00-17:00 - Art Nouveau architecture, fjord gateway, Norwegian culture, scenic beauty',
         coordinates: { lat: 62.4722, lon: 6.1549 }
       },
       { 
-        day: '9', 
+        day: '10', 
         location: 'Trondheim, Norway', 
         description: 'Trondheim 08:00-17:00 - Nidaros Cathedral, historic city, Norwegian heritage, cultural immersion',
         coordinates: { lat: 63.4305, lon: 10.3951 }
       },
       { 
-        day: '10', 
+        day: '11', 
         location: 'At sea - Peak aurora sea day', 
         description: 'Sea day - peak aurora viewing day, History Channel Northern Lights lectures, prepare for Tromsø',
         coordinates: { lat: 68.0, lon: 10.0 }
       },
       { 
-        day: '11', 
+        day: '12', 
         location: 'Tromsø, Norway - Overnight', 
         description: 'Tromsø arrive 13:00 - overnight stay begins, cable car to Mount Storsteinen, Arctic Cathedral, aurora hunts, 24-hour lights window',
         coordinates: { lat: 69.6500, lon: 18.9600 }
       },
       { 
-        day: '12', 
+        day: '13', 
         location: 'Tromsø, Norway', 
         description: 'Tromsø - final lights chance, continue aurora viewing, depart 18:00, begin return crossing',
         coordinates: { lat: 69.6500, lon: 18.9600 }
       },
       { 
-        day: '13', 
+        day: '14', 
         location: 'At sea - Return crossing', 
         description: 'Sea day - return crossing, reflect on aurora experiences, final onboard activities',
         coordinates: { lat: 65.0, lon: 5.0 }
       },
       { 
-        day: '14', 
+        day: '15', 
         location: 'Kirkwall, Orkney Islands', 
         description: 'Kirkwall 08:00-17:00 - Orkney Islands, Skara Brae Neolithic village, Highland Park whisky distillery, Scottish heritage',
         coordinates: { lat: 58.9800, lon: -2.9600 }
       },
       { 
-        day: '15', 
+        day: '16', 
         location: 'Dover, UK', 
         description: 'Arrive Dover 07:00 - disembark, journey complete, easy return home via train/coach',
         coordinates: { lat: 51.1294, lon: 1.3089 }
@@ -1601,6 +1621,7 @@ export const bucketListExperiences = [
   {
     id: 'south-america',
     slug: 'south-america-cruises',
+    lastUpdated: '2026-01-02',
     title: 'South America',
     tagline: 'Buenos Aires tango to Fortaleza beaches',
     description: 'Buenos Aires elegance (2 nights tango immersion), then 12‑night coastal masterpiece: Uruguay polo beaches, São Paulo buzz, Rio\'s iconic harbour, pristine Ilhabela, Bahia\'s colonial charm, Fortaleza\'s dune buggy finale. Open‑jaw perfection. ATOL protected. Get a personalised quote.',
@@ -1630,97 +1651,97 @@ export const bucketListExperiences = [
     cruiseLines: ['Norwegian Cruise Line', 'MSC Cruises', 'Silversea'],
     itinerary: [
       { 
-        day: '0', 
+        day: '1', 
         location: 'London Heathrow (LHR)', 
         description: 'Depart LHR → Buenos Aires EZE (13hr direct)',
         coordinates: { lat: 51.4700, lon: -0.4543 }
       },
       { 
-        day: '1', 
+        day: '2', 
         location: 'Buenos Aires, Argentina', 
         description: 'Arrive Buenos Aires EZE, transfer to luxury hotel. Check-in, explore Recoleta, tango show, Argentine steaks',
         coordinates: { lat: -34.6037, lon: -58.3816 }
       },
       { 
-        day: '2', 
+        day: '4', 
         location: 'Buenos Aires, Argentina', 
         description: 'Buenos Aires free day - tango immersion, San Telmo markets, La Boca, Iguazu Falls day trip option',
         coordinates: { lat: -34.6037, lon: -58.3816 }
       },
       { 
-        day: '3', 
+        day: '5', 
         location: 'Montevideo, Uruguay - Embark', 
         description: 'Transfer to Montevideo port, embark South America cruise. Begin coastal masterpiece journey',
         coordinates: { lat: -34.9011, lon: -56.1645 }
       },
       { 
-        day: '4', 
+        day: '6', 
         location: 'Punta del Este, Uruguay', 
         description: 'Punta del Este - polo beaches, glamorous resort town, Atlantic coast, Uruguayan culture',
         coordinates: { lat: -34.9475, lon: -54.9336 }
       },
       { 
-        day: '5', 
+        day: '7', 
         location: 'Santos (São Paulo), Brazil', 
         description: 'Santos - gateway to São Paulo, Brazilian buzz, urban exploration, coffee culture',
         coordinates: { lat: -23.9608, lon: -46.3332 }
       },
       { 
-        day: '6', 
+        day: '8', 
         location: 'Rio de Janeiro, Brazil - Overnight', 
         description: 'Rio de Janeiro arrive - overnight stay, Christ Redeemer, Copacabana, iconic harbour, Carnival vibe',
         coordinates: { lat: -22.9068, lon: -43.1729 }
       },
       { 
-        day: '7', 
+        day: '9', 
         location: 'Rio de Janeiro, Brazil', 
         description: 'Rio de Janeiro - continue exploration, Sugarloaf Mountain, Ipanema, samba culture, depart afternoon',
         coordinates: { lat: -22.9068, lon: -43.1729 }
       },
       { 
-        day: '8', 
+        day: '10', 
         location: 'Ilhabela, Brazil', 
         description: 'Ilhabela - pristine island paradise, tropical beaches, Atlantic rainforest, Brazilian coast beauty',
         coordinates: { lat: -23.7781, lon: -45.3581 }
       },
       { 
-        day: '9', 
+        day: '11', 
         location: 'Salvador, Brazil', 
         description: 'Salvador - Bahia colonial charm, Pelourinho historic centre, Afro-Brazilian culture, vibrant city',
         coordinates: { lat: -12.9714, lon: -38.5014 }
       },
       { 
-        day: '10', 
+        day: '12', 
         location: 'At sea', 
         description: 'Sea day - relax onboard, prepare for Fortaleza arrival, Brazilian coast cruising',
         coordinates: { lat: -5.0, lon: -35.0 }
       },
       { 
-        day: '11', 
+        day: '13', 
         location: 'Fortaleza - Disembark', 
         description: 'Arrive Fortaleza, disembark cruise. Transfer to beach hotel (2 nights). Begin Brazilian coast finale',
         coordinates: { lat: -3.7172, lon: -38.5433 }
       },
       { 
-        day: '12', 
+        day: '14', 
         location: 'Fortaleza, Brazil', 
         description: 'Fortaleza - beaches, dune buggy adventures, colonial architecture, Brazilian culture, coastal exploration',
         coordinates: { lat: -3.7172, lon: -38.5433 }
       },
       { 
-        day: '13', 
+        day: '15', 
         location: 'Fortaleza, Brazil', 
         description: 'Fortaleza free day - additional beach time, local markets, seafood dining, final Brazilian experiences',
         coordinates: { lat: -3.7172, lon: -38.5433 }
       },
       { 
-        day: '14', 
+        day: '16', 
         location: 'Fortaleza → London Heathrow', 
         description: 'Transfer to Fortaleza airport, fly FOR → LHR (via Lisbon/Miami connection)',
         coordinates: { lat: -3.7172, lon: -38.5433 }
       },
       { 
-        day: '15', 
+        day: '17', 
         location: 'London Heathrow (LHR)', 
         description: 'Arrive LHR, journey complete',
         coordinates: { lat: 51.4700, lon: -0.4543 }
@@ -1796,6 +1817,7 @@ export const bucketListExperiences = [
   {
     id: 'middle-east',
     slug: 'middle-east-cruises',
+    lastUpdated: '2026-01-02',
     title: 'Middle East & Arabian Peninsula',
     tagline: 'Dubai skylines, desert dunes and ancient wonders',
     description: 'Fly direct from the UK into the warmth of the Arabian Gulf, swapping grey winter skies for skyscrapers, souks and desert sunsets. Your journey typically begins with a stay in Dubai or Abu Dhabi, giving time to explore futuristic skylines, the Sheikh Zayed Grand Mosque or the Museum of Islamic Art before you even sail. From there, the ship becomes your moving resort as you hop between Gulf capitals and Omani fjords: Muscat\'s Mutrah Corniche, Khasab\'s dolphin-filled khors, Sir Bani Yas wildlife island, Doha\'s Corniche and Souq Waqif. Longer itineraries branch into the Red Sea, opening up Aqaba for Petra, Safaga or Sokhna for Luxor and Cairo, and occasionally ports in Saudi Arabia such as Jeddah or Al Wajh for AlUla. Each day blends modern luxury with deep history and desert landscapes.',
@@ -1823,76 +1845,76 @@ export const bucketListExperiences = [
     cruiseLines: ['Celebrity Cruises', 'Royal Caribbean', 'MSC Cruises', 'Costa Cruises', 'P&O Cruises'],
     itinerary: [
       { 
-        day: '0', 
+        day: '1', 
         location: 'London Heathrow (LHR)', 
         description: 'Depart LHR → Dubai (7hr direct)',
         coordinates: { lat: 51.4700, lon: -0.4543 }
       },
       { 
-        day: '1', 
+        day: '2', 
         location: 'Dubai, UAE', 
         description: 'Dubai hotel stay - Burj Khalifa, fountains, historic creek, Dubai Marina, Dubai Mall, modern skylines',
         coordinates: { lat: 25.2615, lon: 55.3010 }
       },
       { 
-        day: '2', 
+        day: '4', 
         location: 'Dubai, UAE - Embark', 
         description: 'Embark in Dubai. Overnight in port to enjoy evening city lights, Dubai Harbour or Port Rashid cruise terminals',
         coordinates: { lat: 25.2615, lon: 55.3010 }
       },
       { 
-        day: '3', 
+        day: '5', 
         location: 'Abu Dhabi, UAE', 
         description: 'Abu Dhabi - Sheikh Zayed Grand Mosque, Louvre Abu Dhabi, Yas Island theme parks, Corniche, Zayed Port',
         coordinates: { lat: 24.4762, lon: 54.3583 }
       },
       { 
-        day: '4', 
+        day: '6', 
         location: 'Sir Bani Yas Island, UAE', 
         description: 'Sir Bani Yas Island - beach and wildlife reserve, desert island experience, Arabian Gulf beauty',
         coordinates: { lat: 24.3167, lon: 52.6167 }
       },
       { 
-        day: '5', 
+        day: '7', 
         location: 'At Sea', 
         description: 'Arabian Gulf cruising, onboard activities, enrichment programs'
       },
       { 
-        day: '6', 
+        day: '8', 
         location: 'Doha, Qatar', 
         description: 'Doha - Souq Waqif, Museum of Islamic Art, National Museum of Qatar, Corniche, futuristic skyline, new-build cruise terminal',
         coordinates: { lat: 25.2773, lon: 51.5275 }
       },
       { 
-        day: '7', 
+        day: '9', 
         location: 'At Sea', 
         description: 'Transit through Hormuz region, Arabian Sea cruising'
       },
       { 
-        day: '8', 
+        day: '10', 
         location: 'Muscat, Oman', 
         description: 'Muscat - Mutrah Souq, Corniche, Sultan Qaboos Grand Mosque, Omani culture, traditional architecture',
         coordinates: { lat: 23.6207, lon: 58.5666 }
       },
       { 
-        day: '9', 
+        day: '11', 
         location: 'At Sea', 
         description: 'Arabian Sea cruising, approaching Red Sea'
       },
       { 
-        day: '10', 
+        day: '12', 
         location: 'Safaga or Sokhna, Egypt', 
         description: 'Safaga or Sokhna - optional excursion to Luxor or Cairo, Valley of the Kings, pyramids, ancient Egyptian wonders',
         coordinates: { lat: 26.7333, lon: 33.9333 }
       },
       { 
-        day: '11', 
+        day: '13', 
         location: 'Aqaba, Jordan - Disembark', 
         description: 'Aqaba - disembark, Petra or Wadi Rum full-day tour, Jordan\'s only seaport, ancient wonders, desert landscapes',
         coordinates: { lat: 29.5305, lon: 35.0106 }
       },
       { 
-        day: '12', 
+        day: '14', 
         location: 'Aqaba → Amman → London Heathrow', 
         description: 'Aqaba → Amman → LHR (or direct return to Dubai by air, depending on preference)',
         coordinates: { lat: 29.5305, lon: 35.0106 }
@@ -1964,6 +1986,7 @@ export const bucketListExperiences = [
   {
     id: 'pacific-new-zealand',
     slug: 'pacific-new-zealand-cruises',
+    lastUpdated: '2026-01-02',
     title: 'Pacific Islands & New Zealand',
     tagline: 'Auckland to tropical paradise',
     description: 'Auckland Māori culture kickoff, then 12‑night island hop: Maori Bay of Islands, Fiji\'s coral reefs, New Caledonia\'s Loyalty Isles, Vanuatu volcanoes. Tropical finale with overwater bungalows and pristine beaches. Open‑jaw perfection. ATOL protected. Get a personalised quote.',
@@ -1993,97 +2016,97 @@ export const bucketListExperiences = [
     cruiseLines: ['Princess Cruises', 'P&O Cruises Australia', 'Carnival Cruise Line'],
     itinerary: [
       { 
-        day: '0', 
+        day: '1', 
         location: 'London Heathrow (LHR)', 
         description: 'Depart LHR → Auckland AKL (24hr via Asia/Sydney connection)',
         coordinates: { lat: 51.4700, lon: -0.4543 }
       },
       { 
-        day: '1', 
+        day: '2', 
         location: 'Auckland, New Zealand', 
         description: 'Arrive Auckland, transfer to hotel. Check-in, explore Sky Tower, Viaduct Harbour, Māori culture',
         coordinates: { lat: -36.8485, lon: 174.7633 }
       },
       { 
-        day: '2', 
+        day: '4', 
         location: 'Auckland, New Zealand', 
         description: 'Auckland free day - Sky Tower views, Viaduct exploration, Māori cultural experiences, city of sails',
         coordinates: { lat: -36.8485, lon: 174.7633 }
       },
       { 
-        day: '3', 
+        day: '5', 
         location: 'Bay of Islands - Embark', 
         description: 'Transfer to Bay of Islands port, embark Pacific cruise. Begin island hopping journey',
         coordinates: { lat: -35.2271, lon: 174.2430 }
       },
       { 
-        day: '4', 
+        day: '6', 
         location: 'At sea', 
         description: 'Sea day - relax onboard, prepare for Pacific islands, onboard activities, tropical cruising',
         coordinates: { lat: -30.0, lon: 175.0 }
       },
       { 
-        day: '5', 
+        day: '7', 
         location: 'Suva, Fiji', 
         description: 'Suva - Fijian capital, coral reefs, tropical beaches, Fijian culture, island paradise',
         coordinates: { lat: -18.1416, lon: 178.4419 }
       },
       { 
-        day: '6', 
+        day: '8', 
         location: 'Dravuni Island, Fiji', 
         description: 'Dravuni Island - pristine tropical paradise, turquoise waters, coral reefs, snorkelling, beach relaxation',
         coordinates: { lat: -18.7833, lon: 178.5167 }
       },
       { 
-        day: '7', 
+        day: '9', 
         location: 'Lautoka, Fiji', 
         description: 'Lautoka - sugar city, Fijian culture, tropical landscapes, beach activities, island exploration',
         coordinates: { lat: -17.6244, lon: 177.4528 }
       },
       { 
-        day: '8', 
+        day: '10', 
         location: 'Nouméa, New Caledonia', 
         description: 'Nouméa - French Pacific charm, beautiful lagoon, colonial architecture, tropical paradise',
         coordinates: { lat: -22.2558, lon: 166.4508 }
       },
       { 
-        day: '9', 
+        day: '11', 
         location: 'Lifou, Loyalty Islands', 
         description: 'Lifou - Loyalty Islands, pristine beaches, coral reefs, French Pacific culture, tropical beauty',
         coordinates: { lat: -20.9167, lon: 167.2333 }
       },
       { 
-        day: '10', 
+        day: '12', 
         location: 'Port Vila, Vanuatu', 
         description: 'Port Vila - Vanuatu capital, volcanoes, tropical landscapes, Melanesian culture, island paradise',
         coordinates: { lat: -17.7333, lon: 168.3167 }
       },
       { 
-        day: '11', 
+        day: '13', 
         location: 'At sea', 
         description: 'Sea day - relax onboard, reflect on island experiences, prepare for final port, tropical cruising',
         coordinates: { lat: -12.0, lon: 165.0 }
       },
       { 
-        day: '12', 
+        day: '14', 
         location: 'Final port - Disembark', 
         description: 'Arrive final port (Port Moresby or Cairns), disembark cruise. Transfer to hotel (2 nights). Begin tropical finale',
         coordinates: { lat: -9.4438, lon: 147.1803 } // Port Moresby default, can be Cairns
       },
       { 
-        day: '13', 
+        day: '15', 
         location: 'Final port', 
         description: 'Final port free day - beach relaxation, Barrier Reef tie-in (if Cairns), tropical exploration, local culture',
         coordinates: { lat: -9.4438, lon: 147.1803 }
       },
       { 
-        day: '14', 
+        day: '16', 
         location: 'Final port → London Heathrow', 
         description: 'Transfer to airport, fly final port → LHR (24hr via Asia/Sydney connection)',
         coordinates: { lat: -9.4438, lon: 147.1803 }
       },
       { 
-        day: '15', 
+        day: '17', 
         location: 'London Heathrow (LHR)', 
         description: 'Arrive LHR, journey complete',
         coordinates: { lat: 51.4700, lon: -0.4543 }
@@ -2158,6 +2181,7 @@ export const bucketListExperiences = [
   {
     id: 'transatlantic-crossings',
     slug: 'transatlantic-crossings',
+    lastUpdated: '2026-01-02',
     title: 'Transatlantic Crossings',
     tagline: 'Queen Mary 2 or MSC luxury across the pond',
     description: 'Board Southampton for 7‑day Cunard QM2 or MSC luxury: gala nights, lectures, sea days. Arrive New York harbour like 1920s icons. 2 nights Manhattan magic-Statue of Liberty, Top of Rock, skyline views. No-fly perfection. ATOL protected. Get a personalised quote.',
@@ -2194,55 +2218,55 @@ export const bucketListExperiences = [
         coordinates: { lat: 50.9097, lon: -1.4044 }
       },
       { 
-        day: '2', 
+        day: '3', 
         location: 'At sea - Atlantic crossing', 
         description: 'First sea day - explore ship amenities, enrichment lectures, afternoon tea, begin ocean crossing',
         coordinates: { lat: 50.0, lon: -10.0 }
       },
       { 
-        day: '3', 
+        day: '4', 
         location: 'At sea - Atlantic crossing', 
         description: 'Sea day - QM2 Planetarium (if on Cunard), world-class entertainment, fine dining, relaxation',
         coordinates: { lat: 48.0, lon: -20.0 }
       },
       { 
-        day: '4', 
+        day: '5', 
         location: 'At sea - Atlantic crossing', 
         description: 'Sea day - gala nights, formal dining, enrichment programs, spa treatments, ocean views',
         coordinates: { lat: 46.0, lon: -30.0 }
       },
       { 
-        day: '5', 
+        day: '6', 
         location: 'At sea - Atlantic crossing', 
         description: 'Mid-Atlantic - halfway point, onboard activities, lectures, afternoon tea, elegant evenings',
         coordinates: { lat: 44.0, lon: -40.0 }
       },
       { 
-        day: '6', 
+        day: '7', 
         location: 'At sea - Atlantic crossing', 
         description: 'Sea day - approaching North America, final gala night, entertainment, fine dining',
         coordinates: { lat: 42.0, lon: -50.0 }
       },
       { 
-        day: '7', 
+        day: '8', 
         location: 'At sea - Atlantic crossing', 
         description: 'Final sea day - prepare for New York arrival, enrichment lectures, onboard activities',
         coordinates: { lat: 40.5, lon: -60.0 }
       },
       { 
-        day: '8', 
+        day: '9', 
         location: 'New York, USA - Arrive & Disembark', 
         description: 'Arrive New York harbour - sail past Statue of Liberty, iconic skyline arrival. Disembark, transfer to Manhattan hotel (2 nights)',
         coordinates: { lat: 40.7128, lon: -74.0060 }
       },
       { 
-        day: '9', 
+        day: '10', 
         location: 'New York, USA', 
         description: 'New York free day - Statue of Liberty visit, Top of Rock observation deck, Manhattan exploration, Broadway shows',
         coordinates: { lat: 40.7128, lon: -74.0060 }
       },
       { 
-        day: '10', 
+        day: '11', 
         location: 'New York → London Heathrow', 
         description: 'Transfer to JFK airport, depart NYC → LHR (7hr direct). Arrive LHR, journey complete',
         coordinates: { lat: 40.7128, lon: -74.0060 }
@@ -2312,6 +2336,7 @@ export const bucketListExperiences = [
   {
     id: 'iceland-circumnavigation',
     slug: 'iceland-circumnavigation',
+    lastUpdated: '2026-01-02',
     title: 'Iceland Circumnavigation',
     tagline: 'Ring of Fire complete - Reykjavik to East Fjords',
     description: 'Direct to Reykjavik for geothermal Blue Lagoon and Harpa evenings. Embark 8‑night circumnavigation: Heimaey\'s Eldfell volcano landing, Ísafjörður\'s hot springs, Akureyri whale watch, Seyðisfjörður\'s rainbow street. East Fjords finale-waterfalls, hiking. Open‑jaw perfection. ATOL protected. Get a personalised quote.',
@@ -2341,79 +2366,79 @@ export const bucketListExperiences = [
     cruiseLines: ['Ambassador Cruise Line', 'Fred. Olsen', 'Ponant'],
     itinerary: [
       { 
-        day: '0', 
+        day: '1', 
         location: 'London Heathrow (LHR)', 
         description: 'Depart LHR → Reykjavik KEF (3hr direct)',
         coordinates: { lat: 51.4700, lon: -0.4543 }
       },
       { 
-        day: '1', 
+        day: '2', 
         location: 'Reykjavik, Iceland', 
         description: 'Arrive Reykjavik, transfer to hotel. Check-in, explore Harpa Concert Hall, Reykjavik city centre',
         coordinates: { lat: 64.1460, lon: -21.9420 }
       },
       { 
-        day: '2', 
+        day: '4', 
         location: 'Reykjavik, Iceland', 
         description: 'Reykjavik free day - Blue Lagoon geothermal spa, Golden Circle tour option, Icelandic culture',
         coordinates: { lat: 64.1460, lon: -21.9420 }
       },
       { 
-        day: '3', 
+        day: '5', 
         location: 'Reykjavik - Embark cruise', 
         description: 'Transfer to port, embark circumnavigation cruise. Set sail for Westmann Islands, begin ring of fire journey',
         coordinates: { lat: 64.1460, lon: -21.9420 }
       },
       { 
-        day: '4', 
+        day: '6', 
         location: 'Heimaey, Westmann Islands', 
         description: 'Heimaey - Eldfell volcano tender landing, puffin colonies, volcanic landscapes, dramatic cliffs',
         coordinates: { lat: 63.4420, lon: -20.2760 }
       },
       { 
-        day: '5', 
+        day: '7', 
         location: 'Patreksfjörður, Westfjords', 
         description: 'Patreksfjörður - remote Westfjords, seabird cliffs, dramatic coastline, Icelandic wilderness',
         coordinates: { lat: 65.5970, lon: -23.9960 }
       },
       { 
-        day: '6', 
+        day: '8', 
         location: 'Ísafjörður, Westfjords', 
         description: 'Ísafjörður - hot springs, fishing heritage, Arctic Circle proximity, fjord beauty',
         coordinates: { lat: 66.0750, lon: -23.1350 }
       },
       { 
-        day: '7', 
+        day: '9', 
         location: 'At sea / Ísafjarðardjúp', 
         description: 'Sea day - navigate Ísafjarðardjúp fjord system, onboard activities, midnight sun viewing',
         coordinates: { lat: 66.0, lon: -23.0 }
       },
       { 
-        day: '8', 
+        day: '10', 
         location: 'Akureyri, North Iceland', 
         description: 'Akureyri - whale watching capital, Godafoss waterfall, botanical gardens, northern gateway',
         coordinates: { lat: 65.6830, lon: -18.0880 }
       },
       { 
-        day: '9', 
+        day: '11', 
         location: 'Siglufjörður, North Iceland', 
         description: 'Siglufjörður - herring fishing heritage, Arctic Circle, dramatic fjord landscapes',
         coordinates: { lat: 66.1500, lon: -18.9167 }
       },
       { 
-        day: '10', 
+        day: '12', 
         location: 'Seyðisfjörður - Disembark', 
         description: 'Arrive Seyðisfjörður, disembark cruise. Transfer to East Fjords hotel (2 nights). Rainbow street, waterfalls nearby',
         coordinates: { lat: 65.2560, lon: -14.0100 }
       },
       { 
-        day: '11', 
+        day: '13', 
         location: 'East Fjords', 
         description: 'East Fjords free day - waterfalls, hiking trails, Icelandic horses, dramatic landscapes, local culture',
         coordinates: { lat: 65.2560, lon: -14.0100 }
       },
       { 
-        day: '12', 
+        day: '14', 
         location: 'East Fjords → Reykjavik → London Heathrow', 
         description: 'Transfer to airport, fly East Fjords → Reykjavik → LHR (3hr direct)',
         coordinates: { lat: 65.2560, lon: -14.0100 }
@@ -2484,6 +2509,7 @@ export const bucketListExperiences = [
   {
     id: 'european-rivers',
     slug: 'european-river-cruises',
+    lastUpdated: '2026-01-02',
     title: 'European River Cruises',
     tagline: 'Sail Europe\'s great rivers - from Amsterdam canals to Budapest\'s skyline',
     description: 'European river cruises are a gentle way to see multiple countries in one trip without airport hopping or long coach days. You typically fly from the UK to your embarkation city (for example Amsterdam for the Rhine, Budapest for the Danube or Porto for the Douro), enjoy 1-2 nights in a hand-picked hotel, then join your river ship right in the heart of the city. From there, the river becomes your highway: castles and vineyards slide past as you sit on deck with a glass of wine, you step off into medieval old towns or capital-city centres, and the ship moves while you dine or sleep. There are no open seas, no long tender rides and no days lost in transit - just a sequence of cities, villages and landscapes strung together like beads on a necklace.',
@@ -2511,55 +2537,55 @@ export const bucketListExperiences = [
     cruiseLines: ['Viking', 'AmaWaterways', 'Uniworld', 'Avalon Waterways', 'Scenic'],
     itinerary: [
       { 
-        day: '0', 
+        day: '1', 
         location: 'London Heathrow (LHR)', 
         description: 'Depart LHR → Budapest (2-2.5hr direct)',
         coordinates: { lat: 51.4700, lon: -0.4543 }
       },
       { 
-        day: '1', 
+        day: '2', 
         location: 'Budapest, Hungary', 
         description: 'Budapest hotel stay - explore both Buda and Pest: Castle District, Parliament, riverfront. Optional evening river illuminations cruise',
         coordinates: { lat: 47.4979, lon: 19.0402 }
       },
       { 
-        day: '2', 
+        day: '4', 
         location: 'Budapest, Hungary - Embark', 
         description: 'Free morning in the city, then transfer to the river ship and settle in. Evening welcome dinner and scenic departure',
         coordinates: { lat: 47.4979, lon: 19.0402 }
       },
       { 
-        day: '3', 
+        day: '5', 
         location: 'Bratislava, Slovakia', 
         description: 'Morning arrival with guided walking tour of the old town and hilltop castle. Afternoon at leisure, Slovakian culture',
         coordinates: { lat: 48.1486, lon: 17.1077 }
       },
       { 
-        day: '4', 
+        day: '6', 
         location: 'Vienna, Austria', 
         description: 'City tour (Ringstrasse, St Stephen\'s Cathedral) and optional Schönbrunn Palace. Evening classical concert option, imperial palaces, coffee houses',
         coordinates: { lat: 48.2082, lon: 16.3738 }
       },
       { 
-        day: '5', 
+        day: '7', 
         location: 'Wachau Valley & Dürnstein, Austria', 
         description: 'Scenic morning sailing through vineyards and castle-topped hills. Afternoon stroll through Dürnstein or visit Melk Abbey, terraced vineyards, pretty villages',
         coordinates: { lat: 48.3958, lon: 15.5206 }
       },
       { 
-        day: '6', 
+        day: '8', 
         location: 'Linz or Salzburg Excursion, Austria', 
         description: 'Choice of staying in Linz or taking a full-day excursion to Salzburg and the lakes region, Austrian culture',
         coordinates: { lat: 48.3069, lon: 14.2858 }
       },
       { 
-        day: '7', 
+        day: '9', 
         location: 'Passau, Germany', 
         description: 'Guided walking tour and organ recital in the baroque cathedral. Farewell dinner onboard, three-rivers town where Danube, Inn and Ilz meet',
         coordinates: { lat: 48.5667, lon: 13.4333 }
       },
       { 
-        day: '8', 
+        day: '10', 
         location: 'Passau → Munich → London Heathrow', 
         description: 'Disembark Passau, transfer by coach to Munich airport (roughly 2-3 hours), then fly back to the UK',
         coordinates: { lat: 48.5667, lon: 13.4333 }
@@ -2632,6 +2658,7 @@ export const bucketListExperiences = [
   {
     id: 'great-barrier-reef',
     slug: 'great-barrier-reef-cruises',
+    lastUpdated: '2026-01-02',
     title: 'Great Barrier Reef & Australia',
     tagline: 'Sydney icons, reef snorkelling and Aussie sunshine',
     description: 'Most UK guests fly overnight to Sydney or Brisbane, with at least one connection in Asia or the Middle East. Building in a 2-3 night stay at the start helps with jetlag and gives time to explore Australia\'s flagship city: Sydney Harbour, the Opera House, Bondi and Manly beaches, and perhaps a day trip to the Blue Mountains. From there, you either join a reef-focused cruise from Brisbane or Sydney or take a short domestic flight up to a Queensland gateway such as Cairns or Airlie Beach, using a ship as your floating base for the Great Barrier Reef and Whitsunday Islands. Days are spent snorkelling over coral gardens, visiting white-sand beaches like Whitehaven and calling at relaxed coastal towns. On longer itineraries, you can also visit Melbourne, Adelaide, Tasmania or head further north towards tropical rainforest regions.',
@@ -2659,95 +2686,95 @@ export const bucketListExperiences = [
     cruiseLines: ['Princess Cruises', 'P&O Cruises Australia', 'Celebrity Cruises', 'Coral Expeditions', 'Holland America'],
     itinerary: [
       { 
-        day: '0', 
+        day: '1', 
         location: 'London Heathrow (LHR)', 
         description: 'Depart LHR → Sydney (22-26hr via Dubai/Doha/Singapore/Hong Kong)',
         coordinates: { lat: 51.4700, lon: -0.4543 }
       },
       { 
-        day: '1', 
+        day: '2', 
         location: 'Sydney, Australia', 
         description: 'Arrive Sydney, transfer to hotel. Check-in, begin jetlag recovery, explore harbour area',
         coordinates: { lat: -33.8688, lon: 151.2093 }
       },
       { 
-        day: '2', 
+        day: '4', 
         location: 'Sydney, Australia', 
         description: 'Sydney city stay - explore the harbour, Opera House, The Rocks, Bondi beach, Manly ferry, iconic harbour views',
         coordinates: { lat: -33.8688, lon: 151.2093 }
       },
       { 
-        day: '3', 
+        day: '5', 
         location: 'Sydney, Australia', 
         description: 'Sydney free day - optional Blue Mountains day trip for eucalyptus forests, canyons and viewpoints, or continue city exploration',
         coordinates: { lat: -33.8688, lon: 151.2093 }
       },
       { 
-        day: '4', 
+        day: '6', 
         location: 'Sydney, Australia - Embark', 
         description: 'Board your cruise mid-afternoon; sail out past the Opera House and Harbour Bridge, iconic harbour departure',
         coordinates: { lat: -33.8688, lon: 151.2093 }
       },
       { 
-        day: '5', 
+        day: '7', 
         location: 'At Sea', 
         description: 'Relax and adjust fully to the time zone with pool time, spa and onboard activities, coastal sailing north'
       },
       { 
-        day: '6', 
+        day: '8', 
         location: 'Brisbane, Australia', 
         description: 'Visit South Bank, Lone Pine Koala Sanctuary or explore the riverfront, Queensland\'s capital, river city with galleries',
         coordinates: { lat: -27.4698, lon: 153.0251 }
       },
       { 
-        day: '7', 
+        day: '9', 
         location: 'Airlie Beach / Whitsunday Islands, Australia', 
         description: 'Launch point for Great Barrier Reef and Whitehaven Beach excursions, bright white sand, translucent water, island paradise',
         coordinates: { lat: -20.2674, lon: 148.7183 }
       },
       { 
-        day: '8', 
+        day: '10', 
         location: 'Cairns / Port Douglas, Australia', 
         description: 'More reef options, or combine reef with nearby rainforest attractions, gateway to Great Barrier Reef, tropical Queensland',
         coordinates: { lat: -16.9186, lon: 145.7781 }
       },
       { 
-        day: '9', 
+        day: '11', 
         location: 'Great Barrier Reef (Reef Excursion)', 
         description: 'Organised snorkelling or diving excursions over coral gardens, vibrant coral and tropical fish, world\'s largest coral reef system',
         coordinates: { lat: -18.2871, lon: 147.6992 }
       },
       { 
-        day: '10', 
+        day: '12', 
         location: 'Townsville or Willis Island, Australia', 
         description: 'Another reef or coastal call - could be Townsville, Willis Island (scenic cruising) or a further Whitsunday stop, laid-back marina',
         coordinates: { lat: -19.2590, lon: 146.8169 }
       },
       { 
-        day: '11', 
+        day: '13', 
         location: 'At Sea', 
         description: 'Time to enjoy the ship and Australian-themed activities, coastal sailing south'
       },
       { 
-        day: '12', 
+        day: '14', 
         location: 'Return to Sydney or Brisbane', 
         description: 'Option to disembark and stay a final night ashore, or remain onboard if cruise continues, return to gateway city',
         coordinates: { lat: -33.8688, lon: 151.2093 }
       },
       { 
-        day: '13', 
+        day: '15', 
         location: 'Sydney or Brisbane, Australia', 
         description: 'Final city stay (if open-jaw pattern) - extra day in Sydney or a second city such as Melbourne or Brisbane, Australian culture',
         coordinates: { lat: -33.8688, lon: 151.2093 }
       },
       { 
-        day: '14', 
+        day: '16', 
         location: 'Sydney or Brisbane → London Heathrow', 
         description: 'Transfer to airport, fly Sydney/Brisbane → LHR (22-26hr via Dubai/Doha/Singapore/Hong Kong, typically overnight)',
         coordinates: { lat: -33.8688, lon: 151.2093 }
       },
       { 
-        day: '15', 
+        day: '17', 
         location: 'London Heathrow (LHR)', 
         description: 'Arrive LHR, journey complete',
         coordinates: { lat: 51.4700, lon: -0.4543 }
@@ -2818,6 +2845,7 @@ export const bucketListExperiences = [
   {
     id: 'grand-voyages',
     slug: 'grand-voyages',
+    lastUpdated: '2026-01-02',
     title: 'Grand Voyages',
     tagline: '30-60+ night Grand Voyages linking continents',
     description: 'A Grand Voyage is essentially a long, one-way cruise segment that feels like a self-contained chapter of a world cruise. Instead of a 7-14 night loop, you might sail 35 nights from Barcelona to Cape Town or 45 nights from Rome to Singapore, with flights at each end. These journeys usually follow classic sea routes: across the Mediterranean and through the Suez Canal into the Red Sea and Indian Ocean, across the Atlantic to South America and the Caribbean, or along the coasts of Africa and Asia. You unpack once, settle into your ship routine and let the captain move you between regions while you pick off bucket list ports along the way.',
@@ -2845,176 +2873,176 @@ export const bucketListExperiences = [
     cruiseLines: ['Cunard', 'Holland America', 'Princess Cruises', 'P&O Cruises', 'Fred. Olsen', 'MSC Cruises'],
     itinerary: [
       { 
-        day: '0', 
+        day: '1', 
         location: 'London Heathrow (LHR)', 
         description: 'Depart LHR → Barcelona (2hr15 direct)',
         coordinates: { lat: 51.4700, lon: -0.4543 }
       },
       { 
-        day: '1', 
+        day: '2', 
         location: 'Barcelona, Spain', 
         description: 'Arrive Barcelona, transfer to hotel. Stay 1-2 nights to explore Las Ramblas, the Gothic Quarter and Sagrada Família',
         coordinates: { lat: 41.3851, lon: 2.1734 }
       },
       { 
-        day: '2', 
+        day: '4', 
         location: 'Barcelona, Spain - Embark', 
         description: 'Board your Grand Voyage ship and enjoy a sunset sail-away along the Catalan coast, begin epic journey',
         coordinates: { lat: 41.3851, lon: 2.1734 }
       },
       { 
-        day: '3', 
+        day: '5', 
         location: 'Marseille, France', 
         description: 'Marseille - historic port city, Provence gateway, French Riviera, Mediterranean culture',
         coordinates: { lat: 43.3285, lon: 5.3695 }
       },
       { 
-        day: '4', 
+        day: '6', 
         location: 'At Sea', 
         description: 'Mediterranean sailing, onboard activities, enrichment programs'
       },
       { 
-        day: '5', 
+        day: '7', 
         location: 'Naples, Italy', 
         description: 'Naples - gateway to Pompeii, Amalfi Coast, Italian culture, historic port',
         coordinates: { lat: 40.8375, lon: 14.2660 }
       },
       { 
-        day: '6', 
+        day: '8', 
         location: 'At Sea', 
         description: 'Eastern Mediterranean sailing, approaching Greece'
       },
       { 
-        day: '7', 
+        day: '9', 
         location: 'Piraeus (Athens), Greece', 
         description: 'Piraeus - gateway to Athens, Acropolis, ancient history, Greek culture, Mediterranean highlight',
         coordinates: { lat: 37.9425, lon: 23.6467 }
       },
       { 
-        day: '8', 
+        day: '10', 
         location: 'At Sea', 
         description: 'Sea day(s) with enrichment talks about the history and geopolitics of the region, approaching Suez'
       },
       { 
-        day: '9', 
+        day: '11', 
         location: 'Suez Canal (Transit)', 
         description: 'Slow transit through the Suez Canal, engineering marvel, connecting Mediterranean to Red Sea',
         coordinates: { lat: 29.9669, lon: 32.5498 }
       },
       { 
-        day: '10', 
+        day: '12', 
         location: 'Aqaba, Jordan', 
         description: 'Aqaba - optional excursions to Petra or Wadi Rum, Jordan\'s only seaport, ancient wonders, desert landscapes',
         coordinates: { lat: 29.5305, lon: 35.0106 }
       },
       { 
-        day: '11', 
+        day: '13', 
         location: 'At Sea - Red Sea', 
         description: 'Red Sea cruising, Arabian Peninsula approaching, onboard activities'
       },
       { 
-        day: '12', 
+        day: '14', 
         location: 'Jeddah, Saudi Arabia', 
         description: 'Jeddah - Red Sea gateway, modern city, Arabian culture, optional excursions to Mecca region',
         coordinates: { lat: 21.4858, lon: 39.1925 }
       },
       { 
-        day: '13', 
+        day: '15', 
         location: 'At Sea - Red Sea', 
         description: 'Red Sea sailing, approaching Arabian Gulf'
       },
       { 
-        day: '14', 
+        day: '16', 
         location: 'Muscat, Oman', 
         description: 'Muscat - Mutrah Souq, Corniche, Sultan Qaboos Grand Mosque, Omani culture, Arabian Peninsula',
         coordinates: { lat: 23.6207, lon: 58.5666 }
       },
       { 
-        day: '15', 
+        day: '17', 
         location: 'Doha, Qatar', 
         description: 'Doha - Souq Waqif, Museum of Islamic Art, National Museum of Qatar, Corniche, futuristic skyline',
         coordinates: { lat: 25.2773, lon: 51.5275 }
       },
       { 
-        day: '16', 
+        day: '18', 
         location: 'Dubai, UAE', 
         description: 'Dubai - modern skylines, Dubai Marina, Burj Khalifa, Dubai Mall, Arabian Gulf highlight',
         coordinates: { lat: 25.2615, lon: 55.3010 }
       },
       { 
-        day: '17-19', 
+        day: '19-21', 
         location: 'At Sea - Arabian Sea', 
         description: 'Indian Ocean crossing, Arabian Sea cruising, approaching India'
       },
       { 
-        day: '20', 
+        day: '22', 
         location: 'Mumbai, India', 
         description: 'Mumbai - Gateway of India, Bollywood, colonial architecture, Indian culture, vibrant city',
         coordinates: { lat: 18.9220, lon: 72.8347 }
       },
       { 
-        day: '21', 
+        day: '23', 
         location: 'At Sea', 
         description: 'Arabian Sea sailing, Indian coastline'
       },
       { 
-        day: '22', 
+        day: '24', 
         location: 'Goa, India', 
         description: 'Goa - Portuguese heritage, beautiful beaches, Indian culture, laid-back atmosphere',
         coordinates: { lat: 15.4909, lon: 73.8278 }
       },
       { 
-        day: '23-24', 
+        day: '25-26', 
         location: 'At Sea - Indian Ocean', 
         description: 'Indian Ocean crossing, approaching Sri Lanka'
       },
       { 
-        day: '25', 
+        day: '27', 
         location: 'Colombo, Sri Lanka', 
         description: 'Colombo - tea culture, colonial architecture, Sri Lankan culture, Indian Ocean gateway',
         coordinates: { lat: 6.9271, lon: 79.8612 }
       },
       { 
-        day: '26-27', 
+        day: '28-29', 
         location: 'At Sea - Indian Ocean', 
         description: 'Indian Ocean sailing, approaching Southeast Asia'
       },
       { 
-        day: '28', 
+        day: '30', 
         location: 'Penang, Malaysia', 
         description: 'Penang - George Town UNESCO site, street art, Malaysian culture, food paradise, Southeast Asia gateway',
         coordinates: { lat: 5.4164, lon: 100.3327 }
       },
       { 
-        day: '29', 
+        day: '31', 
         location: 'Port Klang (Kuala Lumpur), Malaysia', 
         description: 'Port Klang - gateway to Kuala Lumpur, Petronas Towers, Malaysian culture, modern city',
         coordinates: { lat: 3.0100, lon: 101.4000 }
       },
       { 
-        day: '30', 
+        day: '32', 
         location: 'At Sea', 
         description: 'Malacca Strait sailing, approaching Thailand'
       },
       { 
-        day: '31', 
+        day: '33', 
         location: 'Phuket, Thailand', 
         description: 'Phuket - beautiful beaches, Thai culture, island paradise, Southeast Asia highlight',
         coordinates: { lat: 7.8865, lon: 98.3983 }
       },
       { 
-        day: '32', 
+        day: '34', 
         location: 'At Sea', 
         description: 'Andaman Sea sailing, approaching Singapore'
       },
       { 
-        day: '33', 
+        day: '35', 
         location: 'Singapore - Disembark', 
         description: 'Arrive Singapore, disembark Grand Voyage. Transfer to hotel (1-2 nights), explore marina, gardens and hawker centres',
         coordinates: { lat: 1.2660, lon: 103.8070 }
       },
       { 
-        day: '34', 
+        day: '36', 
         location: 'Singapore → London Heathrow', 
         description: 'Transfer to airport, fly Singapore → LHR (13hr direct, typically overnight). Arrive LHR, journey complete',
         coordinates: { lat: 1.2660, lon: 103.8070 }
@@ -3086,6 +3114,52 @@ export const bucketListExperiences = [
   }
 ];
 
+// ============================================================================
+// ITINERARY HELPERS - Data is clean (no Day 0 at source)
+// ============================================================================
+// All bucket list data starts at Day 1. Schema validation rejects Day 0.
+// The normalizeItinerary function is a simple pass-through for backwards
+// compatibility with existing code that calls it.
+// ============================================================================
+
+/**
+ * Normalize an itinerary array - PASS-THROUGH (data is already clean)
+ * 
+ * All bucket list data starts at Day 1 (no Day 0 at source).
+ * This function exists for backwards compatibility with existing code.
+ * 
+ * @param {array} itinerary - Itinerary array (already clean at source)
+ * @returns {array} Same itinerary (no modification needed)
+ */
+export function normalizeItinerary(itinerary) {
+  if (!itinerary || !Array.isArray(itinerary)) {
+    return [];
+  }
+  
+  // Data is clean at source - just return as-is
+  return itinerary;
+}
+
+/**
+ * Extract day number from a day string for display
+ * Data is clean at source (no Day 0).
+ * 
+ * @param {string} dayStr - The day string (e.g., '1', '2-3', '10')
+ * @param {number} fallbackIndex - Fallback index (0-based) if day is invalid
+ * @returns {string} Day number for display
+ */
+export function normalizeDayNumber(dayStr, fallbackIndex = 0) {
+  const dayMatch = String(dayStr || '').match(/^\d+/);
+  const dayNumber = dayMatch ? dayMatch[0] : null;
+  
+  // If invalid, use fallback (index + 1 to be 1-based)
+  if (!dayNumber) {
+    return String(fallbackIndex + 1);
+  }
+  
+  return dayNumber;
+}
+
 // Helper functions
 export const getBucketListBySlug = (slug) => 
   bucketListExperiences.find(exp => exp.slug === slug);
@@ -3093,8 +3167,25 @@ export const getBucketListBySlug = (slug) =>
 export const getFeaturedBucketList = () => 
   bucketListExperiences.filter(exp => exp.featured).sort((a, b) => a.priority - b.priority);
 
-export const getAllBucketList = () => 
-  [...bucketListExperiences].sort((a, b) => a.priority - b.priority);
+export const getAllBucketList = (sortBy = 'lastUpdated') => {
+  const experiences = [...bucketListExperiences];
+  
+  if (sortBy === 'lastUpdated') {
+    // Sort by lastUpdated desc (newest first), fallback to priority
+    return experiences.sort((a, b) => {
+      const dateA = new Date(a.lastUpdated);
+      const dateB = new Date(b.lastUpdated);
+      if (dateB - dateA !== 0) {
+        return dateB - dateA; // Newest first
+      }
+      return a.priority - b.priority; // Fallback to priority
+    });
+  } else if (sortBy === 'priority') {
+    return experiences.sort((a, b) => a.priority - b.priority);
+  }
+  
+  return experiences;
+};
 
 // Get random selection for dynamic content
 export const getRandomBucketList = (count = 3) => {
@@ -3108,4 +3199,55 @@ export const getRotatingFeatured = (count = 3) => {
   const shuffled = [...featured].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, Math.min(count, featured.length));
 };
+
+/**
+ * Check if a bucket list experience was recently updated (within last 30 days)
+ * @param {string} lastUpdated - ISO date string (YYYY-MM-DD)
+ * @returns {boolean} True if updated within last 30 days
+ */
+export const isRecentlyUpdated = (lastUpdated) => {
+  if (!lastUpdated) return false;
+  const updateDate = new Date(lastUpdated);
+  const now = new Date();
+  const diffMs = now - updateDate;
+  const diffDays = diffMs / (1000 * 60 * 60 * 24);
+  return diffDays <= 30;
+};
+
+/**
+ * Format lastUpdated date for display
+ * @param {string} lastUpdated - ISO date string (YYYY-MM-DD)
+ * @returns {string} Formatted date (e.g., "2 Jan 2026")
+ */
+export const formatLastUpdated = (lastUpdated) => {
+  if (!lastUpdated) return 'Date unknown';
+  const date = new Date(lastUpdated);
+  return new Intl.DateTimeFormat('en-GB', { 
+    day: 'numeric', 
+    month: 'short', 
+    year: 'numeric' 
+  }).format(date);
+};
+
+// Dev-only validation: Check all bucket list experiences against schema
+validateAllBucketListExperiences(bucketListExperiences);
+
+// Dev-only console summary (helps verify updates are reflected)
+if (import.meta.env?.DEV) {
+  const totalExperiences = bucketListExperiences.length;
+  const sortedByDate = [...bucketListExperiences]
+    .filter(exp => exp.lastUpdated)
+    .sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated));
+  
+  const latestUpdated = sortedByDate[0];
+  const recentlyUpdatedCount = sortedByDate.filter(exp => isRecentlyUpdated(exp.lastUpdated)).length;
+  
+  console.info(
+    `[Bucket List Data Loaded]\n` +
+    `  Total experiences: ${totalExperiences}\n` +
+    `  Latest lastUpdated: ${latestUpdated?.lastUpdated || 'N/A'} (${latestUpdated?.title || 'N/A'})\n` +
+    `  Recently updated (30d): ${recentlyUpdatedCount}\n` +
+    `  ---`
+  );
+}
 

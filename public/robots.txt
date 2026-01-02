@@ -79,7 +79,6 @@ Crawl-delay: 1
 # ===========================================
 
 Sitemap: https://www.limitlesscruises.com/sitemap.xml
-Sitemap: https://www.limitlesscruises.com/sitemaps.xml
 
 # For AI/LLM context, see:
 # https://www.limitlesscruises.com/llms.txt

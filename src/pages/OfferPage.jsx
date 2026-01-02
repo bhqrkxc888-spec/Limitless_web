@@ -2,7 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useOffer } from '../hooks/useOffers';
 import { incrementOfferView } from '../services/offersAPI';
 import { siteConfig } from '../config/siteConfig';
-import SEO from '../components/SEO';
+import SEO, { getBreadcrumbSchema } from '../components/SEO';
 import { Button, SectionHeader } from '../components/ui';
 import ContactForm from '../components/ContactForm';
 // V2 Components
@@ -207,7 +207,14 @@ function OfferPage() {
       data.image = galleryImages.map(img => img.url).filter(Boolean);
     }
 
-    return data;
+    // Add breadcrumb schema
+    const breadcrumb = getBreadcrumbSchema([
+      { name: 'Home', url: 'https://www.limitlesscruises.com/' },
+      { name: 'Offers', url: 'https://www.limitlesscruises.com/offers' },
+      { name: offer.title || 'Offer', url: `https://www.limitlesscruises.com/offers/${offer.slug}` }
+    ]);
+
+    return [data, breadcrumb];
   }, [offer, galleryImages, defaultPriceValidUntil]);
 
   // Loading state
@@ -323,6 +330,9 @@ function OfferPage() {
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 800px"
                           srcsetWidths={[640, 1024, 1200, 1920]}
                           quality={85}
+                          entityType="offer"
+                          entityId={offer?.slug || slug}
+                          imageType="gallery-main"
                           onError={() => handleImageError(validImages[safeSelectedImage]?.url)}
                         />
                         {savingsDisplay && (
@@ -352,6 +362,9 @@ function OfferPage() {
                                 sizes="150px"
                                 srcsetWidths={[150, 300]}
                                 quality={75}
+                                entityType="offer"
+                                entityId={offer?.slug || slug}
+                                imageType={`gallery-thumb-${idx}`}
                                 onError={() => handleImageError(img.url)}
                               />
                             </button>

@@ -1,9 +1,47 @@
 import { aboutImages } from '../utils/imageHelpers';
 import { Button } from '../components/ui';
 import { siteConfig } from '../config/siteConfig';
-import SEO from '../components/SEO';
+import SEO, { getOrganizationSchema, getBreadcrumbSchema } from '../components/SEO';
 import OptimizedImage from '../components/OptimizedImage';
 import './AboutPage.css';
+
+// Structured data for About page
+const getAboutPageSchema = () => {
+  const baseOrg = getOrganizationSchema();
+  return {
+    ...baseOrg,
+    founder: {
+      '@type': 'Person',
+      name: 'Katherine',
+      jobTitle: 'CLIA Cruise Master',
+      description: 'Personal cruise consultant specialising in tailored cruise holidays for UK travellers.',
+    },
+    knowsAbout: [
+      'Cruise holidays',
+      'UK cruise departures',
+      'Worldwide cruise itineraries',
+      'Family cruising',
+      'Accessible travel',
+      'SEND-friendly cruises'
+    ],
+    hasCredential: [
+      {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'Professional Certification',
+        name: 'CLIA Cruise Master',
+        recognizedBy: {
+          '@type': 'Organization',
+          name: 'Cruise Lines International Association'
+        }
+      }
+    ]
+  };
+};
+
+const breadcrumbSchema = getBreadcrumbSchema([
+  { name: 'Home', url: 'https://www.limitlesscruises.com/' },
+  { name: 'About', url: 'https://www.limitlesscruises.com/about' }
+]);
 
 function AboutPage() {
   return (
@@ -12,6 +50,7 @@ function AboutPage() {
         title="About Katherine | CLIA Cruise Master | Your UK Personal Cruise Consultant"
         description="Meet Katherine, your personal UK cruise consultant. CLIA Cruise Master, ABTA protected, specialising in bespoke cruise holidays tailored to you."
         canonical="https://www.limitlesscruises.com/about"
+        structuredData={[getAboutPageSchema(), breadcrumbSchema]}
       />
 
       {/* Hero Section */}

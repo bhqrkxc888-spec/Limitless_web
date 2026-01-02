@@ -12,6 +12,15 @@
   overflow: visible;
 }
 
+/* Badge container */
+.bucket-list-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+/* Base badge styles */
 .bucket-list-badge {
   display: inline-block;
   padding: var(--space-1) var(--space-3);
@@ -22,7 +31,25 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   border-radius: var(--radius-full);
-  margin-bottom: var(--space-3);
+}
+
+/* "Recently Updated" badge (distinct color) */
+.bucket-list-badge-recent {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  animation: subtle-pulse 2s ease-in-out infinite;
+}
+
+@keyframes subtle-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .bucket-list-badge-recent {
+    animation: none;
+  }
 }
 
 .bucket-list-meta {
@@ -46,6 +73,22 @@
 .bucket-list-duration::before {
   content: '⏱️';
   font-size: var(--font-size-base);
+}
+
+/* Last updated text */
+.bucket-list-last-updated {
+  font-size: var(--font-size-xs);
+  color: var(--clr-text-muted);
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.bucket-list-last-updated::before {
+  content: '🔄';
+  font-size: var(--font-size-sm);
+  opacity: 0.7;
 }
 
 .bucket-list-price {
@@ -172,6 +215,21 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--clr-text-main);
+}
+
+.bucket-list-featured-meta .last-updated {
+  font-size: var(--font-size-xs);
+  color: var(--clr-text-muted);
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.bucket-list-featured-meta .last-updated::before {
+  content: '🔄';
+  font-size: var(--font-size-sm);
+  opacity: 0.7;
 }
 
 .bucket-list-featured-meta .price {
