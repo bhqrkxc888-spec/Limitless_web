@@ -214,7 +214,7 @@ function AppLayout() {
             {/* Preview routes - show full site when in maintenance mode */}
             {isMaintenanceMode && (
               <>
-                <Route path="/preview" element={<Navigate to="/preview/find-a-cruise" replace />} />
+                <Route path="/preview" element={<HomePage />} />
                 <Route path="/preview/find-a-cruise" element={<FindCruisePage />} />
                 <Route path="/preview/about" element={<AboutPage />} />
                 <Route path="/preview/contact" element={<ContactPage />} />

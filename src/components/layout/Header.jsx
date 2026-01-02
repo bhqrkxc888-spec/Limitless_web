@@ -1,11 +1,22 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { navigation } from '../../data/navigation';
 import { siteConfig } from '../../config/siteConfig';
 import { isSiteLaunched } from '../../config/launchConfig';
 import './Header.css';
 
 function Header() {
+  const { pathname } = useLocation();
+  const isMaintenanceMode = import.meta.env.VITE_MAINTENANCE_MODE === 'true';
+  const isPreviewRoute = pathname.startsWith('/preview');
+  
+  // Add /preview/ prefix to paths when in maintenance mode and on preview routes
+  const getPath = (path) => {
+    if (isMaintenanceMode && isPreviewRoute && path !== '/') {
+      return `/preview${path}`;
+    }
+    return path;
+  };
   const [activeMenu, setActiveMenu] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [, setAuthStatus] = useState(isSiteLaunched());
@@ -113,7 +124,7 @@ function Header() {
         <div className="container">
           <div className="header-content">
             {/* Logo */}
-            <Link to="/" className="header-logo" onClick={closeMobileMenu}>
+            <Link to={getPath('/')} className="header-logo" onClick={closeMobileMenu}>
               <div className="logo-container">
                 <img 
                   src="https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/logo.webp" 
@@ -174,7 +185,7 @@ function Header() {
                       </button>
                     ) : (
                       <NavLink 
-                        to={item.path}
+                        to={getPath(item.path)}
                         className={({ isActive }) => `nav-link ${isActive ? 'is-active' : ''}`}
                         onClick={closeMobileMenu}
                       >
@@ -206,7 +217,7 @@ function Header() {
                                       </a>
                                     ) : (
                                       <Link 
-                                        to={link.path}
+                                        to={getPath(link.path)}
                                         className={`mega-menu-link ${link.highlight ? 'is-highlight' : ''}`}
                                         onClick={closeMobileMenu}
                                       >

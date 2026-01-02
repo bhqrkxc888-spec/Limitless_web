@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react';
+import { useLocation } from 'react-router-dom';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import BucketListFeatured from '../components/BucketListFeatured'
@@ -94,10 +95,12 @@ const HeartIcon = () => (
 );
 
 function HomePage() {
+  const { pathname } = useLocation();
   const isMaintenanceMode = import.meta.env.VITE_MAINTENANCE_MODE === 'true';
+  const isPreviewRoute = pathname.startsWith('/preview');
 
-  // Maintenance mode: show simple message with contact details
-  if (isMaintenanceMode) {
+  // Maintenance mode: show simple message with contact details (but not on preview routes)
+  if (isMaintenanceMode && !isPreviewRoute) {
     // Single hero image (first image from array)
     const heroImage = homeHeroImages[0];
     const heroImageMobile = homeHeroMobileImage;
