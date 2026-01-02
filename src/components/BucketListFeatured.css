@@ -160,10 +160,6 @@
   gap: var(--space-2);
 }
 
-.bucket-list-featured-meta .duration::before {
-  content: '📅';
-  font-size: var(--font-size-base);
-}
 
 /* Inline CTA within card */
 .bucket-list-featured-cta-inline {

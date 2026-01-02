@@ -189,7 +189,30 @@ function AdminCruiseLineImages() {
                           return shipObj.slug || shipNameToSlug(shipObj.name);
                         });
                         const shipEntityIds = shipSlugs.map(shipSlug => `${cl.slug}/ships/${shipSlug}`);
-                        const shipsWithCards = shipEntityIds.filter(entityId => shipImages[entityId]?.card).length;
+                        
+                        // Count ships with card images - check all possible entity_id formats
+                        let shipsWithCards = 0;
+                        shipEntityIds.forEach(entityId => {
+                          // Check if this exact entity_id has a card image
+                          if (shipImages[entityId]?.card) {
+                            shipsWithCards++;
+                          }
+                        });
+                        
+                        // Debug logging for P&O (can be removed later)
+                        if (cl.slug === 'p-and-o-cruises' && shipCount > 0) {
+                          console.log('P&O Debug:', {
+                            shipCount,
+                            shipsWithCards,
+                            expectedEntityIds: shipEntityIds,
+                            actualShipImageKeys: Object.keys(shipImages).filter(k => k.startsWith('p-and-o-cruises/ships/')),
+                            shipImagesForPO: Object.keys(shipImages).filter(k => k.startsWith('p-and-o-cruises/')).reduce((acc, k) => {
+                              acc[k] = Object.keys(shipImages[k] || {});
+                              return acc;
+                            }, {})
+                          });
+                        }
+                        
                         return (
                           <>
                             {shipCount > 0 && (

@@ -70,10 +70,6 @@
   gap: var(--space-2);
 }
 
-.bucket-list-duration::before {
-  content: '⏱️';
-  font-size: var(--font-size-base);
-}
 
 /* Last updated text */
 .bucket-list-last-updated {
@@ -86,7 +82,7 @@
 }
 
 .bucket-list-last-updated::before {
-  content: '🔄';
+  content: '';
   font-size: var(--font-size-sm);
   opacity: 0.7;
 }

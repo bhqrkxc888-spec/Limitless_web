@@ -58,7 +58,6 @@ function BucketListPage() {
   // Component for experience card with image hook
   const ExperienceCard = ({ experience }) => {
     const { imageUrl } = useBucketListImage(experience.id, 'card', experience.title);
-    const recentlyUpdated = isRecentlyUpdated(experience.lastUpdated);
     
     return (
       <Card to={`/bucket-list/${experience.slug}`} variant="default" className="bucket-list-card">
@@ -73,19 +72,11 @@ function BucketListPage() {
         <Card.Content>
           <div className="bucket-list-badges">
             <span className="bucket-list-badge">Bucket List</span>
-            {recentlyUpdated && (
-              <span className="bucket-list-badge bucket-list-badge-recent">Recently Updated</span>
-            )}
           </div>
           <Card.Title as="h3">{experience.title}</Card.Title>
           <Card.Description>{experience.tagline}</Card.Description>
           <div className="bucket-list-meta">
             <span className="bucket-list-duration">{experience.duration}</span>
-            {experience.lastUpdated && (
-              <span className="bucket-list-last-updated">
-                Updated: {formatLastUpdated(experience.lastUpdated)}
-              </span>
-            )}
           </div>
           {experience.highlights && Array.isArray(experience.highlights) && experience.highlights.length > 0 && (
             <ul className="bucket-list-highlights">
@@ -153,7 +144,6 @@ function BucketListPage() {
                 {visibleItems.map((experience) => {
                   const FeaturedCard = () => {
                     const { imageUrl } = useBucketListImage(experience.id, 'card', experience.title);
-                    const recentlyUpdated = isRecentlyUpdated(experience.lastUpdated);
                     return (
                       <Card 
                         to={`/bucket-list/${experience.slug}`} 
@@ -171,19 +161,11 @@ function BucketListPage() {
                         <Card.Content>
                           <div className="bucket-list-badges">
                             <span className="bucket-list-badge">Bucket List</span>
-                            {recentlyUpdated && (
-                              <span className="bucket-list-badge bucket-list-badge-recent">Recently Updated</span>
-                            )}
                           </div>
                           <Card.Title as="h3">{experience.title}</Card.Title>
                           <Card.Description>{experience.tagline}</Card.Description>
                           <div className="bucket-list-featured-meta">
                             <span className="duration">{experience.duration}</span>
-                            {experience.lastUpdated && (
-                              <span className="last-updated">
-                                Updated: {formatLastUpdated(experience.lastUpdated)}
-                              </span>
-                            )}
                           </div>
                         </Card.Content>
                       </Card>

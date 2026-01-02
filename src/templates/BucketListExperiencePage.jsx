@@ -9,7 +9,6 @@ import { useState, useMemo } from 'react';
 import { getOgImage } from '../utils/imageHelpers';
 import { useBucketListImage } from '../hooks/useImageUrl';
 import { createSanitizedMarkup } from '../utils/sanitizeHtml';
-import LazyBucketListMap from '../components/LazyBucketListMap';
 import './BucketListExperiencePage.css';
 
 function BucketListExperiencePage() {
@@ -169,18 +168,6 @@ function BucketListExperiencePage() {
                 </span>
               </div>
             )}
-            {experience.lastUpdated && (
-              <div className="key-info-item key-info-last-updated">
-                <span className="key-info-label">Last Updated</span>
-                <span className="key-info-value">
-                  {new Date(experience.lastUpdated).toLocaleDateString('en-GB', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric'
-                  })}
-                </span>
-              </div>
-            )}
           </div>
         </div>
       </section>
@@ -268,14 +255,6 @@ function BucketListExperiencePage() {
                       title="Itinerary Overview"
                       subtitle="A glimpse into your journey"
                     />
-                    
-                    {/* Interactive Map - CORE FEATURE: Bucket List pages MUST include an itinerary map. Do not remove. */}
-                    {displayItinerary.some(item => item.coordinates?.lat && item.coordinates?.lon) && (
-                      <LazyBucketListMap 
-                        itinerary={displayItinerary}
-                        className="bucket-list-map-wrapper"
-                      />
-                    )}
 
                     <div className="itinerary-timeline">
                       {displayItinerary.map((item, index) => {
