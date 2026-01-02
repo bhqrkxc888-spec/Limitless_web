@@ -1,4 +1,4 @@
-import { getAllBucketList, getRotatingFeatured, isRecentlyUpdated, formatLastUpdated } from '../data/bucketList';
+import { getAllBucketList, getRotatingFeatured } from '../data/bucketList';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
