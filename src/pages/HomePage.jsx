@@ -202,7 +202,7 @@ function HomePage() {
                     </p>
                     <p className="hero-note">
                       Our website will be fully updated in approximately 2 weeks. In the meantime, 
-                      please get in touch with us directly for expert cruise advice and personalized service.
+                      please get in touch with us directly for expert cruise advice and personalised service.
                     </p>
                   </div>
                 </div>
