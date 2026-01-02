@@ -44,11 +44,9 @@ function BucketListExperiencePage() {
     category: 'Travel Package',
     offers: {
       '@type': 'Offer',
-      priceCurrency: 'GBP',
       availability: 'https://schema.org/InStock',
       priceSpecification: {
-        '@type': 'PriceSpecification',
-        price: experience.startingFrom
+        '@type': 'PriceSpecification'
       }
     },
     aggregateRating: {
@@ -94,12 +92,6 @@ function BucketListExperiencePage() {
               <span className="key-info-label">Season</span>
               <span className="key-info-value">{experience.season}</span>
             </div>
-            {experience.startingFrom && (
-              <div className="key-info-item">
-                <span className="key-info-label">Starting From</span>
-                <span className="key-info-value">{experience.startingFrom}</span>
-              </div>
-            )}
             {experience.bestFor && experience.bestFor.length > 0 && (
               <div className="key-info-item">
                 <span className="key-info-label">Best For</span>

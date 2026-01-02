@@ -94,6 +94,127 @@ const HeartIcon = () => (
 );
 
 function HomePage() {
+  const isMaintenanceMode = import.meta.env.VITE_MAINTENANCE_MODE === 'true';
+
+  // Maintenance mode: show simple message with contact details
+  if (isMaintenanceMode) {
+    return (
+      <main className="home-elegant">
+        <SEO
+          title="Limitless Cruises - Website Updates in Progress"
+          description="We're building a new site and experience. Get in touch with us directly for expert cruise advice."
+          canonical={siteConfig.siteUrl}
+          noindex={true}
+        />
+        
+        <section className="hero-elegant" style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="container" style={{ textAlign: 'center', padding: '4rem 2rem', maxWidth: '800px' }}>
+            <h1 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', color: '#2C344C' }}>
+              We're Building a New Site and Experience
+            </h1>
+            <p style={{ fontSize: '1.25rem', marginBottom: '1rem', color: '#555' }}>
+              We're bringing exciting new features and enhancements to our website.
+            </p>
+            <p style={{ fontSize: '1.1rem', marginBottom: '2.5rem', color: '#666' }}>
+              Our website will be fully updated in approximately 2 weeks. In the meantime, 
+              please get in touch with us directly for expert cruise advice and personalized service.
+            </p>
+            
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '3rem' }}>
+              <a 
+                href={`tel:${siteConfig.phone}`} 
+                className="btn btn-primary"
+                style={{ textDecoration: 'none', padding: '1rem 2rem', fontSize: '1.1rem' }}
+              >
+                📞 Call Us: {siteConfig.phone}
+              </a>
+              <a 
+                href={siteConfig.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary"
+                style={{ textDecoration: 'none', padding: '1rem 2rem', fontSize: '1.1rem' }}
+              >
+                Visit Our Facebook
+              </a>
+            </div>
+
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+              gap: '1.5rem', 
+              marginTop: '3rem',
+              textAlign: 'left'
+            }}>
+              <div style={{ padding: '1.5rem', background: '#f8f9fa', borderRadius: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                  <PhoneIcon />
+                  <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#2C344C' }}>Phone</h3>
+                </div>
+                <a href={`tel:${siteConfig.phone}`} style={{ color: '#0066cc', textDecoration: 'none' }}>
+                  {siteConfig.phone}
+                </a>
+              </div>
+
+              <div style={{ padding: '1.5rem', background: '#f8f9fa', borderRadius: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                  <WhatsAppIcon />
+                  <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#2C344C' }}>WhatsApp</h3>
+                </div>
+                <a 
+                  href={siteConfig.whatsappUrl} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: '#0066cc', textDecoration: 'none' }}
+                >
+                  {siteConfig.whatsapp}
+                </a>
+              </div>
+
+              <div style={{ padding: '1.5rem', background: '#f8f9fa', borderRadius: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                  <FacebookIcon />
+                  <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#2C344C' }}>Facebook</h3>
+                </div>
+                <a 
+                  href={siteConfig.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: '#0066cc', textDecoration: 'none' }}
+                >
+                  Send Message
+                </a>
+              </div>
+
+              <div style={{ padding: '1.5rem', background: '#f8f9fa', borderRadius: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                  <MailIcon />
+                  <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#2C344C' }}>Email</h3>
+                </div>
+                <a href={`mailto:${siteConfig.email}`} style={{ color: '#0066cc', textDecoration: 'none' }}>
+                  {siteConfig.email}
+                </a>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '3rem', padding: '1.5rem', background: '#e8f4f8', borderRadius: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                <ShieldIcon />
+                <strong style={{ color: '#2C344C' }}>ABTA Protected (P7541)</strong>
+                <span style={{ color: '#666' }}>|</span>
+                <AwardIcon />
+                <strong style={{ color: '#2C344C' }}>CLIA Cruise Master</strong>
+                <span style={{ color: '#666' }}>|</span>
+                <MapPinIcon />
+                <strong style={{ color: '#2C344C' }}>UK Based</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
   // WebSite schema with SearchAction for sitelinks search box
   // Note: TravelAgency/Organization schema is in index.html (site-wide)
   const structuredData = {

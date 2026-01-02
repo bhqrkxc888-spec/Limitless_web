@@ -145,6 +145,12 @@ function AppLayout() {
   const { pathname } = useLocation();
   const isAdminRoute = pathname.startsWith('/admin');
   
+  // MAINTENANCE MODE: Redirect all routes except home, preview, and admin to /preview/
+  const isMaintenanceMode = import.meta.env.VITE_MAINTENANCE_MODE === 'true';
+  if (isMaintenanceMode && pathname !== '/' && pathname !== '/preview' && !isAdminRoute) {
+    return <Navigate to="/preview/" replace />;
+  }
+  
   // Admin routes have their own layout
   if (isAdminRoute) {
     return (
