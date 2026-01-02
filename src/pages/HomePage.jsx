@@ -98,6 +98,10 @@ function HomePage() {
 
   // Maintenance mode: show simple message with contact details
   if (isMaintenanceMode) {
+    // Single hero image (first image from array)
+    const heroImage = homeHeroImages[0];
+    const heroImageMobile = homeHeroMobileImage;
+
     return (
       <main className="home-elegant">
         <SEO
@@ -107,106 +111,156 @@ function HomePage() {
           noindex={true}
         />
         
-        <section className="hero-elegant" style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div className="container" style={{ textAlign: 'center', padding: '4rem 2rem', maxWidth: '800px' }}>
-            <h1 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', color: '#2C344C' }}>
-              We're Building a New Site and Experience
-            </h1>
-            <p style={{ fontSize: '1.25rem', marginBottom: '1rem', color: '#555' }}>
-              We're bringing exciting new features and enhancements to our website.
-            </p>
-            <p style={{ fontSize: '1.1rem', marginBottom: '2.5rem', color: '#666' }}>
-              Our website will be fully updated in approximately 2 weeks. In the meantime, 
-              please get in touch with us directly for expert cruise advice and personalized service.
-            </p>
-            
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '3rem' }}>
-              <a 
-                href={`tel:${siteConfig.phone}`} 
-                className="btn btn-primary"
-                style={{ textDecoration: 'none', padding: '1rem 2rem', fontSize: '1.1rem' }}
-              >
-                📞 Call Us: {siteConfig.phone}
-              </a>
-              <a 
-                href={siteConfig.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-secondary"
-                style={{ textDecoration: 'none', padding: '1rem 2rem', fontSize: '1.1rem' }}
-              >
-                Visit Our Facebook
-              </a>
+        {/* Hero Section - Same style as normal home page */}
+        <section className="hero-elegant">
+          <div className="hero-background-image" style={{ aspectRatio: '16/9' }}>
+            <picture>
+              {heroImageMobile && (
+                <source 
+                  media="(max-width: 768px)" 
+                  srcSet={heroImageMobile}
+                  type="image/webp"
+                />
+              )}
+              <img
+                src={heroImage}
+                alt="Beautiful cruise destination"
+                width={1920}
+                height={1080}
+                loading="eager"
+                fetchpriority="high"
+                decoding="sync"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </picture>
+            <div className="hero-image-overlay"></div>
+          </div>
+          <div className="container">
+            <div className="hero-content-overlay">
+              <div className="hero-text-box">
+                <div className="hero-text">
+                  <p className="hero-eyebrow">Website Updates</p>
+                  <h1>We're Building a New Site and Experience</h1>
+                  <p className="hero-lead">
+                    We're bringing exciting new features and enhancements to our website.
+                  </p>
+                  <p className="hero-note">
+                    Our website will be fully updated in approximately 2 weeks. In the meantime, 
+                    please get in touch with us directly for expert cruise advice and personalized service.
+                  </p>
+                  <div className="hero-cta-group">
+                    <a 
+                      href={`tel:${siteConfig.phone}`} 
+                      className="btn btn-primary"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      Call Us: {siteConfig.phone}
+                    </a>
+                    <a 
+                      href={siteConfig.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-secondary"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      Visit Our Facebook
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+        </section>
 
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-              gap: '1.5rem', 
-              marginTop: '3rem',
-              textAlign: 'left'
-            }}>
-              <div style={{ padding: '1.5rem', background: '#f8f9fa', borderRadius: '8px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-                  <PhoneIcon />
-                  <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#2C344C' }}>Phone</h3>
-                </div>
-                <a href={`tel:${siteConfig.phone}`} style={{ color: '#0066cc', textDecoration: 'none' }}>
-                  {siteConfig.phone}
+        {/* Contact Options - Using same style as home page */}
+        <section className="still-here">
+          <div className="container">
+            <div className="still-here-content">
+              <h2>Get In Touch</h2>
+              <p className="section-lead">
+                Your dedicated consultant is here to provide expert guidance 
+                and personalised recommendations for your next voyage.
+              </p>
+              
+              <div className="contact-grid">
+                <a href={`tel:${siteConfig.phone}`} className="contact-card-elegant">
+                  <span className="contact-icon contact-icon--phone">
+                    <PhoneIcon />
+                  </span>
+                  <h3>Telephone</h3>
+                  <p>{siteConfig.phone}</p>
                 </a>
-              </div>
-
-              <div style={{ padding: '1.5rem', background: '#f8f9fa', borderRadius: '8px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-                  <WhatsAppIcon />
-                  <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#2C344C' }}>WhatsApp</h3>
-                </div>
+                
                 <a 
-                  href={siteConfig.whatsappUrl} 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: '#0066cc', textDecoration: 'none' }}
+                  href={siteConfig.whatsappUrl || 'https://wa.me/447359796108'} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="contact-card-elegant"
                 >
-                  {siteConfig.whatsapp}
+                  <span className="contact-icon contact-icon--whatsapp">
+                    <WhatsAppIcon />
+                  </span>
+                  <h3>WhatsApp</h3>
+                  <p>{siteConfig.whatsapp}</p>
                 </a>
-              </div>
-
-              <div style={{ padding: '1.5rem', background: '#f8f9fa', borderRadius: '8px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-                  <FacebookIcon />
-                  <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#2C344C' }}>Facebook</h3>
-                </div>
+                
                 <a 
                   href={siteConfig.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: '#0066cc', textDecoration: 'none' }}
+                  className="contact-card-elegant"
                 >
-                  Send Message
+                  <span className="contact-icon contact-icon--facebook">
+                    <FacebookIcon />
+                  </span>
+                  <h3>Facebook</h3>
+                  <p>Send Message</p>
                 </a>
-              </div>
-
-              <div style={{ padding: '1.5rem', background: '#f8f9fa', borderRadius: '8px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-                  <MailIcon />
-                  <h3 style={{ margin: 0, fontSize: '1.1rem', color: '#2C344C' }}>Email</h3>
-                </div>
-                <a href={`mailto:${siteConfig.email}`} style={{ color: '#0066cc', textDecoration: 'none' }}>
-                  {siteConfig.email}
+                
+                <a href={`mailto:${siteConfig.email}`} className="contact-card-elegant">
+                  <span className="contact-icon contact-icon--email">
+                    <MailIcon />
+                  </span>
+                  <h3>Email</h3>
+                  <p>{siteConfig.email}</p>
                 </a>
               </div>
             </div>
+          </div>
+        </section>
 
-            <div style={{ marginTop: '3rem', padding: '1.5rem', background: '#e8f4f8', borderRadius: '8px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-                <ShieldIcon />
-                <strong style={{ color: '#2C344C' }}>ABTA Protected (P7541)</strong>
-                <span style={{ color: '#666' }}>|</span>
-                <AwardIcon />
-                <strong style={{ color: '#2C344C' }}>CLIA Cruise Master</strong>
-                <span style={{ color: '#666' }}>|</span>
-                <MapPinIcon />
-                <strong style={{ color: '#2C344C' }}>UK Based</strong>
+        {/* Trust Bar */}
+        <section className="trust-bar">
+          <div className="container">
+            <div className="trust-items">
+              <div className="trust-item">
+                <span className="trust-icon">
+                  <ShieldIcon />
+                </span>
+                <div className="trust-text">
+                  <strong>ABTA Protected</strong>
+                  <span>P7541</span>
+                </div>
+              </div>
+              <span className="trust-divider" />
+              <div className="trust-item">
+                <span className="trust-icon">
+                  <AwardIcon />
+                </span>
+                <div className="trust-text">
+                  <strong>CLIA Cruise Master</strong>
+                  <span>Expert Certified</span>
+                </div>
+              </div>
+              <span className="trust-divider" />
+              <div className="trust-item">
+                <span className="trust-icon">
+                  <MapPinIcon />
+                </span>
+                <div className="trust-text">
+                  <strong>UK Based</strong>
+                  <span>Personal Service</span>
+                </div>
               </div>
             </div>
           </div>
