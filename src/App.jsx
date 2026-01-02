@@ -152,7 +152,8 @@ function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Scroll to top immediately on route change (instant, not smooth)
+    window.scrollTo(0, 0);
     
     // Trigger SEO analysis on route change (after a delay to let page render)
     // Skip for admin routes
