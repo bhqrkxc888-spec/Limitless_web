@@ -147,7 +147,9 @@ function AppLayout() {
   
   // MAINTENANCE MODE: Redirect all routes except home, preview, and admin to /preview/
   const isMaintenanceMode = import.meta.env.VITE_MAINTENANCE_MODE === 'true';
-  if (isMaintenanceMode && pathname !== '/' && pathname !== '/preview' && !isAdminRoute) {
+  const isPreviewRoute = pathname.startsWith('/preview');
+  
+  if (isMaintenanceMode && pathname !== '/' && !isPreviewRoute && !isAdminRoute) {
     return <Navigate to="/preview/" replace />;
   }
   
@@ -157,8 +159,8 @@ function AppLayout() {
       <ErrorBoundary>
         <Suspense fallback={<PageLoader />}>
           <Routes>
-          {/* Preview Access for hidden/coming-soon pages */}
-          <Route path="/preview" element={<AdminPage />} />
+          {/* Preview Access for hidden/coming-soon pages - only when NOT in maintenance mode */}
+          {!isMaintenanceMode && <Route path="/preview" element={<AdminPage />} />}
           
           {/* Admin Monitoring Dashboard */}
           <Route path="/admin/login" element={<AdminLogin />} />
@@ -206,6 +208,43 @@ function AppLayout() {
         <ErrorBoundary>
           <Suspense fallback={<PageLoader />}>
             <Routes>
+            {/* Preview routes - show full site when in maintenance mode */}
+            {isMaintenanceMode && (
+              <>
+                <Route path="/preview" element={<Navigate to="/preview/find-a-cruise" replace />} />
+                <Route path="/preview/find-a-cruise" element={<FindCruisePage />} />
+                <Route path="/preview/about" element={<AboutPage />} />
+                <Route path="/preview/contact" element={<ContactPage />} />
+                <Route path="/preview/offers" element={<OffersPage />} />
+                <Route path="/preview/offers/:slug" element={<OfferPage />} />
+                <Route path="/preview/cruise-lines" element={<CruiseLinesPage />} />
+                <Route path="/preview/cruise-lines/:slug" element={<CruiseLinePage />} />
+                <Route path="/preview/ships/:slug" element={<ShipPage />} />
+                <Route path="/preview/destinations" element={<DestinationsPage />} />
+                <Route path="/preview/destinations/transatlantic-cruises" element={<Navigate to="/preview/bucket-list/transatlantic-crossings" replace />} />
+                <Route path="/preview/destinations/:slug" element={<DestinationPage />} />
+                <Route path="/preview/bucket-list" element={<BucketListPage />} />
+                <Route path="/preview/bucket-list/:slug" element={<BucketListExperiencePage />} />
+                <Route path="/preview/cruise-types" element={<CruiseTypesPage />} />
+                <Route path="/preview/cruises/:slug" element={<CategoryPage />} />
+                <Route path="/preview/faq" element={<FAQPage />} />
+                <Route path="/preview/testimonials" element={<PublishGate section="Testimonials" title="Customer Testimonials" backLink="/preview" backLabel="Return Home"><TestimonialsPage /></PublishGate>} />
+                <Route path="/preview/travel-news" element={<TravelNewsPage />} />
+                <Route path="/preview/travel-news/category/:category" element={<TravelNewsCategoryPage />} />
+                <Route path="/preview/travel-news/tag/:tag" element={<TravelNewsTagPage />} />
+                <Route path="/preview/travel-news/:slug" element={<TravelNewsArticlePage />} />
+                <Route path="/preview/cruise-guides" element={<CruiseGuidesPage />} />
+                <Route path="/preview/cruise-guides/:slug" element={<CruiseGuideDetailPage />} />
+                <Route path="/preview/ports" element={<PortsPage />} />
+                <Route path="/preview/ports/region/:slug" element={<PortRegionPage />} />
+                <Route path="/preview/ports/:slug" element={<PortGuidePage />} />
+                <Route path="/preview/website-terms" element={<WebsiteTerms />} />
+                <Route path="/preview/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/preview/booking-terms" element={<BookingTerms />} />
+                <Route path="/preview/cookie-policy" element={<CookiePolicy />} />
+                <Route path="/preview/price-match-guarantee" element={<PriceMatchGuarantee />} />
+              </>
+            )}
             {/* Main Pages - Always Public */}
             <Route path="/" element={<HomePage />} />
             <Route path="/find-a-cruise" element={<FindCruisePage />} />
