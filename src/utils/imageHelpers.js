@@ -151,6 +151,42 @@ export const homeHeroImages = [SITE_ASSETS.homeHero || '/images/placeholders/her
 export const homeHeroMobileImage = SITE_ASSETS.homeHeroMobile || null; // null = use desktop image
 
 /**
+ * Generate responsive hero image srcset using Supabase transforms
+ * Creates multiple sizes for optimal loading at different viewport widths
+ * 
+ * @param {string} imageUrl - Base Supabase image URL
+ * @param {number[]} widths - Array of widths to generate (default: mobile to desktop sizes)
+ * @returns {string} srcset string for responsive images
+ */
+export function generateHeroSrcSet(imageUrl, widths = [480, 768, 1024, 1280, 1920]) {
+  if (!imageUrl || !isSupabaseUrl(imageUrl)) {
+    return '';
+  }
+  
+  return widths
+    .map(width => {
+      const optimized = getOptimizedImageUrl(imageUrl, { width, quality: 85 });
+      return `${optimized} ${width}w`;
+    })
+    .join(', ');
+}
+
+/**
+ * Get optimized hero image URL for a specific viewport
+ * Uses Supabase Image Transforms for on-the-fly resizing
+ * 
+ * @param {string} imageUrl - Base Supabase image URL
+ * @param {number} width - Target width
+ * @returns {string} Optimized image URL
+ */
+export function getResponsiveHeroUrl(imageUrl, width) {
+  if (!imageUrl || !isSupabaseUrl(imageUrl)) {
+    return imageUrl;
+  }
+  return getOptimizedImageUrl(imageUrl, { width, quality: 85 });
+}
+
+/**
  * Image paths for Vercel Blob uploads
  * Use these paths when uploading images
  */

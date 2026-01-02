@@ -1,12 +1,13 @@
 import { lazy, Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
 import { siteConfig } from '../config/siteConfig';
+import { SITE_ASSETS } from '../config/assetUrls';
 import SEO from '../components/SEO';
 import BucketListFeatured from '../components/BucketListFeatured'
 import FeaturedOffers from '../components/FeaturedOffers';
 import LatestNewsTile from '../components/LatestNewsTile';
 import { Button } from '../components/ui';
-import { homeHeroImages, homeHeroMobileImage } from '../utils/imageHelpers';
+import { homeHeroImages, homeHeroMobileImage, generateHeroSrcSet, getResponsiveHeroUrl } from '../utils/imageHelpers';
 import './HomePage.css';
 
 // Lazy load ContactForm (below the fold)
@@ -104,6 +105,9 @@ function HomePage() {
     // Single hero image (first image from array)
     const heroImage = homeHeroImages[0];
     const heroImageMobile = homeHeroMobileImage;
+    // Responsive srcset for maintenance mode too
+    const maintenanceHeroSrcSet = generateHeroSrcSet(heroImage);
+    const maintenanceHeroMobileSrc = getResponsiveHeroUrl(heroImage, 768);
 
     return (
       <>
@@ -157,7 +161,7 @@ function HomePage() {
           <div className="container" style={{ padding: '1.5rem 0' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
               <img 
-                src="https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/logo.webp" 
+                src={SITE_ASSETS.logo} 
                 alt="Limitless Cruises logo" 
                 width="56"
                 height="56"
@@ -196,7 +200,9 @@ function HomePage() {
                   />
                 )}
                 <img
-                  src={heroImage}
+                  src={maintenanceHeroMobileSrc}
+                  srcSet={maintenanceHeroSrcSet || undefined}
+                  sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, (max-width: 1280px) 1280px, 1920px"
                   alt="Beautiful cruise destination"
                   width={1920}
                   height={1080}
@@ -302,6 +308,12 @@ function HomePage() {
   // Single hero image (first image from array)
   const heroImage = homeHeroImages[0];
   const heroImageMobile = homeHeroMobileImage; // Optional mobile-optimized version
+  
+  // Generate responsive srcset for optimal LCP on all devices
+  // Mobile gets smaller image (480-768px), desktop gets full resolution
+  const heroSrcSet = generateHeroSrcSet(heroImage);
+  // Mobile-optimized default src (768px for mobile first)
+  const heroMobileSrc = getResponsiveHeroUrl(heroImage, 768);
 
   return (
     <main className="home-elegant">
@@ -313,11 +325,11 @@ function HomePage() {
       />
 
       {/* Hero Section - Image Background with Overlay Text */}
-      {/* Uses picture element for mobile optimization when mobile image is available */}
+      {/* Uses responsive srcset to serve appropriate image size per viewport */}
       <section className="hero-elegant">
         <div className="hero-background-image" style={{ aspectRatio: '16/9' }}>
           <picture>
-            {/* Mobile-optimized image (if provided) - smaller file for faster LCP on mobile */}
+            {/* Mobile-optimized image (if dedicated mobile image provided) */}
             {heroImageMobile && (
               <source 
                 media="(max-width: 768px)" 
@@ -325,9 +337,12 @@ function HomePage() {
                 type="image/webp"
               />
             )}
-            {/* Desktop/default image - priority loading for LCP */}
+            {/* Responsive image with srcset - browser selects optimal size */}
+            {/* sizes: full viewport on mobile, max 1920px on desktop */}
             <img
-              src={heroImage}
+              src={heroMobileSrc}
+              srcSet={heroSrcSet || undefined}
+              sizes="(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, (max-width: 1280px) 1280px, 1920px"
               alt="Beautiful Caribbean beach with turquoise waters and a cruise ship on the horizon - Limitless Cruises destination"
               width={1920}
               height={1080}

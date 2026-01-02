@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { navigation } from '../../data/navigation';
 import { siteConfig } from '../../config/siteConfig';
 import { isSiteLaunched } from '../../config/launchConfig';
+import { SITE_ASSETS } from '../../config/assetUrls';
 import './Header.css';
 
 function Header() {
@@ -116,7 +117,7 @@ function Header() {
             <Link to="/" className="header-logo" onClick={closeMobileMenu}>
               <div className="logo-container">
                 <img 
-                  src="https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/logo.webp" 
+                  src={SITE_ASSETS.logo} 
                   alt="Limitless Cruises logo - gold cruise ship icon" 
                   className="logo-icon"
                   width="56"

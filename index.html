@@ -61,12 +61,14 @@
     <link rel="dns-prefetch" href="https://challenges.cloudflare.com" />
     <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     
-    <!-- Preload hero image for faster LCP with responsive hints - mobile optimized -->
+    <!-- Preload hero image for desktop only - mobile uses CSS gradient for instant LCP -->
+    <!-- media="(min-width: 769px)" prevents mobile from downloading the hero image -->
     <link rel="preload" as="image" 
-      href="https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/hero.webp" 
+      media="(min-width: 769px)"
+      href="https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/render/image/public/WEB_site/hero.webp?width=1024&quality=85" 
       fetchpriority="high" 
-      imagesrcset="https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/hero.webp 1920w"
-      imagesizes="(max-width: 768px) 100vw, 1920px" />
+      imagesrcset="https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/render/image/public/WEB_site/hero.webp?width=1024&quality=85 1024w, https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/render/image/public/WEB_site/hero.webp?width=1280&quality=85 1280w, https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/render/image/public/WEB_site/hero.webp?width=1920&quality=85 1920w"
+      imagesizes="(max-width: 1024px) 1024px, (max-width: 1280px) 1280px, 1920px" />
     
     <!-- Critical CSS for hero section - prevents render blocking for LCP -->
     <style>
@@ -80,10 +82,14 @@
       body { font-family: Inter, system-ui, -apple-system, sans-serif; line-height: 1.6; color: #333; background: #fff; }
       #root { min-height: 100vh; display: flex; flex-direction: column; }
       
-      /* Mobile optimizations */
+      /* Mobile: NO HERO IMAGE - gradient background for instant LCP */
       @media (max-width: 768px) {
         .hero-elegant { min-height: 400px; }
-        .hero-background-image { min-height: 400px; }
+        .hero-background-image { 
+          min-height: 400px; 
+          background: linear-gradient(135deg, #2C344C 0%, #3d4a6a 40%, #1a2035 100%);
+        }
+        .hero-background-image img { display: none !important; }
       }
     </style>
     

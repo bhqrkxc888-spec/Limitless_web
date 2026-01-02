@@ -316,7 +316,7 @@ export function getArticleSchema(article) {
       name: 'Limitless Cruises',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/logo.webp',
+        url: SITE_ASSETS.logo,
         width: 512,
         height: 512,
       },

@@ -14,10 +14,11 @@ const CookieConsent = lazy(() => import('./components/CookieConsent'))
 const FloatingWhatsApp = lazy(() => import('./components/FloatingWhatsApp'))
 const ImageDebugger = lazy(() => import('./components/ImageDebugger'))
 
-// Route Protection
+// Route Protection - ProtectedRoute and PublishGate are light, kept eager
+// AdminProtectedRoute is lazy to prevent admin chunk from loading on non-admin routes
 import ProtectedRoute from './components/ProtectedRoute'
-import AdminProtectedRoute from './components/AdminProtectedRoute'
 import PublishGate from './components/PublishGate'
+const AdminProtectedRoute = lazy(() => import('./components/AdminProtectedRoute'))
 
 // HomePage is eagerly loaded to prevent CLS on initial page load
 // This is the main landing page and must render without Suspense delay

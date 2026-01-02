@@ -32,21 +32,57 @@
   object-fit: cover;
   object-position: center right;
   display: block;
-  /* Defer expensive filter/transform until after initial paint for better LCP */
-  /* These effects animate in smoothly instead of blocking render */
-  filter: brightness(1) saturate(1);
-  transform: scale(1);
+  /* GPU-accelerated transform for smooth animation */
+  /* contain: paint prevents layout thrash from affecting other elements */
+  contain: paint;
   transform-origin: center right;
-  animation: heroImageEnhance 0.8s ease-out 0.1s forwards;
-  /* Hint browser to prepare for transform/filter changes */
-  will-change: transform, filter;
+}
+
+/* MOBILE: Hide hero image for instant LCP - use gradient background instead */
+/* This eliminates the largest render-blocking resource on mobile */
+@media (max-width: 768px) {
+  .hero-background-image img {
+    display: none !important;
+  }
+  
+  .hero-background-image {
+    /* Premium gradient background for mobile - matches brand colors */
+    background: linear-gradient(
+      135deg,
+      #2C344C 0%,
+      #3d4a6a 40%,
+      #1a2035 100%
+    );
+  }
+  
+  /* Subtle texture overlay for visual interest */
+  .hero-background-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 30% 20%, rgba(201, 169, 98, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 40%);
+    pointer-events: none;
+  }
+}
+
+/* Animation only on devices that prefer motion - respects user preferences */
+/* Only apply to desktop (where image is shown) */
+@media (min-width: 769px) and (prefers-reduced-motion: no-preference) {
+  .hero-background-image img {
+    animation: heroImageEnhance 1s ease-out 0.3s forwards;
+  }
 }
 
 /* Animate in the subtle image enhancements after LCP */
+/* Uses only transform (GPU-accelerated) - removed filter to prevent reflow */
 @keyframes heroImageEnhance {
+  from {
+    transform: scale(1);
+  }
   to {
-    filter: brightness(1.05) saturate(1.1);
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
 }
 
@@ -88,12 +124,16 @@
     0 20px 40px -12px rgba(0, 0, 0, 0.35),
     0 0 0 1px rgba(201, 169, 98, 0.25);
   position: relative;
-  animation: fadeInUp 0.8s ease-out;
   text-align: center;
-  /* GPU acceleration hint for smooth animation */
-  will-change: transform, opacity;
-  /* Use transform3d to force GPU layer */
-  transform: translateZ(0);
+  /* contain: layout prevents forced reflow from affecting other elements */
+  contain: layout style;
+}
+
+/* Animation respects user preferences */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-text-box {
+    animation: fadeInUp 0.8s ease-out;
+  }
 }
 
 /* Gold accent line on top (centered) */

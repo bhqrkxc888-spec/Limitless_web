@@ -3,6 +3,7 @@ import { useTravelNewsArticle } from '../hooks/useTravelNews';
 import { incrementTravelNewsView } from '../services/travelNewsAPI';
 import { supabase } from '../lib/supabase';
 import { siteConfig } from '../config/siteConfig';
+import { SITE_ASSETS } from '../config/assetUrls';
 import SEO from '../components/SEO';
 import { Button, SectionHeader } from '../components/ui';
 import OptimizedImage from '../components/OptimizedImage';
@@ -168,7 +169,7 @@ function TravelNewsArticlePage() {
       name: 'Limitless Cruises',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/logo.webp',
+        url: SITE_ASSETS.logo,
         width: 512,
         height: 512
       }

@@ -1,10 +1,88 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+/**
+ * Custom plugin to remove non-critical CSS from initial HTML
+ * These CSS files will be loaded dynamically when their associated chunks load
+ * This improves mobile performance by reducing render-blocking CSS
+ */
+function deferNonCriticalCSS() {
+  // CSS files that should NOT be in initial HTML (loaded with their chunks instead)
+  const deferredPatterns = [
+    'admin-',      // Admin pages CSS - only needed on /admin routes
+    'map-vendor-', // Mapbox CSS - only needed on pages with maps
+    'map-components-', // Map component CSS
+    'forms-',      // Form CSS - loaded when ContactForm/PriceMatchForm are lazy-loaded
+  ];
+  
+  return {
+    name: 'defer-non-critical-css',
+    enforce: 'post',
+    transformIndexHtml(html) {
+      // Find and remove stylesheet links that match deferred patterns
+      // Store them for deferred loading script
+      const deferredLinks = [];
+      
+      let modifiedHtml = html.replace(
+        /<link rel="stylesheet"[^>]*href="([^"]*)"[^>]*>/g,
+        (match, href) => {
+          const shouldDefer = deferredPatterns.some(pattern => href.includes(pattern));
+          if (shouldDefer) {
+            deferredLinks.push(href);
+            return `<!-- deferred: ${href} -->`; // Comment out, will load dynamically
+          }
+          return match;
+        }
+      );
+      
+      // If we deferred any CSS, add a script to load them on interaction/idle
+      if (deferredLinks.length > 0) {
+        const deferScript = `
+    <script>
+      // Deferred CSS loader - loads non-critical CSS after user interaction or idle
+      (function() {
+        var loaded = false;
+        var deferredCSS = ${JSON.stringify(deferredLinks)};
+        
+        function loadDeferredCSS() {
+          if (loaded) return;
+          loaded = true;
+          deferredCSS.forEach(function(href) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = href;
+            document.head.appendChild(link);
+          });
+        }
+        
+        // Load on idle or after 3 seconds (whichever comes first)
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(loadDeferredCSS, { timeout: 3000 });
+        } else {
+          setTimeout(loadDeferredCSS, 1000);
+        }
+        
+        // Also load on first interaction
+        ['scroll', 'click', 'touchstart', 'mousemove'].forEach(function(e) {
+          window.addEventListener(e, loadDeferredCSS, { once: true, passive: true });
+        });
+      })();
+    </script>`;
+        
+        // Insert script before closing </head>
+        modifiedHtml = modifiedHtml.replace('</head>', deferScript + '\n  </head>');
+      }
+      
+      return modifiedHtml;
+    }
+  };
+}
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
+    deferNonCriticalCSS(),
   ],
   build: {
     // Enable sourcemaps for production debugging (hidden sourcemaps for security)
@@ -24,12 +102,17 @@ export default defineConfig({
               return 'supabase-vendor';
             }
             // Map libraries (only needed on itinerary/destination pages)
+            // These should ONLY load when map components are actually rendered
             if (id.includes('leaflet') || id.includes('mapbox') || id.includes('ol/')) {
               return 'map-vendor';
             }
             // Web vitals - separate for performance monitoring
             if (id.includes('web-vitals')) {
               return 'vitals-vendor';
+            }
+            // react-dropzone (only used in admin image upload)
+            if (id.includes('react-dropzone')) {
+              return 'admin';
             }
             // Other vendor code
             return 'vendor';
@@ -39,8 +122,21 @@ export default defineConfig({
           if (id.includes('/data/cruiseLines')) return 'cruise-data';
           if (id.includes('/data/destinations')) return 'destination-data';
           
-          // Admin pages (lazy-loaded, not needed for public)
-          if (id.includes('/pages/admin/')) return 'admin';
+          // Admin - ALL admin-related code including components and hooks
+          // This ensures the admin chunk is fully isolated from public routes
+          if (id.includes('/pages/admin/') || 
+              id.includes('/components/admin/') || 
+              id.includes('AdminProtectedRoute') ||
+              id.includes('useAdminAuth')) {
+            return 'admin';
+          }
+          
+          // Map components - isolated to prevent map-vendor from loading on homepage
+          if (id.includes('BucketListMap') || 
+              id.includes('InteractiveItineraryMap') || 
+              id.includes('LazyBucketListMap')) {
+            return 'map-components';
+          }
           
           // Weather APIs (only loaded with consent)
           if (id.includes('/services/weather') || id.includes('/services/marine')) {
@@ -78,10 +174,9 @@ export default defineConfig({
     cssMinify: 'lightningcss',
     // Target modern browsers for smaller bundles
     target: 'es2020',
-    // Module preload polyfill
-    modulePreload: {
-      polyfill: true
-    }
+    // Disable module preload polyfill to prevent ALL chunk preloading on initial load
+    // This is critical for mobile performance - we only want to load what's needed for current route
+    modulePreload: false
   },
   server: {
     proxy: {
