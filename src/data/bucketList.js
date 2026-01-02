@@ -25,9 +25,9 @@ export const bucketListExperiences = [
     
     // SEO - targeting real UK search terms
     seo: {
-      metaTitle: 'World Cruise from UK | Round the World Voyage | Limitless Cruises',
-      metaDescription: 'Everything you need to know about world cruises from the UK. 100-140 night voyages circumnavigating the globe. Best time to go, what to expect, which cruise lines. Expert advice.',
-      keywords: ['world cruise from uk', 'round the world cruise', 'circumnavigation cruise', 'world voyage', 'extended cruise uk']
+      metaTitle: 'World Cruise | Round the World Voyage from Barcelona | Limitless Cruises',
+      metaDescription: 'Everything you need to know about world cruises. 100-140 night voyages circumnavigating the globe from Barcelona. Flights from UK included. Best time to go, what to expect, expert advice.',
+      keywords: ['world cruise', 'round the world cruise', 'circumnavigation cruise', 'world voyage', 'world cruise from barcelona', 'extended cruise']
     },
     
     // Hero
@@ -48,7 +48,7 @@ export const bucketListExperiences = [
       narrative: '<p>There is something deeply compelling about the idea of sailing around the world. The great explorers knew it; modern voyagers rediscover it. A world cruise offers something no other form of travel can: the luxury of time. Time to truly know a place rather than merely visit it. Time to watch cultures shift gradually as you move from continent to continent. Time to form lasting friendships with fellow travellers who share your sense of adventure.</p><p>The journey itself becomes the destination. Sea days transform from transit into treasured interludes of reading, reflection, and renewal. You develop a rhythm that feels almost meditative-the gentle motion of the ship, the changing light on the water, the anticipation of tomorrow\'s port.</p><p>What makes a world cruise truly extraordinary is the sheer breadth of experience. In a single voyage, you might tango in Buenos Aires, witness a Maori haka in New Zealand, marvel at the engineering brilliance of the Panama Canal, and trace the footsteps of Gaudí through Barcelona. Each port adds new threads to the tapestry-vibrant Latin American rhythms, serene Pacific island traditions, the sophisticated bustle of Australian cities, the warm hospitality of Caribbean shores.</p><p>The contrast between destinations only heightens their impact. After days of Pacific blue, the first glimpse of a coastline feels almost miraculous. After the grandeur of Rio\'s harbour, the intimate charm of a South Seas atoll seems like a secret discovered just for you.</p>'
     },
     optimalTiming: {
-      summary: 'World cruises typically depart in January and return in April or May, timing the voyage to arrive in each region during its most favourable season.',
+      summary: 'Typical duration: 100-140 nights. World cruises typically depart in January from Barcelona and return in April or May, timing the voyage to arrive in each region during its most favourable season. Flights from the UK included.',
       seasons: [
         {
           name: 'South America',
@@ -121,7 +121,7 @@ export const bucketListExperiences = [
     
     // Is This Right for You - Honest assessment
     idealVoyagerProfile: {
-      intro: 'World cruises suit travellers who value depth over speed and connection over convenience.',
+      intro: 'World cruises suit travellers who value depth over speed and connection over convenience. Most world cruises depart from Barcelona or other Mediterranean ports, with flights from the UK included.',
       profiles: [
         { 
           type: 'Good fit if you...', 
