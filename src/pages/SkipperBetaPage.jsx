@@ -54,6 +54,20 @@ function SkipperBetaPage() {
     };
   }, [searchParams]);
 
+  // Add ESC key listener to close Skipper
+  useEffect(() => {
+    if (!hasAccess) return;
+
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        navigate('/');
+      }
+    };
+
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [hasAccess, navigate]);
+
   if (isChecking) {
     return (
       <div className="skipper-beta-page">
@@ -86,10 +100,18 @@ function SkipperBetaPage() {
   return (
     <div className="skipper-beta-page">
         <div className="beta-banner">
-          <span>⚠️ PRIVATE BETA - Testing Only</span>
-          <button onClick={() => navigate('/concierge')} className="switch-form-btn">
-            Switch to Form
-          </button>
+          <div className="beta-banner-left">
+            <span className="beta-badge">⚠️ PRIVATE BETA</span>
+            <span className="beta-text">Testing Only</span>
+          </div>
+          <div className="beta-banner-right">
+            <button onClick={() => navigate('/concierge')} className="switch-form-btn">
+              📋 Switch to Form
+            </button>
+            <button onClick={() => navigate('/')} className="close-skipper-btn" title="Close and return to website">
+              ✕ Close
+            </button>
+          </div>
         </div>
         <SkipperChat />
       </div>
