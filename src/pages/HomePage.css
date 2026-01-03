@@ -426,6 +426,11 @@
   margin-top: var(--space-12);
 }
 
+.offer-cards-four {
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
 .offer-card {
   background: var(--clr-surface);
   padding: var(--space-10);
@@ -590,9 +595,18 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .offer-cards {
+  .offer-cards,
+  .offer-cards-four {
     grid-template-columns: 1fr;
     gap: var(--space-6);
+  }
+}
+
+/* Tablet: 2x2 grid for 4-card layout */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .offer-cards-four {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-7);
   }
 
   .contact-form-wrapper {

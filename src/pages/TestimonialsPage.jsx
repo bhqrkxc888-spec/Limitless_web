@@ -272,7 +272,7 @@ function TestimonialsPage() {
               Call {siteConfig.phone}
             </Button>
             <Button to="/contact" variant="outline" size="lg" className="btn-outline-white">
-              Get a Quote
+              Get in Touch
             </Button>
           </div>
         </div>

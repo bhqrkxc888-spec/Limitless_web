@@ -95,6 +95,14 @@ const HeartIcon = () => (
   </svg>
 );
 
+const PackageIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
+    <path d="m3.3 7 8.7 5 8.7-5"/>
+    <path d="M12 22V12"/>
+  </svg>
+);
+
 function HomePage() {
   const { pathname } = useLocation();
   const isMaintenanceMode = import.meta.env.VITE_MAINTENANCE_MODE === 'true';
@@ -504,7 +512,7 @@ function HomePage() {
             Expert cruise planning tailored to you. <a href="/about" className="inline-link">Learn more about our services</a>.
           </p>
           
-          <div className="offer-cards">
+          <div className="offer-cards offer-cards-four">
             <div className="offer-card">
               <div className="offer-icon">
                 <UserIcon />
@@ -527,6 +535,14 @@ function HomePage() {
               </div>
               <h3>Stress-Free Planning</h3>
               <p>From first enquiry to safe return - flights, hotels, transfers and every detail are handled for you.</p>
+            </div>
+            
+            <div className="offer-card">
+              <div className="offer-icon">
+                <PackageIcon />
+              </div>
+              <h3>Bespoke Packages</h3>
+              <p>Complete travel packages expertly crafted - flights, hotels, and your perfect cruise all coordinated for you.</p>
             </div>
           </div>
         </div>

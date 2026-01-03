@@ -290,6 +290,9 @@ function AppLayout() {
             <Route path="/contact" element={<ContactPage />} />
             
             {/* Enquiry Forms - Public */}
+            {/* Note: /get-a-quote route kept functional but hidden from navigation
+                Doesn't collect enough passenger/cabin details for proper quotes
+                May attract price-shoppers rather than premium clientele */}
             <Route path="/get-a-quote" element={<GetQuotePage />} />
             <Route path="/concierge" element={<PackageConciergePage />} />
             <Route path="/custom-packages" element={<PackageConciergePage />} />

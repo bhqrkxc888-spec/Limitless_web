@@ -1,3 +1,16 @@
+/**
+ * GET A QUOTE PAGE
+ * 
+ * NOTE: This page is intentionally hidden from navigation (not linked from menu).
+ * 
+ * Reason: The simple "paste a link" approach doesn't collect enough details
+ * (passengers, cabin type/location, preferred deck) needed for proper quotes.
+ * May also attract price-shoppers rather than premium clientele.
+ * 
+ * Route kept functional (/get-a-quote) for potential future use.
+ * See: src/data/navigation.js and src/App.jsx for implementation notes.
+ */
+
 import SEO, { getBreadcrumbSchema } from '../components/SEO';
 import QuoteRequestForm from '../components/enquiry-forms/QuoteRequestForm';
 import './GetQuotePage.css';

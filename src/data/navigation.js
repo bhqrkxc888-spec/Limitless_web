@@ -64,11 +64,6 @@ export const navigation = {
               highlight: true
             },
             {
-              label: 'Get a Quote',
-              path: '/get-a-quote',
-              description: 'We will beat any cruise price you find'
-            },
-            {
               label: 'Find a Cruise',
               path: '/find-a-cruise',
               description: 'Search and compare cruises'
@@ -78,6 +73,10 @@ export const navigation = {
               path: '/concierge',
               description: 'Custom multi-component travel packages'
             }
+            // Note: "Get a Quote" page (/get-a-quote) exists but is hidden from navigation
+            // Page doesn't collect enough passenger/cabin details needed for proper quotes
+            // May attract price-shoppers rather than premium clientele
+            // Code kept intact at /src/pages/GetQuotePage.jsx for potential future use
           ]
         }
       ]
