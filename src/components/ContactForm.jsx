@@ -90,10 +90,7 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
         email: formData.email,
         phone: formData.phone,
         message: formData.message,
-        source: formData.context,
-        status: 'new',
-        // Include Turnstile token for server-side verification if needed - Disabled temporarily
-        // turnstile_token: turnstileToken || null
+        source: formData.context
       };
 
       // Add offer linking if provided
@@ -104,26 +101,55 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
         enquiryData.offer_title = offerTitle;
       }
 
-      // Add timeout to prevent hanging
+      // Primary: Send to CRM API (this triggers email notification)
+      const crmUrl = import.meta.env.VITE_CRM_API_URL || 'https://crm.limitlesscruises.com';
+      const webhookSecret = import.meta.env.VITE_WEBSITE_WEBHOOK_SECRET || 'change-me-in-production';
+      
       let timeoutId;
       const timeoutPromise = new Promise((_, reject) => {
         timeoutId = setTimeout(() => reject(new Error('Request timeout')), 10000);
       });
 
       try {
-        const result = await Promise.race([
-          supabase.from('website_enquiries').insert([enquiryData]).then(result => {
-            clearTimeout(timeoutId);
-            return result;
+        const response = await Promise.race([
+          fetch(`${crmUrl}/api/website-enquiry`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${webhookSecret}`
+            },
+            body: JSON.stringify(enquiryData)
           }),
           timeoutPromise
         ]);
 
-        const { error } = result;
-        if (error) throw error;
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+          throw new Error(errorData.error || `HTTP ${response.status}`);
+        }
+
+        const result = await response.json();
+        logger.info('Enquiry sent to CRM successfully:', result);
+
       } catch (err) {
         clearTimeout(timeoutId);
-        throw err;
+        logger.error('Failed to send enquiry to CRM:', err);
+        
+        // Fallback: Save to local database if CRM API fails
+        try {
+          const fallbackData = { ...enquiryData, status: 'new' };
+          const { error: dbError } = await supabase
+            .from('website_enquiries')
+            .insert([fallbackData]);
+          
+          if (dbError) throw dbError;
+          logger.warn('Enquiry saved to local DB as fallback');
+        } catch (dbErr) {
+          logger.error('Fallback to local DB also failed:', dbErr);
+          throw new Error('Failed to submit enquiry. Please try again or call us directly.');
+        }
       }
       
       setStatus('success');
