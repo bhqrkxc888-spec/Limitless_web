@@ -3,7 +3,7 @@
  * Manages cruise category card images matching cruiseTypes.js data
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import useAdminAuth from '../../hooks/useAdminAuth';
@@ -15,17 +15,19 @@ import { STORAGE_BUCKETS } from '../../config/supabaseConfig';
 import { getAllCruiseTypes } from '../../data/cruiseTypes';
 import './AdminImagesShared.css';
 
-// Get categories from cruiseTypes data (only featured ones for admin management)
-const CATEGORIES = getAllCruiseTypes()
-  .filter(cat => cat.featured) // Only show featured categories in admin
-  .map(cat => ({
-    id: cat.id,
-    label: cat.name
-  }));
-
 function AdminCategoryImages() {
   const navigate = useNavigate();
   const { isAuthenticated, isLoading: authLoading, logout } = useAdminAuth();
+  
+  // Get categories from cruiseTypes data (only featured ones for admin management)
+  const CATEGORIES = useMemo(() => 
+    getAllCruiseTypes()
+      .filter(cat => cat.featured) // Only show featured categories in admin
+      .map(cat => ({
+        id: cat.id,
+        label: cat.name
+      }))
+  , []);
   
   const [images, setImages] = useState({});
   const [loading, setLoading] = useState(true);
