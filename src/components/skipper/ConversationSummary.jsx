@@ -4,7 +4,7 @@ import './ConversationSummary.css';
  * Conversation Summary - Tracks key discussion points
  * Replaces the simple progress checklist with detailed conversation notes
  */
-function ConversationSummary({ collectedData, conversationHistory }) {
+function ConversationSummary({ collectedData }) {
   // Build summary sections from collected data
   const sections = [];
 
