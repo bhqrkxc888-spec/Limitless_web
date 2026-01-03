@@ -91,6 +91,8 @@ function PageLoader() {
 const FindCruisePage = lazy(() => lazyWithRetry(() => import('./pages/FindCruisePage')))
 const AboutPage = lazy(() => lazyWithRetry(() => import('./pages/AboutPage')))
 const ContactPage = lazy(() => lazyWithRetry(() => import('./pages/ContactPage')))
+const GetQuotePage = lazy(() => lazyWithRetry(() => import('./pages/GetQuotePage')))
+const PackageConciergePage = lazy(() => lazyWithRetry(() => import('./pages/PackageConciergePage')))
 const AdminPage = lazy(() => lazyWithRetry(() => import('./pages/AdminPage')))
 const CruiseLinesPage = lazy(() => lazyWithRetry(() => import('./pages/CruiseLinesPage')))
 const DestinationsPage = lazy(() => lazyWithRetry(() => import('./pages/DestinationsPage')))
@@ -286,6 +288,11 @@ function AppLayout() {
             <Route path="/find-a-cruise" element={<FindCruisePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            
+            {/* Enquiry Forms - Public */}
+            <Route path="/get-a-quote" element={<GetQuotePage />} />
+            <Route path="/concierge" element={<PackageConciergePage />} />
+            <Route path="/custom-packages" element={<PackageConciergePage />} />
             
             {/* Offers - Public */}
             <Route path="/offers" element={<OffersPage />} />

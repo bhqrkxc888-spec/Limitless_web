@@ -4,7 +4,7 @@ import { incrementOfferView } from '../services/offersAPI';
 import { siteConfig } from '../config/siteConfig';
 import SEO, { getBreadcrumbSchema } from '../components/SEO';
 import { Button, SectionHeader } from '../components/ui';
-import ContactForm from '../components/ContactForm';
+import { OfferEnquiryModal } from '../components/enquiry-forms';
 // V2 Components
 import AccommodationCard from '../components/AccommodationCard';
 import AirportPricingList from '../components/AirportPricingTable';
@@ -27,6 +27,7 @@ function OfferPage() {
   const { offer, loading, error } = useOffer(isValidSlug ? slug : null);
   const [selectedImage, setSelectedImage] = useState(0);
   const [failedImages, setFailedImages] = useState(new Set());
+  const [showEnquiryModal, setShowEnquiryModal] = useState(false);
 
   // Compute default price valid until date (90 days from now) - must be before early returns
   const defaultPriceValidUntil = useMemo(() => {
@@ -531,11 +532,13 @@ function OfferPage() {
                 )}
                 
                 <div className="offer-pricing-card__actions" style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
-                  <Button href="#enquiry-form" variant="outline" size="md" fullWidth>
-                    Enquire Now
-                  </Button>
-                  <Button href={`tel:${siteConfig.phone}`} variant="ghost" size="sm" fullWidth style={{ marginTop: '0.5rem', opacity: 0.8 }}>
-                    Or call {siteConfig.phone}
+                  <Button 
+                    onClick={() => setShowEnquiryModal(true)}
+                    variant="outline" 
+                    size="md" 
+                    fullWidth
+                  >
+                    Check Availability
                   </Button>
                 </div>
               </div>
@@ -926,17 +929,20 @@ function OfferPage() {
       <section className="section offer-enquiry-section" id="enquiry-form">
         <div className="container">
           <div className="offer-enquiry-stack">
-            {/* Enquiry Form */}
+            {/* Enquiry CTA */}
             <div className="offer-enquiry-form-card">
-              <h2>Enquire About This Offer</h2>
+              <h2>Interested in This Offer?</h2>
               <p>
-                Interested in this cruise? Fill out the form and we'll get back to you with availability and booking details.
+                Check availability and get personalised information about cabin options, pricing, and package add-ons.
               </p>
-              <ContactForm 
-                context="offer-detail"
-                offerId={offer.id}
-                offerTitle={offer.title}
-              />
+              <Button 
+                onClick={() => setShowEnquiryModal(true)}
+                variant="primary"
+                size="lg"
+                fullWidth
+              >
+                Check Availability
+              </Button>
             </div>
 
             {/* Contact CTA - Stacked Below */}
@@ -979,6 +985,13 @@ function OfferPage() {
           </Link>
         </div>
       </section>
+
+      {/* Enquiry Modal */}
+      <OfferEnquiryModal
+        isOpen={showEnquiryModal}
+        onClose={() => setShowEnquiryModal(false)}
+        offer={offer}
+      />
     </main>
   );
 }

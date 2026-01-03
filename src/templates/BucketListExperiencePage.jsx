@@ -6,6 +6,7 @@ import { Button } from '../components/ui';
 import { useState, useMemo } from 'react';
 import { getOgImage } from '../utils/imageHelpers';
 import { useBucketListImage } from '../hooks/useImageUrl';
+import { BucketListEnquiryModal } from '../components/enquiry-forms';
 import './BucketListExperiencePage.css';
 
 /**
@@ -22,6 +23,7 @@ function BucketListExperiencePage() {
   const { slug } = useParams();
   const experience = getBucketListBySlug(slug);
   const [expandedItinerary, setExpandedItinerary] = useState(false);
+  const [showEnquiryModal, setShowEnquiryModal] = useState(false);
   const relatedExperiences = getRotatingFeatured(4).filter(exp => exp.id !== experience?.id).slice(0, 3);
   
   // Load images from database
@@ -337,7 +339,11 @@ function BucketListExperiencePage() {
               Every journey is tailored to your preferences.
             </p>
             <div className="cta-buttons">
-              <Button to="/contact" variant="primary" size="lg">
+              <Button 
+                onClick={() => setShowEnquiryModal(true)} 
+                variant="primary" 
+                size="lg"
+              >
                 Enquire About {experience.title}
               </Button>
               <Button href={`tel:${siteConfig.phone}`} variant="outline" size="lg">
@@ -377,6 +383,14 @@ function BucketListExperiencePage() {
         )}
 
       </article>
+
+      {/* Enquiry Modal */}
+      <BucketListEnquiryModal
+        isOpen={showEnquiryModal}
+        onClose={() => setShowEnquiryModal(false)}
+        bucketListItem={experience.title}
+        bucketListId={experience.id}
+      />
     </main>
   );
 }
