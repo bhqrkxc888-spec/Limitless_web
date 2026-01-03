@@ -93,6 +93,7 @@ const AboutPage = lazy(() => lazyWithRetry(() => import('./pages/AboutPage')))
 const ContactPage = lazy(() => lazyWithRetry(() => import('./pages/ContactPage')))
 const GetQuotePage = lazy(() => lazyWithRetry(() => import('./pages/GetQuotePage')))
 const PackageConciergePage = lazy(() => lazyWithRetry(() => import('./pages/PackageConciergePage')))
+const SkipperBetaPage = lazy(() => lazyWithRetry(() => import('./pages/SkipperBetaPage')))
 const AdminPage = lazy(() => lazyWithRetry(() => import('./pages/AdminPage')))
 const CruiseLinesPage = lazy(() => lazyWithRetry(() => import('./pages/CruiseLinesPage')))
 const DestinationsPage = lazy(() => lazyWithRetry(() => import('./pages/DestinationsPage')))
@@ -296,6 +297,9 @@ function AppLayout() {
             <Route path="/get-a-quote" element={<GetQuotePage />} />
             <Route path="/concierge" element={<PackageConciergePage />} />
             <Route path="/custom-packages" element={<PackageConciergePage />} />
+            
+            {/* Skipper AI Beta - Hidden */}
+            <Route path="/skipper-beta" element={<SkipperBetaPage />} />
             
             {/* Offers - Public */}
             <Route path="/offers" element={<OffersPage />} />

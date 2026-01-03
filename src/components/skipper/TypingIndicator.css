@@ -1,0 +1,35 @@
+.message-bubble.typing {
+  display: flex;
+  gap: 0.3rem;
+  padding: 1rem 1.25rem;
+  align-items: center;
+}
+
+.message-bubble.typing .dot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-grey-600, #666);
+  border-radius: 50%;
+  animation: typing 1.4s infinite;
+  opacity: 0.3;
+}
+
+.message-bubble.typing .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.message-bubble.typing .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
