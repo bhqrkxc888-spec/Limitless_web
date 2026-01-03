@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import SkipperChat from '../components/skipper/SkipperChat';
+import SkipperInfo from '../components/skipper/SkipperInfo';
 import './SkipperBetaPage.css';
 
 const VALID_KEYS = ['sk_test_2026', 'sk_demo_dane', 'sk_family_test'];
@@ -10,6 +11,7 @@ function SkipperBetaPage() {
   const [searchParams] = useSearchParams();
   const [hasAccess, setHasAccess] = useState(false);
   const [isChecking, setIsChecking] = useState(true);
+  const [showInfo, setShowInfo] = useState(false);
 
   useEffect(() => {
     // Prevent body scroll when Skipper is open
@@ -105,6 +107,14 @@ function SkipperBetaPage() {
             <span className="beta-text">Testing Only</span>
           </div>
           <div className="beta-banner-right">
+            <button 
+              onClick={() => setShowInfo(true)} 
+              className="info-btn" 
+              title="About The Skipper"
+              aria-label="About The Skipper"
+            >
+              ?
+            </button>
             <button onClick={() => navigate('/concierge')} className="switch-form-btn">
               📋 Switch to Form
             </button>
@@ -114,6 +124,7 @@ function SkipperBetaPage() {
           </div>
         </div>
         <SkipperChat />
+        <SkipperInfo isOpen={showInfo} onClose={() => setShowInfo(false)} />
       </div>
   );
 }

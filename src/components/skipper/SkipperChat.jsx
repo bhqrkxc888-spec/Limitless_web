@@ -25,12 +25,19 @@ function SkipperChat() {
     const consent = sessionStorage.getItem('skipper_consent');
     if (consent === 'true') {
       setHasConsented(true);
-      // Add welcome message
-      setMessages([{
-        id: generateId(),
-        role: 'assistant',
-        content: "Hello! 👋 I'm The Skipper, your personal AI assistant for Limitless Cruises.\n\n**About Our Service:**\nLimitless Cruises is built on personal, expert service – but we understand that sometimes you'd prefer to explore options at your own pace before speaking with someone. That's why we created The Skipper: an AI assistant who understands our approach and can help you explore cruise options 24/7.\n\n**I'm Here to Enhance, Not Replace:**\nI'm an extension of the personal service we offer, designed to help gather your preferences and requirements. Our expert cruise consultants are always available when you're ready to speak directly – just ask at any point and we'll arrange a call.\n\nHow are you today? What kind of cruise experience are you dreaming of, or would you like to explore some possibilities together?"
-      }]);
+      // Add welcome messages
+      setMessages([
+        {
+          id: generateId(),
+          role: 'assistant',
+          content: "Hello! 👋 I'm The Skipper, your personal AI assistant for Limitless Cruises. I'm here to help you explore cruise options 24/7 and gather your preferences for our expert team."
+        },
+        {
+          id: generateId() + '1',
+          role: 'assistant',
+          content: "How are you today? What kind of cruise experience are you dreaming of, or would you like to explore some possibilities together?"
+        }
+      ]);
     }
   }, []);
 
@@ -42,12 +49,19 @@ function SkipperChat() {
   const handleConsent = () => {
     sessionStorage.setItem('skipper_consent', 'true');
     setHasConsented(true);
-    // Add welcome message
-    setMessages([{
-      id: generateId(),
-      role: 'assistant',
-      content: "Hello! 👋 I'm The Skipper, your personal AI assistant for Limitless Cruises.\n\n**About Our Service:**\nLimitless Cruises is built on personal, expert service – but we understand that sometimes you'd prefer to explore options at your own pace before speaking with someone. That's why we created The Skipper: an AI assistant who understands our approach and can help you explore cruise options 24/7.\n\n**I'm Here to Enhance, Not Replace:**\nI'm an extension of the personal service we offer, designed to help gather your preferences and requirements. Our expert cruise consultants are always available when you're ready to speak directly – just ask at any point and we'll arrange a call.\n\nHow are you today? What kind of cruise experience are you dreaming of, or would you like to explore some possibilities together?"
-    }]);
+    // Add welcome messages
+    setMessages([
+      {
+        id: generateId(),
+        role: 'assistant',
+        content: "Hello! 👋 I'm The Skipper, your personal AI assistant for Limitless Cruises. I'm here to help you explore cruise options 24/7 and gather your preferences for our expert team."
+      },
+      {
+        id: generateId() + '1',
+        role: 'assistant',
+        content: "How are you today? What kind of cruise experience are you dreaming of, or would you like to explore some possibilities together?"
+      }
+    ]);
   };
 
   const handleSendMessage = async (messageText) => {

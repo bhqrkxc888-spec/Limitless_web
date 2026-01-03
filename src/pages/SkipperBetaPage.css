@@ -45,6 +45,29 @@
   gap: 0.75rem;
 }
 
+.info-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--color-white, #ffffff);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.info-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: scale(1.1);
+}
+
 .switch-form-btn {
   background: rgba(255, 255, 255, 0.2);
   color: var(--color-white, #ffffff);
