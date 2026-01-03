@@ -90,7 +90,7 @@
 .step-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-  border-color: var(--primary-color, #1e40af);
+  border-color: var(--clr-accent, #C9A962);
 }
 
 .step-number {
@@ -157,7 +157,7 @@
 .benefit-card svg {
   width: 48px;
   height: 48px;
-  color: var(--primary-color, #1e40af);
+  color: var(--clr-accent, #C9A962);
   margin-bottom: 1rem;
 }
 

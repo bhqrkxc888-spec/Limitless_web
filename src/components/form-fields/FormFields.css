@@ -74,7 +74,7 @@
 .form-select:focus,
 .form-textarea:focus {
   outline: none;
-  border-color: var(--primary-color, #1e40af);
+  border-color: var(--clr-accent, #C9A962);
   box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
 }
 
@@ -134,7 +134,7 @@
   border-radius: 4px;
   cursor: pointer;
   flex-shrink: 0;
-  accent-color: var(--primary-color, #1e40af);
+  accent-color: var(--clr-accent, #C9A962);
 }
 
 .form-checkbox-label {

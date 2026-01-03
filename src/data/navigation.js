@@ -64,9 +64,20 @@ export const navigation = {
               highlight: true
             },
             {
+              label: 'Get a Quote',
+              path: '/get-a-quote',
+              description: 'We'll beat any cruise price you find',
+              highlight: true
+            },
+            {
               label: 'Find a Cruise',
               path: '/find-a-cruise',
               description: 'Search and compare cruises'
+            },
+            {
+              label: 'Bespoke Packages',
+              path: '/concierge',
+              description: 'Custom multi-component travel packages'
             }
           ]
         }

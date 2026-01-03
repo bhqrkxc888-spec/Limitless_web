@@ -156,7 +156,7 @@
 .example-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-  border-color: var(--primary-color, #1e40af);
+  border-color: var(--clr-accent, #C9A962);
 }
 
 .example-icon {
@@ -194,8 +194,8 @@
   display: inline-block;
   padding: 0.5rem 1rem;
   background: white;
-  border: 2px solid var(--primary-color, #1e40af);
-  color: var(--primary-color, #1e40af);
+  border: 2px solid var(--clr-primary, #1e40af);
+  color: var(--clr-primary, #1e40af);
   font-weight: 700;
   font-size: 1rem;
   border-radius: 8px;
@@ -228,7 +228,7 @@
 .benefit-item svg {
   width: 56px;
   height: 56px;
-  color: var(--primary-color, #1e40af);
+  color: var(--clr-primary, #1e40af);
   margin-bottom: 1.5rem;
 }
 
