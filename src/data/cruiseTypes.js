@@ -22,7 +22,7 @@ export const cruiseTypes = [
       'Kids-eat-free dining options'
     ],
     bestFor: ['Families with young children', 'Multi-generational groups', 'First-time family cruisers'],
-    recommendedLines: ['Disney Cruise Line', 'Royal Caribbean', 'MSC Cruises', 'P&O Cruises', 'Norwegian Cruise Line'],
+    recommendedLines: ['P&O Cruises', 'MSC Cruises', 'Disney Cruise Line', 'Norwegian Cruise Line', 'Marella Cruises', 'Royal Caribbean'],
     tips: [
       'Book early to secure connecting cabins',
       'Choose ships with extensive kids facilities',
@@ -69,6 +69,38 @@ export const cruiseTypes = [
     }
   },
   {
+    id: 'premium',
+    slug: 'premium-cruises',
+    name: 'Premium Cruises',
+    tagline: 'Elevated experiences at exceptional value',
+    shortDescription: 'Refined cruising with enhanced amenities and service.',
+    description: 'Premium cruise lines offer an elevated experience with enhanced dining, spacious accommodations, and attentive service - all at exceptional value. Enjoy refined atmosphere, quality entertainment, and thoughtful touches that make your cruise special.',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Cruise%20Type/luxury.webp',
+    icon: 'premium',
+    highlights: [
+      'Enhanced dining experiences',
+      'Spacious staterooms and suites',
+      'Attentive, personalised service',
+      'Quality entertainment and enrichment',
+      'Refined onboard atmosphere',
+      'Excellent value for money'
+    ],
+    bestFor: ['Couples seeking quality', 'Mature travellers', 'Those wanting elevated experiences', 'Value-conscious cruisers'],
+    recommendedLines: ['Celebrity Cruises', 'Holland America Line', 'Fred. Olsen'],
+    tips: [
+      'Celebrity offers modern luxury at accessible prices',
+      'Holland America is perfect for traditional elegance',
+      'Fred. Olsen provides intimate, friendly atmosphere',
+      'Book early for the best cabin selection'
+    ],
+    featured: true,
+    priority: 3,
+    meta: {
+      title: 'Premium Cruises | Elevated Cruise Experiences | Limitless Cruises',
+      description: 'Book premium cruise holidays with enhanced service and amenities. Celebrity, Holland America, Fred. Olsen. Expert advice from Limitless Cruises.'
+    }
+  },
+  {
     id: 'uk-sailings',
     slug: 'uk-no-fly-cruises',
     name: 'UK No-Fly Cruises',
@@ -86,7 +118,7 @@ export const cruiseTypes = [
       'Regional ports available (Liverpool, Newcastle, Dover)'
     ],
     bestFor: ['Those who prefer not to fly', 'First-time cruisers', 'Mobility-limited travellers', 'Those with lots of luggage'],
-    recommendedLines: ['P&O Cruises', 'Fred. Olsen', 'Marella Cruises', 'MSC Cruises', 'Cunard'],
+    recommendedLines: ['P&O Cruises', 'MSC Cruises', 'Celebrity Cruises', 'Holland America Line', 'Ambassador Cruise Line', 'Fred. Olsen'],
     tips: [
       'Southampton offers the widest choice of itineraries',
       'Consider overnight hotel before sailing for stress-free start',
@@ -94,7 +126,7 @@ export const cruiseTypes = [
       'Winter sun cruises to Canaries are popular from UK ports'
     ],
     featured: true,
-    priority: 3,
+    priority: 4,
     meta: {
       title: 'UK No-Fly Cruises | Southampton & UK Port Sailings | Limitless Cruises',
       description: 'Book no-fly cruises from UK ports. Southampton, Liverpool and more. Expert cruise advice from Limitless Cruises.'
@@ -126,7 +158,7 @@ export const cruiseTypes = [
       'Special dietary requirements are handled beautifully'
     ],
     featured: true,
-    priority: 4,
+    priority: 5,
     meta: {
       title: 'Luxury Cruises | All-Inclusive Premium Voyages | Limitless Cruises',
       description: 'Book luxury cruise holidays. All-inclusive elegance with exceptional service. Expert advice from Limitless Cruises.'
@@ -158,7 +190,7 @@ export const cruiseTypes = [
       'Consider the Douro for wine lovers'
     ],
     featured: true,
-    priority: 5,
+    priority: 6,
     meta: {
       title: 'River Cruises | Rhine, Danube & European Rivers | Limitless Cruises',
       description: 'Book European river cruises. Sail the Rhine, Danube, Seine and more. Expert advice from Limitless Cruises.'
@@ -190,7 +222,7 @@ export const cruiseTypes = [
       'Consider shoulder seasons for better value'
     ],
     featured: true,
-    priority: 6,
+    priority: 7,
     meta: {
       title: 'Expedition Cruises | Antarctica, Arctic & Adventure | Limitless Cruises',
       description: 'Book expedition cruises to Antarctica, Arctic, Galápagos and beyond. Expert adventure cruise advice from Limitless Cruises.'
@@ -222,7 +254,7 @@ export const cruiseTypes = [
       'Fred. Olsen is excellent for solo UK travellers'
     ],
     featured: false,
-    priority: 7,
+    priority: 8,
     meta: {
       title: 'Solo Cruises | Single Traveller Cruise Holidays | Limitless Cruises',
       description: 'Book cruises for solo travellers. Studio cabins, no single supplements and social events. Expert advice from Limitless Cruises.'
