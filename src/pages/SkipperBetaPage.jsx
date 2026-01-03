@@ -12,6 +12,9 @@ function SkipperBetaPage() {
   const [isChecking, setIsChecking] = useState(true);
 
   useEffect(() => {
+    // Prevent body scroll when Skipper is open
+    document.body.style.overflow = 'hidden';
+    
     // Set page title and meta tags
     let metaRobots = document.querySelector('meta[name="robots"]');
     if (!metaRobots) {
@@ -44,6 +47,11 @@ function SkipperBetaPage() {
     document.title = 'Access Required - The Skipper Beta';
     setHasAccess(false);
     setIsChecking(false);
+
+    // Cleanup: restore body scroll when component unmounts
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [searchParams]);
 
   if (isChecking) {
