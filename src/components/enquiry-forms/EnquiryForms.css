@@ -10,6 +10,10 @@
   margin: 0 auto;
   padding: var(--space-8, 2rem) var(--space-6, 1.5rem);
   background: var(--clr-surface, white);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--clr-accent);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-base);
 }
 
 /* Multi-step form wider */

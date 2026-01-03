@@ -513,7 +513,7 @@ function HomePage() {
           </p>
           
           <div className="offer-cards offer-cards-four">
-            <div className="offer-card">
+            <div className="offer-card offer-card-featured">
               <div className="offer-icon">
                 <UserIcon />
               </div>
@@ -521,7 +521,7 @@ function HomePage() {
               <p>One-to-one advice from your dedicated cruise consultant who takes time to understand your preferences.</p>
             </div>
             
-            <div className="offer-card">
+            <div className="offer-card offer-card-featured">
               <div className="offer-icon">
                 <StarIcon />
               </div>
@@ -529,7 +529,7 @@ function HomePage() {
               <p>Price match guarantee, exclusive deals, and insider knowledge to get you the most from your cruise budget.</p>
             </div>
             
-            <div className="offer-card">
+            <div className="offer-card offer-card-featured">
               <div className="offer-icon">
                 <CheckCircleIcon />
               </div>
