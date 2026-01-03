@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import ChatMessage from './ChatMessage';
 import ChatInput from './ChatInput';
-import ProgressIndicator from './ProgressIndicator';
+import ConversationSummary from './ConversationSummary';
 import ConsentBanner from './ConsentBanner';
 import TypingIndicator from './TypingIndicator';
 import './SkipperChat.css';
@@ -193,7 +193,7 @@ function SkipperChat() {
           onContinue={() => setReadyToSubmit(false)}
         />
       </div>
-      <ProgressIndicator collectedData={collectedData} />
+      <ConversationSummary collectedData={collectedData} conversationHistory={messages} />
     </div>
   );
 }
