@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useEffect, lazy, Suspense, useState } from 'react'
 import { analyzePageSEO } from './services/seoMonitoring'
+import lazyWithRetry from './utils/lazyWithRetry'
 
 // Layout Components (keep these eagerly loaded for fast initial render)
 import Header from './components/layout/Header'
@@ -10,11 +11,11 @@ import ErrorBoundary from './components/ErrorBoundary'
 
 // Deferred UI Components - loaded after LCP for better mobile performance
 // These are not needed for First Contentful Paint or LCP
-const CookieConsent = lazy(() => import('./components/CookieConsent'))
-const FloatingWhatsApp = lazy(() => import('./components/FloatingWhatsApp'))
+const CookieConsent = lazy(() => lazyWithRetry(() => import('./components/CookieConsent')))
+const FloatingWhatsApp = lazy(() => lazyWithRetry(() => import('./components/FloatingWhatsApp')))
 // ImageDebugger only loaded in development mode
 const ImageDebugger = import.meta.env.DEV 
-  ? lazy(() => import('./components/ImageDebugger'))
+  ? lazy(() => lazyWithRetry(() => import('./components/ImageDebugger')))
   : null
 
 /**
@@ -46,7 +47,7 @@ function DeferredUI({ children }) {
 // AdminProtectedRoute is lazy to prevent admin chunk from loading on non-admin routes
 import ProtectedRoute from './components/ProtectedRoute'
 import PublishGate from './components/PublishGate'
-const AdminProtectedRoute = lazy(() => import('./components/AdminProtectedRoute'))
+const AdminProtectedRoute = lazy(() => lazyWithRetry(() => import('./components/AdminProtectedRoute')))
 
 // HomePage is eagerly loaded to prevent CLS on initial page load
 // This is the main landing page and must render without Suspense delay
@@ -87,65 +88,65 @@ function PageLoader() {
 }
 
 // Lazy-loaded Pages (code splitting) - NOT HomePage
-const FindCruisePage = lazy(() => import('./pages/FindCruisePage'))
-const AboutPage = lazy(() => import('./pages/AboutPage'))
-const ContactPage = lazy(() => import('./pages/ContactPage'))
-const AdminPage = lazy(() => import('./pages/AdminPage'))
-const CruiseLinesPage = lazy(() => import('./pages/CruiseLinesPage'))
-const DestinationsPage = lazy(() => import('./pages/DestinationsPage'))
-const CruiseTypesPage = lazy(() => import('./pages/CruiseTypesPage'))
-const BucketListPage = lazy(() => import('./pages/BucketListPage'))
-const OffersPage = lazy(() => import('./pages/OffersPage'))
-const OfferPage = lazy(() => import('./pages/OfferPage'))
-const TravelNewsPage = lazy(() => import('./pages/TravelNewsPage'))
-const TravelNewsArticlePage = lazy(() => import('./pages/TravelNewsArticlePage'))
-const TravelNewsCategoryPage = lazy(() => import('./pages/TravelNewsCategoryPage'))
-const CruiseGuidesPage = lazy(() => import('./pages/CruiseGuidesPage'))
-const CruiseGuideDetailPage = lazy(() => import('./pages/CruiseGuideDetailPage'))
-const TravelNewsTagPage = lazy(() => import('./pages/TravelNewsTagPage'))
-const NotFoundPage = lazy(() => import('./pages/NotFoundPage'))
-const FAQPage = lazy(() => import('./pages/FAQPage'))
-const TestimonialsPage = lazy(() => import('./pages/TestimonialsPage'))
-const ShipPage = lazy(() => import('./templates/ShipPage'))
+const FindCruisePage = lazy(() => lazyWithRetry(() => import('./pages/FindCruisePage')))
+const AboutPage = lazy(() => lazyWithRetry(() => import('./pages/AboutPage')))
+const ContactPage = lazy(() => lazyWithRetry(() => import('./pages/ContactPage')))
+const AdminPage = lazy(() => lazyWithRetry(() => import('./pages/AdminPage')))
+const CruiseLinesPage = lazy(() => lazyWithRetry(() => import('./pages/CruiseLinesPage')))
+const DestinationsPage = lazy(() => lazyWithRetry(() => import('./pages/DestinationsPage')))
+const CruiseTypesPage = lazy(() => lazyWithRetry(() => import('./pages/CruiseTypesPage')))
+const BucketListPage = lazy(() => lazyWithRetry(() => import('./pages/BucketListPage')))
+const OffersPage = lazy(() => lazyWithRetry(() => import('./pages/OffersPage')))
+const OfferPage = lazy(() => lazyWithRetry(() => import('./pages/OfferPage')))
+const TravelNewsPage = lazy(() => lazyWithRetry(() => import('./pages/TravelNewsPage')))
+const TravelNewsArticlePage = lazy(() => lazyWithRetry(() => import('./pages/TravelNewsArticlePage')))
+const TravelNewsCategoryPage = lazy(() => lazyWithRetry(() => import('./pages/TravelNewsCategoryPage')))
+const CruiseGuidesPage = lazy(() => lazyWithRetry(() => import('./pages/CruiseGuidesPage')))
+const CruiseGuideDetailPage = lazy(() => lazyWithRetry(() => import('./pages/CruiseGuideDetailPage')))
+const TravelNewsTagPage = lazy(() => lazyWithRetry(() => import('./pages/TravelNewsTagPage')))
+const NotFoundPage = lazy(() => lazyWithRetry(() => import('./pages/NotFoundPage')))
+const FAQPage = lazy(() => lazyWithRetry(() => import('./pages/FAQPage')))
+const TestimonialsPage = lazy(() => lazyWithRetry(() => import('./pages/TestimonialsPage')))
+const ShipPage = lazy(() => lazyWithRetry(() => import('./templates/ShipPage')))
 
 // Admin Monitoring Dashboard
-const AdminLogin = lazy(() => import('./pages/admin/AdminLogin'))
-const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'))
-const AdminErrors = lazy(() => import('./pages/admin/AdminErrors'))
-const AdminLighthouse = lazy(() => import('./pages/admin/AdminLighthouse'))
-const AdminSEO = lazy(() => import('./pages/admin/AdminSEO'))
-const AdminAnalytics = lazy(() => import('./pages/admin/AdminAnalytics'))
-const AdminSearchConsole = lazy(() => import('./pages/admin/AdminSearchConsole'))
-const AdminWebsiteDestinations = lazy(() => import('./pages/admin/AdminWebsiteDestinations'))
-const AdminOffersDebug = lazy(() => import('./pages/admin/AdminOffersDebug'))
+const AdminLogin = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminLogin')))
+const AdminDashboard = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminDashboard')))
+const AdminErrors = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminErrors')))
+const AdminLighthouse = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminLighthouse')))
+const AdminSEO = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminSEO')))
+const AdminAnalytics = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminAnalytics')))
+const AdminSearchConsole = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminSearchConsole')))
+const AdminWebsiteDestinations = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminWebsiteDestinations')))
+const AdminOffersDebug = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminOffersDebug')))
 
 // Image Management
-const AdminImageManagement = lazy(() => import('./pages/admin/AdminImageManagement'))
-const AdminSiteImages = lazy(() => import('./pages/admin/AdminSiteImages'))
-const AdminPageHeroes = lazy(() => import('./pages/admin/AdminPageHeroes'))
-const AdminDestinationImages = lazy(() => import('./pages/admin/AdminDestinationImages'))
-const AdminCruiseLineImages = lazy(() => import('./pages/admin/AdminCruiseLineImages'))
-const AdminCategoryImages = lazy(() => import('./pages/admin/AdminCategoryImages'))
-const AdminBucketListImages = lazy(() => import('./pages/admin/AdminBucketListImages'))
-const AdminPortGuideImages = lazy(() => import('./pages/admin/AdminPortGuideImages'))
+const AdminImageManagement = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminImageManagement')))
+const AdminSiteImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminSiteImages')))
+const AdminPageHeroes = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPageHeroes')))
+const AdminDestinationImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminDestinationImages')))
+const AdminCruiseLineImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminCruiseLineImages')))
+const AdminCategoryImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminCategoryImages')))
+const AdminBucketListImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminBucketListImages')))
+const AdminPortGuideImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPortGuideImages')))
 
 // Legal Pages
-const WebsiteTerms = lazy(() => import('./pages/WebsiteTerms'))
-const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
-const BookingTerms = lazy(() => import('./pages/BookingTerms'))
-const CookiePolicy = lazy(() => import('./pages/CookiePolicy'))
-const PriceMatchGuarantee = lazy(() => import('./pages/PriceMatchGuarantee'))
+const WebsiteTerms = lazy(() => lazyWithRetry(() => import('./pages/WebsiteTerms')))
+const PrivacyPolicy = lazy(() => lazyWithRetry(() => import('./pages/PrivacyPolicy')))
+const BookingTerms = lazy(() => lazyWithRetry(() => import('./pages/BookingTerms')))
+const CookiePolicy = lazy(() => lazyWithRetry(() => import('./pages/CookiePolicy')))
+const PriceMatchGuarantee = lazy(() => lazyWithRetry(() => import('./pages/PriceMatchGuarantee')))
 
 // Template Pages (Dynamic Routes)
-const CruiseLinePage = lazy(() => import('./templates/CruiseLinePage'))
-const DestinationPage = lazy(() => import('./templates/DestinationPage'))
-const CategoryPage = lazy(() => import('./templates/CategoryPage'))
-const BucketListExperiencePage = lazy(() => import('./templates/BucketListExperiencePage'))
-const PortGuidePage = lazy(() => import('./templates/PortGuidePage'))
+const CruiseLinePage = lazy(() => lazyWithRetry(() => import('./templates/CruiseLinePage')))
+const DestinationPage = lazy(() => lazyWithRetry(() => import('./templates/DestinationPage')))
+const CategoryPage = lazy(() => lazyWithRetry(() => import('./templates/CategoryPage')))
+const BucketListExperiencePage = lazy(() => lazyWithRetry(() => import('./templates/BucketListExperiencePage')))
+const PortGuidePage = lazy(() => lazyWithRetry(() => import('./templates/PortGuidePage')))
 
 // Port Guide Pages (Draft)
-const PortsPage = lazy(() => import('./pages/PortsPage'))
-const PortRegionPage = lazy(() => import('./pages/PortRegionPage'))
+const PortsPage = lazy(() => lazyWithRetry(() => import('./pages/PortsPage')))
+const PortRegionPage = lazy(() => lazyWithRetry(() => import('./pages/PortRegionPage')))
 
 // Scroll to top on route change and trigger SEO analysis
 function ScrollToTop() {
