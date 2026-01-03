@@ -13,12 +13,6 @@
 .best-time {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
-}
-
-.best-time::before {
-  content: '📅';
-  font-size: var(--font-size-base);
 }
 
 /* Responsive Grid - Enhanced spacing */
