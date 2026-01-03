@@ -125,7 +125,6 @@ function ContactPage() {
                 </svg>
               </div>
               <h3>Email</h3>
-              <p className="contact-method-value">{siteConfig.email}</p>
               <span className="contact-method-action">Send email</span>
             </a>
 
