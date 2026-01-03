@@ -1,7 +1,9 @@
 .skipper-chat {
   display: flex;
-  height: calc(100vh - 60px); /* Account for beta banner */
+  height: 100%;
+  max-height: calc(100vh - 200px); /* Account for site header + beta banner */
   background: var(--color-background-light, #f8f9fa);
+  overflow: hidden;
 }
 
 .chat-main {

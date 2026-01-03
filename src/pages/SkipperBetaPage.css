@@ -1,5 +1,6 @@
 .skipper-beta-page {
-  height: 100vh;
+  min-height: calc(100vh - 140px); /* Account for site header */
+  max-height: calc(100vh - 140px);
   display: flex;
   flex-direction: column;
   background: var(--color-background-light, #f8f9fa);
