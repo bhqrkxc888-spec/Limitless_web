@@ -16,7 +16,7 @@ function ContactFields({ formData, onChange, errors = {}, disabled = false, phon
     if (!phone) return phoneRequired ? 'Phone number is required' : '';
     // UK phone format: optional +44, spaces/hyphens allowed
     const phoneRegex = /^(\+44\s?7\d{3}|\(?07\d{3}\)?)\s?\d{3}\s?\d{3}$|^(\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{6}$/;
-    return phoneRegex.test(phone.replace(/[\s\-]/g, '')) ? '' : 'Please enter a valid UK phone number';
+    return phoneRegex.test(phone.replace(/[\s-]/g, '')) ? '' : 'Please enter a valid UK phone number';
   };
 
   return (

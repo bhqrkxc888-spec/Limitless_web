@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import './FormFields.css';
 
 /**
  * PartySize - Reusable party size fields (adults, children, children ages)
  * Used in bucket list and package concierge forms
  */
-function PartySize({ formData, onChange, errors = {}, disabled = false, showChildrenAges = true }) {
+function PartySize({ formData, onChange, disabled = false, showChildrenAges = true }) {
   const adults = formData.adults || 2;
   const children = formData.children || 0;
   const childrenAges = formData.children_ages || [];

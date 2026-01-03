@@ -111,9 +111,6 @@ function formatEnquiryAsMessage(payload, leadType) {
 export function validateUKPhone(phone) {
   if (!phone) return { valid: false, error: 'Phone number is required' };
   
-  // Remove spaces and hyphens
-  const cleaned = phone.replace(/[\s\-]/g, '');
-  
   // UK phone formats:
   // Mobile: 07xxx xxxxxx or +447xxx xxxxxx
   // Landline: 01xxx xxxxxx, 02x xxxx xxxx, etc.
