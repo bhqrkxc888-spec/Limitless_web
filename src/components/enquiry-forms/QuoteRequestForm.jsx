@@ -214,59 +214,53 @@ function QuoteRequestForm() {
 
   return (
     <form className="enquiry-form" onSubmit={handleSubmit}>
-      <div className="enquiry-form-header">
-        <h2 className="enquiry-form-title">Share Your Cruise Details</h2>
-        <p className="enquiry-form-subtitle">
-          Paste the cruise URL below, or enter the details manually
-        </p>
-      </div>
-
-      {/* Cruise Details Entry Mode Toggle */}
+      {/* Cruise Details */}
       <div className="form-group form-group-full">
-        <div style={{ 
-          padding: '1rem', 
-          background: 'var(--bg-light, #f9fafb)', 
-          borderRadius: '8px',
-          marginBottom: '1rem'
-        }}>
-          <Button
-            type="button"
-            variant={useManualEntry ? 'outline' : 'ghost'}
-            size="sm"
-            onClick={toggleEntryMode}
-            disabled={status === 'submitting'}
-          >
-            {useManualEntry ? 'Switch to URL Entry' : 'Don\'t have a link? Enter details manually'}
-          </Button>
-        </div>
 
         {!useManualEntry ? (
           // URL Entry Mode
-          <div className="form-group">
-            <label htmlFor="cruise_url" className="form-label">
-              Cruise URL <span className="required">*</span>
-            </label>
-            <input
-              type="url"
-              id="cruise_url"
-              name="cruise_url"
-              className={`form-input ${errors.cruise_url ? 'form-input-error' : ''}`}
-              value={formData.cruise_url}
-              onChange={handleChange}
-              placeholder="https://www.princess.com/cruise-to/alaska/..."
+          <>
+            <div className="form-group">
+              <label htmlFor="cruise_url" className="form-label">
+                Cruise URL <span className="required">*</span>
+              </label>
+              <input
+                type="url"
+                id="cruise_url"
+                name="cruise_url"
+                className={`form-input ${errors.cruise_url ? 'form-input-error' : ''}`}
+                value={formData.cruise_url}
+                onChange={handleChange}
+                placeholder="https://www.princess.com/cruise-to/alaska/..."
+                disabled={status === 'submitting'}
+                aria-required="true"
+                aria-invalid={!!errors.cruise_url}
+              />
+              <span className="form-help">
+                Paste the full URL from any cruise website
+              </span>
+              {errors.cruise_url && (
+                <span className="form-error" role="alert">{errors.cruise_url}</span>
+              )}
+            </div>
+            <button
+              type="button"
+              onClick={toggleEntryMode}
               disabled={status === 'submitting'}
-              aria-required="true"
-              aria-invalid={!!errors.cruise_url}
-              aria-describedby="cruise-url-help"
-              style={{ fontSize: '0.95rem' }}
-            />
-            <span id="cruise-url-help" className="form-help">
-              Paste the full URL from any cruise website (Princess, Royal Caribbean, MSC, etc.)
-            </span>
-            {errors.cruise_url && (
-              <span className="form-error" role="alert">{errors.cruise_url}</span>
-            )}
-          </div>
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: '0.5rem 0',
+                color: 'var(--clr-primary, #1e3a5f)',
+                fontSize: '0.9rem',
+                cursor: 'pointer',
+                textDecoration: 'underline',
+                textUnderlineOffset: '2px'
+              }}
+            >
+              Do not have a link? Enter details manually
+            </button>
+          </>
         ) : (
           // Manual Entry Mode
           <>
@@ -342,6 +336,23 @@ function QuoteRequestForm() {
                 disabled={status === 'submitting'}
               />
             </div>
+            <button
+              type="button"
+              onClick={toggleEntryMode}
+              disabled={status === 'submitting'}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: '0.5rem 0',
+                color: 'var(--clr-primary, #1e3a5f)',
+                fontSize: '0.9rem',
+                cursor: 'pointer',
+                textDecoration: 'underline',
+                textUnderlineOffset: '2px'
+              }}
+            >
+              Have a link instead? Switch to URL entry
+            </button>
           </>
         )}
       </div>
@@ -458,9 +469,6 @@ function QuoteRequestForm() {
         </Button>
       </div>
 
-      <p className="form-note">
-        We will review your cruise and send a competitive quote within 24 hours.
-      </p>
     </form>
   );
 }

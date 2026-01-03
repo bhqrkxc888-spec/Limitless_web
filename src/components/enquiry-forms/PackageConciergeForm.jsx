@@ -157,7 +157,7 @@ function PackageConciergeForm() {
         break;
 
       case 3:
-        if (!formData.best_time_to_call) newErrors.best_time_to_call = 'Please select best time to call';
+        // Step 3 is optional - no required fields
         break;
 
       case 4:
@@ -305,46 +305,40 @@ function PackageConciergeForm() {
   };
 
   // Render step indicator
+  const stepLabels = ['Vision', 'Components', 'Details', 'Contact'];
+  
   const renderStepIndicator = () => (
-    <div className="form-step-indicator">
-      {[1, 2, 3, 4].map(step => (
-        <div key={step}>
+    <div className="form-step-indicator" role="navigation" aria-label="Form progress">
+      {[1, 2, 3, 4].map((step, index) => (
+        <>
           <div
+            key={step}
             className={`form-step ${step === currentStep ? 'active' : ''} ${completedSteps.includes(step) ? 'completed' : ''}`}
             onClick={() => goToStep(step)}
             style={{ cursor: step <= currentStep || completedSteps.includes(step - 1) ? 'pointer' : 'default' }}
+            role="button"
+            tabIndex={0}
+            aria-current={step === currentStep ? 'step' : undefined}
           >
             <div className="form-step-number">
               {completedSteps.includes(step) ? '✓' : step}
             </div>
-            <span className="form-step-label">
-              {step === 1 && 'Your Vision'}
-              {step === 2 && 'Components'}
-              {step === 3 && 'Details'}
-              {step === 4 && 'Contact'}
-            </span>
+            <span className="form-step-label">{stepLabels[index]}</span>
           </div>
-          {step < 4 && <div className="form-step-connector" />}
-        </div>
+          {step < 4 && <div key={`conn-${step}`} className="form-step-connector" />}
+        </>
       ))}
     </div>
   );
 
   return (
     <form className="enquiry-form multi-step-form" onSubmit={handleSubmit}>
-      <div className="enquiry-form-header">
-        <h2 className="enquiry-form-title">Tell Us Your Vision</h2>
-        <p className="enquiry-form-subtitle">
-          Complete the form below and we will create a package tailored to your requirements
-        </p>
-      </div>
-
       {renderStepIndicator()}
 
       {/* Step 1: Your Vision */}
       {currentStep === 1 && (
         <div className="form-step-content">
-          <h3 className="form-section-title">Tell Us Your Vision</h3>
+          <h3 className="form-section-title">Your Vision</h3>
 
           {/* Destinations */}
           <div className="form-group form-group-full">
@@ -468,7 +462,7 @@ function PackageConciergeForm() {
 
           <div className="form-step-actions">
             <Button type="button" variant="primary" size="lg" onClick={nextStep} fullWidth>
-              Next: Package Components
+              Continue
             </Button>
           </div>
         </div>
@@ -477,7 +471,7 @@ function PackageConciergeForm() {
       {/* Step 2: Package Components */}
       {currentStep === 2 && (
         <div className="form-step-content">
-          <h3 className="form-section-title">What Should We Include?</h3>
+          <h3 className="form-section-title">Package Components</h3>
 
           {/* Package Components */}
           <div className="form-group form-group-full">
@@ -604,7 +598,7 @@ function PackageConciergeForm() {
               Back
             </Button>
             <Button type="button" variant="primary" size="lg" onClick={nextStep}>
-              Next: Inspiration & Details
+              Continue
             </Button>
           </div>
         </div>
@@ -613,7 +607,7 @@ function PackageConciergeForm() {
       {/* Step 3: Inspiration & Details */}
       {currentStep === 3 && (
         <div className="form-step-content">
-          <h3 className="form-section-title">Share Your Inspiration</h3>
+          <h3 className="form-section-title">Additional Details</h3>
 
           {/* Inspiration Links */}
           <div className="form-group form-group-full">
@@ -650,35 +644,12 @@ function PackageConciergeForm() {
             />
           </div>
 
-          {/* Best Time to Call */}
-          <div className="form-group">
-            <label htmlFor="best_time_to_call" className="form-label">
-              Best Time to Call <span className="required">*</span>
-            </label>
-            <select
-              id="best_time_to_call"
-              name="best_time_to_call"
-              className={`form-select ${errors.best_time_to_call ? 'form-input-error' : ''}`}
-              value={formData.best_time_to_call}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select best time...</option>
-              {callTimeOptions.map(opt => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
-              ))}
-            </select>
-            {errors.best_time_to_call && (
-              <span className="form-error" role="alert">{errors.best_time_to_call}</span>
-            )}
-          </div>
-
           <div className="form-step-actions">
             <Button type="button" variant="outline" size="lg" onClick={prevStep}>
               Back
             </Button>
             <Button type="button" variant="primary" size="lg" onClick={nextStep}>
-              Next: Your Details
+              Continue
             </Button>
           </div>
         </div>
@@ -687,14 +658,7 @@ function PackageConciergeForm() {
       {/* Step 4: Contact & Subscriptions */}
       {currentStep === 4 && (
         <div className="form-step-content">
-          <h3 className="form-section-title">Stay Connected</h3>
-
-          {/* Alert Subscriptions */}
-          <AlertSubscriptions
-            formData={formData}
-            onChange={handleChange}
-            includeLuxury={true}
-          />
+          <h3 className="form-section-title">Your Contact Details</h3>
 
           {/* Contact Details */}
           <ContactFields
@@ -705,12 +669,41 @@ function PackageConciergeForm() {
             phoneRequired={true}
           />
 
+          {/* Best Time to Call - Optional */}
+          <div className="form-group">
+            <label htmlFor="best_time_to_call" className="form-label">
+              Best Time to Call (Optional)
+            </label>
+            <select
+              id="best_time_to_call"
+              name="best_time_to_call"
+              className="form-select"
+              value={formData.best_time_to_call}
+              onChange={handleChange}
+              disabled={status === 'submitting'}
+            >
+              <option value="">No preference</option>
+              {callTimeOptions.map(opt => (
+                <option key={opt.value} value={opt.value}>{opt.label}</option>
+              ))}
+            </select>
+          </div>
+
           {/* Existing Customer */}
           <ExistingCustomerCheckbox
             formData={formData}
             onChange={handleChange}
             disabled={status === 'submitting'}
           />
+
+          {/* Alert Subscriptions */}
+          <div className="form-group form-group-full" style={{ marginTop: 'var(--space-6, 1.5rem)' }}>
+            <AlertSubscriptions
+              formData={formData}
+              onChange={handleChange}
+              includeLuxury={true}
+            />
+          </div>
 
           {/* Status Messages */}
           {status === 'success' && (
@@ -761,13 +754,10 @@ function PackageConciergeForm() {
               size="lg"
               disabled={status === 'submitting' || status === 'success'}
             >
-              {status === 'submitting' ? 'Submitting...' : 'Submit My Package Vision'}
+              {status === 'submitting' ? 'Submitting...' : 'Submit Enquiry'}
             </Button>
           </div>
 
-          <p className="form-note">
-            We will review your request and be in touch within 48 hours.
-          </p>
         </div>
       )}
     </form>

@@ -1,47 +1,49 @@
 /* ========================================
-   PACKAGE CONCIERGE PAGE - SIMPLE & ELEGANT
+   PACKAGE CONCIERGE PAGE - PREMIUM STYLING
    ======================================== */
 
 .package-concierge-page {
-  background: var(--clr-bg);
+  background: var(--clr-bg, #FDFBF7);
   min-height: 100vh;
 }
 
-/* Page Header - Minimal */
+/* Page Header */
 .concierge-page-header {
-  padding: var(--space-12) 0 var(--space-8) 0;
+  padding: var(--space-12, 3rem) 0 var(--space-8, 2rem) 0;
   text-align: center;
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-bottom: 1px solid var(--clr-border, #E8E4DC);
 }
 
 .concierge-page-header h1 {
-  font-family: var(--font-family-display);
-  font-size: clamp(1.75rem, 3vw, 2.25rem);
-  font-weight: 600;
-  color: var(--clr-text-primary);
-  margin-bottom: var(--space-3);
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--clr-text-main, #2C344C);
+  margin-bottom: var(--space-3, 0.75rem);
 }
 
 .concierge-page-header p {
-  font-size: var(--font-size-lg);
-  color: var(--clr-text-secondary);
-  max-width: 600px;
+  font-size: var(--font-size-lg, 1.125rem);
+  color: var(--clr-text-muted, #5C6478);
+  max-width: 500px;
   margin: 0 auto;
   line-height: 1.6;
 }
 
 /* Form Section */
 .concierge-form-section {
-  padding: 0 0 var(--space-16) 0;
+  padding: var(--space-12, 3rem) var(--space-4, 1rem) var(--space-16, 4rem);
 }
 
 .concierge-form-section .container {
-  max-width: 800px;
+  max-width: 740px;
 }
 
 /* Mobile */
 @media (max-width: 767px) {
   .concierge-page-header {
-    padding: var(--space-8) 0 var(--space-6) 0;
+    padding: var(--space-8, 2rem) var(--space-4, 1rem) var(--space-6, 1.5rem);
   }
 
   .concierge-page-header h1 {
@@ -49,6 +51,10 @@
   }
 
   .concierge-page-header p {
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-base, 1rem);
+  }
+
+  .concierge-form-section {
+    padding: var(--space-8, 2rem) 0;
   }
 }

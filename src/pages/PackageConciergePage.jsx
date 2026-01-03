@@ -18,11 +18,11 @@ function PackageConciergePage() {
         structuredData={breadcrumbSchema}
       />
 
-      {/* Simple Page Header */}
+      {/* Page Header */}
       <section className="concierge-page-header">
         <div className="container">
-          <h1>Bespoke Packages</h1>
-          <p>From flights to hotels to your perfect cruise, tell us your vision and we will handle every detail.</p>
+          <h1>Create Your Perfect Package</h1>
+          <p>Flights, hotels, cruise - we handle every detail. Tell us your vision.</p>
         </div>
       </section>
 

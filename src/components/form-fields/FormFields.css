@@ -1,13 +1,16 @@
-/* Reusable Form Fields Styles */
+/* ========================================
+   FORM FIELDS - PREMIUM STYLING
+   Using site design tokens
+   ======================================== */
 
 /* Form Grid */
 .form-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: var(--space-5, 1.25rem);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .form-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -22,139 +25,176 @@
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--space-2, 0.5rem);
+}
+
+.form-group-full {
+  grid-column: 1 / -1;
 }
 
 .form-group-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
+  gap: var(--space-4, 1rem);
+}
+
+@media (max-width: 639px) {
+  .form-group-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 .form-section {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-6, 1.5rem);
 }
 
 /* Labels */
 .form-label {
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--clr-text-primary, #1a1a1a);
+  font-weight: var(--font-weight-medium, 500);
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--clr-text-main, #2C344C);
   display: block;
 }
 
 .form-label-small {
-  font-weight: 500;
-  font-size: 0.85rem;
-  color: var(--text-secondary, #666);
+  font-weight: var(--font-weight-medium, 500);
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--clr-text-muted, #5C6478);
   display: block;
-  margin-bottom: 0.25rem;
+  margin-bottom: var(--space-1, 0.25rem);
 }
 
 .required {
-  color: var(--error-color, #dc2626);
-  margin-left: 0.25rem;
+  color: var(--clr-error, #EF4444);
+  margin-left: 2px;
 }
 
-/* Inputs */
+/* ========================================
+   INPUTS - Match button sizing
+   ======================================== */
+
 .form-input,
 .form-select,
 .form-textarea {
-  padding: 0.875rem 1rem;
-  border: 1px solid var(--clr-border, #e5e7eb);
-  border-radius: var(--radius-md, 6px);
-  font-size: 0.95rem;
-  font-family: inherit;
-  transition: all 0.2s ease;
+  padding: var(--space-3, 0.75rem) var(--space-4, 1rem);
+  border: 1px solid var(--clr-border, #E8E4DC);
+  border-radius: var(--radius-md, 0.375rem);
+  font-size: var(--font-size-base, 1rem);
+  font-family: var(--font-family, inherit);
+  line-height: 1.5;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
   background: var(--clr-surface, white);
   width: 100%;
+  color: var(--clr-text-main, #2C344C);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--clr-text-light, #8B9099);
 }
 
 .form-input:focus,
 .form-select:focus,
 .form-textarea:focus {
   outline: none;
-  border-color: var(--clr-accent, #C9A962);
-  box-shadow: 0 0 0 3px rgba(201, 169, 98, 0.15);
+  border-color: var(--clr-accent, #D4B86A);
+  box-shadow: 0 0 0 3px rgba(212, 184, 106, 0.15);
 }
 
 .form-input:disabled,
 .form-select:disabled,
 .form-textarea:disabled {
-  background-color: var(--disabled-bg, #f3f4f6);
+  background-color: var(--clr-bg-alt, #F8F5F0);
   cursor: not-allowed;
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 .form-input-error {
-  border-color: var(--error-color, #dc2626);
+  border-color: var(--clr-error, #EF4444);
 }
 
 .form-input-error:focus {
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
 }
 
+/* Number inputs */
 .form-input-number {
-  max-width: 120px;
+  max-width: 100px;
+  text-align: center;
 }
 
 /* Textarea */
 .form-textarea {
-  min-height: 120px;
+  min-height: 100px;
   resize: vertical;
+}
+
+/* Select dropdown */
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%235C6478' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right var(--space-3, 0.75rem) center;
+  background-repeat: no-repeat;
+  background-size: 1.25em 1.25em;
+  padding-right: var(--space-10, 2.5rem);
 }
 
 /* Help Text */
 .form-help {
-  font-size: 0.875rem;
-  color: var(--text-secondary, #6b7280);
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--clr-text-muted, #5C6478);
   line-height: 1.4;
 }
 
 /* Error Messages */
 .form-error {
-  font-size: 0.875rem;
-  color: var(--error-color, #dc2626);
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--clr-error, #EF4444);
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  line-height: 1.4;
+  gap: var(--space-1, 0.25rem);
 }
 
-.form-error::before {
-  content: '⚠';
-  font-size: 1rem;
-}
+/* ========================================
+   CHECKBOXES - Clean styling
+   ======================================== */
 
-/* Checkboxes */
 .form-checkbox {
-  width: 1.25rem;
-  height: 1.25rem;
-  border: 2px solid var(--border-color, #d1d5db);
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--clr-border-dark, #D8D4CC);
   border-radius: 4px;
   cursor: pointer;
   flex-shrink: 0;
-  accent-color: var(--clr-accent, #C9A962);
+  accent-color: var(--clr-accent, #D4B86A);
+  margin-top: 2px;
 }
 
 .form-checkbox-label {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
+  gap: var(--space-3, 0.75rem);
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: var(--font-size-sm, 0.875rem);
   line-height: 1.5;
-  color: var(--text-primary, #1a1a1a);
+  color: var(--clr-text-main, #2C344C);
 }
 
 .form-checkbox-label:hover {
-  color: var(--text-hover, #000);
+  color: var(--clr-primary, #2C344C);
 }
 
 .form-checkbox-group {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--space-3, 0.75rem);
+}
+
+/* Horizontal checkbox layout for destinations */
+.form-checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-3, 0.75rem);
 }
 
 /* Fieldsets */
@@ -164,65 +204,79 @@
   margin: 0;
 }
 
+.form-fieldset legend {
+  font-weight: var(--font-weight-medium, 500);
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--clr-text-main, #2C344C);
+  margin-bottom: var(--space-3, 0.75rem);
+}
+
 /* Consent Section */
 .form-consent {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background: var(--bg-light, #f9fafb);
-  border-radius: 8px;
+  margin-top: var(--space-6, 1.5rem);
+  padding: var(--space-4, 1rem);
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-radius: var(--radius-md, 0.375rem);
 }
 
 .form-consent .form-checkbox-label {
-  font-size: 0.9rem;
+  font-size: var(--font-size-xs, 0.75rem);
+  color: var(--clr-text-muted, #5C6478);
 }
 
 .form-consent a {
-  color: var(--link-color, #1e40af);
+  color: var(--clr-primary, #2C344C);
   text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .form-consent a:hover {
-  color: var(--link-hover, #1e3a8a);
+  color: var(--clr-accent, #D4B86A);
 }
 
 /* Children Ages Grid */
 .children-ages-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 1rem;
+  gap: var(--space-4, 1rem);
+  margin-top: var(--space-2, 0.5rem);
 }
 
 .child-age-input {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: var(--space-1, 0.25rem);
 }
 
-/* Mobile Responsiveness */
-@media (max-width: 767px) {
-  .form-group-row {
+/* Party Size - inline layout */
+.party-size-row {
+  display: flex;
+  gap: var(--space-6, 1.5rem);
+  flex-wrap: wrap;
+}
+
+.party-size-item {
+  flex: 1;
+  min-width: 120px;
+}
+
+/* ========================================
+   MOBILE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 639px) {
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: var(--space-3, 0.75rem);
+    font-size: 16px; /* Prevents iOS zoom */
+  }
+
+  .form-checkbox-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .children-ages-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
-/* Loading States */
-.form-input.loading,
-.form-select.loading {
-  background-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.05) 50%, transparent 100%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-

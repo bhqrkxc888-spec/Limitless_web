@@ -18,11 +18,11 @@ function GetQuotePage() {
         structuredData={breadcrumbSchema}
       />
 
-      {/* Simple Page Header */}
+      {/* Page Header */}
       <section className="quote-page-header">
         <div className="container">
-          <h1>Get a Quote</h1>
-          <p>Found your perfect cruise? Share the details and we will provide a competitive quote.</p>
+          <h1>Get a Competitive Quote</h1>
+          <p>Found a cruise you love? Share the details and we will provide a quote within 24 hours.</p>
         </div>
       </section>
 

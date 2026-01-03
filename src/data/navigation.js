@@ -66,8 +66,7 @@ export const navigation = {
             {
               label: 'Get a Quote',
               path: '/get-a-quote',
-              description: 'We will beat any cruise price you find',
-              highlight: true
+              description: 'We will beat any cruise price you find'
             },
             {
               label: 'Find a Cruise',
