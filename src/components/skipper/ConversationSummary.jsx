@@ -57,7 +57,9 @@ function ConversationSummary({ collectedData, conversationHistory }) {
       items: [
         collectedData.flight_class && `Class: ${collectedData.flight_class}`,
         collectedData.preferred_airline && `Airline: ${collectedData.preferred_airline}`,
-        collectedData.preferred_airports && `Airports: ${collectedData.preferred_airports}`,
+        collectedData.preferred_airports && `Departure: ${collectedData.preferred_airports}`,
+        collectedData.flight_connections && `Connections: ${collectedData.flight_connections}`,
+        collectedData.layover_hotel && `Layover hotel: ${collectedData.layover_hotel}`,
         collectedData.seat_preferences && `Seats: ${collectedData.seat_preferences}`
       ].filter(Boolean)
     });
@@ -79,14 +81,27 @@ function ConversationSummary({ collectedData, conversationHistory }) {
     }
   }
 
+  // Transfers
+  if (collectedData.wants_transfers !== false && collectedData.transfer_type) {
+    sections.push({
+      title: '🚗 Transfers',
+      items: [
+        collectedData.transfer_type && `Type: ${collectedData.transfer_type}`,
+        collectedData.transfer_requirements && collectedData.transfer_requirements
+      ].filter(Boolean)
+    });
+  }
+
   // Drinks & Extras
-  if (collectedData.drinks_package || collectedData.drinks_preferences) {
+  if (collectedData.drinks_package || collectedData.drinks_preferences || collectedData.special_requirements) {
     sections.push({
       title: '🍷 Drinks & Extras',
       items: [
         collectedData.drinks_package && `Package: ${collectedData.drinks_package}`,
         collectedData.drinks_preferences && collectedData.drinks_preferences,
-        collectedData.special_requirements && `Special: ${collectedData.special_requirements}`
+        collectedData.special_requirements && `Special: ${collectedData.special_requirements}`,
+        collectedData.special_occasion && `Occasion: ${collectedData.special_occasion}`,
+        collectedData.travel_insurance && `Insurance: ${collectedData.travel_insurance}`
       ].filter(Boolean)
     });
   }
@@ -100,13 +115,12 @@ function ConversationSummary({ collectedData, conversationHistory }) {
   }
 
   // Contact
-  if (collectedData.name || collectedData.email || collectedData.phone) {
+  if (collectedData.name || collectedData.email) {
     sections.push({
       title: '📞 Contact',
       items: [
         collectedData.name && `✍️ ${collectedData.name}`,
-        collectedData.email && `📧 ${collectedData.email}`,
-        collectedData.phone && `📱 ${collectedData.phone}`
+        collectedData.email && `📧 ${collectedData.email}`
       ].filter(Boolean)
     });
   }

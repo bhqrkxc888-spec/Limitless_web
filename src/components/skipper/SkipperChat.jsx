@@ -29,7 +29,7 @@ function SkipperChat() {
       setMessages([{
         id: generateId(),
         role: 'assistant',
-        content: "Hi! I'm The Skipper. Where would you like to sail?"
+        content: "Hello! 👋 I'm The Skipper, your personal enquiry assistant for Limitless Cruises.\n\nHow are you today? I'm here to help you explore cruise options and gather the details our consultants need to create your perfect quote.\n\nWhether you have a specific destination in mind or want to explore possibilities, I'm here to help. What kind of cruise experience are you dreaming of?"
       }]);
     }
   }, []);
@@ -46,7 +46,7 @@ function SkipperChat() {
     setMessages([{
       id: generateId(),
       role: 'assistant',
-      content: "Hi! I'm The Skipper. Where would you like to sail?"
+      content: "Hello! 👋 I'm The Skipper, your personal enquiry assistant for Limitless Cruises.\n\nHow are you today? I'm here to help you explore cruise options and gather the details our consultants need to create your perfect quote.\n\nWhether you have a specific destination in mind or want to explore possibilities, I'm here to help. What kind of cruise experience are you dreaming of?"
     }]);
   };
 
