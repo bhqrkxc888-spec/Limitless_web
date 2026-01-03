@@ -537,7 +537,7 @@ function HomePage() {
               <p>From first enquiry to safe return - flights, hotels, transfers and every detail are handled for you.</p>
             </div>
             
-            <div className="offer-card">
+            <div className="offer-card offer-card-featured">
               <div className="offer-icon">
                 <PackageIcon />
               </div>

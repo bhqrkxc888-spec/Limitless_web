@@ -444,6 +444,11 @@
   box-shadow: var(--shadow-lg);
 }
 
+.offer-card-featured {
+  border-color: var(--clr-accent);
+  box-shadow: var(--shadow-lg);
+}
+
 /* Offer Icons - SVG styling */
 .offer-icon {
   width: 56px;
