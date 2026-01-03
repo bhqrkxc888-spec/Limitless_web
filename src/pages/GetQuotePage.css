@@ -1,294 +1,54 @@
-/* Get Quote Page Styles */
+/* ========================================
+   GET QUOTE PAGE - SIMPLE & ELEGANT
+   ======================================== */
 
 .get-quote-page {
-  background: linear-gradient(to bottom, #f9fafb 0%, white 100%);
+  background: var(--clr-bg);
+  min-height: 100vh;
 }
 
-/* Hero Section */
-.quote-hero {
-  padding: 4rem 0 3rem;
+/* Page Header - Minimal */
+.quote-page-header {
+  padding: var(--space-12) 0 var(--space-8) 0;
   text-align: center;
-  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-  color: white;
 }
 
-.quote-hero-content {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.quote-hero-title {
-  font-size: 2.5rem;
-  font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
-}
-
-.quote-hero-subtitle {
-  font-size: 1.25rem;
-  line-height: 1.6;
-  opacity: 0.95;
-  margin-bottom: 2.5rem;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Trust Indicators */
-.quote-trust-indicators {
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-  flex-wrap: wrap;
-}
-
-.trust-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+.quote-page-header h1 {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
   font-weight: 600;
-  font-size: 1rem;
+  color: var(--clr-text-primary);
+  margin-bottom: var(--space-3);
 }
 
-.trust-item svg {
-  width: 28px;
-  height: 28px;
-  opacity: 0.9;
-}
-
-/* How It Works Section */
-.quote-how-it-works {
-  padding: 4rem 0;
-  background: white;
-}
-
-.section-title {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 3rem;
-  color: var(--text-primary, #1a1a1a);
-}
-
-.steps-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  max-width: 1000px;
+.quote-page-header p {
+  font-size: var(--font-size-lg);
+  color: var(--clr-text-secondary);
+  max-width: 600px;
   margin: 0 auto;
-}
-
-.step-card {
-  text-align: center;
-  padding: 2rem;
-  background: white;
-  border-radius: 12px;
-  border: 2px solid var(--border-color, #e5e7eb);
-  transition: all 0.3s ease;
-}
-
-.step-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-  border-color: var(--clr-accent, #C9A962);
-}
-
-.step-number {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-  color: white;
-  font-size: 1.75rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.5rem;
-}
-
-.step-card h3 {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-  color: var(--text-primary, #1a1a1a);
-}
-
-.step-card p {
-  font-size: 1rem;
   line-height: 1.6;
-  color: var(--text-secondary, #6b7280);
 }
 
 /* Form Section */
 .quote-form-section {
-  padding: 4rem 0;
-  background: var(--bg-light, #f9fafb);
+  padding: 0 0 var(--space-16) 0;
 }
 
-/* Why Choose Us Section */
-.quote-why-choose {
-  padding: 4rem 0;
-  background: white;
+.quote-form-section .container {
+  max-width: 800px;
 }
 
-.benefits-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.benefit-card {
-  padding: 2rem;
-  background: var(--bg-light, #f9fafb);
-  border-radius: 12px;
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-.benefit-card:hover {
-  background: white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
-}
-
-.benefit-card svg {
-  width: 48px;
-  height: 48px;
-  color: var(--clr-accent, #C9A962);
-  margin-bottom: 1rem;
-}
-
-.benefit-card h3 {
-  font-size: 1.125rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-  color: var(--text-primary, #1a1a1a);
-}
-
-.benefit-card p {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: var(--text-secondary, #6b7280);
-}
-
-/* Contact CTA Section */
-.quote-contact-cta {
-  padding: 4rem 0;
-  background: linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%);
-}
-
-.cta-card {
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 3rem;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.cta-card h2 {
-  font-size: 1.875rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--text-primary, #1a1a1a);
-}
-
-.cta-card p {
-  font-size: 1.125rem;
-  line-height: 1.6;
-  color: var(--text-secondary, #6b7280);
-  margin-bottom: 2rem;
-}
-
-.cta-buttons {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/* Mobile Responsiveness */
+/* Mobile */
 @media (max-width: 767px) {
-  .quote-hero {
-    padding: 3rem 0 2rem;
+  .quote-page-header {
+    padding: var(--space-8) 0 var(--space-6) 0;
   }
 
-  .quote-hero-title {
-    font-size: 1.875rem;
-  }
-
-  .quote-hero-subtitle {
-    font-size: 1.125rem;
-  }
-
-  .quote-trust-indicators {
-    gap: 1.5rem;
-    font-size: 0.875rem;
-  }
-
-  .trust-item svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .section-title {
-    font-size: 1.75rem;
-  }
-
-  .steps-grid {
-    gap: 1.5rem;
-  }
-
-  .step-card {
-    padding: 1.5rem;
-  }
-
-  .step-number {
-    width: 50px;
-    height: 50px;
+  .quote-page-header h1 {
     font-size: 1.5rem;
   }
 
-  .quote-form-section,
-  .quote-how-it-works,
-  .quote-why-choose,
-  .quote-contact-cta {
-    padding: 3rem 0;
-  }
-
-  .cta-card {
-    padding: 2rem 1.5rem;
-  }
-
-  .cta-card h2 {
-    font-size: 1.5rem;
-  }
-
-  .cta-card p {
-    font-size: 1rem;
-  }
-
-  .cta-buttons {
-    flex-direction: column;
-  }
-
-  .cta-buttons .btn {
-    width: 100%;
+  .quote-page-header p {
+    font-size: var(--font-size-base);
   }
 }
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  .quote-hero-title {
-    font-size: 2.25rem;
-  }
-
-  .benefits-grid,
-  .steps-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-

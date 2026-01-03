@@ -215,9 +215,9 @@ function QuoteRequestForm() {
   return (
     <form className="enquiry-form" onSubmit={handleSubmit}>
       <div className="enquiry-form-header">
-        <h2 className="enquiry-form-title">Get Your Competitive Quote</h2>
+        <h2 className="enquiry-form-title">Share Your Cruise Details</h2>
         <p className="enquiry-form-subtitle">
-          Found a cruise you love? Share the details and we'll provide a competitive quote - often beating published prices
+          Paste the cruise URL below, or enter the details manually
         </p>
       </div>
 
@@ -459,7 +459,7 @@ function QuoteRequestForm() {
       </div>
 
       <p className="form-note">
-        <strong>24-hour turnaround guaranteed.</strong> We'll review your cruise and send a competitive quote within 24 hours.
+        We will review your cruise and send a competitive quote within 24 hours.
       </p>
     </form>
   );

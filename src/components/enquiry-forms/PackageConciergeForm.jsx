@@ -333,9 +333,9 @@ function PackageConciergeForm() {
   return (
     <form className="enquiry-form multi-step-form" onSubmit={handleSubmit}>
       <div className="enquiry-form-header">
-        <h2 className="enquiry-form-title">Your Dream Package, Expertly Crafted</h2>
+        <h2 className="enquiry-form-title">Tell Us Your Vision</h2>
         <p className="enquiry-form-subtitle">
-          From flights to hotels to your perfect cruise - we handle every detail
+          Complete the form below and we will create a package tailored to your requirements
         </p>
       </div>
 
@@ -718,7 +718,7 @@ function PackageConciergeForm() {
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
               </svg>
-              <span>Thank you! Dane will personally review your dream package vision and reach out within 48 hours.</span>
+              <span>Thank you! We will review your package vision and be in touch within 48 hours.</span>
             </div>
           )}
 
@@ -766,7 +766,7 @@ function PackageConciergeForm() {
           </div>
 
           <p className="form-note">
-            <strong>Personal attention guaranteed.</strong> Dane will personally review your request and reach out within 48 hours.
+            We will review your request and be in touch within 48 hours.
           </p>
         </div>
       )}
