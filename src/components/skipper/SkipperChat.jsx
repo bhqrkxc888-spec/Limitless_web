@@ -21,21 +21,34 @@ function SkipperChat() {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    // Check for stored consent
+    // Check for stored consent and contact details
     const consent = sessionStorage.getItem('skipper_consent');
-    if (consent === 'true') {
+    const storedName = sessionStorage.getItem('skipper_name');
+    const storedEmail = sessionStorage.getItem('skipper_email');
+    const storedPhone = sessionStorage.getItem('skipper_phone');
+    
+    if (consent === 'true' && storedName && storedEmail) {
+      // Restore contact details
+      setCollectedData({
+        name: storedName,
+        email: storedEmail,
+        phone: storedPhone || null,
+      });
+      
       setHasConsented(true);
-      // Add welcome messages
+      
+      // Add welcome messages with personalization
+      const firstName = storedName.split(' ')[0];
       setMessages([
         {
           id: generateId(),
           role: 'assistant',
-          content: "Hello! I'm Captain Cruise, your personal AI assistant for Limitless Cruises. I'm here to help you explore cruise options 24/7 and gather your preferences for our expert team."
+          content: `Hello ${firstName}! I'm Captain Cruise, your personal AI assistant for Limitless Cruises. I'm here to help you explore cruise options 24/7 and gather your preferences for our expert team.`
         },
         {
           id: generateId() + '1',
           role: 'assistant',
-          content: "How are you today? What kind of cruise experience are you dreaming of, or would you like to explore some possibilities together?"
+          content: "What kind of cruise experience are you dreaming of, or would you like to explore some possibilities together?"
         }
       ]);
     }
@@ -46,20 +59,36 @@ function SkipperChat() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isTyping]);
 
-  const handleConsent = () => {
+  const handleConsent = (contactDetails) => {
+    // Store consent and contact details in sessionStorage
     sessionStorage.setItem('skipper_consent', 'true');
+    sessionStorage.setItem('skipper_name', contactDetails.name);
+    sessionStorage.setItem('skipper_email', contactDetails.email);
+    if (contactDetails.phone) {
+      sessionStorage.setItem('skipper_phone', contactDetails.phone);
+    }
+    
+    // Store contact details in collected data from the start
+    setCollectedData({
+      name: contactDetails.name,
+      email: contactDetails.email,
+      phone: contactDetails.phone || null,
+    });
+    
     setHasConsented(true);
-    // Add welcome messages
+    
+    // Add welcome messages with personalization
+    const firstName = contactDetails.name.split(' ')[0];
     setMessages([
       {
         id: generateId(),
         role: 'assistant',
-        content: "Hello! I'm Captain Cruise, your personal AI assistant for Limitless Cruises. I'm here to help you explore cruise options 24/7 and gather your preferences for our expert team."
+        content: `Hello ${firstName}! I'm Captain Cruise, your personal AI assistant for Limitless Cruises. I'm here to help you explore cruise options 24/7 and gather your preferences for our expert team.`
       },
       {
         id: generateId() + '1',
         role: 'assistant',
-        content: "How are you today? What kind of cruise experience are you dreaming of, or would you like to explore some possibilities together?"
+        content: "What kind of cruise experience are you dreaming of, or would you like to explore some possibilities together?"
       }
     ]);
   };
