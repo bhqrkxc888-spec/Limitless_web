@@ -30,7 +30,7 @@ function SkipperChat() {
         {
           id: generateId(),
           role: 'assistant',
-          content: "Hello! 👋 I'm The Skipper, your personal AI assistant for Limitless Cruises. I'm here to help you explore cruise options 24/7 and gather your preferences for our expert team."
+          content: "Hello! 👋 I'm Captain Cruise, your personal AI assistant for Limitless Cruises. I'm here to help you explore cruise options 24/7 and gather your preferences for our expert team."
         },
         {
           id: generateId() + '1',
@@ -54,7 +54,7 @@ function SkipperChat() {
       {
         id: generateId(),
         role: 'assistant',
-        content: "Hello! 👋 I'm The Skipper, your personal AI assistant for Limitless Cruises. I'm here to help you explore cruise options 24/7 and gather your preferences for our expert team."
+        content: "Hello! 👋 I'm Captain Cruise, your personal AI assistant for Limitless Cruises. I'm here to help you explore cruise options 24/7 and gather your preferences for our expert team."
       },
       {
         id: generateId() + '1',

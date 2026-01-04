@@ -1,7 +1,7 @@
 import './SkipperInfo.css';
 
 /**
- * SkipperInfo - Modal showing detailed information about The Skipper
+ * SkipperInfo - Modal showing detailed information about Captain Cruise
  */
 function SkipperInfo({ isOpen, onClose }) {
   if (!isOpen) return null;
@@ -12,15 +12,15 @@ function SkipperInfo({ isOpen, onClose }) {
         <button className="modal-close-btn" onClick={onClose} aria-label="Close">✕</button>
         
         <div className="modal-header">
-          <span className="modal-icon">⚓</span>
-          <h2>About The Skipper</h2>
+          <span className="modal-icon">⛴️</span>
+          <h2>About Captain Cruise</h2>
         </div>
 
         <div className="modal-content">
           <section className="info-section">
-            <h3>🤖 What is The Skipper?</h3>
+            <h3>🤖 What is Captain Cruise?</h3>
             <p>
-              The Skipper is your personal AI assistant for Limitless Cruises. Available 24/7, 
+              Captain Cruise is your personal AI assistant for Limitless Cruises. Available 24/7, 
               I help you explore cruise options and gather your preferences at your own pace.
             </p>
           </section>
@@ -38,7 +38,7 @@ function SkipperInfo({ isOpen, onClose }) {
           <section className="info-section">
             <h3>🎯 Here to Enhance, Not Replace</h3>
             <p>
-              Limitless Cruises is built on personal, expert service. The Skipper enhances this 
+              Limitless Cruises is built on personal, expert service. Captain Cruise enhances this 
               by giving you the flexibility to explore at your own pace before speaking with someone.
             </p>
             <p>

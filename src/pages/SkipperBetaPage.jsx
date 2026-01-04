@@ -29,7 +29,7 @@ function SkipperBetaPage() {
     // Check for stored key in sessionStorage
     const storedKey = sessionStorage.getItem('skipper_access_key');
     if (storedKey && VALID_KEYS.includes(storedKey)) {
-      document.title = 'The Skipper - AI Travel Advisor (Beta)';
+      document.title = 'Captain Cruise - AI Travel Advisor (Beta)';
       setHasAccess(true);
       setIsChecking(false);
       return;
@@ -39,14 +39,14 @@ function SkipperBetaPage() {
     const urlKey = searchParams.get('key');
     if (urlKey && VALID_KEYS.includes(urlKey)) {
       sessionStorage.setItem('skipper_access_key', urlKey);
-      document.title = 'The Skipper - AI Travel Advisor (Beta)';
+      document.title = 'Captain Cruise - AI Travel Advisor (Beta)';
       setHasAccess(true);
       setIsChecking(false);
       return;
     }
 
     // No valid key found
-    document.title = 'Access Required - The Skipper Beta';
+    document.title = 'Access Required - Captain Cruise Beta';
     setHasAccess(false);
     setIsChecking(false);
 
