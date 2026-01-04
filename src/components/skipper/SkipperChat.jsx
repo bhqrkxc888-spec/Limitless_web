@@ -23,16 +23,18 @@ function SkipperChat() {
   useEffect(() => {
     // Check for stored consent and contact details
     const consent = sessionStorage.getItem('skipper_consent');
+    const gdprConsent = sessionStorage.getItem('skipper_gdpr_consent');
     const storedName = sessionStorage.getItem('skipper_name');
     const storedEmail = sessionStorage.getItem('skipper_email');
     const storedPhone = sessionStorage.getItem('skipper_phone');
     
-    if (consent === 'true' && storedName && storedEmail) {
-      // Restore contact details
+    if (consent === 'true' && gdprConsent === 'true' && storedName && storedEmail) {
+      // Restore contact details with GDPR consent
       setCollectedData({
         name: storedName,
         email: storedEmail,
         phone: storedPhone || null,
+        gdprConsent: true,
       });
       
       setHasConsented(true);
@@ -62,6 +64,7 @@ function SkipperChat() {
   const handleConsent = (contactDetails) => {
     // Store consent and contact details in sessionStorage
     sessionStorage.setItem('skipper_consent', 'true');
+    sessionStorage.setItem('skipper_gdpr_consent', 'true'); // GDPR consent flag
     sessionStorage.setItem('skipper_name', contactDetails.name);
     sessionStorage.setItem('skipper_email', contactDetails.email);
     if (contactDetails.phone) {
@@ -73,6 +76,8 @@ function SkipperChat() {
       name: contactDetails.name,
       email: contactDetails.email,
       phone: contactDetails.phone || null,
+      gdprConsent: true, // Track GDPR consent in collected data
+      consentTimestamp: new Date().toISOString(), // When consent was given
     });
     
     setHasConsented(true);

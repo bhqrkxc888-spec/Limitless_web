@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './ConsentBanner.css';
 
 function ConsentBanner({ onAccept }) {
@@ -8,6 +8,7 @@ function ConsentBanner({ onAccept }) {
     name: '',
     email: '',
     phone: '',
+    consent: false,
   });
   const [errors, setErrors] = useState({});
 
@@ -32,6 +33,11 @@ function ConsentBanner({ onAccept }) {
       newErrors.email = 'Please enter a valid email address';
     }
     
+    // Validate consent
+    if (!formData.consent) {
+      newErrors.consent = 'Please accept the data processing consent';
+    }
+    
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -42,15 +48,21 @@ function ConsentBanner({ onAccept }) {
       name: formData.name.trim(),
       email: formData.email.trim(),
       phone: formData.phone.trim() || null,
+      consent: true,
     });
   };
 
   const handleChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
-    // Clear error when user starts typing
+    // Clear error when user starts typing/checking
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: undefined }));
     }
+  };
+
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
+    handleChange(name, checked);
   };
 
   return (
@@ -117,6 +129,31 @@ function ConsentBanner({ onAccept }) {
               Final prices, availability, and arrangements confirmed by our consultants. 
               Conversations are not saved after enquiry submission.
             </small></p>
+          </div>
+
+          {/* GDPR Consent Checkbox */}
+          <div className="form-consent">
+            <label className="form-checkbox-label">
+              <input
+                type="checkbox"
+                name="consent"
+                className="form-checkbox"
+                checked={formData.consent}
+                onChange={handleCheckboxChange}
+                aria-required="true"
+                aria-invalid={!!errors.consent}
+                aria-describedby={errors.consent ? 'consent-error' : undefined}
+              />
+              <span>
+                I consent to my data being stored and processed to respond to my enquiry. 
+                See our <Link to="/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</Link> for details. <span className="required">*</span>
+              </span>
+            </label>
+            {errors.consent && (
+              <span id="consent-error" className="error-message" role="alert">
+                {errors.consent}
+              </span>
+            )}
           </div>
 
           <div className="consent-buttons">
