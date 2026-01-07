@@ -18,17 +18,18 @@ export const navigation = {
     {
       id: 'explore',
       label: 'Explore',
-      path: '/cruise-lines', // Default link (goes to first item)
+      path: '/destinations', // Default link (changed from /cruise-lines while under development)
       megaMenu: true,
       columns: [
         {
           title: 'Explore',
           links: [
-            {
-              label: 'Cruise Lines',
-              path: '/cruise-lines',
-              description: 'Discover cruise lines we work with'
-            },
+            // TEMPORARILY HIDDEN - Content under development
+            // {
+            //   label: 'Cruise Lines',
+            //   path: '/cruise-lines',
+            //   description: 'Discover cruise lines we work with'
+            // },
             {
               label: 'Destinations',
               path: '/destinations',
@@ -129,17 +130,19 @@ export const navigation = {
   ],
   
   footer: {
-    cruiseLines: [
-      { label: 'All Cruise Lines', path: '/cruise-lines' },
-      { label: 'P&O Cruises', path: '/cruise-lines/p-and-o-cruises' },
-      { label: 'MSC Cruises', path: '/cruise-lines/msc-cruises' },
-      { label: 'Royal Caribbean', path: '/cruise-lines/royal-caribbean' },
-      { label: 'Celebrity Cruises', path: '/cruise-lines/celebrity-cruises' },
-      { label: 'Princess Cruises', path: '/cruise-lines/princess-cruises' },
-      { label: 'Cunard', path: '/cruise-lines/cunard' },
-      { label: 'Viking Ocean', path: '/cruise-lines/viking-ocean-cruises' },
-      { label: 'Norwegian Cruise Line', path: '/cruise-lines/norwegian-cruise-line' }
-    ],
+    // TEMPORARILY HIDDEN - Cruise Lines content under development
+    cruiseLines: [], // Temporarily empty - uncomment below when ready to launch
+    // cruiseLines: [
+    //   { label: 'All Cruise Lines', path: '/cruise-lines' },
+    //   { label: 'P&O Cruises', path: '/cruise-lines/p-and-o-cruises' },
+    //   { label: 'MSC Cruises', path: '/cruise-lines/msc-cruises' },
+    //   { label: 'Royal Caribbean', path: '/cruise-lines/royal-caribbean' },
+    //   { label: 'Celebrity Cruises', path: '/cruise-lines/celebrity-cruises' },
+    //   { label: 'Princess Cruises', path: '/cruise-lines/princess-cruises' },
+    //   { label: 'Cunard', path: '/cruise-lines/cunard' },
+    //   { label: 'Viking Ocean', path: '/cruise-lines/viking-ocean-cruises' },
+    //   { label: 'Norwegian Cruise Line', path: '/cruise-lines/norwegian-cruise-line' }
+    // ],
     destinations: [
       { label: 'All Destinations', path: '/destinations' },
       { label: 'Mediterranean', path: '/destinations/mediterranean-cruises' },

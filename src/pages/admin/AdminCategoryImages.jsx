@@ -146,7 +146,7 @@ function AdminCategoryImages() {
                       size="small"
                     />
                   </div>
-                  <p className="image-card-specs">Recommended: 600×400px, WebP format</p>
+                  <p className="image-card-specs">Required: 600×400px, WebP format preferred</p>
                   
                   {/* Show validation warnings if any */}
                   {hasWarnings && (

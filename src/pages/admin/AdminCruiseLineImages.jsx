@@ -248,7 +248,7 @@ function AdminCruiseLineImages() {
                 Required Images
               </h2>
               <p style={{ color: 'var(--admin-text-muted)', fontSize: '0.875rem', marginBottom: '2rem' }}>
-                All images below are required for the cruise line page to display correctly. Upload at 600×400px (displays at 400×300px, 2x for retina), WebP format.
+                All images below are required for the cruise line page to display correctly. Required: 600×400px (displays at 400×300px, 2x for retina), WebP format preferred.
               </p>
 
               {/* Logo */}

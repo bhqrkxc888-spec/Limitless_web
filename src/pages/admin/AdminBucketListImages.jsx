@@ -251,7 +251,7 @@ function AdminBucketListImages() {
                 </div>
                 <p className="image-card-specs">
                   Main banner for bucket list experience page - should be dramatic, wide landscape
-                  <br />Recommended: 1920×1080px, WebP format
+                  <br />Required: 1920×1080px, WebP format preferred
                   <br /><strong>Examples:</strong> Dramatic iceberg (Antarctica), cherry blossoms with temple (Japan), northern lights over fjord (Arctic)
                 </p>
                 {(() => {
@@ -291,7 +291,7 @@ function AdminBucketListImages() {
                 </div>
                 <p className="image-card-specs">
                   Thumbnail for bucket list experience cards - should be iconic and instantly recognizable
-                  <br />Recommended: 600×400px, WebP format
+                  <br />Required: 600×400px, WebP format preferred
                   <br /><strong>Examples:</strong> Penguin colony (Antarctica), Opera House (Australia), Queen Mary 2 (Transatlantic)
                 </p>
                 {(() => {
@@ -331,7 +331,7 @@ function AdminBucketListImages() {
                 </div>
                 <p className="image-card-specs">
                   Optimized image for social media sharing (Facebook, Twitter, LinkedIn)
-                  <br />Recommended: 1200×630px, WebP format
+                  <br />Required: 1200×630px, WebP format preferred
                   <br />If not provided, hero image will be used for social sharing
                 </p>
                 {(() => {
@@ -377,7 +377,7 @@ function AdminBucketListImages() {
                 </div>
                 <p className="image-card-specs">
                   Primary gallery image - featured prominently
-                  <br />Recommended: 800×600px, WebP format
+                  <br />Required: 1200×800px, WebP format preferred
                   <br />Suggested: Landscape/scenery shot
                 </p>
                 {(() => {
@@ -417,7 +417,7 @@ function AdminBucketListImages() {
                 </div>
                 <p className="image-card-specs">
                   Secondary gallery image
-                  <br />Recommended: 800×600px, WebP format
+                  <br />Required: 1200×800px, WebP format preferred
                   <br />Suggested: Wildlife or activity shot
                 </p>
                 {(() => {
@@ -457,7 +457,7 @@ function AdminBucketListImages() {
                 </div>
                 <p className="image-card-specs">
                   Third gallery image
-                  <br />Recommended: 800×600px, WebP format
+                  <br />Required: 1200×800px, WebP format preferred
                   <br />Suggested: Experience/atmosphere shot
                 </p>
                 {(() => {

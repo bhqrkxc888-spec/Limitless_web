@@ -176,7 +176,7 @@ function AdminDestinationImages() {
                 </div>
                 <p className="image-card-specs">
                   Main banner for destination page
-                  <br />Recommended: 1920×1080px, WebP format
+                  <br />Required: 1920×1080px, WebP format preferred
                 </p>
                 <ImageUpload
                   bucket={STORAGE_BUCKETS.DESTINATIONS}
@@ -204,7 +204,7 @@ function AdminDestinationImages() {
                 </div>
                 <p className="image-card-specs">
                   Default thumbnail for destination listings (used if no cruise-line-specific card exists)
-                  <br />Recommended: 600×400px, WebP format
+                  <br />Required: 600×400px, WebP format preferred
                 </p>
                 <ImageUpload
                   bucket={STORAGE_BUCKETS.DESTINATIONS}
@@ -332,7 +332,7 @@ function AdminDestinationImages() {
                         size="small" 
                       />
                     </div>
-                    <p className="image-card-specs">600×400px, WebP format</p>
+                    <p className="image-card-specs">Required: 1200×800px, WebP format preferred</p>
                     <ImageUpload
                       bucket={STORAGE_BUCKETS.DESTINATIONS}
                       entityType="destination"

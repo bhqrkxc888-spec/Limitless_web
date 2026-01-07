@@ -23,14 +23,14 @@ import './AdminImagesShared.css';
 const getPortImageTypes = (port) => {
   if (!port) {
     return [
-      { id: 'hero', label: 'Hero Image', required: true, specs: 'Main banner for port guide page. Recommended: 1920×1080px, WebP format' },
-      { id: 'card', label: 'Card Image', required: true, specs: 'Thumbnail for listing pages. Recommended: 800×600px, WebP format, 3:2 ratio' },
+      { id: 'hero', label: 'Hero Image', required: true, specs: 'Main banner for port guide page. Required: 1920×1080px, WebP format preferred' },
+      { id: 'card', label: 'Card Image', required: true, specs: 'Thumbnail for listing pages. Required: 600×400px, WebP format preferred, 3:2 ratio' },
     ];
   }
 
   const imageTypes = [
-    { id: 'hero', label: 'Hero Image', required: true, specs: 'Main banner for port guide page. Recommended: 1920×1080px, WebP format' },
-    { id: 'card', label: 'Card Image', required: true, specs: 'Thumbnail for listing pages. Recommended: 800×600px, WebP format, 3:2 ratio' },
+    { id: 'hero', label: 'Hero Image', required: true, specs: 'Main banner for port guide page. Required: 1920×1080px, WebP format preferred' },
+    { id: 'card', label: 'Card Image', required: true, specs: 'Thumbnail for listing pages. Required: 600×400px, WebP format preferred, 3:2 ratio' },
   ];
 
   // Add attractions with real names
@@ -40,7 +40,7 @@ const getPortImageTypes = (port) => {
         id: `attraction-${index + 1}`,
         label: sight.title || `Attraction ${index + 1}`,
         required: false,
-        specs: `${sight.title || 'Attraction image'}. Recommended: 800×600px, WebP format`
+        specs: `${sight.title || 'Attraction image'}. Required: 1200×800px, WebP format preferred`
       });
     });
   }
@@ -51,7 +51,7 @@ const getPortImageTypes = (port) => {
       id: 'beach',
       label: port.nearestBeach.name || 'Beach',
       required: false,
-      specs: `${port.nearestBeach.name || 'Beach'} image. Recommended: 800×600px, WebP format`
+      specs: `${port.nearestBeach.name || 'Beach'} image. Required: 1200×800px, WebP format preferred`
     });
   }
 
