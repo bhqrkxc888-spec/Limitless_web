@@ -106,8 +106,8 @@ export const cruiseLines = [
     // Loyalty program
     loyaltyProgram: {
       name: 'Peninsular Club',
-      intro: 'Peninsular Club - P&O\'s generous loyalty programme rewards repeat cruisers with points-based benefits across all tiers. Join free at booking or onboard. Earn 1 Club Point per night (double for suites), redeemable against onboard credit, cabin upgrades, and exclusive events. Bronze status from first cruise, with escalating benefits up to Platinum tier. Over 1 million members enjoy the UK\'s most generous cruise loyalty scheme with no blackout dates for rewards.',
-      pointsInfo: 'Key Benefits: Onboard credit from 10 nights (£30 Silver, £60 Gold, £100 Platinum), priority tendering, dining reservations, and disembarkation, exclusive cocktail parties and loyalty desk services, suite upgrades and spa discounts at higher tiers.',
+      intro: 'Peninsular Club - P&O\'s generous loyalty programme rewards repeat cruisers with points-based benefits across all tiers. Join free at booking or onboard. Earn 1 Club Point per night (double for suites), redeemable against onboard credit, cabin upgrades, and exclusive events. Pacific tier from first cruise, with escalating benefits through Atlantic, Mediterranean, Caribbean, Baltic and up to Ligurian tier. Over 1 million members enjoy the UK\'s most generous cruise loyalty scheme with no blackout dates for rewards.',
+      pointsInfo: 'Key Benefits: Percentage discounts increase with each tier (5% Pacific to 10% Caribbean/Baltic), priority tendering and dining reservations, exclusive cocktail parties and loyalty desk services, Champagne welcome from Atlantic tier, 50% laundry discount at Baltic and Ligurian tiers.',
       tiers: [
         { tier: 'Pacific', points: '150-500', benefits: '5% discount, magazine' },
         { tier: 'Atlantic', points: '501-1,000', benefits: '7.5% discount, Champagne welcome' },
@@ -152,7 +152,7 @@ export const cruiseLines = [
       },
       {
         question: 'How do I join P&O Cruises\' loyalty programme?',
-        answer: 'Join Peninsular Club free at booking or onboard. Earn 1 point per night automatically. Bronze from first cruise, Silver (40 nights), Gold (80 nights), Platinum (160 nights). Benefits include onboard credit, priority services, exclusive events. Points redeemable against cruises and onboard spending.'
+        answer: 'Join Peninsular Club free at booking or onboard. Earn 1 point per night automatically. Pacific tier from 150 points, progressing through Atlantic (501pts), Mediterranean (1,001pts), Caribbean (2,001pts), Baltic (2,501pts), and Ligurian (2,501pts with 201+ nights). Benefits include percentage discounts, priority services, exclusive events. Points redeemable against cruises and onboard spending.'
       },
       {
         question: 'What should I know before booking a P&O Cruises holiday?',
@@ -1522,7 +1522,7 @@ export const cruiseLines = [
       'Marina with complimentary water sports',
       'Ventures by Seabourn expedition excursions',
       'The Grill by Thomas Keller restaurant',
-      'Curated wine and spirits collections',
+      'Carefully selected wine and spirits collections',
       'Seabourn Conversations with guest speakers'
     ],
     ships: ['Seabourn Ovation', 'Seabourn Encore', 'Seabourn Quest', 'Seabourn Pursuit', 'Seabourn Venture'],
@@ -1586,7 +1586,7 @@ export const cruiseLines = [
       },
       {
         title: 'World-Class Dining',
-        description: 'Crown Grill steakhouse, Sabatini\'s Italian, and Harmony Chinese fusion. Main dining with flexible Princess Anytime dining. Fresh seafood emphasis and extensive wine list curated by sommeliers.',
+        description: 'Crown Grill steakhouse, Sabatini\'s Italian, and Harmony Chinese fusion. Main dining with flexible Princess Anytime dining. Fresh seafood emphasis and extensive wine list selected by expert sommeliers.',
         icon: 'dining'
       },
       {
@@ -1653,7 +1653,7 @@ export const cruiseLines = [
     },
 
     highlights: [
-      'MedallionClass wearable technology for seamless service',
+      'MedallionClass wearable technology for effortless service',
       'Movies Under the Stars poolside cinema',
       'Over 50 years of Alaska cruising expertise',
       'Discovery at Sea enrichment programmes',

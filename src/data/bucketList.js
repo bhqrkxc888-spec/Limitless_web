@@ -26,7 +26,7 @@ export const bucketListExperiences = [
     // SEO - targeting real UK search terms
     seo: {
       metaTitle: 'World Cruise | Round the World Voyage from Barcelona | Limitless Cruises',
-      metaDescription: 'Everything you need to know about world cruises. 100-140 night voyages circumnavigating the globe from Barcelona. Flights from UK included. Best time to go, what to expect, expert advice.',
+      metaDescription: 'Complete guide to world cruises from the UK. 100-140 night voyages circumnavigating the globe from Barcelona. Flights included, best time to go, what to expect, expert advice.',
       keywords: ['world cruise', 'round the world cruise', 'circumnavigation cruise', 'world voyage', 'world cruise from barcelona', 'extended cruise']
     },
     
@@ -578,7 +578,7 @@ export const bucketListExperiences = [
     // SEO - targeting real UK search terms
     seo: {
       metaTitle: 'Antarctica Cruise from UK | Expert Guide | Limitless Cruises',
-      metaDescription: 'Everything you need to know about visiting Antarctica from the UK. Best time to go, what to expect, how rough is the Drake Passage. Expert advice from specialists.',
+      metaDescription: 'Visiting Antarctica from the UK: best time to go, what to expect, how rough is the Drake Passage. Penguin colonies, expedition cruises, expert advice from specialists.',
       keywords: ['antarctica cruise from uk', 'best time to visit antarctica', 'antarctica expedition cruise', 'drake passage cruise', 'how to get to antarctica from uk']
     },
     
@@ -825,7 +825,7 @@ export const bucketListExperiences = [
     // SEO - targeting real UK search terms
     seo: {
       metaTitle: 'Japan & Asia Cruise from UK | Cherry Blossom Cruises | Limitless Cruises',
-      metaDescription: 'Everything you need to know about cruising Japan and Asia from the UK. Cherry blossom season, best time to visit, what to expect. Expert advice from specialists.',
+      metaDescription: 'Japan and Asia cruises from the UK. Cherry blossom season, Tokyo to Singapore voyages, best time to visit, what to expect. Expert advice from specialists.',
       keywords: ['japan cruise from uk', 'asia cruise from uk', 'cherry blossom cruise', 'japan sakura cruise', 'asia cruise itinerary']
     },
     
@@ -1099,7 +1099,7 @@ export const bucketListExperiences = [
     // SEO - targeting real UK search terms
     seo: {
       metaTitle: 'Rocky Mountaineer & Alaska Cruise from UK | Expert Guide | Limitless Cruises',
-      metaDescription: 'Everything you need to know about combining the Rocky Mountaineer train with an Alaska cruise from the UK. Best time to go, what to expect. Expert advice.',
+      metaDescription: 'Combining the Rocky Mountaineer train with an Alaska cruise from the UK. Canadian Rockies, Inside Passage, best time to go, what to expect. Expert advice.',
       keywords: ['rocky mountaineer alaska cruise', 'canada alaska cruise from uk', 'rocky mountaineer train cruise', 'alaska inside passage cruise', 'canadian rockies cruise']
     },
     
@@ -1334,7 +1334,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'How do the train and cruise combine logistically?',
-        answer: 'Seamlessly. The Rocky Mountaineer delivers you to Vancouver, where a short transfer connects you with your Inside Passage cruise. The open-jaw routing means you fly into Calgary and home from Vancouver (or reverse), so there is no backtracking. Every connection is handled-you simply enjoy the journey.'
+        answer: 'Perfectly. The Rocky Mountaineer delivers you to Vancouver, where a short transfer connects you with your Inside Passage cruise. The open-jaw routing means you fly into Calgary and home from Vancouver (or reverse), so there is no backtracking. Every connection is handled - you simply enjoy the journey.'
       },
       {
         question: 'What wildlife might I see on this journey?',
@@ -1371,7 +1371,7 @@ export const bucketListExperiences = [
     // SEO - targeting real UK search terms
     seo: {
       metaTitle: 'Galápagos Islands Cruise from UK | Expert Guide | Limitless Cruises',
-      metaDescription: 'Everything you need to know about visiting the Galápagos Islands from the UK. Best time to go, what wildlife to expect, expedition cruise options. Expert advice.',
+      metaDescription: 'Galápagos Islands cruises from the UK. Giant tortoises, blue-footed boobies, marine iguanas. Best time to go, what wildlife to expect, expedition options. Expert advice.',
       keywords: ['galapagos cruise from uk', 'galapagos islands cruise', 'galapagos expedition cruise', 'darwin islands cruise', 'ecuador galapagos cruise']
     },
     
@@ -1602,7 +1602,7 @@ export const bucketListExperiences = [
     // SEO - targeting real UK search terms
     seo: {
       metaTitle: 'Northern Lights Cruise from UK | Aurora Borealis Norway | Limitless Cruises',
-      metaDescription: 'Everything you need to know about seeing the northern lights from the UK. Best time to go, aurora viewing tips, Norway cruise options. Expert advice.',
+      metaDescription: 'Northern lights cruises from the UK. See the aurora borealis in Norway, best time to go, aurora viewing tips, cruise options. Expert advice.',
       keywords: ['northern lights cruise from uk', 'aurora borealis cruise', 'norway northern lights cruise', 'arctic cruise from uk', 'aurora viewing cruise']
     },
     
@@ -2110,7 +2110,7 @@ export const bucketListExperiences = [
     // SEO - targeting real UK search terms
     seo: {
       metaTitle: 'South America Cruise from UK | Buenos Aires & Brazil | Limitless Cruises',
-      metaDescription: 'Everything you need to know about cruising South America from the UK. Buenos Aires, Rio de Janeiro, best time to visit. Expert advice.',
+      metaDescription: 'South America cruises from the UK. Buenos Aires tango, Rio de Janeiro beaches, Patagonia wildlife, best time to visit. Expert advice.',
       keywords: ['south america cruise from uk', 'buenos aires cruise', 'brazil cruise from uk', 'rio de janeiro cruise', 'south america cruise itinerary']
     },
     
@@ -2381,7 +2381,7 @@ export const bucketListExperiences = [
     // SEO - targeting real UK search terms
     seo: {
       metaTitle: 'Middle East Cruise from UK | Dubai & Arabian Peninsula | Limitless Cruises',
-      metaDescription: 'Everything you need to know about cruising the Middle East from the UK. Dubai, Abu Dhabi, Petra, best time to visit. Expert advice.',
+      metaDescription: 'Middle East cruises from the UK. Dubai, Abu Dhabi, Petra by land, Arabian Peninsula, best time to visit. Expert advice.',
       keywords: ['middle east cruise from uk', 'dubai cruise from uk', 'arabian peninsula cruise', 'petra cruise', 'red sea cruise from uk']
     },
     
@@ -2664,7 +2664,7 @@ export const bucketListExperiences = [
     
     // Ideal Voyager Profile
     idealVoyagerProfile: {
-      intro: 'Crafted for those who seek genuine escape-warm waters, welcoming cultures, and islands that time seems to have forgotten.',
+      intro: 'Perfect for those who seek genuine escape - warm waters, welcoming cultures, and islands that time seems to have forgotten.',
       profiles: [
         { type: 'Beach Seeker', description: 'Those who dream of powder-white sand, gentle lagoons and the simple pleasure of perfect tropical days.' },
         { type: 'Reef Explorer', description: 'Snorkellers and divers drawn to coral gardens teeming with colourful life in crystal-clear waters.' },
@@ -2697,10 +2697,10 @@ export const bucketListExperiences = [
     
     // Signature Sights & Encounters
     signatureSights: [
-      { theme: 'Cultural Immersion', icon: '🏛️', highlights: ['Māori haka performance', 'Fijian kava ceremony', 'Village homestays'] },
-      { theme: 'Underwater Wonder', icon: '🐠', highlights: ['Fiji\'s soft coral capital', 'Nouméa\'s UNESCO lagoon', 'Pristine reef systems'] },
-      { theme: 'Volcanic Drama', icon: '🌋', highlights: ['Vanuatu\'s active craters', 'New Zealand\'s geothermal zones', 'Black sand beaches'] },
-      { theme: 'Island Paradise', icon: '🏝️', highlights: ['Dravuni\'s pristine shores', 'Lifou\'s turquoise bays', 'Countless atolls'] }
+      { theme: 'Cultural Immersion', highlights: ['Māori haka performance', 'Fijian kava ceremony', 'Village homestays'] },
+      { theme: 'Underwater Wonder', highlights: ['Fiji\'s soft coral capital', 'Nouméa\'s UNESCO lagoon', 'Pristine reef systems'] },
+      { theme: 'Volcanic Drama', highlights: ['Vanuatu\'s active craters', 'New Zealand\'s geothermal zones', 'Black sand beaches'] },
+      { theme: 'Island Paradise', highlights: ['Dravuni\'s pristine shores', 'Lifou\'s turquoise bays', 'Countless atolls'] }
     ],
     
     // Curated Itinerary Vignettes
@@ -2838,7 +2838,7 @@ export const bucketListExperiences = [
     // Provenance & Assurance
     provenanceAssurance: {
       pillars: [
-        { title: 'Bespoke Curation', description: 'Every Pacific journey crafted around your interests-from dive sites to cultural experiences.' },
+        { title: 'Bespoke Curation', description: 'Every Pacific journey tailored around your interests - from dive sites to cultural experiences.' },
         { title: 'UK Expertise', description: 'Specialists who understand British sensibilities and the journey from the UK.' },
         { title: 'Intimate Voyages', description: 'Access to vessels and itineraries that larger operators cannot offer.' },
         { title: 'Complete Protection', description: 'Full ATOL protection for total peace of mind.' }
@@ -2898,7 +2898,7 @@ export const bucketListExperiences = [
     
     // Ideal Voyager Profile
     idealVoyagerProfile: {
-      intro: 'Crafted for those who understand that how you travel matters as much as where you travel.',
+      intro: 'Designed for those who understand that how you travel matters as much as where you travel.',
       profiles: [
         { type: 'Ocean Purist', description: 'Those who relish the vastness of the Atlantic and the special quality of days spent entirely at sea.' },
         { type: 'Elegance Seeker', description: 'Travellers drawn to the formal traditions-gala nights, afternoon tea, the ballroom-that define ocean liner culture.' },
@@ -2931,10 +2931,10 @@ export const bucketListExperiences = [
     
     // Signature Sights & Encounters
     signatureSights: [
-      { theme: 'Ocean Days', icon: '🌊', highlights: ['Endless Atlantic horizon', 'Stargazing at sea', 'Sunrise from the deck'] },
-      { theme: 'Liner Traditions', icon: '👔', highlights: ['Gala evenings', 'Afternoon tea ritual', 'QM2 Planetarium'] },
-      { theme: 'New York Arrival', icon: '🗽', highlights: ['Statue of Liberty sail-past', 'Manhattan skyline reveal', 'Hudson River berth'] },
-      { theme: 'Manhattan Magic', icon: '🏙️', highlights: ['Top of the Rock views', 'Central Park strolls', 'Broadway spectacles'] }
+      { theme: 'Ocean Days', highlights: ['Endless Atlantic horizon', 'Stargazing at sea', 'Sunrise from the deck'] },
+      { theme: 'Liner Traditions', highlights: ['Gala evenings', 'Afternoon tea ritual', 'QM2 Planetarium'] },
+      { theme: 'New York Arrival', highlights: ['Statue of Liberty sail-past', 'Manhattan skyline reveal', 'Hudson River berth'] },
+      { theme: 'Manhattan Magic', highlights: ['Top of the Rock views', 'Central Park strolls', 'Broadway spectacles'] }
     ],
     
     // Curated Itinerary Vignettes
@@ -3111,7 +3111,7 @@ export const bucketListExperiences = [
     
     // Ideal Voyager Profile
     idealVoyagerProfile: {
-      intro: 'Crafted for those who seek raw natural beauty and the thrill of lands where nature still dominates.',
+      intro: 'Ideal for those who seek raw natural beauty and the thrill of lands where nature still dominates.',
       profiles: [
         { type: 'Nature Purist', description: 'Those who find their greatest joy in landscapes untamed by human hands.' },
         { type: 'Active Explorer', description: 'Travellers eager for Zodiac landings, coastal hikes and close wildlife encounters.' },
@@ -3144,10 +3144,10 @@ export const bucketListExperiences = [
     
     // Signature Sights & Encounters
     signatureSights: [
-      { theme: 'Volcanic Power', icon: '🌋', highlights: ['Heimaey volcano landing', 'Eldfell crater walk', 'Lava field exploration'] },
-      { theme: 'Wildlife Wonders', icon: '🐧', highlights: ['Puffin colonies', 'Whale encounters', 'Arctic seabird cliffs'] },
-      { theme: 'Fjord Drama', icon: '🏔️', highlights: ['Remote Westfjords', 'Ísafjörður hot springs', 'East Fjords waterfalls'] },
-      { theme: 'Arctic Light', icon: '☀️', highlights: ['Midnight sun sailing', 'Golden hour photography', 'Ethereal landscapes'] }
+      { theme: 'Volcanic Power', highlights: ['Heimaey volcano landing', 'Eldfell crater walk', 'Lava field exploration'] },
+      { theme: 'Wildlife Wonders', highlights: ['Puffin colonies', 'Whale encounters', 'Arctic seabird cliffs'] },
+      { theme: 'Fjord Drama', highlights: ['Remote Westfjords', 'Ísafjörður hot springs', 'East Fjords waterfalls'] },
+      { theme: 'Arctic Light', highlights: ['Midnight sun sailing', 'Golden hour photography', 'Ethereal landscapes'] }
     ],
     
     // Curated Itinerary Vignettes
@@ -3335,7 +3335,7 @@ export const bucketListExperiences = [
     
     // Ideal Voyager Profile
     idealVoyagerProfile: {
-      intro: 'Crafted for those who wish to experience Europe deeply without the exhaustion of constant travel.',
+      intro: 'Suited to those who wish to experience Europe deeply without the exhaustion of constant travel.',
       profiles: [
         { type: 'Culture Lover', description: 'Those who relish museums, concerts, and the layers of history visible in every European city.' },
         { type: 'Gentle Pace Seeker', description: 'Travellers who value quality over quantity-time to linger rather than rush between sights.' },
@@ -3373,10 +3373,10 @@ export const bucketListExperiences = [
     
     // Signature Sights & Encounters
     signatureSights: [
-      { theme: 'Imperial Capitals', icon: '🏛️', highlights: ['Vienna\'s palaces', 'Budapest\'s Parliament', 'Prague excursions'] },
-      { theme: 'Medieval Towns', icon: '🏰', highlights: ['Passau\'s cobbles', 'Cologne Cathedral', 'Strasbourg\'s quarters'] },
-      { theme: 'Vineyard Valleys', icon: '🍇', highlights: ['Wachau terraces', 'Douro wine country', 'Rhine wine region'] },
-      { theme: 'Scenic Passages', icon: '🚢', highlights: ['Rhine Gorge castles', 'Danube bend', 'Douro locks'] }
+      { theme: 'Imperial Capitals', highlights: ['Vienna\'s palaces', 'Budapest\'s Parliament', 'Prague excursions'] },
+      { theme: 'Medieval Towns', highlights: ['Passau\'s cobbles', 'Cologne Cathedral', 'Strasbourg\'s quarters'] },
+      { theme: 'Vineyard Valleys', highlights: ['Wachau terraces', 'Douro wine country', 'Rhine wine region'] },
+      { theme: 'Scenic Passages', highlights: ['Rhine Gorge castles', 'Danube bend', 'Douro locks'] }
     ],
     
     // Curated Itinerary Vignettes
@@ -3542,7 +3542,7 @@ export const bucketListExperiences = [
     
     // Ideal Voyager Profile
     idealVoyagerProfile: {
-      intro: 'Crafted for those who wish to experience Australia\'s greatest icons in comfort, without the logistics of independent long-haul travel.',
+      intro: 'Perfect for those who wish to experience Australia\'s greatest icons in comfort, without the logistics of independent long-haul travel.',
       profiles: [
         { type: 'Reef Enthusiast', description: 'Those who dream of coral gardens, tropical fish, and floating above one of Earth\'s natural wonders.' },
         { type: 'Icon Collector', description: 'Travellers who want to see Sydney Harbour, the Opera House, and the Barrier Reef on a single journey.' },
@@ -3575,10 +3575,10 @@ export const bucketListExperiences = [
     
     // Signature Sights & Encounters
     signatureSights: [
-      { theme: 'Sydney Icons', icon: '🌉', highlights: ['Opera House', 'Harbour Bridge', 'Bondi Beach', 'Circular Quay'] },
-      { theme: 'Reef Wonders', icon: '🐠', highlights: ['Coral gardens', 'Tropical fish', 'Giant clams', 'Reef sharks'] },
-      { theme: 'Island Paradise', icon: '🏝️', highlights: ['Whitehaven Beach', 'Whitsunday Islands', 'Turquoise lagoons'] },
-      { theme: 'Tropical Coast', icon: '🌴', highlights: ['Cairns gateway', 'Port Douglas charm', 'Rainforest meets reef'] }
+      { theme: 'Sydney Icons', highlights: ['Opera House', 'Harbour Bridge', 'Bondi Beach', 'Circular Quay'] },
+      { theme: 'Reef Wonders', highlights: ['Coral gardens', 'Tropical fish', 'Giant clams', 'Reef sharks'] },
+      { theme: 'Island Paradise', highlights: ['Whitehaven Beach', 'Whitsunday Islands', 'Turquoise lagoons'] },
+      { theme: 'Tropical Coast', highlights: ['Cairns gateway', 'Port Douglas charm', 'Rainforest meets reef'] }
     ],
     
     // Curated Itinerary Vignettes
@@ -3782,7 +3782,7 @@ export const bucketListExperiences = [
     
     // Ideal Voyager Profile
     idealVoyagerProfile: {
-      intro: 'Crafted for those with the time and disposition to embrace travel at the pace of the ocean itself.',
+      intro: 'Suited to those with the time and disposition to embrace travel at the pace of the ocean itself.',
       profiles: [
         { type: 'Retiree Explorer', description: 'Those for whom decades of work have earned the freedom to spend months experiencing the world.' },
         { type: 'Sabbatical Voyager', description: 'Professionals taking career breaks who want a single, transformative travel experience.' },
@@ -3815,10 +3815,10 @@ export const bucketListExperiences = [
     
     // Signature Sights & Encounters
     signatureSights: [
-      { theme: 'Classic Transits', icon: '⛵', highlights: ['Suez Canal passage', 'Panama Canal crossing', 'Strait of Gibraltar'] },
-      { theme: 'Continental Highlights', icon: '🌍', highlights: ['Mediterranean jewels', 'Arabian Peninsula', 'Indian subcontinent', 'Southeast Asia'] },
-      { theme: 'Remote Calls', icon: '🏝️', highlights: ['Island stops rarely reached', 'South Atlantic outposts', 'Indian Ocean atolls'] },
-      { theme: 'Sea Days', icon: '🌊', highlights: ['Atlantic crossings', 'Indian Ocean passages', 'Time for reflection'] }
+      { theme: 'Classic Transits', highlights: ['Suez Canal passage', 'Panama Canal crossing', 'Strait of Gibraltar'] },
+      { theme: 'Continental Highlights', highlights: ['Mediterranean jewels', 'Arabian Peninsula', 'Indian subcontinent', 'Southeast Asia'] },
+      { theme: 'Remote Calls', highlights: ['Island stops rarely reached', 'South Atlantic outposts', 'Indian Ocean atolls'] },
+      { theme: 'Sea Days', highlights: ['Atlantic crossings', 'Indian Ocean passages', 'Time for reflection'] }
     ],
     
     // Curated Itinerary Vignettes
