@@ -3,8 +3,8 @@
  * Manages cruise category card images matching cruiseTypes.js data
  */
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
@@ -15,41 +15,21 @@ import { STORAGE_BUCKETS } from '../../config/supabaseConfig';
 import { getAllCruiseTypes } from '../../data/cruiseTypes';
 import './AdminImagesShared.css';
 
+// Get categories once at module load (not in render)
+const CATEGORIES = getAllCruiseTypes()
+  .filter(cat => cat.featured)
+  .map(cat => ({
+    id: cat.id,
+    label: cat.name
+  }));
+
 function AdminCategoryImages() {
-  const navigate = useNavigate();
-  const { isAuthenticated, isLoading: authLoading, logout } = useAdminAuth();
-  
-  // Get categories from cruiseTypes data (only featured ones for admin management)
-  const CATEGORIES = useMemo(() => {
-    try {
-      const types = getAllCruiseTypes();
-      if (!types || !Array.isArray(types)) {
-        console.error('getAllCruiseTypes returned invalid data:', types);
-        return [];
-      }
-      return types
-        .filter(cat => cat.featured) // Only show featured categories in admin
-        .map(cat => ({
-          id: cat.id,
-          label: cat.name
-        }));
-    } catch (error) {
-      console.error('Error loading cruise types:', error);
-      return [];
-    }
-  }, []);
+  const { logout } = useAdminAuth();
   
   const [images, setImages] = useState({});
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
-
-  // Redirect if not authenticated
-  useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      navigate('/admin/login');
-    }
-  }, [authLoading, isAuthenticated, navigate]);
 
   const loadImages = useCallback(async () => {
     setIsRefreshing(true);
@@ -61,11 +41,10 @@ function AdminCategoryImages() {
 
       if (error) {
         console.error('Error loading category images:', error);
-        throw error;
       }
 
       const imageMap = {};
-      data?.forEach(img => {
+      (data || []).forEach(img => {
         imageMap[img.entity_id] = {
           url: getPublicUrl(img.bucket, img.path),
           ...img
@@ -82,26 +61,8 @@ function AdminCategoryImages() {
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      loadImages();
-    }
-  }, [isAuthenticated, loadImages]);
-
-  // Show loading while checking auth
-  if (authLoading || (!isAuthenticated && !authLoading)) {
-    return (
-      <div style={{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        minHeight: '100vh',
-        background: '#0f1117',
-        color: '#e8eaed'
-      }}>
-        <div>Loading...</div>
-      </div>
-    );
-  }
+    loadImages();
+  }, [loadImages]);
 
   return (
     <AdminLayout 
