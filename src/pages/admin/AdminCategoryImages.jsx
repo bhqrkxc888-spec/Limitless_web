@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';

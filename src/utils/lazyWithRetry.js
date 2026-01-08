@@ -38,8 +38,8 @@ function hasRecentlyReloaded() {
     }
     
     return false;
-  } catch (e) {
-    // sessionStorage might not be available
+  } catch (_e) {
+    // sessionStorage might not be available - ignore error
     return false;
   }
 }
@@ -48,8 +48,8 @@ function markAsReloaded() {
   try {
     sessionStorage.setItem(RELOAD_KEY, 'true');
     sessionStorage.setItem(RELOAD_TIMESTAMP_KEY, Date.now().toString());
-  } catch (e) {
-    // sessionStorage might not be available
+  } catch (_e) {
+    // sessionStorage might not be available - ignore error
   }
 }
 
