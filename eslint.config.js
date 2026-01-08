@@ -2,18 +2,15 @@ import js from '@eslint/js'
 import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
-import { defineConfig, globalIgnores } from 'eslint/config'
 
-export default defineConfig([
-  globalIgnores(['dist']),
+export default [
+  {
+    ignores: ['dist/**', 'node_modules/**']
+  },
   // Browser/React files
   {
     files: ['src/**/*.{js,jsx}'],
-    extends: [
-      js.configs.recommended,
-      reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite,
-    ],
+    ...js.configs.recommended,
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
@@ -23,19 +20,29 @@ export default defineConfig([
         sourceType: 'module',
       },
     },
+    plugins: {
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+    },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      ...reactHooks.configs.recommended.rules,
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+      'no-unused-vars': ['error', { varsIgnorePattern: '^_|^[A-Z]', argsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' }],
       // These rules are overly strict for valid React patterns
       // setState in useEffect is valid for synchronizing with external state changes
+      'react-hooks/exhaustive-deps': 'warn',
+      // Disable overly strict rules that flag valid React patterns
       'react-hooks/set-state-in-effect': 'off',
-      // Date.now() in useMemo is valid - it's computed once per mount
       'react-hooks/purity': 'off',
     },
   },
   // Node.js API files (Vercel serverless functions)
   {
     files: ['api/**/*.js'],
-    extends: [js.configs.recommended],
+    ...js.configs.recommended,
     languageOptions: {
       ecmaVersion: 2020,
       globals: {
@@ -49,7 +56,7 @@ export default defineConfig([
       },
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'no-unused-vars': ['error', { varsIgnorePattern: '^_|^[A-Z]', argsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' }],
     },
   },
-])
+]
