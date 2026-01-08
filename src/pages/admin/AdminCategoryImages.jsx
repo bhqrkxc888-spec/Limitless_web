@@ -20,14 +20,24 @@ function AdminCategoryImages() {
   const { isAuthenticated, isLoading: authLoading, logout } = useAdminAuth();
   
   // Get categories from cruiseTypes data (only featured ones for admin management)
-  const CATEGORIES = useMemo(() => 
-    getAllCruiseTypes()
-      .filter(cat => cat.featured) // Only show featured categories in admin
-      .map(cat => ({
-        id: cat.id,
-        label: cat.name
-      }))
-  , []);
+  const CATEGORIES = useMemo(() => {
+    try {
+      const types = getAllCruiseTypes();
+      if (!types || !Array.isArray(types)) {
+        console.error('getAllCruiseTypes returned invalid data:', types);
+        return [];
+      }
+      return types
+        .filter(cat => cat.featured) // Only show featured categories in admin
+        .map(cat => ({
+          id: cat.id,
+          label: cat.name
+        }));
+    } catch (error) {
+      console.error('Error loading cruise types:', error);
+      return [];
+    }
+  }, []);
   
   const [images, setImages] = useState({});
   const [loading, setLoading] = useState(true);
@@ -44,10 +54,15 @@ function AdminCategoryImages() {
   const loadImages = useCallback(async () => {
     setIsRefreshing(true);
     try {
-      const { data } = await supabase
+      const { data, error } = await supabase
         .from('site_images')
         .select('*')
         .eq('entity_type', 'category');
+
+      if (error) {
+        console.error('Error loading category images:', error);
+        throw error;
+      }
 
       const imageMap = {};
       data?.forEach(img => {
