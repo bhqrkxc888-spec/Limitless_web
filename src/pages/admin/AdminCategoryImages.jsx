@@ -90,12 +90,17 @@ function AdminCategoryImages() {
           <div className="images-list">
             {CATEGORIES.map(category => {
               const existing = images[category.id];
-              // Check for validation warnings in the JSON field
-              const validationWarnings = existing?.validation_warnings 
-                ? (typeof existing.validation_warnings === 'string' 
+              // Check for validation warnings in the JSON field (safely parse)
+              let validationWarnings = [];
+              if (existing?.validation_warnings) {
+                try {
+                  validationWarnings = typeof existing.validation_warnings === 'string' 
                     ? JSON.parse(existing.validation_warnings) 
-                    : existing.validation_warnings)
-                : [];
+                    : (Array.isArray(existing.validation_warnings) ? existing.validation_warnings : []);
+                } catch {
+                  validationWarnings = [];
+                }
+              }
               const hasWarnings = validationWarnings.length > 0;
               
               // Determine status: missing > not compliant (warning) > has warnings (warning) > pass
