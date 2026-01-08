@@ -12,16 +12,18 @@ import ImageUpload from '../../components/admin/ImageUpload';
 import StatusIndicator from '../../components/admin/StatusIndicator';
 import { supabase, getPublicUrl } from '../../lib/supabase';
 import { STORAGE_BUCKETS } from '../../config/supabaseConfig';
-import { getAllCruiseTypes } from '../../data/cruiseTypes';
 import './AdminImagesShared.css';
 
-// Get categories once at module load (not in render)
-const CATEGORIES = getAllCruiseTypes()
-  .filter(cat => cat.featured)
-  .map(cat => ({
-    id: cat.id,
-    label: cat.name
-  }));
+// Hard-coded categories to eliminate any data loading issues
+const CATEGORIES = [
+  { id: 'family', label: 'Family Cruises' },
+  { id: 'adults-only', label: 'Adults Only' },
+  { id: 'premium', label: 'Premium Cruises' },
+  { id: 'uk-sailings', label: 'UK No-Fly Cruises' },
+  { id: 'luxury', label: 'Luxury Cruises' },
+  { id: 'river', label: 'River Cruises' },
+  { id: 'expedition', label: 'Expedition Cruises' }
+];
 
 function AdminCategoryImages() {
   const { logout } = useAdminAuth();
@@ -41,15 +43,27 @@ function AdminCategoryImages() {
 
       if (error) {
         console.error('Error loading category images:', error);
+        setLoading(false);
+        setIsRefreshing(false);
+        return;
       }
 
       const imageMap = {};
-      (data || []).forEach(img => {
-        imageMap[img.entity_id] = {
-          url: getPublicUrl(img.bucket, img.path),
-          ...img
-        };
-      });
+      if (data && Array.isArray(data)) {
+        data.forEach(img => {
+          if (img && img.entity_id && img.bucket && img.path) {
+            imageMap[img.entity_id] = {
+              url: getPublicUrl(img.bucket, img.path),
+              alt_text: img.alt_text || '',
+              width: img.width || 0,
+              height: img.height || 0,
+              file_size: img.file_size || 0,
+              format: img.format || '',
+              seo_compliant: img.seo_compliant || false
+            };
+          }
+        });
+      }
       setImages(imageMap);
       setLastUpdated(Date.now());
     } catch (error) {
@@ -63,6 +77,13 @@ function AdminCategoryImages() {
   useEffect(() => {
     loadImages();
   }, [loadImages]);
+
+  const getStatus = (categoryId) => {
+    const img = images[categoryId];
+    if (!img) return 'missing';
+    if (!img.seo_compliant) return 'warning';
+    return 'pass';
+  };
 
   return (
     <AdminLayout 
@@ -90,30 +111,7 @@ function AdminCategoryImages() {
           <div className="images-list">
             {CATEGORIES.map(category => {
               const existing = images[category.id];
-              // Check for validation warnings in the JSON field (safely parse)
-              let validationWarnings = [];
-              if (existing?.validation_warnings) {
-                try {
-                  validationWarnings = typeof existing.validation_warnings === 'string' 
-                    ? JSON.parse(existing.validation_warnings) 
-                    : (Array.isArray(existing.validation_warnings) ? existing.validation_warnings : []);
-                } catch {
-                  validationWarnings = [];
-                }
-              }
-              const hasWarnings = validationWarnings.length > 0;
-              
-              // Determine status: missing > not compliant (warning) > has warnings (warning) > pass
-              let status = 'missing';
-              if (existing) {
-                if (!existing.seo_compliant) {
-                  status = 'warning';
-                } else if (hasWarnings) {
-                  status = 'warning';
-                } else {
-                  status = 'pass';
-                }
-              }
+              const status = getStatus(category.id);
               
               return (
                 <div key={category.id} className="admin-card image-card">
@@ -122,24 +120,9 @@ function AdminCategoryImages() {
                       <h3>{category.label}</h3>
                       <span className="badge badge-required">Required</span>
                     </div>
-                    <StatusIndicator 
-                      status={status} 
-                      size="small"
-                    />
+                    <StatusIndicator status={status} size="small" />
                   </div>
                   <p className="image-card-specs">Required: 600×400px, WebP format preferred</p>
-                  
-                  {/* Show validation warnings if any */}
-                  {hasWarnings && (
-                    <div className="image-validation-warnings">
-                      <p className="validation-warning-title">⚠️ Validation Warnings:</p>
-                      <ul className="validation-warning-list">
-                        {validationWarnings.map((warning, idx) => (
-                          <li key={idx}>{warning}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
                   
                   <ImageUpload
                     bucket={STORAGE_BUCKETS.CATEGORIES}
@@ -147,8 +130,8 @@ function AdminCategoryImages() {
                     entityId={category.id}
                     imageType="card"
                     suggestedAltText={`${category.label} cruise category`}
-                    existingImage={existing?.url}
-                    existingData={existing}
+                    existingImage={existing ? existing.url : null}
+                    existingData={existing || null}
                     onUploadComplete={loadImages}
                   />
                 </div>
