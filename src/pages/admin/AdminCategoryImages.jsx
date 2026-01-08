@@ -16,8 +16,7 @@ import { getAllCruiseTypes } from '../../data/cruiseTypes';
 import './AdminImagesShared.css';
 
 function AdminCategoryImages() {
-  const navigate = useNavigate();
-  const { isAuthenticated, isLoading: authLoading, logout } = useAdminAuth();
+  const { logout } = useAdminAuth();
   
   // Get categories from cruiseTypes data (only featured ones for admin management)
   const CATEGORIES = useMemo(() => 
@@ -33,13 +32,6 @@ function AdminCategoryImages() {
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
-
-  // Redirect if not authenticated
-  useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      navigate('/admin/login');
-    }
-  }, [authLoading, isAuthenticated, navigate]);
 
   const loadImages = useCallback(async () => {
     setIsRefreshing(true);
@@ -67,26 +59,8 @@ function AdminCategoryImages() {
   }, []);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      loadImages();
-    }
-  }, [isAuthenticated, loadImages]);
-
-  // Show loading while checking auth
-  if (authLoading || (!isAuthenticated && !authLoading)) {
-    return (
-      <div style={{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        minHeight: '100vh',
-        background: '#0f1117',
-        color: '#e8eaed'
-      }}>
-        <div>Loading...</div>
-      </div>
-    );
-  }
+    loadImages();
+  }, [loadImages]);
 
   return (
     <AdminLayout 
