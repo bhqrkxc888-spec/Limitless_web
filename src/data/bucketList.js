@@ -33,11 +33,11 @@ export const bucketListExperiences = [
     // Hero
     hero: {
       headline: 'World Cruises',
-      subheadline: 'The ultimate voyage: four months, five continents, one extraordinary journey'
+      subheadline: 'The ultimate voyage: four months, five continents, one unforgettable journey'
     },
     
     // Simple summary
-    tagline: 'The ultimate voyage: four months, five continents, one extraordinary journey',
+    tagline: 'The ultimate voyage: four months, five continents, one unforgettable journey',
     heroImage: null,
     cardImage: null,
     duration: '100-140 nights',
@@ -45,7 +45,7 @@ export const bucketListExperiences = [
     
     // Why This Destination - Real, factual content
     whyBucketListWorthy: {
-      narrative: '<p>There is something deeply compelling about the idea of sailing around the world. The great explorers knew it; modern voyagers rediscover it. A world cruise offers something no other form of travel can: the luxury of time. Time to truly know a place rather than merely visit it. Time to watch cultures shift gradually as you move from continent to continent. Time to form lasting friendships with fellow travellers who share your sense of adventure.</p><p>The journey itself becomes the destination. Sea days transform from transit into treasured interludes of reading, reflection, and renewal. You develop a rhythm that feels almost meditative-the gentle motion of the ship, the changing light on the water, the anticipation of tomorrow\'s port.</p><p>What makes a world cruise truly extraordinary is the sheer breadth of experience. In a single voyage, you might tango in Buenos Aires, witness a Maori haka in New Zealand, marvel at the engineering brilliance of the Panama Canal, and trace the footsteps of Gaudí through Barcelona. Each port adds new threads to the tapestry-vibrant Latin American rhythms, serene Pacific island traditions, the sophisticated bustle of Australian cities, the warm hospitality of Caribbean shores.</p><p>The contrast between destinations only heightens their impact. After days of Pacific blue, the first glimpse of a coastline feels almost miraculous. After the grandeur of Rio\'s harbour, the intimate charm of a South Seas atoll seems like a secret discovered just for you.</p>'
+      narrative: '<p>Sailing around the world is one of travel\'s great adventures. A world cruise offers something no other form of travel can: the gift of time. Time to properly explore a place rather than just tick it off. Time to watch cultures change gradually as you move from continent to continent. Time to make lasting friendships with fellow travellers who share your sense of adventure.</p><p>The journey itself becomes part of the experience. Sea days become welcome breaks for reading, relaxing, and looking forward to the next port. You settle into a rhythm-the gentle motion of the ship, the changing light on the water, the anticipation of what tomorrow will bring.</p><p>What makes a world cruise special is the sheer variety of experiences. In a single voyage, you might tango in Buenos Aires, watch a Maori haka in New Zealand, transit the Panama Canal, and explore Gaudí\'s Barcelona. Each port brings something different-Latin American music and colour, peaceful Pacific island life, the buzz of Australian cities, the warmth of Caribbean hospitality.</p><p>The contrast between destinations makes each one more memorable. After days of Pacific blue, catching sight of a coastline feels genuinely exciting. After the drama of Rio\'s harbour, a quiet South Seas atoll feels like your own private discovery.</p>'
     },
     optimalTiming: {
       summary: 'Typical duration: 100-140 nights. World cruises typically depart in January from Barcelona and return in April or May, timing the voyage to arrive in each region during its most favourable season. Flights from the UK included.',
@@ -542,7 +542,7 @@ export const bucketListExperiences = [
     faqs: [
       {
         question: 'What makes a world cruise different from other long voyages?',
-        answer: 'A world cruise offers something no other journey can: the chance to circumnavigate the globe while unpacking only once. You experience the gradual shift of cultures, climates and landscapes as continents give way to oceans and new horizons appear. It is travel at its most immersive-each day building upon the last, each port adding depth to your understanding of our planet\'s extraordinary diversity.'
+        answer: 'A world cruise offers something no other journey can: the chance to circumnavigate the globe while unpacking only once. You experience the gradual shift of cultures, climates and landscapes as continents give way to oceans and new horizons appear. It is travel at its most immersive-each day building upon the last, each port adding to your understanding of our planet\'s amazing diversity.'
       },
       {
         question: 'Which continents and regions will I experience?',
@@ -597,7 +597,7 @@ export const bucketListExperiences = [
     
     // Why This Destination - Real, factual content
     whyBucketListWorthy: {
-      narrative: '<p>Antarctica receives approximately 100,000 visitors each year-still fewer than a busy weekend at Stonehenge. It is the only continent with no permanent human population, no native land mammals, and no property ownership. Ninety percent of the world\'s ice is here, along with the largest wildlife colonies on Earth.</p><p>What makes Antarctica remarkable is the wildlife\'s complete lack of fear. Penguins have no natural land predators, so they\'ve never learned to flee from humans. They will waddle over to inspect your boots while their neighbours go about their business metres away. Seals barely lift their heads. Whales surface alongside your boat with apparent curiosity.</p><p>The landscape is equally arresting. Icebergs the size of cathedrals drift past in shades of blue you didn\'t know existed. Glaciers calve with thunderous cracks. The silence, when it falls, is the most profound you\'ll ever experience-no traffic, no aircraft, no background hum of civilisation.</p><p>For British travellers, there\'s additional resonance. This is where Shackleton, Scott and their expeditions made history. You\'ll pass sites of extraordinary courage and endurance, and visit research stations continuing that tradition of exploration.</p>'
+      narrative: '<p>Antarctica receives approximately 100,000 visitors each year-still fewer than a busy weekend at Stonehenge. It is the only continent with no permanent human population, no native land mammals, and no property ownership. Ninety percent of the world\'s ice is here, along with the largest wildlife colonies on Earth.</p><p>What makes Antarctica remarkable is the wildlife\'s complete lack of fear. Penguins have no natural land predators, so they\'ve never learned to flee from humans. They will waddle over to inspect your boots while their neighbours go about their business metres away. Seals barely lift their heads. Whales surface alongside your boat with what seems like genuine curiosity.</p><p>The landscape is equally impressive. Icebergs the size of cathedrals drift past in shades of blue you didn\'t know existed. Glaciers calve with thunderous cracks. The silence, when it falls, is remarkable-no traffic, no aircraft, no background hum of civilisation. Just you and the ice.</p><p>For British travellers, there\'s added meaning here. This is where Shackleton, Scott and their expeditions made history. You\'ll pass sites of remarkable courage and endurance, and visit research stations continuing that tradition of exploration.</p>'
     },
     
     // Optimal Timing - Factual, helpful breakdown
@@ -895,7 +895,7 @@ export const bucketListExperiences = [
       { 
         theme: 'Gardens by the Bay',
         highlights: [
-          'Walk amongst Singapore\'s extraordinary Supertrees',
+          'Walk amongst Singapore\'s remarkable Supertrees',
           'A vision of urban nature that feels like science fiction made real',
           'Futuristic botanical wonder'
         ]
@@ -1057,7 +1057,7 @@ export const bucketListExperiences = [
         answer: 'Cruising Asia eliminates the exhaustion of constant airport transfers and hotel check-ins while offering something flights never can: the gradual transition between cultures. You unpack once and wake each morning in a new destination, refreshed rather than jet-lagged. The sea voyage between ports provides time to absorb what you have experienced.'
       },
       {
-        question: 'What makes Japan such a compelling cruise destination?',
+        question: 'What makes Japan such a great cruise destination?',
         answer: 'Japan from the sea reveals a different country than the familiar Tokyo-Kyoto circuit. Smaller ports like Kagoshima and Naha offer authentic experiences away from crowds. The blend of ancient tradition and cutting-edge modernity is endlessly fascinating, and the legendary Japanese attention to detail extends to everything from garden design to sushi preparation.'
       },
       {
@@ -1070,11 +1070,11 @@ export const bucketListExperiences = [
       },
       {
         question: 'What is the cultural transition like between countries?',
-        answer: 'This is one of cruising\'s greatest gifts. You observe subtle shifts-from Japanese minimalism to Korean warmth to Chinese grandeur to Singaporean efficiency-without the jarring disconnection of air travel. The sea days between major destinations allow time for reflection and anticipation.'
+        answer: 'This is one of cruising\'s great advantages. You observe subtle shifts-from Japanese minimalism to Korean warmth to Chinese scale to Singaporean efficiency-without the jarring disconnection of air travel. The sea days between major destinations give you time to reflect and look forward to what\'s next.'
       },
       {
         question: 'Is language a barrier when exploring independently?',
-        answer: 'Less than you might expect. English is widely spoken in tourist areas, particularly in Singapore and Hong Kong. In Japan and Korea, younger generations often speak some English, and translation apps have become remarkably effective. The warmth of Asian hospitality transcends language-a smile goes a long way everywhere.'
+        answer: 'Less than you might expect. English is widely spoken in tourist areas, particularly in Singapore and Hong Kong. In Japan and Korea, younger generations often speak some English, and translation apps have become remarkably effective. The warmth of Asian hospitality goes beyond language-a smile works everywhere.'
       }
     ],
     meta: {
@@ -1106,11 +1106,11 @@ export const bucketListExperiences = [
     // Hero
     hero: {
       headline: 'Rocky Mountaineer & Alaska',
-      subheadline: 'Where glass-domed rails meet glacial majesty: Canada\'s most spectacular double act'
+      subheadline: 'Glass-domed trains through the Rockies, then Alaska\'s glaciers: Canada\'s best double act'
     },
     
     // Simple summary
-    tagline: 'Where glass-domed rails meet glacial majesty: Canada\'s most spectacular double act',
+    tagline: 'Glass-domed trains through the Rockies, then Alaska\'s glaciers: Canada\'s best double act',
     heroImage: null,
     cardImage: null,
     duration: '14-18 nights from UK',
@@ -1390,7 +1390,7 @@ export const bucketListExperiences = [
     
     // Why This Destination - Real, factual content
     whyBucketListWorthy: {
-      narrative: '<p>There is nowhere else on Earth where animals show such complete indifference to human presence. In the Galápagos, sea lions sprawl across your path, blue-footed boobies perform courtship dances at arm\'s length, and giant tortoises-creatures that seem to belong to another geological era-regard you with prehistoric calm. This volcanic archipelago, straddling the equator six hundred miles off Ecuador\'s coast, inspired Darwin\'s revolutionary insights and continues to captivate visitors with wildlife encounters unlike anywhere else on the planet.</p><p>The Galápagos Islands exist outside the normal rules. Isolated by vast stretches of Pacific Ocean, life here evolved in extraordinary directions. Cormorants lost the ability to fly because there were no predators to escape. Tortoises grew to improbable sizes because nothing hunted them. Marine iguanas developed the ability to dive for seaweed-the world\'s only seafaring lizards.</p><p>For visitors, this evolutionary isolation means something magical: wildlife that has never learned to fear humans. Animals do not flee as you approach; they continue their business as if you were merely another curious creature in their domain. It is the closest most of us will ever come to a pre-human world.</p><p>The islands are strictly protected, and the best way to experience them is aboard a small expedition vessel with certified naturalist guides. Each day brings new landings-volcanic shores where penguins coexist with tropical fish, lagoons where flamingos wade alongside marine iguanas, cliffs where albatrosses launch their epic migrations.</p>'
+      narrative: '<p>There is nowhere else on Earth where animals show such complete indifference to human presence. In the Galápagos, sea lions sprawl across your path, blue-footed boobies perform courtship dances at arm\'s length, and giant tortoises-creatures that seem to belong to another era-regard you with prehistoric calm. This volcanic archipelago, straddling the equator six hundred miles off Ecuador\'s coast, inspired Darwin\'s revolutionary insights and continues to amaze visitors with wildlife encounters unlike anywhere else on the planet.</p><p>The Galápagos Islands play by their own rules. Isolated by vast stretches of Pacific Ocean, life here evolved in remarkable directions. Cormorants lost the ability to fly because there were no predators to escape. Tortoises grew to improbable sizes because nothing hunted them. Marine iguanas developed the ability to dive for seaweed-the world\'s only seafaring lizards.</p><p>For visitors, this evolutionary isolation means something special: wildlife that has never learned to fear humans. Animals do not flee as you approach; they continue their business as if you were merely another curious creature in their domain. It is the closest most of us will ever come to a pre-human world.</p><p>The islands are strictly protected, and the best way to experience them is aboard a small expedition vessel with certified naturalist guides. Each day brings new landings-volcanic shores where penguins coexist with tropical fish, lagoons where flamingos wade alongside marine iguanas, cliffs where albatrosses launch their epic migrations.</p>'
     },
     optimalTiming: {
       summary: 'The Galápagos can be visited year-round, with each season offering distinct wildlife highlights. There is no bad time-only different experiences.',
@@ -1461,7 +1461,7 @@ export const bucketListExperiences = [
     
     // Is This Right for You - Honest assessment
     idealVoyagerProfile: {
-      intro: 'The Galápagos suits travellers who want extraordinary wildlife encounters and are comfortable with expedition-style travel.',
+      intro: 'The Galápagos suits travellers who want amazing wildlife encounters and are comfortable with expedition-style travel.',
       profiles: [
         { 
           type: 'Good fit if you...', 
@@ -1813,7 +1813,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'What makes Norway such a good place to see the aurora?',
-        answer: 'Norway\'s northern coast sits squarely within the aurora zone-the oval of maximum activity that rings the magnetic pole. The Gulf Stream keeps coastal waters ice-free and creates clearer skies than you might expect at these latitudes. And the dramatic landscapes-fjords, mountains, sea-create an extraordinary backdrop for the light show above.'
+        answer: 'Norway\'s northern coast sits squarely within the aurora zone-the oval of maximum activity that rings the magnetic pole. The Gulf Stream keeps coastal waters ice-free and creates clearer skies than you might expect at these latitudes. And the dramatic landscapes-fjords, mountains, sea-create a stunning backdrop for the light show above.'
       },
       {
         question: 'How cold is it in the Arctic winter?',
@@ -1869,7 +1869,7 @@ export const bucketListExperiences = [
     
     // Why This Destination - Real, factual content
     whyBucketListWorthy: {
-      narrative: '<p>For many UK travellers, the appeal of a no-fly cruise goes beyond convenience-it is about the journey itself. Depart from Dover and watch Britain\'s coast recede, then wake each morning to new horizons: the Art Nouveau elegance of Ålesund, the medieval grandeur of Trondheim, the dramatic fjords of Norway\'s coast. And at journey\'s centre, an overnight in Tromsø-the aurora capital-where a 24-hour window maximises your chances of witnessing nature\'s greatest light show. The Scottish islands on your return add Neolithic wonder and whisky heritage. No airports, no jetlag, just pure Arctic magic.</p><p>There is something deeply satisfying about leaving home without entering an airport. The train or coach to Dover takes less than two hours from London; you step aboard your ship in the afternoon and wake the next morning already at sea. The gradual approach to Norway-watching the latitude numbers climb, feeling the air sharpen-builds anticipation in a way that instant air travel cannot match.</p><p>The voyage\'s climax comes with an overnight stay in Tromsø-one of the world\'s premier aurora viewing locations. This 24-hour window dramatically increases your chances of witnessing the northern lights, as you have both evening and early morning opportunities. The town itself is charming: the striking Arctic Cathedral, the cable car ascending Mount Storsteinen, and the warm hospitality of Norway\'s northernmost university city.</p>'
+      narrative: '<p>For many UK travellers, the appeal of a no-fly cruise goes beyond convenience-it is about the journey itself. Depart from Dover and watch Britain\'s coast recede, then wake each morning to new horizons: the Art Nouveau architecture of Ålesund, the historic streets of Trondheim, and the dramatic fjords of Norway\'s coast. The highlight is an overnight stay in Tromsø-the aurora capital-where a 24-hour window gives you the best chance of seeing the northern lights. The Scottish islands on your return add Neolithic history and whisky heritage. No airports, no jetlag, just a proper Arctic adventure.</p><p>There is a real pleasure in leaving home without setting foot in an airport. The train or coach to Dover takes less than two hours from London; you step aboard your ship in the afternoon and wake the next morning already at sea. The gradual approach to Norway-watching the latitude numbers climb, feeling the air get crisper-builds anticipation in a way that air travel simply cannot match.</p><p>The real highlight is an overnight stay in Tromsø-one of the best places in the world to see the northern lights. This 24-hour window gives you both evening and early morning viewing opportunities, which significantly increases your chances. The town itself is lovely: the striking Arctic Cathedral, the cable car up Mount Storsteinen, and the friendly atmosphere of Norway\'s northernmost university city.</p>'
     },
     optimalTiming: {
       summary: 'The aurora season runs from October to March, with peak viewing typically December through February when nights are longest and activity is highest.',
@@ -2085,7 +2085,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'What makes the Scottish islands special on this route?',
-        answer: 'Orkney and Shetland offer extraordinary contrasts to the Norwegian ports. Skara Brae is a 5,000-year-old Neolithic village-astonishingly well-preserved. Highland Park distillery produces whisky with distinct Norse influences. Shetland\'s wildlife and Norse heritage feel almost as Arctic as Norway itself.'
+        answer: 'Orkney and Shetland offer wonderful contrasts to the Norwegian ports. Skara Brae is a 5,000-year-old Neolithic village-amazingly well-preserved. Highland Park distillery produces whisky with distinct Norse influences. Shetland\'s wildlife and Norse heritage feel almost as Arctic as Norway itself.'
       },
       {
         question: 'How cold will it be at sea?',
@@ -2334,12 +2334,12 @@ export const bucketListExperiences = [
     ],
     faqs: [
       {
-        question: 'What makes South America such a compelling cruise destination?',
+        question: 'What makes South America such a great cruise destination?',
         answer: 'South America offers an intensity of experience that few regions can match. The cultural richness of Buenos Aires and Salvador, the natural drama of Rio\'s harbour and Brazil\'s endless coastline, the warmth of Latin hospitality-all combine into a journey that engages every sense. Cruising allows you to experience this diversity without the exhaustion of constant travel between cities.'
       },
       {
         question: 'Is Buenos Aires really as romantic as its reputation suggests?',
-        answer: 'More so. The city has a theatrical quality-the passion of tango, the grandeur of its architecture, the drama of its steakhouses with their open flames. Late dinners stretch towards midnight. Conversations linger over wine. The pace is civilised but never dull. For couples, it is an intensely romantic start to any journey.'
+        answer: 'More so. The city has a real sense of drama-the passion of tango, the beautiful old buildings, the steakhouses with their open flames. Late dinners stretch towards midnight. Conversations linger over wine. The pace is relaxed but never dull. For couples, it is an intensely romantic start to any journey.'
       },
       {
         question: 'Should I add Iguazu Falls to my trip?',
@@ -2347,7 +2347,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'What is the Brazilian coast like?',
-        answer: 'Varied and wonderful. Salvador offers colonial architecture and vibrant Afro-Brazilian culture. Ilhabela is a pristine island paradise. Rio needs no introduction. Fortaleza\'s northeastern beaches combine golden sand with dramatic dune landscapes. Each port reveals a different facet of Brazil\'s extraordinary diversity.'
+        answer: 'Varied and wonderful. Salvador offers colonial architecture and vibrant Afro-Brazilian culture. Ilhabela is a pristine island paradise. Rio needs no introduction. Fortaleza\'s northeastern beaches combine golden sand with dramatic dune landscapes. Each port reveals a different facet of Brazil\'s incredible diversity.'
       },
       {
         question: 'How safe is South America for visitors?',
@@ -2402,7 +2402,7 @@ export const bucketListExperiences = [
     whyBucketListWorthy: {
       narrative: '<p>The Arabian Peninsula offers something increasingly rare in modern travel: the genuine thrill of discovery. Here, ancient trading ports sit beside gleaming skyscrapers. Desert dunes meet turquoise waters. And millennia of history-from Petra\'s rose-red treasury to the Pharaohs\' tombs at Luxor-unfold within reach of the world\'s most ambitious modern cities. For UK travellers seeking winter sun with substance, the Middle East delivers warmth, wonder, and a fascinating window onto cultures both ancient and futuristic.</p><p>Few regions embody contrast as dramatically as the Arabian Peninsula. Dubai\'s Burj Khalifa pierces the desert sky-the world\'s tallest building rising from sands where Bedouin caravans once trekked. Abu Dhabi\'s Sheikh Zayed Grand Mosque represents Islamic architecture at its most refined, while just hours away, Petra\'s treasury stands as testament to the Nabataean civilisation that flourished two thousand years ago.</p><p>Cruising connects these extremes effortlessly. You sail between futuristic skylines and ancient souks, between Omani fjords and Egyptian monuments. Each morning brings a new world, each evening a different perspective on this endlessly fascinating region.</p><p>The Middle East of the cruise ports is not the Middle East of the headlines. This is a region that has invested billions in welcoming visitors, from Qatar\'s Museum of Islamic Art to Oman\'s meticulously restored heritage sites. The warmth of Arabian hospitality-the coffee ceremonies, the genuine interest in guests-often surprises those making their first visit.</p>',
       personaVignettes: [
-        { persona: 'The Cultural Explorer', description: 'Those fascinated by the contrast between ancient civilisations and modern ambition find the Middle East endlessly compelling.' },
+        { persona: 'The Cultural Explorer', description: 'Those fascinated by the contrast between ancient civilisations and modern ambition find the Middle East endlessly interesting.' },
         { persona: 'The Winter Sun Seeker', description: 'Travellers seeking guaranteed warmth just seven hours from London discover substance beyond the beaches.' },
         { persona: 'The History Enthusiast', description: 'Those drawn to Petra, the Pyramids, and millennia of trading heritage find the region\'s depth remarkable.' }
       ]
@@ -2441,7 +2441,7 @@ export const bucketListExperiences = [
         theme: 'Sheikh Zayed Grand Mosque',
         highlights: [
           'Walk through one of the world\'s most beautiful mosques',
-          'White marble and gold create transcendent spaces',
+          'White marble and gold create stunning spaces',
           'Abu Dhabi\'s architectural masterpiece'
         ]
       },
@@ -2654,7 +2654,7 @@ export const bucketListExperiences = [
     
     // Why Bucket List Worthy
     whyBucketListWorthy: {
-      narrative: '<p>There is a reason the South Pacific has captivated explorers, artists and dreamers for centuries. The light is different here-softer, more golden, filtering through coconut palms onto sand so white it dazzles. The water shifts through impossible gradations of blue and green, clear enough to reveal reef fish twenty feet below your floating body.</p><p>But the Pacific is more than beaches. It is Fiji\'s legendary warmth of welcome, the traditional kava ceremonies that have honoured guests for generations. It is New Caledonia\'s unexpected French sophistication, baguettes and boutiques alongside Melanesian villages. It is Vanuatu\'s volcanic landscapes and the knowledge that you are experiencing something truly remote. Each island brings new wonders; each day ends with a sunset that feels like a personal gift.</p><p>Beginning your journey in New Zealand adds cultural and natural depth that pure island-hopping cannot match. The Māori heritage-New Zealand\'s first and living indigenous culture-offers experiences that resonate long after you return home: the power of a haka performance, the intricate beauty of carved meeting houses, the profound connection to land and sea. Auckland itself is a wonderful gateway: the City of Sails, surrounded by volcanoes, blessed with harbours and beaches.</p>',
+      narrative: '<p>The South Pacific has attracted explorers, artists and dreamers for centuries, and it is easy to see why. The light is different here-softer, more golden, filtering through coconut palms onto sand so white it dazzles. The water shifts through countless shades of blue and green, clear enough to reveal reef fish from the surface.</p><p>But the Pacific is more than beaches. It is Fiji\'s genuine warmth of welcome, the traditional kava ceremonies that have honoured guests for generations. It is New Caledonia\'s unexpected French style, baguettes and boutiques alongside Melanesian villages. It is Vanuatu\'s volcanic landscapes and the knowledge that you are experiencing somewhere truly remote. Each island brings something new; each day ends with a sunset that makes you stop and watch.</p><p>Beginning your journey in New Zealand adds cultural and natural depth that pure island-hopping cannot match. The Māori heritage-New Zealand\'s first and living indigenous culture-offers experiences that stay with you: the power of a haka performance, the intricate beauty of carved meeting houses, the deep connection to land and sea. Auckland itself is a wonderful gateway: the City of Sails, surrounded by volcanoes, blessed with harbours and beaches.</p>',
       personaVignettes: [
         { persona: 'The Tropical Dreamer', description: 'Those who have longed for palm-fringed beaches and turquoise lagoons-the South Pacific delivers paradise beyond imagination.' },
         { persona: 'The Cultural Explorer', description: 'Travellers seeking authentic indigenous experiences find the Māori heritage and Fijian hospitality genuinely transformative.' },
@@ -2810,8 +2810,8 @@ export const bucketListExperiences = [
     ],
     faqs: [
       {
-        question: 'What makes the South Pacific such a compelling cruise destination?',
-        answer: 'The South Pacific offers something increasingly rare: genuine remoteness combined with extraordinary beauty. These islands are not easily reached by other means, but a cruise connects them effortlessly-you wake each morning to a new paradise. The cultures are welcoming, the waters warm, and the sense of escape complete.'
+        question: 'What makes the South Pacific such a great cruise destination?',
+        answer: 'The South Pacific offers something increasingly rare: genuine remoteness combined with stunning natural beauty. These islands are not easily reached by other means, but a cruise connects them effortlessly-you wake each morning to a new paradise. The cultures are welcoming, the waters warm, and the sense of escape complete.'
       },
       {
         question: 'Why do UK explorers choose to discover the Pacific by cruise?',
@@ -2819,11 +2819,11 @@ export const bucketListExperiences = [
       },
       {
         question: 'What is the appeal of experiencing Māori culture firsthand?',
-        answer: 'The Māori heritage of New Zealand offers profound cultural experiences-the power of a haka performance, the artistry of traditional carving, the depth of connection to land and sea. These are not performances for tourists but living traditions that welcome respectful visitors into ancient customs.'
+        answer: 'The Māori heritage of New Zealand offers meaningful cultural experiences-the power of a haka performance, the artistry of traditional carving, the deep connection to land and sea. These are not performances for tourists but living traditions that welcome respectful visitors into ancient customs.'
       },
       {
         question: 'How does snorkelling in the South Pacific compare to other destinations?',
-        answer: 'Many consider Pacific reefs among the world\'s finest. Fiji in particular offers exceptional coral health and fish diversity, earning its reputation as the "soft coral capital of the world." The waters are warm, clear, and uncrowded-even casual snorkellers encounter extraordinary marine life.'
+        answer: 'Many consider Pacific reefs among the world\'s finest. Fiji in particular offers exceptional coral health and fish diversity, earning its reputation as the "soft coral capital of the world." The waters are warm, clear, and uncrowded-even casual snorkellers encounter amazing marine life.'
       },
       {
         question: 'What makes Fijian hospitality so legendary?',
@@ -2888,7 +2888,7 @@ export const bucketListExperiences = [
     
     // Why Bucket List Worthy
     whyBucketListWorthy: {
-      narrative: '<p>There is something profoundly satisfying about crossing an ocean the way it was meant to be crossed-not hurtled through the sky in hours, but gracefully conveyed across the deep over days. The transatlantic crossing is the original voyage, the journey that connected the Old World to the New, and it remains one of travel\'s purest pleasures.</p><p>From Southampton-that historic port from which so many famous crossings departed-you set sail into the Atlantic\'s vastness. Seven days of sea stretch before you: days of enrichment lectures and afternoon tea, of gala nights and stargazing from the deck, of watching the horizon and letting the rhythm of the ocean recalibrate your sense of time.</p><p>And then, the arrival. New York harbour reveals itself gradually: first the distant glitter of the skyline, then the unmistakable silhouette of the Statue of Liberty, and finally the towers of Manhattan rising before you. It is an arrival that no aeroplane can replicate-a moment of genuine drama that connects you to generations of travellers who made this same approach.</p>',
+      narrative: '<p>There is something genuinely satisfying about crossing an ocean the proper way-not hurtled through the sky in hours, but sailing across the Atlantic over several days. The transatlantic crossing is the original voyage, the journey that connected the Old World to the New, and it remains one of travel\'s great pleasures.</p><p>From Southampton-that historic port from which so many famous crossings departed-you set sail into the Atlantic. Seven days of sea stretch before you: days of interesting lectures and afternoon tea, of gala nights and stargazing from the deck, of watching the horizon and letting the rhythm of the ocean slow your pace of life.</p><p>And then, the arrival. New York harbour appears gradually: first the distant glitter of the skyline, then the unmistakable silhouette of the Statue of Liberty, and finally the towers of Manhattan rising before you. It is an arrival that no aeroplane can match-a moment of real excitement that connects you to generations of travellers who made this same approach.</p>',
       personaVignettes: [
         { persona: 'The Romantic Classicist', description: 'Those who yearn for travel\'s golden age find the transatlantic crossing a living embodiment of elegant, unhurried journeys.' },
         { persona: 'The Thoughtful Traveller', description: 'Voyagers who prefer depth to speed, who want the journey itself to be the experience, not merely a means to an end.' },
@@ -3103,9 +3103,9 @@ export const bucketListExperiences = [
     whyBucketListWorthy: {
       narrative: '<p>Iceland is a land still being formed-volcanoes erupting, glaciers carving, geysers spouting. To circumnavigate this island is to witness Earth\'s raw creative forces in action, from the fire beneath your feet to the ice on the horizon. No other destination offers such concentrated geological drama.</p><p>A sea voyage reveals Iceland that road travellers miss entirely. The remote Westfjords, barely accessible by land, open their arms to small ships that anchor in pristine fjords. The wild east coast, with its towering basalt cliffs and rainbow-coloured villages, unfolds naturally as you sail from one sheltered harbour to the next.</p><p>And there is the light. From late May through July, the sun barely sets. At midnight you stand on deck watching golden light play across volcanic peaks, the distinction between day and night suspended. Combined with puffin colonies numbering in the millions and whales breaching in northern waters, an Iceland circumnavigation creates memories that burn bright for a lifetime.</p>',
       personaVignettes: [
-        { persona: 'The Geology Enthusiast', description: 'Those fascinated by Earth\'s forces find Iceland\'s active volcanoes, geysers and thermal springs endlessly compelling.' },
+        { persona: 'The Geology Enthusiast', description: 'Those fascinated by Earth\'s forces find Iceland\'s active volcanoes, geysers and thermal springs endlessly fascinating.' },
         { persona: 'The Wildlife Seeker', description: 'Travellers who dream of puffin colonies, breaching whales and Arctic seabird cliffs in their natural habitat.' },
-        { persona: 'The Photographer', description: 'Those who seek extraordinary light-the midnight sun creates golden hours that last for days.' }
+        { persona: 'The Photographer', description: 'Those who seek amazing light-the midnight sun creates golden hours that last for days.' }
       ]
     },
     
@@ -3250,12 +3250,12 @@ export const bucketListExperiences = [
     ],
     faqs: [
       {
-        question: 'What makes circumnavigating Iceland by ship so compelling?',
+        question: 'What makes circumnavigating Iceland by ship so special?',
         answer: 'A circumnavigation reveals Iceland that road travellers simply cannot reach. The remote Westfjords, accessible only by small ship, offer pristine wilderness. The volcanic south coast, the dramatic east-each region has its own character, and by sea you experience them all without the exhaustion of constant driving.'
       },
       {
         question: 'Why do UK explorers choose to discover Iceland by cruise?',
-        answer: 'Iceland\'s most dramatic coastlines are best appreciated from the sea. Small expedition ships can anchor in fjords too remote for road access, make Zodiac landings on volcanic shores, and position perfectly for wildlife encounters. It is an entirely different perspective on an extraordinary island.'
+        answer: 'Iceland\'s most dramatic coastlines are best appreciated from the sea. Small expedition ships can anchor in fjords too remote for road access, make Zodiac landings on volcanic shores, and position perfectly for wildlife encounters. It is an entirely different perspective on a remarkable island.'
       },
       {
         question: 'What is the experience of a volcano landing like?',
@@ -3263,7 +3263,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'What can I expect from puffin encounters?',
-        answer: 'Iceland hosts millions of Atlantic puffins, and the seabird cliffs are extraordinary spectacles. From ship or Zodiac, you observe these charismatic birds going about their business-flying, fishing, returning to burrows with beaks full of sand eels. The experience is magical, especially during peak breeding season.'
+        answer: 'Iceland hosts millions of Atlantic puffins, and the seabird cliffs are incredible to see. From ship or Zodiac, you observe these charismatic birds going about their business-flying, fishing, returning to burrows with beaks full of sand eels. The experience is magical, especially during peak breeding season.'
       },
       {
         question: 'What is the midnight sun actually like?',
@@ -3354,7 +3354,7 @@ export const bucketListExperiences = [
           highlights: ['Cherry blossoms in Vienna', 'Tulip season in Amsterdam', 'Mild temperatures', 'Fewer crowds']
         },
         {
-          name: 'Summer Splendour',
+          name: 'Summer Season',
           months: 'June-August',
           highlights: ['Longest days', 'Outdoor dining', 'Festival season', 'Vineyard greenery']
         },
@@ -3462,7 +3462,7 @@ export const bucketListExperiences = [
       },
       {
         question: 'How does the Danube compare to the Rhine as a river cruise destination?',
-        answer: 'The Danube offers imperial grandeur-Budapest, Vienna, the Wachau Valley\'s wine terraces. The Rhine delivers fairytale drama-castles crowning every bend, the dramatic gorge, Cologne\'s cathedral. Many travellers eventually experience both, but the choice depends on whether you prefer Habsburg elegance or Germanic romanticism.'
+        answer: 'The Danube offers imperial history-Budapest, Vienna, the Wachau Valley\'s wine terraces. The Rhine delivers fairytale scenery-castles crowning every bend, the dramatic gorge, Cologne\'s cathedral. Many travellers eventually experience both, but the choice depends on whether you prefer Habsburg elegance or Germanic romance.'
       },
       {
         question: 'What is special about the Douro in Portugal?',
@@ -4020,7 +4020,7 @@ export const bucketListExperiences = [
     ],
     faqs: [
       {
-        question: 'What makes a Grand Voyage such a compelling way to travel?',
+        question: 'What makes a Grand Voyage such a great way to travel?',
         answer: 'A Grand Voyage offers what shorter cruises cannot: the satisfaction of truly covering distance, of watching continents change outside your window, of allowing the journey itself to transform you. You settle into ship life, form genuine friendships, and experience the world at the pace it was meant to be experienced.'
       },
       {
