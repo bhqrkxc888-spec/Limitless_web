@@ -68,7 +68,6 @@ const CruiseTypeIcon = ({ type }) => {
 
 function CruiseTypesPage() {
   const featuredTypes = getFeaturedCruiseTypes();
-  const otherTypes = cruiseTypes.filter(t => !t.featured);
 
   // Structured Data for SEO
   const structuredData = {

@@ -205,6 +205,196 @@
 }
 
 /* ========================================
+   FAQ SECTION (details/summary)
+   ======================================== */
+
+.guide-detail-content details {
+  border: 1px solid var(--clr-border-light);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-3);
+  background: var(--clr-bg);
+  overflow: hidden;
+  transition: background var(--transition-fast);
+}
+
+.guide-detail-content details[open] {
+  background: var(--clr-bg-alt);
+}
+
+.guide-detail-content details summary {
+  padding: var(--space-4) var(--space-5);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  transition: background var(--transition-fast);
+  color: var(--clr-text-heading);
+}
+
+.guide-detail-content details summary::-webkit-details-marker {
+  display: none;
+}
+
+.guide-detail-content details summary::before {
+  content: '▸';
+  display: inline-block;
+  transition: transform var(--transition-fast);
+  color: var(--clr-accent);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+}
+
+.guide-detail-content details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.guide-detail-content details summary:hover {
+  background: var(--clr-bg-alt);
+}
+
+.guide-detail-content details p,
+.guide-detail-content details > *:not(summary) {
+  padding: 0 var(--space-5) var(--space-4) calc(var(--space-5) + 1.5rem);
+  margin: 0;
+  color: var(--clr-text-muted);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ========================================
+   TABLE STYLING
+   ======================================== */
+
+.guide-detail-content table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--clr-bg);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  margin: var(--space-6) 0;
+  font-size: var(--font-size-sm);
+}
+
+.guide-detail-content table thead {
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+}
+
+.guide-detail-content table th {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.guide-detail-content table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--clr-border-light);
+  vertical-align: top;
+}
+
+.guide-detail-content table td:first-child {
+  font-weight: var(--font-weight-medium);
+  background: var(--clr-bg-alt);
+}
+
+.guide-detail-content table tbody tr:hover {
+  background: var(--clr-bg-alt);
+}
+
+.guide-detail-content table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+@media (max-width: 768px) {
+  .guide-detail-content table {
+    font-size: var(--font-size-xs);
+  }
+  
+  .guide-detail-content table th,
+  .guide-detail-content table td {
+    padding: var(--space-2) var(--space-3);
+  }
+}
+
+/* ========================================
+   VIDEO EMBED STYLING
+   ======================================== */
+
+.guide-detail-content .guide-video {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  margin: var(--space-8) 0;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  background: #000;
+}
+
+.guide-detail-content .guide-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ========================================
+   GUIDE IMAGE CLASSES
+   ======================================== */
+
+.guide-detail-content .guide-image {
+  margin: var(--space-6) 0;
+}
+
+.guide-detail-content .guide-image--full {
+  max-width: 100%;
+  clear: both;
+}
+
+.guide-detail-content .guide-image--float-left {
+  float: left;
+  margin: var(--space-2) var(--space-6) var(--space-4) 0;
+  max-width: 45%;
+}
+
+.guide-detail-content .guide-image--float-right {
+  float: right;
+  margin: var(--space-2) 0 var(--space-4) var(--space-6);
+  max-width: 45%;
+}
+
+.guide-detail-content .guide-image img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Clear floats before headings */
+.guide-detail-content h2::before,
+.guide-detail-content h3::before {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+@media (max-width: 768px) {
+  .guide-detail-content .guide-image--float-left,
+  .guide-detail-content .guide-image--float-right {
+    float: none;
+    max-width: 100%;
+    margin: var(--space-6) 0;
+  }
+}
+
+/* ========================================
    FOOTER CTA
    ======================================== */
 
