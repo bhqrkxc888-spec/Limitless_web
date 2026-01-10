@@ -235,7 +235,7 @@ export const cruiseTypes = [
     tagline: 'Freedom to cruise your way',
     shortDescription: 'Cruises designed for independent travellers with no single supplements.',
     description: 'Cruising solo has never been easier. Many cruise lines now offer dedicated solo cabins with little or no single supplement, plus social events and dining designed to help solo travellers connect.',
-    image: 'null',
+    image: 'https://jl2lrfef2mjsop6t.public.blob.vercel-storage.com/site/Cruise%20Type/solo-traveller.webp',
     icon: 'solo',
     highlights: [
       'Studio cabins designed for solo travellers',
@@ -253,7 +253,7 @@ export const cruiseTypes = [
       'Consider smaller ships for easier socialising',
       'Fred. Olsen is excellent for solo UK travellers'
     ],
-    featured: false,
+    featured: true,
     priority: 8,
     meta: {
       title: 'Solo Cruises | Single Traveller Cruise Holidays | Limitless Cruises',

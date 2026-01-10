@@ -134,7 +134,7 @@ function CruiseTypesPage() {
       {/* Hero Section */}
       <HeroSection
         title="Find Your Perfect Cruise Style"
-        subtitle="Whether you're seeking family fun, adults-only tranquility, luxury indulgence, or expedition adventure - there's a cruise type tailored just for you."
+        subtitle="Whether you're seeking family fun, adults-only tranquillity, luxury indulgence, or expedition adventure - there's a cruise type tailored just for you."
         size="md"
         align="center"
       />
@@ -153,13 +153,13 @@ function CruiseTypesPage() {
         </div>
       </section>
 
-      {/* Featured Cruise Types */}
+      {/* All Cruise Types */}
       <section className="section">
         <div className="container">
           <SectionHeader
-            eyebrow="Most Popular"
-            title="Popular Cruise Types"
-            subtitle="These cruise styles are the most sought-after by our customers."
+            eyebrow="Find Your Style"
+            title="Cruise Types"
+            subtitle="From family adventures to luxury escapes, find the cruise style that suits you perfectly."
           />
           <div className="cruise-types-grid">
             {featuredTypes.map(type => (
@@ -170,26 +170,6 @@ function CruiseTypesPage() {
           </div>
         </div>
       </section>
-
-      {/* Other Cruise Types */}
-      {otherTypes.length > 0 && (
-        <section className="section section-alt">
-          <div className="container">
-            <SectionHeader
-              eyebrow="Explore More"
-              title="More Cruise Styles"
-              subtitle="Additional cruise types that might be perfect for your needs."
-            />
-            <div className="cruise-types-grid">
-              {otherTypes.map(type => (
-                <div key={type.id} id={type.id} className="cruise-type-anchor">
-                  {renderTypeCard(type)}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Comparison Section */}
       <section className="section">
@@ -262,11 +242,11 @@ function CruiseTypesPage() {
       <section className="section section-alt">
         <div className="container">
           <div className="not-sure-cta">
-            <h2>Not Sure Which Cruise Type Is Right For You?</h2>
+            <h2>Not Sure Which Cruise Type Is Right for You?</h2>
             <p>
               Every traveller is unique, and sometimes the perfect cruise doesn't fit neatly into one category. 
-              That's where personal advice makes all the difference. Tell us about your travel dreams, 
-              and we'll match you with the perfect cruise experience.
+              That's where personal advice makes all the difference. Tell us what you're looking for, 
+              and we'll help you find the perfect cruise experience.
             </p>
             <div className="cta-buttons">
               <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">
@@ -285,7 +265,7 @@ function CruiseTypesPage() {
         <div className="container text-center">
           <h2>Ready to Find Your Perfect Cruise?</h2>
           <p>
-            Speak with your dedicated cruise consultant to find which cruise type will give you the holiday of your dreams.
+            Speak with your personal cruise consultant to discover which cruise type will give you the holiday you're looking for.
           </p>
           <div className="cta-buttons">
             <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">

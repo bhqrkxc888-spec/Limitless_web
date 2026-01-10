@@ -75,16 +75,12 @@ function BucketListPage() {
           </div>
           <Card.Title as="h3">{experience.title}</Card.Title>
           <Card.Description>{experience.tagline}</Card.Description>
-          <div className="bucket-list-meta">
-            <span className="bucket-list-duration">{experience.duration}</span>
+          <div className="bucket-list-meta-bottom">
+            <div className="bucket-list-duration-from">
+              <span className="bucket-list-duration">{experience.duration}</span>
+              {experience.season && <span className="bucket-list-season">Best: {experience.season}</span>}
+            </div>
           </div>
-          {experience.highlights && Array.isArray(experience.highlights) && experience.highlights.length > 0 && (
-            <ul className="bucket-list-highlights">
-              {experience.highlights.slice(0, 3).map((highlight, idx) => (
-                <li key={idx}>{highlight}</li>
-              ))}
-            </ul>
-          )}
         </Card.Content>
       </Card>
     );
@@ -207,8 +203,8 @@ function BucketListPage() {
         <div className="container text-center">
           <h2>Ready to Plan Your Experience?</h2>
           <p>
-            Your expert cruise consultant is here to help you plan your bucket list adventure. 
-            Get personalised advice and exclusive deals on these extraordinary voyages.
+            Your personal cruise consultant is here to help you plan your bucket list adventure. 
+            Get expert advice and access to the best available pricing on these extraordinary voyages.
           </p>
           <div className="cta-buttons">
             <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">

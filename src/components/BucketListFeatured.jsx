@@ -119,12 +119,7 @@ function BucketListFeatured() {
                       <Card.Description>{experience.tagline}</Card.Description>
                       <div className="bucket-list-featured-meta">
                         <span className="duration">{experience.duration}</span>
-                      </div>
-                      <div className="bucket-list-featured-cta-inline">
-                        <span className="bucket-list-cta-text">Enquire Now</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
+                        {experience.season && <span className="season">Best: {experience.season}</span>}
                       </div>
                     </Card.Content>
                   </Card>
@@ -149,7 +144,7 @@ function BucketListFeatured() {
 
         <div className="bucket-list-featured-cta">
           <Button to="/contact" variant="primary" size="lg">
-            Discuss Your Dream Cruise
+            Plan Your Bucket List Voyage
           </Button>
           <Button to="/bucket-list" variant="outline" size="lg">
             View All Bucket List Experiences

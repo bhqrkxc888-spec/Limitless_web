@@ -447,63 +447,6 @@ function HomePage() {
         </div>
       </section>
 
-      {/* Contact Options */}
-      <section className="still-here">
-        <div className="container">
-          <div className="still-here-content">
-            <h2>Speak With Us</h2>
-            <p className="section-lead">
-              Your dedicated consultant is here to provide expert guidance 
-              and personalised recommendations for your next voyage.
-            </p>
-            
-            <div className="contact-grid">
-              <a href={`tel:${siteConfig.phone}`} className="contact-card-elegant">
-                <span className="contact-icon contact-icon--phone">
-                  <PhoneIcon />
-                </span>
-                <h3>Telephone</h3>
-                <p>{siteConfig.phone}</p>
-              </a>
-              
-              <a 
-                href={siteConfig.whatsappUrl || 'https://wa.me/447359796108'} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="contact-card-elegant"
-              >
-                <span className="contact-icon contact-icon--whatsapp">
-                  <WhatsAppIcon />
-                </span>
-                <h3>WhatsApp</h3>
-                <p>{siteConfig.whatsapp}</p>
-              </a>
-              
-              <a 
-                href={siteConfig.facebook}
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="contact-card-elegant"
-              >
-                <span className="contact-icon contact-icon--facebook">
-                  <FacebookIcon />
-                </span>
-                <h3>Facebook</h3>
-                <p>Send Message</p>
-              </a>
-              
-              <a href="#contact-form" className="contact-card-elegant">
-                <span className="contact-icon contact-icon--email">
-                  <MailIcon />
-                </span>
-                <h3>Enquire</h3>
-                <p>Send Request</p>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* What We Offer */}
       <section className="what-we-offer">
         <div className="container">
@@ -557,19 +500,76 @@ function HomePage() {
       {/* Bucket List Featured - Dynamic Rotating Content */}
       <BucketListFeatured />
 
+      {/* Contact Options */}
+      <section className="still-here">
+        <div className="container">
+          <div className="still-here-content">
+            <h2>Speak With Us</h2>
+            <p className="section-lead">
+              Your personal cruise consultant is here to help. Whether you have a question 
+              or you're ready to start planning, we're just a call or message away.
+            </p>
+            
+            <div className="contact-grid">
+              <a href={`tel:${siteConfig.phone}`} className="contact-card-elegant">
+                <span className="contact-icon contact-icon--phone">
+                  <PhoneIcon />
+                </span>
+                <h3>Telephone</h3>
+                <p>{siteConfig.phone}</p>
+              </a>
+              
+              <a 
+                href={siteConfig.whatsappUrl || 'https://wa.me/447359796108'} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="contact-card-elegant"
+              >
+                <span className="contact-icon contact-icon--whatsapp">
+                  <WhatsAppIcon />
+                </span>
+                <h3>WhatsApp</h3>
+                <p>{siteConfig.whatsapp}</p>
+              </a>
+              
+              <a 
+                href={siteConfig.facebook}
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="contact-card-elegant"
+              >
+                <span className="contact-icon contact-icon--facebook">
+                  <FacebookIcon />
+                </span>
+                <h3>Facebook</h3>
+                <p>Send Message</p>
+              </a>
+              
+              <a href="#contact-form" className="contact-card-elegant">
+                <span className="contact-icon contact-icon--email">
+                  <MailIcon />
+                </span>
+                <h3>Enquire</h3>
+                <p>Send Request</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Form Section */}
       <section className="contact-section" id="contact-form">
         <div className="container">
           <div className="contact-form-wrapper">
             <div className="contact-form-text">
-              <h2>Send Us Your Enquiry</h2>
+              <h2>Send Us an Enquiry</h2>
               <p>
-                Tell us about your dream cruise and we'll respond within 24 hours 
+                Tell us what you're looking for and we'll get back to you within 24 hours 
                 with personalised recommendations and pricing.
               </p>
               <ul className="contact-promise">
                 <li>No obligation quote</li>
-                <li>Expert advice</li>
+                <li>Expert, personal advice</li>
                 <li>Response within 24 hours</li>
               </ul>
             </div>
