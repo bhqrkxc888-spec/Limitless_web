@@ -1,15 +1,12 @@
 import { useParams, Link } from 'react-router-dom';
 import { useTravelNewsArticle } from '../hooks/useTravelNews';
 import { incrementTravelNewsView } from '../services/travelNewsAPI';
-import { supabase } from '../lib/supabase';
-import { siteConfig } from '../config/siteConfig';
 import { SITE_ASSETS } from '../config/assetUrls';
 import SEO from '../components/SEO';
 import { Button, SectionHeader } from '../components/ui';
 import OptimizedImage from '../components/OptimizedImage';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect } from 'react';
 import { createSanitizedMarkup } from '../utils/sanitizeHtml';
-import { logger } from '../utils/logger';
 import './TravelNewsArticlePage.css';
 
 function TravelNewsArticlePage() {
@@ -19,17 +16,6 @@ function TravelNewsArticlePage() {
   const isValidSlug = slug && /^[a-z0-9-]+$/i.test(slug);
   
   const { article, loading, error } = useTravelNewsArticle(isValidSlug ? slug : null);
-  
-  // Contact form state
-  const [contactForm, setContactForm] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
-  const [formStatus, setFormStatus] = useState({ submitting: false, submitted: false, error: null });
-  const lastSubmitTime = useRef(0);
-  const isSubmitting = useRef(false);
 
   // Track view when article is loaded
   useEffect(() => {
@@ -37,66 +23,6 @@ function TravelNewsArticlePage() {
       incrementTravelNewsView(article.id);
     }
   }, [article?.id]);
-
-  const handleContactSubmit = async (e) => {
-    e.preventDefault();
-    
-    // Immediate double-submit protection
-    if (isSubmitting.current) {
-      return;
-    }
-    
-    // Rate limiting: prevent submissions within 3 seconds
-    const now = Date.now();
-    if (now - lastSubmitTime.current < 3000) {
-      setFormStatus({ submitting: false, submitted: false, error: 'Please wait a moment before submitting again.' });
-      return;
-    }
-    
-    isSubmitting.current = true;
-    lastSubmitTime.current = now;
-    setFormStatus({ submitting: true, submitted: false, error: null });
-    
-    try {
-      // Prepare enquiry data
-      const enquiryData = {
-        name: contactForm.name,
-        email: contactForm.email,
-        phone: contactForm.phone || null,
-        message: contactForm.message,
-        source: `News Article: ${article?.title || slug}`,
-        context: {
-          articleUrl: window.location.href,
-          articleSlug: slug,
-          articleTitle: article?.title
-        }
-      };
-
-      // Submit to Supabase with 10s timeout
-      const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Request timeout')), 10000)
-      );
-
-      const { error } = await Promise.race([
-        supabase.from('website_enquiries').insert([enquiryData]),
-        timeoutPromise
-      ]);
-      
-      if (error) throw error;
-      
-      setFormStatus({ submitting: false, submitted: true, error: null });
-      setContactForm({ name: '', email: '', phone: '', message: '' });
-    } catch (err) {
-      logger.error('Contact form error:', err);
-      setFormStatus({ 
-        submitting: false, 
-        submitted: false, 
-        error: 'Failed to send. Please try again or contact us directly.' 
-      });
-    } finally {
-      isSubmitting.current = false;
-    }
-  };
 
   // Helper functions
   const formatDate = (dateString) => {
@@ -314,148 +240,6 @@ function TravelNewsArticlePage() {
                 </Button>
               </div>
             </div>
-
-            {/* Sidebar */}
-            <aside className="article-sidebar">
-              {/* Mini Contact Form */}
-              <div className="sidebar-card sidebar-card--contact">
-                <h3>Get in Touch</h3>
-                <p style={{ fontSize: '0.875rem', color: 'var(--clr-text-secondary)', marginBottom: '16px' }}>
-                  Interested in this? Let us help plan your cruise.
-                </p>
-                
-                {formStatus.submitted ? (
-                  <div style={{ padding: '24px', textAlign: 'center', background: 'var(--clr-success-bg)', borderRadius: '8px' }}>
-                    <div style={{ fontSize: '2rem', marginBottom: '8px' }}>✓</div>
-                    <p style={{ margin: 0, fontWeight: '500', color: 'var(--clr-success)' }}>Thanks! We'll be in touch soon.</p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleContactSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                    <input
-                      type="text"
-                      id="article-contact-name"
-                      name="name"
-                      placeholder="Your Name *"
-                      value={contactForm.name}
-                      onChange={(e) => setContactForm(f => ({ ...f, name: e.target.value }))}
-                      required
-                      aria-label="Your name"
-                      style={{
-                        padding: '10px 12px',
-                        border: '1px solid var(--clr-border)',
-                        borderRadius: '6px',
-                        fontSize: '0.875rem',
-                        width: '100%'
-                      }}
-                    />
-                    <input
-                      type="email"
-                      id="article-contact-email"
-                      name="email"
-                      placeholder="Email Address *"
-                      value={contactForm.email}
-                      onChange={(e) => setContactForm(f => ({ ...f, email: e.target.value }))}
-                      required
-                      aria-label="Email address"
-                      style={{
-                        padding: '10px 12px',
-                        border: '1px solid var(--clr-border)',
-                        borderRadius: '6px',
-                        fontSize: '0.875rem',
-                        width: '100%'
-                      }}
-                    />
-                    <input
-                      type="tel"
-                      id="article-contact-phone"
-                      name="phone"
-                      placeholder="Phone Number"
-                      value={contactForm.phone}
-                      onChange={(e) => setContactForm(f => ({ ...f, phone: e.target.value }))}
-                      aria-label="Phone number"
-                      style={{
-                        padding: '10px 12px',
-                        border: '1px solid var(--clr-border)',
-                        borderRadius: '6px',
-                        fontSize: '0.875rem',
-                        width: '100%'
-                      }}
-                    />
-                    <textarea
-                      id="article-contact-message"
-                      name="message"
-                      placeholder="Your Message"
-                      value={contactForm.message}
-                      onChange={(e) => setContactForm(f => ({ ...f, message: e.target.value }))}
-                      rows={3}
-                      aria-label="Your message"
-                      style={{
-                        padding: '10px 12px',
-                        border: '1px solid var(--clr-border)',
-                        borderRadius: '6px',
-                        fontSize: '0.875rem',
-                        width: '100%',
-                        resize: 'vertical'
-                      }}
-                    />
-                    
-                    {formStatus.error && (
-                      <p style={{ margin: 0, color: 'var(--clr-error)', fontSize: '0.75rem' }}>{formStatus.error}</p>
-                    )}
-                    
-                    <Button 
-                      type="submit" 
-                      variant="primary" 
-                      fullWidth
-                      disabled={formStatus.submitting}
-                    >
-                      {formStatus.submitting ? 'Sending...' : 'Send Enquiry'}
-                    </Button>
-                  </form>
-                )}
-                
-                <div style={{ marginTop: '16px', paddingTop: '16px', borderTop: '1px solid var(--clr-border)', textAlign: 'center' }}>
-                  <p style={{ margin: '0 0 8px', fontSize: '0.75rem', color: 'var(--clr-text-secondary)' }}>Or call us directly:</p>
-                  <a 
-                    href={`tel:${siteConfig.phone}`} 
-                    style={{ fontWeight: '600', color: 'var(--clr-primary)', textDecoration: 'none' }}
-                  >
-                    {siteConfig.phone}
-                  </a>
-                </div>
-              </div>
-
-              {/* Category Navigation */}
-              {article.category && (
-                <div className="sidebar-card">
-                  <h3>Category</h3>
-                  <Link to={`/travel-news/category/${article.category}`} className="category-link">
-                    {formatCategory(article.category)}
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                  </Link>
-                </div>
-              )}
-
-              {/* Related Tags */}
-              {article.tags && article.tags.length > 0 && (
-                <div className="sidebar-card">
-                  <h3>Related Topics</h3>
-                  <div className="sidebar-tags">
-                    {article.tags.map((tag, index) => (
-                      <Link 
-                        key={index} 
-                        to={`/travel-news/tag/${encodeURIComponent(tag)}`} 
-                        className="sidebar-tag"
-                      >
-                        {tag}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </aside>
           </div>
         </div>
       </section>

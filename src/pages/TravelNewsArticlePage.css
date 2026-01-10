@@ -160,24 +160,22 @@
 }
 
 /* ========================================
-   ARTICLE GRID
+   ARTICLE GRID - Single Column Layout
    ======================================== */
 
 .article-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-8);
-}
-
-@media (min-width: 1024px) {
-  .article-grid {
-    grid-template-columns: 2fr 1fr;
-    gap: var(--space-12);
-  }
+  display: block; /* Single column, no sidebar */
+  max-width: 900px; /* Comfortable reading width */
+  margin: 0 auto; /* Center the content */
 }
 
 .article-main {
   min-width: 0;
+}
+
+/* Hide sidebar on article pages */
+.article-sidebar {
+  display: none;
 }
 
 /* ========================================
@@ -186,6 +184,7 @@
 
 .article-content {
   margin-bottom: var(--space-8);
+  max-width: 800px; /* Optimal reading width */
 }
 
 .article-content-body {
@@ -253,6 +252,69 @@
   background: var(--clr-bg-alt);
   font-style: italic;
   color: var(--clr-text-muted);
+}
+
+/* -- ALL Tables in Article Content -- */
+.article-content-body table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--clr-surface, #fff);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  margin: var(--space-8) 0;
+  font-size: var(--font-size-sm);
+}
+
+.article-content-body table thead {
+  background: var(--clr-primary);
+  color: var(--clr-text-on-primary);
+}
+
+.article-content-body table th {
+  padding: var(--space-4) var(--space-5);
+  text-align: left;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: none;
+}
+
+.article-content-body table td {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--clr-border-light);
+  color: var(--clr-text-main);
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.article-content-body table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.article-content-body table tbody tr:hover {
+  background: var(--clr-bg-alt);
+}
+
+/* Table first column (labels) styling */
+.article-content-body table td:first-child {
+  font-weight: var(--font-weight-semibold);
+  color: var(--clr-text-heading);
+  background: var(--clr-bg-alt);
+  white-space: nowrap;
+}
+
+/* -- Horizontal Rules -- */
+.article-content-body hr {
+  border: none;
+  border-top: 2px solid var(--clr-border);
+  margin: var(--space-10) 0;
+}
+
+/* -- Strong/Bold text in tables -- */
+.article-content-body table strong {
+  color: var(--clr-text-heading);
 }
 
 /* ========================================
@@ -452,6 +514,23 @@
   
   .article-footer-actions .btn {
     width: 100%;
+  }
+  
+  /* Responsive tables */
+  .article-content-body table {
+    font-size: var(--font-size-xs);
+    margin: var(--space-6) calc(-1 * var(--space-4)); /* Extend to edges on mobile */
+    width: calc(100% + var(--space-8));
+    border-radius: 0;
+  }
+  
+  .article-content-body table th,
+  .article-content-body table td {
+    padding: var(--space-3) var(--space-3);
+  }
+  
+  .article-content-body table td:first-child {
+    white-space: normal; /* Allow wrapping on mobile */
   }
 }
 
