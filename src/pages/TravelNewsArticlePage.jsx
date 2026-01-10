@@ -118,54 +118,50 @@ function TravelNewsArticlePage() {
         structuredData={structuredData}
       />
 
-      {/* Clean Article Header */}
+      {/* Clean Article Header - Centered to match body */}
       <section className="article-header">
         <div className="container">
+          <div className="article-header-inner">
+            {/* Article Meta */}
+            <div className="article-header-meta">
+              {article.category && (
+                <Link 
+                  to={`/travel-news/category/${article.category}`} 
+                  className="article-header-category"
+                >
+                  {formatCategory(article.category)}
+                </Link>
+              )}
+              {article.published_at && (
+                <time className="article-header-date">
+                  {formatDate(article.published_at)}
+                </time>
+              )}
+              {article.view_count !== undefined && (
+                <span className="article-header-views">
+                  {article.view_count} views
+                </span>
+              )}
+            </div>
 
-          {/* Article Meta */}
-          <div className="article-header-meta">
-            {article.category && (
-              <Link 
-                to={`/travel-news/category/${article.category}`} 
-                className="article-header-category"
-              >
-                {formatCategory(article.category)}
-              </Link>
-            )}
-            {article.published_at && (
-              <time className="article-header-date">
-                {formatDate(article.published_at)}
-              </time>
-            )}
-            {article.view_count !== undefined && (
-              <span className="article-header-views">
-                {article.view_count} views
-              </span>
+            {/* Title Only - No excerpt to avoid duplication with content intro */}
+            <h1 className="article-header-title">{article.title}</h1>
+
+            {/* Tags */}
+            {article.tags && article.tags.length > 0 && (
+              <div className="article-header-tags">
+                {article.tags.map((tag, index) => (
+                  <Link 
+                    key={index} 
+                    to={`/travel-news/tag/${encodeURIComponent(tag)}`} 
+                    className="article-header-tag"
+                  >
+                    {tag}
+                  </Link>
+                ))}
+              </div>
             )}
           </div>
-
-          {/* Title */}
-          <h1 className="article-header-title">{article.title}</h1>
-
-          {/* Excerpt */}
-          {article.excerpt && (
-            <p className="article-header-excerpt">{article.excerpt}</p>
-          )}
-
-          {/* Tags */}
-          {article.tags && article.tags.length > 0 && (
-            <div className="article-header-tags">
-              {article.tags.map((tag, index) => (
-                <Link 
-                  key={index} 
-                  to={`/travel-news/tag/${encodeURIComponent(tag)}`} 
-                  className="article-header-tag"
-                >
-                  {tag}
-                </Link>
-              ))}
-            </div>
-          )}
         </div>
       </section>
 
@@ -207,16 +203,6 @@ function TravelNewsArticlePage() {
                   </div>
                 </div>
               )}
-
-              {/* Share / Back Actions */}
-              <div className="article-footer-actions">
-                <Button to="/travel-news" variant="outline">
-                  Back to News
-                </Button>
-                <Button to="/contact" variant="primary">
-                  Contact Us
-                </Button>
-              </div>
             </div>
           </div>
         </div>
