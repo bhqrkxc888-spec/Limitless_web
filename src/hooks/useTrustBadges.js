@@ -17,11 +17,13 @@ export function useTrustBadges(organisationId = DEFAULT_ORG_ID) {
       logoUrl: siteConfig.financialProtection?.abta?.logo || null,
       number: siteConfig.financialProtection?.abta?.number || '',
       enabled: siteConfig.financialProtection?.abta?.enabled ?? true,
+      invert: true, // Default: convert black to white
     },
     atol: {
       logoUrl: siteConfig.financialProtection?.atol?.logo || null,
       number: siteConfig.financialProtection?.atol?.number || '',
       enabled: siteConfig.financialProtection?.atol?.enabled ?? true,
+      invert: true, // Default: convert black to white
     },
     loading: true,
   });
@@ -49,11 +51,13 @@ export function useTrustBadges(organisationId = DEFAULT_ORG_ID) {
               logoUrl: data.abta_logo_url || siteConfig.financialProtection?.abta?.logo || null,
               number: data.default_abta_number || siteConfig.financialProtection?.abta?.number || '',
               enabled: true,
+              invert: data.abta_logo_invert !== false, // Default true for black logos
             },
             atol: {
               logoUrl: data.atol_logo_url || siteConfig.financialProtection?.atol?.logo || null,
               number: data.default_atol_number || siteConfig.financialProtection?.atol?.number || '',
               enabled: true,
+              invert: data.atol_logo_invert !== false, // Default true for black logos
             },
             loading: false,
           });

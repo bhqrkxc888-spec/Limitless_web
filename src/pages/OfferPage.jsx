@@ -597,6 +597,7 @@ function OfferPage() {
                             <img 
                               src={trustBadges.abta.logoUrl} 
                               alt="ABTA Protected" 
+                              style={trustBadges.abta.invert ? { filter: 'brightness(0) invert(1)' } : {}}
                               onError={(e) => { e.target.style.display = 'none'; if(e.target.nextSibling) e.target.nextSibling.style.display = 'flex'; }}
                             />
                           ) : null}
@@ -611,6 +612,7 @@ function OfferPage() {
                             <img 
                               src={trustBadges.atol.logoUrl} 
                               alt="ATOL Protected"
+                              style={trustBadges.atol.invert ? { filter: 'brightness(0) invert(1)' } : {}}
                               onError={(e) => { e.target.style.display = 'none'; if(e.target.nextSibling) e.target.nextSibling.style.display = 'flex'; }}
                             />
                           ) : null}
