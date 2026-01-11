@@ -441,17 +441,18 @@
 .offer-pricing-card__protection {
   margin-top: var(--space-4);
   padding-top: var(--space-4);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--clr-border-light);
   text-align: center;
 }
 
 .protection-label {
   display: block;
   font-size: var(--font-size-xs);
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: var(--space-2);
+  color: var(--clr-accent);
+  margin-bottom: var(--space-3);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  font-weight: var(--font-weight-semibold);
 }
 
 .protection-badges {
@@ -527,7 +528,7 @@
    ======================================== */
 
 .offer-package-section {
-  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  background: var(--clr-bg-alt);
   padding: var(--space-10) 0;
   border-bottom: 1px solid var(--clr-border-light);
 }
@@ -548,67 +549,44 @@
 }
 
 .offer-package-card {
-  background: #ffffff;
+  background: var(--clr-surface);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
-  border: 1px solid var(--clr-border-light);
-  box-shadow: 
-    0 4px 6px -1px rgba(0, 0, 0, 0.05),
-    0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--clr-border);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .offer-package-card:hover {
   transform: translateY(-2px);
-  box-shadow: 
-    0 10px 15px -3px rgba(0, 0, 0, 0.08),
-    0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-md);
 }
 
 .offer-package-card__icon {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: var(--space-4);
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
+  color: var(--clr-text-on-primary);
 }
 
 .offer-package-card__icon svg {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   stroke-width: 2;
 }
 
-/* Flights Card - Blue */
-.offer-package-card--flights .offer-package-card__icon {
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-  color: #1d4ed8;
-}
-
-/* Transfers Card - Green */
-.offer-package-card--transfers .offer-package-card__icon {
-  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
-  color: #15803d;
-}
-
-/* Cruise Card - Navy */
-.offer-package-card--cruise .offer-package-card__icon {
-  background: linear-gradient(135deg, #1e3a5f 0%, #0c2340 100%);
-  color: #ffffff;
-}
-
-/* OBC Card - Gold */
-.offer-package-card--obc .offer-package-card__icon {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  color: #92400e;
-}
-
-/* Hotel Card - Purple */
+/* All package card icons use unified brand styling */
+.offer-package-card--flights .offer-package-card__icon,
+.offer-package-card--transfers .offer-package-card__icon,
+.offer-package-card--cruise .offer-package-card__icon,
+.offer-package-card--obc .offer-package-card__icon,
 .offer-package-card--hotel .offer-package-card__icon {
-  background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
-  color: #6d28d9;
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
+  color: var(--clr-text-on-primary);
 }
 
 .offer-package-card__title {
@@ -691,11 +669,10 @@
 
 /* Section Styles */
 .offer-section {
-  background: #ffffff;
-  border: 1px solid var(--clr-border-light);
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
   border-radius: var(--radius-xl);
   padding: var(--space-6);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .offer-section:last-child {
@@ -748,7 +725,7 @@
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-4);
 }
 
@@ -756,23 +733,21 @@
   display: flex;
   align-items: flex-start;
   gap: var(--space-3);
-  padding: var(--space-5);
-  background: #ffffff;
-  border: 1px solid var(--clr-border-light);
+  padding: var(--space-4);
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
   border-radius: var(--radius-lg);
   color: var(--clr-text-main);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease;
 }
 
 .offer-highlights-list li:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: var(--clr-accent);
 }
 
 .offer-highlights-list li svg {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   color: var(--clr-accent);
   flex-shrink: 0;
   margin-top: 2px;
@@ -1138,7 +1113,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-6);
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   align-items: stretch;
 }
@@ -1376,7 +1351,7 @@
   }
   
   .offer-highlights-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
   
   .offer-enquiry-stack {
@@ -1420,5 +1395,9 @@
   
   .offer-section__title {
     font-size: var(--font-size-lg);
+  }
+  
+  .offer-highlights-list {
+    grid-template-columns: 1fr;
   }
 }
