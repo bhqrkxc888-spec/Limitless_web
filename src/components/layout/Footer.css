@@ -147,20 +147,17 @@
 
 .footer-elite-link {
   display: inline-block;
-  padding: var(--space-3);
-  background: var(--clr-primary-dark);
-  border-radius: var(--radius-md);
   transition: all var(--transition-fast);
 }
 
 .footer-elite-link:hover {
-  background: var(--clr-primary-light, #2a4a7f);
   transform: translateY(-2px);
+  opacity: 0.8;
 }
 
 .footer-elite-link img {
-  height: 40px;
-  width: 80px;
+  height: 75px;
+  width: 150px;
   object-fit: contain;
   display: block;
 }

@@ -197,11 +197,11 @@ function AboutPage() {
                   <OptimizedImage 
                     src={aboutImages.holidayEliteLogo}
                     alt="Holiday Elite Travel Agent - Professional membership" 
-                    width={120}
-                    height={60}
+                    width={150}
+                    height={75}
                     priority={false}
-                    sizes="120px"
-                    srcsetWidths={[120, 240]}
+                    sizes="150px"
+                    srcsetWidths={[150, 300]}
                     quality={85}
                   />
                   <span>View Holiday Elite Profile →</span>
