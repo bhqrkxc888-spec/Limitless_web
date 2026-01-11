@@ -12,6 +12,23 @@ export const siteConfig = {
   linkedin: 'https://www.linkedin.com/company/limitless-cruises/',
   youtube: 'https://www.youtube.com/@LimitlessCruises',
   
+  // Financial Protection - Site-wide defaults
+  // These are used when an offer doesn't specify its own numbers
+  financialProtection: {
+    abta: {
+      enabled: true,
+      number: 'P7541', // Midcounties Co-operative ABTA number
+      // Image: Upload to /images/trust-badges/abta-logo.png (recommended: 120x60px, PNG with transparency)
+      logo: '/images/trust-badges/abta-logo.png',
+    },
+    atol: {
+      enabled: true,
+      number: '', // Add your ATOL number here when available
+      // Image: Upload to /images/trust-badges/atol-logo.png (recommended: 120x60px, PNG with transparency)
+      logo: '/images/trust-badges/atol-logo.png',
+    },
+  },
+  
   // Monitoring settings
   // Note: errorTracking disabled until log_website_error RPC function is created in Supabase
   // This prevents 404 errors in Lighthouse audits

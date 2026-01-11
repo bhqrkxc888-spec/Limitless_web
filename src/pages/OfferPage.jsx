@@ -583,6 +583,43 @@ function OfferPage() {
                     Check Availability
                   </Button>
                 </div>
+                
+                {/* Financial Protection Badges */}
+                {(offer.abta_protected !== false || offer.atol_protected) && (
+                  <div className="offer-pricing-card__protection">
+                    <span className="protection-label">Your booking is protected</span>
+                    <div className="protection-badges">
+                      {offer.abta_protected !== false && (
+                        <div className="protection-badge protection-badge--abta" title="ABTA Protected">
+                          {siteConfig.financialProtection?.abta?.logo ? (
+                            <img 
+                              src={siteConfig.financialProtection.abta.logo} 
+                              alt="ABTA Protected" 
+                              onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                            />
+                          ) : null}
+                          <span className="protection-badge__text" style={siteConfig.financialProtection?.abta?.logo ? { display: 'none' } : {}}>
+                            ABTA {offer.abta_number || siteConfig.financialProtection?.abta?.number || ''}
+                          </span>
+                        </div>
+                      )}
+                      {(offer.atol_protected || (offer.includes_flight && siteConfig.financialProtection?.atol?.enabled)) && (
+                        <div className="protection-badge protection-badge--atol" title="ATOL Protected">
+                          {siteConfig.financialProtection?.atol?.logo ? (
+                            <img 
+                              src={siteConfig.financialProtection.atol.logo} 
+                              alt="ATOL Protected"
+                              onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                            />
+                          ) : null}
+                          <span className="protection-badge__text" style={siteConfig.financialProtection?.atol?.logo ? { display: 'none' } : {}}>
+                            ATOL {offer.atol_number || siteConfig.financialProtection?.atol?.number || ''}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

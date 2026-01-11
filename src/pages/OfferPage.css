@@ -437,6 +437,67 @@
   margin-bottom: var(--space-4);
 }
 
+/* Financial Protection Badges */
+.offer-pricing-card__protection {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.protection-label {
+  display: block;
+  font-size: var(--font-size-xs);
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.protection-badges {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.protection-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.protection-badge img {
+  height: 36px;
+  width: auto;
+  max-width: 80px;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* Make logos white on dark background */
+  opacity: 0.9;
+}
+
+.protection-badge__text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.02em;
+}
+
+.protection-badge--abta .protection-badge__text {
+  background: rgba(0, 102, 179, 0.2);
+}
+
+.protection-badge--atol .protection-badge__text {
+  background: rgba(0, 150, 94, 0.2);
+}
+
 /* ========================================
    MAIN CONTENT SECTION
    ======================================== */
