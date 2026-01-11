@@ -186,8 +186,8 @@ function OfferPage() {
     return offerData.price_from;
   };
 
-  // V2: Calculate total package nights
-  const getTotalPackageNights = (offerData) => {
+  // V2: Calculate total package nights (prefixed with _ as it's reserved for future use)
+  const _getTotalPackageNights = (offerData) => {
     if (!offerData) return 0;
     return (offerData.pre_stay_nights || 0) + 
            (offerData.duration_nights || 0) + 
