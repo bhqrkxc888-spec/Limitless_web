@@ -119,7 +119,8 @@ export const DIMENSION_SPECS = {
   'bucket-list-gallery-4': { width: 1200, height: 800 },
   
   // Site trust badges and agency logo
-  'site-agency-logo': { width: 400, height: 200 },
+  // Agency logo: 240×120 for 2x retina display at 120×60
+  'site-agency-logo': { width: 240, height: 120 },
   'site-abta-badge': { width: 200, height: 200 },
   'site-atol-badge': { width: 200, height: 200 },
   'site-clia-badge': { width: 200, height: 200 },

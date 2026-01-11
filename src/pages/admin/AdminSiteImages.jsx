@@ -23,7 +23,7 @@ const SITE_IMAGES = [
   { id: 'katherine1', type: 'katherine1', label: 'About Page - Katherine Photo 1 (Why Choose section)', required: true, dimensions: '800×1000px portrait' },
   { id: 'katherine2', type: 'katherine2', label: 'About Page - Katherine Photo 2 (Hero section)', required: true, dimensions: '800×1000px portrait' },
   { id: 'katherine3', type: 'katherine3', label: 'About Page - Katherine Photo 3 (Meet Consultant section)', required: true, dimensions: '800×1000px portrait' },
-  { id: 'agency-logo', type: 'agency-logo', label: 'Agency Logo (Holiday Elite/Partner Agency)', required: false, dimensions: 'Any size, PNG preferred for transparency' },
+  { id: 'agency-logo', type: 'agency-logo', label: 'Agency Logo (Holiday Elite/Partner Agency)', required: false, dimensions: '240×120px (displays at 120×60px)' },
   { id: 'trust-abta', type: 'trust-abta', label: 'Trust Badge - ABTA', required: false, dimensions: 'Any size, PNG preferred' },
   { id: 'trust-atol', type: 'trust-atol', label: 'Trust Badge - ATOL', required: false, dimensions: 'Any size, PNG preferred' },
   { id: 'trust-clia', type: 'trust-clia', label: 'Trust Badge - CLIA', required: false, dimensions: 'Any size, PNG preferred' },
