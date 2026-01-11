@@ -589,133 +589,113 @@ function OfferPage() {
         </div>
       </section>
 
+      {/* YOUR PACKAGE INCLUDES - Key Selling Points */}
+      <section className="section offer-package-section">
+        <div className="container">
+          <h2 className="offer-package-section__title">Your Package Includes</h2>
+          <div className="offer-package-cards">
+            {/* Flights Card */}
+            {offer.includes_flight && (
+              <div className="offer-package-card offer-package-card--flights">
+                <div className="offer-package-card__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
+                  </svg>
+                </div>
+                <h3 className="offer-package-card__title">Return Flights Included</h3>
+                <ul className="offer-package-card__details">
+                  {offer.departure_airport && (
+                    <li>
+                      <strong>From:</strong> {offer.departure_airport}
+                    </li>
+                  )}
+                  <li>
+                    <strong>Type:</strong> {offer.flight_direct ? 'Direct Flight' : 'Connecting Flight'}
+                  </li>
+                  {offer.flight_class && (
+                    <li>
+                      <strong>Class:</strong> {capitalize(offer.flight_class)}
+                    </li>
+                  )}
+                </ul>
+              </div>
+            )}
+
+            {/* Transfers Card */}
+            {offer.transfer_included && (
+              <div className="offer-package-card offer-package-card--transfers">
+                <div className="offer-package-card__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="1" y="3" width="15" height="13" rx="2"/>
+                    <path d="M16 8h4l3 3v5h-3"/>
+                    <circle cx="5.5" cy="18.5" r="2.5"/>
+                    <circle cx="18.5" cy="18.5" r="2.5"/>
+                  </svg>
+                </div>
+                <h3 className="offer-package-card__title">Transfers Included</h3>
+                <ul className="offer-package-card__details">
+                  <li>Airport to cruise port</li>
+                  <li>Cruise port to airport</li>
+                  <li>No hidden transport costs</li>
+                </ul>
+              </div>
+            )}
+
+            {/* Cruise/Dining Card - Always show */}
+            <div className="offer-package-card offer-package-card--cruise">
+              <div className="offer-package-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 18l18-6-18-6v12z"/>
+                </svg>
+              </div>
+              <h3 className="offer-package-card__title">
+                {offer.duration_nights}-Night {offer.category === 'luxury' ? 'Luxury' : ''} Cruise
+              </h3>
+              <ul className="offer-package-card__details">
+                <li><strong>Ship:</strong> {offer.ship_name || 'TBC'}</li>
+                {offer.cabin_type && (
+                  <li><strong>Cabin:</strong> {capitalize(offer.cabin_type)} Stateroom</li>
+                )}
+                {offer.includes && offer.includes.some(i => 
+                  i.toLowerCase().includes('all-inclusive') || 
+                  i.toLowerCase().includes('dining') ||
+                  i.toLowerCase().includes('drinks')
+                ) && (
+                  <li><strong>Dining:</strong> All-Inclusive</li>
+                )}
+              </ul>
+            </div>
+
+            {/* Onboard Credit Card */}
+            {offer.onboard_credit_amount > 0 && (
+              <div className="offer-package-card offer-package-card--obc">
+                <div className="offer-package-card__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    <path d="M2 10h20"/>
+                  </svg>
+                </div>
+                <h3 className="offer-package-card__title">Onboard Credit</h3>
+                <ul className="offer-package-card__details">
+                  <li className="offer-package-card__highlight">
+                    {offer.onboard_credit_currency === 'USD' ? '$' : '£'}{offer.onboard_credit_amount} to spend onboard
+                  </li>
+                  <li>Use on spa, excursions, drinks & more</li>
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
       {/* Main Content - Full Width */}
       <section className="section offer-content-section">
         <div className="container">
           <div className="offer-single-column">
-              {/* V2: Package Summary - Show if has accommodation */}
-              {hasAccommodation(offer) && (
-                <div className="offer-section offer-package-summary">
-                  <h2 className="offer-section__title">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="3" y="3" width="18" height="18" rx="2"/>
-                      <path d="M3 9h18"/>
-                      <path d="M9 21V9"/>
-                    </svg>
-                    {getTotalPackageNights(offer)}-Night Package Includes
-                  </h2>
-                  <div className="offer-package-items">
-                    {offer.pre_stay_hotel_name && (
-                      <div className="offer-package-item offer-package-item--hotel">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
-                          <path d="M1 21h22"/>
-                        </svg>
-                        <span>
-                          <strong>{offer.pre_stay_nights} nights</strong> at {offer.pre_stay_hotel_name}
-                          {offer.pre_stay_hotel_stars && ` (${offer.pre_stay_hotel_stars}★)`}
-                          {offer.pre_stay_location && ` in ${offer.pre_stay_location}`}
-                        </span>
-                      </div>
-                    )}
-                    <div className="offer-package-item offer-package-item--cruise">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M3 18l18-6-18-6v12z"/>
-                      </svg>
-                      <span>
-                        <strong>{offer.duration_nights}-night cruise</strong> on {offer.ship_name}
-                        {offer.cabin_type && ` in ${capitalize(offer.cabin_type)} Stateroom`}
-                      </span>
-                    </div>
-                    {offer.post_stay_hotel_name && (
-                      <div className="offer-package-item offer-package-item--hotel">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
-                          <path d="M1 21h22"/>
-                        </svg>
-                        <span>
-                          <strong>{offer.post_stay_nights} nights</strong> at {offer.post_stay_hotel_name}
-                          {offer.post_stay_hotel_stars && ` (${offer.post_stay_hotel_stars}★)`}
-                          {offer.post_stay_location && ` in ${offer.post_stay_location}`}
-                        </span>
-                      </div>
-                    )}
-                    {offer.includes_flight && (
-                      <div className="offer-package-item offer-package-item--flight">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
-                        </svg>
-                        <span>
-                          <strong>Return flights</strong>
-                          {offer.flight_direct && ' (direct)'} included
-                        </span>
-                      </div>
-                    )}
-                    {offer.transfer_included && (
-                      <div className="offer-package-item">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <rect x="1" y="3" width="15" height="13" rx="2"/>
-                          <path d="M16 8h4l3 3v5h-3"/>
-                          <circle cx="5.5" cy="18.5" r="2.5"/>
-                          <circle cx="18.5" cy="18.5" r="2.5"/>
-                        </svg>
-                        <span><strong>Transfers</strong> included</span>
-                      </div>
-                    )}
-                    {offer.onboard_credit_amount > 0 && (
-                      <div className="offer-package-item offer-package-item--obc">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <rect x="3" y="8" width="18" height="4" rx="1"/>
-                          <path d="M12 8v13"/>
-                        </svg>
-                        <span>
-                          <strong>Up to {offer.onboard_credit_currency === 'USD' ? '$' : '£'}{offer.onboard_credit_amount}</strong> onboard credit
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {/* V2: Accommodation Cards */}
-              {hasAccommodation(offer) && (
-                <div className="offer-section offer-accommodation-section">
-                  <h2 className="offer-section__title">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
-                      <path d="M1 21h22"/>
-                    </svg>
-                    Your Accommodation
-                  </h2>
-                  <div className="offer-accommodation-grid">
-                    {offer.pre_stay_hotel_name && (
-                      <AccommodationCard
-                        type="pre"
-                        hotelName={offer.pre_stay_hotel_name}
-                        stars={offer.pre_stay_hotel_stars}
-                        nights={offer.pre_stay_nights}
-                        location={offer.pre_stay_location}
-                        includes={offer.pre_stay_includes}
-                      />
-                    )}
-                    {offer.post_stay_hotel_name && (
-                      <AccommodationCard
-                        type="post"
-                        hotelName={offer.post_stay_hotel_name}
-                        stars={offer.post_stay_hotel_stars}
-                        nights={offer.post_stay_nights}
-                        location={offer.post_stay_location}
-                        includes={offer.post_stay_includes}
-                      />
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {/* Full Description - Prominent */}
+              {/* Why Book This Cruise - Compelling Description */}
               {offer.full_description && (
                 <div className="offer-section offer-section--description">
-                  <h2 className="offer-section__title offer-section__title--large">About This {offer.offer_type === 'cruise_only' ? 'Cruise' : 'Offer'}</h2>
+                  <h2 className="offer-section__title offer-section__title--large">Why Book This Cruise</h2>
                   <div 
                     className="offer-description-content"
                     dangerouslySetInnerHTML={createSanitizedMarkup(offer.full_description)}
@@ -730,7 +710,7 @@ function OfferPage() {
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
                     </svg>
-                    Offer Highlights
+                    What Makes This Special
                   </h2>
                   <ul className="offer-highlights-list">
                     {offer.highlights.map((highlight, index) => (
@@ -849,10 +829,66 @@ function OfferPage() {
                 )}
               </div>
 
-              {/* Perfect For / Ideal For - Two Column Layout */}
+              {/* V2: Airport Pricing List (only shows if multiple airports) */}
+              {offer.airport_prices?.length > 1 && (
+                <div className="offer-section" id="airport-pricing">
+                  <AirportPricingList 
+                    airportPrices={offer.airport_prices}
+                    currency={offer.currency}
+                    priceBasis={offer.price_basis}
+                  />
+                </div>
+              )}
+
+              {/* V2: Accommodation Cards - Show if has hotel stays */}
+              {hasAccommodation(offer) && (
+                <div className="offer-section offer-accommodation-section">
+                  <h2 className="offer-section__title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
+                      <path d="M1 21h22"/>
+                    </svg>
+                    Your Accommodation
+                  </h2>
+                  <div className="offer-accommodation-grid">
+                    {offer.pre_stay_hotel_name && (
+                      <AccommodationCard
+                        type="pre"
+                        hotelName={offer.pre_stay_hotel_name}
+                        stars={offer.pre_stay_hotel_stars}
+                        nights={offer.pre_stay_nights}
+                        location={offer.pre_stay_location}
+                        includes={offer.pre_stay_includes}
+                      />
+                    )}
+                    {offer.post_stay_hotel_name && (
+                      <AccommodationCard
+                        type="post"
+                        hotelName={offer.post_stay_hotel_name}
+                        stars={offer.post_stay_hotel_stars}
+                        nights={offer.post_stay_nights}
+                        location={offer.post_stay_location}
+                        includes={offer.post_stay_includes}
+                      />
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* V2: Solo Traveller Info */}
+              {offer.solo_supplement && offer.solo_supplement > 0 && (
+                <div className="offer-section">
+                  <SoloTravellerInfo 
+                    soloSupplement={offer.solo_supplement}
+                    currency={offer.currency}
+                    variant="default"
+                  />
+                </div>
+              )}
+
+              {/* Perfect For / Ideal For - Lower priority */}
               {(offer.suitable_for?.length > 0 || offer.best_for) && (
                 <div className="offer-audience-grid">
-                  {/* Perfect For - Who this cruise suits */}
                   {offer.suitable_for && offer.suitable_for.length > 0 && (
                     <div className="offer-section offer-section--audience">
                       <h2 className="offer-section__title">
@@ -872,7 +908,6 @@ function OfferPage() {
                     </div>
                   )}
 
-                  {/* Ideal For - Best use case */}
                   {offer.best_for && (
                     <div className="offer-section offer-section--ideal">
                       <h2 className="offer-section__title">
@@ -884,85 +919,6 @@ function OfferPage() {
                       <p className="offer-ideal-description">{safeRender(offer.best_for)}</p>
                     </div>
                   )}
-                </div>
-              )}
-
-              {/* Flight Details (for fly-cruise) */}
-              {offer.includes_flight && (
-                <div className="offer-section">
-                  <h2 className="offer-section__title">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
-                    </svg>
-                    Flight Details
-                  </h2>
-                  <div className="offer-flight-details">
-                    {offer.departure_airport && !offer.airport_prices?.length && (
-                      <div className="offer-flight-detail">
-                        <span className="label">Departure Airport:</span>
-                        <span className="value">{offer.departure_airport}</span>
-                      </div>
-                    )}
-                    {offer.flight_class && (
-                      <div className="offer-flight-detail">
-                        <span className="label">Class:</span>
-                        <span className="value">{capitalize(offer.flight_class)}</span>
-                      </div>
-                    )}
-                    {offer.flight_direct !== undefined && !offer.airport_prices?.length && (
-                      <div className="offer-flight-detail">
-                        <span className="label">Flight Type:</span>
-                        <span className="value">{offer.flight_direct ? 'Direct flight' : 'Connecting flight'}</span>
-                      </div>
-                    )}
-                    {offer.transfer_included !== undefined && (
-                      <div className="offer-flight-detail">
-                        <span className="label">Transfers:</span>
-                        <span className="value">{offer.transfer_included ? 'Included' : 'Not included'}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {/* V2: Airport Pricing List (only shows if multiple airports) */}
-              {offer.airport_prices?.length > 1 && (
-                <div className="offer-section" id="airport-pricing">
-                  <AirportPricingList 
-                    airportPrices={offer.airport_prices}
-                    currency={offer.currency}
-                    priceBasis={offer.price_basis}
-                  />
-                </div>
-              )}
-
-              {/* V2: Solo Traveller Info */}
-              {offer.solo_supplement && offer.solo_supplement > 0 && (
-                <div className="offer-section">
-                  <SoloTravellerInfo 
-                    soloSupplement={offer.solo_supplement}
-                    currency={offer.currency}
-                    variant="default"
-                  />
-                </div>
-              )}
-
-              {/* Regions */}
-              {offer.regions && offer.regions.length > 0 && (
-                <div className="offer-section">
-                  <h2 className="offer-section__title">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="12" cy="12" r="10"/>
-                      <path d="M2 12h20"/>
-                      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                    </svg>
-                    Regions Visited
-                  </h2>
-                  <div className="offer-regions">
-                    {offer.regions.map((region, idx) => (
-                      <span key={idx} className="offer-region-tag">{safeRender(region)}</span>
-                    ))}
-                  </div>
                 </div>
               )}
           </div>
