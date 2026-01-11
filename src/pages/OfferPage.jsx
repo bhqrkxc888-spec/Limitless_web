@@ -666,6 +666,64 @@ function OfferPage() {
               </ul>
             </div>
 
+            {/* Pre-Stay Hotel Card */}
+            {offer.pre_stay_hotel_name && (
+              <div className="offer-package-card offer-package-card--hotel">
+                <div className="offer-package-card__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
+                    <path d="M1 21h22"/>
+                    <path d="M9 7h1"/>
+                    <path d="M9 11h1"/>
+                    <path d="M14 7h1"/>
+                    <path d="M14 11h1"/>
+                  </svg>
+                </div>
+                <h3 className="offer-package-card__title">Pre-Cruise Stay</h3>
+                <ul className="offer-package-card__details">
+                  <li className="offer-package-card__highlight">
+                    {offer.pre_stay_nights} night{offer.pre_stay_nights > 1 ? 's' : ''} included
+                  </li>
+                  <li><strong>Hotel:</strong> {offer.pre_stay_hotel_name}</li>
+                  {offer.pre_stay_hotel_stars && (
+                    <li><strong>Rating:</strong> {offer.pre_stay_hotel_stars}★</li>
+                  )}
+                  {offer.pre_stay_location && (
+                    <li><strong>Location:</strong> {offer.pre_stay_location}</li>
+                  )}
+                </ul>
+              </div>
+            )}
+
+            {/* Post-Stay Hotel Card */}
+            {offer.post_stay_hotel_name && (
+              <div className="offer-package-card offer-package-card--hotel">
+                <div className="offer-package-card__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
+                    <path d="M1 21h22"/>
+                    <path d="M9 7h1"/>
+                    <path d="M9 11h1"/>
+                    <path d="M14 7h1"/>
+                    <path d="M14 11h1"/>
+                  </svg>
+                </div>
+                <h3 className="offer-package-card__title">Post-Cruise Stay</h3>
+                <ul className="offer-package-card__details">
+                  <li className="offer-package-card__highlight">
+                    {offer.post_stay_nights} night{offer.post_stay_nights > 1 ? 's' : ''} included
+                  </li>
+                  <li><strong>Hotel:</strong> {offer.post_stay_hotel_name}</li>
+                  {offer.post_stay_hotel_stars && (
+                    <li><strong>Rating:</strong> {offer.post_stay_hotel_stars}★</li>
+                  )}
+                  {offer.post_stay_location && (
+                    <li><strong>Location:</strong> {offer.post_stay_location}</li>
+                  )}
+                </ul>
+              </div>
+            )}
+
             {/* Onboard Credit Card */}
             {offer.onboard_credit_amount > 0 && (
               <div className="offer-package-card offer-package-card--obc">
