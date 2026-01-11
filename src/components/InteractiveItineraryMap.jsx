@@ -20,11 +20,6 @@ import { logger } from '../utils/logger';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './InteractiveItineraryMap.css';
 
-// Vite worker fix for Mapbox GL JS
-// @ts-ignore
-import MapboxWorker from 'mapbox-gl/dist/mapbox-gl-csp-worker?worker';
-mapboxgl.workerClass = MapboxWorker;
-
 function InteractiveItineraryMap({ itinerary }) {
   const mapContainer = useRef(null);
   const map = useRef(null);

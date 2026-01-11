@@ -35,6 +35,10 @@ class MapErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
+      // Log error to console AND show in UI for debugging
+      const errorMessage = this.state.error?.message || 'Unknown error';
+      const errorStack = this.state.error?.stack || '';
+      
       return (
         <div style={{ 
           minHeight: '300px', 
@@ -57,6 +61,15 @@ class MapErrorBoundary extends Component {
           <p style={{ color: '#94a3b8', fontSize: '0.85rem' }}>
             Please see the itinerary details above
           </p>
+          {/* DEBUG: Show actual error */}
+          <details style={{ marginTop: '1rem', textAlign: 'left', maxWidth: '100%', overflow: 'auto' }}>
+            <summary style={{ cursor: 'pointer', color: '#ef4444', fontSize: '0.75rem' }}>
+              🔧 Debug: {errorMessage}
+            </summary>
+            <pre style={{ fontSize: '0.65rem', color: '#666', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
+              {errorStack}
+            </pre>
+          </details>
         </div>
       );
     }
