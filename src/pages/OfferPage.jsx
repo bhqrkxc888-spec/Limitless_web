@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useOffer } from '../hooks/useOffers';
+import { useTrustBadges } from '../hooks/useTrustBadges';
 import { incrementOfferView } from '../services/offersAPI';
 import { siteConfig } from '../config/siteConfig';
 import SEO, { getBreadcrumbSchema } from '../components/SEO';
@@ -67,6 +68,7 @@ function OfferPage() {
   const isValidSlug = slug && /^[a-z0-9-]+$/i.test(slug);
   
   const { offer, loading, error } = useOffer(isValidSlug ? slug : null);
+  const trustBadges = useTrustBadges(offer?.organisation_id);
   const [selectedImage, setSelectedImage] = useState(0);
   const [failedImages, setFailedImages] = useState(new Set());
   const [showEnquiryModal, setShowEnquiryModal] = useState(false);
@@ -585,35 +587,35 @@ function OfferPage() {
                 </div>
                 
                 {/* Financial Protection Badges */}
-                {(offer.abta_protected !== false || offer.atol_protected) && (
+                {(offer.abta_protected !== false || offer.atol_protected || offer.includes_flight) && (
                   <div className="offer-pricing-card__protection">
                     <span className="protection-label">Your booking is protected</span>
                     <div className="protection-badges">
                       {offer.abta_protected !== false && (
                         <div className="protection-badge protection-badge--abta" title="ABTA Protected">
-                          {siteConfig.financialProtection?.abta?.logo ? (
+                          {trustBadges.abta.logoUrl ? (
                             <img 
-                              src={siteConfig.financialProtection.abta.logo} 
+                              src={trustBadges.abta.logoUrl} 
                               alt="ABTA Protected" 
-                              onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                              onError={(e) => { e.target.style.display = 'none'; if(e.target.nextSibling) e.target.nextSibling.style.display = 'flex'; }}
                             />
                           ) : null}
-                          <span className="protection-badge__text" style={siteConfig.financialProtection?.abta?.logo ? { display: 'none' } : {}}>
-                            ABTA {offer.abta_number || siteConfig.financialProtection?.abta?.number || ''}
+                          <span className="protection-badge__text" style={trustBadges.abta.logoUrl ? { display: 'none' } : {}}>
+                            ABTA {offer.abta_number || trustBadges.abta.number || ''}
                           </span>
                         </div>
                       )}
-                      {(offer.atol_protected || (offer.includes_flight && siteConfig.financialProtection?.atol?.enabled)) && (
+                      {(offer.atol_protected || offer.includes_flight) && trustBadges.atol.enabled && (
                         <div className="protection-badge protection-badge--atol" title="ATOL Protected">
-                          {siteConfig.financialProtection?.atol?.logo ? (
+                          {trustBadges.atol.logoUrl ? (
                             <img 
-                              src={siteConfig.financialProtection.atol.logo} 
+                              src={trustBadges.atol.logoUrl} 
                               alt="ATOL Protected"
-                              onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                              onError={(e) => { e.target.style.display = 'none'; if(e.target.nextSibling) e.target.nextSibling.style.display = 'flex'; }}
                             />
                           ) : null}
-                          <span className="protection-badge__text" style={siteConfig.financialProtection?.atol?.logo ? { display: 'none' } : {}}>
-                            ATOL {offer.atol_number || siteConfig.financialProtection?.atol?.number || ''}
+                          <span className="protection-badge__text" style={trustBadges.atol.logoUrl ? { display: 'none' } : {}}>
+                            ATOL {offer.atol_number || trustBadges.atol.number || ''}
                           </span>
                         </div>
                       )}
