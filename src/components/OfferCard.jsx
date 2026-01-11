@@ -185,6 +185,10 @@ function OfferCard({ offer, variant = 'default' }) {
             {offer.departure_date && (
               <span className="offer-card-hero__detail">
                 {formatDate(offer.departure_date)}
+                {/* Show sailing date if different (pre-stay package) */}
+                {offer.sailing_date && offer.sailing_date !== offer.departure_date && (
+                  <span className="offer-card-hero__sailing"> → Cruise {formatDate(offer.sailing_date)}</span>
+                )}
               </span>
             )}
           </div>
@@ -403,6 +407,14 @@ function OfferCard({ offer, variant = 'default' }) {
             <div className="offer-detail-row">
               <span className="offer-detail-label">Departure</span>
               <span className="offer-detail-value">{formatDate(offer.departure_date)}</span>
+            </div>
+          )}
+
+          {/* Show sailing date when it differs (package has pre-stay) */}
+          {offer.sailing_date && offer.sailing_date !== offer.departure_date && (
+            <div className="offer-detail-row offer-detail-row--sailing">
+              <span className="offer-detail-label">Cruise Starts</span>
+              <span className="offer-detail-value">{formatDate(offer.sailing_date)}</span>
             </div>
           )}
 

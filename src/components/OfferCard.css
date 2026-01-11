@@ -60,6 +60,17 @@
   font-size: var(--font-size-sm);
 }
 
+.offer-detail-row--sailing {
+  background: var(--clr-bg-alt);
+  margin: -2px -8px;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.offer-detail-row--sailing .offer-detail-label {
+  color: var(--clr-primary);
+}
+
 .offer-detail-label {
   color: var(--clr-text-muted);
   font-weight: var(--font-weight-medium);
@@ -367,6 +378,12 @@
   width: 16px;
   height: 16px;
   color: var(--clr-text-muted);
+}
+
+.offer-card-hero__sailing {
+  color: var(--clr-accent);
+  font-weight: var(--font-weight-medium);
+  margin-left: var(--space-1);
 }
 
 .offer-card-hero__footer {
