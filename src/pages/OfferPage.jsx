@@ -137,6 +137,26 @@ function OfferPage() {
     return images;
   }, [offer]);
 
+  // DEBUG: Check if coordinates are in the data
+  useEffect(() => {
+    if (offer) {
+      console.log('=== OFFER MAP DEBUG ===');
+      console.log('show_itinerary_map:', offer.show_itinerary_map);
+      console.log('Has itinerary_detailed:', !!offer.itinerary_detailed);
+      if (offer.itinerary_detailed) {
+        console.log('Total days:', offer.itinerary_detailed.length);
+        const withCoords = offer.itinerary_detailed.filter(d => d.lat && d.lon);
+        console.log('Days with coordinates:', withCoords.length);
+        console.log('First day sample:', offer.itinerary_detailed[0]);
+        if (withCoords.length === 0) {
+          console.error('❌ NO COORDINATES IN DATABASE - Coordinates not saved properly in CRM');
+        } else {
+          console.log('✅ Coordinates found:', withCoords.map(d => `${d.port}: ${d.lat}, ${d.lon}`));
+        }
+      }
+    }
+  }, [offer]);
+
   // Helper functions
   const formatPrice = (price, currency = 'GBP') => {
     if (!price) return '';

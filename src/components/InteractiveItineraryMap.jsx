@@ -687,8 +687,14 @@ function InteractiveItineraryMap({ itinerary }) {
           <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
           <circle cx="12" cy="10" r="3"/>
         </svg>
-        <p><strong>Map coordinates not available</strong></p>
-        <p className="error-hint">The interactive map will appear once coordinates are generated in the CRM.</p>
+        <p><strong>Map coordinates not yet generated</strong></p>
+        <p className="error-hint">
+          This offer has an itinerary, but port coordinates haven't been generated yet.
+          <br />
+          <span style={{ fontSize: '0.9em', opacity: 0.8 }}>
+            (The map will appear once coordinates are generated in the CRM)
+          </span>
+        </p>
       </div>
     );
   }
