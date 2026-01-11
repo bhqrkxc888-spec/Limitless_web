@@ -600,6 +600,27 @@ function InteractiveItineraryMap({ itinerary }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ports, portsGeoJSON, apiConfig.mapbox.enabled, apiConfig.mapbox.accessToken, apiConfig.mapbox.style]);
 
+  // Handle map resize when switching between map and list view
+  useEffect(() => {
+    // When switching back to map view, resize the map to match the container
+    // Since container is now always in DOM (just hidden), we need to resize when it becomes visible
+    if (itineraryViewMode === 'map' && map.current) {
+      // Wait for CSS transition to complete, then resize the map
+      const timeoutId = setTimeout(() => {
+        try {
+          if (map.current && map.current.loaded()) {
+            // Resize the map to recalculate dimensions after container becomes visible
+            map.current.resize();
+          }
+        } catch (error) {
+          logger.error('Error resizing map:', error);
+        }
+      }, 50);
+      
+      return () => clearTimeout(timeoutId);
+    }
+  }, [itineraryViewMode]);
+
   // Handle style changes
   const handleStyleChange = (newStyle) => {
     if (!map.current) return;
@@ -742,9 +763,8 @@ function InteractiveItineraryMap({ itinerary }) {
         </button>
       </div>
       
-      {itineraryViewMode === 'map' ? (
-        /* Map View - Original layout with map and sidebar */
-        <div className="interactive-itinerary-map-layout">
+      {/* Map View - Original layout with map and sidebar */}
+      <div className={`interactive-itinerary-map-layout ${itineraryViewMode === 'map' ? '' : 'hidden'}`}>
           {/* Map Section - 2/3 width */}
           <div className="interactive-itinerary-map-wrapper">
             <div ref={mapContainer} className="interactive-itinerary-map">
@@ -1031,9 +1051,9 @@ function InteractiveItineraryMap({ itinerary }) {
           )}
         </aside>
       </div>
-      ) : (
-        /* List View - Tabular format like Bolsover */
-        <div className="itinerary-list-view">
+      
+      {/* List View - Tabular format like Bolsover */}
+      <div className={`itinerary-list-view ${itineraryViewMode === 'list' ? '' : 'hidden'}`}>
           <table className="itinerary-table">
             <thead>
               <tr>
@@ -1102,7 +1122,6 @@ function InteractiveItineraryMap({ itinerary }) {
             </tbody>
           </table>
         </div>
-      )}
       
       {/* Disclaimer - small text below map */}
       <div className="itinerary-map-disclaimer">

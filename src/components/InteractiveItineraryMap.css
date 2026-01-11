@@ -85,6 +85,10 @@
   scroll-margin-top: 100px;
 }
 
+.interactive-itinerary-map-layout.hidden {
+  display: none;
+}
+
 @media (max-width: 1024px) {
   .interactive-itinerary-map-layout {
     grid-template-columns: 1fr;
@@ -1300,6 +1304,10 @@
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.itinerary-list-view.hidden {
+  display: none;
 }
 
 .itinerary-table {
