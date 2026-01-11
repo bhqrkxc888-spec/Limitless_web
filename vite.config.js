@@ -158,10 +158,10 @@ export default defineConfig({
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: false, // Keep console.logs for debugging - TODO: re-enable after map fix
+        drop_console: true,
         drop_debugger: true,
-        // pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn'], // DISABLED for debugging
-        passes: 2, // Run compress twice for better results
+        pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn'],
+        passes: 2,
       },
       mangle: {
         safari10: true

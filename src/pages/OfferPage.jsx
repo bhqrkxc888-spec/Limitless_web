@@ -22,23 +22,15 @@ const InteractiveItineraryMap = lazy(() => import('../components/InteractiveItin
 class MapErrorBoundary extends Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error) {
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error, errorInfo) {
-    console.error('Map component error:', error, errorInfo);
+  static getDerivedStateFromError() {
+    return { hasError: true };
   }
 
   render() {
     if (this.state.hasError) {
-      // Log error to console AND show in UI for debugging
-      const errorMessage = this.state.error?.message || 'Unknown error';
-      const errorStack = this.state.error?.stack || '';
-      
       return (
         <div style={{ 
           minHeight: '300px', 
@@ -46,8 +38,8 @@ class MapErrorBoundary extends Component {
           flexDirection: 'column',
           alignItems: 'center', 
           justifyContent: 'center',
-          background: 'linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%)',
-          borderRadius: '12px',
+          background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
+          borderRadius: '16px',
           padding: '2rem',
           textAlign: 'center'
         }}>
@@ -61,15 +53,6 @@ class MapErrorBoundary extends Component {
           <p style={{ color: '#94a3b8', fontSize: '0.85rem' }}>
             Please see the itinerary details above
           </p>
-          {/* DEBUG: Show actual error */}
-          <details style={{ marginTop: '1rem', textAlign: 'left', maxWidth: '100%', overflow: 'auto' }}>
-            <summary style={{ cursor: 'pointer', color: '#ef4444', fontSize: '0.75rem' }}>
-              🔧 Debug: {errorMessage}
-            </summary>
-            <pre style={{ fontSize: '0.65rem', color: '#666', whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>
-              {errorStack}
-            </pre>
-          </details>
         </div>
       );
     }
@@ -78,24 +61,12 @@ class MapErrorBoundary extends Component {
 }
 
 function OfferPage() {
-  console.log('🚀 OfferPage component loaded - Build time:', new Date().toISOString());
-  
   const { slug } = useParams();
   
   // Validate slug format
   const isValidSlug = slug && /^[a-z0-9-]+$/i.test(slug);
   
   const { offer, loading, error } = useOffer(isValidSlug ? slug : null);
-  
-  // Log offer data immediately when it changes
-  console.log('📦 Offer data:', {
-    slug,
-    hasOffer: !!offer,
-    hasItinerary: !!offer?.itinerary_detailed,
-    itineraryType: offer?.itinerary_detailed ? typeof offer.itinerary_detailed : 'n/a',
-    itineraryLength: Array.isArray(offer?.itinerary_detailed) ? offer.itinerary_detailed.length : 'not array',
-    firstItem: offer?.itinerary_detailed?.[0]
-  });
   const [selectedImage, setSelectedImage] = useState(0);
   const [failedImages, setFailedImages] = useState(new Set());
   const [showEnquiryModal, setShowEnquiryModal] = useState(false);
@@ -160,26 +131,6 @@ function OfferPage() {
     }
     
     return images;
-  }, [offer]);
-
-  // DEBUG: Check if coordinates are in the data
-  useEffect(() => {
-    if (offer) {
-      console.log('=== OFFER MAP DEBUG ===');
-      console.log('show_itinerary_map:', offer.show_itinerary_map);
-      console.log('Has itinerary_detailed:', !!offer.itinerary_detailed);
-      if (offer.itinerary_detailed) {
-        console.log('Total days:', offer.itinerary_detailed.length);
-        const withCoords = offer.itinerary_detailed.filter(d => d.lat && d.lon);
-        console.log('Days with coordinates:', withCoords.length);
-        console.log('First day sample:', offer.itinerary_detailed[0]);
-        if (withCoords.length === 0) {
-          console.error('❌ NO COORDINATES IN DATABASE - Coordinates not saved properly in CRM');
-        } else {
-          console.log('✅ Coordinates found:', withCoords.map(d => `${d.port}: ${d.lat}, ${d.lon}`));
-        }
-      }
-    }
   }, [offer]);
 
   // Helper functions
