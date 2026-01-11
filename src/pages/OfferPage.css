@@ -469,12 +469,12 @@
 }
 
 .protection-badge img {
-  height: 36px;
+  height: 40px;
   width: auto;
-  max-width: 80px;
+  max-width: 100px;
   object-fit: contain;
-  filter: brightness(0) invert(1); /* Make logos white on dark background */
-  opacity: 0.9;
+  /* No filter - show original logo colours on dark background */
+  /* Upload logos with transparent background, colours will show as-is */
 }
 
 .protection-badge__text {
