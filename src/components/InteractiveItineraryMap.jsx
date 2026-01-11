@@ -16,9 +16,16 @@ import { useEffect, useRef, useMemo, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { apiConfig } from '../config/apiConfig';
 import { getPortAttractions } from '../services/googlePlacesAPI';
-import { logger } from '../utils/logger';
+// Logger removed - was causing production crash due to minification stripping
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './InteractiveItineraryMap.css';
+
+// Simple console wrapper that won't crash if methods are stripped
+const logger = {
+  debug: (...args) => { try { console.log('[Map]', ...args); } catch {} },
+  warn: (...args) => { try { console.warn('[Map]', ...args); } catch {} },
+  error: (...args) => { try { console.error('[Map]', ...args); } catch {} },
+};
 
 function InteractiveItineraryMap({ itinerary }) {
   const mapContainer = useRef(null);
