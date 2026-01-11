@@ -24,9 +24,9 @@ export const apiConfig = {
 
   // Mapbox API - Interactive maps
   mapbox: {
-    accessToken: import.meta.env.VITE_MAPBOX_TOKEN || 'pk.eyJ1IjoiZGFuZWxhd3RvbiIsImEiOiJjbWpiNHM2b3EwNm10M2dyNjJ3eTA0ZHJyIn0.ltnRWBhmfiriKIsmGozQtw',
+    accessToken: import.meta.env.VITE_MAPBOX_TOKEN || '',
     style: 'mapbox://styles/mapbox/outdoors-v12',
-    enabled: true
+    enabled: !!import.meta.env.VITE_MAPBOX_TOKEN
   },
 
   // Google Places API - Port information and attractions
