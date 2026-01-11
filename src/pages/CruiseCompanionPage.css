@@ -1,0 +1,215 @@
+/* ========================================
+   CRUISE COMPANION PAGE - MOBILE FIRST
+   Matching Limitless site styling
+   ======================================== */
+
+.cruise-companion-page {
+  background: var(--clr-bg, #FDFBF7);
+  min-height: 100vh;
+}
+
+/* ========================================
+   LOADING STATE
+   ======================================== */
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--space-8, 2rem);
+}
+
+.loading-state .spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--clr-border-light, #F2EFE9);
+  border-top: 3px solid var(--clr-primary, #2C344C);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: var(--space-4, 1rem);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-state p {
+  color: var(--clr-text-muted, #5C6478);
+  font-size: var(--font-size-base, 1rem);
+}
+
+/* ========================================
+   HEADER
+   ======================================== */
+
+.companion-header {
+  background: var(--clr-primary, #2C344C);
+  color: var(--clr-text-on-primary, #FFFFFF);
+  padding: var(--space-6, 1.5rem) var(--space-4, 1rem);
+}
+
+.companion-header .container {
+  max-width: var(--layout-content-width, 1120px);
+  margin: 0 auto;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4, 1rem);
+  align-items: center;
+  text-align: center;
+}
+
+.header-logo img {
+  height: 50px;
+  width: auto;
+}
+
+.header-text h1 {
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  font-weight: var(--font-weight-semibold, 600);
+  margin-bottom: var(--space-2, 0.5rem);
+  letter-spacing: var(--letter-spacing-wide, 0.025em);
+}
+
+.cruise-title {
+  font-size: var(--font-size-lg, 1.125rem);
+  opacity: 0.95;
+  margin-bottom: var(--space-1, 0.25rem);
+}
+
+.cruise-dates {
+  font-size: var(--font-size-base, 1rem);
+  opacity: 0.9;
+}
+
+.header-fb-link {
+  margin-top: var(--space-2, 0.5rem);
+}
+
+.fb-link {
+  color: var(--clr-text-on-primary, #FFFFFF);
+  text-decoration: underline;
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: var(--font-weight-medium, 500);
+}
+
+.fb-link:hover {
+  opacity: 0.8;
+}
+
+/* ========================================
+   STATUS BAR (Placeholder)
+   ======================================== */
+
+.status-bar-placeholder {
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-bottom: 1px solid var(--clr-border, #E8E4DC);
+  padding: var(--space-4, 1rem) var(--space-4, 1rem);
+  display: none; /* Hide for V1 as per spec */
+}
+
+.status-bar-placeholder .container {
+  max-width: var(--layout-content-width, 1120px);
+  margin: 0 auto;
+}
+
+.status-bar-placeholder p {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--clr-text-muted, #5C6478);
+  margin-bottom: var(--space-3, 0.75rem);
+}
+
+.map-placeholder {
+  min-height: 200px;
+  background: var(--clr-surface, #FFFFFF);
+  border: 2px dashed var(--clr-border, #E8E4DC);
+  border-radius: var(--radius-md, 6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-text-muted, #5C6478);
+  font-size: var(--font-size-sm, 0.875rem);
+  text-align: center;
+  padding: var(--space-4, 1rem);
+}
+
+/* ========================================
+   MAIN CONTENT
+   ======================================== */
+
+.companion-content {
+  padding: var(--space-8, 2rem) var(--space-4, 1rem);
+}
+
+.companion-content .container {
+  max-width: var(--layout-content-width, 1120px);
+  margin: 0 auto;
+}
+
+.day-content {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--clr-surface, #FFFFFF);
+  padding: var(--space-6, 1.5rem);
+  border-radius: var(--radius-lg, 8px);
+  box-shadow: var(--shadow-sm, 0 1px 3px 0 rgba(0, 0, 0, 0.1));
+}
+
+.day-title {
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--clr-text-main, #2C344C);
+  margin-bottom: var(--space-8, 2rem);
+  text-align: center;
+}
+
+/* ========================================
+   RESPONSIVE - TABLET & DESKTOP
+   ======================================== */
+
+@media (min-width: 768px) {
+  .companion-header {
+    padding: var(--space-8, 2rem) var(--space-4, 1rem);
+  }
+
+  .header-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: left;
+  }
+
+  .header-text {
+    flex: 1;
+    margin-left: var(--space-6, 1.5rem);
+  }
+
+  .header-fb-link {
+    margin-top: 0;
+  }
+
+  .companion-content {
+    padding: var(--space-12, 3rem) var(--space-4, 1rem);
+  }
+
+  .day-content {
+    padding: var(--space-10, 2.5rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .header-text h1 {
+    font-size: 1.875rem;
+  }
+
+  .day-content {
+    padding: var(--space-12, 3rem);
+  }
+}

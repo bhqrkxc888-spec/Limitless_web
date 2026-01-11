@@ -94,6 +94,7 @@ const ContactPage = lazy(() => lazyWithRetry(() => import('./pages/ContactPage')
 const GetQuotePage = lazy(() => lazyWithRetry(() => import('./pages/GetQuotePage')))
 const PackageConciergePage = lazy(() => lazyWithRetry(() => import('./pages/PackageConciergePage')))
 const SkipperBetaPage = lazy(() => lazyWithRetry(() => import('./pages/SkipperBetaPage')))
+const CruiseCompanionPage = lazy(() => lazyWithRetry(() => import('./pages/CruiseCompanionPage')))
 const AdminPage = lazy(() => lazyWithRetry(() => import('./pages/AdminPage')))
 const CruiseLinesPage = lazy(() => lazyWithRetry(() => import('./pages/CruiseLinesPage')))
 const DestinationsPage = lazy(() => lazyWithRetry(() => import('./pages/DestinationsPage')))
@@ -300,6 +301,9 @@ function AppLayout() {
             
             {/* Skipper AI Beta - Hidden */}
             <Route path="/skipper-beta" element={<SkipperBetaPage />} />
+            
+            {/* Cruise Companion - Hidden */}
+            <Route path="/cruise/g606-po-iona-canaries-mar-2026" element={<CruiseCompanionPage />} />
             
             {/* Offers - Public */}
             <Route path="/offers" element={<OffersPage />} />

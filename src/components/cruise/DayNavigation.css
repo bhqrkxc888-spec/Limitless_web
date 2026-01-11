@@ -1,0 +1,137 @@
+/* ========================================
+   DAY NAVIGATION
+   ======================================== */
+
+.day-navigation {
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-bottom: 1px solid var(--clr-border, #E8E4DC);
+  padding: var(--space-4, 1rem) 0;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky-content, 900);
+}
+
+.day-navigation .container {
+  max-width: var(--layout-content-width, 1120px);
+  margin: 0 auto;
+  padding: 0 var(--space-4, 1rem);
+}
+
+.day-nav-scroll {
+  display: flex;
+  gap: var(--space-3, 0.75rem);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--clr-border, #E8E4DC) transparent;
+  padding-bottom: var(--space-2, 0.5rem);
+  -webkit-overflow-scrolling: touch;
+}
+
+.day-nav-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.day-nav-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.day-nav-scroll::-webkit-scrollbar-thumb {
+  background: var(--clr-border, #E8E4DC);
+  border-radius: 3px;
+}
+
+.day-nav-button {
+  min-width: 140px;
+  padding: var(--space-3, 0.75rem);
+  background: var(--clr-surface, #FFFFFF);
+  border: 2px solid var(--clr-border, #E8E4DC);
+  border-radius: var(--radius-md, 6px);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-base, 200ms ease);
+  flex-shrink: 0;
+  font-family: inherit;
+}
+
+.day-nav-button:hover {
+  border-color: var(--clr-primary, #2C344C);
+  background: var(--clr-bg, #FDFBF7);
+}
+
+.day-nav-button.active {
+  background: var(--clr-primary, #2C344C);
+  color: var(--clr-text-on-primary, #FFFFFF);
+  border-color: var(--clr-primary, #2C344C);
+}
+
+.day-nav-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(44, 52, 76, 0.2);
+}
+
+.day-nav-date {
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: var(--font-weight-medium, 500);
+  margin-bottom: var(--space-1, 0.25rem);
+  opacity: 0.9;
+}
+
+.day-nav-day {
+  font-size: var(--font-size-base, 1rem);
+  font-weight: var(--font-weight-semibold, 600);
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+.day-nav-location {
+  font-size: var(--font-size-sm, 0.875rem);
+  line-height: var(--line-height-tight, 1.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1, 0.25rem);
+  flex-wrap: wrap;
+}
+
+.overnight-indicator {
+  font-size: var(--font-size-base, 1rem);
+  line-height: 1;
+}
+
+.day-type-badge {
+  font-size: var(--font-size-xs, 0.75rem);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm, 4px);
+  font-weight: var(--font-weight-medium, 500);
+  display: inline-block;
+  margin-top: var(--space-1, 0.25rem);
+}
+
+.day-nav-button.active .day-type-badge {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.day-nav-button:not(.active) .day-type-badge.embarkation,
+.day-nav-button:not(.active) .day-type-badge.disembarkation {
+  background: var(--clr-bg-alt, #F8F5F0);
+  color: var(--clr-text-main, #2C344C);
+}
+
+/* Tablet & Desktop */
+@media (min-width: 768px) {
+  .day-nav-button {
+    min-width: 160px;
+    padding: var(--space-4, 1rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .day-nav-scroll {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-4, 1rem);
+  }
+  
+  .day-nav-button {
+    min-width: 150px;
+  }
+}

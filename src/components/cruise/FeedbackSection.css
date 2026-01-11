@@ -1,0 +1,108 @@
+/* ========================================
+   FEEDBACK SECTION
+   ======================================== */
+
+.feedback-section {
+  margin-top: var(--space-8, 2rem);
+  padding-top: var(--space-6, 1.5rem);
+}
+
+.feedback-divider {
+  border: none;
+  border-top: 1px solid var(--clr-border, #E8E4DC);
+  margin: var(--space-4, 1rem) 0;
+}
+
+.feedback-content {
+  text-align: center;
+}
+
+.feedback-question p {
+  font-size: var(--font-size-base, 1rem);
+  font-weight: var(--font-weight-medium, 500);
+  color: var(--clr-text-main, #2C344C);
+  margin-bottom: var(--space-4, 1rem);
+}
+
+.feedback-buttons {
+  display: flex;
+  gap: var(--space-4, 1rem);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.feedback-button {
+  padding: var(--space-3, 0.75rem) var(--space-6, 1.5rem);
+  background: var(--clr-surface, #FFFFFF);
+  border: 2px solid var(--clr-border, #E8E4DC);
+  border-radius: var(--radius-md, 6px);
+  font-size: var(--font-size-base, 1rem);
+  font-weight: var(--font-weight-medium, 500);
+  color: var(--clr-text-main, #2C344C);
+  cursor: pointer;
+  transition: all var(--transition-base, 200ms ease);
+  font-family: inherit;
+}
+
+.feedback-button:hover:not(:disabled) {
+  border-color: var(--clr-primary, #2C344C);
+  background: var(--clr-bg-alt, #F8F5F0);
+}
+
+.feedback-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.feedback-button.voted {
+  background: var(--clr-primary, #2C344C);
+  color: var(--clr-text-on-primary, #FFFFFF);
+  border-color: var(--clr-primary, #2C344C);
+}
+
+.feedback-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(44, 52, 76, 0.2);
+}
+
+.feedback-share,
+.feedback-error {
+  margin: var(--space-4, 1rem) 0;
+}
+
+.feedback-share p:first-child,
+.feedback-error p {
+  font-size: var(--font-size-base, 1rem);
+  font-weight: var(--font-weight-medium, 500);
+  color: var(--clr-text-main, #2C344C);
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+.feedback-share p:last-of-type {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--clr-text-muted, #5C6478);
+  margin-bottom: var(--space-3, 0.75rem);
+}
+
+.feedback-link {
+  color: var(--clr-primary, #2C344C);
+  text-decoration: underline;
+  font-size: var(--font-size-base, 1rem);
+  font-weight: var(--font-weight-medium, 500);
+}
+
+.feedback-link:hover {
+  color: var(--clr-primary-dark, #1f2536);
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .feedback-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .feedback-button {
+    width: 100%;
+  }
+}
