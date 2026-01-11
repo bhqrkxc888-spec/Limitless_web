@@ -293,8 +293,9 @@
 }
 
 .elite-link img {
-  height: 40px;
-  width: auto;
+  height: 60px;
+  width: 120px;
+  object-fit: contain;
   /* No filter - Holiday Elite logo is coloured with white text on dark background */
 }
 

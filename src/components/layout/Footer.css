@@ -159,8 +159,9 @@
 }
 
 .footer-elite-link img {
-  height: 32px;
-  width: auto;
+  height: 40px;
+  width: 80px;
+  object-fit: contain;
   display: block;
 }
 

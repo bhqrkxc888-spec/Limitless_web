@@ -142,7 +142,9 @@ function Footer() {
                   >
                     <img 
                       src={aboutImages.holidayEliteLogo} 
-                      alt="Holiday Elite Travel Agent Member" 
+                      alt="Holiday Elite Travel Agent Member"
+                      width="80"
+                      height="40"
                     />
                   </a>
                 </div>

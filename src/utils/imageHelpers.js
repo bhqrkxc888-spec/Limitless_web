@@ -5,7 +5,6 @@
  */
 
 import { isVercelBlobUrl } from '../lib/vercelBlob';
-import { getSupabaseImageUrl } from '../config/assetUrls';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://xrbusklskmeaamwynfmm.supabase.co';
 const VERCEL_BLOB_URL = 'https://public.blob.vercel-storage.com';
@@ -138,7 +137,7 @@ export const aboutImages = {
   katherine1: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/katherine1.webp',
   katherine2: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/katherine2.webp',
   katherine3: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/katherine3.webp',
-  holidayEliteLogo: getSupabaseImageUrl('WEB_site', 'holiday-elite-logo.png') // Upload via admin when ready
+  holidayEliteLogo: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/agency-logo.png'
 };
 
 /**
