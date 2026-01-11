@@ -138,6 +138,32 @@
   height: 20px;
 }
 
+/* Holiday Elite Member Badge */
+.footer-member-badge {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-elite-link {
+  display: inline-block;
+  padding: var(--space-3);
+  background: var(--clr-primary-dark);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.footer-elite-link:hover {
+  background: var(--clr-primary-light, #2a4a7f);
+  transform: translateY(-2px);
+}
+
+.footer-elite-link img {
+  height: 32px;
+  width: auto;
+  display: block;
+}
+
 /* ========================================
    FOOTER COLUMNS
    ======================================== */

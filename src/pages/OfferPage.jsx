@@ -308,6 +308,18 @@ function OfferPage() {
         structuredData={structuredData}
       />
 
+      {/* Back Link at Top */}
+      <div className="offer-back-top">
+        <div className="container">
+          <Link to="/offers" className="offer-back-link offer-back-link--top">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back to All Offers
+          </Link>
+        </div>
+      </div>
+
       {/* Offer Header with Gallery */}
       <section className="offer-header">
         <div className="container">
@@ -452,7 +464,9 @@ function OfferPage() {
                     </svg>
                     <div>
                       <span className="offer-quick-detail__label">Destination</span>
-                      <span className="offer-quick-detail__value">{offer.destination}</span>
+                      <span className="offer-quick-detail__value">
+                        {offer.destination.charAt(0).toUpperCase() + offer.destination.slice(1)}
+                      </span>
                     </div>
                   </div>
                 )}

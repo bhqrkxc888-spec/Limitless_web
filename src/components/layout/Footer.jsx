@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { siteConfig } from '../../config/siteConfig';
 import { navigation } from '../../data/navigation';
 import { isSiteLaunched } from '../../config/launchConfig';
+import { aboutImages } from '../../utils/imageHelpers';
 import CookieSettings from '../CookieSettings';
 import './Footer.css';
 
@@ -129,6 +130,23 @@ function Footer() {
                   </svg>
                 </a>
               </div>
+
+              {/* Holiday Elite Member */}
+              {aboutImages.holidayEliteLogo && (
+                <div className="footer-member-badge">
+                  <a 
+                    href="https://www.holidayelite.com/our-travel-agents/katherine-horton" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="footer-elite-link"
+                  >
+                    <img 
+                      src={aboutImages.holidayEliteLogo} 
+                      alt="Holiday Elite Travel Agent Member" 
+                    />
+                  </a>
+                </div>
+              )}
             </div>
 
             {/* Cruise Lines */}
