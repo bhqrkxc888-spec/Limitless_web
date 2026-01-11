@@ -12,11 +12,57 @@ import OnboardCreditBadge from '../components/OnboardCreditBadge';
 import SoloTravellerInfo from '../components/SoloTravellerInfo';
 import OptimizedImage from '../components/OptimizedImage';
 import { createSanitizedMarkup } from '../utils/sanitizeHtml';
-import { useEffect, useMemo, useState, lazy, Suspense } from 'react';
+import { useEffect, useMemo, useState, lazy, Suspense, Component } from 'react';
 import './OfferPage.css';
 
 // Lazy-load heavy Mapbox component
 const InteractiveItineraryMap = lazy(() => import('../components/InteractiveItineraryMap'));
+
+// Error boundary specifically for the map - prevents map errors from crashing the page
+class MapErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error('Map component error:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ 
+          minHeight: '300px', 
+          display: 'flex', 
+          flexDirection: 'column',
+          alignItems: 'center', 
+          justifyContent: 'center',
+          background: 'linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%)',
+          borderRadius: '12px',
+          padding: '2rem',
+          textAlign: 'center'
+        }}>
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="1.5">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          <p style={{ marginTop: '1rem', color: '#64748b', fontSize: '0.95rem' }}>
+            Interactive map unavailable
+          </p>
+          <p style={{ color: '#94a3b8', fontSize: '0.85rem' }}>
+            Please see the itinerary details above
+          </p>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 function OfferPage() {
   const { slug } = useParams();
@@ -732,8 +778,7 @@ function OfferPage() {
                   )}
 
                   {/* Interactive Map with Integrated Day-by-Day Sidebar */}
-                  {/* TEMPORARILY DISABLED - Testing if map is causing crash */}
-                  {false && offer.itinerary_detailed && Array.isArray(offer.itinerary_detailed) && offer.itinerary_detailed.length > 0 && offer.show_itinerary_map !== false && (
+                  {offer.itinerary_detailed && Array.isArray(offer.itinerary_detailed) && offer.itinerary_detailed.length > 0 && offer.show_itinerary_map !== false && (
                     <div className="offer-itinerary-map-section">
                       <Suspense fallback={
                         <div style={{ 
@@ -747,10 +792,12 @@ function OfferPage() {
                           <p>Loading interactive map...</p>
                         </div>
                       }>
-                        <InteractiveItineraryMap 
-                          itinerary={offer.itinerary_detailed}
-                          title={offer.title}
-                        />
+                        <MapErrorBoundary>
+                          <InteractiveItineraryMap 
+                            itinerary={offer.itinerary_detailed}
+                            title={offer.title}
+                          />
+                        </MapErrorBoundary>
                       </Suspense>
                     </div>
                   )}
