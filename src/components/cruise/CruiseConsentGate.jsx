@@ -35,9 +35,18 @@ function CruiseConsentGate({ onConsent }) {
         {/* Logo */}
         <div className="consent-gate-logo">
           <img 
-            src="/logo.svg" 
+            src="/images/placeholders/logo.svg" 
             alt="Limitless Cruises" 
-            onError={(e) => { e.target.style.display = 'none'; }}
+            onError={(e) => { 
+              e.target.style.display = 'none';
+              const logoDiv = e.target.parentElement;
+              if (logoDiv && !logoDiv.querySelector('.logo-text')) {
+                const textFallback = document.createElement('div');
+                textFallback.className = 'logo-text';
+                textFallback.textContent = 'Limitless Cruises';
+                logoDiv.appendChild(textFallback);
+              }
+            }}
           />
         </div>
 

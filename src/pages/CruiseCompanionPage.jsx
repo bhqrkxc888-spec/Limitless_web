@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { hasConsent } from '../components/cruise/CruiseConsentGate';
 import CruiseConsentGate from '../components/cruise/CruiseConsentGate';
@@ -10,8 +10,9 @@ import SeaDayContent from '../components/cruise/sections/SeaDayContent';
 import EmbarkationContent from '../components/cruise/sections/EmbarkationContent';
 import DisembarkationContent from '../components/cruise/sections/DisembarkationContent';
 import AboutIona from '../components/cruise/AboutIona';
-import CruiseFooter from '../components/cruise/CruiseFooter';
 import { g606Itinerary, getSectionsForDayType } from '../data/cruise/g606-itinerary';
+import { SITE_ASSETS } from '../config/assetUrls';
+import { Button } from '../components/ui';
 import './CruiseCompanionPage.css';
 
 // FB Group URL - placeholder
@@ -58,7 +59,6 @@ function getCurrentCruiseDayIndex() {
  * Main Cruise Companion Page
  */
 function CruiseCompanionPage() {
-  const navigate = useNavigate();
   const [consentGiven, setConsentGiven] = useState(false);
   const [isChecking, setIsChecking] = useState(true);
   const [selectedDayIndex, setSelectedDayIndex] = useState(null);
@@ -193,44 +193,60 @@ function CruiseCompanionPage() {
         robots="noindex, nofollow"
       />
 
-      {/* Header */}
+      {/* Simple Header - No Navigation */}
       <header className="companion-header">
         <div className="container">
           <div className="header-content">
-            {/* Logo placeholder - replace with actual logo */}
-            <div className="header-logo">
-              <img 
-                src="/logo.svg" 
-                alt="Limitless Cruises" 
-                onError={(e) => { e.target.style.display = 'none'; }}
-              />
-            </div>
-            
+            {/* Logo - Same as main site */}
+            <Link to="/" className="companion-logo">
+              <div className="logo-container">
+                <img 
+                  src={SITE_ASSETS.logo} 
+                  alt="Limitless Cruises logo - gold cruise ship icon" 
+                  className="logo-icon"
+                  width="56"
+                  height="56"
+                  fetchPriority="high"
+                />
+                <div className="logo-text">
+                  <span className="logo-name">Limitless Cruises</span>
+                  <span className="logo-tagline">Personal Cruise Consultant</span>
+                </div>
+              </div>
+            </Link>
+
             <div className="header-text">
               <h1>P&O IONA | G606</h1>
               <p className="cruise-title">Spain, Portugal & Canary Islands</p>
               <p className="cruise-dates">14-28 March 2026 | 14 Nights | Southampton</p>
             </div>
 
-            {/* FB Group Link in Header */}
-            <div className="header-fb-link">
-              <a 
-                href={FB_GROUP_URL} 
-                target="_blank" 
+            <div className="header-buttons">
+              <Button
+                href={FB_GROUP_URL}
+                target="_blank"
                 rel="noopener noreferrer"
-                className="fb-link"
+                className="btn-outline-white"
+                size="sm"
               >
                 Join the community
-              </a>
+              </Button>
+              <Button
+                href="https://www.limitlesscruises.com"
+                className="btn-outline-white"
+                size="sm"
+              >
+                Visit Limitless Cruises
+              </Button>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Status Bar - Placeholder for V1 */}
+      {/* Status Bar - Show for ALL Days */}
       <div className="status-bar-placeholder">
         <div className="container">
-          <p>📍 Status: [Placeholder - Day {dayData.dayNumber} | Location | Weather]</p>
+          <p>📍 Status: Day {dayData.dayNumber} | {dayData.portName} | Weather: [TBC]</p>
           {/* Map placeholder - static image or empty box for now */}
           <div className="map-placeholder">
             [Map Placeholder - static image or empty box for now]
@@ -270,8 +286,15 @@ function CruiseCompanionPage() {
         </div>
       </div>
 
-      {/* Footer */}
-      <CruiseFooter />
+      {/* Minimal Footer */}
+      <footer className="companion-footer-simple">
+        <div className="container">
+          <p>© 2026 Limitless Cruises. Not affiliated with P&O Cruises.</p>
+          <p className="footer-disclaimer-link">
+            <Link to="/website-terms">Full disclaimer</Link>
+          </p>
+        </div>
+      </footer>
     </main>
   );
 }

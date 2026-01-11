@@ -28,7 +28,7 @@ function EmbarkationContent({ sectionKey, dayData }) {
   );
 }
 
-function WhatToExpectSection({ dayData }) {
+function WhatToExpectSection({ dayData: _dayData }) {
   return (
     <div className="section-what-expect">
       <div className="info-block">
@@ -62,7 +62,7 @@ function WhatToExpectSection({ dayData }) {
   );
 }
 
-function GettingThereSection({ dayData }) {
+function GettingThereSection({ dayData: _dayData }) {
   return (
     <div className="section-getting-there">
       <div className="info-block">
@@ -87,7 +87,7 @@ function GettingThereSection({ dayData }) {
   );
 }
 
-function TipsSection({ dayData }) {
+function TipsSection({ dayData: _dayData }) {
   return (
     <div className="section-tips">
       <p><strong>[TBC]</strong> Tips for embarkation day will appear here.</p>
@@ -100,7 +100,7 @@ function TipsSection({ dayData }) {
   );
 }
 
-function SendSection({ dayData }) {
+function SendSection({ dayData: _dayData }) {
   return (
     <div className="section-send">
       <SubSection title="♿ ASSISTANCE" content="[TBC] Content about assistance available" />

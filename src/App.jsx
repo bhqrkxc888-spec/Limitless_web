@@ -242,7 +242,7 @@ function AppLayout() {
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
-        {!isMaintenanceHome && <Header />}
+        {!isMaintenanceHome && !pathname.startsWith('/cruise/g606') && <Header />}
         {/* Using div instead of main to avoid nested <main> elements - each page has its own <main> */}
         <div id="main-content" className="main-wrapper">
           <ErrorBoundary>
@@ -372,7 +372,7 @@ function AppLayout() {
         </Suspense>
         </ErrorBoundary>
       </div>
-      {!isMaintenanceHome && <Footer />}
+      {!isMaintenanceHome && !pathname.startsWith('/cruise/g606') && <Footer />}
       {/* Deferred UI - loaded after LCP for better mobile performance */}
       {/* These components load only after requestIdleCallback or 3s timeout */}
       <DeferredUI>

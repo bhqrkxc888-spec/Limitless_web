@@ -1,81 +1,123 @@
 /* ========================================
-   SECTION TABS
+   SECTION TABS - MOBILE FIRST
+   Secondary navigation for section content
    ======================================== */
 
 .section-tabs {
-  background: var(--clr-surface, #FFFFFF);
-  border-bottom: 1px solid var(--clr-border, #E8E4DC);
-  padding: var(--space-3, 0.75rem) 0;
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-bottom: 1px solid var(--clr-border-light, #F2EFE9);
+  padding: var(--space-2, 0.5rem) 0;
   position: sticky;
-  top: 76px; /* Below day navigation */
+  top: 68px; /* Below day navigation - adjust based on day nav height */
   z-index: 899;
 }
 
 .section-tabs-scroll {
   display: flex;
-  gap: var(--space-2, 0.5rem);
+  gap: var(--space-1, 0.25rem);
   overflow-x: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--clr-border, #E8E4DC) transparent;
-  padding: 0 var(--space-4, 1rem);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0 var(--space-3, 0.75rem);
   -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
 }
 
 .section-tabs-scroll::-webkit-scrollbar {
-  height: 4px;
+  display: none;
 }
 
-.section-tabs-scroll::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.section-tabs-scroll::-webkit-scrollbar-thumb {
-  background: var(--clr-border, #E8E4DC);
-  border-radius: 2px;
-}
+/* ========================================
+   TAB BUTTONS
+   ======================================== */
 
 .section-tab {
-  padding: var(--space-2, 0.5rem) var(--space-4, 1rem);
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  min-height: 40px;
   background: transparent;
   border: none;
-  border-bottom: 2px solid transparent;
+  border-radius: var(--radius-full, 9999px);
   color: var(--clr-text-muted, #5C6478);
   font-size: var(--font-size-sm, 0.875rem);
   font-weight: var(--font-weight-medium, 500);
   cursor: pointer;
-  transition: all var(--transition-base, 200ms ease);
+  transition: all var(--transition-fast, 150ms ease);
   white-space: nowrap;
   flex-shrink: 0;
   font-family: inherit;
+  touch-action: manipulation;
+  display: flex;
+  align-items: center;
+  scroll-snap-align: start;
 }
 
 .section-tab:hover {
   color: var(--clr-text-main, #2C344C);
-  border-bottom-color: var(--clr-border, #E8E4DC);
+  background: rgba(44, 52, 76, 0.05);
 }
 
 .section-tab.active {
-  color: var(--clr-primary, #2C344C);
-  border-bottom-color: var(--clr-primary, #2C344C);
+  color: var(--clr-surface, #FFFFFF);
+  background: var(--clr-primary, #2C344C);
   font-weight: var(--font-weight-semibold, 600);
 }
 
-.section-tab:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(44, 52, 76, 0.1);
-  border-radius: var(--radius-sm, 4px);
+.section-tab:focus-visible {
+  outline: 3px solid var(--clr-secondary, #D4B86A);
+  outline-offset: 2px;
 }
 
-/* Tablet & Desktop */
+/* ========================================
+   TABLET (768px+)
+   ======================================== */
+
 @media (min-width: 768px) {
-  .section-tabs-scroll {
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: var(--space-3, 0.75rem);
+  .section-tabs {
+    padding: var(--space-3, 0.75rem) 0;
+    top: 80px; /* Adjust for larger day nav on tablet */
   }
-  
+
+  .section-tabs-scroll {
+    gap: var(--space-2, 0.5rem);
+    padding: 0 var(--space-4, 1rem);
+  }
+
+  .section-tab {
+    padding: var(--space-2, 0.5rem) var(--space-4, 1rem);
+    min-height: 44px;
+    font-size: var(--font-size-base, 1rem);
+  }
+}
+
+/* ========================================
+   DESKTOP (1024px+)
+   ======================================== */
+
+@media (min-width: 1024px) {
+  .section-tabs {
+    top: 88px;
+  }
+
+  .section-tabs-scroll {
+    justify-content: flex-start;
+    gap: var(--space-2, 0.5rem);
+  }
+
   .section-tab {
     padding: var(--space-3, 0.75rem) var(--space-5, 1.25rem);
-    font-size: var(--font-size-base, 1rem);
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .section-tab {
+    transition: none;
+  }
+
+  .section-tabs-scroll {
+    scroll-behavior: auto;
   }
 }

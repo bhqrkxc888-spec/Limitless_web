@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { g606Itinerary } from '../../data/cruise/g606-itinerary';
 import './DayNavigation.css';
 
@@ -45,6 +46,16 @@ function getCurrentCruiseDay() {
 function DayNavigation({ selectedDay, onDaySelect }) {
   // Initialize with current day if not set
   const currentDayIndex = selectedDay !== null ? selectedDay : getCurrentCruiseDay();
+  
+  // Scroll to selected day on mount or when selectedDay changes
+  useEffect(() => {
+    if (currentDayIndex !== null) {
+      const button = document.querySelector(`[data-day-index="${currentDayIndex}"]`);
+      if (button) {
+        button.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+  }, [currentDayIndex]);
 
   return (
     <nav className="day-navigation" aria-label="Day navigation">
@@ -59,6 +70,7 @@ function DayNavigation({ selectedDay, onDaySelect }) {
             return (
               <button
                 key={index}
+                data-day-index={index}
                 onClick={() => onDaySelect(index)}
                 className={`day-nav-button ${isSelected ? 'active' : ''}`}
                 aria-pressed={isSelected}

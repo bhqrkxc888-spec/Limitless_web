@@ -1,24 +1,28 @@
 /* ========================================
-   FEEDBACK SECTION
+   FEEDBACK SECTION - MOBILE FIRST
+   Community engagement at end of sections
    ======================================== */
 
 .feedback-section {
   margin-top: var(--space-8, 2rem);
   padding-top: var(--space-6, 1.5rem);
-}
-
-.feedback-divider {
-  border: none;
-  border-top: 1px solid var(--clr-border, #E8E4DC);
-  margin: var(--space-4, 1rem) 0;
+  border-top: 2px solid var(--clr-border-light, #F2EFE9);
 }
 
 .feedback-content {
   text-align: center;
 }
 
+/* ========================================
+   FEEDBACK QUESTION / VOTING
+   ======================================== */
+
+.feedback-question {
+  margin-bottom: var(--space-6, 1.5rem);
+}
+
 .feedback-question p {
-  font-size: var(--font-size-base, 1rem);
+  font-size: var(--font-size-lg, 1.125rem);
   font-weight: var(--font-weight-medium, 500);
   color: var(--clr-text-main, #2C344C);
   margin-bottom: var(--space-4, 1rem);
@@ -26,31 +30,35 @@
 
 .feedback-buttons {
   display: flex;
-  gap: var(--space-4, 1rem);
+  gap: var(--space-3, 0.75rem);
   justify-content: center;
   flex-wrap: wrap;
 }
 
 .feedback-button {
-  padding: var(--space-3, 0.75rem) var(--space-6, 1.5rem);
+  padding: var(--space-3, 0.75rem) var(--space-5, 1.25rem);
+  min-height: 48px;
+  min-width: 100px;
   background: var(--clr-surface, #FFFFFF);
   border: 2px solid var(--clr-border, #E8E4DC);
-  border-radius: var(--radius-md, 6px);
+  border-radius: var(--radius-full, 9999px);
   font-size: var(--font-size-base, 1rem);
   font-weight: var(--font-weight-medium, 500);
   color: var(--clr-text-main, #2C344C);
   cursor: pointer;
   transition: all var(--transition-base, 200ms ease);
   font-family: inherit;
+  touch-action: manipulation;
 }
 
 .feedback-button:hover:not(:disabled) {
   border-color: var(--clr-primary, #2C344C);
   background: var(--clr-bg-alt, #F8F5F0);
+  transform: translateY(-2px);
 }
 
 .feedback-button:disabled {
-  opacity: 0.6;
+  opacity: 0.7;
   cursor: not-allowed;
 }
 
@@ -60,49 +68,145 @@
   border-color: var(--clr-primary, #2C344C);
 }
 
-.feedback-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(44, 52, 76, 0.2);
+.feedback-button:focus-visible {
+  outline: 3px solid var(--clr-secondary, #D4B86A);
+  outline-offset: 2px;
 }
 
-.feedback-share,
-.feedback-error {
-  margin: var(--space-4, 1rem) 0;
+/* ========================================
+   SHARE EXPERIENCE / FB GROUP
+   ======================================== */
+
+.feedback-share {
+  background: linear-gradient(135deg, var(--clr-primary, #2C344C) 0%, #3d4766 100%);
+  padding: var(--space-5, 1.25rem);
+  border-radius: var(--radius-lg, 12px);
+  margin: var(--space-5, 1.25rem) 0;
 }
 
-.feedback-share p:first-child,
-.feedback-error p {
+.feedback-share p:first-child {
   font-size: var(--font-size-base, 1rem);
-  font-weight: var(--font-weight-medium, 500);
-  color: var(--clr-text-main, #2C344C);
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--clr-text-on-primary, #FFFFFF);
+  margin-bottom: var(--space-2, 0.5rem);
+  letter-spacing: 0.05em;
+}
+
+.feedback-share p:nth-child(2) {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: var(--space-4, 1rem);
+}
+
+.feedback-share .feedback-link {
+  display: inline-block;
+  background: var(--clr-secondary, #D4B86A);
+  color: var(--clr-primary, #2C344C);
+  padding: var(--space-2, 0.5rem) var(--space-5, 1.25rem);
+  border-radius: var(--radius-full, 9999px);
+  font-weight: var(--font-weight-semibold, 600);
+  text-decoration: none;
+  transition: all var(--transition-base, 200ms ease);
+}
+
+.feedback-share .feedback-link:hover {
+  background: #e5c97b;
+  transform: translateY(-2px);
+}
+
+/* ========================================
+   ERROR REPORTING
+   ======================================== */
+
+.feedback-error {
+  margin-top: var(--space-5, 1.25rem);
+  padding: var(--space-4, 1rem);
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--clr-border-light, #F2EFE9);
+}
+
+.feedback-error p {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--clr-text-muted, #5C6478);
   margin-bottom: var(--space-2, 0.5rem);
 }
 
-.feedback-share p:last-of-type {
+.feedback-error .feedback-link {
   font-size: var(--font-size-sm, 0.875rem);
-  color: var(--clr-text-muted, #5C6478);
-  margin-bottom: var(--space-3, 0.75rem);
-}
-
-.feedback-link {
   color: var(--clr-primary, #2C344C);
   text-decoration: underline;
-  font-size: var(--font-size-base, 1rem);
-  font-weight: var(--font-weight-medium, 500);
+  text-underline-offset: 2px;
 }
 
-.feedback-link:hover {
+.feedback-error .feedback-link:hover {
   color: var(--clr-primary-dark, #1f2536);
 }
 
-/* Mobile */
-@media (max-width: 767px) {
+/* Divider between sections */
+.feedback-divider {
+  display: none; /* Using visual blocks instead of dividers */
+}
+
+/* ========================================
+   MOBILE RESPONSIVE (default)
+   ======================================== */
+
+@media (max-width: 479px) {
   .feedback-buttons {
     flex-direction: column;
-    align-items: stretch;
+    gap: var(--space-2, 0.5rem);
   }
   
   .feedback-button {
     width: 100%;
+  }
+}
+
+/* ========================================
+   TABLET (768px+)
+   ======================================== */
+
+@media (min-width: 768px) {
+  .feedback-section {
+    margin-top: var(--space-10, 2.5rem);
+    padding-top: var(--space-8, 2rem);
+  }
+
+  .feedback-question p {
+    font-size: 1.25rem;
+  }
+
+  .feedback-button {
+    padding: var(--space-3, 0.75rem) var(--space-6, 1.5rem);
+    min-width: 120px;
+  }
+
+  .feedback-share {
+    padding: var(--space-6, 1.5rem);
+  }
+
+  .feedback-share p:first-child {
+    font-size: var(--font-size-lg, 1.125rem);
+  }
+
+  .feedback-share p:nth-child(2) {
+    font-size: var(--font-size-base, 1rem);
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .feedback-button,
+  .feedback-share .feedback-link {
+    transition: none;
+  }
+
+  .feedback-button:hover:not(:disabled),
+  .feedback-share .feedback-link:hover {
+    transform: none;
   }
 }

@@ -66,7 +66,7 @@ function FeedbackSection({ sectionKey, dayNumber }) {
         <div className="feedback-error">
           <p>🚩 Spot an error?</p>
           <a 
-            href="/contact?subject=Cruise Companion Error - Day " + dayNumber + " - " + sectionKey
+            href={`/contact?subject=Cruise Companion Error - Day ${dayNumber} - ${sectionKey}`}
             className="feedback-link"
           >
             Let us know

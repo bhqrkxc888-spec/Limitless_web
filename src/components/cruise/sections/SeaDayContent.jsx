@@ -28,7 +28,7 @@ function SeaDayContent({ sectionKey, dayData, nextPort }) {
   );
 }
 
-function OverviewSection({ dayData, nextPort }) {
+function OverviewSection({ dayData: _dayData, nextPort }) {
   return (
     <div className="section-overview">
       <div className="section-intro">
@@ -61,7 +61,7 @@ function OverviewSection({ dayData, nextPort }) {
   );
 }
 
-function OnTheShipSection({ dayData }) {
+function OnTheShipSection({ dayData: _dayData }) {
   return (
     <div className="section-on-ship">
       <SubSection title="🏊 POOLS & SUN DECKS" content="[TBC] Content about pool areas" />
@@ -78,7 +78,7 @@ function OnTheShipSection({ dayData }) {
   );
 }
 
-function QuietSpotsSection({ dayData }) {
+function QuietSpotsSection({ dayData: _dayData }) {
   return (
     <div className="section-quiet-spots">
       <div className="section-intro">
@@ -101,7 +101,7 @@ function QuietSpotsSection({ dayData }) {
   );
 }
 
-function SendSection({ dayData }) {
+function SendSection({ dayData: _dayData }) {
   return (
     <div className="section-send">
       <SubSection title="🔇 QUIET HOURS" content="[TBC] Content about quiet hours" />

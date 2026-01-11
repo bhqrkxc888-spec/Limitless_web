@@ -26,7 +26,7 @@ function DisembarkationContent({ sectionKey, dayData }) {
   );
 }
 
-function WhatToExpectSection({ dayData }) {
+function WhatToExpectSection({ dayData: _dayData }) {
   return (
     <div className="section-what-expect">
       <div className="sub-section">
@@ -61,7 +61,7 @@ function WhatToExpectSection({ dayData }) {
   );
 }
 
-function TipsSection({ dayData }) {
+function TipsSection({ dayData: _dayData }) {
   return (
     <div className="section-tips">
       <p><strong>[TBC]</strong> Tips for disembarkation day will appear here.</p>
@@ -74,7 +74,7 @@ function TipsSection({ dayData }) {
   );
 }
 
-function SendSection({ dayData }) {
+function SendSection({ dayData: _dayData }) {
   return (
     <div className="section-send">
       <SubSection title="🚢 PRIORITY DISEMBARKATION" content="[TBC] Content about priority disembarkation" />
