@@ -162,17 +162,6 @@ function OfferPage() {
     return `${nights} nights`;
   };
 
-  const getOfferTypeLabel = (type) => {
-    if (!type) return '';
-    switch(type) {
-      case 'fly_cruise': return 'Fly-Cruise Package';
-      case 'cruise_only': return 'Cruise Only';
-      case 'bucket_list': return 'Bucket List Experience';
-      case 'special_offer': return 'Special Offer';
-      default: return type.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
-    }
-  };
-
   // V2: Calculate lowest price from airport_prices
   const getDisplayPrice = (offerData) => {
     if (!offerData) return null;
@@ -324,11 +313,6 @@ function OfferPage() {
         <div className="container">
           {/* Full-width title and category */}
           <div className="offer-header__top">
-            {offer.offer_type && (
-              <span className="offer-type-tag">
-                {getOfferTypeLabel(offer.offer_type)}
-              </span>
-            )}
             <h1 className="offer-header__title">{offer.title}</h1>
             {offer.short_description && (
               <p className="offer-header__description">{offer.short_description}</p>
