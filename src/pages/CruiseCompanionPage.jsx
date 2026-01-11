@@ -18,6 +18,9 @@ import './CruiseCompanionPage.css';
 // FB Group URL - placeholder
 const FB_GROUP_URL = '#'; // Replace with actual URL
 
+// OG Image for social sharing - Canary Islands hero
+const G606_OG_IMAGE = 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_destinations/canary-islands/hero.webp';
+
 /**
  * Get current cruise day index
  */
@@ -127,6 +130,7 @@ function CruiseCompanionPage() {
         <SEO
           title="Cruise Companion - P&O Iona G606"
           description="Your personal cruise companion for P&O Iona G606, Spain, Portugal & Canary Islands, March 2026"
+          image={G606_OG_IMAGE}
           robots="noindex, nofollow"
         />
         <CruiseConsentGate onConsent={handleConsent} />
@@ -188,8 +192,9 @@ function CruiseCompanionPage() {
   return (
     <main className="cruise-companion-page">
       <SEO
-        title="Cruise Companion - P&O Iona G606"
-        description="Your personal cruise companion for P&O Iona G606, Spain, Portugal & Canary Islands, March 2026"
+        title="G606 Cruise Guide | P&O Iona | Canary Islands March 2026"
+        description="Your insider guide to P&O Iona G606 - Spain, Portugal & Canary Islands, 14-28 March 2026. Port tips, recommendations & more."
+        image={G606_OG_IMAGE}
         robots="noindex, nofollow"
       />
 

@@ -302,7 +302,7 @@ function AppLayout() {
             {/* Skipper AI Beta - Hidden */}
             <Route path="/skipper-beta" element={<SkipperBetaPage />} />
             
-            {/* Cruise Companion - Hidden */}
+            {/* G606 Cruise Guide - Hidden */}
             <Route path="/cruise/g606-po-iona-canaries-mar-2026" element={<CruiseCompanionPage />} />
             
             {/* Offers - Public */}

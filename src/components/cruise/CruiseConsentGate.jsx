@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from '../ui';
 import { siteConfig } from '../../config/siteConfig';
+import { SITE_ASSETS } from '../../config/assetUrls';
 import './CruiseConsentGate.css';
 
 const CONSENT_KEY = 'cruise_companion_consent_g606';
@@ -35,8 +36,10 @@ function CruiseConsentGate({ onConsent }) {
         {/* Logo */}
         <div className="consent-gate-logo">
           <img 
-            src="/images/placeholders/logo.svg" 
+            src={SITE_ASSETS.logo} 
             alt="Limitless Cruises" 
+            width="80"
+            height="80"
             onError={(e) => { 
               e.target.style.display = 'none';
               const logoDiv = e.target.parentElement;
@@ -53,7 +56,7 @@ function CruiseConsentGate({ onConsent }) {
         {/* Header */}
         <div className="consent-gate-header">
           <h1>P&O IONA | G606</h1>
-          <h2>CRUISE COMPANION</h2>
+          <h2>CRUISE GUIDE</h2>
           <p className="cruise-title">Spain, Portugal & Canary Islands</p>
           <p className="cruise-dates">14-28 March 2026</p>
         </div>
@@ -94,7 +97,7 @@ function CruiseConsentGate({ onConsent }) {
           <h3>IMPORTANT NOTICE</h3>
           <div className="disclaimer-text">
             <p>
-              This Cruise Companion is created by Limitless Cruises as a helpful guide for 
+              This Cruise Guide is created by Limitless Cruises as a helpful resource for 
               passengers on P&O Iona sailing G606, 14-28 March 2026.
             </p>
             
@@ -141,7 +144,7 @@ function CruiseConsentGate({ onConsent }) {
             variant="primary"
             size="lg"
           >
-            ENTER CRUISE COMPANION
+            ENTER CRUISE GUIDE
           </Button>
           {(!ageConfirmed || !disclaimerAccepted) && (
             <p className="button-hint">Please check both boxes above to continue</p>
