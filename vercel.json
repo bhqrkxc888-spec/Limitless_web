@@ -16,6 +16,121 @@
       "source": "/destinations/transatlantic-cruises",
       "destination": "/bucket-list/transatlantic-crossings",
       "permanent": true
+    },
+    {
+      "source": "/sitemaps.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/sitemap_index.xml",
+      "destination": "/sitemap.xml",
+      "permanent": true
+    },
+    {
+      "source": "/atlantic-islands-cruises",
+      "destination": "/destinations",
+      "permanent": true
+    },
+    {
+      "source": "/mediterranean",
+      "destination": "/destinations/mediterranean-cruises",
+      "permanent": true
+    },
+    {
+      "source": "/mediterranean/",
+      "destination": "/destinations/mediterranean-cruises",
+      "permanent": true
+    },
+    {
+      "source": "/caribbean",
+      "destination": "/destinations/caribbean-cruises",
+      "permanent": true
+    },
+    {
+      "source": "/caribbean/",
+      "destination": "/destinations/caribbean-cruises",
+      "permanent": true
+    },
+    {
+      "source": "/caribbean-cruises",
+      "destination": "/destinations/caribbean-cruises",
+      "permanent": true
+    },
+    {
+      "source": "/caribbean-cruises/",
+      "destination": "/destinations/caribbean-cruises",
+      "permanent": true
+    },
+    {
+      "source": "/mediterranean-cruises",
+      "destination": "/destinations/mediterranean-cruises",
+      "permanent": true
+    },
+    {
+      "source": "/mediterranean-cruises/",
+      "destination": "/destinations/mediterranean-cruises",
+      "permanent": true
+    },
+    {
+      "source": "/atlantic-islands",
+      "destination": "/ports/region/atlantic-islands",
+      "permanent": true
+    },
+    {
+      "source": "/atlantic-islands/",
+      "destination": "/ports/region/atlantic-islands",
+      "permanent": true
+    },
+    {
+      "source": "/alaska",
+      "destination": "/destinations/alaska-cruises",
+      "permanent": true
+    },
+    {
+      "source": "/alaska/",
+      "destination": "/destinations/alaska-cruises",
+      "permanent": true
+    },
+    {
+      "source": "/norwegian-fjords-cruise",
+      "destination": "/destinations/norwegian-fjords-cruises",
+      "permanent": true
+    },
+    {
+      "source": "/norwegian-fjords-cruise/",
+      "destination": "/destinations/norwegian-fjords-cruises",
+      "permanent": true
+    },
+    {
+      "source": "/fred-olsen-cruise-line",
+      "destination": "/cruise-lines/fred-olsen-cruises",
+      "permanent": true
+    },
+    {
+      "source": "/fred-olsen-cruise-line/",
+      "destination": "/cruise-lines/fred-olsen-cruises",
+      "permanent": true
+    },
+    {
+      "source": "/terms-of-buisiness",
+      "destination": "/booking-terms",
+      "permanent": true
+    },
+    {
+      "source": "/terms-of-buisiness/",
+      "destination": "/booking-terms",
+      "permanent": true
+    },
+    {
+      "source": "/alaska-cruises",
+      "destination": "/destinations/alaska-cruises",
+      "permanent": true
+    },
+    {
+      "source": "/alaska-cruises/",
+      "destination": "/destinations/alaska-cruises",
+      "permanent": true
     }
   ],
   "headers": [
@@ -130,13 +245,54 @@
           "value": "noindex, nofollow"
         }
       ]
+    },
+    {
+      "source": "/skipper-beta",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/cruise/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/get-a-quote",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/concierge",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/custom-packages",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
     }
   ],
   "rewrites": [
-    {
-      "source": "/sitemaps.xml",
-      "destination": "/sitemap.xml"
-    },
     {
       "source": "/go/:code",
       "destination": "/api/go/:code"
