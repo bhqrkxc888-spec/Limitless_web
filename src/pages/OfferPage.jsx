@@ -732,7 +732,8 @@ function OfferPage() {
                   )}
 
                   {/* Interactive Map with Integrated Day-by-Day Sidebar */}
-                  {offer.itinerary_detailed && Array.isArray(offer.itinerary_detailed) && offer.itinerary_detailed.length > 0 && offer.show_itinerary_map !== false && (
+                  {/* TEMPORARILY DISABLED - Testing if map is causing crash */}
+                  {false && offer.itinerary_detailed && Array.isArray(offer.itinerary_detailed) && offer.itinerary_detailed.length > 0 && offer.show_itinerary_map !== false && (
                     <div className="offer-itinerary-map-section">
                       <Suspense fallback={
                         <div style={{ 
