@@ -23,10 +23,11 @@ export const apiConfig = {
   },
 
   // Mapbox API - Interactive maps
+  // NOTE: Token temporarily hardcoded - investigate env var issue later
   mapbox: {
-    accessToken: import.meta.env.VITE_MAPBOX_TOKEN || '',
+    accessToken: import.meta.env.VITE_MAPBOX_TOKEN || 'pk.eyJ1IjoiZGFuZWxhd3RvbiIsImEiOiJjbWpiNHM2b3EwNm10M2dyNjJ3eTA0ZHJyIn0.ltnRWBhmfiriKIsmGozQtw',
     style: 'mapbox://styles/mapbox/outdoors-v12',
-    enabled: !!import.meta.env.VITE_MAPBOX_TOKEN
+    enabled: !!(import.meta.env.VITE_MAPBOX_TOKEN || 'pk.eyJ1IjoiZGFuZWxhd3RvbiIsImEiOiJjbWpiNHM2b3EwNm10M2dyNjJ3eTA0ZHJyIn0.ltnRWBhmfiriKIsmGozQtw')
   },
 
   // Google Places API - Port information and attractions
