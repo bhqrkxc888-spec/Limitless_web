@@ -65,12 +65,24 @@ class MapErrorBoundary extends Component {
 }
 
 function OfferPage() {
+  console.log('🚀 OfferPage component loaded - Build time:', new Date().toISOString());
+  
   const { slug } = useParams();
   
   // Validate slug format
   const isValidSlug = slug && /^[a-z0-9-]+$/i.test(slug);
   
   const { offer, loading, error } = useOffer(isValidSlug ? slug : null);
+  
+  // Log offer data immediately when it changes
+  console.log('📦 Offer data:', {
+    slug,
+    hasOffer: !!offer,
+    hasItinerary: !!offer?.itinerary_detailed,
+    itineraryType: offer?.itinerary_detailed ? typeof offer.itinerary_detailed : 'n/a',
+    itineraryLength: Array.isArray(offer?.itinerary_detailed) ? offer.itinerary_detailed.length : 'not array',
+    firstItem: offer?.itinerary_detailed?.[0]
+  });
   const [selectedImage, setSelectedImage] = useState(0);
   const [failedImages, setFailedImages] = useState(new Set());
   const [showEnquiryModal, setShowEnquiryModal] = useState(false);
