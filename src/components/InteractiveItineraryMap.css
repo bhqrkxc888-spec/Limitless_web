@@ -11,6 +11,52 @@
   margin-top: 16px;
 }
 
+/* View Toggle */
+.itinerary-view-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 6px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.view-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-toggle-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.view-toggle-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.view-toggle-btn.active {
+  background: #0ea5e9;
+  color: #ffffff;
+}
+
 /* Disclaimer - small text below map */
 .itinerary-map-disclaimer {
   margin: 20px 0 0 0;
@@ -1003,6 +1049,27 @@
   font-style: italic;
 }
 
+.day-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.day-icon svg {
+  width: 20px;
+  height: 20px;
+  color: #0ea5e9;
+  stroke-width: 2;
+}
+
+.itinerary-day-item.sea-day .day-icon svg {
+  color: #94a3b8;
+}
+
 .day-number {
   flex-shrink: 0;
   min-width: 54px;
@@ -1222,4 +1289,153 @@
   .attraction-name {
     font-size: 13px;
   }
+}
+
+/* ========================================
+   LIST VIEW - Tabular Format
+   ======================================== */
+
+.itinerary-list-view {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.itinerary-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.itinerary-table thead {
+  background: #f1f5f9;
+}
+
+.itinerary-table thead th {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.itinerary-table thead th:first-child {
+  border-top-left-radius: 12px;
+}
+
+.itinerary-table thead th:last-child {
+  border-top-right-radius: 12px;
+}
+
+.itinerary-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.itinerary-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.itinerary-table tbody tr.sea-day-row {
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.03) 0%, transparent 100%);
+}
+
+.itinerary-table tbody td {
+  padding: 16px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+  color: #0f172a;
+  vertical-align: top;
+}
+
+.itinerary-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.stop-cell {
+  width: 80px;
+}
+
+.stop-cell .stop-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.stop-cell .stop-icon svg {
+  width: 20px;
+  height: 20px;
+  color: #0ea5e9;
+  stroke-width: 2;
+}
+
+.stop-cell .stop-number {
+  font-weight: 700;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.date-cell {
+  width: 120px;
+}
+
+.day-label {
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.day-date {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.port-cell {
+  width: 30%;
+  font-weight: 600;
+}
+
+.activity-cell {
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* Responsive table */
+@media (max-width: 768px) {
+  .itinerary-list-view {
+    padding: 16px;
+    overflow-x: auto;
+  }
+  
+  .itinerary-table {
+    min-width: 600px;
+  }
+  
+  .itinerary-table thead th {
+    padding: 12px;
+    font-size: 11px;
+  }
+  
+  .itinerary-table tbody td {
+    padding: 12px;
+    font-size: 13px;
+  }
+  
+  .view-toggle-btn {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+  
+  .view-toggle-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+}
 }

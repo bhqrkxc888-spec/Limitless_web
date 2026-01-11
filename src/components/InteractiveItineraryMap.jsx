@@ -40,6 +40,9 @@ function InteractiveItineraryMap({ itinerary }) {
   const [loadingAttractions, setLoadingAttractions] = useState(false);
   const [showAllAttractions, setShowAllAttractions] = useState(false);
   const [viewTransition, setViewTransition] = useState(false);
+  
+  // New: Map/List view toggle
+  const [itineraryViewMode, setItineraryViewMode] = useState('map'); // 'map' or 'list'
 
   // Filter and enrich itinerary data - handle round-trips properly
   const ports = useMemo(() => {
@@ -707,10 +710,44 @@ function InteractiveItineraryMap({ itinerary }) {
 
   return (
     <div className="interactive-itinerary-map-container">
-      <div className="interactive-itinerary-map-layout">
-        {/* Map Section - 2/3 width */}
-        <div className="interactive-itinerary-map-wrapper">
-          <div ref={mapContainer} className="interactive-itinerary-map">
+      {/* View Mode Toggle */}
+      <div className="itinerary-view-toggle">
+        <button 
+          type="button"
+          className={`view-toggle-btn ${itineraryViewMode === 'map' ? 'active' : ''}`}
+          onClick={() => setItineraryViewMode('map')}
+          title="Map View"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          Map view
+        </button>
+        <button 
+          type="button"
+          className={`view-toggle-btn ${itineraryViewMode === 'list' ? 'active' : ''}`}
+          onClick={() => setItineraryViewMode('list')}
+          title="List View"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="8" y1="6" x2="21" y2="6"/>
+            <line x1="8" y1="12" x2="21" y2="12"/>
+            <line x1="8" y1="18" x2="21" y2="18"/>
+            <line x1="3" y1="6" x2="3.01" y2="6"/>
+            <line x1="3" y1="12" x2="3.01" y2="12"/>
+            <line x1="3" y1="18" x2="3.01" y2="18"/>
+          </svg>
+          List view
+        </button>
+      </div>
+      
+      {itineraryViewMode === 'map' ? (
+        /* Map View - Original layout with map and sidebar */
+        <div className="interactive-itinerary-map-layout">
+          {/* Map Section - 2/3 width */}
+          <div className="interactive-itinerary-map-wrapper">
+            <div ref={mapContainer} className="interactive-itinerary-map">
             {/* Style Switcher - Inside map container for fullscreen access */}
             <div className="map-style-switcher">
               <button 
@@ -806,6 +843,9 @@ function InteractiveItineraryMap({ itinerary }) {
                     const portIndex = ports.findIndex(p => p.day === day.day);
                     const isClickable = !isSeaDay && portIndex !== -1;
                     
+                    // Determine day type for icon
+                    const dayType = day.type || (isSeaDay ? 'sea' : 'port');
+                    
                     const handleDayClick = (e) => {
                       if (!isClickable) return;
                       e.preventDefault();
@@ -828,6 +868,35 @@ function InteractiveItineraryMap({ itinerary }) {
                         role={isClickable ? 'button' : undefined}
                         tabIndex={isClickable ? 0 : undefined}
                       >
+                        <div className="day-icon">
+                          {dayType === 'flight' || dayType === 'fly' && (
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                            </svg>
+                          )}
+                          {(dayType === 'hotel' || dayType === 'stay') && (
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
+                              <path d="M1 21h22"/>
+                              <path d="M9 7h1"/>
+                              <path d="M9 11h1"/>
+                              <path d="M14 7h1"/>
+                              <path d="M14 11h1"/>
+                            </svg>
+                          )}
+                          {(dayType === 'port' || dayType === 'embark' || dayType === 'disembark') && (
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M12 6.5v7.5M19 13.5c0-4-7-7-7-7s-7 3-7 7c0 1.66 7 4 7 4s7-2.34 7-4z"/>
+                              <path d="M1 20h22"/>
+                            </svg>
+                          )}
+                          {dayType === 'sea' && (
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M2 20h.01M7 20h.01M12 20h.01M17 20h.01M22 20h.01"/>
+                              <path d="M12 4v12"/>
+                            </svg>
+                          )}
+                        </div>
                         <div className="day-number">Day {day.day}</div>
                         <div className="day-details">
                           <div className="day-port">{day.port || day.location || 'At Sea'}</div>
@@ -962,6 +1031,78 @@ function InteractiveItineraryMap({ itinerary }) {
           )}
         </aside>
       </div>
+      ) : (
+        /* List View - Tabular format like Bolsover */
+        <div className="itinerary-list-view">
+          <table className="itinerary-table">
+            <thead>
+              <tr>
+                <th>Stop</th>
+                <th>Date</th>
+                <th>Port / Location</th>
+                <th>Activity</th>
+              </tr>
+            </thead>
+            <tbody>
+              {itinerary.map((day, index) => {
+                const isSeaDay = day.is_sea_day || 
+                               day.type === 'sea' || 
+                               (day.port || '').toLowerCase().includes('at sea') ||
+                               (day.port || '').toLowerCase().includes('cruising');
+                
+                const dayType = day.type || (isSeaDay ? 'sea' : 'port');
+                
+                return (
+                  <tr key={index} className={isSeaDay ? 'sea-day-row' : 'port-day-row'}>
+                    <td className="stop-cell">
+                      <div className="stop-icon">
+                        {(dayType === 'flight' || dayType === 'fly') && (
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                          </svg>
+                        )}
+                        {(dayType === 'hotel' || dayType === 'stay') && (
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
+                            <path d="M1 21h22"/>
+                            <path d="M9 7h1"/>
+                            <path d="M9 11h1"/>
+                            <path d="M14 7h1"/>
+                            <path d="M14 11h1"/>
+                          </svg>
+                        )}
+                        {(dayType === 'port' || dayType === 'embark' || dayType === 'disembark') && (
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M12 6.5v7.5M19 13.5c0-4-7-7-7-7s-7 3-7 7c0 1.66 7 4 7 4s7-2.34 7-4z"/>
+                            <path d="M1 20h22"/>
+                          </svg>
+                        )}
+                        {dayType === 'sea' && (
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M2 20h.01M7 20h.01M12 20h.01M17 20h.01M22 20h.01"/>
+                            <path d="M12 4v12"/>
+                          </svg>
+                        )}
+                      </div>
+                      <span className="stop-number">{index + 1}</span>
+                    </td>
+                    <td className="date-cell">
+                      <div className="day-label">Day {day.day}</div>
+                      {day.date && <div className="day-date">{day.date}</div>}
+                    </td>
+                    <td className="port-cell">
+                      <strong>{day.port || day.location || 'At Sea'}</strong>
+                    </td>
+                    <td className="activity-cell">
+                      {day.description || (isSeaDay ? 'Relaxing at sea' : 'Port visit')}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
       
       {/* Disclaimer - small text below map */}
       <div className="itinerary-map-disclaimer">

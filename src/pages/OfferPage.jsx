@@ -823,6 +823,32 @@ function OfferPage() {
                 </div>
               )}
 
+              {/* Extras Available - Paid Add-ons */}
+              {offer.extras_available && offer.extras_available.length > 0 && (
+                <div className="offer-section">
+                  <h2 className="offer-section__title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 2v20M2 12h20"/>
+                    </svg>
+                    Extras Available
+                  </h2>
+                  <p className="offer-section__subtitle" style={{ marginBottom: '1.5rem', color: 'var(--text-muted)' }}>
+                    Optional paid extras to enhance your cruise experience
+                  </p>
+                  <ul className="offer-extras-list">
+                    {offer.extras_available.map((extra, index) => (
+                      <li key={index}>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                          <line x1="1" y1="10" x2="23" y2="10"/>
+                        </svg>
+                        {safeRender(extra)}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
               {/* Itinerary - Map & Timeline Side by Side */}
               {(offer.itinerary_summary || 
                 (offer.show_itinerary_map !== false && offer.itinerary_map_url) ||

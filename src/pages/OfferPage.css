@@ -753,6 +753,40 @@
   margin-top: 2px;
 }
 
+/* Extras Available List */
+.offer-extras-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.offer-extras-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  color: var(--clr-text-main);
+  transition: border-color 0.2s ease;
+}
+
+.offer-extras-list li:hover {
+  border-color: var(--clr-accent-gold);
+}
+
+.offer-extras-list li svg {
+  width: 20px;
+  height: 20px;
+  color: var(--clr-accent-gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
 /* Itinerary */
 .offer-itinerary-summary {
   font-size: var(--font-size-lg);
@@ -1409,6 +1443,10 @@
   }
   
   .offer-highlights-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .offer-extras-list {
     grid-template-columns: 1fr;
   }
 }
