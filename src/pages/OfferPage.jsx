@@ -496,6 +496,19 @@ function OfferPage() {
                     </div>
                   </div>
                 )}
+                {/* Show sailing date if it differs from departure (package with pre-stay) */}
+                {offer.sailing_date && offer.sailing_date !== offer.departure_date && (
+                  <div className="offer-quick-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 6.5v7.5M19 13.5c0-4-7-7-7-7s-7 3-7 7c0 1.66 7 4 7 4s7-2.34 7-4z"/>
+                      <path d="M1 20h22"/>
+                    </svg>
+                    <div>
+                      <span className="offer-quick-detail__label">Cruise Departs</span>
+                      <span className="offer-quick-detail__value">{formatShortDate(offer.sailing_date)}</span>
+                    </div>
+                  </div>
+                )}
                 {offer.departure_port && (
                   <div className="offer-quick-detail">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
