@@ -904,6 +904,17 @@ function InteractiveItineraryMap({ itinerary }) {
                               <path d="M14 11h1"/>
                             </svg>
                           )}
+                          {dayType === 'train' && (
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <rect x="4" y="3" width="16" height="16" rx="2"/>
+                              <path d="M4 11h16"/>
+                              <path d="M12 3v8"/>
+                              <path d="M8 19l-2 3"/>
+                              <path d="M16 19l2 3"/>
+                              <circle cx="8" cy="15" r="1"/>
+                              <circle cx="16" cy="15" r="1"/>
+                            </svg>
+                          )}
                           {(dayType === 'port' || dayType === 'embark' || dayType === 'disembark') && (
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                               <path d="M12 6.5v7.5M19 13.5c0-4-7-7-7-7s-7 3-7 7c0 1.66 7 4 7 4s7-2.34 7-4z"/>
@@ -1089,6 +1100,17 @@ function InteractiveItineraryMap({ itinerary }) {
                             <path d="M9 11h1"/>
                             <path d="M14 7h1"/>
                             <path d="M14 11h1"/>
+                          </svg>
+                        )}
+                        {dayType === 'train' && (
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <rect x="4" y="3" width="16" height="16" rx="2"/>
+                            <path d="M4 11h16"/>
+                            <path d="M12 3v8"/>
+                            <path d="M8 19l-2 3"/>
+                            <path d="M16 19l2 3"/>
+                            <circle cx="8" cy="15" r="1"/>
+                            <circle cx="16" cy="15" r="1"/>
                           </svg>
                         )}
                         {(dayType === 'port' || dayType === 'embark' || dayType === 'disembark') && (
