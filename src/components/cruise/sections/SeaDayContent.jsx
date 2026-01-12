@@ -28,25 +28,55 @@ function SeaDayContent({ sectionKey, dayData, nextPort }) {
   );
 }
 
-function OverviewSection({ dayData: _dayData, nextPort }) {
+function OverviewSection({ dayData, nextPort }) {
   return (
     <div className="section-overview">
+      {/* Sea Day Hero Image Placeholder */}
+      <div className="image-placeholder">
+        <span className="image-placeholder-icon">🌊</span>
+        <span className="image-placeholder-text">Sea day image coming soon</span>
+      </div>
+
       <div className="section-intro">
-        <p><strong>[TBC]</strong> Description - what to expect on a sea day will appear here.</p>
+        <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--clr-text)' }}>
+          Sea Day {dayData.dayNumberEnd ? `(${dayData.dayNumber}-${dayData.dayNumberEnd})` : ''}
+        </h2>
+        <p><strong>No port stops today</strong> — this is your chance to properly explore the ship, relax by the pool, catch a show, or just do absolutely nothing.</p>
+        <p>Sea days are what you make them. Some people plan their entire day around meals and activities. Others bring a book to a sun lounger at 10am and don't move until dinner. Both are entirely valid.</p>
       </div>
 
       <hr className="section-divider" />
 
       <div className="info-block">
-        <h3>🌡️ WEATHER</h3>
-        <p><strong>[TBC]</strong> Seasonal note - e.g., "Bay of Biscay can be choppy"</p>
+        <h3>🌡️ WEATHER & SEA CONDITIONS</h3>
+        <p><strong>[TBC]</strong> Real-time weather forecast and sea conditions will appear here.</p>
+        <p style={{ fontSize: '0.875rem', opacity: 0.8 }}>
+          {dayData.dayNumber === 2 ? 'Sailing from Southampton towards Spain — Bay of Biscay can be lively in March' : ''}
+          {dayData.dayNumber === 4 ? 'Heading south towards the Canaries — waters typically calmer as we get further south' : ''}
+          {dayData.dayNumber === 9 ? 'Sailing north from Canaries towards mainland Spain' : ''}
+          {dayData.dayNumber === 13 ? 'Returning north from Lisbon to Southampton — crossing the Bay of Biscay again' : ''}
+        </p>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="info-block">
+        <h3>📍 SHIP LOCATION</h3>
+        <p><strong>[TBC]</strong> Live ship tracking map will appear here.</p>
+        <p style={{ fontSize: '0.875rem', opacity: 0.8 }}>Estimated position and progress will be displayed in future updates.</p>
       </div>
 
       <hr className="section-divider" />
 
       <div className="info-block">
         <h3>➡️ WHAT'S AHEAD</h3>
-        <p>Tomorrow: {nextPort || '[TBC] Next port'}</p>
+        <p>
+          {nextPort ? (
+            <>Next port: <strong>{nextPort}</strong></>
+          ) : (
+            'Returning to Southampton'
+          )}
+        </p>
       </div>
 
       <div className="fb-group-link">
@@ -54,7 +84,7 @@ function OverviewSection({ dayData: _dayData, nextPort }) {
           <a href={FB_GROUP_URL} target="_blank" rel="noopener noreferrer">
             Join our G606 Facebook group
           </a>{' '}
-          to share your sea day tips!
+          to share your sea day photos and tips!
         </p>
       </div>
     </div>
