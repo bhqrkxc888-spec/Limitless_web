@@ -6,6 +6,8 @@
  */
 
 import React, { useMemo, useState } from 'react'
+// motion is used in JSX as <motion.div>
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion'
 
 // Type configurations with icons and colors

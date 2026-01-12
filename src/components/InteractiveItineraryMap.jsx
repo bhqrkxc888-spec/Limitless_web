@@ -26,6 +26,73 @@ const logger = {
   error: () => {},
 };
 
+// Known airport indicators for smart type inference
+const AIRPORT_INDICATORS = [
+  'airport', 'heathrow', 'gatwick', 'stansted', 'luton', 'manchester airport',
+  'birmingham airport', 'edinburgh airport', 'glasgow airport', 'dublin airport',
+  'belfast', 'bristol airport', 'newcastle airport', 'leeds bradford',
+  'o\'hare', 'jfk', 'lax', 'sfo', 'mia', 'fll', 'ord', 'atl', 'dfw', 'den', 'las', 'sea-tac',
+  'cdg', 'orly', 'schiphol', 'frankfurt', 'munich airport', 'copenhagen airport', 'bergen airport'
+];
+
+// Types that should be EXCLUDED from the cruise map (part of journey but not sailing)
+const NON_CRUISE_TYPES = [
+  'flight', 'flight_out', 'flight_return', 'flight_connection', 'flight_internal',
+  'hotel', 'transfer'
+];
+
+// Types that ARE part of the cruise/sailing route
+const CRUISE_TYPES = [
+  'port', 'embark', 'embarkation', 'disembark', 'disembarkation',
+  'sea', 'scenic', 'tender', 'private_island'
+];
+
+// Infer item type if not set (for legacy data)
+const inferItemType = (item) => {
+  // If type is already specific (not just 'port'), use it
+  if (item.type && item.type !== 'port' && item.type !== undefined) return item.type;
+  
+  const locationName = (item.port || item.location || '').toLowerCase();
+  const segment = (item.segment || '').toLowerCase();
+  
+  // Check if it's an airport
+  if (AIRPORT_INDICATORS.some(ind => locationName.includes(ind))) {
+    return segment === 'post_cruise' ? 'flight_return' : 'flight_out';
+  }
+  
+  // Check for hotel keywords
+  if (locationName.includes('hotel') || locationName.includes('resort')) return 'hotel';
+  
+  // Pre-cruise segment items (except embark) are likely hotels
+  if (segment === 'pre_cruise' && item.type !== 'embark') {
+    const ukCities = ['london', 'manchester', 'birmingham', 'edinburgh', 'glasgow', 'dublin'];
+    if (ukCities.some(city => locationName.includes(city))) return 'flight_out';
+    return 'hotel';
+  }
+  
+  // Post-cruise segment items (except disembark) are likely hotels or return flights
+  if (segment === 'post_cruise' && item.type !== 'disembark') {
+    const ukCities = ['london', 'manchester', 'birmingham', 'edinburgh', 'glasgow', 'dublin'];
+    if (ukCities.some(city => locationName.includes(city))) return 'flight_return';
+    return 'hotel';
+  }
+  
+  // UK cities on Day 1 are likely departure flights
+  if (item.day === 1) {
+    const ukCities = ['london', 'manchester', 'birmingham', 'edinburgh', 'glasgow', 'dublin'];
+    if (ukCities.some(city => locationName.includes(city))) return 'flight_out';
+  }
+  
+  return item.type || 'port';
+};
+
+// Check if an item type should appear on the cruise map
+const isCruiseMapItem = (itemType) => {
+  if (NON_CRUISE_TYPES.includes(itemType)) return false;
+  if (CRUISE_TYPES.includes(itemType)) return true;
+  return !itemType || itemType === 'port';
+};
+
 function InteractiveItineraryMap({ itinerary }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
@@ -43,73 +110,6 @@ function InteractiveItineraryMap({ itinerary }) {
   
   // New: Map/List view toggle
   const [itineraryViewMode, setItineraryViewMode] = useState('map'); // 'map' or 'list'
-
-  // Known airport indicators for smart type inference
-  const AIRPORT_INDICATORS = [
-    'airport', 'heathrow', 'gatwick', 'stansted', 'luton', 'manchester airport',
-    'birmingham airport', 'edinburgh airport', 'glasgow airport', 'dublin airport',
-    'belfast', 'bristol airport', 'newcastle airport', 'leeds bradford',
-    'o\'hare', 'jfk', 'lax', 'sfo', 'mia', 'fll', 'ord', 'atl', 'dfw', 'den', 'las', 'sea-tac',
-    'cdg', 'orly', 'schiphol', 'frankfurt', 'munich airport', 'copenhagen airport', 'bergen airport'
-  ];
-
-  // Types that should be EXCLUDED from the cruise map (part of journey but not sailing)
-  const NON_CRUISE_TYPES = [
-    'flight', 'flight_out', 'flight_return', 'flight_connection', 'flight_internal',
-    'hotel', 'transfer'
-  ];
-
-  // Types that ARE part of the cruise/sailing route
-  const CRUISE_TYPES = [
-    'port', 'embark', 'embarkation', 'disembark', 'disembarkation',
-    'sea', 'scenic', 'tender', 'private_island'
-  ];
-
-  // Infer item type if not set (for legacy data)
-  const inferItemType = (item) => {
-    // If type is already specific (not just 'port'), use it
-    if (item.type && item.type !== 'port' && item.type !== undefined) return item.type;
-    
-    const locationName = (item.port || item.location || '').toLowerCase();
-    const segment = (item.segment || '').toLowerCase();
-    
-    // Check if it's an airport
-    if (AIRPORT_INDICATORS.some(ind => locationName.includes(ind))) {
-      return segment === 'post_cruise' ? 'flight_return' : 'flight_out';
-    }
-    
-    // Check for hotel keywords
-    if (locationName.includes('hotel') || locationName.includes('resort')) return 'hotel';
-    
-    // Pre-cruise segment items (except embark) are likely hotels
-    if (segment === 'pre_cruise' && item.type !== 'embark') {
-      const ukCities = ['london', 'manchester', 'birmingham', 'edinburgh', 'glasgow', 'dublin'];
-      if (ukCities.some(city => locationName.includes(city))) return 'flight_out';
-      return 'hotel';
-    }
-    
-    // Post-cruise segment items (except disembark) are likely hotels or return flights
-    if (segment === 'post_cruise' && item.type !== 'disembark') {
-      const ukCities = ['london', 'manchester', 'birmingham', 'edinburgh', 'glasgow', 'dublin'];
-      if (ukCities.some(city => locationName.includes(city))) return 'flight_return';
-      return 'hotel';
-    }
-    
-    // UK cities on Day 1 are likely departure flights
-    if (item.day === 1) {
-      const ukCities = ['london', 'manchester', 'birmingham', 'edinburgh', 'glasgow', 'dublin'];
-      if (ukCities.some(city => locationName.includes(city))) return 'flight_out';
-    }
-    
-    return item.type || 'port';
-  };
-
-  // Check if an item type should appear on the cruise map
-  const isCruiseMapItem = (itemType) => {
-    if (NON_CRUISE_TYPES.includes(itemType)) return false;
-    if (CRUISE_TYPES.includes(itemType)) return true;
-    return !itemType || itemType === 'port';
-  };
 
   // Filter and enrich itinerary data - handle round-trips properly
   const ports = useMemo(() => {

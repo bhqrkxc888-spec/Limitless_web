@@ -7,11 +7,13 @@ import './CruiseConsentGate.css';
 const CONSENT_KEY = 'cruise_companion_consent_g606';
 const CONSENT_DATE_KEY = 'cruise_companion_consent_g606_date';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function hasConsent() {
   if (typeof window === 'undefined') return false;
   return localStorage.getItem(CONSENT_KEY) === 'accepted';
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function setConsent() {
   if (typeof window === 'undefined') return;
   const timestamp = new Date().toISOString();
