@@ -177,11 +177,13 @@ function OfferPage() {
   };
 
   // V2: Calculate total package nights (prefixed with _ as it's reserved for future use)
-  const _getTotalPackageNights = (offerData) => {
+  // Calculate TOTAL holiday duration (pre-cruise + cruise + post-cruise)
+  const getTotalHolidayNights = (offerData) => {
     if (!offerData) return 0;
-    return (offerData.pre_stay_nights || 0) + 
-           (offerData.duration_nights || 0) + 
-           (offerData.post_stay_nights || 0);
+    const preNights = parseInt(offerData.pre_stay_nights) || 0;
+    const cruiseNights = parseInt(offerData.duration_nights) || 0;
+    const postNights = parseInt(offerData.post_stay_nights) || 0;
+    return preNights + cruiseNights + postNights;
   };
 
   // V2: Check for accommodation
@@ -479,7 +481,17 @@ function OfferPage() {
                     </svg>
                     <div>
                       <span className="offer-quick-detail__label">Duration</span>
-                      <span className="offer-quick-detail__value">{formatDuration(offer.duration_nights)}</span>
+                      <span className="offer-quick-detail__value">
+                        {(() => {
+                          const totalNights = getTotalHolidayNights(offer);
+                          const cruiseNights = parseInt(offer.duration_nights) || 0;
+                          // If there's pre/post stays, show total with breakdown
+                          if (totalNights > cruiseNights) {
+                            return `${totalNights} nights`;
+                          }
+                          return formatDuration(offer.duration_nights);
+                        })()}
+                      </span>
                     </div>
                   </div>
                 )}
