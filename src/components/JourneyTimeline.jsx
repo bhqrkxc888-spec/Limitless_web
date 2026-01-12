@@ -14,6 +14,7 @@ const TYPE_CONFIG = {
   flight_out: { icon: '✈️', label: 'Outbound Flight', color: '#3b82f6', bgColor: 'rgba(59, 130, 246, 0.1)' },
   flight_return: { icon: '✈️', label: 'Return Flight', color: '#3b82f6', bgColor: 'rgba(59, 130, 246, 0.1)' },
   flight_connection: { icon: '🔄', label: 'Connection', color: '#60a5fa', bgColor: 'rgba(96, 165, 250, 0.1)' },
+  flight_internal: { icon: '✈️', label: 'Internal Flight', color: '#818cf8', bgColor: 'rgba(129, 140, 248, 0.1)' },
   flight: { icon: '✈️', label: 'Flight', color: '#3b82f6', bgColor: 'rgba(59, 130, 246, 0.1)' },
   
   // Ground

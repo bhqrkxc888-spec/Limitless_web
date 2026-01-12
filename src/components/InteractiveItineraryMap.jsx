@@ -55,7 +55,7 @@ function InteractiveItineraryMap({ itinerary }) {
 
   // Types that should be EXCLUDED from the cruise map (part of journey but not sailing)
   const NON_CRUISE_TYPES = [
-    'flight', 'flight_out', 'flight_return', 'flight_connection',
+    'flight', 'flight_out', 'flight_return', 'flight_connection', 'flight_internal',
     'hotel', 'transfer'
   ];
 
