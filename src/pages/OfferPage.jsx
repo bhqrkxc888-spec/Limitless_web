@@ -12,6 +12,7 @@ import AirportPricingList from '../components/AirportPricingTable';
 import OnboardCreditBadge from '../components/OnboardCreditBadge';
 import SoloTravellerInfo from '../components/SoloTravellerInfo';
 import OptimizedImage from '../components/OptimizedImage';
+import JourneyTimeline from '../components/JourneyTimeline';
 import { createSanitizedMarkup } from '../utils/sanitizeHtml';
 import { useEffect, useMemo, useState, lazy, Suspense, Component } from 'react';
 import './OfferPage.css';
@@ -903,6 +904,14 @@ function OfferPage() {
                         ))}
                       </div>
                     </div>
+                  )}
+
+                  {/* Complete Journey Timeline - Shows flights, hotels, and cruise */}
+                  {offer.itinerary_detailed && Array.isArray(offer.itinerary_detailed) && offer.itinerary_detailed.length > 0 && (
+                    <JourneyTimeline 
+                      itinerary={offer.itinerary_detailed} 
+                      defaultExpanded={false}
+                    />
                   )}
 
                   {/* Interactive Map with Integrated Day-by-Day Sidebar */}
