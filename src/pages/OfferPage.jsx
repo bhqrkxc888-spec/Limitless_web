@@ -844,7 +844,8 @@ function OfferPage() {
                   </div>
                 )}
 
-                {offer.excludes && offer.excludes.length > 0 && (
+                {/* Optional Extras - from extras_available (paid add-ons) */}
+                {offer.extras_available && offer.extras_available.length > 0 && (
                   <div className="offer-section offer-section--optional-extras">
                     <h2 className="offer-section__title">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -854,7 +855,7 @@ function OfferPage() {
                       Optional Extras
                     </h2>
                     <ul className="offer-optional-extras-list">
-                      {offer.excludes.map((item, index) => (
+                      {offer.extras_available.map((item, index) => (
                         <li key={index}>
                           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M12 2v20M2 12h20"/>
@@ -863,6 +864,15 @@ function OfferPage() {
                         </li>
                       ))}
                     </ul>
+                  </div>
+                )}
+
+                {/* Not Included - subtle note at bottom (excludes) */}
+                {offer.excludes && offer.excludes.length > 0 && (
+                  <div className="offer-section offer-section--not-included">
+                    <p className="offer-not-included-note">
+                      <strong>Please note:</strong> {offer.excludes.join(', ')} are not included in the price.
+                    </p>
                   </div>
                 )}
               </div>

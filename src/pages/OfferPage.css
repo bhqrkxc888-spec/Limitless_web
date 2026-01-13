@@ -1564,6 +1564,25 @@
 
 /* Optional Extras styling is now unified with Includes above */
 
+/* Not Included - subtle note */
+.offer-section--not-included {
+  background: transparent;
+  padding: var(--space-4, 1rem) 0;
+  margin-top: var(--space-4, 1rem);
+  border-top: 1px solid var(--clr-border, #e2e8f0);
+}
+
+.offer-not-included-note {
+  font-size: 0.875rem;
+  color: var(--clr-text-muted, #718096);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.offer-not-included-note strong {
+  color: var(--clr-text-secondary, #4a5568);
+}
+
 /* Responsive for new sections */
 @media (max-width: 1024px) {
   .offer-why-special-grid {
