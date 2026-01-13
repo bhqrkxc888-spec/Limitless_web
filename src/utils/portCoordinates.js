@@ -431,6 +431,8 @@ export const KNOWN_PORT_COORDINATES = {
   'Case-Pilote': { lat: 14.5333, lon: -61.2167 },
   'Castara': { lat: 11.2833, lon: -60.5833 },
   'Castaway Cay': { lat: 26.0833, lon: -77.5667 },
+  'Castaway Cay, Bahamas': { lat: 26.0833, lon: -77.5667 },
+  'Disney Castaway Cay': { lat: 26.0833, lon: -77.5667 },
   'Castellammare del Golfo': { lat: 38.033, lon: 12.8836 },
   'Castellón de la Plana': { lat: 40.5807, lon: 0.0497 },
   'Casterton': { lat: -37.6, lon: 141.6 },
@@ -502,6 +504,8 @@ export const KNOWN_PORT_COORDINATES = {
   'Cochin': { lat: 9.9312, lon: 76.2673 },
   'Cochrane': { lat: -47.2333, lon: -72.6 },
   'CocoCay': { lat: 25.7833, lon: -77.9167 },
+  'Perfect Day at CocoCay': { lat: 25.7833, lon: -77.9167 },
+  'Perfect Day at CocoCay, Bahamas': { lat: 25.7833, lon: -77.9167 },
   'Cocoa Beach': { lat: 28.3243, lon: -80.6089 },
   'Coffs Harbour': { lat: -30.3, lon: 153.1203 },
   'Colchester': { lat: 51.8953, lon: 0.896 },
@@ -901,6 +905,8 @@ export const KNOWN_PORT_COORDINATES = {
   'Gran Canaria': { lat: 28.1504, lon: -15.4196 },
   'Granada': { lat: 11.9319, lon: -85.9554 },
   'Grand Anse Beach': { lat: 12.0667, lon: -61.7833 },
+  'Great Stirrup Cay': { lat: 25.8283, lon: -77.9067 },
+  'Great Stirrup Cay, Bahamas': { lat: 25.8283, lon: -77.9067 },
   'Grand Cayman': { lat: 19.295, lon: -81.3806 },
   'Grand Marais': { lat: 47.7333, lon: -90.3333 },
   'Grand Portage': { lat: 47.9667, lon: -89.6833 },
@@ -964,6 +970,7 @@ export const KNOWN_PORT_COORDINATES = {
   'Hakodate': { lat: 41.7687, lon: 140.7288 },
   'Haleiwa': { lat: 21.5833, lon: -158.1 },
   'Half Moon Cay': { lat: 23.15, lon: -76.05 },
+  'Half Moon Cay, Bahamas': { lat: 23.15, lon: -76.05 },
   'Half Moon Caye': { lat: 17.25, lon: -87.4833 },
   'Half Moon Island': { lat: -62.5833, lon: -59.9 },
   'Halifax': { lat: 44.6488, lon: -63.5752 },
@@ -1302,6 +1309,7 @@ export const KNOWN_PORT_COORDINATES = {
   'La Rochelle': { lat: 46.1591, lon: -1.152 },
   'La Spezia': { lat: 44.1018, lon: 9.8226 },
   'Labadee': { lat: 19.7736, lon: -72.2486 },
+  'Labadee, Haiti': { lat: 19.7736, lon: -72.2486 },
   'Labuan': { lat: 5.2833, lon: 115.2167 },
   'Labuan Bajo': { lat: -8.4731, lon: 123.3959 },
   'Lacanau': { lat: 44.9833, lon: -1.2 },
@@ -1688,6 +1696,7 @@ export const KNOWN_PORT_COORDINATES = {
   'Narvik': { lat: 68.4385, lon: 17.4274 },
   'Nasipit': { lat: 8.9667, lon: 125.5333 },
   'Nassau': { lat: 25.081, lon: -77.3437 },
+  'Nassau, Bahamas': { lat: 25.081, lon: -77.3437 },
   'National Gallery': { lat: 51.5076, lon: -0.1281 },
   'Nauru': { lat: -0.5228, lon: 166.9315 },
   'Nausori': { lat: -18, lon: 178.5833 },
@@ -1775,6 +1784,9 @@ export const KNOWN_PORT_COORDINATES = {
   'Oban': { lat: 56.412, lon: -5.4714 },
   'Obzor': { lat: 42.7167, lon: 27.7167 },
   'Ocho Rios': { lat: 18.4074, lon: -77.1025 },
+  'Ocean Cay': { lat: 25.2067, lon: -79.2683 },
+  'Ocean Cay, Bahamas': { lat: 25.2067, lon: -79.2683 },
+  'Ocean Cay MSC Marine Reserve': { lat: 25.2067, lon: -79.2683 },
   'Océanopolis': { lat: 48.6297, lon: -4.0678 },
   'Odda': { lat: 60.0519, lon: 6.2272 },
   'Odense': { lat: 55.4038, lon: 10.3897 },
@@ -2947,6 +2959,7 @@ export function getPortCoordinates(portName, contextLat = null, contextLon = nul
   
   // 2. COLLECT ALL PARTIAL MATCHES
   // E.g., "Sydney" → ["Sydney", "Sydney, Nova Scotia", "Sydney, Australia"]
+  // E.g., "Perfect Day at CocoCay, Bahamas" → ["CocoCay"] (search contains key)
   const allMatches = Object.keys(KNOWN_PORT_COORDINATES).filter(key => {
     const keyLower = key.toLowerCase();
     const keyBase = keyLower.split(',')[0].trim(); // "Sydney, Nova Scotia" → "sydney"
@@ -2955,7 +2968,12 @@ export function getPortCoordinates(portName, contextLat = null, contextLon = nul
     // Match if:
     // - Key contains search (e.g., "Sydney, Nova Scotia" contains "Sydney")
     // - OR base names match (e.g., "Sydney" base = "sydney")
-    return keyLower.includes(searchBase) || keyBase === searchBase;
+    // - OR search contains key (e.g., "Perfect Day at CocoCay" contains "CocoCay") ← NEW!
+    // - OR search contains key base (e.g., "Perfect Day at CocoCay, Bahamas" contains "cococay")
+    return keyLower.includes(searchBase) || 
+           keyBase === searchBase ||
+           searchBase.includes(keyBase) ||
+           normalized.includes(keyBase);
   });
   
   // 3. NO MATCHES - Try without parentheses
@@ -2969,6 +2987,22 @@ export function getPortCoordinates(portName, contextLat = null, contextLon = nul
         return { ...KNOWN_PORT_COORDINATES[match], name: match };
       }
     }
+    
+    // 3b. Try extracting location after "at" or "in" keywords
+    // E.g., "Perfect Day at CocoCay" → try "CocoCay"
+    const atMatch = normalized.match(/(?:at|in|on)\s+(.+?)(?:,|$)/i);
+    if (atMatch) {
+      const extracted = atMatch[1].trim();
+      const extractedMatch = Object.keys(KNOWN_PORT_COORDINATES).find(
+        key => key.toLowerCase() === extracted || 
+               key.toLowerCase().includes(extracted) ||
+               extracted.includes(key.toLowerCase())
+      );
+      if (extractedMatch) {
+        return { ...KNOWN_PORT_COORDINATES[extractedMatch], name: extractedMatch };
+      }
+    }
+    
     return null;
   }
   
