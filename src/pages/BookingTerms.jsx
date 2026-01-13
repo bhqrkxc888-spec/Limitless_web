@@ -110,7 +110,7 @@ const fallbackContent = `
 
 <p><strong>Note:</strong> This insolvency protection does not cover contracts with parties other than with us, which can be performed despite our insolvency.</p>
 
-<p>A copy of the Package Travel and Linked Travel Arrangements Regulations 2018 can be found at: <a href="http://www.legislation.gov.uk/uksi/2018/634/contents/made">http://www.legislation.gov.uk/uksi/2018/634/contents/made</a></p>
+<p>A copy of the Package Travel and Linked Travel Arrangements Regulations 2018 can be found at: <a href="https://www.legislation.gov.uk/uksi/2018/634/contents/made" target="_blank" rel="noopener noreferrer">www.legislation.gov.uk</a></p>
 
 <h2>8. Passport, Visa and Health Requirements</h2>
 <p>We can provide general information about the passport and visa requirements for your trip. Your specific passport and visa requirements, and other immigration requirements are your responsibility and you should confirm these with the relevant Embassies and/or Consulates.</p>
@@ -154,7 +154,7 @@ const fallbackContent = `
 
 <p>Further information on the Code and ABTA's assistance in resolving disputes can be found on www.abta.com.</p>
 
-<p>You can also access the European Commission Online Dispute (ODR) Resolution platform at: <a href="http://ec.europa.eu/consumers/odr/">http://ec.europa.eu/consumers/odr/</a></p>
+<p>You can also access the European Commission Online Dispute (ODR) Resolution platform at: <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener noreferrer">ec.europa.eu/consumers/odr</a></p>
 
 <p>This ODR platform is a means of registering your complaint with us; it will not determine how your complaint should be resolved.</p>
 `;

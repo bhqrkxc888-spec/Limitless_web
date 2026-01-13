@@ -94,6 +94,18 @@ function DestinationsPage() {
         align="center"
       />
 
+      {/* Content Update Notice */}
+      <section className="section-notice">
+        <div className="container">
+          <div className="notice notice-info">
+            <span className="notice-icon">📍</span>
+            <p>
+              <strong>Destination guides are being expanded!</strong> We're adding detailed port information, local tips, and insider recommendations to each destination. Check back regularly for updates.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Destinations */}
       {featuredDestinations.length > 0 && (
         <section className="section">

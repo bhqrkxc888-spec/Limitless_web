@@ -1,6 +1,6 @@
 # robots.txt for Limitless Cruises
 # https://www.limitlesscruises.com/robots.txt
-# Last updated: December 2024
+# Last updated: January 2026
 
 # ===========================================
 # STANDARD SEARCH ENGINE CRAWLERS

@@ -148,12 +148,13 @@ function SEO({
     });
 
     // === Twitter Card Tags ===
+    // Note: twitter:site removed - not currently on X/Twitter
+    // Can add back when/if X presence is established
     const twitterTags = {
       'twitter:card': 'summary_large_image',
       'twitter:title': fullTitle,
       'twitter:description': fullDescription,
       'twitter:image': fullImage,
-      'twitter:site': '@LimitlessCruise', // Add if you have Twitter handle
     };
 
     Object.entries(twitterTags).forEach(([name, content]) => {
