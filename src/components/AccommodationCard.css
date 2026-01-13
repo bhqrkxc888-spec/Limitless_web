@@ -30,6 +30,11 @@
   background: linear-gradient(90deg, #8b5cf6, #a855f7);
 }
 
+/* Hotel variant (for middle/multiple hotel stays) */
+.accommodation-card--hotel::before {
+  background: linear-gradient(90deg, #10b981, #059669);
+}
+
 /* Header */
 .accommodation-card__header {
   display: flex;
@@ -114,6 +119,14 @@
 .accommodation-card__location svg {
   width: 14px;
   height: 14px;
+}
+
+/* Description (when no hotel name) */
+.accommodation-card__description {
+  font-size: var(--font-size-sm);
+  color: var(--clr-text-muted);
+  line-height: var(--line-height-relaxed);
+  margin: 0 0 var(--space-3);
 }
 
 /* Includes List */

@@ -1450,3 +1450,135 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ========================================
+   NEW LAYOUT SECTIONS
+   ======================================== */
+
+/* Holiday Summary Section */
+.offer-holiday-summary-section {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 3rem 0;
+}
+
+/* Why This Cruise is Special - 2 Column Layout */
+.offer-section--why-special {
+  margin-bottom: 3rem;
+}
+
+.offer-why-special-grid {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.offer-why-special-description {
+  /* Left column - description paragraphs */
+}
+
+.offer-why-special-highlights {
+  /* Right column - highlights card */
+}
+
+.offer-highlights-card {
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  border: 2px solid var(--clr-border-light, #e2e8f0);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.offer-highlights-card__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--clr-text-main, #1a202c);
+  margin-bottom: 1rem;
+}
+
+.offer-highlights-card__title svg {
+  width: 20px;
+  height: 20px;
+  color: var(--clr-accent, #d4af37);
+}
+
+/* Optional Extras Section */
+.offer-section--optional-extras {
+  margin-bottom: 3rem;
+}
+
+.offer-section--optional-extras .offer-section__subtitle {
+  margin-top: -0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--clr-text-muted, #718096);
+}
+
+.offer-optional-extras-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.offer-optional-extras-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: white;
+  border: 1px solid var(--clr-border-light, #e2e8f0);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.offer-optional-extras-list li:hover {
+  border-color: var(--clr-accent, #d4af37);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.offer-optional-extras-list li svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--clr-accent, #d4af37);
+  margin-top: 2px;
+}
+
+/* Responsive for new sections */
+@media (max-width: 1024px) {
+  .offer-why-special-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .offer-highlights-card {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .offer-holiday-summary-section {
+    padding: 2rem 0;
+  }
+  
+  .offer-optional-extras-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .offer-highlights-card {
+    padding: 1.25rem;
+  }
+  
+  .offer-highlights-card__title {
+    font-size: 1rem;
+  }
+}

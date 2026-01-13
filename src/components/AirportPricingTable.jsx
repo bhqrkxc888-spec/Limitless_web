@@ -22,33 +22,37 @@ function AirportPricingList({ airportPrices, currency = 'GBP', priceBasis = 'per
   const lowestPrice = sortedPrices[0]?.price;
 
   return (
-    <div className="airport-pricing-list">
-      <h4 className="airport-pricing-list__title">Prices by Departure Airport</h4>
-      <ul className="airport-pricing-list__items">
+    <div className="airport-pricing-grid">
+      <h4 className="airport-pricing-grid__title">Prices by Departure Airport</h4>
+      <div className="airport-pricing-grid__cards">
         {sortedPrices.map((ap) => (
-          <li 
+          <div 
             key={ap.code} 
-            className={`airport-pricing-list__item ${ap.price === lowestPrice ? 'airport-pricing-list__item--lowest' : ''}`}
+            className={`airport-pricing-card ${ap.price === lowestPrice ? 'airport-pricing-card--best' : ''}`}
           >
-            <span className="airport-pricing-list__airport">
+            {ap.price === lowestPrice && (
+              <div className="airport-pricing-card__badge">Best Price</div>
+            )}
+            <div className="airport-pricing-card__airport">
               {ap.name}
-              {ap.direct === true && (
-                <span className="airport-pricing-list__flight-type airport-pricing-list__flight-type--direct">
-                  Direct
-                </span>
-              )}
-            </span>
-            <span className="airport-pricing-list__price">
-              {symbol}{formatPrice(ap.price)}{basisLabel}
-              {ap.price === lowestPrice && (
-                <span className="airport-pricing-list__badge">Best Price</span>
-              )}
-            </span>
-          </li>
+            </div>
+            {ap.direct === true && (
+              <div className="airport-pricing-card__flight-type">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{width: '16px', height: '16px'}}>
+                  <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                </svg>
+                Direct Flight
+              </div>
+            )}
+            <div className="airport-pricing-card__price">
+              {symbol}{formatPrice(ap.price)}
+              {basisLabel && <span className="airport-pricing-card__basis">{basisLabel}</span>}
+            </div>
+          </div>
         ))}
-      </ul>
-      <p className="airport-pricing-list__note">
-        Prices may vary based on availability.
+      </div>
+      <p className="airport-pricing-grid__note">
+        Prices may vary based on availability. Contact us for the latest offers.
       </p>
     </div>
   );

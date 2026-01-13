@@ -12,7 +12,7 @@ import AirportPricingList from '../components/AirportPricingTable';
 import OnboardCreditBadge from '../components/OnboardCreditBadge';
 import SoloTravellerInfo from '../components/SoloTravellerInfo';
 import OptimizedImage from '../components/OptimizedImage';
-import JourneyTimeline from '../components/JourneyTimeline';
+import HolidaySummary from '../components/HolidaySummary';
 import { createSanitizedMarkup } from '../utils/sanitizeHtml';
 import { useEffect, useMemo, useState, lazy, Suspense, Component } from 'react';
 import './OfferPage.css';
@@ -186,15 +186,66 @@ function OfferPage() {
     return preNights + cruiseNights + postNights;
   };
 
-  // V2: Check for accommodation
-  const hasAccommodation = (offerData) => {
-    return offerData?.pre_stay_hotel_name || offerData?.post_stay_hotel_name;
+  // V2: Extract hotel stays from itinerary_detailed (supports multi-city)
+  const extractHotelStays = (offerData) => {
+    if (!offerData?.itinerary_detailed || !Array.isArray(offerData.itinerary_detailed)) {
+      return [];
+    }
+    
+    const hotelStays = [];
+    let currentStay = null;
+    
+    for (const item of offerData.itinerary_detailed) {
+      if (item.type === 'hotel') {
+        const city = item.port || item.location || item.city || 'Hotel Stay';
+        const hotelName = item.hotel_name || item.hotelName || null;
+        const segment = item.segment || 'pre_cruise';
+        
+        // Check if this is a continuation of the same hotel stay
+        if (currentStay && 
+            currentStay.city === city && 
+            currentStay.hotelName === hotelName &&
+            currentStay.segment === segment) {
+          // Same hotel, increment nights
+          currentStay.nights += 1;
+        } else {
+          // New hotel stay - save current and start new
+          if (currentStay) {
+            hotelStays.push(currentStay);
+          }
+          currentStay = {
+            city,
+            hotelName,
+            segment,
+            nights: 1,
+            description: item.description || null,
+            stars: item.hotel_stars || item.stars || null,
+            includes: item.includes || []
+          };
+        }
+      } else if (currentStay) {
+        // Non-hotel item - save current stay
+        hotelStays.push(currentStay);
+        currentStay = null;
+      }
+    }
+    
+    // Don't forget the last stay
+    if (currentStay) {
+      hotelStays.push(currentStay);
+    }
+    
+    return hotelStays;
   };
 
-  // V2: Capitalize helper
-  const capitalize = (str) => {
-    if (!str) return '';
-    return str.charAt(0).toUpperCase() + str.slice(1);
+  // V2: Check for accommodation (from itinerary or legacy fields)
+  const hasAccommodation = (offerData) => {
+    // First check itinerary_detailed for hotel entries
+    const hotelStays = extractHotelStays(offerData);
+    if (hotelStays.length > 0) return true;
+    
+    // Fallback to legacy single-hotel fields
+    return offerData?.pre_stay_hotel_name || offerData?.post_stay_hotel_name;
   };
 
   // Safe render helper - prevents React error #310 if data is object instead of string
@@ -670,198 +721,59 @@ function OfferPage() {
         </div>
       </section>
 
-      {/* YOUR PACKAGE INCLUDES - Key Selling Points */}
-      <section className="section offer-package-section">
-        <div className="container">
-          <h2 className="offer-package-section__title">Your Package Includes</h2>
-          <div className="offer-package-cards">
-            {/* Flights Card */}
-            {offer.includes_flight && (
-              <div className="offer-package-card offer-package-card--flights">
-                <div className="offer-package-card__icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/>
-                  </svg>
-                </div>
-                <h3 className="offer-package-card__title">Return Flights Included</h3>
-                <ul className="offer-package-card__details">
-                  {offer.departure_airport && (
-                    <li>
-                      <strong>From:</strong> {offer.departure_airport}
-                    </li>
-                  )}
-                  <li>
-                    <strong>Type:</strong> {offer.flight_direct ? 'Direct Flight' : 'Connecting Flight'}
-                  </li>
-                  {offer.flight_class && (
-                    <li>
-                      <strong>Class:</strong> {capitalize(offer.flight_class)}
-                    </li>
-                  )}
-                </ul>
-              </div>
-            )}
-
-            {/* Transfers Card */}
-            {offer.transfer_included && (
-              <div className="offer-package-card offer-package-card--transfers">
-                <div className="offer-package-card__icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="1" y="3" width="15" height="13" rx="2"/>
-                    <path d="M16 8h4l3 3v5h-3"/>
-                    <circle cx="5.5" cy="18.5" r="2.5"/>
-                    <circle cx="18.5" cy="18.5" r="2.5"/>
-                  </svg>
-                </div>
-                <h3 className="offer-package-card__title">Transfers Included</h3>
-                <ul className="offer-package-card__details">
-                  <li>Airport to cruise port</li>
-                  <li>Cruise port to airport</li>
-                  <li>No hidden transport costs</li>
-                </ul>
-              </div>
-            )}
-
-            {/* Cruise/Dining Card - Always show */}
-            <div className="offer-package-card offer-package-card--cruise">
-              <div className="offer-package-card__icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M3 18l18-6-18-6v12z"/>
-                </svg>
-              </div>
-              <h3 className="offer-package-card__title">
-                {offer.duration_nights}-Night {offer.category === 'luxury' ? 'Luxury' : ''} Cruise
-              </h3>
-              <ul className="offer-package-card__details">
-                <li><strong>Ship:</strong> {offer.ship_name || 'TBC'}</li>
-                {offer.cabin_type && (
-                  <li><strong>Cabin:</strong> {capitalize(offer.cabin_type)} Stateroom</li>
-                )}
-                {offer.includes && offer.includes.some(i => 
-                  i.toLowerCase().includes('all-inclusive') || 
-                  i.toLowerCase().includes('dining') ||
-                  i.toLowerCase().includes('drinks')
-                ) && (
-                  <li><strong>Dining:</strong> All-Inclusive</li>
-                )}
-              </ul>
-            </div>
-
-            {/* Pre-Stay Hotel Card */}
-            {offer.pre_stay_hotel_name && (
-              <div className="offer-package-card offer-package-card--hotel">
-                <div className="offer-package-card__icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
-                    <path d="M1 21h22"/>
-                    <path d="M9 7h1"/>
-                    <path d="M9 11h1"/>
-                    <path d="M14 7h1"/>
-                    <path d="M14 11h1"/>
-                  </svg>
-                </div>
-                <h3 className="offer-package-card__title">Pre-Cruise Stay</h3>
-                <ul className="offer-package-card__details">
-                  <li className="offer-package-card__highlight">
-                    {offer.pre_stay_nights} night{offer.pre_stay_nights > 1 ? 's' : ''} included
-                  </li>
-                  <li><strong>Hotel:</strong> {offer.pre_stay_hotel_name}</li>
-                  {offer.pre_stay_hotel_stars && (
-                    <li><strong>Rating:</strong> {offer.pre_stay_hotel_stars}★</li>
-                  )}
-                  {offer.pre_stay_location && (
-                    <li><strong>Location:</strong> {offer.pre_stay_location}</li>
-                  )}
-                </ul>
-              </div>
-            )}
-
-            {/* Post-Stay Hotel Card */}
-            {offer.post_stay_hotel_name && (
-              <div className="offer-package-card offer-package-card--hotel">
-                <div className="offer-package-card__icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
-                    <path d="M1 21h22"/>
-                    <path d="M9 7h1"/>
-                    <path d="M9 11h1"/>
-                    <path d="M14 7h1"/>
-                    <path d="M14 11h1"/>
-                  </svg>
-                </div>
-                <h3 className="offer-package-card__title">Post-Cruise Stay</h3>
-                <ul className="offer-package-card__details">
-                  <li className="offer-package-card__highlight">
-                    {offer.post_stay_nights} night{offer.post_stay_nights > 1 ? 's' : ''} included
-                  </li>
-                  <li><strong>Hotel:</strong> {offer.post_stay_hotel_name}</li>
-                  {offer.post_stay_hotel_stars && (
-                    <li><strong>Rating:</strong> {offer.post_stay_hotel_stars}★</li>
-                  )}
-                  {offer.post_stay_location && (
-                    <li><strong>Location:</strong> {offer.post_stay_location}</li>
-                  )}
-                </ul>
-              </div>
-            )}
-
-            {/* Onboard Credit Card */}
-            {offer.onboard_credit_amount > 0 && (
-              <div className="offer-package-card offer-package-card--obc">
-                <div className="offer-package-card__icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="2" y="4" width="20" height="16" rx="2"/>
-                    <path d="M2 10h20"/>
-                  </svg>
-                </div>
-                <h3 className="offer-package-card__title">Onboard Credit</h3>
-                <ul className="offer-package-card__details">
-                  <li className="offer-package-card__highlight">
-                    {offer.onboard_credit_currency === 'USD' ? '$' : '£'}{offer.onboard_credit_amount} to spend onboard
-                  </li>
-                  <li>Use on spa, excursions, drinks & more</li>
-                </ul>
-              </div>
-            )}
+      {/* YOUR HOLIDAY AT A GLANCE - Journey Segments */}
+      {offer.itinerary_detailed && Array.isArray(offer.itinerary_detailed) && offer.itinerary_detailed.length > 0 && (
+        <section className="section offer-holiday-summary-section">
+          <div className="container">
+            <HolidaySummary itinerary={offer.itinerary_detailed} />
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Main Content - Full Width */}
       <section className="section offer-content-section">
         <div className="container">
           <div className="offer-single-column">
-              {/* Why Book This Cruise - Compelling Description */}
-              {offer.full_description && (
-                <div className="offer-section offer-section--description">
-                  <h2 className="offer-section__title offer-section__title--large">Why Book This Cruise</h2>
-                  <div 
-                    className="offer-description-content"
-                    dangerouslySetInnerHTML={createSanitizedMarkup(offer.full_description)}
-                  />
-                </div>
-              )}
-
-              {/* Highlights */}
-              {offer.highlights && offer.highlights.length > 0 && (
-                <div className="offer-section">
-                  <h2 className="offer-section__title">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
-                    </svg>
-                    What Makes This Special
-                  </h2>
-                  <ul className="offer-highlights-list">
-                    {offer.highlights.map((highlight, index) => (
-                      <li key={index}>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                          <polyline points="22 4 12 14.01 9 11.01"/>
-                        </svg>
-                        {safeRender(highlight)}
-                      </li>
-                    ))}
-                  </ul>
+              {/* Why This Cruise is Special - Combined 2-Column Layout */}
+              {(offer.full_description || (offer.highlights && offer.highlights.length > 0)) && (
+                <div className="offer-section offer-section--why-special">
+                  <h2 className="offer-section__title offer-section__title--large">Why This Cruise is Special</h2>
+                  <div className="offer-why-special-grid">
+                    {/* Left Column: Description (60%) */}
+                    {offer.full_description && (
+                      <div className="offer-why-special-description">
+                        <div 
+                          className="offer-description-content"
+                          dangerouslySetInnerHTML={createSanitizedMarkup(offer.full_description)}
+                        />
+                      </div>
+                    )}
+                    
+                    {/* Right Column: Highlights (40%) */}
+                    {offer.highlights && offer.highlights.length > 0 && (
+                      <div className="offer-why-special-highlights">
+                        <div className="offer-highlights-card">
+                          <h3 className="offer-highlights-card__title">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+                            </svg>
+                            Highlights
+                          </h3>
+                          <ul className="offer-highlights-list">
+                            {offer.highlights.map((highlight, index) => (
+                              <li key={index}>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                  <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                {safeRender(highlight)}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               )}
 
@@ -918,14 +830,6 @@ function OfferPage() {
                     </div>
                   )}
 
-                  {/* Complete Journey Timeline - Shows flights, hotels, and cruise */}
-                  {offer.itinerary_detailed && Array.isArray(offer.itinerary_detailed) && offer.itinerary_detailed.length > 0 && (
-                    <JourneyTimeline 
-                      itinerary={offer.itinerary_detailed} 
-                      defaultExpanded={false}
-                    />
-                  )}
-
                   {/* Interactive Map with Integrated Day-by-Day Sidebar */}
                   {offer.itinerary_detailed && Array.isArray(offer.itinerary_detailed) && offer.itinerary_detailed.length > 0 && offer.show_itinerary_map !== false && (
                     <div className="offer-itinerary-map-section">
@@ -978,21 +882,20 @@ function OfferPage() {
                 )}
 
                 {offer.excludes && offer.excludes.length > 0 && (
-                  <div className="offer-section offer-section--excludes">
+                  <div className="offer-section offer-section--optional-extras">
                     <h2 className="offer-section__title">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <line x1="15" y1="9" x2="9" y2="15"/>
-                        <line x1="9" y1="9" x2="15" y2="15"/>
+                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                        <line x1="1" y1="10" x2="23" y2="10"/>
                       </svg>
-                      Not Included
+                      Optional Extras
                     </h2>
-                    <ul className="offer-excludes-list">
+                    <p className="offer-section__subtitle">Available to purchase separately to enhance your experience</p>
+                    <ul className="offer-optional-extras-list">
                       {offer.excludes.map((item, index) => (
                         <li key={index}>
                           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <line x1="18" y1="6" x2="6" y2="18"/>
-                            <line x1="6" y1="6" x2="18" y2="18"/>
+                            <path d="M12 2v20M2 12h20"/>
                           </svg>
                           {safeRender(item)}
                         </li>
@@ -1014,39 +917,64 @@ function OfferPage() {
               )}
 
               {/* V2: Accommodation Cards - Show if has hotel stays */}
-              {hasAccommodation(offer) && (
-                <div className="offer-section offer-accommodation-section">
-                  <h2 className="offer-section__title">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
-                      <path d="M1 21h22"/>
-                    </svg>
-                    Your Accommodation
-                  </h2>
-                  <div className="offer-accommodation-grid">
-                    {offer.pre_stay_hotel_name && (
-                      <AccommodationCard
-                        type="pre"
-                        hotelName={offer.pre_stay_hotel_name}
-                        stars={offer.pre_stay_hotel_stars}
-                        nights={offer.pre_stay_nights}
-                        location={offer.pre_stay_location}
-                        includes={offer.pre_stay_includes}
-                      />
-                    )}
-                    {offer.post_stay_hotel_name && (
-                      <AccommodationCard
-                        type="post"
-                        hotelName={offer.post_stay_hotel_name}
-                        stars={offer.post_stay_hotel_stars}
-                        nights={offer.post_stay_nights}
-                        location={offer.post_stay_location}
-                        includes={offer.post_stay_includes}
-                      />
-                    )}
+              {/* Supports multi-city packages via itinerary_detailed, with legacy fallback */}
+              {hasAccommodation(offer) && (() => {
+                const hotelStays = extractHotelStays(offer);
+                const hasItineraryHotels = hotelStays.length > 0;
+                
+                return (
+                  <div className="offer-section offer-accommodation-section">
+                    <h2 className="offer-section__title">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
+                        <path d="M1 21h22"/>
+                      </svg>
+                      Your Accommodation
+                    </h2>
+                    <div className="offer-accommodation-grid">
+                      {hasItineraryHotels ? (
+                        // Render from itinerary_detailed (supports multi-city)
+                        hotelStays.map((stay, index) => (
+                          <AccommodationCard
+                            key={`${stay.city}-${index}`}
+                            type={stay.segment}
+                            hotelName={stay.hotelName}
+                            stars={stay.stars}
+                            nights={stay.nights}
+                            city={stay.city}
+                            description={stay.description}
+                            includes={stay.includes}
+                          />
+                        ))
+                      ) : (
+                        // Fallback to legacy single-hotel fields
+                        <>
+                          {offer.pre_stay_hotel_name && (
+                            <AccommodationCard
+                              type="pre"
+                              hotelName={offer.pre_stay_hotel_name}
+                              stars={offer.pre_stay_hotel_stars}
+                              nights={offer.pre_stay_nights}
+                              location={offer.pre_stay_location}
+                              includes={offer.pre_stay_includes}
+                            />
+                          )}
+                          {offer.post_stay_hotel_name && (
+                            <AccommodationCard
+                              type="post"
+                              hotelName={offer.post_stay_hotel_name}
+                              stars={offer.post_stay_hotel_stars}
+                              nights={offer.post_stay_nights}
+                              location={offer.post_stay_location}
+                              includes={offer.post_stay_includes}
+                            />
+                          )}
+                        </>
+                      )}
+                    </div>
                   </div>
-                </div>
-              )}
+                );
+              })()}
 
               {/* V2: Solo Traveller Info */}
               {offer.solo_supplement && offer.solo_supplement > 0 && (
