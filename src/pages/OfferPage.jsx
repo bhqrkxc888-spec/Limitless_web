@@ -866,16 +866,16 @@ function OfferPage() {
                     </ul>
                   </div>
                 )}
-
-                {/* Not Included - subtle note at bottom (excludes) */}
-                {offer.excludes && offer.excludes.length > 0 && (
-                  <div className="offer-section offer-section--not-included">
-                    <p className="offer-not-included-note">
-                      <strong>Please note:</strong> {offer.excludes.join(', ')} are not included in the price.
-                    </p>
-                  </div>
-                )}
               </div>
+
+              {/* Full-Width Disclaimer - What's NOT Included */}
+              {offer.excludes && offer.excludes.length > 0 && (
+                <div className="offer-disclaimer-box">
+                  <p>
+                    <strong>Please note:</strong> {offer.excludes.join(', ')} are not included in the price.
+                  </p>
+                </div>
+              )}
 
               {/* V2: Airport Pricing List (only shows if multiple airports) */}
               {offer.airport_prices?.length > 1 && (

@@ -1564,23 +1564,35 @@
 
 /* Optional Extras styling is now unified with Includes above */
 
-/* Not Included - subtle note */
-.offer-section--not-included {
-  background: transparent;
-  padding: var(--space-4, 1rem) 0;
-  margin-top: var(--space-4, 1rem);
-  border-top: 1px solid var(--clr-border, #e2e8f0);
+/* Full-Width Disclaimer Box - What's NOT Included */
+.offer-disclaimer-box {
+  background: linear-gradient(135deg, #f6f8fa 0%, #ffffff 100%);
+  border: 1px solid var(--clr-border, #e2e8f0);
+  border-left: 4px solid var(--clr-primary, #2c5282);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-5, 1.5rem) var(--space-6, 2rem);
+  margin-top: var(--space-6, 2rem);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.offer-not-included-note {
-  font-size: 0.875rem;
-  color: var(--clr-text-muted, #718096);
-  margin: 0;
-  line-height: 1.5;
-}
-
-.offer-not-included-note strong {
+.offer-disclaimer-box p {
+  font-size: 0.9375rem;
   color: var(--clr-text-secondary, #4a5568);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.offer-disclaimer-box strong {
+  color: var(--clr-text-primary, #1a202c);
+  font-weight: 600;
+  margin-right: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  .offer-disclaimer-box {
+    padding: var(--space-4, 1rem) var(--space-5, 1.5rem);
+    font-size: 0.875rem;
+  }
 }
 
 /* Responsive for new sections */
