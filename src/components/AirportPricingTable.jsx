@@ -36,14 +36,6 @@ function AirportPricingList({ airportPrices, priceBasis = 'per_person' }) {
             <div className="airport-pricing-card__airport">
               {ap.name}
             </div>
-            {ap.direct === true && (
-              <div className="airport-pricing-card__flight-type">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{width: '16px', height: '16px'}}>
-                  <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
-                </svg>
-                Direct Flight
-              </div>
-            )}
             <div className="airport-pricing-card__price">
               {symbol}{formatPrice(ap.price)}
               {basisLabel && <span className="airport-pricing-card__basis">{basisLabel}</span>}
