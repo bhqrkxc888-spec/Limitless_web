@@ -94,7 +94,8 @@ export default defineConfig({
           // Granular node_modules splitting
           if (id.includes('node_modules')) {
             // Critical - React core (always needed)
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
+            // framer-motion must be with React to access React.createContext
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router') || id.includes('framer-motion')) {
               return 'react-vendor';
             }
             // Supabase client (large but needed)
