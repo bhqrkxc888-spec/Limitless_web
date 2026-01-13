@@ -121,12 +121,36 @@
   height: 14px;
 }
 
-/* Description (when no hotel name) */
+/* Description */
 .accommodation-card__description {
   font-size: var(--font-size-sm);
   color: var(--clr-text-muted);
   line-height: var(--line-height-relaxed);
   margin: 0 0 var(--space-3);
+}
+
+/* Amenities Badges */
+.accommodation-card__amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.accommodation-card__amenity {
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--clr-bg-alt);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--clr-text-muted);
+}
+
+.accommodation-card__amenity--more {
+  background: transparent;
+  color: var(--clr-text-light);
+  font-style: italic;
 }
 
 /* Includes List */

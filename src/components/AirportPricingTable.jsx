@@ -4,12 +4,12 @@
  */
 import './AirportPricingTable.css';
 
-function AirportPricingList({ airportPrices, currency = 'GBP', priceBasis = 'per_person' }) {
+function AirportPricingList({ airportPrices, priceBasis = 'per_person' }) {
   // Only show if we have multiple airports - single airport handled elsewhere
   if (!airportPrices || airportPrices.length <= 1) return null;
 
-  const currencySymbols = { GBP: '£', USD: '$', EUR: '€' };
-  const symbol = currencySymbols[currency] || '£';
+  // Always use GBP for UK market
+  const symbol = '£';
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('en-GB').format(price);

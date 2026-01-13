@@ -6,13 +6,12 @@ import './SoloTravellerInfo.css';
 
 function SoloTravellerInfo({ 
   soloSupplement, 
-  currency = 'GBP', 
   variant = 'default' 
 }) {
   if (!soloSupplement || soloSupplement <= 0) return null;
 
-  const currencySymbols = { GBP: '£', USD: '$', EUR: '€' };
-  const symbol = currencySymbols[currency] || '£';
+  // Always use GBP for UK market
+  const symbol = '£';
 
   const formatAmount = (value) => {
     return new Intl.NumberFormat('en-GB').format(value);

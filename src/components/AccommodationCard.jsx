@@ -12,7 +12,8 @@ function AccommodationCard({
   location,       // City/location name
   city,           // Alternative city prop (for itinerary-derived data)
   includes = [],
-  description     // Optional description from itinerary
+  description,    // Optional description from itinerary or manual entry
+  amenities = []  // Hotel amenities like Pool, Spa, Gym, etc.
 }) {
   // Support both hotelName and location-only cards
   const displayName = hotelName || location || city;
@@ -104,8 +105,25 @@ function AccommodationCard({
         )}
       </div>
 
-      {description && !hotelName && (
+      {/* Description - always show if present */}
+      {description && (
         <p className="accommodation-card__description">{description}</p>
+      )}
+
+      {/* Amenities as badges */}
+      {amenities?.length > 0 && (
+        <div className="accommodation-card__amenities">
+          {amenities.slice(0, 4).map((amenity, idx) => (
+            <span key={idx} className="accommodation-card__amenity">
+              {amenity}
+            </span>
+          ))}
+          {amenities.length > 4 && (
+            <span className="accommodation-card__amenity accommodation-card__amenity--more">
+              +{amenities.length - 4} more
+            </span>
+          )}
+        </div>
       )}
 
       {includes?.length > 0 && (

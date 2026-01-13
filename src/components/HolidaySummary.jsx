@@ -118,11 +118,10 @@ function formatSegmentData(segment) {
       else title = 'Outbound Flight'
       
       return {
-        icon: '✈️',
+        iconType: 'flight',
         title,
         subtitle: `${from} → ${to}`,
-        details: items.length > 1 ? `${items.length} flights` : null,
-        color: isInternal ? '#818cf8' : '#3b82f6'
+        details: items.length > 1 ? `${items.length} flights` : null
       }
     }
     
@@ -132,11 +131,10 @@ function formatSegmentData(segment) {
       const city = items[0].port || items[0].location || 'City'
       
       return {
-        icon: '🏨',
+        iconType: 'hotel',
         title: `${city} Stay`,
         subtitle: hotelName || 'Hotel included',
-        details: `${nights} night${nights > 1 ? 's' : ''}`,
-        color: '#f59e0b'
+        details: `${nights} night${nights > 1 ? 's' : ''}`
       }
     }
     
@@ -146,11 +144,10 @@ function formatSegmentData(segment) {
       const to = items[items.length - 1].port || items[items.length - 1].location || 'End'
       
       return {
-        icon: '🚂',
+        iconType: 'train',
         title: trainName,
         subtitle: `${from} → ${to}`,
-        details: items.length > 1 ? `${items.length} days` : null,
-        color: '#dc2626'
+        details: items.length > 1 ? `${items.length} days` : null
       }
     }
     
@@ -172,17 +169,54 @@ function formatSegmentData(segment) {
       const isRoundTrip = embarkPort === disembarkPort
       
       return {
-        icon: '🚢',
+        iconType: 'cruise',
         title: 'Cruise',
         subtitle: isRoundTrip ? `Round-trip from ${embarkPort}` : `${embarkPort} → ${disembarkPort}`,
-        details: `${nights} night${nights > 1 ? 's' : ''}`,
-        color: '#10b981'
+        details: `${nights} night${nights > 1 ? 's' : ''}`
       }
     }
     
     default:
       return null
   }
+}
+
+// SVG icons for each segment type - monochrome/gold theme
+const SegmentIcon = ({ type }) => {
+  const icons = {
+    flight: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+      </svg>
+    ),
+    hotel: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
+        <path d="M1 21h22"/>
+        <path d="M9 7h1M9 11h1M9 15h1M14 7h1M14 11h1M14 15h1"/>
+      </svg>
+    ),
+    train: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <rect x="4" y="3" width="16" height="16" rx="2"/>
+        <path d="M4 11h16"/>
+        <path d="M12 3v8"/>
+        <circle cx="8" cy="15" r="1"/>
+        <circle cx="16" cy="15" r="1"/>
+        <path d="M8 19l-2 3M16 19l2 3"/>
+      </svg>
+    ),
+    cruise: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1 .6-.5 1.2-1 2.5-1 2.5 0 2.5 2 5 2 1.3 0 1.9-.5 2.5-1"/>
+        <path d="M19.38 20A11.6 11.6 0 0 0 21 14l-9-4-9 4c0 2.9.94 5.34 2.81 7.76"/>
+        <path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6"/>
+        <path d="M12 10V4.5a.5.5 0 0 1 .5-.5h.5a2 2 0 0 1 2 2v2"/>
+      </svg>
+    )
+  }
+  
+  return icons[type] || icons.cruise
 }
 
 function HolidaySummary({ itinerary }) {
@@ -201,12 +235,9 @@ function HolidaySummary({ itinerary }) {
       <div className="holiday-summary__cards">
         {segments.map((segment, index) => (
           <React.Fragment key={index}>
-            <div 
-              className="holiday-summary__card"
-              style={{ borderTopColor: segment.color }}
-            >
-              <div className="holiday-summary__card-icon" style={{ color: segment.color }}>
-                {segment.icon}
+            <div className="holiday-summary__card">
+              <div className="holiday-summary__card-icon">
+                <SegmentIcon type={segment.iconType} />
               </div>
               <div className="holiday-summary__card-content">
                 <h3 className="holiday-summary__card-title">{segment.title}</h3>

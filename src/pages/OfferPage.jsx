@@ -137,11 +137,12 @@ function OfferPage() {
   }, [offer]);
 
   // Helper functions
-  const formatPrice = (price, currency = 'GBP') => {
+  // Always use GBP for UK market - ignore any other currency values
+  const formatPrice = (price) => {
     if (!price) return '';
     return new Intl.NumberFormat('en-GB', {
       style: 'currency',
-      currency: currency,
+      currency: 'GBP',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
     }).format(price);
@@ -347,7 +348,7 @@ function OfferPage() {
   const savingsDisplay = offer.savings_percentage
     ? `${offer.savings_percentage}%`
     : offer.savings_amount
-    ? formatPrice(offer.savings_amount, offer.currency)
+    ? formatPrice(offer.savings_amount)
     : null;
 
   return (
@@ -610,12 +611,12 @@ function OfferPage() {
                   {offer.original_price && (
                     <div className="offer-pricing-card__was">
                       <span className="label">Was</span>
-                      <span className="price">{formatPrice(offer.original_price, offer.currency)}</span>
+                      <span className="price">{formatPrice(offer.original_price)}</span>
                     </div>
                   )}
                   <div className="offer-pricing-card__now">
                     <span className="label">From</span>
-                    <span className="price">{formatPrice(getDisplayPrice(offer), offer.currency)}</span>
+                    <span className="price">{formatPrice(getDisplayPrice(offer))}</span>
                     {offer.price_basis === 'per_person' && (
                       <span className="basis">per person</span>
                     )}
@@ -633,7 +634,7 @@ function OfferPage() {
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                     </svg>
-                    <span>Secure with just {formatPrice(offer.deposit_amount, offer.currency)} deposit</span>
+                    <span>Secure with just {formatPrice(offer.deposit_amount)} deposit</span>
                   </div>
                 )}
                 
@@ -734,10 +735,10 @@ function OfferPage() {
       <section className="section offer-content-section">
         <div className="container">
           <div className="offer-single-column">
-              {/* Why This Cruise is Special - Combined 2-Column Layout */}
+              {/* Holiday Highlights - Combined 2-Column Layout */}
               {(offer.full_description || (offer.highlights && offer.highlights.length > 0)) && (
-                <div className="offer-section offer-section--why-special">
-                  <h2 className="offer-section__title offer-section__title--large">Why This Cruise is Special</h2>
+                <div className="offer-section offer-section--highlights">
+                  <h2 className="offer-section__title offer-section__title--large">Holiday Highlights</h2>
                   <div className="offer-why-special-grid">
                     {/* Left Column: Description (60%) */}
                     {offer.full_description && (
@@ -819,18 +820,9 @@ function OfferPage() {
                   {offer.itinerary_summary && (
                     <p className="offer-itinerary-summary">{offer.itinerary_summary}</p>
                   )}
-                  
-                  {offer.ports_of_call && offer.ports_of_call.length > 0 && (
-                    <div className="offer-ports">
-                      <div className="offer-ports-list">
-                        {offer.ports_of_call.map((port, idx) => (
-                          <span key={idx} className="offer-port-tag">{safeRender(port)}</span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
 
                   {/* Interactive Map with Integrated Day-by-Day Sidebar */}
+                  {/* Note: Port pills removed - redundant with map sidebar */}
                   {offer.itinerary_detailed && Array.isArray(offer.itinerary_detailed) && offer.itinerary_detailed.length > 0 && offer.show_itinerary_map !== false && (
                     <div className="offer-itinerary-map-section">
                       <Suspense fallback={
@@ -910,7 +902,6 @@ function OfferPage() {
                 <div className="offer-section" id="airport-pricing">
                   <AirportPricingList 
                     airportPrices={offer.airport_prices}
-                    currency={offer.currency}
                     priceBasis={offer.price_basis}
                   />
                 </div>
@@ -981,7 +972,6 @@ function OfferPage() {
                 <div className="offer-section">
                   <SoloTravellerInfo 
                     soloSupplement={offer.solo_supplement}
-                    currency={offer.currency}
                     variant="default"
                   />
                 </div>
