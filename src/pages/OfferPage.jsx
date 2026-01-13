@@ -632,7 +632,7 @@ function OfferPage() {
                 {offer.deposit_amount && (
                   <div className="offer-pricing-card__deposit">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                      <text x="12" y="17" textAnchor="middle" fontSize="14" fontWeight="600" fill="currentColor" stroke="none">£</text>
                     </svg>
                     <span>Secure with just {formatPrice(offer.deposit_amount)} deposit</span>
                   </div>
@@ -678,39 +678,25 @@ function OfferPage() {
                   </Button>
                 </div>
                 
-                {/* Financial Protection Badges */}
+                {/* Financial Protection Badges - Using actual logos */}
                 {(offer.abta_protected !== false || offer.atol_protected || offer.includes_flight) && (
                   <div className="offer-pricing-card__protection">
                     <span className="protection-label">Your booking is protected</span>
                     <div className="protection-badges">
-                      {offer.abta_protected !== false && (
+                      {offer.abta_protected !== false && trustBadges.abta.logoUrl && (
                         <div className="protection-badge protection-badge--abta" title="ABTA Protected">
-                          {trustBadges.abta.logoUrl ? (
-                            <img 
-                              src={trustBadges.abta.logoUrl} 
-                              alt="ABTA Protected" 
-                              style={trustBadges.abta.invert ? { filter: 'brightness(0) invert(1)' } : {}}
-                              onError={(e) => { e.target.style.display = 'none'; if(e.target.nextSibling) e.target.nextSibling.style.display = 'flex'; }}
-                            />
-                          ) : null}
-                          <span className="protection-badge__text" style={trustBadges.abta.logoUrl ? { display: 'none' } : {}}>
-                            ABTA {offer.abta_number || trustBadges.abta.number || ''}
-                          </span>
+                          <img 
+                            src={trustBadges.abta.logoUrl} 
+                            alt="ABTA Protected"
+                          />
                         </div>
                       )}
-                      {(offer.atol_protected || offer.includes_flight) && trustBadges.atol.enabled && (
+                      {(offer.atol_protected || offer.includes_flight) && trustBadges.atol.logoUrl && (
                         <div className="protection-badge protection-badge--atol" title="ATOL Protected">
-                          {trustBadges.atol.logoUrl ? (
-                            <img 
-                              src={trustBadges.atol.logoUrl} 
-                              alt="ATOL Protected"
-                              style={trustBadges.atol.invert ? { filter: 'brightness(0) invert(1)' } : {}}
-                              onError={(e) => { e.target.style.display = 'none'; if(e.target.nextSibling) e.target.nextSibling.style.display = 'flex'; }}
-                            />
-                          ) : null}
-                          <span className="protection-badge__text" style={trustBadges.atol.logoUrl ? { display: 'none' } : {}}>
-                            ATOL {offer.atol_number || trustBadges.atol.number || ''}
-                          </span>
+                          <img 
+                            src={trustBadges.atol.logoUrl} 
+                            alt="ATOL Protected"
+                          />
                         </div>
                       )}
                     </div>

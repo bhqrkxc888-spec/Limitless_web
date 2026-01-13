@@ -102,15 +102,13 @@ function formatSegmentData(segment) {
   switch (type) {
     case 'flight': {
       const first = items[0]
-      const last = items[items.length - 1]
       
       // Determine flight type from subType or phase
       const isReturn = subType === 'flight_return' || phase === 'post_cruise'
       const isInternal = subType === 'flight_internal'
       
-      // Extract from/to from port names
-      const from = first.port || first.location || 'Departure'
-      const to = last.port || last.location || 'Arrival'
+      // Extract departure airport only
+      const departFrom = first.port || first.location || 'Airport'
       
       let title = 'Flight'
       if (isReturn) title = 'Return Flight'
@@ -120,8 +118,8 @@ function formatSegmentData(segment) {
       return {
         iconType: 'flight',
         title,
-        subtitle: `${from} → ${to}`,
-        details: items.length > 1 ? `${items.length} flights` : null
+        subtitle: `Depart: ${departFrom}`,
+        details: null
       }
     }
     
