@@ -27,10 +27,10 @@
 }
 
 .holiday-summary__card {
-  flex: 1 1 180px;
-  min-width: 160px;
-  max-width: 200px;
-  min-height: 160px;
+  flex: 1 1 0;
+  min-width: 180px;
+  width: 100%;
+  min-height: 170px;
   background: var(--clr-surface, #ffffff);
   border-radius: var(--radius-lg, 12px);
   border: 1px solid var(--clr-border, #e2e8f0);

@@ -631,9 +631,6 @@ function OfferPage() {
                 {/* V2: Deposit Info */}
                 {offer.deposit_amount && (
                   <div className="offer-pricing-card__deposit">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <text x="12" y="17" textAnchor="middle" fontSize="14" fontWeight="600" fill="currentColor" stroke="none">£</text>
-                    </svg>
                     <span>Secure with just {formatPrice(offer.deposit_amount)} deposit</span>
                   </div>
                 )}
@@ -721,46 +718,34 @@ function OfferPage() {
       <section className="section offer-content-section">
         <div className="container">
           <div className="offer-single-column">
-              {/* Holiday Highlights - Combined 2-Column Layout */}
+              {/* Holiday Highlights - Single Column Layout */}
               {(offer.full_description || (offer.highlights && offer.highlights.length > 0)) && (
                 <div className="offer-section offer-section--highlights">
                   <h2 className="offer-section__title offer-section__title--large">Holiday Highlights</h2>
-                  <div className="offer-why-special-grid">
-                    {/* Left Column: Description (60%) */}
-                    {offer.full_description && (
-                      <div className="offer-why-special-description">
-                        <div 
-                          className="offer-description-content"
-                          dangerouslySetInnerHTML={createSanitizedMarkup(offer.full_description)}
-                        />
-                      </div>
-                    )}
-                    
-                    {/* Right Column: Highlights (40%) */}
-                    {offer.highlights && offer.highlights.length > 0 && (
-                      <div className="offer-why-special-highlights">
-                        <div className="offer-highlights-card">
-                          <h3 className="offer-highlights-card__title">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
-                            </svg>
-                            Highlights
-                          </h3>
-                          <ul className="offer-highlights-list">
-                            {offer.highlights.map((highlight, index) => (
-                              <li key={index}>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                  <polyline points="22 4 12 14.01 9 11.01"/>
-                                </svg>
-                                {safeRender(highlight)}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    )}
-                  </div>
+                  
+                  {/* Description Paragraphs */}
+                  {offer.full_description && (
+                    <div className="offer-description-content">
+                      <div 
+                        dangerouslySetInnerHTML={createSanitizedMarkup(offer.full_description)}
+                      />
+                    </div>
+                  )}
+                  
+                  {/* Highlights List - Below Description */}
+                  {offer.highlights && offer.highlights.length > 0 && (
+                    <ul className="offer-highlights-list" style={{ marginTop: '2rem' }}>
+                      {offer.highlights.map((highlight, index) => (
+                        <li key={index}>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                          </svg>
+                          {safeRender(highlight)}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               )}
 
@@ -868,7 +853,6 @@ function OfferPage() {
                       </svg>
                       Optional Extras
                     </h2>
-                    <p className="offer-section__subtitle">Available to purchase separately to enhance your experience</p>
                     <ul className="offer-optional-extras-list">
                       {offer.excludes.map((item, index) => (
                         <li key={index}>
