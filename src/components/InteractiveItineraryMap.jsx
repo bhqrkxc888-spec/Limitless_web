@@ -88,9 +88,14 @@ const inferItemType = (item) => {
 
 // Check if an item type should appear on the cruise map
 const isCruiseMapItem = (itemType) => {
-  if (NON_CRUISE_TYPES.includes(itemType)) return false;
-  if (CRUISE_TYPES.includes(itemType)) return true;
-  return !itemType || itemType === 'port';
+  if (!itemType) return true;
+  
+  // Normalize to lowercase and handle underscores
+  const normalizedType = itemType.toLowerCase().replace(/_/g, '_');
+  
+  if (NON_CRUISE_TYPES.includes(normalizedType)) return false;
+  if (CRUISE_TYPES.includes(normalizedType)) return true;
+  return normalizedType === 'port';
 };
 
 function InteractiveItineraryMap({ itinerary }) {
@@ -933,14 +938,16 @@ function InteractiveItineraryMap({ itinerary }) {
                   {itinerary.map((day, index) => {
                     const isSeaDay = day.is_sea_day || 
                                    day.type === 'sea' || 
+                                   day.type === 'SEA' ||
                                    (day.port || '').toLowerCase().includes('at sea') ||
                                    (day.port || '').toLowerCase().includes('cruising');
                     
                     const portIndex = ports.findIndex(p => p.day === day.day);
                     const isClickable = !isSeaDay && portIndex !== -1;
                     
-                    // Determine day type for icon
-                    const dayType = day.type || (isSeaDay ? 'sea' : 'port');
+                    // Determine day type for icon - normalize to lowercase for comparison
+                    const rawType = day.type || (isSeaDay ? 'sea' : 'port');
+                    const dayType = rawType.toLowerCase().replace(/_/g, '_');
                     
                     const handleDayClick = (e) => {
                       if (!isClickable) return;
@@ -965,7 +972,7 @@ function InteractiveItineraryMap({ itinerary }) {
                         tabIndex={isClickable ? 0 : undefined}
                       >
                         <div className="day-icon">
-                          {(dayType === 'flight' || dayType === 'fly') && (
+                          {(dayType === 'flight' || dayType === 'flight_out' || dayType === 'flight_return' || dayType === 'fly') && (
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                               <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
                             </svg>
@@ -991,7 +998,7 @@ function InteractiveItineraryMap({ itinerary }) {
                               <circle cx="16" cy="15" r="1"/>
                             </svg>
                           )}
-                          {(dayType === 'port' || dayType === 'embark' || dayType === 'disembark') && (
+                          {(dayType === 'port' || dayType === 'embark' || dayType === 'embarkation' || dayType === 'disembark' || dayType === 'disembarkation' || dayType === 'private_island') && (
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                               <path d="M12 6.5v7.5M19 13.5c0-4-7-7-7-7s-7 3-7 7c0 1.66 7 4 7 4s7-2.34 7-4z"/>
                               <path d="M1 20h22"/>
@@ -1154,16 +1161,18 @@ function InteractiveItineraryMap({ itinerary }) {
               {itinerary.map((day, index) => {
                 const isSeaDay = day.is_sea_day || 
                                day.type === 'sea' || 
+                               day.type === 'SEA' ||
                                (day.port || '').toLowerCase().includes('at sea') ||
                                (day.port || '').toLowerCase().includes('cruising');
                 
-                const dayType = day.type || (isSeaDay ? 'sea' : 'port');
+                const rawType = day.type || (isSeaDay ? 'sea' : 'port');
+                const dayType = rawType.toLowerCase().replace(/_/g, '_');
                 
                 return (
                   <tr key={index} className={isSeaDay ? 'sea-day-row' : 'port-day-row'}>
                     <td className="stop-cell">
                       <div className="stop-icon">
-                        {(dayType === 'flight' || dayType === 'fly') && (
+                        {(dayType === 'flight' || dayType === 'flight_out' || dayType === 'flight_return' || dayType === 'fly') && (
                           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
                           </svg>
@@ -1189,7 +1198,7 @@ function InteractiveItineraryMap({ itinerary }) {
                             <circle cx="16" cy="15" r="1"/>
                           </svg>
                         )}
-                        {(dayType === 'port' || dayType === 'embark' || dayType === 'disembark') && (
+                        {(dayType === 'port' || dayType === 'embark' || dayType === 'embarkation' || dayType === 'disembark' || dayType === 'disembarkation' || dayType === 'private_island') && (
                           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                             <path d="M12 6.5v7.5M19 13.5c0-4-7-7-7-7s-7 3-7 7c0 1.66 7 4 7 4s7-2.34 7-4z"/>
                             <path d="M1 20h22"/>
