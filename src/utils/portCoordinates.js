@@ -2958,26 +2958,41 @@ export function getPortCoordinates(portName, contextLat = null, contextLon = nul
   }
   
   // 2. COLLECT ALL PARTIAL MATCHES
-  // E.g., "Sydney" → ["Sydney", "Sydney, Nova Scotia", "Sydney, Australia"]
-  // E.g., "Perfect Day at CocoCay, Bahamas" → ["CocoCay"] (search contains key)
-  const allMatches = Object.keys(KNOWN_PORT_COORDINATES).filter(key => {
+  // Priority: exact base match > search contains key > key contains search
+  const allMatches = [];
+  const exactBaseMatches = [];
+  const searchContainsKeyMatches = [];
+  
+  for (const key of Object.keys(KNOWN_PORT_COORDINATES)) {
     const keyLower = key.toLowerCase();
     const keyBase = keyLower.split(',')[0].trim(); // "Sydney, Nova Scotia" → "sydney"
-    const searchBase = normalized.split(',')[0].trim();
+    const searchBase = normalized.split(',')[0].trim(); // "Orlando, Florida" → "orlando"
     
-    // Match if:
-    // - Key contains search (e.g., "Sydney, Nova Scotia" contains "Sydney")
-    // - OR base names match (e.g., "Sydney" base = "sydney")
-    // - OR search contains key (e.g., "Perfect Day at CocoCay" contains "CocoCay") ← NEW!
-    // - OR search contains key base (e.g., "Perfect Day at CocoCay, Bahamas" contains "cococay")
-    return keyLower.includes(searchBase) || 
-           keyBase === searchBase ||
-           searchBase.includes(keyBase) ||
-           normalized.includes(keyBase);
-  });
+    // Priority 1: Exact base name match (highest priority)
+    // "Orlando" matches "Orlando" exactly, NOT "Capo d'Orlando"
+    if (keyBase === searchBase) {
+      exactBaseMatches.push(key);
+    }
+    // Priority 2: Search term CONTAINS the key (search is more specific)
+    // "Perfect Day at CocoCay" contains "CocoCay" - GOOD
+    // But "Orlando" does NOT contain "Capo d'Orlando" - SKIP
+    else if (searchBase.includes(keyBase) && keyBase.length >= 4) {
+      // Only match if key base is at least 4 chars (avoid matching "At", "Bay", etc.)
+      searchContainsKeyMatches.push(key);
+    }
+    // Priority 3: Key contains search BUT key starts with search (not just contains anywhere)
+    // "Sydney, Nova Scotia" starts with "Sydney" - GOOD
+    // "Capo d'Orlando" does NOT start with "Orlando" - SKIP
+    else if (keyBase.startsWith(searchBase)) {
+      allMatches.push(key);
+    }
+  }
+  
+  // Combine in priority order: exact base matches first, then search-contains-key, then starts-with
+  const combinedMatches = [...exactBaseMatches, ...searchContainsKeyMatches, ...allMatches];
   
   // 3. NO MATCHES - Try without parentheses
-  if (allMatches.length === 0) {
+  if (combinedMatches.length === 0) {
     const withoutParens = normalized.replace(/\([^)]+\)/g, '').trim();
     if (withoutParens !== normalized) {
       const match = Object.keys(KNOWN_PORT_COORDINATES).find(
@@ -3006,19 +3021,27 @@ export function getPortCoordinates(portName, contextLat = null, contextLon = nul
     return null;
   }
   
-  // 4. SINGLE MATCH - Return it
-  if (allMatches.length === 1) {
-    const match = allMatches[0];
+  // 4. SINGLE MATCH - Return it (prefer exact base matches)
+  if (combinedMatches.length === 1) {
+    const match = combinedMatches[0];
+    return { ...KNOWN_PORT_COORDINATES[match], name: match };
+  }
+  
+  // 4b. If we have exact base matches, prefer them over fuzzy matches
+  if (exactBaseMatches.length > 0) {
+    // Return first exact base match
+    const match = exactBaseMatches[0];
+    console.log(`✅ Exact base match: "${portName}" → "${match}"`);
     return { ...KNOWN_PORT_COORDINATES[match], name: match };
   }
   
   // 5. MULTIPLE MATCHES - Use geographic proximity if context provided
-  if (contextLat !== null && contextLon !== null) {
+  if (contextLat !== null && contextLon !== null && combinedMatches.length > 0) {
     // Find closest match to context coordinates
     let closestMatch = null;
     let closestDistance = Infinity;
     
-    for (const match of allMatches) {
+    for (const match of combinedMatches) {
       const coords = KNOWN_PORT_COORDINATES[match];
       const distance = calculateDistance(contextLat, contextLon, coords.lat, coords.lon);
       
@@ -3034,11 +3057,16 @@ export function getPortCoordinates(portName, contextLat = null, contextLon = nul
     }
   }
   
-  // 6. MULTIPLE MATCHES - Return all for manual selection
-  console.warn(`⚠️ Ambiguous port "${portName}" - found ${allMatches.length} matches:`, allMatches);
-  return allMatches.map(match => ({
-    ...KNOWN_PORT_COORDINATES[match],
-    name: match,
-    _ambiguous: true
-  }));
+  // 6. Return first match if we have any
+  if (combinedMatches.length > 0) {
+    const match = combinedMatches[0];
+    if (combinedMatches.length > 1) {
+      console.warn(`⚠️ Multiple matches for "${portName}", using first: "${match}"`);
+    }
+    return { ...KNOWN_PORT_COORDINATES[match], name: match };
+  }
+  
+  // 7. No matches found
+  console.warn(`❌ No port match found for "${portName}"`);
+  return null;
 }
