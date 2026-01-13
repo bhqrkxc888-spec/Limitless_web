@@ -359,7 +359,7 @@ function OfferPage() {
         description={offer.meta_description || offer.short_description || offer.full_description}
         canonical={`https://www.limitlesscruises.com/offers/${offer.slug}`}
         keywords={offer.meta_keywords?.join(', ') || ''}
-        image={galleryImages[0]?.url}
+        image={offer.card_image_url || galleryImages[0]?.url}
         structuredData={structuredData}
       />
 
