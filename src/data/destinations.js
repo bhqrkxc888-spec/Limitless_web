@@ -1820,6 +1820,9 @@ export const destinations = [
       }
     ]
   }
+];
+
+// Helper functions
 export const getDestinationBySlug = (slug) => destinations.find(d => d.slug === slug);
 export const getFeaturedDestinations = () => destinations.filter(d => d.featured);
 export const getAllDestinations = () => destinations;
