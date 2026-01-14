@@ -71,11 +71,7 @@ function ConsentBanner({ onAccept }) {
         <h2>Chat with Captain Cruise</h2>
         
         <div className="consent-info">
-          <p><strong>To get started, we need your contact details:</strong></p>
-          <p className="consent-info-text">
-            This ensures we can send you accurate quotes and follow up on your enquiry. 
-            Your information is handled securely and in compliance with GDPR.
-          </p>
+          <p>This ensures we can send you accurate quotes and follow up on your enquiry.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="consent-form">
@@ -109,26 +105,11 @@ function ConsentBanner({ onAccept }) {
             {errors.email && <span className="error-message">{errors.email}</span>}
           </div>
 
-          <div className="form-group">
-            <label htmlFor="phone">
-              Phone Number <span className="optional">(optional)</span>
-            </label>
-            <input
-              type="tel"
-              id="phone"
-              value={formData.phone}
-              onChange={(e) => handleChange('phone', e.target.value)}
-              placeholder="07700 900123"
-            />
-            <small className="help-text">For WhatsApp updates (optional)</small>
-          </div>
-
           <div className="consent-disclaimer">
-            <p><small>
+            <p>
               <strong>Note:</strong> Captain Cruise provides general travel advice. 
-              Final prices, availability, and arrangements confirmed by our consultants. 
-              Conversations are not saved after enquiry submission.
-            </small></p>
+              Final prices and availability confirmed by your consultant.
+            </p>
           </div>
 
           {/* GDPR Consent Checkbox */}
