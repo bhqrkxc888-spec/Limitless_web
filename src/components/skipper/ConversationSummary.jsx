@@ -10,31 +10,71 @@ function ConversationSummary({ collectedData }) {
 
   // Destinations & Cruise
   if (collectedData.destinations || collectedData.cruise_line_prefs) {
+    const cruiseItems = [];
+    
+    // Handle destinations array
     const destination = Array.isArray(collectedData.destinations) 
       ? collectedData.destinations.join(', ') 
       : collectedData.destinations;
+    if (destination) cruiseItems.push(`📍 ${destination}`);
     
-    sections.push({
-      title: '⛵ Cruise & Destination',
-      items: [
-        destination && `📍 ${destination}`,
-        collectedData.cruise_line_prefs && `🚢 ${collectedData.cruise_line_prefs}`,
-        collectedData.cabin_type && `🛏️ Cabin: ${collectedData.cabin_type}`,
-        collectedData.deck_preference && `📊 Deck: ${collectedData.deck_preference}`,
-        collectedData.cabin_location && `📍 Location: ${collectedData.cabin_location}`,
-      ].filter(Boolean)
-    });
+    // Handle alternative_destinations array
+    if (collectedData.alternative_destinations && Array.isArray(collectedData.alternative_destinations)) {
+      const alts = collectedData.alternative_destinations.join(', ');
+      cruiseItems.push(`📍 Also considering: ${alts}`);
+    }
+    
+    if (collectedData.cruise_line_prefs) cruiseItems.push(`🚢 ${collectedData.cruise_line_prefs}`);
+    
+    // Handle cabin_preferences array
+    if (collectedData.cabin_preferences && Array.isArray(collectedData.cabin_preferences)) {
+      collectedData.cabin_preferences.forEach(pref => {
+        let cabinStr = `🛏️ ${pref.type}`;
+        if (pref.location) cabinStr += ` (${pref.location})`;
+        if (pref.priority) cabinStr += ` - ${pref.priority} priority`;
+        cruiseItems.push(cabinStr);
+      });
+    } else {
+      if (collectedData.cabin_type) cruiseItems.push(`🛏️ Cabin: ${collectedData.cabin_type}`);
+      if (collectedData.cabin_location) cruiseItems.push(`📍 Location: ${collectedData.cabin_location}`);
+    }
+    
+    if (collectedData.deck_preference) cruiseItems.push(`📊 Deck: ${collectedData.deck_preference}`);
+    
+    if (cruiseItems.length > 0) {
+      sections.push({
+        title: '⛵ Cruise & Destination',
+        items: cruiseItems
+      });
+    }
   }
 
   // Travel Dates
-  if (collectedData.timeframe) {
-    sections.push({
-      title: '📅 When',
-      items: [
-        collectedData.timeframe,
-        collectedData.school_holiday_constraint && '🏫 School holidays required'
-      ].filter(Boolean)
-    });
+  if (collectedData.timeframe || (collectedData.timeframes && Array.isArray(collectedData.timeframes))) {
+    const dateItems = [];
+    
+    // Handle timeframes array
+    if (collectedData.timeframes && Array.isArray(collectedData.timeframes)) {
+      collectedData.timeframes.forEach(tf => {
+        let dateStr = tf.value;
+        if (tf.primary) dateStr += ' (preferred)';
+        if (tf.confirmed === false) dateStr += ' (flexible)';
+        dateItems.push(dateStr);
+      });
+    } else if (collectedData.timeframe) {
+      dateItems.push(collectedData.timeframe);
+    }
+    
+    if (collectedData.school_holiday_constraint) {
+      dateItems.push('🏫 School holidays required');
+    }
+    
+    if (dateItems.length > 0) {
+      sections.push({
+        title: '📅 When',
+        items: dateItems
+      });
+    }
   }
 
   // Travelers
@@ -51,18 +91,39 @@ function ConversationSummary({ collectedData }) {
   }
 
   // Flights
-  if (collectedData.wants_flights !== false && (collectedData.flight_class || collectedData.preferred_airline)) {
-    sections.push({
-      title: '✈️ Flights',
-      items: [
-        collectedData.flight_class && `Class: ${collectedData.flight_class}`,
-        collectedData.preferred_airline && `Airline: ${collectedData.preferred_airline}`,
-        collectedData.preferred_airports && `Departure: ${collectedData.preferred_airports}`,
-        collectedData.flight_connections && `Connections: ${collectedData.flight_connections}`,
-        collectedData.layover_hotel && `Layover hotel: ${collectedData.layover_hotel}`,
-        collectedData.seat_preferences && `Seats: ${collectedData.seat_preferences}`
-      ].filter(Boolean)
-    });
+  if (collectedData.wants_flights !== false && (collectedData.flight_class || collectedData.flight_class_preferences || collectedData.preferred_airline)) {
+    const flightItems = [];
+    
+    // Handle flight_class_preferences array
+    if (collectedData.flight_class_preferences && Array.isArray(collectedData.flight_class_preferences)) {
+      const prefs = collectedData.flight_class_preferences.map(p => 
+        p.acceptable ? `${p.preferred} (or ${p.acceptable})` : p.preferred
+      ).join(', ');
+      flightItems.push(`Class: ${prefs}`);
+    } else if (collectedData.flight_class) {
+      flightItems.push(`Class: ${collectedData.flight_class}`);
+    }
+    
+    if (collectedData.preferred_airline) flightItems.push(`Airline: ${collectedData.preferred_airline}`);
+    
+    // Handle preferred_airports array
+    if (collectedData.preferred_airports) {
+      const airports = Array.isArray(collectedData.preferred_airports) 
+        ? collectedData.preferred_airports.join(', ') 
+        : collectedData.preferred_airports;
+      flightItems.push(`Departure: ${airports}`);
+    }
+    
+    if (collectedData.flight_connections) flightItems.push(`Connections: ${collectedData.flight_connections}`);
+    if (collectedData.layover_hotel) flightItems.push(`Layover hotel: ${collectedData.layover_hotel}`);
+    if (collectedData.seat_preferences) flightItems.push(`Seats: ${collectedData.seat_preferences}`);
+    
+    if (flightItems.length > 0) {
+      sections.push({
+        title: '✈️ Flights',
+        items: flightItems
+      });
+    }
   }
 
   // Hotels
