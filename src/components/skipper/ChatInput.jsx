@@ -23,7 +23,7 @@ function ChatInput({ onSend, disabled, readyToSubmit, submitted, onSubmit, onCon
     return (
       <div className="chat-input submit-ready">
         <div className="submit-prompt">
-          <p>✅ I have all the information I need! Ready to submit your enquiry?</p>
+          <p>You've confirmed your requirements. Ready to submit your enquiry to your cruise consultant?</p>
           <div className="submit-buttons">
             <button 
               className="btn-submit" 
