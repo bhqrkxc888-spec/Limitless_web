@@ -4,10 +4,12 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader } from '../components/ui';
-import { useDestinationImage } from '../hooks/useImageUrl';
+import { useDestinationImage, usePageHeroImage } from '../hooks/useImageUrl';
 import './DestinationsPage.css';
 
 function DestinationsPage() {
+  // Get page hero image
+  const { imageUrl: heroImage } = usePageHeroImage('destinations');
   // Use data/destinations for full details, but map slugs from config/destinations for images
   // Create a mapping of full data with correct image slugs
   const destinations = destinationsData.map(dest => {
@@ -90,6 +92,8 @@ function DestinationsPage() {
       <HeroSection
         title="Explore Remarkable Destinations"
         subtitle="From sun-soaked Mediterranean ports to dramatic Norwegian fjords, explore the world's most captivating cruise destinations with expert consultant guidance."
+        image={heroImage}
+        imageAlt="Cruise destinations around the world"
         size="md"
         align="center"
       />

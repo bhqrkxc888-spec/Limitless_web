@@ -20,7 +20,7 @@ const PAGE_HEROES = [
     type: 'page-hero-destinations', 
     label: 'Destinations Page Hero', 
     required: false, 
-    dimensions: '1920×1080px (16:9 ratio)',
+    dimensions: '1920×400px (narrower hero)',
     description: 'Hero image for the main Destinations listing page',
     pageUrl: '/destinations'
   },
@@ -29,7 +29,7 @@ const PAGE_HEROES = [
     type: 'page-hero-bucket-list', 
     label: 'Bucket List Page Hero', 
     required: false, 
-    dimensions: '1920×1080px (16:9 ratio)',
+    dimensions: '1920×400px (narrower hero)',
     description: 'Hero image for the main Bucket List experiences page',
     pageUrl: '/bucket-list'
   },
@@ -38,7 +38,7 @@ const PAGE_HEROES = [
     type: 'page-hero-cruise-lines', 
     label: 'Cruise Lines Page Hero', 
     required: false, 
-    dimensions: '1920×1080px (16:9 ratio)',
+    dimensions: '1920×400px (narrower hero)',
     description: 'Hero image for the main Cruise Lines listing page',
     pageUrl: '/cruise-lines'
   },
@@ -47,7 +47,7 @@ const PAGE_HEROES = [
     type: 'page-hero-cruise-types', 
     label: 'Cruise Types Page Hero', 
     required: false, 
-    dimensions: '1920×1080px (16:9 ratio)',
+    dimensions: '1920×400px (narrower hero)',
     description: 'Hero image for the main Cruise Types page',
     pageUrl: '/cruise-types'
   },
@@ -56,7 +56,7 @@ const PAGE_HEROES = [
     type: 'page-hero-ports', 
     label: 'Port Guides Page Hero', 
     required: false, 
-    dimensions: '1920×1080px (16:9 ratio)',
+    dimensions: '1920×400px (narrower hero)',
     description: 'Hero image for the main Port Guides listing page',
     pageUrl: '/ports'
   },
@@ -65,7 +65,7 @@ const PAGE_HEROES = [
     type: 'page-hero-cruise-guides', 
     label: 'Cruise Guides Page Hero', 
     required: false, 
-    dimensions: '1920×1080px (16:9 ratio)',
+    dimensions: '1920×400px (narrower hero)',
     description: 'Hero image for the main Cruise Guides listing page',
     pageUrl: '/cruise-guides'
   },

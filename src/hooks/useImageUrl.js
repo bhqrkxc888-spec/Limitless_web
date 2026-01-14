@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from 'react';
 import { getImageUrlFromDb } from '../utils/imageLoader';
-import { getDestinationImageUrl, getBucketListImageUrl, getCruiseLineImageUrl, getShipImageUrl } from '../config/assetUrls';
+import { getDestinationImageUrl, getBucketListImageUrl, getCruiseLineImageUrl, getShipImageUrl, getPageHeroImageUrl } from '../config/assetUrls';
 import { PLACEHOLDER_IMAGE } from '../config/assetUrls';
 import { getImageSlugForDestination } from '../config/destinationSlugMapping';
 
@@ -273,3 +273,58 @@ export function useShipImage(cruiseLineSlug, shipSlug, type = 'card', shipName =
   return { imageUrl, loading, isPlaceholder };
 }
 
+/**
+ * Hook to get page hero image URL (for listing pages like /destinations, /cruise-types, /bucket-list)
+ */
+export function usePageHeroImage(slug) {
+  const [imageUrl, setImageUrl] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [hasImage, setHasImage] = useState(false);
+
+  useEffect(() => {
+    if (!slug) {
+      setImageUrl(null);
+      setLoading(false);
+      setHasImage(false);
+      return;
+    }
+
+    // Page heroes are stored with entity_type='site', entity_id='site', image_type='page-hero-{slug}'
+    const imageType = `page-hero-${slug}`;
+    const fallback = getPageHeroImageUrl(slug);
+    
+    getImageUrlFromDb('site', 'site', imageType, fallback)
+      .then(url => {
+        // Check if image actually exists (not a placeholder or error)
+        if (url && !url.includes('placeholder')) {
+          // Test if image is accessible
+          return fetch(url, { method: 'HEAD' })
+            .then(response => {
+              if (response.ok) {
+                setImageUrl(url);
+                setHasImage(true);
+              } else {
+                setImageUrl(null);
+                setHasImage(false);
+              }
+            })
+            .catch(() => {
+              setImageUrl(null);
+              setHasImage(false);
+            });
+        } else {
+          setImageUrl(null);
+          setHasImage(false);
+        }
+      })
+      .catch(() => {
+        setImageUrl(null);
+        setHasImage(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [slug]);
+
+  return { imageUrl, loading, hasImage };
+}

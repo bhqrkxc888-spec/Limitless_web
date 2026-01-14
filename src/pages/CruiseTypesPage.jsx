@@ -5,6 +5,7 @@ import HeroSection from '../components/HeroSection';
 import { Button, SectionHeader } from '../components/ui';
 import OptimizedImage from '../components/OptimizedImage';
 import { getCruiseTypeCard } from '../utils/assetHelpers';
+import { usePageHeroImage } from '../hooks/useImageUrl';
 import './CruiseTypesPage.css';
 
 // Icon components for each cruise type
@@ -67,6 +68,8 @@ const CruiseTypeIcon = ({ type }) => {
 };
 
 function CruiseTypesPage() {
+  // Get page hero image
+  const { imageUrl: heroImage } = usePageHeroImage('cruise-types');
   const featuredTypes = getFeaturedCruiseTypes();
 
   // Structured Data for SEO
@@ -134,6 +137,8 @@ function CruiseTypesPage() {
       <HeroSection
         title="Find Your Perfect Cruise Style"
         subtitle="Whether you're seeking family fun, adults-only tranquillity, luxury indulgence, or expedition adventure - there's a cruise type tailored just for you."
+        image={heroImage}
+        imageAlt="Different types of cruise holidays"
         size="md"
         align="center"
       />

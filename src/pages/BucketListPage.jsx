@@ -4,10 +4,12 @@ import SEO from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import { Button, Card, SectionHeader } from '../components/ui';
 import { useState, useEffect } from 'react';
-import { useBucketListImage } from '../hooks/useImageUrl';
+import { useBucketListImage, usePageHeroImage } from '../hooks/useImageUrl';
 import './BucketListPage.css';
 
 function BucketListPage() {
+  // Get page hero image
+  const { imageUrl: heroImage } = usePageHeroImage('bucket-list');
   // Get dynamic rotating featured experiences (changes on each visit/refresh)
   const [featured, setFeatured] = useState(getRotatingFeatured(3)); // Max 3 for carousel
   const allExperiences = getAllBucketList('lastUpdated'); // Sort by lastUpdated desc (newest first)
@@ -109,10 +111,10 @@ function BucketListPage() {
       <HeroSection
         title="Extraordinary Cruise Experiences"
         subtitle="Remarkable voyages that make a lasting impact. From world cruises to polar expeditions, these bucket list experiences create memories that last."
+        image={heroImage}
+        imageAlt="Extraordinary bucket list cruise experiences"
         size="md"
         align="center"
-        primaryCta={{ label: 'Enquire Now', to: '/contact' }}
-        secondaryCta={{ label: `Call ${siteConfig.phone}`, href: `tel:${siteConfig.phone}` }}
       />
 
       {/* Featured Experiences - Dynamic Carousel */}

@@ -51,6 +51,12 @@ export function getBucketListImageUrl(slug, type = 'hero') {
   return getSupabaseImageUrl('WEB_categories', `${slug}/${type}.webp`);
 }
 
+// Helper to construct page hero image URLs (for listing pages like /destinations, /cruise-types, /bucket-list)
+// Upload path: WEB_page-heroes/{slug}/hero.webp
+export function getPageHeroImageUrl(slug) {
+  return getSupabaseImageUrl('WEB_page-heroes', `${slug}/hero.webp`);
+}
+
 // ============================================================================
 // PLACEHOLDER IMAGE - Shown when no image exists
 // ============================================================================
