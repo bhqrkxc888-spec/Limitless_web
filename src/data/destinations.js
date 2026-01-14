@@ -1585,7 +1585,7 @@ export const destinations = [
     slug: 'atlantic-canary-islands-cruises',
     name: 'Atlantic & Canary Islands',
     tagline: 'Winter sun from UK ports',
-    description: 'Atlantic Islands cruises visit Tenerife, Gran Canaria, Madeira and Funchal, featuring volcanic beaches, levada walks and wine tasting. They suit winter sun seekers, couples and guests preferring no-fly holidays with year-round mild temperatures and short sea days.',
+    description: 'Atlantic Islands cruises visit Tenerife, Gran Canaria, Madeira and Funchal, featuring volcanic beaches, levada walks and wine tasting. They suit winter sun seekers, couples and guests seeking year-round mild temperatures and short sea days. Both fly-cruise and no-fly options are available from UK ports.',
     image: 'null',
     featured: true,
     coordinates: {
@@ -1608,7 +1608,7 @@ export const destinations = [
     highlights: [
       'Enjoy guaranteed mild temperatures (18-25°C) throughout winter when UK weather turns cold.',
       'Explore volcanic landscapes from Teide National Park (Tenerife) to Timanfaya craters (Lanzarote) and Madeira levada walks.',
-      'Choose convenient no-fly cruises from Southampton and other UK ports, avoiding airports entirely.',
+      'Choose from convenient no-fly cruises from Southampton and other UK ports, or shorter fly-cruise options departing from Tenerife for intensive island-hopping itineraries.',
       'Visit multiple sunny islands in one trip with frequent port calls and minimal sea days between destinations.',
       'Taste island specialities including Madeiran wine, Canarian mojo sauces and fresh seafood across harbourfront restaurants.'
     ],
@@ -1621,10 +1621,10 @@ export const destinations = [
       'Saga Cruises'
     ],
     meta: {
-      title: 'Canary Islands Cruises | No-Fly Winter Sun | Limitless Cruises',
+      title: 'Canary Islands Cruises | Fly & No-Fly Winter Sun | Limitless Cruises',
       description: 'Book Canary Islands cruises from UK ports. Visit Tenerife, Funchal, Gran Canaria and La Palma on sunny Atlantic island voyages all year round.'
     },
-    whyCruise: 'No-fly departures from UK ports make Atlantic Islands cruises one of the most convenient winter sun options, with direct sailings to sunny destinations without airport queues or flight delays. Itineraries efficiently connect multiple islands that would require complex flights and ferries for independent travel, whilst ships dock close to beach resorts and town centres. The consistent mild climate provides welcome relief from UK winter without the extreme heat of Caribbean or Mediterranean summer peaks.\n\nThese cruises appeal to guests seeking relaxed beach time, gentle walks and island exploration rather than intensive sightseeing, with port-intensive schedules maximising sunshine hours. Year-round availability suits last-minute bookings and shoulder-season value.\n\nAtlantic Islands and Canary Islands cruises provide reliable winter sunshine and volcanic scenery from UK departure ports, making them popular no-fly options for UK guests seeking mild weather and relaxed island ports. Itineraries typically combine the Canaries with Madeira, sometimes extending to the Azores or Cape Verde for diverse Atlantic island experiences.',
+    whyCruise: 'Atlantic Islands cruises offer flexible options to suit different preferences: no-fly departures from UK ports provide convenient direct sailings to sunny destinations without airport queues or flight delays, whilst fly-cruise options from Tenerife offer shorter, intensive island-hopping itineraries. Itineraries efficiently connect multiple islands that would require complex flights and ferries for independent travel, whilst ships dock close to beach resorts and town centres. The consistent mild climate provides welcome relief from UK winter without the extreme heat of Caribbean or Mediterranean summer peaks.\n\nThese cruises appeal to guests seeking relaxed beach time, gentle walks and island exploration rather than intensive sightseeing, with port-intensive schedules maximising sunshine hours. Year-round availability suits last-minute bookings and shoulder-season value.\n\nAtlantic Islands and Canary Islands cruises provide reliable winter sunshine and volcanic scenery, with both fly and no-fly options available. Itineraries typically combine the Canaries with Madeira, sometimes extending to the Azores or Cape Verde for diverse Atlantic island experiences.',
     signatureExperiences: [
       {
         title: 'Teide National Park (Tenerife)',
@@ -1680,7 +1680,7 @@ export const destinations = [
       },
       {
         question: 'Are Canary Islands cruises good for first-timers?',
-        answer: 'Excellent choice with no-fly UK departures, resort-style ships, beach-focused ports and familiar euro currency/language in Spanish islands.'
+        answer: 'Excellent choice with both fly and no-fly options available, resort-style ships, beach-focused ports and familiar euro currency/language in Spanish islands.'
       },
       {
         question: 'How long should I cruise Canary Islands?',
@@ -1696,7 +1696,7 @@ export const destinations = [
       },
       {
         question: 'Can I cruise Canary Islands from UK?',
-        answer: 'Yes, multiple weekly no-fly departures from Southampton and regional UK ports make Canaries most accessible winter sun destination.'
+        answer: 'Yes, multiple weekly no-fly departures from Southampton and regional UK ports are available, plus fly-cruise options from Tenerife for shorter intensive itineraries. Both options make the Canaries one of the most accessible winter sun destinations.'
       }
     ]
   },
