@@ -121,6 +121,120 @@ function DestinationPage() {
                   </div>
                 </div>
               )}
+
+              {/* Why Cruise This Destination */}
+              {destination.whyCruise && (
+                <div className="why-cruise-section mt-12">
+                  <SectionHeader title={`Why Cruise the ${destination.name}?`} />
+                  <div className="why-cruise-content">
+                    {destination.whyCruise.split('\n\n').map((paragraph, index) => (
+                      <p key={index}>{paragraph}</p>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Signature Experiences */}
+              {destination.signatureExperiences && destination.signatureExperiences.length > 0 && (
+                <div className="signature-experiences-section mt-12">
+                  <SectionHeader title="Signature Experiences" />
+                  <div className="signature-experiences-list">
+                    {destination.signatureExperiences.map((experience, index) => (
+                      <div key={index} className="signature-experience-item">
+                        <h4>{experience.title}</h4>
+                        <p>{experience.description}</p>
+                        {experience.ports && experience.ports.length > 0 && (
+                          <div className="experience-ports">
+                            <span className="ports-label">Available in:</span>
+                            <div className="ports-tags">
+                              {experience.ports.map((port, portIndex) => (
+                                <span key={portIndex} className="port-tag">{port}</span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* What to Expect */}
+              {destination.whatToExpect && (
+                <div className="what-to-expect-section mt-12">
+                  <SectionHeader title="What to Expect" />
+                  <div className="what-to-expect-content">
+                    {destination.whatToExpect.weather && (
+                      <div className="expect-item">
+                        <h4>Weather & Climate</h4>
+                        <p>{destination.whatToExpect.weather}</p>
+                      </div>
+                    )}
+                    {destination.whatToExpect.portDays && (
+                      <div className="expect-item">
+                        <h4>Port Days vs Sea Days</h4>
+                        <p>{destination.whatToExpect.portDays}</p>
+                      </div>
+                    )}
+                    {destination.whatToExpect.cultural && (
+                      <div className="expect-item">
+                        <h4>Cultural Considerations</h4>
+                        <p>{destination.whatToExpect.cultural}</p>
+                      </div>
+                    )}
+                    {destination.whatToExpect.cruiseLength && (
+                      <div className="expect-item">
+                        <h4>Cruise Length</h4>
+                        <p>{destination.whatToExpect.cruiseLength}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Popular Itineraries */}
+              {destination.popularItineraries && destination.popularItineraries.length > 0 && (
+                <div className="popular-itineraries-section mt-12">
+                  <SectionHeader title="Popular Itineraries" />
+                  <div className="itineraries-list">
+                    {destination.popularItineraries.map((itinerary, index) => (
+                      <div key={index} className="itinerary-item">
+                        <div className="itinerary-header">
+                          <h4>{itinerary.name}</h4>
+                          {itinerary.duration && (
+                            <span className="itinerary-duration">{itinerary.duration}</span>
+                          )}
+                        </div>
+                        {itinerary.ports && itinerary.ports.length > 0 && (
+                          <div className="itinerary-ports">
+                            {itinerary.ports.map((port, portIndex) => (
+                              <span key={portIndex} className="itinerary-port-tag">{port}</span>
+                            ))}
+                          </div>
+                        )}
+                        {itinerary.overview && (
+                          <p className="itinerary-overview">{itinerary.overview}</p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* FAQs */}
+              {destination.faqs && destination.faqs.length > 0 && (
+                <div className="faqs-section mt-12">
+                  <SectionHeader title="Frequently Asked Questions" />
+                  <div className="faqs-list">
+                    {destination.faqs.map((faq, index) => (
+                      <div key={index} className="faq-item">
+                        <h4 className="faq-question">{faq.question}</h4>
+                        <p className="faq-answer">{faq.answer}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Sidebar */}

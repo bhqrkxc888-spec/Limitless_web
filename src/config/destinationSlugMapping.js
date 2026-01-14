@@ -13,19 +13,23 @@ export const destinationSlugToImageSlug = {
   // Exact mappings where slugs differ significantly
   'norwegian-fjords-cruises': 'norway',
   'australia-cruises': 'australia-new-zealand',
-  'greek-isles-cruises': 'greek-islands',
-  'southeast-asia-cruises': 'southeast-asia',
+  'greek-isles-cruises': 'greek-islands', // Legacy mapping
+  'greek-islands-cruises': 'greek-islands',
+  'southeast-asia-cruises': 'southeast-asia', // Legacy mapping
+  'south-east-asia-cruises': 'southeast-asia',
   'norway-cruises': 'norway', // Also map norway-cruises if it exists
   
   // Standard mappings (just remove -cruises suffix)
   'mediterranean-cruises': 'mediterranean',
   'caribbean-cruises': 'caribbean',
   'alaska-cruises': 'alaska',
-  'baltic-cruises': 'baltic',
+  'baltic-cruises': 'baltic', // Legacy mapping
+  'baltics-northern-europe-cruises': 'baltic',
   'british-isles-cruises': 'british-isles',
   'hawaii-cruises': 'hawaii',
   'canada-new-england-cruises': 'canada-new-england',
-  'panama-canal-cruises': 'panama-canal',
+  'panama-canal-cruises': 'panama-canal', // Legacy mapping
+  'panama-central-america-cruises': 'panama-canal',
   'south-america-cruises': 'south-america',
   'japan-cruises': 'japan',
   'asia-cruises': 'asia',
@@ -38,6 +42,7 @@ export const destinationSlugToImageSlug = {
   'adriatic-cruises': 'adriatic',
   'canary-islands-cruises': 'canary-islands',
   'atlantic-islands-cruises': 'atlantic-islands',
+  'atlantic-canary-islands-cruises': 'atlantic-islands',
   'antarctica-cruises': 'antarctica',
   'eastern-mediterranean-cruises': 'eastern-mediterranean',
   'western-mediterranean-cruises': 'western-mediterranean',

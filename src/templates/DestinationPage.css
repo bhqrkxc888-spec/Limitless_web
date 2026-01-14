@@ -195,6 +195,229 @@
 }
 
 /* ========================================
+   WHY CRUISE SECTION
+   ======================================== */
+
+.why-cruise-section {
+  margin-top: var(--space-12);
+}
+
+.why-cruise-content p {
+  font-size: var(--font-size-base);
+  color: var(--clr-text-main);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-4);
+}
+
+.why-cruise-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* ========================================
+   SIGNATURE EXPERIENCES
+   ======================================== */
+
+.signature-experiences-section {
+  margin-top: var(--space-12);
+}
+
+.signature-experiences-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.signature-experience-item {
+  padding: var(--space-6);
+  background-color: var(--clr-bg-alt);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--clr-border-light);
+}
+
+.signature-experience-item h4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-3);
+  color: var(--clr-text-main);
+}
+
+.signature-experience-item p {
+  font-size: var(--font-size-base);
+  color: var(--clr-text-main);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-4);
+}
+
+.experience-ports {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--clr-border-light);
+}
+
+.ports-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--clr-text-muted);
+  margin-right: var(--space-2);
+}
+
+.ports-tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.port-tag {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  background-color: var(--clr-surface);
+  color: var(--clr-text-main);
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--clr-border);
+}
+
+/* ========================================
+   WHAT TO EXPECT
+   ======================================== */
+
+.what-to-expect-section {
+  margin-top: var(--space-12);
+}
+
+.what-to-expect-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.expect-item {
+  padding: var(--space-5);
+  background-color: var(--clr-bg-alt);
+  border-radius: var(--radius-lg);
+}
+
+.expect-item h4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-3);
+  color: var(--clr-text-main);
+}
+
+.expect-item p {
+  font-size: var(--font-size-base);
+  color: var(--clr-text-main);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+/* ========================================
+   POPULAR ITINERARIES
+   ======================================== */
+
+.popular-itineraries-section {
+  margin-top: var(--space-12);
+}
+
+.itineraries-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.itinerary-item {
+  padding: var(--space-6);
+  background-color: var(--clr-bg-alt);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--clr-border-light);
+}
+
+.itinerary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.itinerary-item h4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-text-main);
+  margin: 0;
+}
+
+.itinerary-duration {
+  padding: var(--space-1) var(--space-3);
+  background-color: var(--clr-secondary);
+  color: var(--clr-text-on-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-md);
+}
+
+.itinerary-ports {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+.itinerary-port-tag {
+  display: inline-block;
+  padding: var(--space-2) var(--space-3);
+  background-color: var(--clr-surface);
+  color: var(--clr-text-main);
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--clr-border);
+}
+
+.itinerary-overview {
+  font-size: var(--font-size-base);
+  color: var(--clr-text-main);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+/* ========================================
+   FAQS
+   ======================================== */
+
+.faqs-section {
+  margin-top: var(--space-12);
+}
+
+.faqs-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.faq-item {
+  padding: var(--space-5);
+  background-color: var(--clr-bg-alt);
+  border-radius: var(--radius-lg);
+  border-left: 4px solid var(--clr-secondary);
+}
+
+.faq-question {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-text-main);
+  margin-bottom: var(--space-3);
+}
+
+.faq-answer {
+  font-size: var(--font-size-base);
+  color: var(--clr-text-main);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+/* ========================================
    FULL WIDTH ATTRACTIONS
    ======================================== */
 

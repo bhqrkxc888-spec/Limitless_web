@@ -194,6 +194,13 @@ export const destinations = [
     name: 'Southeast Asia',
     heroFilename: 'southeast-asia-HERO.jpg',
     description: 'Temples, beaches, exotic cultures'
+  },
+  {
+    id: 33,
+    slug: 'atlantic-islands',
+    name: 'Atlantic & Canary Islands',
+    heroFilename: 'atlantic-islands-HERO.jpg',
+    description: 'Madeira, Canaries, year-round sunshine'
   }
 ];
 
@@ -241,7 +248,7 @@ export function getDestinationsByRegion() {
        'canada-new-england', 'hawaii'].includes(d.slug)
     ),
     'Asia & Pacific': destinations.filter(d => 
-      ['asia', 'japan', 'australia-new-zealand', 'dubai-middle-east'].includes(d.slug)
+      ['asia', 'japan', 'australia-new-zealand', 'dubai-middle-east', 'southeast-asia'].includes(d.slug)
     ),
     'Polar & Adventure': destinations.filter(d => 
       ['alaska', 'antarctica', 'iceland'].includes(d.slug)

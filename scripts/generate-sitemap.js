@@ -78,7 +78,7 @@ const CONTENT_LAST_MODIFIED = {
   },
   // Local data categories - update when data files change
   cruiseLines: '2025-01-01',     // Update when cruiseLines.js changes
-  destinations: '2025-01-01',    // Update when destinations.js changes  
+  destinations: '2026-01-14',    // Update when destinations.js changes  
   bucketList: '2025-01-01',      // Update when bucketList.js changes
   cruiseTypes: '2025-01-01'      // Update when cruiseTypes.js changes
 };
