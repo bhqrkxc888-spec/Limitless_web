@@ -45,12 +45,12 @@ function SkipperChat() {
         {
           id: generateId(),
           role: 'assistant',
-          content: `Hello ${firstName}! I'm Captain Cruise, your personal AI assistant for Limitless Cruises. I'm here to help you explore cruise options 24/7 and gather your preferences for our expert team.`
+          content: `Hello ${firstName}! I'm Captain Cruise, an AI assistant working alongside your personal cruise consultant at Limitless Cruises. I'm here 24/7 to help gather your preferences and requirements.`
         },
         {
           id: generateId() + '1',
           role: 'assistant',
-          content: "What kind of cruise experience are you dreaming of, or would you like to explore some possibilities together?"
+          content: "What type of cruise are you considering, or would you like me to help you explore some options?"
         }
       ]);
     }
@@ -88,12 +88,12 @@ function SkipperChat() {
       {
         id: generateId(),
         role: 'assistant',
-        content: `Hello ${firstName}! I'm Captain Cruise, your personal AI assistant for Limitless Cruises. I'm here to help you explore cruise options 24/7 and gather your preferences for our expert team.`
+        content: `Hello ${firstName}! I'm Captain Cruise, an AI assistant working alongside your personal cruise consultant at Limitless Cruises. I'm here 24/7 to help gather your preferences and requirements.`
       },
       {
         id: generateId() + '1',
         role: 'assistant',
-        content: "What kind of cruise experience are you dreaming of, or would you like to explore some possibilities together?"
+        content: "What type of cruise are you considering, or would you like me to help you explore some options?"
       }
     ]);
   };

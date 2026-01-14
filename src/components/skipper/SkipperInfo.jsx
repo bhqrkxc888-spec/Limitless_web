@@ -28,21 +28,21 @@ function SkipperInfo({ isOpen, onClose }) {
           <section className="info-section">
             <h3>✨ How It Works</h3>
             <ul>
-              <li>Chat naturally about your dream cruise</li>
+              <li>Chat naturally about your cruise requirements</li>
               <li>I'll learn your preferences, budget, and requirements</li>
-              <li>Your conversation is summarized and sent to our expert team</li>
-              <li>A cruise consultant will contact you with personalized options</li>
+              <li>Your conversation is summarised and sent to your personal cruise consultant</li>
+              <li>Your consultant will contact you with tailored options</li>
             </ul>
           </section>
 
           <section className="info-section">
-            <h3>🎯 Here to Enhance, Not Replace</h3>
+            <h3>🎯 Here to Assist, Not Replace</h3>
             <p>
-              Limitless Cruises is built on personal, expert service. Captain Cruise enhances this 
+              Limitless Cruises is built on personal, expert service. Captain Cruise assists your consultant 
               by giving you the flexibility to explore at your own pace before speaking with someone.
             </p>
             <p>
-              Our expert cruise consultants are always available when you're ready to speak directly 
+              Your personal cruise consultant is always available when you're ready to speak directly 
               – just ask at any point and we'll arrange a call.
             </p>
           </section>
