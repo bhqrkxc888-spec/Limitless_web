@@ -38,21 +38,21 @@ function WeatherSection({ dayData }) {
   return (
     <div className="section-weather">
       <div className="section-intro">
-        <p>Weather forecast for Southampton on embarkation day.</p>
+        <p>Complete weather forecast for Southampton on embarkation day.</p>
       </div>
 
       <hr className="section-divider" />
 
       <div className="weather-live-section">
-        <h3>🌡️ Current Conditions in Southampton</h3>
-        <div className="weather-card-container">
-          <PortWeather 
-            portName="Southampton"
-            lat={coords.lat}
-            lon={coords.lon}
-            compact={false}
-          />
-        </div>
+        <PortWeather 
+          portName="Southampton"
+          lat={coords.lat}
+          lon={coords.lon}
+          compact={false}
+          showHourly={true}
+          showDaily={true}
+          hourlyCount={12}
+        />
       </div>
 
       <hr className="section-divider" />

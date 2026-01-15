@@ -6,26 +6,33 @@ import { getWeatherIconUrl } from '../../services/weatherAPI';
 import './PortWeather.css';
 
 /**
- * PortWeather - Weather display for cruise ports
+ * PortWeather - Enhanced weather display with One Call API 3.0
  * 
- * Uses existing Limitless Cruises weather infrastructure:
- * - useWeather hook with caching
- * - weatherAPI service
- * - OpenWeatherMap API
+ * Features:
+ * - Current conditions
+ * - 48-hour hourly forecast (scrollable strip)
+ * - 8-day daily forecast
+ * - Weather alerts
  * 
  * Props:
  * - portName: Display name of the port
  * - lat: Latitude
  * - lon: Longitude
- * - compact: Boolean - smaller inline display
+ * - compact: Boolean - smaller inline display (legacy mode)
+ * - showHourly: Boolean - show hourly forecast strip (default: true)
+ * - showDaily: Boolean - show daily forecast cards (default: true)
+ * - hourlyCount: Number of hours to show (default: 12)
  */
 const PortWeather = ({ 
   portName,
   lat,
   lon,
-  compact = false
+  compact = false,
+  showHourly = true,
+  showDaily = true,
+  hourlyCount = 12
 }) => {
-  const { current, loading, error } = useWeather(lat, lon);
+  const { current, hourly, daily, alerts, loading, error } = useWeather(lat, lon);
 
   // Weather icon mapping to emoji (fallback)
   const getWeatherEmoji = (iconCode) => {
@@ -90,10 +97,26 @@ const PortWeather = ({
 
   return (
     <motion.div 
-      className="port-weather"
+      className="port-weather port-weather-enhanced"
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
     >
+      {/* Weather Alerts */}
+      {alerts && alerts.length > 0 && (
+        <div className="weather-alerts">
+          {alerts.map((alert, idx) => (
+            <div key={idx} className="weather-alert">
+              <span className="alert-icon">⚠️</span>
+              <div className="alert-content">
+                <strong>{alert.event}</strong>
+                <p>{alert.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Current Conditions */}
       <div className="port-weather-header">
         <h4 className="port-weather-title">{portName}</h4>
         <span className="port-weather-subtitle">Current conditions</span>
@@ -141,7 +164,73 @@ const PortWeather = ({
           <span className="detail-value">{current.clouds?.all || 0}%</span>
           <span className="detail-label">Cloud cover</span>
         </div>
+        {current.uvi !== undefined && (
+          <div className="weather-detail">
+            <span className="detail-icon">☀️</span>
+            <span className="detail-value">{Math.round(current.uvi)}</span>
+            <span className="detail-label">UV Index</span>
+          </div>
+        )}
       </div>
+
+      {/* Hourly Forecast Strip */}
+      {showHourly && hourly && hourly.length > 0 && (
+        <div className="weather-hourly-section">
+          <h5 className="weather-section-title">Next {hourlyCount} hours</h5>
+          <div className="weather-hourly-strip">
+            {hourly.slice(0, hourlyCount).map((hour, idx) => (
+              <div key={idx} className="hourly-item">
+                <span className="hourly-time">
+                  {hour.time.getHours() === 0 
+                    ? hour.time.toLocaleDateString('en-GB', { weekday: 'short' })
+                    : hour.time.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })
+                  }
+                </span>
+                <img 
+                  src={getWeatherIconUrl(hour.icon)}
+                  alt={hour.description}
+                  className="hourly-icon"
+                />
+                <span className="hourly-temp">{hour.temp}°</span>
+                {hour.pop > 20 && (
+                  <span className="hourly-rain">{hour.pop}%</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Daily Forecast */}
+      {showDaily && daily && daily.length > 0 && (
+        <div className="weather-daily-section">
+          <h5 className="weather-section-title">8-day forecast</h5>
+          <div className="weather-daily-grid">
+            {daily.slice(0, 8).map((day, idx) => (
+              <div key={idx} className="daily-card">
+                <span className="daily-day">
+                  {idx === 0 ? 'Today' : day.date.toLocaleDateString('en-GB', { weekday: 'short' })}
+                </span>
+                <img 
+                  src={getWeatherIconUrl(day.icon)}
+                  alt={day.description}
+                  className="daily-icon"
+                />
+                <div className="daily-temps">
+                  <span className="daily-high">{day.tempMax}°</span>
+                  <span className="daily-low">{day.tempMin}°</span>
+                </div>
+                {day.pop > 20 && (
+                  <span className="daily-rain">
+                    <span className="rain-icon">💧</span>
+                    {day.pop}%
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </motion.div>
   );
 };

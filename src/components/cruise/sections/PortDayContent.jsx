@@ -77,22 +77,22 @@ function WeatherSection({ dayData, portContent }) {
   return (
     <div className="section-weather">
       <div className="section-intro">
-        <p>Current weather conditions and forecast for {dayData.portName}.</p>
+        <p>Complete weather forecast for {dayData.portName} - current conditions, hourly and 8-day outlook.</p>
       </div>
 
       <hr className="section-divider" />
 
-      {/* Live Weather from API */}
+      {/* Enhanced Weather Display with Hourly & Daily Forecasts */}
       <div className="weather-live-section">
-        <h3>🌡️ Current Conditions</h3>
-        <div className="weather-card-container">
-          <PortWeather 
-            portName={dayData.portName}
-            lat={dayData.coords.lat}
-            lon={dayData.coords.lon}
-            compact={false}
-          />
-        </div>
+        <PortWeather 
+          portName={dayData.portName}
+          lat={dayData.coords.lat}
+          lon={dayData.coords.lon}
+          compact={false}
+          showHourly={true}
+          showDaily={true}
+          hourlyCount={12}
+        />
       </div>
 
       <hr className="section-divider" />
@@ -123,7 +123,7 @@ function WeatherSection({ dayData, portContent }) {
       </div>
 
       <div className="info-note">
-        <p>ℹ️ Weather data is updated regularly but conditions can change. Check again closer to your port day for the most accurate forecast.</p>
+        <p>ℹ️ Weather forecasts update hourly. Hourly forecast shows next 12 hours, daily forecast shows next 8 days.</p>
       </div>
     </div>
   );

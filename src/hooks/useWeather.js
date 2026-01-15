@@ -1,16 +1,26 @@
 /**
  * useWeather Hook
- * React hook for fetching weather data
+ * React hook for fetching weather data via One Call API 3.0
+ * 
+ * Returns:
+ * - current: Current conditions
+ * - hourly: 48-hour hourly forecast
+ * - daily: 8-day daily forecast
+ * - alerts: Weather alerts (storms, etc.)
+ * - loading: Boolean
+ * - error: Error message
  */
 
 import { useState, useEffect } from 'react';
-import { getCurrentWeather, getWeatherForecast, groupForecastByDay } from '../services/weatherAPI';
+import { getOneCallWeather, processHourlyForecast, processDailyForecast } from '../services/weatherAPI';
 import { apiConfig } from '../config/apiConfig';
 import { logger } from '../utils/logger';
 
 export function useWeather(lat, lon) {
   const [current, setCurrent] = useState(null);
-  const [forecast, setForecast] = useState(null);
+  const [hourly, setHourly] = useState(null);
+  const [daily, setDaily] = useState(null);
+  const [alerts, setAlerts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -33,33 +43,47 @@ export function useWeather(lat, lon) {
         setLoading(true);
         setError(null);
 
-        const [currentData, forecastData] = await Promise.all([
-          getCurrentWeather(lat, lon),
-          getWeatherForecast(lat, lon)
-        ]);
+        const data = await getOneCallWeather(lat, lon);
 
         if (cancelled) return;
 
-        // Validate current data structure
-        if (!currentData || !currentData.weather || !Array.isArray(currentData.weather) || currentData.weather.length === 0) {
+        // Validate data structure
+        if (!data || !data.current) {
           throw new Error('Invalid weather data received');
         }
 
-        // Validate forecast data structure
-        if (!forecastData || !forecastData.list || !Array.isArray(forecastData.list)) {
-          logger.warn('Invalid forecast data structure, using empty forecast');
-          setCurrent(currentData);
-          setForecast([]);
+        // Set current conditions
+        setCurrent(data.current);
+
+        // Process and set hourly forecast (48 hours available, show 24)
+        if (data.hourly && Array.isArray(data.hourly)) {
+          setHourly(processHourlyForecast(data.hourly, 48));
         } else {
-          setCurrent(currentData);
-          setForecast(groupForecastByDay(forecastData.list));
+          setHourly([]);
         }
+
+        // Process and set daily forecast (8 days)
+        if (data.daily && Array.isArray(data.daily)) {
+          setDaily(processDailyForecast(data.daily));
+        } else {
+          setDaily([]);
+        }
+
+        // Set alerts if any
+        if (data.alerts && Array.isArray(data.alerts)) {
+          setAlerts(data.alerts);
+        } else {
+          setAlerts([]);
+        }
+
       } catch (err) {
         if (!cancelled) {
           logger.error('Error fetching weather:', err);
           setError(err.message || 'Weather data unavailable');
           setCurrent(null);
-          setForecast(null);
+          setHourly(null);
+          setDaily(null);
+          setAlerts(null);
         }
       } finally {
         if (!cancelled) {
@@ -72,6 +96,6 @@ export function useWeather(lat, lon) {
     return () => { cancelled = true; };
   }, [lat, lon]);
 
-  return { current, forecast, loading, error };
+  return { current, hourly, daily, alerts, loading, error };
 }
 
