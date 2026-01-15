@@ -98,7 +98,14 @@ function ConversationSummary({ collectedData }) {
     }
     
     if (collectedData.school_holiday_constraint) {
-      dateItems.push('🏫 School holidays required');
+      if (collectedData.school_holiday_constraint === 'tied') {
+        dateItems.push('🏫 School holidays required');
+      } else if (collectedData.school_holiday_constraint === 'avoid') {
+        dateItems.push('🏫 Avoiding school holidays');
+      } else if (collectedData.school_holiday_constraint === 'flexible') {
+        dateItems.push('🏫 Flexible on school holidays');
+      }
+      // Don't show anything for 'not applicable'
     }
     
     if (dateItems.length > 0) {
@@ -231,6 +238,53 @@ function ConversationSummary({ collectedData }) {
         title: '🏨 Hotels',
         items: hotelItems
       });
+    }
+  }
+
+  // Bucket list extensions
+  if (collectedData.bucket_list_extensions) {
+    const extensions = collectedData.bucket_list_extensions;
+    const extensionItems = [];
+    
+    if (typeof extensions === 'object') {
+      // Trains
+      if (extensions.trains && extensions.trains.wanted) {
+        let trainStr = 'Train: ';
+        if (extensions.trains.routes) trainStr += stringify(extensions.trains.routes);
+        if (extensions.trains.days) trainStr += ` (${extensions.trains.days} days)`;
+        if (extensions.trains.timing) trainStr += ` - ${extensions.trains.timing}`;
+        extensionItems.push(trainStr);
+      }
+      
+      // Safari
+      if (extensions.safari && extensions.safari.wanted) {
+        let safariStr = 'Safari: ';
+        if (extensions.safari.destination) safariStr += extensions.safari.destination;
+        if (extensions.safari.days) safariStr += ` (${extensions.safari.days} days)`;
+        if (extensions.safari.timing) safariStr += ` - ${extensions.safari.timing}`;
+        extensionItems.push(safariStr);
+      }
+      
+      // Land experiences
+      if (extensions.land_experiences && Array.isArray(extensions.land_experiences)) {
+        extensionItems.push(`Land tours: ${extensions.land_experiences.join(', ')}`);
+      }
+      
+      // Unique stays
+      if (extensions.unique_stays && Array.isArray(extensions.unique_stays)) {
+        extensionItems.push(`Unique stays: ${extensions.unique_stays.join(', ')}`);
+      }
+      
+      // Notes
+      if (extensions.notes) {
+        extensionItems.push(stringify(extensions.notes));
+      }
+    } else {
+      extensionItems.push(stringify(extensions));
+    }
+    
+    if (extensionItems.length > 0) {
+      sections.push({ title: '🌟 Bucket List Extensions', items: extensionItems });
     }
   }
 

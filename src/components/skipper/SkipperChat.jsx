@@ -107,6 +107,9 @@ function SkipperChat() {
       content: messageText,
     };
 
+    // Capture current messages state before updating
+    const previousMessages = messages;
+    
     setMessages(prev => [...prev, userMessage]);
     setIsTyping(true);
 
@@ -121,7 +124,7 @@ function SkipperChat() {
         body: JSON.stringify({
           sessionId,
           message: messageText,
-          conversationHistory: messages.map(m => ({
+          conversationHistory: previousMessages.map(m => ({
             role: m.role,
             content: m.content,
           })),
