@@ -482,3 +482,83 @@
     padding: var(--space-2, 0.5rem);
   }
 }
+
+/* =========================================
+   FORECAST UNAVAILABLE STATE
+   ======================================== */
+
+.port-weather-unavailable {
+  background: linear-gradient(135deg, 
+    var(--clr-surface, #FFFFFF) 0%, 
+    var(--clr-bg-alt, #F8F5F0) 100%);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-6, 1.5rem);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--clr-border, #E8E4DC);
+  text-align: center;
+}
+
+.weather-unavailable-content {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.weather-unavailable-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: var(--space-3, 0.75rem);
+}
+
+.weather-unavailable-title {
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  color: var(--clr-text-main, #2C344C);
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-semibold, 600);
+  margin: 0 0 var(--space-3, 0.75rem) 0;
+}
+
+.weather-unavailable-text {
+  color: var(--clr-text-body, #3C4456);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 var(--space-2, 0.5rem) 0;
+}
+
+.weather-unavailable-text strong {
+  color: var(--clr-primary, #005670);
+}
+
+.weather-unavailable-note {
+  color: var(--clr-text-muted, #5C6478);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0 0 var(--space-4, 1rem) 0;
+}
+
+.weather-unavailable-countdown {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--clr-primary-light, #E6F2F5);
+  padding: var(--space-3, 0.75rem) var(--space-5, 1.25rem);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--clr-primary, #005670);
+}
+
+.weather-unavailable-countdown .countdown-number {
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--clr-primary, #005670);
+  line-height: 1;
+}
+
+.weather-unavailable-countdown .countdown-label {
+  font-size: 0.75rem;
+  color: var(--clr-text-muted, #5C6478);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: var(--space-1, 0.25rem);
+}

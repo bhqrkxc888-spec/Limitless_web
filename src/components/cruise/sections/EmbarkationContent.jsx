@@ -38,7 +38,7 @@ function WeatherSection({ dayData }) {
   return (
     <div className="section-weather">
       <div className="section-intro">
-        <p>Complete weather forecast for Southampton on embarkation day.</p>
+        <p>Weather forecast for Southampton on embarkation day. Live forecasts become available about 8 days before departure.</p>
       </div>
 
       <hr className="section-divider" />
@@ -48,6 +48,7 @@ function WeatherSection({ dayData }) {
           portName="Southampton"
           lat={coords.lat}
           lon={coords.lon}
+          portDate={dayData.date}
           compact={false}
           showHourly={true}
           showDaily={true}

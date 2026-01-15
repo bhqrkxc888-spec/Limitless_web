@@ -9,15 +9,17 @@ import './PortWeather.css';
  * PortWeather - Enhanced weather display with One Call API 3.0
  * 
  * Features:
- * - Current conditions
+ * - Current conditions (only if portDate is today or within 8 days)
  * - 48-hour hourly forecast (scrollable strip)
  * - 8-day daily forecast
  * - Weather alerts
+ * - "Forecast not available" message for dates too far out
  * 
  * Props:
  * - portName: Display name of the port
  * - lat: Latitude
  * - lon: Longitude
+ * - portDate: ISO date string (e.g., "2026-03-16") - the actual date of the port visit
  * - compact: Boolean - smaller inline display (legacy mode)
  * - showHourly: Boolean - show hourly forecast strip (default: true)
  * - showDaily: Boolean - show daily forecast cards (default: true)
@@ -27,12 +29,30 @@ const PortWeather = ({
   portName,
   lat,
   lon,
+  portDate,
   compact = false,
   showHourly = true,
   showDaily = true,
   hourlyCount = 12
 }) => {
   const { current, hourly, daily, alerts, loading, error } = useWeather(lat, lon);
+
+  // Calculate days until port date
+  const getDaysUntilPort = () => {
+    if (!portDate) return 0;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const port = new Date(portDate);
+    port.setHours(0, 0, 0, 0);
+    const diffTime = port - today;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays;
+  };
+
+  const daysUntilPort = getDaysUntilPort();
+  const MAX_FORECAST_DAYS = 8; // One Call API provides 8-day forecast
+  const isForecastAvailable = daysUntilPort <= MAX_FORECAST_DAYS && daysUntilPort >= 0;
+  const isInPast = daysUntilPort < 0;
 
   // Weather icon mapping to emoji (fallback)
   const getWeatherEmoji = (iconCode) => {
@@ -57,6 +77,72 @@ const PortWeather = ({
     const index = Math.round(deg / 45) % 8;
     return directions[index];
   };
+
+  // Format the port date for display
+  const formatPortDate = () => {
+    if (!portDate) return '';
+    const date = new Date(portDate);
+    return date.toLocaleDateString('en-GB', { 
+      weekday: 'long', 
+      day: 'numeric', 
+      month: 'long', 
+      year: 'numeric' 
+    });
+  };
+
+  // Calculate when forecast will be available
+  const getForecastAvailableDate = () => {
+    if (!portDate) return '';
+    const port = new Date(portDate);
+    const availableFrom = new Date(port);
+    availableFrom.setDate(port.getDate() - MAX_FORECAST_DAYS);
+    return availableFrom.toLocaleDateString('en-GB', { 
+      day: 'numeric', 
+      month: 'long', 
+      year: 'numeric' 
+    });
+  };
+
+  // If port date is provided and is too far in the future, show "not available" message
+  if (portDate && !isForecastAvailable && !isInPast) {
+    return (
+      <div className="port-weather port-weather-unavailable">
+        <div className="weather-unavailable-content">
+          <span className="weather-unavailable-icon">📅</span>
+          <h4 className="weather-unavailable-title">Forecast Not Yet Available</h4>
+          <p className="weather-unavailable-text">
+            Weather forecasts for <strong>{portName}</strong> on <strong>{formatPortDate()}</strong> will 
+            be available from around <strong>{getForecastAvailableDate()}</strong>.
+          </p>
+          <p className="weather-unavailable-note">
+            Weather APIs typically provide forecasts up to 8 days in advance. Check back closer to your port day!
+          </p>
+          <div className="weather-unavailable-countdown">
+            <span className="countdown-number">{daysUntilPort}</span>
+            <span className="countdown-label">days until this port</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // If port date is in the past
+  if (portDate && isInPast) {
+    return (
+      <div className="port-weather port-weather-unavailable">
+        <div className="weather-unavailable-content">
+          <span className="weather-unavailable-icon">📍</span>
+          <h4 className="weather-unavailable-title">Port Day Complete</h4>
+          <p className="weather-unavailable-text">
+            You visited <strong>{portName}</strong> on <strong>{formatPortDate()}</strong>.
+          </p>
+          <p className="weather-unavailable-note">
+            We hope you had a wonderful time!
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (

@@ -77,7 +77,7 @@ function WeatherSection({ dayData, portContent }) {
   return (
     <div className="section-weather">
       <div className="section-intro">
-        <p>Complete weather forecast for {dayData.portName} - current conditions, hourly and 8-day outlook.</p>
+        <p>Weather forecast for {dayData.portName} on your port day. Live forecasts become available about 8 days before arrival.</p>
       </div>
 
       <hr className="section-divider" />
@@ -88,6 +88,7 @@ function WeatherSection({ dayData, portContent }) {
           portName={dayData.portName}
           lat={dayData.coords.lat}
           lon={dayData.coords.lon}
+          portDate={dayData.date}
           compact={false}
           showHourly={true}
           showDaily={true}
@@ -123,7 +124,7 @@ function WeatherSection({ dayData, portContent }) {
       </div>
 
       <div className="info-note">
-        <p>ℹ️ Weather forecasts update hourly. Hourly forecast shows next 12 hours, daily forecast shows next 8 days.</p>
+        <p>ℹ️ Weather forecasts are available up to 8 days in advance and update hourly. Check back closer to your cruise!</p>
       </div>
     </div>
   );
