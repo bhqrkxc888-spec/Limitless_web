@@ -101,11 +101,12 @@ export const navigation = {
               path: '/travel-news',
               description: 'Latest cruise and travel updates'
             },
-            {
-              label: 'Port Guides',
-              path: '/ports',
-              description: 'Detailed cruise port information'
-            },
+            // TEMPORARILY HIDDEN - Port Guides images under development
+            // {
+            //   label: 'Port Guides',
+            //   path: '/ports',
+            //   description: 'Detailed cruise port information'
+            // },
             {
               label: 'Guides',
               path: '/cruise-guides',
@@ -174,7 +175,8 @@ export const navigation = {
       { label: 'Latest Offers', path: '/offers' },
       { label: 'Find a Cruise', path: '/find-a-cruise' },
       { label: 'Travel News', path: '/travel-news' },
-      { label: 'Port Guides', path: '/ports' },
+      // TEMPORARILY HIDDEN - Port Guides images under development
+      // { label: 'Port Guides', path: '/ports' },
       { label: 'Guides', path: '/cruise-guides' }
     ]
   }
