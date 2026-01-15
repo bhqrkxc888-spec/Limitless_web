@@ -596,3 +596,33 @@
   outline: 2px solid var(--clr-primary, #2C344C);
   outline-offset: 2px;
 }
+
+/* ========================================
+   WEATHER SECTION
+   ======================================== */
+
+.section-weather {
+  width: 100%;
+}
+
+.weather-live-section {
+  margin-bottom: var(--space-4, 1rem);
+}
+
+.weather-live-section h3 {
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--clr-text-main, #2C344C);
+  margin-bottom: var(--space-4, 1rem);
+}
+
+.weather-card-container {
+  max-width: 400px;
+}
+
+@media (min-width: 768px) {
+  .weather-card-container {
+    max-width: 450px;
+  }
+}

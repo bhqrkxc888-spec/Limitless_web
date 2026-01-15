@@ -157,11 +157,11 @@ export const g606Itinerary = [
 export function getSectionsForDayType(dayType) {
   switch (dayType) {
     case 'port':
-      return ['overview', 'stayLocal', 'goFurther', 'withKids', 'send', 'foodAndDrink'];
+      return ['overview', 'weather', 'stayLocal', 'goFurther', 'withKids', 'send', 'foodAndDrink'];
     case 'sea':
       return ['overview', 'onTheShip', 'quietSpots', 'send'];
     case 'embarkation':
-      return ['whatToExpect', 'gettingThere', 'tips', 'send'];
+      return ['whatToExpect', 'weather', 'gettingThere', 'tips', 'send'];
     case 'disembarkation':
       return ['whatToExpect', 'tips', 'send'];
     default:
@@ -175,6 +175,7 @@ export function getSectionsForDayType(dayType) {
 export function getSectionLabel(sectionKey) {
   const labels = {
     overview: 'Overview',
+    weather: 'Weather',
     stayLocal: 'Stay Local',
     goFurther: 'Go Further',
     withKids: 'With Kids',

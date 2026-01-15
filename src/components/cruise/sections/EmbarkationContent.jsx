@@ -1,4 +1,5 @@
 import FeedbackSection from '../FeedbackSection';
+import PortWeather from '../PortWeather';
 import './SectionContent.css';
 
 // FB Group URL - placeholder
@@ -9,6 +10,8 @@ function EmbarkationContent({ sectionKey, dayData }) {
     switch (sectionKey) {
       case 'whatToExpect':
         return <WhatToExpectSection dayData={dayData} />;
+      case 'weather':
+        return <WeatherSection dayData={dayData} />;
       case 'gettingThere':
         return <GettingThereSection dayData={dayData} />;
       case 'tips':
@@ -24,6 +27,48 @@ function EmbarkationContent({ sectionKey, dayData }) {
     <div className="section-content">
       {renderSection()}
       <FeedbackSection sectionKey={sectionKey} dayNumber={dayData.dayNumber} />
+    </div>
+  );
+}
+
+function WeatherSection({ dayData }) {
+  // Southampton coordinates
+  const coords = dayData.coords || { lat: 50.8998, lon: -1.4044 };
+  
+  return (
+    <div className="section-weather">
+      <div className="section-intro">
+        <p>Weather forecast for Southampton on embarkation day.</p>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="weather-live-section">
+        <h3>🌡️ Current Conditions in Southampton</h3>
+        <div className="weather-card-container">
+          <PortWeather 
+            portName="Southampton"
+            lat={coords.lat}
+            lon={coords.lon}
+            compact={false}
+          />
+        </div>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="sub-section">
+        <h3>🎒 What to Wear</h3>
+        <ul className="info-list">
+          <li>March in Southampton can be chilly - layer up!</li>
+          <li>Comfortable shoes for walking through the terminal</li>
+          <li>Keep a jacket in your hand luggage</li>
+        </ul>
+      </div>
+
+      <div className="info-note">
+        <p>ℹ️ The ship has a warm, controlled environment so pack accordingly for the cruise itself.</p>
+      </div>
     </div>
   );
 }

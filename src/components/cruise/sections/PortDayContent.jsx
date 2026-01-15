@@ -1,4 +1,5 @@
 import FeedbackSection from '../FeedbackSection';
+import PortWeather from '../PortWeather';
 import { getPortContent } from '../../../data/cruise/g606-port-content';
 import './SectionContent.css';
 
@@ -34,6 +35,8 @@ function PortDayContent({ sectionKey, dayData }) {
     switch (sectionKey) {
       case 'overview':
         return <OverviewSection dayData={dayData} portContent={portContent} />;
+      case 'weather':
+        return <WeatherSection dayData={dayData} portContent={portContent} />;
       case 'stayLocal':
         return <StayLocalSection dayData={dayData} portContent={portContent} />;
       case 'goFurther':
@@ -53,6 +56,75 @@ function PortDayContent({ sectionKey, dayData }) {
     <div className="section-content">
       {renderSection()}
       <FeedbackSection sectionKey={sectionKey} dayNumber={dayData.dayNumber} />
+    </div>
+  );
+}
+
+function WeatherSection({ dayData, portContent }) {
+  const overview = portContent?.overview;
+  
+  // If no coordinates, show placeholder
+  if (!dayData.coords) {
+    return (
+      <div className="section-weather">
+        <div className="section-intro">
+          <p>Weather information is not available for this location.</p>
+        </div>
+      </div>
+    );
+  }
+  
+  return (
+    <div className="section-weather">
+      <div className="section-intro">
+        <p>Current weather conditions and forecast for {dayData.portName}.</p>
+      </div>
+
+      <hr className="section-divider" />
+
+      {/* Live Weather from API */}
+      <div className="weather-live-section">
+        <h3>🌡️ Current Conditions</h3>
+        <div className="weather-card-container">
+          <PortWeather 
+            portName={dayData.portName}
+            lat={dayData.coords.lat}
+            lon={dayData.coords.lon}
+            compact={false}
+          />
+        </div>
+      </div>
+
+      <hr className="section-divider" />
+
+      {/* Seasonal Info */}
+      <div className="sub-section">
+        <h3>📅 March Weather (Typical)</h3>
+        <p>
+          {overview?.weatherSeasonal 
+            ? overview.weatherSeasonal 
+            : `Weather information for ${dayData.portName} in March will be available closer to the cruise date.`
+          }
+        </p>
+      </div>
+
+      <hr className="section-divider" />
+
+      {/* What to Pack */}
+      <div className="sub-section">
+        <h3>🎒 What to Pack</h3>
+        <ul className="info-list">
+          <li>Layers - mornings and evenings can be cooler</li>
+          <li>Comfortable walking shoes</li>
+          <li>Sunscreen and sunglasses (UV can be strong even in March)</li>
+          <li>Light waterproof jacket (just in case)</li>
+          <li>Hat for sun protection</li>
+        </ul>
+      </div>
+
+      <div className="info-note">
+        <p>ℹ️ Weather data is updated regularly but conditions can change. Check again closer to your port day for the most accurate forecast.</p>
+      </div>
     </div>
   );
 }
