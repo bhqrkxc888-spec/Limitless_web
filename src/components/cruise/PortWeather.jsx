@@ -78,8 +78,16 @@ const PortWeather = ({
   }
 
   const weather = current.weather[0];
-  const main = current.main;
-  const wind = current.wind || {};
+  // One Call API 3.0 returns temp/humidity/etc directly on current, not nested in main
+  const main = {
+    temp: current.temp,
+    feels_like: current.feels_like,
+    humidity: current.humidity
+  };
+  const wind = {
+    speed: current.wind_speed,
+    deg: current.wind_deg
+  };
 
   if (compact) {
     return (
@@ -161,7 +169,7 @@ const PortWeather = ({
         </div>
         <div className="weather-detail">
           <span className="detail-icon">☁️</span>
-          <span className="detail-value">{current.clouds?.all || 0}%</span>
+          <span className="detail-value">{current.clouds || 0}%</span>
           <span className="detail-label">Cloud cover</span>
         </div>
         {current.uvi !== undefined && (
