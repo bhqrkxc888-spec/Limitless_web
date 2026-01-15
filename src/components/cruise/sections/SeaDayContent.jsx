@@ -1,4 +1,6 @@
 import FeedbackSection from '../FeedbackSection';
+import VenueFinder from '../VenueFinder';
+import { getRecommendations } from '../../../data/cruise/iona-venues';
 import './SectionContent.css';
 
 // FB Group URL - placeholder
@@ -94,38 +96,80 @@ function OverviewSection({ dayData, nextPort }) {
 function OnTheShipSection({ dayData: _dayData }) {
   return (
     <div className="section-on-ship">
-      <SubSection title="🏊 POOLS & SUN DECKS" content="[TBC] Content about pool areas" />
-      <SubSection title="🍽️ DINING" content="[TBC] Content about restaurants, times" />
-      <SubSection title="🎭 ENTERTAINMENT" content="[TBC] Content about shows, activities" />
+      <div className="section-intro">
+        <p>Searchable directory of everything on Iona - restaurants, bars, pools, entertainment, and more.</p>
+      </div>
+
+      <hr className="section-divider" />
+
+      {/* Venue Finder Component */}
+      <VenueFinder />
 
       <hr className="section-divider" />
 
       <div className="tip-block">
-        <h3>💡 SEA DAY TIP</h3>
-        <p><strong>[TBC]</strong> Advice for making most of sea day will appear here.</p>
+        <h3>💡 SEA DAY TIPS</h3>
+        <ul className="info-list">
+          <li><strong>Book shows early</strong> - Use the Horizon app to reserve seats for popular performances</li>
+          <li><strong>Pool loungers</strong> - Grab one early (8-9am) on sea days as they fill up quickly</li>
+          <li><strong>Specialty restaurants</strong> - Sea days are good for bookings as there's no port time to consider</li>
+          <li><strong>Gym & Spa</strong> - Quieter early morning before the pools get busy</li>
+          <li><strong>Shops</strong> - Only open at sea, with best deals often on the last sea day</li>
+        </ul>
       </div>
     </div>
   );
 }
 
 function QuietSpotsSection({ dayData: _dayData }) {
+  const quietSpots = getRecommendations.quietSpots();
+  
   return (
     <div className="section-quiet-spots">
       <div className="section-intro">
-        <p>Where to escape the crowds.</p>
+        <p>Where to escape the crowds on sea days when the ship is busy.</p>
       </div>
 
       <hr className="section-divider" />
 
-      <div className="sub-section">
-        <p><strong>[TBC]</strong> List of quiet areas on Iona with descriptions will appear here.</p>
-      </div>
+      {quietSpots.map((venue, idx) => (
+        <div key={venue.id}>
+          <div className="content-card">
+            <div className="content-card-title">{venue.name}</div>
+            <div className="content-card-meta">
+              <span>Deck {venue.deck}</span>
+              {venue.style && <span> • {venue.style}</span>}
+              {venue.adultsOnly && <span> • Adults Only</span>}
+            </div>
+            <p>{venue.description}</p>
+            {venue.tips && venue.tips.length > 0 && (
+              <ul className="info-list">
+                {venue.tips.map((tip, i) => (
+                  <li key={i}>{tip}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+          {idx < quietSpots.length - 1 && <hr className="section-divider" />}
+        </div>
+      ))}
 
       <hr className="section-divider" />
 
       <div className="info-block">
-        <h3>⏰ BEST TIMES</h3>
-        <p><strong>[TBC]</strong> When different areas are quietest will appear here.</p>
+        <h3>⏰ BEST TIMES FOR QUIET</h3>
+        <ul className="info-list">
+          <li><strong>Early morning (7-9am)</strong> - Most areas quiet before breakfast rush</li>
+          <li><strong>Lunchtime (12-2pm)</strong> - Everyone at the buffet or dining areas</li>
+          <li><strong>Show times (evenings)</strong> - When the theatre is on, public areas empty out</li>
+          <li><strong>Port days</strong> - When everyone's ashore, the ship is wonderfully quiet</li>
+        </ul>
+      </div>
+
+      <div className="tip-block">
+        <h3>💡 FOR NEURODIVERGENT TRAVELERS</h3>
+        <p>The Crow's Nest (Deck 17 forward) is particularly good for sensory breaks - 270-degree views with minimal noise. Anderson's Bar & Library is also quiet and dimly lit.</p>
+        <p>If you need a complete break, your cabin with the TV off is the quietest spot on the ship.</p>
       </div>
     </div>
   );
