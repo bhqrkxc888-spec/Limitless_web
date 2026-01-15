@@ -19,7 +19,7 @@ function SubSection({ title, content, mapLink }) {
         {mapLink && (
           <p>
             <a href={mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-              📍 Open route in Google Maps →
+              Open route in Google Maps →
             </a>
           </p>
         )}
@@ -100,7 +100,7 @@ function WeatherSection({ dayData, portContent }) {
 
       {/* Seasonal Info */}
       <div className="sub-section">
-        <h3>📅 March Weather (Typical)</h3>
+        <h3>March Weather (Typical)</h3>
         <p>
           {overview?.weatherSeasonal 
             ? overview.weatherSeasonal 
@@ -113,9 +113,9 @@ function WeatherSection({ dayData, portContent }) {
 
       {/* What to Pack */}
       <div className="sub-section">
-        <h3>🎒 What to Pack</h3>
+        <h3>What to Pack</h3>
         <ul className="info-list">
-          <li>Layers - mornings and evenings can be cooler</li>
+          <li>Layers — mornings and evenings can be cooler</li>
           <li>Comfortable walking shoes</li>
           <li>Sunscreen and sunglasses (UV can be strong even in March)</li>
           <li>Light waterproof jacket (just in case)</li>
@@ -124,7 +124,7 @@ function WeatherSection({ dayData, portContent }) {
       </div>
 
       <div className="info-note">
-        <p>ℹ️ Weather forecasts are available up to 8 days in advance and update hourly. Check back closer to your cruise!</p>
+        <p>Weather forecasts are available up to 8 days in advance and update hourly. Check back closer to your cruise.</p>
       </div>
     </div>
   );
@@ -269,7 +269,7 @@ function StayLocalSection({ dayData: _dayData, portContent }) {
                 <p>{item.content}</p>
                 {item.mapLink && (
                   <a href={item.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                    📍 Open in Google Maps
+                    Open in Google Maps
                   </a>
                 )}
               </div>
@@ -312,7 +312,7 @@ function StayLocalSection({ dayData: _dayData, portContent }) {
               ))}
               {stayLocal.beach.mapLink && (
                 <a href={stayLocal.beach.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                  📍 Open beach route in Google Maps
+                  Open beach route in Google Maps
                 </a>
               )}
             </div>
@@ -414,7 +414,7 @@ function StayLocalSection({ dayData: _dayData, portContent }) {
 
       {/* Tip */}
       <div className="tip-block">
-        <h3>💡 OUR TIP</h3>
+        <h3>Our Tip</h3>
         <p>{stayLocal?.tip ? (
           stayLocal.tip.split('\n\n').map((para, idx) => (
             <span key={idx}>
@@ -494,7 +494,7 @@ function GoFurtherSection({ dayData: _dayData, portContent }) {
 
       {goFurther?.ourTake && (
         <div className="tip-block">
-          <h3>💡 OUR TAKE</h3>
+          <h3>Our Take</h3>
           {goFurther.ourTake.split('\n\n').map((para, idx) => (
             <p key={idx}>{para}</p>
           ))}
@@ -502,7 +502,7 @@ function GoFurtherSection({ dayData: _dayData, portContent }) {
       )}
 
       <div className="info-note">
-        <p>ℹ️ For P&O excursions: Check the P&O app or Reception onboard for current options, prices, and availability.</p>
+        <p>For P&O excursions, check the P&O app or Reception onboard for current options, prices, and availability.</p>
       </div>
     </div>
   );
@@ -583,7 +583,7 @@ function WithKidsSection({ dayData: _dayData, portContent }) {
 
       {/* Easy Day */}
       <div className="tip-block">
-        <h3>💡 EASY FAMILY DAY</h3>
+        <h3>Easy Family Day</h3>
         <p>{withKids?.easyDay ? withKids.easyDay : <><strong>[TBC]</strong> Simple itinerary suggestion will appear here.</>}</p>
       </div>
     </div>
@@ -647,7 +647,7 @@ function SendSection({ dayData: _dayData, portContent }) {
       )}
 
       <div className="info-note">
-        <p>ℹ️ Accessibility information is based on research. Please contact venues directly to confirm current provisions for your specific needs.</p>
+        <p>Accessibility information is based on research. Please contact venues directly to confirm current provisions for your specific needs.</p>
       </div>
     </div>
   );
@@ -742,7 +742,7 @@ function FoodDrinkSection({ dayData: _dayData, portContent }) {
       {/* Tips */}
       {foodDrink?.tips ? (
         <div className="info-block">
-          <h3>💡 TIPS</h3>
+          <h3>Tips</h3>
           <ul className="info-list">
             {foodDrink.tips.map((tip, idx) => (
               <li key={idx}>{tip}</li>
@@ -751,13 +751,13 @@ function FoodDrinkSection({ dayData: _dayData, portContent }) {
         </div>
       ) : (
         <div className="info-block">
-          <h3>💡 TIPS</h3>
+          <h3>Tips</h3>
           <p><strong>[TBC]</strong> Lunch hours, tipping, etc. will appear here.</p>
         </div>
       )}
 
       <div className="info-note">
-        <p>ℹ️ Always check current opening times before visiting.</p>
+        <p>Always check current opening times before visiting.</p>
       </div>
     </div>
   );

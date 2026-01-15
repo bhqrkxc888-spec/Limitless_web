@@ -18,19 +18,19 @@ import './VenueFinder.css';
  */
 
 const VENUE_TYPES = [
-  { id: 'all', label: 'All', icon: '🚢' },
-  { id: 'restaurant', label: 'Dining', icon: '🍽️' },
-  { id: 'cafe', label: 'Cafés', icon: '☕' },
-  { id: 'bar', label: 'Bars', icon: '🍸' },
-  { id: 'pool', label: 'Pools', icon: '🏊' },
-  { id: 'whirlpool', label: 'Hot Tubs', icon: '♨️' },
-  { id: 'entertainment', label: 'Entertainment', icon: '🎭' },
-  { id: 'theatre', label: 'Theatre', icon: '🎪' },
-  { id: 'spa', label: 'Spa & Gym', icon: '💆' },
-  { id: 'gym', label: 'Gym', icon: '💪' },
-  { id: 'kids-club', label: 'Kids', icon: '👶' },
-  { id: 'shop', label: 'Shopping', icon: '🛍️' },
-  { id: 'service', label: 'Services', icon: '🛎️' },
+  { id: 'all', label: 'All' },
+  { id: 'restaurant', label: 'Dining' },
+  { id: 'cafe', label: 'Cafés' },
+  { id: 'bar', label: 'Bars' },
+  { id: 'pool', label: 'Pools' },
+  { id: 'whirlpool', label: 'Hot Tubs' },
+  { id: 'entertainment', label: 'Entertainment' },
+  { id: 'theatre', label: 'Theatre' },
+  { id: 'spa', label: 'Spa & Gym' },
+  { id: 'gym', label: 'Gym' },
+  { id: 'kids-club', label: 'Kids' },
+  { id: 'shop', label: 'Shopping' },
+  { id: 'service', label: 'Services' },
 ];
 
 const POSITION_LABELS = {
@@ -112,11 +112,6 @@ const VenueFinder = () => {
     return Array.from(decks).sort((a, b) => b - a);
   }, []);
 
-  const getTypeIcon = (type) => {
-    const found = VENUE_TYPES.find(t => t.id === type);
-    return found?.icon || '📍';
-  };
-
   return (
     <div className="venue-finder">
       <div className="venue-finder-header">
@@ -127,10 +122,9 @@ const VenueFinder = () => {
       {/* Search Bar */}
       <div className="venue-search-container">
         <div className="venue-search-box">
-          <span className="search-icon">🔍</span>
           <input
             type="text"
-            placeholder="Search... (e.g. coffee, pool, kids, breakfast)"
+            placeholder="Search venues..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="venue-search-input"
@@ -141,7 +135,7 @@ const VenueFinder = () => {
               onClick={() => setSearchQuery('')}
               aria-label="Clear search"
             >
-              ✕
+              ×
             </button>
           )}
         </div>
@@ -156,8 +150,7 @@ const VenueFinder = () => {
               className={`filter-chip ${selectedType === type.id ? 'active' : ''}`}
               onClick={() => setSelectedType(type.id)}
             >
-              <span className="filter-icon">{type.icon}</span>
-              <span className="filter-label">{type.label}</span>
+              {type.label}
             </button>
           ))}
         </div>
@@ -198,12 +191,11 @@ const VenueFinder = () => {
               onClick={() => setExpandedVenue(expandedVenue === venue.id ? null : venue.id)}
             >
               <div className="venue-card-header">
-                <div className="venue-icon" aria-hidden="true">{getTypeIcon(venue.type)}</div>
                 <div className="venue-main-info">
                   <h4 className="venue-name">{venue.name}</h4>
                   <div className="venue-location">
                     <span className="venue-deck">Deck {venue.deck}</span>
-                    <span className="venue-separator">•</span>
+                    <span className="venue-separator">·</span>
                     <span className="venue-position">{POSITION_LABELS[venue.position] || venue.position}</span>
                   </div>
                 </div>
@@ -250,7 +242,7 @@ const VenueFinder = () => {
                     <div className="venue-details-grid">
                       {/* Location Details */}
                       <div className="venue-detail">
-                        <span className="detail-label">📍 Location</span>
+                        <span className="detail-label">Location</span>
                         <span className="detail-value">
                           Deck {venue.deck}, {POSITION_LABELS[venue.position] || venue.position}
                           {venue.side && ` (${SIDE_LABELS[venue.side] || venue.side})`}
@@ -260,7 +252,7 @@ const VenueFinder = () => {
                       {/* Hours */}
                       {venue.hours && (
                         <div className="venue-detail">
-                          <span className="detail-label">🕐 Hours</span>
+                          <span className="detail-label">Hours</span>
                           <span className="detail-value">
                             {typeof venue.hours === 'object' ? (
                               Object.entries(venue.hours)
@@ -275,7 +267,7 @@ const VenueFinder = () => {
                       {/* Meals */}
                       {venue.meals && (
                         <div className="venue-detail">
-                          <span className="detail-label">🍴 Meals</span>
+                          <span className="detail-label">Meals</span>
                           <span className="detail-value">
                             {venue.meals.map(m => m.charAt(0).toUpperCase() + m.slice(1)).join(', ')}
                           </span>
@@ -285,7 +277,7 @@ const VenueFinder = () => {
                       {/* Dress Code */}
                       {venue.dressCode && (
                         <div className="venue-detail">
-                          <span className="detail-label">👔 Dress Code</span>
+                          <span className="detail-label">Dress code</span>
                           <span className="detail-value">{venue.dressCode}</span>
                         </div>
                       )}
@@ -293,7 +285,7 @@ const VenueFinder = () => {
                       {/* Booking */}
                       {venue.bookingRequired !== undefined && (
                         <div className="venue-detail">
-                          <span className="detail-label">📅 Booking</span>
+                          <span className="detail-label">Booking</span>
                           <span className="detail-value">
                             {venue.bookingRequired ? 'Required' : 'Not required'}
                           </span>
@@ -303,7 +295,7 @@ const VenueFinder = () => {
                       {/* Price */}
                       {venue.price && (
                         <div className="venue-detail">
-                          <span className="detail-label">💰 Price</span>
+                          <span className="detail-label">Price</span>
                           <span className="detail-value">{venue.price}</span>
                         </div>
                       )}
@@ -312,7 +304,7 @@ const VenueFinder = () => {
                     {/* Tips */}
                     {venue.tips && venue.tips.length > 0 && (
                       <div className="venue-tips">
-                        <span className="tips-label">💡 Tips</span>
+                        <span className="tips-label">Tips</span>
                         <ul className="tips-list">
                           {venue.tips.map((tip, i) => (
                             <li key={i}>{tip}</li>
@@ -333,7 +325,6 @@ const VenueFinder = () => {
 
         {filteredVenues.length === 0 && (
           <div className="no-results">
-            <span className="no-results-icon">🔍</span>
             <p>No venues found matching your search.</p>
             <button 
               className="clear-filters-btn"

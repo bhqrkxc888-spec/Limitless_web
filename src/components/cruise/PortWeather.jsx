@@ -108,14 +108,13 @@ const PortWeather = ({
     return (
       <div className="port-weather port-weather-unavailable">
         <div className="weather-unavailable-content">
-          <span className="weather-unavailable-icon">📅</span>
           <h4 className="weather-unavailable-title">Forecast Not Yet Available</h4>
           <p className="weather-unavailable-text">
             Weather forecasts for <strong>{portName}</strong> on <strong>{formatPortDate()}</strong> will 
             be available from around <strong>{getForecastAvailableDate()}</strong>.
           </p>
           <p className="weather-unavailable-note">
-            Weather APIs typically provide forecasts up to 8 days in advance. Check back closer to your port day!
+            Weather data is available up to 8 days in advance. Check back closer to your port day.
           </p>
           <div className="weather-unavailable-countdown">
             <span className="countdown-number">{daysUntilPort}</span>
@@ -131,13 +130,12 @@ const PortWeather = ({
     return (
       <div className="port-weather port-weather-unavailable">
         <div className="weather-unavailable-content">
-          <span className="weather-unavailable-icon">📍</span>
           <h4 className="weather-unavailable-title">Port Day Complete</h4>
           <p className="weather-unavailable-text">
             You visited <strong>{portName}</strong> on <strong>{formatPortDate()}</strong>.
           </p>
           <p className="weather-unavailable-note">
-            We hope you had a wonderful time!
+            We hope you had a wonderful time.
           </p>
         </div>
       </div>
@@ -200,7 +198,6 @@ const PortWeather = ({
         <div className="weather-alerts">
           {alerts.map((alert, idx) => (
             <div key={idx} className="weather-alert">
-              <span className="alert-icon">⚠️</span>
               <div className="alert-content">
                 <strong>{alert.event}</strong>
                 <p>{alert.description}</p>
@@ -244,25 +241,21 @@ const PortWeather = ({
 
       <div className="weather-details">
         <div className="weather-detail">
-          <span className="detail-icon">💨</span>
-          <span className="detail-value">{Math.round((wind.speed || 0) * 3.6)} km/h</span>
-          <span className="detail-label">{getWindDirection(wind.deg)}</span>
+          <span className="detail-label">Wind</span>
+          <span className="detail-value">{Math.round((wind.speed || 0) * 3.6)} km/h {getWindDirection(wind.deg)}</span>
         </div>
         <div className="weather-detail">
-          <span className="detail-icon">💧</span>
-          <span className="detail-value">{main.humidity}%</span>
           <span className="detail-label">Humidity</span>
+          <span className="detail-value">{main.humidity}%</span>
         </div>
         <div className="weather-detail">
-          <span className="detail-icon">☁️</span>
-          <span className="detail-value">{current.clouds || 0}%</span>
           <span className="detail-label">Cloud cover</span>
+          <span className="detail-value">{current.clouds || 0}%</span>
         </div>
         {current.uvi !== undefined && (
           <div className="weather-detail">
-            <span className="detail-icon">☀️</span>
-            <span className="detail-value">{Math.round(current.uvi)}</span>
             <span className="detail-label">UV Index</span>
+            <span className="detail-value">{Math.round(current.uvi)}</span>
           </div>
         )}
       </div>
@@ -315,10 +308,7 @@ const PortWeather = ({
                   <span className="daily-low">{day.tempMin}°</span>
                 </div>
                 {day.pop > 20 && (
-                  <span className="daily-rain">
-                    <span className="rain-icon">💧</span>
-                    {day.pop}%
-                  </span>
+                  <span className="daily-rain">{day.pop}%</span>
                 )}
               </div>
             ))}

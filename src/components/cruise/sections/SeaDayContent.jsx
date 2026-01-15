@@ -63,7 +63,7 @@ function OverviewSection({ dayData, nextPort }) {
       <hr className="section-divider" />
 
       <div className="info-block">
-        <h3>📍 SHIP LOCATION</h3>
+        <h3>Ship Location</h3>
         <p><strong>[TBC]</strong> Live ship tracking map will appear here.</p>
         <p style={{ fontSize: '0.875rem', opacity: 0.8 }}>Estimated position and progress will be displayed in future updates.</p>
       </div>
@@ -108,7 +108,7 @@ function OnTheShipSection({ dayData: _dayData }) {
       <hr className="section-divider" />
 
       <div className="tip-block">
-        <h3>💡 SEA DAY TIPS</h3>
+        <h3>Sea Day Tips</h3>
         <ul className="info-list">
           <li><strong>Book shows early</strong> - Use the Horizon app to reserve seats for popular performances</li>
           <li><strong>Pool loungers</strong> - Grab one early (8-9am) on sea days as they fill up quickly</li>
@@ -167,7 +167,7 @@ function QuietSpotsSection({ dayData: _dayData }) {
       </div>
 
       <div className="tip-block">
-        <h3>💡 FOR NEURODIVERGENT TRAVELERS</h3>
+        <h3>For Neurodivergent Travellers</h3>
         <p>The Crow's Nest (Deck 17 forward) is particularly good for sensory breaks - 270-degree views with minimal noise. Anderson's Bar & Library is also quiet and dimly lit.</p>
         <p>If you need a complete break, your cabin with the TV off is the quietest spot on the ship.</p>
       </div>

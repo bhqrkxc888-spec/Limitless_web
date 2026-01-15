@@ -104,10 +104,6 @@
   text-align: center;
 }
 
-.detail-icon {
-  font-size: 1.25rem;
-  margin-bottom: var(--space-1, 0.25rem);
-}
 
 .detail-value {
   font-weight: var(--font-weight-semibold, 600);
@@ -505,11 +501,6 @@
   margin: 0 auto;
 }
 
-.weather-unavailable-icon {
-  font-size: 3rem;
-  display: block;
-  margin-bottom: var(--space-3, 0.75rem);
-}
 
 .weather-unavailable-title {
   font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);

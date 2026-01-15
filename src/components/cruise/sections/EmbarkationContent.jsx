@@ -59,7 +59,7 @@ function WeatherSection({ dayData }) {
       <hr className="section-divider" />
 
       <div className="sub-section">
-        <h3>🎒 What to Wear</h3>
+        <h3>What to Wear</h3>
         <ul className="info-list">
           <li>March in Southampton can be chilly - layer up!</li>
           <li>Comfortable shoes for walking through the terminal</li>
@@ -68,7 +68,7 @@ function WeatherSection({ dayData }) {
       </div>
 
       <div className="info-note">
-        <p>ℹ️ The ship has a warm, controlled environment so pack accordingly for the cruise itself.</p>
+        <p>The ship has a warm, controlled environment so pack accordingly for the cruise itself.</p>
       </div>
     </div>
   );
