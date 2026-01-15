@@ -4,6 +4,21 @@
  * March 14-28, 2026
  */
 
+// Ship information for tracking
+export const g606ShipInfo = {
+  name: 'Iona',
+  imo: '9826548',
+  mmsi: '310857000',
+  operator: 'P&O Cruises'
+};
+
+// Departure info for countdown
+export const g606Departure = {
+  date: '2026-03-14',
+  time: '16:30',
+  port: 'Southampton'
+};
+
 export const g606Itinerary = [
   {
     date: "2026-03-14",
@@ -13,7 +28,8 @@ export const g606Itinerary = [
     country: "UK",
     dayType: "embarkation",
     arriveTime: null,
-    departTime: "TBC"
+    departTime: "16:30",
+    coords: { lat: 50.8998, lon: -1.4044 }
   },
   {
     date: "2026-03-15",
@@ -30,8 +46,9 @@ export const g606Itinerary = [
     portName: "La Coruña",
     country: "Spain",
     dayType: "port",
-    arriveTime: "TBC",
-    departTime: "TBC"
+    arriveTime: "08:00",
+    departTime: "17:00",
+    coords: { lat: 43.3623, lon: -8.4115 }
   },
   {
     date: "2026-03-17",
@@ -50,8 +67,9 @@ export const g606Itinerary = [
     portName: "Tenerife",
     country: "Spain",
     dayType: "port",
-    arriveTime: "TBC",
-    departTime: "TBC"
+    arriveTime: "08:00",
+    departTime: "18:00",
+    coords: { lat: 28.4636, lon: -16.2518 }
   },
   {
     date: "2026-03-20",
@@ -60,8 +78,9 @@ export const g606Itinerary = [
     portName: "Gran Canaria",
     country: "Spain",
     dayType: "port",
-    arriveTime: "TBC",
-    departTime: "TBC"
+    arriveTime: "08:00",
+    departTime: "18:00",
+    coords: { lat: 28.1235, lon: -15.4363 }
   },
   {
     date: "2026-03-21",
@@ -71,8 +90,9 @@ export const g606Itinerary = [
     displayName: "Arrecife de Lanzarote",
     country: "Spain",
     dayType: "port",
-    arriveTime: "TBC",
-    departTime: "TBC"
+    arriveTime: "08:00",
+    departTime: "18:00",
+    coords: { lat: 28.9630, lon: -13.5477 }
   },
   {
     date: "2026-03-22",
@@ -89,9 +109,10 @@ export const g606Itinerary = [
     portName: "Cádiz",
     country: "Spain",
     dayType: "port",
-    arriveTime: "TBC",
-    departTime: "TBC",
-    note: "Tours to Seville available"
+    arriveTime: "08:00",
+    departTime: "17:00",
+    note: "Tours to Seville available",
+    coords: { lat: 36.5271, lon: -6.2886 }
   },
   {
     date: "2026-03-24",
@@ -102,9 +123,10 @@ export const g606Itinerary = [
     portName: "Lisbon",
     country: "Portugal",
     dayType: "port",
-    arriveTime: "TBC",
-    departTime: "TBC",
-    isOvernight: true
+    arriveTime: "08:00",
+    departTime: "17:00",
+    isOvernight: true,
+    coords: { lat: 38.7223, lon: -9.1393 }
   },
   {
     date: "2026-03-26",
@@ -123,8 +145,9 @@ export const g606Itinerary = [
     portName: "Southampton",
     country: "UK",
     dayType: "disembarkation",
-    arriveTime: "TBC",
-    departTime: null
+    arriveTime: "06:30",
+    departTime: null,
+    coords: { lat: 50.8998, lon: -1.4044 }
   }
 ];
 

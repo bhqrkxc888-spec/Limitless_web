@@ -10,7 +10,10 @@ import SeaDayContent from '../components/cruise/sections/SeaDayContent';
 import EmbarkationContent from '../components/cruise/sections/EmbarkationContent';
 import DisembarkationContent from '../components/cruise/sections/DisembarkationContent';
 import AboutIona from '../components/cruise/AboutIona';
-import { g606Itinerary, getSectionsForDayType } from '../data/cruise/g606-itinerary';
+import CountdownTimer from '../components/cruise/CountdownTimer';
+import ShipTracker from '../components/cruise/ShipTracker';
+import PortWeather from '../components/cruise/PortWeather';
+import { g606Itinerary, g606ShipInfo, g606Departure, getSectionsForDayType } from '../data/cruise/g606-itinerary';
 import { SITE_ASSETS } from '../config/assetUrls';
 import { Button } from '../components/ui';
 import './CruiseCompanionPage.css';
@@ -248,13 +251,46 @@ function CruiseCompanionPage() {
         </div>
       </header>
 
-      {/* Status Bar - Show for ALL Days */}
-      <div className="status-bar-placeholder">
+      {/* Countdown Timer Section */}
+      <div className="cruise-countdown-section">
         <div className="container">
-          <p>📍 Status: Day {dayData.dayNumber} | {dayData.portName} | Weather: [TBC]</p>
-          {/* Map placeholder - static image or empty box for now */}
-          <div className="map-placeholder">
-            [Map Placeholder - static image or empty box for now]
+          <CountdownTimer 
+            departureDate={`${g606Departure.date}T${g606Departure.time}:00`}
+            cruiseName="G606"
+            shipName={g606ShipInfo.name}
+          />
+        </div>
+      </div>
+
+      {/* Live Ship Tracker Section */}
+      <div className="cruise-ship-tracker-section">
+        <div className="container">
+          <ShipTracker 
+            imo={g606ShipInfo.imo}
+            height={400}
+            showTrack={true}
+            title="Where's Iona Right Now?"
+          />
+        </div>
+      </div>
+
+      {/* Weather Status Bar */}
+      <div className="cruise-weather-bar">
+        <div className="container">
+          <div className="weather-bar-content">
+            <span className="weather-bar-label">
+              📍 Day {dayData.dayNumber} | {dayData.portName}
+            </span>
+            {dayData.coords ? (
+              <PortWeather 
+                portName={dayData.portName}
+                lat={dayData.coords.lat}
+                lon={dayData.coords.lon}
+                compact={true}
+              />
+            ) : (
+              <span className="weather-at-sea">At Sea</span>
+            )}
           </div>
         </div>
       </div>

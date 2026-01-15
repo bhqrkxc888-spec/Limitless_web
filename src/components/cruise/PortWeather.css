@@ -1,0 +1,229 @@
+/* ========================================
+   PORT WEATHER
+   Weather display matching Limitless design
+   ======================================== */
+
+.port-weather {
+  background: linear-gradient(135deg, 
+    var(--clr-surface, #FFFFFF) 0%, 
+    var(--clr-bg-alt, #F8F5F0) 100%);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-4, 1rem);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.06),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--clr-border, #E8E4DC);
+}
+
+/* Header */
+.port-weather-header {
+  margin-bottom: var(--space-3, 0.75rem);
+}
+
+.port-weather-title {
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  color: var(--clr-text-main, #2C344C);
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-semibold, 600);
+  margin: 0;
+}
+
+.port-weather-subtitle {
+  font-size: 0.8rem;
+  color: var(--clr-text-muted, #5C6478);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Main display */
+.port-weather-main {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4, 1rem);
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+.weather-icon-container {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.weather-icon {
+  width: 80px;
+  height: 80px;
+}
+
+.weather-emoji-fallback {
+  font-size: 3rem;
+}
+
+.weather-temp-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-temp-main {
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  font-size: 3rem;
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--clr-text-main, #2C344C);
+  line-height: 1;
+}
+
+.weather-temp-feels {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--clr-text-muted, #5C6478);
+  margin-top: var(--space-1, 0.25rem);
+}
+
+/* Description */
+.weather-description {
+  font-size: var(--font-size-base, 1rem);
+  color: var(--clr-text-main, #2C344C);
+  text-transform: capitalize;
+  margin: 0 0 var(--space-3, 0.75rem) 0;
+}
+
+/* Details grid */
+.weather-details {
+  display: flex;
+  gap: var(--space-3, 0.75rem);
+  padding-top: var(--space-3, 0.75rem);
+  border-top: 1px solid var(--clr-border, #E8E4DC);
+}
+
+.weather-detail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.detail-icon {
+  font-size: 1.25rem;
+  margin-bottom: var(--space-1, 0.25rem);
+}
+
+.detail-value {
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--clr-text-main, #2C344C);
+  font-size: 0.95rem;
+}
+
+.detail-label {
+  font-size: 0.7rem;
+  color: var(--clr-text-muted, #5C6478);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ========================================
+   COMPACT VARIANT (inline use)
+   ======================================== */
+
+.port-weather-compact {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2, 0.5rem);
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  background: rgba(44, 52, 76, 0.05);
+  border-radius: 20px;
+  border: 1px solid var(--clr-border, #E8E4DC);
+}
+
+.port-weather-compact .weather-emoji {
+  font-size: 1.25rem;
+}
+
+.port-weather-compact .weather-temp {
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--clr-text-main, #2C344C);
+}
+
+.port-weather-compact .weather-desc {
+  color: var(--clr-text-muted, #5C6478);
+  font-size: var(--font-size-sm, 0.875rem);
+  text-transform: capitalize;
+}
+
+/* ========================================
+   LOADING STATE
+   ======================================== */
+
+.port-weather-loading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2, 0.5rem);
+  color: var(--clr-text-muted, #5C6478);
+  font-size: var(--font-size-sm, 0.875rem);
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--clr-border, #E8E4DC);
+  border-top-color: var(--clr-primary, #2C344C);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ========================================
+   ERROR STATE
+   ======================================== */
+
+.port-weather-error {
+  color: var(--clr-text-muted, #5C6478);
+  font-size: var(--font-size-sm, 0.875rem);
+  font-style: italic;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 600px) {
+  .port-weather {
+    padding: var(--space-3, 0.75rem);
+  }
+  
+  .weather-temp-main {
+    font-size: 2.5rem;
+  }
+  
+  .weather-icon-container {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .weather-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .weather-details {
+    gap: var(--space-2, 0.5rem);
+  }
+  
+  .detail-value {
+    font-size: 0.85rem;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner {
+    animation: none;
+  }
+}

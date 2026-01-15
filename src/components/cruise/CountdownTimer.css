@@ -1,0 +1,210 @@
+/* ========================================
+   COUNTDOWN TIMER
+   Celebratory countdown matching Limitless design
+   ======================================== */
+
+.countdown-container {
+  background: linear-gradient(135deg, 
+    var(--clr-primary, #2C344C) 0%, 
+    #3d4766 100%);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-6, 1.5rem) var(--space-5, 1.25rem);
+  text-align: center;
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(212, 184, 106, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.countdown-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    var(--clr-secondary, #D4B86A), 
+    transparent);
+}
+
+/* Milestone badge */
+.countdown-milestone {
+  background: linear-gradient(135deg, 
+    var(--clr-secondary, #D4B86A) 0%, 
+    #e8d48a 100%);
+  color: var(--clr-primary, #2C344C);
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  border-radius: 20px;
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: var(--font-weight-semibold, 600);
+  display: inline-block;
+  margin-bottom: var(--space-4, 1rem);
+  box-shadow: 0 2px 8px rgba(201, 162, 39, 0.3);
+}
+
+/* Heading */
+.countdown-heading {
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  color: var(--clr-text-on-primary, #FFFFFF);
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin: 0 0 var(--space-4, 1rem) 0;
+  letter-spacing: 0.02em;
+  opacity: 0.95;
+}
+
+/* Timer grid */
+.countdown-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2, 0.5rem);
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 70px;
+}
+
+.countdown-number-wrapper {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-3, 0.75rem) var(--space-4, 1rem);
+  min-width: 70px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.countdown-number {
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  font-size: 2.5rem;
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--clr-text-on-primary, #FFFFFF);
+  display: block;
+  line-height: 1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.countdown-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: var(--space-2, 0.5rem);
+  font-weight: var(--font-weight-medium, 500);
+}
+
+.countdown-separator {
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  font-size: 2rem;
+  color: var(--clr-secondary, #D4B86A);
+  font-weight: 300;
+  margin-bottom: var(--space-4, 1rem);
+}
+
+/* Date display */
+.countdown-date {
+  margin: var(--space-4, 1rem) 0 0 0;
+  color: var(--clr-secondary, #D4B86A);
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: var(--font-weight-medium, 500);
+  letter-spacing: 0.05em;
+}
+
+/* ========================================
+   ON BOARD STATE
+   ======================================== */
+
+.countdown-onboard {
+  padding: var(--space-6, 1.5rem);
+}
+
+.onboard-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2, 0.5rem);
+}
+
+.onboard-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-2, 0.5rem);
+  animation: gentle-bob 3s ease-in-out infinite;
+}
+
+@keyframes gentle-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.onboard-title {
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  color: var(--clr-text-on-primary, #FFFFFF);
+  font-size: 1.75rem;
+  font-weight: var(--font-weight-semibold, 600);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.onboard-day {
+  color: var(--clr-secondary, #D4B86A);
+  font-size: 1.1rem;
+  font-weight: var(--font-weight-medium, 500);
+  margin: var(--space-2, 0.5rem) 0 0 0;
+  letter-spacing: 0.05em;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 600px) {
+  .countdown-container {
+    padding: var(--space-4, 1rem);
+  }
+  
+  .countdown-unit {
+    min-width: 55px;
+  }
+  
+  .countdown-number-wrapper {
+    min-width: 55px;
+    padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  }
+  
+  .countdown-number {
+    font-size: 1.75rem;
+  }
+  
+  .countdown-separator {
+    font-size: 1.5rem;
+  }
+  
+  .countdown-grid {
+    gap: var(--space-1, 0.25rem);
+  }
+  
+  .onboard-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .onboard-icon {
+    animation: none;
+  }
+  
+  .countdown-number {
+    animation: none !important;
+    transition: none !important;
+  }
+}
