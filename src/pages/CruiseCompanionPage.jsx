@@ -5,7 +5,7 @@ import { hasConsent } from '../components/cruise/CruiseConsentGate';
 import CruiseConsentGate from '../components/cruise/CruiseConsentGate';
 import DayNavigation from '../components/cruise/DayNavigation';
 import SectionTabs from '../components/cruise/SectionTabs';
-import PortDayContent from '../components/cruise/sections/PortDayContent';
+import CruisePortGuide from '../components/cruise/sections/CruisePortGuide';
 import SeaDayContent from '../components/cruise/sections/SeaDayContent';
 import EmbarkationContent from '../components/cruise/sections/EmbarkationContent';
 import DisembarkationContent from '../components/cruise/sections/DisembarkationContent';
@@ -171,7 +171,7 @@ function CruiseCompanionPage() {
     switch (dayData.dayType) {
       case 'port':
         return (
-          <PortDayContent
+          <CruisePortGuide
             sectionKey={currentSection}
             dayData={dayData}
           />
