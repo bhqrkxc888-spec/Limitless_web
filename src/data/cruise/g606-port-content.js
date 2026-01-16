@@ -136,8 +136,17 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
           independent: 'Train from La Coruña station (about 30 mins) - station is 2.5km from cruise terminal. Taxi possible but expensive for the distance.',
           allow: 'Full day commitment',
           cost: 'Check current prices',
-          notes: 'Beautiful historic centre, incredible cathedral, lots of pilgrims. But it\'s a big commitment for a port day - you\'ll miss La Coruña itself entirely.',
-          ourTake: 'Lovely if you\'ve never been, but only if you have a long port day. If you\'ve got 6-8 hours in port, it\'s doable with careful timing. Less than that, stay in La Coruña and explore locally.'
+          notes: 'Beautiful historic centre, incredible cathedral, lots of pilgrims. But it\'s a big commitment for a port day - you\'ll miss La Coruña itself entirely. If going with kids: Ale Hop shop in old town (Rúa do Vilar, 33).',
+          ourTake: 'Lovely if you\'ve never been, but only if you have a long port day. If you\'ve got 6-8 hours in port, it\'s doable with careful timing. Less than that, stay in La Coruña and explore locally.',
+          kidsNote: {
+            aleHop: {
+              location: 'Old town, near cathedral',
+              address: 'Rúa do Vilar, 33, 15705 Santiago de Compostela',
+              phone: '976 47 73 47',
+              mapsLink: 'https://www.google.com/maps/search/?api=1&query=Ale+Hop+Rua+do+Vilar+33+Santiago+Compostela',
+              image: null
+            }
+          }
         },
         {
           name: 'Monte de San Pedro',
@@ -180,8 +189,10 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
       ],
       familiarChains: {
         mcDonalds: {
-          location: 'Calle Real 40, about 10 min walk from port. Near the main shopping street.',
-          mapsLink: 'https://maps.google.com/?q=McDonald%27s+A+Coruna+Calle+Real'
+          location: 'Calle Real 40, about 10 min walk from port',
+          address: 'Calle Real, 40, 15003 A Coruña',
+          mapsLink: 'https://www.google.com/maps/search/?api=1&query=McDonald%27s+Calle+Real+40+A+Coruna',
+          image: null // To be added
         }
       },
       easyDay: 'Walk to main square, grab a coffee/juice, taxi to Aquarium (or Santa Margarita park for playground), taxi to beach for an hour, ice cream, then walk back to ship.'
@@ -446,13 +457,29 @@ March means you're here for "winter sun" - expect pleasant temperatures perfect 
         'Sun - Stronger than you think. Sunscreen and hats essential.'
       ],
       familiarChains: {
-        mcDonalds: {
-          location: 'Calle del Castillo (main shopping street), about 15 min walk from port',
-          mapsLink: 'https://maps.google.com/?q=McDonald%27s+Santa+Cruz+de+Tenerife'
-        },
+        mcDonalds: [
+          {
+            name: 'Santa Cruz | Castillo',
+            location: 'Main shopping street, 15 min walk from port',
+            address: 'Calle Castillo, 12, 38002 Santa Cruz de Tenerife',
+            mapsLink: 'https://www.google.com/maps/search/?api=1&query=McDonald%27s+Calle+Castillo+12+Santa+Cruz+Tenerife',
+            image: null // To be added
+          },
+          {
+            name: 'Tenerife | CC Meridiano',
+            location: 'Shopping centre, further from port',
+            address: 'CC Meridiano, Avd Manuel Hermoso Rojas nº 16, local A32, 38005 Tenerife',
+            mapsLink: 'https://www.google.com/maps/search/?api=1&query=McDonald%27s+CC+Meridiano+Tenerife',
+            image: null // To be added
+          }
+        ],
         aleHop: {
-          location: 'Calle del Castillo 43. The famous Spanish gift shop with toys, jokes, and novelties. Kids love it.',
-          mapsLink: 'https://maps.google.com/?q=Ale+Hop+Santa+Cruz+de+Tenerife'
+          location: 'Main shopping street',
+          address: 'Calle del Castillo, 43, 38002 Santa Cruz de Tenerife',
+          phone: '922 24 48 82',
+          mapsLink: 'https://www.google.com/maps/search/?api=1&query=Ale+Hop+Calle+Castillo+43+Santa+Cruz+Tenerife',
+          image: null, // To be added
+          description: 'Spanish gift shop with toys, jokes, and novelties. Kids love it.'
         }
       },
       easyDay: 'Option 1 (Beach): Bus to Las Teresitas, beach morning, lunch at beachfront, bus back, ice cream in town, back to ship. Option 2 (City): Plaza de España, Market (kids love the colours), walk to Parque Marítimo for a swim, ice cream, back to ship.'
@@ -697,12 +724,17 @@ Las Canteras beach is the star here - a gorgeous golden sand urban beach with a 
       ],
       familiarChains: {
         mcDonalds: {
-          location: 'Calle Triana 75, about 15 min walk or quick bus from Las Canteras',
-          mapsLink: 'https://maps.google.com/?q=McDonald%27s+Las+Palmas+Triana'
+          location: 'Calle Triana, 15 min walk or quick bus from Las Canteras',
+          address: 'Calle Triana, 75, 35002 Las Palmas de Gran Canaria',
+          mapsLink: 'https://www.google.com/maps/search/?api=1&query=McDonald%27s+Calle+Triana+75+Las+Palmas',
+          image: null // To be added
         },
         aleHop: {
-          location: 'Calle Mayor de Triana 48. Fun Spanish gift shop with novelties and toys.',
-          mapsLink: 'https://maps.google.com/?q=Ale+Hop+Las+Palmas'
+          location: 'Main shopping street',
+          address: 'Calle Mayor de Triana, 48, 35002 Las Palmas de Gran Canaria',
+          mapsLink: 'https://www.google.com/maps/search/?api=1&query=Ale+Hop+Calle+Mayor+Triana+48+Las+Palmas',
+          image: null, // To be added
+          description: 'Spanish gift shop with novelties and toys.'
         }
       },
       easyDay: 'Walk to Las Canteras, beach morning, ice cream, lunch on promenade, more beach or paddle, walk back via Santa Catalina Park, back to ship.'
@@ -942,8 +974,10 @@ March weather is perfect for exploring - warm enough for beaches but not the int
       ],
       familiarChains: {
         mcDonalds: {
-          location: 'Calle León y Castillo in Arrecife centre, about 20 min walk from port',
-          mapsLink: 'https://maps.google.com/?q=McDonald%27s+Arrecife+Lanzarote'
+          location: 'Arrecife centre, 20 min walk from port',
+          address: 'Calle León y Castillo, 35500 Arrecife, Lanzarote',
+          mapsLink: 'https://www.google.com/maps/search/?api=1&query=McDonald%27s+Calle+Leon+Castillo+Arrecife+Lanzarote',
+          image: null // To be added
         }
       },
       easyDay: 'Option 1 (Local): Walk to Charco de San Ginés, coffee, wander old town, Playa del Reducto for beach time, lunch, back to ship. Option 2 (Timanfaya): Book excursion or tour to Timanfaya, spend day exploring volcanic landscapes, return to ship.'
@@ -1189,12 +1223,17 @@ Cádiz is famous for its connection to sherry wine (it's part of the "Sherry Tri
       ],
       familiarChains: {
         mcDonalds: {
-          location: 'Calle Columela near the main shopping area, about 10 min walk from port',
-          mapsLink: 'https://maps.google.com/?q=McDonald%27s+Cadiz'
+          location: 'Near main shopping area, 10 min walk from port',
+          address: 'Calle Columela, 11004 Cádiz',
+          mapsLink: 'https://www.google.com/maps/search/?api=1&query=McDonald%27s+Calle+Columela+Cadiz',
+          image: null // To be added
         },
         aleHop: {
-          location: 'Calle Ancha (main shopping street). Fun Spanish gift shop with toys and novelties.',
-          mapsLink: 'https://maps.google.com/?q=Ale+Hop+Cadiz'
+          location: 'Main shopping street',
+          address: 'Calle Ancha, 11001 Cádiz',
+          mapsLink: 'https://www.google.com/maps/search/?api=1&query=Ale+Hop+Calle+Ancha+Cadiz',
+          image: null, // To be added
+          description: 'Spanish gift shop with toys and novelties.'
         }
       },
       easyDay: 'Option 1 (City): Plaza de San Juan de Dios, Mercado Central (kids love the colours), Torre Tavira (camera obscura), lunch, La Caleta beach, ice cream, back to ship. Option 2 (Park): Walk to Parque Genovés, explore gardens, seafront promenade, lunch, back to ship.'

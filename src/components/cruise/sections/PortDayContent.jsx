@@ -578,24 +578,84 @@ function WithKidsSection({ dayData: _dayData, portContent }) {
             <p style={{ fontSize: '0.875rem', marginBottom: '0.75rem', color: 'var(--clr-text-muted)' }}>
               Sometimes kids just want something familiar. No judgement here.
             </p>
-            <ul className="info-list">
-              {withKids.familiarChains.mcDonalds && (
-                <li>
-                  <strong>McDonald's:</strong> {withKids.familiarChains.mcDonalds.location}
-                  {withKids.familiarChains.mcDonalds.mapsLink && (
-                    <> - <a href={withKids.familiarChains.mcDonalds.mapsLink} target="_blank" rel="noopener noreferrer">Open in Maps</a></>
+            
+            {/* McDonald's */}
+            {withKids?.familiarChains?.mcDonalds && (
+              <div style={{ marginBottom: '1rem' }}>
+                <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.5rem' }}>🍔 McDonald's</h4>
+                {Array.isArray(withKids?.familiarChains?.mcDonalds) ? (
+                  withKids.familiarChains.mcDonalds.map((location, idx) => (
+                    <div key={idx} className="content-card" style={{ marginBottom: '0.75rem' }}>
+                      {location.image && (
+                        <div style={{ marginBottom: '0.5rem' }}>
+                          <img src={location.image} alt={location.name} style={{ width: '100%', borderRadius: '8px' }} />
+                        </div>
+                      )}
+                      <div style={{ fontWeight: 600, marginBottom: '0.25rem' }}>{location.name}</div>
+                      <div style={{ fontSize: '0.875rem', color: 'var(--clr-text-muted)', marginBottom: '0.25rem' }}>
+                        {location.location}
+                      </div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--clr-text-muted)', marginBottom: '0.5rem' }}>
+                        {location.address}
+                      </div>
+                      {location.mapsLink && (
+                        <a href={location.mapsLink} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.875rem' }}>
+                          Open in Google Maps →
+                        </a>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <div className="content-card">
+                    {withKids?.familiarChains?.mcDonalds?.image && (
+                      <div style={{ marginBottom: '0.5rem' }}>
+                        <img src={withKids?.familiarChains?.mcDonalds?.image} alt="McDonald's" style={{ width: '100%', borderRadius: '8px' }} />
+                      </div>
+                    )}
+                    <div style={{ fontSize: '0.875rem', marginBottom: '0.25rem' }}>
+                      {withKids?.familiarChains?.mcDonalds?.location}
+                    </div>
+                    <div style={{ fontSize: '0.75rem', color: 'var(--clr-text-muted)', marginBottom: '0.5rem' }}>
+                      {withKids?.familiarChains?.mcDonalds?.address}
+                    </div>
+                    {withKids?.familiarChains?.mcDonalds?.mapsLink && (
+                      <a href={withKids.familiarChains.mcDonalds.mapsLink} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.875rem' }}>
+                        Open in Google Maps →
+                      </a>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Ale Hop */}
+            {withKids?.familiarChains?.aleHop && (
+              <div>
+                <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.5rem' }}>🎁 Ale Hop</h4>
+                <div className="content-card">
+                  {withKids?.familiarChains?.aleHop?.image && (
+                    <div style={{ marginBottom: '0.5rem' }}>
+                      <img src={withKids.familiarChains.aleHop.image} alt="Ale Hop" style={{ width: '100%', borderRadius: '8px' }} />
+                    </div>
                   )}
-                </li>
-              )}
-              {withKids.familiarChains.aleHop && (
-                <li>
-                  <strong>Ale Hop:</strong> {withKids.familiarChains.aleHop.location} - Fun Spanish gift/toy shop that kids love
-                  {withKids.familiarChains.aleHop.mapsLink && (
-                    <> - <a href={withKids.familiarChains.aleHop.mapsLink} target="_blank" rel="noopener noreferrer">Open in Maps</a></>
+                  <div style={{ fontSize: '0.875rem', marginBottom: '0.25rem' }}>
+                    {withKids?.familiarChains?.aleHop?.description || 'Spanish gift shop with toys, jokes, and novelties.'}
+                  </div>
+                  <div style={{ fontSize: '0.875rem', color: 'var(--clr-text-muted)', marginBottom: '0.25rem' }}>
+                    {withKids?.familiarChains?.aleHop?.location}
+                  </div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--clr-text-muted)', marginBottom: '0.5rem' }}>
+                    {withKids?.familiarChains?.aleHop?.address}
+                    {withKids?.familiarChains?.aleHop?.phone && <> • {withKids?.familiarChains?.aleHop?.phone}</>}
+                  </div>
+                  {withKids?.familiarChains?.aleHop?.mapsLink && (
+                    <a href={withKids.familiarChains.aleHop.mapsLink} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.875rem' }}>
+                      Open in Google Maps →
+                    </a>
                   )}
-                </li>
-              )}
-            </ul>
+                </div>
+              </div>
+            )}
           </div>
           <hr className="section-divider" />
         </>
