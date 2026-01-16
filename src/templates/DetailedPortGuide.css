@@ -91,13 +91,16 @@
 }
 
 /* ========================================
-   SECTION CONTENT
+   SECTION CONTENT - White raised box matching G606
    ======================================== */
 
 .port-section-content {
-  padding: var(--space-6, 1.5rem) var(--space-4, 1rem);
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: var(--layout-content-width, 1120px);
+  margin: var(--space-6, 1.5rem) auto;
+  background: var(--clr-surface, #FFFFFF);
+  padding: var(--space-5, 1.25rem);
+  border-radius: var(--radius-xl, 16px);
+  box-shadow: 0 4px 20px rgba(44, 52, 76, 0.08);
 }
 
 .section-intro {
@@ -622,7 +625,8 @@
   }
   
   .port-section-content {
-    padding: var(--space-8, 2rem) 0;
+    padding: var(--space-6, 1.5rem);
+    border-radius: var(--radius-xl, 16px);
   }
   
   .section-intro h2 {
@@ -642,6 +646,10 @@
   
   .port-section-tab {
     padding: var(--space-3, 0.75rem) var(--space-5, 1.25rem);
+  }
+  
+  .port-section-content {
+    padding: var(--space-8, 2rem);
   }
   
   .access-grid {

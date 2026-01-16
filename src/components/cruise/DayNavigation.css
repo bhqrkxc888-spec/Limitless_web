@@ -52,6 +52,8 @@
   font-family: inherit;
   touch-action: manipulation;
   scroll-snap-align: start;
+  /* Explicit text color for inactive buttons - dark on light background */
+  color: var(--clr-text-main, #2C344C);
 }
 
 .day-nav-button:hover {
