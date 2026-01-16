@@ -81,7 +81,7 @@ export default async function handler(req, res) {
     }
 
     // Step 2: Cache miss or expired - fetch from One Call API 3.0
-    const weatherUrl = `${ONECALL_URL}?lat=${latitude}&lon=${longitude}&appid=${weatherApiKey}&units=metric`;
+    const weatherUrl = `${ONECALL_URL}?lat=${latitude}&lon=${longitude}&appid=${weatherApiKey}&units=metric&lang=en`;
     const weatherResponse = await fetch(weatherUrl);
 
     if (!weatherResponse.ok) {
