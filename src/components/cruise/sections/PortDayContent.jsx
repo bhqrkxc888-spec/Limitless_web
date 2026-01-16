@@ -1,6 +1,9 @@
 import FeedbackSection from '../FeedbackSection';
 import PortWeather from '../PortWeather';
 import { getPortContent } from '../../../data/cruise/g606-port-content';
+import { usePortGuideImage } from '../../../hooks/useImageUrl';
+import { getPortGuideSlugFromG606PortName } from '../../../utils/portNameMapping';
+import OptimizedImage from '../../OptimizedImage';
 import './SectionContent.css';
 
 function SubSection({ title, content, mapLink }) {
@@ -130,13 +133,35 @@ function WeatherSection({ dayData, portContent }) {
 function OverviewSection({ dayData, portContent }) {
   const overview = portContent?.overview;
   
+  // Get port guide slug for image loading
+  const portGuideSlug = getPortGuideSlugFromG606PortName(dayData.portName);
+  const { imageUrl: heroImage, isPlaceholder } = usePortGuideImage(
+    portGuideSlug, 
+    'hero', 
+    dayData.portName, 
+    dayData.country || ''
+  );
+  
   return (
     <div className="section-overview">
-      {/* Hero image placeholder */}
-      <div className="image-placeholder">
-        <span className="image-placeholder-icon">📸</span>
-        <span className="image-placeholder-text">Port hero image coming soon</span>
-      </div>
+      {/* Hero image from port guide */}
+      {heroImage && !isPlaceholder && (
+        <div className="port-hero-image">
+          <OptimizedImage
+            src={heroImage}
+            alt={`${dayData.portName} cruise port`}
+            className="port-hero-img"
+          />
+        </div>
+      )}
+      
+      {/* Show placeholder only if no real image */}
+      {(!heroImage || isPlaceholder) && (
+        <div className="image-placeholder">
+          <span className="image-placeholder-icon">📸</span>
+          <span className="image-placeholder-text">Port hero image coming soon</span>
+        </div>
+      )}
 
       <div className="section-intro">
         {overview?.description ? (
