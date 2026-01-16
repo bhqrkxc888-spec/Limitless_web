@@ -1311,12 +1311,17 @@
 }
 
 .port-footer .disclaimer-text {
-  max-width: 800px;
-  margin: 0 auto var(--space-4);
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto var(--space-3);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-style: italic;
+  line-height: 1.5;
 }
 
 .port-footer .disclaimer-text strong {
   color: var(--clr-text);
+  font-style: normal;
 }
 
 .update-date {

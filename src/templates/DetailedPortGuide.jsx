@@ -40,7 +40,6 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
 
   const { overview, stayLocal, goFurther, withKids, send, foodAndDrink } = detailedContent;
 
-  // Check which sections have content
   // Check which sections have content - match field names from portContent.js
   const hasContent = {
     overview: !!overview,

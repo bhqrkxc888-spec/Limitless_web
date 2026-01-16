@@ -4,10 +4,6 @@
    Matches the cruise companion port day layout EXACTLY
    ======================================== */
 
-.detailed-port-guide {
-  /* No extra margin - the container padding is already removed */
-}
-
 /* Override port-content padding when detailed guide is present */
 .port-content:has(.detailed-port-guide) {
   padding-top: 0 !important;
@@ -23,8 +19,8 @@
   border-bottom: 1px solid var(--clr-border-light, #F2EFE9);
   padding: var(--space-2, 0.5rem) 0;
   position: sticky;
-  top: 80px;
-  z-index: 100;
+  top: 0;
+  z-index: 1000;
   box-shadow: 0 2px 4px rgba(44, 52, 76, 0.04);
   /* Full width - break out of container */
   margin-left: calc(-50vw + 50%);
@@ -610,7 +606,7 @@
 @media (min-width: 768px) {
   .port-section-tabs {
     padding: var(--space-3, 0.75rem) 0;
-    top: 105px;
+    top: 0;
   }
   
   .port-tabs-scroll {
@@ -636,7 +632,7 @@
 
 @media (min-width: 1024px) {
   .port-section-tabs {
-    top: 115px;
+    top: 0;
   }
   
   .port-tabs-scroll {

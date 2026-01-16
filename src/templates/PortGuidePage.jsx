@@ -133,6 +133,9 @@ function PortGuidePage() {
     return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
   };
 
+  // Get current date for "last updated"
+  const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+
   // Weather data
   const weatherMonths = port.weather?.months || [];
   const visibleWeatherCount = 3;
@@ -652,7 +655,7 @@ function PortGuidePage() {
             port authority, or official tourism websites before travel. Prices and availability are indicative only.
           </p>
           <p className="update-date">
-            Guide last updated: {formatDate(port.lastUpdated || '2025-01-01')}
+            Guide last updated: {formatDate(port.lastUpdated || currentDate)}
           </p>
         </div>
       </footer>
