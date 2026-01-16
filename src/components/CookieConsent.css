@@ -13,6 +13,11 @@
   visibility: visible;
   opacity: 1;
   transform: translateY(0);
+  /* Ensure banner doesn't block page scrolling */
+  pointer-events: auto;
+  /* Fix for iOS Safari */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 /* Hidden state - element remains in DOM but is visually hidden to prevent CLS */

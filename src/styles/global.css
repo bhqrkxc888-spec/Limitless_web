@@ -85,6 +85,14 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Enable smooth scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
+  /* Prevent iOS Safari from zooming on input focus */
+  -webkit-text-size-adjust: 100%;
+  /* Ensure scrolling works on iOS */
+  overflow-y: scroll;
+  /* Fix for iOS Safari address bar height issues */
+  height: 100%;
 }
 
 body {
@@ -95,6 +103,16 @@ body {
   color: var(--clr-text-main);
   background-color: var(--clr-bg);
   min-height: 100vh;
+  /* Enable smooth scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
+  /* Allow all touch gestures for scrolling */
+  touch-action: pan-y pan-x;
+  /* Ensure body can scroll */
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Fix for iOS Safari */
+  position: relative;
+  height: 100%;
 }
 
 /* ========================================

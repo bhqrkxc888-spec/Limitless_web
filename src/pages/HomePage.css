@@ -13,6 +13,9 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+  /* Fix for iOS Safari */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 /* Background Image Container */
@@ -640,32 +643,7 @@
 }
 
 @media (max-width: 900px) {
-  .trust-items {
-    gap: var(--space-5);
-  }
-
-  .trust-item {
-    min-width: auto;
-  }
-
-  .trust-text strong {
-    font-size: var(--font-size-xs);
-  }
-
-  .trust-text span {
-    font-size: 0.65rem;
-  }
-}
-
-@media (max-width: 640px) {
-  .hero-elegant {
-    padding: var(--space-10) 0 var(--space-12);
-  }
-
-  .hero-text h1 {
-    font-size: 2rem;
-  }
-
+  /* Trust bar stacks vertically on tablet and mobile for better readability */
   .trust-bar {
     padding: var(--space-6) 0;
   }
@@ -679,7 +657,7 @@
   .trust-item {
     flex-direction: row;
     justify-content: flex-start;
-    width: 160px;
+    width: 200px;
   }
 
   .trust-text {
@@ -692,6 +670,20 @@
 
   .trust-text span {
     font-size: var(--font-size-xs);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-elegant {
+    padding: var(--space-10) 0 var(--space-12);
+  }
+
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+
+  .trust-item {
+    width: 180px;
   }
 
   .contact-grid {
