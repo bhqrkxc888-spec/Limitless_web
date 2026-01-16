@@ -21,7 +21,6 @@ function getSessionId() {
  */
 function FeedbackSection({ sectionKey, dayNumber, cruiseCode = 'G606', portName = null }) {
   const [hasVoted, setHasVoted] = useState(false);
-  const [vote, setVote] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Check for existing vote on mount
@@ -30,7 +29,6 @@ function FeedbackSection({ sectionKey, dayNumber, cruiseCode = 'G606', portName 
     const existingVote = localStorage.getItem(localKey);
     if (existingVote) {
       setHasVoted(true);
-      setVote(existingVote === 'helpful');
     }
   }, [cruiseCode, sectionKey, dayNumber]);
 
@@ -41,7 +39,6 @@ function FeedbackSection({ sectionKey, dayNumber, cruiseCode = 'G606', portName 
     const localKey = `cruise_feedback_${cruiseCode}_${sectionKey}_day${dayNumber}`;
     
     // Optimistic UI update
-    setVote(isHelpful);
     setHasVoted(true);
     localStorage.setItem(localKey, isHelpful ? 'helpful' : 'not-helpful');
 
@@ -75,27 +72,31 @@ function FeedbackSection({ sectionKey, dayNumber, cruiseCode = 'G606', portName 
   return (
     <div className="feedback-section">
       <div className="feedback-content">
-        <div className="feedback-question">
-          <p>Was this section helpful?</p>
-          <div className="feedback-buttons">
-            <button
-              onClick={() => handleVote(true)}
-              className={`feedback-button ${hasVoted && vote === true ? 'voted' : ''}`}
-              disabled={hasVoted || isSubmitting}
-              aria-pressed={hasVoted && vote === true}
-            >
-              {isSubmitting ? '...' : '👍 Yes'}
-            </button>
-            <button
-              onClick={() => handleVote(false)}
-              className={`feedback-button ${hasVoted && vote === false ? 'voted' : ''}`}
-              disabled={hasVoted || isSubmitting}
-              aria-pressed={hasVoted && vote === false}
-            >
-              {isSubmitting ? '...' : '👎 No'}
-            </button>
+        {!hasVoted ? (
+          <div className="feedback-question">
+            <p>Was this section helpful?</p>
+            <div className="feedback-buttons">
+              <button
+                onClick={() => handleVote(true)}
+                className="feedback-button"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? '...' : '👍 Yes'}
+              </button>
+              <button
+                onClick={() => handleVote(false)}
+                className="feedback-button"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? '...' : '👎 No'}
+              </button>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="feedback-thankyou">
+            <p>✓ Thank you for your feedback</p>
+          </div>
+        )}
       </div>
     </div>
   );

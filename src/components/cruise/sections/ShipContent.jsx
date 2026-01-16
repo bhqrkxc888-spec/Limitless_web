@@ -106,7 +106,7 @@ function ShipContent({ sectionKey, dayData }) {
         <div className="tip-block">
           <h3>Good to Know</h3>
           <ul className="info-list">
-            <li>Download the P&O Horizon app for show bookings and daily schedules</li>
+            <li>Access P&O Horizon (web-based) for show bookings and daily schedules - can be added to home screen as a shortcut</li>
             <li>Shops and casino are only open at sea</li>
             <li>The Retreat on Deck 18 is adults only (16+)</li>
             <li>Launderettes are available on Decks 5, 9, 10, 12, 14 and 15</li>

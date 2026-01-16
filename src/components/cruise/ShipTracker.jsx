@@ -26,7 +26,8 @@ const ShipTracker = ({
 }) => {
   // VesselFinder iframe embed URL
   // Using MMSI for more reliable tracking
-  const iframeSrc = `https://www.vesselfinder.com/aismap?zoom=6&track=true&mmsi=${mmsi}&names=true&width=100%25&height=${height}`;
+  // Zoom level 10 keeps ship well-centered
+  const iframeSrc = `https://www.vesselfinder.com/aismap?zoom=10&track=true&mmsi=${mmsi}&names=true&width=100%25&height=${height}`;
 
   return (
     <div className="ship-tracker-wrapper">

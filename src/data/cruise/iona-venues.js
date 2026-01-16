@@ -33,9 +33,9 @@ export const IONA_VENUES = {
       cost: 'included',
       meals: ['breakfast', 'lunch', 'dinner'],
       hours: {
-        breakfast: 'Check Horizon app',
-        lunch: 'Check Horizon app', 
-        dinner: 'Check Horizon app'
+        breakfast: 'Check Horizon',
+        lunch: 'Check Horizon', 
+        dinner: 'Check Horizon'
       },
       dressCode: 'Casual',
       description: 'Main buffet restaurant with extensive hot and cold selections. International cuisine, carving station, salad bar.',
@@ -54,7 +54,7 @@ export const IONA_VENUES = {
       cost: 'included',
       meals: ['dinner'],
       hours: {
-        dinner: 'Check Horizon app'
+        dinner: 'Check Horizon'
       },
       dressCode: 'Smart/Formal (depending on night)',
       description: 'Main dining room with waiter service. Multi-course evening meals.',
@@ -73,7 +73,7 @@ export const IONA_VENUES = {
       cost: 'included',
       meals: ['dinner'],
       hours: {
-        dinner: 'Check Horizon app'
+        dinner: 'Check Horizon'
       },
       dressCode: 'Smart/Formal (depending on night)',
       description: 'Main dining room with waiter service. Multi-course evening meals.',
@@ -92,7 +92,7 @@ export const IONA_VENUES = {
       cost: 'included',
       meals: ['dinner'],
       hours: {
-        dinner: 'Check Horizon app'
+        dinner: 'Check Horizon'
       },
       dressCode: 'Smart/Formal (depending on night)',
       description: 'Main dining room with waiter service. Multi-course evening meals.',
@@ -111,7 +111,7 @@ export const IONA_VENUES = {
       cost: 'included',
       meals: ['dinner'],
       hours: {
-        dinner: 'Check Horizon app'
+        dinner: 'Check Horizon'
       },
       dressCode: 'Smart/Formal (depending on night)',
       description: 'Main dining room with waiter service. Multi-course evening meals.',
@@ -130,9 +130,9 @@ export const IONA_VENUES = {
       cost: 'included',
       meals: ['breakfast', 'lunch', 'dinner'],
       hours: {
-        breakfast: 'Check Horizon app',
-        lunch: 'Check Horizon app',
-        dinner: 'Check Horizon app'
+        breakfast: 'Check Horizon',
+        lunch: 'Check Horizon',
+        dinner: 'Check Horizon'
       },
       dressCode: 'Casual',
       description: 'Vibrant food market with multiple stations - sushi, tacos, curry, burgers and more. Each station has its own specialty.',
@@ -151,8 +151,8 @@ export const IONA_VENUES = {
       cost: 'included',
       meals: ['lunch', 'dinner'],
       hours: {
-        lunch: 'Check Horizon app',
-        dinner: 'Check Horizon app'
+        lunch: 'Check Horizon',
+        dinner: 'Check Horizon'
       },
       dressCode: 'Casual',
       description: 'Relaxed poolside dining. Burgers, hot dogs, salads.',
@@ -171,14 +171,14 @@ export const IONA_VENUES = {
       cost: 'included',
       meals: ['lunch', 'dinner'],
       hours: {
-        lunch: 'Check Horizon app',
-        dinner: 'Check Horizon app'
+        lunch: 'Check Horizon',
+        dinner: 'Check Horizon'
       },
       dressCode: 'Casual',
       description: 'Street food concept with rotating menus. Different cuisines each day.',
       bookingRequired: false,
       familyFriendly: true,
-      tips: ['Menu changes daily - check Horizon app']
+      tips: ['Menu changes daily - check Horizon']
     }
   ],
 
@@ -199,7 +199,7 @@ export const IONA_VENUES = {
       price: '~£40 pp',
       meals: ['dinner'],
       hours: {
-        dinner: 'Check Horizon app'
+        dinner: 'Check Horizon'
       },
       dressCode: 'Smart',
       description: 'Premium fine dining experience with tasting menus. Showcases British ingredients with modern techniques.',
@@ -219,7 +219,7 @@ export const IONA_VENUES = {
       price: '~£25 pp',
       meals: ['dinner'],
       hours: {
-        dinner: 'Check Horizon app'
+        dinner: 'Check Horizon'
       },
       dressCode: 'Smart Casual',
       description: 'Award-winning Indian cuisine by Atul Kochhar. Contemporary dishes with authentic flavours.',
@@ -239,7 +239,7 @@ export const IONA_VENUES = {
       price: '~£30 pp',
       meals: ['dinner'],
       hours: {
-        dinner: 'Check Horizon app'
+        dinner: 'Check Horizon'
       },
       dressCode: 'Smart Casual',
       description: 'Premium steakhouse featuring the finest British beef and fresh seafood.',
@@ -259,7 +259,7 @@ export const IONA_VENUES = {
       price: '~£20 pp',
       meals: ['dinner'],
       hours: {
-        dinner: 'Check Horizon app'
+        dinner: 'Check Horizon'
       },
       dressCode: 'Smart Casual',
       description: 'Fresh Mediterranean cuisine from Italy, Greece, and Spain.',
@@ -279,8 +279,8 @@ export const IONA_VENUES = {
       price: '~£15 pp',
       meals: ['lunch', 'dinner'],
       hours: {
-        lunch: 'Check Horizon app',
-        dinner: 'Check Horizon app'
+        lunch: 'Check Horizon',
+        dinner: 'Check Horizon'
       },
       dressCode: 'Smart Casual',
       description: 'Wine-focused dining with small plates and tapas. Extensive wine list.',
@@ -323,8 +323,8 @@ export const IONA_VENUES = {
       cost: 'extra',
       meals: ['all-day'],
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Authentic Italian gelato made fresh on board.',
       tips: ['The pistachio is incredible!', 'Changes flavors regularly']
@@ -340,8 +340,8 @@ export const IONA_VENUES = {
       cost: 'extra',
       meals: ['all-day'],
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Ice cream and sundaes by the pool.',
       tips: ['Great on a hot sea day']
@@ -362,8 +362,8 @@ export const IONA_VENUES = {
       style: 'Traditional',
       cost: 'pay-as-you-go',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Elegant traditional bar with library. Quiet, sophisticated atmosphere.',
       tips: ['Great for a quiet drink and a book', 'Adults-only atmosphere']
@@ -378,8 +378,8 @@ export const IONA_VENUES = {
       style: 'Live Music',
       cost: 'pay-as-you-go',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Live music venue with intimate atmosphere. Jazz, acoustic, and vocal performances.',
       tips: ['Check Horizon for performance schedule']
@@ -394,8 +394,8 @@ export const IONA_VENUES = {
       style: 'Lounge',
       cost: 'pay-as-you-go',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Stylish lounge bar.',
       tips: []
@@ -410,8 +410,8 @@ export const IONA_VENUES = {
       style: 'Pub',
       cost: 'pay-as-you-go',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Traditional British pub atmosphere. Cask ales and pub food.',
       tips: ['Good for watching sport', 'Quiz nights held here']
@@ -426,8 +426,8 @@ export const IONA_VENUES = {
       style: 'Outdoor',
       cost: 'pay-as-you-go',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Outdoor bar at the aft with stunning wake views. Best sunset spot on the ship.',
       tips: ['Arrive early on sea days for the best seats at sunset!', 'Can get windy but amazing views']
@@ -442,8 +442,8 @@ export const IONA_VENUES = {
       style: 'Observation',
       cost: 'pay-as-you-go',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Forward observation lounge with panoramic sea views. 270-degree views.',
       tips: ['Amazing views when arriving into port', 'Quieter than most bars', 'Best views on the ship']
@@ -521,12 +521,12 @@ export const IONA_VENUES = {
       indoor: true,
       cost: 'included',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
-      description: 'Main pool under the retractable SkyDome roof. Hosts entertainment and DJ sets.',
+      description: 'Main pool under the glass SkyDome roof. Hosts entertainment and DJ sets.',
       familyFriendly: true,
-      tips: ['Roof opens in good weather', 'Gets busy on sea days', 'Evening entertainment hub']
+      tips: ['Glass roof provides shelter', 'Gets busy on sea days', 'Evening entertainment hub']
     },
     {
       id: 'infinity-pool',
@@ -538,8 +538,8 @@ export const IONA_VENUES = {
       indoor: false,
       cost: 'included',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Infinity-edge pool with sea views.',
       familyFriendly: true,
@@ -555,8 +555,8 @@ export const IONA_VENUES = {
       indoor: false,
       cost: 'included',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Adults-only relaxation area. Tranquil atmosphere.',
       familyFriendly: false,
@@ -613,7 +613,7 @@ export const IONA_VENUES = {
       type: 'entertainment',
       cost: 'included',
       description: 'Cinema showing the latest films. Multiple showings daily.',
-      tips: ['Check Horizon app for film times', 'Great for rainy days or quiet time']
+      tips: ['Check Horizon for film times', 'Great for rainy days or quiet time']
     },
     {
       id: 'grand-atrium',
@@ -699,8 +699,8 @@ export const IONA_VENUES = {
       type: 'spa',
       cost: 'extra',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Full-service spa with treatment rooms. Massages, facials, and beauty treatments.',
       tips: ['Book treatments early, especially on sea days', 'Look for sea day spa packages']
@@ -733,8 +733,8 @@ export const IONA_VENUES = {
       ageGroup: '2-4 years',
       cost: 'included',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Kids club for toddlers. Supervised play and activities.',
       tips: ['Free for all kids', 'Evening sessions available']
@@ -749,8 +749,8 @@ export const IONA_VENUES = {
       ageGroup: '5-8 years',
       cost: 'included',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Kids club for younger children. Games, crafts, and activities.',
       tips: []
@@ -765,8 +765,8 @@ export const IONA_VENUES = {
       ageGroup: '9-12 years',
       cost: 'included',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Kids club for older children. Activities and games.',
       tips: []
@@ -781,8 +781,8 @@ export const IONA_VENUES = {
       ageGroup: '6 months - 2 years',
       cost: 'extra',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Nursery facilities for babies and toddlers. Charges apply.',
       tips: ['Book in advance - limited spaces', 'Night nursery available for evening dining']
@@ -830,8 +830,8 @@ export const IONA_VENUES = {
       side: 'port',
       type: 'service',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Book and manage shore excursions.',
       tips: ['Book popular excursions early', 'Can book pre-cruise online']
@@ -845,8 +845,8 @@ export const IONA_VENUES = {
       type: 'service',
       cost: 'extra',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Professional photography services. View and purchase photos taken during the cruise.',
       tips: ['Photos from formal nights available next day', 'Digital packages available']
@@ -860,8 +860,8 @@ export const IONA_VENUES = {
       type: 'service',
       cost: 'extra',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Onboard medical facility with doctor and nurses. For illness and emergencies.',
       tips: ['Charges apply for consultations', 'Travel insurance recommended', 'Available 24/7 for emergencies']
@@ -874,8 +874,8 @@ export const IONA_VENUES = {
       side: 'port',
       type: 'service',
       hours: {
-        open: 'Check Horizon app',
-        close: 'Check Horizon app'
+        open: 'Check Horizon',
+        close: 'Check Horizon'
       },
       description: 'Book future cruises and check loyalty benefits.',
       tips: ['Good deals on future bookings available onboard', 'Loyalty members check in for welcome gift']

@@ -227,6 +227,11 @@
 
 .map-weather-map {
   min-height: 300px;
+  background: var(--clr-surface, #FFFFFF);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-4, 1rem);
+  border: 1px solid var(--clr-border-light, #F2EFE9);
+  box-shadow: 0 2px 8px rgba(44, 52, 76, 0.04);
 }
 
 .map-weather-weather {
@@ -235,6 +240,9 @@
   padding: var(--space-4, 1rem);
   border: 1px solid var(--clr-border-light, #F2EFE9);
   box-shadow: 0 2px 8px rgba(44, 52, 76, 0.04);
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
 }
 
 .weather-section-title {
@@ -274,11 +282,12 @@
 @media (min-width: 768px) {
   .map-weather-grid {
     grid-template-columns: 1fr 1fr;
-    align-items: start;
+    align-items: stretch;
   }
   
-  .map-weather-map {
-    min-height: 350px;
+  .map-weather-map,
+  .map-weather-weather {
+    min-height: 400px;
   }
 }
 
