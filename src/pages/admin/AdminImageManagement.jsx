@@ -387,16 +387,8 @@ function AdminImageManagement() {
       path: '/admin/images/port-guides',
       stats: stats.portGuides || { total: 0, compliant: 0, warnings: 0, missing: 0 },
       color: '#06b6d4'
-    },
-    {
-      id: 'ships',
-      title: 'Ship Images',
-      description: 'Cruise ship photos for guides (P&O Iona, etc.): venues, pools, restaurants',
-      icon: Ship,
-      path: '/admin/images/ships',
-      stats: stats.ships || { total: 0, compliant: 0, warnings: 0, missing: 0 },
-      color: '#0ea5e9'
     }
+    // Note: Ship venue images (P&O Iona, etc.) are managed via Cruise Lines & Ships → select cruise line → select ship
   ];
 
   const totalImages = Object.values(stats).reduce((sum, s) => sum + s.total, 0);

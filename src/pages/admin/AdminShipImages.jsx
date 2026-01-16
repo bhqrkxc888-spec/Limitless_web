@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect, useCallback } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Ship, CheckCircle, AlertTriangle, XCircle, Link as LinkIcon } from 'lucide-react';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
@@ -23,7 +23,15 @@ const SHIPS = [
     id: 'iona',
     name: 'P&O Iona',
     operator: 'P&O Cruises',
+    cruiseLineSlug: 'p-and-o-cruises',
     description: 'P&O Cruises flagship ship, 5,200 guests, 184,700 tonnes'
+  },
+  {
+    id: 'arvia',
+    name: 'P&O Arvia',
+    operator: 'P&O Cruises',
+    cruiseLineSlug: 'p-and-o-cruises',
+    description: 'P&O Cruises newest ship, 5,200 guests, 184,700 tonnes'
   }
   // Future ships can be added here
 ];
@@ -58,6 +66,7 @@ const SHIP_IMAGE_TYPES = [
 
 function AdminShipImages() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { isAuthenticated, isLoading: authLoading, logout } = useAdminAuth();
   const [selectedShip, setSelectedShip] = useState(null);
   const [images, setImages] = useState({});
@@ -72,6 +81,17 @@ function AdminShipImages() {
       navigate('/admin/login');
     }
   }, [authLoading, isAuthenticated, navigate]);
+
+  // Auto-select ship from URL query parameter
+  useEffect(() => {
+    const shipParam = searchParams.get('ship');
+    if (shipParam && !selectedShip) {
+      const ship = SHIPS.find(s => s.id === shipParam);
+      if (ship) {
+        setSelectedShip(ship);
+      }
+    }
+  }, [searchParams, selectedShip]);
 
   const loadImages = useCallback(async () => {
     setIsRefreshing(true);
@@ -187,12 +207,19 @@ function AdminShipImages() {
     >
       <div className="admin-images-page">
         <header className="admin-page-header">
-          <Link to="/admin/images" className="back-link">
-            <ArrowLeft size={18} />
-            Back to Image Management
-          </Link>
-          <h1 className="admin-page-title">Ship Images</h1>
-          <p className="admin-page-subtitle">Manage images for cruise ships - used in cruise guides and ship pages</p>
+          {searchParams.get('ship') ? (
+            <Link to="/admin/images/cruise-lines" className="back-link">
+              <ArrowLeft size={18} />
+              Back to Cruise Lines & Ships
+            </Link>
+          ) : (
+            <Link to="/admin/images" className="back-link">
+              <ArrowLeft size={18} />
+              Back to Image Management
+            </Link>
+          )}
+          <h1 className="admin-page-title">Ship Venue Images</h1>
+          <p className="admin-page-subtitle">Manage venue photos for cruise guides (pools, restaurants, bars, theatres, etc.)</p>
         </header>
 
         {loading ? (

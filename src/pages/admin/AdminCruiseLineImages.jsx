@@ -6,7 +6,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Ship } from 'lucide-react';
+import { ArrowLeft, Ship, Camera } from 'lucide-react';
 import { cruiseLines } from '../../data/cruiseLines';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
@@ -16,6 +16,11 @@ import { supabase, getPublicUrl } from '../../lib/supabase';
 import { STORAGE_BUCKETS } from '../../config/supabaseConfig';
 import { shipNameToSlug } from '../../utils/widgetyHelpers';
 import './AdminImagesShared.css';
+
+// Ships with venue images for cruise guides (expandable)
+const SHIPS_WITH_VENUES = {
+  'p-and-o-cruises': ['iona', 'arvia'] // Ships that have detailed venue pages
+};
 
 const REQUIRED_SHIP_GALLERY = []; // Ships are OPTIONAL - future enhancement
 const OPTIONAL_SHIP_GALLERY = ['exterior', 'deck', 'suite', 'dining', 'pool', 'entertainment', 'spa', 'theater']; // All ship images are optional
@@ -424,6 +429,9 @@ function AdminCruiseLineImages() {
                           const shipEntityId = `${selectedCruiseLine.slug}/ships/${shipSlug}`;
                           const shipImgs = shipImages[shipEntityId] || {};
                           
+                          // Check if this ship has venue images for cruise guides
+                          const hasVenueSupport = SHIPS_WITH_VENUES[selectedCruiseLine.slug]?.includes(shipSlug);
+                          
                           return (
                             <div key={shipSlug} className="admin-card image-card">
                               <div className="image-card-header">
@@ -452,6 +460,32 @@ function AdminCruiseLineImages() {
                                 existingData={shipImgs.card}
                                 onUploadComplete={loadImages}
                               />
+                              
+                              {/* Link to venue images for cruise guides */}
+                              {hasVenueSupport && (
+                                <Link 
+                                  to={`/admin/images/ships?ship=${shipSlug}`}
+                                  className="venue-images-link"
+                                  style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.5rem',
+                                    marginTop: '1rem',
+                                    padding: '0.75rem 1rem',
+                                    background: 'var(--admin-bg-tertiary)',
+                                    border: '1px solid var(--admin-border)',
+                                    borderRadius: '8px',
+                                    color: 'var(--admin-primary)',
+                                    textDecoration: 'none',
+                                    fontSize: '0.875rem',
+                                    fontWeight: 500,
+                                    transition: 'all 0.2s'
+                                  }}
+                                >
+                                  <Camera size={16} />
+                                  Manage Venue Images for Cruise Guides
+                                </Link>
+                              )}
                             </div>
                           );
                         })}
