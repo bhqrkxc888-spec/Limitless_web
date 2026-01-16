@@ -46,21 +46,23 @@ function FeedbackSection({ sectionKey, dayNumber, cruiseCode = 'G606', portName 
     localStorage.setItem(localKey, isHelpful ? 'helpful' : 'not-helpful');
 
     try {
-      // Submit to Supabase
-      const { error } = await supabase
-        .from('guide_feedback')
-        .insert({
-          cruise_code: cruiseCode,
-          day_number: dayNumber,
-          port_name: portName,
-          section_key: sectionKey,
-          is_helpful: isHelpful,
-          user_agent: navigator.userAgent,
-          session_id: getSessionId()
-        });
+      // Submit to Supabase (only if client is configured)
+      if (supabase) {
+        const { error } = await supabase
+          .from('guide_feedback')
+          .insert({
+            cruise_code: cruiseCode,
+            day_number: dayNumber,
+            port_name: portName,
+            section_key: sectionKey,
+            is_helpful: isHelpful,
+            user_agent: navigator.userAgent,
+            session_id: getSessionId()
+          });
 
-      if (error) {
-        console.warn('Feedback saved locally (Supabase unavailable):', error.message);
+        if (error) {
+          console.warn('Feedback saved locally (Supabase unavailable):', error.message);
+        }
       }
     } catch (err) {
       // Silently fail - localStorage already has the vote
