@@ -156,7 +156,7 @@ function OverviewSection({ dayData, portContent }) {
       {/* Quick Info Grid */}
       <div className="quick-info-grid">
         <div className="quick-info-item">
-          <span className="quick-info-icon">🌡️</span>
+          
           <div className="quick-info-content">
             <div className="quick-info-label">Weather (March)</div>
             <div className="quick-info-value">
@@ -166,7 +166,7 @@ function OverviewSection({ dayData, portContent }) {
         </div>
 
         <div className="quick-info-item">
-          <span className="quick-info-icon">🚢</span>
+          
           <div className="quick-info-content">
             <div className="quick-info-label">Dock Location</div>
             <div className="quick-info-value">
@@ -176,7 +176,7 @@ function OverviewSection({ dayData, portContent }) {
         </div>
 
         <div className="quick-info-item">
-          <span className="quick-info-icon">🚶</span>
+          
           <div className="quick-info-content">
             <div className="quick-info-label">Distance to Town</div>
             <div className="quick-info-value">
@@ -186,7 +186,7 @@ function OverviewSection({ dayData, portContent }) {
         </div>
 
         <div className="quick-info-item">
-          <span className="quick-info-icon">🚌</span>
+          
           <div className="quick-info-content">
             <div className="quick-info-label">Shuttle</div>
             <div className="quick-info-value">
@@ -196,7 +196,7 @@ function OverviewSection({ dayData, portContent }) {
         </div>
 
         <div className="quick-info-item">
-          <span className="quick-info-icon">⏰</span>
+          
           <div className="quick-info-content">
             <div className="quick-info-label">Arrive / Depart</div>
             <div className="quick-info-value">
@@ -206,7 +206,7 @@ function OverviewSection({ dayData, portContent }) {
         </div>
 
         <div className="quick-info-item">
-          <span className="quick-info-icon">⚓</span>
+          
           <div className="quick-info-content">
             <div className="quick-info-label">All Aboard</div>
             <div className="quick-info-value">30 mins before departure</div>
@@ -233,7 +233,7 @@ function StayLocalSection({ dayData: _dayData, portContent }) {
       {stayLocal?.quickWalk ? (
         <>
           <div className="sub-section">
-            <h3>🚶 QUICK WALK (15 mins or less)</h3>
+            <h3>Quick Walk (15 mins or less)</h3>
             {stayLocal.quickWalk.map((item, idx) => (
               <div key={idx} className="content-card">
                 <div className="content-card-title">{item.title}</div>
@@ -244,14 +244,14 @@ function StayLocalSection({ dayData: _dayData, portContent }) {
           <hr className="section-divider" />
         </>
       ) : (
-        <SubSection title="🚶 QUICK WALK (15 mins or less)" content="[TBC] Quick walk content" />
+        <SubSection title="Quick Walk (15 mins or less)" content="[TBC] Quick walk content" />
       )}
 
       {/* Longer Walk */}
       {stayLocal?.longerWalk ? (
         <>
           <div className="sub-section">
-            <h3>🚶‍♂️ LONGER WALK (30-45 mins)</h3>
+            <h3>Longer Walk (30-45 mins)</h3>
             {stayLocal.longerWalk.map((item, idx) => (
               <div key={idx} className="content-card">
                 <div className="content-card-title">{item.title}</div>
@@ -267,14 +267,14 @@ function StayLocalSection({ dayData: _dayData, portContent }) {
           <hr className="section-divider" />
         </>
       ) : (
-        <SubSection title="🚶‍♂️ LONGER WALK (30-45 mins)" content="[TBC] Longer walk content with suggested route" />
+        <SubSection title="Longer Walk (30-45 mins)" content="[TBC] Longer walk content with suggested route" />
       )}
 
       {/* Parks */}
       {stayLocal?.parks ? (
         <>
           <div className="sub-section">
-            <h3>🌳 PARKS & GARDENS</h3>
+            <h3>Parks & Gardens</h3>
             {stayLocal.parks.map((item, idx) => (
               <div key={idx} className="content-card">
                 <div className="content-card-title">{item.title}</div>
@@ -285,14 +285,14 @@ function StayLocalSection({ dayData: _dayData, portContent }) {
           <hr className="section-divider" />
         </>
       ) : (
-        <SubSection title="🌳 PARKS & GARDENS" content="[TBC] Parks and gardens content" />
+        <SubSection title="Parks & Gardens" content="[TBC] Parks and gardens content" />
       )}
 
       {/* Beach */}
       {stayLocal?.beach ? (
         <>
           <div className="sub-section">
-            <h3>🏖️ BEACH</h3>
+            <h3>Beach</h3>
             <div className="content-card">
               <div className="content-card-title">{stayLocal.beach.title}</div>
               <p>{stayLocal.beach.content}</p>
@@ -306,14 +306,14 @@ function StayLocalSection({ dayData: _dayData, portContent }) {
               )}
             </div>
             <div className="image-placeholder">
-              <span className="image-placeholder-icon">🏖️</span>
+              
               <span className="image-placeholder-text">Beach image coming soon</span>
             </div>
           </div>
           <hr className="section-divider" />
         </>
       ) : (
-        <SubSection title="🏖️ BEACH" content="[TBC] Beach content or 'No beach within walking distance'" />
+        <SubSection title="Beach" content="[TBC] Beach content or 'No beach within walking distance'" />
       )}
 
       {/* Scenic */}
@@ -337,7 +337,7 @@ function StayLocalSection({ dayData: _dayData, portContent }) {
       {stayLocal?.shopping ? (
         <>
           <div className="sub-section">
-            <h3>🛍️ SHOPPING</h3>
+            <h3>Shopping</h3>
             <ul className="info-list">
               {stayLocal.shopping.map((item, idx) => (
                 <li key={idx}>{item}</li>
@@ -347,14 +347,14 @@ function StayLocalSection({ dayData: _dayData, portContent }) {
           <hr className="section-divider" />
         </>
       ) : (
-        <SubSection title="🛍️ SHOPPING" content="[TBC] Shopping content" />
+        <SubSection title="Shopping" content="[TBC] Shopping content" />
       )}
 
       {/* Coffee */}
       {stayLocal?.coffee ? (
         <>
           <div className="sub-section">
-            <h3>☕ QUICK COFFEE</h3>
+            <h3>Quick Coffee</h3>
             <ul className="info-list">
               {stayLocal.coffee.map((item, idx) => (
                 <li key={idx}>{typeof item === 'string' ? item : `${item.name || ''}${item.location ? ` (${item.location})` : ''}${item.description ? ` - ${item.description}` : ''}`}</li>
@@ -364,7 +364,7 @@ function StayLocalSection({ dayData: _dayData, portContent }) {
           <hr className="section-divider" />
         </>
       ) : (
-        <SubSection title="☕ QUICK COFFEE" content="[TBC] Quick coffee content" />
+        <SubSection title="Quick Coffee" content="[TBC] Quick coffee content" />
       )}
 
       {/* Bars */}
@@ -459,7 +459,7 @@ function GoFurtherSection({ dayData: _dayData, portContent }) {
             
             {attraction.mapLink && (
               <a href={attraction.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                📍 Open in Google Maps
+                Open in Google Maps
               </a>
             )}
           </div>
@@ -506,7 +506,7 @@ function WithKidsSection({ dayData: _dayData, portContent }) {
       {withKids?.toddlers ? (
         <>
           <div className="sub-section">
-            <h3>👶 TODDLERS / YOUNG KIDS</h3>
+            <h3>Toddlers / YOUNG KIDS</h3>
             <ul className="info-list">
               {withKids.toddlers.map((item, idx) => (
                 <li key={idx}>{item}</li>
@@ -516,7 +516,7 @@ function WithKidsSection({ dayData: _dayData, portContent }) {
           <hr className="section-divider" />
         </>
       ) : (
-        <SubSection title="👶 TODDLERS / YOUNG KIDS" content="[TBC] Content - playgrounds, easy activities" />
+        <SubSection title="Toddlers / YOUNG KIDS" content="[TBC] Content - playgrounds, easy activities" />
       )}
 
       {/* Older Kids */}
@@ -557,7 +557,7 @@ function WithKidsSection({ dayData: _dayData, portContent }) {
       {withKids?.warnings ? (
         <>
           <div className="sub-section">
-            <h3>⚠️ WATCH OUT FOR</h3>
+            <h3>Watch Out For</h3>
             <ul className="info-list">
               {withKids.warnings.map((item, idx) => (
                 <li key={idx}>{item}</li>
@@ -567,14 +567,14 @@ function WithKidsSection({ dayData: _dayData, portContent }) {
           <hr className="section-divider" />
         </>
       ) : (
-        <SubSection title="⚠️ WATCH OUT FOR" content="[TBC] Warnings - cobblestones, hills, timing issues" />
+        <SubSection title="Watch Out For" content="[TBC] Warnings - cobblestones, hills, timing issues" />
       )}
 
       {/* Familiar Chains for Kids */}
       {(withKids?.familiarChains?.mcDonalds || withKids?.familiarChains?.aleHop) && (
         <>
           <div className="sub-section">
-            <h3>🏠 FAMILIAR SPOTS</h3>
+            <h3>Familiar Spots</h3>
             <p style={{ fontSize: '0.875rem', marginBottom: '0.75rem', color: 'var(--clr-text-muted)' }}>
               Sometimes kids just want something familiar. No judgement here.
             </p>
@@ -582,7 +582,7 @@ function WithKidsSection({ dayData: _dayData, portContent }) {
             {/* McDonald's */}
             {withKids?.familiarChains?.mcDonalds && (
               <div style={{ marginBottom: '1rem' }}>
-                <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.5rem' }}>🍔 McDonald's</h4>
+                <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.5rem' }}>McDonald's</h4>
                 {Array.isArray(withKids?.familiarChains?.mcDonalds) ? (
                   withKids.familiarChains.mcDonalds.map((location, idx) => (
                     <div key={idx} className="content-card" style={{ marginBottom: '0.75rem' }}>
@@ -631,7 +631,7 @@ function WithKidsSection({ dayData: _dayData, portContent }) {
             {/* Ale Hop */}
             {withKids?.familiarChains?.aleHop && (
               <div>
-                <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.5rem' }}>🎁 Ale Hop</h4>
+                <h4 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '0.5rem' }}>Ale Hop</h4>
                 <div className="content-card">
                   {withKids?.familiarChains?.aleHop?.image && (
                     <div style={{ marginBottom: '0.5rem' }}>
@@ -740,7 +740,7 @@ function FoodDrinkSection({ dayData: _dayData, portContent }) {
     <div className="section-food-drink">
       {/* Food image placeholder */}
       <div className="image-placeholder">
-        <span className="image-placeholder-icon">🍽️</span>
+        
         <span className="image-placeholder-text">Local food image coming soon</span>
       </div>
 
@@ -748,7 +748,7 @@ function FoodDrinkSection({ dayData: _dayData, portContent }) {
       {foodDrink?.restaurants ? (
         <>
           <div className="sub-section">
-            <h3>🍽️ RESTAURANTS</h3>
+            <h3>Restaurants</h3>
             {foodDrink.restaurants.map((restaurant, idx) => (
               <div key={idx} className="content-card">
                 <div className="content-card-title">
@@ -762,14 +762,14 @@ function FoodDrinkSection({ dayData: _dayData, portContent }) {
           <hr className="section-divider" />
         </>
       ) : (
-        <SubSection title="🍽️ RESTAURANTS" content="[TBC] List with brief descriptions" />
+        <SubSection title="Restaurants" content="[TBC] List with brief descriptions" />
       )}
 
       {/* Cafes */}
       {foodDrink?.cafes ? (
         <>
           <div className="sub-section">
-            <h3>☕ CAFÉS</h3>
+            <h3>Cafés</h3>
             {foodDrink.cafes.map((cafe, idx) => (
               <div key={idx} className="content-card">
                 <div className="content-card-title">
@@ -783,7 +783,7 @@ function FoodDrinkSection({ dayData: _dayData, portContent }) {
           <hr className="section-divider" />
         </>
       ) : (
-        <SubSection title="☕ CAFÉS" content="[TBC] List with brief descriptions" />
+        <SubSection title="Cafés" content="[TBC] List with brief descriptions" />
       )}
 
       {/* Bars */}
@@ -809,7 +809,7 @@ function FoodDrinkSection({ dayData: _dayData, portContent }) {
 
       {/* Local Speciality */}
       <div className="tip-block">
-        <h3>🍴 LOCAL SPECIALITY</h3>
+        <h3>Local Speciality</h3>
         {foodDrink?.localSpeciality ? (
           foodDrink.localSpeciality.split('\n\n').map((para, idx) => (
             <p key={idx}>{para}</p>

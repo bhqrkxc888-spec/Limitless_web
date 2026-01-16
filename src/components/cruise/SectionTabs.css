@@ -9,7 +9,7 @@
   padding: var(--space-2, 0.5rem) 0;
   position: sticky;
   top: 68px; /* Below day navigation - adjust based on day nav height */
-  z-index: 800;
+  z-index: 900;
 }
 
 .section-tabs-scroll {

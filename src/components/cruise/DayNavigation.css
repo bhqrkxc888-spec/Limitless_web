@@ -9,7 +9,7 @@
   padding: var(--space-3, 0.75rem) 0;
   position: sticky;
   top: 0;
-  z-index: var(--z-sticky-content, 900);
+  z-index: 1000;
   box-shadow: 0 2px 8px rgba(44, 52, 76, 0.06);
 }
 

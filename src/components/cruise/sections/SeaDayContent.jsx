@@ -50,7 +50,7 @@ function OverviewSection({ dayData, nextPort }) {
     <div className="section-overview">
       {/* Sea Day Hero Image Placeholder */}
       <div className="image-placeholder">
-        <span className="image-placeholder-icon">🌊</span>
+        
         <span className="image-placeholder-text">Sea day image coming soon</span>
       </div>
 
