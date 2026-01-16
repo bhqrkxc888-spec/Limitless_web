@@ -10,7 +10,7 @@ import { useState } from 'react';
 import OptimizedImage from '../components/OptimizedImage';
 import { usePortGuideImage } from '../hooks/useImageUrl';
 import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye } from 'lucide-react';
-import { formatBoldText, formatParagraphsWithBold } from '../utils/textFormatting';
+import { formatBoldText, formatParagraphsWithBold } from '../utils/textFormatting.jsx';
 import './DetailedPortGuide.css';
 
 // Port guide section definitions (similar to G606)

@@ -16,7 +16,7 @@ import { getG606PortContent } from '../../../data/cruise/g606-port-content';
 import { usePortGuideImage } from '../../../hooks/useImageUrl';
 import { getPortGuideSlugFromG606PortName } from '../../../utils/portNameMapping';
 import OptimizedImage from '../../OptimizedImage';
-import { formatBoldText, formatParagraphsWithBold } from '../../../utils/textFormatting';
+import { formatBoldText, formatParagraphsWithBold } from '../../../utils/textFormatting.jsx';
 import './SectionContent.css';
 
 /**
