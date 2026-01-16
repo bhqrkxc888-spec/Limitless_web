@@ -202,32 +202,17 @@ function GettingHomeSection({ dayData: _dayData }) {
       <div className="info-block">
         <h3>By Car (Collecting from Parking)</h3>
         
-        <p><strong>If you parked with CPS Southampton:</strong></p>
-        <ul className="info-list">
-          <li>Exit the terminal and follow signs to the CPS collection point</li>
-          <li>Or walk directly to the car park (adjacent to terminal)</li>
-          <li>Your car will be in the same location you left it</li>
-          <li>No shuttle required - park and walk service</li>
-          <li>Allow 10-15 minutes from terminal exit to driving away</li>
-        </ul>
-
-        <p><strong>If you used off-site parking with shuttle:</strong></p>
-        <ul className="info-list">
-          <li>Follow signs to your parking provider's pickup point</li>
-          <li>Shuttles run continuously on disembarkation mornings</li>
-          <li>May need to wait 10-20 minutes for shuttle</li>
-          <li>Have your booking confirmation ready</li>
-        </ul>
+        <p>If you've pre-booked parking, follow the signs to your parking provider's collection point. Most parking services are adjacent to or within walking distance of the terminal.</p>
 
         <p><strong>Exiting Southampton:</strong></p>
         <ul className="info-list">
           <li>For M27/M3: Follow signs from the port - well signposted</li>
-          <li>Expect some traffic on busy disembarkation mornings (Saturday)</li>
-          <li>Satnav works fine from the terminal postcode</li>
+          <li>Expect some traffic on busy disembarkation mornings</li>
+          <li>Allow 10-15 minutes from terminal exit to driving away</li>
         </ul>
 
         <div className="content-card">
-          <p><strong>Postcode for return journey:</strong></p>
+          <p><strong>Terminal Postcodes:</strong></p>
           <p>Ocean Terminal: <strong>SO15 1BA</strong><br />
           Ocean Cruise Terminal: <strong>SO14 3QN</strong></p>
         </div>
@@ -239,65 +224,17 @@ function GettingHomeSection({ dayData: _dayData }) {
         <h3>By Train</h3>
         
         <p><strong>Getting to Southampton Central:</strong></p>
-        
-        <div className="content-card">
-          <p className="content-card-title">Taxi (Recommended)</p>
-          <ul className="info-list">
-            <li><strong>Time:</strong> 5-10 minutes</li>
-            <li><strong>Cost:</strong> £8-12</li>
-            <li>Large taxi rank directly outside the terminal</li>
-            <li>Plenty of taxis available on cruise mornings</li>
-            <li>Can fit luggage in boot + on seats if needed</li>
-            <li>Simply say "Southampton Central station please"</li>
-          </ul>
-        </div>
+        <p>A taxi rank is located directly outside the terminal. The journey to Southampton Central station takes approximately 5-10 minutes.</p>
 
-        <div className="content-card">
-          <p className="content-card-title">Other Options</p>
-          <ul className="info-list">
-            <li><strong>Uber/Bolt:</strong> 5-10 mins, £6-10 - book via app, good availability</li>
-            <li><strong>Pre-booked transfer:</strong> 5-10 mins, £10-15 - book in advance for guaranteed vehicle</li>
-          </ul>
-        </div>
-
-        <p><strong>Southampton Central connections:</strong></p>
+        <p><strong>Major train connections from Southampton Central:</strong></p>
         <ul className="info-list">
-          <li><strong>London Waterloo:</strong> 1hr 20mins - Every 30 mins</li>
-          <li><strong>London Victoria:</strong> 1hr 45mins - Hourly (via Brighton)</li>
-          <li><strong>Birmingham:</strong> 2hrs 30mins - Hourly</li>
-          <li><strong>Bristol:</strong> 2hrs - Every 1-2 hours</li>
-          <li><strong>Manchester:</strong> 4hrs - Change required</li>
-          <li><strong>Edinburgh:</strong> 6hrs - Change required</li>
+          <li><strong>London Waterloo:</strong> 1hr 20mins - frequent service</li>
+          <li><strong>London Victoria:</strong> 1hr 45mins - via Brighton</li>
+          <li><strong>Birmingham:</strong> 2hrs 30mins</li>
+          <li><strong>Bristol:</strong> 2hrs</li>
         </ul>
 
-        <p className="info-note">Pro tip: Book train tickets in advance for better prices. If your disembarkation time is uncertain, book a flexible/anytime ticket or wait until the morning (prices are usually the same on the day for off-peak).</p>
-      </div>
-
-      <hr className="section-divider" />
-
-      <div className="info-block">
-        <h3>Coach & Transfer Services</h3>
-        
-        <p><strong>National Express:</strong></p>
-        <ul className="info-list">
-          <li>Southampton Coach Station is near the city centre</li>
-          <li>Taxi from terminal to coach station: £10-12</li>
-          <li>Services to London Victoria, Heathrow, and major cities</li>
-        </ul>
-
-        <p><strong>P&O Transfer packages:</strong></p>
-        <ul className="info-list">
-          <li>Available to book as part of your cruise</li>
-          <li>Direct coach to London Victoria or airports</li>
-          <li>Check P&O website for current availability and pricing</li>
-        </ul>
-
-        <p><strong>Private transfers:</strong></p>
-        <ul className="info-list">
-          <li>Pre-bookable to any UK address</li>
-          <li>Useful for groups or those with lots of luggage</li>
-          <li>Typical cost to London: £150-200 (vehicle, not per person)</li>
-        </ul>
+        <p className="info-note">If your disembarkation time is uncertain, consider flexible/anytime tickets.</p>
       </div>
 
       <hr className="section-divider" />
@@ -305,22 +242,15 @@ function GettingHomeSection({ dayData: _dayData }) {
       <div className="info-block">
         <h3>To Airports</h3>
         
+        <p><strong>Nearby airports:</strong></p>
         <ul className="info-list">
-          <li><strong>Southampton (SOU):</strong> 5 miles, £15-20 taxi, 15 mins</li>
-          <li><strong>Bournemouth (BOH):</strong> 30 miles, £50-60 taxi, 40 mins</li>
-          <li><strong>Heathrow (LHR):</strong> 75 miles, £120-150 taxi, 1hr 30mins</li>
-          <li><strong>Gatwick (LGW):</strong> 85 miles, £130-160 taxi, 1hr 45mins</li>
+          <li><strong>Southampton Airport (SOU):</strong> 5 miles, approximately 15 mins by taxi</li>
+          <li><strong>Bournemouth Airport (BOH):</strong> 30 miles, approximately 40 mins</li>
+          <li><strong>Heathrow (LHR):</strong> 75 miles, approximately 1hr 30mins</li>
+          <li><strong>Gatwick (LGW):</strong> 85 miles, approximately 1hr 45mins</li>
         </ul>
 
-        <p><strong>Southampton Airport:</strong></p>
-        <p>Closest option for domestic/European flights. Easy taxi ride from terminal. Limited destinations but very convenient.</p>
-
-        <p><strong>For Heathrow/Gatwick:</strong></p>
-        <ul className="info-list">
-          <li>Consider train to London then Heathrow Express/Gatwick Express</li>
-          <li>Or pre-book private transfer for convenience with luggage</li>
-          <li>Allow plenty of time - traffic can be unpredictable</li>
-        </ul>
+        <p className="info-note">For Heathrow/Gatwick, consider train connections via London or pre-book a transfer. Allow plenty of time as traffic can be unpredictable.</p>
       </div>
     </div>
   );

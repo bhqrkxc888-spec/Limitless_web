@@ -178,7 +178,7 @@ function GettingThereSection({ dayData: _dayData }) {
       <div className="info-block">
         <h3>By Car</h3>
         
-        <p><strong>Address & Postcode for SatNav:</strong></p>
+        <p><strong>Terminal Address & Postcode:</strong></p>
         <div className="content-card">
           <p><strong>Ocean Terminal (Berths 46/47)</strong><br />
           Southern Road<br />
@@ -188,35 +188,15 @@ function GettingThereSection({ dayData: _dayData }) {
             For the newer Ocean Cruise Terminal (Horizon Cruise Terminal), use: <strong>SO14 3QN</strong>
           </p>
           <p className="info-note" style={{ fontSize: '0.875rem', marginTop: '0.5rem' }}>
-            Note: "Ocean Terminal" and "Ocean Cruise Terminal" are different locations. P&O primarily uses the original Ocean Terminal for Iona sailings - check your cruise documents for the exact terminal name.
+            Check your cruise documents for the exact terminal name.
           </p>
         </div>
 
-        <p><strong>Parking Options:</strong></p>
-        
-        <div className="content-card">
-          <p className="content-card-title">CPS Southampton (Recommended)</p>
-          <ul className="info-list">
-            <li><strong>Location:</strong> Adjacent to Ocean Terminal</li>
-            <li><strong>Type:</strong> Park & walk - no shuttle needed</li>
-            <li><strong>Cost:</strong> £70-100 per week</li>
-            <li><strong>Booking:</strong> Essential - book via cpscruiseparking.co.uk</li>
-            <li><strong>Security:</strong> CCTV monitored compound</li>
-            <li>Return your car to the same spot for easy collection</li>
-          </ul>
-        </div>
+        <p><strong>Parking:</strong></p>
+        <p>Various parking options are available at and near the terminal. If you've pre-booked parking, follow the instructions provided by your parking provider.</p>
 
-        <div className="content-card">
-          <p className="content-card-title">Other Parking Options</p>
-          <ul className="info-list">
-            <li><strong>Red Funnel Parking:</strong> 5 mins drive, £60-80/week - pre-book</li>
-            <li><strong>Independent cruise parking:</strong> Off-site with shuttle, £50-70/week</li>
-            <li><strong>ABP Terminal Parking:</strong> At terminal, £85+/week - limited availability</li>
-          </ul>
-        </div>
-
-        <p><strong>Drop-off Zone:</strong></p>
-        <p>If not parking, there's a dedicated drop-off area at the terminal entrance. The driver can pull in, unload passengers and luggage (porters available), then must exit and cannot park or wait.</p>
+        <p><strong>Drop-off:</strong></p>
+        <p>There's a dedicated drop-off area at the terminal entrance with porters available to assist with luggage.</p>
       </div>
 
       <hr className="section-divider" />
@@ -227,31 +207,7 @@ function GettingThereSection({ dayData: _dayData }) {
         <p><strong>Station:</strong> Southampton Central</p>
         <p><strong>Distance to Terminal:</strong> Approximately 1.5 miles (2.5 km)</p>
 
-        <p><strong>Getting from Station to Terminal:</strong></p>
-        
-        <div className="content-card">
-          <p className="content-card-title">Taxi (Recommended)</p>
-          <ul className="info-list">
-            <li><strong>Time:</strong> 5-10 minutes</li>
-            <li><strong>Cost:</strong> £8-12</li>
-            <li>Large taxi rank directly outside Southampton Central's main exit</li>
-            <li>On cruise days, taxis are very familiar with terminal locations</li>
-            <li>Simply say "Ocean Terminal for P&O" - they'll know exactly where</li>
-            <li>Can fit 3-4 passengers plus luggage in standard taxi</li>
-            <li>Pre-book larger vehicles for groups: Radio Taxis Southampton (023 8066 6666)</li>
-          </ul>
-        </div>
-
-        <div className="content-card">
-          <p className="content-card-title">Other Options</p>
-          <ul className="info-list">
-            <li><strong>Uber/Bolt:</strong> 5-10 mins, £6-10 - book via app</li>
-            <li><strong>Bus:</strong> 15-20 mins, £2-3 - Quaylink/Unilink, less practical with luggage</li>
-            <li><strong>Walk:</strong> 25-30 mins - not recommended with luggage</li>
-          </ul>
-        </div>
-
-        <p className="info-note">P&O don't operate dedicated shuttle buses from the station. However, on busy embarkation days, some parking providers offer combined rail/shuttle packages.</p>
+        <p>A taxi rank is located outside Southampton Central station. The journey to the cruise terminal takes approximately 5-10 minutes. Simply tell the driver "Ocean Terminal for P&O".</p>
       </div>
 
       <hr className="section-divider" />
@@ -259,17 +215,16 @@ function GettingThereSection({ dayData: _dayData }) {
       <div className="info-block">
         <h3>Luggage</h3>
         
-        <p><strong>Luggage Tags - Do P&O Send Them?</strong></p>
-        <p>Yes. P&O send luggage tags with your cruise documents approximately 3-4 weeks before departure. These arrive either by post (if you requested paper documents) or digitally via email (print at home). You can also print tags from your My P&O Cruises account online. Each tag has your cabin number, name, and a barcode for tracking.</p>
+        <p><strong>Luggage Tags:</strong></p>
+        <p>P&O send luggage tags with your cruise documents approximately 3-4 weeks before departure. You can also print tags from your My P&O Cruises account online.</p>
 
         <p><strong>Hand Luggage Essentials:</strong></p>
-        <p>Pack these items in your hand luggage - your main bags may not arrive at your cabin for several hours:</p>
+        <p>Your main bags may not arrive at your cabin for several hours, so pack these items in your hand luggage:</p>
 
         <p><strong>Must have:</strong></p>
         <ul className="info-list">
           <li>Passport and cruise documents</li>
-          <li>Cruise card confirmation (on phone or printed)</li>
-          <li>Any medications (enough for 24 hours minimum)</li>
+          <li>Any medications</li>
           <li>Phone and charger</li>
           <li>Glasses/contact lenses</li>
           <li>Money/cards</li>
@@ -281,23 +236,19 @@ function GettingThereSection({ dayData: _dayData }) {
           <li>Basic toiletries</li>
           <li>Sunglasses and sun cream</li>
           <li>Camera for embarkation photos</li>
-          <li>Book or entertainment</li>
-          <li>Snacks if you have dietary requirements</li>
         </ul>
 
         <p><strong>When Do You Get Your Cabin Key (Cruise Card)?</strong></p>
         <p>You receive your cruise card during check-in at the terminal, before boarding. This card is your cabin key, onboard payment method, ID for getting on/off the ship, and muster drill tracker.</p>
 
-        <p><strong>Can You Take Luggage to Your Cabin Yourself?</strong></p>
-        <p>Yes, you have two options:</p>
+        <p><strong>Luggage Options:</strong></p>
 
         <div className="content-card">
           <p className="content-card-title">Porter Service (recommended for large bags)</p>
           <ul className="info-list">
             <li>Hand your tagged luggage to porters at the terminal entrance</li>
-            <li>Bags are X-rayed, loaded, and delivered to your cabin door</li>
-            <li>Usually arrives between 3pm and 6pm (can be later)</li>
-            <li>Free service - tipping porters is discretionary (£1-2 per bag is customary)</li>
+            <li>Bags are delivered to your cabin door</li>
+            <li>Usually arrives between 3pm and 6pm</li>
           </ul>
         </div>
 
@@ -305,14 +256,10 @@ function GettingThereSection({ dayData: _dayData }) {
           <p className="content-card-title">Self-carry</p>
           <ul className="info-list">
             <li>You can wheel/carry bags through security yourself</li>
-            <li>Must fit through X-ray machines</li>
-            <li>You take them directly to your cabin</li>
+            <li>Take them directly to your cabin</li>
             <li>Recommended for hand luggage and smaller bags only</li>
-            <li>Gets you unpacked and settled immediately</li>
           </ul>
         </div>
-
-        <p className="info-note">Mix and match: Most people send large suitcases with porters and carry a smaller bag themselves with essentials.</p>
       </div>
     </div>
   );
