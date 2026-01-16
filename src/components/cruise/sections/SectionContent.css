@@ -24,6 +24,23 @@
   max-height: 400px;
 }
 
+/* Attraction images in Go Further section */
+.attraction-image {
+  width: 100%;
+  margin: var(--space-4, 1rem) 0 var(--space-6, 1.5rem);
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.attraction-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 350px;
+}
+
 /* ========================================
    SECTION INTRO
    ======================================== */

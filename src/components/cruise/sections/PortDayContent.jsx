@@ -267,8 +267,12 @@ function OverviewSection({ dayData, portContent }) {
   );
 }
 
-function StayLocalSection({ dayData: _dayData, portContent }) {
+function StayLocalSection({ dayData, portContent }) {
   const stayLocal = portContent?.stayLocal;
+  
+  // Get port guide slug for image loading
+  const portGuideSlug = getPortGuideSlugFromG606PortName(dayData.portName);
+  const { imageUrl: beachImage, isPlaceholder: isBeachPlaceholder } = usePortGuideImage(portGuideSlug, 'beach', dayData.portName, dayData.country || '');
   
   return (
     <div className="section-stay-local">
@@ -355,10 +359,21 @@ function StayLocalSection({ dayData: _dayData, portContent }) {
                 </a>
               )}
             </div>
-            <div className="image-placeholder">
-              
-              <span className="image-placeholder-text">Beach image coming soon</span>
-            </div>
+            
+            {/* Show real beach image or placeholder */}
+            {beachImage && !isBeachPlaceholder ? (
+              <div className="attraction-image">
+                <OptimizedImage
+                  src={beachImage}
+                  alt={`${dayData.portName} beach`}
+                  className="attraction-img"
+                />
+              </div>
+            ) : (
+              <div className="image-placeholder">
+                <span className="image-placeholder-text">Beach image coming soon</span>
+              </div>
+            )}
           </div>
           <hr className="section-divider" />
         </>
@@ -469,8 +484,28 @@ function StayLocalSection({ dayData: _dayData, portContent }) {
   );
 }
 
-function GoFurtherSection({ dayData: _dayData, portContent }) {
+function GoFurtherSection({ dayData, portContent }) {
   const goFurther = portContent?.goFurther;
+  
+  // Get port guide slug for image loading
+  const portGuideSlug = getPortGuideSlugFromG606PortName(dayData.portName);
+  
+  // Load attraction images (up to 6)
+  const { imageUrl: attraction1Image, isPlaceholder: isPlaceholder1 } = usePortGuideImage(portGuideSlug, 'attraction-1', dayData.portName, dayData.country || '');
+  const { imageUrl: attraction2Image, isPlaceholder: isPlaceholder2 } = usePortGuideImage(portGuideSlug, 'attraction-2', dayData.portName, dayData.country || '');
+  const { imageUrl: attraction3Image, isPlaceholder: isPlaceholder3 } = usePortGuideImage(portGuideSlug, 'attraction-3', dayData.portName, dayData.country || '');
+  const { imageUrl: attraction4Image, isPlaceholder: isPlaceholder4 } = usePortGuideImage(portGuideSlug, 'attraction-4', dayData.portName, dayData.country || '');
+  const { imageUrl: attraction5Image, isPlaceholder: isPlaceholder5 } = usePortGuideImage(portGuideSlug, 'attraction-5', dayData.portName, dayData.country || '');
+  const { imageUrl: attraction6Image, isPlaceholder: isPlaceholder6 } = usePortGuideImage(portGuideSlug, 'attraction-6', dayData.portName, dayData.country || '');
+  
+  const attractionImages = [
+    { url: attraction1Image, isPlaceholder: isPlaceholder1 },
+    { url: attraction2Image, isPlaceholder: isPlaceholder2 },
+    { url: attraction3Image, isPlaceholder: isPlaceholder3 },
+    { url: attraction4Image, isPlaceholder: isPlaceholder4 },
+    { url: attraction5Image, isPlaceholder: isPlaceholder5 },
+    { url: attraction6Image, isPlaceholder: isPlaceholder6 },
+  ];
   
   return (
     <div className="section-go-further">
@@ -481,39 +516,53 @@ function GoFurtherSection({ dayData: _dayData, portContent }) {
       <hr className="section-divider" />
 
       {goFurther?.attractions && goFurther.attractions.length > 0 ? (
-        goFurther.attractions.map((attraction, idx) => (
-          <div key={idx} className="attraction-block">
-            <h3>⭐ {attraction.name}</h3>
-            
-            {/* Image placeholder for attraction */}
-            <div className="image-placeholder">
-              <span className="image-placeholder-icon">🏞️</span>
-              <span className="image-placeholder-text">{attraction.name} image coming soon</span>
+        goFurther.attractions.map((attraction, idx) => {
+          const attractionImage = attractionImages[idx];
+          
+          return (
+            <div key={idx} className="attraction-block">
+              <h3>⭐ {attraction.name}</h3>
+              
+              {/* Show real image or placeholder */}
+              {attractionImage && !attractionImage.isPlaceholder ? (
+                <div className="attraction-image">
+                  <OptimizedImage
+                    src={attractionImage.url}
+                    alt={attraction.name}
+                    className="attraction-img"
+                  />
+                </div>
+              ) : (
+                <div className="image-placeholder">
+                  <span className="image-placeholder-icon">🏞️</span>
+                  <span className="image-placeholder-text">{attraction.name} image coming soon</span>
+                </div>
+              )}
+              
+              <p>{attraction.description}</p>
+              
+              <ul className="info-list">
+                {attraction.poOption && <li><strong>P&O option:</strong> {attraction.poOption}</li>}
+                {attraction.independent && <li><strong>Independent:</strong> {attraction.independent}</li>}
+                {attraction.allow && <li><strong>Allow:</strong> {attraction.allow}</li>}
+                {attraction.cost && <li><strong>Cost:</strong> {attraction.cost}</li>}
+                {attraction.notes && <li>{attraction.notes}</li>}
+              </ul>
+              
+              {attraction.ourTake && (
+                <div className="attraction-take">
+                  <p><strong>Our take:</strong> {attraction.ourTake}</p>
+                </div>
+              )}
+              
+              {attraction.mapLink && (
+                <a href={attraction.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
+                  Open in Google Maps
+                </a>
+              )}
             </div>
-            
-            <p>{attraction.description}</p>
-            
-            <ul className="info-list">
-              {attraction.poOption && <li><strong>P&O option:</strong> {attraction.poOption}</li>}
-              {attraction.independent && <li><strong>Independent:</strong> {attraction.independent}</li>}
-              {attraction.allow && <li><strong>Allow:</strong> {attraction.allow}</li>}
-              {attraction.cost && <li><strong>Cost:</strong> {attraction.cost}</li>}
-              {attraction.notes && <li>{attraction.notes}</li>}
-            </ul>
-            
-            {attraction.ourTake && (
-              <div className="attraction-take">
-                <p><strong>Our take:</strong> {attraction.ourTake}</p>
-              </div>
-            )}
-            
-            {attraction.mapLink && (
-              <a href={attraction.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                Open in Google Maps
-              </a>
-            )}
-          </div>
-        ))
+          );
+        })
       ) : (
         <div className="attraction-block">
           <h3>⭐ [ATTRACTION NAME]</h3>
