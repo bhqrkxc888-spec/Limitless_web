@@ -21,6 +21,9 @@ import './CruiseCompanionPage.css';
 // OG Image for social sharing - Canary Islands hero
 const G606_OG_IMAGE = 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_destinations/canary-islands/hero.webp';
 
+// Facebook group link
+const FB_GROUP_URL = 'https://www.facebook.com/groups/poionamarch2026';
+
 /**
  * Get current cruise day index
  */
