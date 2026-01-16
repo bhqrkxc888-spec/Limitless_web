@@ -208,10 +208,12 @@ const PortWeather = ({
       )}
 
       {/* Current Conditions */}
-      <div className="port-weather-header">
-        <h4 className="port-weather-title">{portName}</h4>
-        <span className="port-weather-subtitle">Current conditions</span>
-      </div>
+      {portName && (
+        <div className="port-weather-header">
+          <h4 className="port-weather-title">{portName}</h4>
+          <span className="port-weather-subtitle">Current conditions</span>
+        </div>
+      )}
 
       <div className="port-weather-main">
         <div className="weather-icon-container">

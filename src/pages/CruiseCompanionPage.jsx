@@ -291,11 +291,11 @@ function CruiseCompanionPage() {
             <div className="map-weather-weather">
               <h3 className="weather-section-title">Today's Weather</h3>
               <div className="weather-location-label">
-                📍 {dayData.portName}
+                {dayData.portName}
               </div>
               {dayData.coords ? (
                 <PortWeather 
-                  portName={dayData.portName}
+                  portName={null}
                   lat={dayData.coords.lat}
                   lon={dayData.coords.lon}
                   compact={false}
