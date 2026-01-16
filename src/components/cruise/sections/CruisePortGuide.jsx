@@ -9,7 +9,7 @@
  * Content comes from portContent.js via g606-port-content.js
  */
 
-import { Clock, DollarSign, Info, MapPin, Sun } from 'lucide-react';
+import { Clock, Info, MapPin, Sun } from 'lucide-react';
 import FeedbackSection from '../FeedbackSection';
 import PortWeather from '../PortWeather';
 import { getG606PortContent } from '../../../data/cruise/g606-port-content';
@@ -451,39 +451,35 @@ function GoFurtherSection({ goFurther, attractionImages, portName }) {
           
           <p className="attraction-description">{attraction.description}</p>
           
-          <div className="attraction-details">
+          <div className="detail-grid">
             {attraction.cruiseLineOption && (
               <div className="detail-item">
-                <strong>Cruise Line Tours:</strong>
+                <strong>Cruise Line Tours</strong>
                 <p>{attraction.cruiseLineOption}</p>
               </div>
             )}
             {attraction.independent && (
               <div className="detail-item">
-                <strong>Going Independent:</strong>
+                <strong>Going Independent</strong>
                 <p>{attraction.independent}</p>
               </div>
             )}
             {attraction.allow && (
               <div className="detail-item">
-                <Clock size={16} />
-                <strong>Allow:</strong>
+                <strong>Allow</strong>
                 <p>{attraction.allow}</p>
               </div>
             )}
             {attraction.cost && (
               <div className="detail-item">
-                <DollarSign size={16} />
-                <strong>Cost:</strong>
+                <strong>Cost</strong>
                 <p>{attraction.cost}</p>
               </div>
             )}
-            {attraction.notes && (
-              <div className="detail-item notes">
-                <p><em>{attraction.notes}</em></p>
-              </div>
-            )}
           </div>
+          {attraction.notes && (
+            <p className="attraction-notes"><em>{attraction.notes}</em></p>
+          )}
           
           {attraction.ourTake && (
             <div className="our-take">

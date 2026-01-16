@@ -9,7 +9,7 @@
 import { useState } from 'react';
 import OptimizedImage from '../components/OptimizedImage';
 import { usePortGuideImage } from '../hooks/useImageUrl';
-import { MapPin, Clock, DollarSign, Info, Users, Utensils, Accessibility, Map, Eye } from 'lucide-react';
+import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye } from 'lucide-react';
 import './DetailedPortGuide.css';
 
 // Port guide section definitions (similar to G606)
@@ -378,39 +378,35 @@ function GoFurtherSection({ goFurther, attractionImages }) {
           
           <p className="attraction-description">{attraction.description}</p>
           
-          <div className="attraction-details">
+          <div className="detail-grid">
             {attraction.cruiseLineOption && (
               <div className="detail-item">
-                <strong>Cruise Line Tours:</strong>
+                <strong>Cruise Line Tours</strong>
                 <p>{attraction.cruiseLineOption}</p>
               </div>
             )}
             {attraction.independent && (
               <div className="detail-item">
-                <strong>Going Independent:</strong>
+                <strong>Going Independent</strong>
                 <p>{attraction.independent}</p>
               </div>
             )}
             {attraction.allow && (
               <div className="detail-item">
-                <Clock size={16} />
-                <strong>Allow:</strong>
+                <strong>Allow</strong>
                 <p>{attraction.allow}</p>
               </div>
             )}
             {attraction.cost && (
               <div className="detail-item">
-                <DollarSign size={16} />
-                <strong>Cost:</strong>
+                <strong>Cost</strong>
                 <p>{attraction.cost}</p>
               </div>
             )}
-            {attraction.notes && (
-              <div className="detail-item notes">
-                <p><em>{attraction.notes}</em></p>
-              </div>
-            )}
           </div>
+          {attraction.notes && (
+            <p className="attraction-notes"><em>{attraction.notes}</em></p>
+          )}
           
           {attraction.ourTake && (
             <div className="our-take">
