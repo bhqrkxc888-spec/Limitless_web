@@ -326,6 +326,47 @@
 }
 
 /* ========================================
+   FOOD ITEMS - Better card styling for food venues
+   ======================================== */
+
+.food-item {
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-4, 1rem);
+  margin-bottom: var(--space-3, 0.75rem);
+  border-left: 4px solid var(--clr-secondary, #D4B86A);
+}
+
+.food-item:last-child {
+  margin-bottom: 0;
+}
+
+.food-item h4 {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--clr-text-main, #2C344C);
+  margin-bottom: var(--space-1, 0.25rem);
+  font-size: var(--font-size-base, 1rem);
+}
+
+.food-location {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--clr-text-muted, #5C6478);
+  font-style: italic;
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+.food-item p {
+  margin-bottom: var(--space-2, 0.5rem);
+  line-height: var(--line-height-relaxed, 1.7);
+  color: var(--clr-text-main, #2C344C);
+}
+
+.food-item p:last-child {
+  margin-bottom: 0;
+}
+
+/* ========================================
    BEACH IMAGE
    ======================================== */
 

@@ -84,11 +84,11 @@ function OverviewSection({ dayData, nextPort }) {
       <hr className="section-divider" />
 
       <div className="tip-block">
-        <h3>Sea Day Essentials</h3>
+        <h3>Check Your Daily Programme</h3>
         <ul className="info-list">
-          <li><strong>Ship tracker and weather</strong> are shown at the top of this page</li>
-          <li>Check the <strong>Ship</strong> tab to explore all venues, restaurants, and facilities</li>
-          <li>Book shows and specialty dining through the <strong>Horizon app</strong></li>
+          <li>Everything happening onboard is in the <strong>Daily Programme</strong> - printed version in your cabin or in the P&O Cruises app</li>
+          <li>Check it the night before to plan your day around activities and shows you don't want to miss</li>
+          <li>Book shows and specialty dining through the <strong>P&O Cruises app</strong></li>
           <li>Shops are <strong>only open at sea</strong>, so this is your chance to browse</li>
         </ul>
       </div>

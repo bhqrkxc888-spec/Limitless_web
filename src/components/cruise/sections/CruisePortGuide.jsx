@@ -16,6 +16,7 @@ import { getG606PortContent } from '../../../data/cruise/g606-port-content';
 import { usePortGuideImage } from '../../../hooks/useImageUrl';
 import { getPortGuideSlugFromG606PortName } from '../../../utils/portNameMapping';
 import OptimizedImage from '../../OptimizedImage';
+import { formatBoldText, formatParagraphsWithBold } from '../../../utils/textFormatting';
 import './SectionContent.css';
 
 /**
@@ -478,13 +479,13 @@ function GoFurtherSection({ goFurther, attractionImages, portName }) {
             )}
           </div>
           {attraction.notes && (
-            <p className="attraction-notes"><em>{attraction.notes}</em></p>
+            <p className="attraction-notes"><em>{formatBoldText(attraction.notes)}</em></p>
           )}
           
           {attraction.ourTake && (
             <div className="our-take">
-              <strong>Our Take:</strong>
-              <p>{attraction.ourTake}</p>
+              <strong>Our Take</strong>
+              {formatParagraphsWithBold(attraction.ourTake)}
             </div>
           )}
           
@@ -501,8 +502,8 @@ function GoFurtherSection({ goFurther, attractionImages, portName }) {
 
       {goFurther.ourTake && (
         <div className="tip-block">
-          <strong>💡 Overall Recommendation</strong>
-          <p>{goFurther.ourTake}</p>
+          <strong>Overall Recommendation</strong>
+          {formatParagraphsWithBold(goFurther.ourTake)}
         </div>
       )}
     </div>
@@ -748,7 +749,7 @@ function FoodDrinkSection({ foodAndDrink }) {
       {foodAndDrink.localSpeciality && (
         <>
           <SubSection title="Local Speciality">
-            <p>{foodAndDrink.localSpeciality}</p>
+            {formatParagraphsWithBold(foodAndDrink.localSpeciality)}
           </SubSection>
           <hr className="section-divider" />
         </>
@@ -758,10 +759,10 @@ function FoodDrinkSection({ foodAndDrink }) {
         <>
           <SubSection title="Local Specialties">
             {foodAndDrink.localSpecialties.map((specialty, idx) => (
-              <div key={idx} className="specialty-item">
-                <strong>{specialty.name}</strong>
-                <p>{specialty.description}</p>
-                {specialty.where && <p className="where"><em>Where: {specialty.where}</em></p>}
+              <div key={idx} className="food-item">
+                <h4>{specialty.name}</h4>
+                <p>{formatBoldText(specialty.description)}</p>
+                {specialty.where && <p className="food-location">{specialty.where}</p>}
               </div>
             ))}
           </SubSection>
@@ -773,10 +774,10 @@ function FoodDrinkSection({ foodAndDrink }) {
         <>
           <SubSection title="Restaurants">
             {foodAndDrink.restaurants.map((restaurant, idx) => (
-              <div key={idx} className="specialty-item">
-                <strong>{restaurant.name}</strong>
-                {restaurant.location && <span style={{ fontWeight: 'normal', fontSize: '0.875rem', opacity: 0.8 }}>, {restaurant.location}</span>}
-                <p>{restaurant.description}</p>
+              <div key={idx} className="food-item">
+                <h4>{restaurant.name}</h4>
+                {restaurant.location && <p className="food-location">{restaurant.location}</p>}
+                <p>{formatBoldText(restaurant.description)}</p>
               </div>
             ))}
           </SubSection>
@@ -788,10 +789,10 @@ function FoodDrinkSection({ foodAndDrink }) {
         <>
           <SubSection title="Cafés">
             {foodAndDrink.cafes.map((cafe, idx) => (
-              <div key={idx} className="specialty-item">
-                <strong>{cafe.name}</strong>
-                {cafe.location && <span style={{ fontWeight: 'normal', fontSize: '0.875rem', opacity: 0.8 }}>, {cafe.location}</span>}
-                {cafe.description && <p>{cafe.description}</p>}
+              <div key={idx} className="food-item">
+                <h4>{cafe.name}</h4>
+                {cafe.location && <p className="food-location">{cafe.location}</p>}
+                {cafe.description && <p>{formatBoldText(cafe.description)}</p>}
               </div>
             ))}
           </SubSection>
@@ -803,10 +804,10 @@ function FoodDrinkSection({ foodAndDrink }) {
         <>
           <SubSection title="Bars">
             {foodAndDrink.bars.map((bar, idx) => (
-              <div key={idx} className="specialty-item">
-                <strong>{bar.name}</strong>
-                {bar.location && <span style={{ fontWeight: 'normal', fontSize: '0.875rem', opacity: 0.8 }}>, {bar.location}</span>}
-                {bar.description && <p>{bar.description}</p>}
+              <div key={idx} className="food-item">
+                <h4>{bar.name}</h4>
+                {bar.location && <p className="food-location">{bar.location}</p>}
+                {bar.description && <p>{formatBoldText(bar.description)}</p>}
               </div>
             ))}
           </SubSection>
