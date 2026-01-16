@@ -81,20 +81,20 @@ function FeedbackSection({ sectionKey, dayNumber, cruiseCode = 'G606', portName 
                 className="feedback-button"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? '...' : '👍 Yes'}
+                {isSubmitting ? '...' : 'Yes'}
               </button>
               <button
                 onClick={() => handleVote(false)}
                 className="feedback-button"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? '...' : '👎 No'}
+                {isSubmitting ? '...' : 'No'}
               </button>
             </div>
           </div>
         ) : (
           <div className="feedback-thankyou">
-            <p>✓ Thank you for your feedback</p>
+            <p>Thank you for your feedback</p>
           </div>
         )}
       </div>

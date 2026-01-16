@@ -20,25 +20,28 @@ function ShipContent({ sectionKey, dayData }) {
         {/* Ship Stats */}
         <div className="ship-stats-grid">
           <div className="ship-stat">
-            <span className="stat-icon">👥</span>
-            <div className="stat-content">
-              <span className="stat-label">Guests</span>
-              <span className="stat-value">{ionaShipInfo.capacity}</span>
-            </div>
+            <span className="stat-label">Guests</span>
+            <span className="stat-value">{ionaShipInfo.capacity}</span>
           </div>
           <div className="ship-stat">
-            <span className="stat-icon">⚓</span>
-            <div className="stat-content">
-              <span className="stat-label">Size</span>
-              <span className="stat-value">{ionaShipInfo.tonnage}</span>
-            </div>
+            <span className="stat-label">Tonnage</span>
+            <span className="stat-value">{ionaShipInfo.tonnage}</span>
           </div>
           <div className="ship-stat">
-            <span className="stat-icon">👔</span>
-            <div className="stat-content">
-              <span className="stat-label">Crew</span>
-              <span className="stat-value">{ionaShipInfo.crew}</span>
-            </div>
+            <span className="stat-label">Crew</span>
+            <span className="stat-value">{ionaShipInfo.crew}</span>
+          </div>
+          <div className="ship-stat">
+            <span className="stat-label">Decks</span>
+            <span className="stat-value">{ionaShipInfo.decks}</span>
+          </div>
+          <div className="ship-stat">
+            <span className="stat-label">Length</span>
+            <span className="stat-value">{ionaShipInfo.length}</span>
+          </div>
+          <div className="ship-stat">
+            <span className="stat-label">Cabins</span>
+            <span className="stat-value">{ionaShipInfo.cabins}</span>
           </div>
         </div>
 
@@ -97,20 +100,38 @@ function ShipContent({ sectionKey, dayData }) {
 
         <hr className="section-divider" />
 
+        {/* Important Notes */}
+        {ionaShipInfo.importantNotes && (
+          <>
+            <div className="sub-section">
+              <h3>Important Notes</h3>
+              <ul className="info-list">
+                {ionaShipInfo.importantNotes.map((note, index) => (
+                  <li key={index}>{note}</li>
+                ))}
+              </ul>
+            </div>
+
+            <hr className="section-divider" />
+          </>
+        )}
+
         {/* Full Venue Finder */}
         <VenueFinder />
 
         <hr className="section-divider" />
 
         {/* Useful Info */}
-        <div className="tip-block">
+        <div className="sub-section">
           <h3>Good to Know</h3>
           <ul className="info-list">
             <li>Access P&O Horizon (web-based) for show bookings and daily schedules - can be added to home screen as a shortcut</li>
             <li>Shops and casino are only open at sea</li>
             <li>The Retreat on Deck 18 is adults only (16+)</li>
-            <li>Launderettes are available on Decks 5, 9, 10, 12, 14 and 15</li>
-            <li>Reception is open 24 hours on Deck 7</li>
+            <li>Launderettes available on Decks 5, 9, 10, 12, 14 and 15</li>
+            <li>Reception open 24 hours on Deck 7</li>
+            <li>Four self-service laundrettes throughout the ship</li>
+            <li>Currency onboard is British Pounds</li>
           </ul>
         </div>
 
