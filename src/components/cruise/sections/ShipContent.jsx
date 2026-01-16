@@ -121,17 +121,67 @@ function ShipContent({ sectionKey, dayData }) {
 
         <hr className="section-divider" />
 
-        {/* Useful Info */}
+        {/* Dining Overview */}
+        <div className="sub-section">
+          <h3>Dining Onboard</h3>
+          <p>With options available around the clock, you can enjoy delicious dishes whenever you're hungry. From modern British classics to flavours inspired by your destinations.</p>
+          
+          <p><strong>Freedom Dining (Iona exclusive):</strong></p>
+          <p>Iona offers exclusively Freedom Dining. Dine any time from 6pm to 9.30pm in the ship's Freedom restaurants - simply turn up and you'll be seated at an available table. At peak times, you'll get a pager so you can relax with a drink while you wait.</p>
+
+          <p><strong>Included Restaurants:</strong></p>
+          <ul className="info-list">
+            <li><strong>Freedom Restaurants</strong> (Coral, Pearl, Aqua, Opal) - Main dining rooms, included</li>
+            <li><strong>The Quays</strong> - Fresh, casual dining, included</li>
+            <li><strong>Horizon Buffet</strong> - All-day buffet, included</li>
+            <li><strong>Poolside Grill</strong> - Burgers and hot dogs, included</li>
+            <li><strong>The Chef's Table</strong> - Fine dining experience, included</li>
+          </ul>
+
+          <p><strong>Extra-Cost Restaurants:</strong></p>
+          <ul className="info-list">
+            <li><strong>Epicurean</strong> - Fine dining with stunning views</li>
+            <li><strong>Sindhu</strong> - Indian cuisine by Atul Kochhar</li>
+            <li><strong>The Glass House</strong> - Wine bar dining</li>
+            <li><strong>Keel & Cow</strong> - Gastropub steaks</li>
+            <li><strong>Ocean Grill</strong> - Premium seafood and steaks</li>
+            <li><strong>Sundaes</strong> - Ice cream parlour</li>
+            <li><strong>The Beach House</strong> - Casual beach-style dining</li>
+          </ul>
+
+          <p><strong>Room Service:</strong> Available 24 hours. Breakfast is included; other items have a charge. Tray charge applies on Iona.</p>
+
+          <p className="info-note">Book speciality restaurants in advance via My P&O Cruises at my.pocruises.com - popular slots go quickly!</p>
+        </div>
+
+        <hr className="section-divider" />
+
+        {/* Good to Know */}
         <div className="sub-section">
           <h3>Good to Know</h3>
+          
+          <p><strong>No Tipping Required:</strong></p>
+          <p>No tipping is needed on P&O ships. Good service is all part of your holiday.</p>
+
+          <p><strong>Staying Connected:</strong></p>
+          <p>Your mobile should work as it does ashore (check roaming with your provider). All ships have extensive WiFi - you can purchase internet packages before you sail or log on when you board.</p>
+
+          <p><strong>My Holiday App:</strong></p>
+          <p>Once onboard, use the free guest WiFi to access My Holiday - your pocket planner for booking shows, viewing your account, making dining reservations, and even joining restaurant queues virtually.</p>
+
+          <p><strong>Laundry:</strong></p>
+          <p>Self-service launderettes with washers, dryers and ironing stations are available. You'll need to supply your own detergent (available to buy onboard). Launderettes are closed on cruises less than 5 nights.</p>
+
+          <p><strong>Smoking Policy:</strong></p>
+          <p>For everyone's safety and comfort, smoking isn't permitted in cabins, on balconies, or in public rooms. Smoking (including e-cigarettes) is only allowed in designated open deck areas.</p>
+
+          <p><strong>Other Useful Info:</strong></p>
           <ul className="info-list">
-            <li>Access P&O Horizon (web-based) for show bookings and daily schedules - can be added to home screen as a shortcut</li>
+            <li>Access P&O Horizon for show bookings and daily schedules</li>
             <li>Shops and casino are only open at sea</li>
             <li>The Retreat on Deck 18 is adults only (16+)</li>
-            <li>Launderettes available on Decks 5, 9, 10, 12, 14 and 15</li>
-            <li>Reception open 24 hours on Deck 7</li>
-            <li>Four self-service laundrettes throughout the ship</li>
-            <li>Currency onboard is British Pounds</li>
+            <li>Reception is open 24 hours on Deck 7</li>
+            <li>Currency onboard is British Pounds (£)</li>
           </ul>
         </div>
 

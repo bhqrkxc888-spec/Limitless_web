@@ -148,24 +148,67 @@ function WhatToExpectSection({ dayData: _dayData }) {
       <hr className="section-divider" />
 
       <div className="sub-section">
-        <h3>Emergency Muster Drill</h3>
+        <h3>Muster Drill & Safety Briefing</h3>
         
-        <p><strong>When:</strong> The muster drill typically takes place approximately 30-60 minutes before sail-away. You'll receive an announcement and your sail & sign card will show your muster station letter.</p>
+        <p>Upon embarkation, a friendly crew member will help direct you to your muster station. Your boarding pass is scanned so you can familiarise yourself with where you'd need to go in an emergency.</p>
 
-        <p><strong>Where:</strong> Each cabin is assigned a muster station (A, B, C, etc.) - this is displayed on your cabin door and cruise card. Stations are located in public areas like lounges, the theatre, or covered deck spaces.</p>
+        <p><strong>In-Cabin Safety Video:</strong></p>
+        <p>When you arrive at your cabin, you'll be asked to watch the safety video on your in-cabin TV. This covers important health, wellbeing and safety information, including what to do in an emergency and a life jacket demonstration. Once you've watched it, you're free to relax, explore and enjoy the ship.</p>
 
-        <p><strong>What to Bring:</strong> Just yourself and your cruise card. No life jackets needed - these are demonstration drills only.</p>
+        <p><strong>Your Muster Station:</strong></p>
+        <ul className="info-list">
+          <li>Each cabin is assigned a muster station letter (A, B, C, etc.)</li>
+          <li>Your station is shown on your cabin door and cruise card</li>
+          <li>Stations are in public areas like lounges or the theatre</li>
+          <li>Crew will be there to guide you on embarkation day</li>
+        </ul>
 
-        <p><strong>Duration:</strong> Approximately 15-20 minutes. Attendance is mandatory and tracked electronically when you scan your card.</p>
+        <p><strong>What You Need to Know:</strong></p>
+        <ul className="info-list">
+          <li>No need to bring life jackets - just yourself and your cruise card</li>
+          <li>Attendance is tracked electronically when you scan your card</li>
+          <li>The whole process takes about 15-20 minutes</li>
+        </ul>
+      </div>
 
-        <p><strong>Process:</strong></p>
-        <ol className="info-list">
-          <li>Announcement calls all guests to stations</li>
-          <li>Head to your assigned letter station</li>
-          <li>Scan your cruise card with crew members</li>
-          <li>Brief safety demonstration</li>
-          <li>Released by announcement - usually back in time for sail-away!</li>
-        </ol>
+      <hr className="section-divider" />
+
+      <div className="sub-section">
+        <h3>Health & Wellbeing Onboard</h3>
+        
+        <p>P&O has comprehensive measures in place to help everyone feel comfortable throughout their holiday:</p>
+
+        <ul className="info-list">
+          <li>Guests are asked to declare any symptoms before boarding</li>
+          <li>Enhanced onboard ventilation systems improve air filtration</li>
+          <li>High levels of cleanliness maintained throughout the ship</li>
+          <li>Medical facilities and plans in place for any health needs</li>
+        </ul>
+
+        <p className="info-note">Wellbeing measures may be updated during your cruise as P&O works with experts and authorities. The focus is always on protecting guests, crew and the communities visited.</p>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="sub-section">
+        <h3>Money Matters</h3>
+        
+        <p><strong>Everything in Sterling:</strong></p>
+        <p>Because everything on a P&O cruise is priced in £ sterling - from your initial holiday cost to onboard extras - you never need to worry about fluctuating exchange rates.</p>
+
+        <p><strong>Cash-Free Ship:</strong></p>
+        <p>All P&O ships operate a 'cash free' environment. Simply present your cruise card for any purchases. Ships don't accept cash except at Reception for settling your final account.</p>
+
+        <p><strong>Register Your Card:</strong></p>
+        <p>As part of online check-in, you'll register a payment card for onboard use. This speeds up embarkation. Accepted cards include Visa, MasterCard, American Express, Diners Club, and Discover. Solo, Maestro, Switch or prepaid cards are not accepted.</p>
+
+        <p><strong>Daily Authorisation:</strong></p>
+        <p>Your daily spend is authorised with your card provider at the end of each day. Your card company may hold these authorisations for up to 28 days. Final payment isn't taken until you disembark.</p>
+
+        <p><strong>Cash Onboard:</strong></p>
+        <p>If you need cash whilst onboard, you can charge it to your account. Limits apply: £250 per day, £1,250 per 7 days, £5,000 per 30 days.</p>
+
+        <p className="info-note">Foreign exchange services are not available onboard. Exchange money before you travel, or use ATMs in port.</p>
       </div>
 
     </div>

@@ -213,6 +213,31 @@ function OverviewSection({ dayData, portContent }) {
           </div>
         </div>
       </div>
+
+      <hr className="section-divider" />
+
+      {/* Going Ashore Information */}
+      <div className="sub-section">
+        <h3>Going Ashore</h3>
+        
+        <p><strong>Docking vs Tendering:</strong></p>
+        <p>Wherever possible, the ship docks at a quayside, allowing you to come and go via the gangway. Sometimes the ship anchors at sea and tenders (small boats carrying ~100 passengers) provide a free, frequent service ashore.</p>
+
+        {overview?.portInfo?.tenderPort && (
+          <div className="info-note" style={{ marginBottom: '1rem' }}>
+            <p>⚓ This port typically requires tendering. Allow extra time to get ashore.</p>
+          </div>
+        )}
+
+        <p><strong>Tender Requirements:</strong></p>
+        <p>To board a tender, you'll need to navigate steps (up to 20cm high) and a gap between the platform and tender (up to 45cm). Crew members will guide and steady you, but cannot carry or lift guests for safety reasons. Wear flat, secure footwear.</p>
+
+        <p><strong>Shuttle Buses:</strong></p>
+        <p>With Select Price bookings, shuttle buses are free in ports where P&O provides them. For Early Saver or Saver prices, there's usually a small supplement (typically £4-5 per person each way). Prices are confirmed onboard.</p>
+
+        <p><strong>Going Independent:</strong></p>
+        <p>Where the ship berths away from the port centre, you'll usually find local transport and taxis close to the ship. Check at Reception for local options and approximate costs.</p>
+      </div>
     </div>
   );
 }
