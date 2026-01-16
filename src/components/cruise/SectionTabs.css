@@ -8,7 +8,7 @@
   border-bottom: 1px solid var(--clr-border-light, #F2EFE9);
   padding: var(--space-2, 0.5rem) 0;
   position: sticky;
-  top: 76px; /* Below day navigation - must account for full day nav height */
+  top: 85px; /* Below day navigation - must account for full day nav height + padding */
   z-index: 900;
   box-shadow: 0 2px 4px rgba(44, 52, 76, 0.04);
 }
@@ -75,7 +75,7 @@
 @media (min-width: 768px) {
   .section-tabs {
     padding: var(--space-3, 0.75rem) 0;
-    top: 92px; /* Adjust for larger day nav on tablet */
+    top: 105px; /* Adjust for larger day nav on tablet */
   }
 
   .section-tabs-scroll {
@@ -96,7 +96,7 @@
 
 @media (min-width: 1024px) {
   .section-tabs {
-    top: 100px;
+    top: 115px;
   }
 
   .section-tabs-scroll {
