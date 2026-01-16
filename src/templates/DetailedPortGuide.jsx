@@ -41,13 +41,16 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
   const { overview, stayLocal, goFurther, withKids, send, foodAndDrink } = detailedContent;
 
   // Check which sections have content
+  // Check which sections have content - match field names from portContent.js
   const hasContent = {
     overview: !!overview,
     stayLocal: !!stayLocal && (stayLocal.quickWalk?.length > 0 || stayLocal.longerWalk?.length > 0 || stayLocal.beach || stayLocal.tip),
     goFurther: !!goFurther && goFurther.attractions?.length > 0,
     withKids: !!withKids && (withKids.toddlers?.length > 0 || withKids.olderKids?.length > 0 || withKids.easyDay),
-    send: !!send && (send.wheelchairAccess || send.mobilityConsiderations?.length > 0),
-    foodAndDrink: !!foodAndDrink && (foodAndDrink.localSpecialties?.length > 0 || foodAndDrink.drinkingWater),
+    // 'send' uses 'mobility', 'quietSpots', 'sensory' - match actual data structure
+    send: !!send && (send.wheelchairAccess || send.mobility?.length > 0 || send.quietSpots?.length > 0 || send.mobilityConsiderations?.length > 0),
+    // 'foodAndDrink' uses 'restaurants', 'cafes', 'bars', 'localSpeciality' - match actual data structure
+    foodAndDrink: !!foodAndDrink && (foodAndDrink.restaurants?.length > 0 || foodAndDrink.localSpeciality || foodAndDrink.localSpecialties?.length > 0 || foodAndDrink.drinkingWater),
   };
 
   // Filter to only show tabs with content
@@ -555,11 +558,12 @@ function SendSection({ send }) {
         </>
       )}
 
-      {send.mobilityConsiderations && send.mobilityConsiderations.length > 0 && (
+      {/* Support both 'mobility' (G606 style) and 'mobilityConsiderations' (old style) */}
+      {((send.mobility && send.mobility.length > 0) || (send.mobilityConsiderations && send.mobilityConsiderations.length > 0)) && (
         <>
           <SubSection title="Mobility Considerations">
             <ul className="simple-list">
-              {send.mobilityConsiderations.map((item, idx) => (
+              {(send.mobility || send.mobilityConsiderations).map((item, idx) => (
                 <li key={idx}>{item}</li>
               ))}
             </ul>
@@ -583,11 +587,26 @@ function SendSection({ send }) {
         </>
       )}
 
-      {send.sensoryConsiderations && send.sensoryConsiderations.length > 0 && (
+      {/* Support 'quietSpots' from G606 style data */}
+      {send.quietSpots && send.quietSpots.length > 0 && (
+        <>
+          <SubSection title="Quiet Spots">
+            <ul className="simple-list">
+              {send.quietSpots.map((item, idx) => (
+                <li key={idx}>{item}</li>
+              ))}
+            </ul>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Support both 'sensory' (G606) and 'sensoryConsiderations' (old style) */}
+      {((send.sensory && send.sensory.length > 0) || (send.sensoryConsiderations && send.sensoryConsiderations.length > 0)) && (
         <>
           <SubSection title="Sensory Considerations">
             <ul className="simple-list">
-              {send.sensoryConsiderations.map((item, idx) => (
+              {(send.sensory || send.sensoryConsiderations).map((item, idx) => (
                 <li key={idx}>{item}</li>
               ))}
             </ul>
@@ -623,6 +642,17 @@ function FoodDrinkSection({ foodAndDrink }) {
 
       <hr className="section-divider" />
 
+      {/* Support 'localSpeciality' (string, G606 style) */}
+      {foodAndDrink.localSpeciality && (
+        <>
+          <SubSection title="Local Speciality">
+            <p>{foodAndDrink.localSpeciality}</p>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Support 'localSpecialties' (array of objects, old style) */}
       {foodAndDrink.localSpecialties && foodAndDrink.localSpecialties.length > 0 && (
         <>
           <SubSection title="Local Specialties">
@@ -631,6 +661,54 @@ function FoodDrinkSection({ foodAndDrink }) {
                 <strong>{specialty.name}</strong>
                 <p>{specialty.description}</p>
                 {specialty.where && <p className="where"><em>Where: {specialty.where}</em></p>}
+              </div>
+            ))}
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Support 'restaurants' (G606 style) */}
+      {foodAndDrink.restaurants && foodAndDrink.restaurants.length > 0 && (
+        <>
+          <SubSection title="Restaurants">
+            {foodAndDrink.restaurants.map((restaurant, idx) => (
+              <div key={idx} className="specialty-item">
+                <strong>{restaurant.name}</strong>
+                {restaurant.location && <span style={{ fontWeight: 'normal', fontSize: '0.875rem', opacity: 0.8 }}>, {restaurant.location}</span>}
+                <p>{restaurant.description}</p>
+              </div>
+            ))}
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Support 'cafes' (G606 style) */}
+      {foodAndDrink.cafes && foodAndDrink.cafes.length > 0 && (
+        <>
+          <SubSection title="Cafés">
+            {foodAndDrink.cafes.map((cafe, idx) => (
+              <div key={idx} className="specialty-item">
+                <strong>{cafe.name}</strong>
+                {cafe.location && <span style={{ fontWeight: 'normal', fontSize: '0.875rem', opacity: 0.8 }}>, {cafe.location}</span>}
+                {cafe.description && <p>{cafe.description}</p>}
+              </div>
+            ))}
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Support 'bars' (G606 style) */}
+      {foodAndDrink.bars && foodAndDrink.bars.length > 0 && (
+        <>
+          <SubSection title="Bars">
+            {foodAndDrink.bars.map((bar, idx) => (
+              <div key={idx} className="specialty-item">
+                <strong>{bar.name}</strong>
+                {bar.location && <span style={{ fontWeight: 'normal', fontSize: '0.875rem', opacity: 0.8 }}>, {bar.location}</span>}
+                {bar.description && <p>{bar.description}</p>}
               </div>
             ))}
           </SubSection>

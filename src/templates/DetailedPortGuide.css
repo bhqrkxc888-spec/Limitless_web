@@ -1,38 +1,44 @@
 /* ========================================
    DETAILED PORT GUIDE - G606 STYLE
    Tabbed navigation with comprehensive content
-   Matches the cruise companion port day layout
+   Matches the cruise companion port day layout EXACTLY
    ======================================== */
 
 .detailed-port-guide {
-  /* Remove default padding as tabs create visual boundary */
+  /* No extra margin - the container padding is already removed */
+}
+
+/* Override port-content padding when detailed guide is present */
+.port-content:has(.detailed-port-guide) {
+  padding-top: 0 !important;
 }
 
 /* ========================================
-   SECTION TABS - Matches G606 SectionTabs
-   Full width, prominent, centered tabs
+   SECTION TABS - EXACT MATCH to G606 SectionTabs
+   Full width, flush against hero, light background
    ======================================== */
 
 .port-section-tabs {
-  background: var(--clr-primary, #2C344C);
-  border-bottom: 3px solid var(--clr-secondary, #D4B86A);
-  padding: var(--space-3, 0.75rem) 0;
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-bottom: 1px solid var(--clr-border-light, #F2EFE9);
+  padding: var(--space-2, 0.5rem) 0;
   position: sticky;
   top: 80px;
   z-index: 100;
-  box-shadow: 0 4px 12px rgba(44, 52, 76, 0.15);
-  border-radius: var(--radius-lg, 12px);
-  margin-bottom: var(--space-6, 1.5rem);
+  box-shadow: 0 2px 4px rgba(44, 52, 76, 0.04);
+  /* Full width - break out of container */
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  width: 100vw;
 }
 
 .port-tabs-scroll {
   display: flex;
-  justify-content: center;
-  gap: var(--space-2, 0.5rem);
+  gap: var(--space-1, 0.25rem);
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding: 0 var(--space-4, 1rem);
+  padding: 0 var(--space-3, 0.75rem);
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
   max-width: var(--layout-content-width, 1120px);
@@ -47,12 +53,12 @@
   display: flex;
   align-items: center;
   gap: var(--space-2, 0.5rem);
-  padding: var(--space-2, 0.5rem) var(--space-4, 1rem);
-  min-height: 44px;
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  min-height: 40px;
   background: transparent;
   border: none;
   border-radius: var(--radius-full, 9999px);
-  color: rgba(255, 255, 255, 0.75);
+  color: var(--clr-text-muted, #5C6478);
   font-size: var(--font-size-sm, 0.875rem);
   font-weight: var(--font-weight-medium, 500);
   cursor: pointer;
@@ -65,13 +71,13 @@
 }
 
 .port-section-tab:hover {
-  color: var(--clr-surface, #FFFFFF);
-  background: rgba(255, 255, 255, 0.1);
+  color: var(--clr-text-main, #2C344C);
+  background: rgba(44, 52, 76, 0.05);
 }
 
 .port-section-tab.active {
-  color: var(--clr-primary, #2C344C);
-  background: var(--clr-secondary, #D4B86A);
+  color: var(--clr-surface, #FFFFFF);
+  background: var(--clr-primary, #2C344C);
   font-weight: var(--font-weight-semibold, 600);
 }
 
@@ -595,21 +601,23 @@
 }
 
 /* ========================================
-   TABLET & DESKTOP
+   TABLET & DESKTOP - Match G606 SectionTabs.css
    ======================================== */
 
 @media (min-width: 768px) {
   .port-section-tabs {
-    padding: var(--space-4, 1rem) 0;
-    top: 90px;
+    padding: var(--space-3, 0.75rem) 0;
+    top: 105px;
   }
   
   .port-tabs-scroll {
-    gap: var(--space-3, 0.75rem);
+    gap: var(--space-2, 0.5rem);
+    padding: 0 var(--space-4, 1rem);
   }
   
   .port-section-tab {
-    padding: var(--space-3, 0.75rem) var(--space-5, 1.25rem);
+    padding: var(--space-2, 0.5rem) var(--space-4, 1rem);
+    min-height: 44px;
     font-size: var(--font-size-base, 1rem);
   }
   
@@ -624,11 +632,16 @@
 
 @media (min-width: 1024px) {
   .port-section-tabs {
-    top: 100px;
+    top: 115px;
+  }
+  
+  .port-tabs-scroll {
+    justify-content: flex-start;
+    gap: var(--space-2, 0.5rem);
   }
   
   .port-section-tab {
-    padding: var(--space-3, 0.75rem) var(--space-6, 1.5rem);
+    padding: var(--space-3, 0.75rem) var(--space-5, 1.25rem);
   }
   
   .access-grid {
