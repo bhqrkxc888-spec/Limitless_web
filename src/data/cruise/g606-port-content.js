@@ -7,8 +7,9 @@
 import { getPortContent as getSharedPortContent } from '../portContent';
 
 // G606-specific port content with cruise-specific overrides
+// Keys match the slugs returned by getPortGuideSlugFromG606PortName
 export const g606PortContent = {
-  'la-coruna': {
+  'a-coruna': {
     ...getSharedPortContent('a-coruna'),
     // Cruise-specific overrides (if needed)
     overview: {
@@ -17,7 +18,7 @@ export const g606PortContent = {
       departTime: 'TBC'
     }
   },
-  'tenerife': {
+  'santa-cruz-de-tenerife': {
     ...getSharedPortContent('santa-cruz-de-tenerife'),
     overview: {
       ...getSharedPortContent('santa-cruz-de-tenerife')?.overview,
@@ -25,7 +26,7 @@ export const g606PortContent = {
       departTime: 'TBC'
     }
   },
-  'gran-canaria': {
+  'las-palmas-gran-canaria': {
     ...getSharedPortContent('las-palmas-gran-canaria'),
     overview: {
       ...getSharedPortContent('las-palmas-gran-canaria')?.overview,

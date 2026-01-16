@@ -19,8 +19,8 @@
   border-bottom: 1px solid var(--clr-border-light, #F2EFE9);
   padding: var(--space-2, 0.5rem) 0;
   position: sticky;
-  top: 0;
-  z-index: 1000;
+  top: 84px; /* Below mobile header (top bar hidden on mobile) */
+  z-index: var(--z-sticky-content, 900); /* Below header (z-index 1000) but above content */
   box-shadow: 0 2px 4px rgba(44, 52, 76, 0.04);
   /* Full width - break out of container */
   margin-left: calc(-50vw + 50%);
@@ -606,7 +606,7 @@
 @media (min-width: 768px) {
   .port-section-tabs {
     padding: var(--space-3, 0.75rem) 0;
-    top: 0;
+    top: 120px; /* Below full header (top bar 36px + main header 84px) */
   }
   
   .port-tabs-scroll {
@@ -632,7 +632,7 @@
 
 @media (min-width: 1024px) {
   .port-section-tabs {
-    top: 0;
+    top: 120px; /* Below full header (top bar 36px + main header 84px) */
   }
   
   .port-tabs-scroll {

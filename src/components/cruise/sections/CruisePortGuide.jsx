@@ -23,30 +23,39 @@ import './SectionContent.css';
  * Renders a specific section based on sectionKey prop
  */
 function CruisePortGuide({ sectionKey, dayData }) {
-  const portContent = getG606PortContent(dayData.portName);
+  // Convert port name to slug for both content and image lookups
   const slug = getPortGuideSlugFromG606PortName(dayData.portName);
+  const portContent = getG606PortContent(slug);
   
   // Load images
+  const { imageUrl: heroImage, isPlaceholder: heroIsPlaceholder } = usePortGuideImage(slug, 'hero', dayData.portName, dayData.country || '');
   const { imageUrl: beachImage } = usePortGuideImage(slug, 'beach', dayData.portName, dayData.country || '');
-  const { imageUrl: attraction1 } = usePortGuideImage(slug, 'attraction-1', dayData.portName, dayData.country || '');
-  const { imageUrl: attraction2 } = usePortGuideImage(slug, 'attraction-2', dayData.portName, dayData.country || '');
-  const { imageUrl: attraction3 } = usePortGuideImage(slug, 'attraction-3', dayData.portName, dayData.country || '');
-  const { imageUrl: attraction4 } = usePortGuideImage(slug, 'attraction-4', dayData.portName, dayData.country || '');
-  const { imageUrl: attraction5 } = usePortGuideImage(slug, 'attraction-5', dayData.portName, dayData.country || '');
-  const { imageUrl: attraction6 } = usePortGuideImage(slug, 'attraction-6', dayData.portName, dayData.country || '');
+  const { imageUrl: attraction1, isPlaceholder: attr1Placeholder } = usePortGuideImage(slug, 'attraction-1', dayData.portName, dayData.country || '');
+  const { imageUrl: attraction2, isPlaceholder: attr2Placeholder } = usePortGuideImage(slug, 'attraction-2', dayData.portName, dayData.country || '');
+  const { imageUrl: attraction3, isPlaceholder: attr3Placeholder } = usePortGuideImage(slug, 'attraction-3', dayData.portName, dayData.country || '');
+  const { imageUrl: attraction4, isPlaceholder: attr4Placeholder } = usePortGuideImage(slug, 'attraction-4', dayData.portName, dayData.country || '');
+  const { imageUrl: attraction5, isPlaceholder: attr5Placeholder } = usePortGuideImage(slug, 'attraction-5', dayData.portName, dayData.country || '');
+  const { imageUrl: attraction6, isPlaceholder: attr6Placeholder } = usePortGuideImage(slug, 'attraction-6', dayData.portName, dayData.country || '');
   
-  const attractionImages = [attraction1, attraction2, attraction3, attraction4, attraction5, attraction6];
-
+  const attractionImages = [
+    { url: attraction1, isPlaceholder: attr1Placeholder },
+    { url: attraction2, isPlaceholder: attr2Placeholder },
+    { url: attraction3, isPlaceholder: attr3Placeholder },
+    { url: attraction4, isPlaceholder: attr4Placeholder },
+    { url: attraction5, isPlaceholder: attr5Placeholder },
+    { url: attraction6, isPlaceholder: attr6Placeholder }
+  ];
+  
   const renderSection = () => {
     switch (sectionKey) {
       case 'overview':
-        return <OverviewSection portName={dayData.portName} overview={portContent?.overview} />;
+        return <OverviewSection portName={dayData.portName} overview={portContent?.overview} heroImage={heroImage} heroIsPlaceholder={heroIsPlaceholder} />;
       case 'weather':
         return <WeatherSection dayData={dayData} />;
       case 'stayLocal':
         return <StayLocalSection stayLocal={portContent?.stayLocal} beachImage={beachImage} />;
       case 'goFurther':
-        return <GoFurtherSection goFurther={portContent?.goFurther} attractionImages={attractionImages} />;
+        return <GoFurtherSection goFurther={portContent?.goFurther} attractionImages={attractionImages} portName={dayData.portName} />;
       case 'withKids':
         return <WithKidsSection withKids={portContent?.withKids} />;
       case 'send':
@@ -130,7 +139,7 @@ function WeatherSection({ dayData }) {
    OVERVIEW SECTION
    ======================================== */
 
-function OverviewSection({ portName, overview }) {
+function OverviewSection({ portName, overview, heroImage, heroIsPlaceholder }) {
   if (!overview) {
     return (
       <div className="section-overview">
@@ -144,6 +153,17 @@ function OverviewSection({ portName, overview }) {
 
   return (
     <div className="section-overview">
+      {/* Hero image */}
+      {heroImage && !heroIsPlaceholder && (
+        <div className="port-hero-image">
+          <OptimizedImage
+            src={heroImage}
+            alt={`${portName} cruise port`}
+            className="port-hero-img"
+          />
+        </div>
+      )}
+
       <div className="section-intro">
         <h2>Welcome to {portName}</h2>
       </div>
@@ -161,29 +181,35 @@ function OverviewSection({ portName, overview }) {
       {overview.portInfo && (
         <>
           <SubSection title="Port Information">
-            <div className="port-info-grid">
+            <div className="port-info-tiles">
               {overview.portInfo.dockLocation && (
-                <div className="info-item">
-                  <MapPin size={20} />
-                  <div>
+                <div className="info-tile">
+                  <div className="info-tile-icon">
+                    <MapPin size={24} />
+                  </div>
+                  <div className="info-tile-content">
                     <strong>Dock Location</strong>
                     <p>{overview.portInfo.dockLocation}</p>
                   </div>
                 </div>
               )}
               {overview.portInfo.distanceToTown && (
-                <div className="info-item">
-                  <Clock size={20} />
-                  <div>
+                <div className="info-tile">
+                  <div className="info-tile-icon">
+                    <Clock size={24} />
+                  </div>
+                  <div className="info-tile-content">
                     <strong>Distance to Town</strong>
                     <p>{overview.portInfo.distanceToTown}</p>
                   </div>
                 </div>
               )}
               {overview.portInfo.shuttleInfo && (
-                <div className="info-item">
-                  <Info size={20} />
-                  <div>
+                <div className="info-tile">
+                  <div className="info-tile-icon">
+                    <Info size={24} />
+                  </div>
+                  <div className="info-tile-content">
                     <strong>Shuttle Info</strong>
                     <p>{overview.portInfo.shuttleInfo}</p>
                   </div>
@@ -371,7 +397,7 @@ function StayLocalSection({ stayLocal, beachImage }) {
       )}
 
       {stayLocal.tip && (
-        <div className="tip-box">
+        <div className="tip-block">
           <strong>💡 Our Tip</strong>
           <p>{stayLocal.tip}</p>
         </div>
@@ -384,7 +410,7 @@ function StayLocalSection({ stayLocal, beachImage }) {
    GO FURTHER SECTION
    ======================================== */
 
-function GoFurtherSection({ goFurther, attractionImages }) {
+function GoFurtherSection({ goFurther, attractionImages, portName }) {
   if (!goFurther || !goFurther.attractions || goFurther.attractions.length === 0) {
     return (
       <div className="section-go-further">
@@ -405,15 +431,19 @@ function GoFurtherSection({ goFurther, attractionImages }) {
 
       <hr className="section-divider" />
 
-      {goFurther.attractions.map((attraction, idx) => (
-        <div key={idx} className="attraction-card">
+      {goFurther.attractions.map((attraction, idx) => {
+        const imgData = attractionImages[idx];
+        const showImage = imgData?.url && !imgData?.isPlaceholder;
+        
+        return (
+        <div key={idx} className="attraction-block">
           <h3>{attraction.name}</h3>
           
-          {attractionImages[idx] && (
+          {showImage && (
             <div className="attraction-image">
               <OptimizedImage
-                src={attractionImages[idx]}
-                alt={attraction.name}
+                src={imgData.url}
+                alt={`${attraction.name} - ${portName}`}
                 className="attraction-img"
               />
             </div>
@@ -470,10 +500,11 @@ function GoFurtherSection({ goFurther, attractionImages }) {
           
           <hr className="section-divider" />
         </div>
-      ))}
+        );
+      })}
 
       {goFurther.ourTake && (
-        <div className="tip-box">
+        <div className="tip-block">
           <strong>💡 Overall Recommendation</strong>
           <p>{goFurther.ourTake}</p>
         </div>
@@ -560,7 +591,7 @@ function WithKidsSection({ withKids }) {
       )}
 
       {withKids.easyDay && (
-        <div className="tip-box">
+        <div className="tip-block">
           <strong>💡 Easy Day Suggestion</strong>
           <p>{withKids.easyDay}</p>
         </div>
@@ -828,7 +859,7 @@ function FoodDrinkSection({ foodAndDrink }) {
 
       {foodAndDrink.dietaryNotes && (
         <>
-          <div className="tip-box">
+          <div className="tip-block">
             <strong>💡 Dietary Notes</strong>
             <p>{foodAndDrink.dietaryNotes}</p>
           </div>
@@ -837,8 +868,8 @@ function FoodDrinkSection({ foodAndDrink }) {
       )}
 
       {foodAndDrink.drinkingWater && (
-        <div className="info-box">
-          <strong>💧 Drinking Water</strong>
+        <div className="info-block">
+          <h3>💧 Drinking Water</h3>
           <p>{foodAndDrink.drinkingWater}</p>
         </div>
       )}

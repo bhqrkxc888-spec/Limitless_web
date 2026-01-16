@@ -23,13 +23,12 @@ function FeedbackSection({ sectionKey, dayNumber, cruiseCode = 'G606', portName 
   const [hasVoted, setHasVoted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Check for existing vote on mount
+  // Check for existing vote on mount AND when section/day changes
   useEffect(() => {
     const localKey = `cruise_feedback_${cruiseCode}_${sectionKey}_day${dayNumber}`;
     const existingVote = localStorage.getItem(localKey);
-    if (existingVote) {
-      setHasVoted(true);
-    }
+    // Reset hasVoted state based on whether this specific section was voted on
+    setHasVoted(!!existingVote);
   }, [cruiseCode, sectionKey, dayNumber]);
 
   const handleVote = async (isHelpful) => {

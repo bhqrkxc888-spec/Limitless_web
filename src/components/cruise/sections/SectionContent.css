@@ -42,11 +42,104 @@
 }
 
 /* ========================================
+   PORT INFO TILES - 3-column grid for port info
+   ======================================== */
+
+.port-info-tiles {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4, 1rem);
+  margin-bottom: var(--space-4, 1rem);
+}
+
+@media (min-width: 600px) {
+  .port-info-tiles {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.info-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-5, 1.25rem);
+  background: var(--clr-surface, #FFFFFF);
+  border: 1px solid var(--clr-border-light, #F2EFE9);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: 0 2px 8px rgba(44, 52, 76, 0.04);
+  transition: transform var(--transition-fast, 150ms ease),
+              box-shadow var(--transition-fast, 150ms ease);
+}
+
+.info-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(44, 52, 76, 0.08);
+}
+
+.info-tile-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-radius: 50%;
+  margin-bottom: var(--space-3, 0.75rem);
+  color: var(--clr-secondary, #D4B86A);
+}
+
+.info-tile-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1, 0.25rem);
+}
+
+.info-tile-content strong {
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  font-size: var(--font-size-base, 1rem);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--clr-text-main, #2C344C);
+}
+
+.info-tile-content p {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--clr-text-muted, #5C6478);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Port description styling */
+.port-description {
+  margin-bottom: var(--space-6, 1.5rem);
+}
+
+.port-description p {
+  font-size: var(--font-size-base, 1rem);
+  color: var(--clr-text-main, #2C344C);
+  line-height: var(--line-height-relaxed, 1.7);
+  margin-bottom: var(--space-4, 1rem);
+}
+
+.port-description p:last-child {
+  margin-bottom: 0;
+}
+
+/* ========================================
    SECTION INTRO
    ======================================== */
 
 .section-intro {
   margin-bottom: var(--space-6, 1.5rem);
+}
+
+.section-intro h2 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-2xl, 1.5rem);
+  font-weight: 600;
+  color: var(--clr-text-main, #2C344C);
+  margin-bottom: var(--space-3, 0.75rem);
+  line-height: 1.2;
 }
 
 .section-intro p {
@@ -473,6 +566,10 @@
 @media (min-width: 768px) {
   .section-intro {
     margin-bottom: var(--space-8, 2rem);
+  }
+
+  .section-intro h2 {
+    font-size: var(--font-size-3xl, 2rem);
   }
 
   .section-intro p {
