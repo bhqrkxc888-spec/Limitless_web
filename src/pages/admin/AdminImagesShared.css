@@ -94,6 +94,36 @@
   color: var(--admin-text);
 }
 
+/* Image actions - buttons for selecting existing images */
+.image-actions {
+  margin-bottom: 1rem;
+}
+
+.btn-use-existing {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  background: var(--admin-bg-tertiary, #2d3139);
+  border: 1px solid var(--admin-border, #3c4149);
+  border-radius: 6px;
+  color: var(--admin-text, #e8eaed);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-use-existing:hover {
+  background: var(--admin-bg-hover, #3c4149);
+  border-color: var(--admin-primary, #4285f4);
+  color: var(--admin-primary, #4285f4);
+}
+
+.btn-use-existing svg {
+  flex-shrink: 0;
+}
+
 /* Image card description - visible text, not tooltip */
 .image-card-description {
   margin: 0.75rem 0;

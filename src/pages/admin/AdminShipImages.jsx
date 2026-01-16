@@ -5,10 +5,11 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Ship, CheckCircle, AlertTriangle, XCircle } from 'lucide-react';
+import { ArrowLeft, Ship, CheckCircle, AlertTriangle, XCircle, Link as LinkIcon } from 'lucide-react';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
 import ImageUpload from '../../components/admin/ImageUpload';
+import ImageSelector from '../../components/admin/ImageSelector';
 import StatusIndicator from '../../components/admin/StatusIndicator';
 import { supabase, getPublicUrl } from '../../lib/supabase';
 import { STORAGE_BUCKETS } from '../../config/supabaseConfig';
@@ -63,6 +64,7 @@ function AdminShipImages() {
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [showImageSelector, setShowImageSelector] = useState(null); // { shipId, imageType }
 
   // Redirect if not authenticated
   useEffect(() => {
@@ -108,6 +110,36 @@ function AdminShipImages() {
 
   const handleUploadComplete = () => {
     loadImages();
+  };
+
+  const handleSelectExisting = async (selectedImage) => {
+    if (!showImageSelector) return;
+
+    try {
+      // Create a reference to the existing image for this ship
+      const { error } = await supabase
+        .from('site_images')
+        .insert({
+          entity_type: 'ship',
+          entity_id: showImageSelector.shipId,
+          image_type: showImageSelector.imageType,
+          bucket: selectedImage.bucket,
+          path: selectedImage.path,
+          alt_text: selectedImage.alt_text,
+          width: selectedImage.width,
+          height: selectedImage.height,
+          seo_compliant: selectedImage.seo_compliant,
+          validation_warnings: selectedImage.validation_warnings
+        });
+
+      if (error) throw error;
+
+      setShowImageSelector(null);
+      loadImages();
+    } catch (error) {
+      console.error('Error linking image:', error);
+      alert('Failed to link image. Please try again.');
+    }
   };
 
   /**
@@ -274,6 +306,17 @@ function AdminShipImages() {
                         </div>
                       )}
 
+                      <div className="image-actions">
+                        <button
+                          className="btn-use-existing"
+                          onClick={() => setShowImageSelector({ shipId: selectedShip.id, imageType: imageType.id })}
+                          title="Use existing image from another entity"
+                        >
+                          <LinkIcon size={16} />
+                          Use Existing Image
+                        </button>
+                      </div>
+
                       <ImageUpload
                         entityType="ship"
                         entityId={selectedShip.id}
@@ -294,6 +337,17 @@ function AdminShipImages() {
               })}
             </div>
           </>
+        )}
+
+        {/* Image Selector Modal */}
+        {showImageSelector && (
+          <ImageSelector
+            entityType="ship"
+            imageType={showImageSelector.imageType}
+            currentEntityId={showImageSelector.shipId}
+            onSelect={handleSelectExisting}
+            onCancel={() => setShowImageSelector(null)}
+          />
         )}
       </div>
     </AdminLayout>
