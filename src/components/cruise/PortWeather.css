@@ -237,9 +237,26 @@
   flex-shrink: 0;
 }
 
+.alert-emoji {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.alert-content {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3, 0.75rem);
+  width: 100%;
+}
+
+.alert-text {
+  flex: 1;
+}
+
 .alert-content strong {
   display: block;
-  color: var(--clr-text-main, #2C344C);
+  color: #c2410c;
   margin-bottom: var(--space-1, 0.25rem);
   font-weight: var(--font-weight-semibold, 600);
 }
@@ -247,6 +264,12 @@
 .alert-content p {
   font-size: var(--font-size-sm, 0.875rem);
   color: var(--clr-text-main, #2C344C);
+  margin: 0;
+}
+
+.alert-note {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--clr-text-muted, #5C6478);
   margin: 0;
 }
 
