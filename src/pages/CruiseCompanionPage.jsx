@@ -9,7 +9,7 @@ import PortDayContent from '../components/cruise/sections/PortDayContent';
 import SeaDayContent from '../components/cruise/sections/SeaDayContent';
 import EmbarkationContent from '../components/cruise/sections/EmbarkationContent';
 import DisembarkationContent from '../components/cruise/sections/DisembarkationContent';
-import AboutIona from '../components/cruise/AboutIona';
+import ShipContent from '../components/cruise/sections/ShipContent';
 import CountdownTimer from '../components/cruise/CountdownTimer';
 import ShipTracker from '../components/cruise/ShipTracker';
 import PortWeather from '../components/cruise/PortWeather';
@@ -17,9 +17,6 @@ import { g606Itinerary, g606ShipInfo, g606Departure, getSectionsForDayType } fro
 import { SITE_ASSETS } from '../config/assetUrls';
 import { Button } from '../components/ui';
 import './CruiseCompanionPage.css';
-
-// FB Group URL - placeholder
-const FB_GROUP_URL = '#'; // Replace with actual URL
 
 // OG Image for social sharing - Canary Islands hero
 const G606_OG_IMAGE = 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_destinations/canary-islands/hero.webp';
@@ -157,6 +154,17 @@ function CruiseCompanionPage() {
   };
 
   const renderSectionContent = () => {
+    // Ship section is available on all day types
+    if (currentSection === 'ship') {
+      return (
+        <ShipContent
+          sectionKey={currentSection}
+          dayData={dayData}
+        />
+      );
+    }
+
+    // Day-type specific content
     switch (dayData.dayType) {
       case 'port':
         return (
@@ -262,35 +270,42 @@ function CruiseCompanionPage() {
         </div>
       </div>
 
-      {/* Live Ship Tracker Section */}
-      <div className="cruise-ship-tracker-section">
+      {/* Map and Weather Grid */}
+      <div className="cruise-map-weather-section">
         <div className="container">
-          <ShipTracker 
-            imo={g606ShipInfo.imo}
-            height={400}
-            showTrack={true}
-            title="Where's Iona Right Now?"
-          />
-        </div>
-      </div>
-
-      {/* Weather Status Bar */}
-      <div className="cruise-weather-bar">
-        <div className="container">
-          <div className="weather-bar-content">
-            <span className="weather-bar-label">
-              📍 Day {dayData.dayNumber} | {dayData.portName}
-            </span>
-            {dayData.coords ? (
-              <PortWeather 
-                portName={dayData.portName}
-                lat={dayData.coords.lat}
-                lon={dayData.coords.lon}
-                compact={true}
+          <div className="map-weather-grid">
+            {/* Live Ship Tracker */}
+            <div className="map-weather-map">
+              <ShipTracker 
+                imo={g606ShipInfo.imo}
+                height={350}
+                showTrack={true}
+                title="Where's Iona Right Now?"
               />
-            ) : (
-              <span className="weather-at-sea">At Sea</span>
-            )}
+            </div>
+
+            {/* Today's Weather */}
+            <div className="map-weather-weather">
+              <h3 className="weather-section-title">Today's Weather</h3>
+              <div className="weather-location-label">
+                📍 {dayData.portName}
+              </div>
+              {dayData.coords ? (
+                <PortWeather 
+                  portName={dayData.portName}
+                  lat={dayData.coords.lat}
+                  lon={dayData.coords.lon}
+                  compact={false}
+                  showHourly={false}
+                  showDaily={false}
+                />
+              ) : (
+                <div className="weather-at-sea-card">
+                  <p className="at-sea-label">At Sea</p>
+                  <p className="at-sea-note">Weather updates available when approaching port</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -317,13 +332,6 @@ function CruiseCompanionPage() {
             {/* Section Content */}
             {renderSectionContent()}
           </div>
-        </div>
-      </div>
-
-      {/* About Iona */}
-      <div className="companion-content">
-        <div className="container">
-          <AboutIona />
         </div>
       </div>
 

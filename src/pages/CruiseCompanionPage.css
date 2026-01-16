@@ -206,52 +206,80 @@
 }
 
 /* ========================================
-   SHIP TRACKER SECTION
+   MAP & WEATHER GRID SECTION
    ======================================== */
 
-.cruise-ship-tracker-section {
+.cruise-map-weather-section {
   background: var(--clr-bg, #FDFBF7);
   padding: var(--space-5, 1.25rem) var(--space-3, 0.75rem);
 }
 
-.cruise-ship-tracker-section .container {
+.cruise-map-weather-section .container {
   max-width: var(--layout-content-width, 1120px);
   margin: 0 auto;
 }
 
-/* ========================================
-   WEATHER STATUS BAR
-   ======================================== */
+.map-weather-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5, 1.25rem);
+}
 
-.cruise-weather-bar {
+.map-weather-map {
+  min-height: 300px;
+}
+
+.map-weather-weather {
   background: var(--clr-surface, #FFFFFF);
-  border-bottom: 1px solid var(--clr-border, #E8E4DC);
-  padding: var(--space-3, 0.75rem);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-4, 1rem);
+  border: 1px solid var(--clr-border-light, #F2EFE9);
+  box-shadow: 0 2px 8px rgba(44, 52, 76, 0.04);
 }
 
-.cruise-weather-bar .container {
-  max-width: var(--layout-content-width, 1120px);
-  margin: 0 auto;
-}
-
-.weather-bar-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3, 0.75rem);
-  flex-wrap: wrap;
-}
-
-.weather-bar-label {
-  font-size: var(--font-size-sm, 0.875rem);
+.weather-section-title {
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  font-size: var(--font-size-lg, 1.125rem);
+  font-weight: var(--font-weight-semibold, 600);
   color: var(--clr-text-main, #2C344C);
-  font-weight: var(--font-weight-medium, 500);
+  margin-bottom: var(--space-2, 0.5rem);
 }
 
-.weather-at-sea {
+.weather-location-label {
   font-size: var(--font-size-sm, 0.875rem);
   color: var(--clr-text-muted, #5C6478);
-  font-style: italic;
+  margin-bottom: var(--space-4, 1rem);
+}
+
+.weather-at-sea-card {
+  padding: var(--space-6, 1.5rem);
+  text-align: center;
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-radius: var(--radius-md, 8px);
+}
+
+.at-sea-label {
+  font-size: var(--font-size-xl, 1.25rem);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--clr-text-main, #2C344C);
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+.at-sea-note {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--clr-text-muted, #5C6478);
+}
+
+/* Tablet: side by side */
+@media (min-width: 768px) {
+  .map-weather-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+  
+  .map-weather-map {
+    min-height: 350px;
+  }
 }
 
 /* ========================================
@@ -427,7 +455,7 @@
     padding: var(--space-6, 1.5rem) var(--space-4, 1rem);
   }
 
-  .cruise-ship-tracker-section {
+  .cruise-map-weather-section {
     padding: var(--space-6, 1.5rem) var(--space-4, 1rem);
   }
 
@@ -477,7 +505,7 @@
     padding: var(--space-8, 2rem) var(--space-6, 1.5rem);
   }
 
-  .cruise-ship-tracker-section {
+  .cruise-map-weather-section {
     padding: var(--space-8, 2rem) var(--space-6, 1.5rem);
   }
 

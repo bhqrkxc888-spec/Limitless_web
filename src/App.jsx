@@ -133,6 +133,7 @@ const AdminCruiseLineImages = lazy(() => lazyWithRetry(() => import('./pages/adm
 const AdminCategoryImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminCategoryImages')))
 const AdminBucketListImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminBucketListImages')))
 const AdminPortGuideImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPortGuideImages')))
+const AdminShipImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminShipImages')))
 
 // Legal Pages
 const WebsiteTerms = lazy(() => lazyWithRetry(() => import('./pages/WebsiteTerms')))
@@ -221,7 +222,7 @@ function AppLayout() {
           <Route path="/admin/images/port-guides" element={<AdminProtectedRoute><AdminPortGuideImages /></AdminProtectedRoute>} />
           <Route path="/admin/images/port-guides/:slug" element={<AdminProtectedRoute><AdminPortGuideImages /></AdminProtectedRoute>} />
           {/* Redirect old ships route to cruise lines */}
-          <Route path="/admin/images/ships" element={<Navigate to="/admin/images/cruise-lines" replace />} />
+          <Route path="/admin/images/ships" element={<AdminProtectedRoute><AdminShipImages /></AdminProtectedRoute>} />
           
           {/* Admin Website Section */}
           <Route path="/admin/website/destinations" element={<AdminProtectedRoute><AdminWebsiteDestinations /></AdminProtectedRoute>} />

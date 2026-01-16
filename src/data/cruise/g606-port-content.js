@@ -178,7 +178,13 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
         'Spanish lunch hours - Restaurants may close 4-8pm. Plan around this or eat early.',
         'Weather - March can be rainy. Pack layers and waterproofs for kids too.'
       ],
-      easyDay: 'Walk to main square → Coffee/juice → Taxi to Aquarium (or Santa Margarita park for playground) → Taxi to beach for an hour → Ice cream → Walk back to ship.'
+      familiarChains: {
+        mcDonalds: {
+          location: 'Calle Real 40, about 10 min walk from port. Near the main shopping street.',
+          mapsLink: 'https://maps.google.com/?q=McDonald%27s+A+Coruna+Calle+Real'
+        }
+      },
+      easyDay: 'Walk to main square, grab a coffee/juice, taxi to Aquarium (or Santa Margarita park for playground), taxi to beach for an hour, ice cream, then walk back to ship.'
     },
     send: {
       mobility: [
@@ -439,7 +445,17 @@ March means you're here for "winter sun" - expect pleasant temperatures perfect 
         'Siesta hours - Some shops/restaurants close 1-4pm. Plan around it.',
         'Sun - Stronger than you think. Sunscreen and hats essential.'
       ],
-      easyDay: '**Option 1 (Beach day):** Bus to Las Teresitas → Beach morning → Lunch at beachfront restaurant → Bus back → Ice cream in town → Ship\n\n**Option 2 (City day):** Plaza de España → Market (kids love the colours) → Walk to Parque Marítimo for a swim → Ice cream → Ship'
+      familiarChains: {
+        mcDonalds: {
+          location: 'Calle del Castillo (main shopping street), about 15 min walk from port',
+          mapsLink: 'https://maps.google.com/?q=McDonald%27s+Santa+Cruz+de+Tenerife'
+        },
+        aleHop: {
+          location: 'Calle del Castillo 43. The famous Spanish gift shop with toys, jokes, and novelties. Kids love it.',
+          mapsLink: 'https://maps.google.com/?q=Ale+Hop+Santa+Cruz+de+Tenerife'
+        }
+      },
+      easyDay: 'Option 1 (Beach): Bus to Las Teresitas, beach morning, lunch at beachfront, bus back, ice cream in town, back to ship. Option 2 (City): Plaza de España, Market (kids love the colours), walk to Parque Marítimo for a swim, ice cream, back to ship.'
     },
     send: {
       mobility: [
@@ -679,7 +695,17 @@ Las Canteras beach is the star here - a gorgeous golden sand urban beach with a 
         'Bikes/scooters on promenade - Keep little ones close.',
         'Waves at southern end of Las Canteras - Calmer in the middle where the reef protects.'
       ],
-      easyDay: 'Walk to Las Canteras → Beach morning → Ice cream → Lunch on promenade → More beach or paddle → Walk back via Santa Catalina Park → Ship'
+      familiarChains: {
+        mcDonalds: {
+          location: 'Calle Triana 75, about 15 min walk or quick bus from Las Canteras',
+          mapsLink: 'https://maps.google.com/?q=McDonald%27s+Las+Palmas+Triana'
+        },
+        aleHop: {
+          location: 'Calle Mayor de Triana 48. Fun Spanish gift shop with novelties and toys.',
+          mapsLink: 'https://maps.google.com/?q=Ale+Hop+Las+Palmas'
+        }
+      },
+      easyDay: 'Walk to Las Canteras, beach morning, ice cream, lunch on promenade, more beach or paddle, walk back via Santa Catalina Park, back to ship.'
     },
     send: {
       mobility: [
@@ -914,7 +940,13 @@ March weather is perfect for exploring - warm enough for beaches but not the int
         'Charco de San Ginés is a working harbour - keep kids away from water edge.',
         'Sun is strong even in March - sunscreen and hats essential.'
       ],
-      easyDay: '**Option 1 (Local):** Walk to Charco de San Ginés → Coffee → Wander old town → Playa del Reducto for beach time → Lunch → Back to ship\n\n**Option 2 (Timanfaya):** Book excursion or tour to Timanfaya → Spend day exploring volcanic landscapes → Return to ship'
+      familiarChains: {
+        mcDonalds: {
+          location: 'Calle León y Castillo in Arrecife centre, about 20 min walk from port',
+          mapsLink: 'https://maps.google.com/?q=McDonald%27s+Arrecife+Lanzarote'
+        }
+      },
+      easyDay: 'Option 1 (Local): Walk to Charco de San Ginés, coffee, wander old town, Playa del Reducto for beach time, lunch, back to ship. Option 2 (Timanfaya): Book excursion or tour to Timanfaya, spend day exploring volcanic landscapes, return to ship.'
     },
     send: {
       mobility: [
@@ -1155,7 +1187,17 @@ Cádiz is famous for its connection to sherry wine (it's part of the "Sherry Tri
         'Spanish lunch hours - Restaurants may close 4-8pm. Plan around this.',
         'Narrow streets - Keep kids close, some streets are very narrow.'
       ],
-      easyDay: '**Option 1 (City day):** Plaza de San Juan de Dios → Mercado Central (kids love the colours) → Torre Tavira (camera obscura) → Lunch → La Caleta beach → Ice cream → Back to ship\n\n**Option 2 (Park day):** Walk to Parque Genovés → Explore gardens → Seafront promenade → Lunch → Back to ship'
+      familiarChains: {
+        mcDonalds: {
+          location: 'Calle Columela near the main shopping area, about 10 min walk from port',
+          mapsLink: 'https://maps.google.com/?q=McDonald%27s+Cadiz'
+        },
+        aleHop: {
+          location: 'Calle Ancha (main shopping street). Fun Spanish gift shop with toys and novelties.',
+          mapsLink: 'https://maps.google.com/?q=Ale+Hop+Cadiz'
+        }
+      },
+      easyDay: 'Option 1 (City): Plaza de San Juan de Dios, Mercado Central (kids love the colours), Torre Tavira (camera obscura), lunch, La Caleta beach, ice cream, back to ship. Option 2 (Park): Walk to Parque Genovés, explore gardens, seafront promenade, lunch, back to ship.'
     },
     send: {
       mobility: [

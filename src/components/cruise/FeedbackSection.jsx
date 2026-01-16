@@ -1,28 +1,77 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { supabase } from '../../lib/supabase';
 import './FeedbackSection.css';
 
-// FB Group URL - placeholder, to be provided
-const FB_GROUP_URL = '#'; // Replace with actual URL
+/**
+ * Generate or retrieve a session ID for feedback deduplication
+ */
+function getSessionId() {
+  const key = 'cruise_feedback_session';
+  let sessionId = sessionStorage.getItem(key);
+  if (!sessionId) {
+    sessionId = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+    sessionStorage.setItem(key, sessionId);
+  }
+  return sessionId;
+}
 
-function FeedbackSection({ sectionKey, dayNumber }) {
+/**
+ * FeedbackSection - Simple Yes/No feedback for cruise guide sections
+ * Stores feedback in Supabase with fallback to localStorage
+ */
+function FeedbackSection({ sectionKey, dayNumber, cruiseCode = 'G606', portName = null }) {
   const [hasVoted, setHasVoted] = useState(false);
   const [vote, setVote] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleVote = (isHelpful) => {
-    if (hasVoted) return;
+  // Check for existing vote on mount
+  useEffect(() => {
+    const localKey = `cruise_feedback_${cruiseCode}_${sectionKey}_day${dayNumber}`;
+    const existingVote = localStorage.getItem(localKey);
+    if (existingVote) {
+      setHasVoted(true);
+      setVote(existingVote === 'helpful');
+    }
+  }, [cruiseCode, sectionKey, dayNumber]);
+
+  const handleVote = async (isHelpful) => {
+    if (hasVoted || isSubmitting) return;
     
-    // Store in localStorage for simple tracking
-    const key = `cruise_feedback_${sectionKey}_day${dayNumber}`;
-    localStorage.setItem(key, isHelpful ? 'helpful' : 'not-helpful');
+    setIsSubmitting(true);
+    const localKey = `cruise_feedback_${cruiseCode}_${sectionKey}_day${dayNumber}`;
     
+    // Optimistic UI update
     setVote(isHelpful);
     setHasVoted(true);
+    localStorage.setItem(localKey, isHelpful ? 'helpful' : 'not-helpful');
+
+    try {
+      // Submit to Supabase
+      const { error } = await supabase
+        .from('guide_feedback')
+        .insert({
+          cruise_code: cruiseCode,
+          day_number: dayNumber,
+          port_name: portName,
+          section_key: sectionKey,
+          is_helpful: isHelpful,
+          user_agent: navigator.userAgent,
+          session_id: getSessionId()
+        });
+
+      if (error) {
+        console.warn('Feedback saved locally (Supabase unavailable):', error.message);
+      }
+    } catch (err) {
+      // Silently fail - localStorage already has the vote
+      console.warn('Feedback saved locally only:', err.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className="feedback-section">
-      <hr className="feedback-divider" />
-      
       <div className="feedback-content">
         <div className="feedback-question">
           <p>Was this section helpful?</p>
@@ -30,47 +79,20 @@ function FeedbackSection({ sectionKey, dayNumber }) {
             <button
               onClick={() => handleVote(true)}
               className={`feedback-button ${hasVoted && vote === true ? 'voted' : ''}`}
-              disabled={hasVoted}
+              disabled={hasVoted || isSubmitting}
               aria-pressed={hasVoted && vote === true}
             >
-              👍 Yes
+              {isSubmitting ? '...' : '👍 Yes'}
             </button>
             <button
               onClick={() => handleVote(false)}
               className={`feedback-button ${hasVoted && vote === false ? 'voted' : ''}`}
-              disabled={hasVoted}
+              disabled={hasVoted || isSubmitting}
               aria-pressed={hasVoted && vote === false}
             >
-              👎 No
+              {isSubmitting ? '...' : '👎 No'}
             </button>
           </div>
-        </div>
-
-        <hr className="feedback-divider" />
-
-        <div className="feedback-share">
-          <p>💬 SHARE YOUR EXPERIENCE</p>
-          <p>Been here before? Help fellow cruisers!</p>
-          <a 
-            href={FB_GROUP_URL} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="feedback-link"
-          >
-            Share a tip →
-          </a>
-        </div>
-
-        <hr className="feedback-divider" />
-
-        <div className="feedback-error">
-          <p>🚩 Spot an error?</p>
-          <a 
-            href={`/contact?subject=G606 Cruise Guide Error - Day ${dayNumber} - ${sectionKey}`}
-            className="feedback-link"
-          >
-            Let us know
-          </a>
         </div>
       </div>
     </div>

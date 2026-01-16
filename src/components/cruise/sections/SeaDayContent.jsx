@@ -3,9 +3,6 @@ import VenueFinder from '../VenueFinder';
 import { getRecommendations } from '../../../data/cruise/iona-venues';
 import './SectionContent.css';
 
-// FB Group URL - placeholder
-const FB_GROUP_URL = '#'; // Replace with actual URL
-
 function SeaDayContent({ sectionKey, dayData, nextPort }) {
   const renderSection = () => {
     switch (sectionKey) {
@@ -25,12 +22,30 @@ function SeaDayContent({ sectionKey, dayData, nextPort }) {
   return (
     <div className="section-content">
       {renderSection()}
-      <FeedbackSection sectionKey={sectionKey} dayNumber={dayData.dayNumber} />
+      <FeedbackSection sectionKey={sectionKey} dayNumber={dayData.dayNumber} portName="At Sea" />
     </div>
   );
 }
 
 function OverviewSection({ dayData, nextPort }) {
+  // Context-aware sailing notes
+  const getSailingNote = () => {
+    switch (dayData.dayNumber) {
+      case 2:
+        return 'Sailing from Southampton towards Spain. The Bay of Biscay can be lively in March, so keep your sea bands handy just in case.';
+      case 4:
+        return 'Heading south towards the Canaries. Waters are typically calmer as we get further south. A good time to explore the ship.';
+      case 9:
+        return 'Sailing north from the Canaries towards mainland Spain. Enjoy the last stretch of Atlantic warmth.';
+      case 13:
+        return 'Returning north from Lisbon to Southampton, crossing the Bay of Biscay again. Final sea day to enjoy the ship.';
+      default:
+        return null;
+    }
+  };
+
+  const sailingNote = getSailingNote();
+
   return (
     <div className="section-overview">
       {/* Sea Day Hero Image Placeholder */}
@@ -43,35 +58,20 @@ function OverviewSection({ dayData, nextPort }) {
         <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--clr-text)' }}>
           Sea Day {dayData.dayNumberEnd ? `(${dayData.dayNumber}-${dayData.dayNumberEnd})` : ''}
         </h2>
-        <p><strong>No port stops today</strong> — this is your chance to properly explore the ship, relax by the pool, catch a show, or just do absolutely nothing.</p>
+        <p><strong>No port stops today.</strong> This is your chance to properly explore the ship, relax by the pool, catch a show, or just do absolutely nothing.</p>
         <p>Sea days are what you make them. Some people plan their entire day around meals and activities. Others bring a book to a sun lounger at 10am and don't move until dinner. Both are entirely valid.</p>
+        
+        {sailingNote && (
+          <p style={{ marginTop: '1rem', fontSize: '0.9375rem', fontStyle: 'italic', opacity: 0.85 }}>
+            {sailingNote}
+          </p>
+        )}
       </div>
 
       <hr className="section-divider" />
 
       <div className="info-block">
-        <h3>🌡️ WEATHER & SEA CONDITIONS</h3>
-        <p><strong>[TBC]</strong> Real-time weather forecast and sea conditions will appear here.</p>
-        <p style={{ fontSize: '0.875rem', opacity: 0.8 }}>
-          {dayData.dayNumber === 2 ? 'Sailing from Southampton towards Spain — Bay of Biscay can be lively in March' : ''}
-          {dayData.dayNumber === 4 ? 'Heading south towards the Canaries — waters typically calmer as we get further south' : ''}
-          {dayData.dayNumber === 9 ? 'Sailing north from Canaries towards mainland Spain' : ''}
-          {dayData.dayNumber === 13 ? 'Returning north from Lisbon to Southampton — crossing the Bay of Biscay again' : ''}
-        </p>
-      </div>
-
-      <hr className="section-divider" />
-
-      <div className="info-block">
-        <h3>Ship Location</h3>
-        <p><strong>[TBC]</strong> Live ship tracking map will appear here.</p>
-        <p style={{ fontSize: '0.875rem', opacity: 0.8 }}>Estimated position and progress will be displayed in future updates.</p>
-      </div>
-
-      <hr className="section-divider" />
-
-      <div className="info-block">
-        <h3>➡️ WHAT'S AHEAD</h3>
+        <h3>What's Ahead</h3>
         <p>
           {nextPort ? (
             <>Next port: <strong>{nextPort}</strong></>
@@ -81,13 +81,16 @@ function OverviewSection({ dayData, nextPort }) {
         </p>
       </div>
 
-      <div className="fb-group-link">
-        <p>
-          <a href={FB_GROUP_URL} target="_blank" rel="noopener noreferrer">
-            Join our G606 Facebook group
-          </a>{' '}
-          to share your sea day photos and tips!
-        </p>
+      <hr className="section-divider" />
+
+      <div className="tip-block">
+        <h3>Sea Day Essentials</h3>
+        <ul className="info-list">
+          <li><strong>Ship tracker and weather</strong> are shown at the top of this page</li>
+          <li>Check the <strong>Ship</strong> tab to explore all venues, restaurants, and facilities</li>
+          <li>Book shows and specialty dining through the <strong>Horizon app</strong></li>
+          <li>Shops are <strong>only open at sea</strong>, so this is your chance to browse</li>
+        </ul>
       </div>
     </div>
   );

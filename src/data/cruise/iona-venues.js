@@ -447,6 +447,66 @@ export const IONA_VENUES = {
       },
       description: 'Forward observation lounge with panoramic sea views. 270-degree views.',
       tips: ['Amazing views when arriving into port', 'Quieter than most bars', 'Best views on the ship']
+    },
+    {
+      id: 'infinity-bar',
+      name: 'Infinity Bar',
+      deck: 16,
+      position: 'mid-forward',
+      side: 'port',
+      type: 'bar',
+      style: 'Poolside',
+      cost: 'pay-as-you-go',
+      description: 'Poolside bar by the Infinity Pool.',
+      tips: ['Great for daytime drinks by the pool']
+    },
+    {
+      id: 'crystal-bar',
+      name: 'Crystal Bar',
+      deck: 16,
+      position: 'midship',
+      side: 'central',
+      type: 'bar',
+      style: 'Cocktail',
+      cost: 'pay-as-you-go',
+      description: 'Elegant cocktail bar near the SkyDome.',
+      tips: ['Good cocktail selection', 'Gets busy in evenings']
+    },
+    {
+      id: 'sky-bar',
+      name: 'Sky Bar',
+      deck: 17,
+      position: 'midship',
+      side: 'central',
+      type: 'bar',
+      style: 'Outdoor',
+      cost: 'pay-as-you-go',
+      description: 'Outdoor bar on Deck 17 with open-air seating.',
+      tips: ['Great in good weather', 'Views of the sun deck']
+    },
+    {
+      id: 'sindhu-bar',
+      name: 'Sindhu Bar',
+      deck: 8,
+      position: 'mid-forward',
+      side: 'port',
+      type: 'bar',
+      style: 'Indian',
+      cost: 'pay-as-you-go',
+      description: 'Bar adjacent to Sindhu restaurant. Indian-inspired cocktails.',
+      tips: ['Try the chai-inspired cocktails']
+    },
+    {
+      id: 'laguna-bar',
+      name: 'Laguna Bar & Sundaes',
+      deck: 16,
+      position: 'midship',
+      side: 'starboard',
+      type: 'bar',
+      style: 'Poolside',
+      cost: 'pay-as-you-go',
+      description: 'Poolside bar with ice cream sundaes available.',
+      tips: ['Sundaes are extra cost', 'Central location by the pool']
     }
   ],
 
@@ -543,6 +603,73 @@ export const IONA_VENUES = {
       cost: 'included',
       description: 'Multi-purpose entertainment venue with retractable roof. Pool parties, DJ sets, live performances.',
       tips: ['Check Horizon for daily events', 'Best party atmosphere on the ship']
+    },
+    {
+      id: 'ocean-studios',
+      name: 'Ocean Studios',
+      deck: 6,
+      position: 'midship',
+      side: 'starboard',
+      type: 'entertainment',
+      cost: 'included',
+      description: 'Cinema showing the latest films. Multiple showings daily.',
+      tips: ['Check Horizon app for film times', 'Great for rainy days or quiet time']
+    },
+    {
+      id: 'grand-atrium',
+      name: 'Grand Atrium',
+      deck: '6-8',
+      position: 'midship',
+      side: 'central',
+      type: 'entertainment',
+      cost: 'included',
+      description: 'Light-filled space at the heart of the ship. Live entertainment, aerial performances, ocean views.',
+      tips: ['Best spot for people watching', 'Aerial performers on select evenings']
+    },
+    {
+      id: 'limelight-club',
+      name: 'The Limelight Club',
+      deck: 6,
+      position: 'aft',
+      side: 'starboard',
+      type: 'entertainment',
+      cost: 'included',
+      description: 'Late night club with DJ sets and dancing. The place for after-hours fun.',
+      adultsOnly: true,
+      tips: ['Gets going late, usually after 11pm', 'Themed nights throughout the cruise']
+    },
+    {
+      id: 'club-house',
+      name: 'The Club House',
+      deck: 8,
+      position: 'midship',
+      side: 'port',
+      type: 'entertainment',
+      cost: 'included',
+      description: 'Interactive gaming venue with screens and competitions. Sports viewing and quiz nights.',
+      tips: ['Great for families during the day', 'Sports shown on big screens']
+    },
+    {
+      id: 'scene',
+      name: 'Scene',
+      deck: 6,
+      position: 'midship',
+      side: 'central',
+      type: 'entertainment',
+      cost: 'included',
+      description: 'Entertainment venue for comedy nights, live music, and themed events.',
+      tips: ['Check Horizon for daily schedule', 'Popular for comedy shows']
+    },
+    {
+      id: 'art-gallery',
+      name: 'Art Gallery',
+      deck: 6,
+      position: 'midship',
+      side: 'port',
+      type: 'entertainment',
+      cost: 'included',
+      description: 'Rotating art exhibitions and sales. A quiet spot to browse.',
+      tips: ['Auctions held throughout the cruise', 'Nice place for a quiet wander']
     },
     {
       id: 'casino',
@@ -708,6 +835,163 @@ export const IONA_VENUES = {
       },
       description: 'Book and manage shore excursions.',
       tips: ['Book popular excursions early', 'Can book pre-cruise online']
+    },
+    {
+      id: 'photo-hub',
+      name: 'The Photo Hub',
+      deck: 7,
+      position: 'midship',
+      side: 'starboard',
+      type: 'service',
+      cost: 'extra',
+      hours: {
+        open: 'Check Horizon app',
+        close: 'Check Horizon app'
+      },
+      description: 'Professional photography services. View and purchase photos taken during the cruise.',
+      tips: ['Photos from formal nights available next day', 'Digital packages available']
+    },
+    {
+      id: 'medical-centre',
+      name: 'Medical Centre',
+      deck: 3,
+      position: 'midship',
+      side: 'central',
+      type: 'service',
+      cost: 'extra',
+      hours: {
+        open: 'Check Horizon app',
+        close: 'Check Horizon app'
+      },
+      description: 'Onboard medical facility with doctor and nurses. For illness and emergencies.',
+      tips: ['Charges apply for consultations', 'Travel insurance recommended', 'Available 24/7 for emergencies']
+    },
+    {
+      id: 'loyalty-cruise-sales',
+      name: 'Loyalty & Cruise Sales',
+      deck: 7,
+      position: 'midship',
+      side: 'port',
+      type: 'service',
+      hours: {
+        open: 'Check Horizon app',
+        close: 'Check Horizon app'
+      },
+      description: 'Book future cruises and check loyalty benefits.',
+      tips: ['Good deals on future bookings available onboard', 'Loyalty members check in for welcome gift']
+    }
+  ],
+
+  outdoor: [
+    {
+      id: 'beachcombers-pool',
+      name: 'Beachcombers Pool',
+      deck: 18,
+      position: 'aft',
+      side: 'central',
+      type: 'pool',
+      indoor: false,
+      cost: 'included',
+      description: 'Aft pool on Panorama Deck with Beachcombers bar nearby. Relaxed atmosphere.',
+      familyFriendly: true,
+      tips: ['Less crowded than main pool areas', 'Great views of the wake']
+    },
+    {
+      id: 'beachcombers-bar',
+      name: 'Beachcombers Bar',
+      deck: 18,
+      position: 'aft',
+      side: 'central',
+      type: 'bar',
+      style: 'Outdoor',
+      cost: 'pay-as-you-go',
+      description: 'Poolside bar at the aft. Cocktails and snacks.',
+      tips: ['Quieter than the main pool bars']
+    },
+    {
+      id: 'panorama-pool',
+      name: 'Panorama Pool & Bar',
+      deck: 18,
+      position: 'forward',
+      side: 'central',
+      type: 'pool',
+      indoor: false,
+      cost: 'included',
+      description: 'Forward pool on Panorama Deck with bar.',
+      familyFriendly: true,
+      tips: ['Good for watching arrivals into port']
+    },
+    {
+      id: 'splash-zone',
+      name: 'Splash Zone',
+      deck: 18,
+      position: 'forward',
+      side: 'port',
+      type: 'pool',
+      indoor: false,
+      cost: 'included',
+      description: 'Water play area for children. Splash pools and water features.',
+      familyFriendly: true,
+      tips: ['Perfect for young children', 'Gets busy on sea days']
+    },
+    {
+      id: 'jogging-track',
+      name: 'Jogging Track',
+      deck: 18,
+      position: 'all',
+      side: 'both',
+      type: 'outdoor',
+      cost: 'included',
+      description: 'Outdoor jogging and walking track circling the deck. Approximately 3 laps per mile.',
+      tips: ['Best early morning or sunset', 'Check wind conditions']
+    },
+    {
+      id: 'sports-arena',
+      name: 'Sports Arena',
+      deck: 19,
+      position: 'midship',
+      side: 'central',
+      type: 'outdoor',
+      cost: 'included',
+      description: 'Multi-sport court for basketball, football, and more.',
+      familyFriendly: true,
+      tips: ['Check Horizon for organised games', 'Gets hot in midday sun']
+    },
+    {
+      id: 'golf-nets',
+      name: 'Golf Nets',
+      deck: 19,
+      position: 'forward',
+      side: 'central',
+      type: 'outdoor',
+      cost: 'included',
+      description: 'Practice your swing with golf nets. Clubs available.',
+      tips: ['Free to use', 'Equipment provided']
+    },
+    {
+      id: 'sunbathing-area',
+      name: 'Sunbathing Area',
+      deck: 19,
+      position: 'forward',
+      side: 'both',
+      type: 'outdoor',
+      cost: 'included',
+      description: 'Sun loungers on Sky Deck. Quieter than main pool areas.',
+      tips: ['Arrive early on sea days', 'Can be windy but great views']
+    },
+    {
+      id: 'outside-dining',
+      name: 'Outside Dining',
+      deck: 8,
+      position: 'midship',
+      side: 'both',
+      type: 'restaurant',
+      cuisine: 'Al Fresco',
+      cost: 'included',
+      meals: ['lunch', 'dinner'],
+      description: 'Outdoor seating area on Promenade Deck for al fresco dining.',
+      familyFriendly: true,
+      tips: ['Weather dependent', 'Beautiful at sunset']
     }
   ],
 

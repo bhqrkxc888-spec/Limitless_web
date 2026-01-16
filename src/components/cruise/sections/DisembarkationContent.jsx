@@ -1,9 +1,6 @@
 import FeedbackSection from '../FeedbackSection';
 import './SectionContent.css';
 
-// FB Group URL - placeholder
-const FB_GROUP_URL = '#'; // Replace with actual URL
-
 function DisembarkationContent({ sectionKey, dayData }) {
   const renderSection = () => {
     switch (sectionKey) {
@@ -21,7 +18,7 @@ function DisembarkationContent({ sectionKey, dayData }) {
   return (
     <div className="section-content">
       {renderSection()}
-      <FeedbackSection sectionKey={sectionKey} dayNumber={dayData.dayNumber} />
+      <FeedbackSection sectionKey={sectionKey} dayNumber={dayData.dayNumber} portName={dayData.portName} />
     </div>
   );
 }
@@ -50,13 +47,6 @@ function WhatToExpectSection({ dayData: _dayData }) {
         </ul>
       </div>
 
-      <div className="fb-group-link">
-        <p>
-          <a href={FB_GROUP_URL} target="_blank" rel="noopener noreferrer">
-            Stay in touch via our FB group
-          </a>
-        </p>
-      </div>
     </div>
   );
 }

@@ -24,6 +24,7 @@ const VENUE_TYPES = [
   { id: 'bar', label: 'Bars' },
   { id: 'pool', label: 'Pools' },
   { id: 'whirlpool', label: 'Hot Tubs' },
+  { id: 'outdoor', label: 'Outdoor' },
   { id: 'entertainment', label: 'Entertainment' },
   { id: 'theatre', label: 'Theatre' },
   { id: 'spa', label: 'Spa & Gym' },

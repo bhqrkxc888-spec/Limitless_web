@@ -2,9 +2,6 @@ import FeedbackSection from '../FeedbackSection';
 import PortWeather from '../PortWeather';
 import './SectionContent.css';
 
-// FB Group URL - placeholder
-const FB_GROUP_URL = '#'; // Replace with actual URL
-
 function EmbarkationContent({ sectionKey, dayData }) {
   const renderSection = () => {
     switch (sectionKey) {
@@ -26,7 +23,7 @@ function EmbarkationContent({ sectionKey, dayData }) {
   return (
     <div className="section-content">
       {renderSection()}
-      <FeedbackSection sectionKey={sectionKey} dayNumber={dayData.dayNumber} />
+      <FeedbackSection sectionKey={sectionKey} dayNumber={dayData.dayNumber} portName={dayData.portName} />
     </div>
   );
 }
@@ -96,14 +93,6 @@ function WhatToExpectSection({ dayData: _dayData }) {
         <p><strong>[TBC]</strong> Content about what to do when you board will appear here.</p>
       </div>
 
-      <div className="fb-group-link">
-        <p>
-          <a href={FB_GROUP_URL} target="_blank" rel="noopener noreferrer">
-            Join our G606 Facebook group
-          </a>{' '}
-          to connect with fellow cruisers!
-        </p>
-      </div>
     </div>
   );
 }

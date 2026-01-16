@@ -153,17 +153,18 @@ export const g606Itinerary = [
 
 /**
  * Get sections available for a day type
+ * Note: 'ship' is available on all day types
  */
 export function getSectionsForDayType(dayType) {
   switch (dayType) {
     case 'port':
-      return ['overview', 'weather', 'stayLocal', 'goFurther', 'withKids', 'send', 'foodAndDrink'];
+      return ['overview', 'weather', 'stayLocal', 'goFurther', 'withKids', 'send', 'foodAndDrink', 'ship'];
     case 'sea':
-      return ['overview', 'onTheShip', 'quietSpots', 'send'];
+      return ['overview', 'onTheShip', 'quietSpots', 'send', 'ship'];
     case 'embarkation':
-      return ['whatToExpect', 'weather', 'gettingThere', 'tips', 'send'];
+      return ['whatToExpect', 'weather', 'gettingThere', 'tips', 'send', 'ship'];
     case 'disembarkation':
-      return ['whatToExpect', 'tips', 'send'];
+      return ['whatToExpect', 'tips', 'send', 'ship'];
     default:
       return [];
   }
@@ -185,7 +186,8 @@ export function getSectionLabel(sectionKey) {
     quietSpots: 'Quiet Spots',
     whatToExpect: 'What to Expect',
     gettingThere: 'Getting There',
-    tips: 'Tips'
+    tips: 'Tips',
+    ship: 'Ship'
   };
   return labels[sectionKey] || sectionKey;
 }

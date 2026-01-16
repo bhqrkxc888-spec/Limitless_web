@@ -3,9 +3,6 @@ import PortWeather from '../PortWeather';
 import { getPortContent } from '../../../data/cruise/g606-port-content';
 import './SectionContent.css';
 
-// FB Group URL - placeholder
-const FB_GROUP_URL = '#'; // Replace with actual URL
-
 function SubSection({ title, content, mapLink }) {
   return (
     <>
@@ -55,7 +52,7 @@ function PortDayContent({ sectionKey, dayData }) {
   return (
     <div className="section-content">
       {renderSection()}
-      <FeedbackSection sectionKey={sectionKey} dayNumber={dayData.dayNumber} />
+      <FeedbackSection sectionKey={sectionKey} dayNumber={dayData.dayNumber} portName={dayData.portName} />
     </div>
   );
 }
@@ -115,7 +112,7 @@ function WeatherSection({ dayData, portContent }) {
       <div className="sub-section">
         <h3>What to Pack</h3>
         <ul className="info-list">
-          <li>Layers — mornings and evenings can be cooler</li>
+          <li>Layers, as mornings and evenings can be cooler</li>
           <li>Comfortable walking shoes</li>
           <li>Sunscreen and sunglasses (UV can be strong even in March)</li>
           <li>Light waterproof jacket (just in case)</li>
@@ -229,14 +226,6 @@ function StayLocalSection({ dayData: _dayData, portContent }) {
         <p>Everything here is walking distance from the ship.</p>
       </div>
 
-      <div className="fb-group-link">
-        <p>
-          <a href={FB_GROUP_URL} target="_blank" rel="noopener noreferrer">
-            Join our G606 Facebook group
-          </a>{' '}
-          to share tips with fellow cruisers!
-        </p>
-      </div>
 
       <hr className="section-divider" />
 
@@ -368,7 +357,7 @@ function StayLocalSection({ dayData: _dayData, portContent }) {
             <h3>☕ QUICK COFFEE</h3>
             <ul className="info-list">
               {stayLocal.coffee.map((item, idx) => (
-                <li key={idx}>{typeof item === 'string' ? item : `${item.name || ''}${item.location ? ` (${item.location})` : ''}${item.description ? ` – ${item.description}` : ''}`}</li>
+                <li key={idx}>{typeof item === 'string' ? item : `${item.name || ''}${item.location ? ` (${item.location})` : ''}${item.description ? ` - ${item.description}` : ''}`}</li>
               ))}
             </ul>
           </div>
@@ -581,6 +570,37 @@ function WithKidsSection({ dayData: _dayData, portContent }) {
         <SubSection title="⚠️ WATCH OUT FOR" content="[TBC] Warnings - cobblestones, hills, timing issues" />
       )}
 
+      {/* Familiar Chains for Kids */}
+      {(withKids?.familiarChains?.mcDonalds || withKids?.familiarChains?.aleHop) && (
+        <>
+          <div className="sub-section">
+            <h3>🏠 FAMILIAR SPOTS</h3>
+            <p style={{ fontSize: '0.875rem', marginBottom: '0.75rem', color: 'var(--clr-text-muted)' }}>
+              Sometimes kids just want something familiar. No judgement here.
+            </p>
+            <ul className="info-list">
+              {withKids.familiarChains.mcDonalds && (
+                <li>
+                  <strong>McDonald's:</strong> {withKids.familiarChains.mcDonalds.location}
+                  {withKids.familiarChains.mcDonalds.mapsLink && (
+                    <> - <a href={withKids.familiarChains.mcDonalds.mapsLink} target="_blank" rel="noopener noreferrer">Open in Maps</a></>
+                  )}
+                </li>
+              )}
+              {withKids.familiarChains.aleHop && (
+                <li>
+                  <strong>Ale Hop:</strong> {withKids.familiarChains.aleHop.location} - Fun Spanish gift/toy shop that kids love
+                  {withKids.familiarChains.aleHop.mapsLink && (
+                    <> - <a href={withKids.familiarChains.aleHop.mapsLink} target="_blank" rel="noopener noreferrer">Open in Maps</a></>
+                  )}
+                </li>
+              )}
+            </ul>
+          </div>
+          <hr className="section-divider" />
+        </>
+      )}
+
       {/* Easy Day */}
       <div className="tip-block">
         <h3>Easy Family Day</h3>
@@ -673,7 +693,7 @@ function FoodDrinkSection({ dayData: _dayData, portContent }) {
               <div key={idx} className="content-card">
                 <div className="content-card-title">
                   {restaurant.name}
-                  {restaurant.location && <span style={{ fontWeight: 'normal', fontSize: '0.875rem', opacity: 0.8 }}> — {restaurant.location}</span>}
+                  {restaurant.location && <span style={{ fontWeight: 'normal', fontSize: '0.875rem', opacity: 0.8 }}>, {restaurant.location}</span>}
                 </div>
                 <p>{restaurant.description}</p>
               </div>
@@ -694,7 +714,7 @@ function FoodDrinkSection({ dayData: _dayData, portContent }) {
               <div key={idx} className="content-card">
                 <div className="content-card-title">
                   {cafe.name}
-                  {cafe.location && <span style={{ fontWeight: 'normal', fontSize: '0.875rem', opacity: 0.8 }}> — {cafe.location}</span>}
+                  {cafe.location && <span style={{ fontWeight: 'normal', fontSize: '0.875rem', opacity: 0.8 }}>, {cafe.location}</span>}
                 </div>
                 {cafe.description && <p>{cafe.description}</p>}
               </div>
@@ -715,7 +735,7 @@ function FoodDrinkSection({ dayData: _dayData, portContent }) {
               <div key={idx} className="content-card">
                 <div className="content-card-title">
                   {bar.name}
-                  {bar.location && <span style={{ fontWeight: 'normal', fontSize: '0.875rem', opacity: 0.8 }}> — {bar.location}</span>}
+                  {bar.location && <span style={{ fontWeight: 'normal', fontSize: '0.875rem', opacity: 0.8 }}>, {bar.location}</span>}
                 </div>
                 {bar.description && <p>{bar.description}</p>}
               </div>
@@ -729,7 +749,7 @@ function FoodDrinkSection({ dayData: _dayData, portContent }) {
 
       {/* Local Speciality */}
       <div className="tip-block">
-        <h3>🍴 LOCAL SPECIALITY — Don't miss these!</h3>
+        <h3>🍴 LOCAL SPECIALITY</h3>
         {foodDrink?.localSpeciality ? (
           foodDrink.localSpeciality.split('\n\n').map((para, idx) => (
             <p key={idx}>{para}</p>
