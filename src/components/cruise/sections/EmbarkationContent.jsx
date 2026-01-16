@@ -75,7 +75,7 @@ function WhatToExpectSection({ dayData: _dayData }) {
   return (
     <div className="section-what-expect">
       <div className="info-block">
-        <h3>📋 TYPICAL TIMELINE</h3>
+        <h3>Typical Timeline</h3>
         <ul className="info-list">
           <li>Arrive at terminal at allocated time</li>
           <li>Security screening</li>
@@ -89,8 +89,83 @@ function WhatToExpectSection({ dayData: _dayData }) {
       <hr className="section-divider" />
 
       <div className="sub-section">
-        <h3>🚢 FIRST FEW HOURS ONBOARD</h3>
-        <p><strong>[TBC]</strong> Content about what to do when you board will appear here.</p>
+        <h3>First Few Hours Onboard</h3>
+        
+        <p><strong>What Happens Right After Boarding?</strong></p>
+        <p>Once you've cleared security and check-in, you'll walk through the gangway directly onto the ship. P&O crew members will be there to welcome you and direct you to your deck. You'll tap your cruise card on a sensor as you board - this activates your account and tracks your embarkation.</p>
+
+        <p><strong>Where to Go First?</strong></p>
+        
+        <div className="content-card">
+          <p className="content-card-title">Option 1: Head to the Buffet (Recommended)</p>
+          <p>Most experienced cruisers head straight to the Horizon Buffet (Deck 16 on Iona). It's open from boarding, serves a full lunch spread, and you can grab a table with sea views while the ship is still quiet. This is your best chance for a relaxed first meal before the crowds arrive.</p>
+        </div>
+
+        <div className="content-card">
+          <p className="content-card-title">Option 2: Explore the Ship</p>
+          <p>If you've eaten, take advantage of the quiet ship to explore. The pools, main atrium, and public areas are all open. It's much easier to get your bearings before 4,000 other guests have the same idea.</p>
+        </div>
+
+        <div className="content-card">
+          <p className="content-card-title">Option 3: Go to Your Cabin</p>
+          <p>If you booked a Conservatory Mini-Suite, Suite, or have Select Price benefits, your cabin may be ready earlier. Otherwise, head to your cabin area to drop off hand luggage - the steward can store bags in the corridor if not quite ready.</p>
+        </div>
+
+        <p><strong>When Are Cabins Ready?</strong></p>
+        <ul className="info-list">
+          <li><strong>Standard cabins:</strong> Usually ready between 1:30pm and 2:00pm</li>
+          <li><strong>Suites and higher grades:</strong> Often ready from 1:00pm</li>
+          <li><strong>Luggage delivery:</strong> Typically arrives between 3:00pm and 6:00pm (sometimes later on busy sailings)</li>
+        </ul>
+
+        <p><strong>What's Open Immediately on Embarkation Day?</strong></p>
+        <p><strong>Restaurants & Bars (from boarding):</strong></p>
+        <ul className="info-list">
+          <li>Horizon Buffet (Deck 16) - full lunch service</li>
+          <li>Grab & Go counter - sandwiches, snacks</li>
+          <li>Coffee shops - may charge for speciality coffees</li>
+          <li>Most bars open from early afternoon</li>
+        </ul>
+
+        <p><strong>Open Areas:</strong></p>
+        <ul className="info-list">
+          <li>Main pool deck and pools (weather dependent)</li>
+          <li>Spa facilities (treatments bookable)</li>
+          <li>Shops (browse only until sail-away)</li>
+          <li>Photo gallery</li>
+          <li>Casino (opens once at sea)</li>
+          <li>Main theatre (may have welcome shows)</li>
+        </ul>
+
+        <p><strong>Closed Until Later:</strong></p>
+        <ul className="info-list">
+          <li>Main Dining Room - opens for dinner</li>
+          <li>Speciality restaurants - dinner service only</li>
+          <li>Some entertainment venues</li>
+        </ul>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="sub-section">
+        <h3>Emergency Muster Drill</h3>
+        
+        <p><strong>When:</strong> The muster drill typically takes place approximately 30-60 minutes before sail-away. You'll receive an announcement and your sail & sign card will show your muster station letter.</p>
+
+        <p><strong>Where:</strong> Each cabin is assigned a muster station (A, B, C, etc.) - this is displayed on your cabin door and cruise card. Stations are located in public areas like lounges, the theatre, or covered deck spaces.</p>
+
+        <p><strong>What to Bring:</strong> Just yourself and your cruise card. No life jackets needed - these are demonstration drills only.</p>
+
+        <p><strong>Duration:</strong> Approximately 15-20 minutes. Attendance is mandatory and tracked electronically when you scan your card.</p>
+
+        <p><strong>Process:</strong></p>
+        <ol className="info-list">
+          <li>Announcement calls all guests to stations</li>
+          <li>Head to your assigned letter station</li>
+          <li>Scan your cruise card with crew members</li>
+          <li>Brief safety demonstration</li>
+          <li>Released by announcement - usually back in time for sail-away!</li>
+        </ol>
       </div>
 
     </div>
@@ -101,22 +176,143 @@ function GettingThereSection({ dayData: _dayData }) {
   return (
     <div className="section-getting-there">
       <div className="info-block">
-        <h3>🚗 BY CAR</h3>
-        <p><strong>[TBC]</strong> Postcode, parking info will appear here.</p>
+        <h3>By Car</h3>
+        
+        <p><strong>Address & Postcode for SatNav:</strong></p>
+        <div className="content-card">
+          <p><strong>Ocean Terminal (Berths 46/47)</strong><br />
+          Southern Road<br />
+          Southampton<br />
+          SO15 1BA</p>
+          <p style={{ fontSize: '0.875rem', marginTop: '0.5rem', color: 'var(--clr-text-muted)' }}>
+            For the newer Ocean Cruise Terminal (Horizon Cruise Terminal), use: <strong>SO14 3QN</strong>
+          </p>
+          <p className="info-note" style={{ fontSize: '0.875rem', marginTop: '0.5rem' }}>
+            Note: "Ocean Terminal" and "Ocean Cruise Terminal" are different locations. P&O primarily uses the original Ocean Terminal for Iona sailings - check your cruise documents for the exact terminal name.
+          </p>
+        </div>
+
+        <p><strong>Parking Options:</strong></p>
+        
+        <div className="content-card">
+          <p className="content-card-title">CPS Southampton (Recommended)</p>
+          <ul className="info-list">
+            <li><strong>Location:</strong> Adjacent to Ocean Terminal</li>
+            <li><strong>Type:</strong> Park & walk - no shuttle needed</li>
+            <li><strong>Cost:</strong> £70-100 per week</li>
+            <li><strong>Booking:</strong> Essential - book via cpscruiseparking.co.uk</li>
+            <li><strong>Security:</strong> CCTV monitored compound</li>
+            <li>Return your car to the same spot for easy collection</li>
+          </ul>
+        </div>
+
+        <div className="content-card">
+          <p className="content-card-title">Other Parking Options</p>
+          <ul className="info-list">
+            <li><strong>Red Funnel Parking:</strong> 5 mins drive, £60-80/week - pre-book</li>
+            <li><strong>Independent cruise parking:</strong> Off-site with shuttle, £50-70/week</li>
+            <li><strong>ABP Terminal Parking:</strong> At terminal, £85+/week - limited availability</li>
+          </ul>
+        </div>
+
+        <p><strong>Drop-off Zone:</strong></p>
+        <p>If not parking, there's a dedicated drop-off area at the terminal entrance. The driver can pull in, unload passengers and luggage (porters available), then must exit and cannot park or wait.</p>
       </div>
 
       <hr className="section-divider" />
 
       <div className="info-block">
-        <h3>🚂 BY TRAIN</h3>
-        <p><strong>[TBC]</strong> Station, taxi info will appear here.</p>
+        <h3>By Train</h3>
+        
+        <p><strong>Station:</strong> Southampton Central</p>
+        <p><strong>Distance to Terminal:</strong> Approximately 1.5 miles (2.5 km)</p>
+
+        <p><strong>Getting from Station to Terminal:</strong></p>
+        
+        <div className="content-card">
+          <p className="content-card-title">Taxi (Recommended)</p>
+          <ul className="info-list">
+            <li><strong>Time:</strong> 5-10 minutes</li>
+            <li><strong>Cost:</strong> £8-12</li>
+            <li>Large taxi rank directly outside Southampton Central's main exit</li>
+            <li>On cruise days, taxis are very familiar with terminal locations</li>
+            <li>Simply say "Ocean Terminal for P&O" - they'll know exactly where</li>
+            <li>Can fit 3-4 passengers plus luggage in standard taxi</li>
+            <li>Pre-book larger vehicles for groups: Radio Taxis Southampton (023 8066 6666)</li>
+          </ul>
+        </div>
+
+        <div className="content-card">
+          <p className="content-card-title">Other Options</p>
+          <ul className="info-list">
+            <li><strong>Uber/Bolt:</strong> 5-10 mins, £6-10 - book via app</li>
+            <li><strong>Bus:</strong> 15-20 mins, £2-3 - Quaylink/Unilink, less practical with luggage</li>
+            <li><strong>Walk:</strong> 25-30 mins - not recommended with luggage</li>
+          </ul>
+        </div>
+
+        <p className="info-note">P&O don't operate dedicated shuttle buses from the station. However, on busy embarkation days, some parking providers offer combined rail/shuttle packages.</p>
       </div>
 
       <hr className="section-divider" />
 
       <div className="info-block">
-        <h3>🧳 LUGGAGE</h3>
-        <p><strong>[TBC]</strong> Luggage tag info, what to keep in hand luggage will appear here.</p>
+        <h3>Luggage</h3>
+        
+        <p><strong>Luggage Tags - Do P&O Send Them?</strong></p>
+        <p>Yes. P&O send luggage tags with your cruise documents approximately 3-4 weeks before departure. These arrive either by post (if you requested paper documents) or digitally via email (print at home). You can also print tags from your My P&O Cruises account online. Each tag has your cabin number, name, and a barcode for tracking.</p>
+
+        <p><strong>Hand Luggage Essentials:</strong></p>
+        <p>Pack these items in your hand luggage - your main bags may not arrive at your cabin for several hours:</p>
+
+        <p><strong>Must have:</strong></p>
+        <ul className="info-list">
+          <li>Passport and cruise documents</li>
+          <li>Cruise card confirmation (on phone or printed)</li>
+          <li>Any medications (enough for 24 hours minimum)</li>
+          <li>Phone and charger</li>
+          <li>Glasses/contact lenses</li>
+          <li>Money/cards</li>
+        </ul>
+
+        <p><strong>Strongly recommended:</strong></p>
+        <ul className="info-list">
+          <li>Change of clothes (swimwear if you want the pool!)</li>
+          <li>Basic toiletries</li>
+          <li>Sunglasses and sun cream</li>
+          <li>Camera for embarkation photos</li>
+          <li>Book or entertainment</li>
+          <li>Snacks if you have dietary requirements</li>
+        </ul>
+
+        <p><strong>When Do You Get Your Cabin Key (Cruise Card)?</strong></p>
+        <p>You receive your cruise card during check-in at the terminal, before boarding. This card is your cabin key, onboard payment method, ID for getting on/off the ship, and muster drill tracker.</p>
+
+        <p><strong>Can You Take Luggage to Your Cabin Yourself?</strong></p>
+        <p>Yes, you have two options:</p>
+
+        <div className="content-card">
+          <p className="content-card-title">Porter Service (recommended for large bags)</p>
+          <ul className="info-list">
+            <li>Hand your tagged luggage to porters at the terminal entrance</li>
+            <li>Bags are X-rayed, loaded, and delivered to your cabin door</li>
+            <li>Usually arrives between 3pm and 6pm (can be later)</li>
+            <li>Free service - tipping porters is discretionary (£1-2 per bag is customary)</li>
+          </ul>
+        </div>
+
+        <div className="content-card">
+          <p className="content-card-title">Self-carry</p>
+          <ul className="info-list">
+            <li>You can wheel/carry bags through security yourself</li>
+            <li>Must fit through X-ray machines</li>
+            <li>You take them directly to your cabin</li>
+            <li>Recommended for hand luggage and smaller bags only</li>
+            <li>Gets you unpacked and settled immediately</li>
+          </ul>
+        </div>
+
+        <p className="info-note">Mix and match: Most people send large suitcases with porters and carry a smaller bag themselves with essentials.</p>
       </div>
     </div>
   );
@@ -125,12 +321,47 @@ function GettingThereSection({ dayData: _dayData }) {
 function TipsSection({ dayData: _dayData }) {
   return (
     <div className="section-tips">
-      <p><strong>[TBC]</strong> Tips for embarkation day will appear here.</p>
-      <ul className="info-list">
-        <li>[TBC] Tip 1</li>
-        <li>[TBC] Tip 2</li>
-        <li>[TBC] Tip 3</li>
-      </ul>
+      <div className="content-card">
+        <p className="content-card-title">Tip 1: Arrive at Your Allocated Time Slot</p>
+        <p>P&O assign boarding time slots to manage the flow of guests. Your slot is shown in your cruise documents and My P&O app. Arriving early won't get you on sooner - you'll just queue longer. Arriving within your slot means minimal waiting.</p>
+        <p className="info-note">Exception: Suite guests and those with early boarding benefits can arrive earlier.</p>
+      </div>
+
+      <div className="content-card">
+        <p className="content-card-title">Tip 2: Download the P&O Horizon App Before Boarding</p>
+        <p>Download and log into the P&O Horizon app before you leave home. On embarkation day, the ship's WiFi will be slow with everyone connecting. Use the app to check your boarding time, view cabin readiness status, make dining reservations, book speciality restaurants, check daily programme, and navigate the ship with deck plans.</p>
+        <p className="info-note">Pro tip: Screenshot anything important as app connectivity can be patchy initially.</p>
+      </div>
+
+      <div className="content-card">
+        <p className="content-card-title">Tip 3: Book Speciality Restaurants Immediately</p>
+        <p>Speciality restaurant slots sell out fast - especially 7pm Saturday sittings and formal night dates. As soon as you board, head to the restaurant booking desk (usually near the Atrium), or use the Horizon app to book online.</p>
+        <p><strong>Popular restaurants to book:</strong> The Glass House (wine bar dining), Epicurean (fine dining), Sindhu (Asian fusion), The Keel & Cow (steakhouse).</p>
+        <p className="info-note">Don't wait until after the muster drill - prime slots go quickly.</p>
+      </div>
+
+      <div className="content-card">
+        <p className="content-card-title">Tip 4: Head to the Buffet for Lunch First</p>
+        <p>The Horizon Buffet is your best lunch option on boarding day. The main dining rooms don't open until dinner, and the buffet has the widest selection. Head there early (before 1pm) for the quietest experience and best selection.</p>
+        <p className="info-note">Sit by the windows for views of Southampton as you prepare to depart.</p>
+      </div>
+
+      <div className="content-card">
+        <p className="content-card-title">Tip 5: Capture the Sail-Away Experience</p>
+        <p>Sail-away from Southampton is special - you pass the historic docks, other cruise ships, and head into the Solent. Position yourself on the pool deck (best elevated views, busy atmosphere), promenade deck (classic ocean liner experience), your balcony (private and peaceful if cabin is ready), or Crow's Nest bar (forward-facing views with a drink).</p>
+        <p className="info-note">The ship sounds its horn as it departs - a proper goosebumps moment. Have your camera ready!</p>
+      </div>
+
+      <div className="content-card">
+        <p className="content-card-title">Tip 6: Know Your Muster Station Before Boarding</p>
+        <p>Your muster station letter is on your cruise documents and will be on your cabin door. Memorise it before you board so you're not rushing later. The drill happens about 30-60 minutes before sail-away - you don't want to miss your position on deck watching the departure!</p>
+      </div>
+
+      <div className="content-card">
+        <p className="content-card-title">Tip 7: Keep Your Cruise Card Handy at All Times</p>
+        <p>From the moment you receive it at check-in, your cruise card is your everything. You'll need it to get back on the ship (every time), open your cabin door, pay for drinks and purchases, check in at the muster drill, and scan when entering restaurants.</p>
+        <p className="info-note">Top tip: Use a lanyard or card holder - it's easy to misplace otherwise.</p>
+      </div>
     </div>
   );
 }
@@ -138,9 +369,135 @@ function TipsSection({ dayData: _dayData }) {
 function SendSection({ dayData: _dayData }) {
   return (
     <div className="section-send">
-      <SubSection title="♿ ASSISTANCE" content="[TBC] Content about assistance available" />
-      <SubSection title="🚢 EARLY BOARDING" content="[TBC] Content about early boarding options" />
-      <SubSection title="🛡️ MUSTER DRILL" content="[TBC] Content about muster drill accommodations" />
+      <div className="sub-section">
+        <h3>Assistance at Southampton Terminal</h3>
+        
+        <p><strong>What Assistance is Available?</strong></p>
+        <p>Southampton Ocean Terminal is fully accessible and P&O provides comprehensive support:</p>
+        <ul className="info-list">
+          <li><strong>Wheelchair assistance:</strong> Available from car drop-off through to the ship</li>
+          <li><strong>Mobility scooter users:</strong> Can use scooters through the terminal; ship has designated storage</li>
+          <li><strong>Visual impairment support:</strong> Staff escort through check-in and security</li>
+          <li><strong>Hearing impairment:</strong> Visual announcements displayed; staff trained in basic BSL</li>
+          <li><strong>Hidden disabilities:</strong> Sunflower lanyard scheme recognised</li>
+        </ul>
+
+        <p><strong>How to Arrange Assistance:</strong></p>
+        
+        <p><strong>Before your cruise:</strong></p>
+        <ul className="info-list">
+          <li>Contact P&O's Guest Accessibility Team: 0344 338 8014</li>
+          <li>Add requirements to your booking via My P&O Cruises</li>
+          <li>Email: accessibility@pocruises.com</li>
+          <li>Request assistance at least 48 hours before embarkation</li>
+        </ul>
+
+        <p><strong>On arrival:</strong></p>
+        <ul className="info-list">
+          <li>Inform parking staff/porters of your needs</li>
+          <li>Meet & Assist staff available at terminal entrance</li>
+          <li>Dedicated accessible check-in lanes available</li>
+        </ul>
+
+        <p><strong>Wheelchairs:</strong></p>
+        <ul className="info-list">
+          <li>Bring your own (stored in cabin or designated area)</li>
+          <li>Ship wheelchairs available for emergency use only</li>
+          <li>Terminal wheelchairs available for embarkation/disembarkation</li>
+          <li>Power wheelchairs and scooters must be battery-operated (dry cell or gel batteries only)</li>
+        </ul>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="sub-section">
+        <h3>Early Boarding</h3>
+        
+        <p><strong>Who Gets Early Boarding?</strong></p>
+        <ul className="info-list">
+          <li><strong>Guests requiring assistance:</strong> Priority boarding - contact accessibility team</li>
+          <li><strong>Suite guests:</strong> Early slots allocated automatically - check documents</li>
+          <li><strong>Peninsular Club members:</strong> Earlier slots by tier - automatic based on tier</li>
+          <li><strong>Select Price bookings:</strong> May include priority - check booking benefits</li>
+          <li><strong>Families with young children:</strong> Priority at terminal - request at check-in</li>
+        </ul>
+
+        <p><strong>How to Request Early Boarding:</strong></p>
+        
+        <p><strong>For accessibility needs:</strong></p>
+        <ul className="info-list">
+          <li>Contact P&O Guest Accessibility Team (details above)</li>
+          <li>State your specific requirements</li>
+          <li>Request priority boarding in your notes</li>
+          <li>Confirm arrangements 48 hours before sailing</li>
+        </ul>
+
+        <p><strong>For other reasons:</strong></p>
+        <ul className="info-list">
+          <li>Loyalty members: Check your tier benefits in My P&O</li>
+          <li>Suite guests: Usually automatic - check your documents</li>
+          <li>Select Price: Review your booking benefits</li>
+        </ul>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="sub-section">
+        <h3>Muster Drill Accommodations</h3>
+        
+        <p><strong>Standard Muster Drill Process:</strong></p>
+        <p>All guests must attend the emergency muster drill before departure. This involves going to your assigned station and listening to safety information.</p>
+
+        <p><strong>Accessibility Provisions:</strong></p>
+        
+        <p><strong>Mobility requirements:</strong></p>
+        <ul className="info-list">
+          <li>Accessible muster stations assigned automatically when booked</li>
+          <li>Stations located in areas with lift access and seating</li>
+          <li>Wheelchair users positioned for easy evacuation route access</li>
+          <li>Extended time allowances for reaching stations</li>
+        </ul>
+
+        <p><strong>Seated drill arrangements:</strong></p>
+        <ul className="info-list">
+          <li>Yes, you can request a seated drill location</li>
+          <li>Chairs provided at all accessible muster stations</li>
+          <li>Notify the accessibility team when booking</li>
+          <li>Crew will verify attendance at your seat</li>
+        </ul>
+
+        <p><strong>Visual impairments:</strong></p>
+        <ul className="info-list">
+          <li>Tactile guidance available to stations</li>
+          <li>Crew member escort can be arranged</li>
+          <li>Audio descriptions of safety equipment</li>
+          <li>Braille safety cards available in cabins</li>
+        </ul>
+
+        <p><strong>Hearing impairments:</strong></p>
+        <ul className="info-list">
+          <li>Visual alarm systems in accessible cabins</li>
+          <li>Written safety information provided</li>
+          <li>BSL interpretation available on request</li>
+          <li>Vibrating pillow alerts can be arranged</li>
+        </ul>
+
+        <p><strong>Exemptions:</strong></p>
+        <p>There are no exemptions from the muster drill as it's a legal requirement. However, significant accommodations are made:</p>
+        <ul className="info-list">
+          <li>Cabin muster drill for guests who cannot attend in person (rare, requires medical documentation)</li>
+          <li>Crew member visits to explain procedures</li>
+          <li>Alternative timing if genuine medical emergency</li>
+        </ul>
+
+        <p><strong>How to Arrange Muster Accommodations:</strong></p>
+        <ol className="info-list">
+          <li>Add accessibility requirements to your booking</li>
+          <li>Contact the Guest Accessibility Team</li>
+          <li>Confirm arrangements on boarding</li>
+          <li>Speak to Guest Services if issues arise</li>
+        </ol>
+      </div>
     </div>
   );
 }
