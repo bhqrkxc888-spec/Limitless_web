@@ -177,38 +177,6 @@ function PortGuidePage() {
         align="left"
       />
 
-      {/* Quick Facts Bar */}
-      <section className="port-facts-bar">
-        <div className="container">
-          <div className="facts-grid">
-            <div className="fact-box">
-              <span className="fact-label">Local Currency</span>
-              <span className="fact-value">{port.quickFacts?.currency || 'EUR'}</span>
-            </div>
-            <div className="fact-box">
-              <span className="fact-label">Language</span>
-              <span className="fact-value">{port.quickFacts?.language || 'English'}</span>
-            </div>
-            <div className="fact-box">
-              <span className="fact-label">Timezone</span>
-              <span className="fact-value">{port.quickFacts?.timezone || 'Local'}</span>
-            </div>
-            <div className="fact-box">
-              <span className="fact-label">Port Type</span>
-              <span className="fact-value">{port.quickFacts?.portType || 'Pier'}</span>
-            </div>
-            <div className="fact-box">
-              <span className="fact-label">Walkable to City</span>
-              <span className="fact-value">{port.quickFacts?.walkable ? 'Yes' : 'No'}</span>
-            </div>
-            <div className="fact-box">
-              <span className="fact-label">Tender Boat</span>
-              <span className="fact-value">{port.quickFacts?.tenderRequired ? 'Yes' : 'No'}</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Main Content */}
       <article className="port-content">
         <div className="container">

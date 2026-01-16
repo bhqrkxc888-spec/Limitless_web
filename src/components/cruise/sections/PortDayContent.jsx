@@ -1,6 +1,6 @@
 import FeedbackSection from '../FeedbackSection';
 import PortWeather from '../PortWeather';
-import { getPortContent } from '../../../data/cruise/g606-port-content';
+import { getG606PortContent } from '../../../data/cruise/g606-port-content';
 import { usePortGuideImage } from '../../../hooks/useImageUrl';
 import { getPortGuideSlugFromG606PortName } from '../../../utils/portNameMapping';
 import OptimizedImage from '../../OptimizedImage';
@@ -30,7 +30,7 @@ function SubSection({ title, content, mapLink }) {
 }
 
 function PortDayContent({ sectionKey, dayData }) {
-  const portContent = getPortContent(dayData.portName);
+  const portContent = getG606PortContent(dayData.portName);
   const renderSection = () => {
     switch (sectionKey) {
       case 'overview':
