@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useMemo } from 'react';
 import { getPortBySlug, getAdjacentPorts } from '../data/ports';
+import { getPortContent, hasDetailedContent } from '../data/portContent';
 import { siteConfig } from '../config/siteConfig';
 import SEO, { getBreadcrumbSchema } from '../components/SEO';
 import HeroSection from '../components/HeroSection';
@@ -9,6 +10,7 @@ import { Button, SectionHeader } from '../components/ui';
 import { SITE_ASSETS } from '../config/assetUrls';
 import { usePortGuideImage } from '../hooks/useImageUrl';
 import { ArrowLeft, ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
+import { DetailedPortGuide } from './DetailedPortGuide';
 import './PortGuidePage.css';
 
 // Fallback hero image
@@ -28,6 +30,10 @@ function PortGuidePage() {
   // Get port data first for image context
   const portName = port?.name || '';
   const portCountry = port?.country || '';
+  
+  // Check if port has detailed G606-style content
+  const detailedContent = getPortContent(slug);
+  const hasDetailed = hasDetailedContent(slug);
   
   // Load images from database with smart placeholders
   const { imageUrl: heroImage } = usePortGuideImage(slug, 'hero', portName, portCountry);
@@ -217,8 +223,18 @@ function PortGuidePage() {
             </div>
           )}
 
-          {/* About the Port */}
-          {port.aboutPort && (
+          {/* Render Detailed G606-style content if available */}
+          {hasDetailed && detailedContent ? (
+            <DetailedPortGuide 
+              slug={slug}
+              portName={portName}
+              portCountry={portCountry}
+              detailedContent={detailedContent}
+            />
+          ) : (
+            <>
+              {/* About the Port */}
+              {port.aboutPort && (
             <section className="port-section port-about">
               <h2>About {port.name} Cruise Port</h2>
               <div className="about-grid">
@@ -610,6 +626,8 @@ function PortGuidePage() {
                 ))}
               </div>
             </section>
+          )}
+            </>
           )}
 
         </div>

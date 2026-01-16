@@ -7963,6 +7963,125 @@ export const ports = [
     lastUpdated: '2025-12-28',
   },
 
+  // Lanzarote - Added for G606 cruise guide
+  {
+    id: 'lanzarote',
+    slug: 'lanzarote',
+    name: 'Lanzarote',
+    displayName: 'Arrecife de Lanzarote',
+    country: 'Spain (Canary Islands)',
+    region: 'atlantic-islands',
+    coordinates: { lat: 28.9630, lon: -13.5477 },
+    tagline: 'Volcanic landscapes and César Manrique artistry',
+    description: 'Arrecife is the capital of Lanzarote, a working port city with authentic Canarian character. The island is famous for its dramatic volcanic landscapes, black sand beaches, and the artistic legacy of César Manrique. Cruise ships dock at Muelle de los Mármoles or Muelle de Naos, about 15-20 minutes walk from the city centre.',
+    
+    aboutPort: {
+      overview: 'Cruise ships dock at Muelle de los Mármoles (main cruise terminal) or Muelle de Naos, located about 15-20 minutes walk from Arrecife city centre. Shuttle buses are usually available from the terminal to the city centre (5 minute ride). The port area is industrial but the city centre is pleasant and walkable.',
+      terminals: 'Muelle de los Mármoles (main cruise terminal) or Muelle de Naos',
+      shuttle: 'Shuttle bus usually available from terminal to city centre (5 mins)',
+      walkability: 'City centre is 15-20 minutes walk from port. Flat, paved route. Shuttle bus recommended for convenience.',
+    },
+
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Spanish',
+      timezone: 'GMT+0',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Lanzarote Airport (ACE)',
+        distance: 'About 5 km from Arrecife (10-15 minutes by taxi)',
+        options: 'Taxi from port area or city centre. Local buses also available.',
+      },
+      trains: {
+        mainStation: 'N/A',
+        description: 'No train network on Lanzarote. Buses cover the island.',
+        localHubs: 'N/A',
+      },
+    },
+
+    gettingAround: {
+      fromPort: 'Walk 15-20 minutes to city centre, or take shuttle bus (5 mins).',
+      publicTransport: 'Local buses connect Arrecife with other parts of the island. Bus station in city centre.',
+      taxis: 'Available at port and in city centre. Fixed or metered fares.',
+      walkingDistance: 'Castillo de San Gabriel: 10 minutes from port. City centre: 15-20 minutes. Playa del Reducto: 20 minutes.',
+      sightseeingBus: 'Limited hop-on hop-off services. Most attractions require organized tours or car hire.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Timanfaya National Park',
+        category: 'excursion',
+        description: 'Dramatic volcanic landscapes. Fire Mountains with geothermal demonstrations. Otherworldly scenery.',
+        duration: 'Half-day excursion',
+        tips: [
+          'Organized tour recommended',
+          'Book in advance',
+          'Bring layers - can be windy',
+        ],
+        highlights: ['Nature', 'Volcanic', 'Unique'],
+        goodFor: ['Nature lovers', 'Photographers', 'Adventure seekers'],
+      },
+      {
+        title: 'César Manrique Foundation (Fundación César Manrique)',
+        category: 'culture',
+        description: 'Former home of the artist César Manrique, built into volcanic bubbles. Stunning architecture and art.',
+        duration: '1-2 hours',
+        tips: [
+          'Taxi or organized tour from port',
+          'Entry fee applies',
+          'Unique architecture worth seeing',
+        ],
+        highlights: ['Art', 'Architecture', 'Culture'],
+        goodFor: ['Art lovers', 'Architecture enthusiasts', 'Culture seekers'],
+      },
+      {
+        title: 'Jameos del Agua',
+        category: 'attraction',
+        description: 'Cave system transformed by César Manrique. Underground lake with blind albino crabs. Concert hall and pool.',
+        duration: '1-2 hours',
+        tips: [
+          'Organized tour or taxi',
+          'Entry fee applies',
+          'Evening concerts sometimes available',
+        ],
+        highlights: ['Nature', 'Art', 'Unique'],
+        goodFor: ['Nature lovers', 'Art enthusiasts', 'Unique experiences'],
+      },
+    ],
+    
+    thingsToDo: [
+      'Walk around Arrecife old town',
+      'Visit Castillo de San Gabriel',
+      'Relax at Playa del Reducto beach',
+      'Explore Charco de San Ginés lagoon',
+      'Visit César Manrique sites',
+      'Take a volcanic landscape tour',
+    ],
+    
+    gettingAroundTips: [
+      'City centre is walkable from port (15-20 mins) or take shuttle',
+      'Taxis available for attractions outside city',
+      'Organized tours best for Timanfaya and César Manrique sites',
+      'Car hire available but not essential for port day',
+      'Local buses connect to other towns but infrequent',
+    ],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'Year-round destination. March offers pleasant temperatures without summer crowds.',
+      visaInfo: 'Part of Spain/EU. Same visa requirements as mainland Spain.',
+      safetyTips: 'Very safe destination. Standard precautions apply.',
+      localCustoms: 'Spanish customs apply. Siesta hours observed (2-5pm).',
+    },
+    
+    status: 'published',
+    lastUpdated: '2026-01-16',
+  },
+
 ];
 
 // ============================================================================
