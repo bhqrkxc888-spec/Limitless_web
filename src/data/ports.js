@@ -57,17 +57,17 @@ export const ports = [
     name: 'Southampton',
     country: 'United Kingdom',
     region: 'uk',
-    coordinates: { lat: 50.9035, lon: -1.4037 },
-    tagline: 'Britain\'s cruise capital on the Solent',
-    description: 'Southampton\'s deep-water docks handle mega-ships from all major lines, with terminals offering lounges, parking, and quick city access via flat paths. Passengers enjoy maritime heritage museums, medieval walls, and easy day trips to the New Forest or Portsmouth, all amid Titanic history. Efficient facilities make it ideal for embarkation and disembarkation.',
-    portCharacter: 'city-culture',
+    coordinates: { lat: 50.9097, lon: -1.4044 },
+    tagline: 'Britain\'s cruise capital where Titanic\'s story began',
+    description: 'Southampton is the UK\'s premier cruise hub, handling over two million passengers annually through its five modern terminals. This historic port city served as the departure point for the RMS Titanic in 1912, and that maritime heritage remains central to its identity today. The city seamlessly blends centuries of seafaring history with contemporary shopping and dining experiences.',
+    portCharacter: 'gateway',
     
     // Detailed port information
     aboutPort: {
-      overview: 'Southampton features five terminals across Eastern and Western Docks: QEII, Ocean, City, Mayflower, Horizon, all with check-in lounges (500 to 1200 seats), baggage halls, WiFi, and snack bars. Modern facilities include airbridges, disabled access, coach bays (18 to 28 per terminal), and secure parking.',
-      terminals: 'QEII, Ocean, City, Mayflower, and Horizon terminals all offer check-in, lounges, WiFi, shops, and parking. No public shuttles needed as gates lead directly to taxis and paths.',
-      shuttleServices: 'Free shuttles link distant berths when needed; most terminals are within a 15 to 20-minute flat walk to Bargate medieval centre.',
-      walkability: 'Walk to city centre takes 15 to 20 minutes on flat, secure paths from most terminals.',
+      overview: 'Walking off your ship at City, Horizon, or Ocean terminals puts you within easy reach of Southampton\'s attractions. The city centre is just a 15 to 20 minute walk from most terminals, with the medieval Old Town, Westquay shopping centre, and excellent museums all accessible on foot. The Bargate, a magnificent medieval gatehouse dating from 1180, stands at the heart of the modern city.',
+      terminals: 'Five terminals along Southampton Water (City, Horizon, Ocean, Mayflower, QEII)',
+      shuttleServices: 'Some cruise lines offer shuttles to town centre for a small fee',
+      walkability: 'City and Horizon terminals are easiest for walking; others may require taxi. Walk to city centre takes 15 to 25 minutes depending on terminal.',
     },
 
     // Quick facts for the info bar
@@ -82,24 +82,24 @@ export const ports = [
     
     // Getting around section
     gettingAround: {
-      fromPort: 'Terminals connect via secure paths to city centre (15 minutes flat). Taxis rank outside each terminal. Free shuttles link distant berths when needed.',
-      publicTransport: 'Buses #7 and #8 connect to train station; frequent trains to London (60 minutes) and Winchester (15 minutes). Hop-on hop-off City Sightseeing bus loops Titanic Trail and SeaCity Museum (90 minutes, terminal stops).',
-      taxis: 'Taxis queue at every terminal for city centre or station runs. Expect 5 to 8 pounds to centre, metered and straightforward.',
-      walkingDistance: 'Medieval Walls 15 minutes, Southampton Central station 20 minutes, SeaCity Museum 15 minutes on foot from terminals.',
-      sightseeingBus: 'City Sightseeing hop-on hop-off bus covers Titanic Trail, SeaCity Museum, and medieval walls. Stops at terminals.',
-      accessibility: 'Excellent; flat paths, terminal ramps, and disabled access throughout all facilities.',
+      fromPort: 'Terminals connect via secure paths to city centre. Taxis rank outside each terminal. Check which terminal your ship uses as distances vary significantly.',
+      publicTransport: 'Direct trains to London (60 minutes) and Winchester (15 minutes) from Southampton Central Station, 20-minute walk from terminals.',
+      taxis: 'Taxis readily available outside all terminals. Metered and straightforward.',
+      walkingDistance: 'City centre 15-25 minutes walk depending on terminal. Medieval Walls, SeaCity Museum all accessible on foot.',
+      sightseeingBus: 'No specific hop-on hop-off mentioned in port data.',
+      accessibility: 'City and Horizon terminals are closest to town and mostly flat walking. All terminals have disabled access.',
     },
     
     // Airport and train connections
     transportConnections: {
       airport: {
         name: 'Southampton Airport (SOU)',
-        distance: '5 km, 15 minutes by taxi',
-        options: 'Taxi 15 minutes direct. Bluestar bus 2 runs every 20 minutes. Heathrow and Gatwick also accessible via train.',
+        distance: '4 miles',
+        options: 'Southampton Airport 4 miles. London Heathrow 75 miles.',
       },
       trains: {
         mainStation: 'Southampton Central Station',
-        description: 'Direct trains to London Waterloo (60 minutes), Winchester (15 minutes), Portsmouth, and UK network. 20-minute walk from terminals or short taxi ride.',
+        description: 'Direct trains to London, Winchester, and UK network. 20-minute walk from terminals or short taxi ride.',
         localHubs: 'Southampton Central is the main hub for all rail connections.',
       },
     },
@@ -107,162 +107,208 @@ export const ports = [
     // Must-see sights (the headline attractions)
     mustSeeSights: [
       {
-        title: 'SeaCity Museum',
+        title: 'Stonehenge',
         category: 'landmark',
-        description: 'Titanic interactive exhibits in original 1912 dock offices; multimedia survivor stories and Southampton\'s maritime heritage.',
-        duration: '1.5 to 2.5 hours for a relaxed pace',
+        description: 'One of the world\'s most famous prehistoric monuments, this UNESCO World Heritage Site features massive standing stones arranged in a circle over 5,000 years ago. The excellent visitor centre explains the mystery and history of this remarkable site, with exhibitions on the people who built it.',
+        duration: '3 to 4 hours including travel for a relaxed pace',
         tips: [
-          'Book timed slots online to avoid embarkation day queues',
-          'Southampton Star exhibit is highly interactive and worth extra time',
-          'Free audio guide provides excellent context for Titanic history',
+          'Book timed entry tickets in advance, especially in summer',
+          'Combine with a stop in Salisbury to see the cathedral and Magna Carta',
+          'The visitor centre is a mile from the stones with shuttle buses running regularly',
         ],
-        highlights: ['History', 'Museums', 'Culture'],
-        goodFor: ['First-time visitors', 'History buffs', 'Families'],
+        highlights: ['History', 'Photography', 'Architecture', 'Culture'],
+        goodFor: ['First-time visitors', 'History buffs', 'Photographers', 'Families'],
       },
       {
-        title: 'Medieval Town Walls & Bargate',
+        title: 'New Forest National Park',
+        category: 'nature',
+        description: 'Ancient woodland and open heathland where wild ponies roam free, just minutes from Southampton. Pretty villages like Lyndhurst and Brockenhurst offer tea rooms, antique shops, and traditional pubs. Perfect for nature lovers wanting an authentic English countryside experience.',
+        duration: '3 to 5 hours for a relaxed pace',
+        tips: [
+          'Wild ponies are everywhere but do not feed or touch them',
+          'Lyndhurst is the unofficial capital with a visitor centre',
+          'Beaulieu Motor Museum and Palace House make an excellent combined visit',
+        ],
+        highlights: ['Nature', 'Wildlife', 'Scenic', 'Photography'],
+        goodFor: ['Families', 'Nature lovers', 'Photographers', 'Active travelers'],
+      },
+      {
+        title: 'SeaCity Museum',
         category: 'historic',
-        description: 'Best-preserved UK city walls with 14th-century gatehouse and Westgate remnants. Walk the full 1 km circuit for views.',
-        duration: '1 to 1.5 hours for a relaxed pace',
+        description: 'Southampton\'s premier museum tells the story of the city\'s connection to the sea and the Titanic. The exhibition includes a 1:25 scale model of the ship, interactive displays, and moving accounts of crew members, most of whom came from Southampton. The Gateway to the World gallery covers 250,000 years of local history.',
+        duration: '2 to 3 hours for a relaxed pace',
         tips: [
-          'Walk the full circuit for best experience; Bargate is free to enter',
-          'Sunrise photography offers golden light on the ancient stones',
-          'Combine with Titanic Trail for a complete historic walk',
+          'Your ticket allows free return visits for a year',
+          'The Disaster Room recreation is particularly moving',
+          'There is a good cafe on the ground floor',
         ],
-        highlights: ['History', 'Architecture', 'Photography'],
-        goodFor: ['History buffs', 'Photographers', 'First-time visitors'],
+        highlights: ['History', 'Museums', 'Culture', 'Family-friendly'],
+        goodFor: ['History buffs', 'Families', 'First-time visitors', 'Culture seekers'],
       },
       {
-        title: 'Titanic Trail & Docks',
-        category: 'stroll',
-        description: 'Self-guided walk tracing the ship\'s 1912 departure past memorials and historic cranes along the waterfront.',
+        title: 'Winchester',
+        category: 'historic',
+        description: 'England\'s ancient capital features one of Europe\'s finest cathedrals, the Great Hall with its legendary Round Table, and charming medieval streets. Jane Austen spent her final years here and is buried in the cathedral. The city offers excellent independent shops and restaurants.',
+        duration: '4 to 5 hours for a relaxed pace',
+        tips: [
+          'Winchester Cathedral requires a ticket but the close and grounds are free',
+          'Walk along the River Itchen for lovely views',
+          'The Buttercross in the High Street is a good meeting point',
+        ],
+        highlights: ['History', 'Architecture', 'Culture', 'Shopping', 'Religious'],
+        goodFor: ['History buffs', 'Architecture lovers', 'Culture seekers', 'Couples'],
+      },
+      {
+        title: 'Tudor House and Garden',
+        category: 'historic',
+        description: 'Southampton\'s most important historic building reveals over 800 years of history in the heart of the Old Town. The timber-framed house dates from the late 15th century, with King John\'s Palace behind it dating back 300 years earlier. Interactive displays bring the stories of residents through the ages to life.',
         duration: '1 to 2 hours for a relaxed pace',
         tips: [
-          'Download free audio tour for detailed commentary at each stop',
-          'April 10am commemorations are particularly moving experiences',
-          'Combine route with medieval walls for extended historic walk',
-        ],
-        highlights: ['History', 'Culture', 'Photography'],
-        goodFor: ['First-time visitors', 'History buffs', 'Solo travelers'],
-      },
-      {
-        title: 'Tudor House & Garden',
-        category: 'historic',
-        description: '1490s merchant home with period rooms, Tudor kitchen, and walled garden. Tea room serves traditional afternoon tea.',
-        duration: '1 to 1.5 hours for a relaxed pace',
-        tips: [
-          'Garden is free to visit in the mornings before house opens',
-          'Audio guide provides detailed Tudor history and architecture',
-          'Tea room in garden setting is excellent for refreshments',
+          'The garden is a peaceful retreat from the busy city',
+          'Look for the Tudor graffiti scratched into walls',
+          'Combined tickets with SeaCity Museum offer good value',
         ],
         highlights: ['History', 'Architecture', 'Gardens'],
-        goodFor: ['History buffs', 'Families', 'Culture seekers'],
+        goodFor: ['History buffs', 'Architecture lovers', 'Families'],
       },
       {
-        title: 'Mayflower Park & Memorial',
+        title: 'Beaulieu National Motor Museum',
+        category: 'family',
+        description: 'World-famous motor museum set in the grounds of a historic abbey and stately home. Over 250 vehicles from vintage cars to Top Gear favourites. The Palace House, monorail, and abbey ruins are included in the entry. A full day out for car enthusiasts and families alike.',
+        duration: '3 to 5 hours for a relaxed pace',
+        tips: [
+          'Allow time for the grounds and abbey as well as the museum',
+          'The James Bond exhibition is popular',
+          'Good restaurant on site',
+        ],
+        highlights: ['Museums', 'Family-friendly', 'History', 'Gardens'],
+        goodFor: ['Families', 'History buffs', 'Car enthusiasts'],
+      },
+      {
+        title: 'Southampton Old Town and Medieval Walls',
         category: 'stroll',
-        description: 'Riverside park with 1620 Pilgrim ship plaque, bandstand, and Solent views. Perfect photo spot for ship departures.',
-        duration: '45 minutes to 1 hour for a relaxed pace',
+        description: 'Explore one of England\'s best-preserved medieval town wall circuits. The 1.25 mile walk takes you past 13 remaining towers, 6 city gates, and half a mile of original walls. The Bargate, dating from 1180, is one of the finest medieval town gates in the country.',
+        duration: '1 to 2 hours for a relaxed pace',
         tips: [
-          'Best ship photography spot for capturing vessels departing',
-          'Weekend markets offer local crafts and food stalls',
-          'Picnic benches perfect for relaxing before embarkation',
+          'Information boards along the route explain the history',
+          'The Arcades on the western wall are unique in England',
+          'God\'s House Tower is one of the first buildings designed for gunpowder weapons',
         ],
-        highlights: ['History', 'Views', 'Nature'],
-        goodFor: ['Families', 'Photographers', 'Couples'],
+        highlights: ['History', 'Architecture', 'Photography'],
+        goodFor: ['History buffs', 'Photographers', 'Solo travelers'],
       },
       {
-        title: 'Winchester Day Excursion',
-        category: 'excursion',
-        description: '11th-century cathedral (longest in Europe), Jane Austen house, and Great Hall with Round Table. Just 20 minutes by train.',
-        duration: '4 to 6 hours for a relaxed pace',
+        title: 'Solent Sky Museum',
+        category: 'historic',
+        description: 'Aviation museum celebrating Southampton\'s role in aircraft development, including the legendary Spitfire. Housed in a former aircraft hangar, the collection includes 19 aircraft and tells the story of the Schneider Trophy and flying boat era. The Spitfire Gallery is a highlight.',
+        duration: '1 to 2 hours for a relaxed pace',
         tips: [
-          'Train costs 8 pounds return; book ahead for best fares',
-          'Cathedral audio tour is comprehensive and well worth it',
-          'Great Hall\'s Round Table is King Arthur legend highlight',
+          'Look for the cockpit experiences where you can sit in a real aircraft',
+          'The Sandringham flying boat is impressive',
+          'Free parking available',
         ],
-        highlights: ['History', 'Architecture', 'Culture'],
-        goodFor: ['History buffs', 'First-time visitors', 'Culture seekers'],
+        highlights: ['History', 'Museums', 'Family-friendly'],
+        goodFor: ['Families', 'History buffs', 'Aviation enthusiasts'],
       },
     ],
     
     // Shore excursions tips
     shoreExcursions: [
       {
-        title: 'Winchester Cathedral',
-        description: '11th-century Gothic cathedral with Jane Austen connections, 20 minutes by train.',
+        title: 'Stonehenge',
+        description: 'UNESCO World Heritage prehistoric monument, about an hour\'s drive from Southampton.',
+        duration: 'Half day',
+        bookWith: 'Ship excursion or independent tour',
+      },
+      {
+        title: 'Winchester',
+        description: 'England\'s ancient capital with cathedral and Great Hall, 20 minutes by train.',
         duration: 'Half day',
         bookWith: 'Independent recommended',
       },
       {
         title: 'New Forest National Park',
-        description: 'Ancient woodland with wild ponies and charming villages, accessible by train or bus.',
+        description: 'Ancient woodland with wild ponies and charming villages.',
         duration: 'Half day to full day',
         bookWith: 'Independent recommended',
       },
     ],
     
-    // Beaches section (city-culture port - no beach)
-    nearestBeach: null,
+    // Beaches section (gateway port - no immediate beach)
+    nearestBeach: {
+      name: 'Weston Shore / Solent beaches',
+      distance: '3 miles',
+      description: 'Nearest beaches at the Solent (Weston Shore) approximately 3 miles east, or in Bournemouth (35 miles).',
+    },
     
     // Food & drink recommendations
     foodAndDrink: [
       {
+        name: 'The Dancing Man Brewery',
+        type: 'Brewery/Restaurant',
+        description: 'Craft brewery in medieval wool house on Town Quay with pub food.',
+      },
+      {
+        name: 'The Pig in the Wall',
+        type: 'Restaurant',
+        description: 'Boutique hotel restaurant with locally sourced menu on Western Esplanade.',
+      },
+      {
         name: 'Oxford Brasserie',
         type: 'Restaurant',
-        description: 'Traditional British roasts near historic walls, 15-minute walk from terminals.',
+        description: 'French-inspired brasserie near the waterfront on Oxford Street.',
+      },
+      {
+        name: 'Mettricks',
+        type: 'Cafe',
+        description: 'Independent speciality coffee roastery on Oxford Street.',
       },
       {
         name: 'SeaCity Museum Cafe',
         type: 'Cafe',
-        description: 'Titanic-themed cafe with scones and light lunches inside the museum.',
+        description: 'Museum cafe open to non-visitors with harbour views on Havelock Road.',
       },
       {
-        name: 'Westquay Food Court',
-        type: 'Food Hall',
-        description: 'Diverse quick eats with harbour views, 10-minute walk from port.',
-      },
-      {
-        name: 'Tudor House Tea Room',
+        name: 'Tudor House Cafe',
         type: 'Cafe',
-        description: 'Traditional afternoon tea in period garden setting within historic house.',
+        description: 'Light lunches in historic setting on Bugle Street.',
       },
     ],
     
     // Tips from experienced cruisers
     insiderTips: [
-      'Book SeaCity Museum timed tickets online; queues form on embarkation days',
-      'Pickpocket risk is low; standard vigilance at stations and parks',
-      'Museums open at 10am, beating day-trippers from London',
-      'Walk to city centre; use buses or trains for Winchester and New Forest',
-      'Cards accepted everywhere; keep 5 to 10 pounds cash for taxis and markets',
-      'No dress codes or siesta times; shops stay open through lunch',
-      'Skip chain souvenir shops; local Titanic models are more authentic',
-      'Free terminal WiFi available; download Citymapper app for transport',
+      'The QE2 Mile links the main attractions and is well signposted with information boards',
+      'Start at SeaCity Museum near the Civic Centre, walk through the Old Town past Tudor House',
+      'Follow along the medieval walls to Town Quay, and finish at Mayflower Park',
+      'Allow 2 hours for a leisurely walk with stops to see your ship from the shore',
+      'Check which terminal your ship uses as distances vary significantly between terminals',
+      'City and Horizon terminals are easiest for walking to town',
+      'Most shops close by 6pm except at Westquay shopping centre',
+      'Sunday trading hours are reduced (typically 11am to 5pm)',
     ],
 
     // Weather information
     weather: {
-      intro: 'Southampton has a temperate maritime climate with mild winters and warm summers. Spring and autumn offer the most pleasant conditions for sightseeing.',
+      intro: '15 to 20°C in summer, 6 to 10°C in spring and autumn. Pack layers and a waterproof jacket as weather can change quickly. Summers are mild with occasional rain.',
       months: [
-        { month: 'Jan', highC: 8, lowC: 3, rainMm: 70, sunDays: 8, seaTempC: 9 },
-        { month: 'Feb', highC: 9, lowC: 3, rainMm: 50, sunDays: 10, seaTempC: 9 },
-        { month: 'Mar', highC: 11, lowC: 4, rainMm: 50, sunDays: 13, seaTempC: 10 },
-        { month: 'Apr', highC: 14, lowC: 6, rainMm: 40, sunDays: 16, seaTempC: 11 },
-        { month: 'May', highC: 17, lowC: 9, rainMm: 40, sunDays: 18, seaTempC: 13 },
-        { month: 'Jun', highC: 20, lowC: 12, rainMm: 40, sunDays: 20, seaTempC: 15 },
-        { month: 'Jul', highC: 22, lowC: 14, rainMm: 40, sunDays: 22, seaTempC: 17 },
-        { month: 'Aug', highC: 22, lowC: 14, rainMm: 50, sunDays: 21, seaTempC: 18 },
-        { month: 'Sep', highC: 20, lowC: 12, rainMm: 50, sunDays: 18, seaTempC: 17 },
-        { month: 'Oct', highC: 16, lowC: 9, rainMm: 70, sunDays: 14, seaTempC: 15 },
-        { month: 'Nov', highC: 12, lowC: 6, rainMm: 80, sunDays: 10, seaTempC: 13 },
-        { month: 'Dec', highC: 9, lowC: 4, rainMm: 80, sunDays: 8, seaTempC: 11 },
+        { month: 'Jan', highC: 8, lowC: 3, rainMm: 80, sunDays: 2, seaTempC: 9 },
+        { month: 'Feb', highC: 8, lowC: 3, rainMm: 56, sunDays: 3, seaTempC: 8 },
+        { month: 'Mar', highC: 10, lowC: 4, rainMm: 62, sunDays: 4, seaTempC: 9 },
+        { month: 'Apr', highC: 13, lowC: 5, rainMm: 48, sunDays: 5, seaTempC: 10 },
+        { month: 'May', highC: 16, lowC: 8, rainMm: 55, sunDays: 6, seaTempC: 12 },
+        { month: 'Jun', highC: 19, lowC: 11, rainMm: 52, sunDays: 7, seaTempC: 14 },
+        { month: 'Jul', highC: 21, lowC: 13, rainMm: 45, sunDays: 8, seaTempC: 17 },
+        { month: 'Aug', highC: 21, lowC: 13, rainMm: 54, sunDays: 7, seaTempC: 17 },
+        { month: 'Sep', highC: 18, lowC: 11, rainMm: 68, sunDays: 5, seaTempC: 17 },
+        { month: 'Oct', highC: 15, lowC: 9, rainMm: 71, sunDays: 4, seaTempC: 15 },
+        { month: 'Nov', highC: 11, lowC: 5, rainMm: 78, sunDays: 2, seaTempC: 12 },
+        { month: 'Dec', highC: 9, lowC: 4, rainMm: 84, sunDays: 2, seaTempC: 10 },
       ],
       bestTime: {
-        overall: 'May to September for mild weather and outdoor activities',
-        hottest: 'July and August (festivals and busy terminals, but pleasant summer weather)',
-        quietest: 'May and September (perfect sightseeing weather with fewer ships)',
-        recommendation: 'Late spring to summer for first-time cruise visitors seeking optimal embarkation conditions.',
+        overall: 'May to September offers the warmest and driest weather',
+        hottest: 'July and August being peak months',
+        quietest: 'Spring (April to May) and early autumn (September) offer pleasant conditions with fewer crowds',
+        recommendation: 'May to September for warm weather.',
       },
     },
 
@@ -270,55 +316,55 @@ export const ports = [
     faq: [
       { 
         question: 'Is Southampton walkable from the cruise port?', 
-        answer: 'Yes, Southampton city centre is 15 to 20 minutes on flat, secure paths from most terminals. The medieval walls and SeaCity Museum are easily reached on foot.' 
+        answer: 'Yes, but it depends on your terminal. City and Horizon terminals are 15 to 20 minutes walk to the city centre on flat ground. Ocean terminal is about 25 minutes. QEII and Mayflower terminals are further and most passengers prefer a taxi or shuttle.' 
       },
       { 
         question: 'How long do you need in Southampton?', 
-        answer: 'Allow 4 to 6 hours to cover museums and medieval walls. A full day enables excursions to Winchester Cathedral (20 minutes by train) or the New Forest.' 
+        answer: 'Half a day is enough to see the main sights including SeaCity Museum, the medieval walls, and shopping at Westquay. Allow a full day if you want to visit Stonehenge or the New Forest.' 
       },
       { 
         question: 'Is English widely spoken in Southampton?', 
-        answer: 'Yes, English is the native language. Southampton is a major UK cruise hub with excellent communication for all visitors.' 
+        answer: 'Yes, English is the first language. Southampton is multicultural with some European languages spoken, but you will have no communication issues.' 
       },
       { 
         question: 'Is Southampton safe for tourists?', 
-        answer: 'Very safe. Southampton is a well-policed port city with standard UK precautions. Terminals have secure access and the city centre is pedestrian-friendly.' 
+        answer: 'Very safe. The city centre and tourist areas are well patrolled and busy during the day. Use normal precautions at night.' 
       },
       { 
         question: 'Is Southampton expensive?', 
-        answer: 'Moderate. Cafes charge around 10 pounds for meals, museums are reasonably priced, and transport is affordable. Less expensive than London day trips.' 
+        answer: 'Moderate by UK standards. Cafes and casual restaurants are affordable, while attractions like SeaCity Museum offer good value. London is considerably more expensive.' 
       },
       { 
         question: 'Do I need cash in Southampton or can I use card?', 
-        answer: 'Cards are accepted everywhere. Keep 5 to 10 pounds cash for occasional taxis or markets. Contactless payment is universal.' 
+        answer: 'Card payments are accepted almost everywhere, including contactless up to a generous limit. Cash is rarely necessary but useful for small purchases under a few pounds.' 
       },
       { 
         question: 'Should I book a ship excursion or explore independently?', 
-        answer: 'Independent exploration is perfect for Southampton; the city is walkable and trains to Winchester are frequent and easy. Ship excursions work best for coordinated New Forest tours.' 
+        answer: 'Southampton is very easy to explore independently if staying local. For Stonehenge, ship excursions guarantee return to the ship but independent tours or car hire offer more flexibility at similar or lower cost.' 
       },
       { 
         question: 'What is the best thing to do in Southampton on a cruise day?', 
-        answer: 'Visit SeaCity Museum for Titanic history, then walk the medieval walls and Titanic Trail. Alternatively, take the train to Winchester Cathedral for a half-day excursion.' 
+        answer: 'Visit the SeaCity Museum to learn about the Titanic connection, then walk the medieval walls and explore the Old Town before lunch at Town Quay watching the ships come and go.' 
       },
       { 
-        question: 'Is Southampton wheelchair accessible?', 
-        answer: 'Excellent accessibility. All terminals have ramps and disabled facilities, paths are flat, and museums provide step-free access throughout.' 
+        question: 'Can you do Stonehenge from Southampton on a cruise day?', 
+        answer: 'Yes, Stonehenge is about an hour\'s drive. Many cruise excursions and private tours visit Stonehenge with time to spare. Allow at least 4 hours total.' 
       },
       { 
         question: 'Is Southampton good for families with children?', 
-        answer: 'Yes, very family-friendly. SeaCity Museum has interactive Titanic exhibits, parks are flat and safe, and Winchester excursions suit all ages.' 
+        answer: 'Yes, the SeaCity Museum has excellent interactive exhibits, and Westquay offers cinema, bowling, and family restaurants. The New Forest and Beaulieu are excellent for a day out with kids.' 
       },
     ],
 
     // Practical information
     practicalInfo: {
-      bestTimeToVisit: 'May to September for warm weather and outdoor activities',
-      cruiseTerminals: ['QEII', 'Ocean', 'City', 'Mayflower', 'Horizon'],
-      nearbyAirport: 'Southampton Airport (SOU) - 15 minutes',
-      visaInfo: 'UK visa requirements apply; no visa for most visitors up to 6 months',
-      emergencyNumber: '999 or 112',
-      tippingCustom: '10 to 12.5% service charge typically included',
-      siestaShopClosing: 'None; shops open through lunch hours',
+      bestTimeToVisit: 'May to September for warm weather',
+      cruiseTerminals: ['City', 'Horizon', 'Ocean', 'Mayflower', 'QEII'],
+      nearbyAirport: 'Southampton Airport (4 miles), London Heathrow (75 miles)',
+      visaInfo: 'UK visa rules apply - EU citizens need passport, check requirements for other nationalities',
+      emergencyNumber: '999 for emergencies, 111 for non-urgent medical advice',
+      tippingCustom: 'Optional, 10 to 15 percent for good restaurant service',
+      siestaShopClosing: 'Generally 9am to 6pm, Westquay until 9pm, reduced Sunday hours',
     },
     
     // Related destinations (for internal linking)
@@ -326,14 +372,14 @@ export const ports = [
     
     // SEO metadata
     meta: {
-      title: 'Southampton Cruise Port Guide | UK\'s Cruise Capital',
-      description: 'Complete guide to Southampton cruise port. Discover Europe\'s leading turnaround port with five modern terminals, Titanic heritage, medieval walls, and rail links to London in 70 minutes.',
-      keywords: ['Southampton cruise port', 'Southampton cruise terminal', 'things to do Southampton', 'Southampton shore excursions', 'UK cruise port', 'Cunard Southampton'],
+      title: 'Southampton Cruise Port Guide | Britain\'s Cruise Capital',
+      description: 'Complete guide to Southampton cruise port. Britain\'s premier cruise hub with Titanic heritage, medieval walls, and gateway to Stonehenge, Winchester, and the New Forest.',
+      keywords: ['Southampton cruise port', 'Southampton cruise terminal', 'things to do Southampton', 'Southampton shore excursions', 'UK cruise port', 'Titanic Southampton'],
     },
     
     // Content status
     status: 'published', // template | draft | review | published
-    lastUpdated: '2025-12-28',
+    lastUpdated: '2026-01-17',
   },
   
   {
@@ -342,15 +388,16 @@ export const ports = [
     name: 'Dover',
     country: 'United Kingdom',
     region: 'uk',
-    coordinates: { lat: 51.1290, lon: 1.3135 },
-    tagline: 'White cliffs gateway to Canterbury',
-    description: 'Dover\'s dramatic chalk cliffs frame busy cruise terminals in the Western Docks, offering quick access to medieval Canterbury while harbour views showcase cross-Channel ferries. Passengers balance port-town history with efficient excursions to Kent\'s cathedral city, all under constant sea breezes.',
+    coordinates: { lat: 51.1279, lon: 1.3134 },
+    tagline: 'Britain\'s White Cliffs gateway where history guards the Channel',
+    description: 'Dover has served as England\'s gateway to the continent for over 2,000 years, and today its dramatic White Cliffs remain one of Britain\'s most recognisable natural landmarks. The port operates three modern cruise terminals at the Western Docks, with most ships arriving early morning and departing in the evening. Dominating the skyline above the port sits Dover Castle, known as the "Key to England," guarding the shortest sea crossing to Europe.',
+    portCharacter: 'gateway',
     
     aboutPort: {
-      overview: 'Dover features two main terminals in Western Docks: Terminal 1 (historic ex-railway station) and Terminal 2 (modern airport-style), both with lounges, WiFi, cafes, ATMs, and parking. Handles mega-ships alongside ferries; shuttles link if needed.',
-      terminals: 'Terminal 1 and Terminal 2 provide fast check-ins, comfortable lounges, free WiFi, disabled access, lifts, and secure berths with baggage handling.',
-      shuttleServices: 'Shuttles link terminals if needed; taxis queue outside both terminals.',
-      walkability: 'Town centre 20 to 30 minute walk uphill from terminals; taxis available for quicker access.',
+      overview: 'Dover has served as England\'s gateway to the continent for over 2,000 years. The chalk cliffs that tower above the harbour have inspired poets and musicians, symbolising homecoming for generations of British travellers. While Dover town itself is modest, the surrounding area offers excellent day trip options including Canterbury Cathedral.',
+      terminals: 'Western Docks with 3 cruise terminals',
+      shuttleServices: 'Most cruise lines offer shuttles to town centre and Dover Castle for around 5 pounds return',
+      walkability: 'Town centre is walkable (10-15 mins), White Cliffs require bus or taxi',
     },
     
     quickFacts: {
@@ -364,9 +411,9 @@ export const ports = [
     
     transportConnections: {
       airport: {
-        name: 'London Gatwick (LGW)',
-        distance: '130 km, 90 minutes by taxi',
-        options: 'Taxi from Dover to Gatwick takes 90 minutes. National Express coaches run from Dover Priory station to major London airports.',
+        name: 'London Gatwick',
+        distance: '88 miles',
+        options: 'London Gatwick (88 miles), London Heathrow (95 miles)',
       },
       trains: {
         mainStation: 'Dover Priory Station',
@@ -376,218 +423,274 @@ export const ports = [
     },
     
     gettingAround: {
-      fromPort: 'Exit terminals for 20-minute downhill stroll to seafront and Waterloo Crescent. Taxis queue outside for quick trips to castle, cliffs, or Dover Priory station.',
-      publicTransport: 'Local buses 15 and 80 run to Canterbury (90 minutes). Hop-on hop-off buses cover castle, cliffs, and town in 60-minute loops.',
-      taxis: 'Taxis plentiful and metered. Expect 80 to 100 pounds return to Canterbury by taxi.',
-      walkingDistance: 'Dover Castle is 30 minutes uphill walk. White Cliffs accessible via cliff paths. Canterbury is 25 km away.',
-      sightseeingBus: 'Hop-on hop-off covers Dover Castle, White Cliffs, and town centre in 60-minute loops.',
-      accessibility: 'Terminals fully accessible. Seafront flat and paved. Castle and cliffs have steep paths and limited wheelchair access.',
+      fromPort: 'Town centre 10 to 15 minutes walk from cruise terminals. Shuttle buses to Dover Castle and White Cliffs available.',
+      publicTransport: 'Bus 80 from Pencester Road to White Cliffs visitor centre. Buses to Canterbury (20-30 minute drive).',
+      taxis: 'Taxis readily available outside terminals for trips to castle, cliffs, or Canterbury.',
+      walkingDistance: 'Town centre walkable. White Cliffs visitor centre 45-60 mins walk with steep steps. Dover Castle 40 mins uphill.',
+      sightseeingBus: 'Shuttle buses offered by cruise lines stop at town centre and Dover Castle.',
+      accessibility: 'Terminals fully accessible. Seafront flat. Castle and cliffs have steep paths with limited wheelchair access.',
     },
     
     mustSeeSights: [
       {
         title: 'Dover Castle',
         category: 'landmark',
-        description: 'Massive clifftop fortress with secret WWII tunnels, Great Siege exhibits, and cliff-edge views over the Channel.',
-        duration: '2 to 3 hours for a relaxed pace',
+        description: 'Known as the "Key to England," this is the largest castle in the country and has defended Britain\'s shores for over 900 years. The Great Tower recreates Henry II\'s medieval court, while the Secret Wartime Tunnels reveal the underground headquarters where Operation Dynamo, the evacuation of Dunkirk, was coordinated.',
+        duration: '3 to 4 hours for a relaxed pace',
         tips: [
-          'Book tunnel tour tickets ahead online to guarantee entry',
-          'Start at the top of the castle and work downhill to save energy',
-          'Wear windproof layers as the clifftop summit is exposed year-round',
+          'The Secret Wartime Tunnels tours book up quickly - head here first',
+          'Allow time for the Roman lighthouse, one of only three surviving in the world',
+          'The views over the Channel to France are stunning from the battlements',
+        ],
+        highlights: ['History', 'Architecture', 'Views', 'Museums'],
+        goodFor: ['History buffs', 'Families', 'First-time visitors', 'Photographers'],
+      },
+      {
+        title: 'White Cliffs of Dover',
+        category: 'nature',
+        description: 'These iconic chalk cliffs have symbolised Britain for centuries. The National Trust manages the visitor centre and walking trails, which offer stunning views across the Channel to France on clear days. The cliff-top paths lead to the South Foreland Lighthouse where you can tour the tower and enjoy cream teas.',
+        duration: '2 to 4 hours for a relaxed pace depending on walking',
+        tips: [
+          'Check visibility before visiting - cloudy days limit views to France',
+          'Wear sturdy footwear as paths can be muddy after rain',
+          'The cafe at the visitor centre has excellent views',
+        ],
+        highlights: ['Nature', 'Views', 'Photography', 'Scenic'],
+        goodFor: ['Active travelers', 'Photographers', 'Nature lovers', 'Couples'],
+      },
+      {
+        title: 'Canterbury Cathedral',
+        category: 'historic',
+        description: 'One of the oldest and most important Christian sites in England, this UNESCO World Heritage cathedral has been a pilgrimage destination since the murder of Archbishop Thomas Becket in 1170. The stunning stained glass windows, atmospheric crypt, and Gothic architecture are awe-inspiring. The medieval city around it offers charming streets, excellent shopping, and punting on the River Stour.',
+        duration: '3 to 5 hours including travel for a relaxed pace',
+        tips: [
+          'Check for Evensong times if you want to experience a choral service',
+          'The cathedral may close for special services - verify opening times',
+          'Allow time to explore the medieval streets and Westgate Towers',
+        ],
+        highlights: ['History', 'Architecture', 'Religious', 'Culture', 'Art'],
+        goodFor: ['History buffs', 'Architecture lovers', 'First-time visitors', 'Culture seekers'],
+      },
+      {
+        title: 'South Foreland Lighthouse',
+        category: 'historic',
+        description: 'This beautiful Victorian lighthouse perched on the White Cliffs was the first to use electric light and where Marconi conducted pioneering radio experiments. Guided tours take you up the tower for panoramic views, and the tea room in the former keeper\'s cottage serves excellent cream teas.',
+        duration: '1 to 2 hours for a relaxed pace',
+        tips: [
+          'The walk from the White Cliffs visitor centre takes about an hour each way',
+          'Cream tea with scones is a must',
+          'Check opening times as it\'s not open every day',
+        ],
+        highlights: ['History', 'Views', 'Photography'],
+        goodFor: ['History buffs', 'Active travelers', 'Photographers'],
+      },
+      {
+        title: 'Dover Museum and Bronze Age Boat',
+        category: 'historic',
+        description: 'Home to the world\'s oldest known seagoing vessel, a 3,500-year-old wooden boat discovered during road works in 1992. The museum spans three floors covering the history of Dover from ancient times to the present. Interactive exhibits and the remarkable boat gallery make it suitable for all ages.',
+        duration: '1 to 2 hours for a relaxed pace',
+        tips: [
+          'Free entry makes this excellent value',
+          'The boat gallery on the top floor is the highlight',
+          'Good wet weather alternative',
+        ],
+        highlights: ['History', 'Museums', 'Family-friendly'],
+        goodFor: ['History buffs', 'Families', 'Rainy day visitors'],
+      },
+      {
+        title: 'Leeds Castle',
+        category: 'landmark',
+        description: 'Often called the loveliest castle in the world, Leeds Castle sits on two islands in a lake surrounded by 500 acres of beautiful parkland. The castle has been home to six medieval queens of England and offers gardens, a maze, birds of prey displays, and elegant interiors to explore.',
+        duration: '4 to 5 hours including travel for a relaxed pace',
+        tips: [
+          'The maze and grotto are popular with children',
+          'Birds of prey displays run at set times',
+          'Consider pre-booking tickets online',
+        ],
+        highlights: ['Architecture', 'Gardens', 'History', 'Family-friendly'],
+        goodFor: ['Families', 'History buffs', 'Photographers', 'Couples'],
+      },
+      {
+        title: 'Western Heights',
+        category: 'historic',
+        description: 'A vast Napoleonic-era fortification carved into the cliffs above Dover, featuring the unique triple spiral staircase of the Grand Shaft. The fortifications offer excellent walking with views over the harbour and town. Less visited than the castle, this provides a quieter historical experience.',
+        duration: '1 to 2 hours for a relaxed pace',
+        tips: [
+          'The Grand Shaft tours are excellent but run at limited times',
+          'The Drop Redoubt is atmospheric and often empty',
+          'Good views of cruise ships in the harbour',
         ],
         highlights: ['History', 'Views', 'Architecture'],
-        goodFor: ['First-time visitors', 'History buffs'],
+        goodFor: ['History buffs', 'Active travelers', 'Solo travelers'],
       },
       {
-        title: 'Canterbury Cathedral Day Excursion',
-        category: 'excursion',
-        description: 'UNESCO Gothic masterpiece, site of Thomas Becket\'s murder, and heart of medieval pilgrim trails.',
-        duration: '4 to 6 hours for a relaxed pace',
-        tips: [
-          'Bus tickets cost around 10 pounds return; trains are faster but pricier',
-          'The crypt is the highlight; quieter than the main nave',
-          'Cloisters offer peaceful atmosphere away from tour groups',
-        ],
-        highlights: ['History', 'Architecture', 'Religious'],
-        goodFor: ['History buffs', 'Culture seekers'],
-      },
-      {
-        title: 'White Cliffs & South Foreland Lighthouse',
-        category: 'nature',
-        description: 'Iconic chalk paths with Channel panoramas, WWII radar relics, and lighthouse teas overlooking France.',
+        title: 'St Margaret\'s Bay',
+        category: 'stroll',
+        description: 'A charming village and beach nestled beneath the White Cliffs, where Noel Coward and Ian Fleming once had homes. The pebble beach is quieter than Dover, with a pleasant pub and tea rooms. Access to the cliff-top path to South Foreland Lighthouse.',
         duration: '2 to 3 hours for a relaxed pace',
         tips: [
-          'National Trust bus runs from Dover town to cliff paths and lighthouse',
-          'Wear sturdy walking shoes as cliff paths can be uneven and muddy',
-          'On clear days France is visible across the Channel',
+          'The Coastguard pub has excellent views and food',
+          'Park at the top and walk down to the beach',
+          'Combine with a lighthouse visit for a full day',
         ],
-        highlights: ['Nature', 'Views', 'History', 'Photography'],
-        goodFor: ['Photographers', 'Active travelers'],
-      },
-      {
-        title: 'Western Heights Napoleonic Forts',
-        category: 'historic',
-        description: 'Drop Redoubt and Grand Shaft triple-helix staircase; atmospheric unrestored military defences from Napoleonic era.',
-        duration: '1.5 to 2 hours for a relaxed pace',
-        tips: [
-          'Free entry to Drop Redoubt and Grand Shaft areas',
-          'Steep paths and uneven ground; not suitable for limited mobility',
-          'Atmospheric solitude with few visitors; bring torch for tunnels',
-        ],
-        highlights: ['History', 'Architecture'],
-        goodFor: ['History buffs'],
-      },
-      {
-        title: 'Dover Museum',
-        category: 'historic',
-        description: 'Bronze Age boat replica (oldest known seagoing vessel), Roman lighthouse ruins (Britain\'s oldest building), and maritime exhibits.',
-        duration: '1 to 1.5 hours for a relaxed pace',
-        tips: [
-          'Boat model has interactive displays suitable for families',
-          'Free entry makes this a quick, budget-friendly stop',
-          'Located in town centre within easy walking distance of terminals',
-        ],
-        highlights: ['History', 'Museums'],
-        goodFor: ['Families', 'History buffs'],
-      },
-      {
-        title: 'Seafront & Waterloo Crescent',
-        category: 'stroll',
-        description: 'Regency crescent with cafes, Prince Regent pub serving fish and chips, and harbour relaxing overlooking ferries.',
-        duration: '45 minutes to 1 hour for a relaxed pace',
-        tips: [
-          'Stop for traditional fish and chips lunch at seafront pubs',
-          'Watch cross-Channel ferries departing throughout the day',
-          'Flat, easy stroll suitable for all mobility levels',
-        ],
-        highlights: ['Culture', 'Food', 'Views'],
-        goodFor: ['First-time visitors', 'Foodies'],
+        highlights: ['Beaches', 'Views', 'Food', 'Nature'],
+        goodFor: ['Couples', 'Foodies', 'Relaxation seekers'],
       },
     ],
     
-    nearestBeach: null,
+    shoreExcursions: [
+      {
+        title: 'Dover Castle',
+        description: 'Largest castle in the country with Secret Wartime Tunnels and Great Tower.',
+        duration: 'Half day',
+        bookWith: 'Independent or ship excursion',
+      },
+      {
+        title: 'Canterbury Cathedral',
+        description: 'UNESCO World Heritage cathedral, 20-30 minute drive from Dover.',
+        duration: 'Half day',
+        bookWith: 'Independent or ship excursion',
+      },
+      {
+        title: 'White Cliffs of Dover',
+        description: 'Iconic chalk cliffs with National Trust visitor centre and walking trails.',
+        duration: 'Half day',
+        bookWith: 'Independent recommended',
+      },
+    ],
+    
+    nearestBeach: {
+      name: 'Dover Beach',
+      distance: '10-15 minutes walk',
+      description: 'Long shingle beach stretching along the seafront below the White Cliffs. A working harbour beach with views of ferries and cruise ships, plus the cliffs as a stunning backdrop. ~14°C in summer.',
+    },
     
     foodAndDrink: [
       {
-        name: 'Prince Regent',
-        type: 'Pub',
-        description: 'Traditional fish and chips and local ales in grand seafront Regency building overlooking harbour.',
-      },
-      {
-        name: 'Dover Museum cafe',
-        type: 'Cafe',
-        description: 'Light lunches, sandwiches, and cakes in museum setting within town centre.',
-      },
-      {
-        name: 'Castle cliff-edge teas',
-        type: 'Cafe',
-        description: 'Cream teas, scones, and English breakfast near Dover Castle with panoramic views.',
-      },
-      {
-        name: 'Waterloo Crescent restaurants',
+        name: 'Cullins Yard',
         type: 'Restaurant',
-        description: 'Local seafood and British classics along the seafront promenade, 20-minute walk from terminals.',
+        description: 'Contemporary waterfront dining with local seafood at Dover Marina.',
+      },
+      {
+        name: 'The Coastguard',
+        type: 'Pub',
+        description: 'Traditional pub with stunning cliff views at St Margaret\'s Bay.',
+      },
+      {
+        name: 'The Allotment',
+        type: 'Cafe',
+        description: 'Modern British cafe with fresh local produce on High Street.',
+      },
+      {
+        name: 'National Trust Cafe',
+        type: 'Cafe',
+        description: 'Cliff-top views and cream teas at White Cliffs visitor centre.',
+      },
+      {
+        name: 'The White Horse',
+        type: 'Pub',
+        description: 'Historic pub near the castle on Castle Street.',
       },
     ],
     
     insiderTips: [
-      'Book Canterbury buses early as they fill up quickly with cruise coaches on busy port days',
-      'Bring windproof layers; the white cliffs are exposed to strong Channel winds year-round',
-      'Dover Castle and tunnels open at 10am; arrive early to beat tour groups',
-      'Walk the seafront; use buses or taxis for castle and Canterbury excursions',
-      'Cards accepted everywhere; keep 5 to 10 pounds cash for pubs and markets; expect 10 to 12.5% service charges',
-      'No dress codes or shop closing times to worry about in Dover',
-      'Skip tourist shops near ferry terminals; local history bookshops in town have better souvenirs',
-      'Free WiFi at cruise terminals; download Google Maps offline for navigation',
+      'The shuttle buses offered by cruise lines stop at both the town centre and Dover Castle, saving a steep 40 minute walk uphill',
+      'If you want to see the White Cliffs without the hour-long walk from the port, take the shuttle to the castle and enjoy cliff views from the battlements',
+      'Catch bus 80 from Pencester Road to the White Cliffs visitor centre',
+      'Cruise season runs primarily April to October; visits outside this period are rare',
+      'The walk to the White Cliffs visitor centre from the port takes 45 to 60 minutes and includes steep steps',
+      'Canterbury is a 20 to 30 minute drive or bus ride - allow at least 3 hours for a visit',
+      'Check visibility before planning cliff walks as views to France disappear in fog or haze',
+      'Dover Castle and tunnels open at 10am; Secret Wartime Tunnels book up quickly',
     ],
     
     weather: {
-      intro: 'Dover has a temperate maritime climate with mild winters and warm summers. Spring and autumn offer pleasant conditions for cliff walks and sightseeing.',
+      intro: '14 to 20°C in summer, 10 to 15°C in spring and autumn. Exposed cliff tops can be windy and cool even in summer. Pack layers and a windproof jacket for walks.',
       months: [
-        { month: 'Jan', highC: 8, lowC: 4, rainMm: 70, sunDays: 8, seaTempC: 9 },
-        { month: 'Feb', highC: 8, lowC: 4, rainMm: 60, sunDays: 10, seaTempC: 9 },
-        { month: 'Mar', highC: 10, lowC: 5, rainMm: 50, sunDays: 13, seaTempC: 10 },
-        { month: 'Apr', highC: 13, lowC: 7, rainMm: 40, sunDays: 16, seaTempC: 11 },
-        { month: 'May', highC: 16, lowC: 10, rainMm: 50, sunDays: 17, seaTempC: 13 },
-        { month: 'Jun', highC: 19, lowC: 13, rainMm: 40, sunDays: 19, seaTempC: 15 },
-        { month: 'Jul', highC: 21, lowC: 15, rainMm: 50, sunDays: 20, seaTempC: 17 },
-        { month: 'Aug', highC: 21, lowC: 15, rainMm: 50, sunDays: 19, seaTempC: 18 },
-        { month: 'Sep', highC: 19, lowC: 13, rainMm: 60, sunDays: 16, seaTempC: 17 },
-        { month: 'Oct', highC: 15, lowC: 10, rainMm: 80, sunDays: 13, seaTempC: 15 },
-        { month: 'Nov', highC: 11, lowC: 7, rainMm: 90, sunDays: 10, seaTempC: 13 },
-        { month: 'Dec', highC: 9, lowC: 5, rainMm: 80, sunDays: 8, seaTempC: 11 },
+        { month: 'Jan', highC: 7, lowC: 3, rainMm: 65, sunDays: 2, seaTempC: 8 },
+        { month: 'Feb', highC: 7, lowC: 3, rainMm: 45, sunDays: 3, seaTempC: 7 },
+        { month: 'Mar', highC: 10, lowC: 4, rainMm: 50, sunDays: 4, seaTempC: 8 },
+        { month: 'Apr', highC: 12, lowC: 6, rainMm: 45, sunDays: 5, seaTempC: 10 },
+        { month: 'May', highC: 16, lowC: 9, rainMm: 45, sunDays: 6, seaTempC: 12 },
+        { month: 'Jun', highC: 19, lowC: 12, rainMm: 50, sunDays: 7, seaTempC: 14 },
+        { month: 'Jul', highC: 21, lowC: 14, rainMm: 45, sunDays: 7, seaTempC: 16 },
+        { month: 'Aug', highC: 21, lowC: 14, rainMm: 55, sunDays: 7, seaTempC: 17 },
+        { month: 'Sep', highC: 18, lowC: 12, rainMm: 60, sunDays: 5, seaTempC: 16 },
+        { month: 'Oct', highC: 14, lowC: 9, rainMm: 70, sunDays: 4, seaTempC: 14 },
+        { month: 'Nov', highC: 10, lowC: 6, rainMm: 75, sunDays: 2, seaTempC: 12 },
+        { month: 'Dec', highC: 8, lowC: 4, rainMm: 70, sunDays: 2, seaTempC: 10 },
       ],
       bestTime: {
-        overall: 'May to September for mild weather and comfortable coastal walks',
-        hottest: 'July and August (busiest ferry traffic and cruise terminals, but pleasant summer weather)',
-        quietest: 'May and September (perfect cliff walks with fewer crowds)',
-        recommendation: 'Summer months offer the best balance of weather and visibility for first-time visitors.',
+        overall: 'May to September offers the warmest and most stable weather',
+        hottest: 'July and August are peak months but can be busy',
+        quietest: 'Late spring (May to June) often provides clear visibility for seeing France',
+        recommendation: 'May to September for warm weather and clear days.',
       },
     },
     
     faq: [
       {
         question: 'Is Dover walkable from the cruise port?', 
-        answer: 'Yes, Dover town centre and seafront are 20 to 30 minutes downhill from terminals. The walk is flat along the seafront but uphill to town and castle.' 
+        answer: 'Yes, the town centre is 10 to 15 minutes flat walk from the cruise terminals. However, Dover Castle requires a steep 40 minute uphill walk or shuttle bus, and the White Cliffs visitor centre is about an hour\'s walk including steep steps.' 
       },
       { 
         question: 'How long do you need in Dover?', 
-        answer: 'Allow 6 to 8 hours to cover Dover Castle and White Cliffs. A full day is needed if including a Canterbury Cathedral excursion.' 
+        answer: 'Most cruise calls allow 8 to 10 hours. You can see Dover Castle and the White Cliffs in a full day, or combine Dover Castle with a trip to Canterbury. The town itself can be seen in a couple of hours.' 
       },
       { 
         question: 'Is English widely spoken in Dover?', 
-        answer: 'Yes, English is the native language. Dover is a major UK port with excellent communication for all visitors.' 
+        answer: 'Yes, English is the first language throughout. Dover sees many international visitors from the ferry port and cruise ships.' 
       },
       { 
         question: 'Is Dover safe for tourists?', 
-        answer: 'Very safe. Dover is a well-policed port town with standard UK precautions. Terminals have secure access and town centre is pedestrian-friendly.' 
+        answer: 'Very safe. The town centre and tourist areas are well patrolled. Use normal precautions especially on quieter cliff paths.' 
       },
       { 
         question: 'Is Dover expensive?', 
-        answer: 'Affordable for UK standards. Pub meals cost around 12 pounds, castle admission is reasonably priced, and transport is moderate.' 
+        answer: 'Moderate by UK standards. Attraction entry fees are in line with other English Heritage and National Trust properties. Eating out is affordable compared to London.' 
       },
       { 
         question: 'Do I need cash in Dover or can I use card?', 
-        answer: 'Cards are accepted everywhere. Keep 5 to 10 pounds cash for occasional pubs or markets. Contactless payment is universal.' 
+        answer: 'Card payments are widely accepted including contactless. Cash is rarely necessary but useful for small purchases.' 
       },
       { 
         question: 'Should I book a ship excursion or explore independently?', 
-        answer: 'Independent exploration works perfectly for Dover Castle and White Cliffs walks. Ship excursions are convenient for coordinated Canterbury Cathedral tours.' 
+        answer: 'Dover Castle and the White Cliffs are easy to visit independently using the shuttle bus. For Canterbury or Leeds Castle, ship excursions guarantee return times but independent transport is straightforward if you plan carefully.' 
       },
       { 
         question: 'What is the best thing to do in Dover on a cruise day?', 
-        answer: 'Visit Dover Castle for secret wartime tunnels, then walk the White Cliffs for iconic Channel views. Alternatively, take a bus or ship excursion to Canterbury Cathedral.' 
+        answer: 'Dover Castle is the must-see attraction, especially the Secret Wartime Tunnels. If weather is good, combine with a walk along the White Cliffs to South Foreland Lighthouse. If weather is poor, focus on the castle\'s indoor areas.' 
       },
       { 
-        question: 'Can you do Canterbury from Dover on a cruise day?', 
-        answer: 'Yes, buses take 90 minutes roundtrip and trains are faster. Allow 4 to 6 hours total including cathedral visit. Feasible on longer port calls.' 
+        question: 'Can you see France from Dover?', 
+        answer: 'Yes, on clear days France is clearly visible across the 21-mile strait from the castle, cliff tops, and even the harbour. Check visibility before planning cliff walks as views disappear in fog or haze.' 
       },
       { 
-        question: 'Is Dover good for limited mobility?', 
-        answer: 'Terminals and seafront are fully accessible and flat. Dover Castle and White Cliffs have steep paths and limited wheelchair access.' 
+        question: 'Is Dover good for families with children?', 
+        answer: 'Dover Castle is excellent for families with interactive medieval displays and exciting wartime tunnels. The cliff walks are spectacular but require supervision. Canterbury offers more variety for a family day out.' 
       },
     ],
     
     practicalInfo: {
-      bestTimeToVisit: 'May to September for mild weather and comfortable coastal walks',
-      cruiseTerminals: ['Terminal 1', 'Terminal 2'],
-      nearbyAirport: 'London Gatwick (LGW) - 130 km',
-      visaInfo: 'UK visa requirements apply; no visa for most visitors up to 6 months',
-      emergencyNumber: '999 or 112',
-      tippingCustom: '10 to 12.5% service charge typically included',
-      siestaShopClosing: 'None; shops open through lunch hours',
+      bestTimeToVisit: 'May to September for warm weather and clear days',
+      cruiseTerminals: ['Terminal 1 (historic Marine Station)', 'Terminal 2', 'Terminal 3'],
+      nearbyAirport: 'London Gatwick (88 miles), London Heathrow (95 miles)',
+      visaInfo: 'UK visa rules apply - EU citizens need passport, check requirements for other nationalities',
+      emergencyNumber: '999 for emergencies, 111 for non-urgent medical advice',
+      tippingCustom: 'Optional, 10 to 15 percent for good restaurant service',
+      siestaShopClosing: 'Generally 9am to 5.30pm, earlier closing on Sundays',
     },
     
     relatedDestinations: ['british-isles-cruises', 'northern-europe-cruises'],
     
     meta: {
       title: 'Dover Cruise Port Guide | White Cliffs & Canterbury',
-      description: 'Complete guide to Dover cruise port. Explore Dover Castle tunnels, walk the White Cliffs, visit Canterbury Cathedral, and discover insider tips for your UK cruise.',
+      description: 'Complete guide to Dover cruise port. Explore Dover Castle, walk the iconic White Cliffs, visit Canterbury Cathedral, and discover Britain\'s gateway to Europe.',
       keywords: ['Dover cruise port', 'Dover white cliffs', 'Dover castle', 'Canterbury from Dover', 'UK cruise terminal', 'Dover shore excursions'],
     },
     
     status: 'published',
-    lastUpdated: '2024-12-28',
+    lastUpdated: '2026-01-17',
   },
 
   // ============================================================================
@@ -3356,21 +3459,22 @@ export const ports = [
     name: 'Bilbao',
     country: 'Spain',
     region: 'atlantic-coast',
-    coordinates: { lat: 43.2627, lon: -3.0045 },
-    tagline: 'Guggenheim\'s Basque gateway',
-    description: 'Bilbao transforms from gritty industrial past to cultural powerhouse, where cruise passengers access Frank Gehry\'s titanium museum, pintxos bars, and medieval bridges via efficient shuttles and metro from Getxo terminals. The port hit record 95 ship calls and 181,000 passengers in 2025.',
+    coordinates: { lat: 43.3485, lon: -3.0310 },
+    tagline: 'Where Gehry\'s titanium curves meet Basque culinary tradition',
+    description: 'Bilbao is northern Spain\'s largest city and the capital of the Basque Country. Once an industrial powerhouse, the city underwent a dramatic transformation in the 1990s with the opening of Frank Gehry\'s Guggenheim Museum - a shimmering titanium masterpiece that sparked the "Bilbao Effect." Your ship docks in Getxo, 15 kilometres north of the city, offering beautiful Ereaga Beach right beside the terminal and excellent metro access into Bilbao in about 25 minutes.',
+    portCharacter: 'city-culture',
     
     aboutPort: {
-      overview: 'Getxo terminals (Olatua, new facilities) handle mega-ships up to 343m with lounges, WiFi, tourist info; 20 minutes from Bilbao centre via shuttle or metro Line 1. Record 2025 season featured MSC Virtuosa (6,334 passengers) and multiple overnights.',
-      terminals: 'Getxo terminals include the modern Olatua Terminal and original Maritime Terminal facilities, offering spacious lounges, VIP areas, direct gangways, check-in, baggage handling, Wi-Fi, tourist information and parking.',
-      shuttleServices: 'Shuttles run to Bilbao centre, dropping near Moyúa metro; metro Line 1 reaches the city in 25 minutes. Taxis available; hop-on buses outside terminals.',
-      walkability: 'Not walkable to Bilbao city centre (requires shuttle or metro, 20 to 30 minutes), though Getxo beach and marina areas are immediately accessible on foot from the terminal.',
+      overview: 'Ships dock in Getxo, an affluent seaside suburb about 15 kilometres north of Bilbao\'s city centre. Getxo itself offers the UNESCO-listed Vizcaya Bridge, beautiful Ereaga Beach right beside the cruise terminal, and charming old fishing ports. The excellent metro system whisks you into Bilbao in about 25 minutes.',
+      terminals: 'Getxo cruise terminal, beside Ereaga Beach and the marina',
+      shuttleServices: 'Most cruise lines offer paid shuttles to Plaza Moyua in Bilbao city centre (around 15 to 20 euros return). Free port authority shuttle to metro stations (Areeta or Algorta)',
+      walkability: 'Getxo is walkable from port. Bilbao Old Town and Guggenheim area are very walkable once you arrive by metro',
     },
 
     quickFacts: {
       currency: 'EUR (€)',
       language: 'Spanish, Basque',
-      timezone: 'GMT+1',
+      timezone: 'CET (GMT+1)',
       portType: 'Port of Call',
       walkable: false,
       tenderRequired: false,
@@ -3379,247 +3483,248 @@ export const ports = [
     transportConnections: {
       airport: {
         name: 'Bilbao Airport (BIO)',
-        distance: '15 km, 20 minutes taxi',
-        options: 'Taxi: 20 minutes direct. Bizkaibus A3247 (3 euros, 30 minutes) to metro then Line 1.',
+        distance: '10 km northeast of the city, about 20 km from Getxo cruise terminal',
+        options: 'Bus A3247 runs from airport to Bilbao city centre. Taxi from cruise terminal to airport approximately 30 to 40 euros.',
       },
       trains: {
-        mainStation: 'Bilbao Abando or Santander',
-        description: 'Euskotren to coast; metro integrated. Near shuttle drop. Regional services to Basque coast and San Sebastián; high-speed trains to Madrid.',
-        localHubs: 'Abando serves as the hub for RENFE and FEVE lines.',
+        mainStation: 'Bilbao-Abando (main RENFE station for long-distance trains), Bilbao-Concordia (narrow gauge trains to Santander and the coast)',
+        description: 'Regional services to Basque coast and San Sebastián; high-speed trains to Madrid from Abando.',
+        localHubs: 'Abando serves as the hub for RENFE long-distance and regional services.',
       },
     },
     
     gettingAround: {
-      fromPort: 'Shuttle or metro Line 1 (Areeta station) to Casco Viejo (25 minutes). Taxis 25 euros to centre; buses to Guggenheim. Hop-on hop-off loops museum, old town, bridges (20 euros).',
-      publicTransport: 'Metro Line 1 connects port area to city centre. Distances: Guggenheim 20 minutes, Casco Viejo 25 minutes. Efficient metro system with lifts at major stations.',
-      taxis: 'Taxis available at terminal, metered fares. Expect 25 euros from port to city centre.',
-      walkingDistance: 'City centre not walkable from port (15 km away). Getxo marina and beach areas are within 5 to 10 minutes walk from terminals.',
-      sightseeingBus: 'Hop-on hop-off buses start near shuttle drop-off points in Bilbao city centre, covering museum, old town and bridges.',
-      accessibility: 'Excellent metro and stations with lifts. Modern terminals have good accessibility. City centre facilities are generally accessible.',
+      fromPort: 'Free port authority shuttle to Areeta or Algorta metro stations, then Line 1 to Bilbao (25 minutes to Moyua for Guggenheim, Casco Viejo for Old Town). Cruise line shuttles available to Plaza Moyua.',
+      publicTransport: 'Metro Line 1 from Areeta or Algorta to Bilbao. Moyua station for Guggenheim, Casco Viejo station for Old Town. Around 2 euros each way for 2-zone ticket.',
+      taxis: 'Available at terminal, around 25 to 35 euros to Bilbao city centre.',
+      walkingDistance: 'Getxo town centre and Vizcaya Bridge walkable (10-20 minutes). Bilbao city centre is 15 km away, requires transport.',
+      sightseeingBus: 'Hop-on hop-off buses available in Bilbao city centre, covering museum, old town and riverside.',
+      accessibility: 'Metro is accessible with lifts at all stations. Cruise shuttles can usually accommodate wheelchairs. Getxo promenade is flat and accessible.',
     },
     
     mustSeeSights: [
       {
         title: 'Guggenheim Museum',
         category: 'landmark',
-        description: 'Gehry\'s titanium masterpiece with Jeff Koons puppy, modern art inside. Frank Gehry\'s architectural icon on the riverfront, featuring contemporary exhibitions and the famous Puppy sculpture.',
+        description: 'Frank Gehry\'s masterpiece of titanium curves and glass revolutionised modern architecture and transformed Bilbao from industrial backwater to world cultural destination. The building itself is the star - a shimmering, undulating sculpture beside the Nervion River. The outdoor sculptures - Jeff Koons\' flower-covered Puppy and Louise Bourgeois\' Maman spider - are iconic.',
         duration: '2 to 3 hours for a relaxed pace',
         tips: [
-          'Timed tickets essential; book online weeks ahead to guarantee entry',
-          'Exterior photos free; riverside walk offers best views',
-          'Morning visits have better light for photography',
+          'Closed on Mondays (except summer and holidays) - check the schedule before visiting',
+          'Book tickets online in advance to skip queues, especially in peak season',
+          'Don\'t miss the outdoor sculptures - Puppy and Maman are free to see',
         ],
-        highlights: ['Architecture', 'Art', 'Photography'],
-        goodFor: ['First-time visitors', 'Art lovers', 'Photographers'],
+        highlights: ['Architecture', 'Art', 'Photography', 'Culture', 'Museums'],
+        goodFor: ['First-time visitors', 'Architecture lovers', 'Art lovers', 'Photographers'],
       },
       {
-        title: 'Casco Viejo (Seven Streets)',
+        title: 'Casco Viejo (Old Town)',
         category: 'historic',
-        description: 'Medieval core with Mercado de la Ribera, Cathedral, pintxos bars. The historic heart of Bilbao with traditional architecture, lively atmosphere and authentic Basque culture.',
-        duration: '2 to 3 hours for a relaxed pace',
+        description: 'Bilbao\'s atmospheric medieval heart, known as Las Siete Calles (The Seven Streets), is a labyrinth of narrow lanes packed with pintxos bars, traditional shops and historic buildings. The 14th century Santiago Cathedral anchors the district, while the elegant 19th century Plaza Nueva provides a perfect setting for al fresco dining under its covered arcades.',
+        duration: '2 to 3 hours for a relaxed pace (longer if doing a proper pintxos crawl)',
         tips: [
-          'Metro to Casco Viejo; market lunch offers authentic local experience',
-          'Pintxo crawl through seven streets; one drink per bar',
-          'Cathedral and market are free to enter; perfect for budget travellers',
+          'Visit Plaza Nueva for the highest concentration of pintxos bars - Gure Toki, Sorginzulo and Cafe Bar Bilbao are local favourites',
+          'There\'s a flea market in Plaza Nueva on Sunday mornings',
+          'The Ribera Market is one of Europe\'s largest covered food markets - visit in the morning for the freshest produce',
         ],
-        highlights: ['Culture', 'Food', 'History', 'Markets'],
-        goodFor: ['Foodies', 'Culture seekers', 'First-time visitors'],
+        highlights: ['History', 'Food', 'Shopping', 'Culture', 'Architecture'],
+        goodFor: ['First-time visitors', 'Foodies', 'Culture seekers', 'Couples'],
       },
       {
-        title: 'Vizcaya Bridge',
-        category: 'landmark',
-        description: 'UNESCO transporter bridge (world\'s oldest); gondola ride across estuary. Historic engineering marvel offering walkway and gondola crossings with industrial heritage views.',
+        title: 'Mount Artxanda Funicular',
+        category: 'nature',
+        description: 'This historic funicular railway (operating since 1915) whisks you up to Mount Artxanda in just 3 minutes for spectacular panoramic views over Bilbao. From the viewpoint (marked by the famous red "BILBAO" letters), you can see the Guggenheim, the Old Town, the surrounding mountains and on clear days, all the way to the Bay of Biscay.',
         duration: '1 to 1.5 hours for a relaxed pace',
         tips: [
-          'Metro L1 Areeta; low-cost ride across estuary',
-          'Industrial heritage views from gondola are unique',
-          'Combine with Getxo marina walk for extended visit',
+          'The bottom station is about 15 minutes walk from Casco Viejo (near City Hall)',
+          'There are restaurants at the top for a scenic lunch',
+          'On the first Saturday of each month, guided tours explain the funicular\'s history',
         ],
-        highlights: ['Architecture', 'History', 'Views'],
-        goodFor: ['History buffs', 'Photographers', 'First-time visitors'],
+        highlights: ['Views', 'Photography', 'Nature', 'Gardens'],
+        goodFor: ['Photographers', 'Families', 'Couples', 'First-time visitors'],
       },
       {
-        title: 'Ribera Market',
+        title: 'Mercado de la Ribera',
         category: 'markets',
-        description: 'Europe\'s largest covered market with Basque produce, txakoli wine. Historic riverside market offering fresh produce, regional specialities and casual food stalls.',
+        description: 'One of Europe\'s largest covered markets, this Art Deco gem sits beside the river in the Old Town. Three floors overflow with fresh fish, meat, produce and Basque specialties. The ground floor gastro market offers pintxos and drinks in a lively atmosphere perfect for lunch.',
         duration: '1 to 1.5 hours for a relaxed pace',
         tips: [
-          'Ground floor food stalls; upstairs tapas bars',
-          'Weekday mornings less crowded',
-          'Try Idiazabal cheese and anchovies for authentic Basque flavours',
+          'Market stalls open Monday to Friday 08:00 to 14:30 and 17:00 to 20:00, Saturday 08:00 to 15:00',
+          'The pintxos bars have longer hours including Sundays',
+          'Look for the beautiful stained glass windows and Art Deco details',
         ],
-        highlights: ['Food', 'Markets', 'Culture'],
-        goodFor: ['Foodies', 'First-time visitors', 'Culture seekers'],
+        highlights: ['Food', 'Markets', 'Shopping', 'Architecture', 'Culture'],
+        goodFor: ['Foodies', 'Culture seekers', 'Families'],
+      },
+      {
+        title: 'Vizcaya Bridge (Puente Colgante)',
+        category: 'landmark',
+        description: 'This UNESCO World Heritage Site is the world\'s oldest transporter bridge, built in 1893 by a disciple of Gustave Eiffel. The ingenious design carries passengers and vehicles across the Nervion estuary on a suspended gondola, while ships pass beneath. For the best experience, take the lift to the 50-metre-high pedestrian walkway for spectacular views.',
+        duration: '1 to 1.5 hours for a relaxed pace',
+        tips: [
+          'Walk along Getxo\'s promenade to reach it from the cruise terminal (about 20 minutes)',
+          'The gondola crossing takes 90 seconds and costs just a couple of euros',
+          'The walkway experience includes lift access and panoramic views from both sides',
+        ],
+        highlights: ['History', 'Architecture', 'Photography', 'Views'],
+        goodFor: ['History buffs', 'Architecture lovers', 'Photographers', 'Families'],
+      },
+      {
+        title: 'San Juan de Gaztelugatxe (Day Excursion)',
+        category: 'excursion',
+        description: 'This dramatic islet topped by a medieval hermitage became world-famous as Dragonstone in Game of Thrones. A winding stone bridge connects it to the mainland, leading to 241 steps up to the chapel. The views of the rugged Basque coastline are breathtaking. Located 35 km east of Bilbao, this requires a half-day excursion but is unforgettable.',
+        duration: 'Half day (4 to 5 hours including travel)',
+        tips: [
+          'Book free entry tickets in advance during peak season (required Easter, summer, weekends March to October)',
+          'Wear sturdy shoes - the path is steep and can be slippery',
+          'Combine with visits to the fishing village of Bermeo or the historic town of Gernika',
+        ],
+        highlights: ['Nature', 'Views', 'Photography', 'History'],
+        goodFor: ['Active travelers', 'Photographers', 'History buffs', 'Couples'],
       },
       {
         title: 'Bilbao Fine Arts Museum',
         category: 'historic',
-        description: 'Spanish masters from El Greco to Picasso in neoclassical building. Comprehensive art collection spanning centuries in elegant museum setting near Doña Casilda park.',
+        description: 'Often overlooked in favour of its flashy neighbour, this excellent museum houses an outstanding collection spanning from medieval to contemporary art. Basque artists feature prominently alongside Spanish masters and international works. Set in a beautiful park, it makes a perfect complement to the Guggenheim.',
         duration: '1.5 to 2 hours for a relaxed pace',
         tips: [
-          'Entry fee reasonable; Goya rooms are highlight',
-          'Near Doña Casilda park for post-visit stroll',
-          'Less crowded than Guggenheim; perfect for art lovers',
+          'Just 10 minutes walk from the Guggenheim through Doña Casilda Park',
+          'Free entry on certain days - check the website',
+          'The museum cafe has a lovely terrace in the park',
         ],
-        highlights: ['Art', 'Museums', 'Culture'],
-        goodFor: ['Art lovers', 'Culture seekers'],
+        highlights: ['Art', 'Museums', 'Culture', 'Gardens'],
+        goodFor: ['Art lovers', 'Culture seekers', 'Solo travelers'],
       },
       {
-        title: 'Getxo & Sopelana Cliffs',
-        category: 'nature',
-        description: 'Coastal walks, surfing beaches near terminal (shuttle access). Dramatic Atlantic coastline with cliff paths, moderate hiking and spectacular ocean views.',
+        title: 'Pintxos Crawl Experience',
+        category: 'stroll',
+        description: 'Experience Bilbao\'s legendary pintxos culture with a self-guided bar hop through the Old Town. The ritual involves ordering one or two pintxos and a drink at each bar before moving to the next - standing at the bar, of course, never sitting down. This is how Bilbainos socialise, and participating is the best way to experience authentic Basque culture.',
         duration: '2 to 3 hours for a relaxed pace',
         tips: [
-          'Local buses from terminal; cliff paths moderate difficulty',
-          'Atlantic views are spectacular; bring windproof layers',
-          'Combine with Getxo marina for full coastal experience',
+          'Start in Plaza Nueva where Gure Toki, Sorginzulo and Cafe Bar Bilbao cluster together',
+          'Try the signature Gilda (anchovy, olive and guindilla pepper) and bacalao al pil-pil',
+          'Pair with txakoli (local sparkling white wine) or a zurito (small beer)',
         ],
-        highlights: ['Nature', 'Views', 'Active'],
-        goodFor: ['Active travelers', 'Nature lovers'],
+        highlights: ['Food', 'Culture', 'History'],
+        goodFor: ['Foodies', 'Couples', 'First-time visitors', 'Culture seekers'],
       },
     ],
 
-    thingsToDo: [
-      {
-        title: 'Guggenheim Museum',
-        description: 'Visit Frank Gehry\'s titanium masterpiece and explore contemporary art collections.',
-        category: 'culture',
-        duration: '2 to 3 hours',
-      },
-      {
-        title: 'Casco Viejo pintxos crawl',
-        description: 'Explore the old town\'s seven streets and sample traditional Basque tapas.',
-        category: 'food',
-        duration: '2 to 3 hours',
-      },
-      {
-        title: 'Vizcaya Bridge',
-        description: 'Experience the UNESCO transporter bridge near the cruise port.',
-        category: 'history',
-        duration: '1 to 1.5 hours',
-      },
-      {
-        title: 'Ribera Market',
-        description: 'Browse Europe\'s largest covered market and sample Basque produce.',
-        category: 'food',
-        duration: '1 to 1.5 hours',
-      },
-      {
-        title: 'Bilbao Fine Arts Museum',
-        description: 'Explore Spanish masters from El Greco to Picasso.',
-        category: 'culture',
-        duration: '1.5 to 2 hours',
-      },
-      {
-        title: 'Getxo & Sopelana Cliffs',
-        description: 'Coastal walks and Atlantic views near terminal.',
-        category: 'nature',
-        duration: '2 to 3 hours',
-      },
-    ],
-    
     shoreExcursions: [
       {
-        title: 'San Sebastián day trip',
-        description: 'Excursion to the elegant coastal resort (1 hour drive), famous for beaches and Michelin-starred cuisine.',
-        duration: 'Full day',
-        bookWith: 'Either',
+        title: 'Guggenheim and Casco Viejo',
+        description: 'Half-day combining the iconic museum with pintxos in Old Town',
+        duration: 'Half day',
+        bookWith: 'Independent or ship excursion',
       },
       {
-        title: 'Guggenheim and city highlights',
-        description: 'Half-day tour covering the museum, old town and key city sights.',
+        title: 'San Juan de Gaztelugatxe',
+        description: 'Game of Thrones filming location with dramatic coastal views',
         duration: 'Half day',
-        bookWith: 'Either',
+        bookWith: 'Ship excursion or local tour (advance booking required)',
+      },
+      {
+        title: 'San Sebastián',
+        description: 'Full day to elegant coastal city famous for beaches and Michelin-starred cuisine',
+        duration: 'Full day',
+        bookWith: 'Ship excursion recommended',
       },
     ],
 
-    nearestBeach: null,
+    nearestBeach: {
+      name: 'Playa de Ereaga (Ereaga Beach)',
+      distance: 'Under 5 minutes walk from cruise terminal',
+      description: 'Beautiful 800-metre urban beach of fine golden sand right next to the cruise terminal. Sheltered by the estuary, it offers calm waters and excellent facilities. Around 14 to 16°C in spring.',
+    },
     
     foodAndDrink: [
       {
-        name: 'Casco Viejo pintxos bars',
+        name: 'Plaza Nueva pintxos bars',
         type: 'Tapas Bar',
-        description: 'Gildas, txakoli wine hopping through Seven Streets. Traditional Basque tapas bars serving classic pintxos with local cider and white wine.',
+        description: 'Highest concentration of quality pintxos bars - Gure Toki, Sorginzulo and Cafe Bar Bilbao are local favourites in Casco Viejo.',
       },
       {
-        name: 'Ribera Market stalls',
+        name: 'Mercado de la Ribera',
         type: 'Market',
-        description: 'Idiazabal cheese, anchovies at Europe\'s largest covered market. Historic riverside market offering fresh produce, regional specialities and casual food stalls.',
+        description: 'One of Europe\'s largest covered markets with fresh fish, meat, produce and Basque specialties. Ground floor gastro market offers pintxos.',
       },
       {
-        name: 'Guggenheim riverside',
-        type: 'Restaurant',
-        description: 'Modern Basque tasting menu with museum views. Museum area restaurant serving contemporary cuisine with riverside terrace overlooking the titanium structure.',
+        name: 'Puerto Viejo de Algorta',
+        type: 'Tapas Bar',
+        description: 'Excellent local pintxos in old fishing port without tourist crowds in Getxo.',
       },
       {
-        name: 'Getxo seafood',
+        name: 'Calle Ledesma',
         type: 'Restaurant',
-        description: 'Fresh percebes near terminal. Waterfront restaurants along the marina serving local catch, grilled seafood and traditional preparations with local flavour.',
+        description: 'Good pintxos options closer to the Guggenheim.',
       },
     ],
     
     insiderTips: [
-      'Metro Areeta card (1 euro plus fare); Bilbao Card (10 to 20 euros discounts). Tourist card includes transport and museum discounts.',
-      'Pickpockets in markets; secure valuables. Use standard precautions in crowded pintxos bars and markets.',
-      'Guggenheim timed tickets essential. Book online weeks ahead to guarantee entry, especially during peak cruise season.',
-      'Metro for city; shuttles for local; taxis reliable. Take cruise shuttle or taxi to city centre, then use efficient metro system.',
-      'Cards everywhere; cash for pintxos (2 to 3 euros each); 5 to 10 percent tip. Most places accept cards, but small cash useful for bars.',
-      'No dress codes; relaxed Basque style. Casual attire is fine throughout the city.',
-      'Skip tourist menus; bar hop authentic. Follow local custom of moving between bars, sampling different specialities at each.',
+      'The Guggenheim is closed on Mondays (except summer months and holidays) - plan accordingly',
+      'Siesta is less observed in the Basque Country than southern Spain, but some small shops may close 14:00 to 17:00',
+      'Pintxos bars are busiest 13:00 to 15:00 and 19:00 to 21:00 - arrive outside these times to secure space at the bar',
+      'Take the free port shuttle to Areeta or Algorta metro stations, then Line 1 into Bilbao (about 2 euros, 20 to 25 minutes)',
+      'For a relaxed day, stay in Getxo - the UNESCO Vizcaya Bridge and Puerto Viejo de Algorta offer excellent half-day without city commute',
+      'San Juan de Gaztelugatxe (Game of Thrones location) requires booking free entry tickets in advance for peak times',
+      'Try the Gilda pintxo (anchovy, olive, pepper), bacalao al pil-pil, and Basque burnt cheesecake',
+      'Pair pintxos with txakoli (local sparkling white wine) poured from height',
     ],
     
     faq: [
       {
-        question: 'Is Bilbao walkable from the cruise port?',
-        answer: 'No, 20-minute metro to centre. The terminals are in Getxo, 15 km from Bilbao city centre, requiring shuttle or metro transport.',
+        question: 'Should I stay in Getxo or go into Bilbao?',
+        answer: 'Both options have merit. Getxo offers the UNESCO Vizcaya Bridge, beautiful beaches, and charming old fishing ports - perfect if you want a relaxed day without commuting. Bilbao is essential for the Guggenheim, vibrant Old Town, and the full pintxos experience. Most visitors with 8+ hours combine both.',
       },
       {
-        question: 'How long do you need in Bilbao?',
-        answer: '6 to 8 hours for Guggenheim and old town. A typical cruise call allows time for the museum (2 to 3 hours) plus pintxos in Casco Viejo, with travel.',
+        question: 'How do I get from the cruise port to Bilbao city centre?',
+        answer: 'Take the cruise line shuttle (usually 15 to 20 euros return) which drops at Plaza Moyua, or use the free port shuttle to Areeta metro station and catch Line 1 into Bilbao (about 2 euros, 20 to 25 minutes).',
       },
       {
-        question: 'Is English widely spoken in Bilbao?',
-        answer: 'Tourist areas and menus yes. English is common in tourist areas, port facilities and major attractions, though less so in traditional bars.',
+        question: 'Is the Guggenheim worth visiting even if I\'m not into art?',
+        answer: 'Absolutely. Frank Gehry\'s building is the main attraction - a stunning architectural achievement that photographs beautifully from every angle. The outdoor sculptures (Puppy and Maman) are free to see. Even a quick visit is worthwhile.',
       },
       {
-        question: 'Is Bilbao safe for tourists?',
-        answer: 'Very safe; standard precautions. Bilbao is generally very safe, but use standard precautions in crowded pintxos bars and markets.',
+        question: 'What are pintxos and how do I order them?',
+        answer: 'Pintxos are Basque small plates, typically served on bread. Order at the bar, point at what you want, and keep your toothpicks (they\'re used to tally your bill). It\'s normal to have just one or two items per bar, then move to the next.',
       },
       {
-        question: 'Is Bilbao expensive?',
-        answer: 'Moderate; pintxos 2 to 3 euros each. Most attractions and dining are reasonably priced, with pintxos bars offering excellent value.',
+        question: 'Is Bilbao walkable?',
+        answer: 'The Old Town and Guggenheim area are very walkable and mostly flat. The main sights are connected by a pleasant riverside promenade. However, getting from the cruise port requires transport (shuttle or metro).',
       },
       {
-        question: 'Do I need cash in Bilbao or can I use card?',
-        answer: 'Cards dominant; cash for pintxos. Most places accept cards, but small cash (2 to 3 euros) useful for pintxos bars.',
+        question: 'What should I eat in Bilbao?',
+        answer: 'Don\'t miss: the Gilda pintxo (anchovy, olive, pepper), bacalao al pil-pil (cod in garlic-oil sauce), and Basque burnt cheesecake (tarta de queso). Wash it down with txakoli, the local sparkling wine.',
       },
       {
-        question: 'Should I book a ship excursion or explore independently?',
-        answer: 'Independent metro perfect. The efficient metro system makes independent exploration straightforward, with shuttles connecting port to city.',
-      },
-      {
-        question: 'What is the best thing to do in Bilbao on a cruise day?',
-        answer: 'Guggenheim to pintxos crawl. Combine the iconic museum with authentic Basque food experience in Casco Viejo for perfect cruise day.',
+        question: 'Is Bilbao good for families with children?',
+        answer: 'Yes! The Guggenheim\'s architecture fascinates all ages, Doña Casilda Park offers space to run around, and Ereaga Beach is right beside the ship. The pintxos culture works well with kids - they can pick what looks interesting.',
       },
       {
         question: 'Is Bilbao wheelchair accessible?',
-        answer: 'Excellent metro and stations. Modern terminals have good accessibility, and metro system features lifts at major stations.',
+        answer: 'The Guggenheim is fully accessible. The Old Town has some cobblestones but main plazas are manageable. Metro stations have lifts. The Vizcaya Bridge gondola is wheelchair accessible. Getxo\'s promenade is flat and easy.',
       },
       {
-        question: 'Is Bilbao good for limited mobility?',
-        answer: 'Yes, flat centre, elevators. City centre is relatively flat with good accessibility, and metro stations have elevators for easy access.',
+        question: 'What\'s the weather like?',
+        answer: 'Bilbao has an oceanic climate - mild but often wet. Expect temperatures of 13 to 18°C in spring and autumn with a high chance of rain. Pack layers and a waterproof jacket regardless of forecast.',
+      },
+      {
+        question: 'Can I visit San Juan de Gaztelugatxe (Game of Thrones location)?',
+        answer: 'Yes, but it requires advance planning. Located 35 km from Bilbao, you need a half-day excursion (organised tour or rental car). Book free entry tickets in advance for peak times. The hike involves 241 steps and takes about 75 minutes return.',
       },
     ],
     
     practicalInfo: {
-      bestTimeToVisit: 'May to October for pleasant weather and good conditions for exploring the city and enjoying outdoor pintxos culture',
-      cruiseTerminals: ['Getxo Olatua', 'Terminal Sul'],
-      nearbyAirport: 'Bilbao Airport (BIO), 15 km',
-      visaInfo: 'None for UK passport holders (Schengen 90/180 days). Check current rules for other nationalities.',
+      bestTimeToVisit: 'May to October for pleasant weather',
+      cruiseTerminals: ['Getxo cruise terminal'],
+      nearbyAirport: 'Bilbao Airport (BIO) - 10 km northeast of city, about 20 km from Getxo',
+      visaInfo: 'Spain is part of the Schengen Area',
+      emergencyNumber: '112 (pan-European emergency number)',
+      tippingCustom: 'Not obligatory - rounding up or small change appreciated',
+      siestaShopClosing: 'Less observed than southern Spain, some shops close 14:00 to 17:00',
     },
 
     weather: {
-      intro: 'Bilbao has an oceanic climate with mild temperatures year-round but significant rainfall, especially in autumn and winter. June to September offers the mildest conditions with drier weather ideal for sightseeing.',
+      intro: '13 to 16°C | Expect rain - this is Green Spain! Pack layers and a waterproof jacket. Bilbao has an oceanic climate with mild but wet conditions year-round. March and April average 16 to 18 rainy days per month.',
       months: [
         { month: 'Jan', highC: 13, lowC: 6, rainMm: 140, sunDays: 9, seaTempC: 13 },
         { month: 'Feb', highC: 14, lowC: 7, rainMm: 110, sunDays: 11, seaTempC: 13 },
@@ -3635,23 +3740,23 @@ export const ports = [
         { month: 'Dec', highC: 13, lowC: 7, rainMm: 140, sunDays: 9, seaTempC: 14 },
       ],
       bestTime: {
-        overall: 'June to September offers mild, drier weather ideal for exploring both city and coast',
-        hottest: 'Peak season (July to August): Festivals and vibrant atmosphere, but busier with tourists',
-        quietest: 'Quieter months (May, September): Perfect sightseeing conditions with fewer crowds',
-        recommendation: 'Guggenheim summer visits offer the most comfortable conditions for first-time cruise visitors wanting to maximise time at the museum and enjoy outdoor pintxos culture',
+        overall: 'May to October for pleasant weather and good conditions for exploring',
+        hottest: 'July to August are warmest with festivals and vibrant atmosphere',
+        quietest: 'May and September offer perfect sightseeing with fewer crowds',
+        recommendation: 'Summer months offer most comfortable conditions for museum visits and outdoor pintxos culture',
       },
     },
     
-    relatedDestinations: ['mediterranean-cruises', 'canary-islands-cruises'],
+    relatedDestinations: ['mediterranean-cruises', 'atlantic-coast-cruises'],
     
     meta: {
       title: 'Bilbao Cruise Port Guide | Guggenheim & Basque Pintxos',
-      description: 'Complete Bilbao cruise port guide. Visit the Guggenheim Museum, explore Casco Viejo pintxos bars, discover Basque culture from this modern Atlantic port.',
-      keywords: ['Bilbao cruise port', 'Guggenheim Museum', 'Basque Country cruise', 'Bilbao shore excursions', 'Getxo cruise terminal', 'Bilbao pintxos'],
+      description: 'Complete Bilbao cruise port guide from Getxo. Visit the Guggenheim Museum, explore Casco Viejo pintxos bars, experience the Vizcaya Bridge, and discover authentic Basque culture.',
+      keywords: ['Bilbao cruise port', 'Guggenheim Museum', 'Basque Country cruise', 'Bilbao shore excursions', 'Getxo cruise terminal', 'Bilbao pintxos', 'Vizcaya Bridge'],
     },
     
     status: 'published',
-    lastUpdated: '2025-12-28',
+    lastUpdated: '2026-01-17',
   },
 
   // Gibraltar
@@ -4198,15 +4303,16 @@ export const ports = [
     name: 'Funchal, Madeira',
     country: 'Portugal',
     region: 'atlantic-islands',
-    coordinates: { lat: 32.6504, lon: -16.9238 },
-    tagline: 'Cable cars and toboggan thrills',
-    description: 'Funchal nestles amphitheatre-style against volcanic peaks, where banana plantations meet Atlantic cliffs and wicker sleds race downhill from Monte. Cruise ships dock centrally for instant access to painted-door old town streets, wine lodges, and gondola rides soaring over rooftops. Subtropical blooms and Cristiano Ronaldo\'s birthplace add unique island allure.',
+    coordinates: { lat: 32.6443, lon: -16.9114 },
+    tagline: 'Floating Garden of the Atlantic where toboggans race and flowers never stop blooming',
+    description: 'Funchal, the capital of Portugal\'s Madeira archipelago, rises dramatically from the harbour in a natural amphitheatre of lush green hills dotted with white houses and red roofs. Cruise ships dock at the modern terminal on Pontinha Pier, just 15 to 20 minutes\' walk from the historic city centre. The city is most famous for its extraordinary gardens and the unique experience of riding a wicker toboggan down steep streets from Monte.',
+    portCharacter: 'island',
     
     aboutPort: {
-      overview: 'Funchal Cruise Terminal on the long breakwater pier offers WiFi, ATMs, shops, and hop-on buses right outside; handles multiple mega-ships simultaneously.',
-      terminals: 'Funchal Cruise Terminal on the long breakwater pier.',
-      shuttleServices: 'No shuttles typically needed; 15-minute flat waterfront promenade leads to old town though taxis and tuk-tuks available.',
-      walkability: '15-minute flat waterfront promenade leads to old town; no shuttles typically needed though taxis and tuk-tuks available.',
+      overview: 'Funchal rises dramatically from the harbour in a natural amphitheatre of lush green hills. Named after the wild fennel (funcho) that Portuguese explorers found growing here in the 15th century. Madeira\'s mild year-round climate and unique flora have earned it the title of Europe\'s Best Cruise Destination.',
+      terminals: 'Pontinha Pier, International Maritime Passenger Terminal',
+      shuttleServices: 'Some cruise lines offer shuttles (around 9 euros return); taxis available for approximately 7 to 8 euros',
+      walkability: 'Excellent - city centre easily walkable from port (15-20 mins)',
     },
     
     quickFacts: {
@@ -4220,269 +4326,296 @@ export const ports = [
     
     transportConnections: {
       airport: {
-        name: 'Cristiano Ronaldo Airport (FNC)',
-        distance: '20km, 30 minutes by taxi',
-        options: 'Bus 113 (40 minutes) or shuttle.',
+        name: 'Funchal Airport (Madeira Airport)',
+        distance: 'Approximately 18km from port',
+        options: 'Taxi or bus.',
       },
       trains: {
         mainStation: null,
-        description: 'None (island buses and tram to Monte). Bus network covers levadas and east coast.',
-        localHubs: 'Bus station 10-minute walk from port.',
+        description: 'No train network on Madeira. Bus network serves the island.',
+        localHubs: 'Bus station near city centre.',
       },
     },
     
     gettingAround: {
-      fromPort: 'Passengers exit the terminal and walk the seafront promenade into Funchal\'s centre, where most sights cluster around the old town and Avenida Arriaga. Taxis and occasional shuttles speed the journey for those preferring not to walk.',
-      publicTransport: 'Public buses and electric tuk-tuks serve the city and hills, while the iconic cable car provides direct uphill access to Monte. No metro or tram exists, but hop-on hop-off buses and small electric sightseeing vehicles start near the terminal.',
-      taxis: 'Taxis rank outside the terminal for short trips to viewpoints or the cable car base; fares are metered or fixed for popular routes. Fixed rate to centre available.',
-      walkingDistance: 'Central distances are short: old town in 15 minutes, market in 10, cable car station in 20 to 25 minutes on foot.',
-      sightseeingBus: 'Hop-on hop-off buses depart from near the port, looping through the city, Monte and botanical gardens, useful for covering dispersed attractions efficiently.',
-      accessibility: 'Funchal centre is fairly walkable, but the cable car and Monte require some mobility. Cobbled streets in old town may be challenging for wheelchairs.',
+      fromPort: '15 to 20 minutes walk along the seafront promenade to city centre. Taxis and tuk-tuks available.',
+      publicTransport: 'Public buses serve the city and island. The iconic cable car connects seafront to Monte.',
+      taxis: 'Readily available outside terminal. Approximately 7 to 8 euros to city centre.',
+      walkingDistance: 'City centre: 15-20 mins. Cable car station: 20 mins. Market: 20 mins walk.',
+      sightseeingBus: 'Hop-on hop-off buses available near port, covering city attractions, Monte, and gardens.',
+      accessibility: 'City centre walkable. Cable car accessible. Old Town has cobbled streets. Monte gardens very steep.',
     },
     
     mustSeeSights: [
       {
-        title: 'Funchal-Monte Cable Car',
+        title: 'Monte Cable Car and Toboggan Ride',
         category: 'landmark',
-        description: 'Soaring gondolas over rooftops to Monte suburb with 360° island views; longest in Portugal.',
-        duration: '1 to 1.5 hours for a relaxed pace',
+        description: 'The iconic Funchal experience combines a spectacular 15-minute cable car ride soaring 550 metres above the city with the unique wicker toboggan descent. The traditional sledges, guided by two "carreiros" using their boots as brakes, have been thrilling visitors since the 1850s. The 2km toboggan ride reaches speeds of up to 30mph and ends in Livramento.',
+        duration: '2 to 3 hours for a relaxed pace (including gardens at top)',
         tips: [
-          'One-way up for toboggan down',
-          'Mornings shortest queues',
-          'Cloudy days skip',
+          'Go early morning or late afternoon to avoid cruise ship crowds at the cable car',
+          'The toboggan ends at Livramento, not the bottom - you\'ll need a taxi (approximately 10 euros) back to town',
+          'One-way cable car ticket works best if taking the toboggan down',
         ],
-        highlights: ['Views', 'Photography', 'Active'],
-        goodFor: ['First-time visitors', 'Photographers'],
+        highlights: ['Views', 'Culture', 'Photography', 'Family-friendly'],
+        goodFor: ['First-time visitors', 'Families', 'Photographers', 'Adventure seekers'],
       },
       {
         title: 'Monte Palace Tropical Garden',
         category: 'nature',
-        description: 'Japanese gardens, tile museum, koi ponds amid exotic plants on extinct volcano.',
-        duration: '1.5 to 2 hours for a relaxed pace',
+        description: 'Stunning 70,000 square metre garden featuring exotic plants from around the world, oriental architecture, decorative tile panels, and a museum of semi-precious stones. The garden cascades down the hillside with lakes, sculptures, and African art. The Church of Nossa Senhora do Monte, resting place of Emperor Charles I of Austria, is nearby.',
+        duration: '2 to 3 hours for a relaxed pace',
         tips: [
-          'Entry fee applies; peacocks mornings',
-          'Sculpture trail loop',
-          'Combine with cable car for best experience',
+          'The gardens are steep - start at the top and work your way down',
+          'Comfortable walking shoes essential',
+          'Allow extra time if visiting the museums inside',
         ],
-        highlights: ['Gardens', 'Nature', 'Art', 'Views'],
-        goodFor: ['Nature lovers', 'Photographers'],
+        highlights: ['Gardens', 'Views', 'Art', 'Photography', 'Architecture'],
+        goodFor: ['Garden lovers', 'Photographers', 'Art lovers', 'Culture seekers'],
       },
       {
-        title: 'Zona Velha & Rua Santa Maria',
-        category: 'historic',
-        description: 'Painted-door street with seafood stalls, fado bars, and 15th-century cathedral.',
-        duration: '1 to 2 hours for a relaxed pace',
+        title: 'Cabo Girão Skywalk',
+        category: 'nature',
+        description: 'Europe\'s highest sea cliff skywalk at 580 metres above the Atlantic Ocean. The glass platform juts out over the sheer cliff face, providing vertigo-inducing views down to the terraced vineyards and tiny beach below. A cable car descends to the base where you can swim.',
+        duration: '2 to 3 hours including travel for a relaxed pace',
         tips: [
-          'Photo murals mornings',
-          'Cathedral free entry',
-          'Avoid lunch rush',
+          'Early morning offers clearest views and fewer crowds',
+          'Not for those with fear of heights - the glass floor is intimidating',
+          'Combine with nearby Câmara de Lobos fishing village',
         ],
-        highlights: ['Culture', 'History', 'Photography', 'Food'],
-        goodFor: ['Culture seekers', 'First-time visitors'],
+        highlights: ['Views', 'Nature', 'Photography'],
+        goodFor: ['Photographers', 'Thrill seekers', 'First-time visitors'],
       },
       {
-        title: 'Mercado dos Lavradores',
-        category: 'markets',
-        description: 'Exotic fruit stalls (passionfruit, custard apples), flowers, and wine; upstairs eateries.',
-        duration: '45 minutes to 1 hour for a relaxed pace',
+        title: 'Câmara de Lobos',
+        category: 'stroll',
+        description: 'Picturesque fishing village made famous by Winston Churchill, who painted its colourful boats and harbour. The traditional fishing boats still line the small harbour, and cliff-top viewpoints offer stunning panoramas. The village has excellent seafood restaurants and authentic local atmosphere.',
+        duration: '2 to 3 hours for a relaxed pace',
         tips: [
-          'Weekdays authentic',
-          'Haggle politely',
-          'Exotic fruit tasting available',
+          'The hop-on hop-off bus stops here making independent visits easy',
+          'Try the local poncha drink at a harbourside bar',
+          'The Churchill viewpoint has an information board about his painting',
         ],
-        highlights: ['Markets', 'Food', 'Culture'],
-        goodFor: ['Foodies', 'Shoppers'],
+        highlights: ['Photography', 'Food', 'Culture', 'Scenic'],
+        goodFor: ['Photographers', 'Foodies', 'Culture seekers', 'Couples'],
+      },
+      {
+        title: 'Madeira Botanical Garden',
+        category: 'nature',
+        description: 'Nine acres of stunning gardens featuring over 2,500 exotic and rare plants, with panoramic views over Funchal. The garden includes a natural history museum, bird park, and themed sections from succulents to tropical flowers. A separate cable car connects from Monte.',
+        duration: '2 to 3 hours for a relaxed pace',
+        tips: [
+          'Can be combined with Monte via the Botanical Garden cable car',
+          'Entry to garden is separate from cable car tickets',
+          'Less steep than Monte Palace and more traditional garden layout',
+        ],
+        highlights: ['Gardens', 'Views', 'Nature', 'Photography'],
+        goodFor: ['Garden lovers', 'Photographers', 'Families', 'Nature lovers'],
       },
       {
         title: 'Blandy\'s Wine Lodge',
         category: 'historic',
-        description: '200-year-old cellars with tastings of fortified Madeira wines; museum and barrels.',
-        duration: '1 to 1.5 hours for a relaxed pace',
+        description: 'Discover the history and production of Madeira wine at this historic lodge founded in 1811. Guided tours take you through the 200-year-old cellars, explaining the unique heating process that creates Madeira\'s distinctive flavour. Tours conclude with tastings of different wine styles from dry to sweet.',
+        duration: '1 to 2 hours for a relaxed pace',
         tips: [
-          'Tasting tour available',
-          'Sweeter wines for beginners',
-          'Combine with market visit',
+          'Book tours in advance, especially when multiple ships are in port',
+          'The vintage room has wines dating back 150 years',
+          'Tours run in multiple languages',
         ],
-        highlights: ['Culture', 'Food', 'History'],
-        goodFor: ['Foodies', 'History buffs'],
+        highlights: ['History', 'Food', 'Culture'],
+        goodFor: ['Foodies', 'History buffs', 'Couples', 'Wine lovers'],
       },
       {
-        title: 'Monte Toboggan Ride',
-        category: 'active',
-        description: 'Wicker sleds steered by carreiros down 2km hillside at 30kph.',
-        duration: '15 minutes to 30 minutes for a relaxed pace',
+        title: 'Old Town (Zona Velha)',
+        category: 'stroll',
+        description: 'Funchal\'s historic quarter features narrow cobbled streets, the 15th-century Sé Cathedral, traditional tavernas, and the famous painted doors art project on Rua de Santa Maria. The Fortaleza de São Tiago fortress offers panoramic harbour views. Local restaurants serve authentic Madeiran cuisine in atmospheric settings.',
+        duration: '2 to 3 hours for a relaxed pace',
         tips: [
-          'Per two people pricing',
-          'Long trousers recommended',
-          'Livramento drop-off (bus back)',
+          'The painted doors make every street a photo opportunity',
+          'Evening atmosphere is magical with lit doorways',
+          'Look for espetada (beef skewers) on restaurant menus',
         ],
-        highlights: ['Active', 'Views', 'Photography'],
-        goodFor: ['Active travelers', 'Couples'],
+        highlights: ['Culture', 'Photography', 'Food', 'History'],
+        goodFor: ['First-time visitors', 'Photographers', 'Foodies', 'Culture seekers'],
       },
       {
-        title: 'Pico do Arieiro',
-        category: 'excursion',
-        description: 'Third-highest peak in Madeira at 1,818 meters elevation. Drive up to summit for panoramic views above the clouds. Hiking trails to Pico Ruivo with tunnels and dramatic mountain scenery.',
-        duration: '3 to 4 hours plus travel for a relaxed pace',
+        title: 'Mercado dos Lavradores',
+        category: 'markets',
+        description: 'Funchal\'s famous farmers\' market is a feast for the senses, with flowers, exotic fruits, vegetables, and fish displayed in a beautiful Art Deco building. Local vendors in traditional costume offer samples of unfamiliar tropical fruits. The fish hall displays the distinctive black scabbard fish unique to Madeira.',
+        duration: '1 hour for a relaxed pace',
         tips: [
-          'Organized tour or car hire required',
-          'Bring warm layers as it is cold and windy',
-          'Best at sunrise or sunset for views above clouds',
+          'Morning is best for atmosphere and freshest produce',
+          'Try the exotic fruits but agree on price before accepting samples',
+          'The flower vendors offer great value on pre-made bouquets',
         ],
-        highlights: ['Views', 'Nature', 'Hiking', 'Photography'],
-        goodFor: ['Nature lovers', 'Hikers', 'Photographers', 'Adventure seekers'],
+        highlights: ['Markets', 'Food', 'Culture', 'Photography'],
+        goodFor: ['Foodies', 'Photographers', 'First-time visitors', 'Culture seekers'],
       },
     ],
     
-    thingsToDo: [],
+    shoreExcursions: [
+      {
+        title: 'Monte Cable Car & Toboggan',
+        description: 'Iconic cable car ride and traditional wicker toboggan descent',
+        duration: 'Half day',
+        bookWith: 'Independent or ship excursion',
+      },
+      {
+        title: 'Cabo Girão Skywalk',
+        description: 'Europe\'s highest sea cliff skywalk with glass platform',
+        duration: 'Half day',
+        bookWith: 'Ship excursion or hop-on bus',
+      },
+      {
+        title: 'Levada Walks',
+        description: 'Hiking along ancient irrigation channels through laurel forests',
+        duration: 'Half to full day',
+        bookWith: 'Ship excursion or local tour',
+      },
+    ],
     
     nearestBeach: {
       name: 'Praia Formosa',
-      description: 'Dark volcanic sands with natural rock pools and promenade; rugged Atlantic surf.',
-      type: 'mixed',
-      waterEntry: 'drops off quickly',
-      shelter: 'exposed',
-      crowdLevel: 'moderate',
-      facilities: {
-        lifeguards: true,
-        lifeguardsSeasonal: true,
-        sunbeds: false,
-        umbrellas: false,
-        showers: true,
-        toilets: true,
-        restaurants: true,
-        changingRooms: false,
-      },
-      access: {
-        walkTime: '40 minutes from port',
-        taxiTime: '10 minutes',
-        busRoute: 'Bus 1 (20 minutes)',
-        notes: 'Bus from Almirante Reis; rocky pools safer for kids',
-      },
-      bestFor: ['swimming', 'snorkelling', 'relaxing'],
-      tip: 'Rock pools at low tide perfect for families despite waves.',
+      distance: 'Short bus or taxi ride (approximately 10 minutes), not walkable',
+      description: 'Madeira\'s largest beach complex with dark pebbles and small sandy sections. Several beach clubs and facilities make this a popular spot for locals and visitors. ~20°C year-round sea temperature.',
     },
-    
-    shoreExcursions: [],
     
     foodAndDrink: [
       {
-        name: 'Mercado dos Lavradores stalls',
-        type: 'Market',
-        description: 'Passionfruit poncha and limpets - 10-minute walk.',
-      },
-      {
-        name: 'O Castelo',
+        name: 'Gavião Novo',
         type: 'Restaurant',
-        description: 'Espetada beef skewers - Zona Velha.',
+        description: 'Traditional Madeiran cuisine with espetada specialty in Old Town.',
       },
       {
-        name: 'Reid\'s Palace',
+        name: 'Armazém do Sal',
+        type: 'Restaurant',
+        description: 'Modern Madeiran food in converted salt warehouse near Marina.',
+      },
+      {
+        name: 'A Muralha',
+        type: 'Restaurant',
+        description: 'Authentic local restaurant in historic building on Rua de Santa Maria.',
+      },
+      {
+        name: 'Ritz Madeira',
         type: 'Cafe',
-        description: 'Afternoon tea with sea views - Monte bus.',
+        description: 'Historic cafe with traditional pastries in City Centre.',
       },
       {
-        name: 'Livramento seafood bars',
-        type: 'Tapas Bar',
-        description: 'Post-toboggan fresh fish - Toboggan drop-off.',
+        name: 'Armazém do Mercado',
+        type: 'Cafe',
+        description: 'Trendy food hall with multiple vendors near Market.',
+      },
+      {
+        name: 'Galáxia Skybar',
+        type: 'Bar',
+        description: 'Galaxy-themed rooftop bar with mountain views at Savoy Palace Hotel.',
+      },
+      {
+        name: 'Venda Velha',
+        type: 'Bar',
+        description: 'Traditional poncha and local atmosphere in Old Town.',
       },
     ],
     
     insiderTips: [
-      'Buy cable car and toboggan combo; one-way up essential.',
-      'Pickpockets low risk but watch bags in market queues.',
-      'Attractions 9 to 11am beat cruise crowds.',
-      'Walk old town; bus or cable car for Monte; taxis reliable.',
-      'Cards everywhere; euros for buses and markets; 5 to 10% tip restaurants.',
-      'No strict siesta; cathedral shoulders covered.',
-      'Skip souvenir chains; market embroidery authentic.',
-      'Free port WiFi; Google Maps for bus stops.',
+      'The cable car to Monte can have long queues when multiple cruise ships are in port - go early or later afternoon',
+      'Monte toboggans end halfway down the hill at Livramento, not at the port - you\'ll need a taxi or bus back',
+      'The best way to experience highlights: cable car up to Monte in the morning, explore gardens, then toboggan down',
+      'The painted doors of Rua de Santa Maria in Old Town are incredibly photogenic',
+      'Try espetada (beef skewers hung from a stand), espada com banana (black scabbard fish with banana), and poncha cocktail',
+      'Blandy\'s Wine Lodge tours should be booked in advance when multiple ships are in port',
+      'Many shops close during siesta (roughly 1pm to 3pm), though tourist areas often stay open',
+      'Santa Catarina Park offers excellent harbour views and is a pleasant spot to relax',
     ],
     
     faq: [
       {
         question: 'Is Funchal walkable from the cruise port?',
-        answer: 'Yes, 15 minutes flat promenade to old town.',
+        answer: 'Yes, the city centre and Old Town are 15 to 20 minutes pleasant walk along the seafront promenade. The route is flat and well-maintained. The cable car station is about 20 minutes walk.',
       },
       {
         question: 'How long do you need in Funchal?',
-        answer: '6 to 8 hours for cable car, toboggan, and market.',
+        answer: 'A full day allows you to experience the cable car, Monte gardens, toboggan ride, and Old Town exploration. Half a day works for just the city centre highlights.',
       },
       {
         question: 'Is English widely spoken in Funchal?',
-        answer: 'Yes in ports, tourist attractions, and restaurants.',
+        answer: 'Yes, English is spoken throughout tourist areas, hotels, and restaurants. Portuguese is the official language but you will have no communication difficulties.',
       },
       {
         question: 'Is Funchal safe for tourists?',
-        answer: 'Very safe; standard vigilance in crowds.',
+        answer: 'Very safe. Madeira has very low crime rates. Normal precautions apply but violent crime is extremely rare.',
       },
       {
         question: 'Is Funchal expensive?',
-        answer: 'Moderate; markets cheap, toboggans pricier.',
+        answer: 'Moderate by Western European standards and cheaper than mainland Portugal. Restaurants, transport, and attractions offer good value.',
       },
       {
         question: 'Do I need cash in Funchal or can I use card?',
-        answer: 'Cards dominant; euros for buses and street food.',
+        answer: 'Card payments are widely accepted including contactless. Some smaller vendors at the market prefer cash. ATMs are readily available.',
       },
       {
         question: 'Should I book a ship excursion or explore independently?',
-        answer: 'Independent perfect (walkable plus buses).',
+        answer: 'Funchal is very easy to explore independently. The cable car and toboggan can be booked on the day (though queues form). For island tours to Cabo Girão or levada walks, ship excursions or local tours are convenient.',
       },
       {
         question: 'What is the best thing to do in Funchal on a cruise day?',
-        answer: 'Cable car up, toboggan down, wine tasting.',
-      },
-      {
-        question: 'Are the beaches nice in Funchal?',
-        answer: 'Praia Formosa rocky pools scenic by bus.',
+        answer: 'Take the cable car to Monte in the morning, explore the gardens, then ride the toboggan down. Spend the afternoon in the Old Town discovering painted doors and trying local food. Visit Blandy\'s Wine Lodge for a tasting before returning to the ship.',
       },
       {
         question: 'Is Funchal family-friendly?',
-        answer: 'Yes, cable car, gardens, toboggans thrill kids.',
+        answer: 'Excellent for families. Children love the cable car and toboggan (minimum age/height may apply for toboggan). Santa Catarina Park has a playground, and the CR7 Museum appeals to young football fans.',
+      },
+      {
+        question: 'What is the weather like in Funchal?',
+        answer: 'Mild year-round with temperatures between 18 and 25°C. The island lives up to its "Eternal Spring" nickname. Higher areas like Monte can be cooler and cloudier than the coast.',
       },
     ],
     
     weather: {
-      intro: 'Year-round mild. Peak season (July to August): Driest and warmest (cons: busier). Quieter months (April to May, October): Flowers and hiking (pros). First-timers: Spring levada walks.',
+      intro: '18 to 25°C throughout the year with little seasonal variation. The mountains can be cooler and cloudier. Pack layers and a light rain jacket for higher altitudes.',
       months: [
-        { month: 'Jan', highC: 19, lowC: 15, rainMm: 80, rainyDays: null, sunDays: 15, seaTempC: 18, uv: null, wind: null },
-        { month: 'Feb', highC: 19, lowC: 15, rainMm: 70, rainyDays: null, sunDays: 16, seaTempC: 18, uv: null, wind: null },
-        { month: 'Mar', highC: 20, lowC: 16, rainMm: 60, rainyDays: null, sunDays: 18, seaTempC: 19, uv: null, wind: null },
-        { month: 'Apr', highC: 21, lowC: 16, rainMm: 50, rainyDays: null, sunDays: 20, seaTempC: 19, uv: null, wind: null },
-        { month: 'May', highC: 22, lowC: 17, rainMm: 30, rainyDays: null, sunDays: 23, seaTempC: 20, uv: null, wind: null },
-        { month: 'Jun', highC: 24, lowC: 19, rainMm: 20, rainyDays: null, sunDays: 25, seaTempC: 21, uv: null, wind: null },
-        { month: 'Jul', highC: 26, lowC: 21, rainMm: 10, rainyDays: null, sunDays: 27, seaTempC: 22, uv: null, wind: null },
-        { month: 'Aug', highC: 27, lowC: 22, rainMm: 15, rainyDays: null, sunDays: 26, seaTempC: 23, uv: null, wind: null },
-        { month: 'Sep', highC: 26, lowC: 21, rainMm: 30, rainyDays: null, sunDays: 24, seaTempC: 23, uv: null, wind: null },
-        { month: 'Oct', highC: 25, lowC: 20, rainMm: 70, rainyDays: null, sunDays: 21, seaTempC: 22, uv: null, wind: null },
-        { month: 'Nov', highC: 23, lowC: 18, rainMm: 90, rainyDays: null, sunDays: 17, seaTempC: 21, uv: null, wind: null },
-        { month: 'Dec', highC: 21, lowC: 16, rainMm: 100, rainyDays: null, sunDays: 15, seaTempC: 19, uv: null, wind: null },
+        { month: 'Jan', highC: 19, lowC: 13, rainMm: 100, sunDays: 4, seaTempC: 18 },
+        { month: 'Feb', highC: 19, lowC: 13, rainMm: 85, sunDays: 5, seaTempC: 18 },
+        { month: 'Mar', highC: 19, lowC: 13, rainMm: 65, sunDays: 5, seaTempC: 18 },
+        { month: 'Apr', highC: 20, lowC: 14, rainMm: 40, sunDays: 6, seaTempC: 18 },
+        { month: 'May', highC: 21, lowC: 15, rainMm: 25, sunDays: 7, seaTempC: 19 },
+        { month: 'Jun', highC: 23, lowC: 17, rainMm: 15, sunDays: 8, seaTempC: 20 },
+        { month: 'Jul', highC: 25, lowC: 19, rainMm: 5, sunDays: 9, seaTempC: 22 },
+        { month: 'Aug', highC: 26, lowC: 19, rainMm: 5, sunDays: 9, seaTempC: 23 },
+        { month: 'Sep', highC: 25, lowC: 19, rainMm: 35, sunDays: 7, seaTempC: 23 },
+        { month: 'Oct', highC: 23, lowC: 17, rainMm: 75, sunDays: 6, seaTempC: 22 },
+        { month: 'Nov', highC: 21, lowC: 15, rainMm: 95, sunDays: 5, seaTempC: 20 },
+        { month: 'Dec', highC: 19, lowC: 14, rainMm: 100, sunDays: 4, seaTempC: 19 },
       ],
       bestTime: {
-        overall: 'Year-round mild. Peak season (July to August): Driest and warmest (cons: busier). Quieter months (April to May, October): Flowers and hiking (pros).',
-        hottest: 'July and August are driest and warmest but busier.',
-        quietest: 'April to May and October offer flowers and hiking with fewer crowds.',
-        recommendation: 'First-timers: Spring levada walks.',
+        overall: 'Funchal is pleasant year-round thanks to its mild subtropical climate',
+        hottest: 'April to October offers the driest weather with July to September being warmest',
+        quietest: 'Winter can be wetter but temperatures remain mild',
+        recommendation: 'Year-round, April to October driest',
       },
     },
     
     practicalInfo: {
-      bestTimeToVisit: 'Year-round',
-      cruiseTerminals: ['Funchal Cruise Terminal'],
-      nearbyAirport: 'Cristiano Ronaldo (FNC), 20km',
-      visaInfo: 'None (Schengen 90/180 days)',
+      bestTimeToVisit: 'Year-round, April to October driest',
+      cruiseTerminals: ['International Maritime Passenger Terminal, Pontinha Pier'],
+      nearbyAirport: 'Funchal Airport (Madeira Airport), approximately 18km from port',
+      visaInfo: 'Madeira is part of Portugal and the Schengen Area',
+      emergencyNumber: '112 for all emergencies',
+      tippingCustom: 'Not mandatory, 5 to 10 percent appreciated for good service',
+      siestaShopClosing: 'Some shops close 1pm to 3pm, tourist areas usually stay open',
     },
     
-    relatedDestinations: ['canary-islands-cruises'],
+    relatedDestinations: ['canary-islands-cruises', 'atlantic-islands-cruises'],
     
     meta: {
       title: 'Funchal Madeira Cruise Port Guide | Cable Cars & Toboggans',
-      description: 'Complete Funchal Madeira cruise port guide. Ride the cable car to Monte, experience the toboggan ride, visit wine lodges, markets and subtropical gardens.',
-      keywords: ['Funchal cruise port', 'Madeira cruise guide', 'Funchal cable car', 'Madeira toboggan', 'Funchal things to do', 'Madeira port guide'],
+      description: 'Complete Funchal Madeira cruise port guide. Experience the Monte cable car and toboggan, explore subtropical gardens, visit the painted doors of Old Town, and taste Madeira wine.',
+      keywords: ['Funchal cruise port', 'Madeira cruise guide', 'Funchal cable car', 'Madeira toboggan', 'Funchal things to do', 'Madeira port guide', 'Monte Palace Garden'],
     },
     
     status: 'published',
-    lastUpdated: '2024-12-28',
+    lastUpdated: '2026-01-17',
   },
 
   // Las Palmas, Gran Canaria
@@ -8171,6 +8304,319 @@ export const ports = [
     
     status: 'published',
     lastUpdated: '2025-12-28',
+  },
+
+  // Fuerteventura - Added for port guide expansion
+  {
+    id: 'fuerteventura',
+    slug: 'fuerteventura',
+    name: 'Fuerteventura',
+    displayName: 'Puerto del Rosario',
+    country: 'Spain (Canary Islands)',
+    region: 'atlantic-islands',
+    coordinates: { lat: 28.5004, lon: -13.8627 },
+    tagline: 'Endless golden dunes, turquoise Atlantic, and the Canaries\' most unspoilt island',
+    description: 'Fuerteventura is the second largest of Spain\'s Canary Islands but feels remarkably undeveloped compared to its neighbours. Cruise ships dock at Puerto del Rosario, the small capital city on the east coast, where the port sits just a short walk from the town beach and pedestrianised centre. The island\'s appeal lies in its raw natural beauty, with vast golden sand dunes and constant trade winds.',
+    portCharacter: 'beach-city',
+    
+    aboutPort: {
+      overview: 'Fuerteventura is the second largest of Spain\'s Canary Islands but feels remarkably undeveloped. Just 100 miles off the African coast, the island receives constant trade winds making it a world-class destination for windsurfing and kiteboarding. Puerto del Rosario may lack the polish of purpose-built resorts, but it offers an authentic slice of Canarian life.',
+      terminals: 'Muelle de Cruceros, Puerto del Rosario',
+      shuttleServices: 'Limited - most passengers walk or use taxis',
+      walkability: 'Town easily walkable (5-10 mins); island attractions require transport',
+    },
+    
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Spanish',
+      timezone: 'GMT+0',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Fuerteventura Airport (FUE)',
+        distance: '6km south of Puerto del Rosario',
+        options: 'Taxi or bus from town centre.',
+      },
+      trains: {
+        mainStation: 'N/A',
+        description: 'No train network. Bus services connect towns.',
+        localHubs: 'Puerto del Rosario bus station',
+      },
+    },
+    
+    gettingAround: {
+      fromPort: '5 minutes walk to beach, 10 minutes to town centre',
+      publicTransport: 'Bus 6 runs to Corralejo (40 mins, ~3.40 euros). Services can be infrequent.',
+      taxis: 'Available at port. Approximately 35 euros each way to Corralejo.',
+      walkingDistance: 'Playa Chica: 5 mins. Town centre: 10 mins. Island attractions require transport.',
+      sightseeingBus: 'Limited. Focus on buses or taxis for island exploration.',
+      accessibility: 'Town centre largely flat and accessible. Dunes have soft sand not suitable for wheelchairs.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Corralejo Natural Park and Dunes',
+        category: 'beach',
+        description: 'Vast golden sand dunes stretching along the coast, backed by turquoise lagoons and views of Lobos Island. Recently named the best beach in the world by National Geographic, this protected natural park offers miles of pristine beaches, from developed areas near Corralejo town to remote stretches accessible only on foot.',
+        duration: '4 to 6 hours for a relaxed pace including travel',
+        tips: [
+          'Bus 6 from Puerto del Rosario runs regularly to Corralejo via the dunes',
+          'The Grandes Playas stop is best for beach access',
+          'Bring everything you need - facilities are limited in the dunes themselves',
+        ],
+        highlights: ['Beaches', 'Nature', 'Photography', 'Scenic'],
+        goodFor: ['Beach lovers', 'Photographers', 'Active travelers', 'Families'],
+      },
+      {
+        title: 'Betancuria',
+        category: 'historic',
+        description: 'The island\'s original capital, founded in 1405 by Norman conqueror Jean de Béthencourt, is a beautifully preserved colonial village nestled in a volcanic valley. White-washed buildings, the Santa María church, local craft shops, and traditional restaurants serve authentic Canarian cuisine. The location was chosen to hide from pirate attacks.',
+        duration: '2 to 3 hours including travel for a relaxed pace',
+        tips: [
+          'The mountain drive is scenic but winding',
+          'Try goat\'s cheese (queso majorero) in local restaurants',
+          'Visit the church with its impressive wooden ceiling',
+        ],
+        highlights: ['History', 'Culture', 'Architecture', 'Food'],
+        goodFor: ['History buffs', 'Culture seekers', 'Foodies', 'Photographers'],
+      },
+      {
+        title: 'Corralejo Town',
+        category: 'stroll',
+        description: 'The island\'s main tourist town in the north offers a lively harbour, excellent restaurants, craft markets, and a traditional old town with pedestrianised streets. Ferries depart for Lobos Island and Lanzarote. The beaches in and around town are excellent, and the atmosphere is relaxed and welcoming.',
+        duration: '2 to 4 hours for a relaxed pace',
+        tips: [
+          'The old town has more character than the newer tourist areas',
+          'Ferry trips to Lobos Island offer wildlife watching',
+          'Market days bring extra atmosphere',
+        ],
+        highlights: ['Stroll', 'Shopping', 'Food', 'Beaches'],
+        goodFor: ['First-time visitors', 'Families', 'Couples', 'Shoppers'],
+      },
+      {
+        title: 'Caleta de Fuste',
+        category: 'beach',
+        description: 'Purpose-built resort area 10km south of Puerto del Rosario, featuring a calm horseshoe-shaped beach perfect for families, a marina, shopping, and water sports. The 18th-century Castillo de Caleta de Fuste tower stands guard over the bay. More developed than other areas but convenient for a beach day.',
+        duration: '3 to 4 hours for a relaxed pace',
+        tips: [
+          'The beach is excellent for children with shallow, calm water',
+          'The castle tower is worth a quick look',
+          'Good restaurant selection along the marina',
+        ],
+        highlights: ['Beaches', 'Family-friendly', 'Shopping'],
+        goodFor: ['Families', 'Beach lovers', 'Relaxation seekers'],
+      },
+      {
+        title: 'Oasis Wildlife Fuerteventura',
+        category: 'family',
+        description: 'Large zoo and botanical garden near La Lajita in the south, home to exotic animals including giraffes, lions, elephants, and camels. The park includes bird shows, sea lion encounters, camel rides through a cactus garden, and a botanical collection. A full day experience for families.',
+        duration: '4 to 5 hours including travel for a relaxed pace',
+        tips: [
+          'Animal shows run at set times - check the schedule on arrival',
+          'The camel safari through the cactus garden is popular',
+          'Consider a ship excursion as it\'s quite far south',
+        ],
+        highlights: ['Wildlife', 'Family-friendly', 'Gardens'],
+        goodFor: ['Families', 'Animal lovers', 'Nature lovers'],
+      },
+      {
+        title: 'Ajuy Caves',
+        category: 'nature',
+        description: 'Dramatic sea caves carved into the oldest rock formations in the Canary Islands, located on the rugged west coast. A trail from the small fishing village of Ajuy leads to the caves along striking black volcanic cliffs. The village itself has traditional fish restaurants overlooking a black sand beach.',
+        duration: '3 to 4 hours including travel for a relaxed pace',
+        tips: [
+          'Wear sturdy footwear for the cave trail',
+          'The caves are best visited at low tide',
+          'Fresh fish at the village restaurants is excellent',
+        ],
+        highlights: ['Nature', 'Geology', 'Food', 'Photography'],
+        goodFor: ['Active travelers', 'Nature lovers', 'Photographers'],
+      },
+      {
+        title: 'El Cotillo',
+        category: 'beach',
+        description: 'Laid-back fishing village in the northwest known for its stunning lagoon beaches (perfect for families) and wilder surf beaches (popular with surfers). The village has excellent seafood restaurants, a ruined castle tower, and a relaxed bohemian atmosphere. Less touristy than Corralejo.',
+        duration: '3 to 4 hours including travel for a relaxed pace',
+        tips: [
+          'The lagoon beaches are best for swimming and families',
+          'The north beaches attract surfers and have stronger currents',
+          'Sunset views from the castle tower are spectacular',
+        ],
+        highlights: ['Beaches', 'Food', 'Scenic', 'Nature'],
+        goodFor: ['Beach lovers', 'Surfers', 'Foodies', 'Photographers'],
+      },
+      {
+        title: 'Mirador Morro Velosa',
+        category: 'nature',
+        description: 'Spectacular viewpoint designed by renowned Canarian artist César Manrique, perched high in the central mountains above Betancuria. The modern building houses a small museum about the landscape, while the terrace offers 360-degree views across Fuerteventura\'s dramatic volcanic terrain.',
+        duration: '2 to 3 hours including travel for a relaxed pace',
+        tips: [
+          'Combine with a visit to nearby Betancuria',
+          'The cafe has stunning views',
+          'Check opening times (closed Mondays)',
+        ],
+        highlights: ['Views', 'Architecture', 'Photography'],
+        goodFor: ['Photographers', 'Architecture lovers', 'First-time visitors'],
+      },
+    ],
+    
+    shoreExcursions: [
+      {
+        title: 'Corralejo Dunes',
+        description: 'World-class beaches with vast golden sand dunes',
+        duration: 'Half day',
+        bookWith: 'Independent (Bus 6) or ship excursion',
+      },
+      {
+        title: 'Betancuria',
+        description: 'Historic colonial village in volcanic valley',
+        duration: 'Half day',
+        bookWith: 'Ship excursion or taxi',
+      },
+      {
+        title: 'Island Tour',
+        description: 'Comprehensive tour of Fuerteventura highlights',
+        duration: 'Full day',
+        bookWith: 'Ship excursion recommended',
+      },
+    ],
+    
+    nearestBeach: {
+      name: 'Playa Chica',
+      distance: '5 minutes walk',
+      description: 'Charming, sheltered urban beach with golden sand right in the heart of Puerto del Rosario. Calm, clear waters perfect for swimming. Views of your cruise ship from the beach. ~20°C year-round.',
+    },
+    
+    foodAndDrink: [
+      {
+        name: 'Huga Restaurant',
+        type: 'Restaurant',
+        description: 'Modern gastrotapas with local ingredients on Primero de Mayo.',
+      },
+      {
+        name: 'Casa Santa Maria',
+        type: 'Restaurant',
+        description: 'Traditional Canarian in historic setting in Betancuria.',
+      },
+      {
+        name: 'El Caleton',
+        type: 'Restaurant',
+        description: 'Seafood overlooking the harbour in Corralejo.',
+      },
+      {
+        name: 'Cafe terraces',
+        type: 'Cafe',
+        description: 'Multiple options on Primero de Mayo pedestrian street.',
+      },
+      {
+        name: 'Beach cafes',
+        type: 'Cafe',
+        description: 'Casual waterfront coffee and snacks at Playa Chica.',
+      },
+    ],
+    
+    insiderTips: [
+      'Puerto del Rosario is small and can be explored in an hour or two',
+      'The real Fuerteventura experience is the Corralejo dunes in the north',
+      'Bus 6 runs regularly from Puerto del Rosario bus station (20 minute walk from port) to Corralejo (40 minutes, around 3.40 euros)',
+      'Get off at the Grandes Playas stop for the best dune beaches',
+      'Share a taxi with other passengers for approximately 35 euros each way to Corralejo',
+      'Many shops close for siesta (roughly 2pm to 5pm)',
+      'Las Rotondas shopping centre stays open all day',
+      'The island is large (100km long) - focus on the north if time is limited',
+    ],
+    
+    weather: {
+      intro: '20 to 28°C year-round with constant sunshine and trade winds. Bring sun protection and something windproof for beach days. The island is notably windier than other Canary Islands.',
+      months: [
+        { month: 'Jan', highC: 20, lowC: 14, rainMm: 20, sunDays: 6, seaTempC: 19 },
+        { month: 'Feb', highC: 21, lowC: 14, rainMm: 15, sunDays: 6, seaTempC: 18 },
+        { month: 'Mar', highC: 22, lowC: 15, rainMm: 10, sunDays: 7, seaTempC: 18 },
+        { month: 'Apr', highC: 22, lowC: 16, rainMm: 5, sunDays: 8, seaTempC: 19 },
+        { month: 'May', highC: 24, lowC: 17, rainMm: 2, sunDays: 9, seaTempC: 19 },
+        { month: 'Jun', highC: 26, lowC: 19, rainMm: 0, sunDays: 10, seaTempC: 20 },
+        { month: 'Jul', highC: 28, lowC: 21, rainMm: 0, sunDays: 10, seaTempC: 21 },
+        { month: 'Aug', highC: 29, lowC: 22, rainMm: 0, sunDays: 10, seaTempC: 22 },
+        { month: 'Sep', highC: 28, lowC: 21, rainMm: 5, sunDays: 9, seaTempC: 23 },
+        { month: 'Oct', highC: 26, lowC: 19, rainMm: 10, sunDays: 8, seaTempC: 22 },
+        { month: 'Nov', highC: 23, lowC: 17, rainMm: 15, sunDays: 6, seaTempC: 21 },
+        { month: 'Dec', highC: 21, lowC: 15, rainMm: 20, sunDays: 6, seaTempC: 20 },
+      ],
+      bestTime: {
+        overall: 'Year-round destination with consistent sunshine',
+        hottest: 'May to October offers the driest weather',
+        quietest: 'December to March is "winter" but still pleasant with temperatures around 20°C',
+        recommendation: 'Year-round, May to October driest. Expect wind year-round.',
+      },
+    },
+    
+    faq: [
+      {
+        question: 'Is Puerto del Rosario walkable from the cruise port?', 
+        answer: 'Yes, very walkable. The town beach (Playa Chica) is 5 minutes walk, and the town centre is 10 to 15 minutes. Everything is flat and straightforward.' 
+      },
+      { 
+        question: 'How long do you need in Puerto del Rosario?', 
+        answer: 'The town itself can be seen in 1 to 2 hours. For a proper Fuerteventura experience, plan to explore beyond the capital - the Corralejo dunes or Betancuria deserve half a day each.' 
+      },
+      { 
+        question: 'Is English widely spoken in Puerto del Rosario?', 
+        answer: 'Basic English is understood in tourist areas and restaurants, but less so than on more developed Canary Islands. Spanish or simple phrases are appreciated.' 
+      },
+      { 
+        question: 'Is Puerto del Rosario safe for tourists?', 
+        answer: 'Very safe. The town is quiet and crime is rare. Normal precautions apply on beaches with valuables.' 
+      },
+      { 
+        question: 'Is Fuerteventura expensive?', 
+        answer: 'Budget-friendly by European standards. The Canary Islands have reduced VAT making shopping attractive. Restaurants and transport are affordable.' 
+      },
+      { 
+        question: 'Do I need cash in Puerto del Rosario or can I use card?', 
+        answer: 'Card is widely accepted including contactless. Some small vendors and market stalls prefer cash. ATMs are available in town.' 
+      },
+      { 
+        question: 'Should I book a ship excursion or explore independently?', 
+        answer: 'For Corralejo or Caleta de Fuste, independent visits work well via bus or taxi. For longer trips to Betancuria, Oasis Park, or island tours, ship excursions offer convenience and guarantee return times.' 
+      },
+      { 
+        question: 'What is the best thing to do in Fuerteventura on a cruise day?', 
+        answer: 'Visit the Corralejo dunes - they\'re genuinely world-class beaches. Take bus 6 from Puerto del Rosario bus station (20 minute walk from port) directly to the dunes. The journey takes 40 minutes and the beaches are spectacular.' 
+      },
+      { 
+        question: 'Is Fuerteventura good for swimming / Are the beaches nice?', 
+        answer: 'Excellent swimming beaches. Playa Chica in Puerto del Rosario has calm, sheltered water. Caleta de Fuste has a family-friendly lagoon. Corralejo dunes offer miles of pristine sand. The west coast has stronger currents suitable for experienced swimmers.' 
+      },
+      { 
+        question: 'Is Fuerteventura family-friendly?', 
+        answer: 'Very family-friendly. Calm beaches at Puerto del Rosario and Caleta de Fuste are perfect for children. The Oasis Wildlife Park is excellent for families (requires transport). Children will enjoy spotting the friendly Barbary ground squirrels found across the island.' 
+      },
+    ],
+    
+    practicalInfo: {
+      bestTimeToVisit: 'Year-round, May to October driest',
+      cruiseTerminals: ['Muelle de Cruceros, Puerto del Rosario'],
+      nearbyAirport: 'Fuerteventura Airport (FUE) - 6km south',
+      visaInfo: 'Fuerteventura is part of Spain and the Schengen Area',
+      emergencyNumber: '112 for all emergencies',
+      tippingCustom: 'Not mandatory, 5 to 10 percent appreciated for good service',
+      siestaShopClosing: 'Many shops close 2pm to 5pm, Las Rotondas stays open',
+    },
+    
+    relatedDestinations: ['canary-islands-cruises', 'atlantic-islands-cruises'],
+    
+    meta: {
+      title: 'Fuerteventura Cruise Port Guide | Corralejo Dunes & Beaches',
+      description: 'Complete guide to Fuerteventura cruise port in Puerto del Rosario. Visit world-class Corralejo dunes, explore Betancuria village, and discover pristine beaches on the Canaries\' most unspoilt island.',
+      keywords: ['Fuerteventura cruise port', 'Puerto del Rosario', 'Corralejo dunes', 'Fuerteventura beaches', 'Canary Islands cruise', 'Fuerteventura shore excursions'],
+    },
+    
+    status: 'published',
+    lastUpdated: '2026-01-17',
   },
 
   // Lanzarote - Added for G606 cruise guide
