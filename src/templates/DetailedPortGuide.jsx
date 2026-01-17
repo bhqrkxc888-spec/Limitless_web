@@ -75,7 +75,7 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
   // Filter to only show tabs with content
   const availableSections = PORT_SECTIONS.filter(section => hasContent[section.key]);
 
-  // Render section content wrapped with ID for hash navigation
+  // Render the active section content
   const renderSectionContent = () => {
     let content;
     switch (activeSection) {

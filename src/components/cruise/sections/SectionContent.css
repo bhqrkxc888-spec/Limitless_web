@@ -5,27 +5,10 @@
 
 .section-content {
   width: 100%;
-  /* Account for sticky day nav + section tabs */
-  scroll-margin-top: 180px;
 }
 
-/* Ensure content wrapper accounts for both sticky headers */
 .cruise-port-guide {
-  scroll-margin-top: 180px;
-}
-
-@media (min-width: 768px) {
-  .section-content,
-  .cruise-port-guide {
-    scroll-margin-top: 200px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .section-content,
-  .cruise-port-guide {
-    scroll-margin-top: 220px;
-  }
+  /* No special styles needed */
 }
 
 /* ========================================
