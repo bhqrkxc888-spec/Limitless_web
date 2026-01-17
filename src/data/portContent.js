@@ -285,6 +285,21 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
         'Noise levels: Generally calm city. Not overwhelming like Barcelona or Madrid.'
       ]
     },
+    // TODO: Research and populate with verified local information
+    medical: {
+      pharmacy: {
+        name: '',
+        location: '',
+        notes: ''
+      },
+      hospital: {
+        name: '',
+        location: '',
+        hasEmergency: false,
+        notes: ''
+      },
+      tips: []
+    },
     foodAndDrink: {
       localDishToTry: {
         name: 'Pulpo a la Gallega',
@@ -597,6 +612,21 @@ March means you're here for "winter sun" - expect pleasant temperatures perfect 
         'Noise levels: Generally relaxed city. Not overwhelming compared to larger Spanish cities.'
       ]
     },
+    // TODO: Research and populate with verified local information
+    medical: {
+      pharmacy: {
+        name: '',
+        location: '',
+        notes: ''
+      },
+      hospital: {
+        name: '',
+        location: '',
+        hasEmergency: false,
+        notes: ''
+      },
+      tips: []
+    },
     foodAndDrink: {
       localDishToTry: {
         name: 'Papas Arrugadas con Mojo',
@@ -880,6 +910,21 @@ Las Canteras beach is the star here - a gorgeous golden sand urban beach with a 
         'Quieter alternatives: Ends of Las Canteras beach, Early morning promenade walk, Ciudad Jardín residential area',
         'Noise levels: Generally relaxed. Beach/promenade has happy buzz but not overwhelming.'
       ]
+    },
+    // TODO: Research and populate with verified local information
+    medical: {
+      pharmacy: {
+        name: '',
+        location: '',
+        notes: ''
+      },
+      hospital: {
+        name: '',
+        location: '',
+        hasEmergency: false,
+        notes: ''
+      },
+      tips: []
     },
     foodAndDrink: {
       localDishToTry: {
@@ -1172,6 +1217,21 @@ March weather is perfect for exploring - warm enough for beaches but not the int
         'Noise levels: Generally calm city. Not overwhelming. Timanfaya can be windy (noise from wind).'
       ]
     },
+    // TODO: Research and populate with verified local information
+    medical: {
+      pharmacy: {
+        name: '',
+        location: '',
+        notes: ''
+      },
+      hospital: {
+        name: '',
+        location: '',
+        hasEmergency: false,
+        notes: ''
+      },
+      tips: []
+    },
     foodAndDrink: {
       localDishToTry: {
         name: 'Pescado a la Plancha with Mojo',
@@ -1461,6 +1521,21 @@ Cádiz is famous for its connection to sherry wine (it's part of the "Sherry Tri
         'Quieter alternatives: Parque Genovés, Seafront promenades away from centre, Early morning old town, Museums',
         'Noise levels: Generally calm city. Not overwhelming like larger Spanish cities. Atlantic breeze can be noisy on seafront.'
       ]
+    },
+    // TODO: Research and populate with verified local information
+    medical: {
+      pharmacy: {
+        name: '',
+        location: '',
+        notes: ''
+      },
+      hospital: {
+        name: '',
+        location: '',
+        hasEmergency: false,
+        notes: ''
+      },
+      tips: []
     },
     foodAndDrink: {
       localDishToTry: {
@@ -1763,6 +1838,21 @@ March weather is pleasant - mild temperatures perfect for walking, though it can
         'Quieter alternatives: Early morning exploration, Jardim Botânico, Less popular viewpoints, Museums',
         'Noise levels: Generally calm city, but trams can be noisy, and fado shows (evening) are intentionally atmospheric (music).'
       ]
+    },
+    // TODO: Research and populate with verified local information
+    medical: {
+      pharmacy: {
+        name: '',
+        location: '',
+        notes: ''
+      },
+      hospital: {
+        name: '',
+        location: '',
+        hasEmergency: false,
+        notes: ''
+      },
+      tips: []
     },
     foodAndDrink: {
       localDishToTry: {

@@ -1430,3 +1430,47 @@
     font-size: var(--font-size-base, 1rem);
   }
 }
+
+/* ========================================
+   MEDICAL SECTION
+   Pharmacy and hospital information
+   ======================================== */
+
+.section-medical .medical-item {
+  background: var(--clr-bg-alt, #F8F5F0);
+  padding: var(--space-4, 1rem);
+  border-radius: var(--radius-md, 0.5rem);
+  margin-bottom: var(--space-3, 0.75rem);
+}
+
+.section-medical .medical-item h4 {
+  margin: 0 0 var(--space-2, 0.5rem) 0;
+  font-size: var(--font-size-lg, 1.125rem);
+  font-weight: 700;
+  color: var(--clr-text-main, #2C344C);
+}
+
+.section-medical .medical-item p {
+  margin: var(--space-1, 0.25rem) 0;
+  font-size: var(--font-size-base, 1rem);
+  color: var(--clr-text-main, #2C344C);
+}
+
+.section-medical .medical-notes {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--clr-text-muted, #5C6478);
+  font-style: italic;
+  margin-top: var(--space-2, 0.5rem);
+}
+
+.section-medical .emergency-badge {
+  display: inline-block;
+  padding: var(--space-1, 0.25rem) var(--space-2, 0.5rem);
+  background: rgba(39, 174, 96, 0.15);
+  color: #1e8449;
+  border: 1px solid rgba(39, 174, 96, 0.3);
+  border-radius: var(--radius-sm, 0.25rem);
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: 600;
+  margin-top: var(--space-2, 0.5rem);
+}

@@ -9,7 +9,7 @@
 import { useState, useRef, useEffect } from 'react';
 import OptimizedImage from '../components/OptimizedImage';
 import { usePortGuideImage } from '../hooks/useImageUrl';
-import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye, Star, AlertCircle, Thermometer, Waves, ChefHat, Wind, Anchor } from 'lucide-react';
+import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye, Star, AlertCircle, Thermometer, Waves, ChefHat, Wind, Anchor, Cross } from 'lucide-react';
 import { formatBoldText, formatParagraphsWithBold } from '../utils/textFormatting.jsx';
 import './DetailedPortGuide.css';
 
@@ -67,6 +67,7 @@ const PORT_SECTIONS = [
   { key: 'goFurther', label: 'Go Further', icon: MapPin },
   { key: 'withKids', label: 'With Kids', icon: Users },
   { key: 'send', label: 'Accessibility', icon: Accessibility },
+  { key: 'medical', label: 'Medical', icon: Cross },
   { key: 'foodAndDrink', label: 'Food & Drink', icon: Utensils },
 ];
 
@@ -100,7 +101,7 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
   const attractionImages = [attraction1, attraction2, attraction3, attraction4, attraction5, attraction6];
 
   // Extract data from detailedContent (may be null)
-  const { overview, stayLocal, goFurther, withKids, send, foodAndDrink } = detailedContent || {};
+  const { overview, stayLocal, goFurther, withKids, send, medical, foodAndDrink } = detailedContent || {};
   
   // Get familyFriendly data from port (ports.js)
   const familyFriendly = port?.familyFriendly;
@@ -121,6 +122,8 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
     withKids: (!!withKids && (withKids.toddlers?.length > 0 || withKids.olderKids?.length > 0 || withKids.easyDay)) || !!familyFriendly,
     // 'send' uses 'mobility', 'quietSpots', 'sensory' - match actual data structure
     send: !!send && (send.wheelchairAccess || send.mobility?.length > 0 || send.quietSpots?.length > 0 || send.mobilityConsiderations?.length > 0),
+    // 'medical' - only show if has actual content (not empty placeholders)
+    medical: !!medical && (medical.pharmacy?.name || medical.hospital?.name || medical.tips?.length > 0),
     // 'foodAndDrink' uses 'restaurants', 'cafes', 'bars', 'localSpeciality' - match actual data structure
     foodAndDrink: !!foodAndDrink && (foodAndDrink.restaurants?.length > 0 || foodAndDrink.localSpeciality || foodAndDrink.localSpecialties?.length > 0 || foodAndDrink.drinkingWater),
   };
@@ -146,6 +149,9 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
         break;
       case 'send':
         content = <SendSection send={send} />;
+        break;
+      case 'medical':
+        content = <MedicalSection medical={medical} />;
         break;
       case 'foodAndDrink':
         content = <FoodDrinkSection foodAndDrink={foodAndDrink} />;
@@ -268,10 +274,10 @@ function MarineConditionsCard({ marineData, loading }) {
     return null; // Don't show anything if no data
   }
 
-  // Format values for display
+  // Format values for display (returns number only, unit added separately)
   const formatValue = (obj, decimals = 1) => {
     if (!obj || obj.value === null || obj.value === undefined) return 'N/A';
-    return `${Number(obj.value).toFixed(decimals)}${obj.unit || ''}`;
+    return Number(obj.value).toFixed(decimals);
   };
 
   // Get swimming safety class
@@ -292,7 +298,7 @@ function MarineConditionsCard({ marineData, loading }) {
           <div className="marine-item">
             <Thermometer size={16} />
             <span className="marine-label">Water Temp</span>
-            <span className="marine-value">{formatValue(marineData.waterTemperature)}</span>
+            <span className="marine-value">{formatValue(marineData.waterTemperature)}°C</span>
           </div>
         )}
         
@@ -308,7 +314,7 @@ function MarineConditionsCard({ marineData, loading }) {
           <div className="marine-item">
             <Wind size={16} />
             <span className="marine-label">Wind</span>
-            <span className="marine-value">{formatValue(marineData.windSpeed, 0)} m/s</span>
+            <span className="marine-value">{formatValue(marineData.windSpeed, 0)}m/s</span>
           </div>
         )}
       </div>
@@ -639,7 +645,7 @@ function GoFurtherSection({ goFurther, attractionImages }) {
     <div className="section-go-further">
       <div className="section-intro">
         <h2>Go Further</h2>
-        <p>These need transport - tour, taxi, or public transport</p>
+        <p>Beyond walking distance - may need transport, longer walk, or organised tour</p>
       </div>
 
       <hr className="section-divider" />
@@ -1066,6 +1072,77 @@ function SendSection({ send }) {
             </ul>
           </SubSection>
         </>
+      )}
+    </div>
+  );
+}
+
+function MedicalSection({ medical }) {
+  if (!medical) return <p>No medical information available yet.</p>;
+
+  // Check if there's any actual content
+  const hasPharmacy = medical.pharmacy?.name;
+  const hasHospital = medical.hospital?.name;
+  const hasTips = medical.tips?.length > 0;
+  
+  if (!hasPharmacy && !hasHospital && !hasTips) {
+    return <p>Medical information coming soon.</p>;
+  }
+
+  return (
+    <div className="section-medical">
+      <div className="section-intro">
+        <h2>Medical & Pharmacy</h2>
+        <p>Healthcare information for your visit</p>
+      </div>
+
+      <hr className="section-divider" />
+
+      {hasPharmacy && (
+        <>
+          <SubSection title="Nearest Pharmacy">
+            <div className="medical-item">
+              <h4>{medical.pharmacy.name}</h4>
+              {medical.pharmacy.location && (
+                <p><strong>Location:</strong> {medical.pharmacy.location}</p>
+              )}
+              {medical.pharmacy.notes && (
+                <p className="medical-notes">{medical.pharmacy.notes}</p>
+              )}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {hasHospital && (
+        <>
+          <SubSection title="Hospital / Medical Centre">
+            <div className="medical-item">
+              <h4>{medical.hospital.name}</h4>
+              {medical.hospital.location && (
+                <p><strong>Location:</strong> {medical.hospital.location}</p>
+              )}
+              {medical.hospital.hasEmergency && (
+                <p className="emergency-badge">✓ Has Emergency Department (A&E)</p>
+              )}
+              {medical.hospital.notes && (
+                <p className="medical-notes">{medical.hospital.notes}</p>
+              )}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {hasTips && (
+        <SubSection title="Medical Tips">
+          <ul className="simple-list">
+            {medical.tips.map((tip, idx) => (
+              <li key={idx}>{tip}</li>
+            ))}
+          </ul>
+        </SubSection>
       )}
     </div>
   );

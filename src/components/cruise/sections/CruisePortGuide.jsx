@@ -75,6 +75,8 @@ function CruisePortGuide({ sectionKey, dayData }) {
         return <WithKidsSection withKids={portContent?.withKids} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} parkImage={parkImage} />;
       case 'send':
         return <SendSection send={portContent?.send} />;
+      case 'medical':
+        return <MedicalSection medical={portContent?.medical} />;
       case 'foodAndDrink':
         return <FoodDrinkSection foodAndDrink={portContent?.foodAndDrink} />;
       default:
@@ -195,11 +197,31 @@ function OverviewSection({ portName, slug, overview, heroImage, heroIsPlaceholde
         <h2>Welcome to {portName}</h2>
       </div>
       
+      {/* Hook - Why this port is special */}
+      {overview.hook && (
+        <div className="port-hook">
+          <span className="hook-icon">⭐</span>
+          <p>{overview.hook}</p>
+        </div>
+      )}
+      
       {overview.description && (
         <div className="port-description">
           {overview.description.split('\n\n').map((para, idx) => (
             <p key={idx}>{para}</p>
           ))}
+        </div>
+      )}
+      
+      {/* Important Notes */}
+      {overview.importantNotes && overview.importantNotes.length > 0 && (
+        <div className="important-notes-box">
+          <h4>⚠️ Good to Know</h4>
+          <ul>
+            {overview.importantNotes.map((note, idx) => (
+              <li key={idx}>{note}</li>
+            ))}
+          </ul>
         </div>
       )}
       
@@ -453,7 +475,7 @@ function GoFurtherSection({ goFurther, attractionImages, portName }) {
     <div className="section-go-further">
       <div className="section-intro">
         <h2>Go Further</h2>
-        <p>These need transport - tour, taxi, or public transport</p>
+        <p>Beyond walking distance - may need transport, longer walk, or organised tour</p>
       </div>
 
       <hr className="section-divider" />
@@ -464,7 +486,27 @@ function GoFurtherSection({ goFurther, attractionImages, portName }) {
         
         return (
         <div key={idx} className="attraction-block">
-          <h3>{attraction.name}</h3>
+          <div className="attraction-header">
+            <h3>{attraction.name}</h3>
+            {/* Terrain and Accessibility Badges */}
+            <div className="attraction-badges">
+              {attraction.terrain && (
+                <span className={`terrain-badge terrain-${attraction.terrain}`}>
+                  {attraction.terrain === 'easy' ? '🟢 Easy' : 
+                   attraction.terrain === 'moderate' ? '🟡 Some Hills' : 
+                   '🔴 Challenging'}
+                </span>
+              )}
+              {attraction.accessibility && (
+                <span className={`accessibility-badge access-${attraction.accessibility.rating}`} title={attraction.accessibility.notes || ''}>
+                  {attraction.accessibility.rating === 'full' ? '♿ Fully Accessible' :
+                   attraction.accessibility.rating === 'partial' ? '⚠️ Partially Accessible' :
+                   attraction.accessibility.rating === 'limited' ? '⚠️ Limited Access' :
+                   '🚫 Not Accessible'}
+                </span>
+              )}
+            </div>
+          </div>
           
           {showImage && (
             <div className="attraction-image">
@@ -710,9 +752,22 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
 
       {withKids?.olderKids && withKids.olderKids.length > 0 && (
         <>
-          <SubSection title="Older Kids & Teens">
+          <SubSection title="Older Kids (6-12)">
             <ul className="simple-list">
               {withKids.olderKids.map((item, idx) => (
+                <li key={idx}>{item}</li>
+              ))}
+            </ul>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {withKids?.teens && withKids.teens.length > 0 && (
+        <>
+          <SubSection title="Teens (13+)">
+            <ul className="simple-list">
+              {withKids.teens.map((item, idx) => (
                 <li key={idx}>{item}</li>
               ))}
             </ul>
@@ -882,6 +937,86 @@ function SendSection({ send }) {
 }
 
 /* ========================================
+   MEDICAL & PHARMACY SECTION
+   ======================================== */
+
+function MedicalSection({ medical }) {
+  // Check if there's any actual content
+  const hasPharmacy = medical?.pharmacy?.name;
+  const hasHospital = medical?.hospital?.name;
+  const hasTips = medical?.tips?.length > 0;
+  
+  if (!medical || (!hasPharmacy && !hasHospital && !hasTips)) {
+    return (
+      <div className="section-medical">
+        <div className="section-intro">
+          <h2>Medical & Pharmacy</h2>
+          <p>Medical information coming soon.</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="section-medical">
+      <div className="section-intro">
+        <h2>Medical & Pharmacy</h2>
+        <p>Healthcare information for your visit</p>
+      </div>
+
+      <hr className="section-divider" />
+
+      {hasPharmacy && (
+        <>
+          <SubSection title="Nearest Pharmacy">
+            <div className="medical-item">
+              <h4>{medical.pharmacy.name}</h4>
+              {medical.pharmacy.location && (
+                <p><strong>Location:</strong> {medical.pharmacy.location}</p>
+              )}
+              {medical.pharmacy.notes && (
+                <p className="medical-notes">{medical.pharmacy.notes}</p>
+              )}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {hasHospital && (
+        <>
+          <SubSection title="Hospital / Medical Centre">
+            <div className="medical-item">
+              <h4>{medical.hospital.name}</h4>
+              {medical.hospital.location && (
+                <p><strong>Location:</strong> {medical.hospital.location}</p>
+              )}
+              {medical.hospital.hasEmergency && (
+                <p className="emergency-badge">✓ Has Emergency Department (A&E)</p>
+              )}
+              {medical.hospital.notes && (
+                <p className="medical-notes">{medical.hospital.notes}</p>
+              )}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {hasTips && (
+        <SubSection title="Medical Tips">
+          <ul className="simple-list">
+            {medical.tips.map((tip, idx) => (
+              <li key={idx}>{tip}</li>
+            ))}
+          </ul>
+        </SubSection>
+      )}
+    </div>
+  );
+}
+
+/* ========================================
    FOOD & DRINK SECTION
    ======================================== */
 
@@ -905,6 +1040,25 @@ function FoodDrinkSection({ foodAndDrink }) {
       </div>
 
       <hr className="section-divider" />
+
+      {/* Featured Local Dish */}
+      {foodAndDrink.localDishToTry && (
+        <>
+          <div className="local-dish-card">
+            <div className="local-dish-header">
+              <span className="dish-icon">🍽️</span>
+              <h4>Must Try: {foodAndDrink.localDishToTry.name}</h4>
+            </div>
+            <div className="local-dish-content">
+              <p>{foodAndDrink.localDishToTry.description}</p>
+              {foodAndDrink.localDishToTry.lookFor && (
+                <p className="look-for"><em>Where to find it: {foodAndDrink.localDishToTry.lookFor}</em></p>
+              )}
+            </div>
+          </div>
+          <hr className="section-divider" />
+        </>
+      )}
 
       {foodAndDrink.localSpeciality && (
         <>
