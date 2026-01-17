@@ -1185,22 +1185,21 @@
    ======================================== */
 
 .port-feedback-section {
-  background: var(--clr-bg);
-  padding: var(--space-16) 0;
-  border-top: 1px solid var(--clr-border);
+  padding: var(--space-4) 0 var(--space-8);
 }
 
 .feedback-container {
-  max-width: 900px;
+  max-width: var(--layout-content-width, 1120px);
   margin: 0 auto;
+  padding: 0 var(--space-4);
 }
 
 .feedback-rating {
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-4);
 }
 
 .feedback-reviews {
-  margin-top: var(--space-8);
+  margin-top: var(--space-6);
 }
 
 /* ========================================

@@ -141,61 +141,54 @@ function PortGuideFeedback({ portSlug, portName }) {
   };
 
   return (
-    <div className="port-guide-feedback">
+    <div className="port-guide-feedback compact">
       {!hasRated ? (
         <div className="feedback-form">
-          <h3>Rate This Port Guide</h3>
-          <p className="feedback-subtitle">How helpful was this guide for planning your port visit?</p>
-
-          {/* Star Rating */}
-          <div className="star-rating">
-            {[1, 2, 3, 4, 5].map((value) => (
-              <button
-                key={value}
-                type="button"
-                className={`star-button ${(hoverRating || rating) >= value ? 'active' : ''}`}
-                onClick={() => handleStarClick(value)}
-                onMouseEnter={() => handleStarHover(value)}
-                onMouseLeave={() => setHoverRating(0)}
-                disabled={hasRated}
-                aria-label={`Rate ${value} star${value > 1 ? 's' : ''}`}
-              >
-                <Star 
-                  size={32} 
-                  fill={(hoverRating || rating) >= value ? '#FFD700' : 'none'}
-                  stroke={(hoverRating || rating) >= value ? '#FFD700' : '#ccc'}
-                />
-              </button>
-            ))}
+          <div className="feedback-header">
+            <span className="feedback-question">Was this guide useful?</span>
+            
+            {/* Compact Star Rating */}
+            <div className="star-rating-inline">
+              {[1, 2, 3, 4, 5].map((value) => (
+                <button
+                  key={value}
+                  type="button"
+                  className={`star-button ${(hoverRating || rating) >= value ? 'active' : ''}`}
+                  onClick={() => handleStarClick(value)}
+                  onMouseEnter={() => handleStarHover(value)}
+                  onMouseLeave={() => setHoverRating(0)}
+                  disabled={hasRated}
+                  aria-label={`Rate ${value} star${value > 1 ? 's' : ''}`}
+                >
+                  <Star 
+                    size={24} 
+                    fill={(hoverRating || rating) >= value ? '#FFD700' : 'none'}
+                    stroke={(hoverRating || rating) >= value ? '#FFD700' : '#ccc'}
+                  />
+                </button>
+              ))}
+              
+              {/* Submit inline when rating selected */}
+              {rating > 0 && !showReviewForm && (
+                <button 
+                  className="btn-submit-inline"
+                  onClick={handleSubmitRating}
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? '...' : 'Submit'}
+                </button>
+              )}
+            </div>
           </div>
 
-          {rating > 0 && (
-            <p className="rating-label">
-              {rating === 5 && 'Excellent! ⭐⭐⭐⭐⭐'}
-              {rating === 4 && 'Very Good ⭐⭐⭐⭐'}
-              {rating === 3 && 'Good ⭐⭐⭐'}
-              {rating === 2 && 'Fair ⭐⭐'}
-              {rating === 1 && 'Needs Improvement ⭐'}
-            </p>
-          )}
-
-          {/* Submit or Add Review */}
+          {/* Option to add review after rating */}
           {rating > 0 && !showReviewForm && (
-            <div className="rating-actions">
-              <button 
-                className="btn-submit-rating"
-                onClick={handleSubmitRating}
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Submitting...' : 'Submit Rating'}
-              </button>
-              <button 
-                className="btn-add-review"
-                onClick={() => setShowReviewForm(true)}
-              >
-                Add a Review
-              </button>
-            </div>
+            <button 
+              className="btn-add-review-link"
+              onClick={() => setShowReviewForm(true)}
+            >
+              Want to leave a comment?
+            </button>
           )}
 
           {/* Review Form */}
