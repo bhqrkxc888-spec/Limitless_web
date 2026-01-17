@@ -55,6 +55,26 @@ const getPortImageTypes = (port) => {
     });
   }
 
+  // Add McDonald's if port has family-friendly section
+  if (port.familyFriendly?.mcdonalds) {
+    imageTypes.push({
+      id: 'mcdonalds',
+      label: 'McDonald\'s',
+      required: false,
+      specs: 'McDonald\'s logo or storefront. Card image: 600×600px square, WebP format preferred'
+    });
+  }
+
+  // Add Ale Hop if port has family-friendly section
+  if (port.familyFriendly?.aleHop) {
+    imageTypes.push({
+      id: 'ale-hop',
+      label: 'Ale Hop',
+      required: false,
+      specs: 'Ale Hop logo or storefront. Card image: 600×600px square, WebP format preferred'
+    });
+  }
+
   // Note: Food images removed - food cards are now text-only with Google Maps links
 
   return imageTypes;
