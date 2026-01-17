@@ -75,6 +75,16 @@ const getPortImageTypes = (port) => {
     });
   }
 
+  // Add Local Park if port has family-friendly section
+  if (port.familyFriendly?.localPark) {
+    imageTypes.push({
+      id: 'local-park',
+      label: port.familyFriendly.localPark.name || 'Local Park',
+      required: false,
+      specs: `${port.familyFriendly.localPark.name || 'Local Park'} image. Card image: 400×400px square, WebP format preferred`
+    });
+  }
+
   // Note: Food images removed - food cards are now text-only with Google Maps links
 
   return imageTypes;
