@@ -175,22 +175,57 @@ function QuietSpotsSection({ dayData: _dayData }) {
 function SendSection({ dayData: _dayData }) {
   return (
     <div className="section-send">
-      <SubSection title="🔇 QUIET HOURS" content="[TBC] Content about quiet hours" />
-      <SubSection title="♿ ACCESSIBLE VENUES" content="[TBC] Content about accessible venues" />
-      <SubSection title="🎧 SENSORY INFO" content="[TBC] Content about sensory considerations" />
-    </div>
-  );
-}
-
-function SubSection({ title, content }) {
-  return (
-    <>
-      <div className="sub-section">
-        <h3>{title}</h3>
-        <p>{content}</p>
+      <div className="section-intro">
+        <p>Information for guests with disabilities, additional needs, or who prefer quieter experiences on sea days.</p>
       </div>
+
       <hr className="section-divider" />
-    </>
+
+      <div className="info-block">
+        <h3>Quiet Spaces on Sea Days</h3>
+        <p>Sea days can be busier than port days. Here are the best places to escape the crowds:</p>
+        <ul className="info-list">
+          <li><strong>Anderson's Bar & Library (Deck 7)</strong> - Quiet, dimly lit space with books and comfortable seating. Adults only.</li>
+          <li><strong>The Crow's Nest (Deck 17)</strong> - Forward observation lounge with 270-degree views. Usually quieter in the mornings.</li>
+          <li><strong>Your cabin</strong> - The quietest spot on the ship. Request a cabin away from lifts and entertainment areas if sensitive to noise.</li>
+          <li><strong>Oasis Spa terrace (Deck 16)</strong> - Thermal suite guests have access to a calm outdoor area.</li>
+        </ul>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="info-block">
+        <h3>Accessible Venues & Facilities</h3>
+        <ul className="info-list">
+          <li><strong>Lifts</strong> - All public decks accessible by lift. Braille buttons and audio announcements in all lifts.</li>
+          <li><strong>Pool hoists</strong> - Available at the main pool. Ask crew for assistance.</li>
+          <li><strong>Accessible seating</strong> - Reserved wheelchair spaces in the Headliners Theatre and 710 Club.</li>
+          <li><strong>Dining</strong> - All main restaurants are fully accessible. Specialty restaurants may have tight spaces - ask when booking.</li>
+          <li><strong>Guest Services (Deck 7)</strong> - Contact for mobility equipment, hearing loops, or any accessibility needs.</li>
+        </ul>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="info-block">
+        <h3>Sensory Considerations</h3>
+        <p>For neurodivergent guests or those with sensory sensitivities:</p>
+        <ul className="info-list">
+          <li><strong>Busiest times</strong> - Pool areas 11am-3pm, buffet at meal times, atrium during embarkation/events</li>
+          <li><strong>Quietest times</strong> - Early morning (before 9am), late evening (after 10pm), during main shows</li>
+          <li><strong>Noise levels</strong> - The Lido deck and SkyDome can be loud. The Crow's Nest and library are consistently quiet.</li>
+          <li><strong>Lighting</strong> - Anderson's Bar and specialty restaurants tend to have softer, dimmer lighting.</li>
+          <li><strong>Headphones welcome</strong> - Wear noise-cancelling headphones anywhere on the ship.</li>
+        </ul>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="tip-block">
+        <h3>Getting Help</h3>
+        <p>Guest Services on Deck 7 can assist with any accessibility needs. You can also speak to your cabin steward or restaurant team about specific requirements. P&O are generally very accommodating - just ask.</p>
+      </div>
+    </div>
   );
 }
 

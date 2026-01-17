@@ -68,6 +68,7 @@ const CONTENT_LAST_MODIFIED = {
     '/cruise-lines': '2025-01-01', // Cruise lines hub
     '/cruise-types': '2025-01-01', // Cruise types hub
     '/bucket-list': '2025-01-01', // Bucket list hub
+    '/ports': '2026-01-17',      // Port guides hub
     '/faq': '2025-01-01',        // FAQ
     '/testimonials': '2025-01-01', // Testimonials
     '/privacy-policy': '2024-12-01',
@@ -80,7 +81,8 @@ const CONTENT_LAST_MODIFIED = {
   cruiseLines: '2025-01-01',     // Update when cruiseLines.js changes
   destinations: '2026-01-14',    // Update when destinations.js changes  
   bucketList: '2025-01-01',      // Update when bucketList.js changes
-  cruiseTypes: '2025-01-01'      // Update when cruiseTypes.js changes
+  cruiseTypes: '2025-01-01',     // Update when cruiseTypes.js changes
+  ports: '2026-01-17'            // Update when ports.js changes
 };
 
 // Helper to get lastmod for a route
@@ -107,6 +109,7 @@ const STATIC_ROUTES = [
   { url: '/cruise-lines', priority: '0.8', changefreq: 'weekly' },
   { url: '/cruise-types', priority: '0.8', changefreq: 'weekly' },
   { url: '/bucket-list', priority: '0.8', changefreq: 'weekly' },
+  { url: '/ports', priority: '0.8', changefreq: 'weekly' },
   { url: '/faq', priority: '0.6', changefreq: 'monthly' },
   { url: '/testimonials', priority: '0.6', changefreq: 'monthly' },
   
@@ -144,16 +147,19 @@ async function loadLocalData() {
     const destinationsModule = await import('../src/data/destinations.js');
     const bucketListModule = await import('../src/data/bucketList.js');
     const cruiseTypesModule = await import('../src/data/cruiseTypes.js');
+    const portsModule = await import('../src/data/ports.js');
 
     return {
       cruiseLines: cruiseLinesModule.cruiseLines || [],
       destinations: destinationsModule.destinations || [],
       bucketList: bucketListModule.bucketListExperiences || [],
       cruiseTypes: cruiseTypesModule.cruiseTypes || [],
+      ports: portsModule.ports || [],
+      portRegions: portsModule.portRegions || [],
     };
   } catch (error) {
     console.error('⚠️  Error loading local data files:', error.message);
-    return { cruiseLines: [], destinations: [], bucketList: [], cruiseTypes: [] };
+    return { cruiseLines: [], destinations: [], bucketList: [], cruiseTypes: [], ports: [], portRegions: [] };
   }
 }
 
@@ -349,6 +355,44 @@ async function generateSitemap() {
     });
   } else if (localData.cruiseTypes.length > 0) {
     console.log(`   ⏭️  Skipping ${localData.cruiseTypes.length} cruise types (DRAFT)`);
+  }
+
+  // Port regions (only if published)
+  if (shouldIncludeDetailPages('ports') && localData.portRegions && localData.portRegions.length > 0) {
+    console.log(`   Adding ${localData.portRegions.length} port regions (PUBLISHED)...`);
+    const portsLastmod = CONTENT_LAST_MODIFIED.ports;
+    localData.portRegions.forEach(region => {
+      const urlPath = `/ports/region/${region.slug}`;
+      if (shouldIncludeInSitemap(urlPath)) {
+        const entry = generateUrlEntry(urlPath, '0.7', 'weekly', portsLastmod);
+        if (entry) {
+          urls.push(entry);
+          totalCount++;
+        }
+      }
+    });
+  }
+
+  // Port guide pages (only if published)
+  if (shouldIncludeDetailPages('ports') && localData.ports && localData.ports.length > 0) {
+    // Filter to only published ports
+    const publishedPorts = localData.ports.filter(port => port.status === 'published');
+    console.log(`   Adding ${publishedPorts.length} port guides (PUBLISHED)...`);
+    const portsLastmod = CONTENT_LAST_MODIFIED.ports;
+    publishedPorts.forEach(port => {
+      const urlPath = `/ports/${port.slug}`;
+      if (shouldIncludeInSitemap(urlPath)) {
+        // Use port's lastUpdated if available, otherwise use global ports lastmod
+        const lastmod = port.lastUpdated || portsLastmod;
+        const entry = generateUrlEntry(urlPath, '0.7', 'weekly', lastmod);
+        if (entry) {
+          urls.push(entry);
+          totalCount++;
+        }
+      }
+    });
+  } else if (localData.ports && localData.ports.length > 0) {
+    console.log(`   ⏭️  Skipping ${localData.ports.length} ports (DRAFT)`);
   }
 
   // 3. Load and add dynamic Supabase data

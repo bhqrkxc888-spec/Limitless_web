@@ -108,6 +108,16 @@
   transform: translateY(-1px);
 }
 
+.region-chip-active {
+  background: var(--clr-primary) !important;
+  color: white !important;
+  border-color: var(--clr-primary) !important;
+}
+
+.region-chip-active .chip-count {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
 .region-chip .chip-count {
   display: inline-flex;
   align-items: center;

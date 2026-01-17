@@ -115,10 +115,17 @@
     </script>
     
     <!-- Disable browser scroll restoration - React Router will handle it -->
+    <!-- Force scroll to top immediately on page load (especially for mobile) -->
     <script>
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
       }
+      // Immediately scroll to top - prevents mobile browsers from restoring scroll
+      window.scrollTo(0, 0);
+      // Also scroll on DOMContentLoaded in case browser scrolls during parse
+      document.addEventListener('DOMContentLoaded', function() {
+        window.scrollTo(0, 0);
+      });
     </script>
     
     <!-- Google Analytics 4 - Load after page is interactive and idle -->

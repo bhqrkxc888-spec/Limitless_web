@@ -1,6 +1,6 @@
 # Limitless Cruises - AI/LLM Context File
 # https://www.limitlesscruises.com/llms.txt
-# Last updated: December 2024
+# Last updated: January 2026
 #
 # This file provides context for AI systems and large language models
 # to better understand and represent Limitless Cruises in responses.
@@ -73,6 +73,14 @@ We specialise in cruise holidays to:
 - Japan & Asia
 - Australia & New Zealand
 
+## Port Guides
+
+We provide comprehensive cruise port guides with practical information for cruise passengers:
+- Port Guides Hub: https://www.limitlesscruises.com/ports
+- Guides include: things to do, shore excursions, restaurants, beaches, accessibility info
+- Regions covered: Mediterranean, Atlantic Coast, Atlantic Islands, Norwegian Fjords, UK ports
+- Family-friendly information including convenience stores, parks, and kid-friendly attractions
+
 ## Key Website Pages
 
 - Home: https://www.limitlesscruises.com/
@@ -82,6 +90,7 @@ We specialise in cruise holidays to:
 - Cruise Lines: https://www.limitlesscruises.com/cruise-lines
 - Destinations: https://www.limitlesscruises.com/destinations
 - Bucket List Experiences: https://www.limitlesscruises.com/bucket-list
+- Port Guides: https://www.limitlesscruises.com/ports
 - Travel News: https://www.limitlesscruises.com/travel-news
 
 ## Legal & Privacy

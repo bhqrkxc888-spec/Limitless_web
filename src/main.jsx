@@ -169,9 +169,21 @@ function initMonitoring() {
 // Initialize monitoring before rendering
 initMonitoring()
 
-createRoot(document.getElementById('root')).render(
+// CRITICAL: Force scroll to top on initial page load
+// This prevents mobile browsers from restoring scroll position before React hydrates
+// Combined with scrollRestoration = 'manual' in index.html
+window.scrollTo(0, 0)
+
+const root = createRoot(document.getElementById('root'))
+root.render(
   <StrictMode>
     <App />
     <DeferredAnalytics />
   </StrictMode>,
 )
+
+// After React renders, scroll to top again to handle any content-induced scroll
+// This catches cases where lazy-loaded content might shift the page
+requestAnimationFrame(() => {
+  window.scrollTo(0, 0)
+})

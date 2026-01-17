@@ -1,10 +1,11 @@
 import { useParams, Link } from 'react-router-dom';
-import { getPortsByRegion, getAllRegions } from '../data/ports';
+import { getPortsByRegion, getAllRegions, getPortsCountByRegion } from '../data/ports';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import { Button, Card, SectionHeader } from '../components/ui';
 import { usePortGuideImage } from '../hooks/useImageUrl';
 import './PortRegionPage.css';
+import './PortsPage.css'; // Import for region filter styles
 
 /**
  * Port Card with Database Image
@@ -104,8 +105,40 @@ function PortRegionPage() {
         </div>
       </section>
 
+      {/* Region Quick-Nav Filter */}
+      <section className="section ports-intro-section" style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
+        <div className="container">
+          <div className="regions-quick-nav">
+            <span className="regions-label">Browse by Region:</span>
+            <div className="regions-chips">
+              <Link
+                to="/ports"
+                className="region-chip"
+                style={{ fontWeight: '600' }}
+              >
+                ← All Ports
+              </Link>
+              {getAllRegions().map((r) => {
+                const portCount = getPortsCountByRegion(r.id);
+                const isActive = r.id === region.id;
+                return (
+                  <Link
+                    key={r.id}
+                    to={`/ports/region/${r.slug}`}
+                    className={`region-chip ${isActive ? 'region-chip-active' : ''}`}
+                  >
+                    {r.name}
+                    <span className="chip-count">{portCount}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Ports Grid */}
-      <section className="section">
+      <section className="section" style={{ paddingTop: '1rem' }}>
         <div className="container">
           <SectionHeader
             title={`All ${region.name} Ports`}
