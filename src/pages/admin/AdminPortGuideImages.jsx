@@ -132,6 +132,8 @@ function AdminPortGuideImages() {
           ...img
         };
       });
+      
+      console.log('[DEBUG] Loaded images by port:', Object.keys(imagesByPort));
 
       setImages(imagesByPort);
       setLastUpdated(Date.now());
@@ -283,9 +285,9 @@ function AdminPortGuideImages() {
 
             <div className="images-list">
               {getPortImageTypes(selectedPort).map(imageType => {
-                const img = images[selectedPort.id]?.[imageType.id];
+                const img = images[selectedPort.slug]?.[imageType.id];
                 const placeholderUrl = getPortPlaceholderImage(
-                  selectedPort.id, 
+                  selectedPort.slug, 
                   imageType.id, 
                   selectedPort.name, 
                   selectedPort.country
@@ -327,7 +329,7 @@ function AdminPortGuideImages() {
                     <ImageUpload
                       bucket={STORAGE_BUCKETS.CATEGORIES}
                       entityType="port-guide"
-                      entityId={selectedPort.id}
+                      entityId={selectedPort.slug}
                       imageType={imageType.id}
                       suggestedAltText={`${selectedPort.name} - ${imageType.label}`}
                       existingImage={img?.url}
