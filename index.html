@@ -114,6 +114,13 @@
       }
     </script>
     
+    <!-- Disable browser scroll restoration - React Router will handle it -->
+    <script>
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+    </script>
+    
     <!-- Google Analytics 4 - Load after page is interactive and idle -->
     <script>
       // Initialize dataLayer immediately (no layout queries)

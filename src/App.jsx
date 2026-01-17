@@ -161,20 +161,35 @@ function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    // Scroll to top immediately on route change (instant, not smooth)
-    window.scrollTo(0, 0);
+    // CRITICAL: Force scroll to top on every route change
+    // Use both scrollTo and scrollRestoration to prevent browser interference
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant' // instant = no smooth scroll
+    });
+    
+    // Backup: Force scroll again after a tiny delay to override any lazy-loaded content
+    const scrollTimeout = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 10);
     
     // Trigger SEO analysis on route change (after a delay to let page render)
     // Skip for admin routes
     if (!import.meta.env.DEV && !pathname.startsWith('/admin')) {
-      const timeoutId = setTimeout(() => {
+      const seoTimeout = setTimeout(() => {
         analyzePageSEO().catch(() => {
           // Silently fail if SEO analysis fails
         })
       }, 1500)
       
-      return () => clearTimeout(timeoutId)
+      return () => {
+        clearTimeout(scrollTimeout)
+        clearTimeout(seoTimeout)
+      }
     }
+    
+    return () => clearTimeout(scrollTimeout)
   }, [pathname]);
 
   return null;
@@ -405,7 +420,7 @@ function AppLayout() {
 function App() {
   return (
     <ErrorBoundary>
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <ScrollToTop />
         <AppLayout />
       </BrowserRouter>
