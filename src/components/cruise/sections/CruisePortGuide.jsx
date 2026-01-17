@@ -155,7 +155,7 @@ function WeatherSection({ dayData }) {
    OVERVIEW SECTION
    ======================================== */
 
-function OverviewSection({ portName, slug, overview, heroImage, heroIsPlaceholder }) {
+function OverviewSection({ portName, _slug, overview, _heroImage, _heroIsPlaceholder }) {
   if (!overview) {
     return (
       <div className="section-overview">
