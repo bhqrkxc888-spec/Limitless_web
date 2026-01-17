@@ -5,7 +5,7 @@
  */
 
 import { useState } from 'react';
-import { Anchor, Calendar, Search, Loader } from 'lucide-react';
+import { Anchor, Calendar, Search, Loader, ChevronDown, ChevronUp } from 'lucide-react';
 import AdminLayout from '../../components/admin/AdminLayout';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import './AdminCruiseFinder.css';
@@ -22,6 +22,7 @@ export default function AdminCruiseFinder() {
   const [searching, setSearching] = useState(false);
   const [results, setResults] = useState(null);
   const [error, setError] = useState(null);
+  const [expandedCruises, setExpandedCruises] = useState(new Set());
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -36,6 +37,7 @@ export default function AdminCruiseFinder() {
     setSearching(true);
     setError(null);
     setResults(null);
+    setExpandedCruises(new Set());
 
     try {
       const response = await fetch('/api/cruise-search', {
@@ -63,6 +65,32 @@ export default function AdminCruiseFinder() {
     } finally {
       setSearching(false);
     }
+  };
+
+  const toggleCruiseExpanded = (cruiseId) => {
+    setExpandedCruises(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(cruiseId)) {
+        newSet.delete(cruiseId);
+      } else {
+        newSet.add(cruiseId);
+      }
+      return newSet;
+    });
+  };
+
+  // Parse stops from cruise data (stop_1_date, stop_1_text, stop_2_date, stop_2_text, etc.)
+  const parseStops = (cruise) => {
+    const stops = [];
+    let i = 1;
+    while (cruise[`stop_${i}_date`] || cruise[`stop_${i}_text`]) {
+      stops.push({
+        date: cruise[`stop_${i}_date`] || '',
+        text: cruise[`stop_${i}_text`] || ''
+      });
+      i++;
+    }
+    return stops;
   };
 
   if (authLoading) {
@@ -178,50 +206,67 @@ export default function AdminCruiseFinder() {
                     Found {results.cruises.length} cruise{results.cruises.length !== 1 ? 's' : ''}
                   </p>
                   
-                  {results.cruises.map((cruise, index) => (
-                    <div key={index} className="cruise-card">
-                      <div className="cruise-header">
-                        <h3>{cruise.title || 'Untitled Cruise'}</h3>
-                        <div className="cruise-meta">
-                          <span className="ship-name">
-                            <Anchor size={16} />
-                            {cruise.ship_name || 'Unknown Ship'}
-                          </span>
-                          {cruise.date && (
-                            <span className="cruise-date">
-                              <Calendar size={16} />
-                              {cruise.date}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-
-                      {cruise.stops && cruise.stops.length > 0 && (
-                        <div className="cruise-stops">
-                          <h4>Itinerary ({cruise.stops.length} stops)</h4>
-                          <ul className="stops-list">
-                            {cruise.stops.map((stop, stopIndex) => (
-                              <li key={stopIndex}>
-                                {stop.port || stop.name || stop}
-                                {stop.date && <span className="stop-date"> - {stop.date}</span>}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-
-                      {cruise.url && (
-                        <a 
-                          href={cruise.url} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="cruise-link"
+                  {results.cruises.map((cruise) => {
+                    const cruiseId = cruise.id || `cruise-${cruise.cruise_date}-${cruise.ship_name}`;
+                    const isExpanded = expandedCruises.has(cruiseId);
+                    const stops = parseStops(cruise);
+                    
+                    return (
+                      <div key={cruiseId} className="cruise-card">
+                        <div 
+                          className="cruise-header clickable"
+                          onClick={() => toggleCruiseExpanded(cruiseId)}
                         >
-                          View on CruiseMapper
-                        </a>
-                      )}
-                    </div>
-                  ))}
+                          <div className="cruise-title-section">
+                            <h3>{cruise.cruise_title || 'Untitled Cruise'}</h3>
+                            <div className="cruise-meta">
+                              <span className="ship-name">
+                                <Anchor size={16} />
+                                {cruise.ship_name || 'Unknown Ship'}
+                              </span>
+                              {cruise.cruise_line && (
+                                <span className="cruise-line">
+                                  {cruise.cruise_line}
+                                </span>
+                              )}
+                              {cruise.cruise_date && (
+                                <span className="cruise-date">
+                                  <Calendar size={16} />
+                                  {cruise.cruise_date}
+                                </span>
+                              )}
+                            </div>
+                            {stops.length > 0 && (
+                              <p className="stops-preview">
+                                {stops.length} stops
+                              </p>
+                            )}
+                          </div>
+                          <button className="expand-button" type="button">
+                            {isExpanded ? (
+                              <ChevronUp size={24} />
+                            ) : (
+                              <ChevronDown size={24} />
+                            )}
+                          </button>
+                        </div>
+
+                        {isExpanded && stops.length > 0 && (
+                          <div className="cruise-stops">
+                            <h4>Full Itinerary</h4>
+                            <ul className="stops-list">
+                              {stops.map((stop, stopIndex) => (
+                                <li key={stopIndex}>
+                                  <span className="stop-date">{stop.date}</span>
+                                  <span className="stop-text">{stop.text}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               ) : (
                 <div className="no-results">
