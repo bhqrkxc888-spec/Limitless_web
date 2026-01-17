@@ -576,3 +576,53 @@ button {
     padding: var(--space-16) 0;
   }
 }
+
+/* ========================================
+   DISABLE IMAGE ANIMATIONS
+   No hover effects or transforms on images
+   Especially important for mobile/touch devices
+   ======================================== */
+
+/* Disable all image transforms and animations */
+img,
+.optimized-image,
+[class*="-image"] img,
+[class*="-img"] {
+  transform: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Disable hover transforms on image containers */
+[class*="-image"]:hover img,
+[class*="-image"]:hover,
+[class*="image-"]:hover img,
+[class*="image-"]:hover {
+  transform: none !important;
+}
+
+/* Mobile-specific: Disable ALL hover animations */
+@media (max-width: 1023px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Disable all transforms on touch devices */
+  .attraction-block:hover,
+  .info-tile:hover,
+  .card:hover,
+  [class*="card"]:hover {
+    transform: none !important;
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -11,8 +11,7 @@
  * The dayData.portSlug links to the port guide - no separate content files needed.
  */
 
-import { ArrowLeft, Clock, Info, MapPin, Sun } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Clock, Info, MapPin, Sun } from 'lucide-react';
 import FeedbackSection from '../FeedbackSection';
 import PortWeather from '../PortWeather';
 import { getPortContent } from '../../../data/portContent';
@@ -164,35 +163,12 @@ function OverviewSection({ portName, slug, overview, heroImage, heroIsPlaceholde
           <h2>Welcome to {portName}</h2>
           <p>Port guide content coming soon.</p>
         </div>
-        {slug && (
-          <Link to={`/ports/${slug}`} className="port-guide-link">
-            <ArrowLeft size={16} /> View Full Port Guide
-          </Link>
-        )}
       </div>
     );
   }
 
   return (
     <div className="section-overview">
-      {/* Link to full port guide */}
-      {slug && (
-        <Link to={`/ports/${slug}`} className="port-guide-link">
-          <ArrowLeft size={16} /> View Full Port Guide
-        </Link>
-      )}
-      
-      {/* Hero image */}
-      {heroImage && !heroIsPlaceholder && (
-        <div className="port-hero-image">
-          <OptimizedImage
-            src={heroImage}
-            alt={`${portName} cruise port`}
-            className="port-hero-img"
-          />
-        </div>
-      )}
-
       <div className="section-intro">
         <h2>Welcome to {portName}</h2>
       </div>
