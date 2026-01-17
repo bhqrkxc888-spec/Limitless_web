@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { hasConsent } from '../components/cruise/CruiseConsentGate';
 import CruiseConsentGate from '../components/cruise/CruiseConsentGate';
@@ -13,26 +13,22 @@ import ShipContent from '../components/cruise/sections/ShipContent';
 import CountdownTimer from '../components/cruise/CountdownTimer';
 import ShipTracker from '../components/cruise/ShipTracker';
 import PortWeather from '../components/cruise/PortWeather';
-import { g606Itinerary, g606ShipInfo, g606Departure, getSectionsForDayType } from '../data/cruise/g606-itinerary';
+import { getCruiseById, getSectionsForDayType } from '../data/cruises';
 import { SITE_ASSETS } from '../config/assetUrls';
 import { Button } from '../components/ui';
 import './CruiseCompanionPage.css';
 
-// OG Image for social sharing - Canary Islands hero
-const G606_OG_IMAGE = 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_destinations/canary-islands/hero.webp';
-
-// Facebook group link
-const FB_GROUP_URL = 'https://www.facebook.com/groups/1019149802999591/';
-
 /**
- * Get current cruise day index
+ * Get current cruise day index based on itinerary
  */
-function getCurrentCruiseDayIndex() {
+function getCurrentCruiseDayIndex(itinerary) {
+  if (!itinerary || itinerary.length === 0) return 0;
+  
   const now = new Date();
   now.setHours(0, 0, 0, 0);
   
-  for (let i = 0; i < g606Itinerary.length; i++) {
-    const day = g606Itinerary[i];
+  for (let i = 0; i < itinerary.length; i++) {
+    const day = itinerary[i];
     const dayStart = new Date(day.date);
     dayStart.setHours(0, 0, 0, 0);
     
@@ -51,38 +47,57 @@ function getCurrentCruiseDayIndex() {
   }
   
   // If before cruise, return first day (index 0)
-  const firstDay = new Date(g606Itinerary[0].date);
+  const firstDay = new Date(itinerary[0].date);
   firstDay.setHours(0, 0, 0, 0);
   if (now < firstDay) {
     return 0;
   }
   
   // If after cruise, return last day
-  return g606Itinerary.length - 1;
+  return itinerary.length - 1;
 }
 
 /**
  * Main Cruise Companion Page
+ * 
+ * GENERIC: Works with ANY cruise from the registry.
+ * Route: /cruise/:cruiseId (e.g., /cruise/g606)
+ * Falls back to g606 for legacy /cruise/g606 route
  */
 function CruiseCompanionPage() {
+  // Get cruise ID from URL params (e.g., /cruise/g606)
+  const { cruiseId } = useParams();
+  const activeCruiseId = cruiseId || 'g606'; // Default to g606 for backwards compatibility
+  
+  // Load cruise data from registry
+  const cruise = getCruiseById(activeCruiseId);
+  
   const [consentGiven, setConsentGiven] = useState(false);
   const [isChecking, setIsChecking] = useState(true);
   const [selectedDayIndex, setSelectedDayIndex] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
+
+  // Extract data from cruise (with fallbacks)
+  const itinerary = cruise?.itinerary || [];
+  const ship = cruise?.ship || {};
+  const departure = cruise?.departure || {};
+  const facebookGroup = cruise?.facebookGroup;
+  const ogImage = cruise?.ogImage;
 
   useEffect(() => {
     // Check for existing consent
     if (hasConsent()) {
       setConsentGiven(true);
       // Initialize day selection
-      const currentDay = getCurrentCruiseDayIndex();
+      const currentDay = getCurrentCruiseDayIndex(itinerary);
       setSelectedDayIndex(currentDay);
-      const dayData = g606Itinerary[currentDay];
-      const sections = getSectionsForDayType(dayData.dayType);
-      setSelectedSection(sections[0]);
+      if (itinerary[currentDay]) {
+        const sections = getSectionsForDayType(itinerary[currentDay].dayType);
+        setSelectedSection(sections[0]);
+      }
     }
     setIsChecking(false);
-  }, []);
+  }, [itinerary]);
 
   // Set page to noindex (hidden page)
   useEffect(() => {
@@ -98,18 +113,21 @@ function CruiseCompanionPage() {
   const handleConsent = () => {
     setConsentGiven(true);
     // Initialize day selection after consent
-    const currentDay = getCurrentCruiseDayIndex();
+    const currentDay = getCurrentCruiseDayIndex(itinerary);
     setSelectedDayIndex(currentDay);
-    const dayData = g606Itinerary[currentDay];
-    const sections = getSectionsForDayType(dayData.dayType);
-    setSelectedSection(sections[0]);
+    if (itinerary[currentDay]) {
+      const sections = getSectionsForDayType(itinerary[currentDay].dayType);
+      setSelectedSection(sections[0]);
+    }
   };
 
   const handleDaySelect = (dayIndex) => {
     setSelectedDayIndex(dayIndex);
-    const dayData = g606Itinerary[dayIndex];
-    const sections = getSectionsForDayType(dayData.dayType);
-    setSelectedSection(sections[0]); // Reset to first section when day changes
+    const dayData = itinerary[dayIndex];
+    if (dayData) {
+      const sections = getSectionsForDayType(dayData.dayType);
+      setSelectedSection(sections[0]); // Reset to first section when day changes
+    }
     
     // Scroll to content area
     setTimeout(() => {
@@ -132,6 +150,19 @@ function CruiseCompanionPage() {
     }, 100);
   };
 
+  // Cruise not found
+  if (!cruise) {
+    return (
+      <div className="cruise-companion-page">
+        <div className="error-state">
+          <h1>Cruise Not Found</h1>
+          <p>The cruise "{activeCruiseId}" could not be found.</p>
+          <Link to="/">Return to homepage</Link>
+        </div>
+      </div>
+    );
+  }
+
   if (isChecking) {
     return (
       <div className="cruise-companion-page">
@@ -147,9 +178,9 @@ function CruiseCompanionPage() {
     return (
       <div className="cruise-companion-page">
         <SEO
-          title="Cruise Companion - P&O Iona G606"
-          description="Your personal cruise companion for P&O Iona G606, Spain, Portugal & Canary Islands, March 2026"
-          image={G606_OG_IMAGE}
+          title={`Cruise Companion - ${ship.operator} ${ship.name} ${cruise.id.toUpperCase()}`}
+          description={`Your personal cruise companion for ${ship.operator} ${ship.name} ${cruise.id.toUpperCase()}, ${cruise.name}`}
+          image={ogImage}
           robots="noindex, nofollow"
         />
         <CruiseConsentGate onConsent={handleConsent} />
@@ -158,15 +189,15 @@ function CruiseCompanionPage() {
   }
 
   // Get current day data
-  const currentDayIndex = selectedDayIndex !== null ? selectedDayIndex : getCurrentCruiseDayIndex();
-  const dayData = g606Itinerary[currentDayIndex];
-  const currentSection = selectedSection || getSectionsForDayType(dayData.dayType)[0];
+  const currentDayIndex = selectedDayIndex !== null ? selectedDayIndex : getCurrentCruiseDayIndex(itinerary);
+  const dayData = itinerary[currentDayIndex];
+  const currentSection = selectedSection || (dayData ? getSectionsForDayType(dayData.dayType)[0] : 'overview');
 
   // Get next port for sea days
   const getNextPort = () => {
-    for (let i = currentDayIndex + 1; i < g606Itinerary.length; i++) {
-      if (g606Itinerary[i].dayType === 'port') {
-        return g606Itinerary[i].portName;
+    for (let i = currentDayIndex + 1; i < itinerary.length; i++) {
+      if (itinerary[i].dayType === 'port') {
+        return itinerary[i].portName;
       }
     }
     return null;
@@ -219,12 +250,22 @@ function CruiseCompanionPage() {
     }
   };
 
+  // Calculate cruise duration
+  const firstDate = itinerary[0]?.date;
+  const lastDate = itinerary[itinerary.length - 1]?.date || itinerary[itinerary.length - 1]?.dateEnd;
+  const formatCruiseDate = (dateStr) => {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  };
+  const nights = itinerary.length > 0 ? itinerary[itinerary.length - 1].dayNumber - 1 : 0;
+
   return (
     <main className="cruise-companion-page">
       <SEO
-        title="G606 Cruise Guide | P&O Iona | Canary Islands March 2026"
-        description="Your insider guide to P&O Iona G606 - Spain, Portugal & Canary Islands, 14-28 March 2026. Port tips, recommendations & more."
-        image={G606_OG_IMAGE}
+        title={`${cruise.id.toUpperCase()} Cruise Guide | ${ship.operator} ${ship.name} | ${cruise.shortName}`}
+        description={`Your insider guide to ${ship.operator} ${ship.name} ${cruise.id.toUpperCase()} - ${cruise.name}. Port tips, recommendations & more.`}
+        image={ogImage}
         robots="noindex, nofollow"
       />
 
@@ -251,21 +292,23 @@ function CruiseCompanionPage() {
             </Link>
 
             <div className="header-text">
-              <h1>P&O IONA | G606</h1>
-              <p className="cruise-title">Spain, Portugal & Canary Islands</p>
-              <p className="cruise-dates">14-28 March 2026 | 14 Nights | Southampton</p>
+              <h1>{ship.operator?.toUpperCase()} {ship.name?.toUpperCase()} | {cruise.id.toUpperCase()}</h1>
+              <p className="cruise-title">{cruise.name}</p>
+              <p className="cruise-dates">{formatCruiseDate(firstDate)} - {formatCruiseDate(lastDate)} | {nights} Nights | {departure.port}</p>
             </div>
 
             <div className="header-buttons">
-              <Button
-                href={FB_GROUP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-outline-white"
-                size="sm"
-              >
-                Join the community
-              </Button>
+              {facebookGroup && (
+                <Button
+                  href={facebookGroup}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline-white"
+                  size="sm"
+                >
+                  Join the community
+                </Button>
+              )}
               <Button
                 href="https://www.limitlesscruises.com"
                 className="btn-outline-white"
@@ -282,9 +325,9 @@ function CruiseCompanionPage() {
       <div className="cruise-countdown-section">
         <div className="container">
           <CountdownTimer 
-            departureDate={`${g606Departure.date}T${g606Departure.time}:00`}
-            cruiseName="G606"
-            shipName={g606ShipInfo.name}
+            departureDate={departure.date && departure.time ? `${departure.date}T${departure.time}:00` : null}
+            cruiseName={cruise.id.toUpperCase()}
+            shipName={ship.name}
           />
         </div>
       </div>
@@ -296,10 +339,10 @@ function CruiseCompanionPage() {
             {/* Live Ship Tracker */}
             <div className="map-weather-map">
               <ShipTracker 
-                imo={g606ShipInfo.imo}
+                imo={ship.imo}
                 height={350}
                 showTrack={true}
-                title="Where's Iona Right Now?"
+                title={`Where's ${ship.name} Right Now?`}
               />
             </div>
 
@@ -307,9 +350,9 @@ function CruiseCompanionPage() {
             <div className="map-weather-weather">
               <h3 className="weather-section-title">Today's Weather</h3>
               <div className="weather-location-label">
-                {dayData.portName}
+                {dayData?.portName}
               </div>
-              {dayData.coords ? (
+              {dayData?.coords ? (
                 <PortWeather 
                   portName={null}
                   lat={dayData.coords.lat}
@@ -331,6 +374,7 @@ function CruiseCompanionPage() {
 
       {/* Day Navigation */}
       <DayNavigation
+        itinerary={itinerary}
         selectedDay={currentDayIndex}
         onDaySelect={handleDaySelect}
       />

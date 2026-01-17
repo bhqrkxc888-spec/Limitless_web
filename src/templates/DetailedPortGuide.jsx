@@ -406,12 +406,7 @@ function GoFurtherSection({ goFurther, attractionImages }) {
                 <p>{attraction.allow}</p>
               </div>
             )}
-            {attraction.cost && (
-              <div className="detail-item">
-                <strong>Cost</strong>
-                <p>{attraction.cost}</p>
-              </div>
-            )}
+            {/* Cost/pricing removed - contact for pricing */}
           </div>
           {attraction.notes && (
             <p className="attraction-notes"><em>{formatBoldText(attraction.notes)}</em></p>

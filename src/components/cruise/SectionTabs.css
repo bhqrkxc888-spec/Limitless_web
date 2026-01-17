@@ -126,3 +126,28 @@
     scroll-behavior: auto;
   }
 }
+
+/* ========================================
+   SCROLL BEHAVIOR FIX
+   Account for sticky headers when content updates
+   ======================================== */
+
+/* The content that appears below section tabs needs scroll margin */
+.section-tabs + div,
+.section-tabs ~ .section-content {
+  scroll-margin-top: 180px;
+}
+
+@media (min-width: 768px) {
+  .section-tabs + div,
+  .section-tabs ~ .section-content {
+    scroll-margin-top: 200px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-tabs + div,
+  .section-tabs ~ .section-content {
+    scroll-margin-top: 220px;
+  }
+}

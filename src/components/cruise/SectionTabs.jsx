@@ -1,4 +1,4 @@
-import { getSectionsForDayType, getSectionLabel } from '../../data/cruise/g606-itinerary';
+import { getSectionsForDayType, getSectionLabel } from '../../data/cruises';
 import './SectionTabs.css';
 
 function SectionTabs({ dayType, selectedSection, onSectionSelect }) {

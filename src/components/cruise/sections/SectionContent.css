@@ -5,6 +5,27 @@
 
 .section-content {
   width: 100%;
+  /* Account for sticky day nav + section tabs */
+  scroll-margin-top: 180px;
+}
+
+/* Ensure content wrapper accounts for both sticky headers */
+.cruise-port-guide {
+  scroll-margin-top: 180px;
+}
+
+@media (min-width: 768px) {
+  .section-content,
+  .cruise-port-guide {
+    scroll-margin-top: 200px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-content,
+  .cruise-port-guide {
+    scroll-margin-top: 220px;
+  }
 }
 
 /* ========================================
@@ -1105,6 +1126,142 @@
   .weather-card-container {
     max-width: 450px;
   }
+}
+
+/* ========================================
+   FAMILY-FRIENDLY SECTION (With Kids)
+   Same styling as port guides
+   ======================================== */
+
+.family-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4, 1rem);
+  margin-bottom: var(--space-4, 1rem);
+}
+
+@media (min-width: 600px) {
+  .family-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.family-card {
+  background: var(--clr-surface, #FFFFFF);
+  border: 1px solid var(--clr-border, #E8E4DC);
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(44, 52, 76, 0.06);
+}
+
+.family-card-image {
+  width: 100%;
+  height: 120px;
+  background: var(--clr-primary, #2C344C);
+  overflow: hidden;
+}
+
+.family-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.family-card-content {
+  padding: var(--space-4, 1rem);
+}
+
+.family-card-content h4 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-base, 1rem);
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--clr-text-main, #2C344C);
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+.family-card-content p {
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--clr-text-main, #2C344C);
+  line-height: 1.5;
+  margin-bottom: var(--space-1, 0.25rem);
+}
+
+.family-notes {
+  font-style: italic;
+  color: var(--clr-text-muted, #5C6478);
+  margin-top: var(--space-2, 0.5rem);
+}
+
+.park-info,
+.attraction-info,
+.beach-info {
+  background: var(--clr-bg-alt, #F8F5F0);
+  padding: var(--space-4, 1rem);
+  border-radius: var(--radius-md, 8px);
+  border-left: 4px solid var(--clr-secondary, #D4B86A);
+}
+
+.park-info h4,
+.attraction-info h4 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-base, 1rem);
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--clr-text-main, #2C344C);
+  margin-bottom: var(--space-3, 0.75rem);
+}
+
+.park-info p,
+.attraction-info p,
+.beach-info p {
+  font-size: var(--font-size-base, 1rem);
+  color: var(--clr-text-main, #2C344C);
+  line-height: var(--line-height-relaxed, 1.7);
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+.park-info p:last-child,
+.attraction-info p:last-child,
+.beach-info p:last-child {
+  margin-bottom: 0;
+}
+
+/* Subtle map links (not big buttons) */
+.map-link-subtle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1, 0.25rem);
+  color: var(--clr-secondary, #D4B86A);
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: var(--font-weight-medium, 500);
+  text-decoration: none;
+  margin-top: var(--space-2, 0.5rem);
+  transition: color 0.2s ease;
+}
+
+.map-link-subtle:hover {
+  color: var(--clr-primary, #2C344C);
+  text-decoration: underline;
+}
+
+/* Port guide link in Overview */
+.port-guide-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2, 0.5rem);
+  color: var(--clr-secondary, #D4B86A);
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: var(--font-weight-medium, 500);
+  text-decoration: none;
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-radius: var(--radius-full, 9999px);
+  transition: all 0.2s ease;
+  margin-bottom: var(--space-4, 1rem);
+}
+
+.port-guide-link:hover {
+  background: var(--clr-primary, #2C344C);
+  color: var(--clr-surface, #FFFFFF);
 }
 
 /* ========================================

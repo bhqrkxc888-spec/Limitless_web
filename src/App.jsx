@@ -253,7 +253,7 @@ function AppLayout() {
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
-        {!isMaintenanceHome && !pathname.startsWith('/cruise/g606') && <Header />}
+        {!isMaintenanceHome && !pathname.startsWith('/cruise/') && <Header />}
         {/* Using div instead of main to avoid nested <main> elements - each page has its own <main> */}
         <div id="main-content" className="main-wrapper">
           <ErrorBoundary>
@@ -313,7 +313,10 @@ function AppLayout() {
             {/* Skipper AI Beta - Hidden */}
             <Route path="/skipper-beta" element={<SkipperBetaPage />} />
             
-            {/* G606 Cruise Guide - Hidden */}
+            {/* Cruise Companion - Generic route for all cruise itineraries */}
+            <Route path="/cruise/:cruiseId" element={<CruiseCompanionPage />} />
+            
+            {/* Legacy G606 route - redirects to new format */}
             <Route path="/cruise/g606-po-iona-canaries-mar-2026" element={<CruiseCompanionPage />} />
             
             {/* Offers - Public */}
@@ -383,7 +386,7 @@ function AppLayout() {
         </Suspense>
         </ErrorBoundary>
       </div>
-      {!isMaintenanceHome && !pathname.startsWith('/cruise/g606') && <Footer />}
+      {!isMaintenanceHome && !pathname.startsWith('/cruise/') && <Footer />}
       {/* Deferred UI - loaded after LCP for better mobile performance */}
       {/* These components load only after requestIdleCallback or 3s timeout */}
       <DeferredUI>

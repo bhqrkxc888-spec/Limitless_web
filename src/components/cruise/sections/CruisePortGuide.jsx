@@ -1,20 +1,23 @@
 /**
  * Cruise Port Guide Component
  * 
- * Renders port content for the cruise companion (G606 etc)
- * Uses the same content structure as DetailedPortGuide from port guide pages
- * Adds cruise-specific features: Weather section, FeedbackSection
+ * GENERIC component that works with ANY cruise itinerary.
+ * Renders port content using the SAME data as standalone port guides.
  * 
- * This is the SINGLE source of truth for port content in cruise companions.
- * Content comes from portContent.js via g606-port-content.js
+ * Content is pulled AUTOMATICALLY from:
+ * - ports.js (familyFriendly structured data)
+ * - portContent.js (detailed narrative content)
+ * 
+ * The dayData.portSlug links to the port guide - no separate content files needed.
  */
 
-import { Clock, Info, MapPin, Sun } from 'lucide-react';
+import { ArrowLeft, Clock, Info, MapPin, Sun } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import FeedbackSection from '../FeedbackSection';
 import PortWeather from '../PortWeather';
-import { getG606PortContent } from '../../../data/cruise/g606-port-content';
+import { getPortContent } from '../../../data/portContent';
+import { getPortBySlug } from '../../../data/ports';
 import { usePortGuideImage } from '../../../hooks/useImageUrl';
-import { getPortGuideSlugFromG606PortName } from '../../../utils/portNameMapping';
 import OptimizedImage from '../../OptimizedImage';
 import { formatBoldText, formatParagraphsWithBold } from '../../../utils/textFormatting.jsx';
 import './SectionContent.css';
@@ -24,9 +27,15 @@ import './SectionContent.css';
  * Renders a specific section based on sectionKey prop
  */
 function CruisePortGuide({ sectionKey, dayData }) {
-  // Convert port name to slug for both content and image lookups
-  const slug = getPortGuideSlugFromG606PortName(dayData.portName);
-  const portContent = getG606PortContent(slug);
+  // Use portSlug directly from itinerary (set in cruise config)
+  const slug = dayData.portSlug;
+  
+  // Get content directly from port guides (source of truth)
+  const portContent = slug ? getPortContent(slug) : null;
+  
+  // Get port data from ports.js (source of truth for familyFriendly structured data)
+  const portData = getPortBySlug(slug);
+  const familyFriendly = portData?.familyFriendly;
   
   // Load images
   const { imageUrl: heroImage, isPlaceholder: heroIsPlaceholder } = usePortGuideImage(slug, 'hero', dayData.portName, dayData.country || '');
@@ -37,6 +46,10 @@ function CruisePortGuide({ sectionKey, dayData }) {
   const { imageUrl: attraction4, isPlaceholder: attr4Placeholder } = usePortGuideImage(slug, 'attraction-4', dayData.portName, dayData.country || '');
   const { imageUrl: attraction5, isPlaceholder: attr5Placeholder } = usePortGuideImage(slug, 'attraction-5', dayData.portName, dayData.country || '');
   const { imageUrl: attraction6, isPlaceholder: attr6Placeholder } = usePortGuideImage(slug, 'attraction-6', dayData.portName, dayData.country || '');
+  
+  // Load family-friendly images (McDonald's, Ale Hop)
+  const { imageUrl: mcdonaldsImage } = usePortGuideImage(slug, 'mcdonalds', dayData.portName, dayData.country || '');
+  const { imageUrl: aleHopImage } = usePortGuideImage(slug, 'ale-hop', dayData.portName, dayData.country || '');
   
   const attractionImages = [
     { url: attraction1, isPlaceholder: attr1Placeholder },
@@ -50,7 +63,7 @@ function CruisePortGuide({ sectionKey, dayData }) {
   const renderSection = () => {
     switch (sectionKey) {
       case 'overview':
-        return <OverviewSection portName={dayData.portName} overview={portContent?.overview} heroImage={heroImage} heroIsPlaceholder={heroIsPlaceholder} />;
+        return <OverviewSection portName={dayData.portName} slug={slug} overview={portContent?.overview} heroImage={heroImage} heroIsPlaceholder={heroIsPlaceholder} />;
       case 'weather':
         return <WeatherSection dayData={dayData} />;
       case 'stayLocal':
@@ -58,7 +71,7 @@ function CruisePortGuide({ sectionKey, dayData }) {
       case 'goFurther':
         return <GoFurtherSection goFurther={portContent?.goFurther} attractionImages={attractionImages} portName={dayData.portName} />;
       case 'withKids':
-        return <WithKidsSection withKids={portContent?.withKids} />;
+        return <WithKidsSection withKids={portContent?.withKids} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} />;
       case 'send':
         return <SendSection send={portContent?.send} />;
       case 'foodAndDrink':
@@ -140,7 +153,7 @@ function WeatherSection({ dayData }) {
    OVERVIEW SECTION
    ======================================== */
 
-function OverviewSection({ portName, overview, heroImage, heroIsPlaceholder }) {
+function OverviewSection({ portName, slug, overview, heroImage, heroIsPlaceholder }) {
   if (!overview) {
     return (
       <div className="section-overview">
@@ -148,12 +161,24 @@ function OverviewSection({ portName, overview, heroImage, heroIsPlaceholder }) {
           <h2>Welcome to {portName}</h2>
           <p>Port guide content coming soon.</p>
         </div>
+        {slug && (
+          <Link to={`/ports/${slug}`} className="port-guide-link">
+            <ArrowLeft size={16} /> View Full Port Guide
+          </Link>
+        )}
       </div>
     );
   }
 
   return (
     <div className="section-overview">
+      {/* Link to full port guide */}
+      {slug && (
+        <Link to={`/ports/${slug}`} className="port-guide-link">
+          <ArrowLeft size={16} /> View Full Port Guide
+        </Link>
+      )}
+      
       {/* Hero image */}
       {heroImage && !heroIsPlaceholder && (
         <div className="port-hero-image">
@@ -471,12 +496,7 @@ function GoFurtherSection({ goFurther, attractionImages, portName }) {
                 <p>{attraction.allow}</p>
               </div>
             )}
-            {attraction.cost && (
-              <div className="detail-item">
-                <strong>Cost</strong>
-                <p>{attraction.cost}</p>
-              </div>
-            )}
+            {/* Cost/pricing removed - contact for pricing */}
           </div>
           {attraction.notes && (
             <p className="attraction-notes"><em>{formatBoldText(attraction.notes)}</em></p>
@@ -512,10 +532,12 @@ function GoFurtherSection({ goFurther, attractionImages, portName }) {
 
 /* ========================================
    WITH KIDS SECTION
+   Now includes familyFriendly data from ports.js (same as port guides)
    ======================================== */
 
-function WithKidsSection({ withKids }) {
-  if (!withKids) {
+function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage }) {
+  // Show section if either withKids OR familyFriendly has content
+  if (!withKids && !familyFriendly) {
     return (
       <div className="section-with-kids">
         <div className="section-intro">
@@ -535,7 +557,135 @@ function WithKidsSection({ withKids }) {
 
       <hr className="section-divider" />
 
-      {withKids.toddlers && withKids.toddlers.length > 0 && (
+      {/* Quick Wins Section - McDonald's and Ale Hop from familyFriendly (ports.js) */}
+      {familyFriendly && (familyFriendly.mcdonalds || familyFriendly.aleHop) && (
+        <>
+          <SubSection title="Quick Wins for Families">
+            <div className="family-cards-grid">
+              {familyFriendly.mcdonalds && (
+                <div className="family-card">
+                  {mcdonaldsImage && (
+                    <div className="family-card-image">
+                      <OptimizedImage src={mcdonaldsImage} alt="McDonald's location" />
+                    </div>
+                  )}
+                  <div className="family-card-content">
+                    <h4>🍔 McDonald's {familyFriendly.mcdonalds.name}</h4>
+                    <p><strong>Location:</strong> {familyFriendly.mcdonalds.location}</p>
+                    <p><strong>Distance:</strong> {familyFriendly.mcdonalds.walkingTime}</p>
+                    {familyFriendly.mcdonalds.notes && <p className="family-notes">{familyFriendly.mcdonalds.notes}</p>}
+                    {familyFriendly.mcdonalds.mapsLink && (
+                      <a href={familyFriendly.mcdonalds.mapsLink} target="_blank" rel="noopener noreferrer" className="map-link-subtle">
+                        Open in Maps →
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
+              {familyFriendly.aleHop && (
+                <div className="family-card">
+                  {aleHopImage && (
+                    <div className="family-card-image">
+                      <OptimizedImage src={aleHopImage} alt="ALE-HOP store" />
+                    </div>
+                  )}
+                  <div className="family-card-content">
+                    <h4>🎁 ALE-HOP {familyFriendly.aleHop.name}</h4>
+                    <p><strong>Location:</strong> {familyFriendly.aleHop.location}</p>
+                    <p><strong>Distance:</strong> {familyFriendly.aleHop.walkingTime}</p>
+                    {familyFriendly.aleHop.notes && <p className="family-notes">{familyFriendly.aleHop.notes}</p>}
+                    {familyFriendly.aleHop.mapsLink && (
+                      <a href={familyFriendly.aleHop.mapsLink} target="_blank" rel="noopener noreferrer" className="map-link-subtle">
+                        Open in Maps →
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Local Park from familyFriendly */}
+      {familyFriendly?.localPark && (
+        <>
+          <SubSection title="🌳 Local Park">
+            <div className="park-info">
+              <h4>{familyFriendly.localPark.name}</h4>
+              <p><strong>Location:</strong> {familyFriendly.localPark.location}</p>
+              <p><strong>Distance:</strong> {familyFriendly.localPark.walkingTime}</p>
+              {familyFriendly.localPark.facilities && <p><strong>Facilities:</strong> {familyFriendly.localPark.facilities}</p>}
+              {familyFriendly.localPark.notes && <p>{familyFriendly.localPark.notes}</p>}
+              {familyFriendly.localPark.mapsLink && (
+                <a href={familyFriendly.localPark.mapsLink} target="_blank" rel="noopener noreferrer" className="map-link-subtle">
+                  Open in Maps →
+                </a>
+              )}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Theme Park / Attraction from familyFriendly */}
+      {familyFriendly?.themePark && (
+        <>
+          <SubSection title="🎢 Theme Park / Attraction">
+            <div className="attraction-info">
+              <h4>{familyFriendly.themePark.name}</h4>
+              <p><strong>Location:</strong> {familyFriendly.themePark.location}</p>
+              <p><strong>Distance:</strong> {familyFriendly.themePark.distance}</p>
+              {familyFriendly.themePark.highlights && <p><strong>Highlights:</strong> {familyFriendly.themePark.highlights}</p>}
+              {familyFriendly.themePark.suitableFor && <p><strong>Suitable for:</strong> {familyFriendly.themePark.suitableFor}</p>}
+              {familyFriendly.themePark.hours && <p><strong>Hours:</strong> {familyFriendly.themePark.hours}</p>}
+              {familyFriendly.themePark.notes && <p>{familyFriendly.themePark.notes}</p>}
+              {familyFriendly.themePark.mapsLink && (
+                <a href={familyFriendly.themePark.mapsLink} target="_blank" rel="noopener noreferrer" className="map-link-subtle">
+                  Open in Maps →
+                </a>
+              )}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Water Park from familyFriendly */}
+      {familyFriendly?.waterPark && (
+        <>
+          <SubSection title="💦 Water Park">
+            <div className="attraction-info">
+              <h4>{familyFriendly.waterPark.name}</h4>
+              <p><strong>Location:</strong> {familyFriendly.waterPark.location}</p>
+              {familyFriendly.waterPark.highlights && <p><strong>Highlights:</strong> {familyFriendly.waterPark.highlights}</p>}
+              {familyFriendly.waterPark.notes && <p>{familyFriendly.waterPark.notes}</p>}
+              {familyFriendly.waterPark.mapsLink && (
+                <a href={familyFriendly.waterPark.mapsLink} target="_blank" rel="noopener noreferrer" className="map-link-subtle">
+                  Open in Maps →
+                </a>
+              )}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Beach Option from familyFriendly */}
+      {familyFriendly?.beachOption && (
+        <>
+          <SubSection title="🏖️ Beach for Families">
+            <div className="beach-info">
+              <p>{familyFriendly.beachOption}</p>
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Original withKids content from portContent.js */}
+      {withKids?.toddlers && withKids.toddlers.length > 0 && (
         <>
           <SubSection title="Toddlers & Young Children">
             <ul className="simple-list">
@@ -548,7 +698,7 @@ function WithKidsSection({ withKids }) {
         </>
       )}
 
-      {withKids.olderKids && withKids.olderKids.length > 0 && (
+      {withKids?.olderKids && withKids.olderKids.length > 0 && (
         <>
           <SubSection title="Older Kids & Teens">
             <ul className="simple-list">
@@ -561,7 +711,7 @@ function WithKidsSection({ withKids }) {
         </>
       )}
 
-      {withKids.familyFood && withKids.familyFood.length > 0 && (
+      {withKids?.familyFood && withKids.familyFood.length > 0 && (
         <>
           <SubSection title="Family-Friendly Food">
             <ul className="simple-list">
@@ -574,7 +724,7 @@ function WithKidsSection({ withKids }) {
         </>
       )}
 
-      {withKids.warnings && withKids.warnings.length > 0 && (
+      {withKids?.warnings && withKids.warnings.length > 0 && (
         <>
           <SubSection title="⚠️ Things to Note">
             <ul className="simple-list warning-list">
@@ -587,7 +737,7 @@ function WithKidsSection({ withKids }) {
         </>
       )}
 
-      {withKids.easyDay && (
+      {withKids?.easyDay && (
         <div className="tip-block">
           <strong>💡 Easy Day Suggestion</strong>
           <p>{withKids.easyDay}</p>

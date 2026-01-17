@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { g606Itinerary } from '../../data/cruise/g606-itinerary';
 import './DayNavigation.css';
 
 function formatDate(dateString) {
@@ -9,43 +8,13 @@ function formatDate(dateString) {
   return `${day} ${month}`;
 }
 
-function getCurrentCruiseDay() {
-  const now = new Date();
-  now.setHours(0, 0, 0, 0);
-  
-  for (let i = 0; i < g606Itinerary.length; i++) {
-    const day = g606Itinerary[i];
-    const dayStart = new Date(day.date);
-    dayStart.setHours(0, 0, 0, 0);
-    
-    let dayEnd;
-    if (day.dateEnd) {
-      dayEnd = new Date(day.dateEnd);
-      dayEnd.setHours(23, 59, 59, 999);
-    } else {
-      dayEnd = new Date(day.date);
-      dayEnd.setHours(23, 59, 59, 999);
-    }
-    
-    if (now >= dayStart && now <= dayEnd) {
-      return i;
-    }
-  }
-  
-  // If before cruise, return first day (index 0)
-  const firstDay = new Date(g606Itinerary[0].date);
-  firstDay.setHours(0, 0, 0, 0);
-  if (now < firstDay) {
-    return 0;
-  }
-  
-  // If after cruise, return last day
-  return g606Itinerary.length - 1;
-}
-
-function DayNavigation({ selectedDay, onDaySelect }) {
-  // Initialize with current day if not set
-  const currentDayIndex = selectedDay !== null ? selectedDay : getCurrentCruiseDay();
+/**
+ * Generic DayNavigation component
+ * Works with ANY cruise itinerary passed as prop
+ */
+function DayNavigation({ itinerary, selectedDay, onDaySelect }) {
+  // Use selectedDay if set, otherwise default to 0
+  const currentDayIndex = selectedDay !== null ? selectedDay : 0;
   
   // Scroll to selected day on mount or when selectedDay changes
   useEffect(() => {
@@ -57,11 +26,15 @@ function DayNavigation({ selectedDay, onDaySelect }) {
     }
   }, [currentDayIndex]);
 
+  if (!itinerary || itinerary.length === 0) {
+    return null;
+  }
+
   return (
     <nav className="day-navigation" aria-label="Day navigation">
       <div className="container">
         <div className="day-nav-scroll">
-          {g606Itinerary.map((day, index) => {
+          {itinerary.map((day, index) => {
             const isSelected = index === currentDayIndex;
             const dateLabel = day.dateEnd 
               ? `${formatDate(day.date)} - ${formatDate(day.dateEnd)}`
