@@ -2992,6 +2992,12 @@ export const ports = [
       beachOption: 'La Caleta Beach is closest (20-25 minutes walk). Calm waters, golden sand, small playground, rocks to climb. Also Playa de la Victoria for longer stretch.',
     },
     
+    meta: {
+      title: 'Cádiz Cruise Port Guide | Andalusian History, Beaches & Tapas',
+      description: 'Complete Cádiz cruise port guide. Explore Europe\'s oldest city, climb the cathedral tower, taste sherry and tapas, and discover Andalusian charm in this walkable Atlantic port.',
+      keywords: ['Cádiz cruise port', 'Cádiz shore excursions', 'Cádiz things to do', 'Cádiz from cruise ship', 'Cádiz cruise terminal', 'Seville day trip', 'Jerez sherry'],
+    },
+    
     status: 'published',
     lastUpdated: '2026-01-17',
   },
@@ -3338,6 +3344,12 @@ export const ports = [
         mapsLink: 'https://www.google.com/maps/dir/?api=1&destination=Aquarium+Finisterrae+A+Coruna&travelmode=walking',
       },
       beachOption: 'Riazor and Orzán beaches are 30 minutes walk or 10 minutes taxi. Urban twin beaches with promenade, full facilities, surf, clean sand.',
+    },
+    
+    meta: {
+      title: 'A Coruña Cruise Port Guide | Tower of Hercules, Seafood & Galician Culture',
+      description: 'Complete A Coruña cruise port guide. Visit the world\'s oldest working lighthouse, explore Galician seafood culture, walk the iconic glass-fronted waterfront, and discover insider tips for your cruise.',
+      keywords: ['A Coruña cruise port', 'La Coruña cruise', 'A Coruña shore excursions', 'Tower of Hercules', 'Galicia cruise', 'A Coruña things to do', 'Santiago de Compostela day trip'],
     },
     
     status: 'published',
@@ -4799,6 +4811,12 @@ export const ports = [
         mapsLink: 'https://www.google.com/maps/dir/?api=1&destination=Aqualand+Maspalomas+Gran+Canaria&travelmode=walking',
       },
       beachOption: 'Las Canteras Beach is 10-15 minutes walk from port. Long urban beach with golden sand, natural reef protection, promenade lined with cafés and restaurants.',
+    },
+    
+    meta: {
+      title: 'Las Palmas Gran Canaria Cruise Port Guide | Beach, Vegueta & Tax-Free Shopping',
+      description: 'Complete Las Palmas cruise port guide. Walk to Las Canteras beach, explore Vegueta old town, enjoy tax-free shopping, and discover insider tips for your Canary Islands cruise.',
+      keywords: ['Las Palmas cruise port', 'Gran Canaria cruise', 'Las Canteras beach', 'Las Palmas things to do', 'Canary Islands cruise', 'Las Palmas shore excursions', 'Vegueta old town'],
     },
     
     status: 'published',
@@ -8384,6 +8402,12 @@ export const ports = [
       visaInfo: 'Part of Spain/EU. Same visa requirements as mainland Spain.',
       safetyTips: 'Very safe destination. Standard precautions apply.',
       localCustoms: 'Spanish customs apply. Siesta hours observed (2-5pm).',
+    },
+    
+    meta: {
+      title: 'Lanzarote Cruise Port Guide | Timanfaya, César Manrique & Volcanic Landscapes',
+      description: 'Complete Lanzarote cruise port guide. Visit Timanfaya Fire Mountains, explore César Manrique masterpieces, discover volcanic wine country, and find insider tips for your Canary Islands cruise.',
+      keywords: ['Lanzarote cruise port', 'Arrecife cruise', 'Timanfaya National Park', 'César Manrique', 'Lanzarote things to do', 'Canary Islands cruise', 'Lanzarote shore excursions'],
     },
     
     status: 'published',

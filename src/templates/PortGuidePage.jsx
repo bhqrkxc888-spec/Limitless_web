@@ -165,10 +165,12 @@ function PortGuidePage() {
     <main className="port-guide-page">
       {/* SEO */}
       <SEO
-        title={port.meta?.title || `${port.name} Cruise Port Guide`}
-        description={port.meta?.description || port.description}
+        title={port.meta?.title || `${port.name} Cruise Port Guide | Things to Do & Local Tips`}
+        description={port.meta?.description || port.description || `Complete cruise port guide for ${port.name}. Discover walking routes, local attractions, accessibility info, family activities, restaurants and essential tips for your cruise visit.`}
         canonical={`https://www.limitlesscruises.com/ports/${port.slug}`}
-        keywords={port.meta?.keywords?.join(', ') || ''}
+        keywords={port.meta?.keywords?.join(', ') || `${port.name} cruise port, ${port.name} port guide, cruise ${port.name}, ${port.name} things to do`}
+        image={heroImage}
+        type="article"
         structuredData={structuredData}
       />
 

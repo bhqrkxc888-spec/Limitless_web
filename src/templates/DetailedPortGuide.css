@@ -872,16 +872,18 @@
 
 .family-card-image {
   flex-shrink: 0;
-  width: 140px;
-  align-self: stretch; /* Match parent height */
+  width: 220px;
+  height: 220px;
+  align-self: flex-start;
   overflow: hidden;
   background: var(--clr-bg-alt, #f5f5f5);
+  border-radius: var(--radius-md, 8px);
 }
 
 .family-card-image img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
 }
 
@@ -963,7 +965,7 @@
   
   .family-card-image {
     width: 100%;
-    height: 160px;
+    height: 220px;
   }
 }
 
@@ -979,15 +981,18 @@
 
 .park-info.with-image .info-image {
   flex-shrink: 0;
-  width: 120px;
-  align-self: stretch; /* Match parent height */
+  width: 220px;
+  height: 220px;
+  align-self: flex-start;
   background: var(--clr-bg-alt, #f5f5f5);
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
 }
 
 .park-info.with-image .info-image img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
 }
 
@@ -1003,7 +1008,7 @@
   
   .park-info.with-image .info-image {
     width: 100%;
-    height: 140px;
+    height: 220px;
   }
 }
 
