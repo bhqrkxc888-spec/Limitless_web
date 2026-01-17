@@ -30,6 +30,7 @@ export const portContent = {
     displayName: 'La Coruña',
     country: 'Spain',
     overview: {
+      hook: 'Walk off the ship straight into the heart of a real Spanish city. Home to the Tower of Hercules - the world\'s oldest working Roman lighthouse.',
       description: `La Coruña (A Coruña in Galician) is one of the easiest cruise ports in Spain. The ship docks at Muelle de Trasatlánticos, literally a 5-minute walk from the city centre. No shuttles needed, no taxis required - just walk off and you're there.
 
 The city sits on a peninsula with the Atlantic on three sides. It's known as the "City of Glass" thanks to the distinctive galería buildings - white wooden-framed glass balconies that line the waterfront. You'll spot them from the ship before you even disembark.
@@ -40,60 +41,90 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
         dockLocation: 'Muelle de Trasatlánticos (Transatlantic Dock)',
         distanceToTown: '5 minutes walk',
         shuttleInfo: 'Not needed - it\'s right there'
-      }
+      },
+      importantNotes: [
+        'Siesta hours: Some smaller shops close 2-5pm',
+        'Museums: Many close on Mondays',
+        'Shops: Some close on Tuesdays',
+        'Sunday: Most shops closed',
+        'Lunch: Restaurants busy 2-4pm, some close 4-8pm'
+      ]
     },
     stayLocal: {
       quickWalk: [
         {
           title: 'From the ship, you\'re immediately on Avenida de la Marina',
-          content: 'The famous waterfront with those iconic glass-fronted galería buildings. Fishermen used to live here with boats tied up in the arcades below. Worth a few photos before you go anywhere.'
+          content: 'The famous waterfront with those iconic glass-fronted galería buildings. Fishermen used to live here with boats tied up in the arcades below. Worth a few photos before you go anywhere.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+Trasatlanticos,+A+Coruna/Avenida+de+la+Marina,+A+Coruna/Muelle+de+Trasatlanticos,+A+Coruna/'
         },
         {
           title: 'Plaza de María Pita (10 mins)',
-          content: 'The main square and heart of the city. Named after a local heroine who defended the city against English attack in 1589. The impressive town hall building dominates one side. Surrounded by cafés - good spot for your first coffee.'
+          content: 'The main square and heart of the city. Named after a local heroine who defended the city against English attack in 1589. The impressive town hall building dominates one side. Surrounded by cafés - good spot for your first coffee.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+Trasatlanticos,+A+Coruna/Plaza+de+Maria+Pita,+A+Coruna/Muelle+de+Trasatlanticos,+A+Coruna/'
         },
         {
           title: 'Los Cantones Village (2 mins)',
-          content: 'Shopping centre right by the port. Useful for toilets, coffee, or if you need anything. Free WiFi.'
+          content: 'Shopping centre right by the port. Useful for toilets, coffee, or if you need anything. Free WiFi.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+Trasatlanticos,+A+Coruna/Los+Cantones+Village,+A+Coruna/Muelle+de+Trasatlanticos,+A+Coruna/'
         },
         {
           title: 'Rúa Real (10 mins)',
-          content: 'Main pedestrian shopping street. Turn left from the port, cross Avenida de la Marina, and you\'re on it. Standard Spanish high street - Zara, Mango, etc.'
+          content: 'Main pedestrian shopping street. Turn left from the port, cross Avenida de la Marina, and you\'re on it. Standard Spanish high street - Zara, Mango, etc.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+Trasatlanticos,+A+Coruna/Rua+Real,+A+Coruna/Muelle+de+Trasatlanticos,+A+Coruna/'
         }
       ],
       longerWalk: [
         {
           title: 'Option 1: Old Town Loop (~1 hour)',
           content: 'Ship → Marina → Plaza María Pita → Wander Old Town streets → San Antón Castle (outside view, 15 min walk) → Waterfront back to ship. The Old Town is compact with narrow winding streets, historic churches, and small plazas. Look for: Colegiata de Santa María del Campo (12th century Romanesque church), Iglesia de San Jorge (Baroque church near the main square), Various tapas bars tucked into side streets.',
+          terrain: 'moderate',
           mapLink: 'https://www.google.com/maps/dir/Muelle+de+Trasatlanticos,+A+Coruna/Plaza+de+Maria+Pita,+A+Coruna/Castillo+de+San+Anton,+A+Coruna/Muelle+de+Trasatlanticos,+A+Coruna/'
         },
         {
           title: 'Option 2: Beach Walk (~45 mins one way)',
           content: 'Ship → Promenade west → Playa de Riazor (30 mins). Sandy city beach with cafés behind. Walk back or taxi return. March = probably not swimming weather, but nice to see.',
-          mapLink: 'https://www.google.com/maps/dir/Muelle+de+Trasatlanticos,+A+Coruna/Praia+de+Riazor,+A+Coruna/'
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+Trasatlanticos,+A+Coruna/Praia+de+Riazor,+A+Coruna/Muelle+de+Trasatlanticos,+A+Coruna/'
         },
         {
           title: 'Option 3: Paseo Marítimo',
-          content: 'The famous 13km seafront promenade. You won\'t do all of it, but even 30 minutes along is lovely - flat, scenic, sea views. Good for walking, running, or cycling (hire bikes available).'
+          content: 'The famous 13km seafront promenade. You won\'t do all of it, but even 30 minutes along is lovely - flat, scenic, sea views. Good for walking, running, or cycling (hire bikes available).',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+Trasatlanticos,+A+Coruna/Paseo+Maritimo,+A+Coruna/Muelle+de+Trasatlanticos,+A+Coruna/'
         }
       ],
       parks: [
         {
           title: 'Jardines de Méndez Núñez (10 mins from port)',
-          content: 'Peaceful gardens right in the city centre. Good for sitting, shade, and a break from walking. 750 metres from the cruise terminal.'
+          content: 'Peaceful gardens right in the city centre. Good for sitting, shade, and a break from walking. 750 metres from the cruise terminal.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+Trasatlanticos,+A+Coruna/Jardines+de+Mendez+Nunez,+A+Coruna/Muelle+de+Trasatlanticos,+A+Coruna/'
         },
         {
           title: 'Jardín de San Carlos (10 mins)',
-          content: 'Small romantic garden overlooking the harbour. Contains the tomb of Sir John Moore (British general). Peaceful, benches, nice views.'
+          content: 'Small romantic garden overlooking the harbour. Contains the tomb of Sir John Moore (British general). Peaceful, benches, nice views.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+Trasatlanticos,+A+Coruna/Jardin+de+San+Carlos,+A+Coruna/Muelle+de+Trasatlanticos,+A+Coruna/'
         },
         {
           title: 'Parque de Santa Margarita (20 mins walk, uphill, or quick taxi)',
-          content: 'Larger park with playground, duck pond, and café. Good if you want green space away from the centre.'
+          content: 'Larger park with playground, duck pond, and café. Good if you want green space away from the centre.',
+          terrain: 'challenging',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+Trasatlanticos,+A+Coruna/Parque+de+Santa+Margarita,+A+Coruna/Muelle+de+Trasatlanticos,+A+Coruna/'
         }
       ],
       beach: {
         title: 'Playa de Riazor (30 mins walk or 10 min taxi)',
         content: 'City beach, sandy, clean. Home ground of Deportivo La Coruña football club visible at one end. Cafés and restaurants behind the beach.',
+        waterTemperature: '~14-15°C in March (cold!)',
+        facilities: 'Toilets, changing facilities, cafés and restaurants behind beach',
+        accessNotes: 'Promenade fully accessible. Sand access may be challenging - check locally for beach wheelchairs.',
+        mapLink: 'https://www.google.com/maps/dir/Muelle+de+Trasatlanticos,+A+Coruna/Praia+de+Riazor,+A+Coruna/Muelle+de+Trasatlanticos,+A+Coruna/',
+        coordinates: { lat: 43.3713, lng: -8.4108 },
         additional: [
           'Playa del Orzán (next to Riazor) - Slightly quieter, good for surfing. Same promenade connects both.',
           'Praia de Santo Amaro (further along coast) - Popular swimming spot with an outdoor pool overlooking the beach. Kiosk for drinks.',
@@ -145,7 +176,12 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
           cost: 'Check current prices',
           notes: '234 steps to the top (no lift). Worth it for the views. Surrounding sculpture park is free to wander and interesting.',
           ourTake: 'If you\'ve got the time and energy, absolutely worth it. Walk there along the promenade (coastal path), taxi back. Or vice versa. You\'ll see the Octopus sculpture and coastal scenery along the way.',
-          mapLink: 'https://www.google.com/maps/dir/Muelle+de+Trasatlanticos,+A+Coruna/Torre+de+Hercules,+A+Coruna/'
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+Trasatlanticos,+A+Coruna/Torre+de+Hercules,+A+Coruna/',
+          terrain: 'moderate',
+          accessibility: {
+            rating: 'partial',
+            notes: 'Surrounding park and promenade accessible. Tower has 234 steps with no lift - not accessible to top.'
+          }
         },
         {
           name: 'Santiago de Compostela',
@@ -156,6 +192,11 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
           cost: 'Check current prices',
           notes: 'Beautiful historic centre, incredible cathedral, lots of pilgrims. But it\'s a big commitment for a port day - you\'ll miss La Coruña itself entirely. If going with kids: Ale Hop shop in old town (Rúa do Vilar, 33).',
           ourTake: 'Lovely if you\'ve never been, but only if you have a long port day. If you\'ve got 6-8 hours in port, it\'s doable with careful timing. Less than that, stay in La Coruña and explore locally.',
+          terrain: 'moderate',
+          accessibility: {
+            rating: 'partial',
+            notes: 'Old town has cobblestones and some hills. Cathedral has accessible entrance. Main plaza is accessible.'
+          },
           kidsNote: {
             aleHop: {
               location: 'Old town, near cathedral',
@@ -174,7 +215,12 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
           allow: 'Allow 1-1.5 hours to enjoy the views and walk around',
           cost: 'Check current prices',
           notes: '',
-          ourTake: 'Nice views but not essential. Tower of Hercules is more impressive and easier to combine with other things.'
+          ourTake: 'Nice views but not essential. Tower of Hercules is more impressive and easier to combine with other things.',
+          terrain: 'easy',
+          accessibility: {
+            rating: 'full',
+            notes: 'Panoramic elevator provides accessible access to viewpoint. Park paths are mostly accessible.'
+          }
         }
       ],
       ourTake: 'Unless you have done La Coruña before, the city itself has plenty. Tower of Hercules is the only "go further" we would prioritise for first-timers. Save Santiago for another trip unless you have got a long day and it is on your bucket list.\n\nFor cruise line excursions: Check the cruise line app or information desk for current options and availability.'
@@ -188,10 +234,17 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
       ],
       olderKids: [
         'Aquarium Finisterrae - Good for a couple of hours',
-        'Domus - Casa del Hombre - Interactive science museum. Human body focus. Interesting enough for teens.',
+        'Domus - Casa del Hombre - Interactive science museum. Human body focus.',
         'Tower of Hercules - The climb (234 steps) could be an adventure. Sculpture park around it is fun to explore.',
         'Beach + ice cream - Always works',
-        'Bike hire - Cycling along the Paseo Marítimo promenade. Flat, scenic, dedicated cycle lanes. Good for active families.'
+        'Bike hire - Cycling along the Paseo Marítimo promenade. Flat, scenic, dedicated cycle lanes.'
+      ],
+      teens: [
+        'Bike hire along Paseo Marítimo - 13km of flat, scenic cycling along the coast. E-bikes available.',
+        'Shopping on Rúa Real - Spanish high street brands (Zara, Mango, etc.) at good prices.',
+        'Tower of Hercules climb - 234 steps for the views and bragging rights. Great for Instagram.',
+        'Surf lessons at Playa del Orzán - The beach next to Riazor has waves and surf schools.',
+        'Domus science museum - Interactive exhibits, more interesting than it sounds.'
       ],
       familyFood: [
         '100 Montaditos - Cheap small sandwiches, choose your own. Kids love the choice and independence.',
@@ -233,6 +286,11 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
       ]
     },
     foodAndDrink: {
+      localDishToTry: {
+        name: 'Pulpo a la Gallega',
+        description: 'Galician-style octopus - boiled until tender, sliced, and served on a wooden plate with paprika, coarse sea salt, and olive oil. Often accompanied by cachelos (boiled potatoes). This is THE dish of Galicia.',
+        lookFor: 'Any restaurant with "Pulpería" in the name, or look for the copper cooking pots in the window.'
+      },
       restaurants: [
         {
           name: 'A Pulpeira de Melide',
@@ -310,6 +368,7 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
     displayName: 'Tenerife (Santa Cruz)',
     country: 'Spain',
     overview: {
+      hook: 'Gateway to Mount Teide - Spain\'s highest peak and Europe\'s most visited national park. Plus year-round sunshine and golden beaches.',
       description: `Santa Cruz de Tenerife is the capital of Tenerife and co-capital of the Canary Islands. It's a proper working city with a relaxed atmosphere, not a tourist resort. The locals are friendly, English is widely spoken, and it's very safe.
 
 The city is flat, easy to navigate, and surprisingly walkable. Most attractions are within 20 minutes of the port on foot. But the real draw of Tenerife is what lies beyond the city - Mount Teide, the beaches, and the stunning volcanic landscapes.
@@ -320,54 +379,79 @@ March means you're here for "winter sun" - expect pleasant temperatures perfect 
         dockLocation: 'Either Muelle Sur (long breakwater, 15-25 min walk) or Muelle Norte (newer terminal, 5 min walk)',
         distanceToTown: '5-25 mins depending on berth',
         shuttleInfo: 'Free shuttle usually runs from Muelle Sur to Plaza de España'
-      }
+      },
+      importantNotes: [
+        'Siesta: Less strict than mainland Spain, but some shops close 1-4pm',
+        'Tax-free: Canaries have lower taxes - electronics and perfume are cheaper',
+        'Mount Teide: Book cable car tickets in advance - they sell out',
+        'Sunday: Most shops closed, markets open',
+        'Tipping: Not expected, round up for good service'
+      ]
     },
     stayLocal: {
       quickWalk: [
         {
           title: 'Plaza de España (5-10 mins from shuttle drop-off)',
-          content: 'The largest square in the Canary Islands. Modern design with a huge reflective pool and fountain. Underground, you can see the remains of Castillo de San Cristóbal (free). Good starting point for exploring.'
+          content: 'The largest square in the Canary Islands. Modern design with a huge reflective pool and fountain. Underground, you can see the remains of Castillo de San Cristóbal (free). Good starting point for exploring.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+Sur,+Santa+Cruz+de+Tenerife/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/Muelle+Sur,+Santa+Cruz+de+Tenerife/'
         },
         {
           title: 'Plaza de la Candelaria (2 mins from Plaza de España)',
-          content: 'Pretty square with the Triunfo de la Candelaria monument. Surrounded by cafés - good for people-watching.'
+          content: 'Pretty square with the Triunfo de la Candelaria monument. Surrounded by cafés - good for people-watching.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/Plaza+de+la+Candelaria,+Santa+Cruz+de+Tenerife/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/'
         },
         {
           title: 'Calle del Castillo (starts at Plaza de la Candelaria)',
-          content: 'Main pedestrian shopping street. All the usual brands plus local shops. Tax-free status means electronics and perfume are cheaper here.'
+          content: 'Main pedestrian shopping street. All the usual brands plus local shops. Tax-free status means electronics and perfume are cheaper here.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/Calle+del+Castillo,+Santa+Cruz+de+Tenerife/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/'
         }
       ],
       longerWalk: [
         {
           title: 'Option 1: Waterfront to Auditorio (~30 mins one way)',
           content: 'Plaza de España → Waterfront promenade → Parque Marítimo → Auditorio de Tenerife. The Auditorio is the iconic wave-shaped concert hall (think Sydney Opera House vibes). Designed by Santiago Calatrava. Even if you don\'t go inside, it\'s worth the walk for photos. Look down at the sea wall - music legends\' faces are painted on the boulders.',
-          mapLink: 'https://www.google.com/maps/dir/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/Auditorio+de+Tenerife/'
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/Auditorio+de+Tenerife/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/'
         },
         {
           title: 'Option 2: City Highlights Loop (~1.5 hours)',
           content: 'Plaza de España → Plaza de la Candelaria → Mercado de Nuestra Señora de África → TEA (art museum, exterior) → Back via Calle del Castillo',
+          terrain: 'easy',
           mapLink: 'https://www.google.com/maps/dir/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/Mercado+de+Nuestra+Senora+de+Africa,+Santa+Cruz+de+Tenerife/TEA+Tenerife+Espacio+de+las+Artes,+Santa+Cruz+de+Tenerife/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/'
         }
       ],
       parks: [
         {
           title: 'Palmetum (20 mins walk from Plaza de España, near Auditorio)',
-          content: 'Botanical garden built on a former rubbish dump - now home to the largest collection of palm trees in Europe. Over 3,000 plant species. Great views over the city from the viewpoint. Peaceful escape.'
+          content: 'Botanical garden built on a former rubbish dump - now home to the largest collection of palm trees in Europe. Over 3,000 plant species. Great views over the city from the viewpoint. Peaceful escape.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/Palmetum,+Santa+Cruz+de+Tenerife/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/'
         },
         {
           title: 'Parque García Sanabria (15 mins walk northwest of centre)',
-          content: 'Large urban park with sculptures, fountains, and shady paths. Free to enter. Nice for a wander.'
+          content: 'Large urban park with sculptures, fountains, and shady paths. Free to enter. Nice for a wander.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/Parque+Garcia+Sanabria,+Santa+Cruz+de+Tenerife/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/'
         },
         {
           title: 'Plaza del Príncipe de Asturias (10 mins from port)',
-          content: 'Small leafy square with benches. Good for a quiet break between sightseeing.'
+          content: 'Small leafy square with benches. Good for a quiet break between sightseeing.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/Plaza+del+Principe+de+Asturias,+Santa+Cruz+de+Tenerife/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/'
         }
       ],
       beach: {
         title: 'Playa de Las Teresitas (20-25 mins by bus)',
-        content: 'The famous golden sand beach - sand imported from the Sahara! Protected by breakwater so calm water. Palm-fringed promenade with cafés. This is the one to visit. Getting there: Bus #910 from Plaza de España or Intercambiador (main bus station). Runs regularly. Tell driver "Las Teresitas." March reality: Water around 19°C - swimmable for the brave. Perfect for a beach walk and lunch at one of the beachfront restaurants.',
+        content: 'The famous golden sand beach - sand imported from the Sahara! Protected by breakwater so calm water. Palm-fringed promenade with cafés. This is the one to visit. Getting there: Bus #910 from Plaza de España. Runs regularly.',
+        waterTemperature: '~19°C in March (swimmable for the brave)',
+        facilities: 'Toilets, showers, sunbed hire, beachfront restaurants and cafés',
+        accessNotes: 'Promenade accessible. Some beach access points have ramps. Check locally for beach wheelchairs.',
         additional: [],
-        mapLink: 'https://www.google.com/maps/dir/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/Playa+de+Las+Teresitas/'
+        mapLink: 'https://www.google.com/maps/dir/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/Playa+de+Las+Teresitas/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/',
+        coordinates: { lat: 28.5084, lng: -16.1867 }
       },
       scenic: [
         'Auditorio de Tenerife - The iconic wave-shaped building',
@@ -412,7 +496,12 @@ March means you're here for "winter sun" - expect pleasant temperatures perfect 
           cost: 'Check current prices',
           notes: 'The journey up is spectacular - you pass through different climate zones, from coast to pine forests to volcanic desert. At the top, it\'s cold (bring layers, even in March - can be near freezing). The cable car takes you near the summit. **Book cable car tickets in advance** - they sell out. Note: Cable car can close due to wind, which is common.',
           ourTake: 'If you\'ve never been to Tenerife before and have a full day in port, Mount Teide is unmissable. The landscapes are genuinely extraordinary. But it\'s a commitment - you\'ll miss the city entirely.',
-          mapLink: null
+          mapLink: null,
+          terrain: 'easy',
+          accessibility: {
+            rating: 'partial',
+            notes: 'Cable car station is accessible. Summit trails are not accessible. Visitor centre is accessible. Cold temperatures - bring layers.'
+          }
         },
         {
           name: 'La Laguna (San Cristóbal de La Laguna)',
@@ -423,7 +512,12 @@ March means you're here for "winter sun" - expect pleasant temperatures perfect 
           cost: 'Check tram prices',
           notes: 'Charming historic centre, good for a wander. Nice cafés and restaurants. More relaxed than Santa Cruz.',
           ourTake: 'Easy half-day trip if you don\'t want to commit to Mount Teide. Combine with the city - morning in Santa Cruz, afternoon in La Laguna, or vice versa.',
-          mapLink: 'https://www.google.com/maps/dir/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/La+Laguna,+Santa+Cruz+de+Tenerife/'
+          mapLink: 'https://www.google.com/maps/dir/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/La+Laguna,+Santa+Cruz+de+Tenerife/',
+          terrain: 'moderate',
+          accessibility: {
+            rating: 'partial',
+            notes: 'Tram is accessible. Old town has cobblestones - some challenging areas. Main plaza and many shops are accessible.'
+          }
         },
         {
           name: 'Loro Parque',
@@ -434,7 +528,12 @@ March means you're here for "winter sun" - expect pleasant temperatures perfect 
           cost: 'Check current prices',
           notes: '',
           ourTake: 'Good for families with kids. Full half-day commitment. Not our personal priority but very popular.',
-          mapLink: null
+          mapLink: null,
+          terrain: 'easy',
+          accessibility: {
+            rating: 'full',
+            notes: 'Fully accessible park with wheelchair hire available. All shows and areas accessible.'
+          }
         }
       ],
       ourTake: '**First time in Tenerife?** Mount Teide if you have a full day. La Laguna if you want something easier.\n\n**Been before / short day?** Stay in Santa Cruz, visit the market, walk to Auditorio, maybe bus to Las Teresitas.\n\n**With kids?** Loro Parque or Las Teresitas beach.\n\n**For cruise line excursions:** Check the cruise line app or information desk for current options and availability.'
@@ -448,9 +547,16 @@ March means you're here for "winter sun" - expect pleasant temperatures perfect 
       ],
       olderKids: [
         'Loro Parque - The big one. Orcas, dolphins, parrots, penguins. Full day.',
-        'Mount Teide - The cable car is an adventure. The volcanic landscape is like being on Mars. Older kids will love it.',
+        'Mount Teide - The cable car is an adventure. The volcanic landscape is like being on Mars.',
         'Las Teresitas - Beach time, maybe kayak or paddleboard hire.',
         'Parque Marítimo - Swimming pools if beach feels too far.'
+      ],
+      teens: [
+        'Mount Teide cable car - The otherworldly volcanic landscape is genuinely impressive. Great for photos.',
+        'Shopping on Calle del Castillo - Tax-free prices on electronics, clothes, and perfume.',
+        'Parque Marítimo - Saltwater pools, lounging, and chilling. Good for a few hours.',
+        'Surfing at Playa de Las Américas - If you have a full day, the south coast has surf schools.',
+        'La Laguna by tram - Cool historic town, independent cafés, different vibe to Santa Cruz.'
       ],
       familyFood: [
         'Papas arrugadas - Wrinkly potatoes with mojo sauce. Kids usually love them.',
@@ -492,6 +598,11 @@ March means you're here for "winter sun" - expect pleasant temperatures perfect 
       ]
     },
     foodAndDrink: {
+      localDishToTry: {
+        name: 'Papas Arrugadas con Mojo',
+        description: 'The iconic Canarian dish - small potatoes boiled in heavily salted water until the skin wrinkles, served with mojo sauces. Red mojo (spicy) and green mojo (herby with coriander/parsley). Simple, delicious, unforgettable.',
+        lookFor: 'Available at almost every restaurant. The best places let you choose your mojo. Try both!'
+      },
       restaurants: [
         {
           name: 'Taberna Ramón',
@@ -565,6 +676,7 @@ March means you're here for "winter sun" - expect pleasant temperatures perfect 
     displayName: 'Gran Canaria (Las Palmas)',
     country: 'Spain',
     overview: {
+      hook: 'Step off the ship onto one of Europe\'s best urban beaches. No shuttles, no taxis - just golden sand and sunshine within minutes.',
       description: `Las Palmas de Gran Canaria is one of the easiest cruise ports you'll visit. The ship docks at Muelle Santa Catalina, right next to a shopping mall, bus station, park, and one of Spain's best urban beaches. You literally walk off the gangway and you're there.
 
 No shuttles needed. No taxis required for the main attractions. Just step off and start exploring.
@@ -575,45 +687,67 @@ Las Canteras beach is the star here - a gorgeous golden sand urban beach with a 
         dockLocation: 'Muelle Santa Catalina',
         distanceToTown: 'You\'re already there - mall and park within 2 mins walk',
         shuttleInfo: 'Not needed - everything is right there'
-      }
+      },
+      importantNotes: [
+        'Beach day: This port is all about Las Canteras - one of Europe\'s best urban beaches',
+        'Sunscreen: The sun is strong even in March - protect yourself',
+        'Siesta: Some smaller shops close 2-5pm',
+        'Sunday: Most shops closed, beach and restaurants open',
+        'Tax-free: Canaries have lower taxes than mainland Spain'
+      ]
     },
     stayLocal: {
       quickWalk: [
         {
           title: 'El Muelle Shopping Centre (2 mins)',
-          content: 'Right next to the dock. Modern mall with fashion, electronics, cafés. Good for a browse or air conditioning.'
+          content: 'Right next to the dock. Modern mall with fashion, electronics, cafés. Good for a browse or air conditioning.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/Centro+Comercial+El+Muelle,+Las+Palmas+de+Gran+Canaria/Muelle+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/'
         },
         {
           title: 'Santa Catalina Park (5 mins)',
-          content: 'The "centre" for cruise passengers. Trees, benches, kiosks, often hosts events. More lively than peaceful, but good for orientation and a shaded sit-down.'
+          content: 'The "centre" for cruise passengers. Trees, benches, kiosks, often hosts events. More lively than peaceful, but good for orientation and a shaded sit-down.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/Parque+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/Muelle+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/'
         },
         {
           title: 'Playa de Las Canteras (10-15 mins)',
-          content: 'The main event. Golden sand beach with a palm-lined promenade. One of the best urban beaches in Spain - possibly Europe. Walk through Santa Catalina Park and keep going.'
+          content: 'The main event. Golden sand beach with a palm-lined promenade. One of the best urban beaches in Spain - possibly Europe. Walk through Santa Catalina Park and keep going.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/Playa+de+Las+Canteras,+Las+Palmas+de+Gran+Canaria/Muelle+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/'
         }
       ],
       longerWalk: [
         {
           title: 'The Las Canteras Loop',
           content: 'Ship → El Muelle → Santa Catalina Park → Las Canteras beach → Stroll along Paseo de Las Canteras promenade → Cut back through streets to Santa Catalina → Ship. This gives you harbour views, café-lined squares, the beach, the promenade with bars and surfers, and a feel for the city. Perfect morning or afternoon.',
+          terrain: 'easy',
           mapLink: 'https://www.google.com/maps/dir/Muelle+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/Parque+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/Playa+de+Las+Canteras,+Las+Palmas+de+Gran+Canaria/Muelle+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/'
         }
       ],
       parks: [
         {
           title: 'Santa Catalina Park (5 mins)',
-          content: 'Right by the port. Trees, benches, kiosks. Often has events. More of a social hub than a peaceful retreat, but convenient.'
+          content: 'Right by the port. Trees, benches, kiosks. Often has events. More of a social hub than a peaceful retreat, but convenient.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/Parque+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/Muelle+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/'
         },
         {
           title: 'Ciudad Jardín (further inland)',
-          content: 'A leafy residential district if you want a calmer wander away from the beach crowds. Not a formal park, just pleasant green streets.'
+          content: 'A leafy residential district if you want a calmer wander away from the beach crowds. Not a formal park, just pleasant green streets.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/Ciudad+Jardin,+Las+Palmas+de+Gran+Canaria/Muelle+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/'
         }
       ],
       beach: {
         title: 'Playa de Las Canteras ⭐ The main attraction',
-        content: '10-15 minute flat walk from the ship. Golden sand, calm water (protected by a natural reef), palm-lined promenade. Consistently rated among the best urban beaches in the world. March conditions: 21°C air, 19°C sea. Absolutely worth a beach visit - sunbathing, walking, or swimming if you\'re feeling brave. Facilities: Sunbeds and umbrellas for hire. Cafés and restaurants right on the promenade. Toilets available. Our take: This is the reason to visit Las Palmas. Don\'t overthink it - grab a spot on the beach, order a coffee or beer from a promenade café, and enjoy.',
+        content: '10-15 minute flat walk from the ship. Golden sand, calm water (protected by a natural reef), palm-lined promenade. Consistently rated among the best urban beaches in the world. This is the reason to visit Las Palmas.',
+        waterTemperature: '~19°C in March (refreshing but swimmable)',
+        facilities: 'Sunbeds and umbrellas for hire, toilets, showers, cafés and restaurants on promenade',
+        accessNotes: 'Promenade fully accessible. Some beach access ramps. Beach wheelchairs may be available - check locally.',
         additional: [],
-        mapLink: null
+        mapLink: 'https://www.google.com/maps/dir/Muelle+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/Playa+de+Las+Canteras,+Las+Palmas+de+Gran+Canaria/Muelle+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/',
+        coordinates: { lat: 28.1376, lng: -15.4356 }
       },
       scenic: [
         'Las Canteras promenade - Bay views, surfers, city skyline, sunset shots',
@@ -654,7 +788,12 @@ Las Canteras beach is the star here - a gorgeous golden sand urban beach with a 
           cost: 'Check bus/taxi prices',
           notes: '**Casa de Colón** - Columbus House museum. Christopher Columbus allegedly stayed here. Interesting history. **Santa Ana Cathedral** - Impressive cathedral on the main square. **CAAM** - Centro Atlántico de Arte Moderno. Contemporary art museum. **Wandering** - The streets themselves are the attraction. Balconies, courtyards, cafés.',
           ourTake: 'Worth doing if you want more than just beach. Go in the morning, back to Las Canteras for afternoon.',
-          mapLink: 'https://www.google.com/maps/dir/Muelle+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/Vegueta,+Las+Palmas+de+Gran+Canaria/'
+          mapLink: 'https://www.google.com/maps/dir/Muelle+Santa+Catalina,+Las+Palmas+de+Gran+Canaria/Vegueta,+Las+Palmas+de+Gran+Canaria/',
+          terrain: 'moderate',
+          accessibility: {
+            rating: 'partial',
+            notes: 'Cobbled streets can be challenging. Main plaza accessible. Some museums have accessible entrances - check individual venues.'
+          }
         },
         {
           name: 'Bandama Caldera',
@@ -665,7 +804,12 @@ Las Canteras beach is the star here - a gorgeous golden sand urban beach with a 
           cost: 'Check excursion/taxi prices',
           notes: '',
           ourTake: 'Nice if you\'ve done Las Palmas before and want something different. For first-timers, the beach is the priority.',
-          mapLink: null
+          mapLink: null,
+          terrain: 'moderate',
+          accessibility: {
+            rating: 'partial',
+            notes: 'Viewpoint accessible by road. Walking trails down into crater not accessible.'
+          }
         },
         {
           name: 'Maspalomas Dunes / Playa del Inglés',
@@ -676,7 +820,12 @@ Las Canteras beach is the star here - a gorgeous golden sand urban beach with a 
           cost: 'Check bus/taxi prices',
           notes: '',
           ourTake: 'Beautiful, but it\'s a commitment. You\'ll spend a lot of time travelling for a cruise day. Only worth it if you have a full day and really want to see the dunes. Most people are happier staying in Las Palmas.',
-          mapLink: null
+          mapLink: null,
+          terrain: 'challenging',
+          accessibility: {
+            rating: 'limited',
+            notes: 'Dunes are sand - not accessible. Resort promenades are accessible. Beach access varies.'
+          }
         }
       ],
       ourTake: '**8-10 hour day, suggested plan:**\nMorning: Bus to Vegueta, wander the old town, coffee\nLunch: Back to Santa Catalina or Las Canteras\nAfternoon: Beach time on Las Canteras\nEvening: Sunset drink on the promenade, back to ship\n\n**Or just:** Beach all day. No shame in that. It is a really good beach.\n\n**For cruise line excursions:** Check the cruise line app or information desk for current options and availability.'
@@ -691,6 +840,13 @@ Las Canteras beach is the star here - a gorgeous golden sand urban beach with a 
         'Surfing/bodyboarding at Las Canteras - Lessons available. The beach has good waves at the southern end.',
         'Vegueta - Pirates-and-explorers history vibes. Columbus connections. Casa de Colón museum has interesting exhibits.',
         'El Muelle mall - Shops, food court, cinema if they need a break from the sun.'
+      ],
+      teens: [
+        'Surfing at Las Canteras - Surf schools at the southern end. Good waves for beginners.',
+        'El Muelle shopping and cinema - Modern mall right by the port. Great for a few hours.',
+        'Vegueta for Instagram - Colonial architecture, colourful streets, café culture.',
+        'Beach day - Honestly, most teens will be happy with beach, promenade, and ice cream all day.',
+        'Paddle boarding - Rentals available along the beach.'
       ],
       familyFood: [
         'Everywhere on Las Canteras promenade - Pizza, burgers, ice cream, tapas. Picky eaters easily accommodated.',
@@ -726,6 +882,11 @@ Las Canteras beach is the star here - a gorgeous golden sand urban beach with a 
       ]
     },
     foodAndDrink: {
+      localDishToTry: {
+        name: 'Papas Arrugadas con Mojo',
+        description: 'Same iconic Canarian dish as Tenerife - small wrinkly potatoes with red (spicy) and green (herby) mojo sauces. Simple, delicious, and found everywhere.',
+        lookFor: 'Any restaurant serving Canarian food. The beachfront restaurants all serve them - pair with fresh fish.'
+      },
       restaurants: [
         {
           name: 'Las Canteras promenade restaurants',
@@ -774,6 +935,7 @@ Las Canteras beach is the star here - a gorgeous golden sand urban beach with a 
     displayName: 'Arrecife de Lanzarote',
     country: 'Spain',
     overview: {
+      hook: 'Experience the Fire Mountains of Timanfaya - a lunar landscape where the earth still smokes. Plus César Manrique\'s architectural masterpieces built into volcanic bubbles.',
       description: `Arrecife is the capital of Lanzarote, a working port city rather than a tourist resort. It's compact, walkable, and authentic - you'll see real Canarian life here, not just cruise ship crowds.
 
 The city sits on the east coast of Lanzarote, with a natural harbour that's been used for centuries. The old town is charming with narrow streets, while the newer areas have modern amenities. Arrecife itself is pleasant for a wander, but Lanzarote's real magic lies beyond - the volcanic landscapes created by César Manrique, the black sand beaches, and the otherworldly Timanfaya National Park.
@@ -784,52 +946,76 @@ March weather is perfect for exploring - warm enough for beaches but not the int
         dockLocation: 'Muelle de los Mármoles (main cruise terminal) or Muelle de Naos',
         distanceToTown: '15-20 minutes walk to city centre',
         shuttleInfo: 'Shuttle bus usually available from terminal to city centre (5 mins)'
-      }
+      },
+      importantNotes: [
+        'Timanfaya: Book excursions early - this is the main attraction and sells out',
+        'César Manrique: The island\'s artistic genius - his sites are worth visiting',
+        'Aloe vera: Lanzarote is famous for aloe products - great souvenirs',
+        'Wine: Try local volcanic wines from La Geria region',
+        'Sunday: Most shops closed, attractions open'
+      ]
     },
     stayLocal: {
       quickWalk: [
         {
           title: 'Castillo de San Gabriel (10 mins from port)',
-          content: '16th-century fortress on a small islet connected by a bridge. Now houses the Ethnographic Museum. Good views over the harbour. Free entry to the bridge and exterior, small fee for museum.'
+          content: '16th-century fortress on a small islet connected by a bridge. Now houses the Ethnographic Museum. Good views over the harbour. Free entry to the bridge and exterior, small fee for museum.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Castillo+de+San+Gabriel,+Arrecife/Muelle+de+los+Marmoles,+Arrecife/'
         },
         {
           title: 'Charco de San Ginés (5 mins)',
-          content: 'The old fishing harbour, now a lagoon surrounded by restaurants and bars. Very picturesque, especially at sunset. This is where locals go for seafood. Authentic atmosphere.'
+          content: 'The old fishing harbour, now a lagoon surrounded by restaurants and bars. Very picturesque, especially at sunset. This is where locals go for seafood. Authentic atmosphere.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Charco+de+San+Gines,+Arrecife/Muelle+de+los+Marmoles,+Arrecife/'
         },
         {
           title: 'Calle Real (10 mins)',
-          content: 'Main shopping street in the old town. Mix of local shops, cafés, and some tourist-oriented stores. Not as polished as resort areas - this is real Arrecife.'
+          content: 'Main shopping street in the old town. Mix of local shops, cafés, and some tourist-oriented stores. Not as polished as resort areas - this is real Arrecife.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Calle+Real,+Arrecife/Muelle+de+los+Marmoles,+Arrecife/'
         },
         {
           title: 'Playa del Reducto (15 mins)',
-          content: 'City beach with golden sand imported from the Sahara. Protected by breakwater so calm water. Promenade with cafés. March reality: Nice for a walk, probably not swimming weather (water ~18°C).'
+          content: 'City beach with golden sand imported from the Sahara. Protected by breakwater so calm water. Promenade with cafés. March reality: Nice for a walk, probably not swimming weather (water ~18°C).',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Playa+del+Reducto,+Arrecife/Muelle+de+los+Marmoles,+Arrecife/'
         }
       ],
       longerWalk: [
         {
           title: 'Option 1: Old Town Loop (~1 hour)',
           content: 'Port → Charco de San Ginés → Calle Real → Castillo de San Gabriel → Playa del Reducto → Back to port. Gives you a good feel for the city, its history, and the harbour.',
-          mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Charco+de+San+Gines,+Arrecife/Castillo+de+San+Gabriel,+Arrecife/Playa+del+Reducto,+Arrecife/'
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Charco+de+San+Gines,+Arrecife/Castillo+de+San+Gabriel,+Arrecife/Playa+del+Reducto,+Arrecife/Muelle+de+los+Marmoles,+Arrecife/'
         },
         {
           title: 'Option 2: Harbour and Beach Walk (~45 mins)',
-          content: 'Port → Charco de San Ginés → Follow waterfront → Playa del Reducto → Promenade walk → Return. Flat, scenic, good for photos.'
+          content: 'Port → Charco de San Ginés → Follow waterfront → Playa del Reducto → Promenade walk → Return. Flat, scenic, good for photos.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Charco+de+San+Gines,+Arrecife/Playa+del+Reducto,+Arrecife/Muelle+de+los+Marmoles,+Arrecife/'
         }
       ],
       parks: [
         {
           title: 'Parque Islas Canarias (10 mins from port)',
-          content: 'Small park near the harbour with benches, shade, and views. Good for a quiet break.'
+          content: 'Small park near the harbour with benches, shade, and views. Good for a quiet break.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Parque+Islas+Canarias,+Arrecife/Muelle+de+los+Marmoles,+Arrecife/'
         }
       ],
       beach: {
         title: 'Playa del Reducto (15 mins walk)',
-        content: 'The main city beach. Golden sand (imported), calm water (protected by breakwater), palm-lined promenade with cafés and restaurants. Facilities: Sunbeds for hire, toilets, showers. March reality: 19°C air, 18°C sea. Perfect for a beach walk, sunbathing if weather is good, swimming for the brave.',
+        content: 'The main city beach. Golden sand (imported), calm water (protected by breakwater), palm-lined promenade with cafés and restaurants. Perfect for a beach walk, sunbathing if weather is good.',
+        waterTemperature: '~18°C in March (cool - swimming for the brave)',
+        facilities: 'Sunbeds for hire, toilets, showers, promenade cafés and restaurants',
+        accessNotes: 'Promenade fully accessible. Beach access ramps available. Check locally for beach wheelchairs.',
+        mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Playa+del+Reducto,+Arrecife/Muelle+de+los+Marmoles,+Arrecife/',
+        coordinates: { lat: 28.9583, lng: -13.5508 },
         additional: [
           'Playa de las Cucharas (Puerto del Carmen, 15km) - Resort beach, more facilities, but requires transport.',
           '💡 Arrecife beaches are pleasant but Lanzarote\'s best beaches are on the south coast (Playa Blanca area) - need transport to reach.'
-        ],
-        mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Playa+del+Reducto,+Arrecife/'
+        ]
       },
       scenic: [
         'Charco de San Ginés - The old fishing harbour lagoon, especially at sunset',
@@ -873,7 +1059,12 @@ March weather is perfect for exploring - warm enough for beaches but not the int
           cost: 'Check current prices - park entry + guided tour required',
           notes: 'The park is strictly controlled - you must join official guided tours inside. The geothermal demonstrations are fascinating. Bring layers - it can be windy and cooler at higher elevations. The restaurant uses geothermal heat to cook food - worth seeing.',
           ourTake: 'If you\'ve never been to Lanzarote before, Timanfaya is unmissable. The landscapes are genuinely extraordinary and unlike anywhere else. But it\'s a commitment - you\'ll spend most of your day there. Worth it for first-timers.',
-          mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Timanfaya+National+Park/'
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Timanfaya+National+Park/',
+          terrain: 'easy',
+          accessibility: {
+            rating: 'partial',
+            notes: 'Visitor centre accessible. Bus tour is the main experience - buses may not be wheelchair accessible. Viewpoints accessible. Walking trails not accessible.'
+          }
         },
         {
           name: 'Jameos del Agua',
@@ -884,7 +1075,12 @@ March weather is perfect for exploring - warm enough for beaches but not the int
           cost: 'Check current prices',
           notes: 'Very popular, can get busy. The underground lake with the crabs is unique. The restaurant is beautiful but pricey. Part of a combined ticket with other César Manrique sites available.',
           ourTake: 'Beautiful and unique. If you\'re interested in César Manrique\'s work or want to see something genuinely different, it\'s worth it. Can be combined with other north-coast attractions.',
-          mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Jameos+del+Agua/'
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Jameos+del+Agua/',
+          terrain: 'moderate',
+          accessibility: {
+            rating: 'partial',
+            notes: 'Main areas accessible via ramps and lifts. Some underground sections have stairs. Check with venue for current accessibility.'
+          }
         },
         {
           name: 'César Manrique Foundation',
@@ -895,7 +1091,12 @@ March weather is perfect for exploring - warm enough for beaches but not the int
           cost: 'Check current prices',
           notes: 'The house itself is the main attraction - built into natural volcanic formations. Beautiful gardens. Good gift shop with Manrique-inspired items.',
           ourTake: 'If you\'re interested in art, architecture, or César Manrique, this is essential. If not, you might prefer Timanfaya or Jameos del Agua for more dramatic landscapes.',
-          mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Fundacion+Cesar+Manrique/'
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Fundacion+Cesar+Manrique/',
+          terrain: 'moderate',
+          accessibility: {
+            rating: 'partial',
+            notes: 'Ground floor accessible. Lower volcanic bubble areas involve stairs - not accessible. Gardens mostly accessible.'
+          }
         },
         {
           name: 'Cueva de los Verdes',
@@ -906,7 +1107,12 @@ March weather is perfect for exploring - warm enough for beaches but not the int
           cost: 'Check current prices',
           notes: 'Guided tours only (included in entry). The cave is impressive but less "designed" than Jameos del Agua - more natural.',
           ourTake: 'Interesting if you like geology or caves. Often combined with Jameos del Agua visit. Less essential than Timanfaya or Jameos, but good if you have time.',
-          mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Cueva+de+los+Verdes/'
+          mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Cueva+de+los+Verdes/',
+          terrain: 'challenging',
+          accessibility: {
+            rating: 'none',
+            notes: 'Not accessible - involves walking through cave with uneven surfaces, steps, and low ceilings.'
+          }
         }
       ],
       ourTake: '**First time in Lanzarote?** Timanfaya is the must-see. If you have a full day, combine with one César Manrique site (Jameos del Agua or Foundation).\n\n**Been before / short day?** Stay in Arrecife, explore the old town, Charco de San Ginés, have lunch, maybe visit the beach.\n\n**With kids?** Timanfaya is fascinating for all ages. Jameos del Agua is also good - the underground lake with crabs is memorable.\n\n**For cruise line excursions:** Check the cruise line app or information desk for current options and availability. Timanfaya excursions are very popular - book early if interested.'
@@ -918,10 +1124,17 @@ March weather is perfect for exploring - warm enough for beaches but not the int
         'Charco de San Ginés - Interesting to see the boats and lagoon (supervised - it\'s a working harbour).'
       ],
       olderKids: [
-        'Timanfaya National Park - The volcanic landscape is like being on Mars. The geothermal demonstrations are fascinating. Older kids will love it.',
+        'Timanfaya National Park - The volcanic landscape is like being on Mars. The geothermal demonstrations are fascinating.',
         'Jameos del Agua - The underground lake with blind crabs is unique and memorable.',
         'Cueva de los Verdes - Cave exploration is always exciting for kids.',
         'Playa del Reducto - Beach time, maybe paddle or swim if brave enough in March.'
+      ],
+      teens: [
+        'Timanfaya - The otherworldly volcanic landscape is genuinely impressive. Great for photos and TikTok.',
+        'Jameos del Agua - The underground lake, architecture, and blind crabs are unlike anything else.',
+        'César Manrique Foundation - Cool architecture built into volcanic bubbles. Interesting even if not into art.',
+        'Surfing at Famara Beach - If you have a full day, this is one of Canaries\' best surf spots.',
+        'La Geria wine region - Tour the volcanic vineyards and taste local wines (for older teens with parents).'
       ],
       familyFood: [
         'Restaurants around Charco de San Ginés - Seafood, usually kid-friendly options available.',
@@ -960,6 +1173,11 @@ March weather is perfect for exploring - warm enough for beaches but not the int
       ]
     },
     foodAndDrink: {
+      localDishToTry: {
+        name: 'Pescado a la Plancha with Mojo',
+        description: 'Grilled fresh fish (vieja/parrotfish or cherne/wreckfish are local favourites) with papas arrugadas and mojo sauces. Simple, fresh, and perfectly Lanzarotean. Pair with a glass of local volcanic wine from La Geria.',
+        lookFor: 'Restaurants around Charco de San Ginés serve the freshest fish. Ask what\'s caught today.'
+      },
       restaurants: [
         {
           name: 'Restaurants around Charco de San Ginés',
@@ -1024,6 +1242,7 @@ March weather is perfect for exploring - warm enough for beaches but not the int
     displayName: 'Cádiz',
     country: 'Spain',
     overview: {
+      hook: 'Europe\'s oldest continuously inhabited city, founded by the Phoenicians 3,100 years ago. A sun-drenched Andalusian gem surrounded by Atlantic waters on three sides.',
       description: `Cádiz is one of the oldest continuously inhabited cities in Western Europe, founded by the Phoenicians around 1100 BC. It's a historic port city on a narrow peninsula, surrounded by the Atlantic on three sides. The old town is compact, walkable, and full of character - narrow streets, plazas, and historic buildings.
 
 The city has a relaxed, authentic Andalusian atmosphere. It's not a tourist resort - this is a real Spanish city where people live and work. The locals are friendly, and while English is spoken in tourist areas, you'll hear Spanish everywhere. It's very safe and perfect for exploring on foot.
@@ -1034,57 +1253,82 @@ Cádiz is famous for its connection to sherry wine (it's part of the "Sherry Tri
         dockLocation: 'Alfonso XIII Pier (Muelle Alfonso XIII)',
         distanceToTown: '5 minutes walk to old town',
         shuttleInfo: 'Not needed - it\'s right there'
-      }
+      },
+      importantNotes: [
+        'Siesta: Many shops close 2-5pm (restaurants often close 4-8pm)',
+        'Sherry: You\'re in the Sherry Triangle - try a copa of fino or manzanilla',
+        'Sunday: Most shops closed, churches and restaurants open',
+        'Market: Mercado Central closes around 2pm - visit in the morning',
+        'Seville day trip: 1.5 hours each way by train - only if you have a full day'
+      ]
     },
     stayLocal: {
       quickWalk: [
         {
           title: 'Plaza de San Juan de Dios (5 mins from port)',
-          content: 'The main square and heart of the old town. Surrounded by impressive buildings including the City Hall (Ayuntamiento). Cafés with outdoor seating, good for people-watching. This is where you start exploring.'
+          content: 'The main square and heart of the old town. Surrounded by impressive buildings including the City Hall (Ayuntamiento). Cafés with outdoor seating, good for people-watching. This is where you start exploring.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/Plaza+de+San+Juan+de+Dios,+Cadiz/Muelle+Alfonso+XIII,+Cadiz/'
         },
         {
           title: 'Cádiz Cathedral (10 mins)',
-          content: 'The iconic golden-domed cathedral. Baroque and neoclassical mix. You can climb the Torre de Poniente for panoramic views (small fee). The cathedral square (Plaza de la Catedral) is lovely. Entry fee for cathedral, free to admire exterior.'
+          content: 'The iconic golden-domed cathedral. Baroque and neoclassical mix. You can climb the Torre de Poniente for panoramic views (small fee). The cathedral square (Plaza de la Catedral) is lovely. Entry fee for cathedral, free to admire exterior.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/Catedral+de+Cadiz,+Cadiz/Muelle+Alfonso+XIII,+Cadiz/'
         },
         {
           title: 'Mercado Central (8 mins)',
-          content: 'The main market in a beautiful 19th-century building. Fresh produce, seafood, local products. Morning is best (closes around 2pm). Even if you don\'t buy, worth a wander to see the atmosphere and the building itself.'
+          content: 'The main market in a beautiful 19th-century building. Fresh produce, seafood, local products. Morning is best (closes around 2pm). Even if you don\'t buy, worth a wander to see the atmosphere and the building itself.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/Mercado+Central,+Cadiz/Muelle+Alfonso+XIII,+Cadiz/'
         },
         {
           title: 'Torre Tavira (10 mins)',
-          content: '18th-century watchtower with camera obscura. Great views over the city. The camera obscura show is interesting (small fee). One of Cádiz\'s 126 watchtowers - the city was full of them for spotting ships.'
+          content: '18th-century watchtower with camera obscura. Great views over the city. The camera obscura show is interesting (small fee). One of Cádiz\'s 126 watchtowers - the city was full of them for spotting ships.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/Torre+Tavira,+Cadiz/Muelle+Alfonso+XIII,+Cadiz/'
         }
       ],
       longerWalk: [
         {
           title: 'Option 1: Old Town Highlights Loop (~1.5 hours)',
           content: 'Port → Plaza de San Juan de Dios → Mercado Central → Cádiz Cathedral → Torre Tavira → Wander narrow streets → La Caleta beach → Back to port. This covers the main sights and gives you a feel for the old town.',
-          mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/Plaza+de+San+Juan+de+Dios,+Cadiz/Catedral+de+Cadiz,+Cadiz/La+Caleta,+Cadiz/'
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/Plaza+de+San+Juan+de+Dios,+Cadiz/Mercado+Central,+Cadiz/Catedral+de+Cadiz,+Cadiz/La+Caleta,+Cadiz/Muelle+Alfonso+XIII,+Cadiz/'
         },
         {
           title: 'Option 2: Seafront Walk (~45 mins one way)',
           content: 'Port → Follow seafront promenade north → Parque Genovés (botanical garden) → Continue along coast. Flat, scenic, sea views. Can return same way or cut through old town.',
-          mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/Parque+Genoves,+Cadiz/'
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/Parque+Genoves,+Cadiz/Muelle+Alfonso+XIII,+Cadiz/'
         }
       ],
       parks: [
         {
           title: 'Parque Genovés (15 mins walk north)',
-          content: 'Beautiful botanical garden by the sea. Palm trees, fountains, sculptures, and a famous "Cave of the Bats" (artificial grotto). Peaceful escape from the city. Free entry.'
+          content: 'Beautiful botanical garden by the sea. Palm trees, fountains, sculptures, and a famous "Cave of the Bats" (artificial grotto). Peaceful escape from the city. Free entry.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/Parque+Genoves,+Cadiz/Muelle+Alfonso+XIII,+Cadiz/'
         },
         {
           title: 'Alameda Apodaca (10 mins walk)',
-          content: 'Seafront promenade with gardens, benches, and sea views. Good for a stroll or sit-down. Free.'
+          content: 'Seafront promenade with gardens, benches, and sea views. Good for a stroll or sit-down. Free.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/Alameda+Apodaca,+Cadiz/Muelle+Alfonso+XIII,+Cadiz/'
         }
       ],
       beach: {
         title: 'La Caleta (15 mins walk)',
-        content: 'The city\'s main beach, located between two historic castles (Castillo de Santa Catalina and Castillo de San Sebastián). Small but picturesque, with a promenade. March reality: 16-18°C air, ~15°C sea. Nice for a walk, probably not swimming weather. The setting between the castles is what makes it special.',
+        content: 'The city\'s main beach, located between two historic castles (Castillo de Santa Catalina and Castillo de San Sebastián). Small but picturesque, with a promenade. The setting between the castles is what makes it special.',
+        waterTemperature: '~15°C in March (too cold for swimming)',
+        facilities: 'Small beach, promenade, some restaurants nearby. Limited facilities compared to resort beaches.',
+        accessNotes: 'Promenade accessible. Beach access involves steps or uneven surfaces. Check locally for accessible options.',
         additional: [
           'Playa de la Victoria (further north, 20-25 mins walk) - Longer beach, more facilities, but further from old town.',
           '💡 La Caleta is the iconic Cádiz beach, but it\'s small. The walk there is part of the experience.'
         ],
-        mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/La+Caleta,+Cadiz/'
+        mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/La+Caleta,+Cadiz/Muelle+Alfonso+XIII,+Cadiz/',
+        coordinates: { lat: 36.5317, lng: -6.3108 }
       },
       scenic: [
         'Cádiz Cathedral - The golden dome, especially in afternoon light',
@@ -1132,7 +1376,12 @@ Cádiz is famous for its connection to sherry wine (it's part of the "Sherry Tri
           cost: 'Check current train/tour prices',
           notes: 'Seville is beautiful but it\'s a big commitment for a cruise day. You\'ll spend 3 hours travelling (round trip) and miss Cádiz entirely. Only worth it if you\'ve never been to Seville and have a full day in port.',
           ourTake: 'Seville is stunning, but Cádiz is also wonderful and much closer. If you have a full day and Seville is on your bucket list, go for it. But don\'t underestimate how much time you\'ll spend travelling. Cádiz itself has plenty to offer.',
-          mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/Seville,+Spain/'
+          mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/Seville,+Spain/',
+          terrain: 'moderate',
+          accessibility: {
+            rating: 'partial',
+            notes: 'Train journey is accessible. Seville old town has cobblestones. Cathedral and Alcázar have accessible entrances - check in advance.'
+          }
         },
         {
           name: 'Jerez de la Frontera',
@@ -1143,7 +1392,12 @@ Cádiz is famous for its connection to sherry wine (it's part of the "Sherry Tri
           cost: 'Check current prices',
           notes: 'Great if you\'re interested in sherry or want to see a traditional Andalusian town. Less touristy than Seville.',
           ourTake: 'Good option if you want to go further but don\'t want the full Seville commitment. Jerez is charming and the sherry connection is interesting.',
-          mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/Jerez+de+la+Frontera,+Spain/'
+          mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/Jerez+de+la+Frontera,+Spain/',
+          terrain: 'moderate',
+          accessibility: {
+            rating: 'partial',
+            notes: 'Train accessible. Town centre has cobblestones. Major bodegas typically have accessible tours - contact in advance.'
+          }
         }
       ],
       ourTake: '**First time in Andalusia?** Cadiz itself has plenty. Seville is beautiful but it is a full-day commitment and you will miss Cadiz entirely.\n\n**Been to Seville before / short day?** Stay in Cadiz, explore the old town, enjoy the atmosphere, try the tapas.\n\n**With kids?** Cadiz is more manageable than Seville for a cruise day. The old town is compact and walkable.\n\n**For cruise line excursions:** Check the cruise line app or information desk for current options and availability. Seville excursions are popular - book early if interested.'
@@ -1161,6 +1415,13 @@ Cádiz is famous for its connection to sherry wine (it's part of the "Sherry Tri
         'La Caleta - Beach time, exploring the castles (exterior).',
         'Old town wandering - The narrow streets and plazas are fun to explore.',
         'Museo de Cádiz - If they\'re interested in history/archaeology.'
+      ],
+      teens: [
+        'Torre Tavira - The camera obscura is genuinely cool. Great views for photos.',
+        'Old town wandering - Authentic Spanish streets, good for Instagram, ice cream stops.',
+        'Tapas hopping - Try different small plates at different bars. Social and fun.',
+        'La Caleta - Hang out on the beach between the castles. Unique setting.',
+        'Seville day trip - If they want a bigger city experience (full day commitment).'
       ],
       familyFood: [
         'Tapas bars - Kids can try small portions of different things.',
@@ -1202,6 +1463,11 @@ Cádiz is famous for its connection to sherry wine (it's part of the "Sherry Tri
       ]
     },
     foodAndDrink: {
+      localDishToTry: {
+        name: 'Pescaíto Frito with Fino Sherry',
+        description: 'A plate of mixed small fried fish - utterly addictive and the signature dish of Cádiz. Served with a copa of chilled fino or manzanilla sherry. Simple, fresh, and perfectly Andalusian. You\'re in the Sherry Triangle - this is what you eat here.',
+        lookFor: 'Any traditional tapas bar. The fish should be fresh and lightly battered. Ask for "una copa de fino" to go with it.'
+      },
       restaurants: [
         {
           name: 'Tapas bars in old town',
@@ -1273,6 +1539,7 @@ Cádiz is famous for its connection to sherry wine (it's part of the "Sherry Tri
     displayName: 'Lisbon',
     country: 'Portugal',
     overview: {
+      hook: 'The city of seven hills, fado music, and the world\'s best custard tarts. An overnight stay means you can experience Lisbon by night - magical.',
       description: `Lisbon is Portugal's capital and one of Europe's most charming cities. Built on seven hills overlooking the Tagus River, it's a city of colourful tiled buildings, historic trams, and stunning viewpoints. The old town (Alfama) is a maze of narrow streets, while the newer areas have wide boulevards and grand squares.
 
 The city has a relaxed, slightly faded elegance. It's not as polished as some European capitals - and that's part of its charm. The locals are friendly, English is widely spoken in tourist areas, and it's very safe. Lisbon is famous for its fado music, its pastéis de nata (custard tarts), and its role in the Age of Discovery.
@@ -1283,43 +1550,62 @@ March weather is pleasant - mild temperatures perfect for walking, though it can
         dockLocation: 'Santa Apolónia or Jardim do Tabaco terminal (both near each other)',
         distanceToTown: '1.5km to Alfama (old town), 20 mins walk',
         shuttleInfo: 'Shuttle bus usually available to city centre (Praça do Comércio)'
-      }
+      },
+      importantNotes: [
+        'Hills: Lisbon is hilly! Use trams, funiculars, and elevators to save your legs',
+        'Tram 28: Iconic but often packed with tourists. Go early morning or just enjoy the view.',
+        'Pastéis de Nata: Try them everywhere - Pastéis de Belém is famous but there are great ones all over',
+        'Fado: Book a fado show in Alfama for an authentic evening experience',
+        'Overnight stay: Take advantage of the evening - Lisbon is magical at night'
+      ]
     },
     stayLocal: {
       quickWalk: [
         {
           title: 'Praça do Comércio (20 mins walk or shuttle)',
-          content: 'The grand square by the river. Huge open space surrounded by yellow buildings. The "doorway to Lisbon" - this is where you enter the city. Cafés, restaurants, good starting point.'
+          content: 'The grand square by the river. Huge open space surrounded by yellow buildings. The "doorway to Lisbon" - this is where you enter the city. Cafés, restaurants, good starting point.',
+          terrain: 'easy',
+          mapLink: 'https://www.google.com/maps/dir/Santa+Apolonia,+Lisbon/Praca+do+Comercio,+Lisbon/Santa+Apolonia,+Lisbon/'
         },
         {
           title: 'Alfama District (25 mins walk from port)',
-          content: 'The old town - narrow winding streets, historic buildings, fado music. This is the heart of old Lisbon. Get lost in the streets, find viewpoints (miradouros), discover small squares. The Sé (cathedral) is here.'
+          content: 'The old town - narrow winding streets, historic buildings, fado music. This is the heart of old Lisbon. Get lost in the streets, find viewpoints (miradouros), discover small squares. The Sé (cathedral) is here.',
+          terrain: 'challenging',
+          mapLink: 'https://www.google.com/maps/dir/Santa+Apolonia,+Lisbon/Alfama,+Lisbon/Santa+Apolonia,+Lisbon/'
         },
         {
           title: 'Sé (Lisbon Cathedral) (25 mins walk)',
-          content: 'The city\'s cathedral, dating from the 12th century. Romanesque architecture, survived the 1755 earthquake. Free to enter, small fee for cloisters. In the Alfama district.'
+          content: 'The city\'s cathedral, dating from the 12th century. Romanesque architecture, survived the 1755 earthquake. Free to enter, small fee for cloisters. In the Alfama district.',
+          terrain: 'moderate',
+          mapLink: 'https://www.google.com/maps/dir/Santa+Apolonia,+Lisbon/Se+de+Lisboa,+Lisbon/Santa+Apolonia,+Lisbon/'
         },
         {
           title: 'Miradouro de Santa Luzia (30 mins walk)',
-          content: 'One of Lisbon\'s famous viewpoints. Overlooks Alfama and the river. Beautiful tiled walls, benches, often has musicians. Free. In Alfama.'
+          content: 'One of Lisbon\'s famous viewpoints. Overlooks Alfama and the river. Beautiful tiled walls, benches, often has musicians. Free. In Alfama.',
+          terrain: 'challenging',
+          mapLink: 'https://www.google.com/maps/dir/Santa+Apolonia,+Lisbon/Miradouro+de+Santa+Luzia,+Lisbon/Santa+Apolonia,+Lisbon/'
         }
       ],
       longerWalk: [
         {
           title: 'Option 1: Alfama Exploration (~2 hours)',
           content: 'Port → Praça do Comércio → Walk up into Alfama → Sé (cathedral) → Miradouro de Santa Luzia → Wander narrow streets → Miradouro das Portas do Sol (another viewpoint) → Back down. This is the classic Lisbon old town experience.',
-          mapLink: 'https://www.google.com/maps/dir/Santa+Apolonia,+Lisbon/Praca+do+Comercio,+Lisbon/Alfama,+Lisbon/'
+          terrain: 'challenging',
+          mapLink: 'https://www.google.com/maps/dir/Santa+Apolonia,+Lisbon/Praca+do+Comercio,+Lisbon/Alfama,+Lisbon/Miradouro+de+Santa+Luzia,+Lisbon/Santa+Apolonia,+Lisbon/'
         },
         {
           title: 'Option 2: Baixa and Chiado (~1.5 hours)',
           content: 'Port → Praça do Comércio → Rua Augusta (pedestrian street) → Rossio Square → Elevador de Santa Justa (art nouveau elevator) → Chiado district. More modern, shopping, cafés.',
-          mapLink: 'https://www.google.com/maps/dir/Santa+Apolonia,+Lisbon/Praca+do+Comercio,+Lisbon/Rossio,+Lisbon/'
+          terrain: 'moderate',
+          mapLink: 'https://www.google.com/maps/dir/Santa+Apolonia,+Lisbon/Praca+do+Comercio,+Lisbon/Rossio,+Lisbon/Chiado,+Lisbon/Santa+Apolonia,+Lisbon/'
         }
       ],
       parks: [
         {
           title: 'Jardim Botânico (Chiado area, 30 mins walk or tram)',
-          content: 'Botanical garden, peaceful escape. Not essential but nice if you want green space.'
+          content: 'Botanical garden, peaceful escape. Not essential but nice if you want green space.',
+          terrain: 'moderate',
+          mapLink: 'https://www.google.com/maps/dir/Santa+Apolonia,+Lisbon/Jardim+Botanico,+Lisbon/Santa+Apolonia,+Lisbon/'
         }
       ],
       beach: {
@@ -1376,7 +1662,12 @@ March weather is pleasant - mild temperatures perfect for walking, though it can
           cost: 'Check current prices - both have entry fees',
           notes: 'Very popular, can get busy. The monastery is stunning - don\'t miss the cloisters. Belém Tower has great views. There\'s also the Pastéis de Belém shop nearby (the original pastéis de nata).',
           ourTake: 'If you have time, these are unmissable. The monastery is one of Europe\'s most beautiful buildings. Tram 15 is an easy way to get there and part of the Lisbon experience. Can combine with the Pastéis de Belém shop.',
-          mapLink: 'https://www.google.com/maps/dir/Praca+do+Comercio,+Lisbon/Torre+de+Belem,+Lisbon/Mosteiro+dos+Jeronymos,+Lisbon/'
+          mapLink: 'https://www.google.com/maps/dir/Praca+do+Comercio,+Lisbon/Torre+de+Belem,+Lisbon/Mosteiro+dos+Jeronymos,+Lisbon/',
+          terrain: 'easy',
+          accessibility: {
+            rating: 'partial',
+            notes: 'Tower has stairs (not accessible to top). Monastery ground floor and cloisters accessible. Tram 15 may not be accessible - taxi recommended for wheelchair users.'
+          }
         },
         {
           name: 'Sintra',
@@ -1387,7 +1678,12 @@ March weather is pleasant - mild temperatures perfect for walking, though it can
           cost: 'Check current prices - train + palace entry fees',
           notes: 'Sintra is beautiful but it\'s a full day and you\'ll miss Lisbon. The palaces are spread out, require transport between them. Very popular, can be crowded.',
           ourTake: 'Sintra is stunning but it\'s a big commitment for a cruise day, especially with an overnight in Lisbon (you might want to explore Lisbon in the evening). Only worth it if you have a full day and Sintra is a priority. Lisbon itself has plenty.',
-          mapLink: 'https://www.google.com/maps/dir/Santa+Apolonia,+Lisbon/Sintra,+Portugal/'
+          mapLink: 'https://www.google.com/maps/dir/Santa+Apolonia,+Lisbon/Sintra,+Portugal/',
+          terrain: 'challenging',
+          accessibility: {
+            rating: 'limited',
+            notes: 'Palaces involve hills and stairs. Pena Palace has limited accessible areas. Quinta da Regaleira not accessible. Check individual palace accessibility before visiting.'
+          }
         },
         {
           name: 'Cascais',
@@ -1398,7 +1694,12 @@ March weather is pleasant - mild temperatures perfect for walking, though it can
           cost: 'Check train prices',
           notes: 'Nice if you want to see the coast and beaches. Charming town, good for a wander. Less essential than Belém but pleasant.',
           ourTake: 'Good option if you want to see the coast or have been to Lisbon before. Less essential than Belém, but pleasant for a change of pace.',
-          mapLink: 'https://www.google.com/maps/dir/Cais+do+Sodre,+Lisbon/Cascais,+Portugal/'
+          mapLink: 'https://www.google.com/maps/dir/Cais+do+Sodre,+Lisbon/Cascais,+Portugal/',
+          terrain: 'easy',
+          accessibility: {
+            rating: 'full',
+            notes: 'Train accessible. Town centre and promenade largely flat and accessible. Beach access varies.'
+          }
         }
       ],
       ourTake: '**First time in Lisbon?** Focus on the city itself - Alfama, Baixa, maybe Belém if you have time. The city has plenty to offer.\n\n**Been before / overnight stay?** Use the evening for fado, dinner, or night wandering. Second day could be Belém or Sintra if you want to go further.\n\n**With kids?** Belém is good - the tower and monastery are impressive. Alfama can be tiring with hills. Use trams - kids love Tram 28.\n\n**For cruise line excursions:** Check the cruise line app or information desk for current options and availability.'
@@ -1416,6 +1717,14 @@ March weather is pleasant - mild temperatures perfect for walking, though it can
         'Tram 28 - Ride the famous tram through old town.',
         'Miradouros (viewpoints) - Kids enjoy the views and the tiled walls.',
         'Pastéis de Belém - The original pastéis de nata shop is an experience (and delicious).'
+      ],
+      teens: [
+        'Alfama wandering - Get lost in the narrow streets, street art, indie shops. Very Instagram-able.',
+        'Miradouros at sunset - The viewpoints are stunning at golden hour.',
+        'LX Factory - Trendy creative complex with shops, cafés, street food (in Alcântara, requires taxi/tram).',
+        'Tram 28 - It\'s a classic for a reason. Ride it through the old town.',
+        'Evening fado show - Authentic Portuguese music experience (book a show in Alfama).',
+        'Street food at Time Out Market - Food hall with lots of options.'
       ],
       familyFood: [
         'Pastéis de nata - Kids (and adults) love these. Available everywhere.',
@@ -1456,6 +1765,11 @@ March weather is pleasant - mild temperatures perfect for walking, though it can
       ]
     },
     foodAndDrink: {
+      localDishToTry: {
+        name: 'Pastéis de Nata (Custard Tarts)',
+        description: 'The iconic Portuguese custard tart - crispy, flaky pastry with creamy egg custard, sprinkled with cinnamon and icing sugar. Utterly addictive and best eaten warm. Pastéis de Belém is the original, but you\'ll find great ones everywhere.',
+        lookFor: 'Any pastelaria (pastry shop). Eat them fresh from the oven. Pastéis de Belém is worth the queue if you\'re in Belém.'
+      },
       restaurants: [
         {
           name: 'Restaurants in Alfama',

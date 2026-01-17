@@ -6,12 +6,55 @@
  * Matches the same layout and style as G606 cruise companion port days
  */
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import OptimizedImage from '../components/OptimizedImage';
 import { usePortGuideImage } from '../hooks/useImageUrl';
-import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye } from 'lucide-react';
+import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye, Star, AlertCircle, Thermometer, Waves, ChefHat, Wind, Anchor } from 'lucide-react';
 import { formatBoldText, formatParagraphsWithBold } from '../utils/textFormatting.jsx';
 import './DetailedPortGuide.css';
+
+/**
+ * Hook to fetch marine weather data from Stormglass API
+ * Uses server-side caching (24h) to respect free tier limits
+ */
+function useMarineWeather(coordinates, portId) {
+  const [marineData, setMarineData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!coordinates || !coordinates.lat || !coordinates.lng) {
+      return;
+    }
+
+    const fetchMarineWeather = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const response = await fetch(
+          `/api/marine-weather?lat=${coordinates.lat}&lng=${coordinates.lng}&portId=${portId || ''}`
+        );
+        
+        if (!response.ok) {
+          throw new Error('Failed to fetch marine weather');
+        }
+
+        const data = await response.json();
+        setMarineData(data);
+      } catch (err) {
+        console.error('Marine weather fetch error:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMarineWeather();
+  }, [coordinates?.lat, coordinates?.lng, portId]);
+
+  return { marineData, loading, error };
+}
 
 // Port guide section definitions (similar to G606)
 const PORT_SECTIONS = [
@@ -58,6 +101,10 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
   
   // Get familyFriendly data from port (ports.js)
   const familyFriendly = port?.familyFriendly;
+  
+  // Fetch marine weather data if beach has coordinates
+  const beachCoordinates = stayLocal?.beach?.coordinates;
+  const { marineData, loading: marineLoading } = useMarineWeather(beachCoordinates, slug);
 
   // Check which sections have content - match field names from portContent.js
   const hasContent = {
@@ -83,7 +130,7 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
         content = <OverviewSection overview={overview} portName={portName} />;
         break;
       case 'stayLocal':
-        content = <StayLocalSection stayLocal={stayLocal} beachImage={beachImage} />;
+        content = <StayLocalSection stayLocal={stayLocal} beachImage={beachImage} marineData={marineData} marineLoading={marineLoading} />;
         break;
       case 'goFurther':
         content = <GoFurtherSection goFurther={goFurther} attractionImages={attractionImages} />;
@@ -152,6 +199,127 @@ function SubSection({ title, children }) {
   );
 }
 
+/**
+ * TerrainBadge - Traffic light badge for walking difficulty
+ * @param {string} terrain - 'easy' | 'moderate' | 'challenging'
+ */
+function TerrainBadge({ terrain }) {
+  const terrainConfig = {
+    easy: { label: 'Flat & Easy', className: 'terrain-easy' },
+    moderate: { label: 'Some Hills', className: 'terrain-moderate' },
+    challenging: { label: 'Steep/Difficult', className: 'terrain-challenging' }
+  };
+  
+  const config = terrainConfig[terrain] || terrainConfig.easy;
+  
+  return (
+    <span className={`terrain-badge ${config.className}`}>
+      {config.label}
+    </span>
+  );
+}
+
+/**
+ * AccessibilityBadge - Traffic light badge for accessibility rating
+ * @param {string} rating - 'full' | 'partial' | 'limited' | 'none'
+ * @param {string} notes - Optional notes about accessibility
+ */
+function AccessibilityBadge({ rating, notes }) {
+  const accessConfig = {
+    full: { label: 'Fully Accessible', className: 'access-full', icon: '♿' },
+    partial: { label: 'Partially Accessible', className: 'access-partial', icon: '⚠️' },
+    limited: { label: 'Limited Access', className: 'access-limited', icon: '⚠️' },
+    none: { label: 'Not Accessible', className: 'access-none', icon: '🚫' }
+  };
+  
+  const config = accessConfig[rating] || accessConfig.partial;
+  
+  return (
+    <span className={`accessibility-badge ${config.className}`} title={notes || ''}>
+      {config.icon} {config.label}
+    </span>
+  );
+}
+
+/**
+ * Marine Conditions Card - displays live sea conditions from Stormglass API
+ * Shows wave height, water temperature, wind, and swimming safety
+ */
+function MarineConditionsCard({ marineData, loading }) {
+  if (loading) {
+    return (
+      <div className="marine-conditions-card loading">
+        <div className="marine-header">
+          <Anchor size={18} />
+          <h5>Live Sea Conditions</h5>
+        </div>
+        <p className="marine-loading">Loading marine data...</p>
+      </div>
+    );
+  }
+  
+  if (!marineData || marineData.error) {
+    return null; // Don't show anything if no data
+  }
+
+  // Format values for display
+  const formatValue = (obj, decimals = 1) => {
+    if (!obj || obj.value === null || obj.value === undefined) return 'N/A';
+    return `${Number(obj.value).toFixed(decimals)}${obj.unit || ''}`;
+  };
+
+  // Get swimming safety class
+  const getSafetyClass = () => {
+    if (marineData.swimmingSafe === null) return '';
+    return marineData.swimmingSafe ? 'safe' : 'caution';
+  };
+
+  return (
+    <div className="marine-conditions-card">
+      <div className="marine-header">
+        <Anchor size={18} />
+        <h5>Live Sea Conditions</h5>
+      </div>
+      
+      <div className="marine-grid">
+        {marineData.waterTemperature?.value !== null && (
+          <div className="marine-item">
+            <Thermometer size={16} />
+            <span className="marine-label">Water Temp</span>
+            <span className="marine-value">{formatValue(marineData.waterTemperature)}</span>
+          </div>
+        )}
+        
+        {marineData.waveHeight?.value !== null && (
+          <div className="marine-item">
+            <Waves size={16} />
+            <span className="marine-label">Wave Height</span>
+            <span className="marine-value">{formatValue(marineData.waveHeight)}m</span>
+          </div>
+        )}
+        
+        {marineData.windSpeed?.value !== null && (
+          <div className="marine-item">
+            <Wind size={16} />
+            <span className="marine-label">Wind</span>
+            <span className="marine-value">{formatValue(marineData.windSpeed, 0)} m/s</span>
+          </div>
+        )}
+      </div>
+      
+      {marineData.conditions && (
+        <div className={`marine-conditions-summary ${getSafetyClass()}`}>
+          <span>{marineData.conditions}</span>
+        </div>
+      )}
+      
+      <p className="marine-note">
+        Data refreshed daily via Stormglass.io
+      </p>
+    </div>
+  );
+}
+
 function OverviewSection({ overview, portName }) {
   if (!overview) return <p>No overview information available yet.</p>;
 
@@ -160,6 +328,14 @@ function OverviewSection({ overview, portName }) {
       <div className="section-intro">
         <h2>Welcome to {portName}</h2>
       </div>
+      
+      {/* Hook - Why this port is special */}
+      {overview.hook && (
+        <div className="port-hook">
+          <Star size={20} className="hook-icon" />
+          <p>{overview.hook}</p>
+        </div>
+      )}
       
       {overview.description && (
         <div className="port-description">
@@ -213,11 +389,28 @@ function OverviewSection({ overview, portName }) {
           </SubSection>
         </>
       )}
+
+      {/* Important Notes - Cultural tips, siesta, closures */}
+      {overview.importantNotes && overview.importantNotes.length > 0 && (
+        <>
+          <hr className="section-divider" />
+          <SubSection title="Good to Know">
+            <div className="important-notes-box">
+              <AlertCircle size={20} className="notes-icon" />
+              <ul className="important-notes-list">
+                {overview.importantNotes.map((note, idx) => (
+                  <li key={idx}>{note}</li>
+                ))}
+              </ul>
+            </div>
+          </SubSection>
+        </>
+      )}
     </div>
   );
 }
 
-function StayLocalSection({ stayLocal, beachImage }) {
+function StayLocalSection({ stayLocal, beachImage, marineData, marineLoading }) {
   if (!stayLocal) return <p>No local information available yet.</p>;
 
   return (
@@ -234,11 +427,14 @@ function StayLocalSection({ stayLocal, beachImage }) {
           <SubSection title="Quick Walk (Under 10 mins)">
             {stayLocal.quickWalk.map((item, idx) => (
               <div key={idx} className="walk-item">
-                <h4>{item.title}</h4>
+                <div className="walk-item-header">
+                  <h4>{item.title}</h4>
+                  {item.terrain && <TerrainBadge terrain={item.terrain} />}
+                </div>
                 <p>{item.content}</p>
                 {item.mapLink && (
                   <a href={item.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                    Open in Google Maps →
+                    View walking route →
                   </a>
                 )}
               </div>
@@ -253,11 +449,14 @@ function StayLocalSection({ stayLocal, beachImage }) {
           <SubSection title="Longer Walk (10-30 mins)">
             {stayLocal.longerWalk.map((item, idx) => (
               <div key={idx} className="walk-item">
-                <h4>{item.title}</h4>
+                <div className="walk-item-header">
+                  <h4>{item.title}</h4>
+                  {item.terrain && <TerrainBadge terrain={item.terrain} />}
+                </div>
                 <p>{item.content}</p>
                 {item.mapLink && (
                   <a href={item.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                    Open in Google Maps →
+                    View walking route →
                   </a>
                 )}
               </div>
@@ -272,8 +471,16 @@ function StayLocalSection({ stayLocal, beachImage }) {
           <SubSection title="Parks & Green Spaces">
             {stayLocal.parks.map((park, idx) => (
               <div key={idx} className="walk-item">
-                <h4>{park.title}</h4>
+                <div className="walk-item-header">
+                  <h4>{park.title}</h4>
+                  {park.terrain && <TerrainBadge terrain={park.terrain} />}
+                </div>
                 <p>{park.content}</p>
+                {park.mapLink && (
+                  <a href={park.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
+                    View walking route →
+                  </a>
+                )}
               </div>
             ))}
           </SubSection>
@@ -292,12 +499,49 @@ function StayLocalSection({ stayLocal, beachImage }) {
             <div className="beach-item">
               <h4>{stayLocal.beach.title}</h4>
               <p>{stayLocal.beach.content}</p>
+              
+              {/* Beach info badges */}
+              {(stayLocal.beach.waterTemperature || stayLocal.beach.facilities) && (
+                <div className="beach-info-grid">
+                  {stayLocal.beach.waterTemperature && (
+                    <div className="beach-info-item">
+                      <Thermometer size={16} />
+                      <span><strong>Water:</strong> {stayLocal.beach.waterTemperature}</span>
+                    </div>
+                  )}
+                  {stayLocal.beach.facilities && (
+                    <div className="beach-info-item">
+                      <Waves size={16} />
+                      <span><strong>Facilities:</strong> {stayLocal.beach.facilities}</span>
+                    </div>
+                  )}
+                </div>
+              )}
+              
+              {/* Live Marine Conditions from Stormglass API */}
+              {stayLocal.beach.coordinates && (
+                <MarineConditionsCard marineData={marineData} loading={marineLoading} />
+              )}
+              
+              {/* Accessibility notes for beach */}
+              {stayLocal.beach.accessNotes && (
+                <p className="beach-access-notes">
+                  <Accessibility size={14} /> {stayLocal.beach.accessNotes}
+                </p>
+              )}
+              
               {stayLocal.beach.additional && stayLocal.beach.additional.length > 0 && (
                 <ul>
                   {stayLocal.beach.additional.map((item, idx) => (
                     <li key={idx}>{item}</li>
                   ))}
                 </ul>
+              )}
+              
+              {stayLocal.beach.mapLink && (
+                <a href={stayLocal.beach.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
+                  View beach location →
+                </a>
               )}
             </div>
           </SubSection>
@@ -396,7 +640,19 @@ function GoFurtherSection({ goFurther, attractionImages }) {
 
       {goFurther.attractions.map((attraction, idx) => (
         <div key={idx} className="attraction-card">
-          <h3>{attraction.name}</h3>
+          <div className="attraction-header">
+            <h3>{attraction.name}</h3>
+            {/* Terrain and Accessibility badges */}
+            <div className="attraction-badges">
+              {attraction.terrain && <TerrainBadge terrain={attraction.terrain} />}
+              {attraction.accessibility && (
+                <AccessibilityBadge 
+                  rating={attraction.accessibility.rating} 
+                  notes={attraction.accessibility.notes} 
+                />
+              )}
+            </div>
+          </div>
           
           {attractionImages[idx] && (
             <div className="attraction-image">
@@ -632,10 +888,25 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
 
       {withKids?.olderKids && withKids.olderKids.length > 0 && (
         <>
-          <SubSection title="Older Kids & Teens">
+          <SubSection title="Older Kids (6-12)">
             <div className="info-list-box">
               <ul className="simple-list">
                 {withKids.olderKids.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {withKids?.teens && withKids.teens.length > 0 && (
+        <>
+          <SubSection title="Teens (13+)">
+            <div className="info-list-box">
+              <ul className="simple-list">
+                {withKids.teens.map((item, idx) => (
                   <li key={idx}>{item}</li>
                 ))}
               </ul>
@@ -806,10 +1077,30 @@ function FoodDrinkSection({ foodAndDrink }) {
 
       <hr className="section-divider" />
 
+      {/* Local Dish to Try - Featured recommendation */}
+      {foodAndDrink.localDishToTry && (
+        <>
+          <div className="local-dish-card">
+            <div className="local-dish-header">
+              <ChefHat size={24} className="dish-icon" />
+              <h3>Must Try</h3>
+            </div>
+            <div className="local-dish-content">
+              <h4>{foodAndDrink.localDishToTry.name}</h4>
+              <p>{foodAndDrink.localDishToTry.description}</p>
+              {foodAndDrink.localDishToTry.lookFor && (
+                <p className="look-for"><strong>Look for:</strong> {foodAndDrink.localDishToTry.lookFor}</p>
+              )}
+            </div>
+          </div>
+          <hr className="section-divider" />
+        </>
+      )}
+
       {/* Support 'localSpeciality' (string, G606 style) */}
       {foodAndDrink.localSpeciality && (
         <>
-          <SubSection title="Local Speciality">
+          <SubSection title="Local Specialities">
             {formatParagraphsWithBold(foodAndDrink.localSpeciality)}
           </SubSection>
           <hr className="section-divider" />
