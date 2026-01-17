@@ -13,14 +13,13 @@ import './AdminPortRatings.css';
 function AdminPortRatings() {
   const { isAuthenticated, isLoading: authLoading, logout } = useAdminAuth();
   const [ratings, setRatings] = useState([]);
-  const [stats, setStats] = useState(null);
+  const [_stats, setStats] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterPort, setFilterPort] = useState('all');
   const [filterRating, setFilterRating] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedRating, setSelectedRating] = useState(null);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -72,7 +71,6 @@ function AdminPortRatings() {
 
       // Refresh data
       fetchRatings();
-      setSelectedRating(null);
     } catch (error) {
       console.error('Error approving rating:', error);
       alert('Failed to approve rating');
@@ -94,7 +92,6 @@ function AdminPortRatings() {
 
       // Refresh data
       fetchRatings();
-      setSelectedRating(null);
     } catch (error) {
       console.error('Error rejecting rating:', error);
       alert('Failed to reject rating');
@@ -174,7 +171,6 @@ function AdminPortRatings() {
 
   const pendingCount = ratings.filter(r => !r.is_approved).length;
   const approvedCount = ratings.filter(r => r.is_approved).length;
-  const withReviewCount = ratings.filter(r => r.review_text).length;
   const avgRating = ratings.length > 0
     ? (ratings.reduce((sum, r) => sum + r.rating, 0) / ratings.length).toFixed(1)
     : 0;

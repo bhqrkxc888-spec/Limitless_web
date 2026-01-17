@@ -205,14 +205,6 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
         'Spanish lunch hours - Restaurants may close 4-8pm. Plan around this or eat early.',
         'Weather - March can be rainy. Pack layers and waterproofs for kids too.'
       ],
-      familiarChains: {
-        mcDonalds: {
-          location: 'Calle Real 40, about 10 min walk from port',
-          address: 'Calle Real, 40, 15003 A Coruña',
-          mapsLink: 'https://www.google.com/maps/search/?api=1&query=McDonald%27s+Calle+Real+40+A+Coruna',
-          image: null // To be added
-        }
-      },
       easyDay: 'Walk to main square, grab a coffee/juice, taxi to Aquarium (or Santa Margarita park for playground), taxi to beach for an hour, ice cream, then walk back to ship.'
     },
     send: {
@@ -472,32 +464,6 @@ March means you're here for "winter sun" - expect pleasant temperatures perfect 
         'Siesta hours - Some shops/restaurants close 1-4pm. Plan around it.',
         'Sun - Stronger than you think. Sunscreen and hats essential.'
       ],
-      familiarChains: {
-        mcDonalds: [
-          {
-            name: 'Santa Cruz | Castillo',
-            location: 'Main shopping street, 15 min walk from port',
-            address: 'Calle Castillo, 12, 38002 Santa Cruz de Tenerife',
-            mapsLink: 'https://www.google.com/maps/search/?api=1&query=McDonald%27s+Calle+Castillo+12+Santa+Cruz+Tenerife',
-            image: null // To be added
-          },
-          {
-            name: 'Tenerife | CC Meridiano',
-            location: 'Shopping centre, further from port',
-            address: 'CC Meridiano, Avd Manuel Hermoso Rojas nº 16, local A32, 38005 Tenerife',
-            mapsLink: 'https://www.google.com/maps/search/?api=1&query=McDonald%27s+CC+Meridiano+Tenerife',
-            image: null // To be added
-          }
-        ],
-        aleHop: {
-          location: 'Main shopping street',
-          address: 'Calle del Castillo, 43, 38002 Santa Cruz de Tenerife',
-          phone: '922 24 48 82',
-          mapsLink: 'https://www.google.com/maps/search/?api=1&query=Ale+Hop+Calle+Castillo+43+Santa+Cruz+Tenerife',
-          image: null, // To be added
-          description: 'Spanish gift shop with toys, jokes, and novelties. Kids love it.'
-        }
-      },
       easyDay: 'Option 1 (Beach): Bus to Las Teresitas, beach morning, lunch at beachfront, bus back, ice cream in town, back to ship. Option 2 (City): Plaza de España, Market (kids love the colours), walk to Parque Marítimo for a swim, ice cream, back to ship.'
     },
     send: {
@@ -736,21 +702,6 @@ Las Canteras beach is the star here - a gorgeous golden sand urban beach with a 
         'Bikes/scooters on promenade - Keep little ones close.',
         'Waves at southern end of Las Canteras - Calmer in the middle where the reef protects.'
       ],
-      familiarChains: {
-        mcDonalds: {
-          location: 'Calle Triana, 15 min walk or quick bus from Las Canteras',
-          address: 'Calle Triana, 75, 35002 Las Palmas de Gran Canaria',
-          mapsLink: 'https://www.google.com/maps/search/?api=1&query=McDonald%27s+Calle+Triana+75+Las+Palmas',
-          image: null // To be added
-        },
-        aleHop: {
-          location: 'Main shopping street',
-          address: 'Calle Mayor de Triana, 48, 35002 Las Palmas de Gran Canaria',
-          mapsLink: 'https://www.google.com/maps/search/?api=1&query=Ale+Hop+Calle+Mayor+Triana+48+Las+Palmas',
-          image: null, // To be added
-          description: 'Spanish gift shop with novelties and toys.'
-        }
-      },
       easyDay: 'Walk to Las Canteras, beach morning, ice cream, lunch on promenade, more beach or paddle, walk back via Santa Catalina Park, back to ship.'
     },
     send: {
@@ -984,14 +935,6 @@ March weather is perfect for exploring - warm enough for beaches but not the int
         'Charco de San Ginés is a working harbour - keep kids away from water edge.',
         'Sun is strong even in March - sunscreen and hats essential.'
       ],
-      familiarChains: {
-        mcDonalds: {
-          location: 'Arrecife centre, 20 min walk from port',
-          address: 'Calle León y Castillo, 35500 Arrecife, Lanzarote',
-          mapsLink: 'https://www.google.com/maps/search/?api=1&query=McDonald%27s+Calle+Leon+Castillo+Arrecife+Lanzarote',
-          image: null // To be added
-        }
-      },
       easyDay: 'Option 1 (Local): Walk to Charco de San Ginés, coffee, wander old town, Playa del Reducto for beach time, lunch, back to ship. Option 2 (Timanfaya): Book excursion or tour to Timanfaya, spend day exploring volcanic landscapes, return to ship.'
     },
     send: {
@@ -1231,21 +1174,6 @@ Cádiz is famous for its connection to sherry wine (it's part of the "Sherry Tri
         'Spanish lunch hours - Restaurants may close 4-8pm. Plan around this.',
         'Narrow streets - Keep kids close, some streets are very narrow.'
       ],
-      familiarChains: {
-        mcDonalds: {
-          location: 'Near main shopping area, 10 min walk from port',
-          address: 'Calle Columela, 11004 Cádiz',
-          mapsLink: 'https://www.google.com/maps/search/?api=1&query=McDonald%27s+Calle+Columela+Cadiz',
-          image: null // To be added
-        },
-        aleHop: {
-          location: 'Main shopping street',
-          address: 'Calle Ancha, 11001 Cádiz',
-          mapsLink: 'https://www.google.com/maps/search/?api=1&query=Ale+Hop+Calle+Ancha+Cadiz',
-          image: null, // To be added
-          description: 'Spanish gift shop with toys and novelties.'
-        }
-      },
       easyDay: 'Option 1 (City): Plaza de San Juan de Dios, Mercado Central (kids love the colours), Torre Tavira (camera obscura), lunch, La Caleta beach, ice cream, back to ship. Option 2 (Park): Walk to Parque Genovés, explore gardens, seafront promenade, lunch, back to ship.'
     },
     send: {
