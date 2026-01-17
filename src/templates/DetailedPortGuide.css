@@ -92,16 +92,13 @@
    SECTION CONTENT - White raised box matching G606
    ======================================== */
 
-.port-section-content,
-#section-content.port-section-content {
+.port-section-content {
   max-width: var(--layout-content-width, 1120px);
   margin: var(--space-6, 1.5rem) auto;
   background: var(--clr-surface, #FFFFFF);
   padding: var(--space-5, 1.25rem);
   border-radius: var(--radius-xl, 16px);
   box-shadow: 0 4px 20px rgba(44, 52, 76, 0.08);
-  /* Scroll margin for sticky header + tabs - mobile: header ~84px + tabs ~56px + buffer */
-  scroll-margin-top: 160px;
 }
 
 .section-intro {
@@ -722,12 +719,9 @@
     font-size: var(--font-size-base, 1rem);
   }
   
-  .port-section-content,
-  #section-content.port-section-content {
+  .port-section-content {
     padding: var(--space-6, 1.5rem);
     border-radius: var(--radius-xl, 16px);
-    /* Tablet: header ~120px + tabs ~56px + buffer */
-    scroll-margin-top: 190px;
   }
   
   .section-intro h2 {
@@ -749,11 +743,8 @@
     padding: var(--space-3, 0.75rem) var(--space-5, 1.25rem);
   }
   
-  .port-section-content,
-  #section-content.port-section-content {
+  .port-section-content {
     padding: var(--space-8, 2rem);
-    /* Desktop: header ~120px + tabs ~60px + buffer */
-    scroll-margin-top: 200px;
   }
   
   .access-grid {

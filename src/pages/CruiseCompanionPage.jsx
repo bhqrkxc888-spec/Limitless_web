@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { hasConsent } from '../components/cruise/CruiseConsentGate';
@@ -76,8 +76,6 @@ function CruiseCompanionPage() {
   const [isChecking, setIsChecking] = useState(true);
   const [selectedDayIndex, setSelectedDayIndex] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
-  const contentRef = useRef(null);
-  const isInitialMount = useRef(true);
 
   // Extract data from cruise (with fallbacks)
   const itinerary = cruise?.itinerary || [];
@@ -85,14 +83,6 @@ function CruiseCompanionPage() {
   const departure = cruise?.departure || {};
   const facebookGroup = cruise?.facebookGroup;
   const ogImage = cruise?.ogImage;
-
-  // Get section from URL hash
-  const getSectionFromHash = useCallback((dayType) => {
-    const hash = window.location.hash.slice(1); // Remove the #
-    if (!hash) return null;
-    const validSections = getSectionsForDayType(dayType);
-    return validSections.includes(hash) ? hash : null;
-  }, []);
 
   useEffect(() => {
     // Check for existing consent
@@ -103,43 +93,24 @@ function CruiseCompanionPage() {
       setSelectedDayIndex(currentDay);
       if (itinerary[currentDay]) {
         const sections = getSectionsForDayType(itinerary[currentDay].dayType);
-        // Check if URL has a valid section hash
-        const hashSection = getSectionFromHash(itinerary[currentDay].dayType);
-        setSelectedSection(hashSection || sections[0]);
+        setSelectedSection(sections[0]);
       }
     }
     setIsChecking(false);
-  }, [itinerary, getSectionFromHash]);
+  }, [itinerary]);
   
-  // Listen for hash changes (browser back/forward)
-  useEffect(() => {
-    const handleHashChange = () => {
-      if (selectedDayIndex !== null && itinerary[selectedDayIndex]) {
-        const hashSection = getSectionFromHash(itinerary[selectedDayIndex].dayType);
-        if (hashSection) {
-          setSelectedSection(hashSection);
-        }
-      }
-    };
-    
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, [selectedDayIndex, itinerary, getSectionFromHash]);
-  
-  // Scroll to content after section/day changes (not on initial mount)
-  useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      return;
-    }
-    
-    // Small delay for React to finish rendering
+  // Simple scroll function - scrolls to day navigation bar
+  const scrollToContent = useCallback(() => {
     requestAnimationFrame(() => {
-      if (contentRef.current) {
-        contentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const dayNav = document.querySelector('.day-navigation');
+      if (dayNav) {
+        window.scrollTo({ 
+          top: dayNav.offsetTop, 
+          behavior: 'smooth' 
+        });
       }
     });
-  }, [selectedDayIndex, selectedSection]);
+  }, []);
 
   // Set page to noindex (hidden page)
   useEffect(() => {
@@ -163,23 +134,21 @@ function CruiseCompanionPage() {
     }
   };
 
-  // Handle day selection - update state and reset section hash
+  // Handle day selection - update state and scroll to content
   const handleDaySelect = (dayIndex) => {
     setSelectedDayIndex(dayIndex);
     const dayData = itinerary[dayIndex];
     if (dayData) {
       const sections = getSectionsForDayType(dayData.dayType);
-      const firstSection = sections[0];
-      setSelectedSection(firstSection);
-      // Update URL hash using pushState (doesn't trigger native scroll)
-      history.pushState(null, '', `#${firstSection}`);
+      setSelectedSection(sections[0]);
     }
+    scrollToContent();
   };
 
-  // Handle section selection - update URL hash using pushState, scroll handled by useEffect
+  // Handle section selection - update state and scroll to content
   const handleSectionSelect = (sectionKey) => {
-    history.pushState(null, '', `#${sectionKey}`);
     setSelectedSection(sectionKey);
+    scrollToContent();
   };
 
   // Cruise not found
@@ -407,10 +376,10 @@ function CruiseCompanionPage() {
         onSectionSelect={handleSectionSelect}
       />
 
-      {/* Main Content - ref for scroll targeting */}
+      {/* Main Content */}
       <div className="companion-content">
         <div className="container">
-          <div ref={contentRef} id="section-content" className="day-content">
+          <div className="day-content">
             <h2 className="day-title">{dayData.dayLabel} - {dayData.portName}</h2>
             
             {/* Section Content */}

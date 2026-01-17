@@ -6,7 +6,7 @@
  * Matches the same layout and style as G606 cruise companion port days
  */
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useCallback } from 'react';
 import OptimizedImage from '../components/OptimizedImage';
 import { usePortGuideImage } from '../hooks/useImageUrl';
 import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye } from 'lucide-react';
@@ -25,52 +25,26 @@ const PORT_SECTIONS = [
 
 export function DetailedPortGuide({ slug, portName, portCountry, detailedContent, port }) {
   const [activeSection, setActiveSection] = useState('overview');
-  const contentRef = useRef(null);
-  const isInitialMount = useRef(true);
   
-  // Read hash from URL and set active section
-  const getSectionFromHash = useCallback(() => {
-    const hash = window.location.hash.slice(1); // Remove the #
-    const validSection = PORT_SECTIONS.find(s => s.key === hash);
-    return validSection ? hash : 'overview';
-  }, []);
-  
-  // Initialize from URL hash on mount
-  useEffect(() => {
-    const initialSection = getSectionFromHash();
-    setActiveSection(initialSection);
-    
-    // Handle browser back/forward navigation
-    const handleHashChange = () => {
-      const newSection = getSectionFromHash();
-      setActiveSection(newSection);
-    };
-    
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, [getSectionFromHash]);
-  
-  // Scroll to content after section changes (not on initial mount)
-  useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      return;
-    }
-    
-    // Small delay for React to finish rendering
+  // Simple scroll function - scrolls to tabs bar position
+  const scrollToContent = useCallback(() => {
     requestAnimationFrame(() => {
-      if (contentRef.current) {
-        contentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const tabs = document.querySelector('.port-section-tabs');
+      const header = document.querySelector('.header');
+      if (tabs) {
+        const headerHeight = header?.offsetHeight || 120;
+        window.scrollTo({ 
+          top: tabs.offsetTop - headerHeight, 
+          behavior: 'smooth' 
+        });
       }
     });
-  }, [activeSection]);
+  }, []);
   
-  // Tab click updates URL hash using pushState (doesn't trigger native scroll)
+  // Tab click - update state and scroll
   const handleTabChange = (sectionKey) => {
-    // Update URL without triggering browser's native hash scroll
-    history.pushState(null, '', `#${sectionKey}`);
-    // Update state - this triggers our useEffect for scrolling
     setActiveSection(sectionKey);
+    scrollToContent();
   };
   
   // Load attraction images
@@ -165,8 +139,8 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
         </div>
       </nav>
 
-      {/* Section Content - ref for scroll targeting, stable ID for CSS */}
-      <div ref={contentRef} id="section-content" className="port-section-content">
+      {/* Section Content */}
+      <div className="port-section-content">
         {renderSectionContent()}
       </div>
     </div>
