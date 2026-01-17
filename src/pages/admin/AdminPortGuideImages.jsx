@@ -132,8 +132,6 @@ function AdminPortGuideImages() {
           ...img
         };
       });
-      
-      console.log('[DEBUG] Loaded images by port:', Object.keys(imagesByPort));
 
       setImages(imagesByPort);
       setLastUpdated(Date.now());
