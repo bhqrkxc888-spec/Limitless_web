@@ -128,12 +128,24 @@ function CruiseCompanionPage() {
       const sections = getSectionsForDayType(dayData.dayType);
       setSelectedSection(sections[0]); // Reset to first section when day changes
     }
-    // No auto-scroll - let user control their position
+    // Scroll to top of content when changing day
+    scrollToContent();
   };
 
   const handleSectionSelect = (sectionKey) => {
     setSelectedSection(sectionKey);
-    // No auto-scroll - content updates in place
+    // Scroll to top of content when changing section/tab
+    scrollToContent();
+  };
+
+  // Scroll to content area - used when switching days or tabs
+  const scrollToContent = () => {
+    setTimeout(() => {
+      const dayTitle = document.querySelector('.day-title');
+      if (dayTitle) {
+        dayTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 50);
   };
 
   // Cruise not found
