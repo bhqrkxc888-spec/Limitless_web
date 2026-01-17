@@ -1267,7 +1267,12 @@ export const ports = [
       },
     ],
 
-    nearestBeach: null,
+    nearestBeach: {
+      name: 'Cascais Beaches',
+      description: 'Cascais is a charming coastal town with several sandy beaches including Praia da Rainha, Praia da Conceição, and the larger Praia de Carcavelos. While not within walking distance from Lisbon\'s cruise port, Cascais is easily accessible by train and offers a pleasant seaside escape with promenade, cafés, and good swimming conditions.',
+      gettingThere: 'From Santa Apolónia cruise terminal area, walk to Cais do Sodré station (or take metro). Direct trains to Cascais run every 20 minutes along the scenic coastal route. Journey time is approximately 40 minutes. The beaches are a short walk from Cascais station.',
+      image: 'beach.webp',
+    },
     
     shoreExcursions: [
       {
