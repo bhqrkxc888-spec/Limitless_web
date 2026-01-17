@@ -56,16 +56,17 @@
   color: var(--clr-text-main, #2C344C);
 }
 
+/* Hover disabled - cleaner experience */
 .day-nav-button:hover {
-  background: var(--clr-bg, #FDFBF7);
-  border-color: var(--clr-border, #E8E4DC);
+  /* No visual change on hover */
 }
 
 .day-nav-button.active {
   background: var(--clr-primary, #2C344C);
   color: var(--clr-text-on-primary, #FFFFFF);
-  border-color: var(--clr-primary, #2C344C);
-  box-shadow: 0 4px 12px rgba(44, 52, 76, 0.2);
+  border-color: var(--clr-accent, #C8A25D);
+  border-width: 3px;
+  box-shadow: 0 0 0 2px rgba(200, 162, 93, 0.3), 0 4px 12px rgba(44, 52, 76, 0.2);
 }
 
 .day-nav-button:focus-visible {

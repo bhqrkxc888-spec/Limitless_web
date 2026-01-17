@@ -232,7 +232,7 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
         },
         {
           name: 'Monte de San Pedro',
-          description: 'Panoramic viewpoint over La Coruña and coastline. Former coastal military battery, now a park. Has remnants of old military guns and a bubble-shaped panoramic elevator (Ascensor Panorámico).',
+          description: 'Panoramic viewpoint over La Coruña and coastline. Former coastal military battery, now a park. Has remnants of old military guns and a bubble-shaped panoramic lift (Ascensor Panorámico).',
           cruiseLineOption: 'Check with your cruise line for current options',
           independent: 'About 4km from cruise port. Taxi is most practical. Local buses connect but slower.',
           allow: 'Allow 1-1.5 hours to enjoy the views and walk around',
@@ -242,7 +242,7 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
           terrain: 'easy',
           accessibility: {
             rating: 'full',
-            notes: 'Panoramic elevator provides accessible access to viewpoint. Park paths are mostly accessible.'
+            notes: 'Panoramic lift provides accessible access to viewpoint. Park paths are mostly accessible.'
           }
         }
       ],
@@ -1761,7 +1761,7 @@ Cádiz is famous for its connection to sherry wine (it's part of the "Sherry Tri
 
 The city has a relaxed, slightly faded elegance. It's not as polished as some European capitals - and that's part of its charm. The locals are friendly, English is widely spoken in tourist areas, and it's very safe. Lisbon is famous for its fado music, its pastéis de nata (custard tarts), and its role in the Age of Discovery.
 
-March weather is pleasant - mild temperatures perfect for walking, though it can be rainy (this is Portugal's wettest month). The hills can be challenging, but there are trams, funiculars, and elevators to help. This is an overnight stay, so you have the evening to explore - fado shows, dinner, or just wandering the illuminated streets.`,
+March weather is pleasant - mild temperatures perfect for walking, though it can be rainy (this is Portugal's wettest month). The hills can be challenging, but there are trams, funiculars, and lifts to help. This is an overnight stay, so you have the evening to explore - fado shows, dinner, or just wandering the illuminated streets.`,
       weatherSeasonal: '15-17°C | Mild, but March is Portugal\'s wettest month. Expect some rain. Layers, waterproof jacket essential. Umbrella recommended.',
       portInfo: {
         dockLocation: 'Santa Apolónia or Jardim do Tabaco terminal (both near each other)',
@@ -1769,7 +1769,7 @@ March weather is pleasant - mild temperatures perfect for walking, though it can
         shuttleInfo: 'Shuttle bus usually available to city centre (Praça do Comércio)'
       },
       importantNotes: [
-        'Hills: Lisbon is hilly! Use trams, funiculars, and elevators to save your legs',
+        'Hills: Lisbon is hilly! Use trams, funiculars, and lifts to save your legs',
         'Tram 28: Iconic but often packed with tourists. Go early morning or just enjoy the view.',
         'Pastéis de Nata: Try them everywhere - Pastéis de Belém is famous but there are great ones all over',
         'Fado: Book a fado show in Alfama for an authentic evening experience',
@@ -1794,7 +1794,7 @@ March weather is pleasant - mild temperatures perfect for walking, though it can
         },
         {
           name: 'Pingo Doce',
-          location: 'Main location: Baixa district on Rua 1º de Dezembro (near Rossio) - 15-20 min walk from cruise terminal, or take metro from Santa Apolónia. Also: Rua da Graça area (near elevators to Alfama)',
+          location: 'Main location: Baixa district on Rua 1º de Dezembro (near Rossio) - 15-20 min walk from cruise terminal, or take metro from Santa Apolónia. Also: Rua da Graça area (near lifts to Alfama)',
           type: 'supermarket',
           what: 'Full supermarket - groceries, wine, drinks, snacks, toiletries, prepared hot meals and sandwiches',
           notes: 'Open Mon-Sun 8:30am-9:30pm. Also has a small café/canteen section with cheap prepared food. Multiple locations throughout Lisbon.'
@@ -1835,7 +1835,7 @@ March weather is pleasant - mild temperatures perfect for walking, though it can
         },
         {
           title: 'Option 2: Baixa and Chiado (~1.5 hours)',
-          content: 'Port → Praça do Comércio → Rua Augusta (pedestrian street) → Rossio Square → Elevador de Santa Justa (art nouveau elevator) → Chiado district. More modern, shopping, cafés.',
+          content: 'Port → Praça do Comércio → Rua Augusta (pedestrian street) → Rossio Square → Elevador de Santa Justa (art nouveau lift) → Chiado district. More modern, shopping, cafés.',
           terrain: 'moderate',
           mapLink: 'https://www.google.com/maps/dir/Santa+Apolonia,+Lisbon/Praca+do+Comercio,+Lisbon/Rossio,+Lisbon/Chiado,+Lisbon/Santa+Apolonia,+Lisbon/'
         }
@@ -1889,7 +1889,7 @@ March weather is pleasant - mild temperatures perfect for walking, though it can
         'Find a pastelaria - Duck in, have coffee and pastéis de nata, wait it out. This is very Portuguese.',
         'Fado house - Book a fado show (usually evening, includes dinner). Indoor, cultural experience.'
       ],
-      tip: 'Lisbon is a city to explore slowly. Don\'t try to see everything - pick a few areas and really explore them. The Alfama is the heart of old Lisbon and rewards getting lost.\n\n**First day:** Focus on Alfama and Baixa. Walk up into Alfama, find viewpoints, explore the streets, visit the cathedral. Have lunch, maybe ride Tram 28.\n\n**Evening (overnight stay):** This is special. Fado show in Alfama, dinner, or just wander the illuminated streets. Lisbon is beautiful at night.\n\n**Second day (if you have it):** Belém (tower, monastery) or more exploring. The hills are challenging - use trams, funiculars, and the metro. Don\'t try to walk everywhere.\n\n**Note:** Lisbon has seven hills. It\'s hilly. Comfortable shoes essential. Use public transport (trams, funiculars, elevators) - they\'re part of the experience anyway.'
+      tip: 'Lisbon is a city to explore slowly. Don\'t try to see everything - pick a few areas and really explore them. The Alfama is the heart of old Lisbon and rewards getting lost.\n\n**First day:** Focus on Alfama and Baixa. Walk up into Alfama, find viewpoints, explore the streets, visit the cathedral. Have lunch, maybe ride Tram 28.\n\n**Evening (overnight stay):** This is special. Fado show in Alfama, dinner, or just wander the illuminated streets. Lisbon is beautiful at night.\n\n**Second day (if you have it):** Belém (tower, monastery) or more exploring. The hills are challenging - use trams, funiculars, and the metro. Don\'t try to walk everywhere.\n\n**Note:** Lisbon has seven hills. It\'s hilly. Comfortable shoes essential. Use public transport (trams, funiculars, lifts) - they\'re part of the experience anyway.'
     },
     goFurther: {
       attractions: [
@@ -1949,7 +1949,7 @@ March weather is pleasant - mild temperatures perfect for walking, though it can
         'Praça do Comércio - Huge open space, space to run, river views.',
         'Tram 28 - Kids love trams. Ride it (or just watch it go by).',
         'Alfama (supervised) - The narrow streets can be fun to explore, but keep kids close.',
-        'Elevador de Santa Justa - The art nouveau elevator is exciting for kids (small fee).'
+        'Elevador de Santa Justa - The art nouveau lift is exciting for kids (small fee).'
       ],
       olderKids: [
         'Belém Tower - Climbing the tower is an adventure. Great views.',
@@ -2092,7 +2092,7 @@ March weather is pleasant - mild temperatures perfect for walking, though it can
         'Fado: If you want to see fado, book ahead. Many fado houses require dinner reservations. Evening shows are atmospheric.',
         'Tipping: Not expected, but round up or leave 5-10% for good service.',
         'Cards: Widely accepted. Small local places may prefer cash.',
-        'The hills: Lisbon is hilly. Use trams, funiculars, elevators, and the metro. Don\'t try to walk everywhere.',
+        'The hills: Lisbon is hilly. Use trams, funiculars, lifts, and the metro. Don\'t try to walk everywhere.',
         'Overnight stay: Use the evening! Fado shows, dinner, or just wander the illuminated streets. Lisbon is beautiful at night.'
       ]
     }

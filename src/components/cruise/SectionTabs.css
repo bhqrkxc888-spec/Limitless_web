@@ -52,15 +52,17 @@
   scroll-snap-align: start;
 }
 
+/* Hover disabled - cleaner experience */
 .section-tab:hover {
-  color: var(--clr-text-main, #2C344C);
-  background: rgba(44, 52, 76, 0.05);
+  /* No visual change on hover */
 }
 
 .section-tab.active {
   color: var(--clr-surface, #FFFFFF);
   background: var(--clr-primary, #2C344C);
   font-weight: var(--font-weight-semibold, 600);
+  border: 2px solid var(--clr-accent, #C8A25D);
+  box-shadow: 0 0 0 2px rgba(200, 162, 93, 0.25);
 }
 
 .section-tab:focus-visible {

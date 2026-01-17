@@ -647,7 +647,7 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
                     </div>
                   )}
                   <div className="family-card-content">
-                    <h4>McDonald's {familyFriendly.mcdonalds.name}</h4>
+                    <h4>{familyFriendly.mcdonalds.name}</h4>
                     <p><strong>Location:</strong> {familyFriendly.mcdonalds.location}</p>
                     <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                       <strong>Distance:</strong> 
@@ -670,7 +670,7 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
                     </div>
                   )}
                   <div className="family-card-content">
-                    <h4>ALE-HOP {familyFriendly.aleHop.name}</h4>
+                    <h4>{familyFriendly.aleHop.name}</h4>
                     <p><strong>Location:</strong> {familyFriendly.aleHop.location}</p>
                     <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                       <strong>Distance:</strong> 

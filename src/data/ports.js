@@ -1396,15 +1396,15 @@ export const ports = [
     relatedDestinations: ['mediterranean-cruises'],
     
     meta: {
-      title: 'Lisbon Cruise Port Guide | Seven Hills, Fado & Discovery',
-      description: 'Complete Lisbon cruise port guide. Explore Alfama, ride historic trams, visit Belém Tower, and discover fado music and pastéis de nata in Portugal\'s capital.',
-      keywords: ['Lisbon cruise port', 'Lisbon shore excursions', 'Lisbon things to do', 'Lisbon from cruise ship', 'Lisbon cruise terminal', 'Santa Apolónia terminal'],
+      title: 'Lisbon Cruise Port Guide 2026 | Alfama, Belém Tower & Pastéis de Nata',
+      description: '2026 Lisbon cruise port guide. Walk to Alfama old town, iconic Tram 28, Belém Tower, pastéis de nata, fado music. Seven hills, stunning viewpoints. Insider tips from real cruisers.',
+      keywords: ['Lisbon cruise port', 'Lisbon port guide', 'Lisbon things to do', 'Alfama walking', 'Tram 28 Lisbon', 'Belém Tower visit', 'pastéis de nata', 'Lisbon viewpoints', 'Santa Apolónia terminal', 'Sintra day trip'],
     },
 
     familyFriendly: {
       mcdonalds: {
         name: 'McDonald\'s Rossio',
-        location: 'Praça Dom Pedro IV 81-83, city center',
+        location: 'Praça Dom Pedro IV 81-83, city centre',
         walkingTime: '20 minutes from cruise port or 10 minutes taxi',
         notes: 'Central location. Opens 8:00 AM. Also McDonald\'s in Belém near monuments.',
         mapsLink: 'https://www.google.com/maps/dir/?api=1&destination=McDonald%27s+Rossio+Lisbon&travelmode=walking',
@@ -1626,15 +1626,15 @@ export const ports = [
     relatedDestinations: ['canary-islands-cruises'],
     
     meta: {
-      title: 'Santa Cruz de Tenerife Cruise Port Guide | Mount Teide & Beaches',
-      description: 'Complete Santa Cruz de Tenerife cruise port guide. Visit Mount Teide, explore the city centre, relax on golden beaches, and discover year-round winter sun in the Canary Islands.',
-      keywords: ['Santa Cruz de Tenerife cruise port', 'Tenerife shore excursions', 'Tenerife things to do', 'Mount Teide cruise', 'Canary Islands cruise', 'Tenerife cruise terminal'],
+      title: 'Santa Cruz de Tenerife Cruise Port Guide 2026 | Mount Teide & Year-Round Sun',
+      description: '2026 Santa Cruz de Tenerife cruise port guide. Spain\'s highest peak Mount Teide, golden beaches, tax-free shopping, year-round sunshine. Siam Park & Loro Parque nearby. Insider tips from real cruisers.',
+      keywords: ['Santa Cruz de Tenerife cruise port', 'Tenerife cruise port', 'Mount Teide excursion', 'Tenerife things to do', 'Canary Islands duty free', 'Siam Park Tenerife', 'Loro Parque', 'Tenerife beaches', 'Plaza de España Tenerife', 'Puerto de la Cruz'],
     },
 
     familyFriendly: {
       mcdonalds: {
         name: 'McDonald\'s Santa Cruz',
-        location: 'Calle Castillo, 12, city center',
+        location: 'Calle Castillo, 12, city centre',
         walkingTime: '10-15 minutes from port',
         notes: 'Main shopping street. Several branches throughout city.',
         mapsLink: 'https://www.google.com/maps/dir/?api=1&destination=McDonald%27s+Calle+Castillo+Santa+Cruz+Tenerife&travelmode=walking',
@@ -2960,16 +2960,10 @@ export const ports = [
     
     relatedDestinations: ['mediterranean-cruises', 'canary-islands-cruises'],
     
-    meta: {
-      title: 'Cádiz Cruise Port Guide | Andalusian History & Beaches',
-      description: 'Complete Cádiz cruise port guide. Walk-off access to historic sights, beaches, and easy day trips to Seville from this Atlantic port.',
-      keywords: ['Cádiz cruise port', 'Cadiz Spain', 'Seville excursions', 'Atlantic coast', 'Cádiz cruise terminal', 'Andalusia cruise'],
-    },
-
     familyFriendly: {
       mcdonalds: {
         name: 'McDonald\'s Cádiz',
-        location: 'Calle Columela, city center',
+        location: 'Calle Columela, city centre',
         walkingTime: '10 minutes from port',
         notes: 'Near main shopping area. Multiple locations in Cádiz.',
         mapsLink: 'https://www.google.com/maps/dir/?api=1&destination=McDonald%27s+Calle+Columela+Cadiz&travelmode=walking',
@@ -2993,9 +2987,9 @@ export const ports = [
     },
     
     meta: {
-      title: 'Cádiz Cruise Port Guide | Andalusian History, Beaches & Tapas',
-      description: 'Complete Cádiz cruise port guide. Explore Europe\'s oldest city, climb the cathedral tower, taste sherry and tapas, and discover Andalusian charm in this walkable Atlantic port.',
-      keywords: ['Cádiz cruise port', 'Cádiz shore excursions', 'Cádiz things to do', 'Cádiz from cruise ship', 'Cádiz cruise terminal', 'Seville day trip', 'Jerez sherry'],
+      title: 'Cádiz Cruise Port Guide 2026 | Oldest City in Europe & Seville Day Trips',
+      description: '2026 Cádiz cruise port guide. Walk off your ship in 5 mins to Europe\'s oldest city. Cathedral views, tapas trails, sherry tasting, Seville & Jerez day trips. Insider tips from real cruisers.',
+      keywords: ['Cádiz cruise port', 'Cádiz port guide', 'Cádiz things to do', 'Cádiz shore excursions', 'Seville day trip from Cádiz', 'Jerez sherry tour', 'Cádiz cathedral tower', 'Cádiz beaches', 'Cádiz old town walking', 'Andalusia cruise port'],
     },
     
     status: 'published',
@@ -3304,23 +3298,17 @@ export const ports = [
     
     relatedDestinations: ['mediterranean-cruises'],
     
-    meta: {
-      title: 'A Coruña Cruise Port Guide | Tower of Hercules & Galician Beaches',
-      description: 'Complete A Coruña cruise port guide. Visit the UNESCO Tower of Hercules, explore the glass-fronted Marina, discover the old town and enjoy urban beaches in this walkable Atlantic port.',
-      keywords: ['A Coruña cruise port', 'La Coruña cruise', 'Tower of Hercules', 'Galician cruise port', 'Atlantic coast cruises', 'A Coruña shore excursions'],
-    },
-
     familyFriendly: {
       mcdonalds: {
         name: 'McDonald\'s Calle Real',
-        location: 'Calle Real, 40, city center',
+        location: 'Calle Real, 40, city centre',
         walkingTime: '10 minutes from port',
         notes: 'On main shopping street. Also one in C.C. Los Rosales mall.',
         mapsLink: 'https://www.google.com/maps/dir/?api=1&destination=McDonald%27s+Calle+Real+A+Coruna&travelmode=walking',
       },
       aleHop: {
         name: 'ALE-HOP La Coruña',
-        location: 'City center shopping areas',
+        location: 'City centre shopping areas',
         walkingTime: '10-15 minutes from port',
         notes: 'Check store locator for nearest location. Toys, gifts, accessories for kids.',
         mapsLink: 'https://www.google.com/maps/dir/?api=1&destination=Ale+Hop+A+Coruna&travelmode=walking',
@@ -3330,7 +3318,7 @@ export const ports = [
         location: 'Heart of the city',
         walkingTime: '15 minutes from port',
         facilities: 'Large children\'s play zone, paths, birdlife, scenic nature, duck pond',
-        notes: 'Near Casa de las Ciencias science museum. Beautiful green space in city center.',
+        notes: 'Near Casa de las Ciencias science museum. Beautiful green space in city centre.',
         mapsLink: 'https://www.google.com/maps/dir/?api=1&destination=Parque+Santa+Margarita+A+Coruna&travelmode=walking',
       },
       themePark: {
@@ -3347,9 +3335,9 @@ export const ports = [
     },
     
     meta: {
-      title: 'A Coruña Cruise Port Guide | Tower of Hercules, Seafood & Galician Culture',
-      description: 'Complete A Coruña cruise port guide. Visit the world\'s oldest working lighthouse, explore Galician seafood culture, walk the iconic glass-fronted waterfront, and discover insider tips for your cruise.',
-      keywords: ['A Coruña cruise port', 'La Coruña cruise', 'A Coruña shore excursions', 'Tower of Hercules', 'Galicia cruise', 'A Coruña things to do', 'Santiago de Compostela day trip'],
+      title: 'A Coruña Cruise Port Guide 2026 | Tower of Hercules & Galician Seafood',
+      description: '2026 A Coruña cruise port guide. Walk 5 mins to the city centre. World\'s oldest working lighthouse, Galician seafood, glass-fronted waterfront, Santiago day trips. Insider tips from real cruisers.',
+      keywords: ['A Coruña cruise port', 'La Coruña port guide', 'A Coruña things to do', 'Tower of Hercules visit', 'Galician seafood', 'Santiago de Compostela day trip', 'A Coruña beaches', 'A Coruña walking tours', 'Galicia cruise port', 'Plaza Maria Pita'],
     },
     
     status: 'published',
@@ -4814,9 +4802,9 @@ export const ports = [
     },
     
     meta: {
-      title: 'Las Palmas Gran Canaria Cruise Port Guide | Beach, Vegueta & Tax-Free Shopping',
-      description: 'Complete Las Palmas cruise port guide. Walk to Las Canteras beach, explore Vegueta old town, enjoy tax-free shopping, and discover insider tips for your Canary Islands cruise.',
-      keywords: ['Las Palmas cruise port', 'Gran Canaria cruise', 'Las Canteras beach', 'Las Palmas things to do', 'Canary Islands cruise', 'Las Palmas shore excursions', 'Vegueta old town'],
+      title: 'Las Palmas Gran Canaria Cruise Port Guide 2026 | Beach & Tax-Free Shopping',
+      description: '2026 Las Palmas cruise port guide. Walk 10 mins to Las Canteras beach. Tax-free shopping, Vegueta old town, year-round sunshine. One of Spain\'s best urban beaches. Insider tips from real cruisers.',
+      keywords: ['Las Palmas cruise port', 'Gran Canaria cruise port', 'Las Canteras beach', 'Las Palmas things to do', 'Canary Islands duty free', 'Vegueta old town', 'Las Palmas walking', 'Gran Canaria shore excursions', 'El Muelle shopping', 'Santa Catalina Park'],
     },
     
     status: 'published',
@@ -8405,13 +8393,13 @@ export const ports = [
     },
     
     meta: {
-      title: 'Lanzarote Cruise Port Guide | Timanfaya, César Manrique & Volcanic Landscapes',
-      description: 'Complete Lanzarote cruise port guide. Visit Timanfaya Fire Mountains, explore César Manrique masterpieces, discover volcanic wine country, and find insider tips for your Canary Islands cruise.',
-      keywords: ['Lanzarote cruise port', 'Arrecife cruise', 'Timanfaya National Park', 'César Manrique', 'Lanzarote things to do', 'Canary Islands cruise', 'Lanzarote shore excursions'],
+      title: 'Lanzarote Cruise Port Guide 2026 | Timanfaya Fire Mountains & César Manrique',
+      description: '2026 Lanzarote cruise port guide. Mars-like volcanic landscapes at Timanfaya, César Manrique art caves, volcanic wine tasting, duty-free prices. Insider tips from real cruisers.',
+      keywords: ['Lanzarote cruise port', 'Arrecife cruise port', 'Timanfaya National Park tour', 'César Manrique Foundation', 'Jameos del Agua', 'Lanzarote things to do', 'Canary Islands duty free', 'volcanic wine La Geria', 'Cueva de los Verdes', 'Mirador del Rio'],
     },
     
     status: 'published',
-    lastUpdated: '2026-01-16',
+    lastUpdated: '2026-01-17',
   },
 
 ];
