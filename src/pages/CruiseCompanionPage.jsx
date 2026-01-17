@@ -141,10 +141,17 @@ function CruiseCompanionPage() {
   // Scroll to content area - used when switching days or tabs
   const scrollToContent = () => {
     setTimeout(() => {
-      const dayTitle = document.querySelector('.day-title');
-      if (dayTitle) {
-        dayTitle.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      requestAnimationFrame(() => {
+        const dayTitle = document.querySelector('.day-title');
+        if (!dayTitle) return;
+        const dayNav = document.querySelector('.day-navigation');
+        const sectionTabs = document.querySelector('.section-tabs');
+        const offset = (dayNav?.getBoundingClientRect().height || 0)
+          + (sectionTabs?.getBoundingClientRect().height || 0)
+          + 12;
+        const targetTop = dayTitle.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+      });
     }, 50);
   };
 

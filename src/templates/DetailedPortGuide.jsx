@@ -26,15 +26,18 @@ const PORT_SECTIONS = [
 export function DetailedPortGuide({ slug, portName, portCountry, detailedContent, port }) {
   const [activeSection, setActiveSection] = useState('overview');
   
-  // Handle tab change - set section and scroll tabs into view
+  // Handle tab change - set section and scroll content to top
   const handleTabChange = useCallback((sectionKey) => {
     setActiveSection(sectionKey);
-    // Scroll to position tabs bar just below header
     setTimeout(() => {
-      const tabs = document.querySelector('.port-section-tabs');
-      if (tabs) {
-        tabs.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      requestAnimationFrame(() => {
+        const content = document.querySelector('.port-section-content');
+        const tabs = document.querySelector('.port-section-tabs');
+        if (!content) return;
+        const tabsHeight = tabs ? tabs.getBoundingClientRect().height : 0;
+        const targetTop = content.getBoundingClientRect().top + window.scrollY - tabsHeight - 12;
+        window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
+      });
     }, 50);
   }, []);
   

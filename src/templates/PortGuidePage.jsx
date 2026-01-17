@@ -309,7 +309,7 @@ function PortGuidePage() {
                         
                         <div className="attraction-footer">
                           <a 
-                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.title + ', ' + port.name)}`}
+                            href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(item.title + ', ' + port.name)}&travelmode=walking`}
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="google-maps-link"
@@ -382,7 +382,7 @@ function PortGuidePage() {
                   )}
                   
                   <a 
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(port.nearestBeach.name + ', ' + port.name)}`}
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(port.nearestBeach.name + ', ' + port.name)}&travelmode=walking`}
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="google-maps-link google-maps-link-large"
@@ -405,7 +405,7 @@ function PortGuidePage() {
                     <h3>{place.name}</h3>
                     <p>{place.description}</p>
                     <a 
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name + ', ' + port.name)}`}
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(place.name + ', ' + port.name)}&travelmode=walking`}
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="google-maps-link"

@@ -161,7 +161,7 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
               location: 'Old town, near cathedral',
               address: 'Rúa do Vilar, 33, 15705 Santiago de Compostela',
               phone: '976 47 73 47',
-              mapsLink: 'https://www.google.com/maps/search/?api=1&query=Ale+Hop+Rua+do+Vilar+33+Santiago+Compostela',
+              mapsLink: 'https://www.google.com/maps/dir/?api=1&destination=Ale+Hop+Rua+do+Vilar+33+Santiago+Compostela&travelmode=walking',
               image: null
             }
           }

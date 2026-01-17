@@ -249,10 +249,6 @@ function AppLayout() {
   
   return (
     <div className="app">
-        {/* Skip to main content - Accessibility */}
-        <a href="#main-content" className="skip-link">
-          Skip to main content
-        </a>
         {!isMaintenanceHome && !pathname.startsWith('/cruise/') && <Header />}
         {/* Using div instead of main to avoid nested <main> elements - each page has its own <main> */}
         <div id="main-content" className="main-wrapper">
