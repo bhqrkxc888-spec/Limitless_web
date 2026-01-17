@@ -507,7 +507,7 @@ function GoFurtherSection({ goFurther, attractionImages, portName }) {
     <div className="section-go-further">
       <div className="section-intro">
         <h2>Go Further</h2>
-        <p>Beyond walking distance - may need transport, longer walk, or organised tour</p>
+        <p>Longer walks - may require transport or organised tour</p>
       </div>
 
       <hr className="section-divider" />

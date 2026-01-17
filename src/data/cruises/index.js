@@ -50,13 +50,13 @@ export function cruiseExists(cruiseId) {
 export function getSectionsForDayType(dayType) {
   switch (dayType) {
     case 'port':
-      return ['overview', 'weather', 'stayLocal', 'goFurther', 'withKids', 'send', 'foodAndDrink', 'ship'];
+      return ['overview', 'weather', 'stayLocal', 'goFurther', 'withKids', 'send', 'medical', 'foodAndDrink'];
     case 'sea':
-      return ['overview', 'onTheShip', 'quietSpots', 'send', 'ship'];
+      return ['overview', 'onTheShip', 'quietSpots', 'send'];
     case 'embarkation':
-      return ['whatToExpect', 'weather', 'gettingThere', 'tips', 'send', 'ship'];
+      return ['whatToExpect', 'weather', 'gettingThere', 'tips', 'send'];
     case 'disembarkation':
-      return ['whatToExpect', 'tips', 'send', 'ship'];
+      return ['whatToExpect', 'tips', 'send'];
     default:
       return [];
   }
@@ -73,13 +73,13 @@ export function getSectionLabel(sectionKey) {
     goFurther: 'Go Further',
     withKids: 'With Kids',
     send: 'SEND & Accessibility',
+    medical: 'Medical',
     foodAndDrink: 'Food & Drink',
     onTheShip: 'On The Ship',
     quietSpots: 'Quiet Spots',
     whatToExpect: 'What to Expect',
     gettingThere: 'Getting There',
-    tips: 'Tips',
-    ship: 'Ship'
+    tips: 'Tips'
   };
   return labels[sectionKey] || sectionKey;
 }
