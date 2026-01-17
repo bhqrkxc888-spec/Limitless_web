@@ -15,7 +15,7 @@
   gap: 0.5rem;
   color: var(--admin-text-muted);
   text-decoration: none;
-  font-size: 0.875rem;
+  font-size: 1rem;
   margin-bottom: 1rem;
   transition: color 0.2s;
 }
@@ -89,7 +89,7 @@
 
 .image-card-title h3 {
   margin: 0;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 600;
   color: var(--admin-text);
 }
@@ -103,12 +103,12 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.625rem 1rem;
+  padding: 0.5rem 0.875rem;
   background: var(--admin-bg-tertiary, #2d3139);
   border: 1px solid var(--admin-border, #3c4149);
   border-radius: 6px;
   color: var(--admin-text, #e8eaed);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
@@ -135,7 +135,7 @@
 
 .image-card-description p {
   margin: 0;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--admin-text);
   line-height: 1.5;
 }
