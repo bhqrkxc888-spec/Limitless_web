@@ -425,7 +425,7 @@ function StayLocalSection({ stayLocal, beachImage }) {
 
       {stayLocal.tip && (
         <div className="tip-block">
-          <strong>Our Tip</strong>
+          <strong>💡 Our Tip</strong>
           <p>{stayLocal.tip}</p>
         </div>
       )}
@@ -561,7 +561,7 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
       {/* Familiar Brands - McDonald's and Ale Hop from familyFriendly (ports.js) */}
       {familyFriendly && (familyFriendly.mcdonalds || familyFriendly.aleHop) && (
         <>
-          <SubSection title="Familiar Brands">
+          <SubSection title="🍔 Familiar Brands">
             <div className="tip-highlight">
               <p><strong>Easy wins:</strong> Familiar brands close to port for snacks, toilets, and quick stops.</p>
             </div>
@@ -621,7 +621,7 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
       {/* Local Park from familyFriendly */}
       {familyFriendly?.localPark && (
         <>
-          <SubSection title="Local Park">
+          <SubSection title="🌳 Local Park">
             <div className={`park-info ${parkImage ? 'with-image' : ''}`}>
               {parkImage && (
                 <div className="info-image">
@@ -749,7 +749,7 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
 
       {withKids?.easyDay && (
         <div className="tip-block">
-          <strong>Easy Day Suggestion</strong>
+          <strong>💡 Easy Day Suggestion</strong>
           <p>{withKids.easyDay}</p>
         </div>
       )}
@@ -1017,7 +1017,7 @@ function FoodDrinkSection({ foodAndDrink }) {
       {foodAndDrink.dietaryNotes && (
         <>
           <div className="tip-block">
-            <strong>Dietary Notes</strong>
+            <strong>💡 Dietary Notes</strong>
             <p>{foodAndDrink.dietaryNotes}</p>
           </div>
           <hr className="section-divider" />
