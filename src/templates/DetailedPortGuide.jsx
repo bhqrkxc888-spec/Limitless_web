@@ -326,7 +326,7 @@ function MarineConditionsCard({ marineData, loading }) {
       )}
       
       <p className="marine-note">
-        Data refreshed daily via Stormglass.io
+        Stormglass
       </p>
     </div>
   );
@@ -406,16 +406,14 @@ function OverviewSection({ overview, portName }) {
       {overview.importantNotes && overview.importantNotes.length > 0 && (
         <>
           <hr className="section-divider" />
-          <SubSection title="Good to Know">
-            <div className="important-notes-box">
-              <AlertCircle size={20} className="notes-icon" />
-              <ul className="important-notes-list">
-                {overview.importantNotes.map((note, idx) => (
-                  <li key={idx}>{note}</li>
-                ))}
-              </ul>
-            </div>
-          </SubSection>
+          <div className="important-notes-box">
+            <h4>⚠️ Good to Know</h4>
+            <ul className="important-notes-list">
+              {overview.importantNotes.map((note, idx) => (
+                <li key={idx}>{note}</li>
+              ))}
+            </ul>
+          </div>
         </>
       )}
     </div>

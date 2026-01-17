@@ -610,19 +610,21 @@ function PortGuidePage() {
       {/* Rating & Feedback Section - Single location per port guide */}
       <section className="port-feedback-section">
         <div className="container">
-          <div className="feedback-container">
-            {/* Star Rating Form */}
-            <div className="feedback-rating">
-              <SectionHeader
-                title="Rate This Port Guide"
-                subtitle="Help other cruise passengers plan their visit"
-              />
-              <PortGuideFeedback portSlug={port.slug} portName={port.name} />
-            </div>
+          <div className="feedback-card">
+            <div className="feedback-container">
+              {/* Star Rating Form */}
+              <div className="feedback-rating">
+                <SectionHeader
+                  title="Rate This Port Guide"
+                  subtitle="Help other cruise passengers plan their visit"
+                />
+                <PortGuideFeedback portSlug={port.slug} portName={port.name} />
+              </div>
 
-            {/* Display Reviews */}
-            <div className="feedback-reviews">
-              <PortGuideReviews portSlug={port.slug} />
+              {/* Display Reviews */}
+              <div className="feedback-reviews">
+                <PortGuideReviews portSlug={port.slug} />
+              </div>
             </div>
           </div>
         </div>

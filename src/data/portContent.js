@@ -285,20 +285,24 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
         'Noise levels: Generally calm city. Not overwhelming like Barcelona or Madrid.'
       ]
     },
-    // TODO: Research and populate with verified local information
     medical: {
       pharmacy: {
-        name: '',
-        location: '',
-        notes: ''
+        name: 'Farmacia Obelisco',
+        location: 'Calle Real 92 - 8-10 minute walk (600m from cruise terminal)',
+        notes: 'Historic pharmacy since 1884, on main shopping street. Mon-Sat typically 09:30-21:00 (check for siesta break). Full dispensing pharmacy with blood tests, BP monitoring. Alternative: Farmacia Villar next door at Calle Real 80-82.'
       },
       hospital: {
-        name: '',
-        location: '',
-        hasEmergency: false,
-        notes: ''
+        name: 'Complejo Hospitalario Universitario de A Coruña (CHUAC)',
+        location: '6 km from cruise port - Taxi ~10-15 mins or Bus lines 20, 22',
+        hasEmergency: true,
+        notes: 'Main referral hospital for region. 24/7 Urgencias. EHIC/GHIC accepted. Phone: +34 981 17 80 00'
       },
-      tips: []
+      tips: [
+        'Pharmacies (Farmacia) display green cross and can dispense prescription/OTC medications',
+        'Parafarmacia = cosmetics/supplements only, NOT medications',
+        'Bring EHIC (EU) / GHIC (UK) card for free emergency treatment at public hospitals',
+        'Emergency number: 112 (works throughout EU, English service available)'
+      ]
     },
     foodAndDrink: {
       localDishToTry: {
@@ -612,20 +616,24 @@ March means you're here for "winter sun" - expect pleasant temperatures perfect 
         'Noise levels: Generally relaxed city. Not overwhelming compared to larger Spanish cities.'
       ]
     },
-    // TODO: Research and populate with verified local information
     medical: {
       pharmacy: {
-        name: '',
-        location: '',
-        notes: ''
+        name: 'Farmacia Santa Cruz',
+        location: 'Calle Viera y Clavijo 2 - 10-15 mins from Plaza de España (free shuttle from port to Plaza)',
+        notes: 'Multiple Farmacia Santa Cruz locations around Plaza de España area. Look for green cross. Pharmacists often multilingual. Standard hours, some 24-hour pharmacies available in city.'
       },
       hospital: {
-        name: '',
-        location: '',
-        hasEmergency: false,
-        notes: ''
+        name: 'Hospital Universitario Nuestra Señora de Candelaria',
+        location: '4 km from cruise port - Taxi ~10 mins or Metro Line 1 to "Hospital La Candelaria" stop',
+        hasEmergency: true,
+        notes: 'Largest hospital complex in Canary Islands (840 beds). Full 24/7 Urgencias. EHIC/GHIC accepted. Phone: +34 922 602 000'
       },
-      tips: []
+      tips: [
+        'Pharmacies (Farmacia) display green cross and can dispense prescription/OTC medications',
+        'Farmacia de Guardia = duty pharmacy (rotating 24hr service) - check pharmacy door for tonight\'s address',
+        'Bring EHIC (EU) / GHIC (UK) card for free emergency treatment at public hospitals',
+        'Emergency number: 112 (works throughout EU, English service available)'
+      ]
     },
     foodAndDrink: {
       localDishToTry: {
@@ -911,20 +919,24 @@ Las Canteras beach is the star here - a gorgeous golden sand urban beach with a 
         'Noise levels: Generally relaxed. Beach/promenade has happy buzz but not overwhelming.'
       ]
     },
-    // TODO: Research and populate with verified local information
     medical: {
       pharmacy: {
-        name: '',
-        location: '',
-        notes: ''
+        name: 'Farmacia Catedral (or pharmacies near port)',
+        location: 'Farmacia Catedral: 6 km in Vegueta old town - taxi recommended. Multiple Farmacias in Santa Catalina/Las Canteras area walkable from cruise terminal',
+        notes: 'Farmacia Catedral (Calle Obispo Codina 3): OPEN 365 DAYS, 08:00-24:00 - one of few pharmacies open every day until midnight. Two pharmacies side-by-side ensuring coverage. Website: farmacatedral.com Phone: +34 928 31 01 54'
       },
       hospital: {
-        name: '',
-        location: '',
-        hasEmergency: false,
-        notes: ''
+        name: 'Hospital Universitario Insular de Gran Canaria',
+        location: '3 km from cruise port - Taxi ~8 mins',
+        hasEmergency: true,
+        notes: 'Main public hospital. 24/7 Urgencias. EHIC/GHIC accepted. Adult emergencies: +34 928 444 321, Paediatrics: +34 928 444 671'
       },
-      tips: []
+      tips: [
+        'Pharmacies (Farmacia) display green cross and can dispense prescription/OTC medications',
+        'Farmacia Catedral near cathedral is open 365 days until midnight',
+        'Bring EHIC (EU) / GHIC (UK) card for free emergency treatment at public hospitals',
+        'Emergency number: 112 (works throughout EU, English service available)'
+      ]
     },
     foodAndDrink: {
       localDishToTry: {
@@ -1217,20 +1229,24 @@ March weather is perfect for exploring - warm enough for beaches but not the int
         'Noise levels: Generally calm city. Not overwhelming. Timanfaya can be windy (noise from wind).'
       ]
     },
-    // TODO: Research and populate with verified local information
     medical: {
       pharmacy: {
-        name: '',
-        location: '',
-        notes: ''
+        name: 'Multiple pharmacies on Calle Real and Calle León y Castillo',
+        location: '10-15 minutes walk to city centre pharmacies. Calle Pérez Galdós 87 is one confirmed location',
+        notes: 'Mon-Fri 09:00-14:00 & 17:00-20:00. Rotating 24hr duty pharmacy - check www.farmaten.com for on-duty pharmacy. Centro Comercial Arrecife also has pharmacy. Phone: +34 928 810 560'
       },
       hospital: {
-        name: '',
-        location: '',
-        hasEmergency: false,
-        notes: ''
+        name: 'Hospital Doctor José Molina Orosa',
+        location: '2 km from cruise port - Taxi ~5 mins',
+        hasEmergency: true,
+        notes: 'Main public hospital for Lanzarote. 24/7 Urgencias. Interpretation services available. EHIC/GHIC accepted. Phone: +34 928 595 000'
       },
-      tips: []
+      tips: [
+        'Pharmacies (Farmacia) display green cross and can dispense prescription/OTC medications',
+        'Check www.farmaten.com or pharmacy door for tonight\'s duty pharmacy address',
+        'Bring EHIC (EU) / GHIC (UK) card for free emergency treatment at public hospitals',
+        'Emergency number: 112 (works throughout EU, English service available)'
+      ]
     },
     foodAndDrink: {
       localDishToTry: {
@@ -1522,20 +1538,24 @@ Cádiz is famous for its connection to sherry wine (it's part of the "Sherry Tri
         'Noise levels: Generally calm city. Not overwhelming like larger Spanish cities. Atlantic breeze can be noisy on seafront.'
       ]
     },
-    // TODO: Research and populate with verified local information
     medical: {
       pharmacy: {
-        name: '',
-        location: '',
-        notes: ''
+        name: 'Farmacia on Plaza San Juan de Dios',
+        location: '2-3 minutes walk! Immediately across Avenida del Puerto from cruise terminal',
+        notes: 'Plaza San Juan de Dios 2 Bajo. Multiple pharmacies around Plaza San Juan de Dios - this is the main square directly opposite cruise terminal. Standard Spanish hours with siesta. Alternative: Farmacia Colorado at Calle Cristóbal Colón y Cobos (central old town).'
       },
       hospital: {
-        name: '',
-        location: '',
-        hasEmergency: false,
-        notes: ''
+        name: 'Hospital Universitario Puerta del Mar',
+        location: '2.5 km from cruise port - Taxi ~8 mins (walkable but long)',
+        hasEmergency: true,
+        notes: 'Main public hospital for Cádiz province. 24/7 Urgencias. EHIC/GHIC accepted. Phone: +34 956 002 100'
       },
-      tips: []
+      tips: [
+        'Pharmacies (Farmacia) display green cross and can dispense prescription/OTC medications',
+        'Pharmacy on Plaza San Juan de Dios is incredibly convenient - just 2-3 minutes from ship',
+        'Bring EHIC (EU) / GHIC (UK) card for free emergency treatment at public hospitals',
+        'Emergency number: 112 (works throughout EU, English service available)'
+      ]
     },
     foodAndDrink: {
       localDishToTry: {
@@ -1839,20 +1859,24 @@ March weather is pleasant - mild temperatures perfect for walking, though it can
         'Noise levels: Generally calm city, but trams can be noisy, and fado shows (evening) are intentionally atmospheric (music).'
       ]
     },
-    // TODO: Research and populate with verified local information
     medical: {
       pharmacy: {
-        name: '',
-        location: '',
-        notes: ''
+        name: 'Farmácia Santa Apolónia',
+        location: 'Rua Caminhos de Ferro 102 - 3 MINUTES walk from Santa Apolónia cruise terminal',
+        notes: 'Excellent location for cruise passengers. Near train/metro station opposite cruise terminal. Standard Portuguese hours. Multiple pharmacies available throughout city.'
       },
       hospital: {
-        name: '',
-        location: '',
-        hasEmergency: false,
-        notes: ''
+        name: 'Hospital de São José',
+        location: '2 km from Santa Apolónia terminal - Taxi or Metro (Martim Moniz station)',
+        hasEmergency: true,
+        notes: 'Central Lisbon hospital. 24/7 Urgências. EHIC/GHIC accepted in Portugal. Phone: +34 218 841 000. Alternative: Hospital de Santa Maria (larger, ~6 km north)'
       },
-      tips: []
+      tips: [
+        'Pharmacies (Farmácia) display green cross and can dispense prescription/OTC medications',
+        'Farmácia Santa Apolónia is incredibly convenient - just 3 minutes from ship',
+        'Bring EHIC (EU) / GHIC (UK) card for free emergency treatment at public hospitals',
+        'Emergency number: 112 (works throughout EU, Portuguese operators speak English)'
+      ]
     },
     foodAndDrink: {
       localDishToTry: {

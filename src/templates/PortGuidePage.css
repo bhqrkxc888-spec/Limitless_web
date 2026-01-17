@@ -1188,10 +1188,18 @@
   padding: var(--space-4) 0 var(--space-8);
 }
 
-.feedback-container {
+.feedback-card {
+  background: white;
+  border: 1px solid var(--clr-border-light, #F2EFE9);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-8, 2rem);
   max-width: var(--layout-content-width, 1120px);
   margin: 0 auto;
-  padding: 0 var(--space-4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.feedback-container {
+  max-width: 100%;
 }
 
 .feedback-rating {

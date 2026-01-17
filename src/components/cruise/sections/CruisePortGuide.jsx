@@ -309,11 +309,20 @@ function StayLocalSection({ stayLocal, beachImage }) {
           <SubSection title="Quick Walk (Under 10 mins)">
             {stayLocal.quickWalk.map((item, idx) => (
               <div key={idx} className="walk-item">
-                <h4>{item.title}</h4>
+                <div className="walk-item-header">
+                  <h4>{item.title}</h4>
+                  {item.terrain && (
+                    <span className={`terrain-badge terrain-${item.terrain}`}>
+                      {item.terrain === 'easy' ? '🟢 Flat & Easy' : 
+                       item.terrain === 'moderate' ? '🟡 Some Hills' : 
+                       '🔴 Challenging'}
+                    </span>
+                  )}
+                </div>
                 <p>{item.content}</p>
                 {item.mapLink && (
                   <a href={item.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                    Open in Google Maps →
+                    View walking route →
                   </a>
                 )}
               </div>
@@ -328,11 +337,20 @@ function StayLocalSection({ stayLocal, beachImage }) {
           <SubSection title="Longer Walk (10-30 mins)">
             {stayLocal.longerWalk.map((item, idx) => (
               <div key={idx} className="walk-item">
-                <h4>{item.title}</h4>
+                <div className="walk-item-header">
+                  <h4>{item.title}</h4>
+                  {item.terrain && (
+                    <span className={`terrain-badge terrain-${item.terrain}`}>
+                      {item.terrain === 'easy' ? '🟢 Flat & Easy' : 
+                       item.terrain === 'moderate' ? '🟡 Some Hills' : 
+                       '🔴 Challenging'}
+                    </span>
+                  )}
+                </div>
                 <p>{item.content}</p>
                 {item.mapLink && (
                   <a href={item.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                    Open in Google Maps →
+                    View walking route →
                   </a>
                 )}
               </div>
@@ -347,8 +365,22 @@ function StayLocalSection({ stayLocal, beachImage }) {
           <SubSection title="Parks & Green Spaces">
             {stayLocal.parks.map((park, idx) => (
               <div key={idx} className="walk-item">
-                <h4>{park.title}</h4>
+                <div className="walk-item-header">
+                  <h4>{park.title}</h4>
+                  {park.terrain && (
+                    <span className={`terrain-badge terrain-${park.terrain}`}>
+                      {park.terrain === 'easy' ? '🟢 Flat & Easy' : 
+                       park.terrain === 'moderate' ? '🟡 Some Hills' : 
+                       '🔴 Challenging'}
+                    </span>
+                  )}
+                </div>
                 <p>{park.content}</p>
+                {park.mapLink && (
+                  <a href={park.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
+                    View walking route →
+                  </a>
+                )}
               </div>
             ))}
           </SubSection>
