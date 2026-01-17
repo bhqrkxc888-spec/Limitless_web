@@ -22,8 +22,12 @@ function useMarineWeather(coordinates, portId) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Extract lat/lng to use as stable dependencies
+  const lat = coordinates?.lat;
+  const lng = coordinates?.lng;
+
   useEffect(() => {
-    if (!coordinates || !coordinates.lat || !coordinates.lng) {
+    if (!lat || !lng) {
       return;
     }
 
@@ -33,7 +37,7 @@ function useMarineWeather(coordinates, portId) {
 
       try {
         const response = await fetch(
-          `/api/marine-weather?lat=${coordinates.lat}&lng=${coordinates.lng}&portId=${portId || ''}`
+          `/api/marine-weather?lat=${lat}&lng=${lng}&portId=${portId || ''}`
         );
         
         if (!response.ok) {
@@ -51,7 +55,7 @@ function useMarineWeather(coordinates, portId) {
     };
 
     fetchMarineWeather();
-  }, [coordinates?.lat, coordinates?.lng, portId]);
+  }, [lat, lng, portId]);
 
   return { marineData, loading, error };
 }
@@ -95,16 +99,18 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
   
   const attractionImages = [attraction1, attraction2, attraction3, attraction4, attraction5, attraction6];
 
-  if (!detailedContent) return null;
-
-  const { overview, stayLocal, goFurther, withKids, send, foodAndDrink } = detailedContent;
+  // Extract data from detailedContent (may be null)
+  const { overview, stayLocal, goFurther, withKids, send, foodAndDrink } = detailedContent || {};
   
   // Get familyFriendly data from port (ports.js)
   const familyFriendly = port?.familyFriendly;
   
   // Fetch marine weather data if beach has coordinates
+  // Hook must be called unconditionally (before any early returns)
   const beachCoordinates = stayLocal?.beach?.coordinates;
   const { marineData, loading: marineLoading } = useMarineWeather(beachCoordinates, slug);
+
+  if (!detailedContent) return null;
 
   // Check which sections have content - match field names from portContent.js
   const hasContent = {
