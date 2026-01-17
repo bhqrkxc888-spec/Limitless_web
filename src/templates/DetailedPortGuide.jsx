@@ -6,7 +6,7 @@
  * Matches the same layout and style as G606 cruise companion port days
  */
 
-import { useState, useCallback } from 'react';
+import { useState, useRef } from 'react';
 import OptimizedImage from '../components/OptimizedImage';
 import { usePortGuideImage } from '../hooks/useImageUrl';
 import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye } from 'lucide-react';
@@ -25,26 +25,15 @@ const PORT_SECTIONS = [
 
 export function DetailedPortGuide({ slug, portName, portCountry, detailedContent, port }) {
   const [activeSection, setActiveSection] = useState('overview');
+  const scrollAnchorRef = useRef(null);
   
-  // Simple scroll function - scrolls to tabs bar position
-  const scrollToContent = useCallback(() => {
-    requestAnimationFrame(() => {
-      const tabs = document.querySelector('.port-section-tabs');
-      const header = document.querySelector('.header');
-      if (tabs) {
-        const headerHeight = header?.offsetHeight || 120;
-        window.scrollTo({ 
-          top: tabs.offsetTop - headerHeight, 
-          behavior: 'smooth' 
-        });
-      }
-    });
-  }, []);
-  
-  // Tab click - update state and scroll
+  // Tab click - update state and scroll to anchor
   const handleTabChange = (sectionKey) => {
     setActiveSection(sectionKey);
-    scrollToContent();
+    // Scroll to anchor after React updates
+    requestAnimationFrame(() => {
+      scrollAnchorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   };
   
   // Load attraction images
@@ -139,6 +128,9 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
         </div>
       </nav>
 
+      {/* Scroll anchor - this is the scroll target, CSS handles the offset */}
+      <div ref={scrollAnchorRef} className="scroll-anchor" aria-hidden="true" />
+      
       {/* Section Content */}
       <div className="port-section-content">
         {renderSectionContent()}

@@ -10,6 +10,34 @@
 }
 
 /* ========================================
+   SCROLL ANCHOR - Invisible scroll target
+   Used to scroll to content top when tabs/days change
+   scroll-margin-top offsets for sticky day nav + section tabs
+   ======================================== */
+
+.cruise-companion-page .scroll-anchor {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  /* Mobile: day nav ~85px + section tabs ~52px */
+  scroll-margin-top: 137px;
+}
+
+@media (min-width: 768px) {
+  .cruise-companion-page .scroll-anchor {
+    /* Tablet: day nav ~105px + section tabs ~56px */
+    scroll-margin-top: 161px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cruise-companion-page .scroll-anchor {
+    /* Desktop: day nav ~115px + section tabs ~60px */
+    scroll-margin-top: 175px;
+  }
+}
+
+/* ========================================
    LOADING STATE
    ======================================== */
 

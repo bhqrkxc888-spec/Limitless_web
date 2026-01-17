@@ -10,6 +10,34 @@
 }
 
 /* ========================================
+   SCROLL ANCHOR - Invisible scroll target
+   Used to scroll to content top when tabs change
+   scroll-margin-top offsets for sticky header + tabs
+   ======================================== */
+
+.detailed-port-guide .scroll-anchor {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  /* Mobile: header ~84px + tabs ~56px */
+  scroll-margin-top: 140px;
+}
+
+@media (min-width: 768px) {
+  .detailed-port-guide .scroll-anchor {
+    /* Tablet: header ~120px + tabs ~56px */
+    scroll-margin-top: 176px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .detailed-port-guide .scroll-anchor {
+    /* Desktop: header ~120px + tabs ~60px */
+    scroll-margin-top: 180px;
+  }
+}
+
+/* ========================================
    SECTION TABS - EXACT MATCH to G606 SectionTabs
    Full width, flush against hero, light background
    ======================================== */

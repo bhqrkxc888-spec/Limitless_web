@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { hasConsent } from '../components/cruise/CruiseConsentGate';
@@ -76,6 +76,7 @@ function CruiseCompanionPage() {
   const [isChecking, setIsChecking] = useState(true);
   const [selectedDayIndex, setSelectedDayIndex] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
+  const scrollAnchorRef = useRef(null);
 
   // Extract data from cruise (with fallbacks)
   const itinerary = cruise?.itinerary || [];
@@ -99,18 +100,12 @@ function CruiseCompanionPage() {
     setIsChecking(false);
   }, [itinerary]);
   
-  // Simple scroll function - scrolls to day navigation bar
-  const scrollToContent = useCallback(() => {
+  // Scroll to anchor - called only on user interaction
+  const scrollToAnchor = () => {
     requestAnimationFrame(() => {
-      const dayNav = document.querySelector('.day-navigation');
-      if (dayNav) {
-        window.scrollTo({ 
-          top: dayNav.offsetTop, 
-          behavior: 'smooth' 
-        });
-      }
+      scrollAnchorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
-  }, []);
+  };
 
   // Set page to noindex (hidden page)
   useEffect(() => {
@@ -134,7 +129,7 @@ function CruiseCompanionPage() {
     }
   };
 
-  // Handle day selection - update state and scroll to content
+  // Handle day selection - update state and scroll to anchor
   const handleDaySelect = (dayIndex) => {
     setSelectedDayIndex(dayIndex);
     const dayData = itinerary[dayIndex];
@@ -142,13 +137,13 @@ function CruiseCompanionPage() {
       const sections = getSectionsForDayType(dayData.dayType);
       setSelectedSection(sections[0]);
     }
-    scrollToContent();
+    scrollToAnchor();
   };
 
-  // Handle section selection - update state and scroll to content
+  // Handle section selection - update state and scroll to anchor
   const handleSectionSelect = (sectionKey) => {
     setSelectedSection(sectionKey);
-    scrollToContent();
+    scrollToAnchor();
   };
 
   // Cruise not found
@@ -375,6 +370,9 @@ function CruiseCompanionPage() {
         selectedSection={currentSection}
         onSectionSelect={handleSectionSelect}
       />
+
+      {/* Scroll anchor - this is the scroll target, CSS handles the offset */}
+      <div ref={scrollAnchorRef} className="scroll-anchor" aria-hidden="true" />
 
       {/* Main Content */}
       <div className="companion-content">
