@@ -110,10 +110,26 @@ function CruiseCompanionPage() {
     const dayData = g606Itinerary[dayIndex];
     const sections = getSectionsForDayType(dayData.dayType);
     setSelectedSection(sections[0]); // Reset to first section when day changes
+    
+    // Scroll to content area
+    setTimeout(() => {
+      const contentArea = document.querySelector('.day-content');
+      if (contentArea) {
+        contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
   };
 
   const handleSectionSelect = (sectionKey) => {
     setSelectedSection(sectionKey);
+    
+    // Scroll to content area
+    setTimeout(() => {
+      const contentArea = document.querySelector('.day-content');
+      if (contentArea) {
+        contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
   };
 
   if (isChecking) {
