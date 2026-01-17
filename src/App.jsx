@@ -134,6 +134,7 @@ const AdminCategoryImages = lazy(() => lazyWithRetry(() => import('./pages/admin
 const AdminBucketListImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminBucketListImages')))
 const AdminPortGuideImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPortGuideImages')))
 const AdminShipImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminShipImages')))
+const AdminCruiseFinder = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminCruiseFinder')))
 
 // Legal Pages
 const WebsiteTerms = lazy(() => lazyWithRetry(() => import('./pages/WebsiteTerms')))
@@ -227,6 +228,9 @@ function AppLayout() {
           {/* Admin Website Section */}
           <Route path="/admin/website/destinations" element={<AdminProtectedRoute><AdminWebsiteDestinations /></AdminProtectedRoute>} />
           <Route path="/admin/offers-debug" element={<AdminProtectedRoute><AdminOffersDebug /></AdminProtectedRoute>} />
+          
+          {/* Admin Tools */}
+          <Route path="/admin/cruise-finder" element={<AdminProtectedRoute><AdminCruiseFinder /></AdminProtectedRoute>} />
           </Routes>
         </Suspense>
       </ErrorBoundary>
