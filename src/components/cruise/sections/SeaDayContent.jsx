@@ -48,12 +48,6 @@ function OverviewSection({ dayData, nextPort }) {
 
   return (
     <div className="section-overview">
-      {/* Sea Day Hero Image Placeholder */}
-      <div className="image-placeholder">
-        
-        <span className="image-placeholder-text">Sea day image coming soon</span>
-      </div>
-
       <div className="section-intro">
         <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--clr-text)' }}>
           Sea Day {dayData.dayNumberEnd ? `(${dayData.dayNumber}-${dayData.dayNumberEnd})` : ''}
