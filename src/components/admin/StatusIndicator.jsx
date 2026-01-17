@@ -54,7 +54,7 @@ function StatusIndicator({ status, warnings = [], showDetails = false, size = 'm
 
   const config = getStatusConfig();
   const Icon = config.icon;
-  const iconSize = size === 'small' ? 16 : size === 'large' ? 32 : 24;
+  const iconSize = size === 'small' ? 13 : size === 'large' ? 32 : 24;
 
   return (
     <div className={`status-indicator status-${size} ${config.className}`}>

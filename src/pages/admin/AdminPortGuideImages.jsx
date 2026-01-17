@@ -452,7 +452,7 @@ function AdminPortGuideImages() {
 
           .entity-detail-title {
             margin: 0 0 0.5rem 0;
-            font-size: 1.5rem;
+            font-size: 1.125rem;
             font-weight: 600;
             color: var(--admin-text);
           }
@@ -475,43 +475,44 @@ function AdminPortGuideImages() {
           .placeholder-info {
             background: rgba(251, 191, 36, 0.05);
             border: 1px dashed rgba(251, 191, 36, 0.3);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1rem;
+            border-radius: 6px;
+            padding: 0.625rem;
+            margin-bottom: 0.75rem;
           }
 
           .placeholder-preview {
             position: relative;
-            margin-bottom: 0.75rem;
-            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
             overflow: hidden;
+            max-width: 200px;
           }
 
           .placeholder-preview img {
             width: 100%;
-            height: 150px;
+            height: 100px;
             object-fit: cover;
             display: block;
           }
 
           .placeholder-badge {
             position: absolute;
-            bottom: 8px;
-            right: 8px;
+            bottom: 6px;
+            right: 6px;
             background: rgba(0, 0, 0, 0.75);
             color: white;
-            font-size: 10px;
-            padding: 4px 8px;
-            border-radius: 4px;
+            font-size: 0.625rem;
+            padding: 0.1875rem 0.375rem;
+            border-radius: 3px;
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
           }
 
           .placeholder-status {
-            font-size: 13px;
+            font-size: 0.75rem;
             color: var(--admin-text-muted);
-            text-align: center;
+            text-align: left;
             margin: 0;
           }
         `}</style>

@@ -23,8 +23,12 @@
 }
 
 /* Size variants */
+.status-small .status-icon-wrapper {
+  gap: 4px;
+}
+
 .status-small .status-label {
-  font-size: 12px;
+  font-size: 0.6875rem;
 }
 
 .status-large .status-label {
