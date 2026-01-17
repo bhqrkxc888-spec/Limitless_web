@@ -51,6 +51,29 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
       ]
     },
     stayLocal: {
+      convenienceStores: [
+        {
+          name: 'Terminal Souvenir Shop',
+          location: 'Inside cruise terminal building',
+          type: 'small shop',
+          what: 'Souvenirs, basic snacks, drinks, newspapers',
+          notes: 'Open when ships are in port. Convenient first stop before heading out.'
+        },
+        {
+          name: 'Los Cantones Village',
+          location: 'Directly opposite cruise terminal - you can\'t miss it',
+          type: 'shopping centre',
+          what: 'Clothing, gifts, snacks, cafés with free WiFi',
+          notes: 'Open Mon-Sat 10am-9/10pm. Free WiFi throughout. Some shops closed Sundays. Good for grabbing essentials and using facilities.'
+        },
+        {
+          name: 'El Corte Inglés (with supermarket on bottom floor)',
+          location: 'Near cruise terminal, accessible via free shuttle bus or 15 min walk towards city centre',
+          type: 'department store with supermarket',
+          what: 'Full supermarket on basement floor - groceries, drinks, snacks, toiletries, sunscreen, plus 7 floors of shopping',
+          notes: 'Open Mon-Sat 10am-9/10pm. Modern, air-conditioned. Note: Mercadona supermarkets are on the outskirts (Avda. de Oza area), not in walking distance of port.'
+        }
+      ],
       quickWalk: [
         {
           title: 'From the ship, you\'re immediately on Avenida de la Marina',
@@ -408,6 +431,36 @@ March means you're here for "winter sun" - expect pleasant temperatures perfect 
       ]
     },
     stayLocal: {
+      convenienceStores: [
+        {
+          name: 'Cruise Terminal Shops',
+          location: 'Inside/near cruise terminal',
+          type: 'small shops',
+          what: 'Souvenirs, basic items',
+          notes: 'Limited facilities at terminal itself. Free shuttle provided by Port Authority to Plaza de España (city centre).'
+        },
+        {
+          name: 'Shops around Plaza de España',
+          location: '5-10 min walk from port (or take free shuttle)',
+          type: 'small shops',
+          what: 'Tobacco, perfume, electronics (all tax-free), souvenirs, snacks',
+          notes: 'Duty-free status means tobacco and alcohol much cheaper than mainland Spain. Many shops close 1-4pm for siesta, but main stores in centre stay open throughout.'
+        },
+        {
+          name: 'Mercado Nuestra Señora de África',
+          location: 'About 15 min walk from cruise terminal, in city centre',
+          type: 'traditional covered market',
+          what: 'Fresh produce, meat, seafood, flowers, fruit, vegetables, dairy, local products',
+          notes: 'Open every day. Great for local food and souvenirs. Bustling atmosphere - a real taste of local life.'
+        },
+        {
+          name: 'Carrefour (inside Centro Comercial Meridiano)',
+          location: 'Av. Tres de Mayo - about 15-20 min walk from port or short taxi/bus ride',
+          type: 'supermarket',
+          what: 'Full supermarket - groceries, drinks, snacks, toiletries, sunscreen, alcohol (cheap due to Canary Islands tax-free status)',
+          notes: 'Shopping centre open Mon-Sat 10am-9/10pm. Also has Primark, Zara, H&M, food court. El Corte Inglés department store is nearby.'
+        }
+      ],
       quickWalk: [
         {
           title: 'Plaza de España (5-10 mins from shuttle drop-off)',
@@ -735,6 +788,29 @@ Las Canteras beach is the star here - a gorgeous golden sand urban beach with a 
       ]
     },
     stayLocal: {
+      convenienceStores: [
+        {
+          name: 'Centro Comercial El Muelle',
+          location: '100 metres from cruise terminal - first building you\'ll see when you exit port',
+          type: 'shopping mall',
+          what: 'Clothing stores, perfumeries, souvenirs, cafés, free WiFi',
+          notes: 'Several floors with outdoor café area facing the ships. Perfect first stop off the ship.'
+        },
+        {
+          name: 'Shops around Santa Catalina Park',
+          location: '10 min walk from cruise terminal, past El Muelle shopping centre',
+          type: 'pedestrian shopping area',
+          what: 'Shops, restaurants, souvenir stores, cafés, tobacco/liquor (duty-free prices)',
+          notes: 'Great for browsing. Electronics and camera shops along Calle Luis Morote.'
+        },
+        {
+          name: 'Supermarket in El Muelle Shopping Centre',
+          location: 'Inside Centro Comercial El Muelle - 100m from cruise terminal',
+          type: 'supermarket',
+          what: 'Full range - groceries, drinks, snacks, toiletries, sunscreen',
+          notes: 'Very convenient location right by the port. Food court on top floor. Mercado Central (local market) is about 8 min walk for fresh local produce and authentic Canarian products.'
+        }
+      ],
       quickWalk: [
         {
           title: 'El Muelle Shopping Centre (2 mins)',
@@ -1013,6 +1089,29 @@ March weather is perfect for exploring - warm enough for beaches but not the int
       ]
     },
     stayLocal: {
+      convenienceStores: [
+        {
+          name: 'Shops along Calle León y Castillo',
+          location: '15-20 min walk from cruise terminal into Arrecife centre, or short shuttle/taxi',
+          type: 'high street shops',
+          what: 'Local crafts, fashion, gifts, souvenirs',
+          notes: 'Main shopping area in Arrecife. Be aware of siesta - shops often close noon-5pm on weekdays, and many closed Saturday afternoons.'
+        },
+        {
+          name: 'Open Mall Lanzarote',
+          location: 'About 700m (10 min walk) from port, on Calle León y Castillo',
+          type: 'large modern shopping centre',
+          what: 'Zara, Primark, JD Sports, JYSK, and many more stores',
+          notes: 'Lanzarote\'s biggest shopping centre. Open 10am-10pm every day (365 days). Opened 2022, very modern facilities.'
+        },
+        {
+          name: 'Hiperdino (inside Open Mall)',
+          location: 'Inside Open Mall Lanzarote - about 700m from cruise port',
+          type: 'supermarket',
+          what: 'Full supermarket - groceries, drinks, snacks, toiletries, sunscreen, alcohol (duty-free prices)',
+          notes: 'Part of the Open Mall complex. Also Eurospar in Arrecife if you prefer. Duty-free Canary Islands - alcohol and tobacco very cheap.'
+        }
+      ],
       quickWalk: [
         {
           title: 'Castillo de San Gabriel (10 mins from port)',
@@ -1339,6 +1438,29 @@ Cádiz is famous for its connection to sherry wine (it's part of the "Sherry Tri
       ]
     },
     stayLocal: {
+      convenienceStores: [
+        {
+          name: 'Cruise Terminal Shops',
+          location: 'Inside the cruise terminal',
+          type: 'small shops',
+          what: 'Duty-free items, delicatessen, souvenirs, local products',
+          notes: 'Free WiFi in terminal. Tourist information desk has city maps. Terminal has been recently renovated.'
+        },
+        {
+          name: 'Shops around Plaza de San Juan de Dios',
+          location: 'Immediately across from port - less than 5 min walk',
+          type: 'small shops and boutiques',
+          what: 'Shoes, clothing, toys, books, handicrafts, cosmetics, souvenirs',
+          notes: 'Main square with tourist office. All streets leading off the square have excellent shopping. Old Town is like an outdoor shopping centre.'
+        },
+        {
+          name: 'Carrefour',
+          location: 'Opposite Mercado Central, near the Cathedral - about 12 min walk from port',
+          type: 'supermarket',
+          what: 'Full supermarket - groceries, drinks, snacks, toiletries',
+          notes: 'Mon-Sat 9am-9pm typically. Right next to Mercado Central (Spain\'s oldest covered market - fantastic for fresh fish, fruit, veg, and tapas). WARNING: Many shops close 2:30-5:30pm for siesta - arrive before or after.'
+        }
+      ],
       quickWalk: [
         {
           title: 'Plaza de San Juan de Dios (5 mins from port)',
@@ -1655,6 +1777,29 @@ March weather is pleasant - mild temperatures perfect for walking, though it can
       ]
     },
     stayLocal: {
+      convenienceStores: [
+        {
+          name: 'Cruise Terminal Shops',
+          location: 'Inside the Terminal de Cruzeiros de Lisboa (new terminal)',
+          type: 'small shops',
+          what: 'Duty-free items, souvenirs, Portuguese products, snacks, drinks',
+          notes: 'Modern terminal opened 2017/2019. Free WiFi, ATMs, currency exchange, tourist info. Guest Information Center for services.'
+        },
+        {
+          name: 'Shops in Alfama District',
+          location: 'Directly opposite the cruise terminal - less than 100m',
+          type: 'small shops',
+          what: 'Souvenirs, local crafts, snacks, drinks',
+          notes: 'Charming historic district with narrow streets. Great for browsing. Many small cafés for coffee and pastéis de nata (custard tarts).'
+        },
+        {
+          name: 'Pingo Doce',
+          location: 'Main location: Baixa district on Rua 1º de Dezembro (near Rossio) - 15-20 min walk from cruise terminal, or take metro from Santa Apolónia. Also: Rua da Graça area (near elevators to Alfama)',
+          type: 'supermarket',
+          what: 'Full supermarket - groceries, wine, drinks, snacks, toiletries, prepared hot meals and sandwiches',
+          notes: 'Open Mon-Sun 8:30am-9:30pm. Also has a small café/canteen section with cheap prepared food. Multiple locations throughout Lisbon.'
+        }
+      ],
       quickWalk: [
         {
           title: 'Praça do Comércio (20 mins walk or shuttle)',

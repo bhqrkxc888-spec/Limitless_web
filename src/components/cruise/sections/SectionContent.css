@@ -1755,3 +1755,75 @@
   font-weight: 600;
   margin-top: var(--space-2, 0.5rem);
 }
+
+/* ========================================
+   CONVENIENCE STORES SECTION
+   Quick essentials near port
+   ======================================== */
+
+.convenience-store-item {
+  padding: var(--space-4, 1rem) 0;
+  border-bottom: 1px solid var(--clr-border-light, #F2EFE9);
+}
+
+.convenience-store-item:last-child {
+  border-bottom: none;
+}
+
+.convenience-store-item h4 {
+  margin: 0 0 var(--space-3, 0.75rem) 0;
+  color: var(--clr-primary, #2C344C);
+  font-size: var(--font-size-lg, 1.125rem);
+}
+
+.store-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2, 0.5rem);
+}
+
+.store-details p {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2, 0.5rem);
+  font-size: var(--font-size-sm, 0.875rem);
+  line-height: 1.6;
+}
+
+.store-details svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--clr-accent, #C8A25D);
+}
+
+.store-location strong,
+.store-type strong,
+.store-what strong {
+  color: var(--clr-text, #2C344C);
+  font-weight: var(--font-weight-semibold, 600);
+}
+
+.store-notes {
+  color: var(--clr-text-muted, #5C6478);
+  font-style: italic;
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-left: 3px solid var(--clr-accent, #C8A25D);
+  border-radius: var(--radius-sm, 0.25rem);
+  margin-top: var(--space-2, 0.5rem);
+}
+
+@media (max-width: 479px) {
+  .convenience-store-item {
+    padding: var(--space-3, 0.75rem) 0;
+  }
+  
+  .convenience-store-item h4 {
+    font-size: var(--font-size-base, 1rem);
+  }
+  
+  .store-details p {
+    font-size: var(--font-size-xs, 0.75rem);
+  }
+}

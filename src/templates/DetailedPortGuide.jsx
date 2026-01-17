@@ -432,6 +432,29 @@ function StayLocalSection({ stayLocal, beachImage, marineData, marineLoading }) 
 
       <hr className="section-divider" />
 
+      {/* Convenience Stores & Essentials - APPEARS FIRST */}
+      {stayLocal.convenienceStores && stayLocal.convenienceStores.length > 0 && (
+        <>
+          <SubSection title="🛒 Near Port: Essentials">
+            <div className="tip-box" style={{ marginBottom: '1rem' }}>
+              <p><strong>Quick supplies right off the ship:</strong> Water, snacks, sunscreen, and basic necessities before you start exploring.</p>
+            </div>
+            {stayLocal.convenienceStores.map((store, idx) => (
+              <div key={idx} className="convenience-store-item">
+                <h4>{store.name}</h4>
+                <div className="store-details">
+                  <p className="store-location"><MapPin size={16} /> <strong>Location:</strong> {store.location}</p>
+                  <p className="store-type"><strong>Type:</strong> {store.type}</p>
+                  <p className="store-what"><strong>What they sell:</strong> {store.what}</p>
+                  {store.notes && <p className="store-notes"><Info size={16} /> {store.notes}</p>}
+                </div>
+              </div>
+            ))}
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
       {stayLocal.quickWalk && stayLocal.quickWalk.length > 0 && (
         <>
           <SubSection title="Quick Walk (Under 10 mins)">
