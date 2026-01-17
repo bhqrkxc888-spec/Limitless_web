@@ -11,6 +11,8 @@ import { SITE_ASSETS } from '../config/assetUrls';
 import { usePortGuideImage } from '../hooks/useImageUrl';
 import { ArrowLeft, ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
 import { DetailedPortGuide } from './DetailedPortGuide';
+import PortGuideFeedback from '../components/port/PortGuideFeedback';
+import PortGuideReviews from '../components/port/PortGuideReviews';
 import './PortGuidePage.css';
 
 // Fallback hero image
@@ -603,6 +605,27 @@ function PortGuidePage() {
 
         </div>
       </article>
+
+      {/* Rating & Feedback Section - Single location per port guide */}
+      <section className="port-feedback-section">
+        <div className="container">
+          <div className="feedback-container">
+            {/* Star Rating Form */}
+            <div className="feedback-rating">
+              <SectionHeader
+                title="Rate This Port Guide"
+                subtitle="Help other cruise passengers plan their visit"
+              />
+              <PortGuideFeedback portSlug={port.slug} portName={port.name} />
+            </div>
+
+            {/* Display Reviews */}
+            <div className="feedback-reviews">
+              <PortGuideReviews portSlug={port.slug} />
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="port-cta">

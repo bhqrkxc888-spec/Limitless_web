@@ -135,6 +135,8 @@ const AdminBucketListImages = lazy(() => lazyWithRetry(() => import('./pages/adm
 const AdminPortGuideImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPortGuideImages')))
 const AdminShipImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminShipImages')))
 const AdminCruiseFinder = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminCruiseFinder')))
+const AdminPortRatings = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPortRatings')))
+const AdminCruiseFeedback = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminCruiseFeedback')))
 
 // Legal Pages
 const WebsiteTerms = lazy(() => lazyWithRetry(() => import('./pages/WebsiteTerms')))
@@ -209,6 +211,10 @@ function AppLayout() {
           <Route path="/admin/analytics" element={<AdminProtectedRoute><AdminAnalytics /></AdminProtectedRoute>} />
           <Route path="/admin/search-console" element={<AdminProtectedRoute><AdminSearchConsole /></AdminProtectedRoute>} />
           <Route path="/admin/seo" element={<AdminProtectedRoute><AdminSEO /></AdminProtectedRoute>} />
+          
+          {/* Feedback Management */}
+          <Route path="/admin/port-ratings" element={<AdminProtectedRoute><AdminPortRatings /></AdminProtectedRoute>} />
+          <Route path="/admin/cruise-feedback" element={<AdminProtectedRoute><AdminCruiseFeedback /></AdminProtectedRoute>} />
           
           {/* Image Management */}
           <Route path="/admin/images" element={<AdminProtectedRoute><AdminImageManagement /></AdminProtectedRoute>} />

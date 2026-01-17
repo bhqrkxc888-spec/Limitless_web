@@ -24,7 +24,9 @@ import {
   Activity,
   ClipboardList,
   Moon,
-  Sun
+  Sun,
+  MessageCircle,
+  Star
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import './AdminLayout.css';
@@ -90,6 +92,10 @@ function AdminLayout({ children, onLogout, lastUpdated, onRefresh, isRefreshing 
     { path: '/admin/analytics', icon: TrendingUp, label: 'Analytics' },
     { path: '/admin/search-console', icon: BarChart3, label: 'Search Console' },
     { path: '/admin/seo', icon: Search, label: 'SEO' },
+    { type: 'divider' },
+    { type: 'section', label: 'Feedback' },
+    { path: '/admin/port-ratings', icon: Star, label: 'Port Ratings' },
+    { path: '/admin/cruise-feedback', icon: MessageCircle, label: 'Cruise Feedback' },
     { type: 'divider' },
     { type: 'section', label: 'Content' },
     { path: '/admin/images', icon: Image, label: 'Image Management' },
