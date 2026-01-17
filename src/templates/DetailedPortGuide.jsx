@@ -23,7 +23,7 @@ const PORT_SECTIONS = [
   { key: 'foodAndDrink', label: 'Food & Drink', icon: Utensils },
 ];
 
-export function DetailedPortGuide({ slug, portName, portCountry, detailedContent }) {
+export function DetailedPortGuide({ slug, portName, portCountry, detailedContent, port }) {
   const [activeSection, setActiveSection] = useState('overview');
   
   // Load attraction images
@@ -35,18 +35,26 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
   const { imageUrl: attraction6 } = usePortGuideImage(slug, 'attraction-6', portName, portCountry);
   const { imageUrl: beachImage } = usePortGuideImage(slug, 'beach', portName, portCountry);
   
+  // Load family-friendly images
+  const { imageUrl: mcdonaldsImage } = usePortGuideImage(slug, 'mcdonalds', portName, portCountry);
+  const { imageUrl: aleHopImage } = usePortGuideImage(slug, 'ale-hop', portName, portCountry);
+  
   const attractionImages = [attraction1, attraction2, attraction3, attraction4, attraction5, attraction6];
 
   if (!detailedContent) return null;
 
   const { overview, stayLocal, goFurther, withKids, send, foodAndDrink } = detailedContent;
+  
+  // Get familyFriendly data from port (ports.js)
+  const familyFriendly = port?.familyFriendly;
 
   // Check which sections have content - match field names from portContent.js
   const hasContent = {
     overview: !!overview,
     stayLocal: !!stayLocal && (stayLocal.quickWalk?.length > 0 || stayLocal.longerWalk?.length > 0 || stayLocal.beach || stayLocal.tip),
     goFurther: !!goFurther && goFurther.attractions?.length > 0,
-    withKids: !!withKids && (withKids.toddlers?.length > 0 || withKids.olderKids?.length > 0 || withKids.easyDay),
+    // withKids now checks BOTH portContent.withKids AND port.familyFriendly
+    withKids: (!!withKids && (withKids.toddlers?.length > 0 || withKids.olderKids?.length > 0 || withKids.easyDay)) || !!familyFriendly,
     // 'send' uses 'mobility', 'quietSpots', 'sensory' - match actual data structure
     send: !!send && (send.wheelchairAccess || send.mobility?.length > 0 || send.quietSpots?.length > 0 || send.mobilityConsiderations?.length > 0),
     // 'foodAndDrink' uses 'restaurants', 'cafes', 'bars', 'localSpeciality' - match actual data structure
@@ -65,7 +73,7 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
       case 'goFurther':
         return <GoFurtherSection goFurther={goFurther} attractionImages={attractionImages} />;
       case 'withKids':
-        return <WithKidsSection withKids={withKids} />;
+        return <WithKidsSection withKids={withKids} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} />;
       case 'send':
         return <SendSection send={send} />;
       case 'foodAndDrink':
@@ -436,8 +444,9 @@ function GoFurtherSection({ goFurther, attractionImages }) {
   );
 }
 
-function WithKidsSection({ withKids }) {
-  if (!withKids) return <p>No family information available yet.</p>;
+function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage }) {
+  // Show section if either withKids (portContent) or familyFriendly (ports.js) has content
+  if (!withKids && !familyFriendly) return <p>No family information available yet.</p>;
 
   return (
     <div className="section-with-kids">
@@ -448,7 +457,112 @@ function WithKidsSection({ withKids }) {
 
       <hr className="section-divider" />
 
-      {withKids.toddlers && withKids.toddlers.length > 0 && (
+      {/* Quick Wins Section - McDonald's and Ale Hop */}
+      {familyFriendly && (familyFriendly.mcdonalds || familyFriendly.aleHop) && (
+        <>
+          <SubSection title="Quick Wins for Families">
+            <div className="family-cards-grid">
+              {familyFriendly.mcdonalds && (
+                <div className="family-card">
+                  {mcdonaldsImage && (
+                    <div className="family-card-image">
+                      <OptimizedImage src={mcdonaldsImage} alt="McDonald's" />
+                    </div>
+                  )}
+                  <div className="family-card-content">
+                    <h4>🍔 {familyFriendly.mcdonalds.name}</h4>
+                    <p><strong>Location:</strong> {familyFriendly.mcdonalds.location}</p>
+                    <p><strong>Distance:</strong> {familyFriendly.mcdonalds.walkingTime}</p>
+                    {familyFriendly.mcdonalds.notes && <p className="family-card-notes">{familyFriendly.mcdonalds.notes}</p>}
+                  </div>
+                </div>
+              )}
+              {familyFriendly.aleHop && (
+                <div className="family-card">
+                  {aleHopImage && (
+                    <div className="family-card-image">
+                      <OptimizedImage src={aleHopImage} alt="Ale Hop" />
+                    </div>
+                  )}
+                  <div className="family-card-content">
+                    <h4>🎁 {familyFriendly.aleHop.name}</h4>
+                    <p><strong>Location:</strong> {familyFriendly.aleHop.location}</p>
+                    <p><strong>Distance:</strong> {familyFriendly.aleHop.walkingTime}</p>
+                    {familyFriendly.aleHop.notes && <p className="family-card-notes">{familyFriendly.aleHop.notes}</p>}
+                  </div>
+                </div>
+              )}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Local Park */}
+      {familyFriendly?.localPark && (
+        <>
+          <SubSection title="🏞️ Local Park">
+            <div className="park-info">
+              <h4>{familyFriendly.localPark.name}</h4>
+              <p><strong>Location:</strong> {familyFriendly.localPark.location}</p>
+              <p><strong>Distance:</strong> {familyFriendly.localPark.walkingTime}</p>
+              {familyFriendly.localPark.facilities && <p><strong>Facilities:</strong> {familyFriendly.localPark.facilities}</p>}
+              {familyFriendly.localPark.notes && <p>{familyFriendly.localPark.notes}</p>}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Theme Park */}
+      {familyFriendly?.themePark && (
+        <>
+          <SubSection title="🎢 Theme Park / Attraction">
+            <div className="attraction-info">
+              <h4>{familyFriendly.themePark.name}</h4>
+              <p><strong>Location:</strong> {familyFriendly.themePark.location}</p>
+              {familyFriendly.themePark.type && <p><strong>Type:</strong> {familyFriendly.themePark.type}</p>}
+              {familyFriendly.themePark.highlights && <p><strong>Highlights:</strong> {familyFriendly.themePark.highlights}</p>}
+              {familyFriendly.themePark.cost && <p><strong>Cost:</strong> {familyFriendly.themePark.cost}</p>}
+              {familyFriendly.themePark.hours && <p><strong>Hours:</strong> {familyFriendly.themePark.hours}</p>}
+              {familyFriendly.themePark.notes && <p className="tip-text">{familyFriendly.themePark.notes}</p>}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Water Park */}
+      {familyFriendly?.waterPark && (
+        <>
+          <SubSection title="🌊 Water Park">
+            <div className="attraction-info">
+              <h4>{familyFriendly.waterPark.name}</h4>
+              <p><strong>Location:</strong> {familyFriendly.waterPark.location}</p>
+              {familyFriendly.waterPark.highlights && <p><strong>Highlights:</strong> {familyFriendly.waterPark.highlights}</p>}
+              {familyFriendly.waterPark.cost && <p><strong>Cost:</strong> {familyFriendly.waterPark.cost}</p>}
+              {familyFriendly.waterPark.hours && <p><strong>Hours:</strong> {familyFriendly.waterPark.hours}</p>}
+              {familyFriendly.waterPark.notes && <p className="tip-text">{familyFriendly.waterPark.notes}</p>}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Beach Option */}
+      {familyFriendly?.beachOption && (
+        <>
+          <SubSection title="🏖️ Beach for Families">
+            <div className="tip-box">
+              <p>{familyFriendly.beachOption}</p>
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Original withKids content from portContent.js */}
+      {withKids?.toddlers && withKids.toddlers.length > 0 && (
         <>
           <SubSection title="Toddlers & Young Children">
             <ul className="simple-list">
@@ -461,7 +575,7 @@ function WithKidsSection({ withKids }) {
         </>
       )}
 
-      {withKids.olderKids && withKids.olderKids.length > 0 && (
+      {withKids?.olderKids && withKids.olderKids.length > 0 && (
         <>
           <SubSection title="Older Kids & Teens">
             <ul className="simple-list">
@@ -474,7 +588,7 @@ function WithKidsSection({ withKids }) {
         </>
       )}
 
-      {withKids.familyFood && withKids.familyFood.length > 0 && (
+      {withKids?.familyFood && withKids.familyFood.length > 0 && (
         <>
           <SubSection title="Family-Friendly Food">
             <ul className="simple-list">
@@ -487,7 +601,7 @@ function WithKidsSection({ withKids }) {
         </>
       )}
 
-      {withKids.warnings && withKids.warnings.length > 0 && (
+      {withKids?.warnings && withKids.warnings.length > 0 && (
         <>
           <SubSection title="⚠️ Things to Note">
             <ul className="simple-list warning-list">
@@ -500,7 +614,7 @@ function WithKidsSection({ withKids }) {
         </>
       )}
 
-      {withKids.easyDay && (
+      {withKids?.easyDay && (
         <div className="tip-box">
           <strong>💡 Easy Day Suggestion</strong>
           <p>{withKids.easyDay}</p>

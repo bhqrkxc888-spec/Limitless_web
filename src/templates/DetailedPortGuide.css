@@ -748,3 +748,119 @@
     grid-template-columns: repeat(3, 1fr);
   }
 }
+
+/* ========================================
+   FAMILY-FRIENDLY CARDS (With Kids section)
+   For McDonald's, Ale Hop, Parks, etc.
+   ======================================== */
+
+.family-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-4, 1rem);
+  margin-top: var(--space-4, 1rem);
+}
+
+.family-card {
+  background: var(--clr-surface, #fff);
+  border: 1px solid var(--clr-border, #e5e5e5);
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.family-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.family-card-image {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  background: var(--clr-bg-alt, #f5f5f5);
+}
+
+.family-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.family-card-content {
+  padding: var(--space-4, 1rem);
+}
+
+.family-card-content h4 {
+  margin: 0 0 var(--space-2, 0.5rem) 0;
+  font-size: var(--font-size-lg, 1.125rem);
+  font-weight: 600;
+  color: var(--clr-text, #2C344C);
+}
+
+.family-card-content p {
+  margin: var(--space-1, 0.25rem) 0;
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--clr-text-light, #6b7280);
+  line-height: 1.5;
+}
+
+.family-card-content p strong {
+  color: var(--clr-text, #2C344C);
+}
+
+.family-card-notes {
+  margin-top: var(--space-2, 0.5rem) !important;
+  padding-top: var(--space-2, 0.5rem);
+  border-top: 1px solid var(--clr-border-light, #eee);
+  font-style: italic;
+}
+
+/* Park and Attraction Info */
+.park-info,
+.attraction-info {
+  background: var(--clr-surface, #fff);
+  border: 1px solid var(--clr-border, #e5e5e5);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-4, 1rem);
+}
+
+.park-info h4,
+.attraction-info h4 {
+  margin: 0 0 var(--space-3, 0.75rem) 0;
+  font-size: var(--font-size-lg, 1.125rem);
+  font-weight: 600;
+  color: var(--clr-text, #2C344C);
+}
+
+.park-info p,
+.attraction-info p {
+  margin: var(--space-2, 0.5rem) 0;
+  font-size: var(--font-size-base, 1rem);
+  color: var(--clr-text-light, #6b7280);
+  line-height: 1.6;
+}
+
+.park-info p strong,
+.attraction-info p strong {
+  color: var(--clr-text, #2C344C);
+}
+
+.tip-text {
+  margin-top: var(--space-3, 0.75rem) !important;
+  padding: var(--space-3, 0.75rem);
+  background: var(--clr-accent-light, #FEF3C7);
+  border-radius: var(--radius-md, 8px);
+  font-size: var(--font-size-sm, 0.875rem);
+}
+
+/* Mobile responsive for family cards */
+@media (max-width: 640px) {
+  .family-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .family-card-image {
+    height: 120px;
+  }
+}

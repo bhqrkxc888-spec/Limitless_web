@@ -1400,9 +1400,41 @@ export const ports = [
       description: 'Complete Lisbon cruise port guide. Explore Alfama, ride historic trams, visit Belém Tower, and discover fado music and pastéis de nata in Portugal\'s capital.',
       keywords: ['Lisbon cruise port', 'Lisbon shore excursions', 'Lisbon things to do', 'Lisbon from cruise ship', 'Lisbon cruise terminal', 'Santa Apolónia terminal'],
     },
+
+    familyFriendly: {
+      mcdonalds: {
+        name: 'McDonald\'s Rossio',
+        location: 'Praça Dom Pedro IV 81-83, city center',
+        walkingTime: '20 minutes from cruise port or 10 minutes taxi',
+        notes: 'Central location. Opens 8:00 AM. Also McDonald\'s in Belém near monuments.',
+      },
+      aleHop: {
+        name: 'ALE-HOP Rua Augusta',
+        location: 'Rua Augusta 184, Baixa district',
+        walkingTime: '20 minutes from port',
+        notes: 'Central shopping street. Quirky gifts and toys for kids.',
+      },
+      localPark: {
+        name: 'Jardim da Estrela',
+        location: 'Near Estrela Basilica',
+        walkingTime: '15 minutes taxi from port',
+        facilities: 'Playgrounds, duck pond, shaded areas, café on site',
+        notes: 'Beautiful park perfect for families. Kids love feeding the ducks.',
+      },
+      themePark: {
+        name: 'Lisbon Zoo (Jardim Zoológico)',
+        location: 'North Lisbon (20 minutes by metro)',
+        type: 'Zoo',
+        highlights: 'Dolphin shows, cable car, pandas, giraffes, large play areas',
+        cost: 'Adults €25, kids 3-12 €17',
+        hours: '10:00 AM to 6:00 PM',
+        notes: 'Full-day activity. Metro from Cais do Sodré. Very popular with families.',
+      },
+      beachOption: 'No city beach in Lisbon port area. Nearest beaches are Cascais or Costa da Caparica (30-40 minutes away).',
+    },
     
     status: 'published',
-    lastUpdated: '2024-12-28',
+    lastUpdated: '2026-01-17',
   },
 
   // ============================================================================
@@ -1594,9 +1626,47 @@ export const ports = [
       description: 'Complete Santa Cruz de Tenerife cruise port guide. Visit Mount Teide, explore the city centre, relax on golden beaches, and discover year-round winter sun in the Canary Islands.',
       keywords: ['Santa Cruz de Tenerife cruise port', 'Tenerife shore excursions', 'Tenerife things to do', 'Mount Teide cruise', 'Canary Islands cruise', 'Tenerife cruise terminal'],
     },
+
+    familyFriendly: {
+      mcdonalds: {
+        name: 'McDonald\'s Santa Cruz',
+        location: 'Multiple locations in city center',
+        walkingTime: '10-15 minutes from port',
+        notes: 'Several branches throughout city. Check Google Maps for nearest location.',
+      },
+      aleHop: {
+        name: 'ALE-HOP Tenerife',
+        location: 'Shopping areas in Santa Cruz',
+        walkingTime: '10-15 minutes from port',
+        notes: 'Multiple locations on island. Gifts, toys, and novelties.',
+      },
+      localPark: {
+        name: 'Parque García Sanabria',
+        location: 'Central Santa Cruz, slightly uphill from port',
+        walkingTime: '15-20 minutes walk from port',
+        facilities: 'Gardens, fountains, sculpture walks, shaded paths, playgrounds, subtropical plants',
+        notes: 'Largest city park. Beautiful for relaxed family strolls. Ideal for quiet break from city streets.',
+      },
+      themePark: {
+        name: 'Loro Parque',
+        location: 'Puerto de la Cruz (north Tenerife, 45 minutes by taxi or organized tour)',
+        type: 'Zoo and marine park',
+        highlights: 'World-famous parrot collection, dolphin shows, orca shows, sea lion shows, Penguin World, tropical gardens',
+        cost: 'Adults €42, kids 6-11 €30, under 6 free',
+        hours: '9:30 AM to 5:30 PM daily',
+        notes: 'World-class attraction. Plan full day. Book tickets in advance. Shows at set times. Consider organized tour from port.',
+      },
+      waterPark: {
+        name: 'Siam Park',
+        location: 'Costa Adeje (south Tenerife, 60 minutes from Santa Cruz port)',
+        highlights: 'World-renowned water park with slides for all ages, Lost City for young kids, lazy river, wave pool, big thrill rides',
+        notes: 'Full-day activity. Go early to beat crowds. Buy tickets in advance. Combo ticket with Loro Parque available.',
+      },
+      beachOption: 'Playa de las Teresitas is main beach (8-10 km north, 20 minutes by bus). Golden sand, sheltered bay backed by palm trees, lifeguards, calm waters.',
+    },
     
     status: 'published',
-    lastUpdated: '2025-01-28',
+    lastUpdated: '2026-01-17',
   },
 
   // ============================================================================
@@ -2886,9 +2956,32 @@ export const ports = [
       description: 'Complete Cádiz cruise port guide. Walk-off access to historic sights, beaches, and easy day trips to Seville from this Atlantic port.',
       keywords: ['Cádiz cruise port', 'Cadiz Spain', 'Seville excursions', 'Atlantic coast', 'Cádiz cruise terminal', 'Andalusia cruise'],
     },
+
+    familyFriendly: {
+      mcdonalds: {
+        name: 'McDonald\'s Cádiz',
+        location: 'City center (multiple locations)',
+        walkingTime: '15-20 minutes from port',
+        notes: 'Multiple locations in Cádiz. Some with PlayPlaces. Check Google Maps for nearest.',
+      },
+      aleHop: {
+        name: 'ALE-HOP Cádiz',
+        location: 'Central shopping district',
+        walkingTime: '15 minutes from port',
+        notes: 'Check store locator for exact address. Toys and novelties for kids.',
+      },
+      localPark: {
+        name: 'Parque Genovés',
+        location: 'Central Cádiz',
+        walkingTime: '10-15 minutes from port',
+        facilities: 'Playground, zip line, duck pond, dinosaur sculptures, skate park, waterfall grotto',
+        notes: 'Best park in Cádiz for kids. Varied attractions for all ages. Shaded areas under century-old trees.',
+      },
+      beachOption: 'La Caleta Beach is closest (20-25 minutes walk). Calm waters, golden sand, small playground, rocks to climb. Also Playa de la Victoria for longer stretch.',
+    },
     
     status: 'published',
-    lastUpdated: '2025-01-28',
+    lastUpdated: '2026-01-17',
   },
 
   {
@@ -3198,9 +3291,41 @@ export const ports = [
       description: 'Complete A Coruña cruise port guide. Visit the UNESCO Tower of Hercules, explore the glass-fronted Marina, discover the old town and enjoy urban beaches in this walkable Atlantic port.',
       keywords: ['A Coruña cruise port', 'La Coruña cruise', 'Tower of Hercules', 'Galician cruise port', 'Atlantic coast cruises', 'A Coruña shore excursions'],
     },
+
+    familyFriendly: {
+      mcdonalds: {
+        name: 'McDonald\'s Los Rosales',
+        location: 'C.C. Los Rosales shopping mall',
+        walkingTime: '15 minutes from port by taxi',
+        notes: 'Inside shopping center. Convenient for quick meal and shopping.',
+      },
+      aleHop: {
+        name: 'ALE-HOP La Coruña',
+        location: 'City center shopping areas',
+        walkingTime: '10-15 minutes from port',
+        notes: 'Check store locator for nearest location. Toys, gifts, accessories for kids.',
+      },
+      localPark: {
+        name: 'Parque de Santa Margarita',
+        location: 'Heart of the city',
+        walkingTime: '15 minutes from port',
+        facilities: 'Large children\'s play zone, paths, birdlife, scenic nature, duck pond',
+        notes: 'Near Casa de las Ciencias science museum. Beautiful green space in city center.',
+      },
+      themePark: {
+        name: 'Aquarium Finisterrae',
+        location: 'Paseo Marítimo Alcalde Francisco Vázquez, 34',
+        type: 'Aquarium',
+        highlights: 'Over 300 marine species, seal colony, interactive exhibits, terraces with ocean views, Nautilus hall with submerged tank',
+        cost: 'Adults €10.30, kids under 16 reduced, under 4 free',
+        hours: 'Seasonal: 10:00-18:00 winter, 10:00-20:00 summer',
+        notes: 'Perfect for families. Right on waterfront promenade. Can combine with Tower of Hercules visit.',
+      },
+      beachOption: 'Riazor and Orzán beaches are 30 minutes walk or 10 minutes taxi. Urban twin beaches with promenade, full facilities, surf, clean sand.',
+    },
     
     status: 'published',
-    lastUpdated: '2025-12-28',
+    lastUpdated: '2026-01-17',
   },
 
   // Bilbao
@@ -4614,9 +4739,49 @@ export const ports = [
       description: 'Complete Las Palmas cruise port guide. Visit Las Canteras beach, explore Vegueta historic district, enjoy Canarian cuisine, and discover insider tips for your Atlantic cruise.',
       keywords: ['Las Palmas cruise port', 'Gran Canaria cruise', 'Las Palmas shore excursions', 'Canary Islands cruise', 'Las Palmas things to do', 'Santa Catalina cruise terminal']
     },
+
+    familyFriendly: {
+      mcdonalds: {
+        name: 'McDonald\'s El Muelle',
+        location: 'Centro Comercial El Muelle (near cruise port)',
+        walkingTime: '5-10 minutes from port',
+        notes: 'Opened Dec 2024. Includes play area for children. Very convenient location right by port.',
+      },
+      aleHop: {
+        name: 'ALE-HOP Las Palmas',
+        location: 'Multiple locations including shopping centers',
+        walkingTime: '10-15 minutes from port',
+        notes: 'Use store locator for nearest branch. Gifts, toys, and novelties for kids.',
+      },
+      localPark: {
+        name: 'Parque Santa Catalina',
+        location: 'Next to Poema del Mar aquarium',
+        walkingTime: '5 minutes from port',
+        facilities: 'Open square with trees, café, benches, near beach promenade',
+        notes: 'Central meeting spot right by port. Perfect starting point. Combine with beach promenade walk.',
+      },
+      themePark: {
+        name: 'Poema del Mar Aquarium',
+        location: 'Las Palmas waterfront (5 minutes walk from port)',
+        type: 'Aquarium',
+        highlights: 'Over 350 species in themed ecosystems, very immersive modern exhibits, large viewing windows',
+        cost: 'Check current prices online',
+        hours: 'Daily opening',
+        notes: 'Walking distance from cruise port. Perfect for families. One of Europe\'s most impressive aquariums.',
+      },
+      waterPark: {
+        name: 'Aqualand Maspalomas',
+        location: 'Maspalomas (south Gran Canaria, 40 minutes by taxi)',
+        highlights: 'Slides, wave pools, separate play areas for young children, heated pools',
+        cost: 'Adults €37-40 for day pass',
+        hours: '10:00 AM to 5:00 PM (longer hours July-August until 6:00 PM)',
+        notes: 'Main water park on island. Full-day trip. Consider organized tour or taxi.',
+      },
+      beachOption: 'Las Canteras Beach is 10-15 minutes walk from port. Long urban beach with golden sand, natural reef protection, promenade lined with cafés and restaurants.',
+    },
     
     status: 'published',
-    lastUpdated: '2025-12-28',
+    lastUpdated: '2026-01-17',
   },
 
   {

@@ -203,6 +203,7 @@ function PortGuidePage() {
               portName={portName}
               portCountry={portCountry}
               detailedContent={detailedContent}
+              port={port}
             />
           ) : (
             <>
