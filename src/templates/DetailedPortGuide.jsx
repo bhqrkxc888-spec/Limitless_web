@@ -26,22 +26,17 @@ const PORT_SECTIONS = [
 export function DetailedPortGuide({ slug, portName, portCountry, detailedContent, port }) {
   const [activeSection, setActiveSection] = useState('overview');
   
-  // Scroll to content area - used when switching tabs
-  // Matches cruise companion behaviour
-  const scrollToContent = useCallback(() => {
+  // Handle tab change - set section and scroll tabs into view
+  const handleTabChange = useCallback((sectionKey) => {
+    setActiveSection(sectionKey);
+    // Scroll to position tabs bar just below header
     setTimeout(() => {
-      const content = document.querySelector('.port-section-content');
-      if (content) {
-        content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const tabs = document.querySelector('.port-section-tabs');
+      if (tabs) {
+        tabs.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }, 50);
   }, []);
-  
-  // Handle tab change - set section and scroll to top of content
-  const handleTabChange = useCallback((sectionKey) => {
-    setActiveSection(sectionKey);
-    scrollToContent();
-  }, [scrollToContent]);
   
   // Load attraction images
   const { imageUrl: attraction1 } = usePortGuideImage(slug, 'attraction-1', portName, portCountry);

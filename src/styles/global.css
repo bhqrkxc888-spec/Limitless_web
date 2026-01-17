@@ -485,17 +485,24 @@ button {
 
 .skip-link {
   position: absolute;
-  top: -40px;
-  left: 0;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: var(--z-tooltip);
   background: var(--clr-primary);
   color: var(--clr-text-on-primary);
   padding: var(--space-2) var(--space-4);
-  z-index: var(--z-tooltip);
-  transition: top var(--transition-fast);
 }
 
 .skip-link:focus {
+  position: fixed;
   top: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+  overflow: visible;
 }
 
 /* Focus visible for keyboard navigation */
