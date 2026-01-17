@@ -6,7 +6,7 @@
  * Matches the same layout and style as G606 cruise companion port days
  */
 
-import { useState, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import OptimizedImage from '../components/OptimizedImage';
 import { usePortGuideImage } from '../hooks/useImageUrl';
 import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye } from 'lucide-react';
@@ -25,22 +25,53 @@ const PORT_SECTIONS = [
 
 export function DetailedPortGuide({ slug, portName, portCountry, detailedContent, port }) {
   const [activeSection, setActiveSection] = useState('overview');
+  const contentRef = useRef(null);
+  const isInitialMount = useRef(true);
   
-  // Handle tab change - set section and scroll content to top
-  const handleTabChange = useCallback((sectionKey) => {
-    setActiveSection(sectionKey);
-    setTimeout(() => {
-      requestAnimationFrame(() => {
-        const content = document.querySelector('.port-section-content');
-        if (!content) return;
-        const tabs = document.querySelector('.port-section-tabs');
-        const tabsBottom = tabs ? tabs.getBoundingClientRect().bottom : 0;
-        const contentTop = content.getBoundingClientRect().top + window.scrollY;
-        const targetTop = contentTop - tabsBottom - 12;
-        window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
-      });
-    }, 50);
+  // Read hash from URL and set active section
+  const getSectionFromHash = useCallback(() => {
+    const hash = window.location.hash.slice(1); // Remove the #
+    const validSection = PORT_SECTIONS.find(s => s.key === hash);
+    return validSection ? hash : 'overview';
   }, []);
+  
+  // Initialize from URL hash on mount
+  useEffect(() => {
+    const initialSection = getSectionFromHash();
+    setActiveSection(initialSection);
+    
+    // Handle browser back/forward navigation
+    const handleHashChange = () => {
+      const newSection = getSectionFromHash();
+      setActiveSection(newSection);
+    };
+    
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [getSectionFromHash]);
+  
+  // Scroll to content after section changes (not on initial mount)
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    
+    // Small delay for React to finish rendering
+    requestAnimationFrame(() => {
+      if (contentRef.current) {
+        contentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }, [activeSection]);
+  
+  // Tab click updates URL hash using pushState (doesn't trigger native scroll)
+  const handleTabChange = (sectionKey) => {
+    // Update URL without triggering browser's native hash scroll
+    history.pushState(null, '', `#${sectionKey}`);
+    // Update state - this triggers our useEffect for scrolling
+    setActiveSection(sectionKey);
+  };
   
   // Load attraction images
   const { imageUrl: attraction1 } = usePortGuideImage(slug, 'attraction-1', portName, portCountry);
@@ -81,23 +112,32 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
   // Filter to only show tabs with content
   const availableSections = PORT_SECTIONS.filter(section => hasContent[section.key]);
 
+  // Render section content wrapped with ID for hash navigation
   const renderSectionContent = () => {
+    let content;
     switch (activeSection) {
       case 'overview':
-        return <OverviewSection overview={overview} portName={portName} />;
+        content = <OverviewSection overview={overview} portName={portName} />;
+        break;
       case 'stayLocal':
-        return <StayLocalSection stayLocal={stayLocal} beachImage={beachImage} />;
+        content = <StayLocalSection stayLocal={stayLocal} beachImage={beachImage} />;
+        break;
       case 'goFurther':
-        return <GoFurtherSection goFurther={goFurther} attractionImages={attractionImages} />;
+        content = <GoFurtherSection goFurther={goFurther} attractionImages={attractionImages} />;
+        break;
       case 'withKids':
-        return <WithKidsSection withKids={withKids} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} parkImage={parkImage} />;
+        content = <WithKidsSection withKids={withKids} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} parkImage={parkImage} />;
+        break;
       case 'send':
-        return <SendSection send={send} />;
+        content = <SendSection send={send} />;
+        break;
       case 'foodAndDrink':
-        return <FoodDrinkSection foodAndDrink={foodAndDrink} />;
+        content = <FoodDrinkSection foodAndDrink={foodAndDrink} />;
+        break;
       default:
-        return <OverviewSection overview={overview} portName={portName} />;
+        content = <OverviewSection overview={overview} portName={portName} />;
     }
+    return content;
   };
 
   return (
@@ -125,8 +165,8 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
         </div>
       </nav>
 
-      {/* Section Content */}
-      <div className="port-section-content">
+      {/* Section Content - ref for scroll targeting, stable ID for CSS */}
+      <div ref={contentRef} id="section-content" className="port-section-content">
         {renderSectionContent()}
       </div>
     </div>

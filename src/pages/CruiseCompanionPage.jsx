@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { hasConsent } from '../components/cruise/CruiseConsentGate';
@@ -76,6 +76,8 @@ function CruiseCompanionPage() {
   const [isChecking, setIsChecking] = useState(true);
   const [selectedDayIndex, setSelectedDayIndex] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
+  const contentRef = useRef(null);
+  const isInitialMount = useRef(true);
 
   // Extract data from cruise (with fallbacks)
   const itinerary = cruise?.itinerary || [];
@@ -83,6 +85,14 @@ function CruiseCompanionPage() {
   const departure = cruise?.departure || {};
   const facebookGroup = cruise?.facebookGroup;
   const ogImage = cruise?.ogImage;
+
+  // Get section from URL hash
+  const getSectionFromHash = useCallback((dayType) => {
+    const hash = window.location.hash.slice(1); // Remove the #
+    if (!hash) return null;
+    const validSections = getSectionsForDayType(dayType);
+    return validSections.includes(hash) ? hash : null;
+  }, []);
 
   useEffect(() => {
     // Check for existing consent
@@ -93,11 +103,43 @@ function CruiseCompanionPage() {
       setSelectedDayIndex(currentDay);
       if (itinerary[currentDay]) {
         const sections = getSectionsForDayType(itinerary[currentDay].dayType);
-        setSelectedSection(sections[0]);
+        // Check if URL has a valid section hash
+        const hashSection = getSectionFromHash(itinerary[currentDay].dayType);
+        setSelectedSection(hashSection || sections[0]);
       }
     }
     setIsChecking(false);
-  }, [itinerary]);
+  }, [itinerary, getSectionFromHash]);
+  
+  // Listen for hash changes (browser back/forward)
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (selectedDayIndex !== null && itinerary[selectedDayIndex]) {
+        const hashSection = getSectionFromHash(itinerary[selectedDayIndex].dayType);
+        if (hashSection) {
+          setSelectedSection(hashSection);
+        }
+      }
+    };
+    
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [selectedDayIndex, itinerary, getSectionFromHash]);
+  
+  // Scroll to content after section/day changes (not on initial mount)
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    
+    // Small delay for React to finish rendering
+    requestAnimationFrame(() => {
+      if (contentRef.current) {
+        contentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }, [selectedDayIndex, selectedSection]);
 
   // Set page to noindex (hidden page)
   useEffect(() => {
@@ -121,39 +163,23 @@ function CruiseCompanionPage() {
     }
   };
 
+  // Handle day selection - update state and reset section hash
   const handleDaySelect = (dayIndex) => {
     setSelectedDayIndex(dayIndex);
     const dayData = itinerary[dayIndex];
     if (dayData) {
       const sections = getSectionsForDayType(dayData.dayType);
-      setSelectedSection(sections[0]); // Reset to first section when day changes
+      const firstSection = sections[0];
+      setSelectedSection(firstSection);
+      // Update URL hash using pushState (doesn't trigger native scroll)
+      history.pushState(null, '', `#${firstSection}`);
     }
-    // Scroll to top of content when changing day
-    scrollToContent();
   };
 
+  // Handle section selection - update URL hash using pushState, scroll handled by useEffect
   const handleSectionSelect = (sectionKey) => {
+    history.pushState(null, '', `#${sectionKey}`);
     setSelectedSection(sectionKey);
-    // Scroll to top of content when changing section/tab
-    scrollToContent();
-  };
-
-  // Scroll to content area - used when switching days or tabs
-  const scrollToContent = () => {
-    setTimeout(() => {
-      requestAnimationFrame(() => {
-        const dayTitle = document.querySelector('.day-title');
-        if (!dayTitle) return;
-        const dayNav = document.querySelector('.day-navigation');
-        const sectionTabs = document.querySelector('.section-tabs');
-        const stickyElements = [dayNav, sectionTabs].filter(Boolean);
-        const stickyBottom = stickyElements.length
-          ? Math.max(...stickyElements.map((el) => el.getBoundingClientRect().bottom))
-          : 0;
-        const targetTop = dayTitle.getBoundingClientRect().top + window.scrollY - stickyBottom - 12;
-        window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
-      });
-    }, 50);
   };
 
   // Cruise not found
@@ -381,10 +407,10 @@ function CruiseCompanionPage() {
         onSectionSelect={handleSectionSelect}
       />
 
-      {/* Main Content */}
+      {/* Main Content - ref for scroll targeting */}
       <div className="companion-content">
         <div className="container">
-          <div className="day-content">
+          <div ref={contentRef} id="section-content" className="day-content">
             <h2 className="day-title">{dayData.dayLabel} - {dayData.portName}</h2>
             
             {/* Section Content */}
