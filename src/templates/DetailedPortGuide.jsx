@@ -603,15 +603,28 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
 
       {/* Beach section removed - already covered in Stay Local with full details */}
 
-      {/* Original withKids content from portContent.js */}
+      {/* Easy Day Suggestion - moved to top */}
+      {withKids?.easyDay && (
+        <>
+          <div className="tip-box">
+            <strong>💡 Easy Day Suggestion</strong>
+            <p>{withKids.easyDay}</p>
+          </div>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Original withKids content from portContent.js - now in boxes */}
       {withKids?.toddlers && withKids.toddlers.length > 0 && (
         <>
           <SubSection title="Toddlers & Young Children">
-            <ul className="simple-list">
-              {withKids.toddlers.map((item, idx) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
+            <div className="info-list-box">
+              <ul className="simple-list">
+                {withKids.toddlers.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </div>
           </SubSection>
           <hr className="section-divider" />
         </>
@@ -620,11 +633,13 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
       {withKids?.olderKids && withKids.olderKids.length > 0 && (
         <>
           <SubSection title="Older Kids & Teens">
-            <ul className="simple-list">
-              {withKids.olderKids.map((item, idx) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
+            <div className="info-list-box">
+              <ul className="simple-list">
+                {withKids.olderKids.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </div>
           </SubSection>
           <hr className="section-divider" />
         </>
@@ -633,11 +648,13 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
       {withKids?.familyFood && withKids.familyFood.length > 0 && (
         <>
           <SubSection title="Family-Friendly Food">
-            <ul className="simple-list">
-              {withKids.familyFood.map((item, idx) => (
-                <li key={idx}>{item}</li>
-              ))}
-            </ul>
+            <div className="info-list-box">
+              <ul className="simple-list">
+                {withKids.familyFood.map((item, idx) => (
+                  <li key={idx}>{item}</li>
+                ))}
+              </ul>
+            </div>
           </SubSection>
           <hr className="section-divider" />
         </>
@@ -646,21 +663,16 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
       {withKids?.warnings && withKids.warnings.length > 0 && (
         <>
           <SubSection title="⚠️ Things to Note">
-            <ul className="simple-list warning-list">
-              {withKids.warnings.map((warning, idx) => (
-                <li key={idx}>{warning}</li>
-              ))}
-            </ul>
+            <div className="info-list-box warning-box">
+              <ul className="simple-list warning-list">
+                {withKids.warnings.map((warning, idx) => (
+                  <li key={idx}>{warning}</li>
+                ))}
+              </ul>
+            </div>
           </SubSection>
           <hr className="section-divider" />
         </>
-      )}
-
-      {withKids?.easyDay && (
-        <div className="tip-box">
-          <strong>💡 Easy Day Suggestion</strong>
-          <p>{withKids.easyDay}</p>
-        </div>
       )}
     </div>
   );

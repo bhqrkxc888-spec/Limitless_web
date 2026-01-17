@@ -291,10 +291,22 @@
    SIMPLE LIST - G606 Info List Style
    ======================================== */
 
+.info-list-box {
+  background: var(--clr-surface, #fff);
+  border: 1px solid var(--clr-border, #e5e5e5);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-4, 1rem);
+}
+
+.info-list-box.warning-box {
+  background: #fef3c7;
+  border-color: #fde68a;
+}
+
 .simple-list {
   list-style: none;
   padding: 0;
-  margin: 0 0 var(--space-4, 1rem) 0;
+  margin: 0;
 }
 
 .simple-list li {
@@ -331,7 +343,8 @@
    MAP LINK - Text link style
    ======================================== */
 
-.map-link {
+.map-link,
+.map-link-subtle {
   display: inline-flex;
   align-items: center;
   gap: var(--space-1, 0.25rem);
@@ -343,12 +356,14 @@
   transition: color 0.2s ease;
 }
 
-.map-link:hover {
+.map-link:hover,
+.map-link-subtle:hover {
   color: var(--clr-primary, #2C344C);
   text-decoration: underline;
 }
 
-.map-link:focus-visible {
+.map-link:focus-visible,
+.map-link-subtle:focus-visible {
   outline: 2px solid var(--clr-secondary, #D4B86A);
   outline-offset: 2px;
 }
@@ -858,7 +873,7 @@
 .family-card-image {
   flex-shrink: 0;
   width: 140px;
-  height: 140px;
+  align-self: stretch; /* Match parent height */
   overflow: hidden;
   background: var(--clr-bg-alt, #f5f5f5);
 }
@@ -923,7 +938,7 @@
 .attraction-info p {
   margin: var(--space-2, 0.5rem) 0;
   font-size: var(--font-size-base, 1rem);
-  color: var(--clr-text-light, #6b7280);
+  color: var(--clr-text-main, #2C344C);
   line-height: 1.6;
 }
 
@@ -965,7 +980,7 @@
 .park-info.with-image .info-image {
   flex-shrink: 0;
   width: 120px;
-  height: 120px;
+  align-self: stretch; /* Match parent height */
   background: var(--clr-bg-alt, #f5f5f5);
 }
 

@@ -132,6 +132,9 @@ function PortGuideFeedback({ portSlug, portName }) {
       setSubmitSuccess(true);
       setShowReviewForm(false);
 
+      // Scroll to top of page after successful submission
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
     } catch (err) {
       console.error('Error submitting review:', err);
       alert('There was an error submitting your review. Please try again.');
@@ -306,14 +309,16 @@ function PortGuideFeedback({ portSlug, portName }) {
         </div>
       ) : submitSuccess ? (
         <div className="feedback-success">
-          <CheckCircle size={48} color="#10b981" />
-          <h3>Thank You!</h3>
-          <p>Your {reviewText ? 'review has' : 'rating has'} been submitted successfully.</p>
-          {allowPublish && (
-            <p className="moderation-notice">
-              Your review will be reviewed by our team and published within 24-48 hours.
-            </p>
-          )}
+          <CheckCircle size={32} color="#10b981" />
+          <div className="success-message">
+            <h3>Thank You!</h3>
+            <p>Your review has been submitted and will be published soon.</p>
+            {allowPublish && (
+              <p className="moderation-notice">
+                Your review will be reviewed by our team and published within 24-48 hours.
+              </p>
+            )}
+          </div>
         </div>
       ) : (
         <div className="feedback-thankyou">

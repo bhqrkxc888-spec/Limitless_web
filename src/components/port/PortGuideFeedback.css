@@ -280,12 +280,12 @@
 }
 
 .btn-submit {
-  background: var(--primary);
+  background: var(--clr-primary, #2C344C);
   color: white;
 }
 
 .btn-submit:hover:not(:disabled) {
-  background: var(--primary-dark);
+  background: var(--clr-primary-dark, #1f2536);
 }
 
 .btn-submit:disabled {
@@ -296,25 +296,35 @@
 /* Success State - Compact */
 .feedback-success {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  align-items: flex-start;
+  gap: 1rem;
   padding: 0;
 }
 
 .feedback-success svg {
   flex-shrink: 0;
-  width: 24px;
-  height: 24px;
+}
+
+.success-message {
+  flex: 1;
 }
 
 .feedback-success h3 {
-  display: none; /* Hide for compact */
+  margin: 0 0 0.5rem 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--clr-text-main, #2C344C);
 }
 
 .feedback-success p {
-  margin: 0;
+  margin: 0 0 0.5rem 0;
   color: var(--clr-text-main, #2C344C);
   font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.feedback-success p:last-child {
+  margin-bottom: 0;
 }
 
 .moderation-notice {
