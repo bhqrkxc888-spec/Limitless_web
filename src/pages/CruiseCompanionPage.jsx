@@ -146,10 +146,11 @@ function CruiseCompanionPage() {
         if (!dayTitle) return;
         const dayNav = document.querySelector('.day-navigation');
         const sectionTabs = document.querySelector('.section-tabs');
-        const offset = (dayNav?.getBoundingClientRect().height || 0)
-          + (sectionTabs?.getBoundingClientRect().height || 0)
-          + 12;
-        const targetTop = dayTitle.getBoundingClientRect().top + window.scrollY - offset;
+        const stickyElements = [dayNav, sectionTabs].filter(Boolean);
+        const stickyBottom = stickyElements.length
+          ? Math.max(...stickyElements.map((el) => el.getBoundingClientRect().bottom))
+          : 0;
+        const targetTop = dayTitle.getBoundingClientRect().top + window.scrollY - stickyBottom - 12;
         window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
       });
     }, 50);

@@ -32,10 +32,11 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
     setTimeout(() => {
       requestAnimationFrame(() => {
         const content = document.querySelector('.port-section-content');
-        const tabs = document.querySelector('.port-section-tabs');
         if (!content) return;
-        const tabsHeight = tabs ? tabs.getBoundingClientRect().height : 0;
-        const targetTop = content.getBoundingClientRect().top + window.scrollY - tabsHeight - 12;
+        const tabs = document.querySelector('.port-section-tabs');
+        const tabsBottom = tabs ? tabs.getBoundingClientRect().bottom : 0;
+        const contentTop = content.getBoundingClientRect().top + window.scrollY;
+        const targetTop = contentTop - tabsBottom - 12;
         window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
       });
     }, 50);
