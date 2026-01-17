@@ -465,12 +465,12 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
 
       <hr className="section-divider" />
 
-      {/* Quick Wins Section - McDonald's and Ale Hop */}
+      {/* Familiar Brands - McDonald's and Ale Hop */}
       {familyFriendly && (familyFriendly.mcdonalds || familyFriendly.aleHop) && (
         <>
-          <SubSection title="Quick Wins for Families">
+          <SubSection title="Familiar Brands">
             <div className="tip-highlight">
-              <p><strong>💡 Easy wins:</strong> Familiar brands close to port for snacks, toilets, and quick stops.</p>
+              <p><strong>Easy wins:</strong> Familiar brands close to port for snacks, toilets, and quick stops.</p>
             </div>
             <div className="family-cards-grid">
               {familyFriendly.mcdonalds && (
@@ -481,16 +481,18 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
                     </div>
                   )}
                   <div className="family-card-content">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', flexWrap: 'wrap' }}>
-                      <h4 style={{ margin: 0 }}>🍔 {familyFriendly.mcdonalds.name}</h4>
-                      <span className="quick-win-tag">🎯 Quick Win</span>
-                    </div>
+                    <h4>McDonald's {familyFriendly.mcdonalds.name}</h4>
                     <p><strong>Location:</strong> {familyFriendly.mcdonalds.location}</p>
                     <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                       <strong>Distance:</strong> 
-                      <span className="distance-badge">📍 {familyFriendly.mcdonalds.walkingTime}</span>
+                      <span className="distance-badge">{familyFriendly.mcdonalds.walkingTime}</span>
                     </p>
                     {familyFriendly.mcdonalds.notes && <p className="family-card-notes">{familyFriendly.mcdonalds.notes}</p>}
+                    {familyFriendly.mcdonalds.mapsLink && (
+                      <a href={familyFriendly.mcdonalds.mapsLink} target="_blank" rel="noopener noreferrer" className="map-link-subtle">
+                        Walking directions →
+                      </a>
+                    )}
                   </div>
                 </div>
               )}
@@ -502,16 +504,18 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
                     </div>
                   )}
                   <div className="family-card-content">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', flexWrap: 'wrap' }}>
-                      <h4 style={{ margin: 0 }}>🎁 {familyFriendly.aleHop.name}</h4>
-                      <span className="quick-win-tag">🎯 Quick Win</span>
-                    </div>
+                    <h4>ALE-HOP {familyFriendly.aleHop.name}</h4>
                     <p><strong>Location:</strong> {familyFriendly.aleHop.location}</p>
                     <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                       <strong>Distance:</strong> 
-                      <span className="distance-badge">📍 {familyFriendly.aleHop.walkingTime}</span>
+                      <span className="distance-badge">{familyFriendly.aleHop.walkingTime}</span>
                     </p>
                     {familyFriendly.aleHop.notes && <p className="family-card-notes">{familyFriendly.aleHop.notes}</p>}
+                    {familyFriendly.aleHop.mapsLink && (
+                      <a href={familyFriendly.aleHop.mapsLink} target="_blank" rel="noopener noreferrer" className="map-link-subtle">
+                        Walking directions →
+                      </a>
+                    )}
                   </div>
                 </div>
               )}
@@ -524,7 +528,7 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
       {/* Local Park */}
       {familyFriendly?.localPark && (
         <>
-          <SubSection title="🏞️ Local Park">
+          <SubSection title="Local Park">
             <div className={`park-info ${parkImage ? 'with-image' : ''}`}>
               {parkImage && (
                 <div className="info-image">
@@ -536,10 +540,15 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
                 <p><strong>Location:</strong> {familyFriendly.localPark.location}</p>
                 <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                   <strong>Distance:</strong> 
-                  <span className="distance-badge">📍 {familyFriendly.localPark.walkingTime}</span>
+                  <span className="distance-badge">{familyFriendly.localPark.walkingTime}</span>
                 </p>
                 {familyFriendly.localPark.facilities && <p><strong>Facilities:</strong> {familyFriendly.localPark.facilities}</p>}
                 {familyFriendly.localPark.notes && <p>{familyFriendly.localPark.notes}</p>}
+                {familyFriendly.localPark.mapsLink && (
+                  <a href={familyFriendly.localPark.mapsLink} target="_blank" rel="noopener noreferrer" className="map-link-subtle">
+                    Walking directions →
+                  </a>
+                )}
               </div>
             </div>
           </SubSection>
