@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { getPortBySlug, getAdjacentPorts } from '../data/ports';
 import { getPortContent, hasDetailedContent } from '../data/portContent';
 import { siteConfig } from '../config/siteConfig';
@@ -28,6 +28,17 @@ function PortGuidePage() {
   const port = getPortBySlug(slug);
   const { prev: prevPort, next: nextPort } = getAdjacentPorts(slug);
   const [weatherIndex, setWeatherIndex] = useState(0);
+
+  // Ensure page starts at top on load and when port changes
+  useEffect(() => {
+    // Immediate scroll to top - override browser scroll restoration
+    window.scrollTo(0, 0);
+    // Double-check after a tick (catches async rendering issues)
+    const timer = setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [slug]);
 
   // Get port data first for image context
   const portName = port?.name || '';

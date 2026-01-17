@@ -6,7 +6,7 @@
  * Matches the same layout and style as G606 cruise companion port days
  */
 
-import { useState } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import OptimizedImage from '../components/OptimizedImage';
 import { usePortGuideImage } from '../hooks/useImageUrl';
 import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye } from 'lucide-react';
@@ -25,6 +25,18 @@ const PORT_SECTIONS = [
 
 export function DetailedPortGuide({ slug, portName, portCountry, detailedContent, port }) {
   const [activeSection, setActiveSection] = useState('overview');
+  const contentRef = useRef(null);
+  
+  // Scroll to top of content when tab changes (not on initial load)
+  const handleTabChange = useCallback((sectionKey) => {
+    setActiveSection(sectionKey);
+    // Scroll to top of content area when changing tabs
+    if (contentRef.current) {
+      setTimeout(() => {
+        contentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    }
+  }, []);
   
   // Load attraction images
   const { imageUrl: attraction1 } = usePortGuideImage(slug, 'attraction-1', portName, portCountry);
@@ -96,7 +108,7 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
             return (
               <button
                 key={section.key}
-                onClick={() => setActiveSection(section.key)}
+                onClick={() => handleTabChange(section.key)}
                 className={`port-section-tab ${isActive ? 'active' : ''}`}
                 aria-pressed={isActive}
                 aria-label={`View ${section.label} section`}
@@ -110,7 +122,7 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
       </nav>
 
       {/* Section Content */}
-      <div className="port-section-content">
+      <div ref={contentRef} className="port-section-content">
         {renderSectionContent()}
       </div>
     </div>
