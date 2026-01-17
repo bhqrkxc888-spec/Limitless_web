@@ -192,20 +192,6 @@
 }
 
 /* ========================================
-   COUNTDOWN SECTION
-   ======================================== */
-
-.cruise-countdown-section {
-  background: var(--clr-surface, #FFFFFF);
-  padding: var(--space-5, 1.25rem) var(--space-3, 0.75rem);
-}
-
-.cruise-countdown-section .container {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* ========================================
    MAP & WEATHER GRID SECTION
    ======================================== */
 
@@ -462,10 +448,6 @@
   }
 
   /* New sections - tablet */
-  .cruise-countdown-section {
-    padding: var(--space-6, 1.5rem) var(--space-4, 1rem);
-  }
-
   .cruise-map-weather-section {
     padding: var(--space-6, 1.5rem) var(--space-4, 1rem);
   }
@@ -513,10 +495,6 @@
   }
 
   /* New sections - desktop */
-  .cruise-countdown-section {
-    padding: var(--space-8, 2rem) var(--space-6, 1.5rem);
-  }
-
   .cruise-map-weather-section {
     padding: var(--space-8, 2rem) var(--space-6, 1.5rem);
   }

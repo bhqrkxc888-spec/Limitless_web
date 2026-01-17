@@ -10,7 +10,7 @@ import SeaDayContent from '../components/cruise/sections/SeaDayContent';
 import EmbarkationContent from '../components/cruise/sections/EmbarkationContent';
 import DisembarkationContent from '../components/cruise/sections/DisembarkationContent';
 import ShipContent from '../components/cruise/sections/ShipContent';
-import CountdownTimer from '../components/cruise/CountdownTimer';
+// CountdownTimer removed - not needed
 import ShipTracker from '../components/cruise/ShipTracker';
 import PortWeather from '../components/cruise/PortWeather';
 import { getCruiseById, getSectionsForDayType } from '../data/cruises';
@@ -128,26 +128,12 @@ function CruiseCompanionPage() {
       const sections = getSectionsForDayType(dayData.dayType);
       setSelectedSection(sections[0]); // Reset to first section when day changes
     }
-    
-    // Scroll to content area
-    setTimeout(() => {
-      const contentArea = document.querySelector('.day-content');
-      if (contentArea) {
-        contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 100);
+    // No auto-scroll - let user control their position
   };
 
   const handleSectionSelect = (sectionKey) => {
     setSelectedSection(sectionKey);
-    
-    // Scroll to content area
-    setTimeout(() => {
-      const contentArea = document.querySelector('.day-content');
-      if (contentArea) {
-        contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }, 100);
+    // No auto-scroll - content updates in place
   };
 
   // Cruise not found
@@ -320,17 +306,6 @@ function CruiseCompanionPage() {
           </div>
         </div>
       </header>
-
-      {/* Countdown Timer Section */}
-      <div className="cruise-countdown-section">
-        <div className="container">
-          <CountdownTimer 
-            departureDate={departure.date && departure.time ? `${departure.date}T${departure.time}:00` : null}
-            cruiseName={cruise.id.toUpperCase()}
-            shipName={ship.name}
-          />
-        </div>
-      </div>
 
       {/* Map and Weather Grid */}
       <div className="cruise-map-weather-section">
