@@ -1,31 +1,37 @@
-/**
- * Standard Page Header Component
- * Clean, modern header for pages without hero images
- * Based on Bespoke Packages design
- */
+/* Standard Page Header Component - Dark Blue Premium Version */
 
 .standard-page-header {
   padding: var(--space-12, 3rem) 0 var(--space-8, 2rem) 0;
   text-align: center;
-  background: var(--clr-bg-alt, #F8F5F0);
-  border-bottom: 1px solid var(--clr-border, #E8E4DC);
+  background: linear-gradient(135deg, #2C344C 0%, #1e2638 100%);
+  color: white;
 }
 
 .standard-page-header h1 {
   font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: var(--font-weight-semibold, 600);
-  color: var(--clr-text-main, #2C344C);
+  color: white;
   margin-bottom: var(--space-3, 0.75rem);
 }
 
 .standard-page-header p,
 .standard-page-header .page-header-subtitle {
   font-size: var(--font-size-lg, 1.125rem);
-  color: var(--clr-text-muted, #5C6478);
+  color: rgba(255, 255, 255, 0.9);
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
+}
+
+.standard-page-header a {
+  color: var(--clr-accent, #C9A961);
+  text-decoration: none;
+}
+
+.standard-page-header a:hover {
+  color: white;
+  text-decoration: underline;
 }
 
 /* Optional eyebrow text */
