@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { usePortGuideImage } from '../hooks/useImageUrl';
 import { supabase } from '../lib/supabase';
 import { Loader2 } from 'lucide-react';
+import '../styles/page-header.css';
 import './PortsPage.css';
 
 /**
@@ -139,14 +140,12 @@ function PortsPage() {
       />
 
       {/* Hero Section - Compact */}
-      <section className="page-header ports-hero">
+      <section className="standard-page-header">
         <div className="container">
-          <div className="page-header-content">
-            <h1>Cruise Port Guides</h1>
-            <p className="page-header-subtitle">
-              Find things to do, shore excursions, restaurants, and insider tips from experienced cruisers.
-            </p>
-          </div>
+          <h1>Cruise Port Guides</h1>
+          <p>
+            Find things to do, shore excursions, restaurants, and insider tips from experienced cruisers.
+          </p>
         </div>
       </section>
 

@@ -4,6 +4,7 @@ import { useCruiseGuides } from '../hooks/useCruiseGuides';
 import SEO from '../components/SEO';
 import { Button } from '../components/ui';
 import GuideCard from '../components/GuideCard';
+import '../styles/page-header.css';
 import './CruiseGuidesPage.css';
 
 const GUIDE_TYPES = [
@@ -44,15 +45,13 @@ function CruiseGuidesPage() {
         structuredData={structuredData}
       />
 
-      <section className="guides-page-header">
+      <section className="standard-page-header">
         <div className="container">
-          <div className="guides-page-header__content">
-            <span className="guides-page-header__eyebrow">Expert Resources</span>
-            <h1 className="guides-page-header__title">Cruise Guides</h1>
-            <p className="guides-page-header__subtitle">
-              Your complete resource for cruise planning. Expert guides covering cruise lines, port guides, how-to tips, and comparisons to help you plan the perfect voyage.
-            </p>
-          </div>
+          <span className="page-header-eyebrow">Expert Resources</span>
+          <h1>Cruise Guides</h1>
+          <p>
+            Your complete resource for cruise planning. Expert guides covering cruise lines, port guides, how-to tips, and comparisons.
+          </p>
         </div>
       </section>
 

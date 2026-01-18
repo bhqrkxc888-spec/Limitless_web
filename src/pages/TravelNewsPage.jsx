@@ -5,6 +5,7 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import { Button, SectionHeader } from '../components/ui';
 import NewsCard from '../components/NewsCard';
+import '../styles/page-header.css';
 import './TravelNewsPage.css';
 
 const CATEGORIES = [
@@ -67,16 +68,13 @@ function TravelNewsPage() {
       />
 
       {/* Page Header */}
-      <section className="news-page-header">
+      <section className="standard-page-header">
         <div className="container">
-          <div className="news-page-header__content">
-            <span className="news-page-header__eyebrow">Stay Informed</span>
-            <h1 className="news-page-header__title">Travel News</h1>
-            <p className="news-page-header__subtitle">
-              The latest cruise updates, destination guides, and expert travel tips. 
-              Your source for everything cruise and travel related.
-            </p>
-          </div>
+          <span className="page-header-eyebrow">Stay Informed</span>
+          <h1>Travel News</h1>
+          <p>
+            The latest cruise updates, destination guides, and expert travel tips.
+          </p>
         </div>
       </section>
 
