@@ -1,7 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useMemo } from 'react';
-import { getPortBySlug, getAdjacentPorts } from '../data/ports';
-import { getPortContent, hasDetailedContent } from '../data/portContent';
+import { usePortData, useAdjacentPorts } from '../hooks/usePortData';
 import { siteConfig } from '../config/siteConfig';
 import SEO, { getBreadcrumbSchema } from '../components/SEO';
 import HeroSection from '../components/HeroSection';
@@ -9,7 +8,7 @@ import OptimizedImage from '../components/OptimizedImage';
 import { Button, SectionHeader } from '../components/ui';
 import { SITE_ASSETS } from '../config/assetUrls';
 import { usePortGuideImage } from '../hooks/useImageUrl';
-import { ArrowLeft, ChevronLeft, ChevronRight, MapPin } from 'lucide-react';
+import { ArrowLeft, ChevronLeft, ChevronRight, MapPin, Loader2 } from 'lucide-react';
 import { DetailedPortGuide } from './DetailedPortGuide';
 import PortGuideFeedback from '../components/port/PortGuideFeedback';
 import PortGuideReviews from '../components/port/PortGuideReviews';
@@ -25,17 +24,18 @@ const FALLBACK_HERO = SITE_ASSETS.heroDefault || '/images/placeholders/coming-so
  */
 function PortGuidePage() {
   const { slug } = useParams();
-  const port = getPortBySlug(slug);
-  const { prev: prevPort, next: nextPort } = getAdjacentPorts(slug);
+  const { port, detailedContent, hasDetailed, isLoading, source } = usePortData(slug);
+  const { prev: prevPort, next: nextPort } = useAdjacentPorts(slug);
   const [weatherIndex, setWeatherIndex] = useState(0);
 
   // Get port data first for image context
   const portName = port?.name || '';
   const portCountry = port?.country || '';
   
-  // Check if port has detailed G606-style content
-  const detailedContent = getPortContent(slug);
-  const hasDetailed = hasDetailedContent(slug);
+  // Debug: Log data source (remove in production)
+  if (source) {
+    console.log(`Port data loaded from: ${source}`);
+  }
   
   // Load images from database with smart placeholders
   const { imageUrl: heroImage } = usePortGuideImage(slug, 'hero', portName, portCountry);
@@ -66,6 +66,18 @@ function PortGuidePage() {
     }
     return port.thingsToDo || [];
   }, [port]);
+
+  // Handle loading state
+  if (isLoading) {
+    return (
+      <main className="port-guide-page">
+        <SEO title="Loading Port Guide..." />
+        <div className="container section" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
+          <Loader2 size={48} className="loading-spinner" style={{ animation: 'spin 1s linear infinite' }} />
+        </div>
+      </main>
+    );
+  }
 
   // Handle port not found
   if (!port) {

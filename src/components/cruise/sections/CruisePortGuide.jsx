@@ -11,11 +11,10 @@
  * The dayData.portSlug links to the port guide - no separate content files needed.
  */
 
-import { Clock, Info, MapPin, Sun } from 'lucide-react';
+import { Clock, Info, MapPin, Sun, Loader2 } from 'lucide-react';
 import PortGuideFeedback from '../../port/PortGuideFeedback';
 import PortWeather from '../PortWeather';
-import { getPortContent } from '../../../data/portContent';
-import { getPortBySlug } from '../../../data/ports';
+import { usePortData } from '../../../hooks/usePortData';
 import { usePortGuideImage } from '../../../hooks/useImageUrl';
 import OptimizedImage from '../../OptimizedImage';
 import { formatBoldText, formatParagraphsWithBold } from '../../../utils/textFormatting.jsx';
@@ -29,11 +28,8 @@ function CruisePortGuide({ sectionKey, dayData }) {
   // Use portSlug directly from itinerary (set in cruise config)
   const slug = dayData.portSlug;
   
-  // Get content directly from port guides (source of truth)
-  const portContent = slug ? getPortContent(slug) : null;
-  
-  // Get port data from ports.js (source of truth for familyFriendly structured data)
-  const portData = getPortBySlug(slug);
+  // Get content from Supabase (with static fallback)
+  const { port: portData, detailedContent: portContent, isLoading } = usePortData(slug);
   const familyFriendly = portData?.familyFriendly;
   
   // Load images
@@ -82,6 +78,15 @@ function CruisePortGuide({ sectionKey, dayData }) {
         return null;
     }
   };
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div className="section-content cruise-port-guide" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '200px' }}>
+        <Loader2 size={32} style={{ animation: 'spin 1s linear infinite', color: 'var(--primary)' }} />
+      </div>
+    );
+  }
 
   return (
     <div className="section-content cruise-port-guide">
