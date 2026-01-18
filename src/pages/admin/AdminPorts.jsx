@@ -4,7 +4,7 @@
  * View, edit, and manage port guides
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { 
   MapPin, 
   Check, 
@@ -12,9 +12,11 @@ import {
   Eye, 
   EyeOff,
   Upload,
+  FileText,
   ExternalLink,
   Search,
-  AlertTriangle
+  AlertTriangle,
+  Loader2
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import useAdminAuth from '../../hooks/useAdminAuth';
@@ -74,6 +76,9 @@ function AdminPorts() {
   const [filterStatus, setFilterStatus] = useState('all');
   const [filterRegion, setFilterRegion] = useState('all');
   const [isMigrating, setIsMigrating] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadResult, setUploadResult] = useState(null);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -250,6 +255,56 @@ function AdminPorts() {
     }
   };
 
+  const handleFileUpload = async (event) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Reset the input so the same file can be selected again
+    event.target.value = '';
+
+    if (!file.name.endsWith('.md')) {
+      alert('Please select a Markdown (.md) file');
+      return;
+    }
+
+    setIsUploading(true);
+    setUploadResult(null);
+
+    try {
+      const markdown = await file.text();
+
+      const response = await fetch('/api/admin/upload-port', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ markdown, action: 'upsert' })
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Upload failed');
+      }
+
+      setUploadResult({
+        success: true,
+        message: `${result.action === 'updated' ? 'Updated' : 'Created'} port: ${result.port.name}`,
+        port: result.port
+      });
+
+      // Refresh the ports list
+      fetchPorts();
+
+    } catch (error) {
+      console.error('Upload error:', error);
+      setUploadResult({
+        success: false,
+        message: error.message
+      });
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
   if (authLoading || !isAuthenticated) {
     return <div className="admin-loading">Loading...</div>;
   }
@@ -284,15 +339,86 @@ function AdminPorts() {
             <h1>Port Guides</h1>
             <p>Manage port guide content and visibility</p>
           </div>
-          <button 
-            className="admin-btn admin-btn-primary"
-            onClick={migrateFromJS}
-            disabled={isMigrating}
-          >
-            <Upload size={18} />
-            {isMigrating ? 'Migrating...' : 'Import from JS Files'}
-          </button>
+          <div style={{ display: 'flex', gap: '0.75rem' }}>
+            {/* Hidden file input */}
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleFileUpload}
+              accept=".md"
+              style={{ display: 'none' }}
+            />
+            
+            {/* Upload Markdown Button */}
+            <button 
+              className="admin-btn admin-btn-primary"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={isUploading}
+              style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+            >
+              {isUploading ? (
+                <>
+                  <Loader2 size={18} style={{ animation: 'spin 1s linear infinite' }} />
+                  Uploading...
+                </>
+              ) : (
+                <>
+                  <FileText size={18} />
+                  Upload Markdown
+                </>
+              )}
+            </button>
+            
+            {/* Import from JS Files (legacy) */}
+            <button 
+              className="admin-btn"
+              onClick={migrateFromJS}
+              disabled={isMigrating}
+              style={{ background: 'var(--admin-bg-tertiary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+            >
+              <Upload size={18} />
+              {isMigrating ? 'Migrating...' : 'Import from JS'}
+            </button>
+          </div>
         </div>
+
+        {/* Upload Result Message */}
+        {uploadResult && (
+          <div 
+            style={{ 
+              padding: '1rem',
+              marginBottom: '1.5rem',
+              borderRadius: '8px',
+              background: uploadResult.success ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+              border: `1px solid ${uploadResult.success ? 'rgba(34, 197, 94, 0.3)' : 'rgba(239, 68, 68, 0.3)'}`,
+              color: uploadResult.success ? 'var(--admin-success)' : 'var(--admin-danger)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between'
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              {uploadResult.success ? <Check size={18} /> : <AlertTriangle size={18} />}
+              <span>{uploadResult.message}</span>
+            </div>
+            {uploadResult.success && uploadResult.port && (
+              <a
+                href={`/ports/${uploadResult.port.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'var(--admin-primary)', display: 'flex', alignItems: 'center', gap: '0.25rem' }}
+              >
+                View Port <ExternalLink size={14} />
+              </a>
+            )}
+            <button 
+              onClick={() => setUploadResult(null)}
+              style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer' }}
+            >
+              <X size={18} />
+            </button>
+          </div>
+        )}
 
         {/* Stats */}
         <div className="stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: '2rem' }}>
