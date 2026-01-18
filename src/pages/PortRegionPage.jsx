@@ -4,6 +4,7 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import { Button, Card, SectionHeader } from '../components/ui';
 import { usePortGuideImage } from '../hooks/useImageUrl';
+import '../styles/page-header.css';
 import './PortRegionPage.css';
 import './PortsPage.css'; // Import for region filter styles
 
@@ -92,16 +93,10 @@ function PortRegionPage() {
       />
 
       {/* Hero Section - No hero requirement */}
-      <section className="page-header">
+      <section className="standard-page-header">
         <div className="container">
-          <div className="page-header-content">
-            <h1>{region.name} Cruise Ports</h1>
-            <p className="page-header-subtitle">{region.description}</p>
-            <div className="page-header-actions">
-              <Button to="/find-a-cruise" variant="primary">Find a Cruise</Button>
-              <Button href={`tel:${siteConfig.phone}`} variant="outline">Call {siteConfig.phone}</Button>
-            </div>
-          </div>
+          <h1>{region.name} Cruise Ports</h1>
+          <p>{region.description}</p>
         </div>
       </section>
 

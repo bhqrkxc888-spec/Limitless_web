@@ -1,0 +1,56 @@
+/**
+ * Standard Page Header Component
+ * Clean, modern header for pages without hero images
+ * Based on Bespoke Packages design
+ */
+
+.standard-page-header {
+  padding: var(--space-12, 3rem) 0 var(--space-8, 2rem) 0;
+  text-align: center;
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-bottom: 1px solid var(--clr-border, #E8E4DC);
+}
+
+.standard-page-header h1 {
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--clr-text-main, #2C344C);
+  margin-bottom: var(--space-3, 0.75rem);
+}
+
+.standard-page-header p,
+.standard-page-header .page-header-subtitle {
+  font-size: var(--font-size-lg, 1.125rem);
+  color: var(--clr-text-muted, #5C6478);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Optional eyebrow text */
+.standard-page-header .page-header-eyebrow {
+  display: inline-block;
+  font-size: var(--font-size-sm, 0.875rem);
+  font-weight: var(--font-weight-semibold, 600);
+  color: var(--clr-accent, #C9A961);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+  .standard-page-header {
+    padding: var(--space-8, 2rem) var(--space-4, 1rem) var(--space-6, 1.5rem);
+  }
+
+  .standard-page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .standard-page-header p,
+  .standard-page-header .page-header-subtitle {
+    font-size: var(--font-size-base, 1rem);
+  }
+}

@@ -13,6 +13,7 @@
 
 import SEO, { getBreadcrumbSchema } from '../components/SEO';
 import QuoteRequestForm from '../components/enquiry-forms/QuoteRequestForm';
+import '../styles/page-header.css';
 import './GetQuotePage.css';
 
 const breadcrumbSchema = getBreadcrumbSchema([
@@ -32,7 +33,7 @@ function GetQuotePage() {
       />
 
       {/* Page Header */}
-      <section className="quote-page-header">
+      <section className="standard-page-header">
         <div className="container">
           <h1>Get a Competitive Quote</h1>
           <p>Found a cruise you love? Share the details and we will provide a quote within 24 hours.</p>

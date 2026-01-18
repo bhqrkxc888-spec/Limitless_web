@@ -2,6 +2,7 @@ import SEO, { getBreadcrumbSchema } from '../components/SEO';
 import PackageConciergeForm from '../components/enquiry-forms/PackageConciergeForm';
 import { Button } from '../components/ui';
 import { siteConfig } from '../config/siteConfig';
+import '../styles/page-header.css';
 import './PackageConciergePage.css';
 
 const breadcrumbSchema = getBreadcrumbSchema([
@@ -21,7 +22,7 @@ function PackageConciergePage() {
       />
 
       {/* Page Header */}
-      <section className="concierge-page-header">
+      <section className="standard-page-header">
         <div className="container">
           <h1>Bespoke Cruise Packages</h1>
           <p>Complete travel packages expertly crafted for you</p>

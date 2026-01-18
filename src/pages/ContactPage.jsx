@@ -3,6 +3,7 @@ import ContactForm from '../components/ContactForm';
 import SEO, { getOrganizationSchema, getBreadcrumbSchema } from '../components/SEO';
 import OptimizedImage from '../components/OptimizedImage';
 import { aboutImages } from '../utils/imageHelpers';
+import '../styles/page-header.css';
 import './ContactPage.css';
 
 // Structured data for Contact page with ContactPoint

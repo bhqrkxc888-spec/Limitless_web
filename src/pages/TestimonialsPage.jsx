@@ -1,6 +1,7 @@
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import { Button } from '../components/ui';
+import '../styles/page-header.css';
 import './TestimonialsPage.css';
 
 /**
@@ -138,10 +139,10 @@ function TestimonialsPage() {
       />
 
       {/* Hero */}
-      <section className="testimonials-hero">
+      <section className="standard-page-header">
         <div className="container">
           <h1>Client Experiences</h1>
-          <p className="testimonials-hero-subtitle">
+          <p>
             Hear from real travellers who've experienced the difference of personal consultant service for their dream cruise holidays.
           </p>
           

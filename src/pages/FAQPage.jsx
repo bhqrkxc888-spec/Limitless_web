@@ -4,6 +4,7 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import { Button, Accordion } from '../components/ui';
 import { createSanitizedMarkup } from '../utils/sanitizeHtml';
+import '../styles/page-header.css';
 import './FAQPage.css';
 
 // FAQ Data organized by category
@@ -211,10 +212,10 @@ function FAQPage() {
       />
 
       {/* Hero */}
-      <section className="faq-hero">
+      <section className="standard-page-header">
         <div className="container">
           <h1>Frequently Asked Questions</h1>
-          <p className="faq-hero-subtitle">
+          <p>
             Everything you need to know about cruise holidays. Can't find your answer? 
             <Link to="/contact"> Just ask us</Link>.
           </p>

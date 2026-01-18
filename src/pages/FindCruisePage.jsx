@@ -5,6 +5,7 @@ import { siteConfig } from '../config/siteConfig';
 import { hasConsent, loadScriptsWithConsent } from '../utils/consentManager';
 import { Button } from '../components/ui';
 import { logger } from '../utils/logger';
+import '../styles/page-header.css';
 import './FindCruisePage.css';
 
 function FindCruisePage() {
@@ -74,11 +75,11 @@ function FindCruisePage() {
       />
 
       {/* Hero */}
-      <section className="finder-hero">
+      <section className="standard-page-header">
         <div className="container">
           <h1>Find Your Perfect Cruise</h1>
-          <p className="finder-hero-lead">
-            Search cruises below or tell us what you're looking for and we'll find the best options with exclusive pricing. <a href="/about" className="inline-link">Learn more about our approach</a>.
+          <p>
+            Search cruises below or tell us what you're looking for and we'll find the best options with exclusive pricing.
           </p>
         </div>
       </section>
