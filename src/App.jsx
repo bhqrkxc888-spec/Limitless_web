@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
-import { useEffect, lazy, Suspense, useState } from 'react'
+import { useEffect, useLayoutEffect, lazy, Suspense, useState } from 'react'
 import { analyzePageSEO } from './services/seoMonitoring'
 import lazyWithRetry from './utils/lazyWithRetry'
 
@@ -157,23 +157,48 @@ const PortsPage = lazy(() => lazyWithRetry(() => import('./pages/PortsPage')))
 const PortRegionPage = lazy(() => lazyWithRetry(() => import('./pages/PortRegionPage')))
 
 // Scroll to top on route change and trigger SEO analysis
+// ARCHITECTURAL FIX: Ensures EVERY page load scrolls to top BEFORE any sticky elements activate
 function ScrollToTop() {
   const { pathname } = useLocation();
 
+  // useLayoutEffect runs synchronously BEFORE browser paint
+  // This prevents any visual "jump" and ensures scroll happens before sticky elements calculate position
+  useLayoutEffect(() => {
+    // CRITICAL: Immediate scroll to top - runs before browser paints
+    // This is the primary scroll that prevents sticky/anchor issues
+    window.scrollTo(0, 0);
+    
+    // Backup scrolls: Handle edge cases where content loads asynchronously
+    // Multiple timeouts ensure it works across all browsers and devices
+    const scrollTimeouts = [
+      // First backup: After requestAnimationFrame (before next paint)
+      requestAnimationFrame(() => {
+        window.scrollTo(0, 0);
+      }),
+      
+      // Second backup: After 50ms (handles lazy components)
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 50),
+      
+      // Final backup: After 100ms (handles heavy pages with lots of images)
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 100)
+    ];
+    
+    return () => {
+      // Clean up RAF
+      if (typeof scrollTimeouts[0] === 'number') {
+        cancelAnimationFrame(scrollTimeouts[0]);
+      }
+      // Clean up timeouts
+      clearTimeout(scrollTimeouts[1]);
+      clearTimeout(scrollTimeouts[2]);
+    };
+  }, [pathname]);
+
   useEffect(() => {
-    // CRITICAL: Force scroll to top on every route change
-    // Use both scrollTo and scrollRestoration to prevent browser interference
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'instant' // instant = no smooth scroll
-    });
-    
-    // Backup: Force scroll again after a tiny delay to override any lazy-loaded content
-    const scrollTimeout = setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 10);
-    
     // Trigger SEO analysis on route change (after a delay to let page render)
     // Skip for admin routes
     if (!import.meta.env.DEV && !pathname.startsWith('/admin')) {
@@ -183,13 +208,8 @@ function ScrollToTop() {
         })
       }, 1500)
       
-      return () => {
-        clearTimeout(scrollTimeout)
-        clearTimeout(seoTimeout)
-      }
+      return () => clearTimeout(seoTimeout)
     }
-    
-    return () => clearTimeout(scrollTimeout)
   }, [pathname]);
 
   return null;
