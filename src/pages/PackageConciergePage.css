@@ -62,9 +62,15 @@
 
 .concierge-benefits {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-6, 1.5rem);
   margin-top: var(--space-8, 2rem);
+}
+
+@media (max-width: 1024px) {
+  .concierge-benefits {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .benefit-item {
