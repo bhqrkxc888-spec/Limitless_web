@@ -138,68 +138,52 @@ function PortsPage() {
         structuredData={structuredData}
       />
 
-      {/* Unified Hero Section */}
+      {/* Hero Section with Region Navigation */}
       <section className="page-header ports-hero">
         <div className="container">
           <div className="page-header-content">
             <h1>Cruise Port Guides</h1>
             <p className="page-header-subtitle">
-              Everything you need to know for your port days
+              Find things to do, shore excursions, restaurants, and insider tips from experienced cruisers.
             </p>
-            {/* Development Notice */}
-            <div style={{
-              background: 'rgba(100, 100, 100, 0.1)',
-              border: '1px solid rgba(100, 100, 100, 0.2)',
-              borderRadius: '4px',
-              padding: '0.5rem 1rem',
-              margin: '1rem auto 1.5rem',
-              maxWidth: '500px',
-              fontSize: '0.8rem',
-              color: 'var(--text-muted)',
-              textAlign: 'center'
-            }}>
-              Port guides are currently in development and will be updated and published daily
-            </div>
+            
+            {/* Region Quick-Nav */}
+            {activeRegions.length > 0 && (
+              <div className="regions-quick-nav" style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
+                <span className="regions-label">Browse by Region:</span>
+                <div className="regions-chips">
+                  {activeRegions.map((region) => {
+                    const portCount = portsByRegion[region.id]?.length || 0;
+                    return (
+                      <Link
+                        key={region.id}
+                        to={`/ports/region/${region.slug}`}
+                        className="region-chip"
+                      >
+                        {region.name}
+                        <span className="chip-count">{portCount}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+            
             <div className="page-header-actions">
               <Button to="/find-a-cruise" variant="primary">Find a Cruise</Button>
               <Button href={`tel:${siteConfig.phone}`} variant="outline">Call {siteConfig.phone}</Button>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Introduction + Regions Combined */}
-      <section className="section ports-intro-section">
-        <div className="container">
-          <div className="ports-intro-content">
-            <h2>Plan Your Perfect Port Day</h2>
-            <p className="lead">
-              Our comprehensive port guides help you make the most of your time ashore. 
-              Find things to do, shore excursions, restaurants, and insider tips from experienced cruisers.
+            
+            {/* Development Notice - subtle */}
+            <p style={{
+              marginTop: '1.5rem',
+              fontSize: '0.75rem',
+              color: 'var(--text-muted)',
+              opacity: 0.7
+            }}>
+              Port guides are in development and updated daily
             </p>
           </div>
-
-          {/* Inline Region Quick-Nav */}
-          {activeRegions.length > 0 && (
-            <div className="regions-quick-nav">
-              <span className="regions-label">Browse by Region:</span>
-              <div className="regions-chips">
-                {activeRegions.map((region) => {
-                  const portCount = portsByRegion[region.id]?.length || 0;
-                  return (
-                    <Link
-                      key={region.id}
-                      to={`/ports/region/${region.slug}`}
-                      className="region-chip"
-                    >
-                      {region.name}
-                      <span className="chip-count">{portCount}</span>
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-          )}
         </div>
       </section>
 
@@ -212,24 +196,6 @@ function PortsPage() {
         </section>
       )}
 
-      {/* Data Source Indicator (visible in development/for debugging) */}
-      {!isLoading && ports.length > 0 && (
-        <div style={{ 
-          position: 'fixed', 
-          bottom: '20px', 
-          right: '20px', 
-          background: 'rgba(34, 197, 94, 0.85)', 
-          color: 'white',
-          padding: '4px 8px',
-          borderRadius: '4px',
-          fontSize: '0.7rem',
-          fontWeight: '500',
-          boxShadow: '0 1px 4px rgba(0,0,0,0.15)',
-          zIndex: 9999
-        }}>
-          Supabase
-        </div>
-      )}
 
       {/* No Ports Message */}
       {!isLoading && ports.length === 0 && (

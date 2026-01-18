@@ -142,7 +142,7 @@
   gap: 12px;
 }
 
-.logo-icon {
+.cruise-companion-page .logo-icon {
   width: 48px;
   height: 48px;
   flex-shrink: 0;
@@ -151,13 +151,13 @@
   border-radius: var(--radius-md, 8px);
 }
 
-.logo-text {
+.cruise-companion-page .logo-text {
   display: flex;
   flex-direction: column;
   line-height: 1.2;
 }
 
-.logo-name {
+.cruise-companion-page .logo-name {
   font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
   font-size: 20px;
   font-weight: 700;
@@ -166,7 +166,7 @@
   margin: 0;
 }
 
-.logo-tagline {
+.cruise-companion-page .logo-tagline {
   font-family: var(--font-family, 'Inter', sans-serif);
   font-size: 10px;
   font-weight: 500;
@@ -446,12 +446,12 @@
     gap: var(--space-5, 1.25rem);
   }
 
-  .logo-icon {
+  .cruise-companion-page .logo-icon {
     width: 56px;
     height: 56px;
   }
 
-  .logo-name {
+  .cruise-companion-page .logo-name {
     font-size: 24px;
   }
 

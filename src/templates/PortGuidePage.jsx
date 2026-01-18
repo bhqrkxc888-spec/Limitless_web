@@ -700,24 +700,6 @@ function PortGuidePage() {
         </div>
       </footer>
 
-      {/* Data Source Indicator */}
-      {source && (
-        <div style={{ 
-          position: 'fixed', 
-          bottom: '20px', 
-          right: '20px', 
-          background: source === 'supabase' ? 'rgba(34, 197, 94, 0.85)' : 'rgba(234, 179, 8, 0.85)', 
-          color: 'white',
-          padding: '4px 8px',
-          borderRadius: '4px',
-          fontSize: '0.7rem',
-          fontWeight: '500',
-          boxShadow: '0 1px 4px rgba(0,0,0,0.15)',
-          zIndex: 9999
-        }}>
-          {source === 'supabase' ? 'Supabase' : 'Static'}
-        </div>
-      )}
     </main>
   );
 }
