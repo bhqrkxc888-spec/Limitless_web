@@ -26,6 +26,16 @@ INSTRUCTIONS:
 <!-- REQUIRED: 2-3 paragraphs providing an engaging overview -->
 [Write 2-3 paragraphs here. First paragraph: What makes this destination special. Second paragraph: History and character. Third paragraph: What visitors can expect. Make it inviting and informative.]
 
+## Weather & Best Time to Visit
+<!-- REQUIRED: Season-aware information for cruise passengers -->
+- Best Months: [e.g., April to October, Year-round, May to September]
+- Peak Season: [When it's busiest, e.g., June-August]
+- Weather Overview: [Brief description of typical weather conditions]
+- Summer (Jun-Aug): [What to expect - e.g., Hot and sunny, 25-30°C, busy]
+- Winter (Dec-Feb): [What to expect - e.g., Mild, 15-20°C, quieter]
+- Spring/Fall: [What to expect - e.g., Pleasant, 18-24°C, ideal for walking]
+- What to Pack: [Season-specific advice, e.g., Light clothing, sun cream, comfortable shoes]
+
 ## About Port
 <!-- REQUIRED: Information about the cruise terminal -->
 [Describe the cruise terminal, arrival procedures, distance to town, shuttle availability, and what facilities are at the port.]
@@ -196,6 +206,7 @@ CHECKLIST BEFORE UPLOAD:
 [ ] Slug is lowercase with dashes only
 [ ] Region matches one of the allowed values
 [ ] Coordinates are correct (check Google Maps)
+[ ] Weather & Best Time to Visit section completed
 [ ] At least 3 Must-See Sights
 [ ] At least 2 Shore Excursions  
 [ ] At least 3 Food & Drink venues

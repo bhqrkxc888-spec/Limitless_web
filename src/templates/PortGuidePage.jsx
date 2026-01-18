@@ -12,6 +12,7 @@ import { ArrowLeft, ChevronLeft, ChevronRight, MapPin, Loader2 } from 'lucide-re
 import { DetailedPortGuide } from './DetailedPortGuide';
 import PortGuideFeedback from '../components/port/PortGuideFeedback';
 import PortGuideReviews from '../components/port/PortGuideReviews';
+import SocialShare from '../components/SocialShare';
 import './PortGuidePage.css';
 
 // Fallback hero image
@@ -226,6 +227,15 @@ function PortGuidePage() {
         size="md"
         align="left"
       />
+
+      {/* Social Share */}
+      <div className="container" style={{ marginTop: '2rem', marginBottom: '2rem' }}>
+        <SocialShare 
+          url={`https://www.limitlesscruises.com/ports/${port.slug}`}
+          title={`${port.name} Cruise Port Guide`}
+          description={port.description}
+        />
+      </div>
 
       {/* Main Content */}
       <article className="port-content">
