@@ -81,7 +81,8 @@
 
 html {
   font-size: 16px;
-  scroll-behavior: smooth;
+  /* REMOVED: scroll-behavior: smooth - interferes with programmatic scrollTo calls
+     Smooth scrolling is applied via JavaScript only when user initiates scroll */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

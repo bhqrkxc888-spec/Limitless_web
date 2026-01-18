@@ -13,8 +13,20 @@
    SCROLL ANCHOR - Invisible scroll target
    Used to scroll to content top when tabs change
    scroll-margin-top offsets for sticky header + tabs
+   
+   IMPORTANT: scroll-margin-top only activates AFTER user clicks a tab
+   This prevents browser from auto-scrolling to this element on initial page load
    ======================================== */
 
+/* INACTIVE state - NO scroll-margin-top (prevents browser auto-scroll on page load) */
+.detailed-port-guide .scroll-anchor-inactive {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  /* No scroll-margin-top - prevents interference with initial page load */
+}
+
+/* ACTIVE state - has scroll-margin-top (only after user clicks a tab) */
 .detailed-port-guide .scroll-anchor {
   height: 0;
   width: 0;

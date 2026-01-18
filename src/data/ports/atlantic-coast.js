@@ -290,8 +290,8 @@ The Basque Country is renowned as one of Europe's great gastronomic regions, and
       },
     },
     
-    medicalPharmacy: {
-      nearestPharmacy: {
+    medical: {
+      pharmacy: {
         name: 'Pharmacy',
         location: 'Available in Getxo town centre and throughout Bilbao',
         notes: 'Look for green cross sign',
@@ -299,10 +299,10 @@ The Basque Country is renowned as one of Europe's great gastronomic regions, and
       hospital: {
         name: 'Hospital Universitario Cruces',
         location: 'Main hospital for the region',
-        emergencyDepartment: true,
+        hasEmergency: true,
         notes: 'Full emergency services',
       },
-      medicalTips: [
+      tips: [
         'European Health Insurance Card (EHIC) valid in Spain',
         '112 is the pan-European emergency number',
         'Pharmacies can provide advice on minor ailments',

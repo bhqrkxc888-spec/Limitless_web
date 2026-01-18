@@ -182,8 +182,25 @@ root.render(
   </StrictMode>,
 )
 
-// After React renders, scroll to top again to handle any content-induced scroll
-// This catches cases where lazy-loaded content might shift the page
+// AGGRESSIVE scroll to top - multiple attempts to ensure page starts at top
+// This handles lazy-loaded content, images, and sticky elements that might cause scroll shift
+
+// 1. Immediate after render
 requestAnimationFrame(() => {
   window.scrollTo(0, 0)
 })
+
+// 2. After 50ms (handles most lazy content)
+setTimeout(() => {
+  window.scrollTo(0, 0)
+}, 50)
+
+// 3. After 100ms (handles heavier content)
+setTimeout(() => {
+  window.scrollTo(0, 0)
+}, 100)
+
+// 4. After 200ms (final safety net)
+setTimeout(() => {
+  window.scrollTo(0, 0)
+}, 200)

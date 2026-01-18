@@ -76,6 +76,7 @@ function CruiseCompanionPage() {
   const [isChecking, setIsChecking] = useState(true);
   const [selectedDayIndex, setSelectedDayIndex] = useState(null);
   const [selectedSection, setSelectedSection] = useState(null);
+  const [hasUserInteracted, setHasUserInteracted] = useState(false);
   const scrollAnchorRef = useRef(null);
 
   // Extract data from cruise (with fallbacks)
@@ -132,6 +133,7 @@ function CruiseCompanionPage() {
   // Handle day selection - update state and scroll to anchor
   const handleDaySelect = (dayIndex) => {
     setSelectedDayIndex(dayIndex);
+    setHasUserInteracted(true);
     const dayData = itinerary[dayIndex];
     if (dayData) {
       const sections = getSectionsForDayType(dayData.dayType);
@@ -143,6 +145,7 @@ function CruiseCompanionPage() {
   // Handle section selection - update state and scroll to anchor
   const handleSectionSelect = (sectionKey) => {
     setSelectedSection(sectionKey);
+    setHasUserInteracted(true);
     scrollToAnchor();
   };
 
@@ -372,7 +375,13 @@ function CruiseCompanionPage() {
       />
 
       {/* Scroll anchor - this is the scroll target, CSS handles the offset */}
-      <div ref={scrollAnchorRef} className="scroll-anchor" aria-hidden="true" />
+      {/* Scroll anchor - only add scroll-margin-top class after user clicks a tab/day
+          This prevents browser from auto-scrolling to this element on initial page load */}
+      <div 
+        ref={scrollAnchorRef} 
+        className={hasUserInteracted ? 'scroll-anchor' : 'scroll-anchor-inactive'} 
+        aria-hidden="true" 
+      />
 
       {/* Main Content */}
       <div className="companion-content">

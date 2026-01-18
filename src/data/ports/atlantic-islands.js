@@ -295,8 +295,8 @@ Madeira's mild year-round climate, unique flora, and dramatic volcanic landscape
       },
     },
     
-    medicalPharmacy: {
-      nearestPharmacy: {
+    medical: {
+      pharmacy: {
         name: 'Farmácia do Infante',
         location: 'Near Sé Cathedral, 15 minutes walk from port',
         notes: 'Portuguese pharmacies display green cross and can advise on minor ailments',
@@ -304,10 +304,10 @@ Madeira's mild year-round climate, unique flora, and dramatic volcanic landscape
       hospital: {
         name: 'Hospital Dr Nélio Mendonça',
         location: 'Approximately 3km from port',
-        emergencyDepartment: true,
+        hasEmergency: true,
         notes: 'Main hospital for Madeira with full emergency services',
       },
-      medicalTips: [
+      tips: [
         'European Health Insurance Card (EHIC) or Global Health Insurance Card (GHIC) valid here',
         'Pharmacies can provide advice and some medications without prescription',
         'Tap water is safe to drink in Funchal',
@@ -682,8 +682,8 @@ Puerto del Rosario may lack the polish of purpose-built resorts, but it offers a
       },
     },
     
-    medicalPharmacy: {
-      nearestPharmacy: {
+    medical: {
+      pharmacy: {
         name: 'Farmacia',
         location: 'Near Primero de Mayo pedestrian street',
         notes: 'Look for green cross sign, can advise on minor ailments',
@@ -691,10 +691,10 @@ Puerto del Rosario may lack the polish of purpose-built resorts, but it offers a
       hospital: {
         name: 'Hospital General de Fuerteventura',
         location: 'Puerto del Rosario, approximately 2km from port',
-        emergencyDepartment: true,
+        hasEmergency: true,
         notes: 'Main hospital for the island',
       },
-      medicalTips: [
+      tips: [
         'European Health Insurance Card (EHIC) or Global Health Insurance Card (GHIC) valid in Spain',
         'Pharmacies can provide advice and some medications without prescription',
         'Sun protection is essential - the UV is strong year-round',

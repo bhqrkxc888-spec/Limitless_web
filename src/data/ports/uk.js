@@ -276,8 +276,8 @@ Southampton also serves as an ideal gateway to some of England\'s most iconic at
       },
     },
     
-    medicalPharmacy: {
-      nearestPharmacy: {
+    medical: {
+      pharmacy: {
         name: 'Boots',
         location: 'Above Bar Street, 15 minutes walk from City Terminal',
         notes: 'Large pharmacy with consultation room, open standard retail hours',
@@ -285,10 +285,10 @@ Southampton also serves as an ideal gateway to some of England\'s most iconic at
       hospital: {
         name: 'Southampton General Hospital',
         location: 'Tremona Road, 3 miles from cruise terminals',
-        emergencyDepartment: true,
+        hasEmergency: true,
         notes: 'Major teaching hospital with full A&E',
       },
-      medicalTips: [
+      tips: [
         'Pharmacies can advise on minor ailments without prescription',
         'NHS 111 service provides medical advice by phone',
         'Bring European Health Insurance Card (EHIC) or Global Health Insurance Card (GHIC) if applicable',
@@ -658,8 +658,8 @@ While Dover town itself is modest, the surrounding area offers excellent day tri
       },
     },
     
-    medicalPharmacy: {
-      nearestPharmacy: {
+    medical: {
+      pharmacy: {
         name: 'Boots',
         location: 'Biggin Street, 12 minutes walk from cruise terminal',
         notes: 'Full pharmacy services, standard retail hours',
@@ -667,10 +667,10 @@ While Dover town itself is modest, the surrounding area offers excellent day tri
       hospital: {
         name: 'William Harvey Hospital',
         location: 'Ashford, approximately 20 miles from Dover',
-        emergencyDepartment: true,
+        hasEmergency: true,
         notes: 'The nearest major hospital; Dover has minor injuries units',
       },
-      medicalTips: [
+      tips: [
         'Dover\'s medical facilities are limited - most serious issues require travel to Ashford or Canterbury',
         'Call NHS 111 for non-emergency medical advice',
         'Pharmacies can provide advice on minor ailments',

@@ -133,6 +133,7 @@ const AdminCruiseLineImages = lazy(() => lazyWithRetry(() => import('./pages/adm
 const AdminCategoryImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminCategoryImages')))
 const AdminBucketListImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminBucketListImages')))
 const AdminPortGuideImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPortGuideImages')))
+const AdminPortGuideStatus = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPortGuideStatus')))
 const AdminShipImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminShipImages')))
 const AdminCruiseFinder = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminCruiseFinder')))
 const AdminPortRatings = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPortRatings')))
@@ -165,36 +166,42 @@ function ScrollToTop() {
   // This prevents any visual "jump" and ensures scroll happens before sticky elements calculate position
   useLayoutEffect(() => {
     // CRITICAL: Immediate scroll to top - runs before browser paints
-    // This is the primary scroll that prevents sticky/anchor issues
+    // Force both document and window to scroll position 0
     window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0; // For Safari
     
     // Backup scrolls: Handle edge cases where content loads asynchronously
     // Multiple timeouts ensure it works across all browsers and devices
-    const scrollTimeouts = [
-      // First backup: After requestAnimationFrame (before next paint)
-      requestAnimationFrame(() => {
-        window.scrollTo(0, 0);
-      }),
-      
-      // Second backup: After 50ms (handles lazy components)
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-      }, 50),
-      
-      // Final backup: After 100ms (handles heavy pages with lots of images)
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-      }, 100)
-    ];
+    const rafId = requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    });
+    
+    const timeout1 = setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 50);
+    
+    const timeout2 = setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 100);
+    
+    const timeout3 = setTimeout(() => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }, 200);
     
     return () => {
-      // Clean up RAF
-      if (typeof scrollTimeouts[0] === 'number') {
-        cancelAnimationFrame(scrollTimeouts[0]);
-      }
-      // Clean up timeouts
-      clearTimeout(scrollTimeouts[1]);
-      clearTimeout(scrollTimeouts[2]);
+      cancelAnimationFrame(rafId);
+      clearTimeout(timeout1);
+      clearTimeout(timeout2);
+      clearTimeout(timeout3);
     };
   }, [pathname]);
 
@@ -250,6 +257,9 @@ function AppLayout() {
           {/* Feedback Management */}
           <Route path="/admin/port-ratings" element={<AdminProtectedRoute><AdminPortRatings /></AdminProtectedRoute>} />
           <Route path="/admin/cruise-feedback" element={<AdminProtectedRoute><AdminCruiseFeedback /></AdminProtectedRoute>} />
+          
+          {/* Port Guide Status */}
+          <Route path="/admin/port-guide-status" element={<AdminProtectedRoute><AdminPortGuideStatus /></AdminProtectedRoute>} />
           
           {/* Image Management */}
           <Route path="/admin/images" element={<AdminProtectedRoute><AdminImageManagement /></AdminProtectedRoute>} />

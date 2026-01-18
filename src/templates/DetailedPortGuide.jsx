@@ -73,12 +73,15 @@ const PORT_SECTIONS = [
 
 export function DetailedPortGuide({ slug, portName, portCountry, detailedContent, port }) {
   const [activeSection, setActiveSection] = useState('overview');
+  const [hasUserInteracted, setHasUserInteracted] = useState(false);
   const scrollAnchorRef = useRef(null);
   
   // Tab click - update state and scroll to anchor
+  // Only scroll to anchor if user has actually clicked a tab (not on initial load)
   const handleTabChange = (sectionKey) => {
     setActiveSection(sectionKey);
-    // Scroll to anchor after React updates
+    setHasUserInteracted(true);
+    // Scroll to anchor after React updates - only if user initiated
     requestAnimationFrame(() => {
       scrollAnchorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
@@ -187,8 +190,13 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
         </div>
       </nav>
 
-      {/* Scroll anchor - this is the scroll target, CSS handles the offset */}
-      <div ref={scrollAnchorRef} className="scroll-anchor" aria-hidden="true" />
+      {/* Scroll anchor - only add scroll-margin-top class after user clicks a tab
+          This prevents browser from auto-scrolling to this element on initial page load */}
+      <div 
+        ref={scrollAnchorRef} 
+        className={hasUserInteracted ? 'scroll-anchor' : 'scroll-anchor-inactive'} 
+        aria-hidden="true" 
+      />
       
       {/* Section Content */}
       <div className="port-section-content">
@@ -1181,25 +1189,30 @@ function FoodDrinkSection({ foodAndDrink }) {
 
       <hr className="section-divider" />
 
-      {/* Local Dish to Try - Featured recommendation */}
-      {foodAndDrink.localDishToTry && (
-        <>
-          <div className="local-dish-card">
-            <div className="local-dish-header">
-              <ChefHat size={24} className="dish-icon" />
-              <h3>Must Try</h3>
+      {/* Local Dish to Try - Featured recommendation
+          Supports both 'localDishToTry' (portContent.js) and 'localDish' (regional files) */}
+      {(foodAndDrink.localDishToTry || foodAndDrink.localDish) && (() => {
+        const dish = foodAndDrink.localDishToTry || foodAndDrink.localDish;
+        const lookForText = dish.lookFor || dish.whatToLookFor;
+        return (
+          <>
+            <div className="local-dish-card">
+              <div className="local-dish-header">
+                <ChefHat size={24} className="dish-icon" />
+                <h3>Must Try</h3>
+              </div>
+              <div className="local-dish-content">
+                <h4>{dish.name}</h4>
+                <p>{dish.description}</p>
+                {lookForText && (
+                  <p className="look-for"><strong>Look for:</strong> {lookForText}</p>
+                )}
+              </div>
             </div>
-            <div className="local-dish-content">
-              <h4>{foodAndDrink.localDishToTry.name}</h4>
-              <p>{foodAndDrink.localDishToTry.description}</p>
-              {foodAndDrink.localDishToTry.lookFor && (
-                <p className="look-for"><strong>Look for:</strong> {foodAndDrink.localDishToTry.lookFor}</p>
-              )}
-            </div>
-          </div>
-          <hr className="section-divider" />
-        </>
-      )}
+            <hr className="section-divider" />
+          </>
+        );
+      })()}
 
       {/* Support 'localSpeciality' (string, G606 style) */}
       {foodAndDrink.localSpeciality && (
