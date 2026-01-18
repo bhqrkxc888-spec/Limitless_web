@@ -70,7 +70,6 @@ function TravelNewsPage() {
       {/* Page Header */}
       <section className="standard-page-header">
         <div className="container">
-          <span className="page-header-eyebrow">Stay Informed</span>
           <h1>Travel News</h1>
           <p>
             The latest cruise updates, destination guides, and expert travel tips.

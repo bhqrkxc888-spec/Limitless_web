@@ -47,7 +47,6 @@ function CruiseGuidesPage() {
 
       <section className="standard-page-header">
         <div className="container">
-          <span className="page-header-eyebrow">Expert Resources</span>
           <h1>Cruise Guides</h1>
           <p>
             Your complete resource for cruise planning. Expert guides covering cruise lines, port guides, how-to tips, and comparisons.
