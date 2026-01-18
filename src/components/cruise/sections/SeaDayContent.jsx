@@ -1,4 +1,3 @@
-import FeedbackSection from '../FeedbackSection';
 import VenueFinder from '../VenueFinder';
 import { getRecommendations } from '../../../data/cruise/iona-venues';
 import './SectionContent.css';
@@ -22,7 +21,6 @@ function SeaDayContent({ sectionKey, dayData, nextPort }) {
   return (
     <div className="section-content">
       {renderSection()}
-      <FeedbackSection sectionKey={sectionKey} dayNumber={dayData.dayNumber} portName="At Sea" />
     </div>
   );
 }

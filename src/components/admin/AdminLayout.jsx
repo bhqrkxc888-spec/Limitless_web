@@ -97,9 +97,6 @@ function AdminLayout({ children, onLogout, lastUpdated, onRefresh, isRefreshing 
     { path: '/admin/port-guide-status', icon: ClipboardList, label: 'Port Guide Status' },
     { path: '/admin/port-ratings', icon: Star, label: 'Port Ratings' },
     { type: 'divider' },
-    { type: 'section', label: 'Feedback' },
-    { path: '/admin/cruise-feedback', icon: MessageCircle, label: 'Cruise Feedback' },
-    { type: 'divider' },
     { type: 'section', label: 'Content' },
     { path: '/admin/images', icon: Image, label: 'Image Management' },
     { path: '/admin/website/destinations', icon: MapPin, label: 'Destinations' }

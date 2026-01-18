@@ -12,7 +12,7 @@
  */
 
 import { Clock, Info, MapPin, Sun } from 'lucide-react';
-import FeedbackSection from '../FeedbackSection';
+import PortGuideFeedback from '../../port/PortGuideFeedback';
 import PortWeather from '../PortWeather';
 import { getPortContent } from '../../../data/portContent';
 import { getPortBySlug } from '../../../data/ports';
@@ -86,7 +86,10 @@ function CruisePortGuide({ sectionKey, dayData }) {
   return (
     <div className="section-content cruise-port-guide">
       {renderSection()}
-      <FeedbackSection sectionKey={sectionKey} dayNumber={dayData.dayNumber} portName={dayData.portName} />
+      {/* Only show feedback on overview section to avoid duplicates */}
+      {sectionKey === 'overview' && slug && (
+        <PortGuideFeedback portSlug={slug} portName={dayData.portName} />
+      )}
     </div>
   );
 }

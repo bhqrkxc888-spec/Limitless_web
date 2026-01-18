@@ -161,29 +161,20 @@ function AdminSearchConsole() {
           </div>
         ) : (
           <>
-            {/* Setup Notice */}
+            {/* Quick Access */}
             <div className="admin-card admin-setup-notice">
-              <h3>🔍 Google Search Console Integration</h3>
+              <h3>🔍 Google Search Console</h3>
               <p>
-                Track how your site performs in Google Search results. Monitor search queries,
-                rankings, click-through rates, and more.
+                Your site is verified and tracking. View detailed search performance data directly in Google Search Console.
               </p>
               <div className="admin-setup-actions">
                 <a 
-                  href="https://search.google.com/search-console" 
+                  href="https://search.google.com/search-console?resource_id=sc-domain%3Alimitlesscruises.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="admin-btn admin-btn-primary"
                 >
                   Open Search Console <ExternalLink size={14} />
-                </a>
-                <a 
-                  href="https://developers.google.com/webmaster-tools/search-console-api-original" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="admin-btn admin-btn-ghost"
-                >
-                  API Documentation <ExternalLink size={14} />
                 </a>
               </div>
             </div>

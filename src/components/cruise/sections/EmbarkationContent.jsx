@@ -1,4 +1,3 @@
-import FeedbackSection from '../FeedbackSection';
 import PortWeather from '../PortWeather';
 import './SectionContent.css';
 
@@ -23,7 +22,6 @@ function EmbarkationContent({ sectionKey, dayData }) {
   return (
     <div className="section-content">
       {renderSection()}
-      <FeedbackSection sectionKey={sectionKey} dayNumber={dayData.dayNumber} portName={dayData.portName} />
     </div>
   );
 }

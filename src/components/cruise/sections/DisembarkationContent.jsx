@@ -1,4 +1,3 @@
-import FeedbackSection from '../FeedbackSection';
 import './SectionContent.css';
 
 function DisembarkationContent({ sectionKey, dayData }) {
@@ -20,7 +19,6 @@ function DisembarkationContent({ sectionKey, dayData }) {
   return (
     <div className="section-content">
       {renderSection()}
-      <FeedbackSection sectionKey={sectionKey} dayNumber={dayData.dayNumber} portName={dayData.portName} />
     </div>
   );
 }

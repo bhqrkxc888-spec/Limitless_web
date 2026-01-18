@@ -1,4 +1,3 @@
-import FeedbackSection from '../FeedbackSection';
 import VenueFinder from '../VenueFinder';
 import { ionaShipInfo } from '../../../data/cruise/g606-ship-info';
 import './SectionContent.css';
@@ -197,12 +196,6 @@ function ShipContent({ sectionKey, dayData }) {
           </p>
         </div>
       </div>
-
-      <FeedbackSection 
-        sectionKey={sectionKey} 
-        dayNumber={dayData.dayNumber} 
-        portName={dayData.portName} 
-      />
     </div>
   );
 }
