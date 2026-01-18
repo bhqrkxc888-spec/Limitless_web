@@ -118,24 +118,27 @@ ALTER TABLE ports ENABLE ROW LEVEL SECURITY;
 ALTER TABLE cruise_ports ENABLE ROW LEVEL SECURITY;
 ALTER TABLE cruise_sea_days ENABLE ROW LEVEL SECURITY;
 
--- Public can read published ports
-CREATE POLICY "Allow public to read published ports" ON ports
+-- Ports: Permissive policies (admin auth handled at application level)
+CREATE POLICY "Allow all reads" ON ports
   FOR SELECT
   TO anon, authenticated
-  USING (status = 'published');
-
--- Authenticated can read all ports (for admin)
-CREATE POLICY "Allow authenticated to read all ports" ON ports
-  FOR SELECT
-  TO authenticated
   USING (true);
 
--- Authenticated can insert/update/delete ports
-CREATE POLICY "Allow authenticated to manage ports" ON ports
-  FOR ALL
-  TO authenticated
+CREATE POLICY "Allow all inserts" ON ports
+  FOR INSERT
+  TO anon, authenticated
+  WITH CHECK (true);
+
+CREATE POLICY "Allow all updates" ON ports
+  FOR UPDATE
+  TO anon, authenticated
   USING (true)
   WITH CHECK (true);
+
+CREATE POLICY "Allow all deletes" ON ports
+  FOR DELETE
+  TO anon, authenticated
+  USING (true);
 
 -- Public can read cruise_ports
 CREATE POLICY "Allow public to read cruise_ports" ON cruise_ports
