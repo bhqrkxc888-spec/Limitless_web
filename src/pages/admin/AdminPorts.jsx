@@ -16,11 +16,27 @@ import {
   ExternalLink,
   Search,
   AlertTriangle,
-  Loader2
+  Loader2,
+  Compass
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
+
+/**
+ * Region definitions matching the public site
+ */
+const REGIONS = [
+  { id: 'all', name: 'All Regions', icon: '🌍' },
+  { id: 'mediterranean', name: 'Mediterranean', icon: '⛵' },
+  { id: 'atlantic-coast', name: 'Atlantic Coast', icon: '🏖️' },
+  { id: 'atlantic-islands', name: 'Atlantic Islands', icon: '🏝️' },
+  { id: 'norwegian-fjords', name: 'Norwegian Fjords', icon: '⛰️' },
+  { id: 'united-kingdom', name: 'United Kingdom', icon: '🇬🇧' },
+  { id: 'caribbean', name: 'Caribbean', icon: '🌴' },
+  { id: 'northern-europe', name: 'Northern Europe', icon: '🏰' },
+  { id: 'baltic', name: 'Baltic', icon: '🛳️' }
+];
 
 /**
  * Calculate content completeness percentage
@@ -74,7 +90,7 @@ function AdminPorts() {
   const [lastUpdated, setLastUpdated] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
-  const [filterRegion, setFilterRegion] = useState('all');
+  const [selectedRegion, setSelectedRegion] = useState('all');
   const [isMigrating, setIsMigrating] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadResult, setUploadResult] = useState(null);
@@ -309,8 +325,6 @@ function AdminPorts() {
     return <div className="admin-loading">Loading...</div>;
   }
 
-  const uniqueRegions = [...new Set(ports.map(p => p.region))].sort();
-
   const filteredPorts = ports.filter(port => {
     if (filterStatus === 'published' && port.status !== 'published') return false;
     if (filterStatus === 'draft' && port.status !== 'draft') return false;
@@ -318,7 +332,7 @@ function AdminPorts() {
     if (filterStatus === 'incomplete' && port.is_complete) return false;
     if (filterStatus === 'in_menu' && !port.show_in_menu) return false;
     if (filterStatus === 'low_content' && !(port.status === 'published' && port.completeness < 80)) return false;
-    if (filterRegion !== 'all' && port.region !== filterRegion) return false;
+    if (selectedRegion !== 'all' && port.region !== selectedRegion) return false;
     if (searchTerm && !port.name.toLowerCase().includes(searchTerm.toLowerCase())) return false;
     return true;
   });
@@ -330,6 +344,12 @@ function AdminPorts() {
     inMenu: ports.filter(p => p.show_in_menu).length,
     needsAttention: ports.filter(p => p.status === 'published' && p.completeness < 80).length
   };
+
+  // Count ports per region
+  const regionCounts = REGIONS.map(region => ({
+    ...region,
+    count: region.id === 'all' ? ports.length : ports.filter(p => p.region === region.id).length
+  })).filter(region => region.count > 0 || region.id === 'all');
 
   return (
     <AdminLayout onLogout={logout} lastUpdated={lastUpdated} onRefresh={fetchPorts} isRefreshing={isLoading}>
@@ -454,8 +474,48 @@ function AdminPorts() {
           </div>
         </div>
 
-        {/* Filters */}
-        <div className="filters-bar" style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
+        {/* Region Navigation */}
+        <div style={{ marginBottom: '2rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
+            <Compass size={20} style={{ color: 'var(--admin-primary)' }} />
+            <h2 style={{ margin: 0, fontSize: '1.25rem' }}>Browse by Region</h2>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.75rem' }}>
+            {regionCounts.map(region => (
+              <button
+                key={region.id}
+                onClick={() => setSelectedRegion(region.id)}
+                style={{
+                  background: selectedRegion === region.id ? 'var(--admin-primary)' : 'var(--admin-bg-secondary)',
+                  color: selectedRegion === region.id ? 'white' : 'var(--admin-text)',
+                  border: selectedRegion === region.id ? 'none' : '1px solid var(--admin-border)',
+                  padding: '1rem',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  fontWeight: selectedRegion === region.id ? '600' : '500'
+                }}
+              >
+                <span style={{ fontSize: '1.5rem' }}>{region.icon}</span>
+                <span style={{ fontSize: '0.875rem' }}>{region.name}</span>
+                <span style={{ 
+                  fontSize: '1.25rem', 
+                  fontWeight: '700',
+                  color: selectedRegion === region.id ? 'white' : 'var(--admin-primary)'
+                }}>
+                  {region.count}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Secondary Filters */}
+        <div className="filters-bar" style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
           <div className="search-box" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'var(--admin-bg-secondary)', padding: '0.5rem 1rem', borderRadius: '8px', flex: '1', minWidth: '200px' }}>
             <Search size={16} style={{ color: 'var(--admin-text-muted)' }} />
             <input
@@ -481,19 +541,8 @@ function AdminPorts() {
             <option value="low_content">⚠️ Low Content (&lt;80%)</option>
           </select>
 
-          <select 
-            value={filterRegion} 
-            onChange={(e) => setFilterRegion(e.target.value)}
-            style={{ background: 'var(--admin-bg-secondary)', color: 'var(--admin-text)', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px' }}
-          >
-            <option value="all">All Regions</option>
-            {uniqueRegions.map(region => (
-              <option key={region} value={region}>{region}</option>
-            ))}
-          </select>
-
           <span style={{ color: 'var(--admin-text-muted)', alignSelf: 'center' }}>
-            Showing {filteredPorts.length} of {ports.length}
+            {filteredPorts.length} {selectedRegion === 'all' ? 'total' : 'in region'}
           </span>
         </div>
 
