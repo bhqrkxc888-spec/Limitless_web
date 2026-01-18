@@ -192,20 +192,20 @@ function AdminAnalytics() {
           </div>
         ) : (
           <>
-            {/* Integration Notice */}
+            {/* Quick Access */}
             <div className="admin-card admin-integration-notice">
-              <h3>🚀 Analytics Ready</h3>
+              <h3>📊 Analytics Active</h3>
               <p>
-                <strong>Vercel Analytics</strong> is now installed and tracking page views in real-time.
+                <strong>Google Analytics 4</strong> (G-GNY4BEL0HQ) is live and tracking with cookie consent compliance.
               </p>
-              <p>
-                <strong>Google Analytics 4</strong> is configured. Replace <code>G-XXXXXXXXXX</code> in <code>index.html</code> with your GA4 property ID.
-              </p>
-              <p>
-                Visit the <a href="https://vercel.com/limitless-cruises/analytics" target="_blank" rel="noopener noreferrer">
-                  Vercel Dashboard <ExternalLink size={14} />
-                </a> to view detailed traffic analytics.
-              </p>
+              <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem', flexWrap: 'wrap' }}>
+                <a href="https://analytics.google.com/analytics/web/#/p123456789/reports/intelligenthome" target="_blank" rel="noopener noreferrer" className="admin-btn admin-btn-primary">
+                  Open GA4 <ExternalLink size={14} />
+                </a>
+                <a href="https://vercel.com/limitless-cruises/analytics" target="_blank" rel="noopener noreferrer" className="admin-btn admin-btn-ghost">
+                  Vercel Analytics <ExternalLink size={14} />
+                </a>
+              </div>
             </div>
 
             {/* Key Metrics Grid */}
@@ -340,49 +340,6 @@ function AdminAnalytics() {
               </div>
             </div>
 
-            {/* Setup Instructions */}
-            <div className="admin-card">
-              <div className="admin-card-header">
-                <h2 className="admin-card-title">Next Steps: Complete Analytics Setup</h2>
-              </div>
-              <div className="admin-setup-steps">
-                <div className="admin-setup-step">
-                  <div className="admin-setup-step-number">1</div>
-                  <div className="admin-setup-step-content">
-                    <h3>Configure Google Analytics 4</h3>
-                    <p>Create a GA4 property at <a href="https://analytics.google.com" target="_blank" rel="noopener noreferrer">analytics.google.com <ExternalLink size={12} /></a></p>
-                    <p>Replace <code>G-XXXXXXXXXX</code> in <code>index.html</code> with your Measurement ID</p>
-                  </div>
-                </div>
-
-                <div className="admin-setup-step">
-                  <div className="admin-setup-step-number">2</div>
-                  <div className="admin-setup-step-content">
-                    <h3>Set Up Google Search Console</h3>
-                    <p>Verify your site at <a href="https://search.google.com/search-console" target="_blank" rel="noopener noreferrer">search.google.com/search-console <ExternalLink size={12} /></a></p>
-                    <p>Enable the API and add credentials to track search rankings</p>
-                  </div>
-                </div>
-
-                <div className="admin-setup-step">
-                  <div className="admin-setup-step-number">3</div>
-                  <div className="admin-setup-step-content">
-                    <h3>Track Conversions</h3>
-                    <p>Add event tracking to forms, buttons, and key actions</p>
-                    <p>Monitor phone clicks, email clicks, and form submissions automatically</p>
-                  </div>
-                </div>
-
-                <div className="admin-setup-step">
-                  <div className="admin-setup-step-number">4</div>
-                  <div className="admin-setup-step-content">
-                    <h3>Set Up UptimeRobot (Optional)</h3>
-                    <p>Create free account at <a href="https://uptimerobot.com" target="_blank" rel="noopener noreferrer">uptimerobot.com <ExternalLink size={12} /></a></p>
-                    <p>Monitor site uptime and get alerts for downtime</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </>
         )}
       </div>

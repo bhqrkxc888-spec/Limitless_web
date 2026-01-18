@@ -234,63 +234,6 @@ function AdminSearchConsole() {
               </div>
             </div>
 
-            {/* Setup Instructions */}
-            <div className="admin-card">
-              <div className="admin-card-header">
-                <h2 className="admin-card-title">How to Set Up Search Console Integration</h2>
-              </div>
-              <div className="admin-setup-steps">
-                <div className="admin-setup-step">
-                  <div className="admin-setup-step-number">1</div>
-                  <div className="admin-setup-step-content">
-                    <h3>Verify Your Site</h3>
-                    <p>Go to <a href="https://search.google.com/search-console" target="_blank" rel="noopener noreferrer">Google Search Console <ExternalLink size={12} /></a> and verify ownership of <code>limitlesscruises.com</code></p>
-                    <p>Use DNS verification or HTML tag method (already added to your site)</p>
-                  </div>
-                </div>
-
-                <div className="admin-setup-step">
-                  <div className="admin-setup-step-number">2</div>
-                  <div className="admin-setup-step-content">
-                    <h3>Enable Search Console API</h3>
-                    <p>Go to <a href="https://console.cloud.google.com" target="_blank" rel="noopener noreferrer">Google Cloud Console <ExternalLink size={12} /></a></p>
-                    <p>Enable the "Google Search Console API" for your project</p>
-                  </div>
-                </div>
-
-                <div className="admin-setup-step">
-                  <div className="admin-setup-step-number">3</div>
-                  <div className="admin-setup-step-content">
-                    <h3>Create Service Account</h3>
-                    <p>Create a service account with Search Console permissions</p>
-                    <p>Download the JSON key file</p>
-                  </div>
-                </div>
-
-                <div className="admin-setup-step">
-                  <div className="admin-setup-step-number">4</div>
-                  <div className="admin-setup-step-content">
-                    <h3>Add Credentials to Vercel</h3>
-                    <p>Add these environment variables in Vercel:</p>
-                    <ul>
-                      <li><code>GOOGLE_SERVICE_ACCOUNT_EMAIL</code></li>
-                      <li><code>GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY</code></li>
-                      <li><code>SEARCH_CONSOLE_SITE_URL</code> = https://www.limitlesscruises.com</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="admin-setup-step">
-                  <div className="admin-setup-step-number">5</div>
-                  <div className="admin-setup-step-content">
-                    <h3>Create API Endpoint</h3>
-                    <p>Create <code>/api/admin/search-console.js</code> to fetch data</p>
-                    <p>Store results in <code>website_search_console</code> table</p>
-                    <p>Set up daily cron job to update data</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </>
         )}
       </div>
