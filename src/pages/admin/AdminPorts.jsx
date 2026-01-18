@@ -12,14 +12,58 @@ import {
   Eye, 
   EyeOff,
   Upload,
-  RefreshCw,
   ExternalLink,
   Search,
-  Filter
+  AlertTriangle
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
+
+/**
+ * Calculate content completeness percentage
+ */
+function calculateCompleteness(port) {
+  if (!port) return 0;
+  
+  let score = 0;
+  let maxScore = 0;
+  
+  // Basic info (20%)
+  maxScore += 20;
+  if (port.tagline) score += 5;
+  if (port.description) score += 5;
+  if (port.about_port && Object.keys(port.about_port).length > 0) score += 5;
+  if (port.quick_facts && Object.keys(port.quick_facts).length > 0) score += 5;
+  
+  // Content sections (60%)
+  const sections = [
+    { field: 'content_overview', weight: 10 },
+    { field: 'content_stay_local', weight: 10 },
+    { field: 'content_go_further', weight: 10 },
+    { field: 'content_with_kids', weight: 10 },
+    { field: 'content_accessibility', weight: 5 },
+    { field: 'content_medical', weight: 5 },
+    { field: 'content_food_drink', weight: 10 },
+  ];
+  
+  sections.forEach(({ field, weight }) => {
+    maxScore += weight;
+    const content = port[field];
+    if (content && typeof content === 'object' && Object.keys(content).length > 0) {
+      score += weight;
+    }
+  });
+  
+  // Supporting data (20%)
+  maxScore += 20;
+  if (port.must_see_sights && port.must_see_sights.length > 0) score += 5;
+  if (port.food_and_drink && port.food_and_drink.length > 0) score += 5;
+  if (port.getting_around && Object.keys(port.getting_around).length > 0) score += 5;
+  if (port.transport_connections && Object.keys(port.transport_connections).length > 0) score += 5;
+  
+  return Math.round((score / maxScore) * 100);
+}
 
 function AdminPorts() {
   const { isAuthenticated, isLoading: authLoading, logout } = useAdminAuth();
@@ -40,13 +84,21 @@ function AdminPorts() {
   const fetchPorts = async () => {
     setIsLoading(true);
     try {
+      // Fetch all fields needed for completeness calculation
       const { data, error } = await supabase
         .from('ports')
-        .select('id, slug, name, country, region, status, show_in_menu, is_complete, created_at, updated_at')
+        .select('*')
         .order('name');
 
       if (error) throw error;
-      setPorts(data || []);
+      
+      // Add completeness score to each port
+      const portsWithScore = (data || []).map(port => ({
+        ...port,
+        completeness: calculateCompleteness(port)
+      }));
+      
+      setPorts(portsWithScore);
       setLastUpdated(Date.now());
     } catch (error) {
       console.error('Error fetching ports:', error);
@@ -210,6 +262,7 @@ function AdminPorts() {
     if (filterStatus === 'complete' && !port.is_complete) return false;
     if (filterStatus === 'incomplete' && port.is_complete) return false;
     if (filterStatus === 'in_menu' && !port.show_in_menu) return false;
+    if (filterStatus === 'low_content' && !(port.status === 'published' && port.completeness < 80)) return false;
     if (filterRegion !== 'all' && port.region !== filterRegion) return false;
     if (searchTerm && !port.name.toLowerCase().includes(searchTerm.toLowerCase())) return false;
     return true;
@@ -219,7 +272,8 @@ function AdminPorts() {
     total: ports.length,
     published: ports.filter(p => p.status === 'published').length,
     complete: ports.filter(p => p.is_complete).length,
-    inMenu: ports.filter(p => p.show_in_menu).length
+    inMenu: ports.filter(p => p.show_in_menu).length,
+    needsAttention: ports.filter(p => p.status === 'published' && p.completeness < 80).length
   };
 
   return (
@@ -251,12 +305,26 @@ function AdminPorts() {
             <div className="stat-label" style={{ color: 'var(--admin-text-muted)' }}>Published</div>
           </div>
           <div className="stat-card" style={{ background: 'var(--admin-bg-secondary)', padding: '1.5rem', borderRadius: '12px' }}>
-            <div className="stat-value" style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--admin-primary)' }}>{stats.complete}</div>
-            <div className="stat-label" style={{ color: 'var(--admin-text-muted)' }}>Complete</div>
-          </div>
-          <div className="stat-card" style={{ background: 'var(--admin-bg-secondary)', padding: '1.5rem', borderRadius: '12px' }}>
-            <div className="stat-value" style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--admin-warning)' }}>{stats.inMenu}</div>
+            <div className="stat-value" style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--admin-primary)' }}>{stats.inMenu}</div>
             <div className="stat-label" style={{ color: 'var(--admin-text-muted)' }}>In Menu</div>
+          </div>
+          <div 
+            className="stat-card" 
+            style={{ 
+              background: stats.needsAttention > 0 ? 'rgba(239, 68, 68, 0.1)' : 'var(--admin-bg-secondary)', 
+              padding: '1.5rem', 
+              borderRadius: '12px',
+              cursor: stats.needsAttention > 0 ? 'pointer' : 'default',
+              border: stats.needsAttention > 0 ? '1px solid rgba(239, 68, 68, 0.3)' : 'none'
+            }}
+            onClick={() => stats.needsAttention > 0 && setFilterStatus('low_content')}
+          >
+            <div className="stat-value" style={{ fontSize: '2rem', fontWeight: '700', color: stats.needsAttention > 0 ? 'var(--admin-danger)' : 'var(--admin-success)' }}>
+              {stats.needsAttention > 0 ? stats.needsAttention : '✓'}
+            </div>
+            <div className="stat-label" style={{ color: 'var(--admin-text-muted)' }}>
+              {stats.needsAttention > 0 ? 'Needs Content' : 'All Good'}
+            </div>
           </div>
         </div>
 
@@ -284,6 +352,7 @@ function AdminPorts() {
             <option value="complete">Complete</option>
             <option value="incomplete">Incomplete</option>
             <option value="in_menu">In Menu</option>
+            <option value="low_content">⚠️ Low Content (&lt;80%)</option>
           </select>
 
           <select 
@@ -309,6 +378,7 @@ function AdminPorts() {
               <tr style={{ borderBottom: '1px solid var(--admin-border)' }}>
                 <th style={{ textAlign: 'left', padding: '1rem', color: 'var(--admin-text-muted)', fontWeight: '500' }}>Port</th>
                 <th style={{ textAlign: 'left', padding: '1rem', color: 'var(--admin-text-muted)', fontWeight: '500' }}>Region</th>
+                <th style={{ textAlign: 'center', padding: '1rem', color: 'var(--admin-text-muted)', fontWeight: '500' }}>Content</th>
                 <th style={{ textAlign: 'center', padding: '1rem', color: 'var(--admin-text-muted)', fontWeight: '500' }}>Status</th>
                 <th style={{ textAlign: 'center', padding: '1rem', color: 'var(--admin-text-muted)', fontWeight: '500' }}>Complete</th>
                 <th style={{ textAlign: 'center', padding: '1rem', color: 'var(--admin-text-muted)', fontWeight: '500' }}>In Menu</th>
@@ -318,7 +388,7 @@ function AdminPorts() {
             <tbody>
               {filteredPorts.length === 0 ? (
                 <tr>
-                  <td colSpan={6} style={{ textAlign: 'center', padding: '3rem', color: 'var(--admin-text-muted)' }}>
+                  <td colSpan={7} style={{ textAlign: 'center', padding: '3rem', color: 'var(--admin-text-muted)' }}>
                     {ports.length === 0 ? (
                       <div>
                         <p>No ports in database</p>
@@ -343,6 +413,36 @@ function AdminPorts() {
                     </td>
                     <td style={{ padding: '1rem', color: 'var(--admin-text-muted)' }}>
                       {port.region}
+                    </td>
+                    <td style={{ padding: '1rem', textAlign: 'center' }}>
+                      <div style={{ 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center',
+                        gap: '0.5rem'
+                      }}>
+                        {port.status === 'published' && port.completeness < 80 && (
+                          <AlertTriangle size={14} style={{ color: 'var(--admin-warning)' }} />
+                        )}
+                        <span style={{
+                          padding: '0.25rem 0.5rem',
+                          borderRadius: '4px',
+                          fontSize: '0.875rem',
+                          fontWeight: '600',
+                          background: port.completeness >= 80 
+                            ? 'rgba(34, 197, 94, 0.2)' 
+                            : port.completeness >= 50 
+                              ? 'rgba(234, 179, 8, 0.2)'
+                              : 'rgba(239, 68, 68, 0.2)',
+                          color: port.completeness >= 80 
+                            ? 'var(--admin-success)' 
+                            : port.completeness >= 50 
+                              ? 'var(--admin-warning)'
+                              : 'var(--admin-danger)'
+                        }}>
+                          {port.completeness}%
+                        </span>
+                      </div>
                     </td>
                     <td style={{ padding: '1rem', textAlign: 'center' }}>
                       <select
