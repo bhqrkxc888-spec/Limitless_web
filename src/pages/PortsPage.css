@@ -7,52 +7,6 @@
   background: var(--color-background);
 }
 
-/* Compact Hero Section */
-.ports-hero {
-  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
-  padding: var(--space-10) 0 var(--space-8);
-  color: white;
-  text-align: center;
-}
-
-.ports-hero .page-header-content h1 {
-  font-size: var(--font-size-4xl);
-  font-weight: bold;
-  margin-bottom: var(--space-4);
-  color: white;
-}
-
-.ports-hero .page-header-subtitle {
-  font-size: var(--font-size-lg);
-  margin-bottom: 0;
-  opacity: 0.95;
-}
-
-/* Introduction Section */
-.ports-intro-section {
-  padding: var(--space-12) 0;
-  background: var(--clr-bg-alt, #f8f9fa);
-}
-
-.ports-intro-content {
-  text-align: center;
-  max-width: 720px;
-  margin: 0 auto var(--space-8);
-}
-
-.ports-intro-content h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: var(--clr-text-main);
-}
-
-.ports-intro-content .lead {
-  font-size: 1.125rem;
-  color: var(--clr-text-muted);
-  line-height: 1.7;
-  margin: 0;
-}
-
 /* Region Navigation Section */
 .regions-nav-section {
   padding: var(--space-6) 0;
