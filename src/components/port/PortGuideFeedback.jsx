@@ -69,6 +69,14 @@ function PortGuideFeedback({ portSlug, portName }) {
     setHasRated(true);
 
     try {
+      // Check if Supabase is available
+      if (!supabase) {
+        console.error('Supabase client not initialized');
+        setSubmitSuccess(true); // Still show success for UX
+        setIsSubmitting(false);
+        return;
+      }
+
       // Submit to Supabase
       const { error } = await supabase
         .from('port_guide_ratings')
@@ -81,14 +89,18 @@ function PortGuideFeedback({ portSlug, portName }) {
         });
 
       if (error) {
-        console.warn('Rating saved locally (Supabase unavailable):', error.message);
+        console.error('Supabase rating insert error:', error.code, error.message, error.details);
+        // Don't silently fail - log for debugging
+        if (error.code === '42P01') {
+          console.error('Table port_guide_ratings does not exist - run migration');
+        }
       }
 
       // Show success message
       setSubmitSuccess(true);
 
     } catch (err) {
-      console.warn('Rating saved locally only:', err.message);
+      console.error('Rating submission error:', err);
     } finally {
       setIsSubmitting(false);
     }
@@ -101,6 +113,14 @@ function PortGuideFeedback({ portSlug, portName }) {
     setIsSubmitting(true);
 
     try {
+      // Check if Supabase is available
+      if (!supabase) {
+        console.error('Supabase client not initialized');
+        alert('Unable to submit review - please try again later.');
+        setIsSubmitting(false);
+        return;
+      }
+
       // Submit rating with review to Supabase
       const { error } = await supabase
         .from('port_guide_ratings')
@@ -120,7 +140,10 @@ function PortGuideFeedback({ portSlug, portName }) {
         });
 
       if (error) {
-        console.error('Error submitting review:', error);
+        console.error('Error submitting review:', error.code, error.message, error.details);
+        if (error.code === '42P01') {
+          console.error('Table port_guide_ratings does not exist - run migration');
+        }
         alert('There was an error submitting your review. Please try again.');
         setIsSubmitting(false);
         return;
