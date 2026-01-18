@@ -241,7 +241,7 @@ function AdminPortGuideImages() {
                 ? sortedPorts.filter(p => p.region === selectedRegion)
                 : sortedPorts
               ).map(port => {
-                const imageCount = getImageCount(port.id);
+                const imageCount = getImageCount(port.slug);
                 const region = portRegions.find(r => r.id === port.region);
                 const portImageTypes = getPortImageTypes(port);
                 
@@ -253,7 +253,7 @@ function AdminPortGuideImages() {
                   >
                     <div className="entity-card-header">
                       <h3>{port.name}</h3>
-                      <StatusIndicator status={getPortStatus(port.id)} size="small" />
+                      <StatusIndicator status={getPortStatus(port.slug)} size="small" />
                     </div>
                     <p className="entity-card-region">{region?.name || port.country}</p>
                     <p className="entity-card-stats">
