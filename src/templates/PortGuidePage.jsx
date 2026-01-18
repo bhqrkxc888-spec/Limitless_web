@@ -631,6 +631,7 @@ function PortGuidePage() {
                 <SectionHeader
                   title="Rate This Port Guide"
                   subtitle="Help other cruise passengers plan their visit"
+                  align="left"
                 />
                 <PortGuideFeedback portSlug={port.slug} portName={port.name} />
               </div>

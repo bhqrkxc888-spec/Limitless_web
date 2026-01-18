@@ -1200,10 +1200,12 @@
 
 .feedback-container {
   max-width: 100%;
+  text-align: left;
 }
 
 .feedback-rating {
   margin-bottom: var(--space-4);
+  text-align: left;
 }
 
 .feedback-reviews {
