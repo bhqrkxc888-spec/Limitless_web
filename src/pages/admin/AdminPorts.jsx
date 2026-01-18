@@ -126,7 +126,7 @@ function AdminPorts() {
           if (getPortContent) {
             try {
               content = getPortContent(port.slug) || {};
-            } catch (e) {
+            } catch (_e) {
               // Content not available
             }
           }
