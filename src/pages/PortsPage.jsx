@@ -1,9 +1,11 @@
-import { getAllRegions, getPortsByRegion, getPortsCountByRegion } from '../data/ports';
+import { useState, useEffect, useMemo } from 'react';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import { Button, Card } from '../components/ui';
 import { Link } from 'react-router-dom';
 import { usePortGuideImage } from '../hooks/useImageUrl';
+import { supabase } from '../lib/supabase';
+import { Loader2 } from 'lucide-react';
 import './PortsPage.css';
 
 /**
@@ -40,11 +42,69 @@ function PortCardWithImage({ port }) {
 }
 
 /**
+ * Region definitions (static - these don't change)
+ */
+const REGIONS = [
+  { id: 'mediterranean', slug: 'mediterranean', name: 'Mediterranean' },
+  { id: 'atlantic-coast', slug: 'atlantic-coast', name: 'Atlantic Coast' },
+  { id: 'atlantic-islands', slug: 'atlantic-islands', name: 'Atlantic Islands' },
+  { id: 'norwegian-fjords', slug: 'norwegian-fjords', name: 'Norwegian Fjords' },
+  { id: 'uk', slug: 'united-kingdom', name: 'United Kingdom' },
+];
+
+/**
  * Ports Hub Page
- * Streamlined layout with consolidated hero section
+ * Only shows ports with show_in_menu = true
  */
 function PortsPage() {
-  const regions = getAllRegions();
+  const [ports, setPorts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch only menu-visible ports from Supabase
+  useEffect(() => {
+    async function fetchMenuPorts() {
+      setIsLoading(true);
+      try {
+        const { data, error } = await supabase
+          .from('ports')
+          .select('id, slug, name, country, region, tagline, show_in_menu, is_complete')
+          .eq('status', 'published')
+          .eq('show_in_menu', true)
+          .order('name');
+
+        if (!error && data) {
+          setPorts(data);
+        } else {
+          console.error('Error fetching ports:', error);
+        }
+      } catch (err) {
+        console.error('Ports fetch error:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    fetchMenuPorts();
+  }, []);
+
+  // Group ports by region
+  const portsByRegion = useMemo(() => {
+    const grouped = {};
+    ports.forEach(port => {
+      if (!grouped[port.region]) {
+        grouped[port.region] = [];
+      }
+      grouped[port.region].push(port);
+    });
+    return grouped;
+  }, [ports]);
+
+  // Filter regions to only those with ports
+  const activeRegions = useMemo(() => {
+    return REGIONS.filter(region => 
+      portsByRegion[region.id] && portsByRegion[region.id].length > 0
+    );
+  }, [portsByRegion]);
 
   // Structured Data for SEO
   const structuredData = {
@@ -52,7 +112,7 @@ function PortsPage() {
     '@type': 'ItemList',
     name: 'Cruise Port Guides',
     description: 'Comprehensive guides to cruise ports around the world',
-    itemListElement: regions.map((region, index) => ({
+    itemListElement: activeRegions.map((region, index) => ({
       '@type': 'ListItem',
       position: index + 1,
       item: {
@@ -101,44 +161,67 @@ function PortsPage() {
           </div>
 
           {/* Inline Region Quick-Nav */}
-          <div className="regions-quick-nav">
-            <span className="regions-label">Browse by Region:</span>
-            <div className="regions-chips">
-              {regions.map((region) => {
-                const portCount = getPortsCountByRegion(region.id);
-                return (
-                  <Link
-                    key={region.id}
-                    to={`/ports/region/${region.slug}`}
-                    className="region-chip"
-                  >
-                    {region.name}
-                    <span className="chip-count">{portCount}</span>
-                  </Link>
-                );
-              })}
+          {activeRegions.length > 0 && (
+            <div className="regions-quick-nav">
+              <span className="regions-label">Browse by Region:</span>
+              <div className="regions-chips">
+                {activeRegions.map((region) => {
+                  const portCount = portsByRegion[region.id]?.length || 0;
+                  return (
+                    <Link
+                      key={region.id}
+                      to={`/ports/region/${region.slug}`}
+                      className="region-chip"
+                    >
+                      {region.name}
+                      <span className="chip-count">{portCount}</span>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
 
+      {/* Loading State */}
+      {isLoading && (
+        <section className="section">
+          <div className="container" style={{ display: 'flex', justifyContent: 'center', padding: '4rem 0' }}>
+            <Loader2 size={48} style={{ animation: 'spin 1s linear infinite', color: 'var(--primary)' }} />
+          </div>
+        </section>
+      )}
+
+      {/* No Ports Message */}
+      {!isLoading && ports.length === 0 && (
+        <section className="section">
+          <div className="container text-center" style={{ padding: '4rem 0' }}>
+            <h2>Coming Soon</h2>
+            <p>We're working on comprehensive port guides. Check back soon!</p>
+          </div>
+        </section>
+      )}
+
       {/* Featured Ports by Region */}
-      {regions.map((region) => {
-        const ports = getPortsByRegion(region.id);
-        if (ports.length === 0) return null;
+      {!isLoading && activeRegions.map((region) => {
+        const regionPorts = portsByRegion[region.id] || [];
+        if (regionPorts.length === 0) return null;
 
         return (
           <section key={region.id} className="section ports-region-section">
             <div className="container">
               <div className="region-section-header">
                 <h2>{region.name}</h2>
-                <Link to={`/ports/region/${region.slug}`} className="view-all-link">
-                  View all {ports.length} ports →
-                </Link>
+                {regionPorts.length > 3 && (
+                  <Link to={`/ports/region/${region.slug}`} className="view-all-link">
+                    View all {regionPorts.length} ports →
+                  </Link>
+                )}
               </div>
 
               <div className="ports-grid">
-                {ports.slice(0, 3).map((port) => (
+                {regionPorts.slice(0, 3).map((port) => (
                   <PortCardWithImage key={port.id} port={port} />
                 ))}
               </div>
