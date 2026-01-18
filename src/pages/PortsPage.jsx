@@ -138,7 +138,7 @@ function PortsPage() {
         structuredData={structuredData}
       />
 
-      {/* Hero Section with Region Navigation */}
+      {/* Hero Section - Compact */}
       <section className="page-header ports-hero">
         <div className="container">
           <div className="page-header-content">
@@ -146,46 +146,35 @@ function PortsPage() {
             <p className="page-header-subtitle">
               Find things to do, shore excursions, restaurants, and insider tips from experienced cruisers.
             </p>
-            
-            {/* Region Quick-Nav */}
-            {activeRegions.length > 0 && (
-              <div className="regions-quick-nav" style={{ marginTop: '1.5rem', marginBottom: '1.5rem' }}>
-                <span className="regions-label">Browse by Region:</span>
-                <div className="regions-chips">
-                  {activeRegions.map((region) => {
-                    const portCount = portsByRegion[region.id]?.length || 0;
-                    return (
-                      <Link
-                        key={region.id}
-                        to={`/ports/region/${region.slug}`}
-                        className="region-chip"
-                      >
-                        {region.name}
-                        <span className="chip-count">{portCount}</span>
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-            
-            <div className="page-header-actions">
-              <Button to="/find-a-cruise" variant="primary">Find a Cruise</Button>
-              <Button href={`tel:${siteConfig.phone}`} variant="outline">Call {siteConfig.phone}</Button>
-            </div>
-            
-            {/* Development Notice - subtle */}
-            <p style={{
-              marginTop: '1.5rem',
-              fontSize: '0.75rem',
-              color: 'var(--text-muted)',
-              opacity: 0.7
-            }}>
-              Port guides are in development and updated daily
-            </p>
           </div>
         </div>
       </section>
+
+      {/* Region Navigation - Below Hero */}
+      {activeRegions.length > 0 && (
+        <section className="regions-nav-section">
+          <div className="container">
+            <div className="regions-quick-nav">
+              <span className="regions-label">Browse by Region:</span>
+              <div className="regions-chips">
+                {activeRegions.map((region) => {
+                  const portCount = portsByRegion[region.id]?.length || 0;
+                  return (
+                    <Link
+                      key={region.id}
+                      to={`/ports/region/${region.slug}`}
+                      className="region-chip"
+                    >
+                      {region.name}
+                      <span className="chip-count">{portCount}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Loading State */}
       {isLoading && (

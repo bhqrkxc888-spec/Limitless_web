@@ -7,10 +7,10 @@
   background: var(--color-background);
 }
 
-/* Unified Hero Section */
+/* Compact Hero Section */
 .ports-hero {
   background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
-  padding: var(--space-16) 0 var(--space-12);
+  padding: var(--space-10) 0 var(--space-8);
   color: white;
   text-align: center;
 }
@@ -23,16 +23,9 @@
 }
 
 .ports-hero .page-header-subtitle {
-  font-size: var(--font-size-xl);
-  margin-bottom: var(--space-8);
+  font-size: var(--font-size-lg);
+  margin-bottom: 0;
   opacity: 0.95;
-}
-
-.ports-hero .page-header-actions {
-  display: flex;
-  gap: var(--space-4);
-  justify-content: center;
-  flex-wrap: wrap;
 }
 
 /* Introduction Section */
@@ -60,6 +53,13 @@
   margin: 0;
 }
 
+/* Region Navigation Section */
+.regions-nav-section {
+  padding: var(--space-6) 0;
+  background: white;
+  border-bottom: 1px solid var(--clr-border, #E8E4DC);
+}
+
 /* Regions Quick Nav - Inline Chips */
 .regions-quick-nav {
   display: flex;
@@ -67,10 +67,6 @@
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  padding: 1.5rem;
-  background: white;
-  border-radius: var(--radius-lg);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .regions-label {
@@ -176,11 +172,23 @@
   transform: translateX(2px);
 }
 
-/* Ports Grid */
+/* Ports Grid - Fixed 3 columns on desktop */
 .ports-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .ports-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .ports-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .port-card {
