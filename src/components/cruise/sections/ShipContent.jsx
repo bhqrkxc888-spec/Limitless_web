@@ -6,7 +6,7 @@ import './SectionContent.css';
  * ShipContent - Dedicated ship information section available on all day types
  * Includes venue finder, ship stats, and deck highlights
  */
-function ShipContent({ sectionKey, dayData }) {
+function ShipContent({ sectionKey: _sectionKey, dayData: _dayData }) {
   return (
     <div className="section-content">
       <div className="section-ship">
