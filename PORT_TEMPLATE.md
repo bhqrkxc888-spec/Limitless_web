@@ -1,153 +1,207 @@
-# Port Name
+# [PORT NAME HERE]
+
+<!-- 
+================================================================================
+LIMITLESS CRUISES - PORT GUIDE TEMPLATE
+================================================================================
+INSTRUCTIONS:
+1. Replace ALL text in [BRACKETS] with actual content
+2. Keep the exact format - dashes, colons, and structure must stay the same
+3. Do not remove any sections - leave empty if not applicable
+4. Save as: port-slug.md (e.g., southampton.md, las-palmas-gran-canaria.md)
+5. Upload via Admin > Port Management > Upload Markdown
+================================================================================
+-->
 
 ## Basic Information
-- Slug: port-name
-- Country: Country Name
-- Region: atlantic-coast
-- Coordinates: 50.9097, -1.4044
-- Tagline: One-line description of the port
-- Port Character: city-culture
+<!-- REQUIRED: All fields below must be completed -->
+- Slug: [lowercase-with-dashes, e.g., southampton or las-palmas-gran-canaria]
+- Country: [Country Name]
+- Region: [One of: atlantic-coast, atlantic-islands, united-kingdom, mediterranean, northern-europe, caribbean, baltic]
+- Coordinates: [latitude], [longitude]
+- Tagline: [One compelling sentence about this port]
+- Port Character: [One of: city-culture, beach-resort, historic, nature, adventure, family]
 
 ## Description
-
-Two to three paragraphs providing an engaging overview of the port. This should capture the essence of what makes this destination special and what visitors can expect.
-
-Include information about the port's history, character, and main attractions. Make it inviting and informative.
+<!-- REQUIRED: 2-3 paragraphs providing an engaging overview -->
+[Write 2-3 paragraphs here. First paragraph: What makes this destination special. Second paragraph: History and character. Third paragraph: What visitors can expect. Make it inviting and informative.]
 
 ## About Port
-
-Information about the cruise terminal, arrival procedures, and getting from ship to shore.
+<!-- REQUIRED: Information about the cruise terminal -->
+[Describe the cruise terminal, arrival procedures, distance to town, shuttle availability, and what facilities are at the port.]
 
 ## Quick Facts
-- Currency: EUR
-- Language: Spanish
-- Timezone: CET (GMT+1)
-- Emergency: 112
-- Water: Safe to drink
-- WiFi: Available in cafes
-- Best for: Culture, food, beaches
+<!-- REQUIRED: Complete all fields -->
+- Currency: [e.g., EUR, GBP, USD]
+- Language: [Primary language(s)]
+- Timezone: [e.g., CET (GMT+1)]
+- Emergency: [Emergency number, usually 112 or 999]
+- Water: [Safe to drink / Bottled recommended]
+- WiFi: [Availability - e.g., Available in cafes and public areas]
+- Best for: [3-5 items, e.g., Culture, beaches, food]
 
 ## Transport Connections
-
-How to get from the port to key destinations. Include information about shuttles, taxis, public transport, and walking options.
+<!-- REQUIRED: How to get from port to key destinations -->
+[Describe shuttle services, taxi availability and typical costs, public transport options, and walking distances to main areas.]
 
 ## Getting Around
-
-Local transport options including buses, trams, taxis, and walking. Include typical costs and tips.
+<!-- REQUIRED: Local transport once in the destination -->
+[Describe local buses, trams, taxis, walking options. Include typical costs and any tips for getting around.]
 
 ## Must-See Sights
+<!-- REQUIRED: Minimum 3 sights, maximum 8 -->
 
-1. **Sight Name** (category: landmark)
-   - Description: Detailed description of the sight
-   - Duration: 2 to 3 hours
-   - Tips: Book online, visit morning
-   - Highlights: Architecture, views
-   - Good For: First-time visitors
+1. **[Sight Name]** (category: [landmark/historic/nature/beach/museum/market])
+   - Description: [2-3 sentences about what this is and why it's worth visiting]
+   - Duration: [e.g., 1 to 2 hours]
+   - Tips: [Practical advice - best time to visit, booking requirements, etc.]
+   - Highlights: [3-5 key features, comma separated]
+   - Good For: [Who would enjoy this - e.g., First-time visitors, History buffs, Families]
 
-2. **Another Sight** (category: historic)
-   - Description: What makes this worth visiting
-   - Duration: 1 to 2 hours
-   - Tips: Wear comfortable shoes
-   - Highlights: History, culture
-   - Good For: History buffs
+2. **[Sight Name]** (category: [category])
+   - Description: [Description]
+   - Duration: [Duration]
+   - Tips: [Tips]
+   - Highlights: [Highlights]
+   - Good For: [Good for]
 
-3. **Third Sight** (category: nature)
-   - Description: Natural attraction details
-   - Duration: Half day
-   - Tips: Bring water and sunscreen
-   - Highlights: Scenery, wildlife
-   - Good For: Nature lovers, families
+3. **[Sight Name]** (category: [category])
+   - Description: [Description]
+   - Duration: [Duration]
+   - Tips: [Tips]
+   - Highlights: [Highlights]
+   - Good For: [Good for]
+
+<!-- Add more sights as needed using the same format -->
 
 ## Shore Excursions
+<!-- REQUIRED: Minimum 2 excursions -->
 
-1. **Excursion Name**
-   - Description: What the excursion includes
-   - Duration: Half day
-   - Book With: Ship or independent
-   - Notes: Suitable for all mobility levels
+1. **[Excursion Name]**
+   - Description: [What the excursion includes and experience offered]
+   - Duration: [Half day / Full day / 3-4 hours]
+   - Book With: [Ship / Independent / Either]
+   - Notes: [Mobility requirements, what to bring, suitability]
 
-2. **Another Excursion**
-   - Description: Detailed excursion description
-   - Duration: Full day
-   - Book With: Independent recommended
-   - Notes: Moderate walking required
+2. **[Excursion Name]**
+   - Description: [Description]
+   - Duration: [Duration]
+   - Book With: [Booking option]
+   - Notes: [Notes]
+
+<!-- Add more excursions as needed -->
 
 ## Nearest Beach
-- Name: Beach Name
-- Distance: 15 minute walk from port
-- Description: Sandy beach with calm waters, ideal for swimming. Sunbeds and umbrellas available for hire.
+<!-- OPTIONAL: Include if there's a beach accessible from port -->
+- Name: [Beach name]
+- Distance: [Distance and how to get there, e.g., 15 minute walk from port]
+- Description: [2-3 sentences about the beach - sand type, facilities, suitability for swimming]
 
 ## Food & Drink
+<!-- REQUIRED: Minimum 3 recommendations -->
 
-1. **Restaurant Name**
-   - Type: Restaurant
-   - Description: Traditional local cuisine in a charming setting
+1. **[Venue Name]**
+   - Type: [Restaurant / Cafe / Bar / Market]
+   - Description: [What they serve, atmosphere, price range]
 
-2. **Cafe Name**
-   - Type: Cafe
-   - Description: Great coffee and pastries
+2. **[Venue Name]**
+   - Type: [Type]
+   - Description: [Description]
 
-3. **Bar Name**
-   - Type: Bar
-   - Description: Evening drinks with port views
+3. **[Venue Name]**
+   - Type: [Type]
+   - Description: [Description]
+
+<!-- Add more venues as needed -->
 
 ## Insider Tips
-- Tip one about visiting this port
-- Another helpful tip for visitors
-- Third tip about local customs
-- Fourth tip about saving money
-- Fifth tip about best experiences
+<!-- REQUIRED: Minimum 5 tips -->
+- [Tip about best times to visit or avoiding crowds]
+- [Tip about local customs or etiquette]
+- [Tip about saving money]
+- [Tip about hidden gems or local favourites]
+- [Tip about practical matters - cash, cards, language]
+
+<!-- Add more tips as needed -->
 
 ## Weather
-- Intro: Mediterranean climate with warm summers and mild winters
-- Best Time: April to October for best weather
+- Intro: [General climate description - 1-2 sentences]
+- Best Time: [Best months to visit and why]
 
 ## FAQ
+<!-- REQUIRED: Minimum 3 questions -->
 
-1. **Is this port walkable from the ship?**
-   Yes, the port is conveniently located within walking distance of the main attractions. Most sights are reachable on foot within 15-20 minutes.
+1. **[Common question about this port?]**
+   [Detailed answer - 2-3 sentences]
 
-2. **Do I need to book excursions in advance?**
-   For popular excursions, advance booking is recommended. However, you can also explore independently with public transport or taxis.
+2. **[Another common question?]**
+   [Answer]
 
-3. **What currency is used?**
-   The Euro (EUR) is used. Credit cards are widely accepted, but carry some cash for small purchases.
+3. **[Third question?]**
+   [Answer]
+
+<!-- Add more FAQs as needed -->
 
 ## Practical Information
-- Best Time to Visit: Spring and autumn for mild weather
-- Cruise Terminals: Main cruise terminal with all facilities
-- Nearest Airport: Local International Airport (30 mins)
-- Visa Info: Schengen zone - check requirements
-- Emergency Number: 112
-- Tipping Custom: 10% appreciated but not mandatory
+- Best Time to Visit: [Months and reasoning]
+- Cruise Terminals: [Terminal name(s) and facilities]
+- Nearest Airport: [Airport name and distance/time]
+- Visa Info: [Visa requirements - e.g., Schengen zone, ESTA required, etc.]
+- Emergency Number: [Usually same as Quick Facts]
+- Tipping Custom: [Local tipping expectations]
 
 ## Content Sections
+<!-- REQUIRED: These power the tabbed content on the port guide page -->
 
 ### Overview
-- Hook: One captivating sentence about why this port is special
-- Description: Detailed overview paragraph
-- Weather Seasonal: Typical weather summary
-- Port Info: Dock location, distance to town, shuttle info
+- Hook: [One captivating sentence - the "headline" for this port]
+- Description: [Detailed paragraph expanding on the hook]
+- Weather Seasonal: [Typical weather summary for cruise season]
+- Port Info: [Dock location, distance to town, shuttle info]
 
 ### Stay Local
-Quick walks and nearby attractions within walking distance of the port.
+<!-- What to do within walking distance of the port -->
+[2-3 paragraphs about attractions, activities, and experiences within easy walking distance. Focus on what can be done in 2-4 hours without transport.]
 
 ### Go Further
-Day trips and attractions requiring transport.
+<!-- Day trips and attractions requiring transport -->
+[2-3 paragraphs about destinations that require a bus, taxi, or tour. Include approximate times and transport options.]
 
 ### With Kids
-Family-friendly activities and facilities.
+<!-- Family-friendly activities and considerations -->
+[2-3 paragraphs about family activities, child-friendly venues, pushchair accessibility, and tips for travelling with children.]
 
 ### Accessibility (SEND)
-Wheelchair access, mobility considerations, quiet spots.
+<!-- Wheelchair access, mobility considerations, sensory needs -->
+[2-3 paragraphs about wheelchair accessibility, mobility considerations, quiet spaces, and facilities for those with additional needs.]
 
 ### Medical & Pharmacy
-Nearest pharmacy and hospital information.
+<!-- Healthcare information -->
+[Information about nearest pharmacy location and hours, nearest hospital/medical centre, how to access medical care, and any health considerations.]
 
 ### Food & Drink Details
-Local specialties and recommended venues.
+<!-- Local cuisine and dining -->
+[2-3 paragraphs about local specialties to try, dining customs, typical meal times, and recommendations for different budgets.]
 
 ## Meta
-- Title: Port Name Cruise Port Guide | Limitless Cruises
-- Description: Complete guide to Port Name for cruise passengers. Discover attractions, restaurants, and insider tips.
-- Keywords: port name cruise, port name shore excursions, things to do in port name
+<!-- SEO Information -->
+- Title: [Port Name] Cruise Port Guide | Limitless Cruises
+- Description: [150-160 character description for search engines. Include port name, key attractions, and call to action.]
+- Keywords: [port name] cruise, [port name] shore excursions, things to do in [port name], [port name] cruise port
+
+<!--
+================================================================================
+CHECKLIST BEFORE UPLOAD:
+[ ] All [BRACKETS] replaced with actual content
+[ ] Slug is lowercase with dashes only
+[ ] Region matches one of the allowed values
+[ ] Coordinates are correct (check Google Maps)
+[ ] At least 3 Must-See Sights
+[ ] At least 2 Shore Excursions  
+[ ] At least 3 Food & Drink venues
+[ ] At least 5 Insider Tips
+[ ] At least 3 FAQs
+[ ] All Content Sections completed
+[ ] Meta description is under 160 characters
+================================================================================
+-->
