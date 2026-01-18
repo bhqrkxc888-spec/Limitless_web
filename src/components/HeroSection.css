@@ -52,6 +52,8 @@
   height: 100%;
   object-fit: cover;
   object-position: center center;
+  /* Prevent flash of background while loading */
+  background: var(--clr-bg-alt, #F8F5F0);
 }
 
 /* Cruise line hero images - center ships vertically */
@@ -62,7 +64,7 @@
 .hero-placeholder {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-light) 100%);
+  background: var(--clr-bg-alt, #F8F5F0);
 }
 
 .hero-overlay {

@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import { useEffect, useLayoutEffect, lazy, Suspense, useState } from 'react'
 import { analyzePageSEO } from './services/seoMonitoring'
 import lazyWithRetry from './utils/lazyWithRetry'
+import { cleanupOverlays } from './utils/cleanupOverlays'
 
 // Layout Components (keep these eagerly loaded for fast initial render)
 import Header from './components/layout/Header'
@@ -171,6 +172,9 @@ function ScrollToTop() {
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0; // For Safari
+    
+    // Clean up any lingering overlays that might block clicks
+    cleanupOverlays();
     
     // Backup scrolls: Handle edge cases where content loads asynchronously
     // Multiple timeouts ensure it works across all browsers and devices

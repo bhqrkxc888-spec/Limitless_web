@@ -172,45 +172,59 @@ export function useCruiseLineImage(slug, type = 'logo', cruiseLineName = '') {
  * Note: port-guide uses 'slug' as entityId in database (e.g., 'barcelona')
  * Images are uploaded as: WEB_categories/{slug}/{imageType}.webp
  * 
- * Falls back to smart Unsplash placeholders when no image is uploaded
+ * Optimized: Checks database first, only shows placeholder if no real image exists
  */
 export function usePortGuideImage(slug, type = 'hero', portName = '', country = '') {
-  const [imageUrl, setImageUrl] = useState(PLACEHOLDER_IMAGE);
+  const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isPlaceholder, setIsPlaceholder] = useState(true);
+  const [isPlaceholder, setIsPlaceholder] = useState(false);
 
   useEffect(() => {
     if (!slug) {
-      setImageUrl(PLACEHOLDER_IMAGE);
-      setLoading(false);
-      setIsPlaceholder(true);
+      import('../utils/placeholderImages.js').then(({ getPortPlaceholderImage }) => {
+        setImageUrl(getPortPlaceholderImage(slug, type, portName, country));
+        setIsPlaceholder(true);
+        setLoading(false);
+      });
       return;
     }
 
-    // Import the placeholder generator
-    import('../utils/placeholderImages.js').then(({ getPortPlaceholderImage }) => {
-      // Generate smart placeholder based on port context
-      const smartPlaceholder = getPortPlaceholderImage(slug, type, portName, country);
-      setImageUrl(smartPlaceholder);
-      
-      // Try to get real image from database
-      getImageUrlFromDb('port-guide', slug, type, null)
-        .then(url => {
-          if (url && !url.includes('placeholder')) {
-            setImageUrl(url);
-            setIsPlaceholder(false);
-          } else {
-            // Keep the smart placeholder
-            setIsPlaceholder(true);
-          }
+    let cancelled = false;
+
+    // Try to get real image from database FIRST
+    getImageUrlFromDb('port-guide', slug, type, null)
+      .then(url => {
+        if (cancelled) return;
+        
+        if (url && !url.includes('placeholder')) {
+          // Real image exists - use it immediately
+          setImageUrl(url);
+          setIsPlaceholder(false);
           setLoading(false);
-        })
-        .catch(() => {
-          // Keep the smart placeholder
+        } else {
+          // No real image - load placeholder
+          import('../utils/placeholderImages.js').then(({ getPortPlaceholderImage }) => {
+            if (cancelled) return;
+            const smartPlaceholder = getPortPlaceholderImage(slug, type, portName, country);
+            setImageUrl(smartPlaceholder);
+            setIsPlaceholder(true);
+            setLoading(false);
+          });
+        }
+      })
+      .catch(() => {
+        if (cancelled) return;
+        // Error - load placeholder
+        import('../utils/placeholderImages.js').then(({ getPortPlaceholderImage }) => {
+          if (cancelled) return;
+          const smartPlaceholder = getPortPlaceholderImage(slug, type, portName, country);
+          setImageUrl(smartPlaceholder);
           setIsPlaceholder(true);
           setLoading(false);
         });
-    });
+      });
+
+    return () => { cancelled = true; };
   }, [slug, type, portName, country]);
 
   return { imageUrl, loading, isPlaceholder };
