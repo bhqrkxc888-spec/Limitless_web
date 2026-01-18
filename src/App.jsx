@@ -134,6 +134,7 @@ const AdminCategoryImages = lazy(() => lazyWithRetry(() => import('./pages/admin
 const AdminBucketListImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminBucketListImages')))
 const AdminPortGuideImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPortGuideImages')))
 const AdminPortGuideStatus = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPortGuideStatus')))
+const AdminPorts = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPorts')))
 const AdminShipImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminShipImages')))
 const AdminCruiseFinder = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminCruiseFinder')))
 const AdminPortRatings = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPortRatings')))
@@ -260,6 +261,7 @@ function AppLayout() {
           
           {/* Port Guide Status */}
           <Route path="/admin/port-guide-status" element={<AdminProtectedRoute><AdminPortGuideStatus /></AdminProtectedRoute>} />
+          <Route path="/admin/ports" element={<AdminProtectedRoute><AdminPorts /></AdminProtectedRoute>} />
           
           {/* Image Management */}
           <Route path="/admin/images" element={<AdminProtectedRoute><AdminImageManagement /></AdminProtectedRoute>} />

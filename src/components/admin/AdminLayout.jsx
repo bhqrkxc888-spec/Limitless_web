@@ -94,6 +94,7 @@ function AdminLayout({ children, onLogout, lastUpdated, onRefresh, isRefreshing 
     { path: '/admin/seo', icon: Search, label: 'SEO' },
     { type: 'divider' },
     { type: 'section', label: 'Port Guides' },
+    { path: '/admin/ports', icon: MapPin, label: 'Port Management' },
     { path: '/admin/port-guide-status', icon: ClipboardList, label: 'Port Guide Status' },
     { path: '/admin/port-ratings', icon: Star, label: 'Port Ratings' },
     { type: 'divider' },
