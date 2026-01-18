@@ -32,10 +32,32 @@ function PortGuidePage() {
   const portName = port?.name || '';
   const portCountry = port?.country || '';
   
-  // Debug: Log data source (remove in production)
-  if (source) {
+  // Track data source (dev only)
+  if (process.env.NODE_ENV === 'development' && source) {
     console.log(`Port data loaded from: ${source}`);
   }
+
+  // Fetch rating stats for review schema
+  const [ratingStats, setRatingStats] = useState(null);
+  useEffect(() => {
+    const fetchRatings = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('port_guide_rating_stats')
+          .select('*')
+          .eq('port_slug', slug)
+          .single();
+        
+        if (!error && data) {
+          setRatingStats(data);
+        }
+      } catch (err) {
+        // Silently fail - not critical for page render
+      }
+    };
+
+    fetchRatings();
+  }, [slug]);
   
   // Load images from database with smart placeholders
   const { imageUrl: heroImage } = usePortGuideImage(slug, 'hero', portName, portCountry);
@@ -95,7 +117,7 @@ function PortGuidePage() {
 
   // Image URLs now loaded via usePortGuideImage hook above
 
-  // Structured Data for SEO - TouristDestination + FAQPage schemas
+  // Structured Data for SEO - TouristDestination + FAQPage + AggregateRating schemas
   const destinationSchema = {
     '@context': 'https://schema.org',
     '@type': 'TouristDestination',
@@ -111,6 +133,15 @@ function PortGuidePage() {
       '@type': 'Country',
       name: port.country,
     },
+    ...(ratingStats && ratingStats.rating_count >= 5 ? {
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: ratingStats.average_rating,
+        reviewCount: ratingStats.rating_count,
+        bestRating: 5,
+        worstRating: 1
+      }
+    } : {})
   };
 
   // FAQ Schema for rich snippets (only if port has FAQ data)
