@@ -28,7 +28,7 @@ import {
 import useAdminAuth from '../../hooks/useAdminAuth';
 import AdminLayout from '../../components/admin/AdminLayout';
 import { getAllPorts } from '../../data/ports';
-import { getPortContent, hasDetailedContent } from '../../data/portContent';
+import { getPortContent } from '../../data/portContent';
 import { supabase } from '../../lib/supabase';
 
 // Define what sections should exist for a complete port guide
