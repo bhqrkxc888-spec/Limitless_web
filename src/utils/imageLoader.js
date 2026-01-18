@@ -13,6 +13,14 @@ import { logger } from './logger';
 // Cache for image URLs to avoid repeated queries
 const imageCache = new Map();
 
+// Clear cache on page load to ensure fresh data
+if (typeof window !== 'undefined') {
+  window.addEventListener('load', () => {
+    imageCache.clear();
+    console.log('[ImageLoader] Cache cleared on page load');
+  });
+}
+
 /**
  * Get image URL from site_images table
  * @param {string} entityType - 'destination', 'bucket-list', 'cruise-line', etc.
@@ -141,6 +149,12 @@ export async function preloadImages(imageRequests) {
  */
 export function clearImageCache() {
   imageCache.clear();
+  console.log('[ImageLoader] Cache manually cleared');
+}
+
+// Expose cache clear globally for debugging
+if (typeof window !== 'undefined') {
+  window.clearImageCache = clearImageCache;
 }
 
 /**
