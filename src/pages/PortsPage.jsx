@@ -12,7 +12,12 @@ import './PortsPage.css';
  * Port Card with Database Image
  */
 function PortCardWithImage({ port }) {
-  const { imageUrl: portImage } = usePortGuideImage(port.slug, 'card');
+  const { imageUrl: portImage, isPlaceholder } = usePortGuideImage(port.slug, 'card');
+  
+  // Debug: Log in development
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`Port Card: ${port.slug} | Image: ${isPlaceholder ? 'placeholder' : 'real'}`);
+  }
   
   return (
     <Card 
@@ -141,6 +146,19 @@ function PortsPage() {
             <p className="page-header-subtitle">
               Everything you need to know for your port days
             </p>
+            {/* Development Notice */}
+            <div style={{
+              background: 'rgba(79, 140, 255, 0.15)',
+              border: '1px solid rgba(79, 140, 255, 0.3)',
+              borderRadius: '8px',
+              padding: '0.75rem 1.5rem',
+              margin: '1rem auto 1.5rem',
+              maxWidth: '600px',
+              fontSize: '0.9rem',
+              color: 'var(--text)'
+            }}>
+              🚧 Port guides are currently in development and will be updated and published daily
+            </div>
             <div className="page-header-actions">
               <Button to="/find-a-cruise" variant="primary">Find a Cruise</Button>
               <Button href={`tel:${siteConfig.phone}`} variant="outline">Call {siteConfig.phone}</Button>
@@ -191,6 +209,25 @@ function PortsPage() {
             <Loader2 size={48} style={{ animation: 'spin 1s linear infinite', color: 'var(--primary)' }} />
           </div>
         </section>
+      )}
+
+      {/* Data Source Indicator (visible in development/for debugging) */}
+      {!isLoading && ports.length > 0 && (
+        <div style={{ 
+          position: 'fixed', 
+          bottom: '20px', 
+          right: '20px', 
+          background: 'rgba(34, 197, 94, 0.9)', 
+          color: 'white',
+          padding: '8px 12px',
+          borderRadius: '6px',
+          fontSize: '0.75rem',
+          fontWeight: '600',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+          zIndex: 9999
+        }}>
+          ✓ Supabase
+        </div>
       )}
 
       {/* No Ports Message */}
