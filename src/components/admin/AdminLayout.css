@@ -538,8 +538,14 @@
   color: white;
 }
 
+a.admin-btn-primary {
+  color: white;
+  text-decoration: none;
+}
+
 .admin-btn-primary:hover {
   background: var(--admin-primary-hover);
+  color: white;
 }
 
 .admin-btn-secondary {
@@ -554,6 +560,10 @@
 .admin-btn-ghost {
   background: transparent;
   color: var(--admin-text-muted);
+}
+
+a.admin-btn-ghost {
+  text-decoration: none;
 }
 
 .admin-btn-ghost:hover {
