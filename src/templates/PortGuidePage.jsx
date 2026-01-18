@@ -52,7 +52,7 @@ function PortGuidePage() {
         if (!error && data) {
           setRatingStats(data);
         }
-      } catch (err) {
+      } catch (_err) {
         // Silently fail - not critical for page render
       }
     };
