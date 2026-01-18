@@ -7,13 +7,10 @@
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
-  AlertTriangle, 
-  Search, 
   Image,
   MapPin,
   LogOut,
   RefreshCw,
-  Clock,
   Gauge,
   TrendingUp,
   BarChart3,
@@ -21,11 +18,8 @@ import {
   X,
   FileText,
   ExternalLink,
-  Activity,
-  ClipboardList,
   Moon,
   Sun,
-  MessageCircle,
   Star
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
@@ -87,19 +81,17 @@ function AdminLayout({ children, onLogout, lastUpdated, onRefresh, isRefreshing 
 
   const navItems = [
     { path: '/admin', icon: LayoutDashboard, label: 'Overview', exact: true },
-    { path: '/admin/errors', icon: AlertTriangle, label: 'Errors' },
     { path: '/admin/lighthouse', icon: Gauge, label: 'Lighthouse' },
     { path: '/admin/analytics', icon: TrendingUp, label: 'Analytics' },
     { path: '/admin/search-console', icon: BarChart3, label: 'Search Console' },
-    { path: '/admin/seo', icon: Search, label: 'SEO' },
     { type: 'divider' },
     { type: 'section', label: 'Port Guides' },
     { path: '/admin/ports', icon: MapPin, label: 'Port Management' },
-    { path: '/admin/port-guide-status', icon: ClipboardList, label: 'Port Guide Status' },
+    { path: '/admin/port-guide-images', icon: Image, label: 'Port Images' },
     { path: '/admin/port-ratings', icon: Star, label: 'Port Ratings' },
     { type: 'divider' },
     { type: 'section', label: 'Content' },
-    { path: '/admin/images', icon: Image, label: 'Image Management' },
+    { path: '/admin/images', icon: Image, label: 'Site Images' },
     { path: '/admin/website/destinations', icon: MapPin, label: 'Destinations' }
   ];
 

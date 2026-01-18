@@ -27,15 +27,15 @@ import AdminLayout from '../../components/admin/AdminLayout';
  * Region definitions matching the public site
  */
 const REGIONS = [
-  { id: 'all', name: 'All Regions', icon: '🌍' },
-  { id: 'mediterranean', name: 'Mediterranean', icon: '⛵' },
-  { id: 'atlantic-coast', name: 'Atlantic Coast', icon: '🏖️' },
-  { id: 'atlantic-islands', name: 'Atlantic Islands', icon: '🏝️' },
-  { id: 'norwegian-fjords', name: 'Norwegian Fjords', icon: '⛰️' },
-  { id: 'united-kingdom', name: 'United Kingdom', icon: '🇬🇧' },
-  { id: 'caribbean', name: 'Caribbean', icon: '🌴' },
-  { id: 'northern-europe', name: 'Northern Europe', icon: '🏰' },
-  { id: 'baltic', name: 'Baltic', icon: '🛳️' }
+  { id: 'all', name: 'All Regions' },
+  { id: 'mediterranean', name: 'Mediterranean' },
+  { id: 'atlantic-coast', name: 'Atlantic Coast' },
+  { id: 'atlantic-islands', name: 'Atlantic Islands' },
+  { id: 'norwegian-fjords', name: 'Norwegian Fjords' },
+  { id: 'united-kingdom', name: 'United Kingdom' },
+  { id: 'caribbean', name: 'Caribbean' },
+  { id: 'northern-europe', name: 'Northern Europe' },
+  { id: 'baltic', name: 'Baltic' }
 ];
 
 /**
@@ -345,11 +345,16 @@ function AdminPorts() {
     needsAttention: ports.filter(p => p.status === 'published' && p.completeness < 80).length
   };
 
-  // Count ports per region
-  const regionCounts = REGIONS.map(region => ({
-    ...region,
-    count: region.id === 'all' ? ports.length : ports.filter(p => p.region === region.id).length
-  })).filter(region => region.count > 0 || region.id === 'all');
+  // Count ports per region with stats
+  const regionCounts = REGIONS.map(region => {
+    const regionPorts = region.id === 'all' ? ports : ports.filter(p => p.region === region.id);
+    return {
+      ...region,
+      count: regionPorts.length,
+      published: regionPorts.filter(p => p.status === 'published').length,
+      complete: regionPorts.filter(p => p.is_complete).length
+    };
+  }).filter(region => region.count > 0 || region.id === 'all');
 
   return (
     <AdminLayout onLogout={logout} lastUpdated={lastUpdated} onRefresh={fetchPorts} isRefreshing={isLoading}>
@@ -480,7 +485,7 @@ function AdminPorts() {
             <Compass size={20} style={{ color: 'var(--admin-primary)' }} />
             <h2 style={{ margin: 0, fontSize: '1.25rem' }}>Browse by Region</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.75rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.75rem' }}>
             {regionCounts.map(region => (
               <button
                 key={region.id}
@@ -489,26 +494,30 @@ function AdminPorts() {
                   background: selectedRegion === region.id ? 'var(--admin-primary)' : 'var(--admin-bg-secondary)',
                   color: selectedRegion === region.id ? 'white' : 'var(--admin-text)',
                   border: selectedRegion === region.id ? 'none' : '1px solid var(--admin-border)',
-                  padding: '1rem',
+                  padding: '0.75rem 1rem',
                   borderRadius: '8px',
                   cursor: 'pointer',
                   transition: 'all 0.2s',
                   display: 'flex',
                   flexDirection: 'column',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  fontWeight: selectedRegion === region.id ? '600' : '500'
+                  alignItems: 'flex-start',
+                  gap: '0.25rem',
+                  fontWeight: selectedRegion === region.id ? '600' : '500',
+                  textAlign: 'left'
                 }}
               >
-                <span style={{ fontSize: '1.5rem' }}>{region.icon}</span>
-                <span style={{ fontSize: '0.875rem' }}>{region.name}</span>
-                <span style={{ 
-                  fontSize: '1.25rem', 
-                  fontWeight: '700',
-                  color: selectedRegion === region.id ? 'white' : 'var(--admin-primary)'
+                <span style={{ fontSize: '0.9375rem', fontWeight: '600' }}>{region.name}</span>
+                <div style={{ 
+                  display: 'flex', 
+                  gap: '0.75rem', 
+                  fontSize: '0.75rem',
+                  color: selectedRegion === region.id ? 'rgba(255,255,255,0.8)' : 'var(--admin-text-muted)',
+                  marginTop: '0.25rem'
                 }}>
-                  {region.count}
-                </span>
+                  <span><strong style={{ color: selectedRegion === region.id ? 'white' : 'var(--admin-text)' }}>{region.count}</strong> total</span>
+                  <span><strong style={{ color: selectedRegion === region.id ? 'white' : 'var(--admin-success)' }}>{region.published}</strong> published</span>
+                  <span><strong style={{ color: selectedRegion === region.id ? 'white' : 'var(--admin-primary)' }}>{region.complete}</strong> complete</span>
+                </div>
               </button>
             ))}
           </div>
