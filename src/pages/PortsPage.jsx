@@ -148,16 +148,17 @@ function PortsPage() {
             </p>
             {/* Development Notice */}
             <div style={{
-              background: 'rgba(79, 140, 255, 0.15)',
-              border: '1px solid rgba(79, 140, 255, 0.3)',
-              borderRadius: '8px',
-              padding: '0.75rem 1.5rem',
+              background: 'rgba(100, 100, 100, 0.1)',
+              border: '1px solid rgba(100, 100, 100, 0.2)',
+              borderRadius: '4px',
+              padding: '0.5rem 1rem',
               margin: '1rem auto 1.5rem',
-              maxWidth: '600px',
-              fontSize: '0.9rem',
-              color: 'var(--text)'
+              maxWidth: '500px',
+              fontSize: '0.8rem',
+              color: 'var(--text-muted)',
+              textAlign: 'center'
             }}>
-              🚧 Port guides are currently in development and will be updated and published daily
+              Port guides are currently in development and will be updated and published daily
             </div>
             <div className="page-header-actions">
               <Button to="/find-a-cruise" variant="primary">Find a Cruise</Button>
@@ -217,16 +218,16 @@ function PortsPage() {
           position: 'fixed', 
           bottom: '20px', 
           right: '20px', 
-          background: 'rgba(34, 197, 94, 0.9)', 
+          background: 'rgba(34, 197, 94, 0.85)', 
           color: 'white',
-          padding: '8px 12px',
-          borderRadius: '6px',
-          fontSize: '0.75rem',
-          fontWeight: '600',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+          padding: '4px 8px',
+          borderRadius: '4px',
+          fontSize: '0.7rem',
+          fontWeight: '500',
+          boxShadow: '0 1px 4px rgba(0,0,0,0.15)',
           zIndex: 9999
         }}>
-          ✓ Supabase
+          Supabase
         </div>
       )}
 
