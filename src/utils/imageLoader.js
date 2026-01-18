@@ -50,11 +50,16 @@ export async function getImageUrlFromDb(entityType, entityId, imageType, fallbac
 
     if (data && data.bucket && data.path) {
       const url = getPublicUrl(data.bucket, data.path);
+      // Debug: Log successful image loads
+      if (process.env.NODE_ENV === 'development' || true) {
+        console.log(`[ImageLoader] Found: ${entityType}/${entityId}/${imageType} -> ${url}`);
+      }
       imageCache.set(cacheKey, url);
       return url;
     }
 
     // Not found in database, use fallback
+    console.log(`[ImageLoader] Not found: ${entityType}/${entityId}/${imageType} -> using fallback`);
     const url = fallbackUrl || PLACEHOLDER_IMAGE;
     imageCache.set(cacheKey, url);
     return url;
