@@ -74,29 +74,23 @@ CREATE POLICY "Allow anonymous rating inserts" ON port_guide_ratings
   TO anon
   WITH CHECK (true);
 
--- Allow public to read approved ratings only
-CREATE POLICY "Allow public to read approved ratings" ON port_guide_ratings
+-- Allow all users to read all ratings (admin uses cookie auth, not Supabase Auth)
+CREATE POLICY "Allow all reads" ON port_guide_ratings
   FOR SELECT
   TO anon, authenticated
-  USING (is_approved = true);
-
--- Allow authenticated users (admins) to see all ratings
-CREATE POLICY "Allow authenticated full read access" ON port_guide_ratings
-  FOR SELECT
-  TO authenticated
   USING (true);
 
--- Allow authenticated users to update ratings (approval, featured, etc.)
-CREATE POLICY "Allow authenticated updates" ON port_guide_ratings
+-- Allow anonymous updates (admin uses cookie auth, not Supabase Auth)
+CREATE POLICY "Allow all updates" ON port_guide_ratings
   FOR UPDATE
-  TO authenticated
+  TO anon, authenticated
   USING (true)
   WITH CHECK (true);
 
--- Allow authenticated users to delete ratings
-CREATE POLICY "Allow authenticated deletes" ON port_guide_ratings
+-- Allow anonymous deletes (admin uses cookie auth, not Supabase Auth)
+CREATE POLICY "Allow all deletes" ON port_guide_ratings
   FOR DELETE
-  TO authenticated
+  TO anon, authenticated
   USING (true);
 
 -- RLS Policies for port_guide_rating_votes
