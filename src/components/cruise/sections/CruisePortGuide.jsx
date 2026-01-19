@@ -527,38 +527,45 @@ function GoFurtherSection({ goFurther, attractionImages, portName }) {
         return (
           <Fragment key={idx}>
             <div className="attraction-block">
-              {showImage && (
-                <div className="attraction-image-rect">
-                  <OptimizedImage
-                    src={imgData.url}
-                    alt={`${attraction.name} - ${portName}`}
-                    width={320}
-                    height={213}
-                    sizes="320px"
-                    srcsetWidths={[320, 640]}
-                  />
+              {/* Row 1: Image and main text side by side */}
+              <div className="attraction-top">
+                {showImage && (
+                  <div className="attraction-image">
+                    <OptimizedImage
+                      src={imgData.url}
+                      alt={`${attraction.name} - ${portName}`}
+                      width={320}
+                      height={213}
+                      sizes="320px"
+                      srcsetWidths={[320, 640]}
+                    />
+                  </div>
+                )}
+                <div className="attraction-header">
+                  <h3>{attraction.name}</h3>
+                  <div className="attraction-tags">
+                    {attraction.terrain && (
+                      <span className={`terrain-badge terrain-${attraction.terrain}`}>
+                        {attraction.terrain === 'easy' ? '🟢 Easy' :
+                          attraction.terrain === 'moderate' ? '🟡 Some Hills' :
+                            '🔴 Challenging'}
+                      </span>
+                    )}
+                    {attraction.accessibility && (
+                      <span className={`accessibility-badge access-${attraction.accessibility.rating}`} title={attraction.accessibility.notes || ''}>
+                        {attraction.accessibility.rating === 'full' ? '♿ Fully Accessible' :
+                          attraction.accessibility.rating === 'partial' ? '⚠️ Partially Accessible' :
+                            attraction.accessibility.rating === 'limited' ? '⚠️ Limited Access' :
+                              '🚫 Not Accessible'}
+                      </span>
+                    )}
+                  </div>
+                  <p className="attraction-description">{attraction.description}</p>
                 </div>
-              )}
-              <div className="attraction-content">
-                <h3>{attraction.name}</h3>
-                <div className="attraction-tags">
-                  {attraction.terrain && (
-                    <span className={`terrain-badge terrain-${attraction.terrain}`}>
-                      {attraction.terrain === 'easy' ? '🟢 Easy' :
-                        attraction.terrain === 'moderate' ? '🟡 Some Hills' :
-                          '🔴 Challenging'}
-                    </span>
-                  )}
-                  {attraction.accessibility && (
-                    <span className={`accessibility-badge access-${attraction.accessibility.rating}`} title={attraction.accessibility.notes || ''}>
-                      {attraction.accessibility.rating === 'full' ? '♿ Fully Accessible' :
-                        attraction.accessibility.rating === 'partial' ? '⚠️ Partially Accessible' :
-                          attraction.accessibility.rating === 'limited' ? '⚠️ Limited Access' :
-                            '🚫 Not Accessible'}
-                    </span>
-                  )}
-                </div>
-                <p className="attraction-description">{attraction.description}</p>
+              </div>
+
+              {/* Row 2: Full width - info boxes, notes, Our Take, maps link */}
+              <div className="attraction-details">
                 <div className="attraction-info-grid">
                   {attraction.cruiseLineOption && (
                     <div className="info-box">
@@ -583,7 +590,7 @@ function GoFurtherSection({ goFurther, attractionImages, portName }) {
                   <p className="attraction-notes"><em>{formatBoldText(attraction.notes)}</em></p>
                 )}
                 {attraction.ourTake && (
-                  <div className="our-take">
+                  <div className="attraction-tips">
                     <strong>Our Take</strong>
                     {formatParagraphsWithBold(attraction.ourTake)}
                   </div>

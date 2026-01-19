@@ -447,14 +447,12 @@
 }
 
 /* ========================================
-   ATTRACTION BLOCKS - Go Further (image left, content right)
+   ATTRACTION BLOCKS - Two-row layout (Go Further)
+   Row 1: Image + title/badges/description. Row 2: Info boxes, notes, Our Take, maps link.
    Scoped to .detailed-port-guide to prevent conflicts with PortGuidePage.css
    ======================================== */
 
 .detailed-port-guide .attraction-block {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
   margin-bottom: 32px;
   background: var(--clr-surface, #FFFFFF);
   border: 1px solid var(--clr-border, #E8E4DC);
@@ -470,7 +468,13 @@
   box-shadow: 0 6px 20px rgba(44, 52, 76, 0.1);
 }
 
-.detailed-port-guide .attraction-image-rect {
+.detailed-port-guide .attraction-top {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.detailed-port-guide .attraction-image {
   flex-shrink: 0;
   width: 320px;
   aspect-ratio: 3 / 2;
@@ -478,20 +482,17 @@
   overflow: hidden;
 }
 
-.detailed-port-guide .attraction-image-rect img {
+.detailed-port-guide .attraction-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.detailed-port-guide .attraction-content {
+.detailed-port-guide .attraction-header {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
 }
 
-.detailed-port-guide .attraction-content h3 {
+.detailed-port-guide .attraction-header h3 {
   font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
   font-size: var(--font-size-lg, 1.125rem);
   font-weight: var(--font-weight-semibold, 600);
@@ -506,10 +507,16 @@
   gap: var(--space-2, 0.5rem);
 }
 
+.detailed-port-guide .attraction-block .attraction-details {
+  width: 100%;
+  display: block;
+}
+
 .detailed-port-guide .attraction-info-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
 .detailed-port-guide .attraction-info-grid .info-box {
@@ -538,14 +545,32 @@
   margin: 0;
 }
 
+.detailed-port-guide .attraction-tips {
+  margin-top: var(--space-4, 1rem);
+  padding: var(--space-3, 0.75rem);
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-radius: var(--radius-md, 8px);
+  border-left: 3px solid var(--clr-secondary, #D4B86A);
+}
+
+.detailed-port-guide .attraction-tips strong {
+  display: block;
+  color: var(--clr-text-main, #2C344C);
+  margin-bottom: var(--space-1, 0.25rem);
+}
+
+.detailed-port-guide .attraction-tips p {
+  margin: 0;
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--clr-text-body, #4A5568);
+}
+
 @media (max-width: 768px) {
-  .detailed-port-guide .attraction-block {
+  .detailed-port-guide .attraction-top {
     flex-direction: column;
   }
-  .detailed-port-guide .attraction-image-rect {
+  .detailed-port-guide .attraction-image {
     width: 100%;
-    height: auto;
-    aspect-ratio: 3 / 2;
   }
   .detailed-port-guide .attraction-info-grid {
     grid-template-columns: 1fr;

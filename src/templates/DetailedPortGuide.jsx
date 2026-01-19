@@ -682,30 +682,37 @@ function GoFurtherSection({ goFurther, attractionImages }) {
       {goFurther.attractions.map((attraction, idx) => (
         <Fragment key={idx}>
           <div className="attraction-block">
-            {attractionImages[idx] && (
-            <div className="attraction-image-rect">
-              <OptimizedImage
-                src={attractionImages[idx]}
-                alt={attraction.name}
-                width={320}
-                height={213}
-                sizes="320px"
-                srcsetWidths={[320, 640]}
-              />
-            </div>
-            )}
-            <div className="attraction-content">
-              <h3>{attraction.name}</h3>
-              <div className="attraction-tags">
-                {attraction.terrain && <TerrainBadge terrain={attraction.terrain} />}
-                {attraction.accessibility && (
-                  <AccessibilityBadge
-                    rating={attraction.accessibility.rating}
-                    notes={attraction.accessibility.notes}
+            {/* Row 1: Image and main text side by side */}
+            <div className="attraction-top">
+              {attractionImages[idx] && (
+                <div className="attraction-image">
+                  <OptimizedImage
+                    src={attractionImages[idx]}
+                    alt={attraction.name}
+                    width={320}
+                    height={213}
+                    sizes="320px"
+                    srcsetWidths={[320, 640]}
                   />
-                )}
+                </div>
+              )}
+              <div className="attraction-header">
+                <h3>{attraction.name}</h3>
+                <div className="attraction-tags">
+                  {attraction.terrain && <TerrainBadge terrain={attraction.terrain} />}
+                  {attraction.accessibility && (
+                    <AccessibilityBadge
+                      rating={attraction.accessibility.rating}
+                      notes={attraction.accessibility.notes}
+                    />
+                  )}
+                </div>
+                <p className="attraction-description">{attraction.description}</p>
               </div>
-              <p className="attraction-description">{attraction.description}</p>
+            </div>
+
+            {/* Row 2: Full width - info boxes, notes, Our Take, maps link */}
+            <div className="attraction-details">
               <div className="attraction-info-grid">
                 {attraction.cruiseLineOption && (
                   <div className="info-box">
@@ -730,7 +737,7 @@ function GoFurtherSection({ goFurther, attractionImages }) {
                 <p className="attraction-notes"><em>{formatBoldText(attraction.notes)}</em></p>
               )}
               {attraction.ourTake && (
-                <div className="our-take">
+                <div className="attraction-tips">
                   <strong>Our Take</strong>
                   {formatParagraphsWithBold(attraction.ourTake)}
                 </div>
