@@ -213,8 +213,16 @@
 }
 
 /* ========================================
-   HEADER BUTTONS
+   HEADER ACTIONS (buttons + share)
    ======================================== */
+
+.header-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2, 0.5rem);
+  width: 100%;
+}
 
 .header-buttons {
   display: flex;
@@ -229,6 +237,21 @@
   flex: 1;
   min-width: 140px;
   max-width: 200px;
+}
+
+/* Social share in header - works on dark background */
+.companion-header .social-share {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 0.75rem;
+}
+
+.companion-header .social-share-label {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.companion-header .social-share-button {
+  background: rgba(255, 255, 255, 0.95);
 }
 
 /* ========================================
@@ -472,11 +495,18 @@
     text-align: left;
   }
 
+  .header-actions {
+    width: auto;
+    flex-shrink: 0;
+    align-items: flex-end;
+  }
+
   .header-buttons {
     margin-top: 0;
     flex-shrink: 0;
     width: auto;
     flex-wrap: nowrap;
+    justify-content: flex-end;
   }
 
   .header-buttons .btn {

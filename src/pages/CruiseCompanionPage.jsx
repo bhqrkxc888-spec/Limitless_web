@@ -16,6 +16,7 @@ import PortWeather from '../components/cruise/PortWeather';
 import { getCruiseById, getSectionsForDayType } from '../data/cruises';
 import { SITE_ASSETS } from '../config/assetUrls';
 import { Button } from '../components/ui';
+import SocialShare from '../components/SocialShare';
 import './CruiseCompanionPage.css';
 
 /**
@@ -296,25 +297,32 @@ function CruiseCompanionPage() {
               <p className="cruise-dates">{formatCruiseDate(firstDate)} - {formatCruiseDate(lastDate)} | {nights} Nights | {departure.port}</p>
             </div>
 
-            <div className="header-buttons">
-              {facebookGroup && (
+            <div className="header-actions">
+              <div className="header-buttons">
+                {facebookGroup && (
+                  <Button
+                    href={facebookGroup}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-outline-white"
+                    size="sm"
+                  >
+                    Join Facebook group
+                  </Button>
+                )}
                 <Button
-                  href={facebookGroup}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="https://www.limitlesscruises.com"
                   className="btn-outline-white"
                   size="sm"
                 >
-                  Join the community
+                  Visit Limitless Cruises website
                 </Button>
-              )}
-              <Button
-                href="https://www.limitlesscruises.com"
-                className="btn-outline-white"
-                size="sm"
-              >
-                Visit Limitless Cruises
-              </Button>
+              </div>
+              <SocialShare
+                url={`https://www.limitlesscruises.com/cruise/${activeCruiseId}`}
+                title={`${cruise.id.toUpperCase()} Cruise Guide | ${ship.operator} ${ship.name} | ${cruise.shortName}`}
+                description={`Your insider guide to ${ship.operator} ${ship.name} ${cruise.id.toUpperCase()} - ${cruise.name}. Port tips, recommendations & more.`}
+              />
             </div>
           </div>
         </div>
