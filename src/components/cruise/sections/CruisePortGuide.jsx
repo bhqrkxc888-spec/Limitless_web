@@ -82,7 +82,7 @@ function CruisePortGuide({ sectionKey, dayData }) {
   // Show loading state
   if (isLoading) {
     return (
-      <div className="section-content cruise-port-guide" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '200px' }}>
+      <div className="section-content cruise-port-guide" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px' }}>
         <Loader2 size={32} style={{ animation: 'spin 1s linear infinite', color: 'var(--primary)' }} />
       </div>
     );

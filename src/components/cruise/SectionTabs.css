@@ -11,6 +11,10 @@
   top: 85px; /* Below day navigation - must account for full day nav height + padding */
   z-index: 900;
   box-shadow: 0 2px 4px rgba(44, 52, 76, 0.04);
+  /* Fix for iOS Safari sticky positioning */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  contain: layout style;
 }
 
 .section-tabs-scroll {

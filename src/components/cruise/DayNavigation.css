@@ -11,6 +11,10 @@
   top: 0;
   z-index: 1000;
   box-shadow: 0 2px 8px rgba(44, 52, 76, 0.06);
+  /* Fix for iOS Safari sticky positioning */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  contain: layout style;
 }
 
 .day-navigation .container {
