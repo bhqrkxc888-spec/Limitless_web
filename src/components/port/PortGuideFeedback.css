@@ -8,6 +8,10 @@
   margin: 1.5rem 0;
 }
 
+.port-guide-feedback__share {
+  margin-bottom: 1rem;
+}
+
 .port-guide-feedback.compact .feedback-form {
   margin: 0;
 }

@@ -27,6 +27,7 @@ import { SITE_ASSETS } from '../config/assetUrls';
  * @param {Object|Array} props.structuredData - JSON-LD structured data
  * @param {string} props.publishedTime - Article published date (ISO 8601)
  * @param {string} props.modifiedTime - Article modified date (ISO 8601)
+ * @param {string} props.keywords - Optional meta keywords (comma-separated). Google ignores; some systems may use. Keep short and relevant.
  */
 function SEO({
   title,
@@ -40,6 +41,7 @@ function SEO({
   structuredData,
   publishedTime,
   modifiedTime,
+  keywords,
 }) {
   const location = useLocation();
   
@@ -105,6 +107,7 @@ function SEO({
     // === Basic Meta Tags ===
     updateMetaTag('meta[name="description"]', fullDescription, () => createNameMeta('description'));
     updateMetaTag('meta[name="author"]', author, () => createNameMeta('author'));
+    updateMetaTag('meta[name="keywords"]', keywords, () => createNameMeta('keywords'));
     updateMetaTag('meta[name="robots"]', robotsMeta, () => createNameMeta('robots'));
 
     // === Canonical Link ===
@@ -201,6 +204,7 @@ function SEO({
     type,
     fullImage,
     author,
+    keywords,
     robotsMeta,
     siteName,
     structuredData,

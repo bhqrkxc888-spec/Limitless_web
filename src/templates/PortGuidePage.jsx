@@ -13,7 +13,6 @@ import { ArrowLeft, ChevronLeft, ChevronRight, MapPin, Loader2 } from 'lucide-re
 import { DetailedPortGuide } from './DetailedPortGuide';
 import PortGuideFeedback from '../components/port/PortGuideFeedback';
 import PortGuideReviews from '../components/port/PortGuideReviews';
-import SocialShare from '../components/SocialShare';
 import './PortGuidePage.css';
 
 // Fallback hero image
@@ -207,13 +206,13 @@ function PortGuidePage() {
 
   return (
     <main className="port-guide-page">
-      {/* SEO */}
+      {/* SEO - Port guides: OG image = hero (when published, hero is always present). Non-URL (e.g. placeholder) falls back to site default. */}
       <SEO
         title={port.meta?.title || `${port.name} Cruise Port Guide | Things to Do & Local Tips`}
         description={port.meta?.description || port.description || `Complete cruise port guide for ${port.name}. Discover walking routes, local attractions, accessibility info, family activities, restaurants and essential tips for your cruise visit.`}
         canonical={`https://www.limitlesscruises.com/ports/${port.slug}`}
         keywords={port.meta?.keywords?.join(', ') || `${port.name} cruise port, ${port.name} port guide, cruise ${port.name}, ${port.name} things to do`}
-        image={heroImage}
+        image={heroImage && /^https?:\/\//i.test(heroImage) ? heroImage : undefined}
         type="article"
         structuredData={structuredData}
       />
@@ -227,15 +226,6 @@ function PortGuidePage() {
         size="md"
         align="left"
       />
-
-      {/* Social Share */}
-      <div className="container" style={{ marginTop: '2rem', marginBottom: '2rem' }}>
-        <SocialShare 
-          url={`https://www.limitlesscruises.com/ports/${port.slug}`}
-          title={`${port.name} Cruise Port Guide`}
-          description={port.description}
-        />
-      </div>
 
       {/* Main Content */}
       <article className="port-content">
@@ -674,7 +664,13 @@ function PortGuidePage() {
                   subtitle="Help other cruise passengers plan their visit"
                   align="left"
                 />
-                <PortGuideFeedback portSlug={port.slug} portName={port.name} />
+                <PortGuideFeedback
+                  portSlug={port.slug}
+                  portName={port.name}
+                  shareUrl={`https://www.limitlesscruises.com/ports/${port.slug}`}
+                  shareTitle={`${port.name} Cruise Port Guide`}
+                  shareDescription={port.description}
+                />
               </div>
 
               {/* Display Reviews */}

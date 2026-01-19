@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Star, CheckCircle } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
+import SocialShare from '../SocialShare';
 import './PortGuideFeedback.css';
 
 /**
@@ -20,7 +21,7 @@ function getSessionId() {
  * PortGuideFeedback - Star rating (1-5) with optional review
  * for port guide pages
  */
-function PortGuideFeedback({ portSlug, portName }) {
+function PortGuideFeedback({ portSlug, portName, shareUrl, shareTitle, shareDescription }) {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [hasRated, setHasRated] = useState(false);
@@ -168,6 +169,11 @@ function PortGuideFeedback({ portSlug, portName }) {
 
   return (
     <div className="port-guide-feedback compact">
+      {shareUrl && (
+        <div className="port-guide-feedback__share">
+          <SocialShare url={shareUrl} title={shareTitle} description={shareDescription} />
+        </div>
+      )}
       {!hasRated ? (
         <div className="feedback-form">
           <div className="feedback-header">
