@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from 'react';
 import { Button } from './ui';
 import './HeroSection.css';
 
@@ -30,6 +31,20 @@ function HeroSection({
   children,
   className = ''
 }) {
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const imgRef = useRef(null);
+
+  // Check if image is already cached
+  useEffect(() => {
+    if (imgRef.current && imgRef.current.complete) {
+      setIsImageLoaded(true);
+    }
+  }, [image]);
+
+  const handleImageLoad = () => {
+    setIsImageLoaded(true);
+  };
+
   const classes = [
     'hero',
     `hero-${size}`,
@@ -53,6 +68,7 @@ function HeroSection({
             )}
             {/* Desktop image - priority loading for LCP */}
             <img
+              ref={imgRef}
               src={image}
               alt={imageAlt}
               className="hero-image"
@@ -61,7 +77,14 @@ function HeroSection({
               loading="eager"
               fetchpriority="high"
               decoding="sync"
-              style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+              onLoad={handleImageLoad}
+              style={{ 
+                objectFit: 'cover', 
+                width: '100%', 
+                height: '100%',
+                opacity: isImageLoaded ? 1 : 0,
+                transition: 'opacity 0.3s ease-in'
+              }}
             />
           </picture>
         ) : (

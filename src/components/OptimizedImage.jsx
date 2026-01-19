@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { getOptimizedImageUrl, generateSrcSet, isSupabaseUrl } from '../utils/imageHelpers';
 import { isVercelBlobUrl } from '../lib/vercelBlob';
 import { SITE_ASSETS } from '../config/assetUrls';
@@ -56,6 +56,20 @@ function OptimizedImage({
   ...props
 }) {
   const [hasError, setHasError] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const imgRef = useRef(null);
+
+  // Check if image is already cached/loaded
+  useEffect(() => {
+    if (imgRef.current && imgRef.current.complete) {
+      setIsLoaded(true);
+    }
+  }, []);
+
+  // Handle successful image load
+  const handleLoad = () => {
+    setIsLoaded(true);
+  };
   
   // Resolve image source through universal resolver (handles all formats + logs issues)
   const resolvedSrc = resolveImageSrc(src, {
@@ -202,6 +216,7 @@ function OptimizedImage({
 
   return (
     <img
+      ref={imgRef}
       src={hasError ? COMING_SOON_PLACEHOLDER : optimizedSrc}
       srcSet={hasError ? undefined : srcSet}
       sizes={srcSet && !hasError ? sizes : undefined}
@@ -214,8 +229,11 @@ function OptimizedImage({
       className={className}
       style={{
         objectFit,
+        opacity: isLoaded ? 1 : 0,
+        transition: 'opacity 0.3s ease-in',
         ...style
       }}
+      onLoad={handleLoad}
       onError={handleError}
       {...props}
     />
