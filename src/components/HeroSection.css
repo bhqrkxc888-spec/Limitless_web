@@ -45,6 +45,8 @@
   position: absolute;
   inset: 0;
   z-index: 0;
+  /* Solid background prevents flash while image loads */
+  background: var(--clr-primary, #2C344C);
 }
 
 .hero-image {

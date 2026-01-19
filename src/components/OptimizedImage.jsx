@@ -218,29 +218,45 @@ function OptimizedImage({
     ? alt.trim() 
     : generateAltFromSrc(resolvedSrc);
 
+  // Wrapper ensures there's always a background while image loads
+  // This prevents the flash of empty/transparent space
   return (
-    <img
-      ref={setImgRef}
-      src={hasError ? COMING_SOON_PLACEHOLDER : optimizedSrc}
-      srcSet={hasError ? undefined : srcSet}
-      sizes={srcSet && !hasError ? sizes : undefined}
-      alt={finalAlt}
-      width={width}
-      height={height}
-      loading={priority ? 'eager' : 'lazy'}
-      fetchPriority={priority ? 'high' : 'auto'}
-      decoding={priority ? 'sync' : 'async'}
-      className={className}
+    <div
       style={{
-        objectFit,
-        opacity: isLoaded ? 1 : 0,
-        transition: 'opacity 0.3s ease-in',
+        position: 'relative',
+        width: width ? `${width}px` : '100%',
+        height: height ? `${height}px` : 'auto',
+        aspectRatio: width && height ? `${width}/${height}` : undefined,
+        backgroundColor: '#E8E4DC', // Neutral loading background
+        overflow: 'hidden',
         ...style
       }}
-      onLoad={handleLoad}
-      onError={handleError}
-      {...props}
-    />
+      className={className}
+    >
+      <img
+        ref={setImgRef}
+        src={hasError ? COMING_SOON_PLACEHOLDER : optimizedSrc}
+        srcSet={hasError ? undefined : srcSet}
+        sizes={srcSet && !hasError ? sizes : undefined}
+        alt={finalAlt}
+        width={width}
+        height={height}
+        loading={priority ? 'eager' : 'lazy'}
+        fetchPriority={priority ? 'high' : 'auto'}
+        decoding={priority ? 'sync' : 'async'}
+        style={{
+          display: 'block',
+          width: '100%',
+          height: '100%',
+          objectFit,
+          opacity: isLoaded ? 1 : 0,
+          transition: 'opacity 0.3s ease-in',
+        }}
+        onLoad={handleLoad}
+        onError={handleError}
+        {...props}
+      />
+    </div>
   );
 }
 
