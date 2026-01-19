@@ -26,8 +26,8 @@ const LOGO_URL = SITE_ASSETS.logo;
 function OptimizedImage({
   src,
   alt,
-  width,
-  height,
+  width: _width,
+  height: _height,
   priority = false,
   className = '',
   sizes = '100vw',
