@@ -289,6 +289,9 @@ export function useShipImage(cruiseLineSlug, shipSlug, type = 'card', shipName =
 
 /**
  * Hook to get page hero image URL (for listing pages like /destinations, /cruise-types, /bucket-list)
+ * 
+ * Fixed: Removed redundant fetch() pre-validation that caused double-requests.
+ * The <img> tag handles 404s gracefully, no need to pre-check with fetch().
  */
 export function usePageHeroImage(slug) {
   const [imageUrl, setImageUrl] = useState(null);
@@ -309,23 +312,11 @@ export function usePageHeroImage(slug) {
     
     getImageUrlFromDb('site', 'site', imageType, fallback)
       .then(url => {
-        // Check if image actually exists (not a placeholder or error)
+        // If we have a valid URL (not a placeholder), use it
+        // Let the <img> tag handle loading - no need to pre-validate with fetch()
         if (url && !url.includes('placeholder')) {
-          // Test if image is accessible
-          return fetch(url, { method: 'HEAD' })
-            .then(response => {
-              if (response.ok) {
-                setImageUrl(url);
-                setHasImage(true);
-              } else {
-                setImageUrl(null);
-                setHasImage(false);
-              }
-            })
-            .catch(() => {
-              setImageUrl(null);
-              setHasImage(false);
-            });
+          setImageUrl(url);
+          setHasImage(true);
         } else {
           setImageUrl(null);
           setHasImage(false);
