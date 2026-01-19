@@ -108,24 +108,33 @@
 }
 
 /* ========================================
-   ATTRACTION IMAGES - Constrained sizing
-   Clean, single definition (removed duplicate rules)
+   ATTRACTION IMAGES - Natural aspect ratio (1200x800)
+   No over-cropping in port guides / G606 cruise
    ======================================== */
 
 .attraction-image {
   width: 100%;
+  height: auto;
   margin: var(--space-4, 1rem) 0 var(--space-6, 1.5rem);
   border-radius: var(--radius-lg, 12px);
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+.attraction-image .optimized-image-container {
+  height: auto !important;
+}
+
 .attraction-img {
   width: 100%;
-  height: auto;
+  height: auto !important;
   display: block;
-  object-fit: cover;
-  max-height: 350px;
+}
+
+.attraction-image img {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain;
 }
 
 /* Port hero image */
@@ -756,11 +765,6 @@
   
   .section-intro p {
     font-size: var(--font-size-sm, 0.875rem);
-  }
-  
-  /* Smaller images on mobile phones */
-  .attraction-img {
-    max-height: 200px;
   }
   
   .port-hero-img {

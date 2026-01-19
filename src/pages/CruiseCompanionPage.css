@@ -175,13 +175,18 @@
   gap: 2px;
 }
 
+/* Override any .header-content h1 (e.g. from shared/global styles) so it's light on dark – non‑destructive, scoped to companion header only */
+.companion-header .header-content h1 {
+  color: #FAF6EF;
+}
+
 .header-center__line1 {
   font-family: var(--font-family, 'Inter', sans-serif);
   font-size: 1.25rem;
   font-weight: var(--font-weight-bold, 700);
   margin: 0;
   letter-spacing: 0.04em;
-  color: #FFFFFF;
+  color: #FAF6EF;
   line-height: 1.3;
   text-transform: uppercase;
   font-variant: normal;
