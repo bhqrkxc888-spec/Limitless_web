@@ -734,7 +734,10 @@ function GoFurtherSection({ goFurther, attractionImages }) {
                 )}
               </div>
               {attraction.notes && (
-                <p className="attraction-notes"><em>{formatBoldText(attraction.notes)}</em></p>
+                <div className="attraction-notes-box">
+                  <strong>Note</strong>
+                  <p>{formatBoldText(attraction.notes)}</p>
+                </div>
               )}
               {attraction.ourTake && (
                 <div className="attraction-tips">

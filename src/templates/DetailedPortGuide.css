@@ -623,12 +623,30 @@
   margin: 0;
 }
 
-/* Attraction notes */
-.attraction-notes {
-  font-size: var(--font-size-sm, 0.875rem);
-  color: var(--clr-text-muted, #5C6478);
+/* Attraction notes - quick tip in a box (caveats, kid tips, booking reminders) */
+.attraction-notes-box {
   margin: var(--space-3, 0.75rem) 0;
-  font-style: italic;
+  padding: var(--space-3, 0.75rem);
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-radius: var(--radius-md, 8px);
+  border-left: 3px solid var(--clr-border, #E8E4DC);
+}
+
+.attraction-notes-box strong {
+  display: block;
+  font-size: var(--font-size-xs, 0.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--clr-text-muted, #5C6478);
+  margin-bottom: var(--space-1, 0.25rem);
+}
+
+.attraction-notes-box p {
+  margin: 0;
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--clr-text-main, #2C344C);
+  line-height: var(--line-height-relaxed, 1.6);
+  font-style: normal;
 }
 
 /* Our Take - G606 attraction-take style */
