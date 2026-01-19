@@ -11,17 +11,8 @@ import { getDestinationForBucketList } from '../config/bucketListDestinationMapp
 import { logger } from './logger';
 
 // Cache for image URLs to avoid repeated queries
+// Cache persists for the session - cleared manually or on full page reload
 const imageCache = new Map();
-
-// Clear cache on page load to ensure fresh data
-if (typeof window !== 'undefined') {
-  window.addEventListener('load', () => {
-    imageCache.clear();
-    if (process.env.NODE_ENV === 'development') {
-      console.log('[ImageLoader] Cache cleared on page load');
-    }
-  });
-}
 
 /**
  * Get image URL from site_images table

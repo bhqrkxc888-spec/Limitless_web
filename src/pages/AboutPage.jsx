@@ -74,7 +74,7 @@ function AboutPage() {
                 alt="Your personal cruise consultant" 
                 width={1920}
                 height={1080}
-                priority={false}
+                priority={true}
                 sizes="(max-width: 768px) 100vw, 600px"
                 srcsetWidths={[400, 600, 800]}
                 quality={85}

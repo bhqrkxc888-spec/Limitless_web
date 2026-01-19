@@ -1,19 +1,18 @@
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getPortsByRegion, getAllRegions, getPortsCountByRegion } from '../data/ports';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import { Button, Card, SectionHeader } from '../components/ui';
-import { usePortGuideImage } from '../hooks/useImageUrl';
+import { supabase, getPublicUrl } from '../lib/supabase';
 import '../styles/page-header.css';
 import './PortRegionPage.css';
 import './PortsPage.css'; // Import for region filter styles
 
 /**
- * Port Card with Database Image
+ * Port Card with pre-fetched image URL (no individual hook call)
  */
-function PortCardWithImage({ port }) {
-  const { imageUrl: portImage } = usePortGuideImage(port.slug, 'card');
-  
+function PortCardWithImage({ port, imageUrl }) {
   return (
     <Card 
       to={`/ports/${port.slug}`} 
@@ -21,7 +20,7 @@ function PortCardWithImage({ port }) {
       className="port-card"
     >
       <Card.Image 
-        src={portImage}
+        src={imageUrl}
         alt={`${port.name} cruise port`}
         aspectRatio="3/2"
       />
@@ -48,6 +47,36 @@ function PortCardWithImage({ port }) {
 function PortRegionPage() {
   const { slug } = useParams();
   const region = getAllRegions().find(r => r.slug === slug);
+  const [portImages, setPortImages] = useState({});
+  
+  const ports = region ? getPortsByRegion(region.id) : [];
+  
+  // Batch fetch all port card images in a single query (avoids N+1)
+  useEffect(() => {
+    if (!ports.length) return;
+    
+    async function fetchPortImages() {
+      const slugs = ports.map(p => p.slug);
+      const { data: cardImages, error } = await supabase
+        .from('site_images')
+        .select('entity_id, bucket, path')
+        .eq('entity_type', 'port-guide')
+        .eq('image_type', 'card')
+        .in('entity_id', slugs);
+      
+      if (!error && cardImages) {
+        const imageMap = cardImages.reduce((acc, img) => {
+          if (img.bucket && img.path) {
+            acc[img.entity_id] = getPublicUrl(img.bucket, img.path);
+          }
+          return acc;
+        }, {});
+        setPortImages(imageMap);
+      }
+    }
+    
+    fetchPortImages();
+  }, [ports.length, region?.id]);
   
   // Handle region not found
   if (!region) {
@@ -62,8 +91,6 @@ function PortRegionPage() {
       </main>
     );
   }
-
-  const ports = getPortsByRegion(region.id);
 
   // Structured Data for SEO
   const structuredData = {
@@ -143,7 +170,11 @@ function PortRegionPage() {
           {ports.length > 0 ? (
             <div className="ports-grid">
               {ports.map((port) => (
-                <PortCardWithImage key={port.id} port={port} />
+                <PortCardWithImage 
+                  key={port.id} 
+                  port={port} 
+                  imageUrl={portImages[port.slug] || null}
+                />
               ))}
             </div>
           ) : (

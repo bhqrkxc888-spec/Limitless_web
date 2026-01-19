@@ -3,23 +3,15 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import { Button, Card } from '../components/ui';
 import { Link } from 'react-router-dom';
-import { usePortGuideImage } from '../hooks/useImageUrl';
-import { supabase } from '../lib/supabase';
+import { supabase, getPublicUrl } from '../lib/supabase';
 import { Loader2 } from 'lucide-react';
 import '../styles/page-header.css';
 import './PortsPage.css';
 
 /**
- * Port Card with Database Image
+ * Port Card with pre-fetched image URL (no individual hook call)
  */
-function PortCardWithImage({ port }) {
-  const { imageUrl: portImage, isPlaceholder } = usePortGuideImage(port.slug, 'card');
-  
-  // Debug: Log in development
-  if (process.env.NODE_ENV === 'development') {
-    console.log(`Port Card: ${port.slug} | Image: ${isPlaceholder ? 'placeholder' : 'real'}`);
-  }
-  
+function PortCardWithImage({ port, imageUrl }) {
   return (
     <Card 
       to={`/ports/${port.slug}`} 
@@ -27,7 +19,7 @@ function PortCardWithImage({ port }) {
       className="port-card"
     >
       <Card.Image 
-        src={portImage}
+        src={imageUrl}
         alt={`${port.name} cruise port`}
         aspectRatio="3/2"
       />
@@ -64,9 +56,10 @@ const REGIONS = [
  */
 function PortsPage() {
   const [ports, setPorts] = useState([]);
+  const [portImages, setPortImages] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch only menu-visible ports from Supabase
+  // Fetch ports AND batch-fetch all card images in parallel
   useEffect(() => {
     async function fetchMenuPorts() {
       setIsLoading(true);
@@ -80,6 +73,28 @@ function PortsPage() {
 
         if (!error && data) {
           setPorts(data);
+          
+          // Batch fetch all port card images in a single query (avoids N+1)
+          const slugs = data.map(p => p.slug);
+          if (slugs.length > 0) {
+            const { data: cardImages, error: imgError } = await supabase
+              .from('site_images')
+              .select('entity_id, bucket, path')
+              .eq('entity_type', 'port-guide')
+              .eq('image_type', 'card')
+              .in('entity_id', slugs);
+            
+            if (!imgError && cardImages) {
+              // Create a map for O(1) lookup: slug -> imageUrl
+              const imageMap = cardImages.reduce((acc, img) => {
+                if (img.bucket && img.path) {
+                  acc[img.entity_id] = getPublicUrl(img.bucket, img.path);
+                }
+                return acc;
+              }, {});
+              setPortImages(imageMap);
+            }
+          }
         } else {
           console.error('Error fetching ports:', error);
         }
@@ -214,7 +229,11 @@ function PortsPage() {
 
               <div className="ports-grid">
                 {regionPorts.slice(0, 3).map((port) => (
-                  <PortCardWithImage key={port.id} port={port} />
+                  <PortCardWithImage 
+                    key={port.id} 
+                    port={port} 
+                    imageUrl={portImages[port.slug] || null}
+                  />
                 ))}
               </div>
             </div>

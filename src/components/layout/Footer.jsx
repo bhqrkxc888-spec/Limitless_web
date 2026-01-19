@@ -145,6 +145,7 @@ function Footer() {
                       alt="Holiday Elite Travel Agent Member"
                       width="150"
                       height="75"
+                      loading="lazy"
                     />
                   </a>
                 </div>
