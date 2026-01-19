@@ -11,6 +11,7 @@
  * The dayData.portSlug links to the port guide - no separate content files needed.
  */
 
+import { Fragment } from 'react';
 import { Clock, Info, MapPin, Sun, Loader2 } from 'lucide-react';
 import PortGuideFeedback from '../../port/PortGuideFeedback';
 import PortWeather from '../PortWeather';
@@ -522,84 +523,80 @@ function GoFurtherSection({ goFurther, attractionImages, portName }) {
       {goFurther.attractions.map((attraction, idx) => {
         const imgData = attractionImages[idx];
         const showImage = imgData?.url && !imgData?.isPlaceholder;
-        
+
         return (
-        <div key={idx} className="attraction-block">
-          <div className="attraction-header">
-            <h3>{attraction.name}</h3>
-            {/* Terrain and Accessibility Badges */}
-            <div className="attraction-badges">
-              {attraction.terrain && (
-                <span className={`terrain-badge terrain-${attraction.terrain}`}>
-                  {attraction.terrain === 'easy' ? '🟢 Easy' : 
-                   attraction.terrain === 'moderate' ? '🟡 Some Hills' : 
-                   '🔴 Challenging'}
-                </span>
+          <Fragment key={idx}>
+            <div className="attraction-block">
+              {showImage && (
+                <div className="attraction-image-rect">
+                  <OptimizedImage
+                    src={imgData.url}
+                    alt={`${attraction.name} - ${portName}`}
+                    width={320}
+                    height={213}
+                    sizes="320px"
+                    srcsetWidths={[320, 640]}
+                  />
+                </div>
               )}
-              {attraction.accessibility && (
-                <span className={`accessibility-badge access-${attraction.accessibility.rating}`} title={attraction.accessibility.notes || ''}>
-                  {attraction.accessibility.rating === 'full' ? '♿ Fully Accessible' :
-                   attraction.accessibility.rating === 'partial' ? '⚠️ Partially Accessible' :
-                   attraction.accessibility.rating === 'limited' ? '⚠️ Limited Access' :
-                   '🚫 Not Accessible'}
-                </span>
-              )}
-            </div>
-          </div>
-          
-          {showImage && (
-            <div className="attraction-image">
-              <OptimizedImage
-                src={imgData.url}
-                alt={`${attraction.name} - ${portName}`}
-                className="attraction-img"
-                srcsetWidths={[640, 1024, 1200]}
-              />
-            </div>
-          )}
-          
-          <p className="attraction-description">{attraction.description}</p>
-          
-          <div className="detail-grid">
-            {attraction.cruiseLineOption && (
-              <div className="detail-item">
-                <strong>Cruise Line Tours</strong>
-                <p>{attraction.cruiseLineOption}</p>
+              <div className="attraction-content">
+                <h3>{attraction.name}</h3>
+                <div className="attraction-tags">
+                  {attraction.terrain && (
+                    <span className={`terrain-badge terrain-${attraction.terrain}`}>
+                      {attraction.terrain === 'easy' ? '🟢 Easy' :
+                        attraction.terrain === 'moderate' ? '🟡 Some Hills' :
+                          '🔴 Challenging'}
+                    </span>
+                  )}
+                  {attraction.accessibility && (
+                    <span className={`accessibility-badge access-${attraction.accessibility.rating}`} title={attraction.accessibility.notes || ''}>
+                      {attraction.accessibility.rating === 'full' ? '♿ Fully Accessible' :
+                        attraction.accessibility.rating === 'partial' ? '⚠️ Partially Accessible' :
+                          attraction.accessibility.rating === 'limited' ? '⚠️ Limited Access' :
+                            '🚫 Not Accessible'}
+                    </span>
+                  )}
+                </div>
+                <p className="attraction-description">{attraction.description}</p>
+                <div className="attraction-info-grid">
+                  {attraction.cruiseLineOption && (
+                    <div className="info-box">
+                      <strong>Cruise Line Tours</strong>
+                      <p>{attraction.cruiseLineOption}</p>
+                    </div>
+                  )}
+                  {attraction.independent && (
+                    <div className="info-box">
+                      <strong>Going Independent</strong>
+                      <p>{attraction.independent}</p>
+                    </div>
+                  )}
+                  {attraction.allow && (
+                    <div className="info-box">
+                      <strong>Allow Time</strong>
+                      <p>{attraction.allow}</p>
+                    </div>
+                  )}
+                </div>
+                {attraction.notes && (
+                  <p className="attraction-notes"><em>{formatBoldText(attraction.notes)}</em></p>
+                )}
+                {attraction.ourTake && (
+                  <div className="our-take">
+                    <strong>Our Take</strong>
+                    {formatParagraphsWithBold(attraction.ourTake)}
+                  </div>
+                )}
+                {attraction.mapLink && (
+                  <a href={attraction.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
+                    View on Google Maps →
+                  </a>
+                )}
               </div>
-            )}
-            {attraction.independent && (
-              <div className="detail-item">
-                <strong>Going Independent</strong>
-                <p>{attraction.independent}</p>
-              </div>
-            )}
-            {attraction.allow && (
-              <div className="detail-item">
-                <strong>Allow</strong>
-                <p>{attraction.allow}</p>
-              </div>
-            )}
-            {/* Cost/pricing removed - contact for pricing */}
-          </div>
-          {attraction.notes && (
-            <p className="attraction-notes"><em>{formatBoldText(attraction.notes)}</em></p>
-          )}
-          
-          {attraction.ourTake && (
-            <div className="our-take">
-              <strong>Our Take</strong>
-              {formatParagraphsWithBold(attraction.ourTake)}
             </div>
-          )}
-          
-          {attraction.mapLink && (
-            <a href={attraction.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-              View on Google Maps →
-            </a>
-          )}
-          
-          <hr className="section-divider" />
-        </div>
+            <hr className="section-divider" />
+          </Fragment>
         );
       })}
 

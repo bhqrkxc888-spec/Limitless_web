@@ -6,7 +6,7 @@
  * Matches the same layout and style as G606 cruise companion port days
  */
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, Fragment } from 'react';
 import OptimizedImage from '../components/OptimizedImage';
 import { usePortGuideImage } from '../hooks/useImageUrl';
 import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye, Star, AlertCircle, Thermometer, Waves, ChefHat, Wind, Anchor, Cross } from 'lucide-react';
@@ -680,74 +680,70 @@ function GoFurtherSection({ goFurther, attractionImages }) {
       <hr className="section-divider" />
 
       {goFurther.attractions.map((attraction, idx) => (
-        <div key={idx} className="attraction-card">
-          <div className="attraction-header">
-            <h3>{attraction.name}</h3>
-            {/* Terrain and Accessibility badges */}
-            <div className="attraction-badges">
-              {attraction.terrain && <TerrainBadge terrain={attraction.terrain} />}
-              {attraction.accessibility && (
-                <AccessibilityBadge 
-                  rating={attraction.accessibility.rating} 
-                  notes={attraction.accessibility.notes} 
-                />
-              )}
-            </div>
-          </div>
-          
-          {attractionImages[idx] && (
-            <div className="attraction-image">
+        <Fragment key={idx}>
+          <div className="attraction-block">
+            {attractionImages[idx] && (
+            <div className="attraction-image-rect">
               <OptimizedImage
                 src={attractionImages[idx]}
                 alt={attraction.name}
-                className="attraction-img"
-                srcsetWidths={[640, 1024, 1200]}
+                width={320}
+                height={213}
+                sizes="320px"
+                srcsetWidths={[320, 640]}
               />
             </div>
-          )}
-          
-          <p className="attraction-description">{attraction.description}</p>
-          
-          <div className="detail-grid">
-            {attraction.cruiseLineOption && (
-              <div className="detail-item">
-                <strong>Cruise Line Tours</strong>
-                <p>{attraction.cruiseLineOption}</p>
-              </div>
             )}
-            {attraction.independent && (
-              <div className="detail-item">
-                <strong>Going Independent</strong>
-                <p>{attraction.independent}</p>
+            <div className="attraction-content">
+              <h3>{attraction.name}</h3>
+              <div className="attraction-tags">
+                {attraction.terrain && <TerrainBadge terrain={attraction.terrain} />}
+                {attraction.accessibility && (
+                  <AccessibilityBadge
+                    rating={attraction.accessibility.rating}
+                    notes={attraction.accessibility.notes}
+                  />
+                )}
               </div>
-            )}
-            {attraction.allow && (
-              <div className="detail-item">
-                <strong>Allow</strong>
-                <p>{attraction.allow}</p>
+              <p className="attraction-description">{attraction.description}</p>
+              <div className="attraction-info-grid">
+                {attraction.cruiseLineOption && (
+                  <div className="info-box">
+                    <strong>Cruise Line Tours</strong>
+                    <p>{attraction.cruiseLineOption}</p>
+                  </div>
+                )}
+                {attraction.independent && (
+                  <div className="info-box">
+                    <strong>Going Independent</strong>
+                    <p>{attraction.independent}</p>
+                  </div>
+                )}
+                {attraction.allow && (
+                  <div className="info-box">
+                    <strong>Allow Time</strong>
+                    <p>{attraction.allow}</p>
+                  </div>
+                )}
               </div>
-            )}
-            {/* Cost/pricing removed - contact for pricing */}
-          </div>
-          {attraction.notes && (
-            <p className="attraction-notes"><em>{formatBoldText(attraction.notes)}</em></p>
-          )}
-          
-          {attraction.ourTake && (
-            <div className="our-take">
-              <strong>Our Take</strong>
-              {formatParagraphsWithBold(attraction.ourTake)}
+              {attraction.notes && (
+                <p className="attraction-notes"><em>{formatBoldText(attraction.notes)}</em></p>
+              )}
+              {attraction.ourTake && (
+                <div className="our-take">
+                  <strong>Our Take</strong>
+                  {formatParagraphsWithBold(attraction.ourTake)}
+                </div>
+              )}
+              {attraction.mapLink && (
+                <a href={attraction.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
+                  View on Google Maps →
+                </a>
+              )}
             </div>
-          )}
-          
-          {attraction.mapLink && (
-            <a href={attraction.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-              View on Google Maps →
-            </a>
-          )}
-          
+          </div>
           <hr className="section-divider" />
-        </div>
+        </Fragment>
       ))}
 
       {goFurther.ourTake && (
