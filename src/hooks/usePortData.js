@@ -7,7 +7,7 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
-import { getPortBySlug as getStaticPort, getAdjacentPorts as getStaticAdjacentPorts } from '../data/ports';
+import { getPortBySlug as getStaticPort } from '../data/ports';
 import { getPortContent as getStaticPortContent, hasDetailedContent as hasStaticDetailedContent } from '../data/portContent';
 
 /**
@@ -132,79 +132,6 @@ export function usePortData(slug) {
   }, [slug]);
 
   return { port, detailedContent, hasDetailed, isLoading, source };
-}
-
-/**
- * Hook to get adjacent ports (prev/next) for navigation
- * Optimized: Uses two targeted queries instead of fetching all ports
- */
-export function useAdjacentPorts(slug) {
-  const [adjacentPorts, setAdjacentPorts] = useState({ prev: null, next: null });
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (!slug) {
-      setIsLoading(false);
-      return;
-    }
-
-    async function fetchAdjacent() {
-      setIsLoading(true);
-      
-      try {
-        // First, get current port's name for alphabetical comparison
-        const { data: currentPort, error: currentError } = await supabase
-          .from('ports')
-          .select('name')
-          .eq('slug', slug)
-          .eq('status', 'published')
-          .single();
-
-        if (currentError || !currentPort) {
-          // Fallback to static
-          setAdjacentPorts(getStaticAdjacentPorts(slug));
-          setIsLoading(false);
-          return;
-        }
-
-        const currentName = currentPort.name;
-
-        // Fetch prev and next in parallel with targeted queries (only 2 rows total)
-        const [prevResult, nextResult] = await Promise.all([
-          supabase
-            .from('ports')
-            .select('slug, name')
-            .eq('status', 'published')
-            .lt('name', currentName)
-            .order('name', { ascending: false })
-            .limit(1)
-            .maybeSingle(),
-          supabase
-            .from('ports')
-            .select('slug, name')
-            .eq('status', 'published')
-            .gt('name', currentName)
-            .order('name', { ascending: true })
-            .limit(1)
-            .maybeSingle()
-        ]);
-
-        setAdjacentPorts({
-          prev: prevResult.data || null,
-          next: nextResult.data || null
-        });
-        setIsLoading(false);
-      } catch (err) {
-        console.warn('Supabase adjacent fetch failed, falling back to static:', err.message);
-        setAdjacentPorts(getStaticAdjacentPorts(slug));
-        setIsLoading(false);
-      }
-    }
-
-    fetchAdjacent();
-  }, [slug]);
-
-  return { ...adjacentPorts, isLoading };
 }
 
 /**

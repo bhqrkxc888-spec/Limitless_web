@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState, useMemo, useEffect } from 'react';
-import { usePortData, useAdjacentPorts } from '../hooks/usePortData';
+import { usePortData } from '../hooks/usePortData';
 import { supabase } from '../lib/supabase';
 import { siteConfig } from '../config/siteConfig';
 import SEO, { getBreadcrumbSchema } from '../components/SEO';
@@ -27,7 +27,6 @@ const FALLBACK_HERO = SITE_ASSETS.heroDefault || '/images/placeholders/coming-so
 function PortGuidePage() {
   const { slug } = useParams();
   const { port, detailedContent, hasDetailed, isLoading, source } = usePortData(slug);
-  const { prev: prevPort, next: nextPort } = useAdjacentPorts(slug);
   const [weatherIndex, setWeatherIndex] = useState(0);
 
   // Get port data first for image context
@@ -712,19 +711,9 @@ function PortGuidePage() {
       <section className="port-navigation-footer">
         <div className="container">
           <div className="port-nav-links">
-            {prevPort && (
-              <Link to={`/ports/${prevPort.slug}`} className="port-nav-link port-nav-prev">
-                ← {prevPort.name}
-              </Link>
-            )}
             <Link to="/ports" className="port-nav-link port-nav-home">
               Back to Port Guides
             </Link>
-            {nextPort && (
-              <Link to={`/ports/${nextPort.slug}`} className="port-nav-link port-nav-next">
-                {nextPort.name} →
-              </Link>
-            )}
           </div>
         </div>
       </section>
