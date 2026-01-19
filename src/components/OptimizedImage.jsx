@@ -31,7 +31,7 @@ function OptimizedImage({
   priority = false,
   className = '',
   sizes = '100vw',
-  srcsetWidths = [640, 1024, 1920],
+  srcsetWidths = [400, 600],
   quality = 85,
   objectFit = 'cover',
   style = {},
@@ -41,36 +41,22 @@ function OptimizedImage({
   imageType = 'unknown',
   ...props
 }) {
+  // width/height accepted but ignored - parent controls size via container; avoids stretching small images
   const [hasError, setHasError] = useState(false);
   const imgRef = useRef(null);
 
   // Callback ref - if image is already cached, add 'loaded' class immediately
-  // This bypasses React's render cycle for instant display of cached images
   const setImgRef = useCallback((node) => {
     if (node) {
       if (node.complete && node.naturalHeight !== 0) {
-        // Cached image - show instantly with no transition
         node.classList.add('loaded', 'no-transition');
       }
       imgRef.current = node;
     }
   }, []);
 
-  // CSS-only load handler - directly add class to DOM, no React state
-  // This fires in the same paint frame as the load event
   const handleLoad = (e) => {
     e.target.classList.add('loaded');
-    
-    // TEMPORARY: Verify transition is working (remove after testing)
-    if (import.meta.env.DEV) {
-      const computedStyle = window.getComputedStyle(e.target);
-      console.log('[OptimizedImage] Transition test:', {
-        transition: computedStyle.transition,
-        opacity: computedStyle.opacity,
-        classes: e.target.className,
-        src: e.target.src.substring(0, 80) + '...'
-      });
-    }
   };
   
   // Resolve image source through universal resolver
@@ -98,9 +84,10 @@ function OptimizedImage({
         <div 
           className={`optimized-image-placeholder ${className}`}
           style={{ 
-            width: width ? `${width}px` : '100%', 
-            height: height ? `${height}px` : 'auto',
-            aspectRatio: width && height ? `${width}/${height}` : undefined,
+            width: '100%',
+            height: '100%',
+            position: 'relative',
+            overflow: 'hidden',
             backgroundColor: '#2C344C',
             display: 'flex',
             flexDirection: 'column',
@@ -148,9 +135,10 @@ function OptimizedImage({
       <div 
         className={`optimized-image-placeholder ${className}`}
         style={{ 
-          width: width ? `${width}px` : '100%', 
-          height: height ? `${height}px` : 'auto',
-          aspectRatio: width && height ? `${width}/${height}` : undefined,
+          width: '100%',
+          height: '100%',
+          position: 'relative',
+          overflow: 'hidden',
           backgroundColor: 'var(--color-gray-100, #f0f0f0)',
           display: 'flex',
           alignItems: 'center',
@@ -168,7 +156,8 @@ function OptimizedImage({
 
   const isVercelBlob = isVercelBlobUrl(resolvedSrc);
   const isSupabase = isSupabaseUrl(resolvedSrc);
-  const maxWidth = width || Math.max(...srcsetWidths);
+  // Use max of srcsetWidths for main src; don't request larger than needed (avoids stretching small images)
+  const maxWidth = srcsetWidths.length > 0 ? Math.max(...srcsetWidths) : 600;
   
   const optimizedSrc = (isVercelBlob || isSupabase)
     ? getOptimizedImageUrl(resolvedSrc, { width: maxWidth, quality })
@@ -198,9 +187,10 @@ function OptimizedImage({
     <div
       className={`optimized-image-container ${className}`}
       style={{
-        width: width ? `${width}px` : '100%',
-        height: height ? `${height}px` : 'auto',
-        aspectRatio: width && height ? `${width}/${height}` : undefined,
+        width: '100%',
+        height: '100%',
+        position: 'relative',
+        overflow: 'hidden',
         ...style
       }}
     >
@@ -211,12 +201,10 @@ function OptimizedImage({
         srcSet={hasError ? undefined : srcSet}
         sizes={srcSet && !hasError ? sizes : undefined}
         alt={finalAlt}
-        width={width}
-        height={height}
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : 'auto'}
         decoding={priority ? 'sync' : 'async'}
-        style={{ objectFit }}
+        style={{ width: '100%', height: '100%', objectFit, objectPosition: 'center' }}
         onLoad={handleLoad}
         onError={handleError}
         {...props}

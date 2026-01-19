@@ -80,14 +80,7 @@ function CardImage({
   // For fixed aspect ratio, default to cover to fill the container
   const defaultObjectFit = isAutoRatio ? undefined : (objectFit || 'cover');
   
-  // Calculate dimensions from aspect ratio for image optimization
-  let calculatedHeight = 450; // default
-  if (!isAutoRatio) {
-    const [widthRatio, heightRatio] = aspectRatio.split('/').map(Number);
-    const baseWidth = 800;
-    calculatedHeight = Math.round((baseWidth * heightRatio) / widthRatio);
-  }
-  
+  // Container sets dimensions via aspect-ratio; OptimizedImage fills it (no width/height to avoid stretching)
   const containerStyle = isAutoRatio ? {} : { aspectRatio };
   
   return (
@@ -99,11 +92,9 @@ function CardImage({
         <OptimizedImage
           src={src}
           alt={alt || 'Card image'}
-          width={800}
-          height={calculatedHeight}
           priority={priority}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
-          srcsetWidths={[400, 600, 800]}
+          srcsetWidths={[400, 600]}
           quality={85}
           objectFit={defaultObjectFit}
           entityType={entityType}
