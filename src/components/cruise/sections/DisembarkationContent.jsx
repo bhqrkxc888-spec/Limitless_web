@@ -32,7 +32,7 @@ function WhatToExpectSection({ dayData: _dayData }) {
         <p><strong>Key tasks to complete:</strong></p>
 
         <p><strong>Settle your onboard account:</strong></p>
-        <p>Check your bill on the TV or Horizon app. Any discrepancies must be resolved at Guest Services before 10pm. If paying by card registered at boarding, charges are automatic.</p>
+        <p>Check your bill on the TV or My Holiday website (myholiday.pocruises.com). Any discrepancies must be resolved at Guest Services before 10pm. If paying by card registered at boarding, charges are automatic.</p>
 
         <p><strong>Pack your luggage:</strong></p>
         <p>If using P&O's luggage service, bags must be outside your cabin door by the time stated (usually 10pm-11pm). You'll receive coloured luggage tags indicating your collection time.</p>
@@ -56,7 +56,7 @@ function WhatToExpectSection({ dayData: _dayData }) {
         <ul className="info-list">
           <li><strong>6:00am - 8:30am:</strong> Breakfast available (buffet and main dining room)</li>
           <li><strong>6:30am onwards:</strong> Ship cleared by UK Border Force</li>
-          <li><strong>7:00am - 7:30am:</strong> Self-assist guests begin disembarking</li>
+          <li><strong>7:00am - 7:30am:</strong> Self-disembarkation guests begin disembarking</li>
           <li><strong>7:30am onwards:</strong> Colour groups called in sequence</li>
           <li><strong>9:30am - 10:00am:</strong> Final guests disembark</li>
           <li><strong>10:30am:</strong> All guests must have left the ship</li>
@@ -73,23 +73,26 @@ function WhatToExpectSection({ dayData: _dayData }) {
       <hr className="section-divider" />
 
       <div className="content-card">
-        <h3 className="content-card-title">Option 1: Self-Assist (Walk-Off) Disembarkation</h3>
+        <h3 className="content-card-title">Option 1: Self-Disembarkation (Carrying Your Own Luggage)</h3>
         
-        <p><strong>Best for:</strong> Early departures, those who pack light, guests with onward travel connections, anyone who wants to avoid waiting.</p>
+        <p><strong>Best for:</strong> Early departures, light packers, tight connections, avoiding waits.</p>
 
         <p><strong>How it works:</strong></p>
         <ul className="info-list">
           <li>You carry ALL your own luggage off the ship</li>
-          <li>You can leave as soon as the ship is cleared (typically 7:00am-7:30am)</li>
+          <li>You leave at your allocated time (in your disembarkation letter)</li>
           <li>No waiting for colour groups to be called</li>
           <li>Walk straight through the terminal to exit</li>
         </ul>
 
+        <p><strong>Typical timing:</strong> Self-disembarkation usually starts around 6:30am (subject to customs clearance) - you'll be given your specific time in your disembarkation letter. <strong>Self-disembarkation guests are typically the first allowed off the ship.</strong></p>
+
+        <p><strong>How to register:</strong> Visit Guest Services or use My Holiday website (myholiday.pocruises.com) during the cruise to register for self-disembarkation. You'll be given your allocated time in your disembarkation letter.</p>
+
         <p><strong>Requirements:</strong></p>
         <ul className="info-list">
-          <li>Must be able to manage all luggage yourself (no porter assistance available for self-assist)</li>
+          <li>Must be able to manage all luggage yourself (no porter assistance available for self-disembarkation)</li>
           <li>Bags must fit through X-ray security scanning</li>
-          <li>Register for self-assist via Guest Services or the Horizon app (usually by the day before)</li>
         </ul>
 
         <p><strong>Advantages:</strong></p>
@@ -109,7 +112,7 @@ function WhatToExpectSection({ dayData: _dayData }) {
           <li>Breakfast options limited if leaving very early</li>
         </ul>
 
-        <p className="info-note">Pro tip: Pack a smaller overnight bag for the cruise and travel light - self-assist is much easier with one wheelie case than three large suitcases.</p>
+        <p className="info-note">Pro tip: Pack a smaller overnight bag for the cruise and travel light - self-disembarkation is much easier with one wheelie case than three large suitcases.</p>
       </div>
 
       <hr className="section-divider" />
@@ -130,6 +133,7 @@ function WhatToExpectSection({ dayData: _dayData }) {
         </ol>
 
         <p><strong>The colour tag system:</strong></p>
+        <p>P&O provides <strong>colour-coded luggage tags</strong> (e.g., Red, Blue, Yellow) paired with a time slot. You place these tags on your bags the night before.</p>
         <ul className="info-list">
           <li>You'll receive coloured luggage tags with your disembarkation letter</li>
           <li>Colours are called in sequence over the morning</li>
@@ -258,9 +262,9 @@ function TipsSection({ dayData: _dayData }) {
   return (
     <div className="section-tips">
       <div className="content-card">
-        <p className="content-card-title">Tip 1: Decide Early - Self-Assist or Standard?</p>
-        <p>Make your disembarkation choice as soon as the option appears in the Horizon app (usually mid-cruise). Self-assist slots can fill up, and you'll have time to pack accordingly. Consider your luggage volume, mobility, and onward travel timing.</p>
-        <p className="info-note">If you have an early flight or train, self-assist is almost always the better choice.</p>
+        <p className="content-card-title">Tip 1: Decide Early - Self-Disembarkation or Standard?</p>
+        <p>Choose as soon as possible during the cruise. Register at Guest Services or via My Holiday website (myholiday.pocruises.com). Self-disembarkation slots can fill up. Consider your luggage volume, mobility, and onward travel timing.</p>
+        <p className="info-note">If you have an early flight or train, self-disembarkation is almost always the better choice.</p>
       </div>
 
       <div className="content-card">
@@ -282,7 +286,7 @@ function TipsSection({ dayData: _dayData }) {
 
       <div className="content-card">
         <p className="content-card-title">Tip 5: Check Your Onboard Account</p>
-        <p>Your final bill is generated overnight. Check it on your cabin TV or the Horizon app first thing. Any disputes need to be resolved at Guest Services before you disembark - it's much harder to fix issues afterwards. Keep your receipts if you've queried any charges.</p>
+        <p>Your final bill is generated overnight. Check on cabin TV or My Holiday website first thing. Any disputes need to be resolved at Guest Services before you disembark - it's much harder to fix issues afterwards. Keep your receipts if you've queried any charges.</p>
       </div>
 
       <div className="content-card">

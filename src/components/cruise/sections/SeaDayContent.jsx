@@ -4,6 +4,22 @@ import './SectionContent.css';
 
 function SeaDayContent({ sectionKey, dayData, nextPort }) {
   const renderSection = () => {
+    // Day 2 (15 March - At Sea): custom Bay of Biscay content replaces all tabs
+    if (dayData?.dayNumber === 2) {
+      return <Day2SeaDayContent />;
+    }
+    // Days 4-5 (17-18 March - At Sea): custom Sailing to the Canaries content replaces all tabs
+    if (dayData?.dayNumber === 4 && dayData?.dayNumberEnd === 5) {
+      return <Days45SeaDayContent />;
+    }
+    // Day 9 (22 March - At Sea): custom Sailing to Mainland Spain content replaces all tabs
+    if (dayData?.dayNumber === 9) {
+      return <Day9SeaDayContent />;
+    }
+    // Days 13-14 (26-27 March - At Sea): custom Heading Home content replaces all tabs
+    if (dayData?.dayNumber === 13 && dayData?.dayNumberEnd === 14) {
+      return <Days1314SeaDayContent />;
+    }
     switch (sectionKey) {
       case 'overview':
         return <OverviewSection dayData={dayData} nextPort={nextPort} />;
@@ -21,6 +37,359 @@ function SeaDayContent({ sectionKey, dayData, nextPort }) {
   return (
     <div className="section-content">
       {renderSection()}
+    </div>
+  );
+}
+
+/**
+ * Day 2 (15 March - At Sea) – Bay of Biscay crossing.
+ * Replaces the default tabbed sea-day content for this day only.
+ */
+function Day2SeaDayContent() {
+  return (
+    <div className="section-overview">
+      <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--clr-text)' }}>
+        Sea Day - Bay of Biscay Crossing
+      </h2>
+      <p><strong>No port stops today.</strong> You're crossing the Bay of Biscay from Southampton toward Spain - this stretch can be lively in March, so keep seasickness tablets handy if you're prone to motion. It's a great day to explore Iona indoors, catch up on shows, or simply rest.</p>
+      <p>Check your <strong>Horizon magazine</strong> (delivered to your cabin) for today's full schedule of activities and entertainment.</p>
+
+      <hr className="section-divider" />
+
+      <div className="info-block">
+        <h3>What's Onboard (P&O Iona)</h3>
+        <p><strong>Dining</strong></p>
+        <ul className="info-list">
+          <li>Main dining rooms (Freedom Dining or allocated seating)</li>
+          <li>Peninsular Restaurant &amp; Oriental Restaurant</li>
+          <li>The Glass House wine bar &amp; restaurant</li>
+          <li>Epicurean specialty restaurant</li>
+          <li>Sindhu Indian restaurant</li>
+          <li>Buffet at Sunset dining area</li>
+        </ul>
+        <p><strong>Relax &amp; Unwind</strong></p>
+        <ul className="info-list">
+          <li>The Oasis Spa - treatments, thermal suite, gym</li>
+          <li>The Retreat - adults-only sun deck</li>
+          <li>Indoor pool under the SkyDome (great for cooler weather)</li>
+          <li>Infinity Pool (aft deck - outdoor)</li>
+          <li>Hot tubs</li>
+        </ul>
+        <p><strong>Entertainment &amp; Activities</strong></p>
+        <ul className="info-list">
+          <li>Evening shows in Headliners Theatre</li>
+          <li>Live music across multiple venues</li>
+          <li>SkyDome - covered entertainment space with retractable roof</li>
+          <li>Movies under the stars (weather permitting)</li>
+          <li>Trivia, bingo, dance classes</li>
+          <li>Cookery demonstrations</li>
+          <li>Enrichment talks</li>
+        </ul>
+        <p><strong>Families</strong></p>
+        <ul className="info-list">
+          <li>Reef kids club (3-17 years)</li>
+          <li>Splash Academy activities</li>
+          <li>Teen hangout spaces</li>
+        </ul>
+        <p><strong>Bars &amp; Nightlife</strong></p>
+        <ul className="info-list">
+          <li>Brodie's Pub</li>
+          <li>Anderson's bar</li>
+          <li>The Crow's Nest bar</li>
+          <li>710 Club</li>
+          <li>Multiple lounges across the ship</li>
+        </ul>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="tip-block">
+        <h3>Sea Day Tips</h3>
+        <ul className="info-list">
+          <li>📅 <strong>Book spa treatments early</strong> - Sea days fill up fast</li>
+          <li>⏰ <strong>Quieter times</strong> - Early morning (8-10am) for pools and fitness</li>
+          <li>🎪 <strong>Check your Horizon</strong> - Full daily schedule, show times, dress code for tonight</li>
+          <li>🌊 <strong>Feeling queasy?</strong> - Head to the Atrium (mid-ship, Deck 6/7 - most stable area), try ginger tea from a bar, or visit Guest Services (Deck 6) for seasickness tablets. Fresh air: Head to Deck 8 open decks and focus on the horizon</li>
+          <li>☕ <strong>Indoor activities</strong> - Perfect weather for exploring SkyDome, catching a movie, or relaxing in Brodie's Pub</li>
+        </ul>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="info-block">
+        <h3>What's Ahead</h3>
+        <p><strong>Tomorrow: La Coruña, Spain</strong></p>
+        <ul className="info-list">
+          <li>💰 Currency: Euros (EUR) - ATMs at the port</li>
+          <li>🗣️ Language: Spanish &amp; Galician</li>
+          <li>🌤️ Weather: Mild March temps (12-16°C) - bring layers</li>
+          <li>⏰ All aboard time: Check your Horizon for details</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Days 4-5 (17-18 March - At Sea) – Sailing to the Canaries.
+ * Replaces the default tabbed sea-day content for this block only.
+ */
+function Days45SeaDayContent() {
+  return (
+    <div className="section-overview">
+      <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--clr-text)' }}>
+        Sea Days - Sailing to the Canaries
+      </h2>
+      <p><strong>No port stops today.</strong> You're cruising south down the Portuguese coast toward the Canary Islands. Weather should be getting warmer and calmer - perfect for enjoying the outdoor decks, pools, and sunshine.</p>
+      <p>Check your <strong>Horizon magazine</strong> (delivered to your cabin) for today's full schedule of activities and entertainment.</p>
+
+      <hr className="section-divider" />
+
+      <div className="info-block">
+        <h3>What's Onboard (P&O Iona)</h3>
+        <p><strong>Dining</strong></p>
+        <ul className="info-list">
+          <li>Main dining rooms (Freedom Dining or allocated seating)</li>
+          <li>Peninsular Restaurant &amp; Oriental Restaurant</li>
+          <li>The Glass House wine bar &amp; restaurant</li>
+          <li>Epicurean specialty restaurant</li>
+          <li>Sindhu Indian restaurant</li>
+          <li>Buffet at Sunset dining area</li>
+        </ul>
+        <p><strong>Relax &amp; Unwind</strong></p>
+        <ul className="info-list">
+          <li>The Oasis Spa - treatments, thermal suite, gym</li>
+          <li>The Retreat - adults-only sun deck (perfect weather for sunbathing)</li>
+          <li>Infinity Pool (aft deck - great views)</li>
+          <li>SkyDome pool</li>
+          <li>Hot tubs across the ship</li>
+        </ul>
+        <p><strong>Entertainment &amp; Activities</strong></p>
+        <ul className="info-list">
+          <li>Evening shows in Headliners Theatre</li>
+          <li>Live music across multiple venues</li>
+          <li>SkyDome events</li>
+          <li>Movies under the stars (weather permitting)</li>
+          <li>Trivia, bingo, dance classes</li>
+          <li>Cookery demonstrations</li>
+          <li>Enrichment talks</li>
+        </ul>
+        <p><strong>Families</strong></p>
+        <ul className="info-list">
+          <li>Reef kids club (3-17 years)</li>
+          <li>Splash Academy activities</li>
+          <li>Teen hangout spaces</li>
+        </ul>
+        <p><strong>Bars &amp; Nightlife</strong></p>
+        <ul className="info-list">
+          <li>Brodie's Pub</li>
+          <li>Anderson's bar</li>
+          <li>The Crow's Nest bar</li>
+          <li>710 Club</li>
+          <li>Multiple lounges across the ship</li>
+        </ul>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="tip-block">
+        <h3>Sea Day Tips</h3>
+        <ul className="info-list">
+          <li>📅 <strong>Book spa treatments</strong> - Two sea days means spa availability</li>
+          <li>☀️ <strong>Sun protection</strong> - Weather warming up - bring sunscreen</li>
+          <li>🎪 <strong>Check your Horizon</strong> - Full daily schedule, show times, dress code for tonight</li>
+          <li>🏊 <strong>Pool time</strong> - Perfect weather for outdoor swimming</li>
+          <li>🌅 <strong>Sunset watching</strong> - Stunning views from aft decks and Infinity Pool area</li>
+        </ul>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="info-block">
+        <h3>What's Ahead</h3>
+        <p><strong>Next: Tenerife, Canary Islands</strong></p>
+        <ul className="info-list">
+          <li>💰 Currency: Euros (EUR)</li>
+          <li>🗣️ Language: Spanish</li>
+          <li>🌤️ Weather: Warm and sunny (20-24°C)</li>
+          <li>⏰ All aboard time: Check your Horizon for details</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Day 9 (22 March - At Sea) – Sailing to Mainland Spain.
+ * Replaces the default tabbed sea-day content for this day only.
+ */
+function Day9SeaDayContent() {
+  return (
+    <div className="section-overview">
+      <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--clr-text)' }}>
+        Sea Day - Sailing to Mainland Spain
+      </h2>
+      <p><strong>No port stops today.</strong> After exploring the Canary Islands, you're heading northeast toward Cádiz on the Spanish mainland. Great weather for enjoying the outdoor decks one last time before heading further north.</p>
+      <p>Check your <strong>Horizon magazine</strong> (delivered to your cabin) for today's full schedule of activities and entertainment.</p>
+
+      <hr className="section-divider" />
+
+      <div className="info-block">
+        <h3>What's Onboard (P&O Iona)</h3>
+        <p><strong>Dining</strong></p>
+        <ul className="info-list">
+          <li>Main dining rooms (Freedom Dining or allocated seating)</li>
+          <li>Peninsular Restaurant &amp; Oriental Restaurant</li>
+          <li>The Glass House wine bar &amp; restaurant</li>
+          <li>Epicurean specialty restaurant</li>
+          <li>Sindhu Indian restaurant</li>
+          <li>Buffet at Sunset dining area</li>
+        </ul>
+        <p><strong>Relax &amp; Unwind</strong></p>
+        <ul className="info-list">
+          <li>The Oasis Spa - treatments, thermal suite, gym</li>
+          <li>The Retreat - adults-only sun deck</li>
+          <li>Infinity Pool (aft deck - great views)</li>
+          <li>SkyDome pool</li>
+          <li>Hot tubs across the ship</li>
+        </ul>
+        <p><strong>Entertainment &amp; Activities</strong></p>
+        <ul className="info-list">
+          <li>Evening shows in Headliners Theatre</li>
+          <li>Live music across multiple venues</li>
+          <li>SkyDome events</li>
+          <li>Movies under the stars (weather permitting)</li>
+          <li>Trivia, bingo, dance classes</li>
+          <li>Cookery demonstrations</li>
+          <li>Enrichment talks</li>
+        </ul>
+        <p><strong>Families</strong></p>
+        <ul className="info-list">
+          <li>Reef kids club (3-17 years)</li>
+          <li>Splash Academy activities</li>
+          <li>Teen hangout spaces</li>
+        </ul>
+        <p><strong>Bars &amp; Nightlife</strong></p>
+        <ul className="info-list">
+          <li>Brodie's Pub</li>
+          <li>Anderson's bar</li>
+          <li>The Crow's Nest bar</li>
+          <li>710 Club</li>
+          <li>Multiple lounges across the ship</li>
+        </ul>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="tip-block">
+        <h3>Sea Day Tips</h3>
+        <ul className="info-list">
+          <li>📅 <strong>Final spa treatments</strong> - Last chance before cooler weather returns</li>
+          <li>☀️ <strong>Soak up the sun</strong> - Enjoy warm weather while it lasts</li>
+          <li>🎪 <strong>Check your Horizon</strong> - Full daily schedule, show times, dress code for tonight</li>
+          <li>🛍️ <strong>Onboard shopping</strong> - Browse duty-free deals</li>
+          <li>📸 <strong>Photo opportunities</strong> - Beautiful sailing along the African coast</li>
+        </ul>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="info-block">
+        <h3>What's Ahead</h3>
+        <p><strong>Tomorrow: Cádiz, Spain</strong></p>
+        <ul className="info-list">
+          <li>💰 Currency: Euros (EUR)</li>
+          <li>🗣️ Language: Spanish</li>
+          <li>🌤️ Weather: Warm spring weather (16-20°C)</li>
+          <li>🏛️ Historic port city - one of the oldest in Europe</li>
+          <li>⏰ All aboard time: Check your Horizon for details</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Days 13-14 (26-27 March - At Sea) – Heading Home.
+ * Replaces the default tabbed sea-day content for this block only.
+ */
+function Days1314SeaDayContent() {
+  return (
+    <div className="section-overview">
+      <h2 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--clr-text)' }}>
+        Sea Days - Heading Home
+      </h2>
+      <p><strong>No port stops today.</strong> Your final days at sea, sailing from Lisbon back to Southampton through the Bay of Biscay. Time to enjoy Iona's facilities one last time, settle your onboard account, and prepare for disembarkation.</p>
+      <p>Check your <strong>Horizon magazine</strong> (delivered to your cabin) for today's full schedule, disembarkation information, and any final activities.</p>
+
+      <hr className="section-divider" />
+
+      <div className="info-block">
+        <h3>What's Onboard (P&O Iona)</h3>
+        <p><strong>Dining</strong></p>
+        <ul className="info-list">
+          <li>Main dining rooms (Freedom Dining or allocated seating)</li>
+          <li>Peninsular Restaurant &amp; Oriental Restaurant</li>
+          <li>The Glass House wine bar &amp; restaurant</li>
+          <li>Epicurean specialty restaurant</li>
+          <li>Sindhu Indian restaurant</li>
+          <li>Buffet at Sunset dining area</li>
+        </ul>
+        <p><strong>Relax &amp; Unwind</strong></p>
+        <ul className="info-list">
+          <li>The Oasis Spa - final chance for treatments</li>
+          <li>The Retreat - adults-only sun deck</li>
+          <li>Pools &amp; hot tubs (indoor SkyDome if weather's poor)</li>
+        </ul>
+        <p><strong>Entertainment &amp; Activities</strong></p>
+        <ul className="info-list">
+          <li>Evening shows in Headliners Theatre</li>
+          <li>Live music across multiple venues</li>
+          <li>SkyDome events</li>
+          <li>Farewell parties and crew performances</li>
+          <li>Trivia, bingo, final activities</li>
+        </ul>
+        <p><strong>Families</strong></p>
+        <ul className="info-list">
+          <li>Reef kids club (3-17 years)</li>
+          <li>Splash Academy activities</li>
+        </ul>
+        <p><strong>Bars &amp; Nightlife</strong></p>
+        <ul className="info-list">
+          <li>Brodie's Pub</li>
+          <li>Anderson's bar</li>
+          <li>The Crow's Nest bar</li>
+          <li>710 Club</li>
+          <li>Multiple lounges across the ship</li>
+        </ul>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="tip-block">
+        <h3>Sea Day Tips</h3>
+        <ul className="info-list">
+          <li>📦 <strong>Luggage tags</strong> - Place tagged bags outside your cabin tonight (check Horizon for time)</li>
+          <li>💳 <strong>Settle your account</strong> - Visit Guest Services or use your TV to check/pay</li>
+          <li>🎁 <strong>Last-minute shopping</strong> - Duty-free closes before arrival</li>
+          <li>📸 <strong>Photo collection</strong> - Pick up cruise photos from the gallery</li>
+          <li>⏰ <strong>Disembarkation briefing</strong> - Check TV or Horizon for procedures</li>
+          <li>🌊 <strong>Bay of Biscay</strong> - Can be choppy on Day 14. Feeling queasy? Head to the Atrium (mid-ship, Deck 6/7 - most stable area), try ginger tea from a bar, or visit Guest Services (Deck 6) for seasickness tablets. Fresh air: Head to Deck 8 open decks and focus on the horizon</li>
+        </ul>
+      </div>
+
+      <hr className="section-divider" />
+
+      <div className="info-block">
+        <h3>What's Ahead</h3>
+        <p><strong>Day 15: Southampton - Disembarkation</strong></p>
+        <ul className="info-list">
+          <li>🏠 Arrival: Early morning (exact time TBC)</li>
+          <li>🧳 Luggage: Will be offloaded by color-coded tags</li>
+          <li>🚗 Transport: Pre-book taxis or parking if needed</li>
+          <li>⏰ Disembarkation: Staggered by deck/dining time - check your Horizon</li>
+        </ul>
+      </div>
     </div>
   );
 }

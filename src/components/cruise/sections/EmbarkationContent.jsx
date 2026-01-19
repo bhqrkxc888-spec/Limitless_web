@@ -79,7 +79,7 @@ function WhatToExpectSection({ dayData: _dayData }) {
           <li>Security screening</li>
           <li>Check-in and boarding card</li>
           <li>Board ship, cabin ready ~2pm</li>
-          <li>Muster drill (check Horizon for time)</li>
+          <li>Muster drill (check Horizon magazine (delivered to your cabin) for time)</li>
           <li>Sail away ~4:30-5pm (check your docs)</li>
         </ul>
       </div>
@@ -148,7 +148,7 @@ function WhatToExpectSection({ dayData: _dayData }) {
       <div className="sub-section">
         <h3>Muster Drill & Safety Briefing</h3>
         
-        <p>Upon embarkation, a friendly crew member will help direct you to your muster station. Your boarding pass is scanned so you can familiarise yourself with where you'd need to go in an emergency.</p>
+        <p>Upon embarkation, a friendly crew member will help direct you to your muster station. You'll scan your boarding pass at your muster station (you'll receive your cruise card/room key later when you reach your cabin).</p>
 
         <p><strong>In-Cabin Safety Video:</strong></p>
         <p>When you arrive at your cabin, you'll be asked to watch the safety video on your in-cabin TV. This covers important health, wellbeing and safety information, including what to do in an emergency and a life jacket demonstration. Once you've watched it, you're free to relax, explore and enjoy the ship.</p>
@@ -164,7 +164,7 @@ function WhatToExpectSection({ dayData: _dayData }) {
         <p><strong>What You Need to Know:</strong></p>
         <ul className="info-list">
           <li>No need to bring life jackets - just yourself and your cruise card</li>
-          <li>Attendance is tracked electronically when you scan your card</li>
+          <li>Attendance is tracked electronically when you scan your boarding pass</li>
           <li>The whole process takes about 15-20 minutes</li>
         </ul>
       </div>
@@ -257,7 +257,7 @@ function GettingThereSection({ dayData: _dayData }) {
         <h3>Luggage</h3>
         
         <p><strong>Luggage Tags:</strong></p>
-        <p>P&O send luggage tags with your cruise documents approximately 3-4 weeks before departure. You can also print tags from your My P&O Cruises account online.</p>
+        <p>Print your own luggage tags from the P&O Cruises website before you travel, or collect them at the terminal check-in desk.</p>
 
         <p><strong>Hand Luggage Essentials:</strong></p>
         <p>Your main bags may not arrive at your cabin for several hours, so pack these items in your hand luggage:</p>
@@ -280,7 +280,7 @@ function GettingThereSection({ dayData: _dayData }) {
         </ul>
 
         <p><strong>When Do You Get Your Cabin Key (Cruise Card)?</strong></p>
-        <p>You receive your cruise card during check-in at the terminal, before boarding. This card is your cabin key, onboard payment method, ID for getting on/off the ship, and muster drill tracker.</p>
+        <p>You receive your boarding pass at terminal check-in. Your cruise card (room key and onboard payment card) will be waiting for you in your cabin when you arrive.</p>
 
         <p><strong>Luggage Options:</strong></p>
 
@@ -311,19 +311,33 @@ function TipsSection({ dayData: _dayData }) {
     <div className="section-tips">
       <div className="content-card">
         <p className="content-card-title">Tip 1: Arrive at Your Allocated Time Slot</p>
-        <p>P&O assign boarding time slots to manage the flow of guests. Your slot is shown in your cruise documents and My P&O app. Arriving early won't get you on sooner - you'll just queue longer. Arriving within your slot means minimal waiting.</p>
+        <p>P&O assign boarding time slots to manage the flow of guests. Your slot is shown in your cruise documents. Arriving early won't get you on sooner - you'll just queue longer. Arriving within your slot means minimal waiting.</p>
         <p className="info-note">Exception: Suite guests and those with early boarding benefits can arrive earlier.</p>
       </div>
 
       <div className="content-card">
-        <p className="content-card-title">Tip 2: Download the P&O Horizon App Before Boarding</p>
-        <p>Download and log into the P&O Horizon app before you leave home. On embarkation day, the ship's WiFi will be slow with everyone connecting. Use the app to check your boarding time, view cabin readiness status, make dining reservations, book speciality restaurants, check daily programme, and navigate the ship with deck plans.</p>
-        <p className="info-note">Pro tip: Screenshot anything important as app connectivity can be patchy initially.</p>
+        <p className="content-card-title">Tip 2: Know How to Access My Holiday Onboard</p>
+        <p>Once onboard, you'll use the My Holiday website to book restaurants, reserve show seats, and check your onboard account. It's accessed via the ship's free Wi-Fi.</p>
+        <p><strong>How to Access My Holiday:</strong></p>
+        <ol className="info-list">
+          <li>Switch your device to Airplane Mode</li>
+          <li>Connect to P&O Cruises Wi-Fi network (free)</li>
+          <li>Open browser and go to myholiday.pocruises.com (or scan QR codes in your cabin)</li>
+          <li>Log in using the last 6 digits of your cruise card barcode</li>
+        </ol>
+        <p><strong>What You Can Do:</strong></p>
+        <ul className="info-list">
+          <li>Book specialty restaurants and show seats</li>
+          <li>Check your onboard spending and account balance</li>
+          <li>View daily event schedules (also in Horizon magazine)</li>
+          <li>Browse shore excursion information</li>
+        </ul>
+        <p className="info-note">Pro tip: Your cruise card (room key) will be waiting in your cabin. The last 6 digits of the barcode on the card are your login.</p>
       </div>
 
       <div className="content-card">
         <p className="content-card-title">Tip 3: Book Speciality Restaurants Immediately</p>
-        <p>Speciality restaurant slots sell out fast - especially 7pm Saturday sittings and formal night dates. As soon as you board, head to the restaurant booking desk (usually near the Atrium), or use the Horizon app to book online.</p>
+        <p>Speciality restaurant slots sell out fast - especially 7pm Saturday sittings and formal night dates. As soon as you board, head to the restaurant booking desk (usually near the Atrium), or use the My Holiday website (myholiday.pocruises.com) once onboard.</p>
         <p><strong>Popular restaurants to book:</strong> The Glass House (wine bar dining), Epicurean (fine dining), Sindhu (Asian fusion), The Keel & Cow (steakhouse).</p>
         <p className="info-note">Don't wait until after the muster drill - prime slots go quickly.</p>
       </div>
