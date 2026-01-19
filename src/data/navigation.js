@@ -96,11 +96,12 @@ export const navigation = {
               path: '/faq',
               description: 'Frequently asked questions'
             },
-            {
-              label: 'Travel News',
-              path: '/travel-news',
-              description: 'Latest cruise and travel updates'
-            },
+            // TEMPORARILY HIDDEN - Travel News content under development
+            // {
+            //   label: 'Travel News',
+            //   path: '/travel-news',
+            //   description: 'Latest cruise and travel updates'
+            // },
             {
               label: 'Port Guides',
               path: '/ports',
@@ -173,7 +174,7 @@ export const navigation = {
       { label: 'Testimonials', path: '/testimonials' },
       { label: 'Latest Offers', path: '/offers' },
       { label: 'Find a Cruise', path: '/find-a-cruise' },
-      { label: 'Travel News', path: '/travel-news' },
+      // { label: 'Travel News', path: '/travel-news' }, // TEMPORARILY HIDDEN
       { label: 'Port Guides', path: '/ports' },
       { label: 'Guides', path: '/cruise-guides' }
     ]

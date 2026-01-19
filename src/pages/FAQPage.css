@@ -7,36 +7,15 @@
 }
 
 /* ========================================
-   HERO
+   SEARCH SECTION
    ======================================== */
 
-.faq-hero {
-  padding: var(--space-12) 0 var(--space-8);
-  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
-  color: var(--clr-text-on-primary);
-  text-align: center;
+.faq-search-section {
+  padding: var(--space-8) 0;
+  background: var(--clr-bg-alt, #f8f9fa);
+  border-bottom: 1px solid var(--clr-border-light, #e5e7eb);
 }
 
-.faq-hero h1 {
-  font-family: var(--font-family-display);
-  font-size: var(--font-size-4xl);
-  color: var(--clr-text-on-primary);
-  margin-bottom: var(--space-4);
-}
-
-.faq-hero-subtitle {
-  font-size: var(--font-size-lg);
-  opacity: 0.9;
-  max-width: 600px;
-  margin: 0 auto var(--space-8);
-}
-
-.faq-hero-subtitle a {
-  color: var(--clr-accent);
-  text-decoration: underline;
-}
-
-/* Search */
 .faq-search {
   position: relative;
   max-width: 500px;
@@ -48,15 +27,15 @@
   padding: var(--space-4) var(--space-5);
   padding-right: var(--space-12);
   font-size: var(--font-size-base);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid var(--clr-border, #d1d5db);
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--clr-text-on-primary);
+  background: white;
+  color: var(--clr-text-main);
   transition: all var(--transition-fast);
 }
 
 .faq-search-input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--clr-text-muted);
 }
 
 .faq-search-input:focus {

@@ -219,8 +219,12 @@ function FAQPage() {
             Everything you need to know about cruise holidays. Can't find your answer? 
             <Link to="/contact"> Just ask us</Link>.
           </p>
-          
-          {/* Search */}
+        </div>
+      </section>
+
+      {/* Search Section */}
+      <section className="faq-search-section">
+        <div className="container">
           <div className="faq-search">
             <input
               type="text"

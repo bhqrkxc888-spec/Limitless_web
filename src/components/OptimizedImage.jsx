@@ -3,6 +3,7 @@ import { getOptimizedImageUrl, generateSrcSet, isSupabaseUrl } from '../utils/im
 import { isVercelBlobUrl } from '../lib/vercelBlob';
 import { SITE_ASSETS } from '../config/assetUrls';
 import { resolveImageSrc } from '../utils/imageResolver';
+import './OptimizedImage.css';
 
 // Fallback placeholder for missing/failed images - uses Limitless Cruises logo
 const COMING_SOON_PLACEHOLDER = '/images/placeholders/coming-soon.svg';
@@ -211,9 +212,11 @@ function OptimizedImage({
       loading={priority ? 'eager' : 'lazy'}
       fetchPriority={priority ? 'high' : 'auto'}
       decoding={priority ? 'sync' : 'async'}
-      className={className}
+      className={`optimized-image ${className}`}
       style={{
         objectFit,
+        opacity: 0,
+        animation: 'optimizedImageFadeIn 0.3s ease-in forwards',
         ...style
       }}
       onError={handleError}

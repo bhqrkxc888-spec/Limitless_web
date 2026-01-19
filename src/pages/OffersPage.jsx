@@ -5,6 +5,7 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import { Button, SectionHeader } from '../components/ui';
 import OfferCard from '../components/OfferCard';
+import '../styles/page-header.css';
 import './OffersPage.css';
 
 const OFFER_TYPES = [
@@ -149,16 +150,14 @@ function OffersPage() {
       />
 
       {/* Page Header */}
-      <section className="offers-page-header">
+      <section className="standard-page-header">
         <div className="container">
-          <div className="offers-page-header__content">
-            <span className="offers-page-header__eyebrow">Exclusive Deals</span>
-            <h1 className="offers-page-header__title">Cruise Offers</h1>
-            <p className="offers-page-header__subtitle">
-              Hand-selected cruise deals and exclusive packages, updated regularly. 
-              Expert guidance, exceptional value, and personal consultant service on every booking.
-            </p>
-          </div>
+          <span className="page-header-eyebrow">Exclusive Deals</span>
+          <h1>Cruise Offers</h1>
+          <p>
+            Hand-selected cruise deals and exclusive packages, updated regularly. 
+            Expert guidance, exceptional value, and personal consultant service on every booking.
+          </p>
         </div>
       </section>
 
