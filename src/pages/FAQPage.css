@@ -263,10 +263,6 @@
 }
 
 @media (max-width: 640px) {
-  .faq-hero h1 {
-    font-size: var(--font-size-3xl);
-  }
-
   .faq-category-btn {
     min-width: 100%;
   }

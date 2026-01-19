@@ -332,29 +332,7 @@
    RESPONSIVE
    ======================================== */
 
-@media (max-width: 1024px) {
-  .news-page-header {
-    padding: var(--space-12) 0 var(--space-10);
-  }
-  
-  .news-page-header__title {
-    font-size: var(--font-size-4xl);
-  }
-}
-
 @media (max-width: 768px) {
-  .news-page-header {
-    padding: var(--space-10) 0 var(--space-8);
-  }
-  
-  .news-page-header__title {
-    font-size: var(--font-size-3xl);
-  }
-  
-  .news-page-header__subtitle {
-    font-size: var(--font-size-base);
-  }
-  
   .news-filter-section {
     padding: var(--space-4) 0;
   }

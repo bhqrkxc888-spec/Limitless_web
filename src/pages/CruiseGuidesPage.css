@@ -145,29 +145,7 @@
    RESPONSIVE
    ======================================== */
 
-@media (max-width: 1024px) {
-  .guides-page-header {
-    padding: var(--space-12) 0 var(--space-10);
-  }
-  
-  .guides-page-header__title {
-    font-size: var(--font-size-4xl);
-  }
-}
-
 @media (max-width: 768px) {
-  .guides-page-header {
-    padding: var(--space-10) 0 var(--space-8);
-  }
-  
-  .guides-page-header__title {
-    font-size: var(--font-size-3xl);
-  }
-  
-  .guides-page-header__subtitle {
-    font-size: var(--font-size-base);
-  }
-  
   .guides-filter-section {
     padding: var(--space-4) 0;
   }

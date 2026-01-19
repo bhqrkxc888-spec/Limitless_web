@@ -7,33 +7,6 @@
 }
 
 /* ========================================
-   HERO
-   ======================================== */
-
-.finder-hero {
-  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
-  padding: var(--space-16) 0;
-  text-align: center;
-  color: var(--clr-text-on-primary);
-}
-
-.finder-hero h1 {
-  font-family: var(--font-family-display);
-  font-size: clamp(2.5rem, 5vw, 3.5rem);
-  font-weight: 600;
-  margin-bottom: var(--space-4);
-  color: var(--clr-text-on-primary);
-}
-
-.finder-hero-lead {
-  font-size: var(--font-size-lg);
-  opacity: 0.9;
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.7;
-}
-
-/* ========================================
    WIDGET SECTION
    ======================================== */
 
@@ -293,10 +266,6 @@
 }
 
 @media (max-width: 640px) {
-  .finder-hero {
-    padding: var(--space-10) 0;
-  }
-
   .finder-widget-section,
   .finder-contact-section,
   .finder-cruiselines {
