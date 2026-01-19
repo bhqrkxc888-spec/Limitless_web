@@ -176,12 +176,12 @@
 }
 
 .header-center__line1 {
-  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  font-family: var(--font-family, 'Inter', sans-serif);
   font-size: 1.25rem;
   font-weight: var(--font-weight-bold, 700);
   margin: 0;
-  letter-spacing: 0.025em;
-  color: var(--clr-text-on-primary, #FFFFFF);
+  letter-spacing: 0.04em;
+  color: #FFFFFF;
   line-height: 1.3;
   text-transform: uppercase;
   font-variant: normal;
@@ -191,15 +191,15 @@
   font-size: var(--font-size-base, 1rem);
   opacity: 0.95;
   margin: 0;
-  color: var(--clr-text-on-primary, #FFFFFF);
+  color: #FFFFFF;
   line-height: 1.4;
 }
 
 .header-center__line3 {
   font-size: var(--font-size-sm, 0.875rem);
-  opacity: 0.85;
+  opacity: 0.9;
   margin: 0;
-  color: var(--clr-secondary, #D4B86A);
+  color: #E8DDB8;
   line-height: 1.4;
   font-weight: var(--font-weight-medium, 500);
 }
@@ -486,8 +486,9 @@
 
   .header-actions .btn {
     width: auto;
-    min-width: 200px;
-    max-width: none;
+    min-width: 0;
+    padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+    white-space: nowrap;
   }
 
   .cruise-companion-page .logo-icon {

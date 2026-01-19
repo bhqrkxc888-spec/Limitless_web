@@ -307,7 +307,7 @@ function CruiseCompanionPage() {
                 className="btn-outline-white"
                 size="sm"
               >
-                Visit Limitless Cruises website
+                Visit Limitless Cruises
               </Button>
               {facebookGroup && (
                 <Button
