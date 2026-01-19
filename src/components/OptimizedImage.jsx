@@ -3,6 +3,7 @@ import { getOptimizedImageUrl, generateSrcSet, isSupabaseUrl } from '../utils/im
 import { isVercelBlobUrl } from '../lib/vercelBlob';
 import { SITE_ASSETS } from '../config/assetUrls';
 import { resolveImageSrc } from '../utils/imageResolver';
+import './OptimizedImage.css';
 
 // Fallback placeholder for missing/failed images - uses Limitless Cruises logo
 const COMING_SOON_PLACEHOLDER = '/images/placeholders/coming-soon.svg';
@@ -20,21 +21,7 @@ const LOGO_URL = SITE_ASSETS.logo;
  * - Proper loading/priority attributes for LCP optimization
  * - Maintains aspect ratio
  * - "Image Coming Soon" fallback for missing images
- * 
- * @param {string} src - Original image URL
- * @param {string} alt - Alt text (required for accessibility)
- * @param {number} width - Intrinsic width (for aspect ratio calculation)
- * @param {number} height - Intrinsic height (for aspect ratio calculation)
- * @param {boolean} priority - If true, uses eager loading and high fetch priority (for LCP images)
- * @param {string} className - Additional CSS classes
- * @param {string} sizes - Sizes attribute for responsive images (default: '100vw')
- * @param {number[]} srcsetWidths - Widths to generate for srcset (default: [640, 1024, 1920])
- * @param {number} quality - Image quality 1-100 (default: 85)
- * @param {string} objectFit - CSS object-fit value (default: 'cover')
- * @param {boolean} showComingSoon - If true, shows "Coming Soon" placeholder when no image (default: true)
- * @param {string} entityType - Entity type for image resolution logging (optional, for debugging)
- * @param {string} entityId - Entity ID/slug for image resolution logging (optional, for debugging)
- * @param {string} imageType - Image type for resolution logging (optional, for debugging)
+ * - CSS-only fade-in (bypasses React render cycle for zero flash)
  */
 function OptimizedImage({
   src,
@@ -46,7 +33,6 @@ function OptimizedImage({
   sizes = '100vw',
   srcsetWidths = [640, 1024, 1920],
   quality = 85,
-  // format parameter removed - not supported by Supabase
   objectFit = 'cover',
   style = {},
   showComingSoon = true,
@@ -56,32 +42,33 @@ function OptimizedImage({
   ...props
 }) {
   const [hasError, setHasError] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
   const imgRef = useRef(null);
 
-  // Use callback ref to catch already-cached images immediately
+  // Callback ref - if image is already cached, add 'loaded' class immediately
+  // This bypasses React's render cycle for instant display of cached images
   const setImgRef = useCallback((node) => {
     if (node) {
-      // Check if image is already loaded (cached)
       if (node.complete && node.naturalHeight !== 0) {
-        setIsLoaded(true);
+        // Cached image - show instantly with no transition
+        node.classList.add('loaded', 'no-transition');
       }
       imgRef.current = node;
     }
   }, []);
 
-  // Handle successful image load
-  const handleLoad = () => {
-    setIsLoaded(true);
+  // CSS-only load handler - directly add class to DOM, no React state
+  // This fires in the same paint frame as the load event
+  const handleLoad = (e) => {
+    e.target.classList.add('loaded');
   };
   
-  // Resolve image source through universal resolver (handles all formats + logs issues)
+  // Resolve image source through universal resolver
   const resolvedSrc = resolveImageSrc(src, {
     entityType,
     entityId,
     imageType,
     fallback: COMING_SOON_PLACEHOLDER,
-    silent: false // Log resolution issues in dev mode
+    silent: true
   });
   
   // Handle image load errors
@@ -89,10 +76,11 @@ function OptimizedImage({
     if (!hasError && showComingSoon) {
       setHasError(true);
       e.target.src = COMING_SOON_PLACEHOLDER;
+      e.target.classList.add('loaded');
     }
   };
   
-  // Return Limitless Cruises logo placeholder if resolved to placeholder
+  // Return placeholder if no valid image
   if (resolvedSrc === COMING_SOON_PLACEHOLDER || !resolvedSrc || resolvedSrc === 'null' || resolvedSrc === 'undefined') {
     if (showComingSoon) {
       return (
@@ -145,7 +133,6 @@ function OptimizedImage({
       );
     }
     
-    // Fallback to simple placeholder div if showComingSoon is false
     return (
       <div 
         className={`optimized-image-placeholder ${className}`}
@@ -170,71 +157,45 @@ function OptimizedImage({
 
   const isVercelBlob = isVercelBlobUrl(resolvedSrc);
   const isSupabase = isSupabaseUrl(resolvedSrc);
-  
-  // Determine the max width for the primary src (use largest srcset width or provided width)
   const maxWidth = width || Math.max(...srcsetWidths);
   
-  // Generate optimized URLs
-  // Vercel Blob: use as-is (Vercel CDN handles optimization automatically)
-  // Supabase: use manual transforms for CMS content
-  // External: use as-is
   const optimizedSrc = (isVercelBlob || isSupabase)
     ? getOptimizedImageUrl(resolvedSrc, { width: maxWidth, quality })
     : resolvedSrc;
   
-  // Generate srcset (Supabase generates manually, Vercel handles automatically)
   const srcSet = isSupabase && srcsetWidths.length > 0
     ? generateSrcSet(resolvedSrc, srcsetWidths, { quality })
     : undefined;
 
-  // Generate meaningful alt text from src if not provided
-  // Extract filename or meaningful part of URL for better SEO
+  // Generate alt text from src if not provided
   const generateAltFromSrc = (imageSrc) => {
     if (!imageSrc) return 'Image';
     try {
       const url = new URL(imageSrc);
-      const pathname = url.pathname;
-      // Extract filename without extension
-      const filename = pathname.split('/').pop() || '';
+      const filename = url.pathname.split('/').pop() || '';
       const nameWithoutExt = filename.replace(/\.[^/.]+$/, '');
-      // Convert kebab-case or snake_case to readable text
-      const readable = nameWithoutExt
-        .replace(/[-_]/g, ' ')
-        .replace(/\b\w/g, l => l.toUpperCase())
-        .trim();
-      return readable || 'Image';
+      return nameWithoutExt.replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()).trim() || 'Image';
     } catch {
-      // If URL parsing fails, try to extract from path
       const match = imageSrc.match(/\/([^/]+)\.(webp|jpg|jpeg|png|gif|svg)/i);
-      if (match) {
-        return match[1].replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) || 'Image';
-      }
-      return 'Image';
+      return match ? match[1].replace(/[-_]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : 'Image';
     }
   };
 
-  // Use provided alt text, or generate from src, or use generic fallback
-  const finalAlt = alt && alt.trim() !== '' 
-    ? alt.trim() 
-    : generateAltFromSrc(resolvedSrc);
+  const finalAlt = alt && alt.trim() !== '' ? alt.trim() : generateAltFromSrc(resolvedSrc);
 
-  // Wrapper ensures there's always a background while image loads
-  // This prevents the flash of empty/transparent space
   return (
     <div
+      className={`optimized-image-container ${className}`}
       style={{
-        position: 'relative',
         width: width ? `${width}px` : '100%',
         height: height ? `${height}px` : 'auto',
         aspectRatio: width && height ? `${width}/${height}` : undefined,
-        backgroundColor: '#E8E4DC', // Neutral loading background
-        overflow: 'hidden',
         ...style
       }}
-      className={className}
     >
       <img
         ref={setImgRef}
+        className="optimized-image"
         src={hasError ? COMING_SOON_PLACEHOLDER : optimizedSrc}
         srcSet={hasError ? undefined : srcSet}
         sizes={srcSet && !hasError ? sizes : undefined}
@@ -244,14 +205,7 @@ function OptimizedImage({
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : 'auto'}
         decoding={priority ? 'sync' : 'async'}
-        style={{
-          display: 'block',
-          width: '100%',
-          height: '100%',
-          objectFit,
-          opacity: isLoaded ? 1 : 0,
-          transition: 'opacity 0.3s ease-in',
-        }}
+        style={{ objectFit }}
         onLoad={handleLoad}
         onError={handleError}
         {...props}
@@ -261,4 +215,3 @@ function OptimizedImage({
 }
 
 export default OptimizedImage;
-

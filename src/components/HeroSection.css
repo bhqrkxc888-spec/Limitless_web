@@ -54,8 +54,19 @@
   height: 100%;
   object-fit: cover;
   object-position: center center;
-  /* Prevent flash of background while loading */
-  background: var(--clr-bg-alt, #F8F5F0);
+  /* CSS-only fade-in - no React state flash */
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+/* Image loaded - fade in */
+.hero-image.loaded {
+  opacity: 1;
+}
+
+/* Cached images - show instantly */
+.hero-image.no-transition {
+  transition: none;
 }
 
 /* Cruise line hero images - center ships vertically */

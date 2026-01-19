@@ -1,28 +1,17 @@
-import { useState, useRef, useCallback } from 'react';
+import { useRef, useCallback } from 'react';
 import { Button } from './ui';
 import './HeroSection.css';
 
 /**
  * HeroSection Component
  * Full-width hero with background image and overlay
- * Supports responsive images with separate mobile version for performance
- * 
- * @param {Object} props
- * @param {string} props.title - Main heading
- * @param {string} props.subtitle - Subtitle text
- * @param {string} props.image - Background image URL (desktop)
- * @param {string} props.mobileImage - Mobile-optimized image URL (optional, falls back to image)
- * @param {string} props.imageAlt - Alt text for background image
- * @param {Object} props.primaryCta - Primary CTA { label, href, to }
- * @param {Object} props.secondaryCta - Secondary CTA { label, href, to }
- * @param {string} props.size - 'sm' | 'md' | 'lg' | 'full'
- * @param {string} props.align - 'left' | 'center'
+ * Uses CSS-only fade-in to avoid React render cycle flash
  */
 function HeroSection({
   title,
   subtitle,
   image,
-  mobileImage, // Optional: smaller image for mobile (e.g., 800x600)
+  mobileImage,
   imageAlt = 'Hero background',
   primaryCta,
   secondaryCta,
@@ -31,22 +20,22 @@ function HeroSection({
   children,
   className = ''
 }) {
-  const [isImageLoaded, setIsImageLoaded] = useState(false);
   const imgRef = useRef(null);
 
-  // Use callback ref to catch already-cached images immediately
+  // Callback ref - if image is cached, add 'loaded' class immediately
   const setImgRef = useCallback((node) => {
     if (node) {
-      // Check if image is already loaded (cached)
       if (node.complete && node.naturalHeight !== 0) {
-        setIsImageLoaded(true);
+        // Cached - show instantly with no transition
+        node.classList.add('loaded', 'no-transition');
       }
       imgRef.current = node;
     }
   }, []);
 
-  const handleImageLoad = () => {
-    setIsImageLoaded(true);
+  // CSS-only load handler - directly add class to DOM
+  const handleImageLoad = (e) => {
+    e.target.classList.add('loaded');
   };
 
   const classes = [
@@ -58,11 +47,10 @@ function HeroSection({
 
   return (
     <section className={classes}>
-      {/* Background Image - uses picture element for mobile optimization */}
+      {/* Background Image */}
       <div className="hero-background">
         {image ? (
           <picture>
-            {/* Mobile-optimized image (if provided) - for screens <= 768px */}
             {mobileImage && (
               <source 
                 media="(max-width: 768px)" 
@@ -70,7 +58,6 @@ function HeroSection({
                 type="image/webp"
               />
             )}
-            {/* Desktop image - priority loading for LCP */}
             <img
               ref={setImgRef}
               src={image}
@@ -82,13 +69,6 @@ function HeroSection({
               fetchpriority="high"
               decoding="sync"
               onLoad={handleImageLoad}
-              style={{ 
-                objectFit: 'cover', 
-                width: '100%', 
-                height: '100%',
-                opacity: isImageLoaded ? 1 : 0,
-                transition: 'opacity 0.3s ease-in'
-              }}
             />
           </picture>
         ) : (
@@ -137,4 +117,3 @@ function HeroSection({
 }
 
 export default HeroSection;
-

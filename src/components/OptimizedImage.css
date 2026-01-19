@@ -1,0 +1,25 @@
+/* OptimizedImage - CSS-only fade-in (no React state flash) */
+
+.optimized-image-container {
+  position: relative;
+  overflow: hidden;
+  background-color: #E8E4DC; /* Neutral loading background */
+}
+
+.optimized-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+/* Image is loaded - fade in */
+.optimized-image.loaded {
+  opacity: 1;
+}
+
+/* Cached images - show instantly with no transition */
+.optimized-image.no-transition {
+  transition: none;
+}
