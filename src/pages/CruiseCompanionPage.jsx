@@ -271,53 +271,55 @@ function CruiseCompanionPage() {
 
       {/* Simple Header - No Navigation */}
       <header className="companion-header">
-        <div className="container">
+        <div className="companion-header__container">
           <div className="header-content">
-            {/* Logo - Same as main site */}
-            <Link to="/" className="companion-logo">
-              <div className="logo-container">
-                <img 
-                  src={SITE_ASSETS.logo} 
-                  alt="Limitless Cruises logo - gold cruise ship icon" 
-                  className="logo-icon"
-                  width="56"
-                  height="56"
-                  fetchPriority="high"
-                />
-                <div className="logo-text">
-                  <span className="logo-name">Limitless Cruises</span>
-                  <span className="logo-tagline">Personal Cruise Consultant</span>
+            {/* Left: Logo */}
+            <div className="header-brand">
+              <Link to="/" className="companion-logo">
+                <div className="logo-container">
+                  <img 
+                    src={SITE_ASSETS.logo} 
+                    alt="Limitless Cruises logo - gold cruise ship icon" 
+                    className="logo-icon"
+                    width="56"
+                    height="56"
+                    fetchPriority="high"
+                  />
+                  <div className="logo-text">
+                    <span className="logo-name">Limitless Cruises</span>
+                    <span className="logo-tagline">Personal Cruise Consultant</span>
+                  </div>
                 </div>
-              </div>
-            </Link>
-
-            <div className="header-text">
-              <h1>{ship.operator?.toUpperCase()} {ship.name?.toUpperCase()} | {cruise.id.toUpperCase()}</h1>
-              <p className="cruise-title">{cruise.name}</p>
-              <p className="cruise-dates">{formatCruiseDate(firstDate)} - {formatCruiseDate(lastDate)} | {nights} Nights | {departure.port}</p>
+              </Link>
             </div>
 
+            {/* Center: Ship | Cruise, itinerary name, dates */}
+            <div className="header-center">
+              <h1 className="header-center__line1">{ship.operator?.toUpperCase()} {ship.name?.toUpperCase()} | {cruise.id.toUpperCase()}</h1>
+              <p className="header-center__line2">{cruise.name}</p>
+              <p className="header-center__line3">{formatCruiseDate(firstDate)} - {formatCruiseDate(lastDate)} | {nights} Nights | {departure.port}</p>
+            </div>
+
+            {/* Right: Visit website, Join Facebook, Share row */}
             <div className="header-actions">
-              <div className="header-buttons">
-                {facebookGroup && (
-                  <Button
-                    href={facebookGroup}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-outline-white"
-                    size="sm"
-                  >
-                    Join Facebook group
-                  </Button>
-                )}
+              <Button
+                href="https://www.limitlesscruises.com"
+                className="btn-outline-white"
+                size="sm"
+              >
+                Visit Limitless Cruises website
+              </Button>
+              {facebookGroup && (
                 <Button
-                  href="https://www.limitlesscruises.com"
+                  href={facebookGroup}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn-outline-white"
                   size="sm"
                 >
-                  Visit Limitless Cruises website
+                  Join Facebook group
                 </Button>
-              </div>
+              )}
               <SocialShare
                 url={`https://www.limitlesscruises.com/cruise/${activeCruiseId}`}
                 title={`${cruise.id.toUpperCase()} Cruise Guide | ${ship.operator} ${ship.name} | ${cruise.shortName}`}
