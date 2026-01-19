@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { getOptimizedImageUrl, generateSrcSet, isSupabaseUrl } from '../utils/imageHelpers';
 import { isVercelBlobUrl } from '../lib/vercelBlob';
 import { SITE_ASSETS } from '../config/assetUrls';
@@ -59,10 +59,14 @@ function OptimizedImage({
   const [isLoaded, setIsLoaded] = useState(false);
   const imgRef = useRef(null);
 
-  // Check if image is already cached/loaded
-  useEffect(() => {
-    if (imgRef.current && imgRef.current.complete) {
-      setIsLoaded(true);
+  // Use callback ref to catch already-cached images immediately
+  const setImgRef = useCallback((node) => {
+    if (node) {
+      // Check if image is already loaded (cached)
+      if (node.complete && node.naturalHeight !== 0) {
+        setIsLoaded(true);
+      }
+      imgRef.current = node;
     }
   }, []);
 
@@ -216,7 +220,7 @@ function OptimizedImage({
 
   return (
     <img
-      ref={imgRef}
+      ref={setImgRef}
       src={hasError ? COMING_SOON_PLACEHOLDER : optimizedSrc}
       srcSet={hasError ? undefined : srcSet}
       sizes={srcSet && !hasError ? sizes : undefined}

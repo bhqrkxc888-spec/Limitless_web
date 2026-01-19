@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { Button } from './ui';
 import './HeroSection.css';
 
@@ -34,12 +34,16 @@ function HeroSection({
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const imgRef = useRef(null);
 
-  // Check if image is already cached
-  useEffect(() => {
-    if (imgRef.current && imgRef.current.complete) {
-      setIsImageLoaded(true);
+  // Use callback ref to catch already-cached images immediately
+  const setImgRef = useCallback((node) => {
+    if (node) {
+      // Check if image is already loaded (cached)
+      if (node.complete && node.naturalHeight !== 0) {
+        setIsImageLoaded(true);
+      }
+      imgRef.current = node;
     }
-  }, [image]);
+  }, []);
 
   const handleImageLoad = () => {
     setIsImageLoaded(true);
@@ -68,7 +72,7 @@ function HeroSection({
             )}
             {/* Desktop image - priority loading for LCP */}
             <img
-              ref={imgRef}
+              ref={setImgRef}
               src={image}
               alt={imageAlt}
               className="hero-image"
