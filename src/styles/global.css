@@ -582,16 +582,32 @@ button {
    DISABLE IMAGE ANIMATIONS
    No hover effects or transforms on images
    Especially important for mobile/touch devices
+   
+   IMPORTANT: Preserve loading transitions for .optimized-image and .hero-image
+   These use CSS-only fade-in for smooth loading without flicker
    ======================================== */
 
-/* Disable all image transforms and animations */
+/* Disable transforms on all images */
 img,
 .optimized-image,
 [class*="-image"] img,
 [class*="-img"] {
   transform: none !important;
-  transition: none !important;
+}
+
+/* Disable animations on all images */
+img,
+.optimized-image,
+[class*="-image"] img,
+[class*="-img"] {
   animation: none !important;
+}
+
+/* Disable transitions on all images EXCEPT loading images */
+img:not(.optimized-image):not(.hero-image),
+[class*="-image"] img:not(.optimized-image):not(.hero-image),
+[class*="-img"]:not(.optimized-image):not(.hero-image) {
+  transition: none !important;
 }
 
 /* Disable hover transforms on image containers */

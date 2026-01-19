@@ -36,6 +36,17 @@ function HeroSection({
   // CSS-only load handler - directly add class to DOM
   const handleImageLoad = (e) => {
     e.target.classList.add('loaded');
+    
+    // TEMPORARY: Verify transition is working (remove after testing)
+    if (import.meta.env?.DEV) {
+      const computedStyle = window.getComputedStyle(e.target);
+      console.log('[HeroSection] Transition test:', {
+        transition: computedStyle.transition,
+        opacity: computedStyle.opacity,
+        classes: e.target.className,
+        src: e.target.src.substring(0, 80) + '...'
+      });
+    }
   };
 
   const classes = [

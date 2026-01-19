@@ -60,6 +60,17 @@ function OptimizedImage({
   // This fires in the same paint frame as the load event
   const handleLoad = (e) => {
     e.target.classList.add('loaded');
+    
+    // TEMPORARY: Verify transition is working (remove after testing)
+    if (import.meta.env.DEV) {
+      const computedStyle = window.getComputedStyle(e.target);
+      console.log('[OptimizedImage] Transition test:', {
+        transition: computedStyle.transition,
+        opacity: computedStyle.opacity,
+        classes: e.target.className,
+        src: e.target.src.substring(0, 80) + '...'
+      });
+    }
   };
   
   // Resolve image source through universal resolver
