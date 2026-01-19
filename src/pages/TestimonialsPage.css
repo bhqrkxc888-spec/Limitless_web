@@ -6,32 +6,15 @@
   background-color: var(--clr-bg);
 }
 
-/* ========================================
-   HERO
-   ======================================== */
+/* Old hero styles removed - now using standard-page-header */
 
-.testimonials-hero {
-  padding: var(--space-12) 0 var(--space-8);
-  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
-  color: var(--clr-text-on-primary);
-  text-align: center;
+/* Stats Section - Below header */
+.testimonials-stats-section {
+  background: var(--clr-bg-alt, #f8f9fa);
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--clr-border-light, #e5e7eb);
 }
 
-.testimonials-hero h1 {
-  font-family: var(--font-family-display);
-  font-size: var(--font-size-4xl);
-  color: var(--clr-text-on-primary);
-  margin-bottom: var(--space-4);
-}
-
-.testimonials-hero-subtitle {
-  font-size: var(--font-size-lg);
-  opacity: 0.9;
-  max-width: 600px;
-  margin: 0 auto var(--space-8);
-}
-
-/* Stats */
 .testimonials-stats {
   display: flex;
   justify-content: center;
@@ -48,6 +31,7 @@
 
 .stat-value {
   font-family: var(--font-family-display);
+  color: var(--clr-primary, #2C344C);
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
   color: var(--clr-accent);

@@ -143,10 +143,14 @@ function TestimonialsPage() {
         <div className="container">
           <h1>Client Experiences</h1>
           <p>
-            Hear from real travellers who've experienced the difference of personal consultant service for their dream cruise holidays.
+            Hear from real travellers who've trusted our personal consultant service.
           </p>
-          
-          {/* Stats */}
+        </div>
+      </section>
+
+      {/* Stats Bar */}
+      <section className="testimonials-stats-section">
+        <div className="container">
           <div className="testimonials-stats">
             <div className="stat">
               <span className="stat-value">{averageRating}</span>

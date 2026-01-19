@@ -152,11 +152,9 @@ function OffersPage() {
       {/* Page Header */}
       <section className="standard-page-header">
         <div className="container">
-          <span className="page-header-eyebrow">Exclusive Deals</span>
           <h1>Cruise Offers</h1>
           <p>
-            Hand-selected cruise deals and exclusive packages, updated regularly. 
-            Expert guidance, exceptional value, and personal consultant service on every booking.
+            Hand-selected cruise deals and exclusive packages, updated regularly.
           </p>
         </div>
       </section>

@@ -1,27 +1,38 @@
 /* Standard Page Header Component - Dark Blue Premium Version */
+/* Consistent height and spacing regardless of content */
 
 .standard-page-header {
-  padding: var(--space-12, 3rem) 0;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   background: linear-gradient(135deg, #2C344C 0%, #1e2638 100%);
   color: white;
+  padding: 2.5rem 1rem;
+}
+
+.standard-page-header .container {
+  width: 100%;
+  max-width: 700px;
 }
 
 .standard-page-header h1 {
   font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
   font-weight: var(--font-weight-semibold, 600);
   color: white;
-  margin-bottom: var(--space-3, 0.75rem);
+  margin: 0 0 0.75rem 0;
+  line-height: 1.2;
 }
 
 .standard-page-header p,
 .standard-page-header .page-header-subtitle {
-  font-size: var(--font-size-lg, 1.125rem);
-  color: rgba(255, 255, 255, 0.9);
-  max-width: 600px;
+  font-size: 1.0625rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 550px;
   margin: 0 auto;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .standard-page-header a {
@@ -34,29 +45,35 @@
   text-decoration: underline;
 }
 
-/* Optional eyebrow text */
+/* Optional eyebrow text - consistent positioning */
 .standard-page-header .page-header-eyebrow {
-  display: inline-block;
-  font-size: var(--font-size-sm, 0.875rem);
-  font-weight: var(--font-weight-semibold, 600);
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
   color: var(--clr-accent, #C9A961);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: var(--space-2, 0.5rem);
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5rem;
 }
 
 /* Mobile adjustments */
 @media (max-width: 767px) {
   .standard-page-header {
-    padding: var(--space-8, 2rem) var(--space-4, 1rem);
+    min-height: 160px;
+    padding: 2rem 1rem;
   }
 
   .standard-page-header h1 {
     font-size: 1.5rem;
+    margin-bottom: 0.5rem;
   }
 
   .standard-page-header p,
   .standard-page-header .page-header-subtitle {
-    font-size: var(--font-size-base, 1rem);
+    font-size: 0.9375rem;
+  }
+
+  .standard-page-header .page-header-eyebrow {
+    font-size: 0.6875rem;
   }
 }
