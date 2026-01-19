@@ -1,18 +1,17 @@
 import { useState, useRef, useCallback } from 'react';
 import { getOptimizedImageUrl, generateSrcSet, isSupabaseUrl } from '../utils/imageHelpers';
 import { isVercelBlobUrl } from '../lib/vercelBlob';
-import { SITE_ASSETS } from '../config/assetUrls';
 import { resolveImageSrc } from '../utils/imageResolver';
+import { SITE_ASSETS } from '../config/assetUrls';
 import './OptimizedImage.css';
 
-// Fallback placeholder for missing/failed images - uses Limitless Cruises logo
-const COMING_SOON_PLACEHOLDER = '/images/placeholders/coming-soon.svg';
 const LOGO_URL = SITE_ASSETS.logo;
 
 /**
  * OptimizedImage Component
  * Automatically optimizes images from Vercel Blob or Supabase Storage.
- * Falls back gracefully for external URLs or missing images.
+ * "Image Coming Soon" is shown only when there is no image (invalid/empty src or load error).
+ * Never shown while loading or when a valid image is available.
  * 
  * Features:
  * - Vercel Blob: Automatic WebP conversion via Vercel CDN
@@ -20,7 +19,7 @@ const LOGO_URL = SITE_ASSETS.logo;
  * - Responsive srcset generation
  * - Proper loading/priority attributes for LCP optimization
  * - Maintains aspect ratio
- * - "Image Coming Soon" fallback for missing images
+ * - "Image Coming Soon" only when there is no image
  * - CSS-only fade-in (bypasses React render cycle for zero flash)
  */
 function OptimizedImage({
@@ -35,7 +34,7 @@ function OptimizedImage({
   quality = 85,
   objectFit = 'cover',
   style = {},
-  showComingSoon = true,
+  showComingSoon: _showComingSoon = true,
   entityType = 'unknown',
   entityId = 'unknown',
   imageType = 'unknown',
@@ -58,98 +57,70 @@ function OptimizedImage({
   const handleLoad = (e) => {
     e.target.classList.add('loaded');
   };
-  
-  // Resolve image source through universal resolver
+
+  // Resolve image source; empty/invalid -> '' so we know there is no image
   const resolvedSrc = resolveImageSrc(src, {
     entityType,
     entityId,
     imageType,
-    fallback: COMING_SOON_PLACEHOLDER,
+    fallback: '',
     silent: true
   });
-  
-  // Handle image load errors
-  const handleError = (e) => {
-    if (!hasError && showComingSoon) {
-      setHasError(true);
-      e.target.src = COMING_SOON_PLACEHOLDER;
-      e.target.classList.add('loaded');
-    }
+
+  // On load error: there is no working image -> "Image Coming Soon" on next render
+  const handleError = () => {
+    if (!hasError) setHasError(true);
   };
-  
-  // Return placeholder if no valid image
-  if (resolvedSrc === COMING_SOON_PLACEHOLDER || !resolvedSrc || resolvedSrc === 'null' || resolvedSrc === 'undefined') {
-    if (showComingSoon) {
-      return (
-        <div 
-          className={`optimized-image-placeholder ${className}`}
-          style={{ 
-            width: '100%',
-            height: '100%',
-            position: 'relative',
-            overflow: 'hidden',
-            backgroundColor: '#2C344C',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '16px',
-            padding: '32px',
-            ...style
-          }}
-          {...props}
-        >
-          <img 
-            src={LOGO_URL} 
-            alt="Limitless Cruises" 
-            style={{ 
-              width: 'auto', 
-              height: 'min(80px, 30%)',
-              opacity: 0.6,
-              objectFit: 'contain'
-            }}
-            loading="lazy"
-          />
-          <div style={{ 
-            color: '#B9953C', 
-            fontSize: '16px', 
-            fontWeight: '500',
-            textAlign: 'center',
-            fontFamily: 'system-ui, -apple-system, sans-serif'
-          }}>
-            Image Coming Soon
-          </div>
-          <div style={{ 
-            color: '#8892a8', 
-            fontSize: '12px',
-            textAlign: 'center',
-            fontFamily: 'system-ui, -apple-system, sans-serif'
-          }}>
-            High-quality imagery will be added shortly
-          </div>
-        </div>
-      );
-    }
-    
+
+  // "Image Coming Soon" only when there is no image: invalid/empty src or load failed
+  if (hasError || !resolvedSrc || resolvedSrc === 'null' || resolvedSrc === 'undefined') {
     return (
-      <div 
+      <div
         className={`optimized-image-placeholder ${className}`}
-        style={{ 
+        style={{
           width: '100%',
           height: '100%',
           position: 'relative',
           overflow: 'hidden',
-          backgroundColor: 'var(--color-gray-100, #f0f0f0)',
+          backgroundColor: '#2C344C',
           display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
+          gap: '16px',
+          padding: '32px',
           ...style
         }}
         {...props}
       >
-        <svg viewBox="0 0 24 24" fill="currentColor" style={{ width: '48px', height: '48px', opacity: 0.3 }}>
-          <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
-        </svg>
+        <img
+          src={LOGO_URL}
+          alt="Limitless Cruises"
+          style={{
+            width: 'auto',
+            height: 'min(80px, 30%)',
+            opacity: 0.6,
+            objectFit: 'contain'
+          }}
+          loading="lazy"
+        />
+        <div style={{
+          color: '#B9953C',
+          fontSize: '16px',
+          fontWeight: '500',
+          textAlign: 'center',
+          fontFamily: 'system-ui, -apple-system, sans-serif'
+        }}>
+          Image Coming Soon
+        </div>
+        <div style={{
+          color: '#8892a8',
+          fontSize: '12px',
+          textAlign: 'center',
+          fontFamily: 'system-ui, -apple-system, sans-serif'
+        }}>
+          High-quality imagery will be added shortly
+        </div>
       </div>
     );
   }
@@ -197,9 +168,9 @@ function OptimizedImage({
       <img
         ref={setImgRef}
         className="optimized-image"
-        src={hasError ? COMING_SOON_PLACEHOLDER : optimizedSrc}
-        srcSet={hasError ? undefined : srcSet}
-        sizes={srcSet && !hasError ? sizes : undefined}
+        src={optimizedSrc}
+        srcSet={srcSet}
+        sizes={srcSet ? sizes : undefined}
         alt={finalAlt}
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : 'auto'}

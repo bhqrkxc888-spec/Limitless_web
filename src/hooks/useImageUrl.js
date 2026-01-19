@@ -14,46 +14,37 @@ import { getImageSlugForDestination } from '../config/destinationSlugMapping';
  * Automatically maps data slugs (e.g., "mediterranean-cruises") to image slugs (e.g., "mediterranean")
  */
 export function useDestinationImage(slug, type = 'hero', destinationName = '') {
-  const [imageUrl, setImageUrl] = useState(PLACEHOLDER_IMAGE);
+  const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isPlaceholder, setIsPlaceholder] = useState(true);
 
   useEffect(() => {
     if (!slug) {
-      setImageUrl(PLACEHOLDER_IMAGE);
+      setImageUrl(null);
       setLoading(false);
       setIsPlaceholder(true);
       return;
     }
 
-    // Map the slug to the image slug used in database
-    // This handles cases like "mediterranean-cruises" -> "mediterranean"
-    // or "norwegian-fjords-cruises" -> "norway"
     const imageSlug = getImageSlugForDestination(slug);
+    const fallback = getDestinationImageUrl(imageSlug, type);
 
-    // Import the placeholder generator
-    import('../utils/placeholderImages.js').then(({ getDestinationPlaceholderImage }) => {
-      // Generate smart placeholder
-      const smartPlaceholder = getDestinationPlaceholderImage(imageSlug, type, destinationName);
-      setImageUrl(smartPlaceholder);
-      
-      const fallback = getDestinationImageUrl(imageSlug, type);
-      
-      getImageUrlFromDb('destination', imageSlug, type, fallback)
-        .then(url => {
-          if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
-            setImageUrl(url);
-            setIsPlaceholder(false);
-          } else {
-            setIsPlaceholder(true);
-          }
-          setLoading(false);
-        })
-        .catch(() => {
+    getImageUrlFromDb('destination', imageSlug, type, fallback)
+      .then(url => {
+        if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
+          setImageUrl(url);
+          setIsPlaceholder(false);
+        } else {
+          setImageUrl(null);
           setIsPlaceholder(true);
-          setLoading(false);
-        });
-    });
+        }
+        setLoading(false);
+      })
+      .catch(() => {
+        setImageUrl(null);
+        setIsPlaceholder(true);
+        setLoading(false);
+      });
   }, [slug, type, destinationName]);
 
   return { imageUrl, loading, isPlaceholder };
@@ -67,57 +58,49 @@ export function useDestinationImage(slug, type = 'hero', destinationName = '') {
  * Performance: Database lookup is deferred until after LCP/idle
  */
 export function useBucketListImage(id, type = 'hero', experienceName = '') {
-  const [imageUrl, setImageUrl] = useState(PLACEHOLDER_IMAGE);
+  const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isPlaceholder, setIsPlaceholder] = useState(true);
 
   useEffect(() => {
     if (!id) {
-      setImageUrl(PLACEHOLDER_IMAGE);
+      setImageUrl(null);
       setLoading(false);
       setIsPlaceholder(true);
       return;
     }
 
     let cancelled = false;
-    
-    // Import the placeholder generator and set placeholder immediately
-    import('../utils/placeholderImages.js').then(({ getBucketListPlaceholderImage }) => {
+    const bucketListFallback = getBucketListImageUrl(id, type);
+
+    const fetchFromDb = () => {
       if (cancelled) return;
-      const smartPlaceholder = getBucketListPlaceholderImage(id, type, experienceName);
-      setImageUrl(smartPlaceholder);
-      
-      const bucketListFallback = getBucketListImageUrl(id, type);
-      
-      // Defer database lookup until after LCP/idle for better mobile performance
-      const fetchFromDb = () => {
-        if (cancelled) return;
-        getImageUrlFromDb('bucket-list', id, type, bucketListFallback)
-          .then(url => {
-            if (cancelled) return;
-            if (url && url !== PLACEHOLDER_IMAGE && url !== smartPlaceholder) {
-              setImageUrl(url);
-              setIsPlaceholder(false);
-            } else {
-              setIsPlaceholder(true);
-            }
-            setLoading(false);
-          })
-          .catch(() => {
-            if (cancelled) return;
+      getImageUrlFromDb('bucket-list', id, type, bucketListFallback)
+        .then(url => {
+          if (cancelled) return;
+          if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
+            setImageUrl(url);
+            setIsPlaceholder(false);
+          } else {
+            setImageUrl(null);
             setIsPlaceholder(true);
-            setLoading(false);
-          });
-      };
-      
-      // Use requestIdleCallback to defer DB lookup
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(fetchFromDb, { timeout: 2000 });
-      } else {
-        setTimeout(fetchFromDb, 100);
-      }
-    });
-    
+          }
+          setLoading(false);
+        })
+        .catch(() => {
+          if (cancelled) return;
+          setImageUrl(null);
+          setIsPlaceholder(true);
+          setLoading(false);
+        });
+    };
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(fetchFromDb, { timeout: 2000 });
+    } else {
+      setTimeout(fetchFromDb, 100);
+    }
+
     return () => { cancelled = true; };
   }, [id, type, experienceName]);
 
@@ -128,40 +111,36 @@ export function useBucketListImage(id, type = 'hero', experienceName = '') {
  * Hook to get cruise line image URL
  */
 export function useCruiseLineImage(slug, type = 'logo', cruiseLineName = '') {
-  const [imageUrl, setImageUrl] = useState(PLACEHOLDER_IMAGE);
+  const [imageUrl, setImageUrl] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isPlaceholder, setIsPlaceholder] = useState(true);
 
   useEffect(() => {
     if (!slug) {
-      setImageUrl(PLACEHOLDER_IMAGE);
+      setImageUrl(null);
       setLoading(false);
       setIsPlaceholder(true);
       return;
     }
 
-    // Import the placeholder generator
-    import('../utils/placeholderImages.js').then(({ getCruiseLinePlaceholderImage }) => {
-      const smartPlaceholder = getCruiseLinePlaceholderImage(slug, type, cruiseLineName);
-      setImageUrl(smartPlaceholder);
-      
-      const fallback = getCruiseLineImageUrl(slug, type);
-      
-      getImageUrlFromDb('cruise-line', slug, type, fallback)
-        .then(url => {
-          if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
-            setImageUrl(url);
-            setIsPlaceholder(false);
-          } else {
-            setIsPlaceholder(true);
-          }
-          setLoading(false);
-        })
-        .catch(() => {
+    const fallback = getCruiseLineImageUrl(slug, type);
+
+    getImageUrlFromDb('cruise-line', slug, type, fallback)
+      .then(url => {
+        if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
+          setImageUrl(url);
+          setIsPlaceholder(false);
+        } else {
+          setImageUrl(null);
           setIsPlaceholder(true);
-          setLoading(false);
-        });
-    });
+        }
+        setLoading(false);
+      })
+      .catch(() => {
+        setImageUrl(null);
+        setIsPlaceholder(true);
+        setLoading(false);
+      });
   }, [slug, type, cruiseLineName]);
 
   return { imageUrl, loading, isPlaceholder };
@@ -181,47 +160,31 @@ export function usePortGuideImage(slug, type = 'hero', portName = '', country = 
 
   useEffect(() => {
     if (!slug) {
-      import('../utils/placeholderImages.js').then(({ getPortPlaceholderImage }) => {
-        setImageUrl(getPortPlaceholderImage(slug, type, portName, country));
-        setIsPlaceholder(true);
-        setLoading(false);
-      });
+      setImageUrl(null);
+      setIsPlaceholder(true);
+      setLoading(false);
       return;
     }
 
     let cancelled = false;
 
-    // Try to get real image from database FIRST
     getImageUrlFromDb('port-guide', slug, type, null)
       .then(url => {
         if (cancelled) return;
-        
         if (url && !url.includes('placeholder')) {
-          // Real image exists - use it immediately
           setImageUrl(url);
           setIsPlaceholder(false);
-          setLoading(false);
         } else {
-          // No real image - load placeholder
-          import('../utils/placeholderImages.js').then(({ getPortPlaceholderImage }) => {
-            if (cancelled) return;
-            const smartPlaceholder = getPortPlaceholderImage(slug, type, portName, country);
-            setImageUrl(smartPlaceholder);
-            setIsPlaceholder(true);
-            setLoading(false);
-          });
+          setImageUrl(null);
+          setIsPlaceholder(true);
         }
+        setLoading(false);
       })
       .catch(() => {
         if (cancelled) return;
-        // Error - load placeholder
-        import('../utils/placeholderImages.js').then(({ getPortPlaceholderImage }) => {
-          if (cancelled) return;
-          const smartPlaceholder = getPortPlaceholderImage(slug, type, portName, country);
-          setImageUrl(smartPlaceholder);
-          setIsPlaceholder(true);
-          setLoading(false);
-        });
+        setImageUrl(null);
+        setIsPlaceholder(true);
+        setLoading(false);
       });
 
     return () => { cancelled = true; };
