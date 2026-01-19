@@ -701,6 +701,7 @@ function GoFurtherSection({ goFurther, attractionImages }) {
                 src={attractionImages[idx]}
                 alt={attraction.name}
                 className="attraction-img"
+                srcsetWidths={[640, 1024, 1200]}
               />
             </div>
           )}

@@ -553,6 +553,7 @@ function GoFurtherSection({ goFurther, attractionImages, portName }) {
                 src={imgData.url}
                 alt={`${attraction.name} - ${portName}`}
                 className="attraction-img"
+                srcsetWidths={[640, 1024, 1200]}
               />
             </div>
           )}

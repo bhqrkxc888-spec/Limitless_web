@@ -479,30 +479,27 @@
   line-height: 1.4;
 }
 
-/* Attraction images: natural aspect ratio (1200x800), no over-cropping */
+/* Attraction images: fill 350px container, crop from center */
 .detailed-port-guide .attraction-image {
   width: 100%;
-  height: auto;
+  aspect-ratio: 3 / 2;
+  max-height: 350px;
   margin: var(--space-4, 1rem) 0 var(--space-6, 1.5rem);
   border-radius: var(--radius-lg, 12px);
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.detailed-port-guide .attraction-image .optimized-image-container {
-  height: auto !important;
-}
-
 .detailed-port-guide .attraction-img {
   width: 100%;
-  height: auto !important;
   display: block;
 }
 
 .detailed-port-guide .attraction-image img {
-  width: 100% !important;
-  height: auto !important;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 .attraction-description {

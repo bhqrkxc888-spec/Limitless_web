@@ -259,19 +259,17 @@
 
 .attraction-image {
   width: 100%;
-  height: auto;
+  aspect-ratio: 3 / 2;
+  max-height: 350px;
   overflow: hidden;
   background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
 }
 
-.attraction-image .optimized-image-container {
-  height: auto !important;
-}
-
 .attraction-image img {
-  width: 100% !important;
-  height: auto !important;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   transition: transform 0.3s;
 }
 

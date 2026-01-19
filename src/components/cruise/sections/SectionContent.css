@@ -108,33 +108,29 @@
 }
 
 /* ========================================
-   ATTRACTION IMAGES - Natural aspect ratio (1200x800)
-   No over-cropping in port guides / G606 cruise
+   ATTRACTION IMAGES - Fill 350px container, crop from center
    ======================================== */
 
 .attraction-image {
   width: 100%;
-  height: auto;
+  aspect-ratio: 3 / 2;
+  max-height: 350px;
   margin: var(--space-4, 1rem) 0 var(--space-6, 1.5rem);
   border-radius: var(--radius-lg, 12px);
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.attraction-image .optimized-image-container {
-  height: auto !important;
-}
-
 .attraction-img {
   width: 100%;
-  height: auto !important;
   display: block;
 }
 
 .attraction-image img {
-  width: 100% !important;
-  height: auto !important;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 /* Port hero image */

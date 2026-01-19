@@ -313,6 +313,7 @@ function PortGuidePage() {
                           width={400}
                           height={280}
                           sizes="(max-width: 768px) 100vw, 33vw"
+                          srcsetWidths={[640, 1024, 1200]}
                         />
                       </div>
                       <div className="attraction-body">
