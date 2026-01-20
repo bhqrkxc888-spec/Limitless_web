@@ -182,25 +182,9 @@ root.render(
   </StrictMode>,
 )
 
-// AGGRESSIVE scroll to top - multiple attempts to ensure page starts at top
-// This handles lazy-loaded content, images, and sticky elements that might cause scroll shift
-
-// 1. Immediate after render
+// Initial scroll to top on app load - single requestAnimationFrame is sufficient
+// Route-specific scroll handling is done by ScrollToTop component in App.jsx
+// which handles navigation properly with React Router lifecycle
 requestAnimationFrame(() => {
   window.scrollTo(0, 0)
 })
-
-// 2. After 50ms (handles most lazy content)
-setTimeout(() => {
-  window.scrollTo(0, 0)
-}, 50)
-
-// 3. After 100ms (handles heavier content)
-setTimeout(() => {
-  window.scrollTo(0, 0)
-}, 100)
-
-// 4. After 200ms (final safety net)
-setTimeout(() => {
-  window.scrollTo(0, 0)
-}, 200)

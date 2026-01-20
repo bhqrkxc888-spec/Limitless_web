@@ -71,28 +71,22 @@ const CountdownTimer = ({
     const initial = calculateTimeLeft();
     if (initial.total <= 0) {
       setIsOnBoard(true);
+      return; // No need to start timer if already on board
     }
 
-    // Update every minute (no need for seconds anymore)
+    // Single interval that updates every minute
+    // Minutes is the smallest unit we display, so no need for seconds
     const timer = setInterval(() => {
       const newTimeLeft = calculateTimeLeft();
       setTimeLeft(newTimeLeft);
       
       if (newTimeLeft.total <= 0) {
         setIsOnBoard(true);
+        clearInterval(timer); // Stop timer when cruise starts
       }
     }, 60000); // Update every minute
 
-    // Also update on seconds for smoother countdown initially
-    const secondsTimer = setInterval(() => {
-      const newTimeLeft = calculateTimeLeft();
-      setTimeLeft(newTimeLeft);
-    }, 1000);
-
-    return () => {
-      clearInterval(timer);
-      clearInterval(secondsTimer);
-    };
+    return () => clearInterval(timer);
   }, [departureDate, calculateTimeLeft]);
 
   // Milestone celebrations

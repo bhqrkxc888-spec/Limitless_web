@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useMemo } from 'react';
 import { getOptimizedImageUrl, generateSrcSet, isSupabaseUrl } from '../utils/imageHelpers';
 import { isVercelBlobUrl } from '../lib/vercelBlob';
 import { resolveImageSrc } from '../utils/imageResolver';
@@ -44,6 +44,21 @@ function OptimizedImage({
   const [hasError, setHasError] = useState(false);
   const imgRef = useRef(null);
 
+  // Resolve image source synchronously on first render to prevent flash
+  // useMemo ensures this is computed before the first paint
+  const resolvedSrc = useMemo(() => resolveImageSrc(src, {
+    entityType,
+    entityId,
+    imageType,
+    fallback: '',
+    silent: true
+  }), [src, entityType, entityId, imageType]);
+
+  // Check validity synchronously - no placeholder flash for valid images
+  const isValidSrc = useMemo(() => {
+    return resolvedSrc && resolvedSrc !== 'null' && resolvedSrc !== 'undefined' && resolvedSrc.length > 0;
+  }, [resolvedSrc]);
+
   // Callback ref - if image is already cached, add 'loaded' class immediately
   const setImgRef = useCallback((node) => {
     if (node) {
@@ -58,22 +73,14 @@ function OptimizedImage({
     e.target.classList.add('loaded');
   };
 
-  // Resolve image source; empty/invalid -> '' so we know there is no image
-  const resolvedSrc = resolveImageSrc(src, {
-    entityType,
-    entityId,
-    imageType,
-    fallback: '',
-    silent: true
-  });
-
   // On load error: there is no working image -> "Image Coming Soon" on next render
   const handleError = () => {
     if (!hasError) setHasError(true);
   };
 
   // "Image Coming Soon" only when there is no image: invalid/empty src or load failed
-  if (hasError || !resolvedSrc || resolvedSrc === 'null' || resolvedSrc === 'undefined') {
+  // This check uses the pre-computed isValidSrc to avoid flash
+  if (hasError || !isValidSrc) {
     return (
       <div
         className={`optimized-image-placeholder ${className}`}

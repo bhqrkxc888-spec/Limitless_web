@@ -13,6 +13,7 @@ import OnboardCreditBadge from '../components/OnboardCreditBadge';
 import SoloTravellerInfo from '../components/SoloTravellerInfo';
 import OptimizedImage from '../components/OptimizedImage';
 import HolidaySummary from '../components/HolidaySummary';
+import SocialShare from '../components/SocialShare';
 import { createSanitizedMarkup } from '../utils/sanitizeHtml';
 import { useEffect, useMemo, useState, lazy, Suspense, Component } from 'react';
 import './OfferPage.css';
@@ -380,7 +381,16 @@ function OfferPage() {
         <div className="container">
           {/* Full-width title and category */}
           <div className="offer-header__top">
-            <h1 className="offer-header__title">{offer.title}</h1>
+            <div className="offer-header__title-row">
+              <h1 className="offer-header__title">{offer.title}</h1>
+              <div className="offer-header__share">
+                <SocialShare 
+                  url={`https://www.limitlesscruises.com/offers/${offer.slug}`}
+                  title={`${offer.title} | Limitless Cruises`}
+                  description={offer.short_description || `Check out this amazing cruise offer: ${offer.title}`}
+                />
+              </div>
+            </div>
             {offer.short_description && (
               <p className="offer-header__description">{offer.short_description}</p>
             )}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { siteConfig } from '../config/siteConfig';
 import './FloatingWhatsApp.css';
 
@@ -9,19 +9,22 @@ import './FloatingWhatsApp.css';
  */
 function FloatingWhatsApp() {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [hasBeenSeen, setHasBeenSeen] = useState(false);
+  const hasBeenSeenRef = useRef(false);
 
   // Show the tooltip after a delay on first load
-  useState(() => {
-    const timer = setTimeout(() => {
-      if (!hasBeenSeen) {
-        setIsExpanded(true);
-        setHasBeenSeen(true);
-        // Auto-collapse after 5 seconds
-        setTimeout(() => setIsExpanded(false), 5000);
-      }
+  useEffect(() => {
+    if (hasBeenSeenRef.current) return;
+    
+    const showTimer = setTimeout(() => {
+      setIsExpanded(true);
+      hasBeenSeenRef.current = true;
+      
+      // Auto-collapse after 5 seconds
+      const hideTimer = setTimeout(() => setIsExpanded(false), 5000);
+      return () => clearTimeout(hideTimer);
     }, 3000);
-    return () => clearTimeout(timer);
+    
+    return () => clearTimeout(showTimer);
   }, []);
 
   const handleClick = () => {
