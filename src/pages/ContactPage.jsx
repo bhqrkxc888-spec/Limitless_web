@@ -1,8 +1,6 @@
 import { siteConfig } from '../config/siteConfig';
 import ContactForm from '../components/ContactForm';
 import SEO, { getOrganizationSchema, getBreadcrumbSchema } from '../components/SEO';
-import OptimizedImage from '../components/OptimizedImage';
-import { aboutImages } from '../utils/imageHelpers';
 import '../styles/page-header.css';
 import './ContactPage.css';
 
