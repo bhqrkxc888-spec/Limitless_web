@@ -241,9 +241,10 @@ function AppLayout() {
                 <Route path="/preview/contact" element={<ContactPage />} />
                 <Route path="/preview/offers" element={<OffersPage />} />
                 <Route path="/preview/offers/:slug" element={<OfferPage />} />
-                <Route path="/preview/cruise-lines" element={<CruiseLinesPage />} />
+                {/* PARKED: Cruise Lines (preview routes) */}
+                {/* <Route path="/preview/cruise-lines" element={<CruiseLinesPage />} />
                 <Route path="/preview/cruise-lines/:cruiseLineSlug" element={<CruiseLinePage />} />
-                <Route path="/preview/cruise-lines/:cruiseLineSlug/:shipSlug" element={<ShipGuidePage />} />
+                <Route path="/preview/cruise-lines/:cruiseLineSlug/:shipSlug" element={<ShipGuidePage />} /> */}
                 <Route path="/preview/destinations" element={<DestinationsPage />} />
                 <Route path="/preview/destinations/transatlantic-cruises" element={<Navigate to="/preview/bucket-list/transatlantic-crossings" replace />} />
                 <Route path="/preview/destinations/:slug" element={<DestinationPage />} />
@@ -262,7 +263,8 @@ function AppLayout() {
                 <Route path="/preview/ports" element={<PortsPage />} />
                 <Route path="/preview/ports/region/:slug" element={<PortRegionPage />} />
                 <Route path="/preview/ports/:slug" element={<PortGuidePage />} />
-                <Route path="/preview/ship-guides/:slug" element={<ShipGuidePage />} />
+                {/* PARKED: Ship Guides */}
+                {/* <Route path="/preview/ship-guides/:slug" element={<ShipGuidePage />} /> */}
                 <Route path="/preview/website-terms" element={<WebsiteTerms />} />
                 <Route path="/preview/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/preview/booking-terms" element={<BookingTerms />} />
@@ -297,14 +299,14 @@ function AppLayout() {
             <Route path="/offers" element={<OffersPage />} />
             <Route path="/offers/:slug" element={<OfferPage />} />
             
-            {/* Cruise Lines - Published */}
+            {/* PARKED: Cruise Lines & Ships - Focus on Port Guides first */}
+            {/* Uncomment when ready to launch cruise ships section
             <Route path="/cruise-lines" element={<CruiseLinesPage />} />
             <Route path="/cruise-lines/:cruiseLineSlug" element={<CruiseLinePage />} />
             <Route path="/cruise-lines/:cruiseLineSlug/:shipSlug" element={<ShipGuidePage />} />
-            
-            {/* Legacy ship routes - still work but show ship page */}
             <Route path="/ships/:slug" element={<ShipGuidePage />} />
             <Route path="/ship-guides/:slug" element={<ShipGuidePage />} />
+            */}
             
             {/* Destinations - Published */}
             <Route path="/destinations" element={<DestinationsPage />} />

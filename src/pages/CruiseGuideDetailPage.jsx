@@ -237,10 +237,11 @@ function CruiseGuideDetailPage() {
             <Link to="/cruise-guides" className="guide-nav-link">
               View All Cruise Guides
             </Link>
-            <span className="nav-separator">•</span>
+            {/* PARKED: Cruise Lines link removed during port guides focus */}
+            {/* <span className="nav-separator">•</span>
             <Link to="/cruise-lines" className="guide-nav-link">
               Browse Cruise Lines
-            </Link>
+            </Link> */}
             <span className="nav-separator">•</span>
             <Link to="/destinations" className="guide-nav-link">
               Explore Destinations

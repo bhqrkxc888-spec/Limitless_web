@@ -256,7 +256,7 @@ function DestinationPage() {
                 </div>
               </div>
 
-              {/* Popular Cruise Lines - Moved Down */}
+              {/* Popular Cruise Lines - Text only, no links */}
               {destination.cruiseLines && destination.cruiseLines.length > 0 && (
                 <div className="sidebar-card">
                   <h3>Popular Cruise Lines</h3>
