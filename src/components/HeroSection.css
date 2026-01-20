@@ -105,42 +105,42 @@
   max-width: 700px;
 }
 
-/* Social Share - Right Side of Hero */
+/* Social Share - Bottom Right of Hero, Horizontal */
 .hero-social {
   position: absolute;
-  top: 50%;
+  bottom: var(--space-4, 1rem);
   right: var(--container-padding, 1rem);
-  transform: translateY(-50%);
   z-index: 2;
 }
 
 /* Override social share styles for hero */
 .hero-social .social-share {
-  flex-direction: column;
-  align-items: flex-end;
+  flex-direction: row;
+  align-items: center;
   gap: var(--space-2, 0.5rem);
 }
 
 .hero-social .social-share-label {
   color: white;
   font-size: var(--font-size-sm, 0.875rem);
-  margin-bottom: var(--space-2, 0.5rem);
+  margin-bottom: 0;
+  margin-right: var(--space-2, 0.5rem);
 }
 
 .hero-social .social-share-buttons {
-  flex-direction: column;
+  flex-direction: row;
   gap: var(--space-2, 0.5rem);
 }
 
 .hero-social .social-share-button {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  border: none;
+  padding: var(--space-2, 0.5rem);
 }
 
 .hero-social .social-share-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
 }
 
 .hero-title {
@@ -249,7 +249,8 @@
 
 @media (max-width: 1023px) {
   .hero-social {
-    right: var(--space-4, 1rem);
+    right: var(--space-3, 0.75rem);
+    bottom: var(--space-3, 0.75rem);
   }
 }
 
@@ -299,12 +300,19 @@
     padding-top: var(--space-6);
   }
 
-  /* Social share on mobile - move to bottom right */
+  /* Social share on mobile - stays bottom right, smaller padding */
   .hero-social {
-    top: auto;
-    bottom: var(--space-4, 1rem);
-    right: var(--space-4, 1rem);
-    transform: none;
+    bottom: var(--space-3, 0.75rem);
+    right: var(--space-3, 0.75rem);
+  }
+  
+  /* Optionally hide label on very small screens */
+  .hero-social .social-share-label {
+    display: none;
+  }
+  
+  .hero-social .social-share-buttons {
+    gap: var(--space-1, 0.25rem);
   }
 }
 
