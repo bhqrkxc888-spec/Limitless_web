@@ -182,6 +182,24 @@ function OfferCard({ offer, variant = 'default' }) {
                 {getDurationText(offer.duration_nights)}
               </span>
             )}
+            {offer.includes_flight && offer.departure_airport && (
+              <span className="offer-card-hero__detail">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 18l18-6-18-6v12z"/>
+                  <path d="M12 2v20"/>
+                </svg>
+                Fly from {offer.departure_airport}
+              </span>
+            )}
+            {offer.departure_port && (
+              <span className="offer-card-hero__detail">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                Cruise departs {offer.departure_port}
+              </span>
+            )}
             {offer.departure_date && (
               <span className="offer-card-hero__detail">
                 {formatDate(offer.departure_date)}
@@ -296,13 +314,22 @@ function OfferCard({ offer, variant = 'default' }) {
                 {getDurationText(offer.duration_nights)}
               </span>
             )}
+            {offer.includes_flight && offer.departure_airport && (
+              <span className="offer-card-horizontal__detail">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 18l18-6-18-6v12z"/>
+                  <path d="M12 2v20"/>
+                </svg>
+                Fly from {offer.departure_airport}
+              </span>
+            )}
             {offer.departure_port && (
               <span className="offer-card-horizontal__detail">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                   <circle cx="12" cy="10" r="3"/>
                 </svg>
-                {offer.departure_port}
+                Cruise departs {offer.departure_port}
               </span>
             )}
           </div>
@@ -401,7 +428,7 @@ function OfferCard({ offer, variant = 'default' }) {
           <Card.Description>{offer.short_description}</Card.Description>
         )}
 
-        {/* Cruise Details - Ordered: Date, Duration, Port, Cruise Line */}
+        {/* Cruise Details - Ordered: Date, Duration, Fly From, Cruise Departs, Cruise Line */}
         <div className="offer-details-grid">
           {offer.departure_date && (
             <div className="offer-detail-row">
@@ -425,9 +452,16 @@ function OfferCard({ offer, variant = 'default' }) {
             </div>
           )}
 
+          {offer.includes_flight && offer.departure_airport && (
+            <div className="offer-detail-row">
+              <span className="offer-detail-label">Fly from</span>
+              <span className="offer-detail-value">{offer.departure_airport}</span>
+            </div>
+          )}
+
           {offer.departure_port && (
             <div className="offer-detail-row">
-              <span className="offer-detail-label">From</span>
+              <span className="offer-detail-label">Cruise departs</span>
               <span className="offer-detail-value">{offer.departure_port}</span>
             </div>
           )}
