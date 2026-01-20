@@ -532,58 +532,73 @@ function StayLocalSection({ stayLocal, beachImage, marineData, marineLoading }) 
       {stayLocal.beach && (
         <>
           <SubSection title="Beach">
-            {beachImage && (
-              <div className="beach-image">
-                <OptimizedImage src={beachImage} alt={stayLocal.beach.title} className="beach-img" />
-              </div>
-            )}
-            <div className="beach-item">
-              <h4>{stayLocal.beach.title}</h4>
-              <p>{stayLocal.beach.content}</p>
-              
-              {/* Beach info badges */}
-              {(stayLocal.beach.waterTemperature || stayLocal.beach.facilities) && (
-                <div className="beach-info-grid">
-                  {stayLocal.beach.waterTemperature && (
-                    <div className="beach-info-item">
-                      <Thermometer size={16} />
-                      <span><strong>Water:</strong> {stayLocal.beach.waterTemperature}</span>
-                    </div>
-                  )}
-                  {stayLocal.beach.facilities && (
-                    <div className="beach-info-item">
-                      <Waves size={16} />
-                      <span><strong>Facilities:</strong> {stayLocal.beach.facilities}</span>
-                    </div>
-                  )}
+            <div className="content-block">
+              {/* Row 1: Image and main text side by side */}
+              <div className="content-block__top">
+                {beachImage && (
+                  <div className="content-block__image">
+                    <OptimizedImage 
+                      src={beachImage} 
+                      alt={stayLocal.beach.title}
+                      width={320}
+                      height={240}
+                      sizes="320px"
+                      srcsetWidths={[320, 640]}
+                    />
+                  </div>
+                )}
+                <div className="content-block__header">
+                  <h4>{stayLocal.beach.title}</h4>
+                  <p>{stayLocal.beach.content}</p>
                 </div>
-              )}
+              </div>
               
-              {/* Live Marine Conditions from Stormglass API */}
-              {stayLocal.beach.coordinates && (
-                <MarineConditionsCard marineData={marineData} loading={marineLoading} />
-              )}
-              
-              {/* Accessibility notes for beach */}
-              {stayLocal.beach.accessNotes && (
-                <p className="beach-access-notes">
-                  <Accessibility size={14} /> {stayLocal.beach.accessNotes}
-                </p>
-              )}
-              
-              {stayLocal.beach.additional && stayLocal.beach.additional.length > 0 && (
-                <ul>
-                  {stayLocal.beach.additional.map((item, idx) => (
-                    <li key={idx}>{item}</li>
-                  ))}
-                </ul>
-              )}
-              
-              {stayLocal.beach.mapLink && (
-                <a href={stayLocal.beach.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                  View beach location →
-                </a>
-              )}
+              {/* Row 2: Additional details */}
+              <div className="content-block__details">
+                {/* Beach info badges */}
+                {(stayLocal.beach.waterTemperature || stayLocal.beach.facilities) && (
+                  <div className="beach-info-grid">
+                    {stayLocal.beach.waterTemperature && (
+                      <div className="beach-info-item">
+                        <Thermometer size={16} />
+                        <span><strong>Water:</strong> {stayLocal.beach.waterTemperature}</span>
+                      </div>
+                    )}
+                    {stayLocal.beach.facilities && (
+                      <div className="beach-info-item">
+                        <Waves size={16} />
+                        <span><strong>Facilities:</strong> {stayLocal.beach.facilities}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
+                
+                {/* Live Marine Conditions from Stormglass API */}
+                {stayLocal.beach.coordinates && (
+                  <MarineConditionsCard marineData={marineData} loading={marineLoading} />
+                )}
+                
+                {/* Accessibility notes for beach */}
+                {stayLocal.beach.accessNotes && (
+                  <p className="beach-access-notes">
+                    <Accessibility size={14} /> {stayLocal.beach.accessNotes}
+                  </p>
+                )}
+                
+                {stayLocal.beach.additional && stayLocal.beach.additional.length > 0 && (
+                  <ul className="simple-list">
+                    {stayLocal.beach.additional.map((item, idx) => (
+                      <li key={idx}>{item}</li>
+                    ))}
+                  </ul>
+                )}
+                
+                {stayLocal.beach.mapLink && (
+                  <a href={stayLocal.beach.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
+                    View beach location →
+                  </a>
+                )}
+              </div>
             </div>
           </SubSection>
           <hr className="section-divider" />

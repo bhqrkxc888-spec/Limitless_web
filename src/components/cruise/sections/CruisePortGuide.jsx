@@ -399,20 +399,36 @@ function StayLocalSection({ stayLocal, beachImage }) {
       {stayLocal.beach && (
         <>
           <SubSection title="Beach">
-            {beachImage && (
-              <div className="beach-image">
-                <OptimizedImage src={beachImage} alt={stayLocal.beach.title} className="beach-img" />
+            <div className="content-block">
+              {/* Row 1: Image and main text side by side */}
+              <div className="content-block__top">
+                {beachImage && (
+                  <div className="content-block__image">
+                    <OptimizedImage 
+                      src={beachImage} 
+                      alt={stayLocal.beach.title}
+                      width={280}
+                      height={210}
+                      sizes="280px"
+                      srcsetWidths={[280, 560]}
+                    />
+                  </div>
+                )}
+                <div className="content-block__header">
+                  <h4>{stayLocal.beach.title}</h4>
+                  <p>{stayLocal.beach.content}</p>
+                </div>
               </div>
-            )}
-            <div className="beach-item">
-              <h4>{stayLocal.beach.title}</h4>
-              <p>{stayLocal.beach.content}</p>
+              
+              {/* Row 2: Additional details */}
               {stayLocal.beach.additional && stayLocal.beach.additional.length > 0 && (
-                <ul>
-                  {stayLocal.beach.additional.map((item, idx) => (
-                    <li key={idx}>{item}</li>
-                  ))}
-                </ul>
+                <div className="content-block__details">
+                  <ul className="simple-list">
+                    {stayLocal.beach.additional.map((item, idx) => (
+                      <li key={idx}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
               )}
             </div>
           </SubSection>

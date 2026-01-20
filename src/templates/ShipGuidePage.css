@@ -322,11 +322,20 @@
   background: var(--clr-bg-alt, #F8F5F0);
   border-radius: var(--radius-lg, 12px);
   overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: var(--space-4, 1rem);
+  gap: var(--space-4, 1rem);
 }
 
 .cabin-image {
-  aspect-ratio: 16/10;
+  width: 280px;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
+  border-radius: var(--radius-md, 8px);
+  background: var(--clr-bg-alt, #F8F5F0);
+  flex-shrink: 0;
 }
 
 .cabin-image img {
@@ -336,7 +345,8 @@
 }
 
 .cabin-details {
-  padding: var(--space-4, 1rem);
+  flex: 1;
+  min-width: 0;
 }
 
 .cabin-details h4 {
@@ -425,11 +435,20 @@
   background: var(--clr-bg-alt, #F8F5F0);
   border-radius: var(--radius-lg, 12px);
   overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: var(--space-4, 1rem);
+  gap: var(--space-4, 1rem);
 }
 
 .venue-image {
-  aspect-ratio: 16/10;
+  width: 280px;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
+  border-radius: var(--radius-md, 8px);
+  background: var(--clr-bg-alt, #F8F5F0);
+  flex-shrink: 0;
 }
 
 .venue-image img {
@@ -439,7 +458,8 @@
 }
 
 .venue-details {
-  padding: var(--space-4, 1rem);
+  flex: 1;
+  min-width: 0;
 }
 
 .venue-details h4 {
@@ -707,6 +727,17 @@
   .venue-grid,
   .activities-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .cabin-type-card,
+  .venue-card {
+    flex-direction: column;
+  }
+  
+  .cabin-image,
+  .venue-image {
+    width: 100%;
+    max-width: 400px;
   }
   
   .cta-box {

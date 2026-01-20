@@ -57,6 +57,12 @@ export function getPageHeroImageUrl(slug) {
   return getSupabaseImageUrl('WEB_page-heroes', `${slug}/hero.webp`);
 }
 
+// Helper to construct port guide image URLs
+// Upload path: WEB_categories/{slug}/{type}.webp
+export function getPortGuideImageUrl(slug, type = 'hero') {
+  return getSupabaseImageUrl('WEB_categories', `${slug}/${type}.webp`);
+}
+
 // ============================================================================
 // PLACEHOLDER IMAGE - Shown when no image exists
 // ============================================================================

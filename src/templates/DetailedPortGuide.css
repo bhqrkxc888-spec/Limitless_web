@@ -422,28 +422,77 @@
 }
 
 /* ========================================
-   BEACH IMAGE
-   Scoped to prevent PortGuidePage.css conflicts
+   CONTENT BLOCK - Unified Image + Content Layout
+   Reusable pattern for beach, attractions, venues, etc.
+   Image on left (constrained), content on right, wrapping on mobile
    ======================================== */
 
-.detailed-port-guide .beach-image {
+.content-block {
   margin-bottom: var(--space-4, 1rem);
+  background: var(--clr-surface, #FFFFFF);
+  border: 1px solid var(--clr-border, #E8E4DC);
   border-radius: var(--radius-lg, 12px);
+  padding: var(--space-5, 1.25rem);
+  box-shadow: 0 4px 12px rgba(44, 52, 76, 0.06);
+}
+
+.content-block__top {
+  display: flex;
+  gap: var(--space-6, 1.5rem);
+  margin-bottom: var(--space-4, 1rem);
+}
+
+.content-block__image {
+  flex-shrink: 0;
+  width: 280px;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md, 8px);
   overflow: hidden;
+  background: var(--clr-bg-alt, #F8F5F0);
 }
 
-.detailed-port-guide .beach-img {
+.content-block__image img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
-  max-height: 300px;
+  display: block;
 }
 
-.beach-item h4 {
-  font-size: var(--font-size-base, 1rem);
+.content-block__header {
+  flex: 1;
+  min-width: 0;
+}
+
+.content-block__header h4 {
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  font-size: var(--font-size-lg, 1.125rem);
   font-weight: var(--font-weight-semibold, 600);
   color: var(--clr-text-main, #2C344C);
-  margin-bottom: var(--space-2, 0.5rem);
+  margin: 0 0 var(--space-3, 0.75rem) 0;
+  line-height: 1.4;
+}
+
+.content-block__header p {
+  font-size: var(--font-size-base, 1rem);
+  color: var(--clr-text-main, #2C344C);
+  line-height: var(--line-height-relaxed, 1.7);
+  margin: 0;
+}
+
+.content-block__details {
+  width: 100%;
+}
+
+/* Mobile: Stack vertically */
+@media (max-width: 600px) {
+  .content-block__top {
+    flex-direction: column;
+  }
+  
+  .content-block__image {
+    width: 100%;
+    max-width: 400px;
+  }
 }
 
 /* ========================================
@@ -476,10 +525,11 @@
 
 .detailed-port-guide .attraction-image {
   flex-shrink: 0;
-  width: 320px;
-  aspect-ratio: 3 / 2;
-  border-radius: 8px;
+  width: 280px;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md, 8px);
   overflow: hidden;
+  background: var(--clr-bg-alt, #F8F5F0);
 }
 
 .detailed-port-guide .attraction-image img {
@@ -977,8 +1027,8 @@
 
 .family-card-image {
   flex-shrink: 0;
-  width: 220px;
-  height: 220px;
+  width: 280px;
+  aspect-ratio: 4 / 3;
   align-self: flex-start;
   overflow: hidden;
   background: var(--clr-bg-alt, #f5f5f5);
@@ -1063,14 +1113,15 @@
 }
 
 /* Mobile responsive for family cards */
-@media (max-width: 479px) {
+@media (max-width: 600px) {
   .family-card {
     flex-direction: column;
   }
   
   .family-card-image {
     width: 100%;
-    height: 220px;
+    max-width: 400px;
+    aspect-ratio: 4 / 3;
   }
 }
 
@@ -1086,8 +1137,8 @@
 
 .park-info.with-image .info-image {
   flex-shrink: 0;
-  width: 220px;
-  height: 220px;
+  width: 280px;
+  aspect-ratio: 4 / 3;
   align-self: flex-start;
   background: var(--clr-bg-alt, #f5f5f5);
   border-radius: var(--radius-md, 8px);
@@ -1106,14 +1157,15 @@
   padding: var(--space-4, 1rem);
 }
 
-@media (max-width: 479px) {
+@media (max-width: 600px) {
   .park-info.with-image {
     flex-direction: column;
   }
   
   .park-info.with-image .info-image {
     width: 100%;
-    height: 220px;
+    max-width: 400px;
+    aspect-ratio: 4 / 3;
   }
 }
 

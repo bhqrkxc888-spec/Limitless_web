@@ -7,6 +7,37 @@ import { useState, useEffect } from 'react';
 import { useBucketListImage, usePageHeroImage } from '../hooks/useImageUrl';
 import './BucketListPage.css';
 
+// Extracted to avoid re-creating component inside render (causes hook re-runs)
+function FeaturedExperienceCard({ experience }) {
+  const { imageUrl } = useBucketListImage(experience.id, 'card', experience.title);
+  return (
+    <Card 
+      to={`/bucket-list/${experience.slug}`} 
+      variant="default"
+      className="bucket-list-featured-card"
+    >
+      <Card.Image 
+        src={imageUrl} 
+        alt={experience.title}
+        aspectRatio="3/2"
+        entityType="bucket-list"
+        entityId={experience.slug}
+        imageType="card-featured"
+      />
+      <Card.Content>
+        <div className="bucket-list-badges">
+          <span className="bucket-list-badge">Bucket List</span>
+        </div>
+        <Card.Title as="h3">{experience.title}</Card.Title>
+        <Card.Description>{experience.tagline}</Card.Description>
+        <div className="bucket-list-featured-meta">
+          <span className="duration">{experience.duration}</span>
+        </div>
+      </Card.Content>
+    </Card>
+  );
+}
+
 function BucketListPage() {
   // Get page hero image
   const { imageUrl: heroImage } = usePageHeroImage('bucket-list');
@@ -139,38 +170,9 @@ function BucketListPage() {
                 </button>
               )}
               <div className="bucket-list-featured-grid">
-                {visibleItems.map((experience) => {
-                  const FeaturedCard = () => {
-                    const { imageUrl } = useBucketListImage(experience.id, 'card', experience.title);
-                    return (
-                      <Card 
-                        to={`/bucket-list/${experience.slug}`} 
-                        variant="default"
-                        className="bucket-list-featured-card"
-                      >
-                        <Card.Image 
-                          src={imageUrl} 
-                          alt={experience.title}
-                          aspectRatio="3/2"
-                          entityType="bucket-list"
-                          entityId={experience.slug}
-                          imageType="card-featured"
-                        />
-                        <Card.Content>
-                          <div className="bucket-list-badges">
-                            <span className="bucket-list-badge">Bucket List</span>
-                          </div>
-                          <Card.Title as="h3">{experience.title}</Card.Title>
-                          <Card.Description>{experience.tagline}</Card.Description>
-                          <div className="bucket-list-featured-meta">
-                            <span className="duration">{experience.duration}</span>
-                          </div>
-                        </Card.Content>
-                      </Card>
-                    );
-                  };
-                  return <FeaturedCard key={experience.id} />;
-                })}
+                {visibleItems.map((experience) => (
+                  <FeaturedExperienceCard key={experience.id} experience={experience} />
+                ))}
               </div>
               {featured.length > itemsToShow && (
                 <button

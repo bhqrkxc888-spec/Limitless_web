@@ -5,44 +5,51 @@
 
 import { useState, useEffect } from 'react';
 import { getImageUrlFromDb } from '../utils/imageLoader';
-import { getDestinationImageUrl, getBucketListImageUrl, getCruiseLineImageUrl, getShipImageUrl, getPageHeroImageUrl } from '../config/assetUrls';
+import { getDestinationImageUrl, getBucketListImageUrl, getCruiseLineImageUrl, getShipImageUrl, getPageHeroImageUrl, getPortGuideImageUrl } from '../config/assetUrls';
 import { PLACEHOLDER_IMAGE } from '../config/assetUrls';
 import { getImageSlugForDestination } from '../config/destinationSlugMapping';
 
 /**
  * Hook to get destination image URL
  * Automatically maps data slugs (e.g., "mediterranean-cruises") to image slugs (e.g., "mediterranean")
+ * 
+ * Performance: Returns direct URL immediately (no grey box), DB check in background
  */
 export function useDestinationImage(slug, type = 'hero', destinationName = '') {
-  const [imageUrl, setImageUrl] = useState(null);
+  // Compute direct URL immediately to avoid grey box flash
+  const imageSlug = slug ? getImageSlugForDestination(slug) : null;
+  const directUrl = imageSlug ? getDestinationImageUrl(imageSlug, type) : PLACEHOLDER_IMAGE;
+  
+  const [imageUrl, setImageUrl] = useState(() => directUrl);
   const [loading, setLoading] = useState(true);
-  const [isPlaceholder, setIsPlaceholder] = useState(true);
+  const [isPlaceholder, setIsPlaceholder] = useState(() => !slug);
 
   useEffect(() => {
     if (!slug) {
-      setImageUrl(null);
+      setImageUrl(PLACEHOLDER_IMAGE);
       setLoading(false);
       setIsPlaceholder(true);
       return;
     }
 
-    const imageSlug = getImageSlugForDestination(slug);
-    const fallback = getDestinationImageUrl(imageSlug, type);
+    const currentImageSlug = getImageSlugForDestination(slug);
+    const currentDirectUrl = getDestinationImageUrl(currentImageSlug, type);
+    
+    // Set direct URL immediately (image starts loading now)
+    setImageUrl(currentDirectUrl);
+    setIsPlaceholder(false);
 
-    getImageUrlFromDb('destination', imageSlug, type, fallback)
+    // Check database in background - only update if different URL found
+    getImageUrlFromDb('destination', currentImageSlug, type, currentDirectUrl)
       .then(url => {
-        if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
+        // Only update if DB returned a different, valid URL
+        if (url && url !== currentDirectUrl && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
           setImageUrl(url);
-          setIsPlaceholder(false);
-        } else {
-          setImageUrl(null);
-          setIsPlaceholder(true);
         }
         setLoading(false);
       })
       .catch(() => {
-        setImageUrl(null);
-        setIsPlaceholder(true);
+        // Keep direct URL, just mark loading complete
         setLoading(false);
       });
   }, [slug, type, destinationName]);
@@ -55,46 +62,51 @@ export function useDestinationImage(slug, type = 'hero', destinationName = '') {
  * Note: bucket-list uses 'id' as entityId in database, not slug
  * Only uses bucket list-specific images (no image sharing)
  * 
- * Performance: Database lookup is deferred until after LCP/idle
+ * Performance: Returns direct URL immediately (no grey box), DB check in background
  */
 export function useBucketListImage(id, type = 'hero', experienceName = '') {
-  const [imageUrl, setImageUrl] = useState(null);
+  // Compute direct URL immediately to avoid grey box flash
+  const directUrl = id ? getBucketListImageUrl(id, type) : PLACEHOLDER_IMAGE;
+  
+  const [imageUrl, setImageUrl] = useState(() => directUrl);
   const [loading, setLoading] = useState(true);
-  const [isPlaceholder, setIsPlaceholder] = useState(true);
+  const [isPlaceholder, setIsPlaceholder] = useState(() => !id);
 
   useEffect(() => {
     if (!id) {
-      setImageUrl(null);
+      setImageUrl(PLACEHOLDER_IMAGE);
       setLoading(false);
       setIsPlaceholder(true);
       return;
     }
 
     let cancelled = false;
-    const bucketListFallback = getBucketListImageUrl(id, type);
+    const currentDirectUrl = getBucketListImageUrl(id, type);
+    
+    // Set direct URL immediately (image starts loading now)
+    setImageUrl(currentDirectUrl);
+    setIsPlaceholder(false);
 
+    // Check database in background - only update if different URL found
     const fetchFromDb = () => {
       if (cancelled) return;
-      getImageUrlFromDb('bucket-list', id, type, bucketListFallback)
+      getImageUrlFromDb('bucket-list', id, type, currentDirectUrl)
         .then(url => {
           if (cancelled) return;
-          if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
+          // Only update if DB returned a different, valid URL
+          if (url && url !== currentDirectUrl && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
             setImageUrl(url);
-            setIsPlaceholder(false);
-          } else {
-            setImageUrl(null);
-            setIsPlaceholder(true);
           }
           setLoading(false);
         })
         .catch(() => {
           if (cancelled) return;
-          setImageUrl(null);
-          setIsPlaceholder(true);
+          // Keep direct URL, just mark loading complete
           setLoading(false);
         });
     };
 
+    // Defer DB check to not block LCP
     if ('requestIdleCallback' in window) {
       requestIdleCallback(fetchFromDb, { timeout: 2000 });
     } else {
@@ -109,36 +121,42 @@ export function useBucketListImage(id, type = 'hero', experienceName = '') {
 
 /**
  * Hook to get cruise line image URL
+ * 
+ * Performance: Returns direct URL immediately (no grey box), DB check in background
  */
 export function useCruiseLineImage(slug, type = 'logo', cruiseLineName = '') {
-  const [imageUrl, setImageUrl] = useState(null);
+  // Compute direct URL immediately to avoid grey box flash
+  const directUrl = slug ? getCruiseLineImageUrl(slug, type) : PLACEHOLDER_IMAGE;
+  
+  const [imageUrl, setImageUrl] = useState(() => directUrl);
   const [loading, setLoading] = useState(true);
-  const [isPlaceholder, setIsPlaceholder] = useState(true);
+  const [isPlaceholder, setIsPlaceholder] = useState(() => !slug);
 
   useEffect(() => {
     if (!slug) {
-      setImageUrl(null);
+      setImageUrl(PLACEHOLDER_IMAGE);
       setLoading(false);
       setIsPlaceholder(true);
       return;
     }
 
-    const fallback = getCruiseLineImageUrl(slug, type);
+    const currentDirectUrl = getCruiseLineImageUrl(slug, type);
+    
+    // Set direct URL immediately (image starts loading now)
+    setImageUrl(currentDirectUrl);
+    setIsPlaceholder(false);
 
-    getImageUrlFromDb('cruise-line', slug, type, fallback)
+    // Check database in background - only update if different URL found
+    getImageUrlFromDb('cruise-line', slug, type, currentDirectUrl)
       .then(url => {
-        if (url && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
+        // Only update if DB returned a different, valid URL
+        if (url && url !== currentDirectUrl && !url.includes('placeholder') && url !== PLACEHOLDER_IMAGE) {
           setImageUrl(url);
-          setIsPlaceholder(false);
-        } else {
-          setImageUrl(null);
-          setIsPlaceholder(true);
         }
         setLoading(false);
       })
       .catch(() => {
-        setImageUrl(null);
-        setIsPlaceholder(true);
+        // Keep direct URL, just mark loading complete
         setLoading(false);
       });
   }, [slug, type, cruiseLineName]);
@@ -151,39 +169,44 @@ export function useCruiseLineImage(slug, type = 'logo', cruiseLineName = '') {
  * Note: port-guide uses 'slug' as entityId in database (e.g., 'barcelona')
  * Images are uploaded as: WEB_categories/{slug}/{imageType}.webp
  * 
- * Optimized: Checks database first, only shows placeholder if no real image exists
+ * Performance: Returns direct URL immediately (no grey box), DB check in background
  */
 export function usePortGuideImage(slug, type = 'hero', portName = '', country = '') {
-  const [imageUrl, setImageUrl] = useState(null);
+  // Compute direct URL immediately to avoid grey box flash
+  const directUrl = slug ? getPortGuideImageUrl(slug, type) : PLACEHOLDER_IMAGE;
+  
+  const [imageUrl, setImageUrl] = useState(() => directUrl);
   const [loading, setLoading] = useState(true);
-  const [isPlaceholder, setIsPlaceholder] = useState(false);
+  const [isPlaceholder, setIsPlaceholder] = useState(() => !slug);
 
   useEffect(() => {
     if (!slug) {
-      setImageUrl(null);
-      setIsPlaceholder(true);
+      setImageUrl(PLACEHOLDER_IMAGE);
       setLoading(false);
+      setIsPlaceholder(true);
       return;
     }
 
     let cancelled = false;
+    const currentDirectUrl = getPortGuideImageUrl(slug, type);
+    
+    // Set direct URL immediately (image starts loading now)
+    setImageUrl(currentDirectUrl);
+    setIsPlaceholder(false);
 
-    getImageUrlFromDb('port-guide', slug, type, null)
+    // Check database in background - only update if different URL found
+    getImageUrlFromDb('port-guide', slug, type, currentDirectUrl)
       .then(url => {
         if (cancelled) return;
-        if (url && !url.includes('placeholder')) {
+        // Only update if DB returned a different, valid URL
+        if (url && url !== currentDirectUrl && !url.includes('placeholder')) {
           setImageUrl(url);
-          setIsPlaceholder(false);
-        } else {
-          setImageUrl(null);
-          setIsPlaceholder(true);
         }
         setLoading(false);
       })
       .catch(() => {
         if (cancelled) return;
-        setImageUrl(null);
-        setIsPlaceholder(true);
+        // Keep direct URL, just mark loading complete
         setLoading(false);
       });
 
@@ -253,13 +276,15 @@ export function useShipImage(cruiseLineSlug, shipSlug, type = 'card', shipName =
 /**
  * Hook to get page hero image URL (for listing pages like /destinations, /cruise-types, /bucket-list)
  * 
- * Fixed: Removed redundant fetch() pre-validation that caused double-requests.
- * The <img> tag handles 404s gracefully, no need to pre-check with fetch().
+ * Performance: Returns direct URL immediately (no grey box), DB check in background
  */
 export function usePageHeroImage(slug) {
-  const [imageUrl, setImageUrl] = useState(null);
+  // Compute direct URL immediately to avoid grey box flash
+  const directUrl = slug ? getPageHeroImageUrl(slug) : null;
+  
+  const [imageUrl, setImageUrl] = useState(() => directUrl);
   const [loading, setLoading] = useState(true);
-  const [hasImage, setHasImage] = useState(false);
+  const [hasImage, setHasImage] = useState(() => !!slug);
 
   useEffect(() => {
     if (!slug) {
@@ -269,27 +294,26 @@ export function usePageHeroImage(slug) {
       return;
     }
 
+    const currentDirectUrl = getPageHeroImageUrl(slug);
+    
+    // Set direct URL immediately (image starts loading now)
+    setImageUrl(currentDirectUrl);
+    setHasImage(true);
+
     // Page heroes are stored with entity_type='site', entity_id='site', image_type='page-hero-{slug}'
     const imageType = `page-hero-${slug}`;
-    const fallback = getPageHeroImageUrl(slug);
     
-    getImageUrlFromDb('site', 'site', imageType, fallback)
+    // Check database in background - only update if different URL found
+    getImageUrlFromDb('site', 'site', imageType, currentDirectUrl)
       .then(url => {
-        // If we have a valid URL (not a placeholder), use it
-        // Let the <img> tag handle loading - no need to pre-validate with fetch()
-        if (url && !url.includes('placeholder')) {
+        // Only update if DB returned a different, valid URL
+        if (url && url !== currentDirectUrl && !url.includes('placeholder')) {
           setImageUrl(url);
-          setHasImage(true);
-        } else {
-          setImageUrl(null);
-          setHasImage(false);
         }
+        setLoading(false);
       })
       .catch(() => {
-        setImageUrl(null);
-        setHasImage(false);
-      })
-      .finally(() => {
+        // Keep direct URL, just mark loading complete
         setLoading(false);
       });
   }, [slug]);
