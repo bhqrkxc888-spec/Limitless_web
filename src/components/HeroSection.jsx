@@ -1,5 +1,6 @@
 import { useRef, useCallback } from 'react';
 import { Button } from './ui';
+import SocialShare from './SocialShare';
 import './HeroSection.css';
 
 /**
@@ -18,7 +19,11 @@ function HeroSection({
   size = 'lg',
   align = 'left',
   children,
-  className = ''
+  className = '',
+  // Social share props
+  socialShareUrl,
+  socialShareTitle,
+  socialShareDescription
 }) {
   const imgRef = useRef(null);
 
@@ -122,6 +127,17 @@ function HeroSection({
           
           {children}
         </div>
+
+        {/* Social Share - Right Side */}
+        {(socialShareUrl || socialShareTitle) && (
+          <div className="hero-social">
+            <SocialShare
+              url={socialShareUrl}
+              title={socialShareTitle}
+              description={socialShareDescription}
+            />
+          </div>
+        )}
       </div>
     </section>
   );

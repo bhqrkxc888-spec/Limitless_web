@@ -95,10 +95,52 @@
    CONTENT
    ======================================== */
 
-.hero-content {
+.hero .container {
   position: relative;
   z-index: 1;
+}
+
+.hero-content {
+  position: relative;
   max-width: 700px;
+}
+
+/* Social Share - Right Side of Hero */
+.hero-social {
+  position: absolute;
+  top: 50%;
+  right: var(--container-padding, 1rem);
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+/* Override social share styles for hero */
+.hero-social .social-share {
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2, 0.5rem);
+}
+
+.hero-social .social-share-label {
+  color: white;
+  font-size: var(--font-size-sm, 0.875rem);
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+.hero-social .social-share-buttons {
+  flex-direction: column;
+  gap: var(--space-2, 0.5rem);
+}
+
+.hero-social .social-share-button {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hero-social .social-share-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .hero-title {
@@ -205,6 +247,12 @@
   }
 }
 
+@media (max-width: 1023px) {
+  .hero-social {
+    right: var(--space-4, 1rem);
+  }
+}
+
 @media (max-width: 767px) {
   .hero-sm {
     min-height: 250px;
@@ -249,6 +297,14 @@
     gap: var(--space-3);
     margin-top: var(--space-6);
     padding-top: var(--space-6);
+  }
+
+  /* Social share on mobile - move to bottom right */
+  .hero-social {
+    top: auto;
+    bottom: var(--space-4, 1rem);
+    right: var(--space-4, 1rem);
+    transform: none;
   }
 }
 

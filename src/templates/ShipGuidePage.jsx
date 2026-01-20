@@ -8,17 +8,16 @@
  */
 
 import { useState, useRef, useMemo } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useShipGuide } from '../hooks/useShipGuide';
 import { siteConfig } from '../config/siteConfig';
 import SEO, { getBreadcrumbSchema } from '../components/SEO';
 import HeroSection from '../components/HeroSection';
 import OptimizedImage from '../components/OptimizedImage';
-import { Button, SectionHeader } from '../components/ui';
-import SocialShare from '../components/SocialShare';
+import { Button } from '../components/ui';
 import { 
   Eye, Bed, Map, Ship, Utensils, Music, Activity, Users, 
-  Baby, Accessibility, Heart, HelpCircle, Anchor, ChevronRight,
+  Baby, Accessibility, Heart, HelpCircle, Anchor,
   Star, Calendar, Ruler, Users2, Loader2
 } from 'lucide-react';
 import './ShipGuidePage.css';
@@ -271,24 +270,17 @@ function ShipGuidePage() {
         imageAlt={`${ship.name} cruise ship`}
         size="md"
         align="left"
+        socialShareUrl={`https://www.limitlesscruises.com/cruise-lines/${ship.cruise_line_slug || cruiseLineSlug || 'p-and-o'}/${ship.slug}`}
+        socialShareTitle={`${ship.name} Ship Guide | ${ship.cruise_line_name}`}
+        socialShareDescription={ship.description || `Complete guide to ${ship.name}`}
       />
 
       {/* Main Content */}
       <article className="ship-content">
         <div className="container">
           
-          {/* Share and Breadcrumb Row */}
-          <div className="ship-header-actions">
-            <Link to={`/cruise-lines/${ship.cruise_line_slug || cruiseLineSlug || 'p-and-o'}`} className="ship-back-link">
-              <ChevronRight size={16} style={{ transform: 'rotate(180deg)' }} />
-              Back to {ship.cruise_line_name}
-            </Link>
-            <SocialShare
-              url={`https://www.limitlesscruises.com/cruise-lines/${ship.cruise_line_slug || cruiseLineSlug || 'p-and-o'}/${ship.slug}`}
-              title={`${ship.name} Ship Guide | ${ship.cruise_line_name}`}
-              description={ship.description || `Complete guide to ${ship.name}`}
-            />
-          </div>
+          {/* Header Actions - Social Share (will be moved to hero) */}
+          {/* Temporarily keeping for reference, will be moved to HeroSection */}
 
           {/* Section Tabs - Scrollable */}
           <nav className="ship-section-tabs" aria-label="Ship guide sections">
@@ -348,20 +340,7 @@ function ShipGuidePage() {
         </div>
       </section>
 
-      {/* Footer Navigation */}
-      <section className="ship-navigation-footer">
-        <div className="container">
-          <div className="ship-nav-links">
-            <Link to="/cruise-lines" className="ship-nav-link">
-              View All Cruise Lines
-            </Link>
-            <span className="nav-separator">•</span>
-            <Link to={`/cruise-lines/${ship.cruise_line_slug || cruiseLineSlug || 'p-and-o'}`} className="ship-nav-link">
-              More {ship.cruise_line_name} Ships
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Footer Navigation - Removed to match Port Guide styling */}
     </main>
   );
 }

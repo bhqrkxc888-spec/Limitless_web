@@ -8,19 +8,33 @@
   background: var(--clr-bg, #FFFDF9);
 }
 
-/* ========================================
-   SCROLL ANCHOR
-   ======================================== */
-
-.scroll-anchor {
-  scroll-margin-top: 140px; /* Header + tabs */
-  height: 0;
-  overflow: hidden;
+/* Main content wrapper - matches Port Guide */
+.ship-content {
+  padding: var(--space-12, 3rem) 0 var(--space-16, 4rem);
 }
 
+/* ========================================
+   SCROLL ANCHOR - Matches Port Guide (DetailedPortGuide.css)
+   
+   IMPORTANT: scroll-margin-top only activates AFTER user clicks a tab
+   This prevents browser from auto-scrolling to this element on initial page load
+   ======================================== */
+
+/* INACTIVE state - NO scroll-margin-top (prevents browser auto-scroll on page load) */
 .scroll-anchor-inactive {
   height: 0;
-  overflow: hidden;
+  width: 0;
+  visibility: hidden;
+  /* No scroll-margin-top - prevents interference with initial page load */
+}
+
+/* ACTIVE state - has scroll-margin-top (only after user clicks a tab) */
+.scroll-anchor {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  /* Mobile: header ~84px + tabs ~56px */
+  scroll-margin-top: 140px;
 }
 
 /* ========================================
@@ -89,7 +103,8 @@
 }
 
 /* ========================================
-   SECTION TABS - Sticky, Scrollable
+   SECTION TABS - Sticky, Scrollable, Full-Width
+   Matches Port Guide (DetailedPortGuide.css)
    ======================================== */
 
 .ship-section-tabs {
@@ -97,13 +112,13 @@
   border-bottom: 1px solid var(--clr-border-light, #F2EFE9);
   padding: var(--space-2, 0.5rem) 0;
   position: sticky;
-  top: 84px; /* Below header */
+  top: 84px; /* Below mobile header */
   z-index: var(--z-sticky-content, 900);
   box-shadow: 0 2px 4px rgba(44, 52, 76, 0.04);
-  margin-left: calc(-1 * var(--container-padding, 1rem));
-  margin-right: calc(-1 * var(--container-padding, 1rem));
-  padding-left: var(--container-padding, 1rem);
-  padding-right: var(--container-padding, 1rem);
+  /* Full width - break out of container (matches Port Guide) */
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  width: 100vw;
   /* iOS Safari fix */
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
@@ -116,7 +131,10 @@
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding-bottom: 2px; /* Prevents cut-off on some browsers */
+  scroll-snap-type: x mandatory;
+  padding: 0 var(--space-3, 0.75rem);
+  max-width: var(--layout-content-width, 1120px);
+  margin: 0 auto;
 }
 
 .ship-tabs-scroll::-webkit-scrollbar {
@@ -127,26 +145,37 @@
   display: flex;
   align-items: center;
   gap: var(--space-2, 0.5rem);
-  padding: var(--space-2, 0.5rem) var(--space-4, 1rem);
+  padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
+  min-height: 40px;
   background: transparent;
   border: none;
-  border-radius: var(--radius-full, 999px);
+  border-radius: var(--radius-full, 9999px);
+  color: var(--clr-text-muted, #5C6478);
   font-size: var(--font-size-sm, 0.875rem);
-  font-weight: 500;
-  color: var(--clr-text-muted, #6B7280);
+  font-weight: var(--font-weight-medium, 500);
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.2s ease;
+  flex-shrink: 0;
+  font-family: inherit;
+  touch-action: manipulation;
+  scroll-snap-align: start;
+  transition: all var(--transition-fast, 150ms ease);
 }
 
 .ship-section-tab:hover {
-  background: rgba(44, 52, 76, 0.05);
   color: var(--clr-text-main, #2C344C);
+  background: rgba(44, 52, 76, 0.05);
 }
 
 .ship-section-tab.active {
+  color: var(--clr-surface, #FFFFFF);
   background: var(--clr-primary, #2C344C);
-  color: white;
+  font-weight: var(--font-weight-semibold, 600);
+}
+
+.ship-section-tab:focus-visible {
+  outline: 3px solid var(--clr-secondary, #D4B86A);
+  outline-offset: 2px;
 }
 
 .ship-section-tab .tab-icon {
@@ -154,11 +183,16 @@
 }
 
 /* ========================================
-   SECTION CONTENT
+   SECTION CONTENT - White Raised Box (Matches Port Guide)
    ======================================== */
 
 .ship-section-content {
-  padding: var(--space-8, 2rem) 0;
+  max-width: var(--layout-content-width, 1120px);
+  margin: var(--space-6, 1.5rem) auto;
+  background: var(--clr-surface, #FFFFFF);
+  padding: var(--space-5, 1.25rem);
+  border-radius: var(--radius-xl, 16px);
+  box-shadow: 0 4px 20px rgba(44, 52, 76, 0.08);
 }
 
 .section-intro {
@@ -166,36 +200,66 @@
 }
 
 .section-intro h2 {
-  font-family: var(--font-family-display, 'Playfair Display', serif);
-  font-size: var(--font-size-2xl, 1.5rem);
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
+  font-size: var(--font-size-2xl, 1.75rem);
+  font-weight: var(--font-weight-semibold, 600);
   color: var(--clr-text-main, #2C344C);
-  margin: 0 0 var(--space-2, 0.5rem);
+  margin-bottom: var(--space-2, 0.5rem);
 }
 
 .section-intro p {
-  color: var(--clr-text-muted, #6B7280);
-  margin: 0;
+  font-size: var(--font-size-base, 1rem);
+  color: var(--clr-text-main, #2C344C);
+  line-height: var(--line-height-relaxed, 1.7);
+  margin-bottom: var(--space-4, 1rem);
 }
 
+.section-intro p:last-child {
+  margin-bottom: 0;
+}
+
+/* Dividers - Subtle gradient separation matching Port Guide */
 .section-divider {
   border: none;
-  border-top: 1px solid var(--clr-border-light, #F2EFE9);
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--clr-border, #E8E4DC) 20%,
+    var(--clr-border, #E8E4DC) 80%,
+    transparent
+  );
   margin: var(--space-6, 1.5rem) 0;
 }
 
 /* ========================================
-   SUBSECTIONS
+   SUBSECTIONS - Matches Port Guide (DetailedPortGuide.css)
    ======================================== */
 
 .ship-subsection {
-  margin-bottom: var(--space-6, 1.5rem);
+  margin-bottom: var(--space-5, 1.25rem);
 }
 
 .ship-subsection h3 {
-  font-family: var(--font-family-display, 'Playfair Display', serif);
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
   font-size: var(--font-size-lg, 1.125rem);
+  font-weight: var(--font-weight-semibold, 600);
   color: var(--clr-text-main, #2C344C);
-  margin: 0 0 var(--space-4, 1rem);
+  margin-bottom: var(--space-4, 1rem);
+  padding-bottom: var(--space-2, 0.5rem);
+  border-bottom: 2px solid var(--clr-secondary, #D4B86A);
+  display: inline-block;
+}
+
+.ship-subsection p {
+  font-size: var(--font-size-base, 1rem);
+  color: var(--clr-text-main, #2C344C);
+  line-height: var(--line-height-relaxed, 1.7);
+  margin-bottom: var(--space-3, 0.75rem);
+}
+
+.ship-subsection p:last-child {
+  margin-bottom: 0;
 }
 
 /* ========================================
@@ -597,61 +661,98 @@
 }
 
 /* ========================================
-   TIP BOX
+   TIP BOX - Matches Port Guide (DetailedPortGuide.css)
    ======================================== */
 
 .tip-box {
-  padding: var(--space-4, 1rem);
-  background: linear-gradient(135deg, rgba(185, 149, 60, 0.1), rgba(185, 149, 60, 0.05));
-  border-left: 4px solid var(--clr-accent, #B9953C);
-  border-radius: var(--radius-md, 8px);
+  background: linear-gradient(135deg, #FEF9E7 0%, #FCF3CF 100%);
+  border: 1px solid var(--clr-secondary, #D4B86A);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-5, 1.25rem);
+  margin: var(--space-6, 1.5rem) 0;
+  position: relative;
+}
+
+.tip-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--clr-secondary, #D4B86A);
+  border-radius: var(--radius-lg, 12px) var(--radius-lg, 12px) 0 0;
 }
 
 .tip-box strong {
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
   display: block;
-  font-size: var(--font-size-sm, 0.875rem);
-  color: var(--clr-accent, #B9953C);
-  margin-bottom: var(--space-2, 0.5rem);
+  font-size: var(--font-size-base, 1rem);
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--clr-text-main, #2C344C);
+  margin-bottom: var(--space-3, 0.75rem);
 }
 
 .tip-box p {
-  margin: 0;
+  font-size: var(--font-size-base, 1rem);
   color: var(--clr-text-main, #2C344C);
+  line-height: var(--line-height-relaxed, 1.7);
+  margin-bottom: var(--space-3, 0.75rem);
+}
+
+.tip-box p:last-child {
+  margin-bottom: 0;
 }
 
 /* ========================================
-   CTA SECTION
+   CTA SECTION - Matches Port Guide
    ======================================== */
 
 .ship-cta {
-  padding: var(--space-12, 3rem) 0;
-  background: linear-gradient(180deg, var(--clr-bg-alt, #F8F5F0) 0%, var(--clr-bg, #FFFDF9) 100%);
+  padding: var(--space-16) 0;
 }
 
 .cta-box {
+  background: linear-gradient(135deg, var(--clr-primary) 0%, var(--clr-primary-dark) 100%);
+  border-radius: var(--radius-xl);
+  padding: var(--space-12);
   text-align: center;
-  padding: var(--space-10, 2.5rem);
-  background: var(--clr-primary, #2C344C);
   color: white;
-  border-radius: var(--radius-xl, 16px);
 }
 
 .cta-box h2 {
-  font-family: var(--font-family-display, 'Playfair Display', serif);
-  font-size: var(--font-size-2xl, 1.5rem);
-  margin: 0 0 var(--space-3, 0.75rem);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-3xl);
+  font-weight: 600;
+  color: var(--clr-accent);
+  margin-bottom: var(--space-4);
 }
 
 .cta-box p {
+  font-size: var(--font-size-lg);
   opacity: 0.9;
-  margin: 0 0 var(--space-6, 1.5rem);
+  margin-bottom: var(--space-8);
+  max-width: 60ch;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
 }
 
 .cta-buttons {
   display: flex;
   justify-content: center;
-  gap: var(--space-4, 1rem);
+  gap: var(--space-4);
   flex-wrap: wrap;
+}
+
+.cta-buttons .btn-outline {
+  border-color: white;
+  color: white;
+}
+
+.cta-buttons .btn-outline:hover {
+  background: white;
+  color: var(--clr-primary);
 }
 
 /* ========================================
@@ -700,30 +801,49 @@
 }
 
 /* ========================================
-   RESPONSIVE
+   RESPONSIVE - Matches Port Guide (DetailedPortGuide.css)
    ======================================== */
 
-@media (max-width: 1024px) {
-  .ship-section-tabs {
-    top: 60px; /* Smaller header on tablet */
+/* Mobile small */
+@media (max-width: 479px) {
+  .ship-tabs-scroll {
+    gap: var(--space-1, 0.25rem);
+    padding: 0 var(--space-2, 0.5rem);
   }
   
-  .scroll-anchor {
-    scroll-margin-top: 120px;
+  .ship-section-tab {
+    padding: var(--space-2, 0.5rem);
+    font-size: var(--font-size-xs, 0.75rem);
+  }
+  
+  .ship-section-tab .tab-icon {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .ship-section-content {
+    padding: var(--space-3, 0.75rem);
+    margin: var(--space-4, 1rem) var(--space-2, 0.5rem);
+    border-radius: var(--radius-lg, 12px);
+  }
+  
+  .section-intro h2 {
+    font-size: var(--font-size-xl, 1.25rem);
+  }
+  
+  .section-intro p {
+    font-size: var(--font-size-sm, 0.875rem);
+  }
+  
+  .ship-stats-grid {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 768px) {
+/* Mobile */
+@media (max-width: 767px) {
   .ship-stats-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .ship-section-tabs {
-    top: 56px; /* Mobile header */
-  }
-  
-  .scroll-anchor {
-    scroll-margin-top: 110px;
   }
   
   .ship-header-actions {
@@ -749,7 +869,11 @@
   }
   
   .cta-box {
-    padding: var(--space-6, 1.5rem);
+    padding: var(--space-8);
+  }
+
+  .cta-box h2 {
+    font-size: var(--font-size-2xl);
   }
   
   .cta-buttons {
@@ -761,26 +885,58 @@
   }
 }
 
-@media (max-width: 480px) {
-  .ship-stats-grid {
-    grid-template-columns: 1fr;
+/* Tablet & Desktop */
+@media (min-width: 768px) {
+  .ship-section-tabs {
+    padding: var(--space-3, 0.75rem) 0;
+    top: 120px; /* Below full header (top bar 36px + main header 84px) */
   }
   
-  .section-intro h2 {
-    font-size: var(--font-size-xl, 1.25rem);
+  .ship-tabs-scroll {
+    gap: var(--space-2, 0.5rem);
+    padding: 0 var(--space-4, 1rem);
   }
   
   .ship-section-tab {
-    padding: var(--space-2, 0.5rem) var(--space-3, 0.75rem);
-    font-size: var(--font-size-xs, 0.75rem);
+    padding: var(--space-2, 0.5rem) var(--space-4, 1rem);
+    min-height: 44px;
+    font-size: var(--font-size-base, 1rem);
   }
   
-  .ship-section-tab span {
-    display: none;
+  .ship-section-content {
+    padding: var(--space-6, 1.5rem);
+    border-radius: var(--radius-xl, 16px);
   }
   
-  .ship-section-tab.active span {
-    display: inline;
+  .section-intro h2 {
+    font-size: var(--font-size-3xl, 2rem);
+  }
+  
+  .scroll-anchor {
+    scroll-margin-top: 176px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ship-section-tabs {
+    top: 120px; /* Below full header */
+  }
+  
+  .ship-tabs-scroll {
+    justify-content: flex-start;
+    gap: var(--space-2, 0.5rem);
+  }
+  
+  .ship-section-tab {
+    padding: var(--space-3, 0.75rem) var(--space-5, 1.25rem);
+  }
+  
+  .ship-section-content {
+    padding: var(--space-8, 2rem);
+  }
+  
+  .scroll-anchor {
+    scroll-margin-top: 180px;
   }
 }
 

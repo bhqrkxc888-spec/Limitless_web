@@ -225,6 +225,9 @@ function PortGuidePage() {
         imageAlt={`${port.name} cruise port`}
         size="md"
         align="left"
+        socialShareUrl={`https://www.limitlesscruises.com/ports/${port.slug}`}
+        socialShareTitle={`${port.name} Cruise Port Guide`}
+        socialShareDescription={port.description}
       />
 
       {/* Main Content */}
