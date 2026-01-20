@@ -52,6 +52,7 @@ export function useRefreshOnFocus(refetch, dependencies = []) {
   const lastFetchRef = useRef(Date.now());
 
   // Update last fetch time when dependencies change (data was fetched)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     lastFetchRef.current = Date.now();
   }, dependencies);

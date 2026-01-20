@@ -63,7 +63,6 @@ function parseMarkdown(markdown) {
   let currentSubsection = '';
   let currentItem = null;
   let descriptionLines = [];
-  let sectionContent = [];
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
