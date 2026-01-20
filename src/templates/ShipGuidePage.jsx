@@ -166,6 +166,58 @@ function ShipGuidePage() {
     );
   }
 
+  // Draft ship - show "Coming Soon" page
+  if (ship.isDraft || ship.status === 'draft') {
+    const cruiseLine = ship.cruise_line_slug || cruiseLineSlug || 'p-and-o-cruises';
+    return (
+      <main className="ship-guide-page">
+        <SEO 
+          title={`${ship.display_name || ship.name} - Coming Soon | ${ship.cruise_line_name || 'Cruise Guide'}`}
+          description={`Complete guide to ${ship.name} coming soon. ${ship.tagline || 'Stay tuned for cabin details, dining, entertainment and more.'}`}
+        />
+        <div className="container section">
+          <div className="ship-coming-soon" style={{ textAlign: 'center', padding: '60px 20px' }}>
+            <Ship size={64} style={{ color: 'var(--clr-primary)', marginBottom: '24px', opacity: 0.7 }} />
+            <h1 style={{ fontSize: '2rem', marginBottom: '12px' }}>{ship.display_name || ship.name}</h1>
+            <p style={{ fontSize: '1.25rem', color: 'var(--clr-text-muted)', marginBottom: '8px' }}>
+              {ship.cruise_line_name}
+            </p>
+            <div style={{ 
+              display: 'inline-block',
+              padding: '8px 20px', 
+              background: 'var(--clr-warning-bg, #fef3cd)', 
+              color: 'var(--clr-warning-text, #856404)',
+              borderRadius: '20px',
+              fontWeight: 600,
+              fontSize: '0.875rem',
+              marginBottom: '24px'
+            }}>
+              Guide Coming Soon
+            </div>
+            {ship.tagline && (
+              <p style={{ fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto 32px', lineHeight: 1.6 }}>
+                {ship.tagline}
+              </p>
+            )}
+            {ship.description && (
+              <p style={{ maxWidth: '700px', margin: '0 auto 32px', color: 'var(--clr-text-muted)', lineHeight: 1.7 }}>
+                {ship.description.substring(0, 300)}{ship.description.length > 300 ? '...' : ''}
+              </p>
+            )}
+            <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Button to={`/cruise-lines/${cruiseLine}`} variant="primary">
+                View {ship.cruise_line_name || 'Cruise Line'}
+              </Button>
+              <Button to="/contact" variant="outline">
+                Contact Us for Info
+              </Button>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
   // Render active section content
   const renderSectionContent = () => {
     switch (activeSection) {

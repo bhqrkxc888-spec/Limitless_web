@@ -373,9 +373,6 @@ function HomePage() {
                   Experience the difference of truly personal service. From ocean voyages to river cruises, 
                   we craft bespoke cruise holidays tailored to your preferences.
                 </p>
-                <p className="hero-note">
-                  We're enhancing our digital experience. Explore our services or speak directly with your personal consultant.
-                </p>
                 <div className="hero-cta-group">
                   <Button to="/find-a-cruise" variant="primary" size="lg">
                     Find a Cruise

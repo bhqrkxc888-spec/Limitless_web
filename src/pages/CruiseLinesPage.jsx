@@ -84,27 +84,10 @@ function CruiseLinesPage() {
         structuredData={structuredData}
       />
 
-      {/* Under Development Notice */}
-      <div className="under-development-banner">
-        <div className="container">
-          <div className="under-development-content">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="under-development-icon">
-              <circle cx="12" cy="12" r="10"/>
-              <line x1="12" y1="8" x2="12" y2="12"/>
-              <line x1="12" y1="16" x2="12.01" y2="16"/>
-            </svg>
-            <div className="under-development-text">
-              <h3>Content Under Development</h3>
-              <p>We're working hard to bring you detailed information about all our cruise line partners. In the meantime, please <a href="/contact">contact us</a> for personalised cruise recommendations.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Hero Section */}
       <HeroSection
         title="Cruise Lines"
-        subtitle="We partner with the world's leading cruise lines to bring you exceptional value and memorable experiences."
+        subtitle="Expert guidance on all major cruise lines. Find the perfect cruise for your style and budget."
         size="sm"
         align="center"
       />

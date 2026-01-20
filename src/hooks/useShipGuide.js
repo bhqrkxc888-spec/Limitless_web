@@ -34,7 +34,7 @@ export function useShipGuide(slug) {
           return;
         }
 
-        // Try direct query
+        // Try direct query - include draft ships (show as "Coming Soon")
         const { data, error: queryError } = await supabase
           .from('ship_guides')
           .select('*')
@@ -45,7 +45,9 @@ export function useShipGuide(slug) {
           throw queryError;
         }
 
-        setShip(data);
+        // Mark if ship is draft (for "Coming Soon" display)
+        const shipData = data ? { ...data, isDraft: data.status !== 'published' } : null;
+        setShip(shipData);
 
         // Fetch ratings separately
         const { data: ratingData } = await supabase

@@ -145,13 +145,6 @@ function DestinationsPage() {
       </section>
 
       {/* Discreet Update Notice */}
-      <section style={{ background: 'var(--clr-bg-alt, #F8F5F0)', padding: '1.5rem 0', borderTop: '1px solid var(--clr-border, #E8E4DC)' }}>
-        <div className="container">
-          <p style={{ fontSize: '0.875rem', color: 'var(--clr-text-muted, #6B7280)', textAlign: 'center', margin: 0 }}>
-            Our destination guides are continuously updated with detailed port information and local insights.
-          </p>
-        </div>
-      </section>
     </main>
   );
 }

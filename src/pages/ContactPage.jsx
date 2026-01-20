@@ -77,18 +77,6 @@ function ContactPage() {
                 I'm here to help. Reach out through any of the channels below.
               </p>
             </div>
-            <div className="contact-hero-image">
-              <OptimizedImage 
-                src={aboutImages.katherine1} 
-                alt="Your cruise consultant" 
-                width={1920}
-                height={1080}
-                priority={true}
-                sizes="(max-width: 768px) 100vw, 600px"
-                srcsetWidths={[400, 600, 800]}
-                quality={85}
-              />
-            </div>
           </div>
         </div>
       </section>

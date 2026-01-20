@@ -82,8 +82,8 @@ function FleetShipCard({ ship, cruiseLineSlug, shipSlug, cruiseLineName }) {
  * CruiseLinePage Template - SEO Optimized 7-Section Layout
  */
 function CruiseLinePage() {
-  const { slug } = useParams();
-  const cruiseLine = getCruiseLineBySlug(slug);
+  const { cruiseLineSlug } = useParams();
+  const cruiseLine = getCruiseLineBySlug(cruiseLineSlug);
 
   // Load all images - MUST be called before early return (React hooks rules)
   // Why Choose images (one per card - 6 images)
