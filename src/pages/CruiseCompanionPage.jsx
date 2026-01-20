@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { hasConsent } from '../components/cruise/CruiseConsentGate';
@@ -80,8 +80,8 @@ function CruiseCompanionPage() {
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
   const scrollAnchorRef = useRef(null);
 
-  // Extract data from cruise (with fallbacks)
-  const itinerary = cruise?.itinerary || [];
+  // Extract data from cruise (with fallbacks) - memoized to prevent dependency changes
+  const itinerary = useMemo(() => cruise?.itinerary || [], [cruise?.itinerary]);
   const ship = cruise?.ship || {};
   const departure = cruise?.departure || {};
   const facebookGroup = cruise?.facebookGroup;

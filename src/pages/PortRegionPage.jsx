@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getPortsByRegion, getAllRegions, getPortsCountByRegion } from '../data/ports';
 import { siteConfig } from '../config/siteConfig';
@@ -49,7 +49,9 @@ function PortRegionPage() {
   const region = getAllRegions().find(r => r.slug === slug);
   const [portImages, setPortImages] = useState({});
   
-  const ports = region ? getPortsByRegion(region.id) : [];
+  const ports = useMemo(() => 
+    region ? getPortsByRegion(region.id) : []
+  , [region]);
   
   // Batch fetch all port card images in a single query (avoids N+1)
   useEffect(() => {
@@ -76,7 +78,7 @@ function PortRegionPage() {
     }
     
     fetchPortImages();
-  }, [ports.length, region?.id]);
+  }, [ports, region?.id]);
   
   // Handle region not found
   if (!region) {

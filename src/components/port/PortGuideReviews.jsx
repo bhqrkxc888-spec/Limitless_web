@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Star, ThumbsUp, ThumbsDown, CheckCircle } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import './PortGuideReviews.css';
@@ -26,12 +26,7 @@ function PortGuideReviews({ portSlug }) {
   const [loading, setLoading] = useState(true);
   const [votedReviews, setVotedReviews] = useState({});
 
-  useEffect(() => {
-    loadReviewsAndStats();
-    loadVotedReviews();
-  }, [portSlug]);
-
-  const loadReviewsAndStats = async () => {
+  const loadReviewsAndStats = useCallback(async () => {
     try {
       // Load aggregate stats
       const { data: statsData, error: statsError } = await supabase
@@ -63,7 +58,12 @@ function PortGuideReviews({ portSlug }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [portSlug]);
+
+  useEffect(() => {
+    loadReviewsAndStats();
+    loadVotedReviews();
+  }, [portSlug, loadReviewsAndStats]);
 
   const loadVotedReviews = () => {
     const sessionId = getSessionId();
