@@ -54,12 +54,31 @@ export async function getCruiseGuides(options = {}) {
 /**
  * Fetch a single guide by its slug
  * @param {string} slug - Guide slug
+ * @param {boolean} preview - If true, fetch regardless of status (for CRM preview)
  * @returns {Promise<Object|null>}
  */
-export async function getCruiseGuideBySlug(slug) {
+export async function getCruiseGuideBySlug(slug, preview = false) {
   if (!slug) return null
 
   try {
+    // For preview mode, fetch directly without status filter
+    if (preview) {
+      const { data, error } = await supabase
+        .from('cruise_guides')
+        .select('*')
+        .eq('slug', slug)
+        .single()
+      
+      if (error) {
+        logger.error('Error fetching guide preview:', error)
+        return null
+      }
+      
+      // Mark as preview so page can show banner
+      return data ? { ...data, isPreview: true } : null
+    }
+
+    // Normal public fetch via RPC (published only)
     const { data, error } = await supabase.rpc('get_cruise_guide_by_slug_public', {
       p_slug: slug,
     })

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useSearchParams } from 'react-router-dom';
 import { getCruiseGuideBySlug } from '../services/cruiseGuidesAPI';
 import SEO, { getBreadcrumbSchema } from '../components/SEO';
 import HeroSection from '../components/HeroSection';
@@ -12,6 +12,8 @@ import './CruiseGuideDetailPage.css';
 
 function CruiseGuideDetailPage() {
   const { slug } = useParams();
+  const [searchParams] = useSearchParams();
+  const isPreviewMode = searchParams.get('preview') === 'true';
   const [guide, setGuide] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -30,7 +32,8 @@ function CruiseGuideDetailPage() {
       try {
         setLoading(true);
         setError(null);
-        const data = await getCruiseGuideBySlug(slug);
+        // Pass preview flag to fetch draft content if preview mode
+        const data = await getCruiseGuideBySlug(slug, isPreviewMode);
         
         if (!cancelled) {
           if (data) {
@@ -56,7 +59,7 @@ function CruiseGuideDetailPage() {
     return () => {
       cancelled = true;
     };
-  }, [slug]);
+  }, [slug, isPreviewMode]);
 
   // Format guide type for display
   const formatGuideType = (type) => {
@@ -135,7 +138,24 @@ function CruiseGuideDetailPage() {
 
   return (
     <main className="guide-detail-page">
-      {/* SEO */}
+      {/* Preview Mode Banner */}
+      {(guide.isPreview || guide.status !== 'published') && (
+        <div style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 1000,
+          background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+          color: 'white',
+          padding: '12px 24px',
+          textAlign: 'center',
+          fontWeight: '500',
+          boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+        }}>
+          ⚠️ PREVIEW MODE - This guide is not yet published. Only you can see this preview.
+        </div>
+      )}
+
+      {/* SEO - only for published guides */}
       <SEO
         title={guide.meta_title || `${guide.title} | Cruise Guide`}
         description={guide.meta_description || guide.excerpt}
@@ -144,6 +164,7 @@ function CruiseGuideDetailPage() {
         image={guide.featured_image_url}
         type="article"
         structuredData={getStructuredData()}
+        noindex={guide.status !== 'published'}
       />
 
       {/* Hero Section */}
