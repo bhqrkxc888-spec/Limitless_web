@@ -5,6 +5,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { getTravelNews, getTravelNewsBySlug } from '../services/travelNewsAPI';
+import { useRefreshOnFocus } from './usePageVisibility';
 import { logger } from '../utils/logger';
 
 /**
@@ -92,6 +93,9 @@ export function useTravelNews({
       return () => clearTimeout(timer);
     }
   }, [fetchNews]);
+
+  // Refresh data when page becomes visible after being stale
+  useRefreshOnFocus(fetchNews, [news]);
 
   return {
     news,

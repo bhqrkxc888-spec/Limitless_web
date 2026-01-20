@@ -6,6 +6,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { getOffers, getOfferBySlug } from '../services/offersAPI';
+import { useRefreshOnFocus } from './usePageVisibility';
 import { logger } from '../utils/logger';
 
 /**
@@ -94,6 +95,9 @@ export function useOffers({
       return () => clearTimeout(timer);
     }
   }, [fetchOffers, priority]);
+
+  // Refresh data when page becomes visible after being stale
+  useRefreshOnFocus(fetchOffers, [offers]);
 
   return {
     offers,
