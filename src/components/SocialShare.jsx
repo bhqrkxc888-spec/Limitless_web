@@ -31,7 +31,7 @@ function SocialShare({ url, title, description }) {
 
   return (
     <div className="social-share">
-      <span className="social-share-label">Share:</span>
+      <span className="social-share-label">Share this guide</span>
       <div className="social-share-buttons">
         <a
           href={shareLinks.facebook}

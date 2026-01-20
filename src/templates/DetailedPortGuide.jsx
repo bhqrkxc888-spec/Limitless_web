@@ -452,7 +452,7 @@ function StayLocalSection({ stayLocal, beachImage, marineData, marineLoading }) 
                 <h4>{store.name}</h4>
                 <div className="store-details">
                   <p className="store-location"><MapPin size={16} /> <strong>Location:</strong> {store.location}</p>
-                  <p className="store-type"><strong>Type:</strong> {store.type}</p>
+                  <p className="store-type">{store.type}</p>
                   <p className="store-what"><strong>What they sell:</strong> {store.what}</p>
                   {store.notes && <p className="store-notes"><Info size={16} /> {store.notes}</p>}
                 </div>
@@ -892,7 +892,7 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
             <div className="attraction-info">
               <h4>{familyFriendly.themePark.name}</h4>
               <p><strong>Location:</strong> {familyFriendly.themePark.location}</p>
-              {familyFriendly.themePark.type && <p><strong>Type:</strong> {familyFriendly.themePark.type}</p>}
+              {familyFriendly.themePark.type && <p>{familyFriendly.themePark.type}</p>}
               {familyFriendly.themePark.highlights && <p><strong>Highlights:</strong> {familyFriendly.themePark.highlights}</p>}
               {familyFriendly.themePark.cost && <p><strong>Cost:</strong> {familyFriendly.themePark.cost}</p>}
               {familyFriendly.themePark.hours && <p><strong>Hours:</strong> {familyFriendly.themePark.hours}</p>}
