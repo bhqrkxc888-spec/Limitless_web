@@ -220,7 +220,7 @@ function PortGuidePage() {
       {/* Hero Section */}
       <HeroSection
         title={port.name}
-        subtitle={port.tagline || port.description?.slice(0, 120)}
+        subtitle={port.tagline || port.description?.split('.')[0]}
         image={heroImage}
         imageAlt={`${port.name} cruise port`}
         size="md"
