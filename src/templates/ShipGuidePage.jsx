@@ -40,7 +40,9 @@ const SHIP_SECTIONS = [
 ];
 
 function ShipGuidePage() {
-  const { slug } = useParams();
+  const { shipSlug, cruiseLineSlug } = useParams();
+  // Use shipSlug if provided (new route), otherwise fall back to slug (legacy)
+  const slug = shipSlug || useParams().slug;
   const { ship, ratings, loading, error } = useShipGuide(slug);
   const [activeSection, setActiveSection] = useState('overview');
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
@@ -81,12 +83,15 @@ function ShipGuidePage() {
   const structuredData = useMemo(() => {
     if (!ship) return null;
 
+    const cruiseLine = ship.cruise_line_slug || cruiseLineSlug || 'p-and-o';
+    const shipUrl = `https://www.limitlesscruises.com/cruise-lines/${cruiseLine}/${ship.slug}`;
+
     const shipSchema = {
       '@context': 'https://schema.org',
       '@type': 'Product',
       name: ship.display_name || ship.name,
       description: ship.meta_description || ship.description,
-      url: `https://www.limitlesscruises.com/ships/${ship.slug}`,
+      url: shipUrl,
       image: ship.hero_image_url || ship.card_image_url,
       brand: {
         '@type': 'Organization',
@@ -121,14 +126,15 @@ function ShipGuidePage() {
     // Breadcrumb schema
     const breadcrumbSchema = getBreadcrumbSchema([
       { name: 'Home', url: 'https://www.limitlesscruises.com/' },
-      { name: 'Ships', url: 'https://www.limitlesscruises.com/ships' },
-      { name: ship.display_name || ship.name, url: `https://www.limitlesscruises.com/ships/${ship.slug}` }
+      { name: 'Cruise Lines', url: 'https://www.limitlesscruises.com/cruise-lines' },
+      { name: ship.cruise_line_name, url: `https://www.limitlesscruises.com/cruise-lines/${cruiseLine}` },
+      { name: ship.display_name || ship.name, url: shipUrl }
     ]);
 
     return faqSchema 
       ? [shipSchema, faqSchema, breadcrumbSchema]
       : [shipSchema, breadcrumbSchema];
-  }, [ship, ratings]);
+  }, [ship, ratings, cruiseLineSlug]);
 
   // Loading state
   if (loading) {
@@ -152,7 +158,7 @@ function ShipGuidePage() {
             <Anchor size={64} className="not-found-icon" />
             <h1>Ship Guide Not Found</h1>
             <p>Sorry, we couldn't find the ship guide you're looking for.</p>
-            <Button to="/ships">View All Ships</Button>
+            <Button to="/cruise-lines">View All Cruise Lines</Button>
           </div>
         </div>
       </main>
@@ -197,7 +203,7 @@ function ShipGuidePage() {
       <SEO
         title={ship.meta_title || `${ship.display_name || ship.name} | ${ship.cruise_line_name} Ship Guide`}
         description={ship.meta_description || ship.description || `Complete guide to ${ship.name}. Discover cabins, dining, entertainment, activities, and everything you need to know before sailing.`}
-        canonical={`https://www.limitlesscruises.com/ships/${ship.slug}`}
+        canonical={`https://www.limitlesscruises.com/cruise-lines/${ship.cruise_line_slug || cruiseLineSlug || 'p-and-o'}/${ship.slug}`}
         keywords={ship.meta_keywords?.join(', ') || `${ship.name}, ${ship.cruise_line_name}, cruise ship, ship guide`}
         image={ship.hero_image_url || ship.card_image_url}
         type="article"
@@ -220,12 +226,12 @@ function ShipGuidePage() {
           
           {/* Share and Breadcrumb Row */}
           <div className="ship-header-actions">
-            <Link to="/ships" className="ship-back-link">
+            <Link to={`/cruise-lines/${ship.cruise_line_slug || cruiseLineSlug || 'p-and-o'}`} className="ship-back-link">
               <ChevronRight size={16} style={{ transform: 'rotate(180deg)' }} />
-              All Ships
+              Back to {ship.cruise_line_name}
             </Link>
             <SocialShare
-              url={`https://www.limitlesscruises.com/ships/${ship.slug}`}
+              url={`https://www.limitlesscruises.com/cruise-lines/${ship.cruise_line_slug || cruiseLineSlug || 'p-and-o'}/${ship.slug}`}
               title={`${ship.name} Ship Guide | ${ship.cruise_line_name}`}
               description={ship.description || `Complete guide to ${ship.name}`}
             />
@@ -293,8 +299,12 @@ function ShipGuidePage() {
       <section className="ship-navigation-footer">
         <div className="container">
           <div className="ship-nav-links">
-            <Link to="/ships" className="ship-nav-link">
-              Back to All Ships
+            <Link to="/cruise-lines" className="ship-nav-link">
+              View All Cruise Lines
+            </Link>
+            <span className="nav-separator">•</span>
+            <Link to={`/cruise-lines/${ship.cruise_line_slug || cruiseLineSlug || 'p-and-o'}`} className="ship-nav-link">
+              More {ship.cruise_line_name} Ships
             </Link>
           </div>
         </div>

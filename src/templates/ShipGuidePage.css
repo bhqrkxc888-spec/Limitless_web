@@ -666,6 +666,9 @@
 .ship-nav-links {
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: var(--space-3, 0.75rem);
+  flex-wrap: wrap;
 }
 
 .ship-nav-link {
@@ -677,6 +680,11 @@
 
 .ship-nav-link:hover {
   color: var(--clr-accent, #B9953C);
+}
+
+.nav-separator {
+  color: var(--clr-text-muted, #6B7280);
+  font-size: var(--font-size-sm, 0.875rem);
 }
 
 /* ========================================

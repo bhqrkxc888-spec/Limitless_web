@@ -53,6 +53,7 @@ function FleetShipCard({ ship, cruiseLineSlug, shipSlug, cruiseLineName }) {
   
   return (
     <Card 
+      to={`/cruise-lines/${cruiseLineSlug}/${shipSlug}`}
       variant="default"
       className="fleet-ship-card"
     >

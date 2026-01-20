@@ -242,8 +242,8 @@ function AppLayout() {
                 <Route path="/preview/offers" element={<OffersPage />} />
                 <Route path="/preview/offers/:slug" element={<OfferPage />} />
                 <Route path="/preview/cruise-lines" element={<CruiseLinesPage />} />
-                <Route path="/preview/cruise-lines/:slug" element={<CruiseLinePage />} />
-                <Route path="/preview/ships/:slug" element={<ShipPage />} />
+                <Route path="/preview/cruise-lines/:cruiseLineSlug" element={<CruiseLinePage />} />
+                <Route path="/preview/cruise-lines/:cruiseLineSlug/:shipSlug" element={<ShipGuidePage />} />
                 <Route path="/preview/destinations" element={<DestinationsPage />} />
                 <Route path="/preview/destinations/transatlantic-cruises" element={<Navigate to="/preview/bucket-list/transatlantic-crossings" replace />} />
                 <Route path="/preview/destinations/:slug" element={<DestinationPage />} />
@@ -299,10 +299,12 @@ function AppLayout() {
             
             {/* Cruise Lines - Published */}
             <Route path="/cruise-lines" element={<CruiseLinesPage />} />
-            <Route path="/cruise-lines/:slug" element={<CruiseLinePage />} />
+            <Route path="/cruise-lines/:cruiseLineSlug" element={<CruiseLinePage />} />
+            <Route path="/cruise-lines/:cruiseLineSlug/:shipSlug" element={<ShipGuidePage />} />
             
-            {/* Ships - Published */}
-            <Route path="/ships/:slug" element={<ShipPage />} />
+            {/* Legacy ship routes - still work but show ship page */}
+            <Route path="/ships/:slug" element={<ShipGuidePage />} />
+            <Route path="/ship-guides/:slug" element={<ShipGuidePage />} />
             
             {/* Destinations - Published */}
             <Route path="/destinations" element={<DestinationsPage />} />
@@ -347,8 +349,7 @@ function AppLayout() {
             <Route path="/ports/region/:slug" element={<PortRegionPage />} />
             <Route path="/ports/:slug" element={<PortGuidePage />} />
             
-            {/* Ship Guides - Comprehensive ship information */}
-            <Route path="/ship-guides/:slug" element={<ShipGuidePage />} />
+            {/* Ship Guides - Legacy route, now handled under cruise-lines */}
             
             {/* Legal Pages - Always Public */}
             <Route path="/website-terms" element={<WebsiteTerms />} />
