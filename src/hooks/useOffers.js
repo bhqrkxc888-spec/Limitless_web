@@ -16,6 +16,7 @@ import { logger } from '../utils/logger';
  * @param {boolean|null} options.featured - Filter by featured status
  * @param {string|null} options.offerType - Filter by offer type
  * @param {string|null} options.destination - Filter by destination
+ * @param {boolean} options.priority - If true, fetch immediately (for above-fold content)
  * @returns {Object} { offers: Array, total: number, loading: boolean, error: Error | null, refetch: Function }
  */
 export function useOffers({
@@ -23,7 +24,8 @@ export function useOffers({
   offset = 0,
   featured = null,
   offerType = null,
-  destination = null
+  destination = null,
+  priority = false
 } = {}) {
   const [offers, setOffers] = useState([]);
   const [total, setTotal] = useState(0);
@@ -76,17 +78,22 @@ export function useOffers({
   }, [limit, offset, featured, offerType, destination]);
 
   useEffect(() => {
-    // Defer initial fetch until after LCP/idle to improve mobile performance
-    const doFetch = () => fetchOffers();
+    // Priority content (above-fold) loads immediately
+    // Non-priority content deferred until idle for better LCP
+    if (priority) {
+      fetchOffers();
+      return;
+    }
     
+    // Defer non-priority fetch until after LCP/idle
     if ('requestIdleCallback' in window) {
-      const id = requestIdleCallback(doFetch, { timeout: 2000 });
+      const id = requestIdleCallback(() => fetchOffers(), { timeout: 1000 });
       return () => cancelIdleCallback(id);
     } else {
-      const timer = setTimeout(doFetch, 100);
+      const timer = setTimeout(fetchOffers, 100);
       return () => clearTimeout(timer);
     }
-  }, [fetchOffers]);
+  }, [fetchOffers, priority]);
 
   return {
     offers,

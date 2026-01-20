@@ -7,8 +7,10 @@ import './FeaturedOffers.css';
 function FeaturedOffers() {
   // Fetch latest 10 offers (not filtered by featured flag)
   // Sorted by date on server side
+  // priority: true ensures immediate load for homepage content
   const { offers, loading, error } = useOffers({ 
-    limit: 10
+    limit: 10,
+    priority: true
   });
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsToShow, setItemsToShow] = useState(3);

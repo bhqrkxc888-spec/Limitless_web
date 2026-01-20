@@ -45,10 +45,8 @@ function DeferredUI({ children }) {
 }
 
 // Route Protection - ProtectedRoute and PublishGate are light, kept eager
-// AdminProtectedRoute is lazy to prevent admin chunk from loading on non-admin routes
 import ProtectedRoute from './components/ProtectedRoute'
 import PublishGate from './components/PublishGate'
-const AdminProtectedRoute = lazy(() => lazyWithRetry(() => import('./components/AdminProtectedRoute')))
 
 // HomePage is eagerly loaded to prevent CLS on initial page load
 // This is the main landing page and must render without Suspense delay
@@ -113,33 +111,10 @@ const NotFoundPage = lazy(() => lazyWithRetry(() => import('./pages/NotFoundPage
 const FAQPage = lazy(() => lazyWithRetry(() => import('./pages/FAQPage')))
 const TestimonialsPage = lazy(() => lazyWithRetry(() => import('./pages/TestimonialsPage')))
 const ShipPage = lazy(() => lazyWithRetry(() => import('./templates/ShipPage')))
+const ShipGuidePage = lazy(() => lazyWithRetry(() => import('./templates/ShipGuidePage')))
 
-// Admin Monitoring Dashboard
-const AdminLogin = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminLogin')))
-const AdminDashboard = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminDashboard')))
-const AdminErrors = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminErrors')))
-const AdminLighthouse = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminLighthouse')))
-const AdminSEO = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminSEO')))
-const AdminAnalytics = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminAnalytics')))
-const AdminSearchConsole = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminSearchConsole')))
-const AdminWebsiteDestinations = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminWebsiteDestinations')))
-const AdminOffersDebug = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminOffersDebug')))
-
-// Image Management
-const AdminImageManagement = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminImageManagement')))
-const AdminSiteImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminSiteImages')))
-const AdminPageHeroes = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPageHeroes')))
-const AdminDestinationImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminDestinationImages')))
-const AdminCruiseLineImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminCruiseLineImages')))
-const AdminCategoryImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminCategoryImages')))
-const AdminBucketListImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminBucketListImages')))
-const AdminPortGuideImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPortGuideImages')))
-const AdminPortGuideStatus = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPortGuideStatus')))
-const AdminPorts = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPorts')))
-const AdminShipImages = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminShipImages')))
-const AdminCruiseFinder = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminCruiseFinder')))
-const AdminPortRatings = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminPortRatings')))
-const AdminCruiseFeedback = lazy(() => lazyWithRetry(() => import('./pages/admin/AdminCruiseFeedback')))
+// Note: Website admin has been removed. All admin functionality is now in the CRM.
+// Use the Vercel dashboard for monitoring and deployments.
 
 // Legal Pages
 const WebsiteTerms = lazy(() => lazyWithRetry(() => import('./pages/WebsiteTerms')))
@@ -212,8 +187,7 @@ function ScrollToTop() {
 
   useEffect(() => {
     // Trigger SEO analysis on route change (after a delay to let page render)
-    // Skip for admin routes
-    if (!import.meta.env.DEV && !pathname.startsWith('/admin')) {
+    if (!import.meta.env.DEV) {
       const seoTimeout = setTimeout(() => {
         analyzePageSEO().catch(() => {
           // Silently fail if SEO analysis fails
@@ -230,68 +204,20 @@ function ScrollToTop() {
 // Layout wrapper that conditionally shows header/footer
 function AppLayout() {
   const { pathname } = useLocation();
-  const isAdminRoute = pathname.startsWith('/admin');
   
-  // MAINTENANCE MODE: Simple redirect - all routes except home, preview, and admin go to /preview/
+  // MAINTENANCE MODE: Simple redirect - all routes except home and preview go to /preview/
   const isMaintenanceMode = import.meta.env.VITE_MAINTENANCE_MODE === 'true';
   const isPreviewRoute = pathname.startsWith('/preview');
   
   // Redirect to preview version (preserves path for better UX)
-  if (isMaintenanceMode && pathname !== '/' && !isPreviewRoute && !isAdminRoute) {
+  if (isMaintenanceMode && pathname !== '/' && !isPreviewRoute) {
     return <Navigate to={`/preview${pathname}`} replace />;
   }
   
-  // Admin routes have their own layout
-  if (isAdminRoute) {
-    return (
-      <ErrorBoundary>
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-          {/* Preview Access for hidden/coming-soon pages - only when NOT in maintenance mode */}
-          {!isMaintenanceMode && <Route path="/preview" element={<AdminPage />} />}
-          
-          {/* Admin Monitoring Dashboard */}
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={<AdminProtectedRoute><AdminDashboard /></AdminProtectedRoute>} />
-          <Route path="/admin/errors" element={<AdminProtectedRoute><AdminErrors /></AdminProtectedRoute>} />
-          <Route path="/admin/lighthouse" element={<AdminProtectedRoute><AdminLighthouse /></AdminProtectedRoute>} />
-          <Route path="/admin/analytics" element={<AdminProtectedRoute><AdminAnalytics /></AdminProtectedRoute>} />
-          <Route path="/admin/search-console" element={<AdminProtectedRoute><AdminSearchConsole /></AdminProtectedRoute>} />
-          <Route path="/admin/seo" element={<AdminProtectedRoute><AdminSEO /></AdminProtectedRoute>} />
-          
-          {/* Feedback Management */}
-          <Route path="/admin/port-ratings" element={<AdminProtectedRoute><AdminPortRatings /></AdminProtectedRoute>} />
-          <Route path="/admin/cruise-feedback" element={<AdminProtectedRoute><AdminCruiseFeedback /></AdminProtectedRoute>} />
-          
-          {/* Port Guide Status */}
-          <Route path="/admin/port-guide-status" element={<AdminProtectedRoute><AdminPortGuideStatus /></AdminProtectedRoute>} />
-          <Route path="/admin/ports" element={<AdminProtectedRoute><AdminPorts /></AdminProtectedRoute>} />
-          
-          {/* Image Management */}
-          <Route path="/admin/images" element={<AdminProtectedRoute><AdminImageManagement /></AdminProtectedRoute>} />
-          <Route path="/admin/images/site" element={<AdminProtectedRoute><AdminSiteImages /></AdminProtectedRoute>} />
-          <Route path="/admin/images/page-heroes" element={<AdminProtectedRoute><AdminPageHeroes /></AdminProtectedRoute>} />
-          <Route path="/admin/images/destinations" element={<AdminProtectedRoute><AdminDestinationImages /></AdminProtectedRoute>} />
-          <Route path="/admin/images/cruise-lines" element={<AdminProtectedRoute><AdminCruiseLineImages /></AdminProtectedRoute>} />
-          <Route path="/admin/images/cruise-lines/:slug" element={<AdminProtectedRoute><AdminCruiseLineImages /></AdminProtectedRoute>} />
-          <Route path="/admin/images/categories" element={<AdminProtectedRoute><AdminCategoryImages /></AdminProtectedRoute>} />
-          <Route path="/admin/images/bucket-list" element={<AdminProtectedRoute><AdminBucketListImages /></AdminProtectedRoute>} />
-          <Route path="/admin/images/bucket-list/:slug" element={<AdminProtectedRoute><AdminBucketListImages /></AdminProtectedRoute>} />
-          <Route path="/admin/images/port-guides" element={<AdminProtectedRoute><AdminPortGuideImages /></AdminProtectedRoute>} />
-          <Route path="/admin/images/port-guides/:slug" element={<AdminProtectedRoute><AdminPortGuideImages /></AdminProtectedRoute>} />
-          {/* Redirect old ships route to cruise lines */}
-          <Route path="/admin/images/ships" element={<AdminProtectedRoute><AdminShipImages /></AdminProtectedRoute>} />
-          
-          {/* Admin Website Section */}
-          <Route path="/admin/website/destinations" element={<AdminProtectedRoute><AdminWebsiteDestinations /></AdminProtectedRoute>} />
-          <Route path="/admin/offers-debug" element={<AdminProtectedRoute><AdminOffersDebug /></AdminProtectedRoute>} />
-          
-          {/* Admin Tools */}
-          <Route path="/admin/cruise-finder" element={<AdminProtectedRoute><AdminCruiseFinder /></AdminProtectedRoute>} />
-          </Routes>
-        </Suspense>
-      </ErrorBoundary>
-    );
+  // Redirect /admin routes to CRM
+  if (pathname.startsWith('/admin')) {
+    // Note: Admin has moved to CRM. You can redirect to CRM here or show a message.
+    return <Navigate to="/" replace />;
   }
   
   // Regular site layout with header/footer
@@ -336,6 +262,7 @@ function AppLayout() {
                 <Route path="/preview/ports" element={<PortsPage />} />
                 <Route path="/preview/ports/region/:slug" element={<PortRegionPage />} />
                 <Route path="/preview/ports/:slug" element={<PortGuidePage />} />
+                <Route path="/preview/ship-guides/:slug" element={<ShipGuidePage />} />
                 <Route path="/preview/website-terms" element={<WebsiteTerms />} />
                 <Route path="/preview/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/preview/booking-terms" element={<BookingTerms />} />
@@ -419,6 +346,9 @@ function AppLayout() {
             <Route path="/ports" element={<PortsPage />} />
             <Route path="/ports/region/:slug" element={<PortRegionPage />} />
             <Route path="/ports/:slug" element={<PortGuidePage />} />
+            
+            {/* Ship Guides - Comprehensive ship information */}
+            <Route path="/ship-guides/:slug" element={<ShipGuidePage />} />
             
             {/* Legal Pages - Always Public */}
             <Route path="/website-terms" element={<WebsiteTerms />} />

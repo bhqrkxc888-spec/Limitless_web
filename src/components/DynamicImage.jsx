@@ -5,9 +5,12 @@
  * 
  * Note: These components include width/height for CLS prevention and lazy loading by default.
  * The container should define dimensions via CSS aspect-ratio.
+ * 
+ * Fix: Initial state is set to fallback URL directly (no double render).
+ * DB fetch only updates if a different URL is found.
  */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { getImageUrlFromDb } from '../utils/imageLoader';
 import { getDestinationImageUrl, getBucketListImageUrl } from '../config/assetUrls';
 
@@ -16,18 +19,30 @@ import { getDestinationImageUrl, getBucketListImageUrl } from '../config/assetUr
  * Default dimensions: 800x450 (16:9 ratio), can be overridden via props
  */
 export function DestinationCardImage({ slug, alt, width = 800, height = 450, loading = 'lazy', ...props }) {
-  const [src, setSrc] = useState(getDestinationImageUrl(slug, 'card'));
+  // Compute fallback synchronously to avoid flash
+  const fallback = useMemo(() => getDestinationImageUrl(slug, 'card'), [slug]);
+  const [src, setSrc] = useState(fallback);
 
   useEffect(() => {
     if (!slug) return;
     
-    const fallback = getDestinationImageUrl(slug, 'card');
-    setSrc(fallback); // Show fallback immediately
-    
+    // Only fetch from DB, don't re-set fallback (already in state)
     getImageUrlFromDb('destination', slug, 'card', fallback)
-      .then(url => setSrc(url))
-      .catch(() => setSrc(fallback));
-  }, [slug]);
+      .then(url => {
+        // Only update if DB returned a different URL
+        if (url && url !== fallback) {
+          setSrc(url);
+        }
+      })
+      .catch(() => {
+        // Keep current src (already fallback)
+      });
+  }, [slug, fallback]);
+
+  // Update src if slug changes (new fallback)
+  useEffect(() => {
+    setSrc(fallback);
+  }, [fallback]);
 
   return (
     <img 
@@ -47,18 +62,30 @@ export function DestinationCardImage({ slug, alt, width = 800, height = 450, loa
  * Default dimensions: 800x450 (16:9 ratio), can be overridden via props
  */
 export function BucketListCardImage({ slug, alt, width = 800, height = 450, loading = 'lazy', ...props }) {
-  const [src, setSrc] = useState(getBucketListImageUrl(slug, 'card'));
+  // Compute fallback synchronously to avoid flash
+  const fallback = useMemo(() => getBucketListImageUrl(slug, 'card'), [slug]);
+  const [src, setSrc] = useState(fallback);
 
   useEffect(() => {
     if (!slug) return;
     
-    const fallback = getBucketListImageUrl(slug, 'card');
-    setSrc(fallback); // Show fallback immediately
-    
+    // Only fetch from DB, don't re-set fallback (already in state)
     getImageUrlFromDb('bucket-list', slug, 'card', fallback)
-      .then(url => setSrc(url))
-      .catch(() => setSrc(fallback));
-  }, [slug]);
+      .then(url => {
+        // Only update if DB returned a different URL
+        if (url && url !== fallback) {
+          setSrc(url);
+        }
+      })
+      .catch(() => {
+        // Keep current src (already fallback)
+      });
+  }, [slug, fallback]);
+
+  // Update src if slug changes (new fallback)
+  useEffect(() => {
+    setSrc(fallback);
+  }, [fallback]);
 
   return (
     <img 
