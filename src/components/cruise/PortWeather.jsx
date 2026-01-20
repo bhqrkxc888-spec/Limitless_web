@@ -193,31 +193,60 @@ const PortWeather = ({
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      {/* Weather Alerts - Simplified */}
-      {alerts && alerts.length > 0 && (
-        <div className="weather-alerts">
-          {alerts.map((alert, idx) => {
-            // Simplify alert display - just show event name with severity indicator
-            // Alert descriptions from local weather services often aren't in English
-            const getAlertEmoji = (event) => {
-              const eventLower = (event || '').toLowerCase();
-              if (eventLower.includes('wind') || eventLower.includes('gale')) return '💨';
-              if (eventLower.includes('rain') || eventLower.includes('flood')) return '🌧️';
-              if (eventLower.includes('storm') || eventLower.includes('thunder')) return '⛈️';
-              if (eventLower.includes('snow') || eventLower.includes('ice')) return '❄️';
-              if (eventLower.includes('heat') || eventLower.includes('temperature')) return '🌡️';
-              if (eventLower.includes('coast') || eventLower.includes('sea') || eventLower.includes('wave')) return '🌊';
-              return '⚠️';
-            };
+      {/* Weather Alerts - Simplified and Deduplicated */}
+      {alerts && alerts.length > 0 && (() => {
+        // Deduplicate alerts by event name and severity
+        const uniqueAlerts = alerts.reduce((acc, alert) => {
+          const getAlertEmoji = (event) => {
+            const eventLower = (event || '').toLowerCase();
+            if (eventLower.includes('wind') || eventLower.includes('gale')) return '💨';
+            if (eventLower.includes('rain') || eventLower.includes('flood')) return '🌧️';
+            if (eventLower.includes('storm') || eventLower.includes('thunder')) return '⛈️';
+            if (eventLower.includes('snow') || eventLower.includes('ice')) return '❄️';
+            if (eventLower.includes('heat') || eventLower.includes('temperature')) return '🌡️';
+            if (eventLower.includes('coast') || eventLower.includes('sea') || eventLower.includes('wave')) return '🌊';
+            return '⚠️';
+          };
 
-            const getSeverityLabel = (event) => {
-              const eventLower = (event || '').toLowerCase();
-              if (eventLower.includes('severe') || eventLower.includes('extreme')) return 'Severe';
-              if (eventLower.includes('moderate')) return 'Moderate';
-              return 'Active';
-            };
+          const getSeverityLabel = (event) => {
+            const eventLower = (event || '').toLowerCase();
+            if (eventLower.includes('severe') || eventLower.includes('extreme')) return 'Severe';
+            if (eventLower.includes('moderate')) return 'Moderate';
+            return 'Active';
+          };
 
-            return (
+          const emoji = getAlertEmoji(alert.event);
+          const severity = getSeverityLabel(alert.event);
+          const key = `${emoji}-${severity}`;
+          
+          // Only add if we haven't seen this combination before
+          if (!acc.some(a => `${getAlertEmoji(a.event)}-${getSeverityLabel(a.event)}` === key)) {
+            acc.push(alert);
+          }
+          return acc;
+        }, []);
+
+        const getAlertEmoji = (event) => {
+          const eventLower = (event || '').toLowerCase();
+          if (eventLower.includes('wind') || eventLower.includes('gale')) return '💨';
+          if (eventLower.includes('rain') || eventLower.includes('flood')) return '🌧️';
+          if (eventLower.includes('storm') || eventLower.includes('thunder')) return '⛈️';
+          if (eventLower.includes('snow') || eventLower.includes('ice')) return '❄️';
+          if (eventLower.includes('heat') || eventLower.includes('temperature')) return '🌡️';
+          if (eventLower.includes('coast') || eventLower.includes('sea') || eventLower.includes('wave')) return '🌊';
+          return '⚠️';
+        };
+
+        const getSeverityLabel = (event) => {
+          const eventLower = (event || '').toLowerCase();
+          if (eventLower.includes('severe') || eventLower.includes('extreme')) return 'Severe';
+          if (eventLower.includes('moderate')) return 'Moderate';
+          return 'Active';
+        };
+
+        return (
+          <div className="weather-alerts">
+            {uniqueAlerts.map((alert, idx) => (
               <div key={idx} className="weather-alert">
                 <div className="alert-content">
                   <span className="alert-emoji">{getAlertEmoji(alert.event)}</span>
@@ -227,10 +256,10 @@ const PortWeather = ({
                   </div>
                 </div>
               </div>
-            );
-          })}
-        </div>
-      )}
+            ))}
+          </div>
+        );
+      })()}
 
       {/* Current Conditions */}
       {portName && (
