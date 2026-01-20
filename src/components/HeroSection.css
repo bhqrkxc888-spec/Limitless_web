@@ -113,11 +113,14 @@
   z-index: 2;
 }
 
-/* Override social share styles for hero */
+/* Override social share styles for hero - Clean circular buttons */
 .hero-social .social-share {
   flex-direction: row;
   align-items: center;
   gap: var(--space-2, 0.5rem);
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 .hero-social .social-share-label {
@@ -125,6 +128,7 @@
   font-size: var(--font-size-sm, 0.875rem);
   margin-bottom: 0;
   margin-right: var(--space-2, 0.5rem);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .hero-social .social-share-buttons {
@@ -132,15 +136,46 @@
   gap: var(--space-2, 0.5rem);
 }
 
+/* Clean white circular buttons matching Rate This Guide section */
 .hero-social .social-share-button {
-  background: transparent;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: white;
+  color: var(--clr-text-main, #2C344C);
   border: none;
-  padding: var(--space-2, 0.5rem);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s;
 }
 
 .hero-social .social-share-button:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border: none;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Brand color hovers */
+.hero-social .social-share-button.facebook:hover {
+  background: #1877F2;
+  color: white;
+}
+
+.hero-social .social-share-button.twitter:hover {
+  background: #1DA1F2;
+  color: white;
+}
+
+.hero-social .social-share-button.email:hover {
+  background: #EA4335;
+  color: white;
+}
+
+.hero-social .social-share-button.copy:hover {
+  background: var(--clr-primary, #2C344C);
+  color: white;
 }
 
 .hero-title {
@@ -252,6 +287,12 @@
     right: var(--space-3, 0.75rem);
     bottom: var(--space-3, 0.75rem);
   }
+  
+  /* Keep clean circular style on tablet */
+  .hero-social .social-share-button {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 @media (max-width: 767px) {
@@ -300,19 +341,25 @@
     padding-top: var(--space-6);
   }
 
-  /* Social share on mobile - stays bottom right, smaller padding */
+  /* Social share on mobile - stays bottom right, clean circles */
   .hero-social {
     bottom: var(--space-3, 0.75rem);
     right: var(--space-3, 0.75rem);
   }
   
-  /* Optionally hide label on very small screens */
+  /* Hide label on small screens - just show circular buttons */
   .hero-social .social-share-label {
     display: none;
   }
   
   .hero-social .social-share-buttons {
-    gap: var(--space-1, 0.25rem);
+    gap: var(--space-2, 0.5rem);
+  }
+  
+  /* Slightly smaller buttons on mobile */
+  .hero-social .social-share-button {
+    width: 32px;
+    height: 32px;
   }
 }
 
