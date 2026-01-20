@@ -40,9 +40,10 @@ const SHIP_SECTIONS = [
 ];
 
 function ShipGuidePage() {
-  const { shipSlug, cruiseLineSlug } = useParams();
+  const params = useParams();
+  const { shipSlug, cruiseLineSlug, slug: legacySlug } = params;
   // Use shipSlug if provided (new route), otherwise fall back to slug (legacy)
-  const slug = shipSlug || useParams().slug;
+  const slug = shipSlug || legacySlug;
   const { ship, ratings, loading, error } = useShipGuide(slug);
   const [activeSection, setActiveSection] = useState('overview');
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
