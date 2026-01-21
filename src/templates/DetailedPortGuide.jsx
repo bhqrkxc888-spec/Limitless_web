@@ -229,13 +229,7 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
     });
   };
   
-  // Load attraction images with metadata
-  const { imageUrl: attraction1, altText: attraction1Alt } = usePortGuideImage(slug, 'attraction-1', portName, portCountry);
-  const { imageUrl: attraction2, altText: attraction2Alt } = usePortGuideImage(slug, 'attraction-2', portName, portCountry);
-  const { imageUrl: attraction3, altText: attraction3Alt } = usePortGuideImage(slug, 'attraction-3', portName, portCountry);
-  const { imageUrl: attraction4, altText: attraction4Alt } = usePortGuideImage(slug, 'attraction-4', portName, portCountry);
-  const { imageUrl: attraction5, altText: attraction5Alt } = usePortGuideImage(slug, 'attraction-5', portName, portCountry);
-  const { imageUrl: attraction6, altText: attraction6Alt } = usePortGuideImage(slug, 'attraction-6', portName, portCountry);
+  // Load beach image
   const { imageUrl: beachImage, altText: beachAlt } = usePortGuideImage(slug, 'beach', portName, portCountry);
   
   // Load family-friendly images
