@@ -29,15 +29,13 @@ function getContentImageUrl(imagePath) {
 /**
  * Simple image component for content images
  * Bypasses OptimizedImage transforms for reliability
- * Clickable to open full size in new tab
+ * Clickable to open in modal lightbox
  */
-function ContentImage({ src, alt, width = 280, height = 210 }) {
+function ContentImage({ src, alt, width = 280, height = 210, onOpenLightbox }) {
   if (!src) return null;
   return (
-    <a 
-      href={src} 
-      target="_blank" 
-      rel="noopener noreferrer"
+    <div 
+      onClick={() => onOpenLightbox && onOpenLightbox(src, alt)}
       style={{ display: 'block', cursor: 'pointer' }}
       title="Click to view full size"
     >
@@ -57,7 +55,102 @@ function ContentImage({ src, alt, width = 280, height = 210 }) {
         onMouseOver={(e) => e.currentTarget.style.opacity = '0.85'}
         onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
       />
-    </a>
+    </div>
+  );
+}
+
+/**
+ * Image Lightbox Modal
+ * Shows full-size image with Limitless Cruises branding and close button
+ */
+function ImageLightbox({ src, alt, onClose }) {
+  if (!src) return null;
+
+  return (
+    <div 
+      className="image-lightbox-overlay"
+      onClick={onClose}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+        zIndex: 9999,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2rem'
+      }}
+    >
+      <button
+        onClick={onClose}
+        style={{
+          position: 'absolute',
+          top: '1rem',
+          right: '1rem',
+          background: 'rgba(255, 255, 255, 0.9)',
+          border: 'none',
+          borderRadius: '50%',
+          width: '48px',
+          height: '48px',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '24px',
+          fontWeight: 'bold',
+          color: '#333',
+          zIndex: 10001,
+          transition: 'background 0.2s'
+        }}
+        onMouseOver={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 1)'}
+        onMouseOut={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.9)'}
+        aria-label="Close"
+      >
+        ×
+      </button>
+      
+      <div 
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          position: 'relative',
+          maxWidth: '90vw',
+          maxHeight: '90vh',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        <img 
+          src={src}
+          alt={alt || 'Image'}
+          style={{
+            maxWidth: '100%',
+            maxHeight: '85vh',
+            objectFit: 'contain',
+            borderRadius: '4px'
+          }}
+        />
+        
+        <div 
+          style={{
+            position: 'absolute',
+            bottom: '1rem',
+            right: '1rem',
+            background: 'rgba(0, 0, 0, 0.6)',
+            color: 'white',
+            padding: '0.5rem 1rem',
+            borderRadius: '4px',
+            fontSize: '14px',
+            fontWeight: '500',
+            letterSpacing: '0.5px'
+          }}
+        >
+          Limitless Cruises
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -122,6 +215,7 @@ const PORT_SECTIONS = [
 export function DetailedPortGuide({ slug, portName, portCountry, detailedContent, port }) {
   const [activeSection, setActiveSection] = useState('overview');
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState(null);
   const scrollAnchorRef = useRef(null);
   
   // Tab click - update state and scroll to anchor
@@ -183,6 +277,11 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
   // Filter to only show tabs with content
   const availableSections = PORT_SECTIONS.filter(section => hasContent[section.key]);
 
+  // Handler to open image in lightbox
+  const handleOpenLightbox = (src, alt) => {
+    setLightboxImage({ src, alt });
+  };
+
   // Render the active section content
   const renderSectionContent = () => {
     let content;
@@ -191,22 +290,22 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
         content = <OverviewSection overview={overview} portName={portName} />;
         break;
       case 'stayLocal':
-        content = <StayLocalSection stayLocal={stayLocal} beachImage={beachImage} beachAlt={beachAlt} marineData={marineData} marineLoading={marineLoading} />;
+        content = <StayLocalSection stayLocal={stayLocal} beachImage={beachImage} beachAlt={beachAlt} marineData={marineData} marineLoading={marineLoading} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'goFurther':
-        content = <GoFurtherSection goFurther={goFurther} attractionImages={attractionImages} attractionAlts={attractionAlts} />;
+        content = <GoFurtherSection goFurther={goFurther} attractionImages={attractionImages} attractionAlts={attractionAlts} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'withKids':
-        content = <WithKidsSection withKids={withKids} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} parkImage={parkImage} />;
+        content = <WithKidsSection withKids={withKids} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} parkImage={parkImage} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'send':
         content = <SendSection send={send} />;
         break;
       case 'medical':
-        content = <MedicalSection medical={medical} />;
+        content = <MedicalSection medical={medical} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'foodAndDrink':
-        content = <FoodDrinkSection foodAndDrink={foodAndDrink} />;
+        content = <FoodDrinkSection foodAndDrink={foodAndDrink} onOpenLightbox={handleOpenLightbox} />;
         break;
       default:
         content = <OverviewSection overview={overview} portName={portName} />;
@@ -251,6 +350,15 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
       <div className="port-section-content">
         {renderSectionContent()}
       </div>
+
+      {/* Image Lightbox Modal */}
+      {lightboxImage && (
+        <ImageLightbox 
+          src={lightboxImage.src}
+          alt={lightboxImage.alt}
+          onClose={() => setLightboxImage(null)}
+        />
+      )}
     </div>
   );
 }
@@ -477,7 +585,7 @@ function OverviewSection({ overview, portName }) {
   );
 }
 
-function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineLoading }) {
+function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineLoading, onOpenLightbox }) {
   if (!stayLocal) return <p>No local information available yet.</p>;
 
   return (
@@ -523,6 +631,7 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
                       <ContentImage 
                         src={getContentImageUrl(item.image)}
                         alt={item.title}
+                        onOpenLightbox={onOpenLightbox}
                       />
                     </div>
                     <div className="content-block__header">
@@ -570,6 +679,7 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
                       <ContentImage 
                         src={getContentImageUrl(item.image)}
                         alt={item.title}
+                        onOpenLightbox={onOpenLightbox}
                       />
                     </div>
                     <div className="content-block__header">
@@ -617,6 +727,7 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
                       <ContentImage 
                         src={getContentImageUrl(park.image)}
                         alt={park.title}
+                        onOpenLightbox={onOpenLightbox}
                       />
                     </div>
                     <div className="content-block__header">
@@ -752,6 +863,7 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
                     <ContentImage 
                       src={getContentImageUrl(stayLocal.shoppingImage)}
                       alt="Shopping near port"
+                      onOpenLightbox={onOpenLightbox}
                     />
                   </div>
                   <div className="content-block__header">
@@ -824,7 +936,7 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
   );
 }
 
-function GoFurtherSection({ goFurther, attractionImages, attractionAlts }) {
+function GoFurtherSection({ goFurther, attractionImages, attractionAlts, onOpenLightbox }) {
   if (!goFurther || !goFurther.attractions || goFurther.attractions.length === 0) {
     return <p>No day trip information available yet.</p>;
   }
@@ -933,7 +1045,7 @@ function GoFurtherSection({ goFurther, attractionImages, attractionAlts }) {
   );
 }
 
-function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage, parkImage }) {
+function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage, parkImage, onOpenLightbox }) {
   // Show section if either withKids (portContent) or familyFriendly (ports.js) has content
   if (!withKids && !familyFriendly) return <p>No family information available yet.</p>;
 
@@ -1280,7 +1392,7 @@ function SendSection({ send }) {
   );
 }
 
-function MedicalSection({ medical }) {
+function MedicalSection({ medical, onOpenLightbox }) {
   if (!medical) return <p>No medical information available yet.</p>;
 
   // Check if there's any actual content
@@ -1311,6 +1423,7 @@ function MedicalSection({ medical }) {
                     <ContentImage 
                       src={getContentImageUrl(medical.pharmacy.image)}
                       alt={medical.pharmacy.name}
+                      onOpenLightbox={onOpenLightbox}
                     />
                   </div>
                   <div className="content-block__header">
@@ -1373,7 +1486,7 @@ function MedicalSection({ medical }) {
   );
 }
 
-function FoodDrinkSection({ foodAndDrink }) {
+function FoodDrinkSection({ foodAndDrink, onOpenLightbox }) {
   if (!foodAndDrink) return <p>No food & drink information available yet.</p>;
 
   return (
@@ -1448,6 +1561,7 @@ function FoodDrinkSection({ foodAndDrink }) {
                       <ContentImage 
                         src={getContentImageUrl(restaurant.image)}
                         alt={restaurant.name}
+                        onOpenLightbox={onOpenLightbox}
                       />
                     </div>
                     <div className="content-block__header">
