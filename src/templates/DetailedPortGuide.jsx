@@ -519,16 +519,45 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
         <>
           <SubSection title="Longer Walk (10-30 mins)">
             {stayLocal.longerWalk.map((item, idx) => (
-              <div key={idx} className="walk-item">
-                <div className="walk-item-header">
-                  <h4>{item.title}</h4>
-                  {item.terrain && <TerrainBadge terrain={item.terrain} />}
-                </div>
-                <p>{item.content}</p>
-                {item.mapLink && (
-                  <a href={item.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                    View walking route →
-                  </a>
+              <div key={idx} className={item.image ? "content-block" : "walk-item"}>
+                {item.image ? (
+                  <div className="content-block__top">
+                    <div className="content-block__image">
+                      <OptimizedImage 
+                        src={`https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_categories/${item.image}`}
+                        alt={item.title}
+                        width={280}
+                        height={210}
+                        sizes="280px"
+                        srcsetWidths={[280, 560]}
+                      />
+                    </div>
+                    <div className="content-block__header">
+                      <div className="walk-item-header">
+                        <h4>{item.title}</h4>
+                        {item.terrain && <TerrainBadge terrain={item.terrain} />}
+                      </div>
+                      <p>{item.content}</p>
+                      {item.mapLink && (
+                        <a href={item.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
+                          View walking route →
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <div className="walk-item-header">
+                      <h4>{item.title}</h4>
+                      {item.terrain && <TerrainBadge terrain={item.terrain} />}
+                    </div>
+                    <p>{item.content}</p>
+                    {item.mapLink && (
+                      <a href={item.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
+                        View walking route →
+                      </a>
+                    )}
+                  </>
                 )}
               </div>
             ))}
