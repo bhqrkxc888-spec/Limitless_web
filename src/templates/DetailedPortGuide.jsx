@@ -293,7 +293,7 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
         content = <StayLocalSection stayLocal={stayLocal} beachImage={beachImage} beachAlt={beachAlt} marineData={marineData} marineLoading={marineLoading} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'goFurther':
-        content = <GoFurtherSection goFurther={goFurther} attractionImages={attractionImages} attractionAlts={attractionAlts} onOpenLightbox={handleOpenLightbox} />;
+        content = <GoFurtherSection goFurther={goFurther} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'withKids':
         content = <WithKidsSection withKids={withKids} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} parkImage={parkImage} onOpenLightbox={handleOpenLightbox} />;
@@ -936,7 +936,7 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
   );
 }
 
-function GoFurtherSection({ goFurther, attractionImages, attractionAlts, onOpenLightbox }) {
+function GoFurtherSection({ goFurther, onOpenLightbox }) {
   if (!goFurther || !goFurther.attractions || goFurther.attractions.length === 0) {
     return <p>No day trip information available yet.</p>;
   }
