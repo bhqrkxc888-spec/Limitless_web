@@ -14,9 +14,9 @@ export function getSupabaseImageUrl(bucket, path) {
 export const SITE_ASSETS = {
   homeHero: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/hero.webp',
   homeHeroMobile: null, // Optional - upload via admin interface
-  // OG Image for social sharing - using About2.webp as fallback
-  // Note: For optimal social sharing, upload a 1200x630 og-image.webp via admin
-  ogImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/categories/about/About2.webp',
+  // OG Image for social sharing - default fallback for all pages
+  // Note: For optimal social sharing, this should be 1200x630 pixels
+  ogImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/og-image.jpeg',
   logo: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/logo.webp',
   favicon: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/favicon.webp',
 };
