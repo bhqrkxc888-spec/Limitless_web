@@ -293,10 +293,10 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
         content = <StayLocalSection stayLocal={stayLocal} beachImage={beachImage} beachAlt={beachAlt} marineData={marineData} marineLoading={marineLoading} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'goFurther':
-        content = <GoFurtherSection goFurther={goFurther} attractionImages={attractionImages} attractionAlts={attractionAlts} onOpenLightbox={handleOpenLightbox} />;
+        content = <GoFurtherSection goFurther={goFurther} attractionImages={attractionImages} attractionAlts={attractionAlts} />;
         break;
       case 'withKids':
-        content = <WithKidsSection withKids={withKids} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} parkImage={parkImage} onOpenLightbox={handleOpenLightbox} />;
+        content = <WithKidsSection withKids={withKids} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} parkImage={parkImage} />;
         break;
       case 'send':
         content = <SendSection send={send} />;
@@ -936,7 +936,7 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
   );
 }
 
-function GoFurtherSection({ goFurther, attractionImages, attractionAlts, onOpenLightbox }) {
+function GoFurtherSection({ goFurther, attractionImages, attractionAlts }) {
   if (!goFurther || !goFurther.attractions || goFurther.attractions.length === 0) {
     return <p>No day trip information available yet.</p>;
   }
@@ -1045,7 +1045,7 @@ function GoFurtherSection({ goFurther, attractionImages, attractionAlts, onOpenL
   );
 }
 
-function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage, parkImage, onOpenLightbox }) {
+function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage, parkImage }) {
   // Show section if either withKids (portContent) or familyFriendly (ports.js) has content
   if (!withKids && !familyFriendly) return <p>No family information available yet.</p>;
 
