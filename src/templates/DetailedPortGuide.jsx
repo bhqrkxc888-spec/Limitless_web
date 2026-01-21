@@ -293,10 +293,10 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
         content = <StayLocalSection stayLocal={stayLocal} beachImage={beachImage} beachAlt={beachAlt} marineData={marineData} marineLoading={marineLoading} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'goFurther':
-        content = <GoFurtherSection goFurther={goFurther} attractionImages={attractionImages} attractionAlts={attractionAlts} />;
+        content = <GoFurtherSection goFurther={goFurther} attractionImages={attractionImages} attractionAlts={attractionAlts} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'withKids':
-        content = <WithKidsSection withKids={withKids} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} parkImage={parkImage} />;
+        content = <WithKidsSection withKids={withKids} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} parkImage={parkImage} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'send':
         content = <SendSection send={send} />;
@@ -936,7 +936,7 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
   );
 }
 
-function GoFurtherSection({ goFurther, attractionImages, attractionAlts }) {
+function GoFurtherSection({ goFurther, attractionImages, attractionAlts, onOpenLightbox }) {
   if (!goFurther || !goFurther.attractions || goFurther.attractions.length === 0) {
     return <p>No day trip information available yet.</p>;
   }
@@ -951,11 +951,11 @@ function GoFurtherSection({ goFurther, attractionImages, attractionAlts }) {
       <hr className="section-divider" />
 
       {goFurther.attractions.map((attraction, idx) => {
-        // Use attraction.image from database if present, otherwise fall back to indexed image
+        // Only use attraction.image from database (no fallback to indexed images)
         const imageUrl = attraction.image 
           ? getContentImageUrl(attraction.image)
-          : attractionImages[idx];
-        const imageAlt = attractionAlts[idx] || attraction.name;
+          : null;
+        const imageAlt = attraction.name;
         
         return (
         <Fragment key={idx}>
@@ -964,13 +964,12 @@ function GoFurtherSection({ goFurther, attractionImages, attractionAlts }) {
             <div className="attraction-top">
               {imageUrl && (
                 <div className="attraction-image">
-                  <OptimizedImage
+                  <ContentImage
                     src={imageUrl}
                     alt={imageAlt}
                     width={320}
                     height={213}
-                    sizes="320px"
-                    srcsetWidths={[320, 640]}
+                    onOpenLightbox={onOpenLightbox}
                   />
                 </div>
               )}
@@ -1045,7 +1044,7 @@ function GoFurtherSection({ goFurther, attractionImages, attractionAlts }) {
   );
 }
 
-function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage, parkImage }) {
+function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage, parkImage, onOpenLightbox }) {
   // Show section if either withKids (portContent) or familyFriendly (ports.js) has content
   if (!withKids && !familyFriendly) return <p>No family information available yet.</p>;
 
@@ -1118,7 +1117,52 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
         </>
       )}
 
-      {/* Local Park */}
+      {/* Parks from database (withKids.parks array) */}
+      {withKids?.parks && withKids.parks.length > 0 && (
+        <>
+          <SubSection title="🌳 Local Park">
+            {withKids.parks.map((park, idx) => (
+              <div key={idx} className={park.image ? "content-block" : "park-info"}>
+                {park.image ? (
+                  <div className="content-block__top">
+                    <div className="content-block__image">
+                      <ContentImage 
+                        src={getContentImageUrl(park.image)}
+                        alt={park.name}
+                        onOpenLightbox={onOpenLightbox}
+                      />
+                    </div>
+                    <div className="content-block__header">
+                      <h4>{park.name}</h4>
+                      <p><strong>Location:</strong> {park.location}</p>
+                      <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                        <strong>Distance:</strong> 
+                        <span className="distance-badge">{park.distance}</span>
+                      </p>
+                      {park.facilities && <p><strong>Facilities:</strong> {park.facilities}</p>}
+                      {park.description && <p>{park.description}</p>}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="park-info">
+                    <h4>{park.name}</h4>
+                    <p><strong>Location:</strong> {park.location}</p>
+                    <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                      <strong>Distance:</strong> 
+                      <span className="distance-badge">{park.distance}</span>
+                    </p>
+                    {park.facilities && <p><strong>Facilities:</strong> {park.facilities}</p>}
+                    {park.description && <p>{park.description}</p>}
+                  </div>
+                )}
+              </div>
+            ))}
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Local Park from familyFriendly (legacy) */}
       {familyFriendly?.localPark && (
         <>
           <SubSection title="🌳 Local Park">
