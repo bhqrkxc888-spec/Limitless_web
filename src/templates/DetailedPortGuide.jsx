@@ -30,9 +30,63 @@ function getContentImageUrl(imagePath) {
  * Simple image component for content images
  * Bypasses OptimizedImage transforms for reliability
  * Clickable to open in modal lightbox
+ * Shows placeholder with exact filename when image is missing
  */
-function ContentImage({ src, alt, width = 280, height = 210, onOpenLightbox }) {
-  if (!src) return null;
+function ContentImage({ src, alt, imagePath, width = 280, height = 210, onOpenLightbox }) {
+  const [imageExists, setImageExists] = useState(true);
+  
+  // Check if image exists
+  useEffect(() => {
+    if (!src) {
+      setImageExists(false);
+      return;
+    }
+    
+    const img = new Image();
+    img.onload = () => setImageExists(true);
+    img.onerror = () => setImageExists(false);
+    img.src = src;
+  }, [src]);
+  
+  if (!src || !imageExists) {
+    // Show placeholder with exact filename
+    const filename = imagePath || 'image.webp';
+    return (
+      <div 
+        style={{ 
+          width: width,
+          height: height,
+          backgroundColor: '#f0f0f0',
+          borderRadius: '8px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '1rem',
+          border: '2px dashed #ccc'
+        }}
+      >
+        <div style={{ fontSize: '14px', color: '#666', marginBottom: '0.5rem', textAlign: 'center' }}>
+          Image Coming Soon
+        </div>
+        <div style={{ 
+          fontSize: '11px', 
+          color: '#999', 
+          fontFamily: 'monospace',
+          textAlign: 'center',
+          wordBreak: 'break-all',
+          padding: '0.5rem',
+          backgroundColor: '#fff',
+          borderRadius: '4px',
+          border: '1px solid #ddd'
+        }}>
+          Upload as:<br />
+          <strong>{filename}</strong>
+        </div>
+      </div>
+    );
+  }
+  
   return (
     <div 
       onClick={() => onOpenLightbox && onOpenLightbox(src, alt)}
@@ -622,6 +676,7 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
                       <ContentImage 
                         src={getContentImageUrl(item.image)}
                         alt={item.title}
+                        imagePath={item.image}
                         onOpenLightbox={onOpenLightbox}
                       />
                     </div>
@@ -670,6 +725,7 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
                       <ContentImage 
                         src={getContentImageUrl(item.image)}
                         alt={item.title}
+                        imagePath={item.image}
                         onOpenLightbox={onOpenLightbox}
                       />
                     </div>
@@ -718,6 +774,7 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
                       <ContentImage 
                         src={getContentImageUrl(park.image)}
                         alt={park.title}
+                        imagePath={park.image}
                         onOpenLightbox={onOpenLightbox}
                       />
                     </div>
@@ -854,6 +911,7 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
                     <ContentImage 
                       src={getContentImageUrl(stayLocal.shoppingImage)}
                       alt="Shopping near port"
+                      imagePath={stayLocal.shoppingImage}
                       onOpenLightbox={onOpenLightbox}
                     />
                   </div>
@@ -958,6 +1016,7 @@ function GoFurtherSection({ goFurther, onOpenLightbox }) {
                   <ContentImage
                     src={imageUrl}
                     alt={imageAlt}
+                    imagePath={attraction.image}
                     width={320}
                     height={213}
                     onOpenLightbox={onOpenLightbox}
@@ -1120,6 +1179,7 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
                       <ContentImage 
                         src={getContentImageUrl(park.image)}
                         alt={park.name}
+                        imagePath={park.image}
                         onOpenLightbox={onOpenLightbox}
                       />
                     </div>
@@ -1458,6 +1518,7 @@ function MedicalSection({ medical, onOpenLightbox }) {
                     <ContentImage 
                       src={getContentImageUrl(medical.pharmacy.image)}
                       alt={medical.pharmacy.name}
+                      imagePath={medical.pharmacy.image}
                       onOpenLightbox={onOpenLightbox}
                     />
                   </div>
@@ -1596,6 +1657,7 @@ function FoodDrinkSection({ foodAndDrink, onOpenLightbox }) {
                       <ContentImage 
                         src={getContentImageUrl(restaurant.image)}
                         alt={restaurant.name}
+                        imagePath={restaurant.image}
                         onOpenLightbox={onOpenLightbox}
                       />
                     </div>
