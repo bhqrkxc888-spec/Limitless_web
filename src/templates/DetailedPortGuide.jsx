@@ -29,23 +29,35 @@ function getContentImageUrl(imagePath) {
 /**
  * Simple image component for content images
  * Bypasses OptimizedImage transforms for reliability
+ * Clickable to open full size in new tab
  */
 function ContentImage({ src, alt, width = 280, height = 210 }) {
   if (!src) return null;
   return (
-    <img 
-      src={src}
-      alt={alt || 'Image'}
-      width={width}
-      height={height}
-      loading="lazy"
-      style={{ 
-        width: '100%', 
-        height: '100%', 
-        objectFit: 'cover',
-        borderRadius: '8px'
-      }}
-    />
+    <a 
+      href={src} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      style={{ display: 'block', cursor: 'pointer' }}
+      title="Click to view full size"
+    >
+      <img 
+        src={src}
+        alt={alt || 'Image'}
+        width={width}
+        height={height}
+        loading="lazy"
+        style={{ 
+          width: '100%', 
+          height: '100%', 
+          objectFit: 'cover',
+          borderRadius: '8px',
+          transition: 'opacity 0.2s'
+        }}
+        onMouseOver={(e) => e.currentTarget.style.opacity = '0.85'}
+        onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
+      />
+    </a>
   );
 }
 
