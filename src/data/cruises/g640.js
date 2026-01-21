@@ -33,7 +33,7 @@ export const g640Cruise = {
   },
   
   // Social/community
-  facebookGroup: null, // Add if available
+  facebookGroup: 'https://www.facebook.com/groups/2090299874803136/',
   
   // OG Image for social sharing
   ogImage: 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_destinations/canary-islands/hero.webp',
