@@ -437,6 +437,7 @@
 
 .content-block__top {
   display: flex;
+  align-items: center; /* Vertical middle alignment */
   gap: var(--space-6, 1.5rem);
   margin-bottom: var(--space-4, 1rem);
 }
@@ -518,6 +519,7 @@
 
 .detailed-port-guide .attraction-top {
   display: flex;
+  align-items: center; /* Vertical middle alignment */
   gap: 24px;
   margin-bottom: 20px;
 }
