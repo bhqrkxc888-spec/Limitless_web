@@ -35,7 +35,7 @@ function WhatToExpectSection({ dayData: _dayData }) {
         <p>Check your bill on the TV or My Holiday website (myholiday.pocruises.com). Any discrepancies must be resolved at Guest Services before 10pm. If paying by card registered at boarding, charges are automatic.</p>
 
         <p><strong>Pack your luggage:</strong></p>
-        <p>If using P&O's luggage service, bags must be outside your cabin door by the time stated (usually 10pm-11pm). You'll receive coloured luggage tags indicating your collection time.</p>
+        <p>If using P&O's luggage service, bags must be outside your cabin door by the time stated (usually 10pm-11pm). Make sure your luggage tags are firmly secured to your baggage.</p>
 
         <p><strong>Check disembarkation information:</strong></p>
         <p>A letter will be delivered to your cabin with your allocated time and colour group. Also displayed on the ship's TV information channel.</p>
@@ -262,37 +262,25 @@ function TipsSection({ dayData: _dayData }) {
   return (
     <div className="section-tips">
       <div className="content-card">
-        <p className="content-card-title">Tip 1: Decide Early - Self-Disembarkation or Standard?</p>
-        <p>Choose as soon as possible during the cruise. Register at Guest Services or via My Holiday website (myholiday.pocruises.com). Self-disembarkation slots can fill up. Consider your luggage volume, mobility, and onward travel timing.</p>
-        <p className="info-note">If you have an early flight or train, self-disembarkation is almost always the better choice.</p>
-      </div>
-
-      <div className="content-card">
         <p className="content-card-title">Tip 2: Pack the Night Before Properly</p>
         <p>If using standard disembarkation, your bags go out by 10-11pm the night before. This means you need to plan carefully. Keep out: breakfast clothes, toiletries, medications, phone charger, travel documents. Use a small day bag or hand luggage for morning essentials. Don't forget items in the safe, drawers, or bathroom.</p>
         <p className="info-note">Common mistakes: Packing passport in main luggage, forgetting phone charger, leaving medication in suitcase.</p>
       </div>
 
       <div className="content-card">
-        <p className="content-card-title">Tip 3: Photograph Your Luggage Tags</p>
-        <p>Take a photo of your coloured luggage tags before putting bags out. In the busy terminal baggage hall, you'll need to remember your exact colour to find the right zone. The tags also have a number that helps identify your specific bags.</p>
+        <p className="content-card-title">Tip 3: Luggage are in Deck Order</p>
+        <p>Your luggage will be arranged in the terminal baggage hall in deck order, making it easier to locate your bags when you disembark.</p>
       </div>
 
       <div className="content-card">
         <p className="content-card-title">Tip 4: Have a Proper Breakfast</p>
-        <p>Don't rush your final morning! Both the buffet and main dining room serve breakfast on disembarkation day. The buffet opens earliest (around 6am), while the MDR offers a sit-down experience. If you're standard disembarkation, you'll likely be waiting anyway - enjoy the meal.</p>
+        <p>Don't rush your final morning! The buffet serves breakfast on disembarkation day which opens around 6am.</p>
         <p className="info-note">The buffet gets very busy 7:30am-8:30am as colour groups are called. Go early or late.</p>
       </div>
 
       <div className="content-card">
         <p className="content-card-title">Tip 5: Check Your Onboard Account</p>
         <p>Your final bill is generated overnight. Check on cabin TV or My Holiday website first thing. Any disputes need to be resolved at Guest Services before you disembark - it's much harder to fix issues afterwards. Keep your receipts if you've queried any charges.</p>
-      </div>
-
-      <div className="content-card">
-        <p className="content-card-title">Tip 6: Don't Rush for Your Colour Group</p>
-        <p>When your colour is called, there's no prize for being first in the queue. Let the initial rush go, then walk off calmly. The baggage hall is always chaotic regardless - an extra 10 minutes onboard won't change your wait for luggage.</p>
-        <p className="info-note">Exception: If you have a tight travel connection, position yourself ready to go when your colour is called.</p>
       </div>
 
       <div className="content-card">

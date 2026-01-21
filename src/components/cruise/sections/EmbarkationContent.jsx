@@ -148,7 +148,7 @@ function WhatToExpectSection({ dayData: _dayData }) {
       <div className="sub-section">
         <h3>Muster Drill & Safety Briefing</h3>
         
-        <p>Upon embarkation, a friendly crew member will help direct you to your muster station. You'll scan your boarding pass at your muster station (you'll receive your cruise card/room key later when you reach your cabin).</p>
+        <p>Upon embarkation, a friendly crew member will help direct you to your muster station. You'll scan your boarding pass at your muster station (you'll receive your cruise card/room key later - it will be in the letter holder outside your cabin).</p>
 
         <p><strong>In-Cabin Safety Video:</strong></p>
         <p>When you arrive at your cabin, you'll be asked to watch the safety video on your in-cabin TV. This covers important health, wellbeing and safety information, including what to do in an emergency and a life jacket demonstration. Once you've watched it, you're free to relax, explore and enjoy the ship.</p>
@@ -280,7 +280,7 @@ function GettingThereSection({ dayData: _dayData }) {
         </ul>
 
         <p><strong>When Do You Get Your Cabin Key (Cruise Card)?</strong></p>
-        <p>You receive your boarding pass at terminal check-in. Your cruise card (room key and onboard payment card) will be waiting for you in your cabin when you arrive.</p>
+        <p>You receive your boarding pass at terminal check-in. Your cruise card (room key and onboard payment card) will be in the letter holder outside your cabin when you arrive.</p>
 
         <p><strong>Luggage Options:</strong></p>
 
@@ -317,14 +317,15 @@ function TipsSection({ dayData: _dayData }) {
 
       <div className="content-card">
         <p className="content-card-title">Tip 2: Know How to Access My Holiday Onboard</p>
-        <p>Once onboard, you'll use the My Holiday website to book restaurants, reserve show seats, and check your onboard account. It's accessed via the ship's free Wi-Fi.</p>
+        <p>Once onboard, you'll use the My Holiday website to book restaurants, reserve show seats, and check your onboard account.</p>
         <p><strong>How to Access My Holiday:</strong></p>
         <ol className="info-list">
           <li>Switch your device to Airplane Mode</li>
-          <li>Connect to P&O Cruises Wi-Fi network (free)</li>
+          <li>Connect to P&O Cruises Wi-Fi network (1 hour free for the duration of the cruise; access to P&O Horizon is always available)</li>
           <li>Open browser and go to myholiday.pocruises.com (or scan QR codes in your cabin)</li>
           <li>Log in using the last 6 digits of your cruise card barcode</li>
         </ol>
+        <p className="info-note">Important: If you do not have a Wi-Fi plan, ensure mobile data is disabled to prevent charges.</p>
         <p><strong>What You Can Do:</strong></p>
         <ul className="info-list">
           <li>Book specialty restaurants and show seats</li>
@@ -332,7 +333,7 @@ function TipsSection({ dayData: _dayData }) {
           <li>View daily event schedules (also in Horizon magazine)</li>
           <li>Browse shore excursion information</li>
         </ul>
-        <p className="info-note">Pro tip: Your cruise card (room key) will be waiting in your cabin. The last 6 digits of the barcode on the card are your login.</p>
+        <p className="info-note">Pro tip: Your cruise card (room key) will be in the letter holder outside your cabin. The last 6 digits of the barcode on the card are your login.</p>
       </div>
 
       <div className="content-card">
@@ -355,13 +356,13 @@ function TipsSection({ dayData: _dayData }) {
       </div>
 
       <div className="content-card">
-        <p className="content-card-title">Tip 6: Know Your Muster Station Before Boarding</p>
-        <p>Your muster station letter is on your cruise documents and will be on your cabin door. Memorise it before you board so you're not rushing later. The drill happens about 30-60 minutes before sail-away - you don't want to miss your position on deck watching the departure!</p>
+        <p className="content-card-title">Tip 6: Know Your Muster Station</p>
+        <p>Your muster station is provided at check-in and will be explained as you board the ship by staff who will scan details confirming that you have attended your muster station.</p>
       </div>
 
       <div className="content-card">
         <p className="content-card-title">Tip 7: Keep Your Cruise Card Handy at All Times</p>
-        <p>From the moment you receive it at check-in, your cruise card is your everything. You'll need it to get back on the ship (every time), open your cabin door, pay for drinks and purchases, check in at the muster drill, and scan when entering restaurants.</p>
+        <p>From the moment you collect your cruise card from your room letter box, your cruise card is your everything. You'll need it to get back on the ship (every time), open your cabin door, pay for drinks and purchases, check in at the muster drill, and scan when entering restaurants.</p>
         <p className="info-note">Top tip: Use a lanyard or card holder - it's easy to misplace otherwise.</p>
       </div>
     </div>
@@ -378,9 +379,9 @@ function SendSection({ dayData: _dayData }) {
         <p>Southampton Ocean Terminal is fully accessible and P&O provides comprehensive support:</p>
         <ul className="info-list">
           <li><strong>Wheelchair assistance:</strong> Available from car drop-off through to the ship</li>
-          <li><strong>Mobility scooter users:</strong> Can use scooters through the terminal; ship has designated storage</li>
+          <li><strong>Mobility scooter users:</strong> Subject to confirmation and must be booked ahead of sailing. Mobility scooters must meet requirements: <a href="https://www.pocruises.com/accessibility/life-onboard/mobility-equipment" target="_blank" rel="noopener noreferrer">https://www.pocruises.com/accessibility/life-onboard/mobility-equipment</a></li>
           <li><strong>Visual impairment support:</strong> Staff escort through check-in and security</li>
-          <li><strong>Hearing impairment:</strong> Visual announcements displayed; staff trained in basic BSL</li>
+          <li><strong>Hearing impairment:</strong> Visual announcements displayed</li>
           <li><strong>Hidden disabilities:</strong> Sunflower lanyard scheme recognised</li>
         </ul>
 
@@ -391,7 +392,7 @@ function SendSection({ dayData: _dayData }) {
           <li>Contact P&O's Guest Accessibility Team: 0344 338 8014</li>
           <li>Add requirements to your booking via My P&O Cruises</li>
           <li>Email: accessibility@pocruises.com</li>
-          <li>Request assistance at least 48 hours before embarkation</li>
+          <li>Request assistance at least 2 weeks before embarkation</li>
         </ul>
 
         <p><strong>On arrival:</strong></p>
@@ -403,44 +404,12 @@ function SendSection({ dayData: _dayData }) {
 
         <p><strong>Wheelchairs:</strong></p>
         <ul className="info-list">
-          <li>Bring your own (stored in cabin or designated area)</li>
-          <li>Ship wheelchairs available for emergency use only</li>
-          <li>Terminal wheelchairs available for embarkation/disembarkation</li>
-          <li>Power wheelchairs and scooters must be battery-operated (dry cell or gel batteries only)</li>
+          <li>Wheelchairs can be brought onboard</li>
+          <li>Terminal wheelchairs may be available for embarkation/disembarkation</li>
+          <li>Power wheelchairs - see link: <a href="https://www.pocruises.com/accessibility/life-onboard/mobility-equipment" target="_blank" rel="noopener noreferrer">https://www.pocruises.com/accessibility/life-onboard/mobility-equipment</a></li>
         </ul>
       </div>
 
-      <hr className="section-divider" />
-
-      <div className="sub-section">
-        <h3>Early Boarding</h3>
-        
-        <p><strong>Who Gets Early Boarding?</strong></p>
-        <ul className="info-list">
-          <li><strong>Guests requiring assistance:</strong> Priority boarding - contact accessibility team</li>
-          <li><strong>Suite guests:</strong> Early slots allocated automatically - check documents</li>
-          <li><strong>Peninsular Club members:</strong> Earlier slots by tier - automatic based on tier</li>
-          <li><strong>Select Price bookings:</strong> May include priority - check booking benefits</li>
-          <li><strong>Families with young children:</strong> Priority at terminal - request at check-in</li>
-        </ul>
-
-        <p><strong>How to Request Early Boarding:</strong></p>
-        
-        <p><strong>For accessibility needs:</strong></p>
-        <ul className="info-list">
-          <li>Contact P&O Guest Accessibility Team (details above)</li>
-          <li>State your specific requirements</li>
-          <li>Request priority boarding in your notes</li>
-          <li>Confirm arrangements 48 hours before sailing</li>
-        </ul>
-
-        <p><strong>For other reasons:</strong></p>
-        <ul className="info-list">
-          <li>Loyalty members: Check your tier benefits in My P&O</li>
-          <li>Suite guests: Usually automatic - check your documents</li>
-          <li>Select Price: Review your booking benefits</li>
-        </ul>
-      </div>
 
       <hr className="section-divider" />
 
@@ -470,10 +439,8 @@ function SendSection({ dayData: _dayData }) {
 
         <p><strong>Visual impairments:</strong></p>
         <ul className="info-list">
-          <li>Tactile guidance available to stations</li>
-          <li>Crew member escort can be arranged</li>
-          <li>Audio descriptions of safety equipment</li>
-          <li>Braille safety cards available in cabins</li>
+          <li>You can request large print documents via the on board needs questionnaire, these will be in size 18 font</li>
+          <li>An escorted orientation tour can be arranged which can be requested through the on board needs questionnaire</li>
         </ul>
 
         <p><strong>Hearing impairments:</strong></p>
@@ -484,21 +451,6 @@ function SendSection({ dayData: _dayData }) {
           <li>Vibrating pillow alerts can be arranged</li>
         </ul>
 
-        <p><strong>Exemptions:</strong></p>
-        <p>There are no exemptions from the muster drill as it's a legal requirement. However, significant accommodations are made:</p>
-        <ul className="info-list">
-          <li>Cabin muster drill for guests who cannot attend in person (rare, requires medical documentation)</li>
-          <li>Crew member visits to explain procedures</li>
-          <li>Alternative timing if genuine medical emergency</li>
-        </ul>
-
-        <p><strong>How to Arrange Muster Accommodations:</strong></p>
-        <ol className="info-list">
-          <li>Add accessibility requirements to your booking</li>
-          <li>Contact the Guest Accessibility Team</li>
-          <li>Confirm arrangements on boarding</li>
-          <li>Speak to Guest Services if issues arise</li>
-        </ol>
       </div>
     </div>
   );
