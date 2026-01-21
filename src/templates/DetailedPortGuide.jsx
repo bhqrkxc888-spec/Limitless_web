@@ -13,6 +13,18 @@ import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye, Star, Al
 import { formatBoldText, formatParagraphsWithBold } from '../utils/textFormatting.jsx';
 import './DetailedPortGuide.css';
 
+// Supabase storage base URL for images
+const STORAGE_BASE_URL = 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_categories';
+
+/**
+ * Helper to get full image URL from database image path
+ * If item.image exists in database content, returns full URL
+ */
+function getContentImageUrl(imagePath) {
+  if (!imagePath) return null;
+  return `${STORAGE_BASE_URL}/${imagePath}`;
+}
+
 /**
  * Hook to fetch marine weather data from Stormglass API
  * Uses server-side caching (24h) to respect free tier limits
@@ -473,7 +485,7 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
                   <div className="content-block__top">
                     <div className="content-block__image">
                       <OptimizedImage 
-                        src={`https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_categories/${item.image}`}
+                        src={getContentImageUrl(item.image)}
                         alt={item.title}
                         width={280}
                         height={210}
@@ -524,7 +536,7 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
                   <div className="content-block__top">
                     <div className="content-block__image">
                       <OptimizedImage 
-                        src={`https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_categories/${item.image}`}
+                        src={getContentImageUrl(item.image)}
                         alt={item.title}
                         width={280}
                         height={210}
@@ -570,16 +582,45 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
         <>
           <SubSection title="Parks & Green Spaces">
             {stayLocal.parks.map((park, idx) => (
-              <div key={idx} className="walk-item">
-                <div className="walk-item-header">
-                  <h4>{park.title}</h4>
-                  {park.terrain && <TerrainBadge terrain={park.terrain} />}
-                </div>
-                <p>{park.content}</p>
-                {park.mapLink && (
-                  <a href={park.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                    View walking route →
-                  </a>
+              <div key={idx} className={park.image ? "content-block" : "walk-item"}>
+                {park.image ? (
+                  <div className="content-block__top">
+                    <div className="content-block__image">
+                      <OptimizedImage 
+                        src={getContentImageUrl(park.image)}
+                        alt={park.title}
+                        width={280}
+                        height={210}
+                        sizes="280px"
+                        srcsetWidths={[280, 560]}
+                      />
+                    </div>
+                    <div className="content-block__header">
+                      <div className="walk-item-header">
+                        <h4>{park.title}</h4>
+                        {park.terrain && <TerrainBadge terrain={park.terrain} />}
+                      </div>
+                      <p>{park.content}</p>
+                      {park.mapLink && (
+                        <a href={park.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
+                          View walking route →
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <div className="walk-item-header">
+                      <h4>{park.title}</h4>
+                      {park.terrain && <TerrainBadge terrain={park.terrain} />}
+                    </div>
+                    <p>{park.content}</p>
+                    {park.mapLink && (
+                      <a href={park.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
+                        View walking route →
+                      </a>
+                    )}
+                  </>
                 )}
               </div>
             ))}
@@ -685,7 +726,7 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
                 <div className="content-block__top">
                   <div className="content-block__image">
                     <OptimizedImage 
-                      src={`https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_categories/${stayLocal.shoppingImage}`}
+                      src={getContentImageUrl(stayLocal.shoppingImage)}
                       alt="Shopping near port"
                       width={280}
                       height={210}
@@ -777,16 +818,23 @@ function GoFurtherSection({ goFurther, attractionImages, attractionAlts }) {
 
       <hr className="section-divider" />
 
-      {goFurther.attractions.map((attraction, idx) => (
+      {goFurther.attractions.map((attraction, idx) => {
+        // Use attraction.image from database if present, otherwise fall back to indexed image
+        const imageUrl = attraction.image 
+          ? getContentImageUrl(attraction.image)
+          : attractionImages[idx];
+        const imageAlt = attractionAlts[idx] || attraction.name;
+        
+        return (
         <Fragment key={idx}>
           <div className="attraction-block">
             {/* Row 1: Image and main text side by side */}
             <div className="attraction-top">
-              {attractionImages[idx] && (
+              {imageUrl && (
                 <div className="attraction-image">
                   <OptimizedImage
-                    src={attractionImages[idx]}
-                    alt={attractionAlts[idx] || attraction.name}
+                    src={imageUrl}
+                    alt={imageAlt}
                     width={320}
                     height={213}
                     sizes="320px"
@@ -852,7 +900,8 @@ function GoFurtherSection({ goFurther, attractionImages, attractionAlts }) {
           </div>
           <hr className="section-divider" />
         </Fragment>
-      ))}
+        );
+      })}
 
       {goFurther.ourTake && (
         <div className="tip-box">
@@ -1235,13 +1284,39 @@ function MedicalSection({ medical }) {
       {hasPharmacy && (
         <>
           <SubSection title="Nearest Pharmacy">
-            <div className="medical-item">
-              <h4>{medical.pharmacy.name}</h4>
-              {medical.pharmacy.location && (
-                <p><strong>Location:</strong> {medical.pharmacy.location}</p>
-              )}
-              {medical.pharmacy.notes && (
-                <p className="medical-notes">{medical.pharmacy.notes}</p>
+            <div className={medical.pharmacy.image ? "content-block" : "medical-item"}>
+              {medical.pharmacy.image ? (
+                <div className="content-block__top">
+                  <div className="content-block__image">
+                    <OptimizedImage 
+                      src={getContentImageUrl(medical.pharmacy.image)}
+                      alt={medical.pharmacy.name}
+                      width={280}
+                      height={210}
+                      sizes="280px"
+                      srcsetWidths={[280, 560]}
+                    />
+                  </div>
+                  <div className="content-block__header">
+                    <h4>{medical.pharmacy.name}</h4>
+                    {medical.pharmacy.location && (
+                      <p><strong>Location:</strong> {medical.pharmacy.location}</p>
+                    )}
+                    {medical.pharmacy.notes && (
+                      <p className="medical-notes">{medical.pharmacy.notes}</p>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <h4>{medical.pharmacy.name}</h4>
+                  {medical.pharmacy.location && (
+                    <p><strong>Location:</strong> {medical.pharmacy.location}</p>
+                  )}
+                  {medical.pharmacy.notes && (
+                    <p className="medical-notes">{medical.pharmacy.notes}</p>
+                  )}
+                </>
               )}
             </div>
           </SubSection>
@@ -1350,10 +1425,32 @@ function FoodDrinkSection({ foodAndDrink }) {
         <>
           <SubSection title="Restaurants">
             {foodAndDrink.restaurants.map((restaurant, idx) => (
-              <div key={idx} className="food-item">
-                <h4>{restaurant.name}</h4>
-                {restaurant.location && <p className="food-location">{restaurant.location}</p>}
-                <p>{formatBoldText(restaurant.description)}</p>
+              <div key={idx} className={restaurant.image ? "content-block" : "food-item"}>
+                {restaurant.image ? (
+                  <div className="content-block__top">
+                    <div className="content-block__image">
+                      <OptimizedImage 
+                        src={getContentImageUrl(restaurant.image)}
+                        alt={restaurant.name}
+                        width={280}
+                        height={210}
+                        sizes="280px"
+                        srcsetWidths={[280, 560]}
+                      />
+                    </div>
+                    <div className="content-block__header">
+                      <h4>{restaurant.name}</h4>
+                      {restaurant.location && <p className="food-location">{restaurant.location}</p>}
+                      <p>{formatBoldText(restaurant.description)}</p>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <h4>{restaurant.name}</h4>
+                    {restaurant.location && <p className="food-location">{restaurant.location}</p>}
+                    <p>{formatBoldText(restaurant.description)}</p>
+                  </>
+                )}
               </div>
             ))}
           </SubSection>
