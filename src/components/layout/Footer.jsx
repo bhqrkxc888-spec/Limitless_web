@@ -97,74 +97,62 @@ function Footer() {
                 )}
               </div>
 
-              {/* Social Links */}
-              <div className="footer-social">
-                <a 
-                  href={socials.facebook} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  aria-label="Facebook"
-                >
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
-                  </svg>
-                </a>
-                <a 
-                  href={socials.linkedin} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  aria-label="LinkedIn"
-                >
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-                  </svg>
-                </a>
-                <a 
-                  href="https://www.youtube.com/@LimitlessCruises" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  aria-label="YouTube"
-                >
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/>
-                  </svg>
-                </a>
-              </div>
-
-              {/* Holiday Elite Member */}
-              {aboutImages.holidayEliteLogo && (
-                <div className="footer-member-badge">
+              {/* Social Links and Holiday Elite */}
+              <div className="footer-social-elite-wrapper">
+                <div className="footer-social">
                   <a 
-                    href="https://www.holidayelite.com/our-travel-agents/katherine-horton" 
+                    href={socials.facebook} 
                     target="_blank" 
-                    rel="noopener noreferrer"
-                    className="footer-elite-link"
+                    rel="noopener noreferrer" 
+                    aria-label="Facebook"
                   >
-                    <img 
-                      src={aboutImages.holidayEliteLogo} 
-                      alt="Holiday Elite Travel Agent Member"
-                      width="150"
-                      height="75"
-                      loading="lazy"
-                    />
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/>
+                    </svg>
+                  </a>
+                  <a 
+                    href={socials.linkedin} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    aria-label="LinkedIn"
+                  >
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                    </svg>
+                  </a>
+                  <a 
+                    href="https://www.youtube.com/@LimitlessCruises" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    aria-label="YouTube"
+                  >
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"/>
+                    </svg>
                   </a>
                 </div>
-              )}
-            </div>
 
-            {/* Cruise Lines */}
-            {footerNav.cruiseLines.length > 0 && (
-              <div className="footer-column">
-                <h3 className="footer-column-title">Cruise Lines</h3>
-                <ul className="footer-links">
-                  {footerNav.cruiseLines.map((link, index) => (
-                    <li key={index}>
-                      <Link to={link.path}>{link.label}</Link>
-                    </li>
-                  ))}
-                </ul>
+                {/* Holiday Elite Member */}
+                {aboutImages.holidayEliteLogo && (
+                  <div className="footer-member-badge">
+                    <a 
+                      href="https://www.holidayelite.com/our-travel-agents/katherine-horton" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="footer-elite-link"
+                    >
+                      <img 
+                        src={aboutImages.holidayEliteLogo} 
+                        alt="Holiday Elite Travel Agent Member"
+                        width="150"
+                        height="75"
+                        loading="lazy"
+                      />
+                    </a>
+                  </div>
+                )}
               </div>
-            )}
+            </div>
 
             {/* Destinations */}
             {footerNav.destinations.length > 0 && (
@@ -177,34 +165,26 @@ function Footer() {
                     </li>
                   ))}
                 </ul>
-                
-                {footerNav.cruiseTypes && footerNav.cruiseTypes.length > 0 && (
-                  <>
-                    <h3 className="footer-column-title mt-6">Cruise Types</h3>
-                    <ul className="footer-links">
-                      {footerNav.cruiseTypes.map((link, index) => (
-                        <li key={index}>
-                          <Link to={link.path}>{link.label}</Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </>
-                )}
               </div>
             )}
 
-            {/* Company */}
-            <div className="footer-column">
-              <h3 className="footer-column-title">Company</h3>
-              <ul className="footer-links">
-                {footerNav.company.map((link, index) => (
-                  <li key={index}>
-                    <Link to={link.path}>{link.label}</Link>
-                  </li>
-                ))}
-              </ul>
+            {/* Cruise Types */}
+            {footerNav.cruiseTypes && footerNav.cruiseTypes.length > 0 && (
+              <div className="footer-column">
+                <h3 className="footer-column-title">Cruise Types</h3>
+                <ul className="footer-links">
+                  {footerNav.cruiseTypes.map((link, index) => (
+                    <li key={index}>
+                      <Link to={link.path}>{link.label}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
-              <h3 className="footer-column-title mt-6">Legal</h3>
+            {/* Legal */}
+            <div className="footer-column">
+              <h3 className="footer-column-title">Legal</h3>
               <ul className="footer-links">
                 {footerNav.legal.map((link, index) => (
                   <li key={index}>
@@ -219,6 +199,18 @@ function Footer() {
                     Cookie Settings
                   </button>
                 </li>
+              </ul>
+            </div>
+
+            {/* Company */}
+            <div className="footer-column">
+              <h3 className="footer-column-title">Company</h3>
+              <ul className="footer-links">
+                {footerNav.company.map((link, index) => (
+                  <li key={index}>
+                    <Link to={link.path}>{link.label}</Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

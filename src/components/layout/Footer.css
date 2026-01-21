@@ -19,8 +19,8 @@
 }
 
 .footer-grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr; /* Brand + 4 columns */
   gap: 48px 32px;
   /* Fixed max-widths prevent layout shift */
   max-width: 1280px;
@@ -32,9 +32,7 @@
    ======================================== */
 
 .footer-brand {
-  flex: 1 1 280px;
-  max-width: 320px;
-  min-width: 280px;
+  /* Grid item - no flex properties needed */
 }
 
 .footer-logo {
@@ -110,7 +108,14 @@
   flex-shrink: 0;
 }
 
-/* Social Links */
+/* Social Links and Holiday Elite Wrapper */
+.footer-social-elite-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
 .footer-social {
   display: flex;
   gap: var(--space-3);
@@ -140,9 +145,7 @@
 
 /* Holiday Elite Member Badge */
 .footer-member-badge {
-  margin-top: var(--space-5);
-  padding-top: var(--space-4);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  /* No longer has border-top or margin-top, sits inline with socials */
 }
 
 .footer-elite-link {
@@ -156,8 +159,9 @@
 }
 
 .footer-elite-link img {
-  height: 75px;
-  width: 150px;
+  height: 60px;
+  width: auto;
+  max-width: 130px;
   object-fit: contain;
   display: block;
 }
@@ -167,9 +171,7 @@
    ======================================== */
 
 .footer-column {
-  flex: 1 1 180px;
-  max-width: 220px;
-  min-width: 180px;
+  /* Grid item - no flex properties needed */
 }
 
 .footer-column-title {
@@ -322,17 +324,17 @@
   }
 
   .footer-grid {
+    grid-template-columns: 1fr 1fr; /* 2 columns wide on tablet */
     gap: 40px 24px;
   }
 
   .footer-brand {
-    flex: 1 1 100%;
+    grid-column: 1 / -1; /* Span full width */
     max-width: 100%;
   }
 
   .footer-column {
-    flex: 1 1 45%;
-    max-width: 45%;
+    max-width: 100%;
   }
 }
 
@@ -342,18 +344,17 @@
   }
 
   .footer-grid {
-    flex-direction: column;
+    grid-template-columns: 1fr; /* 1 column wide on mobile */
     gap: 32px;
   }
 
   .footer-brand {
-    flex: 1 1 100%;
+    grid-column: 1;
     max-width: 100%;
     min-width: 100%;
   }
 
   .footer-column {
-    flex: 1 1 100%;
     max-width: 100%;
     min-width: 100%;
   }

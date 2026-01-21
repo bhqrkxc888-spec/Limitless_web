@@ -145,38 +145,37 @@ export const navigation = {
     //   { label: 'Norwegian Cruise Line', path: '/cruise-lines/norwegian-cruise-line' }
     // ],
     destinations: [
+      { label: 'Alaska', path: '/destinations/alaska-cruises' },
       { label: 'All Destinations', path: '/destinations' },
-      { label: 'Mediterranean', path: '/destinations/mediterranean-cruises' },
-      { label: 'Caribbean', path: '/destinations/caribbean-cruises' },
-      { label: 'Norwegian Fjords', path: '/destinations/norwegian-fjords-cruises' },
       { label: 'Canary Islands', path: '/destinations/canary-islands-cruises' },
-      { label: 'Alaska', path: '/destinations/alaska-cruises' }
+      { label: 'Caribbean', path: '/destinations/caribbean-cruises' },
+      { label: 'Mediterranean', path: '/destinations/mediterranean-cruises' },
+      { label: 'Norwegian Fjords', path: '/destinations/norwegian-fjords-cruises' }
     ],
     cruiseTypes: [
+      { label: 'Adults Only', path: '/cruise-types#adults-only' },
       { label: 'All Cruise Types', path: '/cruise-types' },
       { label: 'Family Cruises', path: '/cruise-types#family' },
-      { label: 'Adults Only', path: '/cruise-types#adults-only' },
       { label: 'Luxury Cruises', path: '/cruise-types#luxury' },
-      { label: 'UK Sailings', path: '/cruise-types#uk-sailings' },
-      { label: 'River Cruises', path: '/cruise-types#river' }
+      { label: 'River Cruises', path: '/cruise-types#river' },
+      { label: 'UK Sailings', path: '/cruise-types#uk-sailings' }
     ],
     legal: [
       { label: 'Booking Terms', path: '/booking-terms' },
-      { label: 'Website Terms', path: '/website-terms' },
-      { label: 'Privacy Policy', path: '/privacy-policy' },
       { label: 'Cookie Policy', path: '/cookie-policy' },
-      { label: 'Price Match Guarantee', path: '/price-match-guarantee' }
+      { label: 'Price Match Guarantee', path: '/price-match-guarantee' },
+      { label: 'Privacy Policy', path: '/privacy-policy' },
+      { label: 'Website Terms', path: '/website-terms' }
     ],
     company: [
       { label: 'About Us', path: '/about' },
       { label: 'Contact', path: '/contact' },
       { label: 'FAQ', path: '/faq' },
-      { label: 'Testimonials', path: '/testimonials' },
-      { label: 'Latest Offers', path: '/offers' },
       { label: 'Find a Cruise', path: '/find-a-cruise' },
+      { label: 'Guides', path: '/cruise-guides' },
+      { label: 'Latest Offers', path: '/offers' },
       // { label: 'Travel News', path: '/travel-news' }, // TEMPORARILY HIDDEN
-      { label: 'Port Guides', path: '/ports' },
-      { label: 'Guides', path: '/cruise-guides' }
+      { label: 'Port Guides', path: '/ports' }
     ]
   }
 };
