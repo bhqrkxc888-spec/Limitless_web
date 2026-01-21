@@ -101,6 +101,11 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
   const { imageUrl: aleHopImage } = usePortGuideImage(slug, 'ale-hop', portName, portCountry);
   const { imageUrl: parkImage } = usePortGuideImage(slug, 'local-park', portName, portCountry);
   
+  // Load Stay Local images (longer walks and shopping)
+  const { imageUrl: longerWalk1Image, altText: longerWalk1Alt } = usePortGuideImage(slug, 'longer-walk-1', portName, portCountry);
+  const { imageUrl: longerWalk2Image, altText: longerWalk2Alt } = usePortGuideImage(slug, 'longer-walk-2', portName, portCountry);
+  const { imageUrl: shoppingImage, altText: shoppingAlt } = usePortGuideImage(slug, 'shopping', portName, portCountry);
+  
   const attractionImages = [attraction1, attraction2, attraction3, attraction4, attraction5, attraction6];
   const attractionAlts = [attraction1Alt, attraction2Alt, attraction3Alt, attraction4Alt, attraction5Alt, attraction6Alt];
 
@@ -143,7 +148,19 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
         content = <OverviewSection overview={overview} portName={portName} />;
         break;
       case 'stayLocal':
-        content = <StayLocalSection stayLocal={stayLocal} beachImage={beachImage} beachAlt={beachAlt} marineData={marineData} marineLoading={marineLoading} />;
+        content = <StayLocalSection 
+          stayLocal={stayLocal} 
+          beachImage={beachImage} 
+          beachAlt={beachAlt} 
+          longerWalk1Image={longerWalk1Image}
+          longerWalk1Alt={longerWalk1Alt}
+          longerWalk2Image={longerWalk2Image}
+          longerWalk2Alt={longerWalk2Alt}
+          shoppingImage={shoppingImage}
+          shoppingAlt={shoppingAlt}
+          marineData={marineData} 
+          marineLoading={marineLoading} 
+        />;
         break;
       case 'goFurther':
         content = <GoFurtherSection goFurther={goFurther} attractionImages={attractionImages} attractionAlts={attractionAlts} />;
@@ -429,7 +446,7 @@ function OverviewSection({ overview, portName }) {
   );
 }
 
-function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineLoading }) {
+function StayLocalSection({ stayLocal, beachImage, beachAlt, longerWalk1Image, longerWalk1Alt, longerWalk2Image, longerWalk2Alt, shoppingImage, shoppingAlt, marineData, marineLoading }) {
   if (!stayLocal) return <p>No local information available yet.</p>;
 
   return (
@@ -489,20 +506,42 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
       {stayLocal.longerWalk && stayLocal.longerWalk.length > 0 && (
         <>
           <SubSection title="Longer Walk (10-30 mins)">
-            {stayLocal.longerWalk.map((item, idx) => (
-              <div key={idx} className="walk-item">
-                <div className="walk-item-header">
-                  <h4>{item.title}</h4>
-                  {item.terrain && <TerrainBadge terrain={item.terrain} />}
+            {stayLocal.longerWalk.map((item, idx) => {
+              // Get image for this walk item (longer-walk-1, longer-walk-2, etc.)
+              const walkImage = idx === 0 ? longerWalk1Image : idx === 1 ? longerWalk2Image : null
+              const walkAlt = idx === 0 ? longerWalk1Alt : idx === 1 ? longerWalk2Alt : null
+              
+              return (
+                <div key={idx} className="content-block">
+                  <div className="content-block__top">
+                    {walkImage && (
+                      <div className="content-block__image">
+                        <OptimizedImage 
+                          src={walkImage} 
+                          alt={walkAlt || item.title}
+                          width={280}
+                          height={210}
+                          sizes="280px"
+                          srcsetWidths={[280, 560]}
+                        />
+                      </div>
+                    )}
+                    <div className="content-block__header">
+                      <div className="walk-item-header">
+                        <h4>{item.title}</h4>
+                        {item.terrain && <TerrainBadge terrain={item.terrain} />}
+                      </div>
+                      <p>{item.content}</p>
+                      {item.mapLink && (
+                        <a href={item.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
+                          View walking route →
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <p>{item.content}</p>
-                {item.mapLink && (
-                  <a href={item.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                    View walking route →
-                  </a>
-                )}
-              </div>
-            ))}
+              )
+            })}
           </SubSection>
           <hr className="section-divider" />
         </>
@@ -622,11 +661,29 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
       {stayLocal.shopping && stayLocal.shopping.length > 0 && (
         <>
           <SubSection title="Shopping">
-            <ul className="simple-list">
-              {stayLocal.shopping.map((shop, idx) => (
-                <li key={idx}>{shop}</li>
-              ))}
-            </ul>
+            <div className="content-block">
+              <div className="content-block__top">
+                {shoppingImage && (
+                  <div className="content-block__image">
+                    <OptimizedImage 
+                      src={shoppingImage} 
+                      alt={shoppingAlt || "Shopping near port"}
+                      width={280}
+                      height={210}
+                      sizes="280px"
+                      srcsetWidths={[280, 560]}
+                    />
+                  </div>
+                )}
+                <div className="content-block__header">
+                  <ul className="simple-list">
+                    {stayLocal.shopping.map((shop, idx) => (
+                      <li key={idx}>{shop}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
           </SubSection>
           <hr className="section-divider" />
         </>
