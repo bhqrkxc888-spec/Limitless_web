@@ -310,13 +310,12 @@ function TipsSection({ dayData: _dayData }) {
   return (
     <div className="section-tips">
       <div className="content-card tip-card">
-        <p className="content-card-title">💡 Tip 1: Arrive at Your Allocated Time Slot</p>
+        <p className="content-card-title">Arrive at Your Allocated Time Slot</p>
         <p>P&O assign boarding time slots to manage the flow of guests. Your slot is shown in your cruise documents. Arriving early won't get you on sooner - you'll just queue longer. Arriving within your slot means minimal waiting.</p>
-        <p className="info-note">Note: Suite guests and those with early boarding benefits can arrive earlier.</p>
       </div>
 
       <div className="content-card tip-card">
-        <p className="content-card-title">💡 Tip 2: Know How to Access My Holiday Onboard</p>
+        <p className="content-card-title">Know How to Access My Holiday Onboard</p>
         <p>Once onboard, you'll use the My Holiday website to book restaurants, reserve show seats, and check your onboard account.</p>
         <p><strong>How to Access My Holiday:</strong></p>
         <ol className="info-list">
@@ -326,7 +325,7 @@ function TipsSection({ dayData: _dayData }) {
           <li>Log in using the last 6 digits of your cruise card barcode</li>
         </ol>
         
-        <p className="info-note"><strong>About the free 1 hour Wi-Fi:</strong> When you start using your 1 hour of free Wi-Fi, the timer runs for 60 continuous minutes. This cannot be split into shorter sessions throughout the cruise (e.g., 12 × 5-minute sessions).</p>
+        <p><strong>About the free 1 hour Wi-Fi:</strong> When you start using your 1 hour of free Wi-Fi, the timer runs for 60 continuous minutes. This cannot be split into shorter sessions throughout the cruise (e.g., 12 × 5-minute sessions).</p>
 
         <div className="warning-box">
           <p><strong>⚠️ Important: Disable Mobile Data</strong></p>
@@ -340,37 +339,32 @@ function TipsSection({ dayData: _dayData }) {
           <li>View daily event schedules (also in Horizon magazine)</li>
           <li>Browse shore excursion information</li>
         </ul>
-        <p className="info-note">Note: Your cruise card (room key) will be in the letter holder outside your cabin. The last 6 digits of the barcode on the card are your login.</p>
       </div>
 
       <div className="content-card tip-card">
-        <p className="content-card-title">💡 Tip 3: Book Speciality Restaurants Immediately (if not already booked pre-cruise)</p>
+        <p className="content-card-title">Book Speciality Restaurants Immediately (if not already booked pre-cruise)</p>
         <p>Speciality restaurant slots sell out fast - especially 7pm Saturday sittings and formal night dates. As soon as you board, head to the restaurant booking desk (usually near the Atrium), or use the My Holiday website (myholiday.pocruises.com) once onboard.</p>
         <p><strong>Popular restaurants to book:</strong> The Glass House (wine bar dining), Epicurean (fine dining), Sindhu (Asian fusion), The Keel & Cow (steakhouse).</p>
-        <p className="info-note">Note: Prime slots go quickly, so book as soon as possible after boarding.</p>
       </div>
 
       <div className="content-card tip-card">
-        <p className="content-card-title">💡 Tip 4: Head to the Buffet for Lunch First</p>
+        <p className="content-card-title">Head to the Buffet for Lunch First</p>
         <p>The Horizon Buffet is your best lunch option on boarding day. The main dining rooms don't open until dinner, and the buffet has the widest selection. Head there early (before 1pm) for the quietest experience and best selection.</p>
-        <p className="info-note">Note: Sit by the windows for views of Southampton as you prepare to depart.</p>
       </div>
 
       <div className="content-card tip-card">
-        <p className="content-card-title">💡 Tip 5: Capture the Sail-Away Experience</p>
+        <p className="content-card-title">Capture the Sail-Away Experience</p>
         <p>Sail-away from Southampton is special - you pass the historic docks, other cruise ships, and head into the Solent. Position yourself on the pool deck (best elevated views, busy atmosphere), promenade deck (classic ocean liner experience), your balcony (private and peaceful if cabin is ready), or Crow's Nest bar (forward-facing views with a drink).</p>
-        <p className="info-note">Note: The ship sounds its horn as it departs - a proper goosebumps moment. Have your camera ready!</p>
       </div>
 
       <div className="content-card tip-card">
-        <p className="content-card-title">💡 Tip 6: Know Your Muster Station</p>
+        <p className="content-card-title">Know Your Muster Station</p>
         <p>Your muster station is provided at check-in and will be explained as you board the ship by staff who will scan details confirming that you have attended your muster station.</p>
       </div>
 
       <div className="content-card tip-card">
-        <p className="content-card-title">💡 Tip 7: Keep Your Cruise Card Handy at All Times</p>
+        <p className="content-card-title">Keep Your Cruise Card Handy at All Times</p>
         <p>From the moment you collect your cruise card from your room letter box, your cruise card is your everything. You'll need it to get back on the ship (every time), open your cabin door, pay for drinks and purchases, check in at the muster drill, and scan when entering restaurants.</p>
-        <p className="info-note">Note: Use a lanyard or card holder - it's easy to misplace otherwise.</p>
       </div>
     </div>
   );
@@ -399,64 +393,6 @@ function SendSection({ dayData: _dayData }) {
         </ul>
       </div>
 
-      <hr className="section-divider" />
-
-      <div className="sub-section">
-        <h3>Key Information Summary</h3>
-        
-        <p><strong>Visual Impairments (Blind or Partially Sighted):</strong></p>
-        <ul className="info-list">
-          <li>Inform P&O at time of booking</li>
-          <li>Travelling with a sighted companion is strongly recommended</li>
-          <li>Orientation tours provided after embarkation to familiarise you with key areas</li>
-          <li>Must demonstrate ability to navigate safely to muster stations independently (SOLAS requirement)</li>
-          <li>Braille cabin numbers, lift buttons and audio call signs available on most ships</li>
-          <li>Large print documents (size 18 font) available via On Board Needs questionnaire</li>
-          <li>Safety information and restaurant menus available in Braille onboard</li>
-        </ul>
-
-        <p><strong>Hearing Impairments (Deaf or Hard of Hearing):</strong></p>
-        <ul className="info-list">
-          <li>Inform P&O at time of booking</li>
-          <li>Hearing loops available at Southampton terminals and Reception desks</li>
-          <li>Infrared hearing support systems in theatres and show lounges across the fleet</li>
-          <li>Listen Technologies equipment including headsets available from Reception</li>
-          <li>In-cabin emergency videos offer closed captioning and British Sign Language versions</li>
-          <li>Visual alarm systems in accessible cabins</li>
-          <li>Wireless visual alert systems available (request via On Board Needs questionnaire)</li>
-        </ul>
-
-        <p><strong>Non-Visible Disabilities:</strong></p>
-        <ul className="info-list">
-          <li>P&O recognises that autism, dementia, anxiety and sensory impairments affect individuals differently</li>
-          <li>Inform P&O in advance for safety and enjoyment</li>
-          <li>Green Non-Visible Disabilities Sunflower Lanyard indicates need for additional support or extra time</li>
-          <li>All staff trained to recognise Sunflower Lanyards</li>
-          <li>May require assistance in emergency situations</li>
-          <li>Complete On Board Needs questionnaire to highlight anything affecting your wellbeing or behaviour</li>
-        </ul>
-
-        <p><strong>Cognitive Disabilities:</strong></p>
-        <ul className="info-list">
-          <li>Guests with intellectual, cognitive and developmental disabilities welcomed on all ships</li>
-          <li>If you require carer assistance at home or help with day-to-day living and moving around, you must travel with a companion who can provide the same level of care onboard</li>
-        </ul>
-
-        <p><strong>Children with Disabilities:</strong></p>
-        <ul className="info-list">
-          <li>All children encouraged to use P&O's children's facilities</li>
-          <li>One-to-one support not provided - parent or carer must be present at all times if child requires this level of care</li>
-          <li>Speak with Youth Manager onboard to discuss activity programme participation</li>
-          <li>Complete On Board Needs questionnaire and provide detailed information when registering child via My P&O Cruises (15 days before departure)</li>
-        </ul>
-
-        <p><strong>Mobility Equipment:</strong></p>
-        <ul className="info-list">
-          <li>Wheelchairs and mobility scooters subject to confirmation and must be booked ahead of sailing</li>
-          <li>Equipment must meet P&O requirements - see: <a href="https://www.pocruises.com/accessibility/life-onboard/mobility-equipment" target="_blank" rel="noopener noreferrer">Mobility Equipment Requirements</a></li>
-          <li>Power wheelchairs and scooters must be battery-operated (dry cell or gel batteries only)</li>
-        </ul>
-      </div>
 
       <hr className="section-divider" />
 

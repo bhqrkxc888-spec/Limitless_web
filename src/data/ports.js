@@ -8853,6 +8853,226 @@ export const ports = [
     lastUpdated: '2026-01-17',
   },
 
+  // ============================================================================
+  // ATLANTIC COAST - NORTHERN SPAIN & FRANCE (TEMPLATES)
+  // ============================================================================
+  
+  // Gijon, Spain
+  {
+    id: 'gijon',
+    slug: 'gijon',
+    name: 'Gijón',
+    country: 'Spain',
+    region: 'atlantic-coast',
+    coordinates: { lat: 43.5453, lon: -5.6618 },
+    tagline: '[TO BE COMPLETED]',
+    description: '[TO BE COMPLETED]',
+    portCharacter: 'city-culture',
+    
+    aboutPort: {
+      overview: '[TO BE COMPLETED]',
+      terminals: '[TO BE COMPLETED]',
+      shuttleServices: '[TO BE COMPLETED]',
+      walkability: '[TO BE COMPLETED]',
+    },
+
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Spanish, Asturian',
+      timezone: 'CET (GMT+1)',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Asturias Airport (OVD)',
+        distance: '[TO BE COMPLETED]',
+        options: '[TO BE COMPLETED]',
+      },
+      trains: {
+        mainStation: '[TO BE COMPLETED]',
+        description: '[TO BE COMPLETED]',
+        localHubs: '[TO BE COMPLETED]',
+      },
+    },
+    
+    gettingAround: {
+      fromPort: '[TO BE COMPLETED]',
+      publicTransport: '[TO BE COMPLETED]',
+      taxis: '[TO BE COMPLETED]',
+      walkingDistance: '[TO BE COMPLETED]',
+      sightseeingBus: '[TO BE COMPLETED]',
+      accessibility: '[TO BE COMPLETED]',
+    },
+    
+    mustSeeSights: [],
+    shoreExcursions: [],
+    
+    nearestBeach: {
+      name: '[TO BE COMPLETED]',
+      description: '[TO BE COMPLETED]',
+      distance: '[TO BE COMPLETED]',
+    },
+    
+    foodAndDrink: [],
+    insiderTips: [],
+    
+    meta: {
+      title: 'Gijón Cruise Port Guide 2026',
+      description: '[TO BE COMPLETED]',
+      keywords: ['Gijón cruise port', 'Asturias cruise port'],
+    },
+    
+    status: 'template',
+    lastUpdated: '2026-01-21',
+  },
+
+  // Santander, Spain
+  {
+    id: 'santander',
+    slug: 'santander',
+    name: 'Santander',
+    country: 'Spain',
+    region: 'atlantic-coast',
+    coordinates: { lat: 43.4623, lon: -3.8050 },
+    tagline: '[TO BE COMPLETED]',
+    description: '[TO BE COMPLETED]',
+    portCharacter: 'city-culture',
+    
+    aboutPort: {
+      overview: '[TO BE COMPLETED]',
+      terminals: '[TO BE COMPLETED]',
+      shuttleServices: '[TO BE COMPLETED]',
+      walkability: '[TO BE COMPLETED]',
+    },
+
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Spanish',
+      timezone: 'CET (GMT+1)',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'Santander Airport (SDR)',
+        distance: '[TO BE COMPLETED]',
+        options: '[TO BE COMPLETED]',
+      },
+      trains: {
+        mainStation: '[TO BE COMPLETED]',
+        description: '[TO BE COMPLETED]',
+        localHubs: '[TO BE COMPLETED]',
+      },
+    },
+    
+    gettingAround: {
+      fromPort: '[TO BE COMPLETED]',
+      publicTransport: '[TO BE COMPLETED]',
+      taxis: '[TO BE COMPLETED]',
+      walkingDistance: '[TO BE COMPLETED]',
+      sightseeingBus: '[TO BE COMPLETED]',
+      accessibility: '[TO BE COMPLETED]',
+    },
+    
+    mustSeeSights: [],
+    shoreExcursions: [],
+    
+    nearestBeach: {
+      name: '[TO BE COMPLETED]',
+      description: '[TO BE COMPLETED]',
+      distance: '[TO BE COMPLETED]',
+    },
+    
+    foodAndDrink: [],
+    insiderTips: [],
+    
+    meta: {
+      title: 'Santander Cruise Port Guide 2026',
+      description: '[TO BE COMPLETED]',
+      keywords: ['Santander cruise port', 'Cantabria cruise port'],
+    },
+    
+    status: 'template',
+    lastUpdated: '2026-01-21',
+  },
+
+  // La Rochelle, France
+  {
+    id: 'la-rochelle',
+    slug: 'la-rochelle',
+    name: 'La Rochelle',
+    country: 'France',
+    region: 'atlantic-coast',
+    coordinates: { lat: 46.1591, lon: -1.1520 },
+    tagline: '[TO BE COMPLETED]',
+    description: '[TO BE COMPLETED]',
+    portCharacter: 'historic',
+    
+    aboutPort: {
+      overview: '[TO BE COMPLETED]',
+      terminals: '[TO BE COMPLETED]',
+      shuttleServices: '[TO BE COMPLETED]',
+      walkability: '[TO BE COMPLETED]',
+    },
+
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'French',
+      timezone: 'CET (GMT+1)',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    transportConnections: {
+      airport: {
+        name: 'La Rochelle – Île de Ré Airport (LRH)',
+        distance: '[TO BE COMPLETED]',
+        options: '[TO BE COMPLETED]',
+      },
+      trains: {
+        mainStation: '[TO BE COMPLETED]',
+        description: '[TO BE COMPLETED]',
+        localHubs: '[TO BE COMPLETED]',
+      },
+    },
+    
+    gettingAround: {
+      fromPort: '[TO BE COMPLETED]',
+      publicTransport: '[TO BE COMPLETED]',
+      taxis: '[TO BE COMPLETED]',
+      walkingDistance: '[TO BE COMPLETED]',
+      sightseeingBus: '[TO BE COMPLETED]',
+      accessibility: '[TO BE COMPLETED]',
+    },
+    
+    mustSeeSights: [],
+    shoreExcursions: [],
+    
+    nearestBeach: {
+      name: '[TO BE COMPLETED]',
+      description: '[TO BE COMPLETED]',
+      distance: '[TO BE COMPLETED]',
+    },
+    
+    foodAndDrink: [],
+    insiderTips: [],
+    
+    meta: {
+      title: 'La Rochelle Cruise Port Guide 2026',
+      description: '[TO BE COMPLETED]',
+      keywords: ['La Rochelle cruise port', 'France Atlantic coast cruise'],
+    },
+    
+    status: 'template',
+    lastUpdated: '2026-01-21',
+  },
+
 ];
 
 // ============================================================================

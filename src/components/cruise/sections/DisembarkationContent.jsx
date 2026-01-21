@@ -111,8 +111,6 @@ function WhatToExpectSection({ dayData: _dayData }) {
           <li>No assistance available</li>
           <li>Breakfast options limited if leaving very early</li>
         </ul>
-
-        <p className="info-note">Pro tip: Pack a smaller overnight bag for the cruise and travel light - self-disembarkation is much easier with one wheelie case than three large suitcases.</p>
       </div>
 
       <hr className="section-divider" />
@@ -262,29 +260,27 @@ function TipsSection({ dayData: _dayData }) {
   return (
     <div className="section-tips">
       <div className="content-card tip-card">
-        <p className="content-card-title">💡 Tip 2: Pack the Night Before Properly</p>
+        <p className="content-card-title">Pack the Night Before Properly</p>
         <p>If using standard disembarkation, your bags go out by 10-11pm the night before. This means you need to plan carefully. Keep out: breakfast clothes, toiletries, medications, phone charger, travel documents. Use a small day bag or hand luggage for morning essentials. Don't forget items in the safe, drawers, or bathroom.</p>
-        <p className="info-note">Note: Common mistakes include packing passport in main luggage, forgetting phone charger, leaving medication in suitcase.</p>
       </div>
 
       <div className="content-card tip-card">
-        <p className="content-card-title">💡 Tip 3: Luggage are in Deck Order</p>
+        <p className="content-card-title">Luggage are in Deck Order</p>
         <p>Your luggage will be arranged in the terminal baggage hall in deck order, making it easier to locate your bags when you disembark.</p>
       </div>
 
       <div className="content-card tip-card">
-        <p className="content-card-title">💡 Tip 4: Have a Proper Breakfast</p>
+        <p className="content-card-title">Have a Proper Breakfast</p>
         <p>Don't rush your final morning! The buffet serves breakfast on disembarkation day which opens around 6am.</p>
-        <p className="info-note">Note: The buffet gets very busy 7:30am-8:30am as colour groups are called. Go early or late.</p>
       </div>
 
       <div className="content-card tip-card">
-        <p className="content-card-title">💡 Tip 5: Check Your Onboard Account</p>
+        <p className="content-card-title">Check Your Onboard Account</p>
         <p>Your final bill is generated overnight. Check on cabin TV or My Holiday website first thing. Any disputes need to be resolved at Guest Services before you disembark - it's much harder to fix issues afterwards. Keep your receipts if you've queried any charges.</p>
       </div>
 
       <div className="content-card tip-card">
-        <p className="content-card-title">💡 Tip 7: Keep Essentials in Hand Luggage</p>
+        <p className="content-card-title">Keep Essentials in Hand Luggage</p>
         <p>Whatever disembarkation method you choose, keep these items on your person or in hand luggage: passport and travel documents, medication, phone, charger, and valuables, car keys/parking ticket, money and payment cards, any items you can't replace.</p>
       </div>
     </div>
@@ -295,142 +291,68 @@ function SendSection({ dayData: _dayData }) {
   return (
     <div className="section-send">
       <div className="sub-section">
-        <h3>Assistance at Southampton Terminal (Disembarkation)</h3>
+        <h3>SEND & Accessibility Support</h3>
         
-        <p><strong>What Assistance is Available?</strong></p>
-        <p>P&O provides full accessibility support for disembarkation:</p>
-        <ul className="info-list">
-          <li><strong>Priority disembarkation:</strong> Guests requiring assistance are typically in the first group called</li>
-          <li><strong>Wheelchair assistance:</strong> Available from cabin to terminal exit</li>
-          <li><strong>Mobility scooter support:</strong> Crew assist with scooter retrieval and transport to gangway</li>
-          <li><strong>Escort service:</strong> Staff can accompany guests through border control and baggage hall</li>
-          <li><strong>Luggage assistance:</strong> Porters available to transport bags to vehicles/taxis</li>
-        </ul>
+        <p>P&O Cruises works with guests to ensure cruise holidays are suitable for their needs whilst remaining enjoyable and relaxing. This guide provides a summary of the support available. For complete, up-to-date information, please visit the official P&O Cruises accessibility pages.</p>
 
-        <p><strong>How to Arrange Assistance:</strong></p>
-        <ol className="info-list">
-          <li><strong>During the cruise:</strong> Visit Guest Services or accessibility desk to confirm disembarkation arrangements</li>
-          <li><strong>The day before:</strong> Confirm your requirements and timing with your cabin steward or Guest Services</li>
-          <li><strong>Disembarkation morning:</strong> Call reception or use cabin phone when ready to leave</li>
-        </ol>
+        <div className="info-box">
+          <p><strong>📋 Complete the On Board Needs Questionnaire</strong></p>
+          <p>It is essential that you complete the On Board Needs questionnaire as soon as possible after booking. This allows P&O to arrange appropriate assistance and ensure compliance with safety requirements. Access via your booking: <a href="https://www.pocruises.com/account/manage-booking" target="_blank" rel="noopener noreferrer">Manage My Booking</a></p>
+        </div>
 
-        <p><strong>Wheelchair users:</strong></p>
+        <p><strong>Official P&O Accessibility Information:</strong></p>
         <ul className="info-list">
-          <li>Ship's wheelchairs available for transport to terminal</li>
-          <li>Your own wheelchair will be retrieved and brought to the gangway</li>
-          <li>Accessible route through terminal (lifts available, no stairs required)</li>
-          <li>Wheelchair-accessible taxis can be pre-arranged</li>
+          <li><strong>Main Accessibility Hub:</strong> <a href="https://www.pocruises.com/accessibility" target="_blank" rel="noopener noreferrer">P&O Accessibility</a></li>
+          <li><strong>Life Onboard:</strong> <a href="https://www.pocruises.com/accessibility/life-onboard" target="_blank" rel="noopener noreferrer">Mobility Assessment & Onboard Assistance</a></li>
+          <li><strong>Trips & Shore Excursions:</strong> <a href="https://www.pocruises.com/accessibility/ashore" target="_blank" rel="noopener noreferrer">Getting On/Off Ship & Port Access</a></li>
+          <li><strong>Impairments & Disabilities:</strong> <a href="https://www.pocruises.com/accessibility/impairments-and-disabilities" target="_blank" rel="noopener noreferrer">Specific Support Information</a></li>
+          <li><strong>Emergencies & Safety:</strong> <a href="https://www.pocruises.com/accessibility/emergencies-and-other-information" target="_blank" rel="noopener noreferrer">Emergency Procedures & Requirements</a></li>
         </ul>
       </div>
 
       <hr className="section-divider" />
 
       <div className="sub-section">
-        <h3>Priority Disembarkation</h3>
+        <h3>Emergency Procedures - Critical Information</h3>
         
-        <p><strong>Who Gets Priority Disembarkation?</strong></p>
-        <ul className="info-list">
-          <li><strong>Guests with disabilities/mobility needs:</strong> First group - contact Guest Services during cruise</li>
-          <li><strong>Guests with early flight connections:</strong> Early colours - request at Guest Services with flight details</li>
-          <li><strong>Families with young children:</strong> Priority consideration - request at Guest Services</li>
-          <li><strong>Suite guests:</strong> Priority colours - usually automatic</li>
-          <li><strong>Peninsular Club top tiers:</strong> Priority colours - usually automatic based on tier</li>
-        </ul>
-
-        <p><strong>How to Request Priority:</strong></p>
-        
-        <p><strong>For accessibility needs:</strong></p>
-        <ul className="info-list">
-          <li>Speak to Guest Services early in the cruise</li>
-          <li>Confirm arrangements the day before disembarkation</li>
-          <li>You'll receive early colour tags or direct priority boarding</li>
-          <li>Assistance will be arranged for the morning</li>
-        </ul>
-
-        <p><strong>For flight/travel connections:</strong></p>
-        <ul className="info-list">
-          <li>Visit Guest Services with your travel details</li>
-          <li>Genuine tight connections may receive earlier colours</li>
-          <li>Provide flight times, booking references if helpful</li>
-          <li>No guarantee but they try to accommodate</li>
-        </ul>
+        <div className="warning-box">
+          <p><strong>⚠️ Emergency Assistance Registration Required</strong></p>
+          <p>In the event of an emergency, guests will not be able to use the lifts. Guests who cannot independently reach their muster stations (which could involve going up or down several flights of stairs) due to disability, health or mental capacity must be pre-registered for assistance.</p>
+          <p>This is essential to ensure we have enough crew allocated and to comply with Safety of Life at Sea (SOLAS) requirements.</p>
+          <p><strong>Even if you are travelling with someone who can support you, you must still register for assistance as that person may not be with you in the event of an emergency.</strong></p>
+          <p>If you arrive at the terminal and require assistance in the event of an emergency but have failed to disclose this requirement beforehand, you may be denied boarding on safety grounds.</p>
+        </div>
       </div>
 
       <hr className="section-divider" />
 
       <div className="sub-section">
-        <h3>Accessible Disembarkation Process</h3>
+        <h3>How to Arrange Assistance</h3>
         
-        <p><strong>Step-by-step for guests requiring assistance:</strong></p>
-
-        <p><strong>Night before:</strong></p>
+        <p><strong>Before Your Cruise (at least 2 weeks before embarkation):</strong></p>
         <ul className="info-list">
-          <li>Confirm arrangements with Guest Services</li>
-          <li>Pack luggage (assistance available if needed)</li>
-          <li>Receive your priority disembarkation time</li>
+          <li>Complete the On Board Needs questionnaire via <a href="https://www.pocruises.com/account/manage-booking" target="_blank" rel="noopener noreferrer">My P&O Cruises</a></li>
+          <li>Contact P&O's Guest Accessibility Team: <strong>0344 338 8014</strong></li>
+          <li>Email: <strong>accessibility@pocruises.com</strong></li>
+          <li>Inform P&O of any disability at time of booking</li>
         </ul>
 
-        <p><strong>Morning:</strong></p>
+        <p><strong>During Your Cruise:</strong></p>
         <ul className="info-list">
-          <li>Have breakfast (room service available if mobility is difficult)</li>
-          <li>Call reception when ready</li>
-          <li>Crew member will come to assist</li>
+          <li>Visit Guest Services or accessibility desk onboard</li>
+          <li>Dial 0 from your cabin phone to contact reception</li>
+          <li>Confirm arrangements for disembarkation the day before</li>
         </ul>
 
-        <p><strong>Leaving the ship:</strong></p>
+        <p><strong>At the Terminal:</strong></p>
         <ul className="info-list">
-          <li>Wheelchair or mobility aid brought to cabin</li>
-          <li>Escorted to gangway via accessible route</li>
-          <li>Accompanied through border control</li>
-          <li>Assistance to baggage hall and exit</li>
+          <li>Inform parking staff/porters of your needs</li>
+          <li>Meet & Assist staff available at terminal entrance</li>
+          <li>Dedicated accessible check-in lanes available</li>
+          <li>Southampton Ocean Terminal is fully accessible</li>
         </ul>
 
-        <p><strong>At the terminal:</strong></p>
-        <ul className="info-list">
-          <li>Porter assistance with luggage</li>
-          <li>Wheelchair-accessible taxis available</li>
-          <li>Assistance to your onward transport</li>
-        </ul>
-
-        <p><strong>If you have your own mobility equipment:</strong></p>
-        <ul className="info-list">
-          <li>Scooters and wheelchairs stored overnight are retrieved and brought to you</li>
-          <li>Allow extra time as retrieval can take 15-30 minutes</li>
-          <li>Confirm storage location with Guest Services the night before</li>
-        </ul>
-
-        <p><strong>Sensory impairments:</strong></p>
-        <ul className="info-list">
-          <li>Announcements supplemented with cabin visits if requested</li>
-          <li>Escort through busy terminal areas</li>
-          <li>Staff alert to assist at border control</li>
-        </ul>
-
-        <p><strong>Hidden disabilities:</strong></p>
-        <ul className="info-list">
-          <li>Sunflower lanyard recognised for priority queuing</li>
-          <li>Quieter disembarkation times can be arranged</li>
-          <li>Notify Guest Services of any specific needs</li>
-        </ul>
-      </div>
-
-      <hr className="section-divider" />
-
-      <div className="sub-section">
-        <h3>Important Contacts</h3>
-        
-        <p><strong>During cruise - Guest Services:</strong> Dial 0 from cabin phone</p>
-
-        <p><strong>P&O Accessibility Team (pre/post cruise):</strong></p>
-        <ul className="info-list">
-          <li>Phone: 0344 338 8014</li>
-          <li>Email: accessibility@pocruises.com</li>
-        </ul>
-
-        <p><strong>Southampton Port (terminal queries):</strong></p>
-        <ul className="info-list">
-          <li>Phone: 023 8048 8800</li>
-        </ul>
+        <p className="info-note">For complete details on all accessibility services, equipment availability, and specific requirements, please visit the official P&O Cruises accessibility pages linked above. Information is subject to change and P&O's official website contains the most current details.</p>
       </div>
     </div>
   );
