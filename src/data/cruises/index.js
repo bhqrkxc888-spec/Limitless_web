@@ -13,10 +13,14 @@
  */
 
 import { g606Cruise } from './g606';
+import { g639Cruise } from './g639';
+import { g640Cruise } from './g640';
 
 // Registry of all cruises
 export const cruises = {
   'g606': g606Cruise,
+  'g639': g639Cruise,
+  'g640': g640Cruise,
   // Add more cruises here:
   // 'g701': g701Cruise,
   // 'g802': g802Cruise,
