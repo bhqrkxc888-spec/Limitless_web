@@ -36,7 +36,7 @@ export async function getImageUrlFromDb(entityType, entityId, imageType, fallbac
   try {
     const { data, error } = await supabase
       .from('site_images')
-      .select('bucket, path')
+      .select('bucket, path, alt_text, title')
       .eq('entity_type', entityType)
       .eq('entity_id', entityId)
       .eq('image_type', imageType)
@@ -44,26 +44,30 @@ export async function getImageUrlFromDb(entityType, entityId, imageType, fallbac
 
     if (error) {
       logger.warn(`Error fetching image from DB: ${error.message}`);
-      const url = fallbackUrl || PLACEHOLDER_IMAGE;
-      imageCache.set(cacheKey, url);
-      return url;
+      const result = { url: fallbackUrl || PLACEHOLDER_IMAGE, alt: null, title: null };
+      imageCache.set(cacheKey, result);
+      return result;
     }
 
     if (data && data.bucket && data.path) {
-      const url = getPublicUrl(data.bucket, data.path);
-      imageCache.set(cacheKey, url);
-      return url;
+      const result = {
+        url: getPublicUrl(data.bucket, data.path),
+        alt: data.alt_text || null,
+        title: data.title || null
+      };
+      imageCache.set(cacheKey, result);
+      return result;
     }
 
     // Not found in database, use fallback
-    const url = fallbackUrl || PLACEHOLDER_IMAGE;
-    imageCache.set(cacheKey, url);
-    return url;
+    const result = { url: fallbackUrl || PLACEHOLDER_IMAGE, alt: null, title: null };
+    imageCache.set(cacheKey, result);
+    return result;
   } catch (error) {
     logger.warn(`Error in getImageUrlFromDb: ${error.message}`);
-    const url = fallbackUrl || PLACEHOLDER_IMAGE;
-    imageCache.set(cacheKey, url);
-    return url;
+    const result = { url: fallbackUrl || PLACEHOLDER_IMAGE, alt: null, title: null };
+    imageCache.set(cacheKey, result);
+    return result;
   }
 }
 

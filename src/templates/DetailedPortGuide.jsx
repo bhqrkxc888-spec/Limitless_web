@@ -87,14 +87,14 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
     });
   };
   
-  // Load attraction images
-  const { imageUrl: attraction1 } = usePortGuideImage(slug, 'attraction-1', portName, portCountry);
-  const { imageUrl: attraction2 } = usePortGuideImage(slug, 'attraction-2', portName, portCountry);
-  const { imageUrl: attraction3 } = usePortGuideImage(slug, 'attraction-3', portName, portCountry);
-  const { imageUrl: attraction4 } = usePortGuideImage(slug, 'attraction-4', portName, portCountry);
-  const { imageUrl: attraction5 } = usePortGuideImage(slug, 'attraction-5', portName, portCountry);
-  const { imageUrl: attraction6 } = usePortGuideImage(slug, 'attraction-6', portName, portCountry);
-  const { imageUrl: beachImage } = usePortGuideImage(slug, 'beach', portName, portCountry);
+  // Load attraction images with metadata
+  const { imageUrl: attraction1, altText: attraction1Alt } = usePortGuideImage(slug, 'attraction-1', portName, portCountry);
+  const { imageUrl: attraction2, altText: attraction2Alt } = usePortGuideImage(slug, 'attraction-2', portName, portCountry);
+  const { imageUrl: attraction3, altText: attraction3Alt } = usePortGuideImage(slug, 'attraction-3', portName, portCountry);
+  const { imageUrl: attraction4, altText: attraction4Alt } = usePortGuideImage(slug, 'attraction-4', portName, portCountry);
+  const { imageUrl: attraction5, altText: attraction5Alt } = usePortGuideImage(slug, 'attraction-5', portName, portCountry);
+  const { imageUrl: attraction6, altText: attraction6Alt } = usePortGuideImage(slug, 'attraction-6', portName, portCountry);
+  const { imageUrl: beachImage, altText: beachAlt } = usePortGuideImage(slug, 'beach', portName, portCountry);
   
   // Load family-friendly images
   const { imageUrl: mcdonaldsImage } = usePortGuideImage(slug, 'mcdonalds', portName, portCountry);
@@ -102,6 +102,7 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
   const { imageUrl: parkImage } = usePortGuideImage(slug, 'local-park', portName, portCountry);
   
   const attractionImages = [attraction1, attraction2, attraction3, attraction4, attraction5, attraction6];
+  const attractionAlts = [attraction1Alt, attraction2Alt, attraction3Alt, attraction4Alt, attraction5Alt, attraction6Alt];
 
   // Extract data from detailedContent (may be null)
   const { overview, stayLocal, goFurther, withKids, send, medical, foodAndDrink } = detailedContent || {};
@@ -142,10 +143,10 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
         content = <OverviewSection overview={overview} portName={portName} />;
         break;
       case 'stayLocal':
-        content = <StayLocalSection stayLocal={stayLocal} beachImage={beachImage} marineData={marineData} marineLoading={marineLoading} />;
+        content = <StayLocalSection stayLocal={stayLocal} beachImage={beachImage} beachAlt={beachAlt} marineData={marineData} marineLoading={marineLoading} />;
         break;
       case 'goFurther':
-        content = <GoFurtherSection goFurther={goFurther} attractionImages={attractionImages} />;
+        content = <GoFurtherSection goFurther={goFurther} attractionImages={attractionImages} attractionAlts={attractionAlts} />;
         break;
       case 'withKids':
         content = <WithKidsSection withKids={withKids} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} parkImage={parkImage} />;
@@ -428,7 +429,7 @@ function OverviewSection({ overview, portName }) {
   );
 }
 
-function StayLocalSection({ stayLocal, beachImage, marineData, marineLoading }) {
+function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineLoading }) {
   if (!stayLocal) return <p>No local information available yet.</p>;
 
   return (
@@ -539,7 +540,7 @@ function StayLocalSection({ stayLocal, beachImage, marineData, marineLoading }) 
                   <div className="content-block__image">
                     <OptimizedImage 
                       src={beachImage} 
-                      alt={stayLocal.beach.title}
+                      alt={beachAlt || stayLocal.beach.title}
                       width={320}
                       height={240}
                       sizes="320px"
@@ -680,7 +681,7 @@ function StayLocalSection({ stayLocal, beachImage, marineData, marineLoading }) 
   );
 }
 
-function GoFurtherSection({ goFurther, attractionImages }) {
+function GoFurtherSection({ goFurther, attractionImages, attractionAlts }) {
   if (!goFurther || !goFurther.attractions || goFurther.attractions.length === 0) {
     return <p>No day trip information available yet.</p>;
   }
@@ -703,7 +704,7 @@ function GoFurtherSection({ goFurther, attractionImages }) {
                 <div className="attraction-image">
                   <OptimizedImage
                     src={attractionImages[idx]}
-                    alt={attraction.name}
+                    alt={attractionAlts[idx] || attraction.name}
                     width={320}
                     height={213}
                     sizes="320px"

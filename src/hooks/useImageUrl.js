@@ -176,12 +176,16 @@ export function usePortGuideImage(slug, type = 'hero', portName = '', country = 
   const directUrl = slug ? getPortGuideImageUrl(slug, type) : PLACEHOLDER_IMAGE;
   
   const [imageUrl, setImageUrl] = useState(() => directUrl);
+  const [altText, setAltText] = useState(null);
+  const [imageTitle, setImageTitle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isPlaceholder, setIsPlaceholder] = useState(() => !slug);
 
   useEffect(() => {
     if (!slug) {
       setImageUrl(PLACEHOLDER_IMAGE);
+      setAltText(null);
+      setImageTitle(null);
       setLoading(false);
       setIsPlaceholder(true);
       return;
@@ -194,13 +198,23 @@ export function usePortGuideImage(slug, type = 'hero', portName = '', country = 
     setImageUrl(currentDirectUrl);
     setIsPlaceholder(false);
 
-    // Check database in background - only update if different URL found
+    // Check database in background - get URL and metadata
     getImageUrlFromDb('port-guide', slug, type, currentDirectUrl)
-      .then(url => {
+      .then(result => {
         if (cancelled) return;
-        // Only update if DB returned a different, valid URL
-        if (url && url !== currentDirectUrl && !url.includes('placeholder')) {
-          setImageUrl(url);
+        
+        // Result is now an object: { url, alt, title }
+        if (result && typeof result === 'object') {
+          if (result.url && result.url !== currentDirectUrl && !result.url.includes('placeholder')) {
+            setImageUrl(result.url);
+          }
+          setAltText(result.alt);
+          setImageTitle(result.title);
+        } else if (result && typeof result === 'string') {
+          // Fallback for old format
+          if (result !== currentDirectUrl && !result.includes('placeholder')) {
+            setImageUrl(result);
+          }
         }
         setLoading(false);
       })
@@ -213,7 +227,7 @@ export function usePortGuideImage(slug, type = 'hero', portName = '', country = 
     return () => { cancelled = true; };
   }, [slug, type, portName, country]);
 
-  return { imageUrl, loading, isPlaceholder };
+  return { imageUrl, altText, imageTitle, loading, isPlaceholder };
 }
 
 /**
