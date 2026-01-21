@@ -361,6 +361,13 @@
   margin-bottom: 0;
 }
 
+/* Tip cards with enhanced styling */
+.tip-card {
+  background: linear-gradient(135deg, #F8F5F0 0%, #F0EDE5 100%);
+  border: 1px solid #E8E4DC;
+  box-shadow: 0 2px 6px rgba(44, 52, 76, 0.06);
+}
+
 .content-card-title {
   font-weight: var(--font-weight-semibold, 600);
   color: var(--clr-text-main, #2C344C);
@@ -375,6 +382,49 @@
 
 .content-card p:last-child {
   margin-bottom: 0;
+}
+
+/* Info boxes for general information */
+.info-box {
+  background: var(--clr-surface, #FFFFFF);
+  border: 1px solid var(--clr-border, #E8E4DC);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-4, 1rem);
+  margin: var(--space-4, 1rem) 0;
+  border-left: 4px solid var(--clr-primary, #2C344C);
+}
+
+.info-box p {
+  margin-bottom: var(--space-2, 0.5rem);
+  line-height: var(--line-height-relaxed, 1.7);
+}
+
+.info-box p:last-child {
+  margin-bottom: 0;
+}
+
+/* Warning boxes for important alerts */
+.warning-box {
+  background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+  border: 2px solid #F59E0B;
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-4, 1rem);
+  margin: var(--space-4, 1rem) 0;
+}
+
+.warning-box p {
+  margin-bottom: var(--space-2, 0.5rem);
+  line-height: var(--line-height-relaxed, 1.7);
+  color: var(--clr-text-main, #2C344C);
+}
+
+.warning-box p:last-child {
+  margin-bottom: 0;
+}
+
+.warning-box strong {
+  color: #92400E;
+  font-weight: var(--font-weight-bold, 700);
 }
 
 /* ========================================

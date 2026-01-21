@@ -261,30 +261,30 @@ function GettingHomeSection({ dayData: _dayData }) {
 function TipsSection({ dayData: _dayData }) {
   return (
     <div className="section-tips">
-      <div className="content-card">
-        <p className="content-card-title">Tip 2: Pack the Night Before Properly</p>
+      <div className="content-card tip-card">
+        <p className="content-card-title">💡 Tip 2: Pack the Night Before Properly</p>
         <p>If using standard disembarkation, your bags go out by 10-11pm the night before. This means you need to plan carefully. Keep out: breakfast clothes, toiletries, medications, phone charger, travel documents. Use a small day bag or hand luggage for morning essentials. Don't forget items in the safe, drawers, or bathroom.</p>
-        <p className="info-note">Common mistakes: Packing passport in main luggage, forgetting phone charger, leaving medication in suitcase.</p>
+        <p className="info-note">Note: Common mistakes include packing passport in main luggage, forgetting phone charger, leaving medication in suitcase.</p>
       </div>
 
-      <div className="content-card">
-        <p className="content-card-title">Tip 3: Luggage are in Deck Order</p>
+      <div className="content-card tip-card">
+        <p className="content-card-title">💡 Tip 3: Luggage are in Deck Order</p>
         <p>Your luggage will be arranged in the terminal baggage hall in deck order, making it easier to locate your bags when you disembark.</p>
       </div>
 
-      <div className="content-card">
-        <p className="content-card-title">Tip 4: Have a Proper Breakfast</p>
+      <div className="content-card tip-card">
+        <p className="content-card-title">💡 Tip 4: Have a Proper Breakfast</p>
         <p>Don't rush your final morning! The buffet serves breakfast on disembarkation day which opens around 6am.</p>
-        <p className="info-note">The buffet gets very busy 7:30am-8:30am as colour groups are called. Go early or late.</p>
+        <p className="info-note">Note: The buffet gets very busy 7:30am-8:30am as colour groups are called. Go early or late.</p>
       </div>
 
-      <div className="content-card">
-        <p className="content-card-title">Tip 5: Check Your Onboard Account</p>
+      <div className="content-card tip-card">
+        <p className="content-card-title">💡 Tip 5: Check Your Onboard Account</p>
         <p>Your final bill is generated overnight. Check on cabin TV or My Holiday website first thing. Any disputes need to be resolved at Guest Services before you disembark - it's much harder to fix issues afterwards. Keep your receipts if you've queried any charges.</p>
       </div>
 
-      <div className="content-card">
-        <p className="content-card-title">Tip 7: Keep Essentials in Hand Luggage</p>
+      <div className="content-card tip-card">
+        <p className="content-card-title">💡 Tip 7: Keep Essentials in Hand Luggage</p>
         <p>Whatever disembarkation method you choose, keep these items on your person or in hand luggage: passport and travel documents, medication, phone, charger, and valuables, car keys/parking ticket, money and payment cards, any items you can't replace.</p>
       </div>
     </div>
