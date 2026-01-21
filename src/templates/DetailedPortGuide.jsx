@@ -13,16 +13,40 @@ import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye, Star, Al
 import { formatBoldText, formatParagraphsWithBold } from '../utils/textFormatting.jsx';
 import './DetailedPortGuide.css';
 
-// Supabase storage base URL for images
+// Supabase storage base URL for images (direct, no transforms)
 const STORAGE_BASE_URL = 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_categories';
 
 /**
  * Helper to get full image URL from database image path
  * If item.image exists in database content, returns full URL
+ * Uses direct storage URL (no transforms) for reliability
  */
 function getContentImageUrl(imagePath) {
   if (!imagePath) return null;
   return `${STORAGE_BASE_URL}/${imagePath}`;
+}
+
+/**
+ * Simple image component for content images
+ * Bypasses OptimizedImage transforms for reliability
+ */
+function ContentImage({ src, alt, width = 280, height = 210 }) {
+  if (!src) return null;
+  return (
+    <img 
+      src={src}
+      alt={alt || 'Image'}
+      width={width}
+      height={height}
+      loading="lazy"
+      style={{ 
+        width: '100%', 
+        height: '100%', 
+        objectFit: 'cover',
+        borderRadius: '8px'
+      }}
+    />
+  );
 }
 
 /**
@@ -484,13 +508,9 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
                 {item.image ? (
                   <div className="content-block__top">
                     <div className="content-block__image">
-                      <OptimizedImage 
+                      <ContentImage 
                         src={getContentImageUrl(item.image)}
                         alt={item.title}
-                        width={280}
-                        height={210}
-                        sizes="280px"
-                        srcsetWidths={[280, 560]}
                       />
                     </div>
                     <div className="content-block__header">
@@ -535,13 +555,9 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
                 {item.image ? (
                   <div className="content-block__top">
                     <div className="content-block__image">
-                      <OptimizedImage 
+                      <ContentImage 
                         src={getContentImageUrl(item.image)}
                         alt={item.title}
-                        width={280}
-                        height={210}
-                        sizes="280px"
-                        srcsetWidths={[280, 560]}
                       />
                     </div>
                     <div className="content-block__header">
@@ -586,13 +602,9 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
                 {park.image ? (
                   <div className="content-block__top">
                     <div className="content-block__image">
-                      <OptimizedImage 
+                      <ContentImage 
                         src={getContentImageUrl(park.image)}
                         alt={park.title}
-                        width={280}
-                        height={210}
-                        sizes="280px"
-                        srcsetWidths={[280, 560]}
                       />
                     </div>
                     <div className="content-block__header">
@@ -725,13 +737,9 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
               <div className="content-block">
                 <div className="content-block__top">
                   <div className="content-block__image">
-                    <OptimizedImage 
+                    <ContentImage 
                       src={getContentImageUrl(stayLocal.shoppingImage)}
                       alt="Shopping near port"
-                      width={280}
-                      height={210}
-                      sizes="280px"
-                      srcsetWidths={[280, 560]}
                     />
                   </div>
                   <div className="content-block__header">
@@ -1288,13 +1296,9 @@ function MedicalSection({ medical }) {
               {medical.pharmacy.image ? (
                 <div className="content-block__top">
                   <div className="content-block__image">
-                    <OptimizedImage 
+                    <ContentImage 
                       src={getContentImageUrl(medical.pharmacy.image)}
                       alt={medical.pharmacy.name}
-                      width={280}
-                      height={210}
-                      sizes="280px"
-                      srcsetWidths={[280, 560]}
                     />
                   </div>
                   <div className="content-block__header">
@@ -1429,13 +1433,9 @@ function FoodDrinkSection({ foodAndDrink }) {
                 {restaurant.image ? (
                   <div className="content-block__top">
                     <div className="content-block__image">
-                      <OptimizedImage 
+                      <ContentImage 
                         src={getContentImageUrl(restaurant.image)}
                         alt={restaurant.name}
-                        width={280}
-                        height={210}
-                        sizes="280px"
-                        srcsetWidths={[280, 560]}
                       />
                     </div>
                     <div className="content-block__header">
