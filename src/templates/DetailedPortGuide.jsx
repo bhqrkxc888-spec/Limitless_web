@@ -242,9 +242,6 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
   const { imageUrl: mcdonaldsImage } = usePortGuideImage(slug, 'mcdonalds', portName, portCountry);
   const { imageUrl: aleHopImage } = usePortGuideImage(slug, 'ale-hop', portName, portCountry);
   const { imageUrl: parkImage } = usePortGuideImage(slug, 'local-park', portName, portCountry);
-  
-  const attractionImages = [attraction1, attraction2, attraction3, attraction4, attraction5, attraction6];
-  const attractionAlts = [attraction1Alt, attraction2Alt, attraction3Alt, attraction4Alt, attraction5Alt, attraction6Alt];
 
   // Extract data from detailedContent (may be null)
   const { overview, stayLocal, goFurther, withKids, send, medical, foodAndDrink } = detailedContent || {};
