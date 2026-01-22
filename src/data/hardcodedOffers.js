@@ -123,8 +123,8 @@ export const hardcodedOffers = [
     ],
     
     // Status
-    featured: true,
-    published: true,
+    featured: false,
+    published: false, // Hidden for now - can re-enable when needed
     
     // Metadata
     created_at: new Date().toISOString(),
