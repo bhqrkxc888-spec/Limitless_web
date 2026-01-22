@@ -21,6 +21,7 @@ const DESTINATIONS = [
   { value: 'Mediterranean', label: 'Mediterranean' },
   { value: 'Caribbean', label: 'Caribbean' },
   { value: 'Northern Europe', label: 'Northern Europe' },
+  { value: 'North America', label: 'North America' },
   { value: 'Alaska', label: 'Alaska' },
   { value: 'Asia', label: 'Asia' },
   { value: 'Australia', label: 'Australia & Pacific' },

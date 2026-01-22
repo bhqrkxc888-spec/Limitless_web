@@ -8,6 +8,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { getOffers, getOfferBySlug } from '../services/offersAPI';
 import { useRefreshOnFocus } from './usePageVisibility';
 import { logger } from '../utils/logger';
+import { hardcodedOffers } from '../data/hardcodedOffers';
 
 /**
  * Hook for fetching list of offers
@@ -46,28 +47,52 @@ export function useOffers({
         destination
       });
 
-      // Check if we got valid data from Supabase
+      // Get database offers
+      let dbOffers = [];
       if (!fetchError && data && data.offers && data.offers.length > 0) {
-        // Use real Supabase data
-        setOffers(data.offers);
-        setTotal(data.total || data.offers.length);
-      } else {
-        // No offers available - return empty array
-        // Offers will be uploaded from CRM soon
-        setOffers([]);
-        setTotal(0);
-        
-        // Don't set error for expected cases (empty DB, function not found)
-        // Only log unexpected errors for debugging
-        if (fetchError && 
-            fetchError.code !== 'PGRST202' && 
-            !fetchError.message?.includes('not found') && 
-            !fetchError.message?.includes('Searched for') &&
-            !fetchError.message?.includes('Could not find') &&
-            !fetchError.message?.includes('not configured')) {
-          logger.warn('Offers API error:', fetchError.message);
-        }
+        dbOffers = data.offers;
+      } else if (fetchError && 
+          fetchError.code !== 'PGRST202' && 
+          !fetchError.message?.includes('not found') && 
+          !fetchError.message?.includes('Searched for') &&
+          !fetchError.message?.includes('Could not find') &&
+          !fetchError.message?.includes('not configured')) {
+        logger.warn('Offers API error:', fetchError.message);
       }
+
+      // Filter hard-coded offers based on query parameters
+      let filteredHardcodedOffers = [...hardcodedOffers];
+      
+      // Apply featured filter
+      if (featured !== null) {
+        filteredHardcodedOffers = filteredHardcodedOffers.filter(
+          offer => offer.featured === featured
+        );
+      }
+      
+      // Apply offer type filter
+      if (offerType) {
+        filteredHardcodedOffers = filteredHardcodedOffers.filter(
+          offer => offer.offer_type === offerType
+        );
+      }
+      
+      // Apply destination filter
+      if (destination) {
+        filteredHardcodedOffers = filteredHardcodedOffers.filter(
+          offer => offer.destination === destination
+        );
+      }
+
+      // Merge hard-coded offers with database offers
+      // Hard-coded offers appear first (featured)
+      const mergedOffers = [...filteredHardcodedOffers, ...dbOffers];
+      
+      // Apply pagination after merging
+      const paginatedOffers = mergedOffers.slice(offset, offset + limit);
+      
+      setOffers(paginatedOffers);
+      setTotal(mergedOffers.length);
     } catch (err) {
       // Unexpected error - return empty
       logger.error('Unexpected error fetching offers:', err);
@@ -129,6 +154,16 @@ export function useOffer(slug) {
         setLoading(true);
         setError(null);
 
+        // First check hard-coded offers
+        const hardcodedOffer = hardcodedOffers.find(offer => offer.slug === slug);
+        
+        if (hardcodedOffer) {
+          setOffer(hardcodedOffer);
+          setLoading(false);
+          return;
+        }
+
+        // If not found in hard-coded, fetch from database
         const { data, error: fetchError } = await getOfferBySlug(slug);
 
         // Check if we got valid data from Supabase
