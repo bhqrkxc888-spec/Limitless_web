@@ -38,7 +38,7 @@ function WhatToExpectSection({ dayData: _dayData }) {
         <p>If using P&O's luggage service, bags must be outside your cabin door by the time stated (usually 10pm-11pm). Make sure your luggage tags are firmly secured to your baggage.</p>
 
         <p><strong>Check disembarkation information:</strong></p>
-        <p>A letter will be delivered to your cabin with your allocated time and colour group. Also displayed on the ship's TV information channel.</p>
+        <p>A letter will be delivered to your cabin with your allocated time and further information on the process.</p>
 
         <p><strong>Collect any stored items:</strong></p>
         <p>Retrieve valuables from the safe, collect any dry cleaning, and gather items from around the cabin.</p>
@@ -57,7 +57,6 @@ function WhatToExpectSection({ dayData: _dayData }) {
           <li><strong>6:00am - 8:30am:</strong> Breakfast available (buffet and main dining room)</li>
           <li><strong>6:30am onwards:</strong> Ship cleared by UK Border Force</li>
           <li><strong>7:00am - 7:30am:</strong> Self-disembarkation guests begin disembarking</li>
-          <li><strong>7:30am onwards:</strong> Colour groups called in sequence</li>
           <li><strong>9:30am - 10:00am:</strong> Final guests disembark</li>
           <li><strong>10:30am:</strong> All guests must have left the ship</li>
         </ul>
@@ -80,14 +79,13 @@ function WhatToExpectSection({ dayData: _dayData }) {
         <p><strong>How it works:</strong></p>
         <ul className="info-list">
           <li>You carry ALL your own luggage off the ship</li>
-          <li>You leave at your allocated time (in your disembarkation letter)</li>
-          <li>No waiting for colour groups to be called</li>
+          <li>No waiting for your time slot</li>
           <li>Walk straight through the terminal to exit</li>
         </ul>
 
-        <p><strong>Typical timing:</strong> Self-disembarkation usually starts around 6:30am (subject to customs clearance) - you'll be given your specific time in your disembarkation letter. <strong>Self-disembarkation guests are typically the first allowed off the ship.</strong></p>
+        <p><strong>Typical timing:</strong> Self-disembarkation usually starts around 6:30am (subject to customs clearance). <strong>Self-disembarkation guests are typically the first allowed off the ship.</strong></p>
 
-        <p><strong>How to register:</strong> Visit Guest Services or use My Holiday website (myholiday.pocruises.com) during the cruise to register for self-disembarkation. You'll be given your allocated time in your disembarkation letter.</p>
+        <p><strong>How to register:</strong> Visit Guest Services or use My Holiday website (myholiday.pocruises.com) during the cruise to register for self-disembarkation.</p>
 
         <p><strong>Requirements:</strong></p>
         <ul className="info-list">
@@ -125,28 +123,10 @@ function WhatToExpectSection({ dayData: _dayData }) {
           <li>Place tagged luggage outside your cabin door the night before (by stated deadline)</li>
           <li>P&O transport bags to the terminal baggage hall</li>
           <li>Enjoy breakfast at leisure</li>
-          <li>Wait for your colour group to be called</li>
+          <li>Wait for your designated time slot to disembark</li>
           <li>Walk off with just hand luggage</li>
-          <li>Collect bags from the terminal hall (organised by tag colour)</li>
+          <li>Collect bags from the terminal hall (organised by deck number)</li>
         </ol>
-
-        <p><strong>The colour tag system:</strong></p>
-        <p>P&O provides <strong>colour-coded luggage tags</strong> (e.g., Red, Blue, Yellow) paired with a time slot. You place these tags on your bags the night before.</p>
-        <ul className="info-list">
-          <li>You'll receive coloured luggage tags with your disembarkation letter</li>
-          <li>Colours are called in sequence over the morning</li>
-          <li>Earlier colours = earlier departure (but no choice - assigned based on deck/cabin location and any special requirements)</li>
-          <li>Listen for announcements and check TV channel for your colour</li>
-        </ul>
-
-        <p><strong>Typical colour group timing:</strong></p>
-        <ul className="info-list">
-          <li><strong>Priority/Assistance:</strong> 7:30am - 8:00am</li>
-          <li><strong>First colours:</strong> 8:00am - 8:30am</li>
-          <li><strong>Middle colours:</strong> 8:30am - 9:00am</li>
-          <li><strong>Later colours:</strong> 9:00am - 9:30am</li>
-        </ul>
-        <p className="info-note">Actual times vary by sailing and passenger numbers.</p>
 
         <p><strong>Advantages:</strong></p>
         <ul className="info-list">
@@ -166,7 +146,7 @@ function WhatToExpectSection({ dayData: _dayData }) {
         </ul>
 
         <p><strong>Baggage collection in terminal:</strong></p>
-        <p>Your bags will be arranged in the terminal by colour group. Look for your tag colour zone, then find your individual bags. Porters and trolleys are available to help you to the exit.</p>
+        <p>Your bags will be arranged in the terminal by deck number. Look for your deck zone, then find your individual bags. Porters and trolleys are available to help you to the exit.</p>
       </div>
 
       <hr className="section-divider" />
@@ -178,7 +158,7 @@ function WhatToExpectSection({ dayData: _dayData }) {
         <ol className="info-list">
           <li><strong>Exit the ship:</strong> Walk down the gangway to the terminal building</li>
           <li><strong>UK Border Control:</strong> Present your passport (usually quick e-gates or manual check)</li>
-          <li><strong>Customs:</strong> Green channel (nothing to declare) or Red channel if needed</li>
+          <li><strong>Customs:</strong> Nothing to declare route or goods to declare route if needed</li>
           <li><strong>Baggage hall (standard disembarkation only):</strong> Collect your tagged luggage</li>
           <li><strong>Exit:</strong> Through to arrivals area where taxis, transfers, and family can meet you</li>
         </ol>
@@ -348,7 +328,6 @@ function SendSection({ dayData: _dayData }) {
         <ul className="info-list">
           <li>Inform parking staff/porters of your needs</li>
           <li>Meet & Assist staff available at terminal entrance</li>
-          <li>Dedicated accessible check-in lanes available</li>
           <li>Southampton Ocean Terminal is fully accessible</li>
         </ul>
 
