@@ -66,7 +66,13 @@ function SEO({
     : siteName;
   const fullDescription = description || defaultDescription;
   const fullCanonical = canonical || policy.canonical;
-  const fullImage = image || defaultImage;
+  
+  // Ensure image URL is absolute for social sharing
+  let fullImage = image || defaultImage;
+  if (fullImage && !fullImage.startsWith('http')) {
+    fullImage = `${siteUrl}${fullImage.startsWith('/') ? '' : '/'}${fullImage}`;
+  }
+  
   const robotsMeta = robots || policy.robots;
 
   useEffect(() => {
@@ -129,6 +135,11 @@ function SEO({
       'og:url': fullCanonical,
       'og:type': type,
       'og:image': fullImage,
+      'og:image:secure_url': fullImage.startsWith('https') ? fullImage : undefined,
+      'og:image:width': '1200',
+      'og:image:height': '630',
+      'og:image:alt': fullTitle,
+      'og:image:type': 'image/jpeg',
       'og:site_name': siteName,
       'og:locale': 'en_GB',
     };
