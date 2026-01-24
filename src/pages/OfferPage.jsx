@@ -719,7 +719,10 @@ function OfferPage() {
       {offer.itinerary_detailed && Array.isArray(offer.itinerary_detailed) && offer.itinerary_detailed.length > 0 && (
         <section className="section offer-holiday-summary-section">
           <div className="container">
-            <HolidaySummary itinerary={offer.itinerary_detailed} />
+            <HolidaySummary 
+              itinerary={offer.itinerary_detailed}
+              cruiseDurationNights={offer.duration_nights ? parseInt(offer.duration_nights) : null}
+            />
           </div>
         </section>
       )}

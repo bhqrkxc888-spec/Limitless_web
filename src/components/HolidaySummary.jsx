@@ -96,7 +96,7 @@ function extractJourneySegments(itinerary) {
 /**
  * Format segment data for display
  */
-function formatSegmentData(segment) {
+function formatSegmentData(segment, cruiseDurationNights = null) {
   const { type, subType, items, segment: phase } = segment
   
   switch (type) {
@@ -150,9 +150,6 @@ function formatSegmentData(segment) {
     }
     
     case 'cruise': {
-      // Count total cruise days (all cruise-related items including embark/disembark)
-      const totalCruiseDays = items.length
-      
       // Get embark and disembark ports
       const embarkItem = items.find(i => i.type === 'embark' || i.type === 'embarkation')
       const disembarkItem = items.find(i => i.type === 'disembark' || i.type === 'disembarkation')
@@ -162,8 +159,9 @@ function formatSegmentData(segment) {
       
       const isRoundTrip = embarkPort === disembarkPort
       
-      // Calculate nights (days - 1) for display
-      const nights = Math.max(totalCruiseDays - 1, 1)
+      // Use the actual cruise duration from offer data if provided
+      // Otherwise fall back to calculating from itinerary items (days - 1)
+      const nights = cruiseDurationNights || Math.max(items.length - 1, 1)
       
       return {
         iconType: 'cruise',
@@ -216,11 +214,11 @@ const SegmentIcon = ({ type }) => {
   return icons[type] || icons.cruise
 }
 
-function HolidaySummary({ itinerary }) {
+function HolidaySummary({ itinerary, cruiseDurationNights = null }) {
   const segments = useMemo(() => {
     const extracted = extractJourneySegments(itinerary)
-    return extracted.map(seg => formatSegmentData(seg)).filter(Boolean)
-  }, [itinerary])
+    return extracted.map(seg => formatSegmentData(seg, cruiseDurationNights)).filter(Boolean)
+  }, [itinerary, cruiseDurationNights])
 
   if (segments.length === 0) {
     return null
