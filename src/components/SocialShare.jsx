@@ -4,9 +4,15 @@ import './SocialShare.css';
 
 /**
  * Social Share Component
- * Compact share buttons for port guides and content
+ * Compact share buttons for guides, offers, and content
+ * 
+ * @param {string} url - URL to share
+ * @param {string} title - Title for share text
+ * @param {string} description - Description for email sharing
+ * @param {string} label - Custom label text (default: no label shown)
+ * @param {boolean} showLabel - Whether to show the label (default: false)
  */
-function SocialShare({ url, title, description }) {
+function SocialShare({ url, title, description, label, showLabel = false }) {
   const [copied, setCopied] = useState(false);
 
   const shareUrl = url || window.location.href;
@@ -31,7 +37,7 @@ function SocialShare({ url, title, description }) {
 
   return (
     <div className="social-share">
-      <span className="social-share-label">Share this guide</span>
+      {showLabel && label && <span className="social-share-label">{label}</span>}
       <div className="social-share-buttons">
         <a
           href={shareLinks.facebook}

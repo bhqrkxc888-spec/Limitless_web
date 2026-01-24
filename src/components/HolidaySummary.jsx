@@ -150,12 +150,8 @@ function formatSegmentData(segment) {
     }
     
     case 'cruise': {
-      // Count actual cruise nights (exclude embark/disembark days)
-      const cruiseItems = items.filter(i => 
-        i.type === 'port' || i.type === 'sea' || i.type === 'scenic' || 
-        i.type === 'tender' || i.type === 'private_island'
-      )
-      const nights = cruiseItems.length
+      // Count total cruise days (all cruise-related items including embark/disembark)
+      const totalCruiseDays = items.length
       
       // Get embark and disembark ports
       const embarkItem = items.find(i => i.type === 'embark' || i.type === 'embarkation')
@@ -165,6 +161,9 @@ function formatSegmentData(segment) {
       const disembarkPort = disembarkItem?.port || items[items.length - 1]?.port || embarkPort
       
       const isRoundTrip = embarkPort === disembarkPort
+      
+      // Calculate nights (days - 1) for display
+      const nights = Math.max(totalCruiseDays - 1, 1)
       
       return {
         iconType: 'cruise',
