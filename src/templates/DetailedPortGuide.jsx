@@ -22,8 +22,9 @@ const STORAGE_BASE_URL = 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/ob
  * Helper to get full image URL from database image path
  * If item.image exists in database content, returns full URL
  * Uses direct storage URL (no transforms) for reliability
+ * NOTE: Currently unused as we've moved to folder-based carousel system
  */
-function getContentImageUrl(imagePath) {
+function _getContentImageUrl(imagePath) {
   if (!imagePath) return null;
   return `${STORAGE_BASE_URL}/${imagePath}`;
 }
@@ -550,7 +551,7 @@ function MarineConditionsCard({ marineData, loading }) {
   );
 }
 
-function OverviewSection({ overview, portName, slug, overviewImages, hasOverviewImages, onOpenLightbox }) {
+function OverviewSection({ overview, portName, _slug, overviewImages, hasOverviewImages, onOpenLightbox }) {
   if (!overview) return <p>No overview information available yet.</p>;
 
   return (
@@ -651,7 +652,7 @@ function OverviewSection({ overview, portName, slug, overviewImages, hasOverview
   );
 }
 
-function StayLocalSection({ stayLocal, slug, beachImage, beachAlt, marineData, marineLoading, stayLocalImages, hasStayLocalImages, onOpenLightbox }) {
+function StayLocalSection({ stayLocal, _slug, beachImage, beachAlt, marineData, marineLoading, stayLocalImages, hasStayLocalImages, onOpenLightbox }) {
   if (!stayLocal) return <p>No local information available yet.</p>;
 
   return (
@@ -916,7 +917,7 @@ function StayLocalSection({ stayLocal, slug, beachImage, beachAlt, marineData, m
   );
 }
 
-function GoFurtherSection({ goFurther, slug, goFurtherImages, hasGoFurtherImages, onOpenLightbox }) {
+function GoFurtherSection({ goFurther, _slug, goFurtherImages, hasGoFurtherImages, onOpenLightbox }) {
   if (!goFurther || !goFurther.attractions || goFurther.attractions.length === 0) {
     return <p>No day trip information available yet.</p>;
   }
@@ -1020,7 +1021,7 @@ function GoFurtherSection({ goFurther, slug, goFurtherImages, hasGoFurtherImages
   );
 }
 
-function WithKidsSection({ withKids, slug, familyFriendly, mcdonaldsImage, aleHopImage, parkImage, withKidsImages, hasWithKidsImages, onOpenLightbox }) {
+function WithKidsSection({ withKids, _slug, familyFriendly, mcdonaldsImage, aleHopImage, parkImage, withKidsImages, hasWithKidsImages, onOpenLightbox }) {
   // Show section if either withKids (portContent) or familyFriendly (ports.js) has content
   if (!withKids && !familyFriendly) return <p>No family information available yet.</p>;
 
@@ -1401,7 +1402,7 @@ function SendSection({ send }) {
   );
 }
 
-function MedicalSection({ medical, onOpenLightbox }) {
+function MedicalSection({ medical, _onOpenLightbox }) {
   if (!medical) return <p>No medical information available yet.</p>;
 
   // Check if there's any actual content
@@ -1472,7 +1473,7 @@ function MedicalSection({ medical, onOpenLightbox }) {
   );
 }
 
-function FoodDrinkSection({ foodAndDrink, onOpenLightbox }) {
+function FoodDrinkSection({ foodAndDrink, _onOpenLightbox }) {
   if (!foodAndDrink) return <p>No food & drink information available yet.</p>;
 
   return (
