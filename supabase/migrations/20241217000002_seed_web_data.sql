@@ -24,7 +24,7 @@ VALUES (
   'Website Terms & Conditions',
   E'<h2>Website Conditions</h2>
 
-<p>This website is operated by <strong>Limitless Cruises Ltd</strong> (Company Number: 16405644). Limitless Cruises Ltd is a member of <strong>Holiday Elite (ABTA P7541)</strong>.</p>
+<p>This website is operated by <strong>Limitless Cruises Ltd</strong> (Company Number: 16405644), a trading name of <strong>Co-op Travel Services Ltd</strong>. Limitless Cruises Ltd is a Member of <strong>Co-operative Travel Consortium (ABTA P7541)</strong>.</p>
 
 <p>By accessing, using, browsing or booking on this website you agree you have read, understood and are bound by these Website Conditions and by the booking conditions of the principal with whom you contract.</p>
 
@@ -70,7 +70,7 @@ VALUES (
 
 <p>Your privacy is important to us. This statement explains how we collect, use, transfer and store your personal data.</p>
 
-<p><strong>Limitless Cruises Ltd</strong> (Company Number: 16405644) is a member of Holiday Elite (ABTA P7541).</p>
+<p><strong>Limitless Cruises Ltd</strong> (Company Number: 16405644) is a trading name of <strong>Co-op Travel Services Ltd</strong>, a Member of <strong>Co-operative Travel Consortium (ABTA P7541)</strong>.</p>
 
 <p><strong>Data Protection Manager:</strong> <a href="mailto:dane@limitlesscruises.com">dane@limitlesscruises.com</a></p>
 
@@ -144,7 +144,7 @@ VALUES (
   'Booking Terms & Conditions',
   E'<h2>Booking Terms &amp; Conditions</h2>
 
-<p>These Booking Terms &amp; Conditions apply to all bookings made through Limitless Cruises Ltd, a member of Holiday Elite (ABTA P7541).</p>
+<p>These Booking Terms &amp; Conditions apply to all bookings made through Limitless Cruises Ltd, a trading name of Co-op Travel Services Ltd, Member of Co-operative Travel Consortium (ABTA P7541).</p>
 
 <h3>Important Notice</h3>
 
@@ -195,7 +195,7 @@ VALUES (
 
 <h3>ABTA Protection</h3>
 
-<p>As a member of Holiday Elite (ABTA P7541), your booking is protected by ABTA.</p>
+<p>As a member of Co-op Travel Services Ltd, which is a member of ABTA (P7541) through Co-operative Travel Consortium, your booking is protected by ABTA.</p>
 
 <h3>Contact</h3>
 

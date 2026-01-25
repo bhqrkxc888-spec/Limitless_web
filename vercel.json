@@ -298,6 +298,17 @@
       "destination": "/api/go/:code"
     },
     {
+      "source": "/offers/:slug",
+      "has": [
+        {
+          "type": "header",
+          "key": "user-agent",
+          "value": "(?i).*(facebookexternalhit|Facebot|Twitterbot|LinkedInBot|WhatsApp|Slackbot|TelegramBot|Pinterest|Discordbot).*"
+        }
+      ],
+      "destination": "/api/og/offers/:slug"
+    },
+    {
       "source": "/((?!api/)(?!go/).*)",
       "destination": "/index.html"
     }

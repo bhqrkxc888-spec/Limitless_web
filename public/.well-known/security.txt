@@ -6,7 +6,7 @@ Expires: 2026-12-31T23:59:59.000Z
 Preferred-Languages: en
 
 # This website is operated by Limitless Cruises,
-# a trading name of The Midcounties Co-operative Ltd.
+# a trading name of Co-op Travel Services Ltd.
 # ABTA Member: P7541
 
 # If you discover a security vulnerability, please contact us

@@ -18,7 +18,7 @@ const faqData = {
       },
       {
         question: 'Is my booking financially protected?',
-        answer: 'Absolutely. All bookings through Limitless Cruises are ABTA protected (member P7541) through The Midcounties Co-operative. This means your money is safe and you\'re covered if anything goes wrong. Flight-inclusive holidays may also be ATOL protected.'
+        answer: 'Absolutely. All bookings through Limitless Cruises are ABTA protected (member P7541) through Co-op Travel Services. This means your money is safe and you\'re covered if anything goes wrong. Flight-inclusive holidays may also be ATOL protected.'
       },
       {
         question: 'Do you charge any booking fees?',

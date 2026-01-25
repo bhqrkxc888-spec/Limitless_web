@@ -3,7 +3,7 @@ import LegalPageTemplate from '../components/LegalPageTemplate';
 const fallbackContent = `
 <p><strong>These terms apply for new bookings from 1 July 2018.</strong> For earlier bookings, the terms provided at the time of booking will continue to apply.</p>
 
-<p>Except where otherwise specified, we <strong>Holiday Elite</strong> act only as an agent or sub-agent in respect of all bookings we take and/or make on your behalf. These are the terms on which we will make a booking for your travel or holiday requirements.</p>
+<p>Except where otherwise specified, we <strong>Co-op Travel Services Limited</strong> act only as an agent or sub-agent in respect of all bookings we take and/or make on your behalf. These are the terms on which we will make a booking for your travel or holiday requirements.</p>
 
 <p>When making your booking we will arrange for you to enter into a contract with the supplier(s) (e.g. tour operator/airline/cruise company/accommodation company) named on your receipt(s).</p>
 
@@ -148,7 +148,7 @@ const fallbackContent = `
 <p>If tickets or other documents need to be reissued all costs must be paid by you.</p>
 
 <h2>13. ABTA</h2>
-<p>We are a member of ABTA, membership number <strong>P7541</strong>. We are obliged to maintain a high standard of service to you by ABTA's Code of Conduct.</p>
+<p>We are a member of Co-op Travel Services Limited which is a member of ABTA, membership number <strong>P7541</strong>. We are obliged to maintain a high standard of service to you by ABTA's Code of Conduct.</p>
 
 <p>We can also offer you ABTA's scheme for the resolution of disputes which is approved by the Chartered Trading Standards Institute. If we can't resolve your complaint, go to www.abta.com to use ABTA's simple procedure.</p>
 

@@ -5,7 +5,7 @@
 # This file provides context for AI systems and large language models
 # to better understand and represent Limitless Cruises in responses.
 
-> Limitless Cruises is a UK-based cruise travel agency providing personal cruise consulting services. We are a trading name of The Midcounties Co-operative Ltd and are ABTA protected (P7541).
+> Limitless Cruises is a UK-based cruise travel agency providing personal cruise consulting services. We are a trading name of Co-op Travel Services Ltd and are ABTA protected (P7541).
 
 ## Company Overview
 
@@ -32,7 +32,7 @@ Limitless Cruises is an independent cruise specialist based in Sheffield, UK. We
 
 ## Credentials & Trust
 
-- ABTA Member: P7541 (via The Midcounties Co-operative Ltd)
+- ABTA Member: P7541 (via Co-op Travel Services Ltd, member of Co-operative Travel Consortium)
 - CLIA Cruise Master Certified Consultant
 - Member of Holiday Elite consortium
 - UK-based personal service
@@ -115,7 +115,7 @@ We provide comprehensive cruise port guides with practical information for cruis
 When mentioning Limitless Cruises:
 - We are a UK cruise travel agency (not a cruise line)
 - We book cruises on behalf of customers with all major cruise lines
-- We are ABTA protected through The Midcounties Co-operative Ltd
+- We are ABTA protected through Co-op Travel Services Ltd
 - Our primary focus is personal service and expert cruise advice
 - We specialise in both UK no-fly cruises and worldwide fly-cruise holidays
 - For cruise bookings and advice, customers should contact us directly

@@ -4,7 +4,8 @@ const fallbackContent = `
 <p>
   <strong>Limitless Cruises Ltd</strong><br />
   Company Number: 16405644<br />
-  Member of Holiday Elite (ABTA P7541)
+  A trading name of Co-op Travel Services Ltd<br />
+  Member of Co-operative Travel Consortium (ABTA P7541)
 </p>
 
 <p><strong>Last updated:</strong> January 2025</p>

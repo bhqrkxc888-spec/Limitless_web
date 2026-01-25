@@ -18,7 +18,7 @@ The official website for **Limitless Cruises**, a UK-based independent cruise tr
 - **Worldwide fly-cruises** - Complete holiday packages including flights and transfers
 - **Bucket list experiences** - World cruises, expeditions, Arctic/Antarctica, transatlantic crossings
 
-**Trading Name:** Limitless Cruises Ltd (a trading name of The Midcounties Co-operative Ltd)  
+**Trading Name:** Limitless Cruises Ltd (a trading name of Co-op Travel Services Ltd)  
 **ABTA Member:** P7541  
 **Location:** Sheffield, South Yorkshire, UK
 
@@ -512,7 +512,7 @@ Use `src/data/cruises/TEMPLATE.js` as reference. System supports unlimited cruis
 
 ## 📄 License & Credits
 
-**Business:** Limitless Cruises Ltd (trading name of The Midcounties Co-operative Ltd)  
+**Business:** Limitless Cruises Ltd (trading name of Co-op Travel Services Ltd)  
 **ABTA:** P7541  
 **Location:** Sheffield, South Yorkshire, UK
 
