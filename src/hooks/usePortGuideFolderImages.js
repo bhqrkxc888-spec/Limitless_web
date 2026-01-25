@@ -45,6 +45,7 @@ export function usePortGuideFolderImages(portSlug, folder) {
           .select('id, path, image_type, alt_text, title, bucket')
           .eq('entity_type', 'port-guide')
           .eq('entity_id', portSlug)
+          .eq('bucket', 'WEB_port-guides')
           .like('image_type', `${folder}%`)
           .order('path');
 
@@ -144,6 +145,7 @@ export function usePortGuideFolderHasImages(portSlug, folder) {
             .select('path')
             .eq('entity_type', 'port-guide')
             .eq('entity_id', portSlug)
+            .eq('bucket', 'WEB_port-guides')
             .like('image_type', `${folder}%`);
 
           if (!countError && imageData) {
