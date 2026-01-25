@@ -7,114 +7,15 @@
  */
 
 import { useState, useRef, useEffect, Fragment } from 'react';
-import OptimizedImage from '../components/OptimizedImage';
-import { usePortGuideImage } from '../hooks/useImageUrl';
 import { usePortGuideFolderImages } from '../hooks/usePortGuideFolderImages';
 import ImageCarousel from '../components/port/ImageCarousel';
 import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye, Star, AlertCircle, Thermometer, Waves, ChefHat, Wind, Anchor, Cross } from 'lucide-react';
 import { formatBoldText, formatParagraphsWithBold } from '../utils/textFormatting.jsx';
 import './DetailedPortGuide.css';
 
-// Supabase storage base URL for images (direct, no transforms)
-const STORAGE_BASE_URL = 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_categories';
-
-/**
- * Helper to get full image URL from database image path
- * If item.image exists in database content, returns full URL
- * Uses direct storage URL (no transforms) for reliability
- * NOTE: Currently unused as we've moved to folder-based carousel system
- */
-function _getContentImageUrl(imagePath) {
-  if (!imagePath) return null;
-  return `${STORAGE_BASE_URL}/${imagePath}`;
-}
-
-/**
- * Simple image component for content images
- * Bypasses OptimizedImage transforms for reliability
- * Clickable to open in modal lightbox
- * Shows placeholder with exact filename when image is missing
- */
-function ContentImage({ src, alt, imagePath, width = 280, height = 210, onOpenLightbox }) {
-  const [imageExists, setImageExists] = useState(true);
-  
-  // Check if image exists
-  useEffect(() => {
-    if (!src) {
-      setImageExists(false);
-      return;
-    }
-    
-    const img = new Image();
-    img.onload = () => setImageExists(true);
-    img.onerror = () => setImageExists(false);
-    img.src = src;
-  }, [src]);
-  
-  if (!src || !imageExists) {
-    // Show placeholder with exact filename
-    const filename = imagePath || 'image.webp';
-    return (
-      <div 
-        style={{ 
-          width: width,
-          height: height,
-          backgroundColor: '#f0f0f0',
-          borderRadius: '8px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '1rem',
-          border: '2px dashed #ccc'
-        }}
-      >
-        <div style={{ fontSize: '14px', color: '#666', marginBottom: '0.5rem', textAlign: 'center' }}>
-          Image Coming Soon
-        </div>
-        <div style={{ 
-          fontSize: '11px', 
-          color: '#999', 
-          fontFamily: 'monospace',
-          textAlign: 'center',
-          wordBreak: 'break-all',
-          padding: '0.5rem',
-          backgroundColor: '#fff',
-          borderRadius: '4px',
-          border: '1px solid #ddd'
-        }}>
-          Upload as:<br />
-          <strong>{filename}</strong>
-        </div>
-      </div>
-    );
-  }
-  
-  return (
-    <div 
-      onClick={() => onOpenLightbox && onOpenLightbox(src, alt)}
-      style={{ display: 'block', cursor: 'pointer' }}
-      title="Click to view full size"
-    >
-      <img 
-        src={src}
-        alt={alt || 'Image'}
-        width={width}
-        height={height}
-        loading="lazy"
-        style={{ 
-          width: '100%', 
-          height: '100%', 
-          objectFit: 'cover',
-          borderRadius: '8px',
-          transition: 'opacity 0.2s'
-        }}
-        onMouseOver={(e) => e.currentTarget.style.opacity = '0.85'}
-        onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
-      />
-    </div>
-  );
-}
+// NOTE: All inline images removed - now using folder-based carousel system only
+// Images are loaded from WEB_port-guides bucket via usePortGuideFolderImages hook
+// Old image hooks (usePortGuideImage) and components (ContentImage, OptimizedImage) removed
 
 /**
  * Image Lightbox Modal
@@ -286,15 +187,8 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
     });
   };
   
-  // Load beach image
-  const { imageUrl: beachImage, altText: beachAlt } = usePortGuideImage(slug, 'beach', portName, portCountry);
-  
-  // Load family-friendly images
-  const { imageUrl: mcdonaldsImage } = usePortGuideImage(slug, 'mcdonalds', portName, portCountry);
-  const { imageUrl: aleHopImage } = usePortGuideImage(slug, 'ale-hop', portName, portCountry);
-  const { imageUrl: parkImage } = usePortGuideImage(slug, 'local-park', portName, portCountry);
-
-  // Load folder images for all sections (must be called unconditionally at top level)
+  // Load folder images for all sections (NEW carousel system)
+  // Note: Old image hooks (beachImage, mcdonaldsImage, etc.) removed - now using folder-based carousels only
   const { images: overviewImages, hasImages: hasOverviewImages } = usePortGuideFolderImages(slug, 'overview');
   const { images: stayLocalImages, hasImages: hasStayLocalImages } = usePortGuideFolderImages(slug, 'stay-local');
   const { images: goFurtherImages, hasImages: hasGoFurtherImages } = usePortGuideFolderImages(slug, 'go-further');
@@ -344,13 +238,13 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
         content = <OverviewSection overview={overview} portName={portName} slug={slug} overviewImages={overviewImages} hasOverviewImages={hasOverviewImages} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'stayLocal':
-        content = <StayLocalSection stayLocal={stayLocal} slug={slug} beachImage={beachImage} beachAlt={beachAlt} marineData={marineData} marineLoading={marineLoading} stayLocalImages={stayLocalImages} hasStayLocalImages={hasStayLocalImages} onOpenLightbox={handleOpenLightbox} />;
+        content = <StayLocalSection stayLocal={stayLocal} marineData={marineData} marineLoading={marineLoading} stayLocalImages={stayLocalImages} hasStayLocalImages={hasStayLocalImages} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'goFurther':
         content = <GoFurtherSection goFurther={goFurther} slug={slug} goFurtherImages={goFurtherImages} hasGoFurtherImages={hasGoFurtherImages} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'withKids':
-        content = <WithKidsSection withKids={withKids} slug={slug} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} parkImage={parkImage} withKidsImages={withKidsImages} hasWithKidsImages={hasWithKidsImages} onOpenLightbox={handleOpenLightbox} />;
+        content = <WithKidsSection withKids={withKids} familyFriendly={familyFriendly} withKidsImages={withKidsImages} hasWithKidsImages={hasWithKidsImages} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'send':
         content = <SendSection send={send} />;
@@ -652,7 +546,7 @@ function OverviewSection({ overview, portName, _slug, overviewImages, hasOvervie
   );
 }
 
-function StayLocalSection({ stayLocal, _slug, beachImage, beachAlt, marineData, marineLoading, stayLocalImages, hasStayLocalImages, onOpenLightbox }) {
+function StayLocalSection({ stayLocal, marineData, marineLoading, stayLocalImages, hasStayLocalImages, onOpenLightbox }) {
   if (!stayLocal) return <p>No local information available yet.</p>;
 
   return (
@@ -770,20 +664,8 @@ function StayLocalSection({ stayLocal, _slug, beachImage, beachAlt, marineData, 
         <>
           <SubSection title="Beach">
             <div className="content-block">
-              {/* Row 1: Image and main text side by side */}
+              {/* Beach info - text only (images via carousel system) */}
               <div className="content-block__top">
-                {beachImage && (
-                  <div className="content-block__image">
-                    <OptimizedImage 
-                      src={beachImage} 
-                      alt={beachAlt || stayLocal.beach.title}
-                      width={320}
-                      height={240}
-                      sizes="320px"
-                      srcsetWidths={[320, 640]}
-                    />
-                  </div>
-                )}
                 <div className="content-block__header">
                   <h4>{stayLocal.beach.title}</h4>
                   <p>{stayLocal.beach.content}</p>
@@ -1021,7 +903,7 @@ function GoFurtherSection({ goFurther, _slug, goFurtherImages, hasGoFurtherImage
   );
 }
 
-function WithKidsSection({ withKids, _slug, familyFriendly, mcdonaldsImage, aleHopImage, parkImage, withKidsImages, hasWithKidsImages, onOpenLightbox }) {
+function WithKidsSection({ withKids, familyFriendly, withKidsImages, hasWithKidsImages, onOpenLightbox }) {
   // Show section if either withKids (portContent) or familyFriendly (ports.js) has content
   if (!withKids && !familyFriendly) return <p>No family information available yet.</p>;
 
@@ -1057,11 +939,6 @@ function WithKidsSection({ withKids, _slug, familyFriendly, mcdonaldsImage, aleH
             <div className="family-cards-grid">
               {familyFriendly.mcdonalds && (
                 <div className="family-card">
-                  {mcdonaldsImage && (
-                    <div className="family-card-image">
-                      <OptimizedImage src={mcdonaldsImage} alt="McDonald's" />
-                    </div>
-                  )}
                   <div className="family-card-content">
                     <h4>{familyFriendly.mcdonalds.name}</h4>
                     <p><strong>Location:</strong> {familyFriendly.mcdonalds.location}</p>
@@ -1080,11 +957,6 @@ function WithKidsSection({ withKids, _slug, familyFriendly, mcdonaldsImage, aleH
               )}
               {familyFriendly.aleHop && (
                 <div className="family-card">
-                  {aleHopImage && (
-                    <div className="family-card-image">
-                      <OptimizedImage src={aleHopImage} alt="Ale Hop" />
-                    </div>
-                  )}
                   <div className="family-card-content">
                     <h4>{familyFriendly.aleHop.name}</h4>
                     <p><strong>Location:</strong> {familyFriendly.aleHop.location}</p>
@@ -1132,12 +1004,7 @@ function WithKidsSection({ withKids, _slug, familyFriendly, mcdonaldsImage, aleH
       {familyFriendly?.localPark && (
         <>
           <SubSection title="🌳 Local Park">
-            <div className={`park-info ${parkImage ? 'with-image' : ''}`}>
-              {parkImage && (
-                <div className="info-image">
-                  <OptimizedImage src={parkImage} alt={familyFriendly.localPark.name} />
-                </div>
-              )}
+            <div className="park-info">
               <div className="info-content">
                 <h4>{familyFriendly.localPark.name}</h4>
                 <p><strong>Location:</strong> {familyFriendly.localPark.location}</p>
