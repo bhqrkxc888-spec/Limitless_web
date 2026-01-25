@@ -59,18 +59,28 @@ export function usePortGuideFolderImages(portSlug, folder) {
         }
 
         if (data && data.length > 0) {
-          // Transform data into image objects with full URLs
-          const imageObjects = data.map(img => ({
-            id: img.id,
-            url: `${SUPABASE_URL}/storage/v1/object/public/${img.bucket}/${img.path}`,
-            alt: img.alt_text || `${portSlug} ${folder} image`,
-            title: img.title || null,
-            path: img.path,
-            imageType: img.image_type
-          }));
+          // Filter out placeholder files (they contain 'placeholder' in path)
+          const realImages = data.filter(img => 
+            img.path && !img.path.includes('placeholder') && !img.path.includes('.placeholder')
+          );
 
-          setImages(imageObjects);
-          setHasImages(true);
+          if (realImages.length > 0) {
+            // Transform data into image objects with full URLs
+            const imageObjects = realImages.map(img => ({
+              id: img.id,
+              url: `${SUPABASE_URL}/storage/v1/object/public/${img.bucket}/${img.path}`,
+              alt: img.alt_text || `${portSlug} ${folder} image`,
+              title: img.title || null,
+              path: img.path,
+              imageType: img.image_type
+            }));
+
+            setImages(imageObjects);
+            setHasImages(true);
+          } else {
+            setImages([]);
+            setHasImages(false);
+          }
         } else {
           setImages([]);
           setHasImages(false);
@@ -129,15 +139,19 @@ export function usePortGuideFolderHasImages(portSlug, folder) {
 
         if (error) {
           // Fallback to direct query if RPC not available
-          const { data: countData, error: countError } = await supabase
+          const { data: imageData, error: countError } = await supabase
             .from('site_images')
-            .select('id', { count: 'exact', head: true })
+            .select('path')
             .eq('entity_type', 'port-guide')
             .eq('entity_id', portSlug)
             .like('image_type', `${folder}%`);
 
-          if (!countError && countData) {
-            setHasImages(countData.length > 0);
+          if (!countError && imageData) {
+            // Filter out placeholders
+            const realImages = imageData.filter(img => 
+              img.path && !img.path.includes('placeholder') && !img.path.includes('.placeholder')
+            );
+            setHasImages(realImages.length > 0);
           } else {
             setHasImages(false);
           }
