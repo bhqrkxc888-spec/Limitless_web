@@ -12,7 +12,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { supabase } from '../config/supabaseClient';
+import { supabase } from '../lib/supabase';
 
 const SUPABASE_URL = 'https://xrbusklskmeaamwynfmm.supabase.co';
 
