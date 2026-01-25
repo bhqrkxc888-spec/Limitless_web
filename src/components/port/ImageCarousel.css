@@ -1,0 +1,262 @@
+/**
+ * Image Carousel Styles for Port Guides
+ * 3-column grid layout with fade transitions
+ */
+
+.port-image-carousel {
+  position: relative;
+  width: 100%;
+  margin: 2rem 0;
+  padding: 0 3rem; /* Space for navigation arrows */
+}
+
+/* Navigation arrows */
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #e0e0e0;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-nav:hover:not(:disabled) {
+  background: #fff;
+  border-color: #0066cc;
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.2);
+}
+
+.carousel-nav:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.carousel-nav svg {
+  width: 24px;
+  height: 24px;
+  color: #333;
+}
+
+.carousel-nav:hover:not(:disabled) svg {
+  color: #0066cc;
+}
+
+.carousel-prev {
+  left: 0;
+}
+
+.carousel-next {
+  right: 0;
+}
+
+/* Image grid */
+.carousel-grid {
+  display: grid;
+  gap: 1rem;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Grid columns - responsive */
+.carousel-grid-1 {
+  grid-template-columns: 1fr;
+}
+
+.carousel-grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.carousel-grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Fade transition states */
+.carousel-grid.fade-in {
+  opacity: 1;
+}
+
+.carousel-grid.fade-out {
+  opacity: 0;
+}
+
+/* Image wrapper */
+.carousel-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #f5f5f5;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-image-wrapper.clickable {
+  cursor: pointer;
+}
+
+.carousel-image-wrapper:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Image */
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-image-wrapper:hover .carousel-image {
+  opacity: 0.9;
+}
+
+/* Image caption (optional) */
+.image-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: white;
+  padding: 1rem 0.75rem 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-image-wrapper:hover .image-caption {
+  opacity: 1;
+}
+
+/* Page indicators (dots) */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.carousel-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.carousel-indicator:hover {
+  border-color: #0066cc;
+  transform: scale(1.2);
+}
+
+.carousel-indicator.active {
+  background: #0066cc;
+  border-color: #0066cc;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .port-image-carousel {
+    padding: 0 2.5rem;
+  }
+
+  .carousel-nav {
+    width: 40px;
+    height: 40px;
+  }
+
+  .carousel-nav svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .port-image-carousel {
+    padding: 0 2rem;
+  }
+
+  .carousel-nav {
+    width: 36px;
+    height: 36px;
+  }
+
+  .carousel-nav svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .carousel-grid {
+    gap: 0.75rem;
+  }
+
+  .image-caption {
+    font-size: 0.8rem;
+    padding: 0.75rem 0.5rem 0.375rem;
+  }
+}
+
+/* Loading state */
+.carousel-image-wrapper.loading {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-grid,
+  .carousel-image,
+  .carousel-nav,
+  .carousel-indicator {
+    transition: none;
+  }
+
+  .carousel-image-wrapper {
+    transition: none;
+  }
+
+  .carousel-image-wrapper.loading {
+    animation: none;
+    background: #f0f0f0;
+  }
+}
+
+/* Print styles */
+@media print {
+  .carousel-nav,
+  .carousel-indicators {
+    display: none;
+  }
+
+  .carousel-grid {
+    opacity: 1 !important;
+  }
+}
