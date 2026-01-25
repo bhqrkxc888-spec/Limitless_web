@@ -337,13 +337,13 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
         content = <OverviewSection overview={overview} portName={portName} />;
         break;
       case 'stayLocal':
-        content = <StayLocalSection stayLocal={stayLocal} beachImage={beachImage} beachAlt={beachAlt} marineData={marineData} marineLoading={marineLoading} onOpenLightbox={handleOpenLightbox} />;
+        content = <StayLocalSection stayLocal={stayLocal} slug={slug} beachImage={beachImage} beachAlt={beachAlt} marineData={marineData} marineLoading={marineLoading} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'goFurther':
-        content = <GoFurtherSection goFurther={goFurther} onOpenLightbox={handleOpenLightbox} />;
+        content = <GoFurtherSection goFurther={goFurther} slug={slug} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'withKids':
-        content = <WithKidsSection withKids={withKids} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} parkImage={parkImage} onOpenLightbox={handleOpenLightbox} />;
+        content = <WithKidsSection withKids={withKids} slug={slug} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} parkImage={parkImage} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'send':
         content = <SendSection send={send} />;
@@ -1003,10 +1003,13 @@ function StayLocalSection({ stayLocal, slug, beachImage, beachAlt, marineData, m
   );
 }
 
-function GoFurtherSection({ goFurther, onOpenLightbox }) {
+function GoFurtherSection({ goFurther, slug, onOpenLightbox }) {
   if (!goFurther || !goFurther.attractions || goFurther.attractions.length === 0) {
     return <p>No day trip information available yet.</p>;
   }
+
+  // Load images for go-further section
+  const { images: goFurtherImages, hasImages: hasGoFurtherImages } = usePortGuideFolderImages(slug, 'go-further');
 
   return (
     <div className="section-go-further">
@@ -1016,6 +1019,19 @@ function GoFurtherSection({ goFurther, onOpenLightbox }) {
       </div>
 
       <hr className="section-divider" />
+
+      {/* Show image carousel if images exist */}
+      {hasGoFurtherImages && (
+        <>
+          <ImageCarousel 
+            images={goFurtherImages}
+            autoScroll={true}
+            interval={5000}
+            onImageClick={onOpenLightbox}
+          />
+          <hr className="section-divider" />
+        </>
+      )}
 
       {goFurther.attractions.map((attraction, idx) => {
         // Only use attraction.image from database (no fallback to indexed images)
@@ -1112,9 +1128,12 @@ function GoFurtherSection({ goFurther, onOpenLightbox }) {
   );
 }
 
-function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage, parkImage, onOpenLightbox }) {
+function WithKidsSection({ withKids, slug, familyFriendly, mcdonaldsImage, aleHopImage, parkImage, onOpenLightbox }) {
   // Show section if either withKids (portContent) or familyFriendly (ports.js) has content
   if (!withKids && !familyFriendly) return <p>No family information available yet.</p>;
+
+  // Load images for with-kids section
+  const { images: withKidsImages, hasImages: hasWithKidsImages } = usePortGuideFolderImages(slug, 'with-kids');
 
   return (
     <div className="section-with-kids">
@@ -1124,6 +1143,19 @@ function WithKidsSection({ withKids, familyFriendly, mcdonaldsImage, aleHopImage
       </div>
 
       <hr className="section-divider" />
+
+      {/* Show image carousel if images exist */}
+      {hasWithKidsImages && (
+        <>
+          <ImageCarousel 
+            images={withKidsImages}
+            autoScroll={true}
+            interval={5000}
+            onImageClick={onOpenLightbox}
+          />
+          <hr className="section-divider" />
+        </>
+      )}
 
       {/* Familiar Brands - McDonald's and Ale Hop */}
       {familyFriendly && (familyFriendly.mcdonalds || familyFriendly.aleHop) && (
