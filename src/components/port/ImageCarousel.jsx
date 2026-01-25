@@ -18,7 +18,7 @@
  * />
  */
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import './ImageCarousel.css';
 
 function ImageCarousel({ 
@@ -66,12 +66,12 @@ function ImageCarousel({
   };
 
   // Navigation handlers
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     if (isTransitioning) return;
     setIsTransitioning(true);
     setCurrentPage((prev) => (prev >= totalPages - 1 ? 0 : prev + 1));
     setTimeout(() => setIsTransitioning(false), 500);
-  };
+  }, [isTransitioning, totalPages]);
 
   const goToPrev = () => {
     if (isTransitioning) return;
@@ -95,7 +95,7 @@ function ImageCarousel({
         clearInterval(autoScrollTimer.current);
       }
     };
-  }, [autoScroll, interval, hasMultiplePages, isPaused, currentPage]);
+  }, [autoScroll, interval, hasMultiplePages, isPaused, currentPage, goToNext]);
 
   // Touch handlers for mobile swipe
   const handleTouchStart = (e) => {

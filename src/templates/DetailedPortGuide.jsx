@@ -293,6 +293,12 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
   const { imageUrl: aleHopImage } = usePortGuideImage(slug, 'ale-hop', portName, portCountry);
   const { imageUrl: parkImage } = usePortGuideImage(slug, 'local-park', portName, portCountry);
 
+  // Load folder images for all sections (must be called unconditionally at top level)
+  const { images: overviewImages, hasImages: hasOverviewImages } = usePortGuideFolderImages(slug, 'overview');
+  const { images: stayLocalImages, hasImages: hasStayLocalImages } = usePortGuideFolderImages(slug, 'stay-local');
+  const { images: goFurtherImages, hasImages: hasGoFurtherImages } = usePortGuideFolderImages(slug, 'go-further');
+  const { images: withKidsImages, hasImages: hasWithKidsImages } = usePortGuideFolderImages(slug, 'with-kids');
+
   // Extract data from detailedContent (may be null)
   const { overview, stayLocal, goFurther, withKids, send, medical, foodAndDrink } = detailedContent || {};
   
@@ -334,16 +340,16 @@ export function DetailedPortGuide({ slug, portName, portCountry, detailedContent
     let content;
     switch (activeSection) {
       case 'overview':
-        content = <OverviewSection overview={overview} portName={portName} />;
+        content = <OverviewSection overview={overview} portName={portName} slug={slug} overviewImages={overviewImages} hasOverviewImages={hasOverviewImages} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'stayLocal':
-        content = <StayLocalSection stayLocal={stayLocal} slug={slug} beachImage={beachImage} beachAlt={beachAlt} marineData={marineData} marineLoading={marineLoading} onOpenLightbox={handleOpenLightbox} />;
+        content = <StayLocalSection stayLocal={stayLocal} slug={slug} beachImage={beachImage} beachAlt={beachAlt} marineData={marineData} marineLoading={marineLoading} stayLocalImages={stayLocalImages} hasStayLocalImages={hasStayLocalImages} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'goFurther':
-        content = <GoFurtherSection goFurther={goFurther} slug={slug} onOpenLightbox={handleOpenLightbox} />;
+        content = <GoFurtherSection goFurther={goFurther} slug={slug} goFurtherImages={goFurtherImages} hasGoFurtherImages={hasGoFurtherImages} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'withKids':
-        content = <WithKidsSection withKids={withKids} slug={slug} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} parkImage={parkImage} onOpenLightbox={handleOpenLightbox} />;
+        content = <WithKidsSection withKids={withKids} slug={slug} familyFriendly={familyFriendly} mcdonaldsImage={mcdonaldsImage} aleHopImage={aleHopImage} parkImage={parkImage} withKidsImages={withKidsImages} hasWithKidsImages={hasWithKidsImages} onOpenLightbox={handleOpenLightbox} />;
         break;
       case 'send':
         content = <SendSection send={send} />;
@@ -544,7 +550,7 @@ function MarineConditionsCard({ marineData, loading }) {
   );
 }
 
-function OverviewSection({ overview, portName }) {
+function OverviewSection({ overview, portName, slug, overviewImages, hasOverviewImages, onOpenLightbox }) {
   if (!overview) return <p>No overview information available yet.</p>;
 
   return (
@@ -552,6 +558,19 @@ function OverviewSection({ overview, portName }) {
       <div className="section-intro">
         <h2>Welcome to {portName}</h2>
       </div>
+
+      {/* Show image carousel if images exist */}
+      {hasOverviewImages && (
+        <>
+          <ImageCarousel 
+            images={overviewImages}
+            autoScroll={true}
+            interval={5000}
+            onImageClick={onOpenLightbox}
+          />
+          <hr className="section-divider" />
+        </>
+      )}
       
       {/* Hook - Why this port is special */}
       {overview.hook && (
@@ -632,11 +651,8 @@ function OverviewSection({ overview, portName }) {
   );
 }
 
-function StayLocalSection({ stayLocal, slug, beachImage, beachAlt, marineData, marineLoading, onOpenLightbox }) {
+function StayLocalSection({ stayLocal, slug, beachImage, beachAlt, marineData, marineLoading, stayLocalImages, hasStayLocalImages, onOpenLightbox }) {
   if (!stayLocal) return <p>No local information available yet.</p>;
-
-  // Load images for stay-local section
-  const { images: stayLocalImages, hasImages: hasStayLocalImages } = usePortGuideFolderImages(slug, 'stay-local');
 
   return (
     <div className="section-stay-local">
@@ -687,43 +703,16 @@ function StayLocalSection({ stayLocal, slug, beachImage, beachAlt, marineData, m
         <>
           <SubSection title="Quick Walk (Under 10 mins)">
             {stayLocal.quickWalk.map((item, idx) => (
-              <div key={idx} className={item.image ? "content-block" : "walk-item"}>
-                {item.image ? (
-                  <div className="content-block__top">
-                    <div className="content-block__image">
-                      <ContentImage 
-                        src={getContentImageUrl(item.image)}
-                        alt={item.title}
-                        imagePath={item.image}
-                        onOpenLightbox={onOpenLightbox}
-                      />
-                    </div>
-                    <div className="content-block__header">
-                      <div className="walk-item-header">
-                        <h4>{item.title}</h4>
-                        {item.terrain && <TerrainBadge terrain={item.terrain} />}
-                      </div>
-                      <p>{item.content}</p>
-                      {item.mapLink && (
-                        <a href={item.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                          View walking route →
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    <div className="walk-item-header">
-                      <h4>{item.title}</h4>
-                      {item.terrain && <TerrainBadge terrain={item.terrain} />}
-                    </div>
-                    <p>{item.content}</p>
-                    {item.mapLink && (
-                      <a href={item.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                        View walking route →
-                      </a>
-                    )}
-                  </>
+              <div key={idx} className="walk-item">
+                <div className="walk-item-header">
+                  <h4>{item.title}</h4>
+                  {item.terrain && <TerrainBadge terrain={item.terrain} />}
+                </div>
+                <p>{item.content}</p>
+                {item.mapLink && (
+                  <a href={item.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
+                    View walking route →
+                  </a>
                 )}
               </div>
             ))}
@@ -736,43 +725,16 @@ function StayLocalSection({ stayLocal, slug, beachImage, beachAlt, marineData, m
         <>
           <SubSection title="Longer Walk (10-30 mins)">
             {stayLocal.longerWalk.map((item, idx) => (
-              <div key={idx} className={item.image ? "content-block" : "walk-item"}>
-                {item.image ? (
-                  <div className="content-block__top">
-                    <div className="content-block__image">
-                      <ContentImage 
-                        src={getContentImageUrl(item.image)}
-                        alt={item.title}
-                        imagePath={item.image}
-                        onOpenLightbox={onOpenLightbox}
-                      />
-                    </div>
-                    <div className="content-block__header">
-                      <div className="walk-item-header">
-                        <h4>{item.title}</h4>
-                        {item.terrain && <TerrainBadge terrain={item.terrain} />}
-                      </div>
-                      <p>{item.content}</p>
-                      {item.mapLink && (
-                        <a href={item.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                          View walking route →
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    <div className="walk-item-header">
-                      <h4>{item.title}</h4>
-                      {item.terrain && <TerrainBadge terrain={item.terrain} />}
-                    </div>
-                    <p>{item.content}</p>
-                    {item.mapLink && (
-                      <a href={item.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                        View walking route →
-                      </a>
-                    )}
-                  </>
+              <div key={idx} className="walk-item">
+                <div className="walk-item-header">
+                  <h4>{item.title}</h4>
+                  {item.terrain && <TerrainBadge terrain={item.terrain} />}
+                </div>
+                <p>{item.content}</p>
+                {item.mapLink && (
+                  <a href={item.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
+                    View walking route →
+                  </a>
                 )}
               </div>
             ))}
@@ -785,43 +747,16 @@ function StayLocalSection({ stayLocal, slug, beachImage, beachAlt, marineData, m
         <>
           <SubSection title="Parks & Green Spaces">
             {stayLocal.parks.map((park, idx) => (
-              <div key={idx} className={park.image ? "content-block" : "walk-item"}>
-                {park.image ? (
-                  <div className="content-block__top">
-                    <div className="content-block__image">
-                      <ContentImage 
-                        src={getContentImageUrl(park.image)}
-                        alt={park.title}
-                        imagePath={park.image}
-                        onOpenLightbox={onOpenLightbox}
-                      />
-                    </div>
-                    <div className="content-block__header">
-                      <div className="walk-item-header">
-                        <h4>{park.title}</h4>
-                        {park.terrain && <TerrainBadge terrain={park.terrain} />}
-                      </div>
-                      <p>{park.content}</p>
-                      {park.mapLink && (
-                        <a href={park.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                          View walking route →
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    <div className="walk-item-header">
-                      <h4>{park.title}</h4>
-                      {park.terrain && <TerrainBadge terrain={park.terrain} />}
-                    </div>
-                    <p>{park.content}</p>
-                    {park.mapLink && (
-                      <a href={park.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
-                        View walking route →
-                      </a>
-                    )}
-                  </>
+              <div key={idx} className="walk-item">
+                <div className="walk-item-header">
+                  <h4>{park.title}</h4>
+                  {park.terrain && <TerrainBadge terrain={park.terrain} />}
+                </div>
+                <p>{park.content}</p>
+                {park.mapLink && (
+                  <a href={park.mapLink} target="_blank" rel="noopener noreferrer" className="map-link">
+                    View walking route →
+                  </a>
                 )}
               </div>
             ))}
@@ -922,33 +857,11 @@ function StayLocalSection({ stayLocal, slug, beachImage, beachAlt, marineData, m
       {stayLocal.shopping && stayLocal.shopping.length > 0 && (
         <>
           <SubSection title="Shopping">
-            {stayLocal.shoppingImage ? (
-              <div className="content-block">
-                <div className="content-block__top">
-                  <div className="content-block__image">
-                    <ContentImage 
-                      src={getContentImageUrl(stayLocal.shoppingImage)}
-                      alt="Shopping near port"
-                      imagePath={stayLocal.shoppingImage}
-                      onOpenLightbox={onOpenLightbox}
-                    />
-                  </div>
-                  <div className="content-block__header">
-                    <ul className="simple-list">
-                      {stayLocal.shopping.map((shop, idx) => (
-                        <li key={idx}>{shop}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <ul className="simple-list">
-                {stayLocal.shopping.map((shop, idx) => (
-                  <li key={idx}>{shop}</li>
-                ))}
-              </ul>
-            )}
+            <ul className="simple-list">
+              {stayLocal.shopping.map((shop, idx) => (
+                <li key={idx}>{shop}</li>
+              ))}
+            </ul>
           </SubSection>
           <hr className="section-divider" />
         </>
@@ -1003,13 +916,10 @@ function StayLocalSection({ stayLocal, slug, beachImage, beachAlt, marineData, m
   );
 }
 
-function GoFurtherSection({ goFurther, slug, onOpenLightbox }) {
+function GoFurtherSection({ goFurther, slug, goFurtherImages, hasGoFurtherImages, onOpenLightbox }) {
   if (!goFurther || !goFurther.attractions || goFurther.attractions.length === 0) {
     return <p>No day trip information available yet.</p>;
   }
-
-  // Load images for go-further section
-  const { images: goFurtherImages, hasImages: hasGoFurtherImages } = usePortGuideFolderImages(slug, 'go-further');
 
   return (
     <div className="section-go-further">
@@ -1034,29 +944,11 @@ function GoFurtherSection({ goFurther, slug, onOpenLightbox }) {
       )}
 
       {goFurther.attractions.map((attraction, idx) => {
-        // Only use attraction.image from database (no fallback to indexed images)
-        const imageUrl = attraction.image 
-          ? getContentImageUrl(attraction.image)
-          : null;
-        const imageAlt = attraction.name;
-        
         return (
         <Fragment key={idx}>
           <div className="attraction-block">
-            {/* Row 1: Image and main text side by side */}
+            {/* Main content - text only */}
             <div className="attraction-top">
-              {imageUrl && (
-                <div className="attraction-image">
-                  <ContentImage
-                    src={imageUrl}
-                    alt={imageAlt}
-                    imagePath={attraction.image}
-                    width={320}
-                    height={213}
-                    onOpenLightbox={onOpenLightbox}
-                  />
-                </div>
-              )}
               <div className="attraction-header">
                 <h3>{attraction.name}</h3>
                 <div className="attraction-tags">
@@ -1128,12 +1020,9 @@ function GoFurtherSection({ goFurther, slug, onOpenLightbox }) {
   );
 }
 
-function WithKidsSection({ withKids, slug, familyFriendly, mcdonaldsImage, aleHopImage, parkImage, onOpenLightbox }) {
+function WithKidsSection({ withKids, slug, familyFriendly, mcdonaldsImage, aleHopImage, parkImage, withKidsImages, hasWithKidsImages, onOpenLightbox }) {
   // Show section if either withKids (portContent) or familyFriendly (ports.js) has content
   if (!withKids && !familyFriendly) return <p>No family information available yet.</p>;
-
-  // Load images for with-kids section
-  const { images: withKidsImages, hasImages: hasWithKidsImages } = usePortGuideFolderImages(slug, 'with-kids');
 
   return (
     <div className="section-with-kids">
@@ -1222,40 +1111,15 @@ function WithKidsSection({ withKids, slug, familyFriendly, mcdonaldsImage, aleHo
         <>
           <SubSection title="🌳 Local Park">
             {withKids.parks.map((park, idx) => (
-              <div key={idx} className={park.image ? "content-block" : "park-info"}>
-                {park.image ? (
-                  <div className="content-block__top">
-                    <div className="content-block__image">
-                      <ContentImage 
-                        src={getContentImageUrl(park.image)}
-                        alt={park.name}
-                        imagePath={park.image}
-                        onOpenLightbox={onOpenLightbox}
-                      />
-                    </div>
-                    <div className="content-block__header">
-                      <h4>{park.name}</h4>
-                      <p><strong>Location:</strong> {park.location}</p>
-                      <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                        <strong>Distance:</strong> 
-                        <span className="distance-badge">{park.distance}</span>
-                      </p>
-                      {park.facilities && <p><strong>Facilities:</strong> {park.facilities}</p>}
-                      {park.description && <p>{park.description}</p>}
-                    </div>
-                  </div>
-                ) : (
-                  <div className="park-info">
-                    <h4>{park.name}</h4>
-                    <p><strong>Location:</strong> {park.location}</p>
-                    <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                      <strong>Distance:</strong> 
-                      <span className="distance-badge">{park.distance}</span>
-                    </p>
-                    {park.facilities && <p><strong>Facilities:</strong> {park.facilities}</p>}
-                    {park.description && <p>{park.description}</p>}
-                  </div>
-                )}
+              <div key={idx} className="park-info">
+                <h4>{park.name}</h4>
+                <p><strong>Location:</strong> {park.location}</p>
+                <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                  <strong>Distance:</strong> 
+                  <span className="distance-badge">{park.distance}</span>
+                </p>
+                {park.facilities && <p><strong>Facilities:</strong> {park.facilities}</p>}
+                {park.description && <p>{park.description}</p>}
               </div>
             ))}
           </SubSection>
@@ -1561,37 +1425,13 @@ function MedicalSection({ medical, onOpenLightbox }) {
       {hasPharmacy && (
         <>
           <SubSection title="Nearest Pharmacy">
-            <div className={medical.pharmacy.image ? "content-block" : "medical-item"}>
-              {medical.pharmacy.image ? (
-                <div className="content-block__top">
-                  <div className="content-block__image">
-                    <ContentImage 
-                      src={getContentImageUrl(medical.pharmacy.image)}
-                      alt={medical.pharmacy.name}
-                      imagePath={medical.pharmacy.image}
-                      onOpenLightbox={onOpenLightbox}
-                    />
-                  </div>
-                  <div className="content-block__header">
-                    <h4>{medical.pharmacy.name}</h4>
-                    {medical.pharmacy.location && (
-                      <p><strong>Location:</strong> {medical.pharmacy.location}</p>
-                    )}
-                    {medical.pharmacy.notes && (
-                      <p className="medical-notes">{medical.pharmacy.notes}</p>
-                    )}
-                  </div>
-                </div>
-              ) : (
-                <>
-                  <h4>{medical.pharmacy.name}</h4>
-                  {medical.pharmacy.location && (
-                    <p><strong>Location:</strong> {medical.pharmacy.location}</p>
-                  )}
-                  {medical.pharmacy.notes && (
-                    <p className="medical-notes">{medical.pharmacy.notes}</p>
-                  )}
-                </>
+            <div className="medical-item">
+              <h4>{medical.pharmacy.name}</h4>
+              {medical.pharmacy.location && (
+                <p><strong>Location:</strong> {medical.pharmacy.location}</p>
+              )}
+              {medical.pharmacy.notes && (
+                <p className="medical-notes">{medical.pharmacy.notes}</p>
               )}
             </div>
           </SubSection>
@@ -1700,30 +1540,10 @@ function FoodDrinkSection({ foodAndDrink, onOpenLightbox }) {
         <>
           <SubSection title="Restaurants">
             {foodAndDrink.restaurants.map((restaurant, idx) => (
-              <div key={idx} className={restaurant.image ? "content-block" : "food-item"}>
-                {restaurant.image ? (
-                  <div className="content-block__top">
-                    <div className="content-block__image">
-                      <ContentImage 
-                        src={getContentImageUrl(restaurant.image)}
-                        alt={restaurant.name}
-                        imagePath={restaurant.image}
-                        onOpenLightbox={onOpenLightbox}
-                      />
-                    </div>
-                    <div className="content-block__header">
-                      <h4>{restaurant.name}</h4>
-                      {restaurant.location && <p className="food-location">{restaurant.location}</p>}
-                      <p>{formatBoldText(restaurant.description)}</p>
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    <h4>{restaurant.name}</h4>
-                    {restaurant.location && <p className="food-location">{restaurant.location}</p>}
-                    <p>{formatBoldText(restaurant.description)}</p>
-                  </>
-                )}
+              <div key={idx} className="food-item">
+                <h4>{restaurant.name}</h4>
+                {restaurant.location && <p className="food-location">{restaurant.location}</p>}
+                <p>{formatBoldText(restaurant.description)}</p>
               </div>
             ))}
           </SubSection>
