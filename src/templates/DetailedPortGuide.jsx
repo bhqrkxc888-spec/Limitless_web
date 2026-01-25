@@ -170,7 +170,7 @@ const PORT_SECTIONS = [
   { key: 'foodAndDrink', label: 'Food & Drink', icon: Utensils },
 ];
 
-export function DetailedPortGuide({ slug, portName, portCountry, detailedContent, port }) {
+export function DetailedPortGuide({ slug, portName, detailedContent, port }) {
   const [activeSection, setActiveSection] = useState('overview');
   const [hasUserInteracted, setHasUserInteracted] = useState(false);
   const [lightboxImage, setLightboxImage] = useState(null);
