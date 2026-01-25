@@ -9,6 +9,8 @@
 import { useState, useRef, useEffect, Fragment } from 'react';
 import OptimizedImage from '../components/OptimizedImage';
 import { usePortGuideImage } from '../hooks/useImageUrl';
+import { usePortGuideFolderImages } from '../hooks/usePortGuideFolderImages';
+import ImageCarousel from '../components/port/ImageCarousel';
 import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye, Star, AlertCircle, Thermometer, Waves, ChefHat, Wind, Anchor, Cross } from 'lucide-react';
 import { formatBoldText, formatParagraphsWithBold } from '../utils/textFormatting.jsx';
 import './DetailedPortGuide.css';
@@ -630,8 +632,11 @@ function OverviewSection({ overview, portName }) {
   );
 }
 
-function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineLoading, onOpenLightbox }) {
+function StayLocalSection({ stayLocal, slug, beachImage, beachAlt, marineData, marineLoading, onOpenLightbox }) {
   if (!stayLocal) return <p>No local information available yet.</p>;
+
+  // Load images for stay-local section
+  const { images: stayLocalImages, hasImages: hasStayLocalImages } = usePortGuideFolderImages(slug, 'stay-local');
 
   return (
     <div className="section-stay-local">
@@ -641,6 +646,19 @@ function StayLocalSection({ stayLocal, beachImage, beachAlt, marineData, marineL
       </div>
 
       <hr className="section-divider" />
+
+      {/* Show image carousel if images exist */}
+      {hasStayLocalImages && (
+        <>
+          <ImageCarousel 
+            images={stayLocalImages}
+            autoScroll={true}
+            interval={5000}
+            onImageClick={onOpenLightbox}
+          />
+          <hr className="section-divider" />
+        </>
+      )}
 
       {/* Convenience Stores & Essentials - APPEARS FIRST */}
       {stayLocal.convenienceStores && stayLocal.convenienceStores.length > 0 && (
