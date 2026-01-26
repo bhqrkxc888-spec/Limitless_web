@@ -108,6 +108,7 @@ const CruiseGuidesPage = lazy(() => lazyWithRetry(() => import('./pages/CruiseGu
 const CruiseGuideDetailPage = lazy(() => lazyWithRetry(() => import('./pages/CruiseGuideDetailPage')))
 const TravelNewsTagPage = lazy(() => lazyWithRetry(() => import('./pages/TravelNewsTagPage')))
 const NotFoundPage = lazy(() => lazyWithRetry(() => import('./pages/NotFoundPage')))
+const BlogDemoBlockLayout = lazy(() => lazyWithRetry(() => import('./pages/BlogDemoBlockLayout')))
 const FAQPage = lazy(() => lazyWithRetry(() => import('./pages/FAQPage')))
 const TestimonialsPage = lazy(() => lazyWithRetry(() => import('./pages/TestimonialsPage')))
 const ShipPage = lazy(() => lazyWithRetry(() => import('./templates/ShipPage')))
@@ -288,6 +289,9 @@ function AppLayout() {
             
             {/* Skipper AI Beta - Hidden */}
             <Route path="/skipper-beta" element={<SkipperBetaPage />} />
+            
+            {/* Blog Blocks Demo - Internal Testing (non-obvious URL) */}
+            <Route path="/internal/blog-demo-block-layout" element={<BlogDemoBlockLayout />} />
             
             {/* Cruise Companion - Generic route for all cruise itineraries */}
             <Route path="/cruise/:cruiseId" element={<CruiseCompanionPage />} />
