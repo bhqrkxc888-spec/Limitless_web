@@ -1023,7 +1023,6 @@ export async function forceAnalyzePageSEO() {
 
 // Track if already initialized to prevent duplicate intervals
 let seoMonitoringInitialized = false
-let seoIntervalId = null
 let seoPopstateHandler = null
 
 export function initSEOMonitoring() {
@@ -1066,23 +1065,10 @@ export function initSEOMonitoring() {
     // Analyze on initial load
     analyzePageSEO()
 
-    // Analyze on route changes (for SPA)
-    let lastPath = window.location.pathname
-    const checkRouteChange = () => {
-      const currentPath = window.location.pathname
-      if (currentPath !== lastPath) {
-        lastPath = currentPath
-        // Wait a bit for new page to render
-        setTimeout(() => {
-          analyzePageSEO()
-        }, 1000)
-      }
-    }
+    // Note: Route changes are handled by React Router via ScrollToTop component in App.jsx
+    // which calls analyzePageSEO() on route changes. No polling needed.
 
-    // Check for route changes periodically (store ID for potential cleanup)
-    seoIntervalId = setInterval(checkRouteChange, 1000)
-
-    // Also listen to popstate (back/forward navigation)
+    // Listen to popstate for browser back/forward navigation
     seoPopstateHandler = () => {
       setTimeout(() => {
         analyzePageSEO()
@@ -1098,10 +1084,6 @@ export function initSEOMonitoring() {
  * Cleanup SEO monitoring (call on app unmount if needed)
  */
 export function cleanupSEOMonitoring() {
-  if (seoIntervalId) {
-    clearInterval(seoIntervalId)
-    seoIntervalId = null
-  }
   if (seoPopstateHandler) {
     window.removeEventListener('popstate', seoPopstateHandler)
     seoPopstateHandler = null
