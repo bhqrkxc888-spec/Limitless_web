@@ -817,9 +817,8 @@ function StayLocalSection({ stayLocal, marineData, marineLoading, stayLocalImage
           <p>{stayLocal.tip}</p>
         </div>
       )}
-      
-      {/* Close legacy structure block */}
-      {!hasSubsections && <></>)}
+        </>
+      )}
     </div>
   );
 }
