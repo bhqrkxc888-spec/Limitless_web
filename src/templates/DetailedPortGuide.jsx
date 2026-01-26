@@ -9,6 +9,7 @@
 import { useState, useRef, useEffect, Fragment } from 'react';
 import { usePortGuideFolderImages } from '../hooks/usePortGuideFolderImages';
 import ImageCarousel from '../components/port/ImageCarousel';
+import DynamicSubsection from '../components/port/DynamicSubsection';
 import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye, Star, AlertCircle, Thermometer, Waves, ChefHat, Wind, Anchor, Cross } from 'lucide-react';
 import { formatBoldText, formatParagraphsWithBold } from '../utils/textFormatting.jsx';
 import './DetailedPortGuide.css';
@@ -549,11 +550,14 @@ function OverviewSection({ overview, portName, _slug, overviewImages, hasOvervie
 function StayLocalSection({ stayLocal, marineData, marineLoading, stayLocalImages, hasStayLocalImages, onOpenLightbox }) {
   if (!stayLocal) return <p>No local information available yet.</p>;
 
+  // Check if using NEW flexible structure
+  const hasSubsections = stayLocal.subsections && Array.isArray(stayLocal.subsections) && stayLocal.subsections.length > 0;
+
   return (
     <div className="section-stay-local">
       <div className="section-intro">
         <h2>Stay Local</h2>
-        <p>Everything within walking distance from the ship</p>
+        <p>{stayLocal.overview || 'Everything within walking distance from the ship'}</p>
       </div>
 
       <hr className="section-divider" />
@@ -570,6 +574,23 @@ function StayLocalSection({ stayLocal, marineData, marineLoading, stayLocalImage
           <hr className="section-divider" />
         </>
       )}
+
+      {/* NEW: Dynamic subsections rendering */}
+      {hasSubsections ? (
+        <>
+          {stayLocal.subsections.map((subsection, idx) => (
+            <DynamicSubsection
+              key={subsection.id || idx}
+              subsection={subsection}
+              index={idx}
+              totalCount={stayLocal.subsections.length}
+              showDivider={true}
+            />
+          ))}
+        </>
+      ) : (
+        /* OLD: Legacy hardcoded structure (backward compatible) */
+        <>
 
       {/* Convenience Stores & Essentials - APPEARS FIRST */}
       {stayLocal.convenienceStores && stayLocal.convenienceStores.length > 0 && (
@@ -789,18 +810,26 @@ function StayLocalSection({ stayLocal, marineData, marineLoading, stayLocalImage
         </>
       )}
 
+      {/* Legacy tip (show for both new and old structure) */}
       {stayLocal.tip && (
         <div className="tip-box">
           <strong>💡 Our Tip</strong>
           <p>{stayLocal.tip}</p>
         </div>
       )}
+      
+      {/* Close legacy structure block */}
+      {!hasSubsections && <></>)}
     </div>
   );
 }
 
 function GoFurtherSection({ goFurther, _slug, goFurtherImages, hasGoFurtherImages, onOpenLightbox }) {
-  if (!goFurther || !goFurther.attractions || goFurther.attractions.length === 0) {
+  // Check if using NEW flexible structure
+  const hasSubsections = goFurther?.subsections && Array.isArray(goFurther.subsections) && goFurther.subsections.length > 0;
+  const hasLegacyAttractions = goFurther?.attractions && goFurther.attractions.length > 0;
+  
+  if (!goFurther || (!hasSubsections && !hasLegacyAttractions)) {
     return <p>No day trip information available yet.</p>;
   }
 
@@ -808,7 +837,7 @@ function GoFurtherSection({ goFurther, _slug, goFurtherImages, hasGoFurtherImage
     <div className="section-go-further">
       <div className="section-intro">
         <h2>Go Further</h2>
-        <p>Longer walks - may require transport or organised tour</p>
+        <p>{goFurther.overview || 'Longer walks - may require transport or organised tour'}</p>
       </div>
 
       <hr className="section-divider" />
@@ -826,7 +855,23 @@ function GoFurtherSection({ goFurther, _slug, goFurtherImages, hasGoFurtherImage
         </>
       )}
 
-      {goFurther.attractions.map((attraction, idx) => {
+      {/* NEW: Dynamic subsections rendering */}
+      {hasSubsections ? (
+        <>
+          {goFurther.subsections.map((subsection, idx) => (
+            <DynamicSubsection
+              key={subsection.id || idx}
+              subsection={subsection}
+              index={idx}
+              totalCount={goFurther.subsections.length}
+              showDivider={true}
+            />
+          ))}
+        </>
+      ) : (
+        /* OLD: Legacy attractions structure (backward compatible) */
+        <>
+          {goFurther.attractions.map((attraction, idx) => {
         return (
         <Fragment key={idx}>
           <div className="attraction-block">
@@ -899,11 +944,20 @@ function GoFurtherSection({ goFurther, _slug, goFurtherImages, hasGoFurtherImage
           {formatParagraphsWithBold(goFurther.ourTake)}
         </div>
       )}
+          </>
+        )}
+      {/* Close legacy structure block */}
     </div>
   );
 }
 
 function WithKidsSection({ withKids, familyFriendly, withKidsImages, hasWithKidsImages, onOpenLightbox }) {
+  // Check if using NEW flexible structure
+  const hasSubsections = withKids?.subsections && Array.isArray(withKids.subsections) && withKids.subsections.length > 0;
+  const hasLegacyContent = withKids && (withKids.toddlers?.length > 0 || withKids.olderKids?.length > 0 || withKids.easyDay);
+  
+  if (!withKids && !familyFriendly) return <p>No family information available yet.</p>;
+  if (!hasSubsections && !hasLegacyContent && !familyFriendly) return <p>No family information available yet.</p>;
   // Show section if either withKids (portContent) or familyFriendly (ports.js) has content
   if (!withKids && !familyFriendly) return <p>No family information available yet.</p>;
 
@@ -926,6 +980,21 @@ function WithKidsSection({ withKids, familyFriendly, withKidsImages, hasWithKids
             onImageClick={onOpenLightbox}
           />
           <hr className="section-divider" />
+        </>
+      )}
+
+      {/* NEW: Dynamic subsections rendering */}
+      {hasSubsections && (
+        <>
+          {withKids.subsections.map((subsection, idx) => (
+            <DynamicSubsection
+              key={subsection.id || idx}
+              subsection={subsection}
+              index={idx}
+              totalCount={withKids.subsections.length}
+              showDivider={true}
+            />
+          ))}
         </>
       )}
 
