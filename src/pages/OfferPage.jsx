@@ -630,6 +630,11 @@ function OfferPage() {
                     {offer.price_basis === 'per_person' && (
                       <span className="basis">per person</span>
                     )}
+                    {offer.cabin_type && (
+                      <span className="cabin-type">
+                        {offer.cabin_type.charAt(0).toUpperCase() + offer.cabin_type.slice(1)} cabin
+                      </span>
+                    )}
                   </div>
                   {savingsDisplay && (
                     <div className="offer-pricing-card__savings">
@@ -658,9 +663,17 @@ function OfferPage() {
                   />
                 )}
                 
-                {/* Departure airport info */}
+                {/* Departure airport and flight class info */}
                 {offer.includes_flight && (
                   <div className="offer-pricing-card__departure">
+                    {offer.flight_class && offer.flight_class !== 'economy' && (
+                      <span className="flight-class-badge">
+                        {offer.flight_class === 'premium_economy' ? 'Premium Economy' :
+                         offer.flight_class === 'business' ? 'Business Class' :
+                         offer.flight_class === 'first' ? 'First Class' :
+                         offer.flight_class.charAt(0).toUpperCase() + offer.flight_class.slice(1)} flights
+                      </span>
+                    )}
                     {offer.airport_prices?.length > 1 ? (
                       <>
                         <span className="label">Flying from {offer.airport_prices.length} UK airports</span>
@@ -853,6 +866,17 @@ function OfferPage() {
                           {safeRender(item)}
                         </li>
                       ))}
+                      {/* Auto-add transfers if included but not in list */}
+                      {offer.transfer_included && !offer.includes?.some(i => 
+                        typeof i === 'string' && i.toLowerCase().includes('transfer')
+                      ) && (
+                        <li>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                          </svg>
+                          Airport transfers included
+                        </li>
+                      )}
                     </ul>
                   </div>
                 )}
