@@ -3,7 +3,7 @@ import { useOffer } from '../hooks/useOffers';
 import { useTrustBadges } from '../hooks/useTrustBadges';
 import { incrementOfferView } from '../services/offersAPI';
 import { siteConfig } from '../config/siteConfig';
-import SEO, { getBreadcrumbSchema } from '../components/SEO';
+import SEO, { getBreadcrumbSchema, getEventSchema } from '../components/SEO';
 import { Button, SectionHeader } from '../components/ui';
 import { OfferEnquiryModal } from '../components/enquiry-forms';
 // V2 Components
@@ -275,9 +275,9 @@ function OfferPage() {
       '@context': 'https://schema.org',
       '@type': 'Product',
       name: offer.title || '',
-      description: offer.short_description || '',
+      description: offer.short_description || offer.full_description?.substring(0, 300) || '',
       url: `https://www.limitlesscruises.com/offers/${offer.slug}`,
-      category: 'Travel Package',
+      category: 'Cruise Holiday',
       brand: {
         '@type': 'Organization',
         name: offer.cruise_line_name || 'Cruise Line'
@@ -285,11 +285,36 @@ function OfferPage() {
       offers: {
         '@type': 'Offer',
         price: displayPrice || 0,
-        priceCurrency: offer.currency || 'GBP',
-        availability: 'https://schema.org/InStock',
+        priceCurrency: 'GBP',
+        availability: offer.status === 'sold_out' 
+          ? 'https://schema.org/SoldOut' 
+          : 'https://schema.org/InStock',
         priceValidUntil: offer.expires_at || defaultPriceValidUntil,
-        url: `https://www.limitlesscruises.com/offers/${offer.slug}`
-      }
+        url: `https://www.limitlesscruises.com/offers/${offer.slug}`,
+        seller: {
+          '@type': 'TravelAgency',
+          name: 'Limitless Cruises',
+          url: 'https://www.limitlesscruises.com'
+        },
+        itemCondition: 'https://schema.org/NewCondition'
+      },
+      additionalProperty: [
+        ...(offer.duration_nights ? [{
+          '@type': 'PropertyValue',
+          name: 'Duration',
+          value: `${offer.duration_nights} nights`
+        }] : []),
+        ...(offer.ship_name ? [{
+          '@type': 'PropertyValue',
+          name: 'Ship',
+          value: offer.ship_name
+        }] : []),
+        ...(offer.departure_port ? [{
+          '@type': 'PropertyValue',
+          name: 'Departure Port',
+          value: offer.departure_port
+        }] : [])
+      ]
     };
 
     // Add images if available
@@ -304,7 +329,26 @@ function OfferPage() {
       { name: offer.title || 'Offer', url: `https://www.limitlesscruises.com/offers/${offer.slug}` }
     ]);
 
-    return [data, breadcrumb];
+    // Add Event schema for cruise departures (helps with Google Events rich results)
+    const schemas = [data, breadcrumb];
+    
+    if (offer.departure_date) {
+      const eventSchema = getEventSchema({
+        title: offer.title,
+        description: offer.short_description || offer.full_description?.substring(0, 200),
+        url: `https://www.limitlesscruises.com/offers/${offer.slug}`,
+        departureDate: offer.departure_date,
+        returnDate: offer.return_date,
+        departurePort: offer.departure_port,
+        cruiseLine: offer.cruise_line_name,
+        shipName: offer.ship_name,
+        price: displayPrice,
+        image: galleryImages[0]?.url,
+      });
+      schemas.push(eventSchema);
+    }
+
+    return schemas;
   }, [offer, galleryImages, defaultPriceValidUntil]);
 
   // Loading state

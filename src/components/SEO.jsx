@@ -128,6 +128,29 @@ function SEO({
       createdElements.push(canonicalLink);
     }
 
+    // === Hreflang Links (UK targeting) ===
+    // Primary: en-GB for UK audience
+    // x-default: same as en-GB (single-language site)
+    const hreflangTags = [
+      { hreflang: 'en-GB', href: fullCanonical },
+      { hreflang: 'x-default', href: fullCanonical },
+    ];
+
+    hreflangTags.forEach(({ hreflang, href }) => {
+      const selector = `link[rel="alternate"][hreflang="${hreflang}"]`;
+      let link = document.querySelector(selector);
+      if (link) {
+        link.setAttribute('href', href);
+      } else {
+        link = document.createElement('link');
+        link.setAttribute('rel', 'alternate');
+        link.setAttribute('hreflang', hreflang);
+        link.setAttribute('href', href);
+        document.head.appendChild(link);
+        createdElements.push(link);
+      }
+    });
+
     // === Open Graph Tags ===
     const ogTags = {
       'og:title': fullTitle,
@@ -341,5 +364,89 @@ export function getArticleSchema(article) {
       '@type': 'WebPage',
       '@id': article.url,
     },
+  };
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export function getEventSchema(cruise) {
+  // Build event schema for cruise departures
+  const event = {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: cruise.title || `${cruise.cruiseLine} Cruise`,
+    description: cruise.description || `Cruise holiday departing ${cruise.departureDate}`,
+    url: cruise.url,
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    organizer: {
+      '@type': 'Organization',
+      name: cruise.cruiseLine || 'Cruise Line',
+    },
+    offers: {
+      '@type': 'Offer',
+      price: cruise.price || 0,
+      priceCurrency: 'GBP',
+      availability: 'https://schema.org/InStock',
+      url: cruise.url,
+      validFrom: new Date().toISOString(),
+    },
+  };
+
+  // Add start date if available
+  if (cruise.departureDate) {
+    event.startDate = cruise.departureDate;
+  }
+
+  // Add end date if available
+  if (cruise.returnDate) {
+    event.endDate = cruise.returnDate;
+  }
+
+  // Add location (departure port)
+  if (cruise.departurePort) {
+    event.location = {
+      '@type': 'Place',
+      name: cruise.departurePort,
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'GB',
+      },
+    };
+  }
+
+  // Add image if available
+  if (cruise.image) {
+    event.image = cruise.image;
+  }
+
+  // Add performer (ship)
+  if (cruise.shipName) {
+    event.performer = {
+      '@type': 'Organization',
+      name: cruise.shipName,
+    };
+  }
+
+  return event;
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export function getWebPageSchema(page) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: page.title,
+    description: page.description,
+    url: page.url,
+    isPartOf: {
+      '@type': 'WebSite',
+      name: 'Limitless Cruises',
+      url: 'https://www.limitlesscruises.com',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Limitless Cruises',
+    },
+    inLanguage: 'en-GB',
   };
 }

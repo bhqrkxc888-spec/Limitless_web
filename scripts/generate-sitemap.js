@@ -57,25 +57,25 @@ const today = new Date().toISOString().split('T')[0];
 const CONTENT_LAST_MODIFIED = {
   // Static pages - update when page content changes
   static: {
-    '/': '2025-01-01',           // Homepage
-    '/about': '2025-01-01',      // About page
-    '/contact': '2025-01-01',    // Contact page
-    '/find-a-cruise': '2025-01-01', // Find a Cruise
-    '/offers': '2025-01-01',     // Offers hub
-    '/travel-news': '2025-01-01', // News hub
-    '/cruise-guides': '2025-01-01', // Guides hub
-    '/destinations': '2025-01-01', // Destinations hub
-    '/cruise-lines': '2025-01-01', // Cruise lines hub
-    '/cruise-types': '2025-01-01', // Cruise types hub
-    '/bucket-list': '2025-01-01', // Bucket list hub
-    '/ports': '2026-01-17',      // Port guides hub
-    '/faq': '2025-01-01',        // FAQ
-    '/testimonials': '2025-01-01', // Testimonials
-    '/privacy-policy': '2024-12-01',
-    '/cookie-policy': '2024-12-01',
-    '/booking-terms': '2024-12-01',
-    '/website-terms': '2024-12-01',
-    '/price-match-guarantee': '2024-12-01'
+    '/': '2026-01-27',           // Homepage
+    '/about': '2026-01-27',      // About page
+    '/contact': '2026-01-27',    // Contact page
+    '/find-a-cruise': '2026-01-27', // Find a Cruise
+    '/offers': '2026-01-27',     // Offers hub
+    '/travel-news': '2026-01-27', // News hub
+    '/cruise-guides': '2026-01-27', // Guides hub
+    '/destinations': '2026-01-27', // Destinations hub
+    '/cruise-lines': '2026-01-27', // Cruise lines hub
+    '/cruise-types': '2026-01-27', // Cruise types hub
+    '/bucket-list': '2026-01-27', // Bucket list hub
+    '/ports': '2026-01-27',      // Port guides hub
+    '/faq': '2026-01-27',        // FAQ
+    '/testimonials': '2026-01-27', // Testimonials (parked)
+    '/privacy-policy': '2026-01-27',
+    '/cookie-policy': '2026-01-27',
+    '/booking-terms': '2026-01-27',
+    '/website-terms': '2026-01-27',
+    '/price-match-guarantee': '2026-01-27'
   },
   // Local data categories - update when data files change
   cruiseLines: '2025-01-01',     // Update when cruiseLines.js changes
