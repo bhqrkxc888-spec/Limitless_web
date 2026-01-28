@@ -250,58 +250,6 @@ function InteractiveItineraryMap({ itinerary }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Keyboard navigation for map
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      // Only handle if map container is in viewport and user isn't typing
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-      if (!mapContainer.current) return;
-      
-      const rect = mapContainer.current.getBoundingClientRect();
-      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
-      
-      if (!isInViewport) return;
-      
-      switch (e.key) {
-        case 'ArrowLeft':
-          e.preventDefault();
-          lockScroll();
-          if (currentPortIndex === null) {
-            navigateToPort(ports.length - 1);
-          } else if (currentPortIndex > 0) {
-            navigateToPort(currentPortIndex - 1);
-          } else {
-            navigateToPort(ports.length - 1);
-          }
-          setTimeout(unlockScroll, 3000);
-          break;
-        case 'ArrowRight':
-          e.preventDefault();
-          lockScroll();
-          if (currentPortIndex === null) {
-            navigateToPort(0);
-          } else if (currentPortIndex < ports.length - 1) {
-            navigateToPort(currentPortIndex + 1);
-          } else {
-            navigateToPort(0);
-          }
-          setTimeout(unlockScroll, 3000);
-          break;
-        case 'Escape':
-          e.preventDefault();
-          if (sidebarView === 'port-details') {
-            returnToItinerary();
-          }
-          break;
-        default:
-          break;
-      }
-    };
-    
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentPortIndex, ports, navigateToPort, sidebarView]);
-
   // Navigate to a specific port and load port guide data
   const navigateToPort = useCallback((index) => {
     if (!map.current || index < 0 || index >= ports.length) return;
@@ -415,7 +363,6 @@ function InteractiveItineraryMap({ itinerary }) {
     setTimeout(() => {
       setSidebarView('itinerary');
       setSelectedPort(null);
-      setAttractions([]);
       setViewTransition(false);
     }, 200);
     
@@ -499,7 +446,6 @@ function InteractiveItineraryMap({ itinerary }) {
     setTimeout(() => {
       setSidebarView('itinerary');
       setSelectedPort(null);
-      setAttractions([]);
       setViewTransition(false);
     }, 150);
     
@@ -520,6 +466,42 @@ function InteractiveItineraryMap({ itinerary }) {
     
     return false;
   };
+
+  // Keyboard navigation for map
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Only handle if map container is in viewport and user isn't typing
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (!mapContainer.current) return;
+      
+      const rect = mapContainer.current.getBoundingClientRect();
+      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (!isInViewport) return;
+      
+      switch (e.key) {
+        case 'ArrowLeft':
+          e.preventDefault();
+          goToPrevPort();
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          goToNextPort();
+          break;
+        case 'Escape':
+          e.preventDefault();
+          if (sidebarView === 'port-details') {
+            returnToItinerary();
+          }
+          break;
+        default:
+          break;
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentPortIndex, sidebarView]);
 
   // Create GeoJSON for ports
   const portsGeoJSON = useMemo(() => {
