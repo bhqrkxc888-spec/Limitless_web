@@ -1282,6 +1282,43 @@
   justify-content: center;
 }
 
+/* Simplified Combined Enquiry Section */
+.offer-enquiry-combined {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.offer-enquiry-main {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-card);
+}
+
+.offer-enquiry-main h2 {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--clr-text-main);
+  margin: 0 0 var(--space-3);
+}
+
+.offer-enquiry-main p {
+  font-size: var(--font-size-base);
+  color: var(--clr-text-muted);
+  margin: 0 0 var(--space-4);
+  line-height: var(--line-height-relaxed);
+}
+
+.offer-enquiry-cabins-note {
+  font-size: var(--font-size-sm);
+  color: var(--clr-accent);
+  font-style: italic;
+  margin-bottom: var(--space-6) !important;
+}
+
 /* ========================================
    BACK SECTION
    ======================================== */
@@ -1561,13 +1598,7 @@
   }
 }
 
-.offer-why-special-description {
-  /* Description paragraphs */
-}
-
-.offer-why-special-highlights {
-  /* Highlights card */
-}
+/* Description and highlights containers use default block styling */
 
 .offer-highlights-card {
   background: var(--clr-surface, #ffffff);

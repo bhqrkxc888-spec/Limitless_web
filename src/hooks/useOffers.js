@@ -61,7 +61,8 @@ export function useOffers({
       }
 
       // Filter hard-coded offers based on query parameters
-      let filteredHardcodedOffers = [...hardcodedOffers];
+      // Only include published hardcoded offers
+      let filteredHardcodedOffers = hardcodedOffers.filter(offer => offer.published !== false);
       
       // Apply featured filter
       if (featured !== null) {
@@ -154,8 +155,8 @@ export function useOffer(slug) {
         setLoading(true);
         setError(null);
 
-        // First check hard-coded offers
-        const hardcodedOffer = hardcodedOffers.find(offer => offer.slug === slug);
+        // First check hard-coded offers (only if published)
+        const hardcodedOffer = hardcodedOffers.find(offer => offer.slug === slug && offer.published !== false);
         
         if (hardcodedOffer) {
           setOffer(hardcodedOffer);

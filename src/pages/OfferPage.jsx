@@ -657,6 +657,22 @@ function OfferPage() {
                     </div>
                   </div>
                 )}
+                {offer.cabin_type && (
+                  <div className="offer-quick-detail">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M2 4v16"/>
+                      <path d="M2 8h18a2 2 0 0 1 2 2v10"/>
+                      <path d="M2 17h20"/>
+                      <path d="M6 8v9"/>
+                    </svg>
+                    <div>
+                      <span className="offer-quick-detail__label">Cabin Type</span>
+                      <span className="offer-quick-detail__value">
+                        {offer.cabin_type.charAt(0).toUpperCase() + offer.cabin_type.slice(1)}
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Pricing Card */}
@@ -673,11 +689,6 @@ function OfferPage() {
                     <span className="price">{formatPrice(getDisplayPrice(offer))}</span>
                     {offer.price_basis === 'per_person' && (
                       <span className="basis">per person</span>
-                    )}
-                    {offer.cabin_type && (
-                      <span className="cabin-type">
-                        {offer.cabin_type.charAt(0).toUpperCase() + offer.cabin_type.slice(1)} cabin
-                      </span>
                     )}
                   </div>
                   {savingsDisplay && (
@@ -1080,12 +1091,14 @@ function OfferPage() {
       {/* Enquiry Section - Full Width at Bottom */}
       <section className="section offer-enquiry-section" id="enquiry-form">
         <div className="container">
-          <div className="offer-enquiry-stack">
-            {/* Enquiry CTA */}
-            <div className="offer-enquiry-form-card">
+          <div className="offer-enquiry-combined">
+            <div className="offer-enquiry-main">
               <h2>Interested in This Offer?</h2>
               <p>
                 Check availability and get personalised information about cabin options, pricing, and package add-ons.
+              </p>
+              <p className="offer-enquiry-cabins-note">
+                Other cabin types available on enquiry.
               </p>
               <Button 
                 onClick={() => setShowEnquiryModal(true)}
@@ -1095,32 +1108,6 @@ function OfferPage() {
               >
                 Check Availability
               </Button>
-            </div>
-
-            {/* Contact CTA - Stacked Below */}
-            <div className="offer-enquiry-cta-card">
-              <h3>Prefer to Speak Directly?</h3>
-              <p>Call or WhatsApp us for immediate assistance and expert advice.</p>
-              <div className="offer-enquiry-buttons">
-                <Button href={`tel:${siteConfig.phone}`} variant="primary" size="lg">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{width: '20px', height: '20px', marginRight: '8px'}}>
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-                  </svg>
-                  Call {siteConfig.phone}
-                </Button>
-                <Button 
-                  href={siteConfig.whatsappUrl} 
-                  variant="outline" 
-                  size="lg"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{width: '20px', height: '20px', marginRight: '8px'}}>
-                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                  </svg>
-                  WhatsApp {siteConfig.whatsapp}
-                </Button>
-              </div>
             </div>
           </div>
         </div>

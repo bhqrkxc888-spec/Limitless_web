@@ -78,7 +78,42 @@
 }
 
 .concierge-form-section .container {
-  max-width: 740px;
+  max-width: 900px;
+}
+
+/* Override form width for concierge page - wider and cleaner */
+.concierge-form-section .enquiry-form {
+  max-width: 100%;
+  padding: var(--space-10, 2.5rem);
+  border-radius: var(--radius-lg, 12px);
+}
+
+.concierge-form-section .multi-step-form {
+  max-width: 100%;
+}
+
+/* Make form inputs full width and properly aligned */
+.concierge-form-section .form-group-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6, 1.5rem);
+}
+
+.concierge-form-section .form-group {
+  margin-bottom: var(--space-5, 1.25rem);
+}
+
+.concierge-form-section .form-group-full {
+  grid-column: 1 / -1;
+}
+
+.concierge-form-section .form-input,
+.concierge-form-section .form-select,
+.concierge-form-section .form-textarea {
+  width: 100%;
+  padding: var(--space-3, 0.75rem) var(--space-4, 1rem);
+  font-size: var(--font-size-base, 1rem);
+  border-radius: var(--radius-md, 8px);
 }
 
 .form-intro {
@@ -155,5 +190,15 @@
 
   .contact-options a {
     width: 100%;
+  }
+
+  /* Stack form fields on mobile */
+  .concierge-form-section .form-group-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-4, 1rem);
+  }
+
+  .concierge-form-section .enquiry-form {
+    padding: var(--space-6, 1.5rem);
   }
 }
