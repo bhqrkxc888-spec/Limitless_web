@@ -228,18 +228,9 @@ function InteractiveItineraryMap({ itinerary }) {
   const navigateToPort = async (index) => {
     if (!map.current || index < 0 || index >= ports.length) return;
     
-    // Store scroll position to prevent page jump
-    const scrollY = window.scrollY;
-    const scrollX = window.scrollX;
-    
     const port = ports[index];
     setCurrentPortIndex(index);
     setSelectedPort(port);
-    
-    // Restore scroll position
-    requestAnimationFrame(() => {
-      window.scrollTo(scrollX, scrollY);
-    });
     
     // Fly to the port - slower, smoother animation with less zoom
     map.current.flyTo({
@@ -362,9 +353,12 @@ function InteractiveItineraryMap({ itinerary }) {
   
   // Return to itinerary view and reset map
   const returnToItinerary = () => {
-    // Store scroll position
+    // Capture scroll position before any state changes
     const scrollY = window.scrollY;
     const scrollX = window.scrollX;
+    
+    // Helper to restore scroll - called multiple times to catch async scroll events
+    const restoreScroll = () => window.scrollTo({ left: scrollX, top: scrollY, behavior: 'instant' });
     
     setViewTransition(true);
     
@@ -401,32 +395,42 @@ function InteractiveItineraryMap({ itinerary }) {
       setViewTransition(false);
     }, 200);
     
-    // Restore scroll position
-    window.scrollTo(scrollX, scrollY);
+    // Restore scroll multiple times to catch React re-renders and map animations
+    restoreScroll();
+    requestAnimationFrame(restoreScroll);
+    setTimeout(restoreScroll, 50);
+    setTimeout(restoreScroll, 150);
   };
 
   // Navigation handlers - Circular navigation
+  // Uses multiple scroll restoration attempts to handle async map animations
   const goToPrevPort = (e) => {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
     
-    // Prevent page scroll by storing and restoring scroll position
+    // Capture scroll position before any state changes
     const scrollY = window.scrollY;
     const scrollX = window.scrollX;
     
+    // Helper to restore scroll - called multiple times to catch async scroll events
+    const restoreScroll = () => window.scrollTo({ left: scrollX, top: scrollY, behavior: 'instant' });
+    
     if (currentPortIndex === null) {
-      navigateToPort(ports.length - 1); // Start from end
+      navigateToPort(ports.length - 1);
     } else if (currentPortIndex > 0) {
       navigateToPort(currentPortIndex - 1);
     } else {
-      // Loop back to the end when at the beginning
       navigateToPort(ports.length - 1);
     }
     
-    // Restore scroll position immediately
-    window.scrollTo(scrollX, scrollY);
+    // Restore scroll multiple times to catch React re-renders and map animations
+    restoreScroll();
+    requestAnimationFrame(restoreScroll);
+    setTimeout(restoreScroll, 50);
+    setTimeout(restoreScroll, 150);
+    
     return false;
   };
 
@@ -436,21 +440,27 @@ function InteractiveItineraryMap({ itinerary }) {
       e.stopPropagation();
     }
     
-    // Prevent page scroll by storing and restoring scroll position
+    // Capture scroll position before any state changes
     const scrollY = window.scrollY;
     const scrollX = window.scrollX;
     
+    // Helper to restore scroll - called multiple times to catch async scroll events
+    const restoreScroll = () => window.scrollTo({ left: scrollX, top: scrollY, behavior: 'instant' });
+    
     if (currentPortIndex === null) {
-      navigateToPort(0); // Start from beginning
+      navigateToPort(0);
     } else if (currentPortIndex < ports.length - 1) {
       navigateToPort(currentPortIndex + 1);
     } else {
-      // Loop back to the beginning when at the end
       navigateToPort(0);
     }
     
-    // Restore scroll position immediately
-    window.scrollTo(scrollX, scrollY);
+    // Restore scroll multiple times to catch React re-renders and map animations
+    restoreScroll();
+    requestAnimationFrame(restoreScroll);
+    setTimeout(restoreScroll, 50);
+    setTimeout(restoreScroll, 150);
+    
     return false;
   };
 
@@ -461,11 +471,14 @@ function InteractiveItineraryMap({ itinerary }) {
       e.stopPropagation();
     }
     
-    // Prevent page scroll by storing and restoring scroll position
+    if (!map.current || ports.length === 0) return false;
+    
+    // Capture scroll position before any state changes
     const scrollY = window.scrollY;
     const scrollX = window.scrollX;
     
-    if (!map.current || ports.length === 0) return false;
+    // Helper to restore scroll - called multiple times to catch async scroll events
+    const restoreScroll = () => window.scrollTo({ left: scrollX, top: scrollY, behavior: 'instant' });
     
     setCurrentPortIndex(null);
     if (popup.current) popup.current.remove();
@@ -499,8 +512,12 @@ function InteractiveItineraryMap({ itinerary }) {
       duration: 1500
     });
     
-    // Restore scroll position immediately
-    window.scrollTo(scrollX, scrollY);
+    // Restore scroll multiple times to catch React re-renders and map animations
+    restoreScroll();
+    requestAnimationFrame(restoreScroll);
+    setTimeout(restoreScroll, 50);
+    setTimeout(restoreScroll, 150);
+    
     return false;
   };
 

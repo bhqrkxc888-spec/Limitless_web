@@ -700,7 +700,7 @@ function OfferPage() {
                 {/* V2: Deposit Info */}
                 {offer.deposit_amount && (
                   <div className="offer-pricing-card__deposit">
-                    <span>Secure with just {formatPrice(offer.deposit_amount)} deposit</span>
+                    <span>Secure with just {formatPrice(offer.deposit_amount)} deposit{offer.price_basis === 'per_person' ? ' pp' : ''}</span>
                   </div>
                 )}
                 
