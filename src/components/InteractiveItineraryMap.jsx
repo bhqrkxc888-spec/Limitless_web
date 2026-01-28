@@ -12,10 +12,12 @@
  * - Mobile-friendly
  */
 
-import { useEffect, useRef, useMemo, useState } from 'react';
+import { useEffect, useRef, useMemo, useState, useCallback } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { apiConfig } from '../config/apiConfig';
-import { getPortAttractions } from '../services/googlePlacesAPI';
+import { ports as portGuides } from '../data/ports';
+import { getPortGuideSlug, getPortGuideUrl } from '../utils/portNameMapping';
+import { generateCruiseRoute } from '../utils/maritimeRouting';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './InteractiveItineraryMap.css';
 
@@ -35,17 +37,35 @@ const AIRPORT_INDICATORS = [
   'cdg', 'orly', 'schiphol', 'frankfurt', 'munich airport', 'copenhagen airport', 'bergen airport'
 ];
 
-// Types that should be EXCLUDED from the cruise map (part of journey but not sailing)
-const NON_CRUISE_TYPES = [
-  'flight', 'flight_out', 'flight_return', 'flight_connection', 'flight_internal',
-  'hotel', 'transfer', 'train'
-];
+// Transport type classifications
+const TRANSPORT_TYPES = {
+  cruise: ['port', 'embark', 'embarkation', 'disembark', 'disembarkation', 'sea', 'scenic', 'tender', 'private_island'],
+  flight: ['flight', 'flight_out', 'flight_return', 'flight_connection', 'flight_internal', 'fly'],
+  rail: ['train', 'rail', 'rocky_mountaineer'],
+  hotel: ['hotel', 'stay', 'resort'],
+  transfer: ['transfer', 'coach', 'bus'],
+};
 
-// Types that ARE part of the cruise/sailing route
-const CRUISE_TYPES = [
-  'port', 'embark', 'embarkation', 'disembark', 'disembarkation',
-  'sea', 'scenic', 'tender', 'private_island'
-];
+// Transport styling configuration
+const TRANSPORT_STYLES = {
+  cruise: { color: '#0ea5e9', icon: '🚢', lineStyle: 'dashed', lineWidth: 3 },
+  flight: { color: '#8b5cf6', icon: '✈️', lineStyle: 'arc', lineWidth: 2 },
+  rail: { color: '#10b981', icon: '🚂', lineStyle: 'solid', lineWidth: 3 },
+  hotel: { color: '#f59e0b', icon: '🏨', lineStyle: null, lineWidth: 0 },
+  transfer: { color: '#6b7280', icon: '🚐', lineStyle: 'dotted', lineWidth: 2 },
+  default: { color: '#64748b', icon: '📍', lineStyle: 'solid', lineWidth: 2 },
+};
+
+// Classify a transport type
+const classifyTransport = (type) => {
+  if (!type) return 'cruise';
+  const normalizedType = type.toLowerCase().replace(/_/g, '_');
+  
+  for (const [category, types] of Object.entries(TRANSPORT_TYPES)) {
+    if (types.includes(normalizedType)) return category;
+  }
+  return 'cruise'; // Default to cruise for ports
+};
 
 // Infer item type if not set (for legacy data)
 const inferItemType = (item) => {
@@ -86,16 +106,18 @@ const inferItemType = (item) => {
   return item.type || 'port';
 };
 
-// Check if an item type should appear on the cruise map
+// Check if an item type should appear on the cruise map (cruise ports only)
 const isCruiseMapItem = (itemType) => {
   if (!itemType) return true;
-  
-  // Normalize to lowercase and handle underscores
-  const normalizedType = itemType.toLowerCase().replace(/_/g, '_');
-  
-  if (NON_CRUISE_TYPES.includes(normalizedType)) return false;
-  if (CRUISE_TYPES.includes(normalizedType)) return true;
-  return normalizedType === 'port';
+  const category = classifyTransport(itemType);
+  return category === 'cruise';
+};
+
+// Get port guide data for a port name
+const getPortGuideData = (portName) => {
+  const slug = getPortGuideSlug(portName);
+  if (!slug) return null;
+  return portGuides.find(p => p.slug === slug) || null;
 };
 
 function InteractiveItineraryMap({ itinerary }) {
@@ -108,13 +130,15 @@ function InteractiveItineraryMap({ itinerary }) {
   // Sidebar state - now permanent with two views
   const [sidebarView, setSidebarView] = useState('itinerary'); // 'itinerary' or 'port-details'
   const [selectedPort, setSelectedPort] = useState(null);
-  const [attractions, setAttractions] = useState([]);
   const [loadingAttractions, setLoadingAttractions] = useState(false);
-  const [showAllAttractions, setShowAllAttractions] = useState(false);
   const [viewTransition, setViewTransition] = useState(false);
   
   // New: Map/List view toggle
   const [itineraryViewMode, setItineraryViewMode] = useState('map'); // 'map' or 'list'
+  
+  // Scroll lock ref - prevents scroll during map navigation
+  const scrollLockRef = useRef(false);
+  const scrollPositionRef = useRef({ x: 0, y: 0 });
 
   // Filter and enrich itinerary data - handle round-trips properly
   const ports = useMemo(() => {
@@ -199,33 +223,87 @@ function InteractiveItineraryMap({ itinerary }) {
     return '#0ea5e9'; // Sky blue - consistent for all ports
   };
 
-  // Calculate distance between two coordinates (Haversine formula)
-  const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    const R = 6371; // Earth's radius in km
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const a = 
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c;
-    return distance; // Returns distance in km
+  // Scroll lock mechanism - captures position and prevents scroll during map operations
+  const lockScroll = () => {
+    scrollPositionRef.current = { x: window.scrollX, y: window.scrollY };
+    scrollLockRef.current = true;
+  };
+  
+  const unlockScroll = () => {
+    scrollLockRef.current = false;
+  };
+  
+  const restoreScrollPosition = () => {
+    const { x, y } = scrollPositionRef.current;
+    window.scrollTo({ left: x, top: y, behavior: 'instant' });
   };
 
-  // Format distance for display
-  const formatDistance = (km) => {
-    if (km < 1) {
-      return `${Math.round(km * 1000)}m`;
-    } else if (km < 10) {
-      return `${km.toFixed(1)}km`;
-    } else {
-      return `${Math.round(km)}km`;
-    }
-  };
+  // Effect to enforce scroll lock
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrollLockRef.current) {
+        restoreScrollPosition();
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: false });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  // Navigate to a specific port and fetch Google Places data
-  const navigateToPort = async (index) => {
+  // Keyboard navigation for map
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Only handle if map container is in viewport and user isn't typing
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      if (!mapContainer.current) return;
+      
+      const rect = mapContainer.current.getBoundingClientRect();
+      const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (!isInViewport) return;
+      
+      switch (e.key) {
+        case 'ArrowLeft':
+          e.preventDefault();
+          lockScroll();
+          if (currentPortIndex === null) {
+            navigateToPort(ports.length - 1);
+          } else if (currentPortIndex > 0) {
+            navigateToPort(currentPortIndex - 1);
+          } else {
+            navigateToPort(ports.length - 1);
+          }
+          setTimeout(unlockScroll, 3000);
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          lockScroll();
+          if (currentPortIndex === null) {
+            navigateToPort(0);
+          } else if (currentPortIndex < ports.length - 1) {
+            navigateToPort(currentPortIndex + 1);
+          } else {
+            navigateToPort(0);
+          }
+          setTimeout(unlockScroll, 3000);
+          break;
+        case 'Escape':
+          e.preventDefault();
+          if (sidebarView === 'port-details') {
+            returnToItinerary();
+          }
+          break;
+        default:
+          break;
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentPortIndex, ports, navigateToPort, sidebarView]);
+
+  // Navigate to a specific port and load port guide data
+  const navigateToPort = useCallback((index) => {
     if (!map.current || index < 0 || index >= ports.length) return;
     
     const port = ports[index];
@@ -235,8 +313,8 @@ function InteractiveItineraryMap({ itinerary }) {
     // Fly to the port - slower, smoother animation with less zoom
     map.current.flyTo({
       center: [port.lon, port.lat],
-      zoom: 7, // Reduced from 10 to 7 for less aggressive zoom
-      duration: 2500, // Increased from 1500ms to 2500ms for smoother transition
+      zoom: 7,
+      duration: 2500,
       essential: true
     });
     
@@ -244,6 +322,7 @@ function InteractiveItineraryMap({ itinerary }) {
     if (popup.current) {
       const days = port.days || [port.day];
       const visits = port.visits || null;
+      const portGuide = getPortGuideData(port.name);
       
       let popupHTML = `<div class="port-popup-content">`;
       
@@ -264,8 +343,16 @@ function InteractiveItineraryMap({ itinerary }) {
           popupHTML += `<div>• Day ${visit.day}: ${typeLabel}</div>`;
         });
         popupHTML += '</div>';
+      } else if (portGuide?.tagline) {
+        popupHTML += `<div class="port-popup-description">${portGuide.tagline}</div>`;
       } else if (port.description) {
         popupHTML += `<div class="port-popup-description">${port.description}</div>`;
+      }
+      
+      // Add port guide link if available
+      const portGuideUrl = getPortGuideUrl(port.name);
+      if (portGuideUrl) {
+        popupHTML += `<a href="${portGuideUrl}" class="port-popup-link" target="_blank">View Port Guide →</a>`;
       }
       
       popupHTML += `</div>`;
@@ -283,82 +370,19 @@ function InteractiveItineraryMap({ itinerary }) {
       setViewTransition(false);
     }, 200);
     
-    // Fetch Google Places data via serverless proxy
-    setShowAllAttractions(false);
+    // Load port guide data (no external API call needed)
     setLoadingAttractions(true);
     
-    try {
-      const portAttractions = await getPortAttractions(port.lat, port.lon);
-      
-      // Add distance to each attraction
-      const attractionsWithDistance = portAttractions.map(attraction => ({
-        ...attraction,
-        distance: calculateDistance(port.lat, port.lon, attraction.lat, attraction.lng)
-      }));
-      
-      setAttractions(attractionsWithDistance);
-      
-      // Add markers for attractions on the map
-      if (map.current) {
-        // Remove any existing attraction markers
-        if (map.current.getLayer('attraction-markers')) {
-          map.current.removeLayer('attraction-markers');
-        }
-        if (map.current.getSource('attractions')) {
-          map.current.removeSource('attractions');
-        }
-        
-        // Create GeoJSON for attractions
-        const attractionsGeoJSON = {
-          type: 'FeatureCollection',
-          features: attractionsWithDistance.slice(0, 8).map(attraction => ({
-            type: 'Feature',
-            geometry: {
-              type: 'Point',
-              coordinates: [attraction.lng, attraction.lat]
-            },
-            properties: {
-              name: attraction.name,
-              rating: attraction.rating
-            }
-          }))
-        };
-        
-        // Add source and layer
-        map.current.addSource('attractions', {
-          type: 'geojson',
-          data: attractionsGeoJSON
-        });
-        
-        map.current.addLayer({
-          id: 'attraction-markers',
-          type: 'circle',
-          source: 'attractions',
-          paint: {
-            'circle-radius': 6,
-            'circle-color': '#c9a961',
-            'circle-stroke-width': 2,
-            'circle-stroke-color': '#ffffff',
-            'circle-opacity': 0.8
-          }
-        });
-      }
-    } catch (error) {
-      logger.error('Error fetching port attractions:', error);
-      setAttractions([]);
-    } finally {
+    // Brief delay for transition effect
+    setTimeout(() => {
       setLoadingAttractions(false);
-    }
-  };
+    }, 300);
+  }, [ports]);
   
   // Return to itinerary view and reset map
   const returnToItinerary = () => {
-    // Capture scroll position before any state changes
-    const scrollY = window.scrollY;
-    const scrollX = window.scrollX;
-    
-    // Helper to restore scroll - called multiple times to catch async scroll events
-    const restoreScroll = () => window.scrollTo({ left: scrollX, top: scrollY, behavior: 'instant' });
+    // Lock scroll before any state changes
+    lockScroll();
     
     setViewTransition(true);
     
@@ -395,27 +419,20 @@ function InteractiveItineraryMap({ itinerary }) {
       setViewTransition(false);
     }, 200);
     
-    // Restore scroll multiple times to catch React re-renders and map animations
-    restoreScroll();
-    requestAnimationFrame(restoreScroll);
-    setTimeout(restoreScroll, 50);
-    setTimeout(restoreScroll, 150);
+    // Unlock after animation completes
+    setTimeout(unlockScroll, 2000);
   };
 
   // Navigation handlers - Circular navigation
-  // Uses multiple scroll restoration attempts to handle async map animations
+  // Uses scroll lock to prevent any scroll during map animations
   const goToPrevPort = (e) => {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
     
-    // Capture scroll position before any state changes
-    const scrollY = window.scrollY;
-    const scrollX = window.scrollX;
-    
-    // Helper to restore scroll - called multiple times to catch async scroll events
-    const restoreScroll = () => window.scrollTo({ left: scrollX, top: scrollY, behavior: 'instant' });
+    // Lock scroll before any state changes
+    lockScroll();
     
     if (currentPortIndex === null) {
       navigateToPort(ports.length - 1);
@@ -425,11 +442,8 @@ function InteractiveItineraryMap({ itinerary }) {
       navigateToPort(ports.length - 1);
     }
     
-    // Restore scroll multiple times to catch React re-renders and map animations
-    restoreScroll();
-    requestAnimationFrame(restoreScroll);
-    setTimeout(restoreScroll, 50);
-    setTimeout(restoreScroll, 150);
+    // Unlock after map animation completes (3s should cover flyTo duration)
+    setTimeout(unlockScroll, 3000);
     
     return false;
   };
@@ -440,12 +454,8 @@ function InteractiveItineraryMap({ itinerary }) {
       e.stopPropagation();
     }
     
-    // Capture scroll position before any state changes
-    const scrollY = window.scrollY;
-    const scrollX = window.scrollX;
-    
-    // Helper to restore scroll - called multiple times to catch async scroll events
-    const restoreScroll = () => window.scrollTo({ left: scrollX, top: scrollY, behavior: 'instant' });
+    // Lock scroll before any state changes
+    lockScroll();
     
     if (currentPortIndex === null) {
       navigateToPort(0);
@@ -455,11 +465,8 @@ function InteractiveItineraryMap({ itinerary }) {
       navigateToPort(0);
     }
     
-    // Restore scroll multiple times to catch React re-renders and map animations
-    restoreScroll();
-    requestAnimationFrame(restoreScroll);
-    setTimeout(restoreScroll, 50);
-    setTimeout(restoreScroll, 150);
+    // Unlock after map animation completes
+    setTimeout(unlockScroll, 3000);
     
     return false;
   };
@@ -473,12 +480,8 @@ function InteractiveItineraryMap({ itinerary }) {
     
     if (!map.current || ports.length === 0) return false;
     
-    // Capture scroll position before any state changes
-    const scrollY = window.scrollY;
-    const scrollX = window.scrollX;
-    
-    // Helper to restore scroll - called multiple times to catch async scroll events
-    const restoreScroll = () => window.scrollTo({ left: scrollX, top: scrollY, behavior: 'instant' });
+    // Lock scroll before any state changes
+    lockScroll();
     
     setCurrentPortIndex(null);
     if (popup.current) popup.current.remove();
@@ -512,11 +515,8 @@ function InteractiveItineraryMap({ itinerary }) {
       duration: 1500
     });
     
-    // Restore scroll multiple times to catch React re-renders and map animations
-    restoreScroll();
-    requestAnimationFrame(restoreScroll);
-    setTimeout(restoreScroll, 50);
-    setTimeout(restoreScroll, 150);
+    // Unlock after animation completes
+    setTimeout(unlockScroll, 2000);
     
     return false;
   };
@@ -547,6 +547,64 @@ function InteractiveItineraryMap({ itinerary }) {
           visits: port.visits ? JSON.stringify(port.visits) : null
         }
       }))
+    };
+  }, [ports]);
+
+  // Create GeoJSON for route line connecting ports using maritime waypoints
+  const routeGeoJSON = useMemo(() => {
+    if (ports.length < 2) return null;
+
+    // Use maritime routing to generate sea-aware route (avoids land crossings)
+    const coordinates = generateCruiseRoute(ports);
+
+    return {
+      type: 'Feature',
+      geometry: {
+        type: 'LineString',
+        coordinates
+      },
+      properties: {}
+    };
+  }, [ports]);
+
+  // Create GeoJSON for arrow points along the route (for direction indicators)
+  const arrowPointsGeoJSON = useMemo(() => {
+    if (ports.length < 2) return null;
+
+    const features = [];
+    
+    // Add arrow point at midpoint of each segment
+    for (let i = 0; i < ports.length - 1; i++) {
+      const start = ports[i];
+      const end = ports[i + 1];
+      
+      // Calculate midpoint
+      const midLon = (start.lon + end.lon) / 2;
+      const midLat = (start.lat + end.lat) / 2;
+      
+      // Calculate bearing (direction) from start to end
+      const dLon = (end.lon - start.lon) * Math.PI / 180;
+      const lat1 = start.lat * Math.PI / 180;
+      const lat2 = end.lat * Math.PI / 180;
+      const y = Math.sin(dLon) * Math.cos(lat2);
+      const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+      const bearing = Math.atan2(y, x) * 180 / Math.PI;
+      
+      features.push({
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [midLon, midLat]
+        },
+        properties: {
+          bearing: bearing
+        }
+      });
+    }
+
+    return {
+      type: 'FeatureCollection',
+      features
     };
   }, [ports]);
 
@@ -608,6 +666,83 @@ function InteractiveItineraryMap({ itinerary }) {
       });
       map.current.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
 
+      // Create custom arrow image for direction indicators
+      const arrowSize = 32;
+      const arrowCanvas = document.createElement('canvas');
+      arrowCanvas.width = arrowSize;
+      arrowCanvas.height = arrowSize;
+      const ctx = arrowCanvas.getContext('2d');
+      
+      // Draw arrow pointing right (0 degrees) - will be rotated by bearing
+      ctx.fillStyle = '#0ea5e9';
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      // Arrow shape pointing right
+      ctx.moveTo(arrowSize * 0.8, arrowSize * 0.5);  // Tip
+      ctx.lineTo(arrowSize * 0.3, arrowSize * 0.2);  // Top back
+      ctx.lineTo(arrowSize * 0.4, arrowSize * 0.5);  // Center notch
+      ctx.lineTo(arrowSize * 0.3, arrowSize * 0.8);  // Bottom back
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      
+      // Add the arrow image to the map
+      map.current.addImage('arrow', { 
+        width: arrowSize, 
+        height: arrowSize, 
+        data: ctx.getImageData(0, 0, arrowSize, arrowSize).data 
+      });
+
+      // Add route line source (before ports so it renders underneath)
+      if (routeGeoJSON) {
+        map.current.addSource('route', {
+          type: 'geojson',
+          data: routeGeoJSON
+        });
+
+        // Add route line layer - dashed line for cruise route
+        map.current.addLayer({
+          id: 'route-line',
+          type: 'line',
+          source: 'route',
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          paint: {
+            'line-color': '#0ea5e9',
+            'line-width': 3,
+            'line-opacity': 0.7,
+            'line-dasharray': [2, 1]
+          }
+        });
+      }
+
+      // Add arrow points source for direction indicators
+      if (arrowPointsGeoJSON) {
+        map.current.addSource('arrow-points', {
+          type: 'geojson',
+          data: arrowPointsGeoJSON
+        });
+
+        // Add arrow symbols along the route
+        map.current.addLayer({
+          id: 'route-arrows',
+          type: 'symbol',
+          source: 'arrow-points',
+          layout: {
+            'symbol-placement': 'point',
+            'icon-image': 'arrow',
+            'icon-size': 0.6,
+            'icon-rotate': ['get', 'bearing'],
+            'icon-rotation-alignment': 'map',
+            'icon-allow-overlap': true,
+            'icon-ignore-placement': true
+          }
+        });
+      }
+
       // Add ports data source
       map.current.addSource('ports', {
         type: 'geojson',
@@ -662,14 +797,16 @@ function InteractiveItineraryMap({ itinerary }) {
         map.current.getCanvas().style.cursor = '';
       });
 
-      // Click handler for ports
+      // Click handler for ports - use scroll lock for map clicks too
       map.current.on('click', 'port-circles', (e) => {
         const feature = e.features[0];
         const props = feature.properties;
         const portIndex = props.index;
         
-        // Use navigateToPort to handle the click (keeps state in sync)
+        // Lock scroll and navigate
+        lockScroll();
         navigateToPort(portIndex);
+        setTimeout(unlockScroll, 3000);
       });
     });
 
@@ -752,6 +889,71 @@ function InteractiveItineraryMap({ itinerary }) {
         maxzoom: 14
       });
       map.current.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
+
+      // Re-create arrow image
+      const arrowSize = 32;
+      const arrowCanvas = document.createElement('canvas');
+      arrowCanvas.width = arrowSize;
+      arrowCanvas.height = arrowSize;
+      const ctx = arrowCanvas.getContext('2d');
+      ctx.fillStyle = '#0ea5e9';
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(arrowSize * 0.8, arrowSize * 0.5);
+      ctx.lineTo(arrowSize * 0.3, arrowSize * 0.2);
+      ctx.lineTo(arrowSize * 0.4, arrowSize * 0.5);
+      ctx.lineTo(arrowSize * 0.3, arrowSize * 0.8);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      map.current.addImage('arrow', { 
+        width: arrowSize, 
+        height: arrowSize, 
+        data: ctx.getImageData(0, 0, arrowSize, arrowSize).data 
+      });
+
+      // Re-add route line source
+      if (routeGeoJSON) {
+        map.current.addSource('route', {
+          type: 'geojson',
+          data: routeGeoJSON
+        });
+        map.current.addLayer({
+          id: 'route-line',
+          type: 'line',
+          source: 'route',
+          layout: { 'line-join': 'round', 'line-cap': 'round' },
+          paint: {
+            'line-color': '#0ea5e9',
+            'line-width': 3,
+            'line-opacity': 0.7,
+            'line-dasharray': [2, 1]
+          }
+        });
+      }
+
+      // Re-add arrow points
+      if (arrowPointsGeoJSON) {
+        map.current.addSource('arrow-points', {
+          type: 'geojson',
+          data: arrowPointsGeoJSON
+        });
+        map.current.addLayer({
+          id: 'route-arrows',
+          type: 'symbol',
+          source: 'arrow-points',
+          layout: {
+            'symbol-placement': 'point',
+            'icon-image': 'arrow',
+            'icon-size': 0.6,
+            'icon-rotate': ['get', 'bearing'],
+            'icon-rotation-alignment': 'map',
+            'icon-allow-overlap': true,
+            'icon-ignore-placement': true
+          }
+        });
+      }
       
       // Re-add ports data source
       map.current.addSource('ports', {
@@ -970,14 +1172,11 @@ function InteractiveItineraryMap({ itinerary }) {
                       if (!isClickable) return;
                       e.preventDefault();
                       e.stopPropagation();
-                      // Preserve scroll position
-                      const scrollY = window.scrollY;
-                      const scrollX = window.scrollX;
+                      // Use scroll lock mechanism
+                      lockScroll();
                       navigateToPort(portIndex);
-                      // Restore scroll position after a tick
-                      requestAnimationFrame(() => {
-                        window.scrollTo(scrollX, scrollY);
-                      });
+                      // Unlock after animation completes
+                      setTimeout(unlockScroll, 3000);
                     };
                     
                     return (
@@ -1065,98 +1264,141 @@ function InteractiveItineraryMap({ itinerary }) {
                 {loadingAttractions ? (
                   <div className="sidebar-loading">
                     <div className="loading-spinner"></div>
-                    <p>Discovering local attractions...</p>
+                    <p>Loading port information...</p>
                   </div>
-                ) : attractions.length > 0 ? (
-                  <>
-                    <h4 className="sidebar-section-title">
-                      🏛️ Things To Do
-                    </h4>
-                    <p className="sidebar-section-subtitle">
-                      Top-rated attractions and experiences near the port
-                    </p>
-                    <div className="attractions-list">
-                      {(showAllAttractions ? attractions : attractions.slice(0, 4)).map(place => (
-                        <a 
-                          key={place.id} 
-                          className="attraction-card"
-                          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name)}&query_place_id=${place.id}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <div className="attraction-name">{place.name}</div>
-                          <div className="attraction-meta">
-                            {place.rating > 0 && (
-                              <div className="attraction-rating">
-                                ⭐ {place.rating.toFixed(1)}
-                                {place.ratingCount > 0 && (
-                                  <span className="rating-count">({place.ratingCount.toLocaleString()})</span>
-                                )}
-                              </div>
-                            )}
-                            {place.distance !== undefined && (
-                              <div className="attraction-distance">
-                                📍 {formatDistance(place.distance)} from port
-                              </div>
-                            )}
+                ) : (() => {
+                  const portGuide = selectedPort ? getPortGuideData(selectedPort.name) : null;
+                  const portGuideUrl = selectedPort ? getPortGuideUrl(selectedPort.name) : null;
+                  
+                  if (portGuide) {
+                    return (
+                      <>
+                        {/* Port Tagline */}
+                        {portGuide.tagline && (
+                          <p className="port-tagline">{portGuide.tagline}</p>
+                        )}
+                        
+                        {/* Port Description */}
+                        {portGuide.description && (
+                          <div className="port-description">
+                            <p>{portGuide.description}</p>
                           </div>
-                          {place.types && place.types.length > 0 && (
-                            <div className="attraction-types">
-                              {place.types.slice(0, 3).map((type, idx) => (
-                                <span key={idx} className="attraction-type-tag">
-                                  {type.replace(/_/g, ' ')}
-                                </span>
-                              ))}
+                        )}
+                        
+                        {/* Quick Facts */}
+                        {portGuide.quickFacts && (
+                          <div className="port-quick-facts">
+                            <h4 className="sidebar-section-title">Quick Facts</h4>
+                            <div className="quick-facts-grid">
+                              {portGuide.quickFacts.currency && (
+                                <div className="quick-fact">
+                                  <span className="fact-icon">💷</span>
+                                  <span className="fact-label">Currency</span>
+                                  <span className="fact-value">{portGuide.quickFacts.currency}</span>
+                                </div>
+                              )}
+                              {portGuide.quickFacts.language && (
+                                <div className="quick-fact">
+                                  <span className="fact-icon">🗣️</span>
+                                  <span className="fact-label">Language</span>
+                                  <span className="fact-value">{portGuide.quickFacts.language}</span>
+                                </div>
+                              )}
+                              {portGuide.quickFacts.timezone && (
+                                <div className="quick-fact">
+                                  <span className="fact-icon">🕐</span>
+                                  <span className="fact-label">Timezone</span>
+                                  <span className="fact-value">{portGuide.quickFacts.timezone}</span>
+                                </div>
+                              )}
+                              {portGuide.quickFacts.portType && (
+                                <div className="quick-fact">
+                                  <span className="fact-icon">⚓</span>
+                                  <span className="fact-label">Port Type</span>
+                                  <span className="fact-value">{portGuide.quickFacts.portType}</span>
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </a>
-                      ))}
+                          </div>
+                        )}
+                        
+                        {/* About the Port */}
+                        {portGuide.aboutPort?.overview && (
+                          <div className="port-about">
+                            <h4 className="sidebar-section-title">About the Port</h4>
+                            <p>{portGuide.aboutPort.overview}</p>
+                          </div>
+                        )}
+                        
+                        {/* View Full Port Guide CTA */}
+                        {portGuideUrl && (
+                          <a 
+                            href={portGuideUrl}
+                            className="port-guide-cta"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <span>View Complete Port Guide</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                          </a>
+                        )}
+                      </>
+                    );
+                  }
+                  
+                  // No port guide available - show basic info
+                  return (
+                    <div className="sidebar-empty">
+                      {selectedPort?.description ? (
+                        <p>{selectedPort.description}</p>
+                      ) : (
+                        <p>Port guide coming soon for {selectedPort?.name}.</p>
+                      )}
+                      <p style={{ marginTop: '12px', fontSize: '13px', opacity: 0.8 }}>
+                        We are continuously adding detailed port guides with local tips and recommendations.
+                      </p>
                     </div>
-                    
-                    {attractions.length > 4 && !showAllAttractions && (
-                      <button 
-                        type="button"
-                        className="view-more-btn"
-                        onClick={() => setShowAllAttractions(true)}
-                      >
-                        View {attractions.length - 4} more attractions →
-                      </button>
-                    )}
-                    
-                    {showAllAttractions && attractions.length > 4 && (
-                      <button 
-                        type="button"
-                        className="view-more-btn"
-                        onClick={() => setShowAllAttractions(false)}
-                      >
-                        Show less
-                      </button>
-                    )}
-                  </>
-                ) : (
-                  <div className="sidebar-empty">
-                    <p>No attractions data available for this port yet.</p>
-                    <p style={{ marginTop: '12px', fontSize: '13px' }}>
-                      Try searching on Google Maps for local recommendations.
-                    </p>
-                  </div>
-                )}
+                  );
+                })()}
               </div>
               
-              {/* Footer with Google Maps link */}
+              {/* Footer */}
               <div className="sidebar-footer">
-                <a 
-                  href={`https://www.google.com/maps/search/things+to+do+near+${encodeURIComponent(selectedPort?.name || '')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="google-maps-link"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                    <circle cx="12" cy="10" r="3"/>
-                  </svg>
-                  Explore more on Google Maps
-                </a>
+                {(() => {
+                  const portGuideUrl = selectedPort ? getPortGuideUrl(selectedPort.name) : null;
+                  if (portGuideUrl) {
+                    return (
+                      <a 
+                        href={portGuideUrl}
+                        className="google-maps-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                          <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        Explore our Port Guide
+                      </a>
+                    );
+                  }
+                  return (
+                    <a 
+                      href={`https://www.google.com/maps/search/things+to+do+near+${encodeURIComponent(selectedPort?.name || '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="google-maps-link"
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                      </svg>
+                      Explore on Google Maps
+                    </a>
+                  );
+                })()}
               </div>
             </div>
           )}
