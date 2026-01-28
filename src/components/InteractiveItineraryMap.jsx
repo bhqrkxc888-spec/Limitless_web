@@ -306,7 +306,11 @@ function InteractiveItineraryMap({ itinerary }) {
   }, [ports]);
   
   // Return to itinerary view and reset map
-  const returnToItinerary = () => {
+  const returnToItinerary = (e) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     setViewTransition(true);
     
     // Reset map to show all ports and remove attraction markers
@@ -674,6 +678,26 @@ function InteractiveItineraryMap({ itinerary }) {
         const portIndex = props.index;
         navigateToPort(portIndex);
       });
+      
+      // Global scroll lock during ANY map movement to prevent page jumping
+      let scrollLockY = null;
+      let scrollLockHandler = null;
+      
+      map.current.on('movestart', () => {
+        scrollLockY = window.scrollY;
+        scrollLockHandler = () => window.scrollTo(0, scrollLockY);
+        window.addEventListener('scroll', scrollLockHandler);
+      });
+      
+      map.current.on('moveend', () => {
+        // Remove scroll lock after animation completes
+        setTimeout(() => {
+          if (scrollLockHandler) {
+            window.removeEventListener('scroll', scrollLockHandler);
+            scrollLockHandler = null;
+          }
+        }, 100);
+      });
     });
 
     // Cleanup - defensive checks to avoid errors on unmounted instances
@@ -931,9 +955,16 @@ function InteractiveItineraryMap({ itinerary }) {
                     <div
                       key={index}
                       className={`list-day-item ${isSeaDay ? 'sea-day' : 'port-day'} ${isClickable ? 'clickable' : ''} ${isSelected ? 'selected' : ''}`}
-                      onClick={() => isClickable && navigateToPort(portIndex)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (isClickable) {
+                          navigateToPort(portIndex);
+                        }
+                      }}
+                      onMouseDown={(e) => e.preventDefault()} // Prevent focus-induced scroll
                       role={isClickable ? 'button' : undefined}
-                      tabIndex={isClickable ? 0 : undefined}
+                      tabIndex={isClickable ? 0 : -1}
                     >
                       <div className="day-label">
                         <span className="day-num">Day {day.day}</span>
@@ -1027,7 +1058,7 @@ function InteractiveItineraryMap({ itinerary }) {
 
       {/* Disclaimer */}
       <div className="itinerary-map-disclaimer">
-        <p>This map displays cruise ports only. Flights and hotels are not included in the route visualisation.</p>
+        <p>Map shown for visual purposes only and may not be 100% accurate.</p>
       </div>
     </div>
   );

@@ -189,5 +189,5 @@ export function hasPortGuide(portName) {
 export function getPortGuideUrl(portName) {
   const slug = getPortGuideSlug(portName);
   if (!slug) return null;
-  return `/port-guides/${slug}`;
+  return `/ports/${slug}`;
 }
