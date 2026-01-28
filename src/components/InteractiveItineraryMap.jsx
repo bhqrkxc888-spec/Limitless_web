@@ -817,176 +817,7 @@ function InteractiveItineraryMap({ itinerary }) {
 
   return (
     <div className="interactive-itinerary-map-container">
-      {/* SECTION 1: Full-Width Map at Top */}
-      <div className={`map-section ${itineraryViewMode === 'map' ? '' : 'hidden'}`}>
-        <div ref={mapContainer} className="interactive-itinerary-map">
-          {/* Style Switcher */}
-          <div className="map-style-switcher">
-            <button 
-              type="button"
-              className={`map-style-btn ${currentStyle === 'outdoors' ? 'active' : ''}`}
-              onClick={() => handleStyleChange('outdoors')}
-              title="Outdoors (Terrain)"
-            >
-              🗺️
-            </button>
-            <button 
-              type="button"
-              className={`map-style-btn ${currentStyle === 'satellite' ? 'active' : ''}`}
-              onClick={() => handleStyleChange('satellite')}
-              title="Satellite View"
-            >
-              🛰️
-            </button>
-            <button 
-              type="button"
-              className={`map-style-btn ${currentStyle === 'streets' ? 'active' : ''}`}
-              onClick={() => handleStyleChange('streets')}
-              title="Street Map"
-            >
-              📍
-            </button>
-            <button 
-              type="button"
-              className="map-style-btn map-centre-btn"
-              onClick={resetView}
-              title="Show Full Itinerary"
-            >
-              ⟲
-            </button>
-          </div>
-
-          {/* Port Navigation */}
-          <div className="map-port-navigation">
-            <button type="button" className="map-nav-btn" onClick={goToPrevPort} title="Previous Port">
-              ← Prev
-            </button>
-            <div className="map-nav-info">
-              {currentPortIndex !== null ? (
-                <>
-                  <span className="map-nav-current">{ports[currentPortIndex]?.name}</span>
-                  <span className="map-nav-counter">{currentPortIndex + 1} of {ports.length}</span>
-                </>
-              ) : (
-                <span className="map-nav-hint">Click a port or use arrows</span>
-              )}
-            </div>
-            <button type="button" className="map-nav-btn" onClick={goToNextPort} title="Next Port">
-              Next →
-            </button>
-          </div>
-        </div>
-      </div>
-      
-      {/* SECTION 2: Itinerary Panel Below Map */}
-      <div className={`itinerary-panel ${itineraryViewMode === 'map' ? '' : 'hidden'} ${selectedPort ? 'has-selection' : ''}`}>
-        {/* Day List - Always visible */}
-        <div className="itinerary-day-list-panel">
-          <div className="panel-header">
-            <h3>Your Itinerary</h3>
-            <span className="port-count">{ports.length} ports</span>
-          </div>
-          <div className="panel-content">
-            {itinerary.map((day, index) => {
-              const isSeaDay = day.is_sea_day || 
-                             day.type === 'sea' || 
-                             day.type === 'SEA' ||
-                             (day.port || '').toLowerCase().includes('at sea') ||
-                             (day.port || '').toLowerCase().includes('cruising');
-              
-              const portIndex = ports.findIndex(p => p.day === day.day);
-              const isClickable = !isSeaDay && portIndex !== -1;
-              const isSelected = currentPortIndex === portIndex && portIndex !== -1;
-              
-              const rawType = day.type || (isSeaDay ? 'sea' : 'port');
-              const dayType = rawType.toLowerCase().replace(/_/g, '_');
-              
-              return (
-                <div
-                  key={index}
-                  className={`day-item ${isSeaDay ? 'sea-day' : 'port-day'} ${isClickable ? 'clickable' : ''} ${isSelected ? 'selected' : ''}`}
-                  onClick={() => isClickable && navigateToPort(portIndex)}
-                  role={isClickable ? 'button' : undefined}
-                  tabIndex={isClickable ? 0 : undefined}
-                >
-                  <div className="day-header">
-                    <span className="day-num">Day {day.day}</span>
-                    {dayType === 'sea' && <span className="day-badge sea">At Sea</span>}
-                    {(dayType === 'embark' || dayType === 'embarkation') && <span className="day-badge embark">Embark</span>}
-                    {(dayType === 'disembark' || dayType === 'disembarkation') && <span className="day-badge disembark">Disembark</span>}
-                  </div>
-                  <div className="day-port">{day.port || day.location || 'At Sea'}</div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        
-        {/* Port Details - Only when selected */}
-        {selectedPort && (
-          <div className={`port-details-panel ${viewTransition ? 'transitioning' : ''}`}>
-            <div className="panel-header">
-              <button type="button" className="back-btn" onClick={returnToItinerary}>
-                ← Back
-              </button>
-              <div className="port-day-badge">
-                {selectedPort?.days?.length > 1 
-                  ? `Days ${selectedPort.days.join(' & ')}` 
-                  : `Day ${selectedPort?.day}`}
-              </div>
-            </div>
-            <h3 className="port-name">{selectedPort?.name}</h3>
-            
-            {loadingAttractions ? (
-              <div className="loading-state"><div className="loading-spinner"></div></div>
-            ) : (() => {
-              const portGuide = getPortGuideData(selectedPort.name);
-              const portGuideUrl = getPortGuideUrl(selectedPort.name);
-              
-              if (portGuide) {
-                return (
-                  <div className="port-info">
-                    {portGuide.tagline && <p className="port-tagline">{portGuide.tagline}</p>}
-                    {portGuide.description && <p className="port-description">{portGuide.description}</p>}
-                    
-                    {portGuide.quickFacts && (
-                      <div className="quick-facts">
-                        {portGuide.quickFacts.currency && (
-                          <div className="fact"><span className="icon">💷</span>{portGuide.quickFacts.currency}</div>
-                        )}
-                        {portGuide.quickFacts.language && (
-                          <div className="fact"><span className="icon">🗣️</span>{portGuide.quickFacts.language}</div>
-                        )}
-                        {portGuide.quickFacts.timezone && (
-                          <div className="fact"><span className="icon">🕐</span>{portGuide.quickFacts.timezone}</div>
-                        )}
-                      </div>
-                    )}
-                    
-                    {portGuideUrl && (
-                      <a href={portGuideUrl} className="port-guide-link" target="_blank" rel="noopener noreferrer">
-                        View Complete Port Guide →
-                      </a>
-                    )}
-                  </div>
-                );
-              }
-              
-              return (
-                <div className="port-info">
-                  {selectedPort?.description ? (
-                    <p>{selectedPort.description}</p>
-                  ) : (
-                    <p className="placeholder">Port guide coming soon for {selectedPort?.name}.</p>
-                  )}
-                </div>
-              );
-            })()}
-          </div>
-        )}
-      </div>
-      
-      {/* View Mode Toggle */}
+      {/* VIEW MODE TOGGLE - At top */}
       <div className="itinerary-view-toggle">
         <button 
           type="button"
@@ -1015,36 +846,150 @@ function InteractiveItineraryMap({ itinerary }) {
           List
         </button>
       </div>
-      
-      {/* List View - Tabular format */}
-      <div className={`itinerary-list-view ${itineraryViewMode === 'list' ? '' : 'hidden'}`}>
-        <table className="itinerary-table">
-          <thead>
-            <tr>
-              <th>Day</th>
-              <th>Port / Location</th>
-              <th>Activity</th>
-            </tr>
-          </thead>
-          <tbody>
-            {itinerary.map((day, index) => {
-              const isSeaDay = day.is_sea_day || 
-                             day.type === 'sea' || 
-                             day.type === 'SEA' ||
-                             (day.port || '').toLowerCase().includes('at sea') ||
-                             (day.port || '').toLowerCase().includes('cruising');
-              return (
-                <tr key={index} className={isSeaDay ? 'sea-day-row' : 'port-day-row'}>
-                  <td>Day {day.day}</td>
-                  <td><strong>{day.port || day.location || 'At Sea'}</strong></td>
-                  <td>{day.description || (isSeaDay ? 'Relaxing at sea' : 'Port visit')}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-      
+
+      {/* ===== MAP VIEW MODE ===== */}
+      {itineraryViewMode === 'map' && (
+        <>
+          {/* BOX 1: THE ACTUAL MAP - Full width at top */}
+          <div className="map-box">
+            <div ref={mapContainer} className="interactive-itinerary-map">
+              {/* Map controls overlay */}
+              <div className="map-style-switcher">
+                <button type="button" className={`map-style-btn ${currentStyle === 'outdoors' ? 'active' : ''}`} onClick={() => handleStyleChange('outdoors')} title="Terrain">🗺️</button>
+                <button type="button" className={`map-style-btn ${currentStyle === 'satellite' ? 'active' : ''}`} onClick={() => handleStyleChange('satellite')} title="Satellite">🛰️</button>
+                <button type="button" className={`map-style-btn ${currentStyle === 'streets' ? 'active' : ''}`} onClick={() => handleStyleChange('streets')} title="Streets">📍</button>
+                <button type="button" className="map-style-btn" onClick={resetView} title="Reset View">⟲</button>
+              </div>
+              <div className="map-port-navigation">
+                <button type="button" className="map-nav-btn" onClick={goToPrevPort}>← Prev</button>
+                <div className="map-nav-info">
+                  {currentPortIndex !== null ? (
+                    <><span className="map-nav-current">{ports[currentPortIndex]?.name}</span><span className="map-nav-counter">{currentPortIndex + 1} of {ports.length}</span></>
+                  ) : (
+                    <span className="map-nav-hint">Click a port to explore</span>
+                  )}
+                </div>
+                <button type="button" className="map-nav-btn" onClick={goToNextPort}>Next →</button>
+              </div>
+            </div>
+          </div>
+
+          {/* BOX 2: ITINERARY LIST + PORT DETAILS - Below map */}
+          <div className={`itinerary-box ${selectedPort ? 'has-selection' : ''}`}>
+            {/* Left side: Day List (always visible) */}
+            <div className="itinerary-list-side">
+              <div className="list-header">
+                <h4>Your Itinerary</h4>
+                <span className="port-count">{ports.length} ports</span>
+              </div>
+              <div className="list-content">
+                {itinerary.map((day, index) => {
+                  const isSeaDay = day.is_sea_day || day.type === 'sea' || day.type === 'SEA' ||
+                    (day.port || '').toLowerCase().includes('at sea') || (day.port || '').toLowerCase().includes('cruising');
+                  const portIndex = ports.findIndex(p => p.day === day.day);
+                  const isClickable = !isSeaDay && portIndex !== -1;
+                  const isSelected = currentPortIndex === portIndex && portIndex !== -1;
+                  const rawType = day.type || (isSeaDay ? 'sea' : 'port');
+                  const dayType = rawType.toLowerCase();
+
+                  return (
+                    <div
+                      key={index}
+                      className={`list-day-item ${isSeaDay ? 'sea-day' : 'port-day'} ${isClickable ? 'clickable' : ''} ${isSelected ? 'selected' : ''}`}
+                      onClick={() => isClickable && navigateToPort(portIndex)}
+                      role={isClickable ? 'button' : undefined}
+                      tabIndex={isClickable ? 0 : undefined}
+                    >
+                      <div className="day-label">
+                        <span className="day-num">Day {day.day}</span>
+                        {dayType === 'sea' && <span className="type-badge sea">At Sea</span>}
+                        {(dayType === 'embark' || dayType === 'embarkation') && <span className="type-badge embark">Embark</span>}
+                        {(dayType === 'disembark' || dayType === 'disembarkation') && <span className="type-badge disembark">Disembark</span>}
+                      </div>
+                      <div className="port-name">{day.port || day.location || 'At Sea'}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Right side: Port Details (only when port selected) */}
+            {selectedPort && (
+              <div className={`port-details-side ${viewTransition ? 'transitioning' : ''}`}>
+                <div className="details-header">
+                  <button type="button" className="back-btn" onClick={returnToItinerary}>← Back</button>
+                  <span className="day-badge">
+                    {selectedPort?.days?.length > 1 ? `Days ${selectedPort.days.join(' & ')}` : `Day ${selectedPort?.day}`}
+                  </span>
+                </div>
+                <h3 className="details-port-name">{selectedPort?.name}</h3>
+                
+                {loadingAttractions ? (
+                  <div className="loading-spinner-wrap"><div className="loading-spinner"></div></div>
+                ) : (() => {
+                  const portGuide = getPortGuideData(selectedPort.name);
+                  const portGuideUrl = getPortGuideUrl(selectedPort.name);
+                  
+                  if (portGuide) {
+                    return (
+                      <div className="port-details-content">
+                        {portGuide.tagline && <p className="tagline">{portGuide.tagline}</p>}
+                        {portGuide.description && <p className="description">{portGuide.description}</p>}
+                        {portGuide.quickFacts && (
+                          <div className="quick-facts">
+                            {portGuide.quickFacts.currency && <div className="fact">💷 {portGuide.quickFacts.currency}</div>}
+                            {portGuide.quickFacts.language && <div className="fact">🗣️ {portGuide.quickFacts.language}</div>}
+                            {portGuide.quickFacts.timezone && <div className="fact">🕐 {portGuide.quickFacts.timezone}</div>}
+                          </div>
+                        )}
+                        {portGuideUrl && (
+                          <a href={portGuideUrl} className="port-guide-cta" target="_blank" rel="noopener noreferrer">
+                            View Complete Port Guide →
+                          </a>
+                        )}
+                      </div>
+                    );
+                  }
+                  return (
+                    <div className="port-details-content">
+                      <p className="placeholder">{selectedPort?.description || `Port guide coming soon for ${selectedPort?.name}.`}</p>
+                    </div>
+                  );
+                })()}
+              </div>
+            )}
+          </div>
+        </>
+      )}
+
+      {/* ===== LIST VIEW MODE ===== */}
+      {itineraryViewMode === 'list' && (
+        <div className="table-view-box">
+          <table className="itinerary-table">
+            <thead>
+              <tr>
+                <th>Day</th>
+                <th>Port / Location</th>
+                <th>Activity</th>
+              </tr>
+            </thead>
+            <tbody>
+              {itinerary.map((day, index) => {
+                const isSeaDay = day.is_sea_day || day.type === 'sea' || day.type === 'SEA' ||
+                  (day.port || '').toLowerCase().includes('at sea') || (day.port || '').toLowerCase().includes('cruising');
+                return (
+                  <tr key={index} className={isSeaDay ? 'sea-day-row' : 'port-day-row'}>
+                    <td>Day {day.day}</td>
+                    <td><strong>{day.port || day.location || 'At Sea'}</strong></td>
+                    <td>{day.description || (isSeaDay ? 'Relaxing at sea' : 'Port visit')}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+
       {/* Disclaimer */}
       <div className="itinerary-map-disclaimer">
         <p>This map displays cruise ports only. Flights and hotels are not included in the route visualisation.</p>
