@@ -2,7 +2,6 @@ import { useParams, Link } from 'react-router-dom';
 import { useOffer } from '../hooks/useOffers';
 import { useTrustBadges } from '../hooks/useTrustBadges';
 import { incrementOfferView } from '../services/offersAPI';
-import { siteConfig } from '../config/siteConfig';
 import SEO, { getBreadcrumbSchema, getEventSchema } from '../components/SEO';
 import { Button, SectionHeader } from '../components/ui';
 import { OfferEnquiryModal } from '../components/enquiry-forms';
