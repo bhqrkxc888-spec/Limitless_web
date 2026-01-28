@@ -135,10 +135,6 @@ function InteractiveItineraryMap({ itinerary }) {
   
   // New: Map/List view toggle
   const [itineraryViewMode, setItineraryViewMode] = useState('map'); // 'map' or 'list'
-  
-  // Scroll lock ref - prevents scroll during map navigation
-  const scrollLockRef = useRef(false);
-  const scrollPositionRef = useRef({ x: 0, y: 0 });
 
   // Filter and enrich itinerary data - handle round-trips properly
   const ports = useMemo(() => {
@@ -223,32 +219,6 @@ function InteractiveItineraryMap({ itinerary }) {
     return '#0ea5e9'; // Sky blue - consistent for all ports
   };
 
-  // Scroll lock mechanism - captures position and prevents scroll during map operations
-  const lockScroll = () => {
-    scrollPositionRef.current = { x: window.scrollX, y: window.scrollY };
-    scrollLockRef.current = true;
-  };
-  
-  const unlockScroll = () => {
-    scrollLockRef.current = false;
-  };
-  
-  const restoreScrollPosition = () => {
-    const { x, y } = scrollPositionRef.current;
-    window.scrollTo({ left: x, top: y, behavior: 'instant' });
-  };
-
-  // Effect to enforce scroll lock
-  useEffect(() => {
-    const handleScroll = () => {
-      if (scrollLockRef.current) {
-        restoreScrollPosition();
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll, { passive: false });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Navigate to a specific port and load port guide data
   const navigateToPort = useCallback((index) => {
@@ -329,9 +299,6 @@ function InteractiveItineraryMap({ itinerary }) {
   
   // Return to itinerary view and reset map
   const returnToItinerary = () => {
-    // Lock scroll before any state changes
-    lockScroll();
-    
     setViewTransition(true);
     
     // Reset map to show all ports and remove attraction markers
@@ -365,9 +332,6 @@ function InteractiveItineraryMap({ itinerary }) {
       setSelectedPort(null);
       setViewTransition(false);
     }, 200);
-    
-    // Unlock after animation completes
-    setTimeout(unlockScroll, 2000);
   };
 
   // Navigation handlers - Circular navigation
@@ -378,9 +342,6 @@ function InteractiveItineraryMap({ itinerary }) {
       e.stopPropagation();
     }
     
-    // Lock scroll before any state changes
-    lockScroll();
-    
     if (currentPortIndex === null) {
       navigateToPort(ports.length - 1);
     } else if (currentPortIndex > 0) {
@@ -388,9 +349,6 @@ function InteractiveItineraryMap({ itinerary }) {
     } else {
       navigateToPort(ports.length - 1);
     }
-    
-    // Unlock after map animation completes (3s should cover flyTo duration)
-    setTimeout(unlockScroll, 3000);
     
     return false;
   };
@@ -401,9 +359,6 @@ function InteractiveItineraryMap({ itinerary }) {
       e.stopPropagation();
     }
     
-    // Lock scroll before any state changes
-    lockScroll();
-    
     if (currentPortIndex === null) {
       navigateToPort(0);
     } else if (currentPortIndex < ports.length - 1) {
@@ -411,9 +366,6 @@ function InteractiveItineraryMap({ itinerary }) {
     } else {
       navigateToPort(0);
     }
-    
-    // Unlock after map animation completes
-    setTimeout(unlockScroll, 3000);
     
     return false;
   };
@@ -426,9 +378,6 @@ function InteractiveItineraryMap({ itinerary }) {
     }
     
     if (!map.current || ports.length === 0) return false;
-    
-    // Lock scroll before any state changes
-    lockScroll();
     
     setCurrentPortIndex(null);
     if (popup.current) popup.current.remove();
@@ -460,9 +409,6 @@ function InteractiveItineraryMap({ itinerary }) {
       padding: { top: 80, bottom: 80, left: 80, right: 80 },
       duration: 1500
     });
-    
-    // Unlock after animation completes
-    setTimeout(unlockScroll, 2000);
     
     return false;
   };
@@ -549,47 +495,6 @@ function InteractiveItineraryMap({ itinerary }) {
     };
   }, [ports]);
 
-  // Create GeoJSON for arrow points along the route (for direction indicators)
-  const arrowPointsGeoJSON = useMemo(() => {
-    if (ports.length < 2) return null;
-
-    const features = [];
-    
-    // Add arrow point at midpoint of each segment
-    for (let i = 0; i < ports.length - 1; i++) {
-      const start = ports[i];
-      const end = ports[i + 1];
-      
-      // Calculate midpoint
-      const midLon = (start.lon + end.lon) / 2;
-      const midLat = (start.lat + end.lat) / 2;
-      
-      // Calculate bearing (direction) from start to end
-      const dLon = (end.lon - start.lon) * Math.PI / 180;
-      const lat1 = start.lat * Math.PI / 180;
-      const lat2 = end.lat * Math.PI / 180;
-      const y = Math.sin(dLon) * Math.cos(lat2);
-      const x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
-      const bearing = Math.atan2(y, x) * 180 / Math.PI;
-      
-      features.push({
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [midLon, midLat]
-        },
-        properties: {
-          bearing: bearing
-        }
-      });
-    }
-
-    return {
-      type: 'FeatureCollection',
-      features
-    };
-  }, [ports]);
-
   // Initialize map
   useEffect(() => {
     if (!apiConfig.mapbox.enabled || !apiConfig.mapbox.accessToken) {
@@ -648,34 +553,6 @@ function InteractiveItineraryMap({ itinerary }) {
       });
       map.current.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
 
-      // Create custom arrow image for direction indicators
-      const arrowSize = 32;
-      const arrowCanvas = document.createElement('canvas');
-      arrowCanvas.width = arrowSize;
-      arrowCanvas.height = arrowSize;
-      const ctx = arrowCanvas.getContext('2d');
-      
-      // Draw arrow pointing right (0 degrees) - will be rotated by bearing
-      ctx.fillStyle = '#0ea5e9';
-      ctx.strokeStyle = '#ffffff';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      // Arrow shape pointing right
-      ctx.moveTo(arrowSize * 0.8, arrowSize * 0.5);  // Tip
-      ctx.lineTo(arrowSize * 0.3, arrowSize * 0.2);  // Top back
-      ctx.lineTo(arrowSize * 0.4, arrowSize * 0.5);  // Center notch
-      ctx.lineTo(arrowSize * 0.3, arrowSize * 0.8);  // Bottom back
-      ctx.closePath();
-      ctx.fill();
-      ctx.stroke();
-      
-      // Add the arrow image to the map
-      map.current.addImage('arrow', { 
-        width: arrowSize, 
-        height: arrowSize, 
-        data: ctx.getImageData(0, 0, arrowSize, arrowSize).data 
-      });
-
       // Add route line source (before ports so it renders underneath)
       if (routeGeoJSON) {
         map.current.addSource('route', {
@@ -697,30 +574,6 @@ function InteractiveItineraryMap({ itinerary }) {
             'line-width': 3,
             'line-opacity': 0.7,
             'line-dasharray': [2, 1]
-          }
-        });
-      }
-
-      // Add arrow points source for direction indicators
-      if (arrowPointsGeoJSON) {
-        map.current.addSource('arrow-points', {
-          type: 'geojson',
-          data: arrowPointsGeoJSON
-        });
-
-        // Add arrow symbols along the route
-        map.current.addLayer({
-          id: 'route-arrows',
-          type: 'symbol',
-          source: 'arrow-points',
-          layout: {
-            'symbol-placement': 'point',
-            'icon-image': 'arrow',
-            'icon-size': 0.6,
-            'icon-rotate': ['get', 'bearing'],
-            'icon-rotation-alignment': 'map',
-            'icon-allow-overlap': true,
-            'icon-ignore-placement': true
           }
         });
       }
@@ -784,11 +637,7 @@ function InteractiveItineraryMap({ itinerary }) {
         const feature = e.features[0];
         const props = feature.properties;
         const portIndex = props.index;
-        
-        // Lock scroll and navigate
-        lockScroll();
         navigateToPort(portIndex);
-        setTimeout(unlockScroll, 3000);
       });
     });
 
@@ -872,29 +721,6 @@ function InteractiveItineraryMap({ itinerary }) {
       });
       map.current.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
 
-      // Re-create arrow image
-      const arrowSize = 32;
-      const arrowCanvas = document.createElement('canvas');
-      arrowCanvas.width = arrowSize;
-      arrowCanvas.height = arrowSize;
-      const ctx = arrowCanvas.getContext('2d');
-      ctx.fillStyle = '#0ea5e9';
-      ctx.strokeStyle = '#ffffff';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(arrowSize * 0.8, arrowSize * 0.5);
-      ctx.lineTo(arrowSize * 0.3, arrowSize * 0.2);
-      ctx.lineTo(arrowSize * 0.4, arrowSize * 0.5);
-      ctx.lineTo(arrowSize * 0.3, arrowSize * 0.8);
-      ctx.closePath();
-      ctx.fill();
-      ctx.stroke();
-      map.current.addImage('arrow', { 
-        width: arrowSize, 
-        height: arrowSize, 
-        data: ctx.getImageData(0, 0, arrowSize, arrowSize).data 
-      });
-
       // Re-add route line source
       if (routeGeoJSON) {
         map.current.addSource('route', {
@@ -911,28 +737,6 @@ function InteractiveItineraryMap({ itinerary }) {
             'line-width': 3,
             'line-opacity': 0.7,
             'line-dasharray': [2, 1]
-          }
-        });
-      }
-
-      // Re-add arrow points
-      if (arrowPointsGeoJSON) {
-        map.current.addSource('arrow-points', {
-          type: 'geojson',
-          data: arrowPointsGeoJSON
-        });
-        map.current.addLayer({
-          id: 'route-arrows',
-          type: 'symbol',
-          source: 'arrow-points',
-          layout: {
-            'symbol-placement': 'point',
-            'icon-image': 'arrow',
-            'icon-size': 0.6,
-            'icon-rotate': ['get', 'bearing'],
-            'icon-rotation-alignment': 'map',
-            'icon-allow-overlap': true,
-            'icon-ignore-placement': true
           }
         });
       }
@@ -1013,44 +817,147 @@ function InteractiveItineraryMap({ itinerary }) {
 
   return (
     <div className="interactive-itinerary-map-container">
-      {/* View Mode Toggle */}
-      <div className="itinerary-view-toggle">
-        <button 
-          type="button"
-          className={`view-toggle-btn ${itineraryViewMode === 'map' ? 'active' : ''}`}
-          onClick={() => setItineraryViewMode('map')}
-          title="Map View"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-            <circle cx="12" cy="10" r="3"/>
-          </svg>
-          Map view
-        </button>
-        <button 
-          type="button"
-          className={`view-toggle-btn ${itineraryViewMode === 'list' ? 'active' : ''}`}
-          onClick={() => setItineraryViewMode('list')}
-          title="List View"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <line x1="8" y1="6" x2="21" y2="6"/>
-            <line x1="8" y1="12" x2="21" y2="12"/>
-            <line x1="8" y1="18" x2="21" y2="18"/>
-            <line x1="3" y1="6" x2="3.01" y2="6"/>
-            <line x1="3" y1="12" x2="3.01" y2="12"/>
-            <line x1="3" y1="18" x2="3.01" y2="18"/>
-          </svg>
-          List view
-        </button>
+      {/* NEW LAYOUT: Itinerary Panel Above Map */}
+      <div className={`itinerary-explorer-panel ${itineraryViewMode === 'map' ? '' : 'hidden'}`}>
+        {/* Left: Day List */}
+        <div className="itinerary-explorer-list">
+          <div className="explorer-list-header">
+            <h3>Your Itinerary</h3>
+            <span className="port-count">{ports.length} ports</span>
+          </div>
+          <div className="explorer-list-content">
+            {itinerary.map((day, index) => {
+              const isSeaDay = day.is_sea_day || 
+                             day.type === 'sea' || 
+                             day.type === 'SEA' ||
+                             (day.port || '').toLowerCase().includes('at sea') ||
+                             (day.port || '').toLowerCase().includes('cruising');
+              
+              const portIndex = ports.findIndex(p => p.day === day.day);
+              const isClickable = !isSeaDay && portIndex !== -1;
+              const isSelected = currentPortIndex === portIndex && portIndex !== -1;
+              
+              const rawType = day.type || (isSeaDay ? 'sea' : 'port');
+              const dayType = rawType.toLowerCase().replace(/_/g, '_');
+              
+              return (
+                <div
+                  key={index}
+                  className={`explorer-day-item ${isSeaDay ? 'sea-day' : 'port-day'} ${isClickable ? 'clickable' : ''} ${isSelected ? 'selected' : ''}`}
+                  onClick={() => isClickable && navigateToPort(portIndex)}
+                  role={isClickable ? 'button' : undefined}
+                  tabIndex={isClickable ? 0 : undefined}
+                >
+                  <div className="explorer-day-number">
+                    <span className="day-num">Day {day.day}</span>
+                    {dayType === 'sea' && <span className="day-badge sea">At Sea</span>}
+                    {(dayType === 'embark' || dayType === 'embarkation') && <span className="day-badge embark">Embark</span>}
+                    {(dayType === 'disembark' || dayType === 'disembarkation') && <span className="day-badge disembark">Disembark</span>}
+                  </div>
+                  <div className="explorer-day-port">
+                    {day.port || day.location || 'At Sea'}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        
+        {/* Right: Port Details */}
+        <div className={`itinerary-explorer-details ${viewTransition ? 'transitioning' : ''}`}>
+          {selectedPort ? (
+            <div className="explorer-details-content">
+              <div className="explorer-details-header">
+                <div className="details-day-badge">
+                  {selectedPort?.days?.length > 1 
+                    ? `Days ${selectedPort.days.join(' & ')}` 
+                    : `Day ${selectedPort?.day}`}
+                </div>
+                <h3 className="details-port-name">{selectedPort?.name}</h3>
+              </div>
+              
+              {loadingAttractions ? (
+                <div className="explorer-details-loading">
+                  <div className="loading-spinner"></div>
+                </div>
+              ) : (() => {
+                const portGuide = getPortGuideData(selectedPort.name);
+                const portGuideUrl = getPortGuideUrl(selectedPort.name);
+                
+                if (portGuide) {
+                  return (
+                    <>
+                      {portGuide.tagline && (
+                        <p className="details-tagline">{portGuide.tagline}</p>
+                      )}
+                      
+                      {portGuide.description && (
+                        <p className="details-description">{portGuide.description}</p>
+                      )}
+                      
+                      {portGuide.quickFacts && (
+                        <div className="details-quick-facts">
+                          {portGuide.quickFacts.currency && (
+                            <div className="quick-fact-item">
+                              <span className="fact-icon">💷</span>
+                              <span>{portGuide.quickFacts.currency}</span>
+                            </div>
+                          )}
+                          {portGuide.quickFacts.language && (
+                            <div className="quick-fact-item">
+                              <span className="fact-icon">🗣️</span>
+                              <span>{portGuide.quickFacts.language}</span>
+                            </div>
+                          )}
+                          {portGuide.quickFacts.timezone && (
+                            <div className="quick-fact-item">
+                              <span className="fact-icon">🕐</span>
+                              <span>{portGuide.quickFacts.timezone}</span>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                      
+                      {portGuideUrl && (
+                        <a href={portGuideUrl} className="details-cta" target="_blank" rel="noopener noreferrer">
+                          View Complete Port Guide →
+                        </a>
+                      )}
+                    </>
+                  );
+                }
+                
+                return (
+                  <div className="details-placeholder">
+                    {selectedPort?.description ? (
+                      <p>{selectedPort.description}</p>
+                    ) : (
+                      <p>Port guide coming soon for {selectedPort?.name}.</p>
+                    )}
+                  </div>
+                );
+              })()}
+            </div>
+          ) : (
+            <div className="explorer-details-empty">
+              <div className="empty-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <p className="empty-title">Select a port to explore</p>
+              <p className="empty-hint">Click on any port in the list or on the map below</p>
+            </div>
+          )}
+        </div>
       </div>
       
-      {/* Map View - Original layout with map and sidebar */}
-      <div className={`interactive-itinerary-map-layout ${itineraryViewMode === 'map' ? '' : 'hidden'}`}>
-          {/* Map Section - 2/3 width */}
-          <div className="interactive-itinerary-map-wrapper">
-            <div ref={mapContainer} className="interactive-itinerary-map">
-            {/* Style Switcher - Inside map container for fullscreen access */}
+      {/* Map View - Now Full Width Below Itinerary Panel */}
+      <div className={`interactive-itinerary-map-layout-v2 ${itineraryViewMode === 'map' ? '' : 'hidden'}`}>
+        <div className="interactive-itinerary-map-wrapper-v2">
+          <div ref={mapContainer} className="interactive-itinerary-map">
+            {/* Style Switcher */}
             <div className="map-style-switcher">
               <button 
                 type="button"
@@ -1123,271 +1030,41 @@ function InteractiveItineraryMap({ itinerary }) {
             </div>
           </div>
         </div>
-        
-        {/* Permanent Sidebar - 1/3 width */}
-        <aside className={`itinerary-sidebar ${viewTransition ? 'transitioning' : ''}`}>
-          {sidebarView === 'itinerary' ? (
-            /* Day-by-Day Itinerary View */
-            <div className="sidebar-itinerary-view">
-              <div className="sidebar-header">
-                <h3 className="sidebar-title">Day-by-Day Itinerary</h3>
-                <p className="sidebar-subtitle">Click any day to explore what to do in port</p>
-              </div>
-              
-              <div className="sidebar-content">
-                <div className="itinerary-day-list">
-                  {itinerary.map((day, index) => {
-                    const isSeaDay = day.is_sea_day || 
-                                   day.type === 'sea' || 
-                                   day.type === 'SEA' ||
-                                   (day.port || '').toLowerCase().includes('at sea') ||
-                                   (day.port || '').toLowerCase().includes('cruising');
-                    
-                    const portIndex = ports.findIndex(p => p.day === day.day);
-                    const isClickable = !isSeaDay && portIndex !== -1;
-                    
-                    // Determine day type for icon - normalize to lowercase for comparison
-                    const rawType = day.type || (isSeaDay ? 'sea' : 'port');
-                    const dayType = rawType.toLowerCase().replace(/_/g, '_');
-                    
-                    const handleDayClick = (e) => {
-                      if (!isClickable) return;
-                      e.preventDefault();
-                      e.stopPropagation();
-                      // Use scroll lock mechanism
-                      lockScroll();
-                      navigateToPort(portIndex);
-                      // Unlock after animation completes
-                      setTimeout(unlockScroll, 3000);
-                    };
-                    
-                    return (
-                      <div
-                        key={index}
-                        className={`itinerary-day-item ${isSeaDay ? 'sea-day' : 'port-day'} ${isClickable ? 'clickable' : ''}`}
-                        onClick={handleDayClick}
-                        role={isClickable ? 'button' : undefined}
-                        tabIndex={isClickable ? 0 : undefined}
-                      >
-                        <div className="day-icon">
-                          {(dayType === 'flight' || dayType === 'flight_out' || dayType === 'flight_return' || dayType === 'fly') && (
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
-                            </svg>
-                          )}
-                          {(dayType === 'hotel' || dayType === 'stay') && (
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16"/>
-                              <path d="M1 21h22"/>
-                              <path d="M9 7h1"/>
-                              <path d="M9 11h1"/>
-                              <path d="M14 7h1"/>
-                              <path d="M14 11h1"/>
-                            </svg>
-                          )}
-                          {dayType === 'train' && (
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <rect x="4" y="3" width="16" height="16" rx="2"/>
-                              <path d="M4 11h16"/>
-                              <path d="M12 3v8"/>
-                              <path d="M8 19l-2 3"/>
-                              <path d="M16 19l2 3"/>
-                              <circle cx="8" cy="15" r="1"/>
-                              <circle cx="16" cy="15" r="1"/>
-                            </svg>
-                          )}
-                          {(dayType === 'port' || dayType === 'embark' || dayType === 'embarkation' || dayType === 'disembark' || dayType === 'disembarkation' || dayType === 'private_island') && (
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <path d="M12 6.5v7.5M19 13.5c0-4-7-7-7-7s-7 3-7 7c0 1.66 7 4 7 4s7-2.34 7-4z"/>
-                              <path d="M1 20h22"/>
-                            </svg>
-                          )}
-                          {dayType === 'sea' && (
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <path d="M2 20h.01M7 20h.01M12 20h.01M17 20h.01M22 20h.01"/>
-                              <path d="M12 4v12"/>
-                            </svg>
-                          )}
-                        </div>
-                        <div className="day-number">Day {day.day}</div>
-                        <div className="day-details">
-                          <div className="day-port">{day.port || day.location || 'At Sea'}</div>
-                          {day.description && (
-                            <div className="day-description">{day.description}</div>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          ) : (
-            /* Port Details View */
-            <div className="sidebar-port-view">
-              <div className="sidebar-header">
-                <button 
-                  type="button" 
-                  className="sidebar-back-btn"
-                  onClick={returnToItinerary}
-                  title="Back to itinerary"
-                >
-                  ← Back to Itinerary
-                </button>
-                <div className="sidebar-port-day">
-                  {selectedPort?.days?.length > 1 
-                    ? `Days ${selectedPort.days.join(' & ')}` 
-                    : `Day ${selectedPort?.day}`}
-                </div>
-                <h3 className="sidebar-port-name">{selectedPort?.name}</h3>
-              </div>
-              
-              <div className="sidebar-content">
-                {loadingAttractions ? (
-                  <div className="sidebar-loading">
-                    <div className="loading-spinner"></div>
-                    <p>Loading port information...</p>
-                  </div>
-                ) : (() => {
-                  const portGuide = selectedPort ? getPortGuideData(selectedPort.name) : null;
-                  const portGuideUrl = selectedPort ? getPortGuideUrl(selectedPort.name) : null;
-                  
-                  if (portGuide) {
-                    return (
-                      <>
-                        {/* Port Tagline */}
-                        {portGuide.tagline && (
-                          <p className="port-tagline">{portGuide.tagline}</p>
-                        )}
-                        
-                        {/* Port Description */}
-                        {portGuide.description && (
-                          <div className="port-description">
-                            <p>{portGuide.description}</p>
-                          </div>
-                        )}
-                        
-                        {/* Quick Facts */}
-                        {portGuide.quickFacts && (
-                          <div className="port-quick-facts">
-                            <h4 className="sidebar-section-title">Quick Facts</h4>
-                            <div className="quick-facts-grid">
-                              {portGuide.quickFacts.currency && (
-                                <div className="quick-fact">
-                                  <span className="fact-icon">💷</span>
-                                  <span className="fact-label">Currency</span>
-                                  <span className="fact-value">{portGuide.quickFacts.currency}</span>
-                                </div>
-                              )}
-                              {portGuide.quickFacts.language && (
-                                <div className="quick-fact">
-                                  <span className="fact-icon">🗣️</span>
-                                  <span className="fact-label">Language</span>
-                                  <span className="fact-value">{portGuide.quickFacts.language}</span>
-                                </div>
-                              )}
-                              {portGuide.quickFacts.timezone && (
-                                <div className="quick-fact">
-                                  <span className="fact-icon">🕐</span>
-                                  <span className="fact-label">Timezone</span>
-                                  <span className="fact-value">{portGuide.quickFacts.timezone}</span>
-                                </div>
-                              )}
-                              {portGuide.quickFacts.portType && (
-                                <div className="quick-fact">
-                                  <span className="fact-icon">⚓</span>
-                                  <span className="fact-label">Port Type</span>
-                                  <span className="fact-value">{portGuide.quickFacts.portType}</span>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        )}
-                        
-                        {/* About the Port */}
-                        {portGuide.aboutPort?.overview && (
-                          <div className="port-about">
-                            <h4 className="sidebar-section-title">About the Port</h4>
-                            <p>{portGuide.aboutPort.overview}</p>
-                          </div>
-                        )}
-                        
-                        {/* View Full Port Guide CTA */}
-                        {portGuideUrl && (
-                          <a 
-                            href={portGuideUrl}
-                            className="port-guide-cta"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <span>View Complete Port Guide</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                              <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                          </a>
-                        )}
-                      </>
-                    );
-                  }
-                  
-                  // No port guide available - show basic info
-                  return (
-                    <div className="sidebar-empty">
-                      {selectedPort?.description ? (
-                        <p>{selectedPort.description}</p>
-                      ) : (
-                        <p>Port guide coming soon for {selectedPort?.name}.</p>
-                      )}
-                      <p style={{ marginTop: '12px', fontSize: '13px', opacity: 0.8 }}>
-                        We are continuously adding detailed port guides with local tips and recommendations.
-                      </p>
-                    </div>
-                  );
-                })()}
-              </div>
-              
-              {/* Footer */}
-              <div className="sidebar-footer">
-                {(() => {
-                  const portGuideUrl = selectedPort ? getPortGuideUrl(selectedPort.name) : null;
-                  if (portGuideUrl) {
-                    return (
-                      <a 
-                        href={portGuideUrl}
-                        className="google-maps-link"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                          <circle cx="12" cy="10" r="3"/>
-                        </svg>
-                        Explore our Port Guide
-                      </a>
-                    );
-                  }
-                  return (
-                    <a 
-                      href={`https://www.google.com/maps/search/things+to+do+near+${encodeURIComponent(selectedPort?.name || '')}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="google-maps-link"
-                    >
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                        <circle cx="12" cy="10" r="3"/>
-                      </svg>
-                      Explore on Google Maps
-                    </a>
-                  );
-                })()}
-              </div>
-            </div>
-          )}
-        </aside>
       </div>
       
-      {/* List View - Tabular format like Bolsover */}
+      {/* View Mode Toggle */}
+      <div className="itinerary-view-toggle">
+        <button 
+          type="button"
+          className={`view-toggle-btn ${itineraryViewMode === 'map' ? 'active' : ''}`}
+          onClick={() => setItineraryViewMode('map')}
+          title="Map View"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          Map
+        </button>
+        <button 
+          type="button"
+          className={`view-toggle-btn ${itineraryViewMode === 'list' ? 'active' : ''}`}
+          onClick={() => setItineraryViewMode('list')}
+          title="List View"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="8" y1="6" x2="21" y2="6"/>
+            <line x1="8" y1="12" x2="21" y2="12"/>
+            <line x1="8" y1="18" x2="21" y2="18"/>
+            <line x1="3" y1="6" x2="3.01" y2="6"/>
+            <line x1="3" y1="12" x2="3.01" y2="12"/>
+            <line x1="3" y1="18" x2="3.01" y2="18"/>
+          </svg>
+          List
+        </button>
+      </div>
+      
+      {/* List View - Tabular format */}
       <div className={`itinerary-list-view ${itineraryViewMode === 'list' ? '' : 'hidden'}`}>
           <table className="itinerary-table">
             <thead>

@@ -1572,3 +1572,324 @@
     font-size: 13px;
   }
 }
+
+/* ========================================
+   NEW: Itinerary Explorer Panel (Above Map)
+   ======================================== */
+
+.itinerary-explorer-panel {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 0;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  margin-bottom: 20px;
+  overflow: hidden;
+  min-height: 280px;
+  max-height: 360px;
+}
+
+.itinerary-explorer-panel.hidden {
+  display: none;
+}
+
+/* Left: Day List */
+.itinerary-explorer-list {
+  background: #f8fafc;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.explorer-list-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.explorer-list-header h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.explorer-list-header .port-count {
+  font-size: 12px;
+  color: #64748b;
+  background: #e2e8f0;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.explorer-list-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.explorer-day-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-bottom: 4px;
+  transition: all 0.15s ease;
+}
+
+.explorer-day-item.clickable {
+  cursor: pointer;
+}
+
+.explorer-day-item.clickable:hover {
+  background: #e0f2fe;
+}
+
+.explorer-day-item.selected {
+  background: #0ea5e9;
+}
+
+.explorer-day-item.selected .day-num,
+.explorer-day-item.selected .explorer-day-port {
+  color: #ffffff;
+}
+
+.explorer-day-item.sea-day {
+  opacity: 0.6;
+}
+
+.explorer-day-number {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.explorer-day-number .day-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.explorer-day-number .day-badge {
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.explorer-day-number .day-badge.sea {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.explorer-day-number .day-badge.embark {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.explorer-day-number .day-badge.disembark {
+  background: #fce7f3;
+  color: #9d174d;
+}
+
+.explorer-day-port {
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Right: Port Details */
+.itinerary-explorer-details {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  transition: opacity 0.15s ease;
+}
+
+.itinerary-explorer-details.transitioning {
+  opacity: 0.5;
+}
+
+.explorer-details-content {
+  flex: 1;
+}
+
+.explorer-details-header {
+  margin-bottom: 16px;
+}
+
+.details-day-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #0ea5e9;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.details-port-name {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.details-tagline {
+  font-size: 14px;
+  color: #475569;
+  font-style: italic;
+  margin: 0 0 12px 0;
+  line-height: 1.5;
+}
+
+.details-description {
+  font-size: 14px;
+  color: #334155;
+  line-height: 1.6;
+  margin: 0 0 16px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.details-quick-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.quick-fact-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #475569;
+  background: #f1f5f9;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+.quick-fact-item .fact-icon {
+  font-size: 14px;
+}
+
+.details-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+  color: #ffffff;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  margin-top: auto;
+}
+
+.details-cta:hover {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  transform: translateY(-1px);
+}
+
+.details-placeholder {
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Empty State */
+.explorer-details-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: #94a3b8;
+}
+
+.explorer-details-empty .empty-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.explorer-details-empty .empty-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.explorer-details-empty .empty-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #64748b;
+  margin: 0 0 4px 0;
+}
+
+.explorer-details-empty .empty-hint {
+  font-size: 13px;
+  margin: 0;
+}
+
+.explorer-details-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Map Layout V2 - Full Width */
+.interactive-itinerary-map-layout-v2 {
+  width: 100%;
+}
+
+.interactive-itinerary-map-layout-v2.hidden {
+  display: none;
+}
+
+.interactive-itinerary-map-wrapper-v2 {
+  width: 100%;
+}
+
+/* Responsive: Explorer Panel */
+@media (max-width: 768px) {
+  .itinerary-explorer-panel {
+    grid-template-columns: 1fr;
+    max-height: none;
+  }
+  
+  .itinerary-explorer-list {
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+    max-height: 200px;
+  }
+  
+  .itinerary-explorer-details {
+    min-height: 200px;
+  }
+  
+  .details-port-name {
+    font-size: 18px;
+  }
+}
