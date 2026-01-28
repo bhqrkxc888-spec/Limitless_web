@@ -229,12 +229,20 @@ function InteractiveItineraryMap({ itinerary }) {
     setSelectedPort(port);
     
     // Fly to the port - slower, smoother animation with less zoom
+    // Disable scroll during animation to prevent page jumping
+    const scrollY = window.scrollY;
+    
     map.current.flyTo({
       center: [port.lon, port.lat],
       zoom: 7,
       duration: 2500,
-      essential: true
+      essential: false // Don't force animation, prevents scroll issues
     });
+    
+    // Lock scroll position during animation
+    const lockScroll = () => window.scrollTo(0, scrollY);
+    window.addEventListener('scroll', lockScroll);
+    setTimeout(() => window.removeEventListener('scroll', lockScroll), 2600);
     
     // Show popup for this port
     if (popup.current) {
@@ -321,10 +329,17 @@ function InteractiveItineraryMap({ itinerary }) {
         [Math.max(...lons), Math.max(...lats)]
       ];
       
+      // Lock scroll during animation to prevent page jumping
+      const scrollY = window.scrollY;
+      const lockScroll = () => window.scrollTo(0, scrollY);
+      window.addEventListener('scroll', lockScroll);
+      
       map.current.fitBounds(bounds, {
         padding: { top: 80, bottom: 80, left: 80, right: 80 },
         duration: 1500
       });
+      
+      setTimeout(() => window.removeEventListener('scroll', lockScroll), 1600);
     }
     
     setTimeout(() => {
@@ -405,10 +420,17 @@ function InteractiveItineraryMap({ itinerary }) {
       [Math.max(...lons), Math.max(...lats)]
     ];
     
+    // Lock scroll during animation to prevent page jumping
+    const scrollY = window.scrollY;
+    const lockScroll = () => window.scrollTo(0, scrollY);
+    window.addEventListener('scroll', lockScroll);
+    
     map.current.fitBounds(bounds, {
       padding: { top: 80, bottom: 80, left: 80, right: 80 },
       duration: 1500
     });
+    
+    setTimeout(() => window.removeEventListener('scroll', lockScroll), 1600);
     
     return false;
   };
@@ -482,8 +504,19 @@ function InteractiveItineraryMap({ itinerary }) {
   const routeGeoJSON = useMemo(() => {
     if (ports.length < 2) return null;
 
+    // Check if first port is a round-trip (meaning we need to close the circuit)
+    const isRoundTrip = ports[0]?.isRoundTrip === true;
+    
+    // Create a copy of ports for route generation
+    let portsForRoute = [...ports];
+    
+    // If it's a round-trip, add the first port at the end to close the circuit
+    if (isRoundTrip && ports.length >= 2) {
+      portsForRoute.push({ ...ports[0] });
+    }
+
     // Use maritime routing to generate sea-aware route (avoids land crossings)
-    const coordinates = generateCruiseRoute(ports);
+    const coordinates = generateCruiseRoute(portsForRoute);
 
     return {
       type: 'Feature',
@@ -493,7 +526,7 @@ function InteractiveItineraryMap({ itinerary }) {
       },
       properties: {}
     };
-  }, [ports]);
+  }, [ports])
 
   // Initialize map
   useEffect(() => {
@@ -525,6 +558,7 @@ function InteractiveItineraryMap({ itinerary }) {
     ];
 
     // Initialize map with 3D terrain support
+    // Use mercator projection for flat map (not globe-like at low zoom)
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: apiConfig.mapbox.style,
@@ -533,7 +567,8 @@ function InteractiveItineraryMap({ itinerary }) {
         padding: { top: 80, bottom: 80, left: 80, right: 80 }
       },
       pitch: 0, // Start flat, user can tilt
-      bearing: 0
+      bearing: 0,
+      projection: 'mercator' // Flat map projection, not globe
     });
 
     // Add navigation controls (zoom only, no compass)
