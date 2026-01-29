@@ -9073,6 +9073,1332 @@ export const ports = [
     lastUpdated: '2026-01-21',
   },
 
+  // ============================================================================
+  // ADDITIONAL UK PORTS
+  // ============================================================================
+  
+  // Liverpool
+  {
+    id: 'liverpool',
+    slug: 'liverpool',
+    name: 'Liverpool',
+    country: 'United Kingdom',
+    region: 'uk',
+    coordinates: { lat: 53.4084, lon: -2.9916 },
+    tagline: 'Beatles heritage and maritime history on the Mersey',
+    description: 'Liverpool is a vibrant cruise port on the River Mersey, famous worldwide as the birthplace of The Beatles. The city\'s UNESCO-listed waterfront features the iconic Three Graces buildings and the award-winning Museum of Liverpool. Cruise ships dock at the Liverpool Cruise Terminal on the Pier Head, putting passengers within walking distance of the city\'s major attractions, world-class museums, and thriving cultural quarter.',
+    portCharacter: 'city',
+    
+    aboutPort: {
+      overview: 'Liverpool Cruise Terminal is located on the historic Pier Head waterfront, directly opposite the famous Three Graces. The terminal opened in 2007 and offers excellent facilities including check-in areas, seating, and refreshments. The city centre, Albert Dock, and major museums are all within a 10-15 minute walk.',
+      terminals: 'Single cruise terminal at Pier Head with modern facilities',
+      walkability: 'Excellent - city centre, Albert Dock, and museums all within walking distance',
+      shuttleServices: 'Generally not required due to central location',
+    },
+    
+    quickFacts: {
+      currency: 'GBP (£)',
+      language: 'English',
+      timezone: 'GMT+0',
+      portType: 'Port of Call & Turnaround',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Walk directly from the terminal to Albert Dock, the Museum of Liverpool, and city centre attractions.',
+      publicTransport: 'Merseyrail trains connect to suburbs and beyond. Good bus network throughout the city.',
+      taxis: 'Readily available at the terminal and throughout the city.',
+      walkingDistance: 'Albert Dock 5 mins, The Beatles Story 10 mins, Cavern Quarter 15 mins, Liverpool ONE shopping 10 mins.',
+      sightseeingBus: 'City Explorer hop-on hop-off buses operate from near the waterfront.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'The Beatles Story',
+        category: 'museum',
+        description: 'Award-winning exhibition chronicling the lives and times of The Beatles, located in Albert Dock. Features authentic memorabilia, replica venues, and immersive experiences.',
+        duration: '2 to 3 hours',
+      },
+      {
+        title: 'Albert Dock',
+        category: 'landmark',
+        description: 'Grade I listed dock complex housing museums, galleries, restaurants, and bars. Home to Tate Liverpool, Merseyside Maritime Museum, and The Beatles Story.',
+        duration: '2 to 4 hours',
+      },
+      {
+        title: 'Cavern Quarter',
+        category: 'cultural',
+        description: 'The legendary Mathew Street area where The Beatles played their early gigs. The Cavern Club still hosts live music daily.',
+        duration: '1 to 2 hours',
+      },
+    ],
+    
+    insiderTips: [
+      'The Cavern Club offers free lunchtime sessions - arrive early for the best spots.',
+      'Liverpool ONE offers excellent shopping and dining in a pedestrianised setting.',
+      'The free museums at Albert Dock (Museum of Liverpool, Maritime Museum, Tate Liverpool) are world-class.',
+    ],
+    
+    meta: {
+      title: 'Liverpool Cruise Port Guide 2026 | Beatles Heritage & Maritime History',
+      description: 'Complete Liverpool cruise port guide. Beatles attractions, Albert Dock, world-class museums. Walking distance from ship to city centre.',
+      keywords: ['Liverpool cruise port', 'Beatles Story', 'Albert Dock', 'Cavern Club'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
+  // Edinburgh (Leith)
+  {
+    id: 'edinburgh',
+    slug: 'edinburgh',
+    name: 'Edinburgh (Leith)',
+    country: 'United Kingdom',
+    region: 'uk',
+    coordinates: { lat: 55.9533, lon: -3.1883 },
+    tagline: 'Scotland\'s historic capital with castle views and Royal Mile charm',
+    description: 'Edinburgh, Scotland\'s capital, is one of Europe\'s most beautiful cities, dominated by its medieval castle perched on volcanic rock. Cruise ships typically dock at Leith or anchor at the Firth of Forth with tender services. The city offers a perfect blend of ancient history, Georgian elegance, world-class festivals, and vibrant culture. The Royal Mile connects Edinburgh Castle to the Palace of Holyroodhouse in a walkable historic core.',
+    portCharacter: 'city',
+    
+    aboutPort: {
+      overview: 'Most cruise ships dock at Ocean Terminal in Leith, about 2.5 miles from the city centre. Larger ships may anchor in the Firth of Forth near South Queensferry with tender service. Ocean Terminal offers shopping and dining facilities.',
+      terminals: 'Ocean Terminal, Leith - modern shopping centre with cruise facilities',
+      walkability: 'Leith is walkable locally; city centre requires transport',
+      shuttleServices: 'Many cruise lines offer shuttles to Princes Street or the Royal Mile',
+    },
+    
+    quickFacts: {
+      currency: 'GBP (£)',
+      language: 'English',
+      timezone: 'GMT+0',
+      portType: 'Port of Call',
+      walkable: false,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Bus services run from Ocean Terminal to the city centre (20-30 minutes). Taxis are readily available.',
+      publicTransport: 'Lothian Buses serve the city extensively. Tram connects airport to city centre.',
+      taxis: 'Available at Ocean Terminal and throughout Edinburgh.',
+      walkingDistance: 'Royal Yacht Britannia is at Ocean Terminal. City centre is 2.5 miles away.',
+      sightseeingBus: 'Edinburgh Bus Tours operates hop-on hop-off services from the city centre.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Edinburgh Castle',
+        category: 'landmark',
+        description: 'Iconic fortress dominating the city skyline. Houses the Scottish Crown Jewels, Stone of Destiny, and offers panoramic views across Edinburgh.',
+        duration: '2 to 3 hours',
+      },
+      {
+        title: 'Royal Mile',
+        category: 'historic',
+        description: 'Historic thoroughfare running from Edinburgh Castle to the Palace of Holyroodhouse. Lined with historic buildings, shops, pubs, and closes to explore.',
+        duration: '2 to 4 hours',
+      },
+      {
+        title: 'Royal Yacht Britannia',
+        category: 'museum',
+        description: 'Former royal yacht now permanently berthed at Ocean Terminal. Tour the State Apartments, crew quarters, and Royal Deck Tea Room.',
+        duration: '1.5 to 2 hours',
+      },
+    ],
+    
+    insiderTips: [
+      'Royal Yacht Britannia is right at Ocean Terminal - perfect for the start or end of your visit.',
+      'Book Edinburgh Castle tickets online to skip the queues.',
+      'The free National Museum of Scotland on Chambers Street is excellent for rainy days.',
+    ],
+    
+    meta: {
+      title: 'Edinburgh Cruise Port Guide 2026 | Castle, Royal Mile & Scottish Heritage',
+      description: 'Complete Edinburgh cruise port guide. Edinburgh Castle, Royal Mile, Royal Yacht Britannia. Transport from Leith to city centre.',
+      keywords: ['Edinburgh cruise port', 'Leith cruise terminal', 'Edinburgh Castle', 'Royal Mile'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
+  // Belfast
+  {
+    id: 'belfast',
+    slug: 'belfast',
+    name: 'Belfast',
+    country: 'United Kingdom',
+    region: 'uk',
+    coordinates: { lat: 54.5973, lon: -5.9301 },
+    tagline: 'Titanic\'s birthplace reborn as a vibrant cultural capital',
+    description: 'Belfast has transformed from its industrial shipbuilding past into a dynamic, welcoming city. The Titanic Quarter, where the famous liner was built, now houses the award-winning Titanic Belfast museum. The Victorian architecture, vibrant Cathedral Quarter, political murals, and warm hospitality make Belfast a fascinating destination. Most cruise ships dock within easy reach of the city centre and Titanic Quarter.',
+    portCharacter: 'city',
+    
+    aboutPort: {
+      overview: 'Belfast has two main cruise berths: the Titanic Quarter berth (adjacent to Titanic Belfast) and the city centre berth near the Big Fish sculpture. Both offer excellent access to attractions.',
+      terminals: 'Multiple berths in Titanic Quarter and city centre',
+      walkability: 'Good - city centre and Titanic Belfast both walkable from berths',
+      shuttleServices: 'Usually not required from city centre berth; shuttles may operate from Titanic Quarter',
+    },
+    
+    quickFacts: {
+      currency: 'GBP (£)',
+      language: 'English',
+      timezone: 'GMT+0',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'City centre is walkable from most berths. Titanic Belfast is a 10-minute walk from the Titanic Quarter berth.',
+      publicTransport: 'Metro buses serve the city. Glider rapid transit connects key areas.',
+      taxis: 'Black cabs and regular taxis readily available.',
+      walkingDistance: 'Titanic Belfast 10-15 mins from Titanic berth, City Hall 10-15 mins from city berth.',
+      sightseeingBus: 'City Sightseeing Belfast operates hop-on hop-off tours.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Titanic Belfast',
+        category: 'museum',
+        description: 'World\'s largest Titanic visitor experience, built on the actual slipways where the liner was constructed. Nine interactive galleries tell the complete Titanic story.',
+        duration: '2 to 3 hours',
+      },
+      {
+        title: 'Political Murals Tour',
+        category: 'cultural',
+        description: 'Black cab tours of the Falls Road and Shankill Road murals provide insight into Belfast\'s complex history and the peace process.',
+        duration: '1.5 to 2 hours',
+      },
+      {
+        title: 'Cathedral Quarter',
+        category: 'neighbourhood',
+        description: 'Belfast\'s cultural heart with cobbled streets, street art, independent shops, and the best pubs and restaurants in the city.',
+        duration: '2 to 3 hours',
+      },
+    ],
+    
+    insiderTips: [
+      'Book Titanic Belfast tickets online in advance - it can get very busy on cruise ship days.',
+      'The Crown Liquor Saloon is a Victorian pub gem - arrive before lunch for the best experience.',
+      'St George\'s Market on Friday, Saturday, and Sunday is excellent for local food and crafts.',
+    ],
+    
+    meta: {
+      title: 'Belfast Cruise Port Guide 2026 | Titanic Quarter & Cultural Revival',
+      description: 'Complete Belfast cruise port guide. Titanic Belfast, political murals, Cathedral Quarter. Walking distance from cruise berths.',
+      keywords: ['Belfast cruise port', 'Titanic Belfast', 'Belfast murals', 'Cathedral Quarter'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
+  // Invergordon
+  {
+    id: 'invergordon',
+    slug: 'invergordon',
+    name: 'Invergordon',
+    country: 'United Kingdom',
+    region: 'uk',
+    coordinates: { lat: 57.6879, lon: -4.1756 },
+    tagline: 'Gateway to the Scottish Highlands and Loch Ness',
+    description: 'Invergordon is a small town on the Cromarty Firth that serves as the gateway to the Scottish Highlands. While the town itself is modest, its location makes it the perfect base for excursions to Loch Ness, Inverness, and the dramatic Highland scenery. Cruise ships dock at a deep-water berth with easy access to the town centre and tour buses.',
+    portCharacter: 'gateway',
+    
+    aboutPort: {
+      overview: 'Invergordon offers a single deep-water cruise berth that can accommodate the largest ships. The town centre is a short walk from the pier, but most visitors take organised excursions to Highland attractions.',
+      terminals: 'Single deep-water pier with basic facilities',
+      walkability: 'Town centre walkable; attractions require transport',
+      shuttleServices: 'Usually not required for town; organised tours for Highland attractions',
+    },
+    
+    quickFacts: {
+      currency: 'GBP (£)',
+      language: 'English',
+      timezone: 'GMT+0',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Town centre is a 5-10 minute walk. Loch Ness and Inverness require organised tours or car hire.',
+      publicTransport: 'Limited local buses. Train station connects to Inverness.',
+      taxis: 'Limited availability - pre-book for independent exploration.',
+      walkingDistance: 'High Street murals, local shops, and cafes within 10 minutes.',
+      sightseeingBus: 'No hop-on hop-off; organised shore excursions recommended.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Loch Ness',
+        category: 'nature',
+        description: 'The legendary loch, home to the mythical monster Nessie. Visit Urquhart Castle ruins on the shore and take a boat cruise on the dark waters.',
+        duration: 'Full day excursion',
+      },
+      {
+        title: 'Inverness',
+        category: 'city',
+        description: 'The capital of the Highlands offers Victorian architecture, riverside walks, and excellent shopping. Inverness Castle provides panoramic views.',
+        duration: 'Half day',
+      },
+      {
+        title: 'Culloden Battlefield',
+        category: 'historic',
+        description: 'Site of the 1746 battle that ended the Jacobite rising. Excellent visitor centre tells the story of this pivotal moment in Scottish history.',
+        duration: '2 to 3 hours',
+      },
+    ],
+    
+    insiderTips: [
+      'Book Loch Ness excursions through the cruise line or reputable local operators well in advance.',
+      'Invergordon\'s High Street murals depicting local history are worth a stroll before departure.',
+      'The Highlands weather is changeable - bring layers and waterproofs regardless of forecast.',
+    ],
+    
+    meta: {
+      title: 'Invergordon Cruise Port Guide 2026 | Gateway to Loch Ness & Highlands',
+      description: 'Complete Invergordon cruise port guide. Gateway to Loch Ness, Inverness, Culloden. Scottish Highlands excursions from your cruise.',
+      keywords: ['Invergordon cruise port', 'Loch Ness cruise', 'Scottish Highlands cruise'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
+  // Greenock
+  {
+    id: 'greenock',
+    slug: 'greenock',
+    name: 'Greenock',
+    country: 'United Kingdom',
+    region: 'uk',
+    coordinates: { lat: 55.9496, lon: -4.7649 },
+    tagline: 'Gateway to Glasgow and the dramatic Highlands',
+    description: 'Greenock is a historic shipbuilding town on the Firth of Clyde that serves as the cruise port for Glasgow. The Ocean Terminal offers modern facilities, and the town itself has Victorian architecture and connections to inventor James Watt. Most passengers use Greenock as a base for excursions to Glasgow, Loch Lomond, or the Trossachs National Park.',
+    portCharacter: 'gateway',
+    
+    aboutPort: {
+      overview: 'Greenock Ocean Terminal is a purpose-built cruise facility with covered walkways, café, and gift shop. Glasgow city centre is approximately 25 miles east, reached by train or organised tour.',
+      terminals: 'Greenock Ocean Terminal - modern purpose-built facility',
+      walkability: 'Town centre walkable; Glasgow requires transport',
+      shuttleServices: 'Some cruise lines offer shuttles to Glasgow; check with your ship',
+    },
+    
+    quickFacts: {
+      currency: 'GBP (£)',
+      language: 'English',
+      timezone: 'GMT+0',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Greenock town is walkable. Glasgow requires 45-minute train journey or organised tour.',
+      publicTransport: 'Regular trains from Greenock Central to Glasgow Central (45 minutes).',
+      taxis: 'Available at the terminal for local trips.',
+      walkingDistance: 'McLean Museum 15 mins, town centre 10 mins, Greenock West station 10 mins.',
+      sightseeingBus: 'No local hop-on hop-off; Glasgow has City Sightseeing buses.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Glasgow',
+        category: 'city',
+        description: 'Scotland\'s largest city offers world-class museums (most free), Victorian and Art Nouveau architecture, and excellent shopping on Buchanan Street.',
+        duration: 'Full day',
+      },
+      {
+        title: 'Loch Lomond',
+        category: 'nature',
+        description: 'Britain\'s largest freshwater lake offers stunning scenery, boat trips, and the picturesque village of Luss.',
+        duration: 'Half day',
+      },
+      {
+        title: 'Stirling Castle',
+        category: 'landmark',
+        description: 'Magnificent Renaissance palace with connections to Mary Queen of Scots and Robert the Bruce. Spectacular views over the Forth Valley.',
+        duration: '3 to 4 hours',
+      },
+    ],
+    
+    insiderTips: [
+      'Glasgow\'s Kelvingrove Art Gallery and Museum is free and absolutely world-class.',
+      'The train to Glasgow is scenic along the Clyde - sit on the left side heading east.',
+      'If staying local, the Victorian Cemetery is an atmospheric walk with views over the Firth.',
+    ],
+    
+    meta: {
+      title: 'Greenock Cruise Port Guide 2026 | Gateway to Glasgow & Loch Lomond',
+      description: 'Complete Greenock cruise port guide. Gateway to Glasgow, Loch Lomond, Stirling. Transport options from Ocean Terminal.',
+      keywords: ['Greenock cruise port', 'Glasgow cruise', 'Loch Lomond cruise'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
+  // Lerwick
+  {
+    id: 'lerwick',
+    slug: 'lerwick',
+    name: 'Lerwick',
+    country: 'United Kingdom',
+    region: 'uk',
+    coordinates: { lat: 60.1539, lon: -1.1451 },
+    tagline: 'Shetland\'s Viking heritage and dramatic island landscapes',
+    description: 'Lerwick is the capital of the Shetland Islands, Britain\'s most northerly archipelago. These remote islands offer dramatic coastal scenery, abundant wildlife, and a unique culture blending Scottish and Norse heritage. The Up Helly Aa fire festival celebrates Viking ancestry, and the islands are renowned for Shetland ponies, knitwear, and exceptional seabird colonies.',
+    portCharacter: 'island',
+    
+    aboutPort: {
+      overview: 'Cruise ships dock at Holmsgarth or anchor in Bressay Sound with tender service to Victoria Pier. The compact town centre is easily walkable with shops, cafes, and the excellent Shetland Museum.',
+      terminals: 'Holmsgarth terminal or Victoria Pier (tender)',
+      walkability: 'Town centre very walkable; wider island requires transport',
+      shuttleServices: 'Usually not required for town; organised tours for island attractions',
+    },
+    
+    quickFacts: {
+      currency: 'GBP (£)',
+      language: 'English',
+      timezone: 'GMT+0',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Town centre is a 10-15 minute walk from either dock. Island attractions require organised tours.',
+      publicTransport: 'Limited bus services to other parts of Shetland.',
+      taxis: 'Book in advance - limited availability.',
+      walkingDistance: 'Shetland Museum 10 mins, Fort Charlotte 15 mins, Commercial Street 10 mins.',
+      sightseeingBus: 'No hop-on hop-off; organised excursions recommended for island exploration.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Shetland Museum',
+        category: 'museum',
+        description: 'Award-winning museum covering 5,000 years of Shetland history from Norse settlers to oil industry. Free admission, boat-building gallery, and cafe.',
+        duration: '1.5 to 2 hours',
+      },
+      {
+        title: 'Jarlshof',
+        category: 'historic',
+        description: 'Remarkable archaeological site spanning Bronze Age to Viking settlements. Stone houses and Norse longhouses on a dramatic coastal setting.',
+        duration: '2 to 3 hours (excursion)',
+      },
+      {
+        title: 'Sumburgh Head',
+        category: 'nature',
+        description: 'RSPB reserve with puffins, gannets, and other seabirds. The lighthouse offers tours, and the views are spectacular.',
+        duration: '2 to 3 hours (excursion)',
+      },
+    ],
+    
+    insiderTips: [
+      'Commercial Street has excellent knitwear shops - authentic Shetland wool products make special souvenirs.',
+      'Puffins are best seen May to July at Sumburgh Head or Noss National Nature Reserve.',
+      'The weather changes quickly - layers and waterproofs essential.',
+    ],
+    
+    meta: {
+      title: 'Lerwick Cruise Port Guide 2026 | Shetland Islands & Viking Heritage',
+      description: 'Complete Lerwick cruise port guide. Shetland Museum, Jarlshof, puffins at Sumburgh Head. Viking heritage and island wildlife.',
+      keywords: ['Lerwick cruise port', 'Shetland Islands cruise', 'Viking heritage'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
+  // Kirkwall
+  {
+    id: 'kirkwall',
+    slug: 'kirkwall',
+    name: 'Kirkwall',
+    country: 'United Kingdom',
+    region: 'uk',
+    coordinates: { lat: 58.9809, lon: -2.9605 },
+    tagline: 'Orkney\'s ancient capital with Neolithic world heritage',
+    description: 'Kirkwall is the capital of Orkney, an archipelago off Scotland\'s north coast with an extraordinary concentration of Neolithic monuments. The Heart of Neolithic Orkney UNESCO World Heritage Site includes Skara Brae, the Ring of Brodgar, and other sites older than the Egyptian pyramids. The town itself features the magnificent St Magnus Cathedral and narrow medieval streets.',
+    portCharacter: 'island',
+    
+    aboutPort: {
+      overview: 'Cruise ships dock at Hatston Pier, about 1.5 miles from the town centre. Smaller ships may use the town pier. Organised excursions are the best way to see the Neolithic sites.',
+      terminals: 'Hatston Pier (large ships) or Town Pier (smaller vessels)',
+      walkability: 'Town centre walkable from Town Pier; Hatston requires shuttle',
+      shuttleServices: 'Shuttles often provided from Hatston to town centre',
+    },
+    
+    quickFacts: {
+      currency: 'GBP (£)',
+      language: 'English',
+      timezone: 'GMT+0',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Shuttle or taxi from Hatston; Neolithic sites require organised tours.',
+      publicTransport: 'Limited bus services around the islands.',
+      taxis: 'Available but limited - book in advance for independent exploration.',
+      walkingDistance: 'From town: St Magnus Cathedral 5 mins, Orkney Museum 5 mins, shops and cafes throughout.',
+      sightseeingBus: 'No hop-on hop-off; organised excursions essential for major sites.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Skara Brae',
+        category: 'historic',
+        description: 'Europe\'s best-preserved Neolithic village, older than Stonehenge and the pyramids. Stone-built homes with furniture still visible after 5,000 years.',
+        duration: '2 to 3 hours (excursion)',
+      },
+      {
+        title: 'Ring of Brodgar',
+        category: 'historic',
+        description: 'Magnificent stone circle in a dramatic setting between two lochs. 27 of the original 60 stones remain standing.',
+        duration: '1 to 2 hours (excursion)',
+      },
+      {
+        title: 'St Magnus Cathedral',
+        category: 'landmark',
+        description: 'Magnificent red and yellow sandstone cathedral founded in 1137 by Vikings. Free entry, atmospheric interior with Viking-era history.',
+        duration: '30 mins to 1 hour',
+      },
+    ],
+    
+    insiderTips: [
+      'Book Neolithic site excursions early - they fill up quickly and independent transport is limited.',
+      'The Highland Park Distillery offers tours and tastings in Kirkwall itself.',
+      'St Magnus Cathedral is free and unmissable - allow time even if doing an excursion.',
+    ],
+    
+    meta: {
+      title: 'Kirkwall Cruise Port Guide 2026 | Orkney & Neolithic World Heritage',
+      description: 'Complete Kirkwall cruise port guide. Skara Brae, Ring of Brodgar, St Magnus Cathedral. Orkney Neolithic UNESCO World Heritage.',
+      keywords: ['Kirkwall cruise port', 'Orkney cruise', 'Skara Brae cruise', 'Ring of Brodgar'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
+  // ============================================================================
+  // ADDITIONAL MEDITERRANEAN PORTS
+  // ============================================================================
+
+  // Dubrovnik
+  {
+    id: 'dubrovnik',
+    slug: 'dubrovnik',
+    name: 'Dubrovnik',
+    country: 'Croatia',
+    region: 'mediterranean',
+    coordinates: { lat: 42.6507, lon: 18.0944 },
+    tagline: 'Pearl of the Adriatic with Game of Thrones fame',
+    description: 'Dubrovnik is one of the Mediterranean\'s most beautiful walled cities, its terracotta rooftops and marble streets gleaming against the deep blue Adriatic. The UNESCO-listed Old Town, encircled by medieval walls, was famously used as King\'s Landing in Game of Thrones. Cruise ships anchor in the harbour or dock at Gruž port, with the Old Town accessible by bus, taxi, or scenic walk.',
+    portCharacter: 'historic',
+    
+    aboutPort: {
+      overview: 'Large ships dock at Gruž port, about 3km from the Old Town. Smaller ships may anchor near the Old Town with tender service. The walk along the seafront from Gruž to Pile Gate is scenic but uphill returning.',
+      terminals: 'Gruž port with modern facilities; anchorage for smaller vessels',
+      walkability: 'Old Town very walkable but hilly; port to Old Town requires transport',
+      shuttleServices: 'Shuttles often provided; public buses also available',
+    },
+    
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Croatian',
+      timezone: 'GMT+1',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Bus 1A/1B from Gruž to Old Town (15 mins). Taxis available. Walking takes 30-40 mins.',
+      publicTransport: 'Efficient local bus network. Cable car to Mount Srđ.',
+      taxis: 'Available at port and Old Town. Agree fare before departure.',
+      walkingDistance: 'Old Town compact and fully walkable. Walls walk 2km circumference.',
+      sightseeingBus: 'Hop-on hop-off buses connect Gruž port to Old Town and beaches.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'City Walls Walk',
+        category: 'landmark',
+        description: 'Walk the complete 2km circuit of medieval walls for panoramic views over terracotta rooftops and the Adriatic. One of Europe\'s finest urban experiences.',
+        duration: '1.5 to 2 hours',
+      },
+      {
+        title: 'Stradun',
+        category: 'historic',
+        description: 'Dubrovnik\'s main limestone-paved street running through the Old Town. Lined with cafes, shops, and baroque architecture.',
+        duration: '30 mins to 1 hour',
+      },
+      {
+        title: 'Cable Car to Mount Srđ',
+        category: 'viewpoint',
+        description: 'Ride to 412m for spectacular panoramic views over the Old Town, islands, and coastline. War museum at the summit.',
+        duration: '1 to 2 hours',
+      },
+    ],
+    
+    insiderTips: [
+      'Walk the walls early morning or late afternoon to avoid crowds and heat.',
+      'The beaches at Banje and Lapad are excellent for swimming after sightseeing.',
+      'Game of Thrones filming locations are throughout - maps available at tourist offices.',
+    ],
+    
+    meta: {
+      title: 'Dubrovnik Cruise Port Guide 2026 | Pearl of the Adriatic',
+      description: 'Complete Dubrovnik cruise port guide. City walls, Old Town, Game of Thrones locations. Transport from Gruž to Old Town.',
+      keywords: ['Dubrovnik cruise port', 'Dubrovnik walls', 'Game of Thrones Dubrovnik'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
+  // Kotor
+  {
+    id: 'kotor',
+    slug: 'kotor',
+    name: 'Kotor',
+    country: 'Montenegro',
+    region: 'mediterranean',
+    coordinates: { lat: 42.4247, lon: 18.7712 },
+    tagline: 'Medieval fortress town in Europe\'s southernmost fjord',
+    description: 'Kotor sits at the head of a dramatic bay often called Europe\'s southernmost fjord. The UNESCO-listed Old Town is a maze of medieval churches, palaces, and squares, backed by imposing fortifications climbing the mountainside. Ships navigate the winding Bay of Kotor to dock right beside the Old Town, making this one of the most scenic cruise arrivals in the Mediterranean.',
+    portCharacter: 'historic',
+    
+    aboutPort: {
+      overview: 'Cruise ships dock directly beside the Old Town walls - simply walk off the ship and through the Sea Gate. Larger ships may anchor in the bay with tender service.',
+      terminals: 'Town quay beside Old Town; anchorage for large ships',
+      walkability: 'Excellent - Old Town steps from the ship; fortress climb steep',
+      shuttleServices: 'Not required for Old Town',
+    },
+    
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Montenegrin',
+      timezone: 'GMT+1',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Walk directly into Old Town through the Sea Gate.',
+      publicTransport: 'Buses to Perast and other bay towns.',
+      taxis: 'Available for excursions around the bay.',
+      walkingDistance: 'Old Town entirely walkable. Fortress climb 1,350 steps.',
+      sightseeingBus: 'Bay of Kotor tours available.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Fortress of St John',
+        category: 'landmark',
+        description: 'Climb 1,350 steps up the fortifications for breathtaking views over the bay and Old Town. Challenging but unforgettable.',
+        duration: '2 to 3 hours',
+      },
+      {
+        title: 'Old Town',
+        category: 'historic',
+        description: 'Wander the car-free medieval streets, discovering hidden squares, Romanesque churches, and the magnificent Cathedral of Saint Tryphon.',
+        duration: '1.5 to 2 hours',
+      },
+      {
+        title: 'Perast',
+        category: 'village',
+        description: 'Baroque village across the bay with the famous Our Lady of the Rocks island church. Reached by taxi or organised tour.',
+        duration: 'Half day excursion',
+      },
+    ],
+    
+    insiderTips: [
+      'Start the fortress climb early to avoid the heat - take water and wear sturdy shoes.',
+      'The cats of Kotor are famous - look for the Cat Museum in the Old Town.',
+      'Perast is quieter than Kotor and offers boat trips to Our Lady of the Rocks.',
+    ],
+    
+    meta: {
+      title: 'Kotor Cruise Port Guide 2026 | Montenegro\'s Fjord Gem',
+      description: 'Complete Kotor cruise port guide. Fortress climb, Old Town, Bay of Kotor. Ships dock beside medieval walls.',
+      keywords: ['Kotor cruise port', 'Bay of Kotor cruise', 'Montenegro cruise'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
+  // Split
+  {
+    id: 'split',
+    slug: 'split',
+    name: 'Split',
+    country: 'Croatia',
+    region: 'mediterranean',
+    coordinates: { lat: 43.5081, lon: 16.4402 },
+    tagline: 'Roman Emperor\'s palace transformed into a living city',
+    description: 'Split\'s Old Town is unique in the world - an entire city centre built within and around the 4th-century palace of Roman Emperor Diocletian. This UNESCO World Heritage site is no museum but a living neighbourhood of apartments, shops, bars, and restaurants occupying ancient Roman halls. The waterfront Riva promenade buzzes with Mediterranean life.',
+    portCharacter: 'historic',
+    
+    aboutPort: {
+      overview: 'Cruise ships dock at the cruise terminal on the waterfront, a short walk from Diocletian\'s Palace. The Old Town and Riva promenade are immediately accessible.',
+      terminals: 'City port waterfront terminal',
+      walkability: 'Excellent - palace and Old Town steps from the ship',
+      shuttleServices: 'Not required',
+    },
+    
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Croatian',
+      timezone: 'GMT+1',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Walk directly to Diocletian\'s Palace (5 minutes from terminal).',
+      publicTransport: 'Buses to beaches and Trogir.',
+      taxis: 'Available at the port.',
+      walkingDistance: 'Diocletian\'s Palace 5 mins, Riva promenade 5 mins, Marjan Hill 15 mins.',
+      sightseeingBus: 'Hop-on hop-off available.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Diocletian\'s Palace',
+        category: 'historic',
+        description: 'Explore the 4th-century Roman palace complex - now Split\'s Old Town. See the Peristyle, Cathedral (former mausoleum), and underground cellars.',
+        duration: '2 to 3 hours',
+      },
+      {
+        title: 'Riva Promenade',
+        category: 'neighbourhood',
+        description: 'Split\'s lively waterfront lined with cafes and palm trees. Perfect for people-watching with views across to the islands.',
+        duration: '30 mins to 1 hour',
+      },
+      {
+        title: 'Marjan Hill',
+        category: 'nature',
+        description: 'Forested peninsula with walking trails, viewpoints, and beaches. Escape the crowds for panoramic city views.',
+        duration: '2 to 3 hours',
+      },
+    ],
+    
+    insiderTips: [
+      'The palace cellars (where Game of Thrones dragons were kept) are worth exploring.',
+      'Beaches at Bačvice and around Marjan Hill are walkable from the Old Town.',
+      'Try peka (meat or fish cooked under a bell-shaped lid) at local restaurants.',
+    ],
+    
+    meta: {
+      title: 'Split Cruise Port Guide 2026 | Diocletian\'s Palace & Dalmatian Coast',
+      description: 'Complete Split cruise port guide. Diocletian\'s Palace, Riva promenade, Marjan beaches. Walking distance from cruise terminal.',
+      keywords: ['Split cruise port', 'Diocletian\'s Palace cruise', 'Croatia cruise'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
+  // Valletta
+  {
+    id: 'valletta',
+    slug: 'valletta',
+    name: 'Valletta',
+    country: 'Malta',
+    region: 'mediterranean',
+    coordinates: { lat: 35.8989, lon: 14.5146 },
+    tagline: 'Knights\' fortress capital on a sun-drenched Mediterranean island',
+    description: 'Valletta is a baroque masterpiece built by the Knights of St John after the Great Siege of 1565. This UNESCO World Heritage capital is one of Europe\'s smallest and most concentrated historic areas, packed with grand palaces, churches, and fortifications. The entire city is essentially an open-air museum, with stunning harbour views from its ramparts.',
+    portCharacter: 'historic',
+    
+    aboutPort: {
+      overview: 'Ships dock at the Valletta Cruise Port in the Grand Harbour. A lift takes passengers up to Barrakka Gardens and the Upper Town, or buses/taxis are available.',
+      terminals: 'Valletta Cruise Port with modern facilities',
+      walkability: 'City very walkable but hilly; lift from port to Upper Town',
+      shuttleServices: 'Barrakka Lift provides easy access to Upper Town',
+    },
+    
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Maltese, English',
+      timezone: 'GMT+1',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Barrakka Lift to Upper Town (2 mins). Buses available to Valletta and around Malta.',
+      publicTransport: 'Comprehensive bus network covering Malta.',
+      taxis: 'White taxis at port; Bolt/eCabs apps work well.',
+      walkingDistance: 'Upper Barrakka Gardens 5 mins by lift, St John\'s Co-Cathedral 10 mins, Republic Street 10 mins.',
+      sightseeingBus: 'Hop-on hop-off buses cover Valletta, Mdina, and beaches.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'St John\'s Co-Cathedral',
+        category: 'landmark',
+        description: 'Ornate baroque cathedral of the Knights of St John. Caravaggio masterpieces, marble tombs, and gilded interior.',
+        duration: '1 to 1.5 hours',
+      },
+      {
+        title: 'Upper Barrakka Gardens',
+        category: 'viewpoint',
+        description: 'Elegant gardens with panoramic views over Grand Harbour. Noon cannon firing daily.',
+        duration: '30 mins to 1 hour',
+      },
+      {
+        title: 'Mdina',
+        category: 'historic',
+        description: 'Malta\'s ancient capital - a walled city of honey-coloured stone and silent streets. Reached by bus or excursion.',
+        duration: 'Half day excursion',
+      },
+    ],
+    
+    insiderTips: [
+      'Arrive at St John\'s early to avoid cruise ship crowds.',
+      'The noon cannon firing at Upper Barrakka Gardens is worth timing your visit around.',
+      'Pastizzi (flaky pastries) from local bakeries cost cents and are delicious.',
+    ],
+    
+    meta: {
+      title: 'Valletta Cruise Port Guide 2026 | Malta\'s Baroque Capital',
+      description: 'Complete Valletta cruise port guide. St John\'s Cathedral, Knights heritage, Grand Harbour views. Barrakka Lift from port.',
+      keywords: ['Valletta cruise port', 'Malta cruise', 'Knights of Malta'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
+  // Santorini
+  {
+    id: 'santorini',
+    slug: 'santorini',
+    name: 'Santorini',
+    country: 'Greece',
+    region: 'mediterranean',
+    coordinates: { lat: 36.3932, lon: 25.4615 },
+    tagline: 'Volcanic caldera crowned with whitewashed clifftop villages',
+    description: 'Santorini is one of the world\'s most photographed destinations - whitewashed villages with blue domes perched on dramatic cliffs above a flooded volcanic caldera. Cruise ships anchor in the caldera, and passengers tender to the old port at Fira, then ascend by cable car, donkey, or 588 steps. The sunsets in Oia are legendary.',
+    portCharacter: 'island',
+    
+    aboutPort: {
+      overview: 'Ships anchor in the caldera. Tenders take passengers to the old port below Fira. Cable car (recommended), donkey, or 588 steps to reach the clifftop town.',
+      terminals: 'Tender port below Fira; cable car to town',
+      walkability: 'Towns walkable but steep; transport needed between villages',
+      shuttleServices: 'Cable car essential for most visitors',
+    },
+    
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Greek',
+      timezone: 'GMT+2',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: true,
+    },
+    
+    gettingAround: {
+      fromPort: 'Cable car to Fira (3 mins, queues likely). Donkeys or 588 steps alternatives.',
+      publicTransport: 'Buses from Fira to Oia, beaches, and airport.',
+      taxis: 'Limited and expensive - book in advance.',
+      walkingDistance: 'Fira walkable; Oia requires bus or taxi (25 mins).',
+      sightseeingBus: 'Excursions recommended for efficiency.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Oia Village',
+        category: 'village',
+        description: 'The most photographed village in Greece - blue domes, whitewashed houses, and the famous sunset views. Arrive early for the best spots.',
+        duration: '2 to 3 hours',
+      },
+      {
+        title: 'Fira Town',
+        category: 'town',
+        description: 'Capital of Santorini with caldera views, shops, restaurants, and the Museum of Prehistoric Thera. Cable car arrives here.',
+        duration: '1 to 2 hours',
+      },
+      {
+        title: 'Akrotiri',
+        category: 'historic',
+        description: 'Minoan Bronze Age settlement preserved under volcanic ash - Greece\'s Pompeii. Fascinating archaeological site.',
+        duration: '1.5 to 2 hours (excursion)',
+      },
+    ],
+    
+    insiderTips: [
+      'Cable car queues can be very long - allow plenty of time for return to ship.',
+      'Oia sunset is crowded - Fira offers similar views with fewer people.',
+      'Red Beach and Perissa Black Sand Beach require transport but offer swimming.',
+    ],
+    
+    meta: {
+      title: 'Santorini Cruise Port Guide 2026 | Volcanic Caldera & Blue Domes',
+      description: 'Complete Santorini cruise port guide. Oia sunset, Fira town, cable car from caldera. Blue domes and whitewashed villages.',
+      keywords: ['Santorini cruise port', 'Oia sunset cruise', 'Greek Islands cruise'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
+  // Mykonos
+  {
+    id: 'mykonos',
+    slug: 'mykonos',
+    name: 'Mykonos',
+    country: 'Greece',
+    region: 'mediterranean',
+    coordinates: { lat: 37.4467, lon: 25.3289 },
+    tagline: 'Cycladic charm meets cosmopolitan glamour',
+    description: 'Mykonos combines traditional Cycladic whitewashed architecture with a glamorous, cosmopolitan atmosphere. The charming Chora (Old Town) features narrow lanes, iconic windmills, and the waterfront Little Venice. While known for nightlife, it\'s equally appealing by day for its beaches, boutiques, and relaxed Mediterranean vibe.',
+    portCharacter: 'island',
+    
+    aboutPort: {
+      overview: 'Ships anchor in the bay or dock at the new cruise port. Tenders or shuttle buses take passengers to the Old Town (Chora). The old port is walking distance from Chora.',
+      terminals: 'New cruise port or anchorage with tender to old port',
+      walkability: 'Chora very walkable; beaches require transport',
+      shuttleServices: 'Shuttle buses to Old Town from new port',
+    },
+    
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Greek',
+      timezone: 'GMT+2',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Shuttle or short walk to Chora from old port.',
+      publicTransport: 'Buses to beaches from Fabrika Square.',
+      taxis: 'Available but limited during peak season.',
+      walkingDistance: 'Windmills 5 mins, Little Venice 10 mins, Chora throughout.',
+      sightseeingBus: 'Beach buses most useful transport.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Little Venice',
+        category: 'neighbourhood',
+        description: 'Colourful houses built right on the waterfront, with balconies hanging over the sea. Perfect for sunset drinks at waterside bars.',
+        duration: '1 to 2 hours',
+      },
+      {
+        title: 'Windmills of Kato Mili',
+        category: 'landmark',
+        description: 'Iconic 16th-century windmills on the hillside above Little Venice. Mykonos\'s most photographed landmark.',
+        duration: '15 to 30 mins',
+      },
+      {
+        title: 'Chora (Old Town)',
+        category: 'neighbourhood',
+        description: 'Maze of whitewashed lanes lined with boutiques, galleries, and tavernas. Get lost - it\'s the best way to explore.',
+        duration: '2 to 3 hours',
+      },
+    ],
+    
+    insiderTips: [
+      'The lanes are designed to confuse pirates - getting lost is part of the experience.',
+      'Paradise and Super Paradise beaches are famous but crowded; Agios Sostis is quieter.',
+      'Pelicans wander the waterfront - look out for Petros the Pelican\'s successors.',
+    ],
+    
+    meta: {
+      title: 'Mykonos Cruise Port Guide 2026 | Windmills & Cycladic Charm',
+      description: 'Complete Mykonos cruise port guide. Little Venice, windmills, Chora Old Town. Greek island glamour and traditional charm.',
+      keywords: ['Mykonos cruise port', 'Little Venice Mykonos', 'Greek Islands cruise'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
+  // Piraeus (Athens)
+  {
+    id: 'piraeus',
+    slug: 'piraeus',
+    name: 'Piraeus (Athens)',
+    country: 'Greece',
+    region: 'mediterranean',
+    coordinates: { lat: 37.9475, lon: 23.6370 },
+    tagline: 'Gateway to the Acropolis and birthplace of democracy',
+    description: 'Piraeus is the port of Athens, one of the world\'s oldest cities and birthplace of Western civilisation. The Acropolis crowned by the Parthenon dominates the skyline, while the ancient Agora, Plaka neighbourhood, and world-class museums bring 3,000 years of history to life. The port is well-connected to central Athens by metro.',
+    portCharacter: 'gateway',
+    
+    aboutPort: {
+      overview: 'Large cruise port with multiple terminals. Metro station (Piraeus) connects directly to central Athens (Monastiraki/Acropolis) in about 25 minutes.',
+      terminals: 'Multiple cruise terminals at Piraeus port',
+      walkability: 'Port area basic; Athens requires metro or transport',
+      shuttleServices: 'Some cruise lines offer shuttles; metro recommended',
+    },
+    
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Greek',
+      timezone: 'GMT+2',
+      portType: 'Port of Call & Turnaround',
+      walkable: false,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Metro Line 1 (green) from Piraeus to Monastiraki (25 mins) for Acropolis access.',
+      publicTransport: 'Excellent Athens metro; buses and trams throughout.',
+      taxis: 'Available at port; use apps like Beat or Uber.',
+      walkingDistance: 'Piraeus town 10-15 mins; Athens city centre 10km (use metro).',
+      sightseeingBus: 'Athens hop-on hop-off buses pick up from port.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Acropolis',
+        category: 'landmark',
+        description: 'Ancient citadel with the Parthenon, Erechtheion, and other classical temples. The symbol of Athens and Greek civilisation.',
+        duration: '2 to 3 hours',
+      },
+      {
+        title: 'Acropolis Museum',
+        category: 'museum',
+        description: 'Modern museum at the Acropolis foot housing sculptures and artefacts from the sacred rock. Glass floors reveal excavations below.',
+        duration: '2 to 3 hours',
+      },
+      {
+        title: 'Plaka',
+        category: 'neighbourhood',
+        description: 'Historic neighbourhood at the Acropolis foot with neoclassical houses, tavernas, and souvenir shops. Charming for wandering.',
+        duration: '1 to 2 hours',
+      },
+    ],
+    
+    insiderTips: [
+      'Book Acropolis tickets online to skip the queues - combination tickets include other sites.',
+      'Visit the Acropolis early morning or late afternoon to avoid heat and crowds.',
+      'The metro stations at Syntagma and Acropolis have archaeological displays.',
+    ],
+    
+    meta: {
+      title: 'Piraeus Cruise Port Guide 2026 | Gateway to Athens & Acropolis',
+      description: 'Complete Piraeus cruise port guide. Acropolis, Parthenon, Plaka neighbourhood. Metro connection to central Athens.',
+      keywords: ['Piraeus cruise port', 'Athens cruise', 'Acropolis cruise'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
+  // Corfu
+  {
+    id: 'corfu',
+    slug: 'corfu',
+    name: 'Corfu',
+    country: 'Greece',
+    region: 'mediterranean',
+    coordinates: { lat: 39.6243, lon: 19.9217 },
+    tagline: 'Venetian elegance meets lush Greek island beauty',
+    description: 'Corfu is the greenest of the Greek islands, with a UNESCO-listed Old Town reflecting centuries of Venetian, French, and British rule. The elegant Liston arcade, two Venetian fortresses, and winding kantounia (alleyways) give it a distinctly Italian feel. Beyond the town, the island offers beaches, mountain villages, and the famous Achilleion Palace.',
+    portCharacter: 'island',
+    
+    aboutPort: {
+      overview: 'Cruise ships dock at the new cruise terminal or anchor in the bay. The Old Town is a short walk or shuttle ride from the port.',
+      terminals: 'New cruise terminal near Old Town',
+      walkability: 'Old Town very walkable; island attractions require transport',
+      shuttleServices: 'Usually not required; Old Town close to port',
+    },
+    
+    quickFacts: {
+      currency: 'EUR (€)',
+      language: 'Greek',
+      timezone: 'GMT+2',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Old Town 10-15 minute walk.',
+      publicTransport: 'Blue buses around town; green buses to island destinations.',
+      taxis: 'Available at port.',
+      walkingDistance: 'Liston 10 mins, Old Fortress 15 mins, Spianada Square 10 mins.',
+      sightseeingBus: 'Island tours available.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Corfu Old Town',
+        category: 'historic',
+        description: 'UNESCO-listed town with Venetian architecture, the Liston arcade, and charming alleyways. Explore without a map for best discoveries.',
+        duration: '2 to 3 hours',
+      },
+      {
+        title: 'Old Fortress',
+        category: 'landmark',
+        description: 'Venetian fortress on a promontory with panoramic views. Lighthouse and Byzantine church within the walls.',
+        duration: '1 to 1.5 hours',
+      },
+      {
+        title: 'Achilleion Palace',
+        category: 'palace',
+        description: 'Summer palace built for Empress Elisabeth of Austria (Sisi). Gardens, statues, and views over the Ionian Sea.',
+        duration: '1.5 to 2 hours (excursion)',
+      },
+    ],
+    
+    insiderTips: [
+      'The Liston arcade is perfect for coffee and people-watching.',
+      'Kumquat liqueur and products are a Corfu speciality - makes good souvenirs.',
+      'Palaiokastritsa on the west coast has beautiful beaches and a monastery.',
+    ],
+    
+    meta: {
+      title: 'Corfu Cruise Port Guide 2026 | Venetian Heritage & Greek Island Beauty',
+      description: 'Complete Corfu cruise port guide. UNESCO Old Town, Venetian fortresses, Achilleion Palace. Walking distance from cruise port.',
+      keywords: ['Corfu cruise port', 'Corfu Old Town', 'Greek Islands cruise'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
+  // ============================================================================
+  // ADDITIONAL NORWEGIAN PORTS
+  // ============================================================================
+
+  // Oslo
+  {
+    id: 'oslo',
+    slug: 'oslo',
+    name: 'Oslo',
+    country: 'Norway',
+    region: 'norwegian-fjords',
+    coordinates: { lat: 59.9139, lon: 10.7522 },
+    tagline: 'Viking heritage and modern Nordic cool at the fjord\'s head',
+    description: 'Oslo sits at the head of the Oslofjord, combining Viking heritage with cutting-edge Scandinavian design. The waterfront has been transformed with the striking Opera House and Munch Museum, while traditional highlights include the Viking Ship Museum and Vigeland Sculpture Park. The city offers a perfect blend of culture, nature, and Nordic lifestyle.',
+    portCharacter: 'city',
+    
+    aboutPort: {
+      overview: 'Cruise ships dock at various piers along the waterfront. Most terminals are within walking distance of the city centre, Opera House, and Aker Brygge.',
+      terminals: 'Multiple waterfront berths near city centre',
+      walkability: 'Excellent - city centre walkable from most berths',
+      shuttleServices: 'Usually not required',
+    },
+    
+    quickFacts: {
+      currency: 'NOK (kr)',
+      language: 'Norwegian',
+      timezone: 'GMT+1',
+      portType: 'Port of Call & Turnaround',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Walk to Opera House (5-10 mins), Karl Johan gate (15 mins).',
+      publicTransport: 'Excellent tram, metro, and bus network. Ferries to Bygdøy.',
+      taxis: 'Readily available but expensive.',
+      walkingDistance: 'Opera House 5 mins, Aker Brygge 10 mins, Royal Palace 20 mins.',
+      sightseeingBus: 'Hop-on hop-off buses operate throughout the city.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Viking Ship Museum',
+        category: 'museum',
+        description: 'Three remarkably preserved 9th-century Viking ships. The Oseberg ship is particularly stunning. Located on Bygdøy peninsula.',
+        duration: '1 to 1.5 hours',
+      },
+      {
+        title: 'Vigeland Sculpture Park',
+        category: 'park',
+        description: 'Open-air gallery with over 200 bronze and granite sculptures by Gustav Vigeland. Free entry, extraordinary human forms.',
+        duration: '1 to 2 hours',
+      },
+      {
+        title: 'Opera House',
+        category: 'landmark',
+        description: 'Stunning contemporary architecture - walk on the sloping marble roof for harbour views. Symbol of modern Oslo.',
+        duration: '30 mins to 1 hour',
+      },
+    ],
+    
+    insiderTips: [
+      'The Oslo Pass includes public transport and museum entry - good value if seeing multiple sites.',
+      'Bygdøy museums (Viking Ships, Fram, Kon-Tiki) are reached by ferry from Aker Brygge.',
+      'Grünerløkka neighbourhood offers trendy cafes, vintage shops, and local atmosphere.',
+    ],
+    
+    meta: {
+      title: 'Oslo Cruise Port Guide 2026 | Viking Heritage & Modern Nordic Design',
+      description: 'Complete Oslo cruise port guide. Viking Ship Museum, Opera House, Vigeland Park. Walking distance from cruise terminals.',
+      keywords: ['Oslo cruise port', 'Viking Ship Museum cruise', 'Norway cruise'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
+  // Trondheim
+  {
+    id: 'trondheim',
+    slug: 'trondheim',
+    name: 'Trondheim',
+    country: 'Norway',
+    region: 'norwegian-fjords',
+    coordinates: { lat: 63.4305, lon: 10.3951 },
+    tagline: 'Norway\'s medieval pilgrimage city with colourful wharves',
+    description: 'Trondheim was Norway\'s first capital and remains the country\'s spiritual centre, crowned by the magnificent Nidaros Cathedral - Scandinavia\'s largest medieval building. The colourful wooden warehouses of Bakklandet line the Nidelva River, while the historic wharf Bryggene echoes Bergen\'s famous waterfront. It\'s a walkable city rich in history and student energy.',
+    portCharacter: 'city',
+    
+    aboutPort: {
+      overview: 'Cruise ships dock at the city pier, a short walk from the centre. Nidaros Cathedral, Bakklandet, and the main attractions are all within walking distance.',
+      terminals: 'City centre pier',
+      walkability: 'Excellent - all major attractions walkable',
+      shuttleServices: 'Not required',
+    },
+    
+    quickFacts: {
+      currency: 'NOK (kr)',
+      language: 'Norwegian',
+      timezone: 'GMT+1',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Nidaros Cathedral 10-15 minute walk. Bakklandet 15 minutes.',
+      publicTransport: 'Trams and buses serve the city.',
+      taxis: 'Available at the port.',
+      walkingDistance: 'Cathedral 15 mins, Bakklandet 15 mins, Old Town Bridge 10 mins.',
+      sightseeingBus: 'City tours available.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Nidaros Cathedral',
+        category: 'landmark',
+        description: 'Scandinavia\'s largest medieval cathedral and Norway\'s national sanctuary. Built over the burial site of St Olav. Climb the tower for views.',
+        duration: '1 to 2 hours',
+      },
+      {
+        title: 'Bakklandet',
+        category: 'neighbourhood',
+        description: 'Charming old town district with colourful wooden houses, cobbled streets, cafes, and boutiques along the river.',
+        duration: '1 to 2 hours',
+      },
+      {
+        title: 'Old Town Bridge',
+        category: 'landmark',
+        description: 'Red wooden bridge with views of the colourful riverside warehouses. Perfect photo spot and gateway to Bakklandet.',
+        duration: '15 to 30 mins',
+      },
+    ],
+    
+    insiderTips: [
+      'The bicycle lift on Bakklandet is the world\'s first - try it for free.',
+      'Nidaros Cathedral crown jewels can be viewed in the Archbishop\'s Palace.',
+      'Trondheimsfjord excursions to Ringve Music Museum or Munkholmen island are worthwhile.',
+    ],
+    
+    meta: {
+      title: 'Trondheim Cruise Port Guide 2026 | Nidaros Cathedral & Medieval Heritage',
+      description: 'Complete Trondheim cruise port guide. Nidaros Cathedral, Bakklandet, colourful wharves. Walking distance from cruise pier.',
+      keywords: ['Trondheim cruise port', 'Nidaros Cathedral cruise', 'Norway cruise'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
+  // Olden
+  {
+    id: 'olden',
+    slug: 'olden',
+    name: 'Olden',
+    country: 'Norway',
+    region: 'norwegian-fjords',
+    coordinates: { lat: 61.8302, lon: 6.8095 },
+    tagline: 'Gateway to Briksdal Glacier and turquoise glacial lakes',
+    description: 'Olden is a small village at the head of Nordfjord, famous as the gateway to Briksdal Glacier and the stunning Oldevatnet and Lovatnet glacial lakes. The village itself is tiny, but the surrounding scenery - towering mountains, glacial valleys, and turquoise waters - is spectacular. Most visitors take excursions to the glacier or lakes.',
+    portCharacter: 'village',
+    
+    aboutPort: {
+      overview: 'Ships dock at the village pier or anchor with tender service. The village is very small; the main attractions require excursions.',
+      terminals: 'Village pier',
+      walkability: 'Village walkable; attractions require transport',
+      shuttleServices: 'Organised excursions recommended',
+    },
+    
+    quickFacts: {
+      currency: 'NOK (kr)',
+      language: 'Norwegian',
+      timezone: 'GMT+1',
+      portType: 'Port of Call',
+      walkable: true,
+      tenderRequired: false,
+    },
+    
+    gettingAround: {
+      fromPort: 'Village is steps from the pier.',
+      publicTransport: 'Limited - excursions recommended.',
+      taxis: 'Very limited.',
+      walkingDistance: 'Village shops and cafe immediately accessible.',
+      sightseeingBus: 'Organised excursions only.',
+    },
+    
+    mustSeeSights: [
+      {
+        title: 'Briksdal Glacier',
+        category: 'nature',
+        description: 'Arm of the Jostedalsbreen glacier accessible by trolley car and walk. Dramatic ice face surrounded by waterfalls and mountains.',
+        duration: 'Half day excursion',
+      },
+      {
+        title: 'Loen Skylift',
+        category: 'viewpoint',
+        description: 'Cable car ascending 1,011 metres in 5 minutes to Mount Hoven. Spectacular views over Nordfjord and the mountains.',
+        duration: '2 to 3 hours',
+      },
+      {
+        title: 'Lovatnet Lake',
+        category: 'nature',
+        description: 'Stunning turquoise glacial lake surrounded by mountains and waterfalls. The drive alone is unforgettable.',
+        duration: '2 to 3 hours (excursion)',
+      },
+    ],
+    
+    insiderTips: [
+      'Briksdal Glacier has retreated significantly - manage expectations but it\'s still spectacular.',
+      'Loen Skylift is best booked in advance through ship excursions or online.',
+      'The village has a small shop and cafe for those staying local.',
+    ],
+    
+    meta: {
+      title: 'Olden Cruise Port Guide 2026 | Briksdal Glacier & Fjord Scenery',
+      description: 'Complete Olden cruise port guide. Briksdal Glacier, Loen Skylift, glacial lakes. Gateway to spectacular Norwegian fjord scenery.',
+      keywords: ['Olden cruise port', 'Briksdal Glacier cruise', 'Norwegian fjords cruise'],
+    },
+    
+    status: 'overview',
+    lastUpdated: '2026-01-29',
+  },
+
 ];
 
 // ============================================================================

@@ -73,8 +73,8 @@ const PORT_NAME_MAPPINGS = {
   'bordeaux': 'bordeaux',
   
   // Atlantic Islands
-  'funchal': 'funchal',
-  'madeira': 'funchal',
+  'funchal': 'funchal-madeira',
+  'madeira': 'funchal-madeira',
   'tenerife': 'santa-cruz-de-tenerife',
   'santa cruz de tenerife': 'santa-cruz-de-tenerife',
   'las palmas': 'las-palmas-gran-canaria',

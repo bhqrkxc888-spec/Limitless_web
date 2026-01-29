@@ -868,9 +868,6 @@ function OfferPage() {
                     </svg>
                     Itinerary
                   </h2>
-                  {offer.itinerary_summary && (
-                    <p className="offer-itinerary-summary">{offer.itinerary_summary}</p>
-                  )}
 
                   {/* Interactive Map with Integrated Day-by-Day Sidebar */}
                   {/* Note: Port pills removed - redundant with map sidebar */}
