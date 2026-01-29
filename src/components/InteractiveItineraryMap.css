@@ -12,19 +12,31 @@
   overscroll-behavior: contain; /* Prevent scroll chaining to page */
 }
 
+/* Consolidated Header */
+.itinerary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 0;
+}
+
+.itinerary-header-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
 /* View Toggle */
 .itinerary-view-toggle {
   display: flex;
-  justify-content: center;
   gap: 8px;
-  margin-bottom: 20px;
   padding: 6px;
   background: #ffffff;
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .view-toggle-btn {
@@ -1427,6 +1439,15 @@
   .itinerary-table tbody td {
     padding: 12px;
     font-size: 13px;
+  }
+  
+  .itinerary-header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .itinerary-header-title {
+    font-size: 20px;
   }
   
   .view-toggle-btn {

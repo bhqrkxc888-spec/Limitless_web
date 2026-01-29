@@ -165,7 +165,7 @@ function InteractiveItineraryMap({ itinerary }) {
           }));
           setPortGuidesCache(transformed);
         }
-      } catch (err) {
+      } catch (_err) {
         // Silently fall back to static data
         console.warn('Using static port guides (Supabase unavailable)');
       }
@@ -350,7 +350,7 @@ function InteractiveItineraryMap({ itinerary }) {
     setTimeout(() => {
       setLoadingAttractions(false);
     }, 300);
-  }, [ports]);
+  }, [ports, portGuidesCache]);
   
   // Return to itinerary view and reset map
   const returnToItinerary = (e) => {
@@ -537,7 +537,7 @@ function InteractiveItineraryMap({ itinerary }) {
     
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentPortIndex, sidebarView]);
+  }, [currentPortIndex, sidebarView, goToNextPort, goToPrevPort, returnToItinerary]);
 
   // Create GeoJSON for ports
   const portsGeoJSON = useMemo(() => {
@@ -940,34 +940,37 @@ function InteractiveItineraryMap({ itinerary }) {
 
   return (
     <div className="interactive-itinerary-map-container">
-      {/* VIEW MODE TOGGLE - At top */}
-      <div className="itinerary-view-toggle">
-        <button 
-          type="button"
-          className={`view-toggle-btn ${itineraryViewMode === 'map' ? 'active' : ''}`}
-          onClick={() => setItineraryViewMode('map')}
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-            <circle cx="12" cy="10" r="3"/>
-          </svg>
-          Map
-        </button>
-        <button 
-          type="button"
-          className={`view-toggle-btn ${itineraryViewMode === 'list' ? 'active' : ''}`}
-          onClick={() => setItineraryViewMode('list')}
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <line x1="8" y1="6" x2="21" y2="6"/>
-            <line x1="8" y1="12" x2="21" y2="12"/>
-            <line x1="8" y1="18" x2="21" y2="18"/>
-            <line x1="3" y1="6" x2="3.01" y2="6"/>
-            <line x1="3" y1="12" x2="3.01" y2="12"/>
-            <line x1="3" y1="18" x2="3.01" y2="18"/>
-          </svg>
-          List
-        </button>
+      {/* CONSOLIDATED HEADER - Title left, toggle right */}
+      <div className="itinerary-header">
+        <h3 className="itinerary-header-title">Itinerary</h3>
+        <div className="itinerary-view-toggle">
+          <button 
+            type="button"
+            className={`view-toggle-btn ${itineraryViewMode === 'map' ? 'active' : ''}`}
+            onClick={() => setItineraryViewMode('map')}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            Map
+          </button>
+          <button 
+            type="button"
+            className={`view-toggle-btn ${itineraryViewMode === 'list' ? 'active' : ''}`}
+            onClick={() => setItineraryViewMode('list')}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="8" y1="6" x2="21" y2="6"/>
+              <line x1="8" y1="12" x2="21" y2="12"/>
+              <line x1="8" y1="18" x2="21" y2="18"/>
+              <line x1="3" y1="6" x2="3.01" y2="6"/>
+              <line x1="3" y1="12" x2="3.01" y2="12"/>
+              <line x1="3" y1="18" x2="3.01" y2="18"/>
+            </svg>
+            List
+          </button>
+        </div>
       </div>
 
       {/* ===== MAP VIEW MODE ===== */}
