@@ -69,8 +69,11 @@ async function searchPexels(query, perPage = 5) {
     throw new Error('PEXELS_API_KEY environment variable is required');
   }
 
+  // Enhance query to focus on destinations, not people
+  const enhancedQuery = `${query} landscape architecture scenery -people -portrait -crowd`;
+
   const url = new URL('https://api.pexels.com/v1/search');
-  url.searchParams.set('query', query);
+  url.searchParams.set('query', enhancedQuery);
   url.searchParams.set('per_page', perPage.toString());
   url.searchParams.set('orientation', 'landscape');
 
@@ -192,14 +195,15 @@ function generateSearchQueries(port, section) {
 
   switch (section) {
     case 'overview':
+      // Focus on harbour, aerial, architecture - no people
       return [
-        `${portName} cruise port ${country}`,
-        `${portName} harbour aerial view`,
-        `${portName} cityscape panorama`
+        `${portName} harbour marina boats`,
+        `${portName} aerial view cityscape`,
+        `${portName} skyline architecture`
       ];
 
     case 'stay-local':
-      // Extract local/walking attractions
+      // Extract local/walking attractions - focus on architecture/streets
       const localSights = mustSeeSights
         .filter(s => {
           const cat = (s.category || '').toLowerCase();
@@ -208,16 +212,16 @@ function generateSearchQueries(port, section) {
         .slice(0, 3);
       
       if (localSights.length > 0) {
-        return localSights.map(s => `${s.name || s.title} ${portName}`);
+        return localSights.map(s => `${s.name || s.title} architecture building`);
       }
       return [
-        `${portName} old town street`,
-        `${portName} local market`,
-        `${portName} historic center`
+        `${portName} old town cobblestone street`,
+        `${portName} market stalls food`,
+        `${portName} historic buildings architecture`
       ];
 
     case 'go-further':
-      // Extract day trip attractions
+      // Extract day trip attractions - focus on landscapes/monuments
       const dayTrips = mustSeeSights
         .filter(s => {
           const cat = (s.category || '').toLowerCase();
@@ -226,16 +230,16 @@ function generateSearchQueries(port, section) {
         .slice(0, 3);
       
       if (dayTrips.length > 0) {
-        return dayTrips.map(s => `${s.name || s.title} ${country}`);
+        return dayTrips.map(s => `${s.name || s.title} landmark monument`);
       }
       return [
-        `${portName} day trip ${country}`,
-        `${portName} scenic landscape`,
-        `${country} famous landmark`
+        `${portName} scenic landscape nature`,
+        `${country} mountain valley vista`,
+        `${country} famous monument landmark`
       ];
 
     case 'with-kids':
-      // Extract family-friendly attractions
+      // Extract family-friendly attractions - focus on beaches/parks, not people
       const familySights = mustSeeSights
         .filter(s => {
           const cat = (s.category || '').toLowerCase();
@@ -246,12 +250,12 @@ function generateSearchQueries(port, section) {
         .slice(0, 3);
       
       if (familySights.length > 0) {
-        return familySights.map(s => `${s.name || s.title} ${portName}`);
+        return familySights.map(s => `${s.name || s.title} scenery`);
       }
       return [
-        `${portName} beach family`,
-        `${portName} park children`,
-        `${country} family vacation`
+        `${portName} beach sand sea turquoise`,
+        `${portName} park gardens nature`,
+        `${portName} playground equipment`
       ];
 
     default:
