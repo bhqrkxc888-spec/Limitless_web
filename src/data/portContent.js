@@ -102,19 +102,19 @@ La Coruña is a real working city, not a tourist resort. It has an authentic, re
       ],
       longerWalk: [
         {
-          title: 'Option 1: Old Town Loop (~1 hour)',
+          title: 'Old Town Loop (~1 hour)',
           content: 'Ship → Marina → Plaza María Pita → Wander Old Town streets → San Antón Castle (outside view, 15 min walk) → Waterfront back to ship. The Old Town is compact with narrow winding streets, historic churches, and small plazas. Look for: Colegiata de Santa María del Campo (12th century Romanesque church), Iglesia de San Jorge (Baroque church near the main square), Various tapas bars tucked into side streets.',
           terrain: 'moderate',
           mapLink: 'https://www.google.com/maps/dir/Muelle+de+Trasatlanticos,+A+Coruna/Plaza+de+Maria+Pita,+A+Coruna/Castillo+de+San+Anton,+A+Coruna/Muelle+de+Trasatlanticos,+A+Coruna/'
         },
         {
-          title: 'Option 2: Beach Walk (~45 mins one way)',
+          title: 'Beach Walk (~45 mins one way)',
           content: 'Ship → Promenade west → Playa de Riazor (30 mins). Sandy city beach with cafés behind. Walk back or taxi return. March = probably not swimming weather, but nice to see.',
           terrain: 'easy',
           mapLink: 'https://www.google.com/maps/dir/Muelle+de+Trasatlanticos,+A+Coruna/Praia+de+Riazor,+A+Coruna/Muelle+de+Trasatlanticos,+A+Coruna/'
         },
         {
-          title: 'Option 3: Paseo Marítimo',
+          title: 'Paseo Marítimo',
           content: 'The famous 13km seafront promenade. You won\'t do all of it, but even 30 minutes along is lovely - flat, scenic, sea views. Good for walking, running, or cycling (hire bikes available).',
           terrain: 'easy',
           mapLink: 'https://www.google.com/maps/dir/Muelle+de+Trasatlanticos,+A+Coruna/Paseo+Maritimo,+A+Coruna/Muelle+de+Trasatlanticos,+A+Coruna/'
@@ -483,13 +483,13 @@ March means you're here for "winter sun" - expect pleasant temperatures perfect 
       ],
       longerWalk: [
         {
-          title: 'Option 1: Waterfront to Auditorio (~30 mins one way)',
+          title: 'Waterfront to Auditorio (~30 mins one way)',
           content: 'Plaza de España → Waterfront promenade → Parque Marítimo → Auditorio de Tenerife. The Auditorio is the iconic wave-shaped concert hall (think Sydney Opera House vibes). Designed by Santiago Calatrava. Even if you don\'t go inside, it\'s worth the walk for photos. Look down at the sea wall - music legends\' faces are painted on the boulders.',
           terrain: 'easy',
           mapLink: 'https://www.google.com/maps/dir/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/Auditorio+de+Tenerife/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/'
         },
         {
-          title: 'Option 2: City Highlights Loop (~1.5 hours)',
+          title: 'City Highlights Loop (~1.5 hours)',
           content: 'Plaza de España → Plaza de la Candelaria → Mercado de Nuestra Señora de África → TEA (art museum, exterior) → Back via Calle del Castillo',
           terrain: 'easy',
           mapLink: 'https://www.google.com/maps/dir/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/Mercado+de+Nuestra+Senora+de+Africa,+Santa+Cruz+de+Tenerife/TEA+Tenerife+Espacio+de+las+Artes,+Santa+Cruz+de+Tenerife/Plaza+de+Espana,+Santa+Cruz+de+Tenerife/'
@@ -1140,13 +1140,13 @@ March weather is perfect for exploring - warm enough for beaches but not the int
       ],
       longerWalk: [
         {
-          title: 'Option 1: Old Town Loop (~1 hour)',
+          title: 'Old Town Loop (~1 hour)',
           content: 'Port → Charco de San Ginés → Calle Real → Castillo de San Gabriel → Playa del Reducto → Back to port. Gives you a good feel for the city, its history, and the harbour.',
           terrain: 'easy',
           mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Charco+de+San+Gines,+Arrecife/Castillo+de+San+Gabriel,+Arrecife/Playa+del+Reducto,+Arrecife/Muelle+de+los+Marmoles,+Arrecife/'
         },
         {
-          title: 'Option 2: Harbour and Beach Walk (~45 mins)',
+          title: 'Harbour and Beach Walk (~45 mins)',
           content: 'Port → Charco de San Ginés → Follow waterfront → Playa del Reducto → Promenade walk → Return. Flat, scenic, good for photos.',
           terrain: 'easy',
           mapLink: 'https://www.google.com/maps/dir/Muelle+de+los+Marmoles,+Arrecife/Charco+de+San+Gines,+Arrecife/Playa+del+Reducto,+Arrecife/Muelle+de+los+Marmoles,+Arrecife/'
@@ -1489,13 +1489,13 @@ Cádiz is famous for its connection to sherry wine (it's part of the "Sherry Tri
       ],
       longerWalk: [
         {
-          title: 'Option 1: Old Town Highlights Loop (~1.5 hours)',
+          title: 'Old Town Highlights Loop (~1.5 hours)',
           content: 'Port → Plaza de San Juan de Dios → Mercado Central → Cádiz Cathedral → Torre Tavira → Wander narrow streets → La Caleta beach → Back to port. This covers the main sights and gives you a feel for the old town.',
           terrain: 'easy',
           mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/Plaza+de+San+Juan+de+Dios,+Cadiz/Mercado+Central,+Cadiz/Catedral+de+Cadiz,+Cadiz/La+Caleta,+Cadiz/Muelle+Alfonso+XIII,+Cadiz/'
         },
         {
-          title: 'Option 2: Seafront Walk (~45 mins one way)',
+          title: 'Seafront Walk (~45 mins one way)',
           content: 'Port → Follow seafront promenade north → Parque Genovés (botanical garden) → Continue along coast. Flat, scenic, sea views. Can return same way or cut through old town.',
           terrain: 'easy',
           mapLink: 'https://www.google.com/maps/dir/Muelle+Alfonso+XIII,+Cadiz/Parque+Genoves,+Cadiz/Muelle+Alfonso+XIII,+Cadiz/'
@@ -1828,13 +1828,13 @@ March weather is pleasant - mild temperatures perfect for walking, though it can
       ],
       longerWalk: [
         {
-          title: 'Option 1: Alfama Exploration (~2 hours)',
+          title: 'Alfama Exploration (~2 hours)',
           content: 'Port → Praça do Comércio → Walk up into Alfama → Sé (cathedral) → Miradouro de Santa Luzia → Wander narrow streets → Miradouro das Portas do Sol (another viewpoint) → Back down. This is the classic Lisbon old town experience.',
           terrain: 'challenging',
           mapLink: 'https://www.google.com/maps/dir/Santa+Apolonia,+Lisbon/Praca+do+Comercio,+Lisbon/Alfama,+Lisbon/Miradouro+de+Santa+Luzia,+Lisbon/Santa+Apolonia,+Lisbon/'
         },
         {
-          title: 'Option 2: Baixa and Chiado (~1.5 hours)',
+          title: 'Baixa and Chiado (~1.5 hours)',
           content: 'Port → Praça do Comércio → Rua Augusta (pedestrian street) → Rossio Square → Elevador de Santa Justa (art nouveau lift) → Chiado district. More modern, shopping, cafés.',
           terrain: 'moderate',
           mapLink: 'https://www.google.com/maps/dir/Santa+Apolonia,+Lisbon/Praca+do+Comercio,+Lisbon/Rossio,+Lisbon/Chiado,+Lisbon/Santa+Apolonia,+Lisbon/'

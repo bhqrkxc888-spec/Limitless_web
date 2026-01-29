@@ -604,7 +604,7 @@ function StayLocalSection({ stayLocal, marineData, marineLoading, stayLocalImage
                 <h4>{store.name}</h4>
                 <div className="store-details">
                   <p className="store-location"><MapPin size={16} /> <strong>Location:</strong> {store.location}</p>
-                  <p className="store-type">{store.type}</p>
+                  {store.type && <p className="store-type"><strong>Type:</strong> {store.type}</p>}
                   <p className="store-what"><strong>What they sell:</strong> {store.what}</p>
                   {store.notes && <p className="store-notes"><Info size={16} /> {store.notes}</p>}
                 </div>
@@ -915,7 +915,7 @@ function GoFurtherSection({ goFurther, _slug, goFurtherImages, hasGoFurtherImage
               </div>
               {attraction.notes && (
                 <div className="attraction-notes-box">
-                  <strong>Note</strong>
+                  <Info size={16} className="info-icon" />
                   <p>{formatBoldText(attraction.notes)}</p>
                 </div>
               )}
@@ -1129,7 +1129,280 @@ function WithKidsSection({ withKids, familyFriendly, withKidsImages, hasWithKids
         </>
       )}
 
-      {/* Beach section removed - already covered in Stay Local with full details */}
+      {/* Parks with Playgrounds (array) */}
+      {familyFriendly?.parks && familyFriendly.parks.length > 0 && (
+        <>
+          <SubSection title="🛝 Parks & Playgrounds">
+            <div className="family-cards-grid">
+              {familyFriendly.parks.map((park, idx) => (
+                <div key={idx} className="family-card">
+                  <div className="family-card-content">
+                    <h4>{park.name}</h4>
+                    <p><strong>Location:</strong> {park.location}</p>
+                    <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                      <strong>Distance:</strong> 
+                      <span className="distance-badge">{park.walkingTime}</span>
+                    </p>
+                    {park.facilities && <p><strong>Facilities:</strong> {park.facilities}</p>}
+                    {park.ageRange && <p><strong>Ages:</strong> {park.ageRange}</p>}
+                    {park.notes && <p className="family-card-notes">{park.notes}</p>}
+                    {park.mapsLink && (
+                      <a href={park.mapsLink} target="_blank" rel="noopener noreferrer" className="map-link-subtle">
+                        Walking directions →
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Aquarium / Sea Life */}
+      {familyFriendly?.aquariumSeaLife && (
+        <>
+          <SubSection title="🐠 Aquarium / Sea Life">
+            <div className="attraction-info">
+              <h4>{familyFriendly.aquariumSeaLife.name}</h4>
+              <p><strong>Location:</strong> {familyFriendly.aquariumSeaLife.location}</p>
+              <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <strong>Distance:</strong> 
+                <span className="distance-badge">{familyFriendly.aquariumSeaLife.walkingTime}</span>
+              </p>
+              {familyFriendly.aquariumSeaLife.highlights && <p><strong>Highlights:</strong> {familyFriendly.aquariumSeaLife.highlights}</p>}
+              {familyFriendly.aquariumSeaLife.duration && <p><strong>Duration:</strong> {familyFriendly.aquariumSeaLife.duration}</p>}
+              {familyFriendly.aquariumSeaLife.hours && <p><strong>Hours:</strong> {familyFriendly.aquariumSeaLife.hours}</p>}
+              {familyFriendly.aquariumSeaLife.cost && <p><strong>Cost:</strong> {familyFriendly.aquariumSeaLife.cost}</p>}
+              {familyFriendly.aquariumSeaLife.notes && <p className="tip-text">{familyFriendly.aquariumSeaLife.notes}</p>}
+              {familyFriendly.aquariumSeaLife.mapsLink && (
+                <a href={familyFriendly.aquariumSeaLife.mapsLink} target="_blank" rel="noopener noreferrer" className="map-link-subtle">
+                  View on map →
+                </a>
+              )}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Swimming Pools */}
+      {familyFriendly?.swimmingPools && familyFriendly.swimmingPools.length > 0 && (
+        <>
+          <SubSection title="🏊 Swimming Pools">
+            <div className="family-cards-grid">
+              {familyFriendly.swimmingPools.map((pool, idx) => (
+                <div key={idx} className="family-card">
+                  <div className="family-card-content">
+                    <h4>{pool.name}</h4>
+                    {pool.type && <p><em>{pool.type}</em></p>}
+                    <p><strong>Location:</strong> {pool.location}</p>
+                    <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                      <strong>Distance:</strong> 
+                      <span className="distance-badge">{pool.walkingTime}</span>
+                    </p>
+                    {pool.facilities && <p><strong>Facilities:</strong> {pool.facilities}</p>}
+                    {pool.cost && <p><strong>Cost:</strong> {pool.cost}</p>}
+                    {pool.notes && <p className="family-card-notes">{pool.notes}</p>}
+                    {pool.mapsLink && (
+                      <a href={pool.mapsLink} target="_blank" rel="noopener noreferrer" className="map-link-subtle">
+                        View on map →
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Family Beaches */}
+      {familyFriendly?.beaches && familyFriendly.beaches.length > 0 && (
+        <>
+          <SubSection title="🏖️ Family Beaches">
+            <div className="family-cards-grid">
+              {familyFriendly.beaches.map((beach, idx) => (
+                <div key={idx} className="family-card">
+                  <div className="family-card-content">
+                    <h4>{beach.name}</h4>
+                    <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                      <strong>Distance:</strong> 
+                      <span className="distance-badge">{beach.walkingTime}</span>
+                    </p>
+                    {beach.sandType && <p><strong>Sand:</strong> {beach.sandType}</p>}
+                    {beach.facilities && <p><strong>Facilities:</strong> {beach.facilities}</p>}
+                    {beach.shallowWater && <p><strong>For toddlers:</strong> {beach.shallowWater}</p>}
+                    {beach.notes && <p className="family-card-notes">{beach.notes}</p>}
+                    {beach.mapsLink && (
+                      <a href={beach.mapsLink} target="_blank" rel="noopener noreferrer" className="map-link-subtle">
+                        View on map →
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Zoo / Wildlife */}
+      {familyFriendly?.zooWildlife && (
+        <>
+          <SubSection title="🦁 Zoo / Wildlife">
+            <div className="attraction-info">
+              <h4>{familyFriendly.zooWildlife.name}</h4>
+              <p><strong>Location:</strong> {familyFriendly.zooWildlife.location}</p>
+              <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <strong>Distance:</strong> 
+                <span className="distance-badge">{familyFriendly.zooWildlife.walkingTime}</span>
+              </p>
+              {familyFriendly.zooWildlife.highlights && <p><strong>Highlights:</strong> {familyFriendly.zooWildlife.highlights}</p>}
+              {familyFriendly.zooWildlife.duration && <p><strong>Duration:</strong> {familyFriendly.zooWildlife.duration}</p>}
+              {familyFriendly.zooWildlife.hours && <p><strong>Hours:</strong> {familyFriendly.zooWildlife.hours}</p>}
+              {familyFriendly.zooWildlife.notes && <p className="tip-text">{familyFriendly.zooWildlife.notes}</p>}
+              {familyFriendly.zooWildlife.mapsLink && (
+                <a href={familyFriendly.zooWildlife.mapsLink} target="_blank" rel="noopener noreferrer" className="map-link-subtle">
+                  View on map →
+                </a>
+              )}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Sports Stadium / Football Museum */}
+      {familyFriendly?.sportsStadiums && (
+        <>
+          <SubSection title="⚽ Sports Stadium / Museum">
+            <div className="attraction-info">
+              <h4>{familyFriendly.sportsStadiums.name}</h4>
+              {familyFriendly.sportsStadiums.team && <p><strong>Team:</strong> {familyFriendly.sportsStadiums.team}</p>}
+              <p><strong>Location:</strong> {familyFriendly.sportsStadiums.location}</p>
+              <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                <strong>Distance:</strong> 
+                <span className="distance-badge">{familyFriendly.sportsStadiums.walkingTime}</span>
+              </p>
+              {familyFriendly.sportsStadiums.tours && <p><strong>Tours:</strong> {familyFriendly.sportsStadiums.tours}</p>}
+              {familyFriendly.sportsStadiums.museum && <p><strong>Museum:</strong> {familyFriendly.sportsStadiums.museum}</p>}
+              {familyFriendly.sportsStadiums.notes && <p className="tip-text">{familyFriendly.sportsStadiums.notes}</p>}
+              {familyFriendly.sportsStadiums.mapsLink && (
+                <a href={familyFriendly.sportsStadiums.mapsLink} target="_blank" rel="noopener noreferrer" className="map-link-subtle">
+                  View on map →
+                </a>
+              )}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Nature Walks */}
+      {familyFriendly?.natureWalks && familyFriendly.natureWalks.length > 0 && (
+        <>
+          <SubSection title="🌿 Nature Walks & Gardens">
+            <div className="family-cards-grid">
+              {familyFriendly.natureWalks.map((walk, idx) => (
+                <div key={idx} className="family-card">
+                  <div className="family-card-content">
+                    <h4>{walk.name}</h4>
+                    {walk.type && <p><em>{walk.type}</em></p>}
+                    <p><strong>Start:</strong> {walk.location}</p>
+                    {walk.distance && <p><strong>Distance:</strong> {walk.distance}</p>}
+                    {walk.terrain && <p><strong>Terrain:</strong> {walk.terrain}</p>}
+                    {walk.highlights && <p><strong>Highlights:</strong> {walk.highlights}</p>}
+                    {walk.notes && <p className="family-card-notes">{walk.notes}</p>}
+                    {walk.mapsLink && (
+                      <a href={walk.mapsLink} target="_blank" rel="noopener noreferrer" className="map-link-subtle">
+                        View on map →
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Adventure Activities */}
+      {familyFriendly?.adventure && familyFriendly.adventure.length > 0 && (
+        <>
+          <SubSection title="🚴 Adventure Activities">
+            <div className="family-cards-grid">
+              {familyFriendly.adventure.map((activity, idx) => (
+                <div key={idx} className="family-card">
+                  <div className="family-card-content">
+                    <h4>{activity.name}</h4>
+                    {activity.type && <p><em>{activity.type}</em></p>}
+                    <p><strong>Location:</strong> {activity.location}</p>
+                    {activity.ageRange && <p><strong>Ages:</strong> {activity.ageRange}</p>}
+                    {activity.duration && <p><strong>Duration:</strong> {activity.duration}</p>}
+                    {activity.cost && <p><strong>Cost:</strong> {activity.cost}</p>}
+                    {activity.notes && <p className="family-card-notes">{activity.notes}</p>}
+                    {activity.mapsLink && (
+                      <a href={activity.mapsLink} target="_blank" rel="noopener noreferrer" className="map-link-subtle">
+                        View on map →
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Kid-Friendly Attractions */}
+      {familyFriendly?.attractions && familyFriendly.attractions.length > 0 && (
+        <>
+          <SubSection title="🎡 Kid-Friendly Attractions">
+            <div className="family-cards-grid">
+              {familyFriendly.attractions.map((attraction, idx) => (
+                <div key={idx} className="family-card">
+                  <div className="family-card-content">
+                    <h4>{attraction.name}</h4>
+                    {attraction.type && <p><em>{attraction.type}</em></p>}
+                    <p><strong>Location:</strong> {attraction.location}</p>
+                    <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+                      <strong>Distance:</strong> 
+                      <span className="distance-badge">{attraction.walkingTime}</span>
+                    </p>
+                    {attraction.highlights && <p><strong>Highlights:</strong> {attraction.highlights}</p>}
+                    {attraction.duration && <p><strong>Duration:</strong> {attraction.duration}</p>}
+                    {attraction.notes && <p className="family-card-notes">{attraction.notes}</p>}
+                    {attraction.mapsLink && (
+                      <a href={attraction.mapsLink} target="_blank" rel="noopener noreferrer" className="map-link-subtle">
+                        View on map →
+                      </a>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {/* Beach Option Summary */}
+      {familyFriendly?.beachOption && (
+        <>
+          <SubSection title="🏖️ Best Family Beach">
+            <div className="tip-box">
+              <p>{familyFriendly.beachOption}</p>
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
 
       {/* Easy Day Suggestion - moved to top */}
       {withKids?.easyDay && (
@@ -1308,6 +1581,23 @@ function SendSection({ send }) {
         </>
       )}
 
+      {/* Quieter Alternatives - suggestions for avoiding crowds */}
+      {send.quieterAlternatives && send.quieterAlternatives.length > 0 && (
+        <>
+          <SubSection title="Quieter Alternatives">
+            <div className="tip-box">
+              <p><strong>Looking for a calmer experience?</strong> Try these alternatives to the busiest spots.</p>
+            </div>
+            <ul className="simple-list">
+              {send.quieterAlternatives.map((item, idx) => (
+                <li key={idx}>{item}</li>
+              ))}
+            </ul>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
       {/* Support both 'sensory' (G606) and 'sensoryConsiderations' (old style) */}
       {((send.sensory && send.sensory.length > 0) || (send.sensoryConsiderations && send.sensoryConsiderations.length > 0)) && (
         <>
@@ -1430,7 +1720,7 @@ function FoodDrinkSection({ foodAndDrink, _onOpenLightbox }) {
             <div className="local-dish-card">
               <div className="local-dish-header">
                 <ChefHat size={24} className="dish-icon" />
-                <h3>Must Try</h3>
+                <h3>Worth a Try</h3>
               </div>
               <div className="local-dish-content">
                 <h4>{dish.name}</h4>

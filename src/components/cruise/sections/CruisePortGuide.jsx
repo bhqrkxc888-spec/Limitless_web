@@ -1110,7 +1110,7 @@ function FoodDrinkSection({ foodAndDrink }) {
           <div className="local-dish-card">
             <div className="local-dish-header">
               <span className="dish-icon">🍽️</span>
-              <h4>Must Try: {foodAndDrink.localDishToTry.name}</h4>
+              <h4>Worth a Try: {foodAndDrink.localDishToTry.name}</h4>
             </div>
             <div className="local-dish-content">
               <p>{foodAndDrink.localDishToTry.description}</p>

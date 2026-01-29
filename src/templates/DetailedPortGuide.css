@@ -215,7 +215,7 @@
 }
 
 .port-description p {
-  color: var(--clr-text-body, #4A5568);
+  color: var(--clr-text-body, #3D4555);
   line-height: 1.8;
   margin-bottom: var(--space-4, 1rem);
 }
@@ -613,7 +613,7 @@
 .detailed-port-guide .attraction-tips p {
   margin: 0;
   font-size: var(--font-size-sm, 0.875rem);
-  color: var(--clr-text-body, #4A5568);
+  color: var(--clr-text-body, #3D4555);
 }
 
 @media (max-width: 768px) {
@@ -683,13 +683,16 @@
   border-left: 3px solid var(--clr-border, #E8E4DC);
 }
 
-.attraction-notes-box strong {
-  display: block;
-  font-size: var(--font-size-xs, 0.75rem);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--clr-text-muted, #5C6478);
-  margin-bottom: var(--space-1, 0.25rem);
+.attraction-notes-box {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2, 0.5rem);
+}
+
+.attraction-notes-box .info-icon {
+  flex-shrink: 0;
+  color: var(--clr-secondary, #D4B86A);
+  margin-top: 2px;
 }
 
 .attraction-notes-box p {
@@ -718,7 +721,7 @@
 .our-take p {
   margin: 0;
   font-size: var(--font-size-sm, 0.875rem);
-  color: var(--clr-text-body, #4A5568);
+  color: var(--clr-text-body, #3D4555);
 }
 
 /* ========================================
@@ -838,7 +841,7 @@
 }
 
 .specialty-item p {
-  color: var(--clr-text-body, #4A5568);
+  color: var(--clr-text-body, #3D4555);
   margin-bottom: var(--space-1, 0.25rem);
 }
 
