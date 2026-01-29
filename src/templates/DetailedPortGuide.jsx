@@ -462,7 +462,6 @@ function OverviewSection({ overview, portName, _slug, overviewImages, hasOvervie
             images={overviewImages}
             autoScroll={true}
             interval={5000}
-            onImageClick={onOpenLightbox}
           />
           <hr className="section-divider" />
         </>
@@ -569,7 +568,6 @@ function StayLocalSection({ stayLocal, marineData, marineLoading, stayLocalImage
             images={stayLocalImages}
             autoScroll={true}
             interval={5000}
-            onImageClick={onOpenLightbox}
           />
           <hr className="section-divider" />
         </>
@@ -848,7 +846,6 @@ function GoFurtherSection({ goFurther, _slug, goFurtherImages, hasGoFurtherImage
             images={goFurtherImages}
             autoScroll={true}
             interval={5000}
-            onImageClick={onOpenLightbox}
           />
           <hr className="section-divider" />
         </>
@@ -976,7 +973,6 @@ function WithKidsSection({ withKids, familyFriendly, withKidsImages, hasWithKids
             images={withKidsImages}
             autoScroll={true}
             interval={5000}
-            onImageClick={onOpenLightbox}
           />
           <hr className="section-divider" />
         </>

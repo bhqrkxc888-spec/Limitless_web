@@ -42,7 +42,15 @@ const BUCKET_NAME = 'WEB_port-guides';
 const IMAGES_PER_SECTION = 3;
 const RATE_LIMIT_DELAY_MS = 2000; // 2 seconds between requests (safe for 200/hour)
 
-const SECTIONS = ['overview', 'stay-local', 'go-further', 'with-kids'];
+// Gallery sections + hero and card
+const SECTIONS = ['hero', 'card', 'overview', 'stay-local', 'go-further', 'with-kids'];
+
+// Image dimensions by type
+const IMAGE_SIZES = {
+  hero: { width: 1920, height: 600 },   // Wide banner
+  card: { width: 600, height: 400 },    // Card thumbnail
+  default: { width: 600, height: 400 }, // Gallery images
+};
 
 // ============================================================================
 // SUPABASE CLIENT
@@ -96,7 +104,7 @@ async function searchPexels(query, perPage = 5) {
 // IMAGE PROCESSING
 // ============================================================================
 
-async function downloadAndConvertImage(imageUrl) {
+async function downloadAndConvertImage(imageUrl, section = 'default') {
   const response = await fetch(imageUrl);
   if (!response.ok) {
     throw new Error(`Failed to download image: ${response.status}`);
@@ -104,10 +112,13 @@ async function downloadAndConvertImage(imageUrl) {
 
   const buffer = await response.buffer();
   
-  // Convert to WebP, resize to 600x400
+  // Get dimensions based on section type
+  const size = IMAGE_SIZES[section] || IMAGE_SIZES.default;
+  
+  // Convert to WebP with appropriate size
   const webpBuffer = await sharp(buffer)
-    .resize(600, 400, { fit: 'cover', position: 'center' })
-    .webp({ quality: 85 })
+    .resize(size.width, size.height, { fit: 'cover', position: 'center' })
+    .webp({ quality: section === 'hero' ? 90 : 85 }) // Higher quality for hero
     .toBuffer();
 
   return webpBuffer;
@@ -194,6 +205,22 @@ function generateSearchQueries(port, section) {
   const mustSeeSights = port.must_see_sights || [];
 
   switch (section) {
+    case 'hero':
+      // Wide panoramic shots for hero banner
+      return [
+        `${portName} panorama aerial view`,
+        `${portName} harbour panoramic cityscape`,
+        `${portName} skyline sunset`
+      ];
+
+    case 'card':
+      // Iconic shot for card thumbnail
+      return [
+        `${portName} harbour scenic`,
+        `${portName} landmark iconic`,
+        `${portName} cityscape`
+      ];
+
     case 'overview':
       // Focus on harbour, aerial, architecture - no people
       return [
@@ -304,32 +331,50 @@ async function checkPexelsImageExists(externalId) {
 
 async function processSection(port, section, dryRun = false) {
   const portSlug = port.slug;
+  const isHeroOrCard = section === 'hero' || section === 'card';
+  
   console.log(`\n📁 Processing ${section} for ${port.name}...`);
 
-  // Check existing images (manual and pexels separately)
-  const existing = await checkExistingImages(portSlug, section);
-  const manualCount = existing.manual.length;
-  const pexelsCount = existing.pexels.length;
-  const totalCount = manualCount + pexelsCount;
-  
-  // Calculate how many more images needed (manual images count first)
-  const neededCount = IMAGES_PER_SECTION - totalCount;
+  // For hero/card, check if file exists in storage directly
+  if (isHeroOrCard) {
+    const filePath = `${portSlug}/${section}.webp`;
+    const { data: existingFile } = await supabase.storage
+      .from(BUCKET_NAME)
+      .list(portSlug, { search: `${section}.webp` });
+    
+    if (existingFile && existingFile.length > 0) {
+      console.log(`  ✓ ${section}.webp already exists, skipping`);
+      return { fetched: 0, uploaded: 0, skipped: 1, manual: 1 };
+    }
+    console.log(`  🔍 No ${section}.webp found, fetching from Pexels...`);
+  } else {
+    // Check existing images (manual and pexels separately) for gallery sections
+    const existing = await checkExistingImages(portSlug, section);
+    const manualCount = existing.manual.length;
+    const pexelsCount = existing.pexels.length;
+    const totalCount = manualCount + pexelsCount;
+    
+    // Calculate how many more images needed (manual images count first)
+    const galNeededCount = IMAGES_PER_SECTION - totalCount;
 
-  console.log(`  📊 Manual: ${manualCount} | Pexels: ${pexelsCount} | Total: ${totalCount}`);
+    console.log(`  📊 Manual: ${manualCount} | Pexels: ${pexelsCount} | Total: ${totalCount}`);
 
-  if (neededCount <= 0) {
-    console.log(`  ✓ Already has ${totalCount} images (${manualCount} manual, ${pexelsCount} pexels), skipping`);
-    return { fetched: 0, uploaded: 0, skipped: totalCount, manual: manualCount };
+    if (galNeededCount <= 0) {
+      console.log(`  ✓ Already has ${totalCount} images (${manualCount} manual, ${pexelsCount} pexels), skipping`);
+      return { fetched: 0, uploaded: 0, skipped: totalCount, manual: manualCount };
+    }
+
+    console.log(`  🔍 Need ${galNeededCount} more images from Pexels`);
   }
-
-  console.log(`  � Need ${neededCount} more images from Pexels`);
+  
+  // How many images to fetch for this section
+  const neededCount = isHeroOrCard ? 1 : IMAGES_PER_SECTION;
 
   // Generate search queries
   const queries = generateSearchQueries(port, section);
   console.log(`  🔍 Search queries: ${queries.join(', ')}`);
 
   let uploaded = 0;
-  let imageIndex = totalCount + 1;
 
   for (const query of queries) {
     if (uploaded >= neededCount) break;
@@ -350,28 +395,31 @@ async function processSection(port, section, dryRun = false) {
       for (const photo of photos) {
         if (uploaded >= neededCount) break;
 
-        // Check if this Pexels image is already in our DB
-        const alreadyExists = await checkPexelsImageExists(photo.id);
-        if (alreadyExists) {
-          console.log(`    ⏭️  Pexels image ${photo.id} already imported`);
-          continue;
+        // Check if this Pexels image is already in our DB (skip for hero/card)
+        if (!isHeroOrCard) {
+          const alreadyExists = await checkPexelsImageExists(photo.id);
+          if (alreadyExists) {
+            console.log(`    ⏭️  Pexels image ${photo.id} already imported`);
+            continue;
+          }
         }
 
-        const filename = `pexels-${photo.id}.webp`;
-        const storagePath = `${portSlug}/${section}/${filename}`;
+        // Hero/card: use section.webp, gallery: use pexels-{id}.webp in subfolder
+        const filename = isHeroOrCard ? `${section}.webp` : `pexels-${photo.id}.webp`;
+        const storagePath = isHeroOrCard ? `${portSlug}/${filename}` : `${portSlug}/${section}/${filename}`;
 
         if (dryRun) {
           console.log(`    📸 [DRY RUN] Would upload: ${storagePath}`);
           console.log(`       Photographer: ${photo.photographer}`);
           uploaded++;
-          imageIndex++;
           continue;
         }
 
         try {
-          // Download and convert
-          console.log(`    ⬇️  Downloading: ${photo.src.large}`);
-          const webpBuffer = await downloadAndConvertImage(photo.src.large);
+          // Download and convert - use larger source for hero
+          const imageSource = isHeroOrCard && section === 'hero' ? photo.src.original : photo.src.large;
+          console.log(`    ⬇️  Downloading: ${imageSource}`);
+          const webpBuffer = await downloadAndConvertImage(imageSource, section);
 
           // Upload to storage
           console.log(`    ⬆️  Uploading: ${storagePath}`);
