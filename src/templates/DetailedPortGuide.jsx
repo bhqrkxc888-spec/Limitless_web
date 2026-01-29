@@ -236,16 +236,16 @@ export function DetailedPortGuide({ slug, portName, detailedContent, port }) {
     let content;
     switch (activeSection) {
       case 'overview':
-        content = <OverviewSection overview={overview} portName={portName} slug={slug} overviewImages={overviewImages} hasOverviewImages={hasOverviewImages} onOpenLightbox={handleOpenLightbox} />;
+        content = <OverviewSection overview={overview} portName={portName} slug={slug} overviewImages={overviewImages} hasOverviewImages={hasOverviewImages} />;
         break;
       case 'stayLocal':
-        content = <StayLocalSection stayLocal={stayLocal} marineData={marineData} marineLoading={marineLoading} stayLocalImages={stayLocalImages} hasStayLocalImages={hasStayLocalImages} onOpenLightbox={handleOpenLightbox} />;
+        content = <StayLocalSection stayLocal={stayLocal} marineData={marineData} marineLoading={marineLoading} stayLocalImages={stayLocalImages} hasStayLocalImages={hasStayLocalImages} />;
         break;
       case 'goFurther':
-        content = <GoFurtherSection goFurther={goFurther} slug={slug} goFurtherImages={goFurtherImages} hasGoFurtherImages={hasGoFurtherImages} onOpenLightbox={handleOpenLightbox} />;
+        content = <GoFurtherSection goFurther={goFurther} slug={slug} goFurtherImages={goFurtherImages} hasGoFurtherImages={hasGoFurtherImages} />;
         break;
       case 'withKids':
-        content = <WithKidsSection withKids={withKids} familyFriendly={familyFriendly} withKidsImages={withKidsImages} hasWithKidsImages={hasWithKidsImages} onOpenLightbox={handleOpenLightbox} />;
+        content = <WithKidsSection withKids={withKids} familyFriendly={familyFriendly} withKidsImages={withKidsImages} hasWithKidsImages={hasWithKidsImages} />;
         break;
       case 'send':
         content = <SendSection send={send} />;
@@ -446,7 +446,7 @@ function MarineConditionsCard({ marineData, loading }) {
   );
 }
 
-function OverviewSection({ overview, portName, _slug, overviewImages, hasOverviewImages, onOpenLightbox }) {
+function OverviewSection({ overview, portName, _slug, overviewImages, hasOverviewImages }) {
   if (!overview) return <p>No overview information available yet.</p>;
 
   return (
@@ -546,7 +546,7 @@ function OverviewSection({ overview, portName, _slug, overviewImages, hasOvervie
   );
 }
 
-function StayLocalSection({ stayLocal, marineData, marineLoading, stayLocalImages, hasStayLocalImages, onOpenLightbox }) {
+function StayLocalSection({ stayLocal, marineData, marineLoading, stayLocalImages, hasStayLocalImages }) {
   if (!stayLocal) return <p>No local information available yet.</p>;
 
   // Check if using NEW flexible structure
@@ -821,7 +821,7 @@ function StayLocalSection({ stayLocal, marineData, marineLoading, stayLocalImage
   );
 }
 
-function GoFurtherSection({ goFurther, _slug, goFurtherImages, hasGoFurtherImages, onOpenLightbox }) {
+function GoFurtherSection({ goFurther, _slug, goFurtherImages, hasGoFurtherImages }) {
   // Check if using NEW flexible structure
   const hasSubsections = goFurther?.subsections && Array.isArray(goFurther.subsections) && goFurther.subsections.length > 0;
   const hasLegacyAttractions = goFurther?.attractions && goFurther.attractions.length > 0;
@@ -947,7 +947,7 @@ function GoFurtherSection({ goFurther, _slug, goFurtherImages, hasGoFurtherImage
   );
 }
 
-function WithKidsSection({ withKids, familyFriendly, withKidsImages, hasWithKidsImages, onOpenLightbox }) {
+function WithKidsSection({ withKids, familyFriendly, withKidsImages, hasWithKidsImages }) {
   // Check if using NEW flexible structure
   const hasSubsections = withKids?.subsections && Array.isArray(withKids.subsections) && withKids.subsections.length > 0;
   const hasLegacyContent = withKids && (withKids.toddlers?.length > 0 || withKids.olderKids?.length > 0 || withKids.easyDay);
