@@ -117,7 +117,11 @@ const isCruiseMapItem = (itemType) => {
 const getPortGuideData = (portName) => {
   const slug = getPortGuideSlug(portName);
   if (!slug) return null;
-  return portGuides.find(p => p.slug === slug) || null;
+  // Match by id first (preferred), then by slug, then partial match
+  return portGuides.find(p => p.id === slug) || 
+         portGuides.find(p => p.slug === slug) ||
+         portGuides.find(p => p.slug?.startsWith(slug) || p.id?.startsWith(slug)) ||
+         null;
 };
 
 function InteractiveItineraryMap({ itinerary }) {
@@ -1097,10 +1101,6 @@ function InteractiveItineraryMap({ itinerary }) {
         </div>
       )}
 
-      {/* Disclaimer */}
-      <div className="itinerary-map-disclaimer">
-        <p>Map shown for visual purposes only and may not be 100% accurate.</p>
-      </div>
     </div>
   );
 }
