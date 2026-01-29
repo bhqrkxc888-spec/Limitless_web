@@ -1,10 +1,11 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getPortsByRegion, getAllRegions, getPortsCountByRegion } from '../data/ports';
+import { getAllRegions } from '../data/ports';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import { Button, Card, SectionHeader } from '../components/ui';
 import { supabase, getPublicUrl } from '../lib/supabase';
+import { Loader2 } from 'lucide-react';
 import '../styles/page-header.css';
 import './PortRegionPage.css';
 import './PortsPage.css'; // Import for region filter styles
@@ -47,38 +48,113 @@ function PortCardWithImage({ port, imageUrl }) {
 function PortRegionPage() {
   const { slug } = useParams();
   const region = getAllRegions().find(r => r.slug === slug);
+  const [ports, setPorts] = useState([]);
   const [portImages, setPortImages] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [itemsToShow, setItemsToShow] = useState(3);
+  const [allRegionCounts, setAllRegionCounts] = useState({});
   
-  const ports = useMemo(() => 
-    region ? getPortsByRegion(region.id) : []
-  , [region]);
-  
-  // Batch fetch all port card images in a single query (avoids N+1)
+  // Fetch published ports for this region from Supabase
   useEffect(() => {
-    if (!ports.length) return;
+    if (!region) return;
     
-    async function fetchPortImages() {
-      const slugs = ports.map(p => p.slug);
-      const { data: cardImages, error } = await supabase
-        .from('site_images')
-        .select('entity_id, bucket, path')
-        .eq('entity_type', 'port-guide')
-        .eq('image_type', 'card')
-        .in('entity_id', slugs);
-      
-      if (!error && cardImages) {
-        const imageMap = cardImages.reduce((acc, img) => {
-          if (img.bucket && img.path) {
-            acc[img.entity_id] = getPublicUrl(img.bucket, img.path);
+    async function fetchRegionPorts() {
+      setIsLoading(true);
+      try {
+        const { data, error } = await supabase
+          .from('ports')
+          .select('id, slug, name, country, region, tagline, show_in_menu')
+          .eq('status', 'published')
+          .eq('region', region.id)
+          .order('name'); // A-Z sorting
+
+        if (!error && data) {
+          setPorts(data);
+          
+          // Batch fetch all port card images
+          const slugs = data.map(p => p.slug);
+          if (slugs.length > 0) {
+            const { data: cardImages, error: imgError } = await supabase
+              .from('site_images')
+              .select('entity_id, bucket, path')
+              .eq('entity_type', 'port-guide')
+              .eq('image_type', 'card')
+              .in('entity_id', slugs);
+            
+            if (!imgError && cardImages) {
+              const imageMap = cardImages.reduce((acc, img) => {
+                if (img.bucket && img.path) {
+                  acc[img.entity_id] = getPublicUrl(img.bucket, img.path);
+                }
+                return acc;
+              }, {});
+              setPortImages(imageMap);
+            }
           }
-          return acc;
-        }, {});
-        setPortImages(imageMap);
+        }
+      } catch (err) {
+        console.error('Error fetching region ports:', err);
+      } finally {
+        setIsLoading(false);
       }
     }
     
-    fetchPortImages();
-  }, [ports, region?.id]);
+    fetchRegionPorts();
+  }, [region]);
+  
+  // Fetch port counts for all regions (for navigation chips)
+  useEffect(() => {
+    async function fetchRegionCounts() {
+      try {
+        const { data, error } = await supabase
+          .from('ports')
+          .select('region')
+          .eq('status', 'published');
+        
+        if (!error && data) {
+          const counts = data.reduce((acc, port) => {
+            acc[port.region] = (acc[port.region] || 0) + 1;
+            return acc;
+          }, {});
+          setAllRegionCounts(counts);
+        }
+      } catch (err) {
+        console.error('Error fetching region counts:', err);
+      }
+    }
+    
+    fetchRegionCounts();
+  }, []);
+  
+  // Responsive items to show
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setItemsToShow(1);
+      } else if (window.innerWidth < 1024) {
+        setItemsToShow(2);
+      } else {
+        setItemsToShow(3);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
+  const maxIndex = Math.max(0, ports.length - itemsToShow);
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+  };
+
+  const goToPrev = () => {
+    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+  };
+  
+  const visiblePorts = ports.slice(currentIndex, currentIndex + itemsToShow);
   
   // Handle region not found
   if (!region) {
@@ -143,8 +219,8 @@ function PortRegionPage() {
                 ← All Ports
               </Link>
               {getAllRegions().map((r) => {
-                const portCount = getPortsCountByRegion(r.id);
-                const isActive = r.id === region.id;
+                const portCount = allRegionCounts[r.id] || 0;
+                const isActive = r.id === region?.id;
                 return (
                   <Link
                     key={r.id}
@@ -161,32 +237,125 @@ function PortRegionPage() {
         </div>
       </section>
 
-      {/* Ports Grid */}
-      <section className="section" style={{ paddingTop: '1rem' }}>
-        <div className="container">
-          <SectionHeader
-            title={`All ${region.name} Ports`}
-            subtitle={`${ports.length} port guide${ports.length !== 1 ? 's' : ''} available`}
-          />
+      {/* Loading State */}
+      {isLoading && (
+        <section className="section">
+          <div className="container" style={{ display: 'flex', justifyContent: 'center', padding: '4rem 0' }}>
+            <Loader2 size={48} style={{ animation: 'spin 1s linear infinite', color: 'var(--primary)' }} />
+          </div>
+        </section>
+      )}
 
-          {ports.length > 0 ? (
-            <div className="ports-grid">
-              {ports.map((port) => (
-                <PortCardWithImage 
-                  key={port.id} 
-                  port={port} 
-                  imageUrl={portImages[port.slug] || null}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="no-ports">
-              <p>Port guides for this region are coming soon.</p>
-              <Button to="/ports">View All Regions</Button>
-            </div>
-          )}
-        </div>
-      </section>
+      {/* Ports Carousel with Navigation Arrows */}
+      {!isLoading && (
+        <section className="section" style={{ paddingTop: '1rem' }}>
+          <div className="container">
+            <SectionHeader
+              title={`All ${region.name} Ports`}
+              subtitle={`${ports.length} port guide${ports.length !== 1 ? 's' : ''} available`}
+            />
+
+            {ports.length > 0 ? (
+              <div style={{ position: 'relative' }}>
+                {/* Previous Arrow */}
+                {ports.length > itemsToShow && (
+                  <button
+                    onClick={goToPrev}
+                    aria-label="Previous ports"
+                    style={{
+                      position: 'absolute',
+                      left: '-20px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      zIndex: 10,
+                      background: 'white',
+                      border: '2px solid var(--border-default)',
+                      borderRadius: '50%',
+                      width: '48px',
+                      height: '48px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                      transition: 'all 0.2s',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'var(--primary)';
+                      e.currentTarget.style.borderColor = 'var(--primary)';
+                      e.currentTarget.style.color = 'white';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'white';
+                      e.currentTarget.style.borderColor = 'var(--border-default)';
+                      e.currentTarget.style.color = 'inherit';
+                    }}
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="24" height="24">
+                      <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                  </button>
+                )}
+
+                <div className="ports-grid">
+                  {visiblePorts.map((port) => (
+                    <PortCardWithImage 
+                      key={port.id} 
+                      port={port} 
+                      imageUrl={portImages[port.slug] || null}
+                    />
+                  ))}
+                </div>
+
+                {/* Next Arrow */}
+                {ports.length > itemsToShow && (
+                  <button
+                    onClick={goToNext}
+                    aria-label="Next ports"
+                    style={{
+                      position: 'absolute',
+                      right: '-20px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      zIndex: 10,
+                      background: 'white',
+                      border: '2px solid var(--border-default)',
+                      borderRadius: '50%',
+                      width: '48px',
+                      height: '48px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                      transition: 'all 0.2s',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'var(--primary)';
+                      e.currentTarget.style.borderColor = 'var(--primary)';
+                      e.currentTarget.style.color = 'white';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'white';
+                      e.currentTarget.style.borderColor = 'var(--border-default)';
+                      e.currentTarget.style.color = 'inherit';
+                    }}
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="24" height="24">
+                      <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                  </button>
+                )}
+              </div>
+            ) : (
+              <div className="no-ports">
+                <p>No published port guides for this region yet.</p>
+                <Button to="/ports">View All Regions</Button>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* CTA Section */}
       <section className="section section-dark">

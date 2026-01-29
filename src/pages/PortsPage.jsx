@@ -58,6 +58,25 @@ function PortsPage() {
   const [ports, setPorts] = useState([]);
   const [portImages, setPortImages] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [carouselIndexes, setCarouselIndexes] = useState({});
+  const [itemsToShow, setItemsToShow] = useState(3);
+
+  // Responsive carousel items
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setItemsToShow(1);
+      } else if (window.innerWidth < 1024) {
+        setItemsToShow(2);
+      } else {
+        setItemsToShow(3);
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Fetch ports AND batch-fetch all card images in parallel
   useEffect(() => {
@@ -66,10 +85,10 @@ function PortsPage() {
       try {
         const { data, error } = await supabase
           .from('ports')
-          .select('id, slug, name, country, region, tagline, show_in_menu, is_complete')
+          .select('id, slug, name, country, region, tagline, show_in_menu')
           .eq('status', 'published')
           .eq('show_in_menu', true)
-          .order('name');
+          .order('name'); // A-Z sorting
 
         if (!error && data) {
           setPorts(data);
@@ -126,6 +145,29 @@ function PortsPage() {
       portsByRegion[region.id] && portsByRegion[region.id].length > 0
     );
   }, [portsByRegion]);
+  
+  // Navigation handlers for each region carousel
+  const goToNext = (regionId, totalPorts) => {
+    setCarouselIndexes(prev => {
+      const currentIndex = prev[regionId] || 0;
+      const maxIndex = Math.max(0, totalPorts - itemsToShow);
+      return {
+        ...prev,
+        [regionId]: currentIndex >= maxIndex ? 0 : currentIndex + 1
+      };
+    });
+  };
+
+  const goToPrev = (regionId, totalPorts) => {
+    setCarouselIndexes(prev => {
+      const currentIndex = prev[regionId] || 0;
+      const maxIndex = Math.max(0, totalPorts - itemsToShow);
+      return {
+        ...prev,
+        [regionId]: currentIndex <= 0 ? maxIndex : currentIndex - 1
+      };
+    });
+  };
 
   // Structured Data for SEO
   const structuredData = {
@@ -210,31 +252,116 @@ function PortsPage() {
         </section>
       )}
 
-      {/* Featured Ports by Region */}
+      {/* Featured Ports by Region with Carousel Navigation */}
       {!isLoading && activeRegions.map((region) => {
         const regionPorts = portsByRegion[region.id] || [];
         if (regionPorts.length === 0) return null;
+        
+        const currentIndex = carouselIndexes[region.id] || 0;
+        const visiblePorts = regionPorts.slice(currentIndex, currentIndex + itemsToShow);
 
         return (
           <section key={region.id} className="section ports-region-section">
             <div className="container">
               <div className="region-section-header">
                 <h2>{region.name}</h2>
-                {regionPorts.length > 3 && (
+                {regionPorts.length > itemsToShow && (
                   <Link to={`/ports/region/${region.slug}`} className="view-all-link">
                     View all {regionPorts.length} ports →
                   </Link>
                 )}
               </div>
 
-              <div className="ports-grid">
-                {regionPorts.slice(0, 3).map((port) => (
-                  <PortCardWithImage 
-                    key={port.id} 
-                    port={port} 
-                    imageUrl={portImages[port.slug] || null}
-                  />
-                ))}
+              <div style={{ position: 'relative' }}>
+                {/* Previous Arrow */}
+                {regionPorts.length > itemsToShow && (
+                  <button
+                    onClick={() => goToPrev(region.id, regionPorts.length)}
+                    aria-label="Previous ports"
+                    style={{
+                      position: 'absolute',
+                      left: '-20px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      zIndex: 10,
+                      background: 'white',
+                      border: '2px solid var(--border-default)',
+                      borderRadius: '50%',
+                      width: '48px',
+                      height: '48px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                      transition: 'all 0.2s',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'var(--primary)';
+                      e.currentTarget.style.borderColor = 'var(--primary)';
+                      e.currentTarget.style.color = 'white';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'white';
+                      e.currentTarget.style.borderColor = 'var(--border-default)';
+                      e.currentTarget.style.color = 'inherit';
+                    }}
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="24" height="24">
+                      <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                  </button>
+                )}
+
+                <div className="ports-grid">
+                  {visiblePorts.map((port) => (
+                    <PortCardWithImage 
+                      key={port.id} 
+                      port={port} 
+                      imageUrl={portImages[port.slug] || null}
+                    />
+                  ))}
+                </div>
+
+                {/* Next Arrow */}
+                {regionPorts.length > itemsToShow && (
+                  <button
+                    onClick={() => goToNext(region.id, regionPorts.length)}
+                    aria-label="Next ports"
+                    style={{
+                      position: 'absolute',
+                      right: '-20px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      zIndex: 10,
+                      background: 'white',
+                      border: '2px solid var(--border-default)',
+                      borderRadius: '50%',
+                      width: '48px',
+                      height: '48px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                      transition: 'all 0.2s',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = 'var(--primary)';
+                      e.currentTarget.style.borderColor = 'var(--primary)';
+                      e.currentTarget.style.color = 'white';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'white';
+                      e.currentTarget.style.borderColor = 'var(--border-default)';
+                      e.currentTarget.style.color = 'inherit';
+                    }}
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="24" height="24">
+                      <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                  </button>
+                )}
               </div>
             </div>
           </section>
