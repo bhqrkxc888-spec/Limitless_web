@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getAllRegions } from '../data/ports';
 import { siteConfig } from '../config/siteConfig';
