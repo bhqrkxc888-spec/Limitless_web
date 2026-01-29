@@ -38,7 +38,9 @@ const PEXELS_API_KEY = process.env.PEXELS_API_KEY;
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || 'https://xrbusklskmeaamwynfmm.supabase.co';
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-const BUCKET_NAME = 'WEB_port-guides';
+// Buckets: hero/card go to WEB_categories, gallery images go to WEB_port-guides
+const HERO_CARD_BUCKET = 'WEB_categories';
+const GALLERY_BUCKET = 'WEB_port-guides';
 const IMAGES_PER_SECTION = 3;
 const RATE_LIMIT_DELAY_MS = 2000; // 2 seconds between requests (safe for 200/hour)
 
@@ -128,9 +130,11 @@ async function downloadAndConvertImage(imageUrl, section = 'default') {
 // SUPABASE STORAGE
 // ============================================================================
 
-async function uploadToStorage(buffer, path) {
+async function uploadToStorage(buffer, path, section) {
+  // Hero/card go to WEB_categories, gallery images go to WEB_port-guides
+  const bucket = (section === 'hero' || section === 'card') ? HERO_CARD_BUCKET : GALLERY_BUCKET;
   const { data, error } = await supabase.storage
-    .from(BUCKET_NAME)
+    .from(bucket)
     .upload(path, buffer, {
       contentType: 'image/webp',
       upsert: false // Don't overwrite existing
@@ -147,16 +151,18 @@ async function uploadToStorage(buffer, path) {
   return data;
 }
 
-async function createImageMetadata(portSlug, section, pexelsPhoto, storagePath, searchQuery) {
+async function createImageMetadata(portSlug, section, photo, storagePath, searchQuery) {
+  // Hero/card use WEB_categories, gallery images use WEB_port-guides
+  const bucket = (section === 'hero' || section === 'card') ? HERO_CARD_BUCKET : GALLERY_BUCKET;
   const { data, error } = await supabase
     .from('site_images')
     .insert({
-      bucket: BUCKET_NAME,
+      bucket: bucket,
       path: storagePath,
       entity_type: 'port-guide',
       entity_id: portSlug,
       image_type: section,
-      alt_text: pexelsPhoto.alt || `${portSlug} ${section} image`,
+      alt_text: photo.alt || `${portSlug} ${section} image`,
       width: 600,
       height: 400,
       format: 'webp',
@@ -338,8 +344,9 @@ async function processSection(port, section, dryRun = false) {
   // For hero/card, check if file exists in storage directly
   if (isHeroOrCard) {
     const filePath = `${portSlug}/${section}.webp`;
+    // Hero/card check WEB_categories bucket
     const { data: existingFile } = await supabase.storage
-      .from(BUCKET_NAME)
+      .from(HERO_CARD_BUCKET)
       .list(portSlug, { search: `${section}.webp` });
     
     if (existingFile && existingFile.length > 0) {
@@ -423,7 +430,7 @@ async function processSection(port, section, dryRun = false) {
 
           // Upload to storage
           console.log(`    ⬆️  Uploading: ${storagePath}`);
-          const uploadResult = await uploadToStorage(webpBuffer, storagePath);
+          const uploadResult = await uploadToStorage(webpBuffer, storagePath, section);
 
           if (uploadResult) {
             // Create metadata entry
