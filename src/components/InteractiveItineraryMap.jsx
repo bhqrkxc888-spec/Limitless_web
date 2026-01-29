@@ -15,7 +15,8 @@
 import { useEffect, useRef, useMemo, useState, useCallback } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { apiConfig } from '../config/apiConfig';
-import { ports as portGuides } from '../data/ports';
+import { supabase } from '../lib/supabase';
+import { ports as staticPortGuides } from '../data/ports';
 import { getPortGuideSlug, getPortGuideUrl } from '../utils/portNameMapping';
 import { generateCruiseRoute } from '../utils/maritimeRouting';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -113,14 +114,14 @@ const isCruiseMapItem = (itemType) => {
   return category === 'cruise';
 };
 
-// Get port guide data for a port name
-const getPortGuideData = (portName) => {
+// Get port guide data for a port name (from dynamic port guides cache)
+const getPortGuideData = (portName, portGuidesCache) => {
   const slug = getPortGuideSlug(portName);
   if (!slug) return null;
   // Match by id first (preferred), then by slug, then partial match
-  return portGuides.find(p => p.id === slug) || 
-         portGuides.find(p => p.slug === slug) ||
-         portGuides.find(p => p.slug?.startsWith(slug) || p.id?.startsWith(slug)) ||
+  return portGuidesCache.find(p => p.id === slug) || 
+         portGuidesCache.find(p => p.slug === slug) ||
+         portGuidesCache.find(p => p.slug?.startsWith(slug) || p.id?.startsWith(slug)) ||
          null;
 };
 
@@ -139,6 +140,39 @@ function InteractiveItineraryMap({ itinerary }) {
   
   // New: Map/List view toggle
   const [itineraryViewMode, setItineraryViewMode] = useState('map'); // 'map' or 'list'
+  
+  // Port guides data - fetch from Supabase with static fallback
+  const [portGuidesCache, setPortGuidesCache] = useState(staticPortGuides);
+  
+  // Fetch port guides from Supabase on mount
+  useEffect(() => {
+    async function fetchPortGuides() {
+      try {
+        const { data, error } = await supabase
+          .from('ports')
+          .select('id, slug, name, tagline, description, coordinates, status')
+          .eq('status', 'published');
+        
+        if (!error && data && data.length > 0) {
+          // Transform to match static format
+          const transformed = data.map(p => ({
+            id: p.id,
+            slug: p.slug,
+            name: p.name,
+            tagline: p.tagline || '',
+            description: p.description || '',
+            coordinates: p.coordinates || {}
+          }));
+          setPortGuidesCache(transformed);
+        }
+      } catch (err) {
+        // Silently fall back to static data
+        console.warn('Using static port guides (Supabase unavailable)');
+      }
+    }
+    
+    fetchPortGuides();
+  }, [])
 
   // Filter and enrich itinerary data - handle round-trips properly
   const ports = useMemo(() => {
@@ -257,7 +291,7 @@ function InteractiveItineraryMap({ itinerary }) {
       if (popup.current && map.current) {
         const days = port.days || [port.day];
         const visits = port.visits || null;
-        const portGuide = getPortGuideData(port.name);
+        const portGuide = getPortGuideData(port.name, portGuidesCache);
         
         let popupHTML = `<div class="port-popup-content">`;
         
@@ -1038,7 +1072,7 @@ function InteractiveItineraryMap({ itinerary }) {
                 {loadingAttractions ? (
                   <div className="loading-spinner-wrap"><div className="loading-spinner"></div></div>
                 ) : (() => {
-                  const portGuide = getPortGuideData(selectedPort.name);
+                  const portGuide = getPortGuideData(selectedPort.name, portGuidesCache);
                   const portGuideUrl = getPortGuideUrl(selectedPort.name);
                   
                   if (portGuide) {
