@@ -225,69 +225,78 @@ function InteractiveItineraryMap({ itinerary }) {
     if (!map.current || index < 0 || index >= ports.length) return;
     
     const port = ports[index];
+    
+    // CRITICAL: Lock scroll IMMEDIATELY before any state changes or map operations
+    const scrollY = window.scrollY;
+    const lockScroll = () => window.scrollTo(0, scrollY);
+    window.addEventListener('scroll', lockScroll);
+    
+    // Remove any existing popup FIRST to prevent scroll-to-popup behavior
+    if (popup.current) {
+      popup.current.remove();
+    }
+    
+    // Update state
     setCurrentPortIndex(index);
     setSelectedPort(port);
     
-    // Fly to the port - slower, smoother animation with less zoom
-    // Disable scroll during animation to prevent page jumping
-    const scrollY = window.scrollY;
-    
+    // Fly to the port - the map will center on this location
     map.current.flyTo({
       center: [port.lon, port.lat],
       zoom: 7,
       duration: 2500,
-      essential: false // Don't force animation, prevents scroll issues
+      essential: false
     });
     
-    // Lock scroll position during animation
-    const lockScroll = () => window.scrollTo(0, scrollY);
-    window.addEventListener('scroll', lockScroll);
-    setTimeout(() => window.removeEventListener('scroll', lockScroll), 2600);
-    
-    // Show popup for this port
-    if (popup.current) {
-      const days = port.days || [port.day];
-      const visits = port.visits || null;
-      const portGuide = getPortGuideData(port.name);
-      
-      let popupHTML = `<div class="port-popup-content">`;
-      
-      if (days.length > 1) {
-        popupHTML += `<div class="port-popup-day">Days ${days.join(', ')}</div>`;
-      } else {
-        popupHTML += `<div class="port-popup-day">Day ${days[0]}</div>`;
+    // Show popup ONLY AFTER map has finished moving (prevents scroll-to-popup)
+    map.current.once('moveend', () => {
+      if (popup.current && map.current) {
+        const days = port.days || [port.day];
+        const visits = port.visits || null;
+        const portGuide = getPortGuideData(port.name);
+        
+        let popupHTML = `<div class="port-popup-content">`;
+        
+        if (days.length > 1) {
+          popupHTML += `<div class="port-popup-day">Days ${days.join(', ')}</div>`;
+        } else {
+          popupHTML += `<div class="port-popup-day">Day ${days[0]}</div>`;
+        }
+        
+        popupHTML += `<div class="port-popup-name">${port.name}</div>`;
+        
+        if (port.type === 'round-trip' && visits) {
+          popupHTML += '<div class="port-popup-badge round-trip">Round-Trip Port</div>';
+          popupHTML += '<div class="port-popup-description">';
+          visits.forEach(visit => {
+            const typeLabel = visit.type === 'embark' ? 'Embarkation' : 
+                             visit.type === 'disembark' ? 'Disembarkation' : 'Port of call';
+            popupHTML += `<div>• Day ${visit.day}: ${typeLabel}</div>`;
+          });
+          popupHTML += '</div>';
+        } else if (portGuide?.tagline) {
+          popupHTML += `<div class="port-popup-description">${portGuide.tagline}</div>`;
+        } else if (port.description) {
+          popupHTML += `<div class="port-popup-description">${port.description}</div>`;
+        }
+        
+        // Add port guide link if available
+        const portGuideUrl = getPortGuideUrl(port.name);
+        if (portGuideUrl) {
+          popupHTML += `<a href="${portGuideUrl}" class="port-popup-link" target="_blank">View Port Guide →</a>`;
+        }
+        
+        popupHTML += `</div>`;
+        
+        popup.current
+          .setLngLat([port.lon, port.lat])
+          .setHTML(popupHTML)
+          .addTo(map.current);
       }
       
-      popupHTML += `<div class="port-popup-name">${port.name}</div>`;
-      
-      if (port.type === 'round-trip' && visits) {
-        popupHTML += '<div class="port-popup-badge round-trip">Round-Trip Port</div>';
-        popupHTML += '<div class="port-popup-description">';
-        visits.forEach(visit => {
-          const typeLabel = visit.type === 'embark' ? 'Embarkation' : 
-                           visit.type === 'disembark' ? 'Disembarkation' : 'Port of call';
-          popupHTML += `<div>• Day ${visit.day}: ${typeLabel}</div>`;
-        });
-        popupHTML += '</div>';
-      } else if (portGuide?.tagline) {
-        popupHTML += `<div class="port-popup-description">${portGuide.tagline}</div>`;
-      } else if (port.description) {
-        popupHTML += `<div class="port-popup-description">${port.description}</div>`;
-      }
-      
-      // Add port guide link if available
-      const portGuideUrl = getPortGuideUrl(port.name);
-      if (portGuideUrl) {
-        popupHTML += `<a href="${portGuideUrl}" class="port-popup-link" target="_blank">View Port Guide →</a>`;
-      }
-      
-      popupHTML += `</div>`;
-      
-      popup.current
-        .setLngLat([port.lon, port.lat])
-        .setHTML(popupHTML)
-        .addTo(map.current);
-    }
+      // Release scroll lock after popup is shown
+      setTimeout(() => window.removeEventListener('scroll', lockScroll), 100);
+    });
     
     // Switch to port details view with fade transition
     setViewTransition(true);
@@ -353,13 +362,19 @@ function InteractiveItineraryMap({ itinerary }) {
     }, 200);
   };
 
-  // Navigation handlers - Circular navigation
-  // Uses scroll lock to prevent any scroll during map animations
+  // Navigation handlers - Circular navigation through PORTS ONLY (skips sea days)
+  // The ports array already excludes sea days, so navigation naturally skips them
+  // Added scroll lock to prevent page jumping during navigation
   const goToPrevPort = (e) => {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
     }
+    
+    // Lock scroll position before any state changes
+    const scrollY = window.scrollY;
+    const lockScroll = () => window.scrollTo(0, scrollY);
+    window.addEventListener('scroll', lockScroll);
     
     if (currentPortIndex === null) {
       navigateToPort(ports.length - 1);
@@ -368,6 +383,9 @@ function InteractiveItineraryMap({ itinerary }) {
     } else {
       navigateToPort(ports.length - 1);
     }
+    
+    // Remove scroll lock after navigation completes
+    setTimeout(() => window.removeEventListener('scroll', lockScroll), 3000);
     
     return false;
   };
@@ -378,6 +396,11 @@ function InteractiveItineraryMap({ itinerary }) {
       e.stopPropagation();
     }
     
+    // Lock scroll position before any state changes
+    const scrollY = window.scrollY;
+    const lockScroll = () => window.scrollTo(0, scrollY);
+    window.addEventListener('scroll', lockScroll);
+    
     if (currentPortIndex === null) {
       navigateToPort(0);
     } else if (currentPortIndex < ports.length - 1) {
@@ -385,6 +408,9 @@ function InteractiveItineraryMap({ itinerary }) {
     } else {
       navigateToPort(0);
     }
+    
+    // Remove scroll lock after navigation completes
+    setTimeout(() => window.removeEventListener('scroll', lockScroll), 3000);
     
     return false;
   };
@@ -958,13 +984,28 @@ function InteractiveItineraryMap({ itinerary }) {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
+                        // Lock scroll position when clicking ANY item
+                        const scrollY = window.scrollY;
+                        requestAnimationFrame(() => window.scrollTo(0, scrollY));
                         if (isClickable) {
                           navigateToPort(portIndex);
                         }
                       }}
-                      onMouseDown={(e) => e.preventDefault()} // Prevent focus-induced scroll
+                      onMouseDown={(e) => {
+                        e.preventDefault();
+                        // Blur any focused element to prevent scroll
+                        if (document.activeElement) {
+                          document.activeElement.blur();
+                        }
+                      }}
+                      onFocus={(e) => {
+                        // Prevent focus-induced scroll by immediately restoring scroll position
+                        if (!isClickable) {
+                          e.target.blur();
+                        }
+                      }}
                       role={isClickable ? 'button' : undefined}
-                      tabIndex={isClickable ? 0 : -1}
+                      tabIndex={isClickable ? 0 : undefined}
                     >
                       <div className="day-label">
                         <span className="day-num">Day {day.day}</span>
