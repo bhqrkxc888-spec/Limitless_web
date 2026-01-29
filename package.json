@@ -16,6 +16,7 @@
     "sync:ship-links": "node scripts/sync-ship-links.js",
     "fix:ship-entityids": "node scripts/fix-ship-image-entityids.js",
     "debug:ship-images": "node scripts/debug-ship-images.js",
+    "fetch:pexels": "node scripts/fetch-pexels-images.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -33,6 +34,7 @@
     "react-dropzone": "^14.3.8",
     "react-router-dom": "^7.10.1",
     "sharp": "^0.34.5",
+    "node-fetch": "^3.3.2",
     "web-vitals": "^5.1.0"
   },
   "devDependencies": {

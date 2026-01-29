@@ -1,0 +1,71 @@
+/**
+ * Pexels Attribution Styles
+ * Minimal, unobtrusive attribution footer
+ */
+
+.pexels-attribution {
+  padding: 8px 0;
+  margin-top: 12px;
+  font-size: 0.75rem;
+  color: #666;
+  text-align: center;
+  border-top: 1px solid #eee;
+}
+
+.pexels-attribution.compact {
+  padding: 4px 0;
+  margin-top: 8px;
+  font-size: 0.7rem;
+  border-top: none;
+}
+
+.pexels-attribution .attribution-text {
+  display: inline;
+}
+
+.pexels-attribution .photographer-link,
+.pexels-attribution .pexels-link {
+  color: #0078d4;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.pexels-attribution .photographer-link:hover,
+.pexels-attribution .pexels-link:hover {
+  color: #005a9e;
+  text-decoration: underline;
+}
+
+.pexels-attribution .photographer-name {
+  font-weight: 500;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .pexels-attribution {
+    color: #999;
+    border-top-color: #333;
+  }
+
+  .pexels-attribution .photographer-link,
+  .pexels-attribution .pexels-link {
+    color: #5ba8f5;
+  }
+
+  .pexels-attribution .photographer-link:hover,
+  .pexels-attribution .pexels-link:hover {
+    color: #7ec0ff;
+  }
+}
+
+/* Within card/section context */
+.port-section .pexels-attribution {
+  margin-top: 16px;
+  padding-top: 12px;
+}
+
+/* Within carousel context */
+.port-image-carousel + .pexels-attribution {
+  margin-top: 8px;
+  border-top: none;
+}

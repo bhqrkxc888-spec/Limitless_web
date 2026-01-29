@@ -6,9 +6,14 @@
  * const { images, loading, hasImages } = usePortGuideFolderImages('barcelona', 'stay-local');
  * 
  * Returns:
- * - images: Array of {url, alt, title, id, path}
+ * - images: Array of {url, alt, title, id, path, imageType, source, photographerName, photographerUrl}
  * - loading: Boolean indicating if query is in progress
  * - hasImages: Boolean indicating if folder has any images
+ * 
+ * Attribution: For Pexels images, use PexelsAttribution component:
+ * import PexelsAttribution from '../components/port/PexelsAttribution';
+ * <ImageCarousel images={images} />
+ * <PexelsAttribution images={images} />
  */
 
 import { useState, useEffect } from 'react';
@@ -39,10 +44,10 @@ export function usePortGuideFolderImages(portSlug, folder) {
 
     const fetchImages = async () => {
       try {
-        // Query site_images table for all images in this folder
+        // Query site_images table for all images in this folder (including attribution)
         const { data, error } = await supabase
           .from('site_images')
-          .select('id, path, image_type, alt_text, title, bucket')
+          .select('id, path, image_type, alt_text, title, bucket, source, photographer_name, photographer_url')
           .eq('entity_type', 'port-guide')
           .eq('entity_id', portSlug)
           .eq('bucket', 'WEB_port-guides')
@@ -66,17 +71,27 @@ export function usePortGuideFolderImages(portSlug, folder) {
           );
 
           if (realImages.length > 0) {
-            // Transform data into image objects with full URLs
+            // Transform data into image objects with full URLs and attribution
             const imageObjects = realImages.map(img => ({
               id: img.id,
               url: `${SUPABASE_URL}/storage/v1/object/public/${img.bucket}/${img.path}`,
               alt: img.alt_text || `${portSlug} ${folder} image`,
               title: img.title || null,
               path: img.path,
-              imageType: img.image_type
+              imageType: img.image_type,
+              source: img.source || 'manual',
+              photographerName: img.photographer_name || null,
+              photographerUrl: img.photographer_url || null
             }));
 
-            setImages(imageObjects);
+            // PRIORITY: Manual images always shown first, then Pexels images
+            const sortedImages = imageObjects.sort((a, b) => {
+              if (a.source === 'manual' && b.source !== 'manual') return -1;
+              if (a.source !== 'manual' && b.source === 'manual') return 1;
+              return 0; // Keep original order within same source type
+            });
+
+            setImages(sortedImages);
             setHasImages(true);
           } else {
             setImages([]);
