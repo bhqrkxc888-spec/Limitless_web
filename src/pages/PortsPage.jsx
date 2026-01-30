@@ -402,6 +402,18 @@ function PortsPage() {
           </div>
         </div>
       </section>
+
+      {/* Disclaimer Footer */}
+      <section className="port-guides-disclaimer">
+        <div className="container">
+          <p>
+            <strong>About Our Port Guides:</strong> Our guides are compiled from publicly available information and personal cruising experience to help you plan your port days. While we strive for accuracy, details such as opening times, prices, and transport options may change. We recommend verifying essential information before your visit.
+          </p>
+          <p>
+            <strong>Always Ad-Free:</strong> Our port guides are created to genuinely help cruisers, not to sell advertising. We do not accept payment for recommendations or placements.
+          </p>
+        </div>
+      </section>
     </main>
   );
 }

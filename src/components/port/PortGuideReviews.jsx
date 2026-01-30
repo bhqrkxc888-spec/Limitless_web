@@ -117,14 +117,9 @@ function PortGuideReviews({ portSlug }) {
     );
   }
 
+  // Hide entire section if no reviews - the feedback form already prompts users to rate
   if (!stats || stats.total_reviews === 0) {
-    return (
-      <div className="port-guide-reviews">
-        <div className="no-reviews">
-          <p>No reviews yet. Be the first to rate this port guide!</p>
-        </div>
-      </div>
-    );
+    return null;
   }
 
   return (

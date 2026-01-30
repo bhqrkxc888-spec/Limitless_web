@@ -256,3 +256,30 @@
     align-items: center;
   }
 }
+
+/* Port Guides Disclaimer Footer */
+.port-guides-disclaimer {
+  background: var(--clr-bg-alt, #F8F5F0);
+  padding: var(--space-6, 1.5rem) 0;
+  border-top: 1px solid var(--clr-border, #E8E4DC);
+}
+
+.port-guides-disclaimer p {
+  font-size: 0.8125rem;
+  color: var(--clr-text-muted, #5C6478);
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.port-guides-disclaimer p:last-child {
+  margin-bottom: 0;
+}
+
+.port-guides-disclaimer strong {
+  color: var(--clr-text-main, #2C344C);
+  font-weight: 600;
+}

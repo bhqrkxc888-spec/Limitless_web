@@ -195,7 +195,18 @@ function PortRegionPage() {
               >
                 ← All Ports
               </Link>
-              {getAllRegions().map((r) => {
+              {getAllRegions()
+                .filter((r) => {
+                  // Only filter once we have counts loaded
+                  if (Object.keys(allRegionCounts).length === 0) {
+                    // While loading, only show current region
+                    return r.id === region?.id;
+                  }
+                  const portCount = allRegionCounts[r.id] || 0;
+                  // Show if has ports OR is the current active region
+                  return portCount > 0 || r.id === region?.id;
+                })
+                .map((r) => {
                 const portCount = allRegionCounts[r.id] || 0;
                 const isActive = r.id === region?.id;
                 return (
