@@ -65,19 +65,19 @@ function ImageCarousel({
     return images.slice(startIndex, startIndex + columns);
   };
 
-  // Navigation handlers
+  // Navigation handlers - smooth transitions with 600ms duration
   const goToNext = useCallback(() => {
     if (isTransitioning) return;
     setIsTransitioning(true);
     setCurrentPage((prev) => (prev >= totalPages - 1 ? 0 : prev + 1));
-    setTimeout(() => setIsTransitioning(false), 500);
+    setTimeout(() => setIsTransitioning(false), 600);
   }, [isTransitioning, totalPages]);
 
   const goToPrev = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
     setCurrentPage((prev) => (prev <= 0 ? totalPages - 1 : prev - 1));
-    setTimeout(() => setIsTransitioning(false), 500);
+    setTimeout(() => setIsTransitioning(false), 600);
   };
 
   // Auto-scroll functionality
@@ -205,6 +205,13 @@ function ImageCarousel({
               title={image.title || image.alt}
               loading="lazy"
               className="carousel-image"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/logo.webp';
+                e.target.style.objectFit = 'contain';
+                e.target.style.padding = '2rem';
+                e.target.style.background = '#f8f5f0';
+              }}
             />
             {image.title && (
               <div className="image-caption">{image.title}</div>

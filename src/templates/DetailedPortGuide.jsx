@@ -90,6 +90,13 @@ function ImageLightbox({ src, alt, onClose }) {
             objectFit: 'contain',
             borderRadius: '4px'
           }}
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = 'https://xrbusklskmeaamwynfmm.supabase.co/storage/v1/object/public/WEB_site/logo.webp';
+            e.target.style.objectFit = 'contain';
+            e.target.style.padding = '2rem';
+            e.target.style.background = '#f8f5f0';
+          }}
         />
         
         <div 
