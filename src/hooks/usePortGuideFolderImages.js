@@ -2,6 +2,10 @@
  * React Hook for fetching folder-based port guide images
  * Loads all images from a specific folder (e.g., stay-local, go-further)
  * 
+ * IMPORTANT: This hook queries Supabase Storage DIRECTLY to get images.
+ * It does NOT rely on the site_images table which requires manual sync.
+ * This ensures images appear immediately after upload via Media Library.
+ * 
  * Usage:
  * const { images, loading, hasImages } = usePortGuideFolderImages('barcelona', 'stay-local');
  * 
@@ -20,9 +24,22 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 
 const SUPABASE_URL = 'https://xrbusklskmeaamwynfmm.supabase.co';
+const BUCKET = 'WEB_port-guides';
+
+/**
+ * Generate alt text from filename
+ */
+function generateAltFromFilename(filename, portSlug, folder) {
+  if (!filename) return `${portSlug} ${folder} image`;
+  // Remove extension and convert to readable text
+  const name = filename.replace(/\.[^/.]+$/, '').replace(/[-_]/g, ' ');
+  // Capitalize first letter of each word
+  return name.replace(/\b\w/g, l => l.toUpperCase()) || `${portSlug} ${folder} image`;
+}
 
 /**
  * Hook to get all images for a specific port guide folder
+ * Queries Supabase Storage directly for immediate availability after upload
  * @param {string} portSlug - Port slug (e.g., 'barcelona', 'lisbon')
  * @param {string} folder - Folder name (e.g., 'stay-local', 'go-further', 'with-kids', 'overview')
  * @returns {object} { images, loading, hasImages }
@@ -44,59 +61,68 @@ export function usePortGuideFolderImages(portSlug, folder) {
 
     const fetchImages = async () => {
       try {
-        // Query site_images table for all images in this folder (including attribution)
-        const { data, error } = await supabase
-          .from('site_images')
-          .select('id, path, image_type, alt_text, title, bucket, source, photographer_name, photographer_url')
-          .eq('entity_type', 'port-guide')
-          .eq('entity_id', portSlug)
-          .eq('bucket', 'WEB_port-guides')
-          .like('image_type', `${folder}%`)
-          .order('path');
-
-        if (cancelled) return;
-
-        if (error) {
-          console.error('Error fetching port guide folder images:', error);
+        // Check if supabase is configured
+        if (!supabase) {
+          console.warn('Supabase not configured - cannot load port guide images');
           setImages([]);
           setHasImages(false);
           setLoading(false);
           return;
         }
 
-        if (data && data.length > 0) {
-          // Filter out placeholder files (they contain 'placeholder' in path)
-          const realImages = data.filter(img => 
-            img.path && !img.path.includes('placeholder') && !img.path.includes('.placeholder')
-          );
+        // Query Supabase Storage directly - this ensures images appear immediately after upload
+        const folderPath = `${portSlug}/${folder}`;
+        console.log(`[PortGuideImages] Fetching from ${BUCKET}/${folderPath}`);
+        
+        const { data: storageFiles, error: storageError } = await supabase.storage
+          .from(BUCKET)
+          .list(folderPath, { limit: 100, sortBy: { column: 'name', order: 'asc' } });
 
-          if (realImages.length > 0) {
-            // Transform data into image objects with full URLs and attribution
-            const imageObjects = realImages.map(img => ({
-              id: img.id,
-              url: `${SUPABASE_URL}/storage/v1/object/public/${img.bucket}/${img.path}`,
-              alt: img.alt_text || `${portSlug} ${folder} image`,
-              title: img.title || null,
-              path: img.path,
-              imageType: img.image_type,
-              source: img.source || 'manual',
-              photographerName: img.photographer_name || null,
-              photographerUrl: img.photographer_url || null
-            }));
+        if (cancelled) return;
 
-            // PRIORITY: Manual images always shown first, then Pexels images
-            const sortedImages = imageObjects.sort((a, b) => {
-              if (a.source === 'manual' && b.source !== 'manual') return -1;
-              if (a.source !== 'manual' && b.source === 'manual') return 1;
-              return 0; // Keep original order within same source type
-            });
+        if (storageError) {
+          console.error(`[PortGuideImages] Error listing ${folderPath}:`, storageError);
+          setImages([]);
+          setHasImages(false);
+          setLoading(false);
+          return;
+        }
+        
+        console.log(`[PortGuideImages] Found ${storageFiles?.length || 0} items in ${folderPath}`);
+        if (storageFiles?.length > 0) {
+          console.log(`[PortGuideImages] Items:`, storageFiles.map(f => f.name));
+        }
 
-            setImages(sortedImages);
-            setHasImages(true);
-          } else {
-            setImages([]);
-            setHasImages(false);
-          }
+        // Filter out placeholder files and folders
+        const imageFiles = (storageFiles || []).filter(file => 
+          file.id !== null && // Not a folder
+          file.name && 
+          !file.name.startsWith('.') && 
+          !file.name.includes('placeholder') &&
+          /\.(jpg|jpeg|png|webp|gif)$/i.test(file.name)
+        );
+
+        console.log(`[PortGuideImages] Filtered to ${imageFiles.length} valid images`);
+
+        if (imageFiles.length > 0) {
+          // Build image objects with public URLs
+          const imageObjects = imageFiles.map((file, index) => {
+            const fullPath = `${folderPath}/${file.name}`;
+            return {
+              id: file.id || `${portSlug}-${folder}-${index}`,
+              url: `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${fullPath}`,
+              alt: generateAltFromFilename(file.name, portSlug, folder),
+              title: generateAltFromFilename(file.name, portSlug, folder),
+              path: fullPath,
+              imageType: `${folder}/${file.name}`,
+              source: 'manual',
+              photographerName: null,
+              photographerUrl: null
+            };
+          });
+
+          setImages(imageObjects);
+          setHasImages(true);
         } else {
           setImages([]);
           setHasImages(false);
@@ -124,7 +150,7 @@ export function usePortGuideFolderImages(portSlug, folder) {
 
 /**
  * Hook to check if a port guide folder has any images
- * Lighter weight than usePortGuideFolderImages - only returns boolean
+ * Queries Supabase Storage directly for immediate availability
  * @param {string} portSlug - Port slug
  * @param {string} folder - Folder name
  * @returns {object} { hasImages, loading }
@@ -144,38 +170,38 @@ export function usePortGuideFolderHasImages(portSlug, folder) {
 
     const checkImages = async () => {
       try {
-        // Use RPC function for efficient check
-        const { data, error } = await supabase
-          .rpc('port_guide_folder_has_images', {
-            p_port_slug: portSlug,
-            p_folder: folder
-          });
+        // Check if supabase is configured
+        if (!supabase) {
+          setHasImages(false);
+          setLoading(false);
+          return;
+        }
+
+        // Query storage directly for immediate availability
+        const folderPath = `${portSlug}/${folder}`;
+        const { data: storageFiles, error } = await supabase.storage
+          .from(BUCKET)
+          .list(folderPath, { limit: 10 });
 
         if (cancelled) return;
 
         if (error) {
-          // Fallback to direct query if RPC not available
-          const { data: imageData, error: countError } = await supabase
-            .from('site_images')
-            .select('path')
-            .eq('entity_type', 'port-guide')
-            .eq('entity_id', portSlug)
-            .eq('bucket', 'WEB_port-guides')
-            .like('image_type', `${folder}%`);
-
-          if (!countError && imageData) {
-            // Filter out placeholders
-            const realImages = imageData.filter(img => 
-              img.path && !img.path.includes('placeholder') && !img.path.includes('.placeholder')
-            );
-            setHasImages(realImages.length > 0);
-          } else {
-            setHasImages(false);
-          }
-        } else {
-          setHasImages(data === true);
+          console.error('Error checking storage folder:', error);
+          setHasImages(false);
+          setLoading(false);
+          return;
         }
 
+        // Filter out placeholder files and folders
+        const imageFiles = (storageFiles || []).filter(file => 
+          file.id !== null && // Not a folder
+          file.name && 
+          !file.name.startsWith('.') && 
+          !file.name.includes('placeholder') &&
+          /\.(jpg|jpeg|png|webp|gif)$/i.test(file.name)
+        );
+
+        setHasImages(imageFiles.length > 0);
         setLoading(false);
       } catch (err) {
         if (cancelled) return;
