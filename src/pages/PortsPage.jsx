@@ -3,10 +3,13 @@ import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import { Button, Card } from '../components/ui';
 import { Link } from 'react-router-dom';
-import { supabase, getPublicUrl } from '../lib/supabase';
+import { supabase } from '../lib/supabase';
 import { Loader2 } from 'lucide-react';
 import '../styles/page-header.css';
 import './PortsPage.css';
+
+const SUPABASE_URL = 'https://xrbusklskmeaamwynfmm.supabase.co';
+const BUCKET = 'WEB_port-guides';
 
 /**
  * Port Card with pre-fetched image URL (no individual hook call)
@@ -94,26 +97,30 @@ function PortsPage() {
         if (!error && data) {
           setPorts(data);
           
-          // Batch fetch all port card images in a single query (avoids N+1)
+          // Fetch card images directly from storage for each port
           const slugs = data.map(p => p.slug);
           if (slugs.length > 0) {
-            const { data: cardImages, error: imgError } = await supabase
-              .from('site_images')
-              .select('entity_id, bucket, path')
-              .eq('entity_type', 'port-guide')
-              .eq('image_type', 'card')
-              .in('entity_id', slugs);
-            
-            if (!imgError && cardImages) {
-              // Create a map for O(1) lookup: slug -> imageUrl
-              const imageMap = cardImages.reduce((acc, img) => {
-                if (img.bucket && img.path) {
-                  acc[img.entity_id] = getPublicUrl(img.bucket, img.path);
+            const imageMap = {};
+            // Check storage directly for card.webp in each port folder
+            await Promise.all(slugs.map(async (slug) => {
+              try {
+                const { data: files } = await supabase.storage
+                  .from(BUCKET)
+                  .list(slug, { limit: 20 });
+                
+                if (files) {
+                  const cardFile = files.find(f => 
+                    f.name && (f.name.toLowerCase() === 'card.webp' || f.name.toLowerCase() === 'card.jpg' || f.name.toLowerCase() === 'card.png')
+                  );
+                  if (cardFile) {
+                    imageMap[slug] = `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${slug}/${cardFile.name}`;
+                  }
                 }
-                return acc;
-              }, {});
-              setPortImages(imageMap);
-            }
+              } catch (err) {
+                console.error(`Error fetching card image for ${slug}:`, err);
+              }
+            }));
+            setPortImages(imageMap);
           }
         } else {
           console.error('Error fetching ports:', error);

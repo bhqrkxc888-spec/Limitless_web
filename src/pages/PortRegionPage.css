@@ -68,6 +68,37 @@
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* View All Grid - shows ALL ports, no carousel */
+.ports-grid-all {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* Ensure no horizontal overflow */
+.port-region-page .container {
+  overflow-x: hidden;
+}
+
+@media (min-width: 768px) {
+  .ports-grid-all {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ports-grid-all {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .ports-grid-all {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 .port-card .port-card-header {
   display: flex;
   flex-direction: column;

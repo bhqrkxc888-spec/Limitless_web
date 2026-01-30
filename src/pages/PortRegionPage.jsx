@@ -4,11 +4,14 @@ import { getAllRegions } from '../data/ports';
 import { siteConfig } from '../config/siteConfig';
 import SEO from '../components/SEO';
 import { Button, Card, SectionHeader } from '../components/ui';
-import { supabase, getPublicUrl } from '../lib/supabase';
+import { supabase } from '../lib/supabase';
 import { Loader2 } from 'lucide-react';
 import '../styles/page-header.css';
 import './PortRegionPage.css';
 import './PortsPage.css'; // Import for region filter styles
+
+const SUPABASE_URL = 'https://xrbusklskmeaamwynfmm.supabase.co';
+const BUCKET = 'WEB_port-guides';
 
 /**
  * Port Card with pre-fetched image URL (no individual hook call)
@@ -51,8 +54,6 @@ function PortRegionPage() {
   const [ports, setPorts] = useState([]);
   const [portImages, setPortImages] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [itemsToShow, setItemsToShow] = useState(3);
   const [allRegionCounts, setAllRegionCounts] = useState({});
   
   // Fetch published ports for this region from Supabase
@@ -72,25 +73,30 @@ function PortRegionPage() {
         if (!error && data) {
           setPorts(data);
           
-          // Batch fetch all port card images
+          // Fetch card images directly from storage for each port
           const slugs = data.map(p => p.slug);
           if (slugs.length > 0) {
-            const { data: cardImages, error: imgError } = await supabase
-              .from('site_images')
-              .select('entity_id, bucket, path')
-              .eq('entity_type', 'port-guide')
-              .eq('image_type', 'card')
-              .in('entity_id', slugs);
-            
-            if (!imgError && cardImages) {
-              const imageMap = cardImages.reduce((acc, img) => {
-                if (img.bucket && img.path) {
-                  acc[img.entity_id] = getPublicUrl(img.bucket, img.path);
+            const imageMap = {};
+            // Check storage directly for card.webp in each port folder
+            await Promise.all(slugs.map(async (slug) => {
+              try {
+                const { data: files } = await supabase.storage
+                  .from(BUCKET)
+                  .list(slug, { limit: 20 });
+                
+                if (files) {
+                  const cardFile = files.find(f => 
+                    f.name && (f.name.toLowerCase() === 'card.webp' || f.name.toLowerCase() === 'card.jpg' || f.name.toLowerCase() === 'card.png')
+                  );
+                  if (cardFile) {
+                    imageMap[slug] = `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/${slug}/${cardFile.name}`;
+                  }
                 }
-                return acc;
-              }, {});
-              setPortImages(imageMap);
-            }
+              } catch (err) {
+                console.error(`Error fetching card image for ${slug}:`, err);
+              }
+            }));
+            setPortImages(imageMap);
           }
         }
       } catch (err) {
@@ -126,35 +132,6 @@ function PortRegionPage() {
     
     fetchRegionCounts();
   }, []);
-  
-  // Responsive items to show
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setItemsToShow(1);
-      } else if (window.innerWidth < 1024) {
-        setItemsToShow(2);
-      } else {
-        setItemsToShow(3);
-      }
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-  
-  const maxIndex = Math.max(0, ports.length - itemsToShow);
-
-  const goToNext = () => {
-    setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-  };
-
-  const goToPrev = () => {
-    setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
-  };
-  
-  const visiblePorts = ports.slice(currentIndex, currentIndex + itemsToShow);
   
   // Handle region not found
   if (!region) {
@@ -256,96 +233,14 @@ function PortRegionPage() {
             />
 
             {ports.length > 0 ? (
-              <div style={{ position: 'relative' }}>
-                {/* Previous Arrow */}
-                {ports.length > itemsToShow && (
-                  <button
-                    onClick={goToPrev}
-                    aria-label="Previous ports"
-                    style={{
-                      position: 'absolute',
-                      left: '-20px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      zIndex: 10,
-                      background: 'white',
-                      border: '2px solid var(--border-default)',
-                      borderRadius: '50%',
-                      width: '48px',
-                      height: '48px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                      transition: 'all 0.2s',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'var(--primary)';
-                      e.currentTarget.style.borderColor = 'var(--primary)';
-                      e.currentTarget.style.color = 'white';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'white';
-                      e.currentTarget.style.borderColor = 'var(--border-default)';
-                      e.currentTarget.style.color = 'inherit';
-                    }}
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="24" height="24">
-                      <path d="M15 18l-6-6 6-6"/>
-                    </svg>
-                  </button>
-                )}
-
-                <div className="ports-grid">
-                  {visiblePorts.map((port) => (
-                    <PortCardWithImage 
-                      key={port.id} 
-                      port={port} 
-                      imageUrl={portImages[port.slug] || null}
-                    />
-                  ))}
-                </div>
-
-                {/* Next Arrow */}
-                {ports.length > itemsToShow && (
-                  <button
-                    onClick={goToNext}
-                    aria-label="Next ports"
-                    style={{
-                      position: 'absolute',
-                      right: '-20px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      zIndex: 10,
-                      background: 'white',
-                      border: '2px solid var(--border-default)',
-                      borderRadius: '50%',
-                      width: '48px',
-                      height: '48px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      cursor: 'pointer',
-                      boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                      transition: 'all 0.2s',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'var(--primary)';
-                      e.currentTarget.style.borderColor = 'var(--primary)';
-                      e.currentTarget.style.color = 'white';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'white';
-                      e.currentTarget.style.borderColor = 'var(--border-default)';
-                      e.currentTarget.style.color = 'inherit';
-                    }}
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width="24" height="24">
-                      <path d="M9 18l6-6-6-6"/>
-                    </svg>
-                  </button>
-                )}
+              <div className="ports-grid ports-grid-all">
+                {ports.map((port) => (
+                  <PortCardWithImage 
+                    key={port.id} 
+                    port={port} 
+                    imageUrl={portImages[port.slug] || null}
+                  />
+                ))}
               </div>
             ) : (
               <div className="no-ports">

@@ -58,9 +58,9 @@ export function getPageHeroImageUrl(slug) {
 }
 
 // Helper to construct port guide image URLs
-// Upload path: WEB_categories/{slug}/{type}.webp
+// Upload path: WEB_port-guides/{slug}/{type}.webp
 export function getPortGuideImageUrl(slug, type = 'hero') {
-  return getSupabaseImageUrl('WEB_categories', `${slug}/${type}.webp`);
+  return getSupabaseImageUrl('WEB_port-guides', `${slug}/${type}.webp`);
 }
 
 // ============================================================================
