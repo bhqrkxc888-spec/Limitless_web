@@ -46,6 +46,7 @@ const REGIONS = [
   { id: 'mediterranean', slug: 'mediterranean', name: 'Mediterranean' },
   { id: 'atlantic-coast', slug: 'atlantic-coast', name: 'Atlantic Coast' },
   { id: 'atlantic-islands', slug: 'atlantic-islands', name: 'Atlantic Islands' },
+  { id: 'north-africa', slug: 'north-africa', name: 'North Africa' },
   { id: 'norwegian-fjords', slug: 'norwegian-fjords', name: 'Norwegian Fjords' },
   { id: 'uk', slug: 'united-kingdom', name: 'United Kingdom' },
 ];

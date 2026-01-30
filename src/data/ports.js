@@ -32,6 +32,13 @@ export const portRegions = [
     image: null,
   },
   {
+    id: 'north-africa',
+    slug: 'north-africa',
+    name: 'North Africa',
+    description: 'Moroccan and North African cruise ports along the Mediterranean and Atlantic coasts',
+    image: null,
+  },
+  {
     id: 'norwegian-fjords',
     slug: 'norwegian-fjords',
     name: 'Norwegian Fjords',
