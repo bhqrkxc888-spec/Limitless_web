@@ -10,7 +10,7 @@ import { useState, useRef, useEffect, Fragment } from 'react';
 import { usePortGuideFolderImages } from '../hooks/usePortGuideFolderImages';
 import ImageCarousel from '../components/port/ImageCarousel';
 import DynamicSubsection from '../components/port/DynamicSubsection';
-import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye, Star, AlertCircle, Thermometer, Waves, ChefHat, Wind, Anchor, Cross } from 'lucide-react';
+import { MapPin, Clock, Info, Users, Utensils, Accessibility, Map, Eye, Star, AlertCircle, Thermometer, Waves, ChefHat, Wind, Anchor, Cross, Moon } from 'lucide-react';
 import { formatBoldText, formatParagraphsWithBold } from '../utils/textFormatting.jsx';
 import './DetailedPortGuide.css';
 
@@ -176,6 +176,7 @@ const PORT_SECTIONS = [
   { key: 'send', label: 'Accessibility', icon: Accessibility },
   { key: 'medical', label: 'Medical', icon: Cross },
   { key: 'foodAndDrink', label: 'Food & Drink', icon: Utensils },
+  { key: 'overnight', label: 'Overnight', icon: Moon },
 ];
 
 export function DetailedPortGuide({ slug, portName, detailedContent, port }) {
@@ -203,7 +204,7 @@ export function DetailedPortGuide({ slug, portName, detailedContent, port }) {
   const { images: withKidsImages, hasImages: hasWithKidsImages } = usePortGuideFolderImages(slug, 'with-kids');
 
   // Extract data from detailedContent (may be null)
-  const { overview, stayLocal, goFurther, withKids, send, medical, foodAndDrink } = detailedContent || {};
+  const { overview, stayLocal, goFurther, withKids, send, medical, foodAndDrink, overnight } = detailedContent || {};
   
   // Get familyFriendly data from port (ports.js)
   const familyFriendly = port?.familyFriendly;
@@ -218,16 +219,18 @@ export function DetailedPortGuide({ slug, portName, detailedContent, port }) {
   // Check which sections have content - match field names from portContent.js
   const hasContent = {
     overview: !!overview,
-    stayLocal: !!stayLocal && (stayLocal.quickWalk?.length > 0 || stayLocal.longerWalk?.length > 0 || stayLocal.beach || stayLocal.tip),
-    goFurther: !!goFurther && goFurther.attractions?.length > 0,
+    stayLocal: !!stayLocal && (stayLocal.quickWalk?.length > 0 || stayLocal.longerWalk?.length > 0 || stayLocal.beach || stayLocal.tip || stayLocal.sampleItinerary),
+    goFurther: !!goFurther && (goFurther.attractions?.length > 0 || goFurther.halfDayItinerary || goFurther.fullDayItinerary),
     // withKids now checks BOTH portContent.withKids AND port.familyFriendly
-    withKids: (!!withKids && (withKids.toddlers?.length > 0 || withKids.olderKids?.length > 0 || withKids.easyDay)) || !!familyFriendly,
+    withKids: (!!withKids && (withKids.toddlers?.length > 0 || withKids.olderKids?.length > 0 || withKids.easyDay || withKids.familyItinerary)) || !!familyFriendly,
     // 'send' uses 'mobility', 'quietSpots', 'sensory' - match actual data structure
-    send: !!send && (send.wheelchairAccess || send.mobility?.length > 0 || send.quietSpots?.length > 0 || send.mobilityConsiderations?.length > 0),
+    send: !!send && (send.wheelchairAccess || send.mobility?.length > 0 || send.quietSpots?.length > 0 || send.mobilityConsiderations?.length > 0 || send.wheelchairItinerary),
     // 'medical' - only show if has actual content (not empty placeholders)
     medical: !!medical && (medical.pharmacy?.name || medical.hospital?.name || medical.tips?.length > 0),
     // 'foodAndDrink' uses 'restaurants', 'cafes', 'bars', 'localSpeciality' - match actual data structure
-    foodAndDrink: !!foodAndDrink && (foodAndDrink.restaurants?.length > 0 || foodAndDrink.localSpeciality || foodAndDrink.localSpecialties?.length > 0 || foodAndDrink.drinkingWater),
+    foodAndDrink: !!foodAndDrink && (foodAndDrink.restaurants?.length > 0 || foodAndDrink.localSpeciality || foodAndDrink.localSpecialties?.length > 0 || foodAndDrink.drinkingWater || foodAndDrink.coffee?.length > 0),
+    // 'overnight' - evening activities, don't-miss experiences
+    overnight: !!overnight && (overnight.eveningActivities?.length > 0 || overnight.dontMiss?.length > 0 || overnight.summary),
   };
 
   // Filter to only show tabs with content
@@ -262,6 +265,9 @@ export function DetailedPortGuide({ slug, portName, detailedContent, port }) {
         break;
       case 'foodAndDrink':
         content = <FoodDrinkSection foodAndDrink={foodAndDrink} onOpenLightbox={handleOpenLightbox} />;
+        break;
+      case 'overnight':
+        content = <OvernightSection overnight={overnight} portName={portName} />;
         break;
       default:
         content = <OverviewSection overview={overview} portName={portName} />;
@@ -1865,6 +1871,160 @@ function FoodDrinkSection({ foodAndDrink, _onOpenLightbox }) {
         <div className="info-box">
           <strong>💧 Drinking Water</strong>
           <p>{foodAndDrink.drinkingWater}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Overnight Section - Evening activities, don't-miss experiences, extended stays
+ */
+function OvernightSection({ overnight, portName }) {
+  if (!overnight) return <p>No overnight information available yet.</p>;
+
+  return (
+    <div className="section-overnight">
+      <div className="section-intro">
+        <h2>Overnight in {portName}</h2>
+        <p className="section-subtitle">When your ship stays in port - evening activities and extended experiences</p>
+      </div>
+
+      {overnight.summary && (
+        <>
+          <div className="overnight-summary">
+            {overnight.summary.split('\n\n').map((para, idx) => (
+              <p key={idx}>{formatBoldText(para)}</p>
+            ))}
+          </div>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {overnight.dontMiss && overnight.dontMiss.length > 0 && (
+        <>
+          <SubSection title="Don't Miss">
+            <div className="dont-miss-grid">
+              {overnight.dontMiss.map((item, idx) => (
+                <div key={idx} className="dont-miss-card">
+                  <div className="dont-miss-header">
+                    <Star size={18} className="dont-miss-icon" />
+                    <h4>{item.title}</h4>
+                  </div>
+                  {item.type && <span className="activity-type">{item.type}</span>}
+                  <p>{formatBoldText(item.description)}</p>
+                  {item.timing && <p className="timing"><Clock size={14} /> {item.timing}</p>}
+                  {item.bookingAdvice && <p className="booking-advice"><strong>Booking:</strong> {item.bookingAdvice}</p>}
+                  {item.practicalInfo && <p className="practical-info">{item.practicalInfo}</p>}
+                </div>
+              ))}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {overnight.eveningActivities && overnight.eveningActivities.length > 0 && (
+        <>
+          <SubSection title="Evening Activities">
+            {overnight.eveningActivities.map((activity, idx) => (
+              <div key={idx} className="evening-activity">
+                <h4>{activity.title}</h4>
+                {activity.type && <span className="activity-type">{activity.type}</span>}
+                <p>{formatBoldText(activity.description)}</p>
+                {activity.timing && <p className="timing"><Clock size={14} /> {activity.timing}</p>}
+                {activity.location && <p className="location"><MapPin size={14} /> {activity.location}</p>}
+                {activity.tips && <p className="tips"><strong>Tip:</strong> {activity.tips}</p>}
+              </div>
+            ))}
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {overnight.sunriseSunset && (
+        <>
+          <SubSection title="Sunrise & Sunset">
+            <div className="sunrise-sunset-grid">
+              {overnight.sunriseSunset.bestSunrise && (
+                <div className="sunrise-card">
+                  <h4>🌅 Best Sunrise</h4>
+                  <p><strong>Location:</strong> {overnight.sunriseSunset.bestSunrise.location}</p>
+                  {overnight.sunriseSunset.bestSunrise.timing && <p><strong>When:</strong> {overnight.sunriseSunset.bestSunrise.timing}</p>}
+                  {overnight.sunriseSunset.bestSunrise.notes && <p>{overnight.sunriseSunset.bestSunrise.notes}</p>}
+                </div>
+              )}
+              {overnight.sunriseSunset.bestSunset && (
+                <div className="sunset-card">
+                  <h4>🌇 Best Sunset</h4>
+                  <p><strong>Location:</strong> {overnight.sunriseSunset.bestSunset.location}</p>
+                  {overnight.sunriseSunset.bestSunset.timing && <p><strong>When:</strong> {overnight.sunriseSunset.bestSunset.timing}</p>}
+                  {overnight.sunriseSunset.bestSunset.notes && <p>{overnight.sunriseSunset.bestSunset.notes}</p>}
+                </div>
+              )}
+            </div>
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {overnight.extendedDay && (
+        <>
+          <SubSection title={overnight.extendedDay.title || "Extended Day Itinerary"}>
+            {overnight.extendedDay.description && <p className="itinerary-intro">{overnight.extendedDay.description}</p>}
+            {overnight.extendedDay.day1 && overnight.extendedDay.day1.length > 0 && (
+              <div className="itinerary-timeline">
+                {overnight.extendedDay.day1.map((stop, idx) => (
+                  <div key={idx} className="timeline-stop">
+                    <span className="timeline-time">{stop.time}</span>
+                    <div className="timeline-content">
+                      <strong>{stop.activity}</strong>
+                      {stop.notes && <p>{stop.notes}</p>}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {overnight.extendedDay.day2Alternative && (
+              <div className="day2-note">
+                <strong>Day 2:</strong> {overnight.extendedDay.day2Alternative}
+              </div>
+            )}
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {overnight.lateNightFood && overnight.lateNightFood.length > 0 && (
+        <>
+          <SubSection title="Late Night Food">
+            {overnight.lateNightFood.map((place, idx) => (
+              <div key={idx} className="food-item">
+                <h4>{place.name}</h4>
+                {place.type && <span className="food-type">{place.type}</span>}
+                {place.openUntil && <p className="open-until"><Clock size={14} /> Open until {place.openUntil}</p>}
+                {place.location && <p className="food-location"><MapPin size={14} /> {place.location}</p>}
+                {place.notes && <p>{place.notes}</p>}
+              </div>
+            ))}
+          </SubSection>
+          <hr className="section-divider" />
+        </>
+      )}
+
+      {overnight.safeAreas && (
+        <div className="safety-info">
+          <SubSection title="Safety Information">
+            {overnight.safeAreas.evening && (
+              <p><strong>Evening:</strong> {overnight.safeAreas.evening}</p>
+            )}
+            {overnight.safeAreas.lateNight && (
+              <p><strong>Late Night:</strong> {overnight.safeAreas.lateNight}</p>
+            )}
+            {overnight.safeAreas.tips && (
+              <p><strong>Tips:</strong> {overnight.safeAreas.tips}</p>
+            )}
+          </SubSection>
         </div>
       )}
     </div>

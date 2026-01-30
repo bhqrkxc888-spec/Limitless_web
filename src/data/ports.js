@@ -46,11 +46,68 @@ export const portRegions = [
     image: null,
   },
   {
-    id: 'uk',
+    id: 'united-kingdom',
     slug: 'united-kingdom',
     name: 'United Kingdom',
     description: 'Major UK cruise ports including Southampton and Dover',
-    image: null, // Will use WEB_categories/ports/uk/hero.webp
+    image: null,
+  },
+  // Future regions - structure ready for expansion
+  {
+    id: 'caribbean',
+    slug: 'caribbean',
+    name: 'Caribbean',
+    description: 'Island paradise ports across the Caribbean Sea',
+    image: null,
+  },
+  {
+    id: 'alaska',
+    slug: 'alaska',
+    name: 'Alaska',
+    description: 'Glaciers, wildlife and wilderness ports of Alaska',
+    image: null,
+  },
+  {
+    id: 'iceland',
+    slug: 'iceland',
+    name: 'Iceland',
+    description: 'Land of fire and ice - volcanic landscapes and Northern Lights',
+    image: null,
+  },
+  {
+    id: 'canada-new-england',
+    slug: 'canada-new-england',
+    name: 'Canada & New England',
+    description: 'Fall foliage, maritime heritage and historic ports',
+    image: null,
+  },
+  {
+    id: 'northern-europe',
+    slug: 'northern-europe',
+    name: 'Northern Europe',
+    description: 'Baltic capitals, Scandinavian cities and historic ports',
+    image: null,
+  },
+  {
+    id: 'middle-east',
+    slug: 'middle-east',
+    name: 'Middle East',
+    description: 'Dubai, Abu Dhabi and Arabian Gulf destinations',
+    image: null,
+  },
+  {
+    id: 'asia-pacific',
+    slug: 'asia-pacific',
+    name: 'Asia Pacific',
+    description: 'Far East ports from Japan to Southeast Asia and Australia',
+    image: null,
+  },
+  {
+    id: 'south-america',
+    slug: 'south-america',
+    name: 'South America',
+    description: 'From Patagonia to the Amazon and vibrant coastal cities',
+    image: null,
   },
 ];
 

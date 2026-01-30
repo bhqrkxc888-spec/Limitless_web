@@ -1673,3 +1673,178 @@
     font-size: var(--font-size-xs, 0.75rem);
   }
 }
+
+/* ========================================
+   OVERNIGHT SECTION - Evening & Extended Stay
+   ======================================== */
+
+.section-overnight .section-subtitle {
+  color: var(--clr-text-muted, #5C6478);
+  font-size: var(--font-size-sm, 0.875rem);
+  margin-top: var(--space-1, 0.25rem);
+}
+
+.overnight-summary {
+  background: linear-gradient(135deg, #2C344C 0%, #3D4A6B 100%);
+  color: white;
+  padding: var(--space-5, 1.5rem);
+  border-radius: var(--radius-lg, 12px);
+  margin-bottom: var(--space-4, 1rem);
+}
+
+.overnight-summary p {
+  color: rgba(255, 255, 255, 0.95);
+  line-height: var(--line-height-relaxed, 1.7);
+}
+
+.dont-miss-grid {
+  display: grid;
+  gap: var(--space-4, 1rem);
+}
+
+@media (min-width: 768px) {
+  .dont-miss-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.dont-miss-card {
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-4, 1rem);
+  border-left: 4px solid var(--clr-secondary, #D4B86A);
+}
+
+.dont-miss-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2, 0.5rem);
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+.dont-miss-icon {
+  color: var(--clr-secondary, #D4B86A);
+}
+
+.dont-miss-card h4 {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--clr-text-main, #2C344C);
+  margin: 0;
+}
+
+.activity-type {
+  display: inline-block;
+  background: var(--clr-primary, #2C344C);
+  color: white;
+  font-size: var(--font-size-xs, 0.75rem);
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+.evening-activity {
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-4, 1rem);
+  margin-bottom: var(--space-3, 0.75rem);
+}
+
+.evening-activity h4 {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--clr-text-main, #2C344C);
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+.timing, .location {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1, 0.25rem);
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--clr-text-muted, #5C6478);
+  margin-bottom: var(--space-1, 0.25rem);
+}
+
+.sunrise-sunset-grid {
+  display: grid;
+  gap: var(--space-4, 1rem);
+}
+
+@media (min-width: 640px) {
+  .sunrise-sunset-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.sunrise-card, .sunset-card {
+  background: var(--clr-bg-alt, #F8F5F0);
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-4, 1rem);
+}
+
+.sunrise-card {
+  border-top: 4px solid #F59E0B;
+}
+
+.sunset-card {
+  border-top: 4px solid #EC4899;
+}
+
+.itinerary-timeline {
+  border-left: 3px solid var(--clr-secondary, #D4B86A);
+  padding-left: var(--space-4, 1rem);
+  margin: var(--space-4, 1rem) 0;
+}
+
+.timeline-stop {
+  display: flex;
+  gap: var(--space-3, 0.75rem);
+  margin-bottom: var(--space-4, 1rem);
+  position: relative;
+}
+
+.timeline-stop::before {
+  content: '';
+  position: absolute;
+  left: calc(-1rem - 7px);
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  background: var(--clr-secondary, #D4B86A);
+  border-radius: 50%;
+}
+
+.timeline-time {
+  font-weight: var(--font-weight-bold, 700);
+  color: var(--clr-primary, #2C344C);
+  min-width: 50px;
+  font-size: var(--font-size-sm, 0.875rem);
+}
+
+.timeline-content strong {
+  display: block;
+  margin-bottom: var(--space-1, 0.25rem);
+}
+
+.day2-note {
+  background: var(--clr-bg-alt, #F8F5F0);
+  padding: var(--space-3, 0.75rem);
+  border-radius: var(--radius-sm, 4px);
+  margin-top: var(--space-3, 0.75rem);
+}
+
+.safety-info {
+  background: #FEF3C7;
+  border-radius: var(--radius-md, 8px);
+  padding: var(--space-4, 1rem);
+  border-left: 4px solid #F59E0B;
+}
+
+.open-until {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1, 0.25rem);
+  font-size: var(--font-size-sm, 0.875rem);
+  color: var(--clr-text-muted, #5C6478);
+}

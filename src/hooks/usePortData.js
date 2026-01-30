@@ -64,7 +64,8 @@ function extractDetailedContent(dbPort) {
     withKids: dbPort.content_with_kids || null,
     send: dbPort.content_accessibility || null,
     medical: dbPort.content_medical || null,
-    foodAndDrink: dbPort.content_food_drink || null
+    foodAndDrink: dbPort.content_food_drink || null,
+    overnight: dbPort.content_overnight || null
   };
   
   // Check if any content exists

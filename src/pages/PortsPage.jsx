@@ -51,7 +51,16 @@ const REGIONS = [
   { id: 'atlantic-islands', slug: 'atlantic-islands', name: 'Atlantic Islands' },
   { id: 'north-africa', slug: 'north-africa', name: 'North Africa' },
   { id: 'norwegian-fjords', slug: 'norwegian-fjords', name: 'Norwegian Fjords' },
-  { id: 'uk', slug: 'united-kingdom', name: 'United Kingdom' },
+  { id: 'united-kingdom', slug: 'united-kingdom', name: 'United Kingdom' },
+  // Future regions - will show when ports are published
+  { id: 'caribbean', slug: 'caribbean', name: 'Caribbean' },
+  { id: 'alaska', slug: 'alaska', name: 'Alaska' },
+  { id: 'iceland', slug: 'iceland', name: 'Iceland' },
+  { id: 'canada-new-england', slug: 'canada-new-england', name: 'Canada & New England' },
+  { id: 'northern-europe', slug: 'northern-europe', name: 'Northern Europe' },
+  { id: 'middle-east', slug: 'middle-east', name: 'Middle East' },
+  { id: 'asia-pacific', slug: 'asia-pacific', name: 'Asia Pacific' },
+  { id: 'south-america', slug: 'south-america', name: 'South America' },
 ];
 
 /**
