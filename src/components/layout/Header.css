@@ -3,6 +3,39 @@
    Modern mega menu with clean design
    ======================================== */
 
+/* ========================================
+   SKIP LINK - Accessibility (WCAG 2.1)
+   Hidden until focused via keyboard navigation
+   ======================================== */
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  z-index: calc(var(--z-sticky) + 100);
+}
+
+.skip-link:focus {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.75rem 1.25rem;
+  background: var(--clr-primary, #2C344C);
+  color: white;
+  font-size: var(--font-size-base, 1rem);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  outline: 2px solid white;
+  outline-offset: 2px;
+}
+
 .header {
   position: sticky;
   top: 0;

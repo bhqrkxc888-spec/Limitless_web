@@ -89,6 +89,11 @@ function Header() {
 
   return (
     <header className="header">
+      {/* Skip to Content Link - Accessibility (WCAG 2.1) */}
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+      
       {/* Top Bar */}
       <div className="header-top">
         <div className="container">

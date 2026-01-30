@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import { logger } from '../utils/logger';
 import { Button } from './ui';
-// import Turnstile from './Turnstile'; // Disabled temporarily
 import './ContactForm.css';
 
 function ContactForm({ context = 'general', offerId = null, offerTitle = null }) {
@@ -18,24 +17,16 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
   
   const [status, setStatus] = useState('idle'); // idle, submitting, success, error
   const [lastSubmitTime, setLastSubmitTime] = useState(0);
-  // const [turnstileToken, setTurnstileToken] = useState(null); // Disabled temporarily
   
-  // Check if Turnstile is configured
-  // const isTurnstileEnabled = !!import.meta.env.VITE_TURNSTILE_SITE_KEY; // Disabled temporarily
+  // Spam protection: honeypot field (bots fill it, humans don't see it)
+  const [honeypot, setHoneypot] = useState('');
+  // Spam protection: track when form loaded (submissions too fast = bot)
+  const formLoadTime = useRef(Date.now());
   
-  // Turnstile callbacks - Disabled temporarily
-  // const handleTurnstileVerify = useCallback((token) => {
-  //   setTurnstileToken(token);
-  // }, []);
-  
-  // const handleTurnstileError = useCallback(() => {
-  //   logger.warn('Turnstile verification failed');
-  //   setTurnstileToken(null);
-  // }, []);
-  
-  // const handleTurnstileExpire = useCallback(() => {
-  //   setTurnstileToken(null);
-  // }, []);
+  // Reset load time when form mounts or resets
+  useEffect(() => {
+    formLoadTime.current = Date.now();
+  }, []);
 
   const handleChange = (e) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
@@ -73,13 +64,24 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
       return;
     }
     
-    // Check Turnstile verification (if enabled and no token yet) - Disabled temporarily
-    // if (isTurnstileEnabled && !turnstileToken) {
-    //   logger.warn('Turnstile token not received - waiting for verification');
-    //   setStatus('error');
-    //   setTimeout(() => setStatus('idle'), 5000);
-    //   return;
-    // }
+    // Spam check 1: Honeypot - if filled, it's a bot
+    if (honeypot) {
+      logger.info('Spam blocked: honeypot triggered');
+      // Show fake success so bot doesn't know it was caught
+      setStatus('success');
+      setTimeout(() => setStatus('idle'), 5000);
+      return;
+    }
+    
+    // Spam check 2: Time-based - humans take at least 3 seconds to fill a form
+    const timeToFill = Date.now() - formLoadTime.current;
+    if (timeToFill < 3000) {
+      logger.info('Spam blocked: submitted too fast (' + timeToFill + 'ms)');
+      // Show fake success so bot doesn't know it was caught
+      setStatus('success');
+      setTimeout(() => setStatus('idle'), 5000);
+      return;
+    }
     
     setStatus('submitting');
     setLastSubmitTime(now);
@@ -161,8 +163,8 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
         context: context,
         consent: false
       });
-      // Reset Turnstile token for next submission - Disabled temporarily
-      // setTurnstileToken(null);
+      setHoneypot('');
+      formLoadTime.current = Date.now(); // Reset for next submission
 
       // Reset success message after 5 seconds
       setTimeout(() => setStatus('idle'), 5000);
@@ -302,14 +304,21 @@ function ContactForm({ context = 'general', offerId = null, offerTitle = null })
         </label>
       </div>
 
-      {/* Invisible CAPTCHA - Cloudflare Turnstile - Disabled temporarily */}
-      {/* <Turnstile
-        onVerify={handleTurnstileVerify}
-        onError={handleTurnstileError}
-        onExpire={handleTurnstileExpire}
-        action={`contact_${context}`}
-        mode="invisible"
-      /> */}
+      {/* Honeypot field - hidden from humans, bots fill it */}
+      <div className="form-honeypot" aria-hidden="true">
+        <label htmlFor="website">
+          Leave this field empty
+          <input
+            type="text"
+            id="website"
+            name="website"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </label>
+      </div>
 
       <Button
         type="submit"

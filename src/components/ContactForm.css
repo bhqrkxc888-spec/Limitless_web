@@ -140,3 +140,20 @@
   text-align: center;
 }
 
+/* ========================================
+   HONEYPOT FIELD - Spam Protection
+   Hidden from humans, visible to bots
+   ======================================== */
+
+.form-honeypot {
+  position: absolute !important;
+  left: -9999px !important;
+  top: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  overflow: hidden !important;
+}
+

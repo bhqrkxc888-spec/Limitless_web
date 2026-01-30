@@ -5,13 +5,25 @@ import { logger } from './logger';
  * Submit enquiry to CRM with fallback to local database
  * @param {Object} enquiryData - The enquiry data to submit
  * @param {string} leadType - Type of lead (e.g., "Bucket List Enquiry")
+ * @param {Object} options - Optional settings (formLoadTime for time-based validation)
  * @returns {Promise<Object>} - Result object with success status
  */
-export async function submitEnquiryToCRM(enquiryData, leadType = 'Website Enquiry') {
+export async function submitEnquiryToCRM(enquiryData, leadType = 'Website Enquiry', options = {}) {
   // Check for honeypot spam
   if (enquiryData.website) {
-    logger.warn('Honeypot field filled - spam detected');
-    throw new Error('Invalid submission');
+    logger.info('Spam blocked: honeypot field filled');
+    // Return fake success so bot doesn't know it was caught
+    return { success: true, blocked: true };
+  }
+  
+  // Check for time-based spam (if formLoadTime provided)
+  if (options.formLoadTime) {
+    const timeToFill = Date.now() - options.formLoadTime;
+    if (timeToFill < 3000) {
+      logger.info(`Spam blocked: submitted too fast (${timeToFill}ms)`);
+      // Return fake success so bot doesn't know it was caught
+      return { success: true, blocked: true };
+    }
   }
 
   const crmUrl = import.meta.env.VITE_CRM_API_URL || 'https://crm.limitlesscruises.com';
