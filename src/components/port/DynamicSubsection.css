@@ -1,7 +1,19 @@
 /* Dynamic Subsection Styling */
 
 .dynamic-subsection {
-  margin: 2rem 0;
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #FAFAFA 0%, #F5F5F5 100%);
+  border: 1px solid #E8E4DC;
+  border-left: 4px solid var(--clr-secondary, #D4B86A);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(44, 52, 76, 0.06);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.dynamic-subsection:hover {
+  box-shadow: 0 4px 16px rgba(44, 52, 76, 0.1);
+  transform: translateY(-1px);
 }
 
 /* Header */
@@ -10,13 +22,14 @@
 }
 
 .subsection-title {
-  font-size: 1.5rem;
+  font-size: 1.375rem;
   font-weight: 600;
-  color: var(--color-text-primary, #1a1a1a);
+  color: var(--clr-primary, #2C344C);
   margin: 0 0 0.75rem 0;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
 }
 
 .subsection-type-icon {

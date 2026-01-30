@@ -133,27 +133,32 @@
 .port-section-content {
   max-width: var(--layout-content-width, 1120px);
   margin: var(--space-6, 1.5rem) auto;
-  background: var(--clr-surface, #FFFFFF);
-  padding: var(--space-5, 1.25rem);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFA 100%);
+  padding: var(--space-6, 1.5rem) var(--space-5, 1.25rem);
   border-radius: var(--radius-xl, 16px);
-  box-shadow: 0 4px 20px rgba(44, 52, 76, 0.08);
+  box-shadow: 0 4px 24px rgba(44, 52, 76, 0.1);
+  border: 1px solid rgba(232, 228, 220, 0.5);
 }
 
 .section-intro {
   margin-bottom: var(--space-6, 1.5rem);
+  padding: var(--space-5, 1.25rem);
+  background: linear-gradient(135deg, #2C344C 0%, #1e2536 100%);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: 0 4px 16px rgba(44, 52, 76, 0.15);
 }
 
 .section-intro h2 {
   font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
   font-size: var(--font-size-2xl, 1.75rem);
   font-weight: var(--font-weight-semibold, 600);
-  color: var(--clr-text-main, #2C344C);
+  color: var(--clr-secondary, #D4B86A);
   margin-bottom: var(--space-2, 0.5rem);
 }
 
 .section-intro p {
   font-size: var(--font-size-base, 1rem);
-  color: var(--clr-text-main, #2C344C);
+  color: rgba(255, 255, 255, 0.9);
   line-height: var(--line-height-relaxed, 1.7);
   margin-bottom: var(--space-4, 1rem);
 }
@@ -181,14 +186,20 @@
    ======================================== */
 
 .port-subsection {
-  margin-bottom: var(--space-5, 1.25rem);
+  margin-bottom: var(--space-6, 1.5rem);
+  padding: var(--space-5, 1.25rem);
+  background: linear-gradient(135deg, #FAFAFA 0%, #F5F5F5 100%);
+  border: 1px solid rgba(232, 228, 220, 0.8);
+  border-left: 4px solid var(--clr-secondary, #D4B86A);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: 0 2px 8px rgba(44, 52, 76, 0.04);
 }
 
 .port-subsection h3 {
   font-family: var(--font-family-display, 'Playfair Display', Georgia, serif);
   font-size: var(--font-size-lg, 1.125rem);
   font-weight: var(--font-weight-semibold, 600);
-  color: var(--clr-text-main, #2C344C);
+  color: var(--clr-primary, #2C344C);
   margin-bottom: var(--space-4, 1rem);
   padding-bottom: var(--space-2, 0.5rem);
   border-bottom: 2px solid var(--clr-secondary, #D4B86A);
@@ -271,11 +282,20 @@
    ======================================== */
 
 .walk-item {
-  background: var(--clr-bg-alt, #F8F5F0);
-  border-radius: var(--radius-md, 8px);
-  padding: var(--space-4, 1rem);
-  margin-bottom: var(--space-3, 0.75rem);
+  background: linear-gradient(135deg, #F8F5F0 0%, #F5F2ED 100%);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-5, 1.25rem);
+  margin-bottom: var(--space-4, 1rem);
   border-left: 4px solid var(--clr-secondary, #D4B86A);
+  border: 1px solid rgba(232, 228, 220, 0.8);
+  border-left: 4px solid var(--clr-secondary, #D4B86A);
+  box-shadow: 0 2px 8px rgba(44, 52, 76, 0.04);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.walk-item:hover {
+  box-shadow: 0 4px 12px rgba(44, 52, 76, 0.08);
+  transform: translateY(-1px);
 }
 
 .walk-item:last-child {
@@ -304,10 +324,11 @@
    ======================================== */
 
 .info-list-box {
-  background: var(--clr-surface, #fff);
-  border: 1px solid var(--clr-border, #e5e5e5);
+  background: linear-gradient(135deg, #FFFFFF 0%, #FAFAFA 100%);
+  border: 1px solid rgba(232, 228, 220, 0.8);
   border-radius: var(--radius-lg, 12px);
-  padding: var(--space-4, 1rem);
+  padding: var(--space-5, 1.25rem);
+  box-shadow: 0 2px 8px rgba(44, 52, 76, 0.04);
 }
 
 .info-list-box.warning-box {
@@ -385,11 +406,19 @@
    ======================================== */
 
 .food-item {
-  background: var(--clr-bg-alt, #F8F5F0);
-  border-radius: var(--radius-md, 8px);
-  padding: var(--space-4, 1rem);
-  margin-bottom: var(--space-3, 0.75rem);
+  background: linear-gradient(135deg, #F8F5F0 0%, #F5F2ED 100%);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-5, 1.25rem);
+  margin-bottom: var(--space-4, 1rem);
+  border: 1px solid rgba(232, 228, 220, 0.8);
   border-left: 4px solid var(--clr-secondary, #D4B86A);
+  box-shadow: 0 2px 8px rgba(44, 52, 76, 0.04);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.food-item:hover {
+  box-shadow: 0 4px 12px rgba(44, 52, 76, 0.08);
+  transform: translateY(-1px);
 }
 
 .food-item:last-child {
@@ -428,11 +457,19 @@
    ======================================== */
 
 .content-block {
-  margin-bottom: var(--space-3, 0.75rem);
-  background: var(--clr-bg-alt, #F8F5F0);
-  border-radius: var(--radius-md, 8px);
-  padding: var(--space-4, 1rem);
+  margin-bottom: var(--space-4, 1rem);
+  background: linear-gradient(135deg, #F8F5F0 0%, #F5F2ED 100%);
+  border-radius: var(--radius-lg, 12px);
+  padding: var(--space-5, 1.25rem);
+  border: 1px solid rgba(232, 228, 220, 0.8);
   border-left: 4px solid var(--clr-secondary, #D4B86A);
+  box-shadow: 0 2px 8px rgba(44, 52, 76, 0.04);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.content-block:hover {
+  box-shadow: 0 4px 12px rgba(44, 52, 76, 0.08);
+  transform: translateY(-1px);
 }
 
 .content-block__top {
@@ -502,19 +539,20 @@
    ======================================== */
 
 .detailed-port-guide .attraction-block {
-  margin-bottom: 32px;
-  background: var(--clr-surface, #FFFFFF);
-  border: 1px solid var(--clr-border, #E8E4DC);
+  margin-bottom: 24px;
+  background: linear-gradient(135deg, #F8F5F0 0%, #F5F2ED 100%);
+  border: 1px solid rgba(232, 228, 220, 0.8);
+  border-left: 4px solid var(--clr-secondary, #D4B86A);
   border-radius: var(--radius-lg, 12px);
   padding: var(--space-5, 1.25rem);
-  box-shadow: 0 4px 12px rgba(44, 52, 76, 0.06);
+  box-shadow: 0 2px 8px rgba(44, 52, 76, 0.06);
   transition: transform var(--transition-base, 200ms ease),
               box-shadow var(--transition-base, 200ms ease);
 }
 
 .detailed-port-guide .attraction-block:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(44, 52, 76, 0.1);
+  box-shadow: 0 6px 16px rgba(44, 52, 76, 0.12);
 }
 
 .detailed-port-guide .attraction-top {
@@ -654,9 +692,11 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-1, 0.25rem);
-  padding: var(--space-3, 0.75rem);
-  background: var(--clr-bg-alt, #F8F5F0);
+  padding: var(--space-4, 1rem);
+  background: linear-gradient(135deg, #FFFFFF 0%, #FAFAFA 100%);
+  border: 1px solid rgba(232, 228, 220, 0.6);
   border-radius: var(--radius-md, 8px);
+  box-shadow: 0 1px 3px rgba(44, 52, 76, 0.04);
 }
 
 .detail-item strong {
