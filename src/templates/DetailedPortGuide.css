@@ -1850,3 +1850,75 @@
   font-size: var(--font-size-sm, 0.875rem);
   color: var(--clr-text-muted, #4B5563);
 }
+
+/* ========================================
+   BOAT TRIPS SECTION - Sea Excursions
+   ======================================== */
+
+.section-boat-trips .section-intro h2 {
+  color: var(--clr-text-primary, #1F2937);
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+.boat-trip-card {
+  padding: var(--space-4, 1rem) 0;
+}
+
+.boat-trip-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3, 0.75rem);
+  margin-bottom: var(--space-2, 0.5rem);
+}
+
+.boat-trip-header h3 {
+  margin: 0;
+  color: var(--clr-text-primary, #1F2937);
+  font-size: var(--font-size-lg, 1.125rem);
+}
+
+.duration-badge {
+  background: var(--clr-accent, #2C344C);
+  color: white;
+  padding: var(--space-1, 0.25rem) var(--space-2, 0.5rem);
+  border-radius: var(--radius-sm, 4px);
+  font-size: var(--font-size-xs, 0.75rem);
+  font-weight: 500;
+}
+
+.boat-trip-description {
+  color: var(--clr-text-secondary, #4B5563);
+  line-height: var(--line-height-relaxed, 1.7);
+  margin-bottom: var(--space-3, 0.75rem);
+}
+
+.boat-trip-detail,
+.boat-trip-booking {
+  margin-bottom: var(--space-2, 0.5rem);
+  font-size: var(--font-size-sm, 0.875rem);
+}
+
+.boat-trip-detail strong,
+.boat-trip-booking strong {
+  color: var(--clr-text-primary, #1F2937);
+}
+
+.boat-trip-highlights {
+  margin-top: var(--space-3, 0.75rem);
+}
+
+.boat-trip-highlights ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2, 0.5rem);
+  list-style: none;
+  padding: 0;
+  margin: var(--space-2, 0.5rem) 0 0 0;
+}
+
+.boat-trip-highlights li {
+  background: var(--clr-bg-alt, #F8F5F0);
+  padding: var(--space-1, 0.25rem) var(--space-2, 0.5rem);
+  border-radius: var(--radius-sm, 4px);
+  font-size: var(--font-size-sm, 0.875rem);
+}

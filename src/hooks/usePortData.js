@@ -33,6 +33,7 @@ function transformSupabasePort(dbPort) {
     gettingAround: dbPort.getting_around || {},
     mustSeeSights: dbPort.must_see_sights || [],
     shoreExcursions: dbPort.shore_excursions || [],
+    boatTrips: dbPort.boat_trips || [],
     nearestBeach: dbPort.nearest_beach || {},
     foodAndDrink: dbPort.food_and_drink || [],
     insiderTips: dbPort.insider_tips || [],
